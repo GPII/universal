@@ -32,14 +32,5 @@
             return fluid.stringTemplate(url, that.options.vars);
         };
     };
-    
-    fluid.demands("gpii.urlExpander", "gpii.development", {
-        options: {
-            vars: {
-                db: path.join(__dirname, ".."),
-                root: path.join(__dirname, "..")
-            }
-        }
-    });
 
 })();

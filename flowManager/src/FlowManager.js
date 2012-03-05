@@ -152,9 +152,18 @@
         });
 
         var port = findArgv("port") || 8081;
-        fluid.log("Preferences Server is running on port: " + port);
+        fluid.log("Flow Manager is running on port: " + port);
         that.server.listen(typeof port === "string" ? parseInt(port, 10) : port);
     };
+
+    fluid.demands("gpii.urlExpander", ["gpii.development", "gpii.flowManager"], {
+        options: {
+            vars: {
+                db: path.join(__dirname, ".."),
+                root: path.join(__dirname, "..")
+            }
+        }
+    });
 
     fluid.demands("userPreferencesDataSource", ["gpii.development", "gpii.flowManager"], {
         options: {
