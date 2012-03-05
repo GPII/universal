@@ -1,0 +1,14 @@
+{
+    "userPreferences": {
+        "url": "%db/test/data/user/%token.json"
+    },
+    "solutionsReporter": {
+        "url": "%db/test/data/solutions/list.json"
+    },
+    "matchMaker": {
+        "url": "%db/test/data/matchMaker/match.json"
+    },
+    "launchManager": {
+        "url": "%db/test/data/launchManager/launch.json"
+    }
+}
