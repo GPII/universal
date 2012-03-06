@@ -62,21 +62,21 @@
     };
 
     gpii.source.get = function (dataSource, req, res) {
-        dataSource.get(req.directModel, gpii.source.makeSuccessCallback(res), gpii.source.errorCallback);
+        dataSource.get(req.directModel, gpii.source.makeCallback(res));
     };
 
     gpii.source.post = function (dataSource, req, res) {
-        dataSource.set(req.body, req.directModel, gpii.source.makeSuccessCallback(res), gpii.source.errorCallback);
+        dataSource.set(req.body, req.directModel, gpii.source.makeCallback(res));
     };
 
-    gpii.source.makeSuccessCallback = function (res) {
+    gpii.source.makeCallback = function (res) {
         return function (resp) {
+            if (!resp || resp && resp.isError) {
+                res.send(resp.message, 404);
+                return;
+            }
             res.send(resp, 200);
         };
-    };
-
-    gpii.source.errorCallback = function (message, error) {
-        console.log(message);
     };
 
     fluid.demands("gpii.source.all", "gpii.source", {

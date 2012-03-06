@@ -1,4 +1,26 @@
 {
-    "token": "123",
-    "preferences": {}
+    "display": {
+        "screenEnhancement": {
+            "magnification": 2,
+            "tracking": "mouse",
+            "applications": [
+                {
+                    "name": "GNOME Shell Magnifier",
+                    "id": "org.gnome.desktop.a11y.magnifier",
+                    "priority": 100,
+                    "parameters": {
+                        "show-cross-hairs": true
+                    }
+                },
+                {
+                    "name": "Windows Magnifier",
+                    "id": "com.microsoft.windows.screenmagnifier",
+                    "priority": 0,
+                    "parameters": {
+                        "MagnifierUIWindowMinimized": 0
+                    }
+                }
+            ]
+        }
+    }
 }

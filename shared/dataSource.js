@@ -41,8 +41,7 @@
             "{dataSource}.options.responseParser",
             "{dataSource}.resolveUrl",
             "{arguments}.0",
-            "{arguments}.1",
-            "{arguments}.2"
+            "{arguments}.1"
         ]
     });
 
@@ -53,8 +52,7 @@
             "{dataSource}.resolveUrl",
             "{arguments}.0",
             "{arguments}.1",
-            "{arguments}.2",
-            "{arguments}.3"
+            "{arguments}.2"
         ]
     });
 
@@ -64,8 +62,7 @@
             "{dataSource}.options.responseParser",
             "{dataSource}.resolveUrl",
             "{arguments}.0",
-            "{arguments}.1",
-            "{arguments}.2"
+            "{arguments}.1"
         ]
     });
 
@@ -76,8 +73,7 @@
             "{dataSource}.resolveUrl",
             "{arguments}.0",
             "{arguments}.1",
-            "{arguments}.2",
-            "{arguments}.3"
+            "{arguments}.2"
         ]
     });
 
@@ -101,7 +97,7 @@
         callback(data);
     };
 
-    var dbAll = function (resolveUrl, directModel, method, callback, errorCallback, model) {
+    var dbAll = function (resolveUrl, directModel, method, callback, model) {
         var path = resolveUrl(directModel);
             urlObj = url.parse(path, true);
         var req = http.request({
@@ -120,19 +116,22 @@
             });
         });
         req.on("error", function (error) {
-            errorCallback(error.message, error);
+            callback({
+                isError: true,
+                message: error.message
+            });
         });
         req.end(model);
         return req;
     };
 
-    gpii.dataSource.DBGet = function (responseParser, resolveUrl, directModel, callback, errorCallback) {
+    gpii.dataSource.DBGet = function (responseParser, resolveUrl, directModel, callback) {
         dbAll(resolveUrl, directModel, "GET", function (data) {
             processData(data, responseParser, directModel, callback);
-        }, errorCallback);
+        });
     };
 
-    gpii.dataSource.DBSet = function (responseParser, resolveUrl, model, directModel, callback, errorCallback) {
+    gpii.dataSource.DBSet = function (responseParser, resolveUrl, model, directModel, callback) {
         var modelData = typeof model === "string" ? model : JSON.stringify(model);
         var req = dbAll(resolveUrl, directModel, "PUT", function (data) {
             data = JSON.parse(data);
@@ -140,10 +139,10 @@
                 req.emit("error", data);
             }
             processData(data, responseParser, directModel, callback);
-        }, errorCallback, modelData);
+        }, modelData);
     };
 
-    var fsAll = function (method, responseParser, resolveUrl, directModel, callback, errorCallback, model) {
+    var fsAll = function (method, responseParser, resolveUrl, directModel, callback, model) {
         var fileName = resolveUrl(directModel),
             args = [fileName];
         if (model) {
@@ -152,19 +151,23 @@
         args.push("utf8");
         args.push(function (error, data) {
             if (error) {
-                errorCallback(error.message, error);
+                callback({
+                    isError: true,
+                    message: error.message
+                });
+                return;
             }
             processData(data || model, responseParser, directModel, callback);
         });
         fs[method + "File"].apply(null, args);
     };
 
-    gpii.dataSource.FSGet = function (responseParser, resolveUrl, directModel, callback, errorCallback) {
-        fsAll("read", responseParser, resolveUrl, directModel, callback, errorCallback);
+    gpii.dataSource.FSGet = function (responseParser, resolveUrl, directModel, callback) {
+        fsAll("read", responseParser, resolveUrl, directModel, callback);
     };
 
-    gpii.dataSource.FSSet = function (responseParser, resolveUrl, model, directModel, callback, errorCallback) {
-        fsAll("write", responseParser, resolveUrl, directModel, callback, errorCallback,
+    gpii.dataSource.FSSet = function (responseParser, resolveUrl, model, directModel, callback) {
+        fsAll("write", responseParser, resolveUrl, directModel, callback,
             typeof model === "string" ? model : JSON.stringify(model));
     };
 
