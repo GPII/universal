@@ -7,6 +7,7 @@
         fs = require("fs"),
         http = require("http"),
         path = require("path"),
+        url = require("url"),
         eUC = "encodeURIComponent:";
 
     fluid.require("../../../../../shared/utils.js");
@@ -61,8 +62,6 @@
         funcName: "gpii.dataSource.DBGet",
         args: [
             "{dataSource}.options.responseParser",
-            "{dataSource}.options.host",
-            "{dataSource}.options.port",
             "{dataSource}.resolveUrl",
             "{arguments}.0",
             "{arguments}.1",
@@ -74,8 +73,6 @@
         funcName: "gpii.dataSource.DBSet",
         args: [
             "{dataSource}.options.responseParser",
-            "{dataSource}.options.host",
-            "{dataSource}.options.port",
             "{dataSource}.resolveUrl",
             "{arguments}.0",
             "{arguments}.1",
@@ -104,12 +101,13 @@
         callback(data);
     };
 
-    var dbAll = function (resolveUrl, directModel, host, port, method, callback, errorCallback, model) {
+    var dbAll = function (resolveUrl, directModel, method, callback, errorCallback, model) {
         var path = resolveUrl(directModel);
+            urlObj = url.parse(path, true);
         var req = http.request({
-            host: host,
-            port: port,
-            path: path,
+            host: urlObj.hostname,
+            port: praseInt(urlObj.port, 10),
+            path: urlObj.pathname,
             method: method
         }, function (res) {
             var data = "";
@@ -128,15 +126,15 @@
         return req;
     };
 
-    gpii.dataSource.DBGet = function (responseParser, host, port, resolveUrl, directModel, callback, errorCallback) {
-        dbAll(resolveUrl, directModel, host, port, "GET", function (data) {
+    gpii.dataSource.DBGet = function (responseParser, resolveUrl, directModel, callback, errorCallback) {
+        dbAll(resolveUrl, directModel, "GET", function (data) {
             processData(data, responseParser, directModel, callback);
         }, errorCallback);
     };
 
-    gpii.dataSource.DBSet = function (responseParser, host, port, resolveUrl, model, directModel, callback, errorCallback) {
+    gpii.dataSource.DBSet = function (responseParser, resolveUrl, model, directModel, callback, errorCallback) {
         var modelData = typeof model === "string" ? model : JSON.stringify(model);
-        var req = dbAll(resolveUrl, directModel, host, port, "PUT", function (data) {
+        var req = dbAll(resolveUrl, directModel, "PUT", function (data) {
             data = JSON.parse(data);
             if (!data.ok) {
                 req.emit("error", data);

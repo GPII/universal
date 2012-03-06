@@ -20,10 +20,6 @@
 
     fluid.defaults("gpii.urlExpander", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
-        vars: {
-            db: "",
-            root: path.join(__dirname, "..")
-        },
         finalInitFunction: "gpii.urlExpander.finalInit"
     });
     
