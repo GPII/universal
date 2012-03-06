@@ -6,6 +6,7 @@
         fluid = require("infusion"),
         fs = require("fs"),
         path = require("path"),
+        querystring = require("querystring"),
         gpii = fluid.registerNamespace("gpii");
 
     var findArgv = function (key) {
@@ -40,43 +41,65 @@
                     }
                 }
             },
-            solutionsReporterDataSource: {
+            deviceReporterDataSource: {
                 type: "gpii.dataSource"
             },
             matchMakerDataSource: {
-                 type: "gpii.dataSource",
-                 options: {
-                    writable: true
-                 }
+                type: "gpii.dataSource",
+                options: {
+                    termMap: {
+                        query: "%query"
+                    }
+                }
+            },
+            transformerDataSource: {
+                type: "gpii.dataSource",
+                options: {
+                    termMap: {
+                        query: "%query"
+                    }
+                }
             },
             launchManagerDataSource: {
-                 type: "gpii.dataSource",
-                 options: {
+                type: "gpii.dataSource",
+                options: {
+                    termMap: {
+                        query: "%query"
+                    }
+                }
+            },
+            snapshotDataSource: {
+                type: "gpii.dataSource",
+                options: {
                     writable: true
-                 }
+                }
             }
         },
         events: {
             onUserListener: null,
             onUserPreferences: null,
-            onSolutions: null,
+            onDevice: null,
             onReadyToMatch: {
                 events: {
                    userPreferences: "onUserPreferences",
-                   solutions: "onSolutions"
+                   device: "onDevice"
                 },
-                args: ["{arguments}.userPreferences.0", "{arguments}.solutions.0"]
+                args: ["{arguments}.userPreferences.0", "{arguments}.device.0"]
             },
-            onMatch: null
+            onMatch: null,
+            onTransformation: null,
+            onSnapshot: null
         },
         listeners: {
             onUserListener: [{
                 listener: "{gpii.flowManager}.getUserPreferences"
             }, {
-                listener: "{gpii.flowManager}.getSolutions"
+                listener: "{gpii.flowManager}.getDevice"
             }],
             onReadyToMatch: "{gpii.flowManager}.onReadyToMatchHandler",
-            onMatch: "{gpii.flowManager}.onMatchHandler"
+            onMatch: "{gpii.flowManager}.onMatchHandler",
+            onTransformation: "{gpii.flowManager}.onTransformationHandler",
+            onSnapshot: "{gpii.flowManager}.onSnapshotHandler"
         }
     });
 
@@ -102,43 +125,81 @@
             that.userPreferencesDataSource.get({
                 token: token
             }, function (userPreferences) {
-                fluid.log("Fetched user preferences: " + JSON.stringify(userPreferences));
+                if (userPreferences && userPreferences.isError) {
+                    fluid.log(userPreferences.message);
+                    return;
+                }
+                fluid.log("Fetched user preferences: ", userPreferences);
                 that.events.onUserPreferences.fire(userPreferences);
-            }, function (message, error) {
-                fluid.log(message);
             });
         };
-        that.getSolutions = function () {
-            that.solutionsReporterDataSource.get(undefined, function (solutions) {
-                fluid.log("Fetched solutions: " + JSON.stringify(solutions));
-                that.events.onSolutions.fire(solutions);
-            }, function (message, error) {
-                fluid.log(message);
+        that.getDevice = function () {
+            that.deviceReporterDataSource.get(undefined, function (device) {
+                if (device && device.isError) {
+                    fluid.log(device.message);
+                    return;
+                }
+                fluid.log("Fetched device reporter data: ", device);
+                that.events.onDevice.fire(device);
             });
         };
-        that.onReadyToMatchHandler = function (userPreferences, solutions) {
-            that.matchMakerDataSource.set({
-                userPreferences: userPreferences,
-                solutions: solutions
-            }, undefined, function (match) {
-                fluid.log("Matched preferences and sollutions: " + JSON.stringify(match));
+        that.onReadyToMatchHandler = function (userPreferences, device) {
+            that.matchMakerDataSource.get({
+                query: querystring.stringify({
+                    userPreferences: JSON.stringify(userPreferences),
+                    device: JSON.stringify(device)
+                })
+            }, function (match) {
+                if (match && match.isError) {
+                    fluid.log(match.message);
+                    return;
+                }
+                fluid.log("Matched preferences and device reporter data: ", match);
                 that.events.onMatch.fire(match);
-            }, function (message, error) {
-                fluid.log(message);
             });
         };
         that.onMatchHandler = function (match) {
-            that.launchManagerDataSource.set(match, undefined, function () {
-                fluid.log("Successfully sent matched launch spec to the Launch Manager");
-            }, function (message, error) {
-                fluid.log(message);
+            that.transformerDataSource.get({
+                query: querystring.stringify({
+                    data: JSON.stringify(match)
+                })
+            }, function (transformation) {
+                if (transformation && transformation.isError) {
+                    fluid.log(transformation.message);
+                    return;
+                }
+                fluid.log("Performed transformation: ", transformation);
+                that.events.onTransformation.fire(transformation);
+            });
+        };
+        that.onTransformationHandler = function (transformation) {
+            that.launchManagerDataSource.get({
+                query: querystring.stringify({
+                    data: JSON.stringify(transformation)
+                })
+            }, function (snapshot) {
+                if (snapshot && snapshot.isError) {
+                    fluid.log(snapshot.message);
+                    return;
+                }
+                fluid.log("Launch manager returned a snapshot: ", snapshot);
+                that.events.onSnapshot.fire(snapshot);
+            });
+        };
+        that.onSnapshotHandler = function (snapshot) {
+            that.snapshotDataSource.set(undefined, snapshot, function (data) {
+                if (data && data.isError) {
+                    fluid.log(data.message);
+                    return;
+                }
+                fluid.log("Successfully saved the snapshot");
             });
         };
     };
 
     gpii.flowManager.finalInit = function (that) {
 
-        that.server.get("/user/:token", function (req, res) {
+        that.server.get("/user/:token/login", function (req, res) {
             var token = req.params["token"];
             fluid.log("User Listener sent token: " + token);
             that.events.onUserListener.fire(token);
@@ -165,9 +226,9 @@
         }
     });
 
-    fluid.demands("solutionsReporterDataSource", "gpii.flowManager", {
+    fluid.demands("deviceReporterDataSource", "gpii.flowManager", {
         options: {
-            url: "{gpii.flowManager}.config.solutionsReporter.url"
+            url: "{gpii.flowManager}.config.deviceReporter.url"
         }
     });
 
@@ -177,9 +238,21 @@
         }
     });
 
+    fluid.demands("transformerDataSource", "gpii.flowManager", {
+        options: {
+            url: "{gpii.flowManager}.config.transformer.url"
+        }
+    });
+
     fluid.demands("launchManagerDataSource", "gpii.flowManager", {
         options: {
             url: "{gpii.flowManager}.config.launchManager.url"
+        }
+    });
+
+    fluid.demands("snapshotDataSource", "gpii.flowManager", {
+        options: {
+            url: "{gpii.flowManager}.config.snapshot.url"
         }
     });
 

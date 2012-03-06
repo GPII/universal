@@ -1,14 +1,20 @@
 {
     "userPreferences": {
-        "url": "%db/test/data/user/%token.json"
+        "url": "%db/test/data/user.profile.payload.example.json"
     },
-    "solutionsReporter": {
-        "url": "%db/test/data/solutions/list.json"
+    "deviceReporter": {
+        "url": "%db/test/data/device.reporter.payload.example.json"
     },
     "matchMaker": {
-        "url": "%db/test/data/matchMaker/match.json"
+        "url": "%db/test/data/matchmaker.payload.example.json"
+    },
+    "transformer": {
+        "url": "%db/test/data/transformer.payload.example.json"
     },
     "launchManager": {
-        "url": "%db/test/data/launchManager/launch.json"
+        "url": "%db/test/data/launchmanager.payload.example.json"
+    },
+    "snapshot": {
+        "url": "%db/snapshot.json"
     }
 }

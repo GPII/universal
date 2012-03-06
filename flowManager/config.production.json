@@ -2,13 +2,19 @@
     "userPreferences": {
         "url": "http://0.0.0.0:8080/%db/user/%token"
     },
-    "solutionsReporter": {
-        "url": "http://0.0.0.0:8082/solutions"
+    "deviceReporter": {
+        "url": "http://0.0.0.0:8081/device"
     },
     "matchMaker": {
-        "url": "http://0.0.0.0:8083/match"
+        "url": "http://0.0.0.0:8081/match?%query"
+    },
+    "transformer": {
+        "url": "http://0.0.0.0:8081/transform?%query"
     },
     "launchManager": {
-        "url": "http://0.0.0.0:8084/launch"
+        "url": "http://0.0.0.0:8081/launch?%query"
+    },
+    "snapshot": {
+        "url": "%root/snapshot.json"
     }
 }
