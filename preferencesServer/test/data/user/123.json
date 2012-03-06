@@ -1,4 +1,13 @@
 {
-    "token": "123",
-    "name": "User 1"
+    "screenEnhancement": {
+        "magnification": 2.5,
+        "crossHairSize": 4096,
+        "applications": [{
+            "name": "GNOME Shell Magnifier",
+            "version": "2.31.2",
+            "id": "org.gnome.desktop.a11y.magnifier",
+            "priority": 0,
+            "parameter": {}
+        }]
+    }
 }

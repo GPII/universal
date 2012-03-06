@@ -4,6 +4,7 @@
 
     var express = require("express"),
         fluid = require("infusion"),
+        path = require("path"),
         gpii = fluid.registerNamespace("gpii");
 
     var findArgv = function (key) {
@@ -42,43 +43,46 @@
     });
     
     gpii.preferencesServer.preInit = function (that) {
-        that.server = express.createServer(
-//      In case we want to support https
-//        {
-//            key: fs.readFileSync('path/to/key.pem'),
-//            cert: fs.readFileSync('path/to/cert.pem')
-//        }
-        );
+        that.server = express.createServer();
         that.server.configure(function () {
             that.server.use(express.bodyParser());
         });
         that.server.configure("production", function () {
             // Set production options.
             fluid.staticEnvironment.production = fluid.typeTag("gpii.production");
+            fluid.setLogging(false);
         });
         that.server.configure("development", function () {
             // Set development options.
             fluid.staticEnvironment.production = fluid.typeTag("gpii.development");
+            fluid.setLogging(true);
         });
     };
     
     gpii.preferencesServer.finalInit = function (that) {
         var port = findArgv("port") || 8080;
-        console.log("Preferences Server is running on port: " + port);
+        fluid.log("Preferences Server is running on port: " + port);
         that.server.listen(typeof port === "string" ? parseInt(port, 10) : port);
     };
+
+    fluid.demands("gpii.urlExpander", ["gpii.development", "gpii.flowManager"], {
+        options: {
+            vars: {
+                db: path.join(__dirname, ".."),
+                root: path.join(__dirname, "..")
+            }
+        }
+    });
     
-    fluid.demands("gpii.dataSource", ["gpii.development", "userSource"], {
+    fluid.demands("gpii.dataSource", ["gpii.development", "gpii.preferencesServer"], {
         options: {
             url: "%db/test/data/user/%token.json"
         }
     });
     
-    fluid.demands("gpii.dataSource", ["gpii.production", "userSource"], {
+    fluid.demands("gpii.dataSource", ["gpii.production", "gpii.preferencesServer"], {
         options: {
-            host: "0.0.0.0",
-            port: 5984,
-            url: "%db/user/%token"
+            url: "0.0.0.0:5984/%db/user/%token"
         }
     });
 
