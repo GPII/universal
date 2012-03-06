@@ -66,7 +66,7 @@
     };
 
     gpii.source.post = function (dataSource, req, res) {
-        dataSource.set(req.body, req.directModel, gpii.source.makeCallback(res));
+        dataSource.set(req.directModel, req.body, gpii.source.makeCallback(res));
     };
 
     gpii.source.makeCallback = function (res) {

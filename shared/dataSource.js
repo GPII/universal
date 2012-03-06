@@ -131,7 +131,7 @@
         });
     };
 
-    gpii.dataSource.DBSet = function (responseParser, resolveUrl, model, directModel, callback) {
+    gpii.dataSource.DBSet = function (responseParser, resolveUrl, directModel, model, callback) {
         var modelData = typeof model === "string" ? model : JSON.stringify(model);
         var req = dbAll(resolveUrl, directModel, "PUT", function (data) {
             data = JSON.parse(data);
@@ -166,7 +166,7 @@
         fsAll("read", responseParser, resolveUrl, directModel, callback);
     };
 
-    gpii.dataSource.FSSet = function (responseParser, resolveUrl, model, directModel, callback) {
+    gpii.dataSource.FSSet = function (responseParser, resolveUrl, directModel, model, callback) {
         fsAll("write", responseParser, resolveUrl, directModel, callback,
             typeof model === "string" ? model : JSON.stringify(model));
     };
