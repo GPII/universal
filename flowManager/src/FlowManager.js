@@ -81,13 +81,7 @@
     });
 
     gpii.flowManager.preInit = function (that) {
-        that.server = express.createServer(
-//      In case we want to support https
-//        {
-//            key: fs.readFileSync('path/to/key.pem'),
-//            cert: fs.readFileSync('path/to/cert.pem')
-//        }
-        );
+        that.server = express.createServer();
         that.server.configure(function () {
             that.server.use(express.bodyParser());
         });
@@ -165,58 +159,26 @@
         }
     });
 
-    fluid.demands("userPreferencesDataSource", ["gpii.development", "gpii.flowManager"], {
+    fluid.demands("userPreferencesDataSource", "gpii.flowManager", {
         options: {
             url: "{gpii.flowManager}.config.userPreferences.url"
         }
     });
 
-    fluid.demands("userPreferencesDataSource", ["gpii.production", "gpii.flowManager"], {
-        options: {
-            host: "{gpii.flowManager}.config.userPreferences.host",
-            port: "{gpii.flowManager}.config.userPreferences.port",
-            url: "{gpii.flowManager}.config.userPreferences.url"
-        }
-    });
-
-    fluid.demands("solutionsReporterDataSource", ["gpii.development", "gpii.flowManager"], {
+    fluid.demands("solutionsReporterDataSource", "gpii.flowManager", {
         options: {
             url: "{gpii.flowManager}.config.solutionsReporter.url"
         }
     });
 
-    fluid.demands("solutionsReporterDataSource", ["gpii.production", "gpii.flowManager"], {
-        options: {
-            host: "{gpii.flowManager}.config.solutionsReporter.host",
-            port: "{gpii.flowManager}.config.solutionsReporter.port",
-            url: "{gpii.flowManager}.config.solutionsReporter.url"
-        }
-    });
-
-    fluid.demands("matchMakerDataSource", ["gpii.development", "gpii.flowManager"], {
+    fluid.demands("matchMakerDataSource", "gpii.flowManager", {
         options: {
             url: "{gpii.flowManager}.config.matchMaker.url"
         }
     });
 
-    fluid.demands("matchMakerDataSource", ["gpii.production", "gpii.flowManager"], {
+    fluid.demands("launchManagerDataSource", "gpii.flowManager", {
         options: {
-            host: "{gpii.flowManager}.config.matchMaker.host",
-            port: "{gpii.flowManager}.config.matchMaker.port",
-            url: "{gpii.flowManager}.config.matchMaker.url"
-        }
-    });
-
-    fluid.demands("launchManagerDataSource", ["gpii.development", "gpii.flowManager"], {
-        options: {
-            url: "{gpii.flowManager}.config.launchManager.url"
-        }
-    });
-
-    fluid.demands("launchManagerDataSource", ["gpii.production", "gpii.flowManager"], {
-        options: {
-            host: "{gpii.flowManager}.config.launchManager.host",
-            port: "{gpii.flowManager}.config.launchManager.port",
             url: "{gpii.flowManager}.config.launchManager.url"
         }
     });

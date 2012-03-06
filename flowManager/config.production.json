@@ -1,22 +1,14 @@
 {
     "userPreferences": {
-        "host": "0.0.0.0",
-        "port": 8080,
-        "url": "%db/user/%token"
+        "url": "http://0.0.0.0:8080/%db/user/%token"
     },
     "solutionsReporter": {
-        "host": "0.0.0.0",
-        "port": 8082,
-        "url": "/solutions"
+        "url": "http://0.0.0.0:8082/solutions"
     },
     "matchMaker": {
-        "host": "0.0.0.0",
-        "port": 8083,
-        "url": "/match"
+        "url": "http://0.0.0.0:8083/match"
     },
     "launchManager": {
-        "host": "0.0.0.0",
-        "port": 8084,
-        "url": "/launch"
+        "url": "http://0.0.0.0:8084/launch"
     }
 }
