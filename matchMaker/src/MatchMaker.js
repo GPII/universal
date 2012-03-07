@@ -8,20 +8,28 @@
 
     fluid.defaults("gpii.matchMaker", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
-        preInitFunction: "gpii.matchMaker.preInit",
         components: {
             solutionsReporter: {
-                type: "gpii.dataSource"
+                type: "gpii.dataSource",
+                options: {
+                    url: "{gpii.matchMaker}.options.url"
+                }
             }
         },
         invokers: {
-            set: "gpii.matchMaker.set"
+            set: "gpii.matchMaker.set",
+            match: "gpii.matchMaker.match"
         }
     });
 
     fluid.demands("gpii.matchMaker.set", "gpii.matchMaker", {
         funcName: "gpii.matchMaker.setFS",
-        args: ["{solutionsReporter}", "{solutionsReporter}.match", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+        args: ["{solutionsReporter}", "{gpii.matchMaker}.match", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+    });
+
+    fluid.demands("gpii.matchMaker.match", "gpii.matchMaker", {
+        funcName: "gpii.matchMaker.match",
+        args: ["{arguments}.0", "{arguments}.1"]
     });
 
     var filterFSSolutions = function (solutions, device) {
@@ -57,16 +65,25 @@
         });
     };
 
-    gpii.matchMaker.buildSolutionsQuery = function () {};
-
-    gpii.matchMaker.preInit = function (that) {
-        that.match = function (preferences, solutions) {
-            var matchedSolutions = [];
-            fluid.each(solutions, function (solution) {
-                
+    gpii.matchMaker.match = function (preferences, solutions) {
+        var matched = [];
+        fluid.each(solutions, function (solution) {
+            var solutionMatched = fluid.find(solution.settingsHandlers, function (settingsHandlers) {
+                var capabilityMatched = fluid.find(settingsHandlers.capabilities, function (capability) {
+                    if (fluid.get(preferences, capability)) {
+                        return true;
+                    }
+                });
+                if (capabilityMatched) {
+                    return true;
+                }
             });
-            return matchedSolutions;
-        };
+            if (!solutionMatched) {
+                return;
+            }
+            matched.push(solution);
+        });
+        return matched;
     };
 
 })();

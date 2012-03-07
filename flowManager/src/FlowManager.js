@@ -18,6 +18,7 @@
     };
 
     fluid.require("../../../../../shared/dataSource.js");
+    fluid.require("../../../../../matchMaker/src/MatchMaker.js");
 
     process.on("uncaughtException", function (err) {
         console.log("Uncaught Exception: " + err);
@@ -229,7 +230,8 @@
     });
 
     fluid.demands("matchMakerDataSource", "gpii.flowManager", {
-        options: {
+        funcName: "gpii.matchMaker",
+        args: {
             url: "{gpii.flowManager}.config.matchMaker.url"
         }
     });

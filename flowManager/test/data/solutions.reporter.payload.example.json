@@ -5,14 +5,18 @@
         "version": "3.2.1",
         "contexts": {
             "OS": {
-                 "id": "linux",
-                 "version": ">=2.6.26"
+                "id": "linux",
+                "version": ">=2.6.26"
             }
         },
         "settingsHandlers": [
             {
                 "type": "gpii.settings.gsettingsHandler",
-                "capabilities": {
+                "capabilities": [
+                    "display.screenEnhancement.magnification",
+                    "display.screenEnhancement.tracking"
+                ],
+                "capabilitiesTransformations": {
                     "screenEnhancement": {
                         "magnification": "mag-factor",
                         "tracking": {
@@ -55,7 +59,7 @@
         "id": "com.microsoft.windows.magnifier",
         "version": "7",
         "contexts": {
-            "platforms": [
+            "OS": [
                 {
                     "id": "com.microsoft.windows",
                     "version": ">=7.0"
