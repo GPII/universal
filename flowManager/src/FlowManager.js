@@ -33,7 +33,7 @@
         preInitFunction: "gpii.flowManager.preInit",
         finalInitFunction: "gpii.flowManager.finalInit",
         components: {
-            userPreferencesDataSource: {
+            preferencesDataSource: {
                 type: "gpii.dataSource",
                 options: {
                     termMap: {
@@ -47,9 +47,7 @@
             matchMakerDataSource: {
                 type: "gpii.dataSource",
                 options: {
-                    termMap: {
-                        query: "%query"
-                    }
+                    writable: true
                 }
             },
             transformerDataSource: {
@@ -77,14 +75,14 @@
         },
         events: {
             onUserListener: null,
-            onUserPreferences: null,
+            onPreferences: null,
             onDevice: null,
             onReadyToMatch: {
                 events: {
-                   userPreferences: "onUserPreferences",
+                   preferences: "onPreferences",
                    device: "onDevice"
                 },
-                args: ["{arguments}.userPreferences.0", "{arguments}.device.0"]
+                args: ["{arguments}.preferences.0", "{arguments}.device.0"]
             },
             onMatch: null,
             onTransformation: null,
@@ -92,7 +90,7 @@
         },
         listeners: {
             onUserListener: [{
-                listener: "{gpii.flowManager}.getUserPreferences"
+                listener: "{gpii.flowManager}.getPreferences"
             }, {
                 listener: "{gpii.flowManager}.getDevice"
             }],
@@ -121,16 +119,16 @@
             fluid.setLogging(true);
         });
 
-        that.getUserPreferences = function (token) {
-            that.userPreferencesDataSource.get({
+        that.getPreferences = function (token) {
+            that.preferencesDataSource.get({
                 token: token
-            }, function (userPreferences) {
-                if (userPreferences && userPreferences.isError) {
-                    fluid.log(userPreferences.message);
+            }, function (preferences) {
+                if (preferences && preferences.isError) {
+                    fluid.log(preferences.message);
                     return;
                 }
-                fluid.log("Fetched user preferences: ", userPreferences);
-                that.events.onUserPreferences.fire(userPreferences);
+                fluid.log("Fetched user preferences: ", preferences);
+                that.events.onPreferences.fire(preferences);
             });
         };
         that.getDevice = function () {
@@ -143,12 +141,10 @@
                 that.events.onDevice.fire(device);
             });
         };
-        that.onReadyToMatchHandler = function (userPreferences, device) {
-            that.matchMakerDataSource.get({
-                query: querystring.stringify({
-                    userPreferences: JSON.stringify(userPreferences),
-                    device: JSON.stringify(device)
-                })
+        that.onReadyToMatchHandler = function (preferences, device) {
+            that.matchMakerDataSource.set(undefined, {
+                preferences: preferences,
+                device: device
             }, function (match) {
                 if (match && match.isError) {
                     fluid.log(match.message);
@@ -220,9 +216,9 @@
         }
     });
 
-    fluid.demands("userPreferencesDataSource", "gpii.flowManager", {
+    fluid.demands("preferencesDataSource", "gpii.flowManager", {
         options: {
-            url: "{gpii.flowManager}.config.userPreferences.url"
+            url: "{gpii.flowManager}.config.preferences.url"
         }
     });
 
