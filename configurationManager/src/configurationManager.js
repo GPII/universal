@@ -11,11 +11,8 @@ https://github.com/gpii/universal/LICENSE.txt
 */
 (function () {
     "use strict";
-	var settingsStore;
 	
-    var express = require("express"),
-        fluid = require("infusion"),
-        path = require("path"),
+    var fluid = require("infusion"),
         gpii = fluid.registerNamespace("gpii");
     
     fluid.defaults("gpii.configurationManager", {
@@ -30,9 +27,11 @@ https://github.com/gpii/universal/LICENSE.txt
     		//return the set of 
     	};
     	
+    	that.settingsStore;
+    	
 		that.set = function (directModel, data, callback) {
 			//place to store return values:
-			var settingsStore = [];
+			that.settingsStore = [];
 			//data is an array of solutions with settingHandlers and launchHandlers
 			//for each solution
 			fluid.each(data, function(solution) {
@@ -58,7 +57,7 @@ https://github.com/gpii/universal/LICENSE.txt
 				});
 				//save launchHandler so we have it for when we need to stop the solutions
 				previousSolution.launchHanders = solution.launchHandlers;
-				settingsStore.push(previousSolution);
+				that.settingsStore.push(previousSolution);
 			});
 			//store the return values from the settingsHandlers
 			//TODO: settingsStore should be saved to filesystem
@@ -67,7 +66,7 @@ https://github.com/gpii/universal/LICENSE.txt
 		that.delete = function (directModel, data, callback) {
 			//TODO load the previously stored settings
 			//do the same as set but without storing the preferences
-			fluid.each(settingsStore, function(solution) {
+			fluid.each(that.settingsStore, function(solution) {
 				//for each settingsHandler:
 				fluid.each(solution.settingHandlers, function (handler) {
 					//send the payload to reset the settings via settingsHandlers
@@ -80,47 +79,10 @@ https://github.com/gpii/universal/LICENSE.txt
 				});
 				//clear the settingsStore as it is no longer relevant
 				//TODO handle the settingsStore in file instead.
-				settingsStore = {};
+				that.settingsStore = {};
 			});
 		}
 		
 	}
 
 })();
-
-[{// 
-// 	"id": "org.gnome.desktop.a11y.magnifier",
-// 	"settingHandlers": [{
-// 		"type": "gpii.settings.gsettingsHandler",
-// 		"options": {
-// 			"parameters": {
-// 				"org.gnome.desktop.a11y.magnifier": {
-// 					"cross-hairs-clip": true,
-// 					"cross-hairs-color": "red",
-// 					"cross-hairs-length": 4096,
-// 					"cross-hairs-opacity": 0.2,
-// 					"cross-hairs-thickness": 10,
-// 					"lens-mode": true,
-// 					"mag-factor": 12.2,
-// 					"mouse-tracking": "push",
-// 					"screen-position": "top-half",
-// 					"scroll-at-edges": true,
-// 					"show-cross-hairs": true,
-// 				}	
-// 			}
-// 		}
-// 	}],
-// 	"launchHandlers": [{
-// 		"type": "gpii.launch.gsettings",
-// 		"start": {
-// 			"schema": "org.gnome.desktop.a11y.applications",
-// 			"key": "screen-magnifier-enabled",
-// 			"value": true
-// 		},
-// 		"stop": {
-// 			"schema": "org.gnome.desktop.a11y.applications",
-// 			"key": "screen-magnifier-enabled",
-// 			"value": true
-// 		}
-// 	}]
-// }]
