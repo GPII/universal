@@ -1,0 +1,128 @@
+[
+    {
+        "name": "GNOME Shell Magnifier",
+        "id": "org.gnome.desktop.a11y.magnifier",
+        "version": "3.2.1",
+        "contexts": {
+            "OS": {
+                 "id": "linux",
+                 "version": ">=2.6.26"
+            }
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settings.gsettingsHandler",
+                "capabilities": {
+                    "screenEnhancement": {
+                        "magnification": "mag-factor",
+                        "tracking": {
+                            "expander": {
+                                "type": "gpii.transform.valueMapper",
+                                "path": "mouse-tracking",
+                                "options": {
+                                    "valueMap": {
+                                        "mouse": "centered"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "launchHandlers": [
+            {
+                "type": "gpii.launch.exec",
+                "options": {
+                    "start": {
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled",
+                        "args": [
+                            "true"
+                        ]
+                    },
+                    "stop": {
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled",
+                        "args": [
+                            "false"
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "name": "Screen Magnifier",
+        "id": "com.microsoft.windows.magnifier",
+        "version": "7",
+        "contexts": {
+            "platforms": [
+                {
+                    "id": "com.microsoft.windows",
+                    "version": ">=7.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settings.windowsRegistryHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\ScreenMagnifier"
+                },
+                "capabilities": {
+                    "screenEnhancement": {
+                        "magnification": {
+                            "path": "Magnification",
+                            "type": "gpii.transform.scaleValue",
+                            "option": {
+                                "scaleFactor": 100
+                            }
+                        },
+                        "invertColourChoice": {
+                            "path": "Invert",
+                            "dataType": "DWORD"
+                        },
+                        "tracking": {
+                            "expander": {
+                                "type": "gpii.transform.demultiplexValue",
+                                "options": {
+                                    "valueMap": {
+                                        "mouse": {
+                                            "path": "FollowMouse",
+                                            "value": true
+                                        },
+                                        "focus": {
+                                            "path": "FollowFocus",
+                                            "value": true
+                                        },
+                                        "caret": {
+                                            "path": "FollowCaret",
+                                            "value": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "launchHandlers": [
+            {
+                "type": "gpii.launch.windows.registryExec",
+                "options": {
+                    "pathKey": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\magnifierpane",
+                    "start": {
+                        "command": "{path}"
+                    },
+                    "stop": {
+                        "command": "???",
+                        "args": [
+                            "{pid"
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+]

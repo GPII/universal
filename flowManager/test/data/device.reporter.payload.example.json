@@ -1,1 +1,10 @@
-{}
+{
+    "OS": {
+         "id": "linux",
+         "version": "2.6.26"
+    },
+    "solutions": [{
+        "id": "org.gnome.desktop.a11y.magnifier",
+        "version": "3.2.1"
+    }]
+}
