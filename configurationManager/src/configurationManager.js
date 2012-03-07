@@ -1,5 +1,5 @@
 /*!
-Launch Manager
+Configuration Manager
 
 Copyright 2012 Raising the Floor - International
 
@@ -18,13 +18,13 @@ https://github.com/gpii/universal/LICENSE.txt
         path = require("path"),
         gpii = fluid.registerNamespace("gpii");
     
-    fluid.defaults("gpii.launchManager", {
+    fluid.defaults("gpii.configurationManager", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
-		preInitFunction: "gpii.launchManager.preInit"
+		preInitFunction: "gpii.configurationManager.preInit"
     
     });
     
-    gpii.launchManager.preInit = function (that) {
+    gpii.configurationManager.preInit = function (that) {
     	that.get = function (directModel, callback) {
     		//call settingsHandler with get
     		//return the set of 
