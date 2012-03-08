@@ -29,6 +29,7 @@ https://github.com/gpii/universal/LICENSE.txt
 		that.get = function (directModel, callback) {
 			callback({
 				OS: { 
+					//TODO: need to report more details - windowmanager
 					id: os.platform(), 
 					version: os.release() 
 				}

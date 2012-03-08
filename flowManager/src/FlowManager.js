@@ -42,7 +42,7 @@
                 }
             },
             deviceReporterDataSource: {
-                type: "gpii.dataSource"
+                type: "gpii.deviceReporter"
             },
             matchMakerDataSource: {
                 type: "gpii.dataSource",
