@@ -57,7 +57,7 @@ https://github.com/gpii/universal/LICENSE.txt
             var capabilities = handler.capabilities;
             delete handler.capabilities;
             var transformedSettings = gpii.transformer.preferencesToSettings(preferences, solution, specificPrefs);
-            handler.solutions = transformedSettings;
+            handler.settings = transformedSettings;
         });
     };
     

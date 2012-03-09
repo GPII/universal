@@ -72,7 +72,7 @@ https://github.com/gpii/universal/LICENSE.txt
             "settingsHandlers": [
                 {
                     "type": "gpii.settings.gsettingsHandler",
-                    "solutions": {
+                    "settings": {
                          "show-cross-hairs": true
                     },
                     "options": {}
