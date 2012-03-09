@@ -16,7 +16,6 @@ https://github.com/gpii/universal/LICENSE.txt
 
     var express = require("express"),
         fluid = require("infusion"),
-        path = require("path"),
         gpii = fluid.registerNamespace("gpii");
     
     fluid.defaults("gpii.deviceReporter", {
@@ -29,7 +28,7 @@ https://github.com/gpii/universal/LICENSE.txt
 		that.get = function (directModel, callback) {
 			callback({
 				OS: { 
-					//TODO: need to report more details - windowmanager
+					//TODO: need to report more details - windowmanager, etc.
 					id: os.platform(), 
 					version: os.release() 
 				}

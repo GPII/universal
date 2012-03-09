@@ -14,14 +14,12 @@ https://github.com/gpii/universal/LICENSE.txt
 
     var express = require("express"),
         fluid = require("infusion"),
-        path = require("path"),
         child_process = require("child_process"),
         gpii = fluid.registerNamespace("gpii");
     
     fluid.defaults("gpii.launchHandler", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
 		preInitFunction: "gpii.launchHandler.preInit"
-    
     });
     
     gpii.launchHandler.preInit = function (that) {
@@ -52,23 +50,3 @@ https://github.com/gpii/universal/LICENSE.txt
 		}
 	}
 })();
-
-// {
-//     "type": "gpii.launchHandler.exec",
-//     "options": {
-//          "command": "org.gnome.desktop.a11y.applications screen-magnifier-enabled"
-//			"args": ["screen-magnifier-enabled", "true" ]
-//     }
-//  }
-
-// { 
-//     "statusCode": 200,
-//     "pid": 1234
-// }
-
-//{ 
-//     "type": "gpii.launchHandler.exec",
-//     "options": {
-//          "pid": 1234
-//     }
-// }
