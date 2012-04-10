@@ -1,0 +1,19 @@
+{
+    "name": "jqUnit",
+    "description": "An XUnit unit testing framework (in the style of JUnit) to node.js, using QUnit as the underlying engine",
+    "version": "0.1",
+    "author": "Fluid Project",
+    "homepage": "http://www.fluidproject.org/",
+    "repository": {
+        "type": "git",
+        "url": "http: //github.com/fluid-project/node-jqUnit.git"
+    },
+    "keywords": ["TDD", "JUnit", "jqUnit", "QUnit", "unit", "testing", "tests", "async"],
+    "engines": { "node": "0.6.x" },
+    "main": "./lib/jqUnit.js",
+    "licenses": [ {
+        "type": "BSD-3-Clause",
+        "url": "http://www.opensource.org/licenses/BSD-3-Clause"
+        }
+    ]
+}
