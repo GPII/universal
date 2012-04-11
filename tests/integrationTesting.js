@@ -16,11 +16,80 @@ https://github.com/gpii/universal/LICENSE.txt
     
     var gpii = fluid.registerNamespace("gpii");
     var http = require("http");
-
     gpii.integrationTesting = fluid.registerNamespace("gpii.integrationTesting");
 
+    //
+    var integrationTester1_expectedSettingsStore = [
+    {
+        "name": "[TESTING] Mock application",
+        "id": "net.gpii.testing.mock.linux.application",
+        "version": "3.2.1",
+        "contexts": {
+            "OS": {
+                "id": "linux",
+                "version": ">=2.6.26"
+            }
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.integrationTesting.mockSettingsHandler",
+                "capabilitiesTransformations": {
+                    "screenEnhancement": {
+                        "magnification": "mag-factor",
+                        "tracking": {
+                            "expander": {
+                                "type": "gpii.transform.valueMapper",
+                                "path": "mouse-tracking",
+                                "options": {
+                                    "valueMap": {
+                                        "mouse": "centered"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "settings": {
+                    "applicationParameter1": true
+                }
+            }
+        ],
+        "launchHandlers": [
+            {
+                "type": "gpii.integrationTesting.mockLaunchHandler",
+                "options": {
+                    "start": [
+                        {
+                            "mockLaunchHandler-start": {
+                                "settings": {
+                                    "setting1": true
+                                },
+                                "options": {
+                                    "option1": true
+                                }
+                            }
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "mockLaunchHandler-stop": {
+                                "settings": {
+                                    "setting1": false
+                                },
+                                "options": {
+                                    "setting1": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+];
+
     gpii.integrationTesting.mockLaunchHandler = function(data) {
-        fluid.log("MOCK LAUNCHER HERE");
+        jqUnit.assert("gpii.integrationTesting.mockLaunchHandler called");
         return data;
     };
 
@@ -32,12 +101,12 @@ https://github.com/gpii/universal/LICENSE.txt
         cpy = fluid.transform(cpy, function(settingsHandler) {
             //each solution
             return fluid.transform(settingsHandler, function(solution) {
-                return fluid.transform(solution.settings, function(value) {
+                var settingsBlock = fluid.transform(solution.settings, function(value) {
                     return { oldValue: value, newValue: "changed" };
                 });
+                return { settings:settingsBlock };
             });
         });
-        fluid.log("RETURNING \n"+JSON.stringify(cpy));
         return cpy;
     };
 
@@ -46,33 +115,43 @@ https://github.com/gpii/universal/LICENSE.txt
         flowManager = gpii.flowManager();
     };
 
-    jqUnit.asyncTest("Does it launch?", function () {
+    jqUnit.asyncTest("Regular successful login", function () {
         gpii.integrationTesting.launchServer();
 
-        jqUnit.expect(2);
+        jqUnit.expect(3);
         http.get({
             host: "localhost",
             port: 8081,
             path: "/user/integrationTester1/login"
         }, function(response) {
-            //printRec(response);
             console.log("Callback from use login called");
-            jqUnit.assert("It works");
 
             response.on("data", function (chunk) {
                 console.log("Response from server: " + chunk);
             });
-            response.on("close", function(ab) {
-                console.log("Closing time");
+            response.on("close", function(dat) {
+                console.log("Connection to the server was closed");
                 jqUnit.start();
             });
-            response.on("end", function(ab) {
-                console.log("Ending time");
-                //printRec(flowManager);
+            response.on("end", function(dat) {
+                console.log("Connection to server ended");
+                if (flowManager && flowManager.launchManagerDataSource && 
+                    flowManager.launchManagerDataSource.settingsStore) {
+                    jqUnit.assertDeepEq("Checking that the settingsStore contains the expected: ", 
+                        flowManager.launchManagerDataSource.settingsStore, integrationTester1_expectedSettingsStore);
+                } else {
+                   jqUnit.assert("flowManager or settingsStore are not set", false);
+                }
                 jqUnit.start();
             });
         }).on('error', function(e) {
             console.log("Got error: " + e.message);
         });
     });
+    //TODO: assert payloads sent to handlers
+    //TODO: logout
+    //TODO: unsuccessful logout (for non-logged in user)
+    //TODO: multi-logout/login
+    //TODO: unsuccessful login (invalid token)
+    //TODO: make test with hooks in various places in the flowmanager
 }());
