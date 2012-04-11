@@ -1,4 +1,5 @@
 /*!
+
 Integration Testing
 
 Copyright 2012 Raising the Floor - International
@@ -9,6 +10,8 @@ compliance with this License.
 You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
+
+/*global require*/
 
 (function () {
     var fluid = require("universal");
@@ -94,7 +97,7 @@ https://github.com/gpii/universal/LICENSE.txt
     };
 
     gpii.integrationTesting.mockSettingsHandler = function(data) {
-        fluid.log("MOCK SETTINGS HANDLER RECIEVED: "+JSON.stringify(data));
+        //fluid.log("MOCK SETTINGS HANDLER RECIEVED: "+JSON.stringify(data));
         jqUnit.assert("gpii.integrationTesting.mockSettingsHandler called");
         var cpy = fluid.copy(data);
         //enter array with settingsHandlers
@@ -124,17 +127,17 @@ https://github.com/gpii/universal/LICENSE.txt
             port: 8081,
             path: "/user/integrationTester1/login"
         }, function(response) {
-            console.log("Callback from use login called");
+            fluid.log("Callback from use login called");
 
             response.on("data", function (chunk) {
-                console.log("Response from server: " + chunk);
+                fluid.log("Response from server: " + chunk);
             });
             response.on("close", function(dat) {
-                console.log("Connection to the server was closed");
+                fluid.log("Connection to the server was closed");
                 jqUnit.start();
             });
             response.on("end", function(dat) {
-                console.log("Connection to server ended");
+                fluid.log("Connection to server ended");
                 if (flowManager && flowManager.launchManagerDataSource && 
                     flowManager.launchManagerDataSource.settingsStore) {
                     jqUnit.assertDeepEq("Checking that the settingsStore contains the expected: ", 
@@ -145,7 +148,7 @@ https://github.com/gpii/universal/LICENSE.txt
                 jqUnit.start();
             });
         }).on('error', function(e) {
-            console.log("Got error: " + e.message);
+            fluid.log("Got error: " + e.message);
         });
     });
     //TODO: assert payloads sent to handlers
