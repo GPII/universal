@@ -60,11 +60,16 @@ https://github.com/gpii/universal/LICENSE.txt
     });
     var integrationTester = gpii.tests.testEnvironment();
 
-    var getExpectedSettingsStore = function (url) {
-        var settings = fs.readFileSync(url, "utf8");
-        settings = JSON.parse(settings);
+    function getJSON (url) {
+        var data = fs.readFileSync(url, "utf8");
+        return JSON.parse(data);
+    }
+
+    var getExpectedSettingsStore = function (options) {
+        var settings = getJSON(options.solutionsUrl),
+            device = getJSON(options.deviceUrl);
         return fluid.remove_if(settings, function (setting, index) {
-            if (setting.contexts.OS.id !== os.platform()) {
+            if (setting.contexts.OS.id !== device.OS.id) {
                 return setting;
             } else {
                 fluid.each(setting.settingsHandlers, function (settingsHandler) {
@@ -76,7 +81,10 @@ https://github.com/gpii/universal/LICENSE.txt
 
     integrationTester.asyncTest("Regular successful login", function () {
         var flowManager = gpii.flowManager(),
-            expectedSettingsStore = getExpectedSettingsStore(flowManager.matchMakerDataSource.solutionsReporter.resolveUrl());
+            expectedSettingsStore = getExpectedSettingsStore({
+                solutionsUrl: flowManager.matchMakerDataSource.solutionsReporter.resolveUrl(),
+                deviceUrl: flowManager.deviceReporterDataSource.resolveUrl()
+            });
         jqUnit.expect(3);
         http.get({
             host: "localhost",
