@@ -52,6 +52,12 @@ https://github.com/gpii/universal/LICENSE.txt
             url: "%db/test/data/solutions.reporter.mock1.json"
         }
     });
+    fluid.demands("deviceReporterDataSource", ["gpii.flowManager", "gpii.development", "gpii.test"], {
+        funcName: "gpii.dataSource.file",
+        args: {
+            url: "%db/test/data/device.reporter.payload.mock1.json"
+        }
+    });
     var integrationTester = gpii.tests.testEnvironment();
 
     var getExpectedSettingsStore = function (url) {
