@@ -107,7 +107,7 @@
     };
 
     var dbAll = function (resolveUrl, directModel, method, callback, model) {
-        var path = resolveUrl(directModel);
+        var path = resolveUrl(directModel),
             urlObj = url.parse(path, true);
         var req = http.request({
             host: urlObj.hostname,
