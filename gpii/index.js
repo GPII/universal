@@ -7,5 +7,6 @@ fluid.require("deviceReporter", require);
 fluid.require("lifecycleManager", require);
 fluid.require("lifecycleActions", require);
 fluid.require("flowManager", require);
+fluid.require("settingsHandlers", require);
 
 module.exports = fluid;
