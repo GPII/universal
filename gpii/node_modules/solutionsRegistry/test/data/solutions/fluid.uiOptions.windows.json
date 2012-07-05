@@ -1,0 +1,32 @@
+{
+    "name": "UI Options",
+    "id": "fluid.uiOptions.windows",
+    "contexts": {             
+        "OS": [
+            {
+                "id": "win32",
+                "version": ">=5.0"
+            }
+        ]
+    },
+    "settingsHandlers": [
+        {
+            "type": "gpii.settingsHandlers.noSettings",
+            "capabilities": ["display"]
+        }
+    ],
+    "lifecycleManager": {
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+            }
+        ]
+    }
+}
