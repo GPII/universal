@@ -1,0 +1,31 @@
+{
+    "typeName": "preferencesServer.solutionsRegistry.production",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": false,
+                    "components": {
+                        "preferencesServer": {
+                            "type": "gpii.preferencesServer",
+                            "options": {
+                                "typeName": "preferencesServer.production",
+                                "userSourceUrl": "http://localhost:5984/user/%token"
+                            }
+                        },
+                        "solutionsRegistry": {
+                            "type": "gpii.solutionsRegistry",
+                            "options": {
+                                "typeName": "solutionsRegistry.production",
+                                "solutionsRegistryUrl": "http://localhost:5984/solutions/%id",
+                                "solutionsQueryUrl": "http://localhost:5984/solutions?os=%os"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
