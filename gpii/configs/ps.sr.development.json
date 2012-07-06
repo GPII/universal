@@ -1,0 +1,31 @@
+{
+    "typeName": "preferencesServer.solutionsRegistry.development",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "components": {
+                        "preferencesServer": {
+                            "type": "gpii.preferencesServer",
+                            "options": {
+                                "typeName": "preferencesServer.development",
+                                "userSourceUrl": "file://%root/test/data/user/%token.json"
+                            }
+                        },
+                        "solutionsRegistry": {
+                            "type": "gpii.solutionsRegistry",
+                            "options": {
+                                "typeName": "solutionsRegistry.development",
+                                "solutionsRegistryUrl": "file://%root/test/data/solutions/%id.json",
+                                "solutionsQueryUrl": "file://%root/test/data/solutions/%os.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
