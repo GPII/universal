@@ -7,7 +7,7 @@
                 "type": "gpii.server",
                 "options": {
                     "logging": false,
-                    "port": 80,
+                    "port": 8081,
                     "components": {
                         "preferencesServer": {
                             "type": "gpii.preferencesServer",
