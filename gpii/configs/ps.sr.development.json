@@ -19,8 +19,8 @@
                             "type": "gpii.solutionsRegistry",
                             "options": {
                                 "typeName": "solutionsRegistry.development",
-                                "solutionRegistryUrl": "file://%root/test/data/solution/%id.json",
-                                "solutionQueryUrl": "file://%root/test/data/solution/%os.json"
+                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
+                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
                             }
                         }
                     }
