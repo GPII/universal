@@ -1,0 +1,43 @@
+{
+    "typeName": "flowManager.preferencesServer.solutionsRegistry.development",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "components": {
+                        "preferencesServer": {
+                            "type": "gpii.preferencesServer",
+                            "options": {
+                                "typeName": "preferencesServer.development",
+                                "userSourceUrl": "file://%root/../flowManager/test/data/user.profile.%token.json"
+                            }
+                        },
+                        "solutionsRegistry": {
+                            "type": "gpii.solutionsRegistry",
+                            "options": {
+                                "typeName": "solutionsRegistry.development",
+                                "solutionRegistryUrl": "file://%root/test/data/solution/%id.json",
+                                "solutionQueryUrl": "file://%root/test/data/solution/%os.json"
+                            }
+                        },
+                        "flowManager": {
+                            "type": "gpii.flowManager",
+                            "options": {
+                                "typeName": "flowManager.development",
+                                "urls": {
+                                    "preferences": "http://localhost:8080/user/%token",
+                                    "deviceReporter": "",
+                                    "solutionsReporter": "http://localhost:8080/solution?os=%os&version=%version",
+                                    "matchMaker": ""
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
