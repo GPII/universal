@@ -12,7 +12,7 @@
                             "type": "gpii.preferencesServer",
                             "options": {
                                 "typeName": "preferencesServer.development",
-                                "userSourceUrl": "file://%root/test/data/user/%token.json"
+                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
                             }
                         },
                         "solutionsRegistry": {
