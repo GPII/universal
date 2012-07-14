@@ -1,0 +1,30 @@
+{
+    "display": {
+        "screenEnhancement": {
+            "fontSize": 24,
+            "magnification": 2.0,
+            "tracking": "mouse",
+            "invertImages": true,
+            "showCrosshairs": true
+        }
+    },
+    
+    "control": {
+        "keyboardEnhancement": {
+            "stickyKeys": true
+        }
+    },
+    
+    "-provisional-languageAssistance": {
+        "applications": {
+            "com.texthelp.readWriteGold": {
+                "name": "Read Write Gold",
+                "priority": 100,
+                "parameters": {
+                    "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true
+                }
+            }
+        }
+    }
+}
