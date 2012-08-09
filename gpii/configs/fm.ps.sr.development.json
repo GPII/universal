@@ -28,9 +28,9 @@
                             "options": {
                                 "typeName": "flowManager.development",
                                 "urls": {
-                                    "preferences": "http://localhost:8080/user/%token",
-                                    "deviceReporter": "",
-                                    "solutionsReporter": "http://localhost:8080/solution?os=%os&version=%version",
+                                    "preferences": "http://localhost:%port/user/%token",
+                                    "deviceReporter": "http://localhost:%port/device",
+                                    "solutionsReporter": "http://localhost:%port/solution?os=%os&version=%version",
                                     "matchMaker": ""
                                 }
                             }
