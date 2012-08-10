@@ -37,8 +37,7 @@
                                 "urls": {
                                     "preferences": "http://localhost:%port/user/%token",
                                     "deviceReporter": "http://localhost:%port/device",
-                                    "solutionsReporter": "http://localhost:%port/solution?os=%os&version=%version",
-                                    "matchMaker": ""
+                                    "matchMaker": "http://localhost:%port/match"
                                 }
                             }
                         }
