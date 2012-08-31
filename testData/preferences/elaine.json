@@ -1,0 +1,16 @@
+{
+    "content": {
+        "simplification": {
+            "applications": {
+                "trace.easyOne.communicator.windows": {
+                    "name": "EasyOne Communicator",
+                    "priority": 100
+                },
+                "trace.easyOne.communicator.linux": {
+                    "name": "EasyOne Communicator",
+                    "priority": 100
+                }
+            }
+        }
+    }
+}

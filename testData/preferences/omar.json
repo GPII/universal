@@ -1,0 +1,16 @@
+{
+    "content": {
+        "pictorialSimplification": {
+            "applications": {
+                "trace.easyOne.sudan.windows": {
+                    "name": "EasyOne Communicator Sudan Windows",
+                    "priority": 100
+                },
+                "trace.easyOne.sudan.linux": {
+                    "name": "EasyOne Communicator Sudan Linux",
+                    "priority": 100
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,381 @@
+[
+    {
+        "name": "Read Write Gold",
+        "id": "com.texthelp.readWriteGold",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+                },
+                "capabilities": [
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.name",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.priority",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.Width\\.$t",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.LargeIcons\\.$t",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optToolbarLargeIcons\\.$t",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.ShowText\\.$t",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optToolbarShowText\\.$t",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optSAPI5Speed\\.$t",
+                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optAutoUseScreenReading\\.$t"
+                ],
+                "capabilitiesTransformations": {
+                    "ApplicationSettings\\.AppBar\\.Width": "ApplicationSettings\\.AppBar\\.Width",
+                    "ApplicationSettings\\.AppBar\\.ShowText": "ApplicationSettings\\.AppBar\\.ShowText",
+                    "ApplicationSettings\\.AppBar\\.optToolbarShowText": "ApplicationSettings\\.AppBar\\.optToolbarShowText",
+                    "ApplicationSettings\\.AppBar\\.LargeIcons": "ApplicationSettings\\.AppBar\\.LargeIcons",
+                    "ApplicationSettings\\.AppBar\\.optToolbarLargeIcons": "ApplicationSettings\\.AppBar\\.optToolbarLargeIcons",
+                    "ApplicationSettings\\.Speech\\.optSAPI5Speed": "ApplicationSettings\\.Speech\\.optSAPI5Speed",
+                    "ApplicationSettings\\.Speech\\.optAutoUseScreenReading": "ApplicationSettings\\.Speech\\.optAutoUseScreenReading"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write10\\InstallPath}\\ReadAndWrite.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+    {
+        "name": "Windows Built-in Screen Magnifier",
+        "id": "com.microsoft.windows.magnifier",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\ScreenMagnifier"
+                },
+                "capabilities": [
+                    "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
+                ],
+                "capabilitiesTransformations": {
+                    "Magnification": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "display.screenEnhancement.magnification",
+                            "outputPath": "value",
+                            "factor": 100
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_DWORD"
+                            }
+                        }
+                    },
+                    "Invert": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.invertImages",
+                            "outputPath": "value"
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_DWORD"
+                            }
+                        }
+                    },
+                    "expander": {
+                        "type": "fluid.model.transform.valueMapper",
+                        "inputPath": "display.screenEnhancement.tracking",
+                        "options": {
+                            "mouse": {
+                                "outputPath": "FollowMouse",
+                                "outputValue": {
+                                    "value": 1,
+                                    "dataType": "REG_DWORD"
+                                }
+                            },
+                            "caret": {
+                                "outputPath": "FollowCaret",
+                                "outputValue": {
+                                    "value": 1,
+                                    "dataType": "REG_DWORD"
+                                }
+                            },
+                            "focus": {
+                                "outputPath": "FollowFocus",
+                                "outputValue": {
+                                    "value": 1,
+                                    "dataType": "REG_DWORD"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                "setSettings", 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\Magnify.exe"
+                }
+            ],
+            "stop": [ {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+
+    {
+        "name": "UI Options",
+        "id": "fluid.uiOptions.windows",
+        "contexts": {             
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.applications.fluid\\.uiOptions\\.windows.name",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.foregroundColor",
+                    "display.screenEnhancement.backgroundColor",
+                    "display.screenEnhancement.fontFace"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "Windows Built-in Onscreen Keyboard",
+        "id": "com.microsoft.windows.onscreenKeyboard",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "control.onscreenKeyboard",
+                    "control.onscreenKeyboard.applications.com\\.microsoft\\.windows\\.onscreenKeyboard.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\osk.exe"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im osk.exe"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "NVDA Screen Reader",
+        "id": "nvda.screenReader",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader.applications.nvda\\.screenReader.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
+                }
+            ],
+            "stop": [ 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
+                },{
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
+                }
+            ]
+        }
+    },     
+
+    {
+        "name": "EasyOne Communicator Windows",
+        "id": "trace.easyOne.communicator.windows",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "content.simplification",
+                    "content.simplification.applications.trace\\.easyOne\\.communicator\\.windows.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://easy1234.org/user/${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "EasyOne Communicator Sudan",
+        "id": "trace.easyOne.sudan.windows",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "content.pictorialSimplification",
+                    "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.windows.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://easy1234.org/sudan"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "Web Anywhere",
+        "id": "webinsight.webAnywhere.windows",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "display.screenReader.applications.webinsight\\.webAnywhere\\.windows.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+             "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                }
+            ]
+        }
+    }
+]
