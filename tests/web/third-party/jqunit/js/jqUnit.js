@@ -97,47 +97,47 @@ var jqUnit = jqUnit || {};
     
     var jsUnitCompat = {
         assert: function(msg) {
-            ok(true, msg);  
+            QUnit.ok(true, msg);
         },
         
         assertEquals: function (msg, expected, actual) {
-            equals(actual, expected, msg);
+            QUnit.equals(actual, expected, msg);
         },
         
         assertNotEquals: function (msg, value1, value2) {
-            ok(value1 !== value2, msg);
+            QUnit.ok(value1 !== value2, msg);
         },
 
         assertTrue: function (msg, value) {
-            ok(value, msg);
+            QUnit.ok(value, msg);
         },
 
         assertFalse: function (msg, value) {
-            ok(!value, msg);
+            QUnit.ok(!value, msg);
         },
 
         assertUndefined: function (msg, value) {
-            ok(typeof value === 'undefined', msg);
+            QUnit.ok(typeof value === 'undefined', msg);
         },
 
         assertNotUndefined: function (msg, value) {
-            ok(typeof value !== 'undefined', msg);
+            QUnit.ok(typeof value !== 'undefined', msg);
         },
 
         assertValue: function (msg, value) {
-            ok(value !== null && value !== undefined, msg);
+            QUnit.ok(value !== null && value !== undefined, msg);
         },
         
         assertNoValue: function (msg, value) {
-            ok(value === null || value === undefined, msg);
+            QUnit.ok(value === null || value === undefined, msg);
         },
         
         assertNull: function (msg, value) {
-            equals(value, null, msg);
+            QUnit.equals(value, null, msg);
         },
 
         assertNotNull: function (msg, value) {
-            ok(value !== null, msg);
+            QUnit.ok(value !== null, msg);
         },
         
         assertDeepEq: function (msg, expected, actual) {
@@ -149,7 +149,7 @@ var jqUnit = jqUnit || {};
         },
         // Namespaced version of "expect" for civilization
         expect: function(number) {
-            expect(number);
+            QUnit.expect(number);
         }
     };
 
@@ -163,19 +163,19 @@ var jqUnit = jqUnit || {};
     
     var testFns = {
         isVisible: function (msg, selector) {
-            ok($(selector).is(':visible'), msg);
+            QUnit.ok($(selector).is(':visible'), msg);
         },
         
         notVisible: function (msg, selector) {
-            ok($(selector).is(':hidden'), msg);
+            QUnit.ok($(selector).is(':hidden'), msg);
         },
         
         exists: function (msg, selector) {
-            ok($(selector)[0], msg);
+            QUnit.ok($(selector)[0], msg);
         },
         
         notExists: function (msg, selector) {
-            ok(!$(selector)[0], msg);
+            QUnit.ok(!$(selector)[0], msg);
         },
         
         // Overrides jQuery's animation routines to be synchronous. Careful!
@@ -271,14 +271,14 @@ var jqUnit = jqUnit || {};
         };
 
         that.test = function (string, testFn) {
-            test(string, testFn);
+            QUnit.test(string, testFn);
         };
         
         that.asyncTest = function (string, testFn) {
-            asyncTest(string, testFn);
+            QUnit.asyncTest(string, testFn);
         };
         
-        module(moduleName, {
+        QUnit.module(moduleName, {
             setup: setUpFn || function () {},
             teardown: tearDownFn || function () {}
         });
