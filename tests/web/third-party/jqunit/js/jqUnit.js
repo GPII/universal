@@ -101,7 +101,7 @@ var jqUnit = jqUnit || {};
         },
         
         assertEquals: function (msg, expected, actual) {
-            QUnit.equals(actual, expected, msg);
+            QUnit.equal(actual, expected, msg);
         },
         
         assertNotEquals: function (msg, value1, value2) {
@@ -133,7 +133,7 @@ var jqUnit = jqUnit || {};
         },
         
         assertNull: function (msg, value) {
-            QUnit.equals(value, null, msg);
+            QUnit.equal(value, null, msg);
         },
 
         assertNotNull: function (msg, value) {
