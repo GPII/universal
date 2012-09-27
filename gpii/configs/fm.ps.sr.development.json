@@ -1,0 +1,43 @@
+{
+    "typeName": "flowManager.preferencesServer.solutionsRegistry.development",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081,
+                    "components": {
+                        "preferencesServer": {
+                            "type": "gpii.preferencesServer",
+                            "options": {
+                                "typeName": "preferencesServer.development",
+                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
+                            }
+                        },
+                        "solutionsRegistry": {
+                            "type": "gpii.solutionsRegistry",
+                            "options": {
+                                "typeName": "solutionsRegistry.development",
+                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
+                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
+                            }
+                        },
+                        "flowManager": {
+                            "type": "gpii.flowManager",
+                            "options": {
+                                "typeName": "flowManager.development",
+                                "urls": {
+                                    "preferences": "http://localhost:%port/user/%token",
+                                    "deviceReporter": "http://localhost:%port/device",
+                                    "matchMaker": "http://localhost:%port/match"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

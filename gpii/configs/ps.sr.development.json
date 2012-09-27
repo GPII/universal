@@ -7,20 +7,21 @@
                 "type": "gpii.server",
                 "options": {
                     "logging": true,
+                    "port": 8081,
                     "components": {
                         "preferencesServer": {
                             "type": "gpii.preferencesServer",
                             "options": {
                                 "typeName": "preferencesServer.development",
-                                "userSourceUrl": "file://%root/test/data/user/%token.json"
+                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
                             }
                         },
                         "solutionsRegistry": {
                             "type": "gpii.solutionsRegistry",
                             "options": {
                                 "typeName": "solutionsRegistry.development",
-                                "solutionsRegistryUrl": "file://%root/test/data/solutions/%id.json",
-                                "solutionsQueryUrl": "file://%root/test/data/solutions/%os.json"
+                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
+                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
                             }
                         }
                     }

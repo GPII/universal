@@ -7,6 +7,7 @@
                 "type": "gpii.server",
                 "options": {
                     "logging": false,
+                    "port": 8081,
                     "components": {
                         "preferencesServer": {
                             "type": "gpii.preferencesServer",
@@ -19,8 +20,8 @@
                             "type": "gpii.solutionsRegistry",
                             "options": {
                                 "typeName": "solutionsRegistry.production",
-                                "solutionsRegistryUrl": "http://localhost:5984/solutions/%id",
-                                "solutionsQueryUrl": "http://localhost:5984/solutions?os=%os"
+                                "solutionRegistryUrl": "http://localhost:5984/gpii-sol-registry/_design/gpii-solutions/_rewrite/solutions/%id",
+                                "solutionQueryUrl": "http://localhost:5984/gpii-sol-registry/_design/gpii-solutions/_rewrite/solutions?os=%os"
                             }
                         }
                     }

@@ -1,0 +1,57 @@
+{
+    "typeName": "flowManager.preferencesServer.solutionsRegistry.development",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081,
+                    "components": {
+                        "deviceReporter": {
+                            "type": "gpii.deviceReporter",
+                            "options": {
+                                "typeName": "deviceReporter.development",
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/installedSolutions.json"
+                            }
+                        },
+                        "preferencesServer": {
+                            "type": "gpii.preferencesServer",
+                            "options": {
+                                "typeName": "preferencesServer.development",
+                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
+                            }
+                        },
+                        "matchMaker": {
+                            "type": "gpii.matchMaker",
+                            "options": {
+                                "typeName": "matchMaker.development",
+                                "solutionsReporterUrl": "http://localhost:%port/solution?os=%os&version=%version"
+                            }
+                        },
+                        "solutionsRegistry": {
+                            "type": "gpii.solutionsRegistry",
+                            "options": {
+                                "typeName": "solutionsRegistry.development",
+                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
+                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
+                            }
+                        },
+                        "flowManager": {
+                            "type": "gpii.flowManager",
+                            "options": {
+                                "typeName": "flowManager.development",
+                                "urls": {
+                                    "preferences": "http://localhost:%port/user/%token",
+                                    "deviceReporter": "http://localhost:%port/device",
+                                    "matchMaker": "http://localhost:%port/match"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@
             "magnification": 2.0,
             "tracking": "mouse",
             "invertImages": true,
-            "showCrosshairs": true
+            "-provisional-showCrosshairs": true
         }
     },
     
