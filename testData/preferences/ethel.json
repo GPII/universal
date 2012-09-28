@@ -8,13 +8,14 @@
 					"parameters": {
 					    "name":"Ethel",
 					    "theme":"colour",
+                                            "playStartSound":"no",
 					    "speakTitles":"no",
 					    "speakLabels":"no",
-					    "showLabels":"yes",
+					    "showLabels":"no",
 					    "showImages":"yes",
-					    "useSkype":"yes",
+					    "useSkype":"no",
 					    "userType":"scan",
-					    "splashTime":"1",
+					    "splashTime":0,
 					    "scanRate":"2000",
 					    "scanMode":"AUTO1SWITCHAUTOSTART",
 
