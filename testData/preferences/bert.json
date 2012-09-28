@@ -1,0 +1,28 @@
+{
+    "display": {
+		"screenEnhancement": {
+			"applications": {
+				"net.opendirective.maavis": {
+					"name": "maavis",
+					"priority": 100,
+					"parameters": {
+					    "theme": "colour",
+					    "speakTitles":"yes",
+					    "speakLabels":"yes",
+					    "showLabels":"yes",
+					    "showImages":"no",
+					    "useSkype":"no",
+					    "userType":"scan",
+					    "splashTime":"1",
+					    "scanRate":"2000",
+					    "scanMode":"AUTO1SWITCHAUTOSTART",
+
+					    "selectionsSetSize":"2x3",
+					    
+					    "passwordSetSize":"4x3"
+					}
+				}
+			}	
+		}
+	}
+}

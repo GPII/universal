@@ -73,5 +73,13 @@
     
     {
         "id": "webinsight.webAnywhere.linux"
+    }, 
+
+    {
+        "id": "net.opendirective.maavis"
+    }, 
+
+    {
+        "id": "org.apache.wookie"
     }
 ]
