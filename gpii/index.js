@@ -10,6 +10,5 @@ fluid.require("flowManager", require);
 fluid.require("settingsHandlers", require);
 fluid.require("preferencesServer", require);
 fluid.require("settingsHandlers", require);
-fluid.require("testFramework", require);
 
 module.exports = fluid;
