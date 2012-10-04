@@ -1,0 +1,24 @@
+{
+    "http://gpii.org/registry/display/screenEnhancement/fontSize": {
+        "expander": [{
+            "type": "http://gpii.org/operators/inRange",
+            "value": 28,
+            "start": "17:00:00",
+            "end": "09:00:00",
+            "format": "time"
+        }, {
+            "type": "http://gpii.org/operators/inRange",
+            "value": 24,
+            "start": "09:00:00",
+            "end": "17:00:00",
+            "format": "time"
+        }]
+    },
+    "http://gpii.org/registry/display/screenEnhancement/foregroundColor": "white",
+    "http://gpii.org/registry/display/screenEnhancement/backgroundColor": "black",
+    "http://gpii.org/registry/display/screenEnhancement/fontFaceFontName": ["Comic Sans"],
+    "http://gpii.org/registry/display/screenEnhancement/fontFaceGenericFontFace": "sans serif",
+    "http://gpii.org/registry/display/screenEnhancement/magnification": 2.0,
+    "http://gpii.org/registry/display/screenEnhancement/tracking": "mouse",
+    "http://gpii.org/registry/display/screenEnhancement/invertImages": true
+}

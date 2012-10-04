@@ -1,0 +1,10 @@
+{
+    "fontSize": "display.screenEnhancement.fontSize",
+    "foregroundColor": "display.screenEnhancement.foregroundColor",
+    "backgroundColor": "display.screenEnhancement.backgroundColor",
+    "fontFaceFontName": "display.screenEnhancement.fontFaceFontName",
+    "fontFaceGenericFontFace": "display.screenEnhancement.fontFaceGenericFontFace",
+    "magnification": "display.screenEnhancement.magnification",
+    "tracking": "display.screenEnhancement.tracking",
+    "invertImages": "display.screenEnhancement.invertImages"
+}
