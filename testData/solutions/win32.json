@@ -332,7 +332,7 @@
         {
             "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
 	        "options": {
-	            "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+	            "path": "${{environment}.MAAVIS_HOME}\\media\\Users\\Default\\userconfig.json"
 	        },
                 "capabilities": [
                     "display.screenEnhancement.applications.net\\.opendirective\\.maavis.name"
@@ -344,7 +344,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && DevMaavisPortable.cmd\""
                 } 
             ],
             "stop": [ 
