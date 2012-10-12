@@ -1,10 +1,10 @@
 {
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize": 24,
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor": "white",
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor": "black",
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName": ["Comic Sans"],
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace": "sans serif",
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification": 2.0,
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking": "mouse",
-    "http:/gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages": true
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize": 24,
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor": "white",
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor": "black",
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName": ["Comic Sans"],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace": "sans serif",
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification": 2.0,
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking": "mouse",
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages": true
 }
