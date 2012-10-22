@@ -1,5 +1,5 @@
 {
-     "ontology/A4A-2.0/display/screenEnhancement": {
+     "A4A-2.0": {
         "transformations": {
             "display.screenEnhancement.fontSize": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/fontSize",
             "display.screenEnhancement.foregroundColor": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/foregroundColor",
