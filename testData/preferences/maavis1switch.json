@@ -1,0 +1,16 @@
+{
+    "display": {
+		"screenEnhancement": {
+			"applications": {
+				"net.opendirective.maavis": {
+					"name": "maavis",
+					"priority": 100,
+					"parameters": {
+                                            "userType":"scan",
+					    "scanMode":"AUTO1SWITCH"
+					}
+				}
+			}	
+		}
+	}
+}

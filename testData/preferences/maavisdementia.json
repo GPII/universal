@@ -1,0 +1,26 @@
+{
+    "display": {
+		"screenEnhancement": {
+			"applications": {
+				"net.opendirective.maavis": {
+					"name": "maavis",
+					"priority": 100,
+					"parameters": {
+					    "theme": "dementia",
+                                            "playStartSound":"no",
+                                            "speakOnActivate":"yes",
+					    "speakTitles":"no",
+					    "speakLabels":"no",
+					    "showLabels":"yes",
+					    "showImages":"yes",
+					    "useSkype":"no",
+					    "userType":"touch",
+					    "splashTime":1,
+					    "selectionsSetSize":"3x3",
+					    "passwordSetSize":"4x3"
+					}
+				}
+			}	
+		}
+	}
+}
