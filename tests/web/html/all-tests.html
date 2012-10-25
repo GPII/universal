@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Fluid framework complete tests runner</title>
+
+    <link rel="stylesheet" href="../../../gpii/node_modules/testFramework/web/third-party/qunit/css/qunit.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="../../../gpii/node_modules/testFramework/web/third-party/qunit/addons/composite/qunit-composite.css">
+    <script src="../../../gpii/node_modules/testFramework/web/third-party/qunit/js/qunit.js"></script>
+    <script src="../../../gpii/node_modules/testFramework/web/third-party/qunit/addons/composite/qunit-composite.js"></script>
+    <script>
+    QUnit.testSuites([
+        "../../../gpii/node_modules/matchMaker/test/html/AsynchronousMatchMakerTest.html",
+        "../../../gpii/node_modules/matchMaker/test/html/CanopyMatchMakerTest.html",
+        "../../../gpii/node_modules/matchMaker/test/html/FlatMatchMakerTest.html",
+        "../../../gpii/node_modules/transformer/test/html/TransformerTests.html",
+        "../../../gpii/node_modules/lifecycleManager/test/html/LifecycleManagerTest.html"
+    ]);
+    </script>
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+</div>
+</body>
+</html>
