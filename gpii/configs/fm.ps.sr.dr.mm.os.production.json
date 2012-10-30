@@ -1,13 +1,10 @@
 {
     "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.production",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
-                "type": "gpii.server",
                 "options": {
                     "logging": false,
-                    "port": 8081,
                     "components": {
                         "deviceReporter": {
                             "type": "gpii.deviceReporter",

@@ -1,13 +1,9 @@
 {
     "typeName": "preferencesServer.solutionsRegistry.development",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
-                "type": "gpii.server",
                 "options": {
-                    "logging": true,
-                    "port": 8081,
                     "components": {
                         "preferencesServer": {
                             "type": "gpii.preferencesServer",
