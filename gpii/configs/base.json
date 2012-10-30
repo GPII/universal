@@ -10,6 +10,309 @@
     },
     "demands": [{
         "demandingName": "gpii.requests.request.handler",
+        "context": "deviceGet",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.deviceGet",
+                        "args": ["{requestProxy}", "{deviceReporter}.installedSolutionsDataSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "installedSolutionsDataSource",
+        "context": "gpii.deviceReporter",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawInstalledSolutionsDataSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "rawInstalledSolutionsDataSource",
+        "context": "gpii.deviceReporter",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL",
+            "options": {
+                "url": "{gpii.deviceReporter}.options.installedSolutionsUrl"
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "userLogin",
+        "demandSpec": {
+            "options": {
+                "preInitFunction": "gpii.requests.request.handler.userLoginPreInit",
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.userLogin",
+                        "args": ["{request}.req.params.token", "{gpii.requests.request.handler}"]
+                    }
+                },
+                "components": {
+                    "requestProxy": "{requestProxy}",
+                    "preferencesDataSource": "{flowManager}.preferencesDataSource",
+                    "deviceReporterDataSource": "{flowManager}.deviceReporterDataSource",
+                    "matchMakerDataSource": "{flowManager}.matchMakerDataSource",
+                    "lifecycleManager": "{flowManager}.lifecycleManager"
+                },
+                "events": {
+                    "onRequestEnd": "{request}.events.onRequestEnd",
+                    "onUserListener": null,
+                    "onPreferences": null,
+                    "onDevice": null,
+                    "onReadyToMatch": {
+                        "events": {
+                           "preferences": "onPreferences",
+                           "device": "onDevice"
+                        },
+                        "args": ["{arguments}.preferences.0", "{arguments}.device.0"]
+                    },
+                    "onMatch": null
+                },
+                "listeners": {
+                    "onUserListener": [{
+                        "listener": "{gpii.requests.request.handler}.getPreferences"
+                    }, {
+                        "listener": "{gpii.requests.request.handler}.getDevice"
+                    }],
+                    "onReadyToMatch": "{gpii.requests.request.handler}.onReadyToMatchHandler",
+                    "onMatch": "{gpii.requests.request.handler}.onMatchHandler",
+                    "onRequestEnd": {
+                        "listener": "gpii.clearRequest",
+                        "args": "{that}"
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "userLogout",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.userLogout",
+                        "args": ["{requestProxy}", "{request}.req.params.token", "{flowManager}.lifecycleManager"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "rawPreferencesDataSource",
+        "context": "gpii.flowManager",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL",
+            "options": {
+                "url": "{gpii.flowManager}.options.urls.preferences",
+                "termMap": {
+                    "token": "%token"
+                }
+            }
+        }
+    }, {
+        "demandingName": "preferencesDataSource",
+        "context": "gpii.flowManager",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawPreferencesDataSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "rawDeviceReporterDataSource",
+        "context": "gpii.flowManager",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL",
+            "options": {
+                "url": "{gpii.flowManager}.options.urls.deviceReporter"
+            }
+        }
+    }, {
+        "demandingName": "deviceReporterDataSource",
+        "context": "gpii.flowManager",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawDeviceReporterDataSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "rawMatchMakerDataSource",
+        "context": "gpii.flowManager",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL",
+            "options": {
+                "url": "{gpii.flowManager}.options.urls.matchMaker",
+                "writable": true
+            }
+        }
+    }, {
+        "demandingName": "matchMakerDataSource",
+        "context": "gpii.flowManager",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawMatchMakerDataSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.matchMaker.match",
+        "context": "gpii.matchMaker",
+        "demandSpec": {
+            "funcName": "gpii.matchMaker.match",
+            "args": ["{arguments}.0", "{arguments}.1", "{arguments}.2"]
+        }
+    }, {
+        "demandingName": "gpii.matchMaker.prefilterSolutions",
+        "context": "gpii.matchMaker",
+        "demandSpec": {
+            "funcName": "gpii.matchMaker.prefilterSolutions",
+            "args": ["{arguments}.0", "{arguments}.1"]
+        }
+    }, {
+        "demandingName": "gpii.matchMaker.filterSolutionsByVersion",
+        "context": "gpii.matchMaker",
+        "demandSpec": {
+            "funcName": "gpii.matchMaker.filterSolutionsByVersion",
+            "args": ["{arguments}.0", "{arguments}.1", "{arguments}.2"]
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "matchPost",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "matchMaker": "{gpii.matchMaker}"
+                },
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.matchPost",
+                        "args": ["{that}", "{requestProxy}", "{request}.req.body"]
+                    }
+                },
+                "events": {
+                    "onRequestEnd": "{request}.events.onRequestEnd",
+                    "onSolutionsReporter": null,
+                    "onOntologyServer": null,
+                    "onReadyToMatch": {
+                        "events": {
+                           "solutions": "onSolutionsReporter",
+                           "ontology": "onOntologyServer"
+                        },
+                        "args": ["{arguments}.solutions.0", "{arguments}.ontology.0"]
+                    }
+                },
+                "listeners": {
+                    "onReadyToMatch": "{that}.match",
+                    "onRequestEnd": {
+                        "listener": "gpii.clearRequest",
+                        "args": "{that}"
+                    }
+                },
+                "preInitFunction": "gpii.requests.request.handler.matchPostPreInit"
+            }
+        }
+    }, {
+        "demandingName": "solutionsReporter",
+        "context": "gpii.matchMaker",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawSolutionsReporter}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "rawSolutionsReporter",
+        "context": "gpii.matchMaker",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL",
+            "options": {
+                "url": "{gpii.matchMaker}.options.solutionsReporterUrl",
+                "termMap": {
+                    "os": "%os",
+                    "version": "%version"
+                }
+            }
+        }
+    }, {
+        "demandingName": "ontologyServer",
+        "context": "gpii.matchMaker",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawOntologyServer}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "ontologyConvertPost",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.ontologyConvertPost",
+                        "args": ["{that}", "{requestProxy}", "{request}.req.params.to", "{request}.req.body.preferences", "{ontologyServer}.ontologySource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "ontologySource",
+        "context": "gpii.ontologyServer",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawOntologySource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "userGet",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.userGet",
+                        "args": ["{requestProxy}", "{request}.req.params.token", "{preferencesServer}.userSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "userPost",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.userPost",
+                        "args": ["{requestProxy}", "{request}.req", "{preferencesServer}.userSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "userSource",
+        "context": "gpii.preferencesServer",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawUserSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
         "context": "solutionGet",
         "demandSpec": {
             "options": {
@@ -64,42 +367,6 @@
             "options": {
                 "components": {
                     "rawSource": "{rawSolutionQuerySource}"
-                }
-            }
-        }
-    }, {
-        "demandingName": "gpii.requests.request.handler",
-        "context": "userGet",
-        "demandSpec": {
-            "options": {
-                "invokers": {
-                    "handle": {
-                        "funcName": "gpii.requests.request.handler.userGet",
-                        "args": ["{requestProxy}", "{request}.req.params.token", "{preferencesServer}.userSource"]
-                    }
-                }
-            }
-        }
-    }, {
-        "demandingName": "gpii.requests.request.handler",
-        "context": "userPost",
-        "demandSpec": {
-            "options": {
-                "invokers": {
-                    "handle": {
-                        "funcName": "gpii.requests.request.handler.userPost",
-                        "args": ["{requestProxy}", "{request}.req", "{preferencesServer}.userSource"]
-                    }
-                }
-            }
-        }
-    }, {
-        "demandingName": "userSource",
-        "context": "gpii.preferencesServer",
-        "demandSpec": {
-            "options": {
-                "components": {
-                    "rawSource": "{rawUserSource}"
                 }
             }
         }

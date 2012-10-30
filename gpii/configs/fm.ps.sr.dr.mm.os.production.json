@@ -1,12 +1,12 @@
 {
-    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
+    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.production",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
                 "type": "gpii.server",
                 "options": {
-                    "logging": true,
+                    "logging": false,
                     "port": 8081,
                     "components": {
                         "deviceReporter": {
@@ -18,7 +18,7 @@
                         "preferencesServer": {
                             "type": "gpii.preferencesServer",
                             "options": {
-                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
+                                "userSourceUrl": "http://localhost:5984/user/%token"
                             }
                         },
                         "matchMaker": {
@@ -31,14 +31,14 @@
                         "solutionsRegistry": {
                             "type": "gpii.solutionsRegistry",
                             "options": {
-                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
-                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
+                                "solutionRegistryUrl": "http://localhost:5984/gpii-sol-registry/_design/gpii-solutions/_rewrite/solutions/%id",
+                                "solutionQueryUrl": "http://localhost:5984/gpii-sol-registry/_design/gpii-solutions/_rewrite/solutions?os=%os"
                             }
                         },
                         "ontologyServer": {
                             "type": "gpii.ontologyServer",
                             "options": {
-                                "ontologySourceUrl": "file://%root/../../../testData/ontologies/%name.json"
+                                "ontologySourceUrl": "http://localhost:5984/ontologies/%name"
                             }
                         },
                         "flowManager": {
@@ -57,36 +57,6 @@
         }
     },
     "demands": [{
-        "demandingName": "gpii.urlExpander",
-        "context": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
-        "demandSpec": {
-            "funcName": "gpii.urlExpander.development"
-        }
-    }, {
-        "demandingName": "rawSolutionSource",
-        "context": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawSolutionQuerySource",
-        "context": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawUserSource",
-        "context": "gpii.preferencesServer",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawOntologySource",
-        "context": "gpii.ontologyServer",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
         "demandingName": "rawOntologyServer",
         "context": "gpii.matchMaker",
         "demandSpec": {
@@ -95,6 +65,30 @@
                 "url": "{gpii.matchMaker}.options.ontologyServerUrl",
                 "writable": true
             }
+        }
+    }, {
+        "demandingName": "rawOntologySource",
+        "context": "gpii.ontologyServer",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.CouchDB"
+        }
+    }, {
+        "demandingName": "rawUserSource",
+        "context": "gpii.preferencesServer",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.CouchDB"
+        }
+    }, {
+        "demandingName": "rawSolutionSource",
+        "context": "gpii.solutionsRegistry",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.CouchDB"
+        }
+    }, {
+        "demandingName": "rawSolutionQuerySource",
+        "context": "gpii.solutionsRegistry",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.CouchDB"
         }
     }]
 }
