@@ -12,14 +12,12 @@
                         "preferencesServer": {
                             "type": "gpii.preferencesServer",
                             "options": {
-                                "typeName": "preferencesServer.development",
                                 "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
                             }
                         },
                         "solutionsRegistry": {
                             "type": "gpii.solutionsRegistry",
                             "options": {
-                                "typeName": "solutionsRegistry.development",
                                 "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
                                 "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
                             }
@@ -28,5 +26,30 @@
                 }
             }
         }
-    }
+    },
+    "demands": [{
+        "demandingName": "gpii.urlExpander",
+        "context": "preferencesServer.solutionsRegistry.development",
+        "demandSpec": {
+            "funcName": "gpii.urlExpander.development"
+        }
+    }, {
+        "demandingName": "rawUserSource",
+        "context": "gpii.preferencesServer",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL"
+        }
+    }, {
+        "demandingName": "rawSolutionSource",
+        "context": "gpii.solutionsRegistry",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL"
+        }
+    }, {
+        "demandingName": "rawSolutionQuerySource",
+        "context": "gpii.solutionsRegistry",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL"
+        }
+    }]
 }

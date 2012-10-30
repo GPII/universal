@@ -1,0 +1,107 @@
+{
+    "typeName": "gpiiComponent",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server"
+            }
+        }
+    },
+    "demands": [{
+        "demandingName": "gpii.requests.request.handler",
+        "context": "solutionGet",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.solutionGet",
+                        "args": ["{request}.req.params.id", "{requestProxy}.", "{solutionsRegistry}.solutionSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "solutionPost",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.solutionPost",
+                        "args": ["{request}.req", "{requestProxy}", "{solutionsRegistry}.solutionSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "solutionQuery",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.solutionQuery",
+                        "args": ["{requestProxy}", "{request}.req.query.os", "{solutionsRegistry}.solutionQuerySource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "solutionSource",
+        "context": "gpii.solutionsRegistry",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawSolutionSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "solutionQuerySource",
+        "context": "gpii.solutionsRegistry",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawSolutionQuerySource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "userGet",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.userGet",
+                        "args": ["{requestProxy}", "{request}.req.params.token", "{preferencesServer}.userSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.requests.request.handler",
+        "context": "userPost",
+        "demandSpec": {
+            "options": {
+                "invokers": {
+                    "handle": {
+                        "funcName": "gpii.requests.request.handler.userPost",
+                        "args": ["{requestProxy}", "{request}.req", "{preferencesServer}.userSource"]
+                    }
+                }
+            }
+        }
+    }, {
+        "demandingName": "userSource",
+        "context": "gpii.preferencesServer",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawUserSource}"
+                }
+            }
+        }
+    }]
+}
