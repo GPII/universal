@@ -64,7 +64,6 @@
                     "lifecycleManager": "{flowManager}.lifecycleManager"
                 },
                 "events": {
-                    "onRequestEnd": "{request}.events.onRequestEnd",
                     "onUserListener": null,
                     "onPreferences": null,
                     "onDevice": null,
@@ -84,11 +83,7 @@
                         "listener": "{gpii.requests.request.handler}.getDevice"
                     }],
                     "onReadyToMatch": "{gpii.requests.request.handler}.onReadyToMatchHandler",
-                    "onMatch": "{gpii.requests.request.handler}.onMatchHandler",
-                    "onRequestEnd": {
-                        "listener": "gpii.clearRequest",
-                        "args": "{that}"
-                    }
+                    "onMatch": "{gpii.requests.request.handler}.onMatchHandler"
                 }
             }
         }
@@ -203,7 +198,6 @@
                 },
                 "events": {
                     "onMatchRequest": null,
-                    "onRequestEnd": "{request}.events.onRequestEnd",
                     "onSolutionsReporter": null,
                     "onOntologyServer": null,
                     "onReadyToMatch": {
@@ -220,11 +214,7 @@
                     }, {
                         "listener": "{that}.transformPreferences"
                     }],
-                    "onReadyToMatch": "{that}.match",
-                    "onRequestEnd": {
-                        "listener": "gpii.clearRequest",
-                        "args": "{that}"
-                    }
+                    "onReadyToMatch": "{that}.match"
                 },
                 "preInitFunction": "gpii.requests.request.handler.matchPostPreInit"
             }
