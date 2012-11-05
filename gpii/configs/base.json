@@ -198,10 +198,11 @@
                 "invokers": {
                     "handle": {
                         "funcName": "gpii.requests.request.handler.matchPost",
-                        "args": ["{that}", "{requestProxy}", "{request}.req.body"]
+                        "args": ["{that}", "{request}.req.body"]
                     }
                 },
                 "events": {
+                    "onMatchRequest": null,
                     "onRequestEnd": "{request}.events.onRequestEnd",
                     "onSolutionsReporter": null,
                     "onOntologyServer": null,
@@ -214,6 +215,11 @@
                     }
                 },
                 "listeners": {
+                    "onMatchRequest": [{
+                        "listener": "{that}.getSolutions"
+                    }, {
+                        "listener": "{that}.transformPreferences"
+                    }],
                     "onReadyToMatch": "{that}.match",
                     "onRequestEnd": {
                         "listener": "gpii.clearRequest",
