@@ -25,25 +25,25 @@
     },
     "demands": [{
         "demandingName": "gpii.urlExpander",
-        "context": "preferencesServer.solutionsRegistry.development",
+        "contextNames": "preferencesServer.solutionsRegistry.development",
         "demandSpec": {
             "funcName": "gpii.urlExpander.development"
         }
     }, {
         "demandingName": "rawUserSource",
-        "context": "gpii.preferencesServer",
+        "contextNames": "gpii.preferencesServer",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }
     }, {
         "demandingName": "rawSolutionSource",
-        "context": "gpii.solutionsRegistry",
+        "contextNames": "gpii.solutionsRegistry",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }
     }, {
         "demandingName": "rawSolutionQuerySource",
-        "context": "gpii.solutionsRegistry",
+        "contextNames": "gpii.solutionsRegistry",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }

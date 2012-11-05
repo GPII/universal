@@ -26,19 +26,19 @@
     },
     "demands": [{
         "demandingName": "rawUserSource",
-        "context": "gpii.preferencesServer",
+        "contextNames": "gpii.preferencesServer",
         "demandSpec": {
             "funcName": "gpii.dataSource.CouchDB"
         }
     }, {
         "demandingName": "rawSolutionSource",
-        "context": "gpii.solutionsRegistry",
+        "contextNames": "gpii.solutionsRegistry",
         "demandSpec": {
             "funcName": "gpii.dataSource.CouchDB"
         }
     }, {
         "demandingName": "rawSolutionQuerySource",
-        "context": "gpii.solutionsRegistry",
+        "contextNames": "gpii.solutionsRegistry",
         "demandSpec": {
             "funcName": "gpii.dataSource.CouchDB"
         }

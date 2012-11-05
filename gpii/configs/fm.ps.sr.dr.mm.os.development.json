@@ -54,37 +54,37 @@
     },
     "demands": [{
         "demandingName": "gpii.urlExpander",
-        "context": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
+        "contextNames": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
         "demandSpec": {
             "funcName": "gpii.urlExpander.development"
         }
     }, {
         "demandingName": "rawSolutionSource",
-        "context": "gpii.solutionsRegistry",
+        "contextNames": "gpii.solutionsRegistry",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }
     }, {
         "demandingName": "rawSolutionQuerySource",
-        "context": "gpii.solutionsRegistry",
+        "contextNames": "gpii.solutionsRegistry",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }
     }, {
         "demandingName": "rawUserSource",
-        "context": "gpii.preferencesServer",
+        "contextNames": "gpii.preferencesServer",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }
     }, {
         "demandingName": "rawOntologySource",
-        "context": "gpii.ontologyServer",
+        "contextNames": "gpii.ontologyServer",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL"
         }
     }, {
         "demandingName": "rawOntologyServer",
-        "context": "gpii.matchMaker",
+        "contextNames": "gpii.matchMaker",
         "demandSpec": {
             "funcName": "gpii.dataSource.URL",
             "options": {
