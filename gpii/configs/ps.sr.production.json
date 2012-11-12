@@ -1,46 +1,19 @@
 {
     "typeName": "preferencesServer.solutionsRegistry.production",
     "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
+                "type": "gpii.server",
                 "options": {
                     "logging": false,
-                    "components": {
-                        "preferencesServer": {
-                            "type": "gpii.preferencesServer",
-                            "options": {
-                                "userSourceUrl": "http://localhost:5984/user/%token"
-                            }
-                        },
-                        "solutionsRegistry": {
-                            "type": "gpii.solutionsRegistry",
-                            "options": {
-                                "solutionRegistryUrl": "http://localhost:5984/gpii-sol-registry/_design/gpii-solutions/_rewrite/solutions/%id",
-                                "solutionQueryUrl": "http://localhost:5984/gpii-sol-registry/_design/gpii-solutions/_rewrite/solutions?os=%os"
-                            }
-                        }
-                    }
+                    "port": 8081
                 }
             }
         }
     },
-    "demands": [{
-        "demandingName": "rawUserSource",
-        "contextNames": "gpii.preferencesServer",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.CouchDB"
-        }
-    }, {
-        "demandingName": "rawSolutionSource",
-        "contextNames": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.CouchDB"
-        }
-    }, {
-        "demandingName": "rawSolutionQuerySource",
-        "contextNames": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.CouchDB"
-        }
-    }]
+    "imports": [
+        "../node_modules/preferencesServer/configs/production.json",
+        "../node_modules/solutionsRegistry/configs/production.json"
+    ]
 }

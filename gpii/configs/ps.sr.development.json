@@ -1,51 +1,19 @@
 {
     "typeName": "preferencesServer.solutionsRegistry.development",
     "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
+                "type": "gpii.server",
                 "options": {
-                    "components": {
-                        "preferencesServer": {
-                            "type": "gpii.preferencesServer",
-                            "options": {
-                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
-                            }
-                        },
-                        "solutionsRegistry": {
-                            "type": "gpii.solutionsRegistry",
-                            "options": {
-                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
-                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
-                            }
-                        }
-                    }
+                    "logging": true,
+                    "port": 8081
                 }
             }
         }
     },
-    "demands": [{
-        "demandingName": "gpii.urlExpander",
-        "contextNames": "preferencesServer.solutionsRegistry.development",
-        "demandSpec": {
-            "funcName": "gpii.urlExpander.development"
-        }
-    }, {
-        "demandingName": "rawUserSource",
-        "contextNames": "gpii.preferencesServer",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawSolutionSource",
-        "contextNames": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawSolutionQuerySource",
-        "contextNames": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }]
+    "imports": [
+        "../node_modules/preferencesServer/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json"
+    ]
 }

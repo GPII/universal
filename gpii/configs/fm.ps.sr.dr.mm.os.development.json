@@ -1,96 +1,23 @@
 {
     "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
     "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
+                "type": "gpii.server",
                 "options": {
-                    "components": {
-                        "deviceReporter": {
-                            "type": "gpii.deviceReporter",
-                            "options": {
-                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/installedSolutions.json"
-                            }
-                        },
-                        "preferencesServer": {
-                            "type": "gpii.preferencesServer",
-                            "options": {
-                                "userSourceUrl": "file://%root/../../../testData/preferences/%token.json"
-                            }
-                        },
-                        "matchMaker": {
-                            "type": "gpii.matchMaker",
-                            "options": {
-                                "solutionsReporterUrl": "http://localhost:%port/solution?os=%os",
-                                "ontologyServerUrl": "http://localhost:%port/ontology/convert/default"
-                            }
-                        },
-                        "solutionsRegistry": {
-                            "type": "gpii.solutionsRegistry",
-                            "options": {
-                                "solutionRegistryUrl": "file://%root/../../../testData/solutions/%id.json",
-                                "solutionQueryUrl": "file://%root/../../../testData/solutions/%os.json"
-                            }
-                        },
-                        "ontologyServer": {
-                            "type": "gpii.ontologyServer",
-                            "options": {
-                                "ontologySourceUrl": "file://%root/../../../testData/ontologies/%name.json"
-                            }
-                        },
-                        "flowManager": {
-                            "type": "gpii.flowManager",
-                            "options": {
-                                "urls": {
-                                    "preferences": "http://localhost:%port/user/%token",
-                                    "deviceReporter": "http://localhost:%port/device",
-                                    "matchMaker": "http://localhost:%port/match"
-                                }
-                            }
-                        }
-                    }
+                    "logging": true,
+                    "port": 8081
                 }
             }
         }
     },
-    "demands": [{
-        "demandingName": "gpii.urlExpander",
-        "contextNames": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
-        "demandSpec": {
-            "funcName": "gpii.urlExpander.development"
-        }
-    }, {
-        "demandingName": "rawSolutionSource",
-        "contextNames": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawSolutionQuerySource",
-        "contextNames": "gpii.solutionsRegistry",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawUserSource",
-        "contextNames": "gpii.preferencesServer",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawOntologySource",
-        "contextNames": "gpii.ontologyServer",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL"
-        }
-    }, {
-        "demandingName": "rawOntologyServer",
-        "contextNames": "gpii.matchMaker",
-        "demandSpec": {
-            "funcName": "gpii.dataSource.URL",
-            "options": {
-                "url": "{gpii.matchMaker}.options.ontologyServerUrl",
-                "writable": true
-            }
-        }
-    }]
+    "imports": [
+        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/matchMaker/configs/development.json",
+        "../node_modules/ontologyServer/configs/development.json",
+        "../node_modules/preferencesServer/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json"
+    ]
 }
