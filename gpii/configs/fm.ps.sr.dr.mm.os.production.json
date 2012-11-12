@@ -12,7 +12,7 @@
             }
         }
     },
-    "imports": [
+    "includes": [
         "../node_modules/deviceReporter/configs/production.json",
         "../node_modules/flowManager/configs/production.json",
         "../node_modules/matchMaker/configs/production.json",

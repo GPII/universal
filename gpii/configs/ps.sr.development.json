@@ -12,7 +12,7 @@
             }
         }
     },
-    "imports": [
+    "includes": [
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
     ]

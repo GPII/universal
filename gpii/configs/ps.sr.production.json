@@ -12,7 +12,7 @@
             }
         }
     },
-    "imports": [
+    "includes": [
         "../node_modules/preferencesServer/configs/production.json",
         "../node_modules/solutionsRegistry/configs/production.json"
     ]
