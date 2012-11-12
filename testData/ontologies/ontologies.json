@@ -1,0 +1,26 @@
+{
+     "A4A-2.0": {
+        "transformations": {
+            "display.screenEnhancement.fontSize": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/fontSize",
+            "display.screenEnhancement.foregroundColor": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/foregroundColor",
+            "display.screenEnhancement.backgroundColor": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/backgroundColor",
+            "display.screenEnhancement.fontFaceFontName": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/fontFaceFontName",
+            "display.screenEnhancement.fontFaceGenericFontFace": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/fontFaceGenericFontFace",
+            "display.screenEnhancement.magnification": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/magnification",
+            "display.screenEnhancement.tracking": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/tracking",
+            "display.screenEnhancement.invertImages": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/invertImages"
+        }
+    },
+    "default": {
+        "transformations": {
+            "display.screenEnhancement.fontSize": "display.screenEnhancement.fontSize",
+            "display.screenEnhancement.foregroundColor": "display.screenEnhancement.foregroundColor",
+            "display.screenEnhancement.backgroundColor": "display.screenEnhancement.backgroundColor",
+            "display.screenEnhancement.fontFaceFontName": "display.screenEnhancement.fontFaceFontName",
+            "display.screenEnhancement.fontFaceGenericFontFace": "display.screenEnhancement.fontFaceGenericFontFace",
+            "display.screenEnhancement.magnification": "display.screenEnhancement.magnification",
+            "display.screenEnhancement.tracking": "display.screenEnhancement.tracking",
+            "display.screenEnhancement.invertImages": "display.screenEnhancement.invertImages"
+        }
+    }
+}
