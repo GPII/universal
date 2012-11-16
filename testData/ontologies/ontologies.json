@@ -8,7 +8,17 @@
             "display.screenEnhancement.fontFaceGenericFontFace": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/fontFaceGenericFontFace",
             "display.screenEnhancement.magnification": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/magnification",
             "display.screenEnhancement.tracking": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/tracking",
-            "display.screenEnhancement.invertImages": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/invertImages"
+            "display.screenEnhancement.invertImages": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/invertImages",
+
+            "control.onscreenKeyboard": "http://gpii\\.org/ontology/A4A-2\\.0/control/onscreenKeyboard",
+            "control.mouseEmulation.-provisional-initDelay": "http://gpii\\.org/ontology/A4A-2\\.0/control/mouseEmulation/-provisional-initDelay",
+            "control.mouseEmulation.cursorSpeed": "http://gpii\\.org/ontology/A4A-2\\.0/control/mouseEmulation/cursorSpeed",
+            "control.mouseEmulation.cursorAcceleration": "http://gpii\\.org/ontology/A4A-2\\.0/control/mouseEmulation/cursorAcceleration",
+            "control.mouseEmulation.-provisional-mouseEmulationEnabled": "http://gpii\\.org/ontology/A4A-2\\.0/control/mouseEmulation/-provisional-mouseEmulationEnabled",
+            "control.keyboardEnhancement.stickyKeys": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/stickyKeys",
+            "control.keyboardEnhancement.slowKeys.slowKeysInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/slowKeys/slowKeysInterval",
+            "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/-provisional-debounceEnable",
+            "control.keyboardEnhancement.debounceKeys.debounceInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/debounceInterval"
         }
     },
     "default": {
@@ -20,7 +30,17 @@
             "display.screenEnhancement.fontFaceGenericFontFace": "display.screenEnhancement.fontFaceGenericFontFace",
             "display.screenEnhancement.magnification": "display.screenEnhancement.magnification",
             "display.screenEnhancement.tracking": "display.screenEnhancement.tracking",
-            "display.screenEnhancement.invertImages": "display.screenEnhancement.invertImages"
+            "display.screenEnhancement.invertImages": "display.screenEnhancement.invertImages",
+
+            "control.onscreenKeyboard": "control.onscreenKeyboard",
+            "control.mouseEmulation.-provisional-initDelay": "control.mouseEmulation.-provisional-initDelay",
+            "control.mouseEmulation.cursorSpeed": "control.mouseEmulation.cursorSpeed",
+            "control.mouseEmulation.cursorAcceleration": "control.mouseEmulation.cursorAcceleration",
+            "control.mouseEmulation.-provisional-mouseEmulationEnabled": "control.mouseEmulation.-provisional-mouseEmulationEnabled",
+            "control.keyboardEnhancement.stickyKeys": "control.keyboardEnhancement.stickyKeys",
+            "control.keyboardEnhancement.slowKeys.slowKeysInterval": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
+            "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable",
+            "control.keyboardEnhancement.debounceKeys.debounceInterval": "control.keyboardEnhancement.debounceKeys.debounceInterval"
         }
     }
 }

@@ -1,22 +1,12 @@
 {
-    "control": {
-        "onscreenKeyboard": true,
-        "mouseEmulation": {
-            "-provisional-initDelay": 0.120,
-            "cursorSpeed": 0.850,
-            "cursorAcceleration": 0.800,
-            "-provisional-mouseEmulationEnabled": true
-        },
-        "keyboardEnhancement": {
-            "stickyKeys": true,
-            "slowKeys": {
-                "-provisional-slowKeysEnable": true,
-                "slowKeysInterval": 0.4
-            },
-            "debounceKeys": {
-                "debounceInterval": 0.20,
-                "-provisional-debounceEnable": true
-            }
-        }
-    }
+    "http://gpii.org/ontology/A4A-2.0/control/onscreenKeyboard": true,
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/-provisional-initDelay": 0.120,
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/cursorSpeed": 0.850,
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/cursorAcceleration": 0.800,
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/-provisional-mouseEmulationEnabled": true,
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/stickyKeys": true,
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/slowKeys/-provisional-slowKeysEnable": true,
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/slowKeys/slowKeysInterval": 0.4,
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/debounceKeys/-provisional-debounceEnable": true,
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/debounceKeys/debounceInterval": 0.20
 }
