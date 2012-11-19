@@ -1,0 +1,47 @@
+{
+    "http://gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+            "ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.LargeIcons.$t": false,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
+            "ApplicationSettings.AppBar.ShowText.$t": false,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 90,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": true
+        }
+    }],
+    "http://gpii.org/applications/org.gnome.orca": [{ "value": {}}],
+    "http://gpii.org/applications/nvda.screenReader": [{ "value": {}}],
+    "http://gpii.org/applications/webinsight.webAnywhere.windows": [{ "value": {}}],
+    "http://gpii.org/applications/webinsight.webAnywhere.linux": [{ "value": {}}],    
+    "http://gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://gpii.org/applications/fluid.uiOptions": [{ 
+        "value": {
+            "lineSpacing": "1",
+            "links": false,
+            "inputsLarger": false,
+            "captions": false,
+            "transcripts": false,
+            "volume": "50"
+        }
+    }],
+    "http://gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
+        "value": {
+            "feature-state-change-beep": true
+        }
+    }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize": [{ "value": 12 }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor": [{ "value": "white" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor": [{ "value": "black" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://gpii.org/ontology/A4A-2.0/content/adaptationPreference": [{ "value": [
+        {
+            "adaptationType": "caption",
+            "language": "en"
+        },
+        {}
+    ]}],
+    "http://gpii.org/ontology/A4A-2.0/control/structuralNavigation/tableOfContents": [{ "value": false }]
+}

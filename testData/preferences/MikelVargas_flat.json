@@ -1,0 +1,12 @@
+{
+    "http://gpii.org/ontology/A4A-2.0/control/onscreenKeyboard": [{ "value": true }],
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/-provisional-initDelay": [{ "value": 0.120 }],
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/cursorSpeed": [{ "value": 0.850 }],
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/cursorAcceleration": [{ "value": 0.800 }],
+    "http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/-provisional-mouseEmulationEnabled": [{ "value": true }],
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/stickyKeys": [{ "value": true }],
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/slowKeys/-provisional-slowKeysEnable": [{ "value": true }],
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/slowKeys/slowKeysInterval": [{ "value": 0.4 }],
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/debounceKeys/-provisional-debounceEnable": [{ "value": true }],
+    "http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/debounceKeys/debounceInterval": [{ "value": 0.20 }]
+}

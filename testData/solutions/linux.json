@@ -18,7 +18,7 @@
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
                 "capabilities": [
-                    "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name" 
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id" 
                 ],
                 "capabilitiesTransformations": {
                     "mag-factor": "display.screenEnhancement.magnification",
@@ -70,7 +70,7 @@
             {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.applications.fluid\\.uiOptions\\.linux.name",
+                    "applications.fluid\\.uiOptions\\.linux.id",
                     "display.screenEnhancement.fontSize",
                     "display.screenEnhancement.foregroundColor",
                     "display.screenEnhancement.backgroundColor",
@@ -108,7 +108,7 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name" ],
+                "capabilities": [ "applications.org\\.gnome\\.desktop\\.interface.id" ],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "expander": {
@@ -142,7 +142,7 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name" ],
+                "capabilities": [ "applications.org\\.gnome\\.nautilus.id" ],
                 "capabilitiesTransformations": {
                     "font": "display.screenEnhancement.fontFace.fontName.0"
                 },
@@ -172,7 +172,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
-                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.name"
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.id"
                 ]
             }
         ],
@@ -203,7 +203,7 @@
         },
         "settingsHandlers": [ {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name" ],
+                "capabilities": [ "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id" ],
                 "capabilitiesTransformations": { 
                     "stickykeys-enable": "control.keyboardEnhancement.stickyKeys",
                     "slowkeys-enable": "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable",
@@ -270,7 +270,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
-                    "display.screenReader.applications.org\\.gnome\\.orca.name"
+                    "applications.org\\.gnome\\.orca.id"
                 ]
             }
         ],
@@ -306,7 +306,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.simplification",
-                    "content.simplification.applications.trace\\.easyOne\\.communicator\\.linux.name"
+                    "applications.trace\\.easyOne\\.communicator\\.linux.id"
                 ]
             }
         ],
@@ -342,7 +342,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.pictorialSimplification",
-                    "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.linux.name"
+                    "applications.trace\\.easyOne\\.sudan\\.linux.id"
                 ]
             }
         ],
@@ -378,7 +378,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
-                    "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
+                    "applications.webinsight\\.webAnywhere\\.linux.id"
                 ]
             }
         ],

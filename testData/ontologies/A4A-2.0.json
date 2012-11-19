@@ -8,7 +8,7 @@
         "display.screenEnhancement.magnification": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/magnification",
         "display.screenEnhancement.tracking": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/tracking",
         "display.screenEnhancement.invertImages": "http://gpii\\.org/ontology/A4A-2\\.0/display/screenEnhancement/invertImages",
-        
+
         "control.onscreenKeyboard": "http://gpii\\.org/ontology/A4A-2\\.0/control/onscreenKeyboard",
         "control.mouseEmulation.-provisional-initDelay": "http://gpii\\.org/ontology/A4A-2\\.0/control/mouseEmulation/-provisional-initDelay",
         "control.mouseEmulation.cursorSpeed": "http://gpii\\.org/ontology/A4A-2\\.0/control/mouseEmulation/cursorSpeed",
@@ -17,6 +17,9 @@
         "control.keyboardEnhancement.stickyKeys": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/stickyKeys",
         "control.keyboardEnhancement.slowKeys.slowKeysInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/slowKeys/slowKeysInterval",
         "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/-provisional-debounceEnable",
-        "control.keyboardEnhancement.debounceKeys.debounceInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/debounceInterval"
+        "control.keyboardEnhancement.debounceKeys.debounceInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/debounceInterval",
+
+        "content.adaptationPreference": "http://gpii\\.org/ontology/A4A-2\\.0/content/adaptationPreference",
+        "control.structuralNavigation.tableOfContents": "http://gpii\\.org/ontology/A4A-2\\.0/control/structuralNavigation/tableOfContents"    
     }
 }

@@ -1,0 +1,83 @@
+{
+    "http://gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+            "ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.ShowText.$t": true,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+        }
+    }],
+    "http://gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://gpii.org/applications/fluid.uiOptions": [{ 
+        "value": {
+            "lineSpacing": "2",
+            "links": true,
+            "inputsLarger": true,
+            "captions": false,
+            "transcripts": false,
+            "volume": "50"
+        }
+    }],
+    "http://gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
+        "value": {
+            "show-cross-hairs": true,
+            "lens-mode": false,
+            "mag-factor": 2,
+            "mouse-tracking": "proportional",
+            "screen-position": "right-half",
+            "scroll-at-edges": true
+        }
+    }],
+    "http://gpii.org/applications/com.microsoft.windows.magnifier": [{ 
+        "value": {
+            "Magnification": {
+                "value": 200,
+                "dataType": "REG_DWORD"
+            },
+            "ZoomIncrement": {
+                "value": 50,
+                "dataType": "REG_DWORD"
+            },
+            "Invert": {
+                "value": 0,
+                "dataType": "REG_DWORD"
+            },
+            "FollowMouse": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "FollowFocus": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "FollowCaret": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "MagnificationModel": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            }
+        }
+    }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize": [{ "value": 24 }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor": [{ "value": "white" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor": [{ "value": "black" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification": [{ "value": 2.0 }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking": [{ "value": "mouse" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages": [{ "value": true }],
+    "http://gpii.org/ontology/A4A-2.0/content/adaptationPreference": [{ "value": [
+        {
+            "adaptationType": "caption",
+            "language": "en"
+        },
+        {}
+    ]}],
+    "http://gpii.org/ontology/A4A-2.0/control/structuralNavigation/tableOfContents": [{ "value": false }]
+}

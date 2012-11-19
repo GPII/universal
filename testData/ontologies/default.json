@@ -17,6 +17,9 @@
         "control.keyboardEnhancement.stickyKeys": "control.keyboardEnhancement.stickyKeys",
         "control.keyboardEnhancement.slowKeys.slowKeysInterval": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
         "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable",
-        "control.keyboardEnhancement.debounceKeys.debounceInterval": "control.keyboardEnhancement.debounceKeys.debounceInterval"
+        "control.keyboardEnhancement.debounceKeys.debounceInterval": "control.keyboardEnhancement.debounceKeys.debounceInterval",
+
+        "content.adaptationPreference":  "content.adaptationPreference",
+        "control.structuralNavigation.tableOfContents": "control.structuralNavigation.tableOfContents"
     }
 }

@@ -18,7 +18,10 @@
             "control.keyboardEnhancement.stickyKeys": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/stickyKeys",
             "control.keyboardEnhancement.slowKeys.slowKeysInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/slowKeys/slowKeysInterval",
             "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/-provisional-debounceEnable",
-            "control.keyboardEnhancement.debounceKeys.debounceInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/debounceInterval"
+            "control.keyboardEnhancement.debounceKeys.debounceInterval": "http://gpii\\.org/ontology/A4A-2\\.0/control/keyboardEnhancement/debounceKeys/debounceInterval",
+
+            "content.adaptationPreference": "http://gpii\\.org/ontology/A4A-2\\.0/content/adaptationPreference",
+            "control.structuralNavigation.tableOfContents": "http://gpii\\.org/ontology/A4A-2\\.0/control/structuralNavigation/tableOfContents"
         }
     },
     "default": {
@@ -40,7 +43,10 @@
             "control.keyboardEnhancement.stickyKeys": "control.keyboardEnhancement.stickyKeys",
             "control.keyboardEnhancement.slowKeys.slowKeysInterval": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
             "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable",
-            "control.keyboardEnhancement.debounceKeys.debounceInterval": "control.keyboardEnhancement.debounceKeys.debounceInterval"
+            "control.keyboardEnhancement.debounceKeys.debounceInterval": "control.keyboardEnhancement.debounceKeys.debounceInterval",
+
+            "content.adaptationPreference":  "content.adaptationPreference",
+            "control.structuralNavigation.tableOfContents": "control.structuralNavigation.tableOfContents"
         }
     }
 }

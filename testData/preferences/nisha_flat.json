@@ -1,0 +1,55 @@
+{
+    "http://gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+            "ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.ShowText.$t": false,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
+            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+        }
+    }],
+    "http://gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://gpii.org/applications/fluid.uiOptions": [{ 
+        "value": {
+            "lineSpacing": "1",
+            "links": false,
+            "inputsLarger": false,
+            "captions": false,
+            "transcripts": false,
+            "volume": "50"
+        }
+    }],
+    "http://gpii.org/applications/org.gnome.desktop.a11y.caribou-keyboard": [{ "value": {}}],
+    "http://gpii.org/applications/com.microsoft.windows.onscreenKeyboard": [{ "value": {}}],
+    "http://gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
+        "value": {
+            "stickykeys-enable": true,
+            "enable": true,
+            "bouncekeys-enable": true,
+            "bouncekeys-delay": 300,
+            "mousekeys-enable": true,
+            "mousekeys-init-delay": 120,
+            "mousekeys-max-speed": 850,
+            "mousekeys-accel-time": 800,
+            "slowkeys-enable": true,
+            "togglekeys-enable": true
+        }
+    }],    
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize": [{ "value": 12 }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor": [{ "value": "white" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor": [{ "value": "black" }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://gpii.org/ontology/A4A-2.0/content/adaptationPreference": [{ "value": [
+        {
+            "adaptationType": "caption",
+            "language": "en"
+        },
+        {}
+    ]}],
+    "http://gpii.org/ontology/A4A-2.0/control/structuralNavigation/tableOfContents": [{ "value": false }]
+}
