@@ -1,14 +1,21 @@
 {
      "A4A-2.0": {
         "transformations": {
-            "display.screenEnhancement.fontSize": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize",
-            "display.screenEnhancement.foregroundColor": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor",
-            "display.screenEnhancement.backgroundColor": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor",
-            "display.screenEnhancement.fontFaceFontName": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName",
-            "display.screenEnhancement.fontFaceGenericFontFace": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace",
-            "display.screenEnhancement.magnification": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification",
-            "display.screenEnhancement.tracking": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking",
-            "display.screenEnhancement.invertImages": "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages"
+            "display.screenEnhancement.fontSize": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize}.0.value",
+            "display.screenEnhancement.foregroundColor": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor}.0.value",
+            "display.screenEnhancement.backgroundColor": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor}.0.value",
+            "display.screenEnhancement.fontFaceFontName": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName}.0.value",
+            "display.screenEnhancement.fontFaceGenericFontFace": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace}.0.value",
+            "display.screenEnhancement.magnification": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification}.0.value",
+            "display.screenEnhancement.tracking": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking}.0.value",
+            "display.screenEnhancement.invertImages": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages}.0.value",
+            "applications": {
+                "expander": {
+                    "type": "gpii.ontologyServer.transform.application",
+                    "inputPath": "*",
+                    "outputPath": "applications"
+                }
+            }
         }
     },
     "default": {
