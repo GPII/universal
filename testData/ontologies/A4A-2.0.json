@@ -8,10 +8,10 @@
         "display.screenEnhancement.magnification": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification}.0.value",
         "display.screenEnhancement.tracking": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking}.0.value",
         "display.screenEnhancement.invertImages": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages}.0.value",
-        "applications": {
+        "": {
             "expander": {
                 "type": "gpii.ontologyServer.transform.application",
-                "inputPath": "*",
+                "inputPath": "",
                 "outputPath": "applications"
             }
         }
