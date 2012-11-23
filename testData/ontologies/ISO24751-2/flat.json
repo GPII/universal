@@ -1,0 +1,19 @@
+{
+    "transformations": {
+        "display.screenEnhancement.fontSize": "{http://registry.gpii.org/common/fontSize}.0.value",
+        "display.screenEnhancement.foregroundColor": "{http://registry.gpii.org/common/foregroundColor}.0.value",
+        "display.screenEnhancement.backgroundColor": "{http://registry.gpii.org/common/backgroundColor}.0.value",
+        "display.screenEnhancement.fontFaceFontName": "{http://registry.gpii.org/common/fontFaceFontName}.0.value",
+        "display.screenEnhancement.fontFaceGenericFontFace": "{http://registry.gpii.org/common/fontFaceGenericFontFace}.0.value",
+        "display.screenEnhancement.magnification": "{http://registry.gpii.org/common/magnification}.0.value",
+        "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
+        "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
+        "": {
+            "expander": {
+                "type": "gpii.ontologyServer.transform.application",
+                "inputPath": "",
+                "outputPath": "applications"
+            }
+        }
+    }
+}
