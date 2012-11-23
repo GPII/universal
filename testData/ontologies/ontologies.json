@@ -1,14 +1,14 @@
 {
-     "A4A-2.0": {
+     "ISO24751-2/flat": {
         "transformations": {
-            "display.screenEnhancement.fontSize": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize}.0.value",
-            "display.screenEnhancement.foregroundColor": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor}.0.value",
-            "display.screenEnhancement.backgroundColor": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor}.0.value",
-            "display.screenEnhancement.fontFaceFontName": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName}.0.value",
-            "display.screenEnhancement.fontFaceGenericFontFace": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace}.0.value",
-            "display.screenEnhancement.magnification": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification}.0.value",
-            "display.screenEnhancement.tracking": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking}.0.value",
-            "display.screenEnhancement.invertImages": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages}.0.value",
+            "display.screenEnhancement.fontSize": "{http://registry.gpii.org/common/fontSize}.0.value",
+            "display.screenEnhancement.foregroundColor": "{http://registry.gpii.org/common/foregroundColor}.0.value",
+            "display.screenEnhancement.backgroundColor": "{http://registry.gpii.org/common/backgroundColor}.0.value",
+            "display.screenEnhancement.fontFaceFontName": "{http://registry.gpii.org/common/fontFaceFontName}.0.value",
+            "display.screenEnhancement.fontFaceGenericFontFace": "{http://registry.gpii.org/common/fontFaceGenericFontFace}.0.value",
+            "display.screenEnhancement.magnification": "{http://registry.gpii.org/common/magnification}.0.value",
+            "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
+            "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
             "": {
                 "expander": {
                     "type": "gpii.ontologyServer.transform.application",
@@ -16,18 +16,6 @@
                     "outputPath": "applications"
                 }
             }
-        }
-    },
-    "default": {
-        "transformations": {
-            "display.screenEnhancement.fontSize": "display.screenEnhancement.fontSize",
-            "display.screenEnhancement.foregroundColor": "display.screenEnhancement.foregroundColor",
-            "display.screenEnhancement.backgroundColor": "display.screenEnhancement.backgroundColor",
-            "display.screenEnhancement.fontFaceFontName": "display.screenEnhancement.fontFaceFontName",
-            "display.screenEnhancement.fontFaceGenericFontFace": "display.screenEnhancement.fontFaceGenericFontFace",
-            "display.screenEnhancement.magnification": "display.screenEnhancement.magnification",
-            "display.screenEnhancement.tracking": "display.screenEnhancement.tracking",
-            "display.screenEnhancement.invertImages": "display.screenEnhancement.invertImages"
         }
     }
 }
