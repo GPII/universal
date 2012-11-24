@@ -203,7 +203,10 @@
         },
         "settingsHandlers": [ {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id" ],
+                "capabilities": [ 
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id", 
+                    "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id"
+                 ],
                 "capabilitiesTransformations": { 
                     "stickykeys-enable": "control.keyboardEnhancement.stickyKeys",
                     "slowkeys-enable": "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable",
