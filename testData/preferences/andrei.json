@@ -2,6 +2,7 @@
     "languageAssistance": {
         "applications": {
             "com.texthelp.readWriteGold": {
+                "id": "com.texthelp.readWriteGold",
                 "name": "Read Write Gold",
                 "priority": 100,
                 "parameters": {
@@ -20,18 +21,22 @@
         "screenReader": {
             "applications": {
                 "org.gnome.orca": {
+                    "id": "org.gnome.orca",
                     "name": "ORCA Screen Reader",
                     "priority": 100
                 },
                 "nvda.screenReader": {
+                    "id": "nvda.screenReader",
                     "name": "NVDA Screen Reader",
                     "priority": 100
                 },
                 "webinsight.webAnywhere.windows": {
+                    "id": "webinsight.webAnywhere.windows",
                     "name": "Web Anywhere",
                     "priority": 100
                 },
                 "webinsight.webAnywhere.linux": {
+                    "id": "webinsight.webAnywhere.linux",
                     "name": "Web Anywhere",
                     "priority": 100
                 }
@@ -39,12 +44,15 @@
         },
         "applications": {
             "fluid.uiOptions.windows": {
+                "id": "fluid.uiOptions.windows",
                 "name": "UI Options"
             },
             "fluid.uiOptions.linux": {
+                "id": "fluid.uiOptions.linux",
                 "name": "UI Options"
             },
             "fluid.uiOptions": {
+                "id": "fluid.uiOptions",
                 "name": "UI Options",
                 "parameters": {
                     "lineSpacing": "1",
@@ -81,6 +89,7 @@
         "keyboardEnhancement": {
             "applications": {
                 "org.gnome.desktop.a11y.keyboard": {
+                    "id": "org.gnome.desktop.a11y.keyboard",
                     "name": "GNOME Shell Keyboard Settings",
                     "priority": 100,
                     "parameters": {
