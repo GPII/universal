@@ -35,7 +35,7 @@
         }
     ],
     
-    "http://registry.gpii.net/application/com.texthelp.readWriteGold": [
+    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": [
         {
             "value": {
                 "ApplicationSettings.AppBar.LargeIcons.$t": true,
