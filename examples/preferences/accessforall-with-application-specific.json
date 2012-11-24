@@ -1,23 +1,23 @@
 {
-    "http://registry.gpii.net/core/fontSize": [
+    "http://registry.gpii.net/common/fontSize": [
         {
             "value": 24
         }
     ],
     
-    "http://registry.gpii.net/core/magnification": [
+    "http://registry.gpii.net/common/magnification": [
         {
             "value": 2.0
         }
     ],
     
-    "http://registry.gpii.net/core/tracking": [
+    "http://registry.gpii.net/common/tracking": [
         {
             "value": "mouse"
         }
     ],
     
-    "http://registry.gpii.net/core/invertImages": [
+    "http://registry.gpii.net/common/invertImages": [
         {
             "value": true
         }
@@ -29,7 +29,7 @@
         }
     ],
     
-    "http://registry.gpii.net/core/stickyKeys": [
+    "http://registry.gpii.net/common/stickyKeys": [
         {
             "value": true
         }
