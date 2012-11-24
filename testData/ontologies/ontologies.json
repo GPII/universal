@@ -17,6 +17,7 @@
             "control.mouseEmulation.-provisional-mouseEmulationEnabled": "{http://registry.gpii.org/common/-provisional-mouseEmulationEnabled}.0.value",
             "control.keyboardEnhancement.stickyKeys": "{http://registry.gpii.org/common/stickyKeys}.0.value",
             "control.keyboardEnhancement.slowKeys.slowKeysInterval": "{http://registry.gpii.org/common/slowKeysInterval}.0.value",
+            "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable": "{http://registry.gpii.org/common/-provisional-slowKeysEnable}.0.value",
             "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "{http://registry.gpii.org/common/-provisional-debounceEnable}.0.value",
             "control.keyboardEnhancement.debounceKeys.debounceInterval": "{http://registry.gpii.org/common/debounceInterval}.0.value",
 
