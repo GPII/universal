@@ -1,27 +1,27 @@
 {
-     "A4A-2.0": {
+     "ISO24751-2/flat": {
         "transformations": {
-            "display.screenEnhancement.fontSize": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize}.0.value",
-            "display.screenEnhancement.foregroundColor": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor}.0.value",
-            "display.screenEnhancement.backgroundColor": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor}.0.value",
-            "display.screenEnhancement.fontFaceFontName": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName}.0.value",
-            "display.screenEnhancement.fontFaceGenericFontFace": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace}.0.value",
-            "display.screenEnhancement.magnification": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/magnification}.0.value",
-            "display.screenEnhancement.tracking": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/tracking}.0.value",
-            "display.screenEnhancement.invertImages": "{http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/invertImages}.0.value",
+            "display.screenEnhancement.fontSize": "{http://registry.gpii.org/common/fontSize}.0.value",
+            "display.screenEnhancement.foregroundColor": "{http://registry.gpii.org/common/foregroundColor}.0.value",
+            "display.screenEnhancement.backgroundColor": "{http://registry.gpii.org/common/backgroundColor}.0.value",
+            "display.screenEnhancement.fontFaceFontName": "{http://registry.gpii.org/common/fontFaceFontName}.0.value",
+            "display.screenEnhancement.fontFaceGenericFontFace": "{http://registry.gpii.org/common/fontFaceGenericFontFace}.0.value",
+            "display.screenEnhancement.magnification": "{http://registry.gpii.org/common/magnification}.0.value",
+            "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
+            "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
 
-            "control.onscreenKeyboard": "{http://gpii.org/ontology/A4A-2.0/control/onscreenKeyboard}.0.value",
-            "control.mouseEmulation.-provisional-initDelay": "{http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/-provisional-initDelay}.0.value",
-            "control.mouseEmulation.cursorSpeed": "{http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/cursorSpeed}.0.value",
-            "control.mouseEmulation.cursorAcceleration": "{http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/cursorAcceleration}.0.value",
-            "control.mouseEmulation.-provisional-mouseEmulationEnabled": "{http://gpii.org/ontology/A4A-2.0/control/mouseEmulation/-provisional-mouseEmulationEnabled}.0.value",
-            "control.keyboardEnhancement.stickyKeys": "{http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/stickyKeys}.0.value",
-            "control.keyboardEnhancement.slowKeys.slowKeysInterval": "{http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/slowKeys/slowKeysInterval}.0.value",
-            "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "{http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/debounceKeys/-provisional-debounceEnable}.0.value",
-            "control.keyboardEnhancement.debounceKeys.debounceInterval": "{http://gpii.org/ontology/A4A-2.0/control/keyboardEnhancement/debounceKeys/debounceInterval}.0.value",
+            "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
+            "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",
+            "control.mouseEmulation.cursorSpeed": "{http://registry.gpii.org/common/cursorSpeed}.0.value",
+            "control.mouseEmulation.cursorAcceleration": "{http://registry.gpii.org/common/cursorAcceleration}.0.value",
+            "control.mouseEmulation.-provisional-mouseEmulationEnabled": "{http://registry.gpii.org/common/-provisional-mouseEmulationEnabled}.0.value",
+            "control.keyboardEnhancement.stickyKeys": "{http://registry.gpii.org/common/stickyKeys}.0.value",
+            "control.keyboardEnhancement.slowKeys.slowKeysInterval": "{http://registry.gpii.org/common/slowKeysInterval}.0.value",
+            "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "{http://registry.gpii.org/common/-provisional-debounceEnable}.0.value",
+            "control.keyboardEnhancement.debounceKeys.debounceInterval": "{http://registry.gpii.org/common/debounceInterval}.0.value",
 
-            "content.adaptationPreference": "{http://gpii.org/ontology/A4A-2.0/content/adaptationPreference}.0.value",
-            "control.structuralNavigation.tableOfContents": "{http://gpii.org/ontology/A4A-2.0/control/structuralNavigation/tableOfContents}.0.value",
+            "content.adaptationPreference": "{http://registry.gpii.org/common/adaptationPreference}.0.value",
+            "control.structuralNavigation.tableOfContents": "{http://registry.gpii.org/common/tableOfContents}.0.value",
             "": {
                 "expander": {
                     "type": "gpii.ontologyServer.transform.application",
@@ -29,31 +29,6 @@
                     "outputPath": "applications"
                 }
             }
-        }
-    },
-    "default": {
-        "transformations": {
-            "display.screenEnhancement.fontSize": "display.screenEnhancement.fontSize",
-            "display.screenEnhancement.foregroundColor": "display.screenEnhancement.foregroundColor",
-            "display.screenEnhancement.backgroundColor": "display.screenEnhancement.backgroundColor",
-            "display.screenEnhancement.fontFaceFontName": "display.screenEnhancement.fontFaceFontName",
-            "display.screenEnhancement.fontFaceGenericFontFace": "display.screenEnhancement.fontFaceGenericFontFace",
-            "display.screenEnhancement.magnification": "display.screenEnhancement.magnification",
-            "display.screenEnhancement.tracking": "display.screenEnhancement.tracking",
-            "display.screenEnhancement.invertImages": "display.screenEnhancement.invertImages",
-
-            "control.onscreenKeyboard": "control.onscreenKeyboard",
-            "control.mouseEmulation.-provisional-initDelay": "control.mouseEmulation.-provisional-initDelay",
-            "control.mouseEmulation.cursorSpeed": "control.mouseEmulation.cursorSpeed",
-            "control.mouseEmulation.cursorAcceleration": "control.mouseEmulation.cursorAcceleration",
-            "control.mouseEmulation.-provisional-mouseEmulationEnabled": "control.mouseEmulation.-provisional-mouseEmulationEnabled",
-            "control.keyboardEnhancement.stickyKeys": "control.keyboardEnhancement.stickyKeys",
-            "control.keyboardEnhancement.slowKeys.slowKeysInterval": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
-            "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable",
-            "control.keyboardEnhancement.debounceKeys.debounceInterval": "control.keyboardEnhancement.debounceKeys.debounceInterval",
-
-            "content.adaptationPreference":  "content.adaptationPreference",
-            "control.structuralNavigation.tableOfContents": "control.structuralNavigation.tableOfContents"
         }
     }
 }
