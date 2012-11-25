@@ -1,5 +1,5 @@
 {
-    "http://gpii.org/applications/com.texthelp.readWriteGold": [{
+    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
         "value": {
             "ApplicationSettings.AppBar.Width.$t": 788,
             "ApplicationSettings.AppBar.ShowText.$t": false,
@@ -11,9 +11,9 @@
             "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
         }
     }],
-    "http://gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
-    "http://gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
-    "http://gpii.org/applications/fluid.uiOptions": [{ 
+    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
         "value": {
             "lineSpacing": "1",
             "links": false,
@@ -23,9 +23,9 @@
             "volume": "50"
         }
     }],
-    "http://gpii.org/applications/org.gnome.desktop.a11y.caribou-keyboard": [{ "value": {}}],
-    "http://gpii.org/applications/com.microsoft.windows.onscreenKeyboard": [{ "value": {}}],
-    "http://gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.caribou-keyboard": [{ "value": {}}],
+    "http://registry.gpii.org/applications/com.microsoft.windows.onscreenKeyboard": [{ "value": {}}],
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
         "value": {
             "stickykeys-enable": true,
             "enable": true,
@@ -39,17 +39,17 @@
             "togglekeys-enable": true
         }
     }],    
-    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontSize": [{ "value": 12 }],
-    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/foregroundColor": [{ "value": "white" }],
-    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/backgroundColor": [{ "value": "black" }],
-    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceFontName": [{ "value": ["Comic Sans"] }],
-    "http://gpii.org/ontology/A4A-2.0/display/screenEnhancement/fontFaceGenericFontFace": [{ "value": "sans serif" }],
-    "http://gpii.org/ontology/A4A-2.0/content/adaptationPreference": [{ "value": [
+    "http://registry.gpii.org/common/fontSize": [{ "value": 12 }],
+    "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
+    "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
+    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
         {
             "adaptationType": "caption",
             "language": "en"
         },
         {}
     ]}],
-    "http://gpii.org/ontology/A4A-2.0/control/structuralNavigation/tableOfContents": [{ "value": false }]
+    "http://registry.gpii.org/common/tableOfContents": [{ "value": false }]
 }

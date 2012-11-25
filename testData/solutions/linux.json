@@ -18,7 +18,8 @@
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
                 "capabilities": [
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id" 
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id",
+                    "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name" 
                 ],
                 "capabilitiesTransformations": {
                     "mag-factor": "display.screenEnhancement.magnification",
@@ -71,6 +72,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.fluid\\.uiOptions\\.linux.id",
+                    "display.applications.fluid\\.uiOptions\\.linux.name",
                     "display.screenEnhancement.fontSize",
                     "display.screenEnhancement.foregroundColor",
                     "display.screenEnhancement.backgroundColor",
@@ -108,7 +110,10 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ "applications.org\\.gnome\\.desktop\\.interface.id" ],
+                "capabilities": [ 
+                    "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
+                    "applications.org\\.gnome\\.desktop\\.interface.id" 
+                ],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "expander": {
@@ -142,7 +147,10 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ "applications.org\\.gnome\\.nautilus.id" ],
+                "capabilities": [ 
+                    "applications.org\\.gnome\\.nautilus.id",
+                    "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name"
+                ],
                 "capabilitiesTransformations": {
                     "font": "display.screenEnhancement.fontFace.fontName.0"
                 },
@@ -172,6 +180,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
+                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.name",
                     "applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.id"
                 ]
             }
@@ -205,6 +214,7 @@
                 "type": "gpii.gsettings.set",
                 "capabilities": [ 
                     "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id", 
+                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
                     "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id"
                  ],
                 "capabilitiesTransformations": { 
@@ -273,7 +283,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
-                    "applications.org\\.gnome\\.orca.id"
+                    "applications.org\\.gnome\\.orca.id",
+                    "display.screenReader.applications.org\\.gnome\\.orca.name"
                 ]
             }
         ],
@@ -309,7 +320,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.simplification",
-                    "applications.trace\\.easyOne\\.communicator\\.linux.id"
+                    "applications.trace\\.easyOne\\.communicator\\.linux.id",
+                    "content.simplification.applications.trace\\.easyOne\\.communicator\\.linux.name"
                 ]
             }
         ],
@@ -345,7 +357,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.pictorialSimplification",
-                    "applications.trace\\.easyOne\\.sudan\\.linux.id"
+                    "applications.trace\\.easyOne\\.sudan\\.linux.id",
+                    "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.linux.name"
                 ]
             }
         ],
@@ -381,7 +394,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
-                    "applications.webinsight\\.webAnywhere\\.linux.id"
+                    "applications.webinsight\\.webAnywhere\\.linux.id",
+                    "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
                 ]
             }
         ],
