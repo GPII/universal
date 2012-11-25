@@ -215,7 +215,7 @@
                 "capabilities": [ 
                     "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id", 
                     "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
-                    "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id"
+                    "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name"
                  ],
                 "capabilitiesTransformations": { 
                     "stickykeys-enable": "control.keyboardEnhancement.stickyKeys",
