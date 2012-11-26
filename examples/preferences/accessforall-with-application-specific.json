@@ -1,30 +1,46 @@
 {
-    "display": {
-        "screenEnhancement": {
-            "fontSize": 24,
-            "magnification": 2.0,
-            "tracking": "mouse",
-            "invertImages": true,
-            "-provisional-showCrosshairs": true
+    "http://registry.gpii.net/common/fontSize": [
+        {
+            "value": 24
         }
-    },
+    ],
     
-    "control": {
-        "keyboardEnhancement": {
-            "stickyKeys": true
+    "http://registry.gpii.net/common/magnification": [
+        {
+            "value": 2.0
         }
-    },
+    ],
     
-    "-provisional-languageAssistance": {
-        "applications": {
-            "com.texthelp.readWriteGold": {
-                "name": "Read Write Gold",
-                "priority": 100,
-                "parameters": {
-                    "ApplicationSettings.AppBar.LargeIcons.$t": true,
-                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true
-                }
+    "http://registry.gpii.net/common/tracking": [
+        {
+            "value": "mouse"
+        }
+    ],
+    
+    "http://registry.gpii.net/common/invertImages": [
+        {
+            "value": true
+        }
+    ],
+    
+    "http://registry.gpii.net/common/showCrosshairs": [
+        {
+            "value": true
+        }
+    ],
+    
+    "http://registry.gpii.net/common/stickyKeys": [
+        {
+            "value": true
+        }
+    ],
+    
+    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": [
+        {
+            "value": {
+                "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true
             }
         }
-    }
+    ]
 }
