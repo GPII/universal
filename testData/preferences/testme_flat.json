@@ -1,7 +1,0 @@
-{
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
-        "value": {
-            "feature-state-change-beep": true
-        }
-    }]
-}

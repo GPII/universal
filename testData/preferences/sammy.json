@@ -1,17 +1,10 @@
 {
-    "display": {
-        "screenEnhancement": {
-            "fontSize": 24,
-            "foregroundColor": "white",
-            "backgroundColor": "black",
-            "fontFace": {
-                "fontName": ["Comic Sans"],
-                "genericFontFace": "sans serif"
-            },
-            "magnification": 2.0,
-            "tracking": "mouse",
-            "invertImages": true,
-            "-provisional-showCrosshairs": true
-        }
-    }
+    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
+    "http://registry.gpii.org/common/foregroundColor": [{"value": "white"}],
+    "http://registry.gpii.org/common/backgroundColor": [{"value": "black"}],
+    "http://registry.gpii.org/common/fontFaceFontName": [{"value": ["Comic Sans"]}],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{"value": "sans serif"}],
+    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
+    "http://registry.gpii.org/common/tracking": [{"value": "mouse"}],
+    "http://registry.gpii.org/common/invertImages": [{"value": true}]
 }

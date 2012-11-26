@@ -1,82 +1,49 @@
 {
-    "languageAssistance": {
-        "applications": {
-            "com.texthelp.readWriteGold": {
-                "name": "Read Write Gold",
-                "priority": 100,
-                "parameters": {
-                    "ApplicationSettings.AppBar.Width.$t": 1072,
-                    "ApplicationSettings.AppBar.ShowText.$t": true,
-                    "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
-                    "ApplicationSettings.AppBar.LargeIcons.$t": true,
-                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-                    "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
-                    "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
-                }
-            }
+    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+            "ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.Width.$t": 1072,
+            "ApplicationSettings.AppBar.ShowText.$t": true,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
         }
-    },
-    
-    "display": {
-    	"applications": {
-        	"fluid.uiOptions.windows": {
-                "name": "UI Options"
-            },
-            "fluid.uiOptions.linux": {
-                "name": "UI Options"
-            },
-            "fluid.uiOptions": {
-            	"name": "UI Options",
-                "parameters": {
-                    "lineSpacing": "1.5",
-                    "links": true,
-                    "inputsLarger": true,
-                    "captions": false,
-                    "transcripts": false,
-                    "volume": "50"
-                }
-           	}
-    	},
-    	
-        "screenEnhancement": {
-        	"fontSize": 18,
-            "foregroundColor": "white",
-            "backgroundColor": "black",
-            "fontFace": {
-                "fontName": [
-                    "Comic Sans"
-                ],
-                "genericFontFace": "sans serif"
-            },
-            "applications": {
-                "org.gnome.desktop.interface": {
-                    "name": "GNOME Interface Settings",
-                    "priority": 100,
-                    "parameters": {
-                        "text-scaling-factor": 1.6
-                    }
-                },
-                "org.gnome.nautilus": {
-                    "name": "GNOME Nautilus Desktop Settings",
-                    "priority": 100,
-                    "parameters": {
-                        "font": "Cantarell 18"
-                    }
-                }
-            }
+    }],
+    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
+        "value": {
+            "lineSpacing": "1.5",
+            "links": true,
+            "inputsLarger": true,
+            "captions": false,
+            "transcripts": false,
+            "volume": "50"
         }
-    },
-    "control": {
-        "structuralNavigation": {
-            "tableOfContents": false
+    }],
+    "http://registry.gpii.org/applications/org.gnome.desktop.interface": [{ 
+        "value": {
+            "text-scaling-factor": 1.6
         }
-    },
-    "content": {
-        "adaptationPreference": [
-            {
-                "adaptationType": "caption",
-                "language": "en"
-            }
-        ]
-    }
+    }],
+    "http://registry.gpii.org/applications/org.gnome.nautilus": [{ 
+        "value": {
+            "font": "Cantarell 18"
+        }
+    }],
+    "http://registry.gpii.org/common/fontSize": [{ "value": 18 }],
+    "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
+    "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
+    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
+        {
+            "adaptationType": "caption",
+            "language": "en"
+        },
+        {}
+    ]}],
+    "http://registry.gpii.org/common/tableOfContents": [{ "value": false }]
 }
