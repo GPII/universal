@@ -18,6 +18,7 @@
                     "path": "Software\\Microsoft\\ScreenMagnifier"
                 },
                 "capabilities": [
+                    "applications.com\\.microsoft\\.windows\\.magnifier.id",
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
@@ -111,6 +112,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.applications.fluid\\.uiOptions\\.windows.name",
+                    "applications.fluid\\.uiOptions\\.windows.id",
                     "display.screenEnhancement.fontSize",
                     "display.screenEnhancement.foregroundColor",
                     "display.screenEnhancement.backgroundColor",
@@ -150,6 +152,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
+                    "applications.com\\.microsoft\\.windows\\.onscreenKeyboard.id",
                     "control.onscreenKeyboard.applications.com\\.microsoft\\.windows\\.onscreenKeyboard.name"
                 ]
             }
@@ -185,6 +188,7 @@
             {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
+                    "applications.nvda\\.screenReader.id",
                     "display.screenReader.applications.nvda\\.screenReader.name"
                 ]
             }
@@ -225,6 +229,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.simplification",
+                    "applications.trace\\.easyOne\\.communicator\\.windows.id",
                     "content.simplification.applications.trace\\.easyOne\\.communicator\\.windows.name"
                 ]
             }
@@ -261,6 +266,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.pictorialSimplification",
+                    "applications.trace\\.easyOne\\.sudan\\.windows.id",
                     "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.windows.name"
                 ]
             }
@@ -297,6 +303,7 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
+                    "applications.webinsight\\.webAnywhere\\.windows.id",
                     "display.screenReader.applications.webinsight\\.webAnywhere\\.windows.name"
                 ]
             }

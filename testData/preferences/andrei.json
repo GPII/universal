@@ -1,96 +1,47 @@
 {
-    "languageAssistance": {
-        "applications": {
-            "com.texthelp.readWriteGold": {
-                "name": "Read Write Gold",
-                "priority": 100,
-                "parameters": {
-                    "ApplicationSettings.AppBar.Width.$t": 788,
-                    "ApplicationSettings.AppBar.LargeIcons.$t": false,
-                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
-                    "ApplicationSettings.AppBar.ShowText.$t": false,
-                    "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
-                    "ApplicationSettings.Speech.optSAPI5Speed.$t": 90,
-                    "ApplicationSettings.Speech.optAutoUseScreenReading.$t": true
-                }
-            }
+    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+            "ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.LargeIcons.$t": false,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
+            "ApplicationSettings.AppBar.ShowText.$t": false,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 90,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": true
         }
-    },
-    "display": {
-        "screenReader": {
-            "applications": {
-                "org.gnome.orca": {
-                    "name": "ORCA Screen Reader",
-                    "priority": 100
-                },
-                "nvda.screenReader": {
-                    "name": "NVDA Screen Reader",
-                    "priority": 100
-                },
-                "webinsight.webAnywhere.windows": {
-                    "name": "Web Anywhere",
-                    "priority": 100
-                },
-                "webinsight.webAnywhere.linux": {
-                    "name": "Web Anywhere",
-                    "priority": 100
-                }
-            }
-        },
-        "applications": {
-            "fluid.uiOptions.windows": {
-                "name": "UI Options"
-            },
-            "fluid.uiOptions.linux": {
-                "name": "UI Options"
-            },
-            "fluid.uiOptions": {
-                "name": "UI Options",
-                "parameters": {
-                    "lineSpacing": "1",
-                    "links": false,
-                    "inputsLarger": false,
-                    "captions": false,
-                    "transcripts": false,
-                    "volume": "50"
-                }
-            }
-        },
-        "screenEnhancement": {
-            "fontSize": 12,
-            "foregroundColor": "white",
-            "backgroundColor": "black",
-            "fontFace": {
-                "fontName": [
-                    "Comic Sans"
-                ],
-                "genericFontFace": "sans serif"
-            }
+    }],
+    "http://registry.gpii.org/applications/org.gnome.orca": [{ "value": {}}],
+    "http://registry.gpii.org/applications/nvda.screenReader": [{ "value": {}}],
+    "http://registry.gpii.org/applications/webinsight.webAnywhere.windows": [{ "value": {}}],
+    "http://registry.gpii.org/applications/webinsight.webAnywhere.linux": [{ "value": {}}],    
+    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
+        "value": {
+            "lineSpacing": "1",
+            "links": false,
+            "inputsLarger": false,
+            "captions": false,
+            "transcripts": false,
+            "volume": "50"
         }
-    },
-    "content": {
-        "adaptationPreference": [
-            {
-                "adaptationType": "caption",
-                "language": "en"
-            },
-            {}
-        ]
-    },
-    "control": {
-        "keyboardEnhancement": {
-            "applications": {
-                "org.gnome.desktop.a11y.keyboard": {
-                    "name": "GNOME Shell Keyboard Settings",
-                    "priority": 100,
-                    "parameters": {
-                        "feature-state-change-beep": true
-                    }
-                }
-            }
-        },
-        "structuralNavigation": {
-            "tableOfContents": false
+    }],
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
+        "value": {
+            "feature-state-change-beep": true
         }
-    }
+    }],
+    "http://registry.gpii.org/common/fontSize": [{ "value": 12 }],
+    "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
+    "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
+    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
+        {
+            "adaptationType": "caption",
+            "language": "en"
+        },
+        {}
+    ]}],
+    "http://registry.gpii.org/common/tableOfContents": [{ "value": false }]
 }
