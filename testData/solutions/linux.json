@@ -1,0 +1,417 @@
+[
+
+    {
+        "name": "GNOME Shell Magnifier",
+        "id": "org.gnome.desktop.a11y.magnifier",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.magnifier"
+                },
+                "capabilities": [
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id",
+                    "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name" 
+                ],
+                "capabilitiesTransformations": {
+                    "mag-factor": "display.screenEnhancement.magnification",
+                    "show-cross-hairs": "display.screenEnhancement.-provisional-showCrosshairs",
+                    "mouse-tracking": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.tracking",
+                            "options": {
+                                "mouse": {
+                                    "outputValue": "centered"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+  
+    {
+        "name": "UI Options",
+        "id": "fluid.uiOptions.linux",
+        "contexts": {             
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.fluid\\.uiOptions\\.linux.id",
+                    "display.applications.fluid\\.uiOptions\\.linux.name",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.foregroundColor",
+                    "display.screenEnhancement.backgroundColor",
+                    "display.screenEnhancement.fontFace"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "google-chrome http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "pkill -2 chrome"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "GNOME Interface Settings",
+        "id": "org.gnome.desktop.interface",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "capabilities": [ 
+                    "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
+                    "applications.org\\.gnome\\.desktop\\.interface.id" 
+                ],
+                "capabilitiesTransformations": {
+                    "text-scaling-factor": {
+                        "expander": {
+                            "type": "gpii.transformer.fontSizeToScale",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "baseFontSize": 12
+                        }
+                    }
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "GNOME Nautilus Settings",
+        "id": "org.gnome.nautilus",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "capabilities": [ 
+                    "applications.org\\.gnome\\.nautilus.id",
+                    "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name"
+                ],
+                "capabilitiesTransformations": {
+                    "font": "display.screenEnhancement.fontFace.fontName.0"
+                },
+                "options": {
+                    "schema": "org.gnome.nautilus.desktop"
+                }
+            }
+        ],
+        
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "GNOME Caribou Onscreen Keyboard",
+        "id": "org.gnome.desktop.a11y.caribou-keyboard",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "control.onscreenKeyboard",
+                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.name",
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "GNOME Shell Keyboard Settings",
+        "id": "org.gnome.desktop.a11y.keyboard",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [ {
+                "type": "gpii.gsettings.set",
+                "capabilities": [ 
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id", 
+                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
+                    "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name"
+                 ],
+                "capabilitiesTransformations": { 
+                    "stickykeys-enable": "control.keyboardEnhancement.stickyKeys",
+                    "slowkeys-enable": "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable",
+                    "slowkeys-delay": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
+                            "factor": 1000
+                        }
+                    },
+                    "bouncekeys-enable": "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable",
+                    "bouncekeys-delay": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "control.keyboardEnhancement.debounceKeys.debounceInterval",
+                            "factor": 1000
+                        }
+                    },
+                    "mousekeys-enable": "control.mouseEmulation.-provisional-mouseEmulationEnabled",
+                    "mousekeys-init-delay": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "control.mouseEmulation.-provisional-initDelay",
+                            "factor": 1000
+                        }
+                    },
+                    "mousekeys-max-speed": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "control.mouseEmulation.cursorSpeed",
+                            "factor": 1000
+                        }
+                    },
+                    "mousekeys-accel-time": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "control.mouseEmulation.cursorAcceleration",
+                            "factor": 1000
+                        }
+                    }
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.keyboard"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "ORCA Screen Reader",
+        "id": "org.gnome.orca",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.org\\.gnome\\.orca.id",
+                    "display.screenReader.applications.org\\.gnome\\.orca.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "EasyOne Communicator Linux",
+        "id": "trace.easyOne.communicator.linux",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "content.simplification",
+                    "applications.trace\\.easyOne\\.communicator\\.linux.id",
+                    "content.simplification.applications.trace\\.easyOne\\.communicator\\.linux.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "google-chrome http://easy1234.org/user/${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "pkill -2 chrome"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "EasyOne Communicator Sudan",
+        "id": "trace.easyOne.sudan.linux",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "content.pictorialSimplification",
+                    "applications.trace\\.easyOne\\.sudan\\.linux.id",
+                    "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.linux.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "google-chrome http://easy1234.org/sudan"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "pkill -2 chrome"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "Web Anywhere",
+        "id": "webinsight.webAnywhere.linux",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.webinsight\\.webAnywhere\\.linux.id",
+                    "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "pkill -2 chrome"
+                }
+            ]
+        }
+    }
+]

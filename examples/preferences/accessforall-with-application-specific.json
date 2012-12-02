@@ -1,0 +1,46 @@
+{
+    "http://registry.gpii.net/common/fontSize": [
+        {
+            "value": 24
+        }
+    ],
+    
+    "http://registry.gpii.net/common/magnification": [
+        {
+            "value": 2.0
+        }
+    ],
+    
+    "http://registry.gpii.net/common/tracking": [
+        {
+            "value": "mouse"
+        }
+    ],
+    
+    "http://registry.gpii.net/common/invertImages": [
+        {
+            "value": true
+        }
+    ],
+    
+    "http://registry.gpii.net/common/showCrosshairs": [
+        {
+            "value": true
+        }
+    ],
+    
+    "http://registry.gpii.net/common/stickyKeys": [
+        {
+            "value": true
+        }
+    ],
+    
+    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": [
+        {
+            "value": {
+                "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true
+            }
+        }
+    ]
+}

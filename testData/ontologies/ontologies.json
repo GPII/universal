@@ -1,0 +1,35 @@
+{
+     "ISO24751-2/flat": {
+        "transformations": {
+            "display.screenEnhancement.fontSize": "{http://registry.gpii.org/common/fontSize}.0.value",
+            "display.screenEnhancement.foregroundColor": "{http://registry.gpii.org/common/foregroundColor}.0.value",
+            "display.screenEnhancement.backgroundColor": "{http://registry.gpii.org/common/backgroundColor}.0.value",
+            "display.screenEnhancement.fontFaceFontName": "{http://registry.gpii.org/common/fontFaceFontName}.0.value",
+            "display.screenEnhancement.fontFaceGenericFontFace": "{http://registry.gpii.org/common/fontFaceGenericFontFace}.0.value",
+            "display.screenEnhancement.magnification": "{http://registry.gpii.org/common/magnification}.0.value",
+            "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
+            "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
+
+            "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
+            "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",
+            "control.mouseEmulation.cursorSpeed": "{http://registry.gpii.org/common/cursorSpeed}.0.value",
+            "control.mouseEmulation.cursorAcceleration": "{http://registry.gpii.org/common/cursorAcceleration}.0.value",
+            "control.mouseEmulation.-provisional-mouseEmulationEnabled": "{http://registry.gpii.org/common/-provisional-mouseEmulationEnabled}.0.value",
+            "control.keyboardEnhancement.stickyKeys": "{http://registry.gpii.org/common/stickyKeys}.0.value",
+            "control.keyboardEnhancement.slowKeys.slowKeysInterval": "{http://registry.gpii.org/common/slowKeysInterval}.0.value",
+            "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable": "{http://registry.gpii.org/common/-provisional-slowKeysEnable}.0.value",
+            "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable": "{http://registry.gpii.org/common/-provisional-debounceEnable}.0.value",
+            "control.keyboardEnhancement.debounceKeys.debounceInterval": "{http://registry.gpii.org/common/debounceInterval}.0.value",
+
+            "content.adaptationPreference": "{http://registry.gpii.org/common/adaptationPreference}.0.value",
+            "control.structuralNavigation.tableOfContents": "{http://registry.gpii.org/common/tableOfContents}.0.value",
+            "": {
+                "expander": {
+                    "type": "gpii.ontologyServer.transform.application",
+                    "inputPath": "",
+                    "outputPath": "applications"
+                }
+            }
+        }
+    }
+}
