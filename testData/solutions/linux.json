@@ -280,7 +280,10 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.orca.set",
+                "options": {
+                    "user": "${{userToken}}"
+                },
                 "capabilities": [
                     "display.screenReader",
                     "applications.org\\.gnome\\.orca.id",
@@ -290,15 +293,16 @@
         ],
         "lifecycleManager": {
             "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
+                    "command": "orca -p ${{userToken}} --replace"
                 }
             ],
             "stop": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
+                    "command": "pkill -9 orca"
                 }
             ]
         }
