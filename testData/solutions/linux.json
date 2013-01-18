@@ -296,13 +296,13 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "orca -p ${{userToken}} --replace"
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
                 }
             ],
             "stop": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "pkill -9 orca"
+                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
                 }
             ]
         }
