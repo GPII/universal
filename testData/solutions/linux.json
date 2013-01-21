@@ -270,6 +270,64 @@
     },
 
     {
+        "name": "GNOME desktop Window Manager preferences",
+        "id": "org.gnome.desktop.wm.preferences",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "capabilities": [
+                    "applications.org\\.gnome\\.desktop\\.wm\\.preferences.id",
+                    "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.wm\\.preferences.name"
+                ],
+                "options": {
+                    "schema": "org.gnome.desktop.wm.preferences"
+                }
+            }
+        ],
+
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "GNOME Shell overrides",
+        "id": "org.gnome.shell.overrides",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "capabilities": [
+                    "applications.org\\.gnome\\.shell\\.overrides.id",
+                    "display.screenEnhancement.applications.org\\.gnome\\.shell\\.overrides.name"
+                ],
+                "options": {
+                    "schema": "org.gnome.shell.overrides"
+                }
+            }
+        ],
+
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
         "name": "ORCA Screen Reader",
         "id": "org.gnome.orca",
         "contexts": {
