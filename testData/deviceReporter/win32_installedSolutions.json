@@ -78,6 +78,10 @@
         
         {
             "id": "webinsight.webAnywhere.linux"
+        },
+    
+        {
+            "id": "com.microsoft.windows.highContrast"
         }
     ]
 }

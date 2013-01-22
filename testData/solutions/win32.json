@@ -322,5 +322,58 @@
                 }
             ]
         }
+    },
+    
+    {
+        "name": "Windows High Contrast",
+        "id": "com.microsoft.windows.highContrast",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.spiSettingsHandler.set",
+                "options": {
+                    "getAction": "SPI_GETHIGHCONTRAST",
+                    "setAction": "SPI_SETHIGHCONTRAST",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "HIGHCONTRAST"
+                    }
+                },
+                "capabilities": [
+                    "display.screenEnhancement.highContrast"
+                ],
+                "capabilitiesTransformations": {
+                    "HighContrastOn": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.highContrast",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
     }
 ]

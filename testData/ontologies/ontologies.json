@@ -9,6 +9,7 @@
             "display.screenEnhancement.magnification": "{http://registry.gpii.org/common/magnification}.0.value",
             "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
             "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
+            "display.screenEnhancement.highContrast": "{http://registry.gpii.org/common/highContrast}.0.value",
 
             "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
             "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",
