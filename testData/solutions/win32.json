@@ -186,11 +186,19 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "options": {
+                    "path": "\"${{environment}.APPDATA}\\nvda\\nvda.ini",
+                    "allowNumberSignComments": true,
+                    "allowSubSections": true
+                },
                 "capabilities": [
                     "applications.nvda\\.screenReader.id",
                     "display.screenReader.applications.nvda\\.screenReader.name"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "speech.symbolLevel": 90
+                }
             }
         ],
         "lifecycleManager": {

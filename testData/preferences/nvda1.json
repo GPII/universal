@@ -1,0 +1,7 @@
+{
+    "http://registry.gpii.org/applications/nvda.screenReader": [{
+        "value": {
+            "speech.symbolLevel": 90
+        }
+    }]
+}
