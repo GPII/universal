@@ -1,0 +1,19 @@
+{
+    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+        	"ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
+        	"ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",
+        	"ApplicationSettings.AppBar.ShowText.$t": false,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
+            "ApplicationSettings.AppBar.LargeIcons.$t": false,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
+        	"ApplicationSettings.Speech.optSAPI5Pitch.$t": 50,
+        	"ApplicationSettings.Speech.optSAPI5Speed.$t": 40,
+        	"ApplicationSettings.Speech.optSAPI5Volume.$t": 80,
+        	"ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
+        	"ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK Indian Sangeeta",
+        	"ApplicationSettings.Scanning.ScanDestination.$t": "Word",
+    		"ApplicationSettings.Scanning.ScanToFile.$t": true
+    	}
+    }]
+}

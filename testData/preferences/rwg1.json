@@ -1,0 +1,19 @@
+{
+    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
+        "value": {
+        	"ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
+        	"ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
+        	"ApplicationSettings.AppBar.ShowText.$t": true,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+        	"ApplicationSettings.Speech.optSAPI5Pitc.$t": 30,
+        	"ApplicationSettings.Speech.optSAPI5Speed.$t": 30,
+        	"ApplicationSettings.Speech.optSAPI5Volume.$t": 50,
+        	"ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 214,
+        	"ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Emily",
+        	"ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
+    		"ApplicationSettings.Scanning.ScanToFile.$t": false
+    	}
+    }]
+}
