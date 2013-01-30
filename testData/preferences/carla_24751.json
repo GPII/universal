@@ -112,5 +112,155 @@
         "structuralNavigation": {
             "tableOfContents": false
         }
+    },
+    "android": {
+        "applications": [
+            {
+                "id": "es.codefactory.mobileAccessibility",
+                "name": "Code Factory Mobile Accessibility",
+                "parameters": {
+                    "access_commonprefs_brailledevicemodel": {
+                        "type": "class java.lang.String",
+                        "value": "{5E8D729F-F5E2-4b8d-AB87-2549B86108EF}/{6EBAEE25-D0BB-47be-B456-5F116283715D}"
+                    },
+                    "already_changed_settings_phone_usesystemcallscreens": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_brailleinputgrade": {
+                        "type": "class java.lang.String",
+                        "value": "1"
+                    },
+                    "access_commonprefs_brailleringingaction": {
+                        "type": "class java.lang.String",
+                        "value": "0"
+                    },
+                    "access_commonprefs_brailleoutputgrade": {
+                        "type": "class java.lang.String",
+                        "value": "1"
+                    },
+                    "access_commonprefs_brailletable_6dot": {
+                        "type": "class java.lang.String",
+                        "value": "en-us-computer6.6tb"
+                    },
+                    "access_commonprefs_editingspeakdelchar": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_eliminaterepeats": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "accessibility_commonprefs_virtualkeyboarddisplay": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_numberprocessing": {
+                        "type": "class java.lang.String",
+                        "value": "0"
+                    },
+                    "access_commonprefs_brailletable_8dot": {
+                        "type": "class java.lang.String",
+                        "value": "en-us-Computer8.8tb"
+                    },
+                    "access_commonprefs_editingkeyboardecho": {
+                        "type": "class java.lang.String",
+                        "value": "3"
+                    },
+                    "access_commonprefs_ttsvoice": {
+                        "type": "class java.lang.String",
+                        "value": "system"
+                    },
+                    "access_commonprefs_editingsecretmode": {
+                        "type": "class java.lang.String",
+                        "value": "1"
+                    },
+                    "MA_CLOUD4ALL_USER": {
+                        "type": "class java.lang.String",
+                        "value": "CFTestUser02"
+                    },
+                    "settings_phone_usesystemcallscreens": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_srnotifymaleave": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "already_changed_access_commonprefs_brailledevicemodel": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_speechpitch": {
+                        "type": "class java.lang.String",
+                        "value": "5"
+                    },
+                    "access_commonprefs_brailleuncontractwordundercursor": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_braillespeakstatus": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_speechrate": {
+                        "type": "class java.lang.String",
+                        "value": "5"
+                    },
+                    "access_commonprefs_punctuation": {
+                        "type": "class java.lang.String",
+                        "value": "2"
+                    },
+                    "already_changed_access_commonprefs_brailleautomaticreconnect": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_brailleautomaticreconnect": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_brailleshowcontrolindicator": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_brailleshowprompts": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_vibratewhennavigating": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_capitalization": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "access_commonprefs_braillecursorblink": {
+                        "type": "class java.lang.String",
+                        "value": "2"
+                    },
+                    "access_commonprefs_brailletable_grade1": {
+                        "type": "class java.lang.String",
+                        "value": "en-us-g1.utb"
+                    },
+                    "access_commonprefs_brailletable_grade2": {
+                        "type": "class java.lang.String",
+                        "value": "en-us-g2.ctb"
+                    },
+                    "access_commonprefs_soundwhennavigating": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "accessibility_commonprefs_virtualkeyboardlandscape": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    },
+                    "accessibility_commonprefs_virtualkeyboardusevolumekeys": {
+                        "type": "class java.lang.Boolean",
+                        "value": "true"
+                    }
+                }
+            }
+        ]
     }
 }
