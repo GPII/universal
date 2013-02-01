@@ -3,5 +3,7 @@
         "value": {
             "speech.symbolLevel": 90
         }
-    }]
+    }],
+
+    "http://registry.gpii.org/common/readingUnit": [{ "value": "word" }]
 }

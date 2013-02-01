@@ -188,7 +188,7 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler.set",
                 "options": {
-                    "path": "\"${{environment}.APPDATA}\\nvda\\nvda.ini",
+                    "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
                     "allowSubSections": true
                 },
@@ -197,12 +197,24 @@
                     "display.screenReader.applications.nvda\\.screenReader.name"
                 ],
                 "capabilitiesTransformations": {
-                    "speech.symbolLevel": 90
+                    "virtualBuffers.autoSayAllOnPageLoad": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.textReadingHighlight.readingUnit",
+                            "defaultOutputValue": false,
+                            "options": {
+                                "all": {
+                                    "outputValue": true
+                                }
+                            }
+                        }
+                    }
                 }
             }
         ],
         "lifecycleManager": {
             "start": [ 
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
@@ -215,7 +227,8 @@
                 },{
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
-                }
+                },
+                "restoreSettings"
             ]
         }
     },     
