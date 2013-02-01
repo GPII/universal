@@ -5,5 +5,9 @@
         }
     }],
 
-    "http://registry.gpii.org/common/readingUnit": [{ "value": "word" }]
+    "http://registry.gpii.org/common/speakTutorialMessages": [{ "value": false }],
+    "http://registry.gpii.org/common/keyEcho": [{ "value": false }],
+    "http://registry.gpii.org/common/wordEcho": [{ "value": false }],
+    "http://registry.gpii.org/common/announceCapitals": [{ "value": true }]
+
 }

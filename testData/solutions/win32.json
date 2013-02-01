@@ -197,6 +197,10 @@
                     "display.screenReader.applications.nvda\\.screenReader.name"
                 ],
                 "capabilitiesTransformations": {
+                    "presentation.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
+                    "keyboard.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
+                    "keyboard.speakTypedWords": "display.screenReader.-provisional-wordEcho",
+                    "speech.espeak.sayCapForCapitals": "display.screenReader.-provisional-announceCapitals",
                     "virtualBuffers.autoSayAllOnPageLoad": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
