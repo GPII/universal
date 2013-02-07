@@ -197,18 +197,41 @@
                     "display.screenReader.applications.nvda\\.screenReader.name"
                 ],
                 "capabilitiesTransformations": {
-                    "presentation.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
-                    "keyboard.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
-                    "keyboard.speakTypedWords": "display.screenReader.-provisional-wordEcho",
-                    "speech.espeak.sayCapForCapitals": "display.screenReader.-provisional-announceCapitals",
-                    "virtualBuffers.autoSayAllOnPageLoad": {
+                    "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
+                    "keyboard\\.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
+                    "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
+                    "speech\\.espeak\\.sayCapForCapitals": "display.screenReader.-provisional-announceCapitals",
+                    "virtualBuffers\\.autoSayAllOnPageLoad": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
                             "inputPath": "display.textReadingHighlight.readingUnit",
-                            "defaultOutputValue": false,
+                            "defaultInputValue": "sentence",
                             "options": {
                                 "all": {
                                     "outputValue": true
+                                },
+                                "sentence": {
+                                    "outputValue": false
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.symbolLevel": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                            "options": {
+                                "none": {
+                                    "outputValue": "0"
+                                },
+                                "some": {
+                                    "outputValue": "100"
+                                },
+                                "most": {
+                                    "outputValue": "200"
+                                },
+                                "all": {
+                                    "outputValue": "300"
                                 }
                             }
                         }
