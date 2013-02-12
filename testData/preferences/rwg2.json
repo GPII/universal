@@ -1,19 +1,87 @@
 {
     "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
         "value": {
-        	"ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
-        	"ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",
-        	"ApplicationSettings.AppBar.ShowText.$t": false,
-            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
-            "ApplicationSettings.AppBar.LargeIcons.$t": false,
-            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
-        	"ApplicationSettings.Speech.optSAPI5Pitch.$t": 50,
-        	"ApplicationSettings.Speech.optSAPI5Speed.$t": 40,
-        	"ApplicationSettings.Speech.optSAPI5Volume.$t": 80,
-        	"ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
-        	"ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK Indian Sangeeta",
-        	"ApplicationSettings.Scanning.ScanDestination.$t": "Word",
-    		"ApplicationSettings.Scanning.ScanToFile.$t": true
-    	}
-    }]
+            "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
+			"ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",
+			"ApplicationSettings.AppBar.DocType.$t": "1", 
+			"ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.ShowText.$t": true,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false,
+			"ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel"
+        }
+    }],
+    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
+    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
+        "value": {
+            "lineSpacing": "2",
+            "links": true,
+            "inputsLarger": true,
+            "captions": false,
+            "transcripts": false,
+            "volume": "50"
+        }
+    }],
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
+        "value": {
+            "show-cross-hairs": true,
+            "lens-mode": false,
+            "mag-factor": 2,
+            "mouse-tracking": "proportional",
+            "screen-position": "right-half",
+            "scroll-at-edges": true
+        }
+    }],
+    "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{ 
+        "value": {
+            "Magnification": {
+                "value": 200,
+                "dataType": "REG_DWORD"
+            },
+            "ZoomIncrement": {
+                "value": 50,
+                "dataType": "REG_DWORD"
+            },
+            "Invert": {
+                "value": 0,
+                "dataType": "REG_DWORD"
+            },
+            "FollowMouse": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "FollowFocus": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "FollowCaret": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "MagnificationModel": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            }
+        }
+    }],
+    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
+    "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
+    "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
+    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
+    "http://registry.gpii.org/common/magnification": [{ "value": 2.0 }],
+    "http://registry.gpii.org/common/tracking": [{ "value": "mouse" }],
+    "http://registry.gpii.org/common/invertImages": [{ "value": true }],
+    "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
+        {
+            "adaptationType": "caption",
+            "language": "en"
+        },
+        {}
+    ]}],
+    "http://registry.gpii.org/common/tableOfContents": [{ "value": false }]
 }

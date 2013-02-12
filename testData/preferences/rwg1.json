@@ -3,6 +3,7 @@
         "value": {
         	"ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
         	"ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
+			"ApplicationSettings.AppBar.DocType.$t": "1", 
         	"ApplicationSettings.AppBar.ShowText.$t": true,
             "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
             "ApplicationSettings.AppBar.LargeIcons.$t": true,
