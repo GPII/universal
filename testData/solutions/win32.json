@@ -39,14 +39,10 @@
         ],
         "lifecycleManager": {
             "start": [ 
+                 "setSettings", 
                 {
                     "type": "gpii.launch.exec",
-                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
-                },
-                "setSettings", 
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
+					"command": "\"C:\\Program Files\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
                 }
             ],
             "stop": [
@@ -147,7 +143,7 @@
             ],
             "stop": [ {
                     "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
+                    "command": "TASKKILL /f /im Magnify.exe"
                 },
                 "restoreSettings"
             ]
