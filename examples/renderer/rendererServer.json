@@ -1,0 +1,56 @@
+{
+    "typeName": "rendererServer",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "static": "%root/node_modules/infusion/src/webapp",
+                    "components": {
+                        "rendererServer": {
+                            "type": "gpii.rendererServer"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "demands": [{
+        "demandingName": "gpii.requests.request.handler",
+        "contextNames": "rendererGet",
+        "demandSpec": {
+            "funcName": "gpii.rendererServer.handler"
+        }
+    }, {
+        "demandingName": "templateSource",
+        "contextNames": "gpii.rendererServer",
+        "demandSpec": {
+            "options": {
+                "components": {
+                    "rawSource": "{rawTemplateSource}"
+                }
+            }
+        }
+    }, {
+        "demandingName": "gpii.urlExpander",
+        "contextNames": "gpii.rendererServer",
+        "demandSpec": {
+            "funcName": "gpii.urlExpander.development"
+        }
+    }, {
+        "demandingName": "rawTemplateSource",
+        "contextNames": "gpii.rendererServer",
+        "demandSpec": {
+            "funcName": "gpii.dataSource.URL"
+        }
+    }, {
+        "demandingName": "gpii.dataSource.modelParser.parse",
+        "contextNames": ["gpii.dataSource.modelParser", "gpii.rendererServer"],
+        "demandSpec": {
+            "funcName": "fluid.identity",
+            "args": "{arguments}.0"
+        }
+    }]
+}
