@@ -1,0 +1,6 @@
+{
+    "http://registry.gpii.org/common/speakTutorialMessages": [{ "value": false }],
+    "http://registry.gpii.org/common/keyEcho": [{ "value": false }],
+    "http://registry.gpii.org/common/wordEcho": [{ "value": true }],
+    "http://registry.gpii.org/common/screenReaderBrailleOutput": [{ "value": true }]
+}
