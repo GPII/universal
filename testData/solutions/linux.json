@@ -288,7 +288,13 @@
                     "display.screenReader",
                     "applications.org\\.gnome\\.orca.id",
                     "display.screenReader.applications.org\\.gnome\\.orca.name"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "enableTutorialMessages": "display.screenReader.-provisional-speakTutorialMessages",
+                    "enableEchoByCharacter": "display.screenReader.-provisional-keyEcho",
+                    "enableEchoByWord": "display.screenReader.-provisional-wordEcho",
+                    "enableBraille": "display.screenReader.-provisional-screenReaderBrailleOutput"
+                }
             }
         ],
         "lifecycleManager": {
