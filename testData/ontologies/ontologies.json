@@ -22,6 +22,7 @@
             "display.screenReader.-provisional-announceCapitals": "{http://registry.gpii.org/common/announceCapitals}.0.value",
             "display.screenReader.-provisional-brailleOutput": "{http://registry.gpii.org/common/screenReaderBrailleOutput}.0.value",
             "display.screenReader.-provisional-punctuationVerbosity": "{http://registry.gpii.org/common/punctuationVerbosity}.0.value",
+            "display.screenReader.-provisional-screenReaderTTSEnabled": "{http://registry.gpii.org/common/screenReaderTTSEnabled}.0.value",
 
             "display.textReadingHighlight.readingUnit": "{http://registry.gpii.org/common/readingUnit}.0.value",
             
