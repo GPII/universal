@@ -235,6 +235,30 @@
                                 }
                             }
                         }
+                    },
+                    "speech": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "options": {
+                                "false": {
+                                    "outputValue": {
+                                        "expander": [
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "silence",
+                                                "outputPath": "synth"
+                                            },
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "Microsoft Sound Mapper",
+                                                "outputPath": "outputDevice"  
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
