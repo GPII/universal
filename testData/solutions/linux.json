@@ -282,7 +282,9 @@
             {
                 "type": "gpii.orca.set",
                 "options": {
-                    "user": "${{userToken}}"
+                    "user": "${{userToken}}",
+                    "allowNumberSignComments": true,
+                    "allowSubSections": true
                 },
                 "capabilities": [
                     "display.screenReader",
@@ -308,7 +310,8 @@
                                 }
                             }
                         }
-                    }
+                    },
+                    "voices\\.default\\.rate": "display.screenReader.speechRate"
                 }
             }
         ],
