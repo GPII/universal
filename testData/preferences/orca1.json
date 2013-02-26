@@ -6,5 +6,7 @@
     "http://registry.gpii.org/common/readingUnit": [{ "value": "line" }],
     "http://registry.gpii.org/common/speechRate": [{ "value": 100 }],
     "http://registry.gpii.org/common/auditoryOutLanguage": [{ "value": "es-419" }],
-    "http://registry.gpii.org/common/punctuationVerbosity": [{ "value": "all" }]
+    "http://registry.gpii.org/common/punctuationVerbosity": [{ "value": "all" }],
+
+    "http://registry.gpii.org/common/magnifierPosition": [{ "value": "LeftHalf" }]
 }
