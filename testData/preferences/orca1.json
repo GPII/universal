@@ -3,5 +3,6 @@
     "http://registry.gpii.org/common/keyEcho": [{ "value": false }],
     "http://registry.gpii.org/common/wordEcho": [{ "value": true }],
     "http://registry.gpii.org/common/screenReaderBrailleOutput": [{ "value": true }],
-    "http://registry.gpii.org/common/readingUnit": [{ "value": "line" }]
+    "http://registry.gpii.org/common/readingUnit": [{ "value": "line" }],
+    "http://registry.gpii.org/common/speechRate": [{ "value": 100 }]
 }

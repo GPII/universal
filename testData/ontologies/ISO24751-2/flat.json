@@ -13,6 +13,7 @@
         "display.screenReader.-provisional-wordEcho": "{http://registry.gpii.org/common/wordEcho}.0.value",
         "display.screenReader.-provisional-speakTutorialMessages": "{http://registry.gpii.org/common/speakTutorialMessages}.0.value",
         "display.screenReader.-provisional-screenReaderBrailleOutput": "{http://registry.gpii.org/common/screenReaderBrailleOutput}.0.value",
+        "display.screenReader.speechRate": "{http://registry.gpii.org/common/speechRate}.0.value",
 
         "display.textReadingHighlight.readingUnit": "{http://registry.gpii.org/common/readingUnit}.0.value",
 
