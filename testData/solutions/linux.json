@@ -311,7 +311,382 @@
                             }
                         }
                     },
-                    "voices\\.default\\.rate": "display.screenReader.speechRate"
+                    "voices\\.default\\.rate": "display.screenReader.speechRate",
+                    "voices\\.default\\.family": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-auditoryOutLanguage",
+                            "defaultInputValue": "en",
+                            "options": {
+                                "en": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "english"
+                                    }
+                                },
+                                "en-GB": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "english"
+                                    }
+                                },
+                                "en-US": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "english-us"
+                                    }
+                                },
+                                "en-scotland": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "en-scottish"
+                                    }
+                                },
+                                "en-BZ": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "en-westindies"
+                                    }
+                                },
+                                "en-BS": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "en-westindies"
+                                    }
+                                },
+                                "en-AG": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "en-westindies"
+                                    }
+                                },
+                                "en-AI": {
+                                    "outputValue": {
+                                        "locale": "en",
+                                        "name": "en-westindies"
+                                    }
+                                },
+                                "af": {
+                                    "outputValue": {
+                                        "locale": "af",
+                                        "name": "afrikaans"
+                                    }
+                                },
+                                "bg": {
+                                    "outputValue": {
+                                        "locale": "bg",
+                                        "name": "bulgarian-test"
+                                    }
+                                },
+                                "bs": {
+                                    "outputValue": {
+                                        "locale": "bs",
+                                        "name": "bosnian"
+                                    }
+                                },
+                                "ca": {
+                                    "outputValue": {
+                                        "locale": "ca",
+                                        "name": "catalan"
+                                    }
+                                },
+                                "cs": {
+                                    "outputValue": {
+                                        "locale": "cs",
+                                        "name": "czech"
+                                    }
+                                },
+                                "cy": {
+                                    "outputValue": {
+                                        "locale": "cy",
+                                        "name": "welsh-test"
+                                    }
+                                },
+                                "da": {
+                                    "outputValue": {
+                                        "locale": "da",
+                                        "name": "danish"
+                                    }
+                                },
+                                "de": {
+                                    "outputValue": {
+                                        "locale": "de",
+                                        "name": "german"
+                                    }
+                                },
+                                "el": {
+                                    "outputValue": {
+                                        "locale": "el",
+                                        "name": "greek"
+                                    }
+                                },
+                                "grc": {
+                                    "outputValue": {
+                                        "locale": "grc",
+                                        "name": "greek-ancient"
+                                    }
+                                },
+                                "eo": {
+                                    "outputValue": {
+                                        "locale": "eo",
+                                        "name": "esperanto"
+                                    }
+                                },
+                                "es": {
+                                    "outputValue": {
+                                        "locale": "es",
+                                        "name": "spanish"
+                                    }
+                                },
+                                "es-419": {
+                                    "outputValue": {
+                                        "locale": "es",
+                                        "name": "spanish-latin-american"
+                                    }
+                                },
+                                "et": {
+                                    "outputValue": {
+                                        "locale": "et",
+                                        "name": "estonian"
+                                    }
+                                },
+                                "fi": {
+                                    "outputValue": {
+                                        "locale": "fi",
+                                        "name": "finnish"
+                                    }
+                                },
+                                "fr": {
+                                    "outputValue": {
+                                        "locale": "fr",
+                                        "name": "french"
+                                    }
+                                },
+                                "fr-BE": {
+                                    "outputValue": {
+                                        "locale": "(Belgium)",
+                                        "name": "french"
+                                    }
+                                },
+                                "hi": {
+                                    "outputValue": {
+                                        "locale": "hi",
+                                        "name": "hindi"
+                                    }
+                                },
+                                "hr": {
+                                    "outputValue": {
+                                        "locale": "hr",
+                                        "name": "croatian"
+                                    }
+                                },
+                                "hu": {
+                                    "outputValue": {
+                                        "locale": "hu",
+                                        "name": "hungarian"
+                                    }
+                                },
+                                "hy": {
+                                    "outputValue": {
+                                        "locale": "hy",
+                                        "name": "armenian"
+                                    }
+                                },
+                                "hy-arevmda": {
+                                    "outputValue": {
+                                        "locale": "hy",
+                                        "name": "armenian-west"
+                                    }
+                                },
+                                "id": {
+                                    "outputValue": {
+                                        "locale": "id",
+                                        "name": "indonesian-test"
+                                    }
+                                },
+                                "is": {
+                                    "outputValue": {
+                                        "locale": "is",
+                                        "name": "icelandic-test"
+                                    }
+                                },
+                                "it": {
+                                    "outputValue": {
+                                        "locale": "it",
+                                        "name": "italian"
+                                    }
+                                },
+                                "jbo": {
+                                    "outputValue": {
+                                        "locale": "jbo",
+                                        "name": "lojban"
+                                    }
+                                },
+                                "ka": {
+                                    "outputValue": {
+                                        "locale": "ka",
+                                        "name": "georgian-test"
+                                    }
+                                },
+                                "kn": {
+                                    "outputValue": {
+                                        "locale": "kn",
+                                        "name": "kannada"
+                                    }
+                                },
+                                "ku": {
+                                    "outputValue": {
+                                        "locale": "ku",
+                                        "name": "kurdish"
+                                    }
+                                },
+                                "la": {
+                                    "outputValue": {
+                                        "locale": "la",
+                                        "name": "latin"
+                                    }
+                                },
+                                "lv": {
+                                    "outputValue": {
+                                        "locale": "lv",
+                                        "name": "latvian"
+                                    }
+                                },
+                                "mk": {
+                                    "outputValue": {
+                                        "locale": "mk",
+                                        "name": "macedonian-test"
+                                    }
+                                },
+                                "ml": {
+                                    "outputValue": {
+                                        "locale": "ml",
+                                        "name": "malayalam"
+                                    }
+                                },
+                                "nl": {
+                                    "outputValue": {
+                                        "locale": "nl",
+                                        "name": "dutch-test"
+                                    }
+                                },
+                                "no": {
+                                    "outputValue": {
+                                        "locale": "no",
+                                        "name": "norwegian"
+                                    }
+                                },
+                                "pap": {
+                                    "outputValue": {
+                                        "locale": "pap",
+                                        "name": "papiamento-test"
+                                    }
+                                },
+                                "pl": {
+                                    "outputValue": {
+                                        "locale": "pl",
+                                        "name": "polish"
+                                    }
+                                },
+                                "pt-BR": {
+                                    "outputValue": {
+                                        "locale": "pt",
+                                        "name": "brazil"
+                                    }
+                                },
+                                "pt-PT": {
+                                    "outputValue": {
+                                        "locale": "pt",
+                                        "name": "portugal"
+                                    }
+                                },
+                                "ro": {
+                                    "outputValue": {
+                                        "locale": "ro",
+                                        "name": "romanian"
+                                    }
+                                },
+                                "ru": {
+                                    "outputValue": {
+                                        "locale": "ru",
+                                        "name": "russian_test"
+                                    }
+                                },
+                                "sk": {
+                                    "outputValue": {
+                                        "locale": "sk",
+                                        "name": "slovak"
+                                    }
+                                },
+                                "sq": {
+                                    "outputValue": {
+                                        "locale": "sq",
+                                        "name": "albanian"
+                                    }
+                                },
+                                "sr": {
+                                    "outputValue": {
+                                        "locale": "sr",
+                                        "name": "serbian"
+                                    }
+                                },
+                                "sv": {
+                                    "outputValue": {
+                                        "locale": "sv",
+                                        "name": "swedish"
+                                    }
+                                },
+                                "sw": {
+                                    "outputValue": {
+                                        "locale": "sw",
+                                        "name": "swahili-test"
+                                    }
+                                },
+                                "ta": {
+                                    "outputValue": {
+                                        "locale": "ta",
+                                        "name": "tamil"
+                                    }
+                                },
+                                "tr": {
+                                    "outputValue": {
+                                        "locale": "tr",
+                                        "name": "turkish"
+                                    }
+                                },
+                                "vi": {
+                                    "outputValue": {
+                                        "locale": "vi",
+                                        "name": "vietnam"
+                                    }
+                                },
+                                "zh-cmn": {
+                                    "outputValue": {
+                                        "locale": "zh",
+                                        "name": "Mandarin"
+                                    }
+                                },
+                                "cmn": {
+                                    "outputValue": {
+                                        "locale": "zh",
+                                        "name": "Mandarin"
+                                    }
+                                },
+                                "zh-yue": {
+                                    "outputValue": {
+                                        "locale": "zh",
+                                        "name": "cantonese"
+                                    }
+                                },
+                                "yue": {
+                                    "outputValue": {
+                                        "locale": "zh",
+                                        "name": "cantonese"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         ],
