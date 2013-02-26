@@ -293,7 +293,22 @@
                     "enableTutorialMessages": "display.screenReader.-provisional-speakTutorialMessages",
                     "enableEchoByCharacter": "display.screenReader.-provisional-keyEcho",
                     "enableEchoByWord": "display.screenReader.-provisional-wordEcho",
-                    "enableBraille": "display.screenReader.-provisional-screenReaderBrailleOutput"
+                    "enableBraille": "display.screenReader.-provisional-screenReaderBrailleOutput",
+                    "sayAllStyle": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.textReadingHighlight.readingUnit",
+                            "defaultInputValue": "sentence",
+                            "options": {
+                                "line": {
+                                    "outputValue": 0
+                                },
+                                "sentence": {
+                                    "outputValue": 1
+                                }
+                            }
+                        }
+                    }
                 }
             }
         ],
