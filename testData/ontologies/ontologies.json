@@ -19,6 +19,7 @@
             "display.screenReader.-provisional-screenReaderBrailleOutput": "{http://registry.gpii.org/common/screenReaderBrailleOutput}.0.value",
             "display.screenReader.speechRate": "{http://registry.gpii.org/common/speechRate}.0.value",
             "display.screenReader.-provisional-auditoryOutLanguage": "{http://registry.gpii.org/common/auditoryOutLanguage}.0.value",
+            "display.screenReader.-provisional-punctuationVerbosity": "{http://registry.gpii.org/common/punctuationVerbosity}.0.value",
 
             "display.textReadingHighlight.readingUnit": "{http://registry.gpii.org/common/readingUnit}.0.value",
 
