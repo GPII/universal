@@ -10,6 +10,11 @@
             "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
             "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
 
+            "display.screenReader.-provisional-keyEcho": "{http://registry.gpii.org/common/keyEcho}.0.value",
+            "display.screenReader.-provisional-wordEcho": "{http://registry.gpii.org/common/wordEcho}.0.value",
+            "display.screenReader.-provisional-speakTutorialMessages": "{http://registry.gpii.org/common/speakTutorialMessages}.0.value",
+            "display.screenReader.-provisional-screenReaderBrailleOutput": "{http://registry.gpii.org/common/screenReaderBrailleOutput}.0.value",
+
             "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
             "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",
             "control.mouseEmulation.cursorSpeed": "{http://registry.gpii.org/common/cursorSpeed}.0.value",
