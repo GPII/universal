@@ -7,7 +7,6 @@
                 "type": "gpii.server",
                 "options": {
                     "logging": true,
-                    "static": "%root/node_modules/infusion/src/webapp",
                     "components": {
                         "rendererServer": {
                             "type": "gpii.rendererServer"
@@ -51,6 +50,12 @@
         "demandSpec": {
             "funcName": "fluid.identity",
             "args": "{arguments}.0"
+        }
+    }, {
+        "demandingName": "static",
+        "contextNames": "gpii.app",
+        "demandSpec": {
+            "funcName": "gpii.middleware.static"
         }
     }]
 }

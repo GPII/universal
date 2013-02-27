@@ -32,6 +32,9 @@ https://github.com/gpii/universal/LICENSE.txt
         templates: {
             rendererGet: "file://%root/renderer/renderer.html"
         },
+        events: {
+            onMiddleware: "{gpii.server}.events.onMiddleware"
+        },
         components: {
             rawTemplateSource: {
                 type: "gpii.dataSource",
@@ -42,9 +45,14 @@ https://github.com/gpii/universal/LICENSE.txt
             },
             templateSource: {
                 type: "gpii.callbackWrappingDataSource"
+            },
+            "static": {
+                type: "gpii.middleware",
+                createOnEvent: "onMiddleware"
             }
         },
-        root: path.join(__dirname, "..")
+        root: path.join(__dirname, ".."),
+        "static": "%root/../node_modules/infusion/src/webapp"
     });
 
     fluid.defaults("gpii.rendererServer.handler", {
