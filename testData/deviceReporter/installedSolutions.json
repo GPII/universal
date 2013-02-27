@@ -73,5 +73,9 @@
     
     {
         "id": "webinsight.webAnywhere.linux"
+    }, 
+        
+    {
+        "id": "net.opendirective.maavis"
     }
 ]
