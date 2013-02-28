@@ -56,7 +56,7 @@ https://github.com/gpii/universal/LICENSE.txt
     });
 
     fluid.defaults("gpii.rendererServer.handler", {
-        gradeNames: ["gpii.requests.request.handler", "gpii.renderer", "autoInit"],
+        gradeNames: ["gpii.requests.request.handler", "gpii.renderer", "gpii.renderer.injector", "autoInit"],
         selectors: {
             "my-paragraph": ".my-paragraph"
         },
