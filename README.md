@@ -33,4 +33,4 @@ open `{universal}/tests/web/html/all-tests.html` in your preferred browser:
 
 Running node tests:
 
-    node tests/all-tets.js
+    node tests/all-tests.js
