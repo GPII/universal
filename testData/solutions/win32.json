@@ -14,7 +14,7 @@
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
             "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"},
-            "capabilities": [ "applications.net\\.opendirective\\.maavis.name" ]
+            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
         }],        
         
         "lifecycleManager": {
@@ -29,8 +29,9 @@
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
-                }
-            ]
+                },
+                "restoreSettings"
+           ]
         }
     },
     
