@@ -1,7 +1,16 @@
 {
     "http://registry.gpii.org/applications/net.opendirective.maavis": [{
         "value": {
-            "theme": "bw"
+            "selectionsSetSize": "3x3",
+            "showImages": "yes",
+            "showLabels": "yes",
+            "theme": "colour",
+            "playStartSound": "no",
+            "speakLabels": "no",
+            "speakTitles": "no",
+            "userType": "scan",
+            "scanMode": "AUTO1SWITCHAUTOSTART",
+            "scanRate": "600"            
         }
     }]
 }

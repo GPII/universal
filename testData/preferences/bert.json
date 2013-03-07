@@ -1,7 +1,14 @@
 {
     "http://registry.gpii.org/applications/net.opendirective.maavis": [{
         "value": {
-            "theme": "bw"
+            "selectionsSetSize": "2x3",
+            "showImages": "yes",
+            "showLabels": "no",
+            "theme": "bw",
+            "playStartSound": "yes",
+            "speakLabels": "yes",
+            "speakTitles": "yes",
+            "userType": "touch"
         }
     }]
 }
