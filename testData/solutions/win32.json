@@ -272,17 +272,25 @@
                             }
                         }
                     },
-<<<<<<< HEAD
+                    "reviewCursor": {
+                        "expander": {
+                            "type": "fluid.model.transform.arrayToOutputs",
+                            "inputPath": "display.screenEnhancement.tracking",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "foo": "followFocus", 
+                                "bar": "followCaret",
+                                "tar": "followMouse"
+                            }
+                        }
+                    },
                     "speech": {
-=======
-                    "speech\\.synth": {
->>>>>>> GPII-85
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
                             "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
                             "options": {
                                 "false": {
-<<<<<<< HEAD
                                     "outputValue": {
                                         "expander": [
                                             {
@@ -297,11 +305,6 @@
                                             }
                                         ]
                                     }
-                                }
-                            }
-                        }
-=======
-                                    "outputValue": "silent"
                                 }
                             }
                         }
@@ -438,7 +441,7 @@
                                     "outputValue": "ml"
                                 },
                                 "nci": {
-                                    "outputValue": "test\nci"
+                                    "outputValue": "test\\nci"
                                 },
                                 "nl": {
                                     "outputValue": "nl"
@@ -502,7 +505,6 @@
                                 }
                             }    
                         }
->>>>>>> GPII-85
                     }
                 }
             }
