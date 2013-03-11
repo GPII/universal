@@ -375,5 +375,139 @@
                 "restoreSettings"
             ]
         }
+    },
+    
+    {
+        "name": "Windows Non-client Metrics",
+        "id": "com.microsoft.windows.nonClientMetrics",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.spiSettingsHandler.set",
+                "options": {
+                    "getAction": "SPI_GETNONCLIENTMETRICS",
+                    "setAction": "SPI_SETNONCLIENTMETRICS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "NONCLIENTMETRICS"
+                    }
+                },
+                "capabilities": [
+                    "display.screenEnhancement.nonClientMetrics"
+                ],
+                "capabilitiesTransformations": {
+                    "CaptionFontItalic": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.captionFontItalic",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfCaptionFont.lfItalic"
+                            }
+                        }
+                    },
+                    "SmallCaptionFontUnderline": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.smallCaptionFontUnderline",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfSmCaptionFont.lfUnderline"
+                            }
+                        }
+                    },
+                    "FontSize": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.FontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfCaptionFont.lfHeight"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
+    },
+    
+    {
+        "name": "Windows Mouse Tracking",
+        "id": "com.microsoft.windows.mouseTracking",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.spiSettingsHandler.set",
+                "options": {
+                    "getAction": "SPI_GETMOUSETRAILS",
+                    "setAction": "SPI_SETMOUSETRAILS",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    }
+                },
+                "capabilities": [
+                    "display.screenEnhancement.Tracking"
+                ],
+                "capabilitiesTransformations": {
+                    "MouseTrails": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.Tracking",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
     }
 ]
