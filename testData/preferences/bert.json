@@ -1,7 +1,7 @@
 {
     "http://registry.gpii.org/applications/net.opendirective.maavis": [{
         "value": {
-            "theme": "bw
+            "theme": "bw",
             "playStartSound":"yes",
             "speakOnActivate":"yes",
             "speakTitles":"yes",
