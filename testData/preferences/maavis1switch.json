@@ -1,8 +1,0 @@
-{
-    "http://registry.gpii.org/applications/net.opendirective.maavis": [{
-        "value": {
-            "userType":"scan",
-            "scanMode":"AUTO1SWITCH"
-		}
-	}]
-}
