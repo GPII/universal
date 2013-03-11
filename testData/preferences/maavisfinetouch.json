@@ -1,0 +1,18 @@
+{
+    "display": {
+		"screenEnhancement": {
+			"applications": {
+				"net.opendirective.maavis": {
+					"name": "maavis",
+					"priority": 100,
+					"parameters": {
+					    "userType":"touch",
+                                            "selectionsSetSize":"3x3",
+                                            "showImages":"yes",
+                                            "showLabels":"no"
+					}
+				}
+			}	
+		}
+	}
+}
