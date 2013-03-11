@@ -323,7 +323,7 @@
             ]
         }
     },
-
+    
     {
         "name": "maavis",
         "id": "net.opendirective.maavis",
@@ -342,7 +342,7 @@
 	            "path": "${{environment}.MAAVIS_HOME}\\media\\Users\\Default\\userconfig.json"
 	        },
                 "capabilities": [
-                    "display.screenEnhancement.applications.net\\.opendirective\\.maavis.name"
+                    "display.screenEnhancement.applications.net\\.opendirective\\.maavis.id"
                 ]
            }
         ],
@@ -351,7 +351,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && DevMaavisPortable.cmd\""
+                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
                 } 
             ],
             "stop": [ 
