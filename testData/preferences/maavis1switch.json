@@ -1,16 +1,8 @@
 {
-    "display": {
-		"screenEnhancement": {
-			"applications": {
-				"net.opendirective.maavis": {
-					"name": "maavis",
-					"priority": 100,
-					"parameters": {
-                                            "userType":"scan",
-					    "scanMode":"AUTO1SWITCH"
-					}
-				}
-			}	
+    "http://registry.gpii.org/applications/net.opendirective.maavis": [{
+        "value": {
+            "userType":"scan",
+            "scanMode":"AUTO1SWITCH"
 		}
-	}
+	}]
 }
