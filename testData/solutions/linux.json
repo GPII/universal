@@ -312,9 +312,7 @@
             {
                 "type": "gpii.orca.set",
                 "options": {
-                    "user": "${{userToken}}",
-                    "allowNumberSignComments": true,
-                    "allowSubSections": true
+                    "user": "${{userToken}}"
                 },
                 "capabilities": [
                     "display.screenReader",
