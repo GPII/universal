@@ -11,7 +11,9 @@
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "when": "~1.8.1",
-        "xml-mapping": "~1.2.0"
+        "xml-mapping": "~1.2.0",
+        "ini": "git://github.com/kaspermarkus/ini.git#ec778a5fe565e64531eaf7a713fbc0f5d8a9e22a"
+
     },
     "devDependencies": {
         "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e9bf72445bd343a4f3aabe3ba96a1087d3498612"
