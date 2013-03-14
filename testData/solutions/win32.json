@@ -25,16 +25,7 @@
                 "capabilities": [
                     "languageAssistance",
                      "applications.com\\.texthelp\\.readWriteGold.id"
-                ],
-                "capabilitiesTransformations": {
-                    "ApplicationSettings\\.AppBar\\.Width": "ApplicationSettings\\.AppBar\\.Width",
-                    "ApplicationSettings\\.AppBar\\.ShowText": "ApplicationSettings\\.AppBar\\.ShowText",
-                    "ApplicationSettings\\.AppBar\\.optToolbarShowText": "ApplicationSettings\\.AppBar\\.optToolbarShowText",
-                    "ApplicationSettings\\.AppBar\\.LargeIcons": "ApplicationSettings\\.AppBar\\.LargeIcons",
-                    "ApplicationSettings\\.AppBar\\.optToolbarLargeIcons": "ApplicationSettings\\.AppBar\\.optToolbarLargeIcons",
-                    "ApplicationSettings\\.Speech\\.optSAPI5Speed": "ApplicationSettings\\.Speech\\.optSAPI5Speed",
-                    "ApplicationSettings\\.Speech\\.optAutoUseScreenReading": "ApplicationSettings\\.Speech\\.optAutoUseScreenReading"
-                }
+                ]
             }
         ],
         "lifecycleManager": {
@@ -143,7 +134,7 @@
             ],
             "stop": [ {
                     "type": "gpii.launch.exec",
-                    "command": "TASKKILL /f /im Magnify.exe"
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
                 },
                 "restoreSettings"
             ]
