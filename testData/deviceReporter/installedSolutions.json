@@ -85,5 +85,9 @@
     
     {
         "id": "com.microsoft.windows.mouseTracking"
+    },
+    
+    {
+        "id": "com.microsoft.windows.cursors"
     }
 ]

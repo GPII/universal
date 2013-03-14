@@ -14,6 +14,7 @@
             "display.screenEnhancement.smallCaptionFontUnderline": "{http://registry.gpii.org/common/smallCaptionFontUnderline}.0.value",
             "display.screenEnhancement.FontSize": "{http://registry.gpii.org/common/FontSize}.0.value",
             "display.screenEnhancement.Tracking": "{http://registry.gpii.org/common/Tracking}.0.value",
+            "display.screenEnhancement.CursorSize": "{http://registry.gpii.org/common/CursorSize}.0.value",
 
             "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
             "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",

@@ -509,5 +509,106 @@
                 "restoreSettings"
             ]
         }
+    },
+    
+    {
+        "name": "Windows Cursors",
+        "id": "com.microsoft.windows.cursors",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Cursors"
+                },
+                "capabilities": [
+                    "display.screenEnhancement.CursorSize"
+                ],
+                "capabilitiesTransformations": {
+                    "Arrow": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_arrow.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "Hand": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_link.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_link_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_link_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                "setSettings", 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "node C:\\Users\\Astea\\repos\\tsakov\\windows\\gpii\\node_modules\\setcursors.js"
+                }
+            ],
+            "stop": [
+                "restoreSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "node C:\\Users\\Astea\\repos\\tsakov\\windows\\gpii\\node_modules\\setcursors.js"
+                }
+            ]
+        }
     }
 ]
