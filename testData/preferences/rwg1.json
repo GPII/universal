@@ -8,13 +8,17 @@
             "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
             "ApplicationSettings.AppBar.LargeIcons.$t": true,
             "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-        	"ApplicationSettings.Speech.optSAPI5Pitc.$t": 30,
-        	"ApplicationSettings.Speech.optSAPI5Speed.$t": 30,
-        	"ApplicationSettings.Speech.optSAPI5Volume.$t": 50,
-        	"ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 214,
-        	"ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Emily",
+        	"ApplicationSettings.Speech.optSAPI5Pitch.$t": 36,
+        	"ApplicationSettings.Speech.optSAPI5Speed.$t": 38,
+        	"ApplicationSettings.Speech.optSAPI5Volume.$t": 72,
+        	"ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
+        	"ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
+			"ApplicationSettings.Speech.WebHighlighting.$t": false,
+			"ApplicationSettings.Translation.ToLanguage.$t": "fr",
+			"ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
         	"ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
-    		"ApplicationSettings.Scanning.ScanToFile.$t": false
+    		"ApplicationSettings.Scanning.ScanToFile.$t": false,
+			"ApplicationSettings.Spelling.SpellAsIType.$t": true
     	}
     }]
 }
