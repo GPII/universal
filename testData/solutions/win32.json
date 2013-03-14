@@ -991,14 +991,14 @@
                 "setSettings", 
                 {
                     "type": "gpii.launch.exec",
-                    "command": "node C:\\Users\\Astea\\repos\\tsakov\\windows\\gpii\\node_modules\\setcursors.js"
+                    "command": "node gpii\\node_modules\\setcursors.js"
                 }
             ],
             "stop": [
                 "restoreSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "node C:\\Users\\Astea\\repos\\tsakov\\windows\\gpii\\node_modules\\setcursors.js"
+                    "command": "node gpii\\node_modules\\setcursors.js"
                 }
             ]
         }
