@@ -10,8 +10,6 @@
             "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
             "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
             "display.screenEnhancement.highContrast": "{http://registry.gpii.org/common/highContrast}.0.value",
-            "display.screenEnhancement.captionFontItalic": "{http://registry.gpii.org/common/captionFontItalic}.0.value",
-            "display.screenEnhancement.smallCaptionFontUnderline": "{http://registry.gpii.org/common/smallCaptionFontUnderline}.0.value",
             "display.screenEnhancement.FontSize": "{http://registry.gpii.org/common/FontSize}.0.value",
             "display.screenEnhancement.Tracking": "{http://registry.gpii.org/common/Tracking}.0.value",
             "display.screenEnhancement.CursorSize": "{http://registry.gpii.org/common/CursorSize}.0.value",
