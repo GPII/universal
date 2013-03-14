@@ -663,6 +663,325 @@
                                 "value": "REG_SZ"
                             }
                         }
+                    },
+                    "Help": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "AppStarting": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_working.ani"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_working_l.ani"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "No": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_unavail.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "NWPen": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_pen.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_pen_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeAll": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_move.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_move_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_move_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeNESW": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nesw.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeNS": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ns.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ns_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeNWSE": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nwse.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeWE": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ew.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ew_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "UpArrow": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_up.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_up_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_up_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "Wait": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_busy.ani"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_busy_l.ani"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
                     }
                 }
             }
