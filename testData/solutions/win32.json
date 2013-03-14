@@ -36,42 +36,6 @@
                             }
                         }
                     },
-                    "MagnificationMode": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.-provisional-magnifierPosition",
-                            "outputPath": "value",
-                            "options": {
-                                "FullScreen": {
-                                	"outputValue": 2
-                                },
-                                "Lens": {
-                                	"outputValue": 3
-                                },
-                                "LeftHalf": {
-                                	"outputValue": 1
-                                },
-                                "RightHalf": {
-                                	"outputValue": 1
-                                },
-                                "TopHalf": {
-                                	"outputValue": 1
-                                },
-                                "BottomHalf": {
-                                	"outputValue": 1
-                                },
-                                "Custom": {
-                                    "outputValue": 2
-                                }
-                            }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_DWORD"
-                            }
-                        }
-                    },
                     "Invert": {
                         "expander": {
                             "type": "fluid.model.transform.value",
@@ -269,19 +233,6 @@
                                 "all": {
                                     "outputValue": "300"
                                 }
-                            }
-                        }
-                    },
-                    "reviewCursor": {
-                        "expander": {
-                            "type": "fluid.model.transform.arrayToOutputs",
-                            "inputPath": "display.screenEnhancement.tracking",
-                            "presentValue": true,
-                            "missingValue": false,
-                            "options": {
-                                "foo": "followFocus", 
-                                "bar": "followCaret",
-                                "tar": "followMouse"
                             }
                         }
                     },
