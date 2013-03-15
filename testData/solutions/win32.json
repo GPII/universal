@@ -189,6 +189,61 @@
                             }
                         }
                     },
+                    "expander": [{
+                        "type": "fluid.model.transform.arrayToOutputs",
+                        "inputPath": "display.screenEnhancement.tracking",
+                        "presentValue": true,
+                        "missingValue": false,
+                        "options": {
+                            "focus": "reviewCursor\\.followFocus", 
+                            "caret": "reviewCursor\\.followCaret",
+                            "mouse": "reviewCursor\\.followMouse"
+                        }
+                    }],
+                    "speech\\.espeak\\.rate": {
+                        "expander": {
+                            "type": "fluid.model.transform.binaryOp",
+                            "right": 3.10,
+                            "operator": "/",
+                            "left": {
+                                "expander": {
+                                    "type": "fluid.model.transform.binaryOp",
+                                    "right": 80,
+                                    "operator": "-",
+                                    "left": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.condition",
+                                            "truePath": "display.screenReader.speechRate",
+                                            "false": {
+                                                "expander": {
+                                                    "type": "fluid.model.transform.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "/",
+                                                    "right": 3                                                
+                                                }
+                                            },
+                                            "condition": {
+                                                "expander": {
+                                                    "type": "fluid.model.transform.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "<=",
+                                                    "right": 390
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.espeak\\.rateBoost": {
+                        "expander": {
+                            "type": "fluid.model.transform.binaryOp",
+                            "leftPath": "display.screenReader.speechRate",
+                            "operator": ">",
+                            "right": 390
+                        }
+                    },
                     "speech\\.symbolLevel": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
