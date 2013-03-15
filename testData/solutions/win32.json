@@ -24,8 +24,8 @@
                 "capabilitiesTransformations": {
                     "Magnification": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.magnification",
+                            "type": "fluid.model.transform.scaleValue",
+                            "valuePath": "display.screenEnhancement.magnification",
                             "outputPath": "value",
                             "factor": 100
                         },

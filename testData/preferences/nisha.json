@@ -38,7 +38,7 @@
             "slowkeys-enable": true,
             "togglekeys-enable": true
         }
-    }],    
+    }], 
     "http://registry.gpii.org/common/fontSize": [{ "value": 12 }],
     "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
     "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
