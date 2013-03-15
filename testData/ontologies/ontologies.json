@@ -13,6 +13,7 @@
             "display.screenEnhancement.mouseTrailing": "{http://registry.gpii.org/common/mouseTrailing}.0.value",
             "display.screenEnhancement.cursorSize": "{http://registry.gpii.org/common/cursorSize}.0.value",
             "display.screenEnhancement.-provisional-magnifierPosition": "{http://registry.gpii.org/common/magnifierPosition}.0.value",
+            "display.screenEnhancement.cursorSize": "{http://registry.gpii.org/common/cursorSize}.0.value",
             "display.screenReader.-provisional-keyEcho": "{http://registry.gpii.org/common/keyEcho}.0.value",
             "display.screenReader.-provisional-wordEcho": "{http://registry.gpii.org/common/wordEcho}.0.value",
             "display.screenReader.-provisional-speakTutorialMessages": "{http://registry.gpii.org/common/speakTutorialMessages}.0.value",
