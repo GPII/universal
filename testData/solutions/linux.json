@@ -151,7 +151,8 @@
                             "inputPath": "display.screenEnhancement.fontSize",
                             "baseFontSize": 12
                         }
-                    }
+                    },
+                    "cursor-size": "display.screenEnhancement.cursorSize"
                 },
                 "options": {
                     "schema": "org.gnome.desktop.interface"
