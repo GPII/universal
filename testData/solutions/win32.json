@@ -24,8 +24,8 @@
                 "capabilitiesTransformations": {
                     "Magnification": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.magnification",
+                            "type": "fluid.model.transform.scaleValue",
+                            "valuePath": "display.screenEnhancement.magnification",
                             "outputPath": "value",
                             "factor": 100
                         },
@@ -46,33 +46,6 @@
                             "expander": {
                                 "type": "fluid.model.transform.literalValue",
                                 "value": "REG_DWORD"
-                            }
-                        }
-                    },
-                    "expander": {
-                        "type": "fluid.model.transform.valueMapper",
-                        "inputPath": "display.screenEnhancement.tracking",
-                        "options": {
-                            "mouse": {
-                                "outputPath": "FollowMouse",
-                                "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
-                                }
-                            },
-                            "caret": {
-                                "outputPath": "FollowCaret",
-                                "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
-                                }
-                            },
-                            "focus": {
-                                "outputPath": "FollowFocus",
-                                "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
-                                }
                             }
                         }
                     }
