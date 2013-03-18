@@ -10,9 +10,8 @@
             "display.screenEnhancement.tracking": "{http://registry.gpii.org/common/tracking}.0.value",
             "display.screenEnhancement.invertImages": "{http://registry.gpii.org/common/invertImages}.0.value",
             "display.screenEnhancement.highContrast": "{http://registry.gpii.org/common/highContrast}.0.value",
-            "display.screenEnhancement.FontSize": "{http://registry.gpii.org/common/FontSize}.0.value",
-            "display.screenEnhancement.Tracking": "{http://registry.gpii.org/common/Tracking}.0.value",
-            "display.screenEnhancement.CursorSize": "{http://registry.gpii.org/common/CursorSize}.0.value",
+            "display.screenEnhancement.mouseTrailing": "{http://registry.gpii.org/common/mouseTrailing}.0.value",
+            "display.screenEnhancement.cursorSize": "{http://registry.gpii.org/common/cursorSize}.0.value",
 
             "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
             "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",

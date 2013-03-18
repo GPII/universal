@@ -407,7 +407,7 @@
                     "CaptionFontHeight": {
                         "expander": {
                             "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
+                            "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -421,7 +421,6 @@
                     "CaptionHeight": {
                         "expander": {
                             "type": "fluid.model.transform.literalValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
                             "outputPath": "value",
                             "value": 0
                         },
@@ -435,7 +434,7 @@
                     "MenuFontHeight": {
                         "expander": {
                             "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
+                            "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -449,7 +448,6 @@
                     "MenuHeight": {
                         "expander": {
                             "type": "fluid.model.transform.literalValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
                             "outputPath": "value",
                             "value": 0
                         },
@@ -463,7 +461,7 @@
                     "SmallCaptionFontHeight": {
                         "expander": {
                             "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
+                            "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -477,7 +475,6 @@
                     "SmallCaptionHeight": {
                         "expander": {
                             "type": "fluid.model.transform.literalValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
                             "outputPath": "value",
                             "value": 0
                         },
@@ -491,7 +488,7 @@
                     "StatusFontHeight": {
                         "expander": {
                             "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
+                            "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -505,7 +502,7 @@
                     "MessageFontHeight": {
                         "expander": {
                             "type": "gpii.transformer.scaleValue",
-                            "inputPath": "display.screenEnhancement.FontSize",
+                            "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -552,13 +549,13 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.Tracking"
+                    "display.screenEnhancement.mouseTrailing"
                 ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
                         "expander": {
                             "type": "fluid.model.transform.value",
-                            "inputPath": "display.screenEnhancement.Tracking",
+                            "inputPath": "display.screenEnhancement.mouseTrailing",
                             "outputPath": "value"
                         },
                         "path": {
@@ -603,13 +600,13 @@
                     "path": "Control Panel\\Cursors"
                 },
                 "capabilities": [
-                    "display.screenEnhancement.CursorSize"
+                    "display.screenEnhancement.cursorSize"
                 ],
                 "capabilitiesTransformations": {
                     "Arrow": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -638,7 +635,7 @@
                     "Hand": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -667,7 +664,7 @@
                     "Help": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -696,7 +693,7 @@
                     "AppStarting": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -725,7 +722,7 @@
                     "No": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -754,7 +751,7 @@
                     "NWPen": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -783,7 +780,7 @@
                     "SizeAll": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -812,7 +809,7 @@
                     "SizeNESW": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -841,7 +838,7 @@
                     "SizeNS": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -870,7 +867,7 @@
                     "SizeNWSE": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -899,7 +896,7 @@
                     "SizeWE": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -928,7 +925,7 @@
                     "UpArrow": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
@@ -957,7 +954,7 @@
                     "Wait": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.CursorSize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
                             "options": {
                                 "normal": {
                                     "outputValue": {
