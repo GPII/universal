@@ -19,5 +19,13 @@
         "../node_modules/ontologyServer/configs/development.json",
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
-    ]
+    ],
+    "demands": [{
+        "demandingName": "gpii.matchMaker.match",
+        "contextNames": ["gpii.matchMaker", "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development"],
+        "demandSpec": {
+            "funcName": "gpii.ruleBasedMatchMaker.match",
+            "args": ["{arguments}.0", "{arguments}.1", "{arguments}.2"]
+        }
+    }]
 }
