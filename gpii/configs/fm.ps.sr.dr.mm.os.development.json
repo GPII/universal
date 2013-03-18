@@ -25,7 +25,7 @@
         "contextNames": ["gpii.matchMaker", "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development"],
         "demandSpec": {
             "funcName": "gpii.ruleBasedMatchMaker.match",
-            "args": ["{arguments}.0", "{arguments}.1", "{request}.req.body", "{arguments}.2"]
+            "args": ["{callbackWrapper}", "{arguments}.0", "{arguments}.1", "{request}.req.body", "{arguments}.2"]
         }
     }]
 }
