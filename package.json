@@ -7,7 +7,7 @@
     "homepage": "http://gpii.net/",
     "dependencies": {
         "express": "~3.1.0",
-        "infusion": "git://github.com/kaspermarkus/infusion.git#f9b65221688a202ed175b58fab8dd75549ba90ba",
+        "infusion": "git://github.com/kaspermarkus/infusion.git#7914f25c08732543496847dc5ef7afd0b44afe55",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "when": "~1.8.1",
