@@ -7,7 +7,7 @@
     "homepage": "http://gpii.net/",
     "dependencies": {
         "express": "~3.1.0",
-        "infusion": "git://github.com/fluid-project/infusion.git#08f3b382d9d556c5c8d21b2f16e65851ed8a1c62",
+        "infusion": "git://github.com/kaspermarkus/infusion.git#7914f25c08732543496847dc5ef7afd0b44afe55",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "when": "~1.8.1",
