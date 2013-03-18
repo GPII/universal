@@ -32,18 +32,6 @@
     },
     
     {
-        "id": "nvda.screenReader"
-    },
-    
-    {
-        "id": "fluid.uiOptions.windows"
-    },
-    
-    {
-        "id": "fluid.uiOptions.linux"
-    },
-    
-    {
         "id": "org.gnome.desktop.interface"
     },
     

@@ -751,7 +751,7 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.nonClientMetrics"
+                    "display.screenEnhancement.fontSize"
                 ],
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
@@ -931,8 +931,8 @@
             "stop": [
                 "restoreSettings"
             ]
-        }
-    },
+        
+}    },
     
     {
         "name": "Windows Cursors",
