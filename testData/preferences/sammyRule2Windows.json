@@ -1,0 +1,56 @@
+{
+    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
+    "http://registry.gpii.org/common/foregroundColor": [{"value": "white"}],
+    "http://registry.gpii.org/common/backgroundColor": [{"value": "black"}],
+    "http://registry.gpii.org/common/fontFaceFontName": [{"value": ["Comic Sans"]}],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{"value": "sans serif"}],
+    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
+    "http://registry.gpii.org/common/tracking": [{"value": "mouse"}],
+    "http://registry.gpii.org/common/invertImages": [{"value": true}],
+	
+	
+	
+	"http://registry.gpii.org/applications/com.microsoft.windows.highContrast":  [{
+		"value": {
+			"highContrastOn": 
+			{
+				"value": 1, 
+				"path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+			}
+		}
+	}],
+	"http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{ 
+		"value": {
+			"Magnification": {
+				"value": 200,
+				"dataType": "REG_DWORD"
+			},
+			"ZoomIncrement": {
+				"value": 50,
+				"dataType": "REG_DWORD"
+			},
+			"Invert": {
+				"value": 0,
+				"dataType": "REG_DWORD"
+			},
+			"FollowMouse": {
+				"value": 1,
+				"dataType": "REG_DWORD"
+			},
+			"FollowFocus": {
+				"value": 1,
+				"dataType": "REG_DWORD"
+			},
+			"FollowCaret": {
+				"value": 1,
+				"dataType": "REG_DWORD"
+			},
+			"MagnificationMode": {
+				"value": 2,
+				"dataType": "REG_DWORD"
+			}
+		}
+	}]
+
+
+}
