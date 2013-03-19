@@ -325,6 +325,7 @@
                     "enableEchoByCharacter": "display.screenReader.-provisional-keyEcho",
                     "enableEchoByWord": "display.screenReader.-provisional-wordEcho",
                     "enableBraille": "display.screenReader.-provisional-screenReaderBrailleOutput",
+                    "enableSpeech": "display.screenReader.-provisional-screenReaderTTSEnabled",
                     "sayAllStyle": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
