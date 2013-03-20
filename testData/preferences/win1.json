@@ -4,5 +4,6 @@
     "http://registry.gpii.org/common/tracking": [{ "value": [ "mouse", "caret" ] }],
     "http://registry.gpii.org/common/invertImages": [{ "value": true }],
     "http://registry.gpii.org/common/cursorSize": [{ "value": 0.9 }],
-    "http://registry.gpii.org/common/fontSize": [{ "value": 18 }]
+    "http://registry.gpii.org/common/fontSize": [{ "value": 18 }],
+    "http://registry.gpii.org/common/mouseTrailing": [{ "value": 10 }]
 }

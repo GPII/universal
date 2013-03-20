@@ -757,7 +757,7 @@
                     "CaptionFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -785,7 +785,7 @@
                     "MenuFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -813,7 +813,7 @@
                     "SmallCaptionFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -841,7 +841,7 @@
                     "StatusFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -855,7 +855,7 @@
                     "MessageFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
