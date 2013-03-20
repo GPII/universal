@@ -244,7 +244,7 @@
                     },
                     "expander": [{
                         "type": "fluid.model.transform.arrayToOutputs",
-                        "inputPath": "display.screenEnhancement.tracking",
+                        "inputPath": "display.screenEnhancement.trackingTTS",
                         "presentValue": true,
                         "missingValue": false,
                         "options": {
