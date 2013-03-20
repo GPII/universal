@@ -698,7 +698,8 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.highContrast"
+                    "display.screenEnhancement.highContrast",
+                    "applications.com\\.microsoft\\.windows\\.highContrast.id"
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
@@ -751,7 +752,8 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.fontSize"
+                    "display.screenEnhancement.fontSize",
+                    "applications.com\\.microsoft\\.windows\\.nonClientMetrics.id"
                 ],
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
@@ -902,7 +904,8 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.mouseTrailing"
+                    "display.screenEnhancement.mouseTrailing",
+                    "applications.com\\.microsoft\\.windows\\.mouseTrailing.id"
                 ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
@@ -953,7 +956,8 @@
                     "path": "Control Panel\\Cursors"
                 },
                 "capabilities": [
-                    "display.screenEnhancement.cursorSize"
+                    "display.screenEnhancement.cursorSize",
+                    "applications.com\\.microsoft\\.windows\\.cursors.id"
                 ],
                 "capabilitiesTransformations": {
                     "expander": [ 
