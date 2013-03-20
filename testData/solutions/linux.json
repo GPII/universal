@@ -341,7 +341,42 @@
                             }
                         }
                     },
-                    "voices\\.default\\.rate": "display.screenReader.speechRate",
+                    "voices\\.default\\.rate": {
+                        "expander": {
+                            "type": "fluid.model.transform.binaryOp",
+                            "right": 50,
+                            "operator": "+",
+                            "left": {
+                                "expander": {
+                                    "type": "fluid.model.transform.binaryOp",
+                                    "operator": "/",
+                                    "left": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.binaryOp",
+                                            "leftPath": "display.screenReader.speechRate",
+                                            "operator": "-",
+                                            "right": 170
+                                        }
+                                    },
+                                    "right": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.condition",
+                                            "condition": {
+                                                "expander" : {
+                                                    "type": "fluid.model.transform.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "<",
+                                                    "right": 170
+                                                }
+                                            },
+                                            "true": 1.8,
+                                            "false": 4.4
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "voices\\.default\\.family": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
