@@ -81,5 +81,13 @@
 
     {
         "id": "nvda.screenReader"
-    }
+    },
+
+    {
+        "id": "net.opendirective.maavis"
+    },
+
+    {
+        "id": "com.texthelp.readWriteGold"
+    } 
 ]

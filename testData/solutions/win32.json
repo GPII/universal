@@ -1385,5 +1385,86 @@
                 }
             ]
         }
+    },
+    {
+        "name": "maavis",
+        "id": "net.opendirective.maavis",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        
+        "settingsHandlers": [{
+            "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
+            "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"},
+            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+        }],        
+        
+         "lifecycleManager": {
+            "start": [ 
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                } 
+            ],
+            "stop": [ 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+    {
+        "name": "Read Write Gold",
+        "id": "com.texthelp.readWriteGold",
+        "version": "10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+                    "rules": {
+                        "ApplicationSettings": "ApplicationSettings"
+                    }
+                },
+                "capabilities": [
+                    "languageAssistance",
+                     "applications.com\\.texthelp\\.readWriteGold.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                 "setSettings", 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"C:\\Program Files\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "restoreSettings"
+            ]
+        }
     }
 ]
