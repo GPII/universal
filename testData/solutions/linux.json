@@ -388,8 +388,8 @@
                                         "expander" : {
                                             "type": "fluid.model.transform.literalValue",
                                             "value": {
-                                              "locale": "en",
-                                              "name": "english"
+                                                "locale": "en",
+                                                "name": "english"
                                             }
                                         }
                                     }
