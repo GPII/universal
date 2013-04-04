@@ -32,18 +32,6 @@
     },
     
     {
-        "id": "nvda.screenReader"
-    },
-    
-    {
-        "id": "fluid.uiOptions.windows"
-    },
-    
-    {
-        "id": "fluid.uiOptions.linux"
-    },
-    
-    {
         "id": "org.gnome.desktop.interface"
     },
     
@@ -73,5 +61,25 @@
     
     {
         "id": "webinsight.webAnywhere.linux"
+    },
+    
+    {
+        "id": "com.microsoft.windows.highContrast"
+    },
+        
+    {
+        "id": "com.microsoft.windows.nonClientMetrics"
+    },
+    
+    {
+        "id": "com.microsoft.windows.mouseTrailing"
+    },
+    
+    {
+        "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "nvda.screenReader"
     }
 ]
