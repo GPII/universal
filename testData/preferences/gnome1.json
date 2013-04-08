@@ -1,0 +1,6 @@
+{
+    "http://registry.gpii.org/common/magnifierPosition": [{ "value": "LeftHalf" }],
+    "http://registry.gpii.org/common/magnification": [{ "value": 2.0 }],
+    "http://registry.gpii.org/common/cursorSize": [{ "value": 54 }],
+    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }]
+}
