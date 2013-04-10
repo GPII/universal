@@ -89,5 +89,9 @@
 
     {
         "id": "com.texthelp.readWriteGold"
-    } 
+    },
+
+    {
+        "id": "webinsight.webAnywhere.linux"
+    }
 ]
