@@ -152,7 +152,49 @@
                             "baseFontSize": 12
                         }
                     },
-                    "cursor-size": "display.screenEnhancement.cursorSize"
+                    "cursor-size": {
+                        "expander": {
+                            "type": "fluid.model.transform.condition",
+                            "condition": {
+                                "expander": {
+                                    "type": "fluid.model.transform.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": ">",
+                                    "right": 0.666
+                                }
+                            },
+                            "true": 41,
+                            "false": {
+                                "expander": {
+                                    "type": "fluid.model.transform.condition",
+                                    "condition": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": ">",
+                                            "right": 0.333
+                                        }
+                                    },
+                                    "true": 29,
+                                    "false": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.condition",
+                                            "condition": {
+                                                "expander": {
+                                                    "type": "fluid.model.transform.binaryOp",
+                                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                                    "operator": ">",
+                                                    "right": 0
+                                                }
+                                            },
+                                            "true": 20,
+                                            "false": -1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
                 "options": {
                     "schema": "org.gnome.desktop.interface"
