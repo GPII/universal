@@ -18,17 +18,6 @@
             }
         }
     }],
-    "http://registry.gpii.org/applications/com.microsoft.windows.mouseTrailing": [{
-        "value": {
-            "MouseTrails": {
-                "path": {
-                    "get": "pvParam",
-                    "set": "uiParam"
-                },
-                "value": 10
-            }
-        }
-    }],
     "http://registry.gpii.org/applications/com.microsoft.windows.cursors": [{
         "value": {
             "No": {

@@ -242,17 +242,41 @@
                             }
                         }
                     },
-                    "expander": [{
-                        "type": "fluid.model.transform.arrayToOutputs",
-                        "inputPath": "display.screenEnhancement.trackingTTS",
-                        "presentValue": true,
-                        "missingValue": false,
-                        "options": {
-                            "focus": "reviewCursor\\.followFocus", 
-                            "caret": "reviewCursor\\.followCaret",
-                            "mouse": "reviewCursor\\.followMouse"
+                    "expander": [
+                        {
+                            "type": "fluid.model.transform.arrayToOutputs",
+                            "inputPath": "display.screenEnhancement.trackingTTS",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "focus": "reviewCursor\\.followFocus", 
+                                "caret": "reviewCursor\\.followCaret",
+                                "mouse": "reviewCursor\\.followMouse"
+                            }
+                        }, 
+                        {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "options": {
+                                "false": {
+                                    "outputValue": {
+                                        "expander": [
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "silence",
+                                                "outputPath": "speech\\.synth"
+                                            },
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "Microsoft Sound Mapper",
+                                                "outputPath": "speech\\.outputDevice"  
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
                         }
-                    }],
+                    ],
                     "speech\\.espeak\\.rate": {
                         "expander": {
                             "type": "fluid.model.transform.binaryOp",
@@ -313,30 +337,6 @@
                                 },
                                 "all": {
                                     "outputValue": "300"
-                                }
-                            }
-                        }
-                    },
-                    "speech": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
-                            "options": {
-                                "false": {
-                                    "outputValue": {
-                                        "expander": [
-                                            {
-                                                "type": "fluid.model.transform.literalValue",
-                                                "value": "silence",
-                                                "outputPath": "synth"
-                                            },
-                                            {
-                                                "type": "fluid.model.transform.literalValue",
-                                                "value": "Microsoft Sound Mapper",
-                                                "outputPath": "outputDevice"  
-                                            }
-                                        ]
-                                    }
                                 }
                             }
                         }
