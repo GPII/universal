@@ -194,6 +194,28 @@
                                 }
                             }
                         }
+                    },
+                    "gtk-theme": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.highContrast",
+                            "options": {
+                                "true": {
+                                    "outputValue": "HighContrast"
+                                }
+                            }
+                        }
+                    },
+                    "icon-theme": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.highContrast",
+                            "options": {
+                                "true": {
+                                    "outputValue": "HighContrast"
+                                }
+                            }
+                        }
                     }
                 },
                 "options": {
