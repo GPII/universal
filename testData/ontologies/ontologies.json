@@ -16,6 +16,7 @@
             "display.screenEnhancement.highContrast": "{http://registry.gpii.org/common/highContrast}.0.value",
             "display.screenEnhancement.mouseTrailing": "{http://registry.gpii.org/common/mouseTrailing}.0.value",
 
+            "display.screenReader.-provisional-screenReaderBrailleOutput": "{http://registry.gpii.org/common/screenReaderBrailleOutput}.0.value",
             "display.screenReader.-provisional-screenReaderTTSEnabled": "{http://registry.gpii.org/common/ScreenReaderTTSEnabled}.0.value",
             "display.screenReader.-provisional-auditoryOutLanguage": "{http://registry.gpii.org/common/auditoryOutLanguage}.0.value",
             "display.screenReader.speechRate": "{http://registry.gpii.org/common/speechRate}.0.value",
@@ -30,7 +31,6 @@
             "display.textReadingHighlight.readingUnit": "{http://registry.gpii.org/common/readingUnit}.0.value",
             
             "display.braille.-provisional-brailleMode": "{http://registry.gpii.org/common/brailleMode}.0.value",
-
 
             "control.onscreenKeyboard": "{http://registry.gpii.org/common/onscreenKeyboard}.0.value",
             "control.mouseEmulation.-provisional-initDelay": "{http://registry.gpii.org/common/-provisional-initDelay}.0.value",

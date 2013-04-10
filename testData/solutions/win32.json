@@ -934,8 +934,8 @@
             "stop": [
                 "restoreSettings"
             ]
-        
-}    },
+        }
+    },
     
     {
         "name": "Windows Cursors",
