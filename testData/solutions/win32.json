@@ -662,8 +662,6 @@
                 }
             ]
         }
-<<<<<<< HEAD
-=======
     },
     
     {
@@ -1373,6 +1371,5 @@
                 }
             ]
         }
->>>>>>> 90da405... GPII-85: Now supports all magnifiersettings and cursor size. Updated reference to fluid repo
     }
 ]
