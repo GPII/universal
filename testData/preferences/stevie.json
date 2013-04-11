@@ -1,0 +1,10 @@
+{
+    "http://registry.gpii.org/applications/org.gnome.orca": [{ 
+        "value": {
+            "enableSpeech": true,
+            "enableBrailleMonitor": true,
+            "quitOrcaNoConfirmation": true,
+            "showMainWindow": true
+        }
+    }]
+}
