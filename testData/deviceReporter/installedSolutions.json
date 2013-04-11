@@ -101,5 +101,9 @@
     
     {
         "id": "com.microsoft.windows.cursors"
+    },
+    
+    {
+        "id": "net.opendirective.maavis"
     }
 ]
