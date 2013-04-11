@@ -201,7 +201,7 @@
 
     {
         "name": "NVDA Screen Reader",
-        "id": "nvda.screenReader",
+        "id": "org.nvda-project",
         "contexts": {
             "OS": [
                 {
@@ -219,8 +219,8 @@
                     "allowSubSections": true
                 },
                 "capabilities": [
-                    "applications.nvda\\.screenReader.id",
-                    "display.screenReader.applications.nvda\\.screenReader.name"
+                    "applications.org\\.nvda-project.id",
+                    "display.screenReader.applications.org\\.nvda-project.name"
                 ],
                 "capabilitiesTransformations": {
                     "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",

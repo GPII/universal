@@ -1,5 +1,5 @@
 {
-    "http://registry.gpii.org/applications/nvda.screenReader": [{
+    "http://registry.gpii.org/applications/org.nvda-project": [{
     	"value": {
     		"speech.synth": "silence",
     		"speech.outputDevice": "Microsoft Sound Mapper",
