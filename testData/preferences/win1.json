@@ -1,6 +1,0 @@
-{
-    "http://registry.gpii.org/common/magnifierPosition": [{ "value": "Lens" }],
-    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
-    "http://registry.gpii.org/common/tracking": [{"value": "mouse"}],
-    "http://registry.gpii.org/common/invertImages": [{"value": true}]
-}

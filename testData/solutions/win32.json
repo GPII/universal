@@ -246,7 +246,7 @@
 
     {
         "name": "NVDA Screen Reader",
-        "id": "nvda.screenReader",
+        "id": "org.nvda-project",
         "contexts": {
             "OS": [
                 {
@@ -264,8 +264,8 @@
                     "allowSubSections": true
                 },
                 "capabilities": [
-                    "applications.nvda\\.screenReader.id",
-                    "display.screenReader.applications.nvda\\.screenReader.name"
+                    "applications.org\\.nvda-project.id",
+                    "display.screenReader.applications.org\\.nvda-project.name"
                 ],
                 "capabilitiesTransformations": {
                     "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
@@ -287,6 +287,85 @@
                             }
                         }
                     },
+                    "expander": [
+                        {
+                            "type": "fluid.model.transform.arrayToOutputs",
+                            "inputPath": "display.screenEnhancement.trackingTTS",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "focus": "reviewCursor\\.followFocus", 
+                                "caret": "reviewCursor\\.followCaret",
+                                "mouse": "reviewCursor\\.followMouse"
+                            }
+                        }, 
+                        {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "options": {
+                                "false": {
+                                    "outputValue": {
+                                        "expander": [
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "silence",
+                                                "outputPath": "speech\\.synth"
+                                            },
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "Microsoft Sound Mapper",
+                                                "outputPath": "speech\\.outputDevice"  
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "speech\\.espeak\\.rate": {
+                        "expander": {
+                            "type": "fluid.model.transform.binaryOp",
+                            "right": 3.10,
+                            "operator": "/",
+                            "left": {
+                                "expander": {
+                                    "type": "fluid.model.transform.binaryOp",
+                                    "right": 80,
+                                    "operator": "-",
+                                    "left": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.condition",
+                                            "truePath": "display.screenReader.speechRate",
+                                            "false": {
+                                                "expander": {
+                                                    "type": "fluid.model.transform.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "/",
+                                                    "right": 3                                                
+                                                }
+                                            },
+                                            "condition": {
+                                                "expander": {
+                                                    "type": "fluid.model.transform.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "<=",
+                                                    "right": 390
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.espeak\\.rateBoost": {
+                        "expander": {
+                            "type": "fluid.model.transform.binaryOp",
+                            "leftPath": "display.screenReader.speechRate",
+                            "operator": ">",
+                            "right": 390
+                        }
+                    },
                     "speech\\.symbolLevel": {
                         "expander": {
                             "type": "fluid.model.transform.valueMapper",
@@ -303,30 +382,6 @@
                                 },
                                 "all": {
                                     "outputValue": "300"
-                                }
-                            }
-                        }
-                    },
-                    "speech": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
-                            "options": {
-                                "false": {
-                                    "outputValue": {
-                                        "expander": [
-                                            {
-                                                "type": "fluid.model.transform.literalValue",
-                                                "value": "silence",
-                                                "outputPath": "synth"
-                                            },
-                                            {
-                                                "type": "fluid.model.transform.literalValue",
-                                                "value": "Microsoft Sound Mapper",
-                                                "outputPath": "outputDevice"  
-                                            }
-                                        ]
-                                    }
                                 }
                             }
                         }
@@ -688,7 +743,8 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.highContrast"
+                    "display.screenEnhancement.highContrast",
+                    "applications.com\\.microsoft\\.windows\\.highContrast.id"
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
@@ -741,13 +797,14 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.nonClientMetrics"
+                    "display.screenEnhancement.fontSize",
+                    "applications.com\\.microsoft\\.windows\\.nonClientMetrics.id"
                 ],
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -775,7 +832,7 @@
                     "MenuFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -803,7 +860,7 @@
                     "SmallCaptionFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -831,7 +888,7 @@
                     "StatusFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -845,7 +902,7 @@
                     "MessageFontHeight": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
@@ -892,7 +949,8 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.mouseTrailing"
+                    "display.screenEnhancement.mouseTrailing",
+                    "applications.com\\.microsoft\\.windows\\.mouseTrailing.id"
                 ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
@@ -943,7 +1001,8 @@
                     "path": "Control Panel\\Cursors"
                 },
                 "capabilities": [
-                    "display.screenEnhancement.cursorSize"
+                    "display.screenEnhancement.cursorSize",
+                    "applications.com\\.microsoft\\.windows\\.cursors.id"
                 ],
                 "capabilitiesTransformations": {
                     "expander": [ 
@@ -1372,7 +1431,6 @@
             ]
         }
     },
-    
     {
         "name": "maavis",
         "id": "net.opendirective.maavis",
@@ -1403,6 +1461,52 @@
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+    {
+        "name": "Read Write Gold",
+        "id": "com.texthelp.readWriteGold",
+        "version": "10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+                    "rules": {
+                        "ApplicationSettings": "ApplicationSettings"
+                    }
+                },
+                "capabilities": [
+                    "languageAssistance",
+                     "applications.com\\.texthelp\\.readWriteGold.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                 "setSettings", 
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"C:\\Program Files\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
                 },
                 "restoreSettings"
             ]
