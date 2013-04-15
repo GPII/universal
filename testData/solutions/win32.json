@@ -987,15 +987,13 @@
             "start": [ 
                 "setSettings", 
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "node gpii\\node_modules\\setcursors.js"
+                    "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
             ],
             "stop": [
                 "restoreSettings",
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "node gpii\\node_modules\\setcursors.js"
+                    "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
             ]
         }
