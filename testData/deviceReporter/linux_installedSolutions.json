@@ -29,6 +29,14 @@
         },
         
         {
+            "id": "org.gnome.shell.overrides"
+        },
+
+        {
+            "id": "org.gnome.desktop.wm.preferences"
+        },
+
+        {
             "id": "com.microsoft.windows.magnifier"
         },
         
