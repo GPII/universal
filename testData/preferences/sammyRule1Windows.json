@@ -10,17 +10,17 @@
 	
 	
 	
-	
-	
-	"http://registry.gpii.org/applications/com.microsoft.windows.highContrast":  [{
+	"http://registry.gpii.org/applications/com.microsoft.windows.highContrast": [{
 		"value": {
-			"highContrastOn": 
+			"HighContrastOn": 
 			{
-				"value": 1, 
-				"path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+				"path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+				"value": true
 			}
 		}
 	}]
+	
+	
 
 
 }
