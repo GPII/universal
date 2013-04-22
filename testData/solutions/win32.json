@@ -1511,5 +1511,57 @@
                 "restoreSettings"
             ]
         }
+    },
+
+    {
+        "name": "Sociable",
+        "id": "eu.singularlogic.sociable",
+        "contexts":
+        {
+            "OS":
+                    [
+                        {
+                            "id": "win32",
+                            "version": ">=5.0"
+                        }
+                    ]
+        },
+        "settingsHandlers":
+                [
+                    {
+                        "type": "gpii.settingsHandlers.XMLHandler.set",
+                        "options": {
+                            "filename": "C:\\Sociable\\Configuration.xml",
+                            "encoding": "utf-8",
+                            "rules":{
+                                "configuration":"configuration"
+                            }
+                        },
+                        "capabilities":
+                                [
+                                    "applications.eu\\.singularlogic\\.sociable.id"
+                                ],
+                        "capabilitiesTransformations": {
+                        }
+                    }
+                ],
+        "lifecycleManager":
+        {
+            "start":
+                    [
+                        "setSettings",
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "C:\\Sociable\\Cloud4All.exe"
+                        }
+                    ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "C:\\Sociable\\Cloud4All.exe -stop"
+                },
+                "restoreSettings"
+            ]
+        }
     }
 ]

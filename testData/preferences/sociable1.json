@@ -1,0 +1,11 @@
+{ "http://registry.gpii.org/applications/eu.singularlogic.sociable":
+        [{
+            "value":
+            {
+                "configuration.user.$t": 1,
+                "configuration.expert.$t": 1,
+                "configuration.careCenter.$t": 1,
+                "configuration.textToSpeech.$t": true
+            }
+        }]
+}
