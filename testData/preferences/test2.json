@@ -1,40 +1,15 @@
 {
-   "_id":"test2",
-   "_rev":"22-82a84fe3c0e959b2b1c38ddb22fd9272",
-   "display":{
-      "screenEnhancement":{
-         "magnification":0,
-         "tracking":null,
-         "invertImages":false,
-         "showCrosshairs":false,
-         "applications":[
-            {
-               "parameters":{
-                  "links":false,
-                  "layout":false,
-                  "volume":null,
-                  "lineSpacing":"1.0",
-                  "inputsLarger":false
-               },
-               "name":"UI Options",
-               "id":null
-            }
-         ],
-         "fontFace":{
-            "fontName":[
-               "comic sans"
-            ],
-            "genericFontFace":null
-         },
-         "fontSize":14,
-         "foregroundColor":"default",
-         "backgroundColor":"default"
-      }
-   },
-   "control":{
-      "structuralNavigation":{
-         "tableOfContents":false
-      }
-   },
-   "content":null
+    "http://registry.gpii.org/common/fontSize": [{ "value": 10 }],
+    "http://registry.gpii.org/common/foregroundColor": [{ "value": "default" }],
+    "http://registry.gpii.org/common/backgroundColor": [{ "value": "default" }],
+    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": [ "default" ] }],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "default" }],
+    "http://registry.gpii.org/common/magnification": [{ "value": 1 }],
+    "http://registry.gpii.org/common/tracking": [{ "value": "mouse" }],
+    "http://registry.gpii.org/common/invertImages": [{ "value": false }],
+    "http://registry.gpii.org/common/links": [{ "value": false }],
+    "http://registry.gpii.org/common/toc": [{ "value": false }],
+    "http://registry.gpii.org/common/inputsLarger": [{ "value": false }],
+    "http://registry.gpii.org/common/layout": [{ "value": false }],
+    "http://registry.gpii.org/common/lineSpacing": [{ "value": 1 }]
 }
