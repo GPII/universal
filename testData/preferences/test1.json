@@ -1,40 +1,69 @@
 {
-   "_id":"test1",
-   "_rev":"26-3006fe5b2f75442c26486ca63a6cac86",
-   "display":{
-      "screenEnhancement":{
-         "magnification":0,
-         "tracking":null,
-         "invertImages":false,
-         "showCrosshairs":false,
-         "applications":[
-            {
-               "parameters":{
-                  "links":true,
-                  "layout":false,
-                  "volume":null,
-                  "lineSpacing":"1.2",
-                  "inputsLarger":true
-               },
-               "name":"UI Options",
-               "id":null
-            }
-         ],
-         "fontFace":{
-            "fontName":[
-               "arial"
-            ],
-            "genericFontFace":null
-         },
-         "fontSize":15,
-         "foregroundColor":"yellow",
-         "backgroundColor":"black"
-      }
-   },
-   "control":{
-      "structuralNavigation":{
-         "tableOfContents":false
-      }
-   },
-   "content":null
+    "http://registry.gpii.org/common/fontSize": [
+        {
+            "value": 11
+        }
+    ],
+    "http://registry.gpii.org/common/foregroundColor": [
+        {
+            "value": "yellow"
+        }
+    ],
+    "http://registry.gpii.org/common/backgroundColor": [
+        {
+            "value": "black"
+        }
+    ],
+    "http://registry.gpii.org/common/fontFaceFontName": [
+        {
+            "value": [
+                "ARIAL"
+            ]
+        }
+    ],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [
+        {
+            "value": "SERIF"
+        }
+    ],
+    "http://registry.gpii.org/common/magnification": [
+        {
+            "value": 1
+        }
+    ],
+    "http://registry.gpii.org/common/tracking": [
+        {
+            "value": "mouse"
+        }
+    ],
+    "http://registry.gpii.org/common/invertImages": [
+        {
+            "value": false
+        }
+    ],
+    "http://registry.gpii.org/common/links": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/toc": [
+        {
+            "value": false
+        }
+    ],
+    "http://registry.gpii.org/common/inputsLarger": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/layout": [
+        {
+            "value": false
+        }
+    ],
+    "http://registry.gpii.org/common/lineSpacing": [
+        {
+            "value": 1.2
+        }
+    ]
 }
