@@ -1,5 +1,5 @@
 {
-    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
+    "typeName": "statistical.mm.production",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
@@ -14,15 +14,14 @@
     },
     "includes": [
         "../node_modules/deviceReporter/configs/development.json",
-        "../node_modules/flowManager/configs/development.json",
-        "../node_modules/matchMaker/configs/development.json",
+        "../node_modules/flowManager/configs/production.json",
+        "../node_modules/matchMaker/configs/production.json",
         "../node_modules/ontologyServer/configs/development.json",
-        "../node_modules/preferencesServer/configs/production.json",
         "../node_modules/solutionsRegistry/configs/development.json"
     ],
     "demands": [{
         "demandingName": "gpii.matchMaker.match",
-        "contextNames": ["gpii.matchMaker", "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development"],
+        "contextNames": ["gpii.matchMaker", "statistical.mm.production"],
         "demandSpec": {
             "funcName": "gpii.matchMaker.statistical.match",
             "args": ["{callbackWrapper}", "{arguments}.0", "{arguments}.1", "{request}.req.body", "{arguments}.2"]
