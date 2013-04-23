@@ -1,0 +1,31 @@
+{
+    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/matchMaker/configs/development.json",
+        "../node_modules/ontologyServer/configs/development.json",
+        "../node_modules/preferencesServer/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json"
+    ],
+    "demands": [{
+        "demandingName": "gpii.matchMaker.match",
+        "contextNames": ["gpii.matchMaker", "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.development"],
+        "demandSpec": {
+            "funcName": "gpii.matchMaker.statistical.match",
+            "args": ["{callbackWrapper}", "{arguments}.0", "{arguments}.1", "{request}.req.body", "{arguments}.2"]
+        }
+    }]
+}
