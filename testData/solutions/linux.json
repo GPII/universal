@@ -725,6 +725,17 @@
                                         }
                                     }
                                 },
+                                "es-ES": {
+                                    "outputValue": {
+                                        "expander" : {
+                                            "type": "fluid.model.transform.literalValue",
+                                            "value": {
+                                                "locale": "es",
+                                                "name": "spanish"
+                                            }
+                                        }
+                                    }
+                                },
                                 "es-419": {
                                     "outputValue": {
                                         "expander" : {
