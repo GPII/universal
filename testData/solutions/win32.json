@@ -322,5 +322,680 @@
                 }
             ]
         }
+    },
+    
+    {
+        "name": "Windows High Contrast",
+        "id": "com.microsoft.windows.highContrast",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.spiSettingsHandler.set",
+                "options": {
+                    "getAction": "SPI_GETHIGHCONTRAST",
+                    "setAction": "SPI_SETHIGHCONTRAST",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "HIGHCONTRAST"
+                    }
+                },
+                "capabilities": [
+                    "display.screenEnhancement.highContrast"
+                ],
+                "capabilitiesTransformations": {
+                    "HighContrastOn": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.highContrast",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
+    },
+    
+    {
+        "name": "Windows Non-client Metrics",
+        "id": "com.microsoft.windows.nonClientMetrics",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.spiSettingsHandler.set",
+                "options": {
+                    "getAction": "SPI_GETNONCLIENTMETRICS",
+                    "setAction": "SPI_SETNONCLIENTMETRICS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "NONCLIENTMETRICS"
+                    }
+                },
+                "capabilities": [
+                    "display.screenEnhancement.nonClientMetrics"
+                ],
+                "capabilitiesTransformations": {
+                    "CaptionFontHeight": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "outputPath": "value",
+                            "factor": -1
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfCaptionFont.lfHeight"
+                            }
+                        }
+                    },
+                    "CaptionHeight": {
+                        "expander": {
+                            "type": "fluid.model.transform.literalValue",
+                            "outputPath": "value",
+                            "value": 0
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.iCaptionHeight"
+                            }
+                        }
+                    },
+                    "MenuFontHeight": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "outputPath": "value",
+                            "factor": -1
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfMenuFont.lfHeight"
+                            }
+                        }
+                    },
+                    "MenuHeight": {
+                        "expander": {
+                            "type": "fluid.model.transform.literalValue",
+                            "outputPath": "value",
+                            "value": 0
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.iMenuHeight"
+                            }
+                        }
+                    },
+                    "SmallCaptionFontHeight": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "outputPath": "value",
+                            "factor": -1
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfSmCaptionFont.lfHeight"
+                            }
+                        }
+                    },
+                    "SmallCaptionHeight": {
+                        "expander": {
+                            "type": "fluid.model.transform.literalValue",
+                            "outputPath": "value",
+                            "value": 0
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.iSmCaptionHeight"
+                            }
+                        }
+                    },
+                    "StatusFontHeight": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "outputPath": "value",
+                            "factor": -1
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfStatusFont.lfHeight"
+                            }
+                        }
+                    },
+                    "MessageFontHeight": {
+                        "expander": {
+                            "type": "gpii.transformer.scaleValue",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "outputPath": "value",
+                            "factor": -1
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "pvParam.lfMessageFont.lfHeight"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
+    },
+    
+    {
+        "name": "Windows Mouse Tracking",
+        "id": "com.microsoft.windows.mouseTracking",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.spiSettingsHandler.set",
+                "options": {
+                    "getAction": "SPI_GETMOUSETRAILS",
+                    "setAction": "SPI_SETMOUSETRAILS",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    }
+                },
+                "capabilities": [
+                    "display.screenEnhancement.mouseTrailing"
+                ],
+                "capabilitiesTransformations": {
+                    "MouseTrails": {
+                        "expander": {
+                            "type": "fluid.model.transform.value",
+                            "inputPath": "display.screenEnhancement.mouseTrailing",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
+    },
+    
+    {
+        "name": "Windows Cursors",
+        "id": "com.microsoft.windows.cursors",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Cursors"
+                },
+                "capabilities": [
+                    "display.screenEnhancement.cursorSize"
+                ],
+                "capabilitiesTransformations": {
+                    "Arrow": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_arrow.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "Hand": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_link.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_link_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_link_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "Help": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "AppStarting": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_working.ani"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_working_l.ani"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "No": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_unavail.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "NWPen": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_pen.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_pen_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeAll": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_move.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_move_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_move_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeNESW": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nesw.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeNS": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ns.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ns_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeNWSE": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nwse.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "SizeWE": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ew.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ew_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "UpArrow": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_up.cur"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_up_l.cur"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_up_xl.cur"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    },
+                    "Wait": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "options": {
+                                "normal": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_busy.ani"
+                                    }
+                                },
+                                "large": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_busy_l.ani"
+                                    }
+                                },
+                                "extralarge": {
+                                    "outputValue": {
+                                        "value": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
+                                    }
+                                }
+                            }
+                        },
+                        "dataType": {
+                            "expander": {
+                                "type": "fluid.model.transform.literalValue",
+                                "value": "REG_SZ"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                "setSettings", 
+                {
+                    "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                }
+            ],
+            "stop": [
+                "restoreSettings",
+                {
+                    "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                }
+            ]
+        }
     }
 ]
