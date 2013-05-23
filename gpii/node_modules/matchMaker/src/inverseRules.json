@@ -1,0 +1,576 @@
+{
+    "com.microsoft.windows.highContrast": {
+        "display.screenEnhancement.highContrast": "HighContrastOn.value"
+    },
+    "com.microsoft.windows.cursors": {
+        "expander": [
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "Arrow.value",
+                "defaultOutputPath": "display.screenEnhancement.cursorSize",
+                "options": {
+                    "%SystemRoot%\\cursors\\aero_arrow.cur": {
+                        "outputValue": 0.32
+                    },
+                    "%SystemRoot%\\cursors\\aero_arrow_l.cur": {
+                        "outputValue": 0.65
+                    },
+                    "%SystemRoot%\\cursors\\aero_arrow_xl.cur": {
+                        "outputValue": 1
+                    }
+                }
+            }
+        ]
+    },
+    "com.microsoft.windows.magnifier": {
+        "display.screenEnhancement.invertImages": "Invert.value",
+        "expander": [
+            {       
+                "type": "fluid.model.transform.scaleValue",
+                "valuePath": "Magnification.value",
+                "outputPath": "display.screenEnhancement.magnification",
+                "factor": 0.01
+            },
+            {
+                "type": "fluid.model.transform.inputsToArray",
+                "outputPath": "display.screenEnhancement.tracking",
+                "presentValue": 1,
+                "missingValue": 0,
+                "options": {
+                    "FollowFocus.value": "focus",
+                    "FollowMouse.value": "mouse",
+                    "FollowCaret.value": "caret"
+                }
+            },
+            { 
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "MagnificationMode.value",
+                "defaultOutputPath": "display.screenEnhancement.-provisional-magnifierPosition",
+                "options": {
+                    "2": {
+                        "outputValue": "FullScreen"
+                    },
+                    "3": {
+                        "outputValue": "Lens"
+                    },
+                    "1": {
+                        "outputValue": "TopHalf"
+                    }
+                }
+            }
+
+        ]
+    },
+    "org.nvda-project": {
+        "display.screenReader.-provisional-speakTutorialMessages": "presentation\\.reportHelpBalloons",
+        "display.screenReader.-provisional-keyEcho": "keyboard\\.speakTypedCharacters",
+        "display.screenReader.-provisional-wordEcho": "keyboard\\.speakTypedWords",
+        "display.screenReader.-provisional-announceCapitals": "speech\\.espeak\\.sayCapForCapitals",
+                    
+        "expander": [
+            {       
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "virtualBuffers\\.autoSayAllOnPageLoad.value",
+                "defaultOutputPath": "display.textReadingHighlight.readingUnit",
+                "options": {
+                    "true": {
+                        "outputValue": "all"
+                    },
+                    "false": {
+                        "outputValue": "sentence"
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.inputsToArray",
+                "outputPath": "display.screenEnhancement.trackingTTS",
+                "presentValue": true,
+                "missingValue": false,
+                "options": {
+                    "reviewCursor\\.followFocus": "focus",
+                    "reviewCursor\\.followCaret": "caret",
+                    "reviewCursor\\.followMouse": "mouse"
+                }
+            },
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "defaultOutputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                "inputPath": "speech\\.symbolLevel",
+                "options": {
+                    "0": {
+                        "outputValue": "none"
+                    },
+                    "100": {
+                        "outputValue": "some"
+                    },
+                    "200": {
+                        "outputValue": "most"
+                    },
+                    "300": {
+                        "outputValue": "all"
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.condition",
+                "outputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                "false": true,
+                "true": false,
+                "condition": {
+                    "expander": {
+                        "type": "fluid.model.transform.binaryOp",
+                        "left": {
+                            "expander": {
+                                "type": "fluid.model.transform.binaryOp",
+                                "leftPath": "speech\\.synth",
+                                "operator": "===",
+                                "right": "silence"
+                            }
+                        },
+                        "right": {
+                            "expander": {
+                                "type": "fluid.model.transform.binaryOp",
+                                "leftPath": "speech\\.outputDevice",
+                                "operator": "===",
+                                "right": "Microsoft Sound Mapper"
+                            }
+                        },
+                        "operator": "&&"
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.condition",
+                "outputPath": "display.screenReader.speechRate",
+                "condition": {
+                    "expander": {
+                        "type": "fluid.model.transform.binaryOp",
+                        "right": true,
+                        "operator": "===",
+                        "leftPath": "speech\\.espeak\\.rateBoost"
+                    }
+                },
+                "false": {
+                    "expander": {
+                        "type": "fluid.model.transform.scaleValue",
+                        "valuePath": "speech\\.espeak\\.rate",
+                        "factor": 3.1,
+                        "offset": 80
+                    }
+                },
+                "true": {
+                    "expander": {
+                        "type": "fluid.model.transform.binaryOp",
+                        "left": {
+                            "expander": {
+                                "type": "fluid.model.transform.scaleValue",
+                                "valuePath": "speech\\.espeak\\.rate",
+                                "factor": 3.1,
+                                "offset": 80
+                            }
+                        },
+                        "operator": "*",
+                        "right": 3     
+                    }                    
+                }
+            },
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "speech\\.espeak\\.voice",
+                "defaultOutputPath": "display.screenReader.-provisional-auditoryOutLanguage",
+                "options": {
+                    "en\\en": {
+                        "outputValue": "en"
+                    },
+                    "en\\en-us": {
+                        "outputValue": "en-US"
+                    },
+                    "en\\en-sc": {
+                        "outputValue": "en-scotland"
+                    },
+                    "en\\en-wi": {
+                        "outputValue": "en-BZ"
+                    },
+                    "af": {
+                        "outputValue": "af"
+                    },
+                    "bg": {
+                        "outputValue": "bg"
+                    },
+                    "bs": {
+                        "outputValue": "bs"
+                    },
+                    "ca": {
+                        "outputValue": "ca"
+                    },
+                    "cs": {
+                        "outputValue": "cs"
+                    },
+                    "cy": {
+                        "outputValue": "cy"
+                    },
+                    "da": {
+                        "outputValue": "da"
+                    },
+                    "de": {
+                        "outputValue": "de"
+                    },
+                    "el": {
+                        "outputValue": "el"
+                    },
+                    "test\\grc": {
+                        "outputValue": "grc"
+                    },
+                    "eo": {
+                        "outputValue": "eo"
+                    },
+                    "es": {
+                        "outputValue": "es"
+                    },
+                    "es": {
+                        "outputValue": "es-ES"
+                    },
+                    "es-la": {
+                        "outputValue": "es-419"
+                    },
+                    "et": {
+                        "outputValue": "et"
+                    },
+                    "fi": {
+                        "outputValue": "fi"
+                    },
+                    "fr": {
+                        "outputValue": "fr"
+                    },
+                    "fr-be": {
+                        "outputValue": "fr-BE"
+                    },
+                    "hi": {
+                        "outputValue": "hi"
+                    },
+                    "hr": {
+                        "outputValue": "hr"
+                    },
+                    "hu": {
+                        "outputValue": "hu"
+                    },
+                    "hy": {
+                        "outputValue": "hy"
+                    },
+                    "hy-west": {
+                        "outputValue": "hy-arevmda"
+                    },
+                    "id": {
+                        "outputValue": "id"
+                    },
+                    "is": {
+                        "outputValue": "is"
+                    },
+                    "it": {
+                        "outputValue": "it"
+                    },
+                    "test\\jbo": {
+                        "outputValue": "jbo"
+                    },
+                    "ka": {
+                        "outputValue": "ka"
+                    },
+                    "kn": {
+                        "outputValue": "kn"
+                    },
+                    "ku": {
+                        "outputValue": "ku"
+                    },
+                    "la": {
+                        "outputValue": "la"
+                    },
+                    "lv": {
+                        "outputValue": "lv"
+                    },
+                    "mk": {
+                        "outputValue": "mk"
+                    },
+                    "ml": {
+                        "outputValue": "ml"
+                    },
+                    "test\\nci": {
+                        "outputValue": "nci"
+                    },
+                    "nl": {
+                        "outputValue": "nl"
+                    },
+                    "no": {
+                        "outputValue": "no"
+                    },
+                    "test\\pap": {
+                        "outputValue": "pap"
+                    },
+                    "pl": {
+                        "outputValue": "pl"
+                    },
+                    "pt": {
+                        "outputValue": "pt-BR"
+                    },
+                    "pt-pt": {
+                        "outputValue": "pt-PT"
+                    },
+                    "ro": {
+                        "outputValue": "ro"
+                    },
+                    "ru": {
+                        "outputValue": "ru"
+                    },
+                    "sk": {
+                        "outputValue": "sk"
+                    },
+                    "sq": {
+                        "outputValue": "sq"
+                    },
+                    "sr": {
+                        "outputValue": "sr"
+                    },
+                    "sv": {
+                        "outputValue": "sv"
+                    },
+                    "sw": {
+                        "outputValue": "sw"
+                    },
+                    "ta": {
+                        "outputValue": "ta"
+                    },
+                    "tr": {
+                        "outputValue": "tr"
+                    },
+                    "vi": {
+                        "outputValue": "vi"
+                    },
+                    "zh": {
+                        "outputValue": "zh-cmn"
+                    },
+                    "zh-yue": {
+                        "outputValue": "zh-yue"
+                    },
+                    "yue": {
+                        "outputValue": "zh-yue"
+                    }
+                }
+            }
+        ]
+    },
+    "org.gnome.desktop.interface": {
+        "expander": [
+            {
+                "type": "fluid.model.transform.binaryOp",
+                "right": 12,
+                "operator": "*",
+                "leftPath": "text-scaling-factor",
+                "outputPath": "display.screenEnhancement.fontSize"
+            },
+            {
+                "type": "fluid.model.transform.scaleValue",
+                "valuePath": "cursor-size",
+                "outputPath": "display.screenEnhancement.cursorSize",
+                "factor": 0.01
+            },
+			{
+				"type": "fluid.model.transform.binaryOp",
+				"outputPath": "display.screenEnhancement.highContrast",
+				"left": {
+					"expander": {
+						"type": "fluid.model.transform.binaryOp",
+						"leftPath": "gtk-theme",
+						"operator": "===",
+						"right": "HighContrast"
+					}
+				},
+				"right": {
+					"expander": {
+						"type": "fluid.model.transform.binaryOp",
+						"leftPath": "icon-theme",
+						"operator": "===",
+						"right": "HighContrast"
+					}
+				},
+				"operator": "&&"
+			}
+        ]
+    },
+    "org.gnome.desktop.a11y.magnifier": {
+        "display.screenEnhancement.magnification": "mag-factor",
+        "display.screenEnhancement.-provisional-showCrosshairs": "show-cross-hairs",
+        "expander": [
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "screen-position",
+                "defaultOutputPath": "display.screenEnhancement.-provisional-magnifierPosition",
+                "options": {
+                    "full-screen": {
+                        "outputValue": "FullScreen"
+                    },
+                    "left-half": {
+                        "outputValue": "LeftHalf"
+                    },
+                    "right-half": {
+                        "outputValue": "RightHalf"
+                    },
+                    "top-half": {
+                        "outputValue": "TopHalf"
+                    },
+                    "bottom-half": {
+                        "outputValue": "BottomHalf"
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "defaultOutputPath": "display.screenEnhancement.tracking",
+                "inputPath": "mouse-tracking",
+                "options": {
+                    "centered": {
+                        "outputValue": "mouse"
+                    }
+                }
+            }
+        ]
+    },
+    "org.gnome.orca": {
+        "display.screenReader.-provisional-speakTutorialMessages": "enableTutorialMessages",
+        "display.screenReader.-provisional-keyEcho": "enableEchoByCharacter",
+        "display.screenReader.-provisional-wordEcho": "enableEchoByWord",
+        "display.screenReader.-provisional-screenReaderBrailleOutput": "enableBraille",
+        "display.screenReader.-provisional-screenReaderTTSEnabled": "enableSpeech",
+        "expander": [
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "sayAllStyle",
+                "defaultOutputPath": "display.textReadingHighlight.readingUnit",
+                "defaultInputValue": "1",
+                "options": {
+                    "0": {
+                        "outputValue": "line"
+                    },
+                    "1": {
+                        "outputValue": "sentence"
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "verbalizePunctuationStyle",
+                "defaultOutputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                "defaultInputValue": "1",
+                "options": {
+                    "3": {
+                        "outputValue": "none"
+                    },
+                    "2": {
+                        "outputValue": "some"
+                    },
+                    "1": {
+                        "outputValue": "most"
+                    },
+                    "0": {
+                        "outputValue": "all"
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.binaryOp",
+                "outputPath": "display.screenReader.speechRate",
+                "right": 170,
+                "operator": "+",
+                "left": {
+                    "expander": {
+                        "type": "fluid.model.transform.binaryOp",
+                        "operator": "*",
+                        "left": {
+                            "expander": {
+                                "type": "fluid.model.transform.binaryOp",
+                                "leftPath": "voices\\.default\\.rate",
+                                "operator": "-",
+                                "right": 50
+                            }
+                        },
+                        "right": {
+                            "expander": {
+                                "type": "fluid.model.transform.condition",
+                                "condition": {
+                                    "expander" : {
+                                        "type": "fluid.model.transform.binaryOp",
+                                        "leftPath": "voices\\.default\\.rate",
+                                        "operator": "<",
+                                        "right": 50
+                                    }
+                                },
+                                "true": 1.8,
+                                "false": 4.4
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "type": "fluid.model.transform.valueMapper",
+                "inputPath": "voices\\.default\\.family.name",
+                "defaultOutputPath": "display.screenReader.-provisional-auditoryOutLanguage",
+                "defaultInputValue": "en",
+                "options": {
+                    "english": { "outputValue": "en" },
+                    "english-us": { "outputValue": "en-US" },
+                    "en-scottish": { "outputValue": "en-scotland" },
+                    "en-westindies": { "outputValue": "en-BZ" },
+                    "afrikaans": { "outputValue": "af" },
+                    "bulgarian-test": { "outputValue": "bg" },
+                    "bosnian": { "outputValue": "bs" },
+                    "catalan": { "outputValue": "ca" },
+                    "czech": { "outputValue": "cs" },
+                    "welsh-test": { "outputValue": "cy" },
+                    "danish": { "outputValue": "da" },
+                    "german": { "outputValue": "de" },
+                    "greek": { "outputValue": "el" },
+                    "greek-ancient": { "outputValue": "grc" },
+                    "esperanto": { "outputValue": "eo" },
+                    "spanish": { "outputValue": "es" },
+                    "spanish-latin-american": { "outputValue": "es-419" },
+                    "estonian": { "outputValue": "et" },
+                    "finnish": { "outputValue": "fi" },
+                    "french": { "outputValue": "fr" },
+                    "hindi": { "outputValue": "hi" },
+                    "croatian": { "outputValue": "hr" },
+                    "hungarian": { "outputValue": "hu" },
+                    "armenian": { "outputValue": "hy" },
+                    "armenian-west": { "outputValue": "hy-arevmda" },
+                    "indonesian-test": { "outputValue": "id" },
+                    "icelandic-test": { "outputValue": "is" },
+                    "italian": { "outputValue": "it" },
+                    "lojban": { "outputValue": "jbo" },
+                    "georgian-test": { "outputValue": "ka" },
+                    "kannada": { "outputValue": "kn" },
+                    "kurdish": { "outputValue": "ku" },
+                    "latin": { "outputValue": "la" },
+                    "latvian": { "outputValue": "lv" },
+                    "macedonian-test": { "outputValue": "mk" },
+                    "malayalam": { "outputValue": "ml" },
+                    "dutch-test": { "outputValue": "nl" },
+                    "norwegian": { "outputValue": "no" },
+                    "papiamento-test": { "outputValue": "pap" },
+                    "polish": { "outputValue": "pl" },
+                    "brazil": { "outputValue": "pt-BR" },
+                    "portugal": { "outputValue": "pt-PT" },
+                    "romanian": { "outputValue": "ro" },
+                    "russian_test": { "outputValue": "ru" },
+                    "slovak": { "outputValue": "sk" },
+                    "albanian": { "outputValue": "sq" },
+                    "serbian": { "outputValue": "sr" },
+                    "swedish": { "outputValue": "sv" },
+                    "swahili-test": { "outputValue": "sw" },
+                    "tamil": { "outputValue": "ta" },
+                    "turkish": { "outputValue": "tr" },
+                    "vietnam": { "outputValue": "vi" },
+                    "Mandarin": { "outputValue": "zh-cmn" },
+                    "cantonese": { "outputValue": "zh-yue" }
+                }
+            }
+        ]
+    }
+}

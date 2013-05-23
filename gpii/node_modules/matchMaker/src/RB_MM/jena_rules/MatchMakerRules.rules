@@ -1,0 +1,52 @@
+@prefix ns: <http://www.cloud4all.eu/SemanticFrameworkForContentAndSolutions.owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+[ProblemWithHighContrastInWin7:
+(?tmpUser rdf:type ns:TempUsers)
+(?tmpUser ns:TempUsers_highContrast ?tmpUserPrefHighContrast)
+(?tmpEnvironment rdf:type ns:TempEnvironment)
+(?tmpEnvironment ns:TempEnvironment_platformName ?tmpEnvironmentPlatformName)
+(?tmpEnvironment ns:TempEnvironment_platformVersion ?tmpEnvironmentPlatformVersion)
+equal(?tmpUserPrefHighContrast, "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+equal(?tmpEnvironmentPlatformName, 'win32')
+equal(?tmpEnvironmentPlatformVersion, '6.1')
+->
+(ns:ProblemWithHighContrastInWindows7 rdf:type ns:TempHandicapSituations)
+(ns:ProblemWithHighContrastInWindows7 ns:TempHandicapSituations_problemWithHighContrast "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+]
+
+[ProblemWithHighContrastInWin7_ProposeSolution:
+(ns:ProblemWithHighContrastInWindows7 ns:TempHandicapSituations_problemWithHighContrast "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+->
+(ns:ProblemWithHighContrastInWindows7_PossibleSolution rdf:type ns:TempPossibleSolutions)
+(ns:ProblemWithHighContrastInWindows7_PossibleSolution ns:TempPossibleSolutions_text "Solve problem with high contrast -> use default theme and magnifier on with inverse colours"^^http://www.w3.org/2001/XMLSchema#string)
+(ns:ProblemWithHighContrastInWindows7_PossibleSolution ns:TempPossibleSolutions_comment "no comments"^^http://www.w3.org/2001/XMLSchema#string)
+]
+
+
+
+
+
+[ProblemWithMagnifierFullScreenInWin7:
+(?tmpUser rdf:type ns:TempUsers)
+(?tmpUser ns:TempUsers_magnifierFullScreen ?tmpUserPrefMagnifierFullScreen)
+(?tmpUser ns:TempUsers_highContrast ?tmpUserPrefHighContrast)
+(?tmpEnvironment rdf:type ns:TempEnvironment)
+(?tmpEnvironment ns:TempEnvironment_platformName ?tmpEnvironmentPlatformName)
+(?tmpEnvironment ns:TempEnvironment_platformVersion ?tmpEnvironmentPlatformVersion)
+equal(?tmpUserPrefMagnifierFullScreen, "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+equal(?tmpUserPrefHighContrast, "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+equal(?tmpEnvironmentPlatformName, 'win32')
+equal(?tmpEnvironmentPlatformVersion, '6.1')
+->
+(ns:ProblemWithMagnifierFullScreenInWindows7 rdf:type ns:TempHandicapSituations)
+(ns:ProblemWithMagnifierFullScreenInWindows7 ns:TempHandicapSituations_problemWithMagnifierFullScreen "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+]
+
+[ProblemWithMagnifierFullScreenInWin7_ProposeSolution:
+(ns:ProblemWithMagnifierFullScreenInWindows7 ns:TempHandicapSituations_problemWithMagnifierFullScreen "true"^^http://www.w3.org/2001/XMLSchema#boolean)
+->
+(ns:ProblemWithMagnifierFullScreenInWindows7_PossibleSolution rdf:type ns:TempPossibleSolutions)
+(ns:ProblemWithMagnifierFullScreenInWindows7_PossibleSolution ns:TempPossibleSolutions_text "Solve problem with magnifier running on full screen -> Apply AERO design"^^http://www.w3.org/2001/XMLSchema#string)
+(ns:ProblemWithMagnifierFullScreenInWindows7_PossibleSolution ns:TempPossibleSolutions_comment "no comments"^^http://www.w3.org/2001/XMLSchema#string)
+]

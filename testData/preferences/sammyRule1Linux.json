@@ -1,0 +1,23 @@
+{
+    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
+    "http://registry.gpii.org/common/foregroundColor": [{"value": "white"}],
+    "http://registry.gpii.org/common/backgroundColor": [{"value": "black"}],
+    "http://registry.gpii.org/common/fontFaceFontName": [{"value": ["Comic Sans"]}],
+    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{"value": "sans serif"}],
+    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
+    "http://registry.gpii.org/common/tracking": [{"value": "mouse"}],
+	
+	
+	
+	
+	
+	
+	"http://registry.gpii.org/applications/org.gnome.desktop.interface":  [{
+		"value": {
+			"gtk-theme": "HighContrast",
+			"icon-theme": "HighContrast"
+		}
+	}]
+
+
+}

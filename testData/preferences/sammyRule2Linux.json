@@ -1,0 +1,21 @@
+{
+	
+	"http://registry.gpii.org/applications/org.gnome.desktop.interface":  [{
+		"value": {
+			"gtk-theme": "HighContrast",
+			"icon-theme": "HighContrast"
+		}
+	}],
+	"http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
+		"value": {
+			"show-cross-hairs": true,
+			"lens-mode": false,
+			"mag-factor": 2,
+			"mouse-tracking": "proportional",
+			"screen-position": "full-screen",
+			"scroll-at-edges": true
+		}
+	}]
+
+
+}
