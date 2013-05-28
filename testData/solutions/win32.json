@@ -69,10 +69,15 @@
                 "capabilitiesTransformations": {
                     "Magnification": {
                         "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "display.screenEnhancement.magnification",
-                            "outputPath": "value",
-                            "factor": 100
+                            "type": "fluid.model.transform.round",
+                            "input": {
+                                "expander": {
+                                    "type": "fluid.model.transform.scaleValue",
+                                    "valuePath": "display.screenEnhancement.magnification",
+                                    "factor": 100
+                                }
+                            },
+                            "outputPath": "value"
                         },
                         "dataType": {
                             "expander": {
