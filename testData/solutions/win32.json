@@ -67,23 +67,10 @@
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
-                    "Magnification": {
+                    "Magnification.dataType": {
                         "expander": {
-                            "type": "fluid.model.transform.round",
-                            "input": {
-                                "expander": {
-                                    "type": "fluid.model.transform.scaleValue",
-                                    "valuePath": "display.screenEnhancement.magnification",
-                                    "factor": 100
-                                }
-                            },
-                            "outputPath": "value"
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_DWORD"
-                            }
+                            "type": "fluid.model.transform.literalValue",
+                            "value": "REG_DWORD"
                         }
                     },
                     "Invert": {
@@ -115,6 +102,16 @@
                             "caret": "FollowCaret",
                             "mouse": "FollowMouse"
                         }
+                    }, {
+                        "type": "fluid.model.transform.round",
+                        "input": {
+                            "expander": {
+                                "type": "fluid.model.transform.scaleValue",
+                                "valuePath": "display.screenEnhancement.magnification",
+                                "factor": 100
+                            }
+                        },
+                        "outputPath": "Magnification.value"
                     }],                    
                     "MagnificationMode": {
                         "expander": {
