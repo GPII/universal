@@ -593,7 +593,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
+                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
                 }
             ],
             "stop": [ 
