@@ -67,18 +67,10 @@
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
-                    "Magnification": {
+                    "Magnification.dataType": {
                         "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "display.screenEnhancement.magnification",
-                            "outputPath": "value",
-                            "factor": 100
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_DWORD"
-                            }
+                            "type": "fluid.model.transform.literalValue",
+                            "value": "REG_DWORD"
                         }
                     },
                     "Invert": {
@@ -110,6 +102,16 @@
                             "caret": "FollowCaret",
                             "mouse": "FollowMouse"
                         }
+                    }, {
+                        "type": "fluid.model.transform.round",
+                        "input": {
+                            "expander": {
+                                "type": "fluid.model.transform.scaleValue",
+                                "valuePath": "display.screenEnhancement.magnification",
+                                "factor": 100
+                            }
+                        },
+                        "outputPath": "Magnification.value"
                     }],                    
                     "MagnificationMode": {
                         "expander": {
@@ -591,7 +593,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
+                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
                 }
             ],
             "stop": [ 
