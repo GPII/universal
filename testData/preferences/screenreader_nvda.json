@@ -1,7 +1,7 @@
 {
     "http://registry.gpii.org/applications/org.nvda-project": [{
     	"value": {
-    		"speech.synth": "silence",
+    		"speech.synth": "espeak",
     		"speech.outputDevice": "Microsoft Sound Mapper",
 		    "speech.symbolLevel": "300",
 		    "speech.espeak.rate": 17.20430107526882,
