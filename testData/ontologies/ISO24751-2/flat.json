@@ -15,7 +15,6 @@
         "display.screenEnhancement.mouseTrailing": "{http://registry.gpii.org/common/mouseTrailing}.0.value",
 
         "display.screenReader.-provisional-screenReaderBrailleOutput": "{http://registry.gpii.org/common/screenReaderBrailleOutput}.0.value",
-        "display.screenReader.-provisional-screenReaderTTSEnabled": "{http://registry.gpii.org/common/ScreenReaderTTSEnabled}.0.value",
         "display.screenReader.-provisional-auditoryOutLanguage": "{http://registry.gpii.org/common/auditoryOutLanguage}.0.value",
         "display.screenReader.speechRate": "{http://registry.gpii.org/common/speechRate}.0.value",
         "display.screenReader.-provisional-speakTutorialMessages": "{http://registry.gpii.org/common/speakTutorialMessages}.0.value",
