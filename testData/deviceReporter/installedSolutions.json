@@ -101,5 +101,9 @@
 
     {
         "id": "webinsight.webAnywhere.linux"
+    },
+
+    {
+        "id": "eu.singularlogic.sociable"
     }
 ]

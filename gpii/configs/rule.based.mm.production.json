@@ -1,5 +1,5 @@
 {
-    "typeName": "statistical.mm.production",
+    "typeName": "rule.based.mm.production",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
@@ -21,9 +21,9 @@
     ],
     "demands": [{
         "demandingName": "gpii.matchMaker.match",
-        "contextNames": ["gpii.matchMaker", "statistical.mm.production"],
+        "contextNames": ["gpii.matchMaker", "rule.based.mm.production"],
         "demandSpec": {
-            "funcName": "gpii.matchMaker.statistical.match",
+            "funcName": "gpii.ruleBasedMatchMaker.match",
             "args": ["{callbackWrapper}", "{arguments}.0", "{arguments}.1", "{request}.req.body", "{arguments}.2"]
         }
     }]

@@ -67,18 +67,10 @@
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
-                    "Magnification": {
+                    "Magnification.dataType": {
                         "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "display.screenEnhancement.magnification",
-                            "outputPath": "value",
-                            "factor": 100
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_DWORD"
-                            }
+                            "type": "fluid.model.transform.literalValue",
+                            "value": "REG_DWORD"
                         }
                     },
                     "Invert": {
@@ -110,6 +102,16 @@
                             "caret": "FollowCaret",
                             "mouse": "FollowMouse"
                         }
+                    }, {
+                        "type": "fluid.model.transform.round",
+                        "input": {
+                            "expander": {
+                                "type": "fluid.model.transform.scaleValue",
+                                "valuePath": "display.screenEnhancement.magnification",
+                                "factor": 100
+                            }
+                        },
+                        "outputPath": "Magnification.value"
                     }],                    
                     "MagnificationMode": {
                         "expander": {
@@ -591,7 +593,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
+                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
                 }
             ],
             "stop": [ 
@@ -1418,15 +1420,13 @@
             "start": [ 
                 "setSettings", 
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "node gpii\\node_modules\\setcursors.js"
+                    "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
             ],
             "stop": [
                 "restoreSettings",
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "node gpii\\node_modules\\setcursors.js"
+                    "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
             ]
         }
@@ -1507,6 +1507,58 @@
                 {
                     "type": "gpii.launch.exec",
                     "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+
+    {
+        "name": "Sociable",
+        "id": "eu.singularlogic.sociable",
+        "contexts":
+        {
+            "OS":
+                    [
+                        {
+                            "id": "win32",
+                            "version": ">=5.0"
+                        }
+                    ]
+        },
+        "settingsHandlers":
+                [
+                    {
+                        "type": "gpii.settingsHandlers.XMLHandler.set",
+                        "options": {
+                            "filename": "C:\\Sociable\\Configuration.xml",
+                            "encoding": "utf-8",
+                            "rules":{
+                                "configuration":"configuration"
+                            }
+                        },
+                        "capabilities":
+                                [
+                                    "applications.eu\\.singularlogic\\.sociable.id"
+                                ],
+                        "capabilitiesTransformations": {
+                        }
+                    }
+                ],
+        "lifecycleManager":
+        {
+            "start":
+                    [
+                        "setSettings",
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "C:\\Sociable\\Cloud4All.exe"
+                        }
+                    ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "C:\\Sociable\\Cloud4All.exe -stop"
                 },
                 "restoreSettings"
             ]

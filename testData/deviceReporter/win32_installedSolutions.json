@@ -79,7 +79,7 @@
         {
             "id": "webinsight.webAnywhere.linux"
         },
-    
+
         {
             "id": "com.microsoft.windows.highContrast"
         },
@@ -94,6 +94,10 @@
         
         {
             "id": "com.microsoft.windows.cursors"
+        },
+
+        {
+            "id": "eu.singularlogic.sociable"
         }
     ]
 }
