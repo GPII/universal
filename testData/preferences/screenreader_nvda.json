@@ -1,20 +1,20 @@
 {
     "http://registry.gpii.org/applications/org.nvda-project": [{
-    	"value": {
-    		"speech.synth": "silence",
-    		"speech.outputDevice": "Microsoft Sound Mapper",
-		    "speech.symbolLevel": "300",
-		    "speech.espeak.rate": 17.20430107526882,
-		    "speech.espeak.voice": "en\\en-wi",
-		    "reviewCursor.followFocus": false,
-		    "reviewCursor.followCaret": true,
-		    "reviewCursor.followMouse": true,
-		    "keyboard.speakTypedWords": true,
-		    "speech.espeak.rateBoost": true,
-		    "keyboard.speakTypedCharacters": false,
-		    "presentation.reportHelpBalloons": false,
-		    "speech.espeak.sayCapForCapitals": true,
-		    "virtualBuffers.autoSayAllOnPageLoad": false
-		}
-	}]
+        "value": {
+            "speech.synth": "espeak",
+            "speech.outputDevice": "Microsoft Sound Mapper",
+            "speech.symbolLevel": "300",
+            "speech.espeak.rate": 17.20430107526882,
+            "speech.espeak.voice": "en\\en-wi",
+            "reviewCursor.followFocus": false,
+            "reviewCursor.followCaret": true,
+            "reviewCursor.followMouse": true,
+            "keyboard.speakTypedWords": true,
+            "speech.espeak.rateBoost": true,
+            "keyboard.speakTypedCharacters": false,
+            "presentation.reportHelpBalloons": false,
+            "speech.espeak.sayCapForCapitals": true,
+            "virtualBuffers.autoSayAllOnPageLoad": false
+        }
+    }]
 }
