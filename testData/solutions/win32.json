@@ -1,5 +1,50 @@
 [
     {
+        "name": "Read Write Gold",
+        "id": "com.texthelp.readWriteGold",
+        "version": "10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+                    "rules": {
+                        "ApplicationSettings": "ApplicationSettings"
+                    }
+                },
+                "capabilities": [
+                    "languageAssistance",
+                     "applications.com\\.texthelp\\.readWriteGold.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ 
+                 "setSettings", 
+                {
+                    "type": "gpii.launch.exec",
+					"command": "\"C:\\Program Files\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "restoreSettings"
+            ]
+        }
+    }, {
         "name": "Windows Built-in Screen Magnifier",
         "id": "com.microsoft.windows.magnifier",
         "contexts": {
