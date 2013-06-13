@@ -33,7 +33,7 @@
                  "setSettings", 
                 {
                     "type": "gpii.launch.exec",
-					"command": "\"C:\\Program Files\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
+                    "command": "\"C:\\Program Files\\Texthelp Systems\\Read And Write 10\\ReadAndWrite.exe\""
                 }
             ],
             "stop": [
