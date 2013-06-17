@@ -74,7 +74,11 @@
     {
         "id": "webinsight.webAnywhere.linux"
     },
-    
+
+    {
+        "id": "com.texthelp.readWriteGold"
+    },
+
     {
         "id": "com.microsoft.windows.highContrast"
     },
@@ -90,4 +94,5 @@
     {
         "id": "com.microsoft.windows.cursors"
     }
+
 ]
