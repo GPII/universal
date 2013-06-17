@@ -1,19 +1,40 @@
 {
-  "name": "universal",
-  "description": "Cross platform, core components of the GPII personalization infrastructure.",
-  "version": "0.1",
-  "author": "GPII",
-  "bugs": "http://wiki.gpii.net/index.php/Main_Page",
-  "homepage": "http://gpii.net/",
-  "dependencies": {},
-  "licenses": [
-     {
-       "type": "BSD-3-Clause",
-       "url": "http://www.opensource.org/licenses/BSD-3-Clause"
-     }
-  ],
-  "keywords": ["gpii", "accessibility", "settings", "fluid", "IoC", "Inversion of Control", "configuration", "evented"],
-  "repository": "git://github.com/GPII/universal.git",
-  "main": "./gpii/index.js",
-  "engines": { "node" : ">=0.1.9" }
+    "name": "universal",
+    "description": "Cross platform, core components of the GPII personalization infrastructure.",
+    "version": "0.1.0",
+    "author": "GPII",
+    "bugs": "http://wiki.gpii.net/index.php/Main_Page",
+    "homepage": "http://gpii.net/",
+    "dependencies": {
+        "express": "~3.1.0",
+        "infusion": "git://github.com/fluid-project/infusion.git#08f3b382d9d556c5c8d21b2f16e65851ed8a1c62",
+        "node-uuid": "~1.4.0",
+        "semver": "~1.1.4",
+        "when": "~1.8.1",
+        "xml-mapping": "~1.2.0"
+    },
+    "devDependencies": {
+        "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e9bf72445bd343a4f3aabe3ba96a1087d3498612"
+    },
+    "licenses": [
+        {
+            "type": "BSD-3-Clause",
+            "url": "http://www.opensource.org/licenses/BSD-3-Clause"
+        }
+    ],
+    "keywords": [
+        "gpii",
+        "accessibility",
+        "settings",
+        "fluid",
+        "IoC",
+        "Inversion of Control",
+        "configuration",
+        "evented"
+    ],
+    "repository": "git://github.com/GPII/universal.git",
+    "main": "./gpii/index.js",
+    "engines": {
+        "node": ">=0.1.9"
+    }
 }

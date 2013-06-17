@@ -82,6 +82,22 @@
 
         {
             "id": "com.texthelp.readWriteGold"
+        },
+    
+        {
+            "id": "com.microsoft.windows.highContrast"
+        },
+            
+        {
+            "id": "com.microsoft.windows.nonClientMetrics"
+        },
+    
+        {
+            "id": "com.microsoft.windows.mouseTracking"
+        },
+        
+        {
+            "id": "com.microsoft.windows.cursors"
         }
     ]
 }
