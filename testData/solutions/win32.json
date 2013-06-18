@@ -19,7 +19,7 @@
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
                 "capabilities": [
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.id",
+                    "applications.com\\.texthelp\\.readWriteGold.id",
                     "languageAssistance.applications.com\\.texthelp\\.readWriteGold.name",
                     "languageAssistance.applications.com\\.texthelp\\.readWriteGold.priority",
                     "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.Width\\.$t",
