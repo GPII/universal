@@ -20,24 +20,10 @@
                 },
                 "capabilities": [
                     "applications.com\\.texthelp\\.readWriteGold.id",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.name",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.priority",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.Width\\.$t",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.LargeIcons\\.$t",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optToolbarLargeIcons\\.$t",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.ShowText\\.$t",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optToolbarShowText\\.$t",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optSAPI5Speed\\.$t",
-                    "languageAssistance.applications.com\\.texthelp\\.readWriteGold.parameters.ApplicationSettings\\.AppBar\\.optAutoUseScreenReading\\.$t"
+                    "languageAssistance"
                 ],
                 "capabilitiesTransformations": {
-                    "ApplicationSettings\\.AppBar\\.Width": "ApplicationSettings\\.AppBar\\.Width",
-                    "ApplicationSettings\\.AppBar\\.ShowText": "ApplicationSettings\\.AppBar\\.ShowText",
-                    "ApplicationSettings\\.AppBar\\.optToolbarShowText": "ApplicationSettings\\.AppBar\\.optToolbarShowText",
-                    "ApplicationSettings\\.AppBar\\.LargeIcons": "ApplicationSettings\\.AppBar\\.LargeIcons",
-                    "ApplicationSettings\\.AppBar\\.optToolbarLargeIcons": "ApplicationSettings\\.AppBar\\.optToolbarLargeIcons",
-                    "ApplicationSettings\\.Speech\\.optSAPI5Speed": "ApplicationSettings\\.Speech\\.optSAPI5Speed",
-                    "ApplicationSettings\\.Speech\\.optAutoUseScreenReading": "ApplicationSettings\\.Speech\\.optAutoUseScreenReading"
+                    "ApplicationSettings": "ApplicationSettings"
                 }
             }
         ],
@@ -143,8 +129,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\Magnify.exe"
@@ -162,7 +148,7 @@
     {
         "name": "UI Options",
         "id": "fluid.uiOptions.windows",
-        "contexts": {             
+        "contexts": {
             "OS": [
                 {
                     "id": "win32",
@@ -257,13 +243,13 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
+            "start": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
                 }
             ],
-            "stop": [ 
+            "stop": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
@@ -273,7 +259,7 @@
                 }
             ]
         }
-    },     
+    },
 
     {
         "name": "EasyOne Communicator Windows",
@@ -286,7 +272,7 @@
                 }
             ]
         },
-        
+
         "settingsHandlers": [
             {
                 "type": "gpii.settingsHandlers.noSettings",
@@ -386,7 +372,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows High Contrast",
         "id": "com.microsoft.windows.highContrast",
@@ -439,7 +425,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Non-client Metrics",
         "id": "com.microsoft.windows.nonClientMetrics",
@@ -588,7 +574,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Mouse Tracking",
         "id": "com.microsoft.windows.mouseTracking",
@@ -643,7 +629,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Cursors",
         "id": "com.microsoft.windows.cursors",
@@ -1047,8 +1033,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
