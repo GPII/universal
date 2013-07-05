@@ -77,5 +77,21 @@
     
     {
         "id": "net.opendirective.maavis"
+    },
+
+    {
+        "id": "com.microsoft.windows.highContrast"
+    },
+        
+    {
+        "id": "com.microsoft.windows.nonClientMetrics"
+    },
+    
+    {
+        "id": "com.microsoft.windows.mouseTracking"
+    },
+    
+    {
+        "id": "com.microsoft.windows.cursors"
     }
 ]
