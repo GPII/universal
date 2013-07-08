@@ -1,9 +1,0 @@
-{
-    "http://registry.gpii.org/common/cursorSize": [{"value": "extralarge"}],
-    "http://registry.gpii.org/common/fontSize": [{"value": 20}],
-    "http://registry.gpii.org/common/mouseTrailing": [{"value": 16}],
-    
-    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
-    "http://registry.gpii.org/common/tracking": [{"value": "focus"}],
-    "http://registry.gpii.org/common/invertImages": [{"value": false}]
-}
