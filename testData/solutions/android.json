@@ -1,0 +1,103 @@
+[
+    {
+        "name": "FreeSpeech",
+        "id": "com.android.freespeech",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.com\\.android\\.freespeech.id",
+                    "display.screenReader.applications.com\\.android\\.freespeech.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.androidActivityManager.startFreespeech"
+                }
+            ],
+            "stop": [
+                {
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "TalkBack Screen Reader",
+        "id": "com.android.talkback",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.com\\.android\\.talkback.id",
+                    "display.screenReader.applications.com\\.android\\.talkback.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.androidActivityManager.startTalkback"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.androidActivityManager.stopTalkback"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "Android System Font Size Demo",
+        "id": "com.android.activitymanager",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidActivityManager.set",
+                "capabilities": [ 
+                    "display.screenEnhancement.applications.com\\.android\\.activityManager\\.interface.name",
+                    "applications.com\\.android\\.activityManager\\.interface.id" 
+                ],
+                "capabilitiesTransformations": {
+                    "text-scaling-factor": {
+                        "expander": {
+                            "type": "gpii.transformer.fontSizeToScale",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "baseFontSize": 12
+                        }
+                    }
+                },
+                "options": {
+                    "schema": "com.android.activityManager"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    }
+ 
+]
