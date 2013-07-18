@@ -88,8 +88,8 @@
                 }
             ],
             "stop": [ {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "Magnify.exe"
                 },
                 "restoreSettings"
             ]
@@ -129,8 +129,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "firefox.exe"
                 }
             ]
         }
@@ -166,8 +166,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im osk.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "osk.exe"
                 }
             ]
         }
@@ -202,11 +202,11 @@
             ],
             "stop": [ 
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "nvda_service.exe"
                 },{
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "nvda.exe"
                 }
             ]
         }
@@ -243,8 +243,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "firefox.exe"
                 }
             ]
         }
@@ -280,8 +280,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "firefox.exe"
                 }
             ]
         }
@@ -317,8 +317,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "name": "firefox.exe"
                 }
             ]
         }
