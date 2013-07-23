@@ -1,0 +1,30 @@
+{
+    "typeName": "rule.based.mm.production",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "gpii.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/flowManager/configs/production.json",
+        "../node_modules/matchMaker/configs/production.json",
+        "../node_modules/ontologyServer/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json"
+    ],
+    "demands": [{
+        "demandingName": "gpii.matchMaker.match",
+        "contextNames": ["gpii.matchMaker", "rule.based.mm.production"],
+        "demandSpec": {
+            "funcName": "gpii.ruleBasedMatchMaker.match",
+            "args": ["{callbackWrapper}", "{arguments}.0", "{arguments}.1", "{request}.req.body", "{arguments}.2"]
+        }
+    }]
+}
