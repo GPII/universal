@@ -7,11 +7,12 @@
     "homepage": "http://gpii.net/",
     "dependencies": {
         "express": "~3.1.0",
-        "infusion": "git://github.com/fluid-project/infusion.git#08f3b382d9d556c5c8d21b2f16e65851ed8a1c62",
+        "infusion": "git://github.com/fluid-project/infusion.git#c0ee40396fe44407d374915262e753b8bdc6d457",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "when": "~1.8.1",
-        "xml-mapping": "~1.2.0"
+        "xml-mapping": "~1.2.0",
+        "kettle": "git://github.com/yzen/kettle.git#GPII-116"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e9bf72445bd343a4f3aabe3ba96a1087d3498612"

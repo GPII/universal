@@ -1,6 +1,5 @@
 var fluid = require("infusion");
 
-fluid.require("gpiiFramework", require);
 fluid.require("matchMaker", require);
 fluid.require("transformer", require);
 fluid.require("deviceReporter", require);
