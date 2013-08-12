@@ -4,7 +4,7 @@
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
-                "type": "gpii.server",
+                "type": "kettle.server",
                 "options": {
                     "logging": true,
                     "port": 8081
@@ -15,5 +15,9 @@
     "includes": [
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
+    ],
+    "modules": [
+        "preferencesServer",
+        "solutionsRegistry"
     ]
 }
