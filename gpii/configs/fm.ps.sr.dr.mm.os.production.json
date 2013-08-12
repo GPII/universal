@@ -18,12 +18,5 @@
         "../node_modules/matchMaker/configs/production.json",
         "../node_modules/ontologyServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
-    ],
-    "modules": [
-        "solutionsRegistry",
-        "deviceReporter",
-        "flowManager",
-        "matchMaker",
-        "ontologyServer"
     ]
 }
