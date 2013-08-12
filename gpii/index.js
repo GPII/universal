@@ -1,5 +1,6 @@
 var fluid = require("infusion");
 
+fluid.require("kettle", require);
 fluid.require("matchMaker", require);
 fluid.require("transformer", require);
 fluid.require("deviceReporter", require);
