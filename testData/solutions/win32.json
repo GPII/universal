@@ -703,17 +703,17 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working.cur"
+                                        "value": "%SystemRoot%\\cursors\\aero_working.ani"
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working_l.cur"
+                                        "value": "%SystemRoot%\\cursors\\aero_working_l.ani"
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working_xl.cur"
+                                        "value": "%SystemRoot%\\cursors\\aero_working_xl.ani"
                                     }
                                 }
                             }
@@ -964,17 +964,17 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy.cur"
+                                        "value": "%SystemRoot%\\cursors\\aero_busy.ani"
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy_l.cur"
+                                        "value": "%SystemRoot%\\cursors\\aero_busy_l.ani"
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy_xl.cur"
+                                        "value": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
                                     }
                                 }
                             }
