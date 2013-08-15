@@ -56,22 +56,49 @@
                             "mouse": {
                                 "outputPath": "FollowMouse",
                                 "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
+                                    "expander": {
+                                        "type": "fluid.model.transform.value",
+                                        "input": 1,
+                                        "outputPath": "value"
+                                    },
+                                    "dataType": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.literalValue",
+                                            "value": "REG_DWORD"
+                                        }
+                                    }
                                 }
                             },
                             "caret": {
                                 "outputPath": "FollowCaret",
                                 "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
+                                    "expander": {
+                                        "type": "fluid.model.transform.value",
+                                        "input": 1,
+                                        "outputPath": "value"
+                                    },
+                                    "dataType": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.literalValue",
+                                            "value": "REG_DWORD"
+                                        }
+                                    }
                                 }
                             },
                             "focus": {
                                 "outputPath": "FollowFocus",
                                 "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
+                                    "expander": {
+                                        "type": "fluid.model.transform.value",
+                                        "input": 1,
+                                        "outputPath": "value"
+                                    },
+                                    "dataType": {
+                                        "expander": {
+                                            "type": "fluid.model.transform.literalValue",
+                                            "value": "REG_DWORD"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -80,8 +107,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\Magnify.exe"
@@ -99,7 +126,7 @@
     {
         "name": "UI Options",
         "id": "fluid.uiOptions.windows",
-        "contexts": {             
+        "contexts": {
             "OS": [
                 {
                     "id": "win32",
@@ -194,13 +221,13 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
+            "start": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
                 }
             ],
-            "stop": [ 
+            "stop": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
@@ -210,7 +237,7 @@
                 }
             ]
         }
-    },     
+    },
 
     {
         "name": "EasyOne Communicator Windows",
@@ -223,7 +250,7 @@
                 }
             ]
         },
-        
+
         "settingsHandlers": [
             {
                 "type": "gpii.settingsHandlers.noSettings",
@@ -323,7 +350,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows High Contrast",
         "id": "com.microsoft.windows.highContrast",
@@ -376,7 +403,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Non-client Metrics",
         "id": "com.microsoft.windows.nonClientMetrics",
@@ -525,7 +552,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Mouse Tracking",
         "id": "com.microsoft.windows.mouseTracking",
@@ -580,7 +607,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Cursors",
         "id": "com.microsoft.windows.cursors",
@@ -610,17 +637,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_arrow.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_arrow.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_arrow_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -639,17 +678,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_link.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_link.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_link_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_link_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_link_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_link_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -668,17 +719,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_helpsel.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_helpsel_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -697,17 +760,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working.ani"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_working.ani",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working_l.ani"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_working_l.ani",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_working_xl.ani",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -726,17 +801,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_unavail.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_unavail.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_unavail_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -755,17 +842,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_pen.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_pen.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_pen_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_pen_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -784,17 +883,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_move.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_move.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_move_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_move_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_move_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_move_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -813,17 +924,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nesw.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_nesw.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_nesw_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -842,17 +965,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ns.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_ns.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ns_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_ns_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -871,17 +1006,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nwse.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_nwse.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_nwse_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -900,17 +1047,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ew.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_ew.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ew_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_ew_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -929,17 +1088,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_up.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_up.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_up_l.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_up_l.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_up_xl.cur"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_up_xl.cur",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -958,17 +1129,29 @@
                             "options": {
                                 "normal": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy.ani"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_busy.ani",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "large": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy_l.ani"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_busy_l.ani",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 },
                                 "extralarge": {
                                     "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
+                                        "expander": {
+                                            "type": "fluid.model.transform.value",
+                                            "input": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
+                                            "outputPath": "value"
+                                        }
                                     }
                                 }
                             }
@@ -984,8 +1167,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
