@@ -6,12 +6,12 @@
     "bugs": "http://wiki.gpii.net/index.php/Main_Page",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "express": "~3.1.0",
-        "infusion": "git://github.com/fluid-project/infusion.git#c1a526d81663c7ce2c07d9c6c5327866ecc0102c",
+        "infusion": "git://github.com/fluid-project/infusion.git#c0ee40396fe44407d374915262e753b8bdc6d457",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "when": "~1.8.1",
-        "xml-mapping": "~1.2.0"
+        "xml-mapping": "~1.2.0",
+        "kettle": "git://github.com/fluid-project/kettle.git#dd630dda5b39bbb2ae20a693d70d2aedf4c1a487"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e9bf72445bd343a4f3aabe3ba96a1087d3498612"

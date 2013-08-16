@@ -3,6 +3,7 @@
 GPII Integration Testing
 
 Copyright 2013 Raising the Floor International
+Copyright 2013 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -18,6 +19,7 @@ https://github.com/gpii/universal/LICENSE.txt
     var fluid = require("infusion"),
         http = require("http"),
         gpii = fluid.registerNamespace("gpii"),
+        kettle = fluid.require("kettle", require),
         jqUnit = fluid.require("jqUnit"),
         child_process = require('child_process');
 
@@ -47,7 +49,7 @@ https://github.com/gpii/universal/LICENSE.txt
                 }
                 jqUnit.assertFalse("Got an error on exec... " + err.message, true);
             } else {
-                that.events.onExit.fire(stdout, processSpec);   
+                that.events.onExit.fire(stdout, processSpec);
             }
         });
     };
@@ -199,7 +201,7 @@ https://github.com/gpii/universal/LICENSE.txt
     };
 
     gpii.integrationTesting.startServer = function (testDef, tests) {
-        tests.componentName = gpii.config.createDefaults(testDef.gpiiConfig);
+        tests.componentName = kettle.config.createDefaults(testDef.gpiiConfig);
         tests.events.createServer.fire();
     };
     gpii.integrationTesting.initSettings = function (testDef, settingsStore) {
