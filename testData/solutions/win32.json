@@ -331,6 +331,42 @@
     },
 
     {
+        "name": "maavis",
+        "id": "net.opendirective.maavis",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+
+        "settingsHandlers": [{
+            "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
+            "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
+            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+        }],
+
+         "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+
+    {
         "name": "Windows High Contrast",
         "id": "com.microsoft.windows.highContrast",
         "contexts": {
