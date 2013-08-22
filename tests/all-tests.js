@@ -16,7 +16,6 @@ var fluid = fluid || require("infusion");
 
 (function () {
 
-    fluid.require("./IntegrationTests.js", require);
     fluid.require("../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js", require);
     fluid.require("../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js", require);
 
