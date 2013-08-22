@@ -4,7 +4,7 @@
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
-                "type": "gpii.server",
+                "type": "kettle.server",
                 "options": {
                     "logging": true,
                     "port": 8081

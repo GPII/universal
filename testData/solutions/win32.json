@@ -25,7 +25,7 @@
                     "Magnification": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "display.screenEnhancement.magnification",
+                            "inputPath": "display.screenEnhancement.magnification",
                             "outputPath": "value",
                             "factor": 100
                         },
@@ -61,37 +61,31 @@
                             "dataType": "REG_DWORD"
                         },
                         "options": {
-                            "focus": "FollowFocus", 
-                            "caret": "FollowCaret",
-                            "mouse": "FollowMouse"
-                        }
-                    }],                    
-                    "MagnificationMode": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.-provisional-magnifierPosition",
-                            "defaultOutputPath": "value",
-                            "options": {
-                                "FullScreen": {
-                                    "outputValue": 2
-                                },
-                                "Lens": {
-                                    "outputValue": 3
-                                },
-                                "LeftHalf": {
-                                    "outputValue": 1
-                                },
-                                "RightHalf": {
-                                    "outputValue": 1
-                                },
-                                "TopHalf": {
-                                    "outputValue": 1
-                                },
-                                "BottomHalf": {
-                                    "outputValue": 1
-                                },
-                                "Custom": {
-                                    "outputValue": 2
+                            "mouse": {
+                                "outputPath": "FollowMouse",
+                                "outputValue": {
+                                    "value": {
+                                        "value": 1,
+                                        "dataType": "REG_DWORD"
+                                    }
+                                }
+                            },
+                            "caret": {
+                                "outputPath": "FollowCaret",
+                                "outputValue": {
+                                    "value": {
+                                        "value": 1,
+                                        "dataType": "REG_DWORD"
+                                    }
+                                }
+                            },
+                            "focus": {
+                                "outputPath": "FollowFocus",
+                                "outputValue": {
+                                    "value": {
+                                        "value": 1,
+                                        "dataType": "REG_DWORD"
+                                    }
                                 }
                             }
                         },
@@ -106,8 +100,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\Magnify.exe"
@@ -125,7 +119,7 @@
     {
         "name": "UI Options",
         "id": "fluid.uiOptions.windows",
-        "contexts": {             
+        "contexts": {
             "OS": [
                 {
                     "id": "win32",
@@ -220,13 +214,13 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
+            "start": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
                 }
             ],
-            "stop": [ 
+            "stop": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
@@ -236,7 +230,7 @@
                 }
             ]
         }
-    },     
+    },
 
     {
         "name": "EasyOne Communicator Windows",
@@ -249,7 +243,7 @@
                 }
             ]
         },
-        
+
         "settingsHandlers": [
             {
                 "type": "gpii.settingsHandlers.noSettings",
@@ -349,7 +343,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows High Contrast",
         "id": "com.microsoft.windows.highContrast",
@@ -402,7 +396,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Non-client Metrics",
         "id": "com.microsoft.windows.nonClientMetrics",
@@ -432,7 +426,7 @@
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -459,7 +453,7 @@
                     },
                     "MenuFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -486,7 +480,7 @@
                     },
                     "SmallCaptionFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -513,7 +507,7 @@
                     },
                     "StatusFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -527,7 +521,7 @@
                     },
                     "MessageFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -551,7 +545,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Mouse Tracking",
         "id": "com.microsoft.windows.mouseTracking",
@@ -606,7 +600,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Cursors",
         "id": "com.microsoft.windows.cursors",
@@ -1010,8 +1004,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
@@ -1023,8 +1017,6 @@
                 }
             ]
         }
-<<<<<<< HEAD
-=======
     },
     
     {
@@ -1734,6 +1726,5 @@
                 }
             ]
         }
->>>>>>> 90da405... GPII-85: Now supports all magnifiersettings and cursor size. Updated reference to fluid repo
     }
 ]

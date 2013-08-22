@@ -318,7 +318,7 @@
                     "slowkeys-delay": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
+                            "inputPath": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
                             "factor": 1000
                         }
                     },
@@ -326,7 +326,7 @@
                     "bouncekeys-delay": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "control.keyboardEnhancement.debounceKeys.debounceInterval",
+                            "inputPath": "control.keyboardEnhancement.debounceKeys.debounceInterval",
                             "factor": 1000
                         }
                     },
@@ -334,21 +334,21 @@
                     "mousekeys-init-delay": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "control.mouseEmulation.-provisional-initDelay",
+                            "inputPath": "control.mouseEmulation.-provisional-initDelay",
                             "factor": 1000
                         }
                     },
                     "mousekeys-max-speed": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "control.mouseEmulation.cursorSpeed",
+                            "inputPath": "control.mouseEmulation.cursorSpeed",
                             "factor": 1000
                         }
                     },
                     "mousekeys-accel-time": {
                         "expander": {
                             "type": "fluid.model.transform.scaleValue",
-                            "valuePath": "control.mouseEmulation.cursorAcceleration",
+                            "inputPath": "control.mouseEmulation.cursorAcceleration",
                             "factor": 1000
                         }
                     }
