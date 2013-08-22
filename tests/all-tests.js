@@ -17,9 +17,8 @@ var fluid = fluid || require("infusion"),
 
 (function () {
 
-    fluid.require("../gpii/node_modules/gpiiFramework/test/DataSourceTests.js", require);
-    fluid.require("../gpii/node_modules/gpiiFramework/test/DataSourceTests.js", require);
     fluid.require("../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js", require);
     fluid.require("../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js", require);
+    fluid.require("../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js", require);
 
 }());
