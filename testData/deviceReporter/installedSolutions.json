@@ -2,6 +2,14 @@
     {
         "id": "org.gnome.desktop.interface"
     },
+
+    {
+        "id": "org.gnome.shell.overrides"
+    },
+
+    {
+        "id": "org.gnome.desktop.wm.preferences"
+    },
     
     {
         "id": "org.gnome.nautilus"
