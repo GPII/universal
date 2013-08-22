@@ -24,7 +24,7 @@
                 "capabilitiesTransformations": {
                     "Magnification": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.magnification",
                             "outputPath": "value",
                             "factor": 100
@@ -56,22 +56,28 @@
                             "mouse": {
                                 "outputPath": "FollowMouse",
                                 "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
+                                    "value": {
+                                        "value": 1,
+                                        "dataType": "REG_DWORD"
+                                    }
                                 }
                             },
                             "caret": {
                                 "outputPath": "FollowCaret",
                                 "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
+                                    "value": {
+                                        "value": 1,
+                                        "dataType": "REG_DWORD"
+                                    }
                                 }
                             },
                             "focus": {
                                 "outputPath": "FollowFocus",
                                 "outputValue": {
-                                    "value": 1,
-                                    "dataType": "REG_DWORD"
+                                    "value": {
+                                        "value": 1,
+                                        "dataType": "REG_DWORD"
+                                    }
                                 }
                             }
                         }
@@ -80,8 +86,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\Magnify.exe"
@@ -99,7 +105,7 @@
     {
         "name": "UI Options",
         "id": "fluid.uiOptions.windows",
-        "contexts": {             
+        "contexts": {
             "OS": [
                 {
                     "id": "win32",
@@ -194,13 +200,13 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
+            "start": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
                 }
             ],
-            "stop": [ 
+            "stop": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
@@ -210,7 +216,7 @@
                 }
             ]
         }
-    },     
+    },
 
     {
         "name": "EasyOne Communicator Windows",
@@ -223,7 +229,7 @@
                 }
             ]
         },
-        
+
         "settingsHandlers": [
             {
                 "type": "gpii.settingsHandlers.noSettings",
@@ -323,7 +329,43 @@
             ]
         }
     },
-    
+
+    {
+        "name": "maavis",
+        "id": "net.opendirective.maavis",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+
+        "settingsHandlers": [{
+            "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
+            "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
+            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+        }],
+
+         "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+
     {
         "name": "Windows High Contrast",
         "id": "com.microsoft.windows.highContrast",
@@ -376,7 +418,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Non-client Metrics",
         "id": "com.microsoft.windows.nonClientMetrics",
@@ -406,7 +448,7 @@
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -433,7 +475,7 @@
                     },
                     "MenuFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -460,7 +502,7 @@
                     },
                     "SmallCaptionFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -487,7 +529,7 @@
                     },
                     "StatusFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -501,7 +543,7 @@
                     },
                     "MessageFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -525,7 +567,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Mouse Tracking",
         "id": "com.microsoft.windows.mouseTracking",
@@ -580,7 +622,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Windows Cursors",
         "id": "com.microsoft.windows.cursors",
@@ -984,8 +1026,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
