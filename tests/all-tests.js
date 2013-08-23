@@ -12,8 +12,7 @@ https://github.com/gpii/universal/LICENSE.txt
 
 /*global require, __dirname*/
 // This loads universal.
-var fluid = fluid || require("infusion"),
-    gpii = fluid.registerNamespace("gpii");
+var fluid = fluid || require("infusion");
 
 (function () {
 
