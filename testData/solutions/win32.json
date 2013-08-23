@@ -24,7 +24,7 @@
                 "capabilitiesTransformations": {
                     "Magnification": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.magnification",
                             "outputPath": "value",
                             "factor": 100
@@ -192,15 +192,283 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "options": {
+                    "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                    "allowNumberSignComments": true,
+                    "allowSubSections": true
+                },
                 "capabilities": [
                     "applications.nvda\\.screenReader.id",
                     "display.screenReader.applications.nvda\\.screenReader.name"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
+                    "keyboard\\.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
+                    "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
+                    "speech\\.espeak\\.sayCapForCapitals": "display.screenReader.-provisional-announceCapitals",
+                    "virtualBuffers\\.autoSayAllOnPageLoad": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.textReadingHighlight.readingUnit",
+                            "defaultInputValue": "sentence",
+                            "options": {
+                                "all": {
+                                    "outputValue": true
+                                },
+                                "sentence": {
+                                    "outputValue": false
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.symbolLevel": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                            "options": {
+                                "none": {
+                                    "outputValue": "0"
+                                },
+                                "some": {
+                                    "outputValue": "100"
+                                },
+                                "most": {
+                                    "outputValue": "200"
+                                },
+                                "all": {
+                                    "outputValue": "300"
+                                }
+                            }
+                        }
+                    },
+                    "speech": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "options": {
+                                "false": {
+                                    "outputValue": {
+                                        "expander": [
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "silence",
+                                                "outputPath": "synth"
+                                            },
+                                            {
+                                                "type": "fluid.model.transform.literalValue",
+                                                "value": "Microsoft Sound Mapper",
+                                                "outputPath": "outputDevice"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.espeak\\.voice": {
+                        "expander": {
+                            "type": "fluid.model.transform.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-auditoryOutLanguage",
+                            "options": {
+                                "en": {
+                                    "outputValue": "en\\en"
+                                },
+                                "en-GB": {
+                                    "outputValue": "en\\en"
+                                },
+                                "en-US": {
+                                    "outputValue": "en\\en-us"
+                                },
+                                "en-scotland": {
+                                    "outputValue": "en\\en-sc"
+                                },
+                                "en-BZ": {
+                                    "outputValue": "en\\en-wi"
+                                },
+                                "en-BS": {
+                                    "outputValue": "en\\en-wi"
+                                },
+                                "en-AG": {
+                                    "outputValue": "en\\en-wi"
+                                },
+                                "en-AI": {
+                                    "outputValue": "en\\en-wi"
+                                },
+                                "af": {
+                                    "outputValue": "af"
+                                },
+                                "bg": {
+                                    "outputValue": "bg"
+                                },
+                                "bs": {
+                                    "outputValue": "bs"
+                                },
+                                "ca": {
+                                    "outputValue": "ca"
+                                },
+                                "cs": {
+                                    "outputValue": "cs"
+                                },
+                                "cy": {
+                                    "outputValue": "cy"
+                                },
+                                "da": {
+                                    "outputValue": "da"
+                                },
+                                "de": {
+                                    "outputValue": "de"
+                                },
+                                "el": {
+                                    "outputValue": "el"
+                                },
+                                "grc": {
+                                    "outputValue": "test\\grc"
+                                },
+                                "eo": {
+                                    "outputValue": "eo"
+                                },
+                                "es": {
+                                    "outputValue": "es"
+                                },
+                                "es-ES": {
+                                    "outputValue": "es"
+                                },
+                                "es-419": {
+                                    "outputValue": "es-la"
+                                },
+                                "et": {
+                                    "outputValue": "et"
+                                },
+                                "fi": {
+                                    "outputValue": "fi"
+                                },
+                                "fr": {
+                                    "outputValue": "fr"
+                                },
+                                "fr-BE": {
+                                    "outputValue": "fr-be"
+                                },
+                                "hi": {
+                                    "outputValue": "hi"
+                                },
+                                "hr": {
+                                    "outputValue": "hr"
+                                },
+                                "hu": {
+                                    "outputValue": "hu"
+                                },
+                                "hy": {
+                                    "outputValue": "hy"
+                                },
+                                "hy-arevmda": {
+                                    "outputValue": "hy-west"
+                                },
+                                "id": {
+                                    "outputValue": "id"
+                                },
+                                "is": {
+                                    "outputValue": "is"
+                                },
+                                "it": {
+                                    "outputValue": "it"
+                                },
+                                "jbo": {
+                                    "outputValue": "test\\jbo"
+                                },
+                                "ka": {
+                                    "outputValue": "ka"
+                                },
+                                "kn": {
+                                    "outputValue": "kn"
+                                },
+                                "ku": {
+                                    "outputValue": "ku"
+                                },
+                                "la": {
+                                    "outputValue": "la"
+                                },
+                                "lv": {
+                                    "outputValue": "lv"
+                                },
+                                "mk": {
+                                    "outputValue": "mk"
+                                },
+                                "ml": {
+                                    "outputValue": "ml"
+                                },
+                                "nci": {
+                                    "outputValue": "test\\nci"
+                                },
+                                "nl": {
+                                    "outputValue": "nl"
+                                },
+                                "no": {
+                                    "outputValue": "no"
+                                },
+                                "pap": {
+                                    "outputValue": "test\\pap"
+                                },
+                                "pl": {
+                                    "outputValue": "pl"
+                                },
+                                "pt-BR": {
+                                    "outputValue": "pt"
+                                },
+                                "pt-PT": {
+                                    "outputValue": "pt-pt"
+                                },
+                                "ro": {
+                                    "outputValue": "ro"
+                                },
+                                "ru": {
+                                    "outputValue": "ru"
+                                },
+                                "sk": {
+                                    "outputValue": "sk"
+                                },
+                                "sq": {
+                                    "outputValue": "sq"
+                                },
+                                "sr": {
+                                    "outputValue": "sr"
+                                },
+                                "sv": {
+                                    "outputValue": "sv"
+                                },
+                                "sw": {
+                                    "outputValue": "sw"
+                                },
+                                "ta": {
+                                    "outputValue": "ta"
+                                },
+                                "tr": {
+                                    "outputValue": "tr"
+                                },
+                                "vi": {
+                                    "outputValue": "vi"
+                                },
+                                "zh-cmn": {
+                                    "outputValue": "zh"
+                                },
+                                "cmn": {
+                                    "outputValue": "zh"
+                                },
+                                "zh-yue": {
+                                    "outputValue": "zh-yue"
+                                },
+                                "zh-yue": {
+                                    "outputValue": "yue"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         ],
         "lifecycleManager": {
             "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
@@ -213,7 +481,8 @@
                 },{
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
-                }
+                },
+                "restoreSettings"
             ]
         }
     },
@@ -331,6 +600,42 @@
     },
 
     {
+        "name": "maavis",
+        "id": "net.opendirective.maavis",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+
+        "settingsHandlers": [{
+            "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
+            "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
+            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+        }],
+
+         "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+
+    {
         "name": "Windows High Contrast",
         "id": "com.microsoft.windows.highContrast",
         "contexts": {
@@ -412,7 +717,7 @@
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -439,7 +744,7 @@
                     },
                     "MenuFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -466,7 +771,7 @@
                     },
                     "SmallCaptionFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -493,7 +798,7 @@
                     },
                     "StatusFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
@@ -507,7 +812,7 @@
                     },
                     "MessageFontHeight": {
                         "expander": {
-                            "type": "gpii.transformer.scaleValue",
+                            "type": "fluid.model.transform.scaleValue",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
