@@ -35,7 +35,7 @@
                         }
                     },
                     "transform": [{
-                        "type": "fluid.transforms.arrayToOutputs",
+                        "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "display.screenEnhancement.tracking",
                         "presentValue": {
                             "value": 1,
@@ -54,7 +54,7 @@
                         "type": "fluid.transforms.round",
                         "input": {
                             "transform": {
-                                "type": "fluid.transforms.linearScale ",
+                                "type": "fluid.transforms.linearScale",
                                 "valuePath": "display.screenEnhancement.magnification",
                                 "factor": 100
                             }
@@ -239,7 +239,7 @@
                     },
                     "transform": [
                         {
-                            "type": "fluid.transforms.arrayToOutputs",
+                            "type": "fluid.transforms.arrayToSetMembership",
                             "inputPath": "display.screenEnhancement.trackingTTS",
                             "presentValue": true,
                             "missingValue": false,
@@ -729,7 +729,8 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.highContrast"
+                    "display.screenEnhancement.highContrast",
+                    "applications.com\\.microsoft\\.windows\\.highContrast.id"
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {

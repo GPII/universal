@@ -44,7 +44,7 @@
         "control.structuralNavigation.tableOfContents": "{http://registry.gpii.org/common/tableOfContents}.0.value",
         
         "": {
-            "expander": {
+            "transform": {
                 "type": "gpii.ontologyServer.transform.application",
                 "inputPath": "",
                 "outputPath": "applications"
