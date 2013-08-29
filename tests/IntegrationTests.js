@@ -42,12 +42,14 @@ https://github.com/gpii/universal/LICENSE.txt
     });
 
     gpii.integrationTesting.exec.exec = function (that, processSpec) {
+        fluid.log("Exec'ing: "+processSpec.command);
         child_process.exec(processSpec.command, function (err, stdout, stderr) {
             if (err) {
                 if (stderr) {
                     fluid.log("stderr from '" + processSpec.command + "': " + stderr);
                 }
                 jqUnit.assertFalse("Got an error on exec... " + err.message, true);
+                //that.events.onExit.fire(sterr, processSpec);
             } else {
                 that.events.onExit.fire(stdout, processSpec);
             }
@@ -200,6 +202,16 @@ https://github.com/gpii/universal/LICENSE.txt
         return ret;
     };
 
+    gpii.integrationTesting.removeOptionsBlocks = function (payload) {
+        var togo = fluid.copy(payload);
+        return fluid.transform(togo, function (settingHandler) {
+            return fluid.transform(settingHandler, function (solutionBlocks) {            
+                return fluid.transform(solutionBlocks, function (solutionBlock) {
+                    return { settings: solutionBlock.settings};
+                });
+            });
+        });
+    }
     gpii.integrationTesting.startServer = function (testDef, tests) {
         tests.componentName = kettle.config.createDefaults(testDef.gpiiConfig);
         tests.events.createServer.fire();
@@ -212,7 +224,8 @@ https://github.com/gpii/universal/LICENSE.txt
     };
     gpii.integrationTesting.checkConfiguration = function (testDef) {
         var config = gpii.integrationTesting.getSettings(testDef.settingsHandlers);
-        jqUnit.assertDeepEq("Checking that settings are set", config, testDef.settingsHandlers);
+        var noOptions = gpii.integrationTesting.removeOptionsBlocks(testDef.settingsHandlers);
+        jqUnit.assertDeepEq("Checking that settings are set", config, noOptions);
     };
     gpii.integrationTesting.onExecExit = function (output, processSpec) {
         jqUnit.assertEquals("Checking that the process "+processSpec.command+" is running", processSpec.expect, output.trim());

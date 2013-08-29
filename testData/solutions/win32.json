@@ -12,7 +12,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler",
+                "type": "gpii.windows.registrySettingsHandler.set",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier"
@@ -976,7 +976,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler",
+                "type": "gpii.windows.registrySettingsHandler.set",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors"
