@@ -783,116 +783,82 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.nonClientMetrics"
+                    "applications.com\\.microsoft\\.windows\\.nonClientMetrics.id",
+                    "display.screenEnhancement.fontSize"
                 ],
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.lfCaptionFont.lfHeight"
-                            }
+                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
                         }
                     },
                     "CaptionHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "outputPath": "value",
-                            "value": 0
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.iCaptionHeight"
-                            }
+                        "literalValue": {
+                            "value": 0,
+                            "path": "pvParam.iCaptionHeight"
                         }
                     },
                     "MenuFontHeight": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.lfMenuFont.lfHeight"
-                            }
+                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
+
                         }
                     },
                     "MenuHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "outputPath": "value",
-                            "value": 0
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.iMenuHeight"
-                            }
+                        "value": {
+                            "value": 0,
+                            "path": "pvParam.iMenuHeight"
                         }
                     },
                     "SmallCaptionFontHeight": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.lfSmCaptionFont.lfHeight"
-                            }
+                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
                         }
                     },
                     "SmallCaptionHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "outputPath": "value",
-                            "value": 0
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.iSmCaptionHeight"
-                            }
+                        "literalValue": {
+                            "value": 0,
+                            "path": "pvParam.iSmCaptionHeight"
                         }
                     },
                     "StatusFontHeight": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.lfStatusFont.lfHeight"
-                            }
+                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
                         }
                     },
                     "MessageFontHeight": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "valuePath": "display.screenEnhancement.fontSize",
                             "outputPath": "value",
                             "factor": -1
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.lfMessageFont.lfHeight"
-                            }
+                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
                         }
                     }
                 }
