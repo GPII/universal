@@ -117,9 +117,10 @@
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "expander": {
-                            "type": "gpii.transformer.fontSizeToScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "baseFontSize": 12
+                            "type": "fluid.model.transform.binaryOp",
+                            "leftPath": "display.screenEnhancement.fontSize",
+                            "operator": "/",
+                            "right": 11
                         }
                     }
                 },
