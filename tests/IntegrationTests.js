@@ -29,15 +29,9 @@ fluid.registerNamespace("gpii.integrationTesting");
 fluid.defaults("gpii.integrationTesting.exec", {
     gradeNames: ["autoInit", "fluid.eventedComponent"],
     events: {
-        onExecResult: null,
-        onFinalResult: null
+        onExec: null,
+        onExecAndExpect: null
     },
-    // listeners: {
-    //     onIntermediateResult: function (tmp1, tmp2) {
-    //         console.log(tmp1);
-    //         console.log(tmp2);
-    //     }
-    // },
     invokers: {
         exec: {
             funcName: "gpii.integrationTesting.exec.exec",
@@ -61,7 +55,7 @@ gpii.integrationTesting.exec.exec = function (that, processSpec) {
             }
             jqUnit.assertFalse("Got an error on exec... " + err.message, true);
         } else {
-            that.events.onExecResult.fire(stdout, processSpec);
+            that.events.onExec.fire(stdout, processSpec);
         }
     });
 };
@@ -80,13 +74,12 @@ gpii.integrationTesting.exec.execAndExpect = function (that, processSpec) {
         }
 
         if (stdout.trim() === expected) {
-            //jqUnit.assertTrue(, true);
-            that.events.onExecResult.fire(true, processSpec);
+            that.events.onExecAndExpect.fire(true, processSpec);
         } else {
             processSpec.count = processSpec.count || 0;
             
             if (processSpec.count >= maxLoops) {
-                that.events.onExecResult.fire(false, processSpec);
+                that.events.onExecAndExpect.fire(false, processSpec);
             } else {
                 processSpec.count++;
                 setTimeout(function () {
@@ -222,8 +215,8 @@ gpii.integrationTesting.buildTestFixtures = function (testDefs) {
                 args: [ testDefRef + ".processes." + pindex ]
             }
             , {
-                listener: "gpii.integrationTesting.onExecExit",
-                event: "{exec}.events.onExecResult"
+                listener: "gpii.integrationTesting.onExecAndExpectExit",
+                event: "{exec}.events.onExecAndExpect"
             });
         });
         //Logout, check that configuration is properly restored
@@ -242,7 +235,6 @@ gpii.integrationTesting.buildTestFixtures = function (testDefs) {
     });
     return testFixtures;
 };
-
 /*
 * Sets the settings given in the json paramater. The content of the json passed
 * is the values to set in a format similar to the content of 'initialState'
@@ -290,9 +282,7 @@ gpii.integrationTesting.checkConfiguration = function (testDef) {
     jqUnit.assertDeepEq("Checking that settings are set", config, noOptions);
 };
 
-gpii.integrationTesting.onExecExit = function (result, processSpec) {
-    //jqUnit.assertEquals("Checking that the process " + processSpec.command +
-    //    " is running", processSpec.expect, output.trim());
+gpii.integrationTesting.onExecAndExpectExit = function (result, processSpec) {
     jqUnit.assertTrue("Checking the process with command: " + processSpec, result);
 };
 
