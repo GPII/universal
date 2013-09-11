@@ -298,3 +298,19 @@ gpii.integrationTesting.checkRestoredConfiguration = function (testDef, settings
     jqUnit.assertDeepEq("Checking that settings are properly reset",
         settingsStore.orig, currentSettings);
 };
+
+
+gpii.integrationTesting.buildTests = function (testDefs) {
+    fluid.defaults("gpii.integrationTesting.tests", {
+        gradeNames: ["autoInit", "gpii.integrationTesting.testCaseHolder"],
+        testDefs: gpii.lifecycleManager.resolver().resolve(testDefs),
+        modules: [ {
+            name: "Full login/logout cycle",
+            tests: gpii.integrationTesting.buildTestFixtures(testDefs)
+        }]
+    });
+
+    fluid.test.runTests([
+        "gpii.integrationTesting.testEnv"
+    ]);    
+};  
