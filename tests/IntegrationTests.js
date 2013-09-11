@@ -136,105 +136,6 @@ gpii.integrationTesting.httpReq.call = function (token, action, callback) {
     });
 };
 
-//definition of tests, sequence, etc.
-fluid.defaults("gpii.integrationTesting.testEnv", {
-    gradeNames: ["fluid.test.testEnvironment", "autoInit"],
-    components: {
-        httpReq: {
-            type: "gpii.integrationTesting.httpReq"
-        },
-        exec: {
-            type: "gpii.integrationTesting.exec"
-        },
-        tests: {
-            type: "gpii.integrationTesting.tests"
-        }
-    }
-});
-
-fluid.defaults("gpii.integrationTesting.server", {
-    gradeNames: ["autoInit", "fluid.littleComponent", "{that}.buildServerGrade"],
-    invokers: {
-        buildServerGrade: {
-            funcName: "fluid.identity",
-            args: "{gpii.integrationTesting.testCaseHolder}.componentName"
-        }
-    }
-});
-
-fluid.defaults("gpii.integrationTesting.testCaseHolder", {
-    gradeNames: ["autoInit", "fluid.test.testCaseHolder"],
-    members: {
-        settingsStore: {}
-    },
-    events: {
-        createServer: null
-    },
-    components: {
-        server: {
-            type: "gpii.integrationTesting.server",
-            createOnEvent: "createServer"
-        }
-    }
-});
-
-gpii.integrationTesting.buildTestFixtures = function (testDefs) {
-    var testFixtures = [];
-
-    fluid.each(testDefs, function (testDef, index) {
-        var processes = testDef.processes;
-        var testDefRef = "{tests}.options.testDefs." + index;
-        // Storing state, start server, logging in and checking that
-        // configuration is set
-        var testFixture = {
-            name: testDef.name,
-            //number of asserts is 4 + number of checks for running processes
-            expect: 4 + testDef.processes.length,
-            sequence: [ {
-                func: "gpii.integrationTesting.startServer",
-                args: [ testDefRef, "{tests}" ]
-            }, {
-                func: "gpii.integrationTesting.initSettings",
-                args: [ testDefRef, "{tests}.settingsStore" ]
-            }, {
-                func: "{httpReq}.login",
-                args: [ testDefRef + ".token" ]
-            }, {
-                listener: "gpii.integrationTesting.loginRequestListen",
-                event: "{httpReq}.events.onLogin"
-            }, {
-                func: "gpii.integrationTesting.checkConfiguration",
-                args: [ testDefRef ]
-            }]
-        };
-        // For each process, run the command, then check that we get the
-        // expected output
-        fluid.each(processes, function (process, pindex) {
-            testFixture.sequence.push({
-                func: "{exec}.execAndExpect",
-                args: [ testDefRef + ".processes." + pindex ]
-            }
-            , {
-                listener: "gpii.integrationTesting.onExecAndExpectExit",
-                event: "{exec}.events.onExecAndExpect"
-            });
-        });
-        //Logout, check that configuration is properly restored
-        testFixture.sequence.push({
-                func: "{httpReq}.logout",
-                args: [ testDefRef + ".token" ]
-            }, {
-                listener: "gpii.integrationTesting.logoutRequestListen",
-                event: "{httpReq}.events.onLogout"
-            }, {
-                func: "gpii.integrationTesting.checkRestoredConfiguration",
-                args: [ testDefRef, "{tests}.settingsStore"]
-            });
-
-        testFixtures.push(testFixture);
-    });
-    return testFixtures;
-};
 /*
 * Sets the settings given in the json paramater. The content of the json passed
 * is the values to set in a format similar to the content of 'initialState'
@@ -264,7 +165,7 @@ gpii.integrationTesting.startServer = function (testDef, tests) {
     tests.events.createServer.fire();
 };
 
-gpii.integrationTesting.initSettings = function (testDef, settingsStore) {
+gpii.integrationTesting.snapshotSettings = function (testDef, settingsStore) {
     settingsStore.orig = gpii.integrationTesting.getSettings(
         testDef.settingsHandlers);
 };
@@ -299,18 +200,117 @@ gpii.integrationTesting.checkRestoredConfiguration = function (testDef, settings
         settingsStore.orig, currentSettings);
 };
 
-
-gpii.integrationTesting.buildTests = function (testDefs) {
-    fluid.defaults("gpii.integrationTesting.tests", {
-        gradeNames: ["autoInit", "gpii.integrationTesting.testCaseHolder"],
-        testDefs: gpii.lifecycleManager.resolver().resolve(testDefs),
-        modules: [ {
-            name: "Full login/logout cycle",
-            tests: gpii.integrationTesting.buildTestFixtures(testDefs)
+gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
+    var processes = testDef.processes;
+    var testDefRef = "{tests}.options.testDef";
+    // Storing state, start server, logging in and checking that
+    // configuration is set
+    var testFixture = {
+        name: testDef.name,
+        //number of asserts is 4 + number of checks for running processes
+        expect: 4 + testDef.processes.length,
+        sequence: [ {
+            func: "gpii.integrationTesting.startServer",
+            args: [ testDefRef, "{tests}" ]
+        }, {
+            func: "gpii.integrationTesting.snapshotSettings",
+            args: [ testDefRef, "{tests}.settingsStore" ]
+        }, {
+            func: "{httpReq}.login",
+            args: [ testDefRef + ".token" ]
+        }, {
+            listener: "gpii.integrationTesting.loginRequestListen",
+            event: "{httpReq}.events.onLogin"
+        }, {
+            func: "gpii.integrationTesting.checkConfiguration",
+            args: [ testDefRef ]
         }]
+    };
+    // For each process, run the command, then check that we get the
+    // expected output
+    fluid.each(processes, function (process, pindex) {
+        testFixture.sequence.push({
+            func: "{exec}.execAndExpect",
+            args: [ testDefRef + ".processes." + pindex ]
+        }, {
+            listener: "gpii.integrationTesting.onExecAndExpectExit",
+            event: "{exec}.events.onExecAndExpect"
+        });
+    });
+    //Logout, check that configuration is properly restored
+    testFixture.sequence.push({
+        func: "{httpReq}.logout",
+        args: [ testDefRef + ".token" ]
+    }, {
+        listener: "gpii.integrationTesting.logoutRequestListen",
+        event: "{httpReq}.events.onLogout"
+    }, {
+        func: "gpii.integrationTesting.checkRestoredConfiguration",
+        args: [ testDefRef, "{tests}.settingsStore"]
     });
 
-    fluid.test.runTests([
-        "gpii.integrationTesting.testEnv"
-    ]);    
+    return testFixture;
+};
+
+fluid.defaults("gpii.integrationTesting.server", {
+    gradeNames: ["autoInit", "fluid.littleComponent", "{that}.buildServerGrade"],
+    invokers: {
+        buildServerGrade: {
+            funcName: "fluid.identity",
+            args: "{gpii.integrationTesting.testCaseHolder}.componentName"
+        }
+    }
+});
+
+fluid.defaults("gpii.integrationTesting.testCaseHolder", {
+    gradeNames: ["autoInit", "fluid.test.testCaseHolder"],
+    members: {
+        settingsStore: {}
+    },
+    events: {
+        createServer: null
+    },
+    components: {
+        server: {
+            type: "gpii.integrationTesting.server",
+            createOnEvent: "createServer"
+        }
+    }
+});
+
+gpii.integrationTesting.buildTests = function (testDefs) {
+    var tests = [];
+    fluid.each(testDefs, function (testDef, index) {
+        var testDef = testDefs[index];
+        var testId = "gpii.integrationTesting.test"+index;
+
+        fluid.defaults(testId, {
+            gradeNames: ["autoInit", "gpii.integrationTesting.testCaseHolder"],
+            testDef: gpii.lifecycleManager.resolver().resolve(testDef),
+            modules: [ {
+                name: "Full login/logout cycle",
+                tests: [ gpii.integrationTesting.buildSingleTestFixture(testDef) ]
+            }]
+        });
+
+        //definition of tests, sequence, etc.
+        fluid.defaults(testId+"Env", {
+            gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+            components: {
+                httpReq: {
+                    type: "gpii.integrationTesting.httpReq"
+                },
+                exec: {
+                    type: "gpii.integrationTesting.exec"
+                },
+                tests: {
+                    type: testId
+                }
+            }
+        });
+
+        tests.push(testId+"Env");
+    });
+
+    fluid.test.runTests(tests);
 };  
