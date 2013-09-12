@@ -39,7 +39,7 @@ fluid.defaults("gpii.integrationTesting.exec", {
         },
         execAndExpect: {
             funcName: "gpii.integrationTesting.exec.execAndExpect",
-            args: ["{that}", "{arguments}.0"]
+            args: ["{that}", "{arguments}.0", "{arguments}.1" ]
         }
     }
 });
@@ -61,9 +61,8 @@ gpii.integrationTesting.exec.exec = function (that, processSpec) {
 };
 
 
-gpii.integrationTesting.exec.execAndExpect = function (that, processSpec) {
+gpii.integrationTesting.exec.execAndExpect = function (that, processSpec, expected) {
     var command = processSpec.command,
-        expected = processSpec.expect,
         maxLoops = 6;
 
     fluid.log("Exec'ing: ", command);
@@ -72,7 +71,6 @@ gpii.integrationTesting.exec.execAndExpect = function (that, processSpec) {
         if (stderr) {
             fluid.log("stderr from command '", command, "': ", stderr);
         }
-
         if (stdout.trim() === expected) {
             that.events.onExecAndExpect.fire(true, processSpec);
         } else {
@@ -83,7 +81,7 @@ gpii.integrationTesting.exec.execAndExpect = function (that, processSpec) {
             } else {
                 processSpec.count++;
                 setTimeout(function () {
-                    gpii.integrationTesting.exec.execAndExpect(that, processSpec);
+                    gpii.integrationTesting.exec.execAndExpect(that, processSpec, expected);
                 }, 500);
             }
         }
@@ -161,7 +159,6 @@ gpii.integrationTesting.removeOptionsBlocks = function (payload) {
 }
 
 gpii.integrationTesting.startServer = function (testDef, tests) {
-    tests.componentName = kettle.config.createDefaults(testDef.gpiiConfig);
     tests.events.createServer.fire();
 };
 
@@ -207,8 +204,8 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
     // configuration is set
     var testFixture = {
         name: testDef.name,
-        //number of asserts is 4 + number of checks for running processes
-        expect: 4 + testDef.processes.length,
+        //number of asserts is 4 + number of checks for running processes (both on login and logout)
+        expect: 4 + testDef.processes.length*2,
         sequence: [ {
             func: "gpii.integrationTesting.startServer",
             args: [ testDefRef, "{tests}" ]
@@ -231,7 +228,7 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
     fluid.each(processes, function (process, pindex) {
         testFixture.sequence.push({
             func: "{exec}.execAndExpect",
-            args: [ testDefRef + ".processes." + pindex ]
+            args: [ testDefRef + ".processes." + pindex, testDefRef + ".processes." + pindex + ".expectConfigured" ]
         }, {
             listener: "gpii.integrationTesting.onExecAndExpectExit",
             event: "{exec}.events.onExecAndExpect"
@@ -244,7 +241,20 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
     }, {
         listener: "gpii.integrationTesting.logoutRequestListen",
         event: "{httpReq}.events.onLogout"
-    }, {
+    });
+
+    // Check that the processes are in the expected state after logout
+    fluid.each(processes, function (process, pindex) {
+        testFixture.sequence.push({
+            func: "{exec}.execAndExpect",
+            args: [ testDefRef + ".processes." + pindex, testDefRef + ".processes." + pindex + ".expectRestored" ]
+        }, {
+            listener: "gpii.integrationTesting.onExecAndExpectExit",
+            event: "{exec}.events.onExecAndExpect"
+        });
+    });
+
+    testFixture.sequence.push({
         func: "gpii.integrationTesting.checkRestoredConfiguration",
         args: [ testDefRef, "{tests}.settingsStore"]
     });
@@ -257,7 +267,7 @@ fluid.defaults("gpii.integrationTesting.server", {
     invokers: {
         buildServerGrade: {
             funcName: "fluid.identity",
-            args: "{gpii.integrationTesting.testCaseHolder}.componentName"
+            args: "{gpii.integrationTesting.testCaseHolder}.options.serverName"
         }
     }
 });
@@ -278,7 +288,8 @@ fluid.defaults("gpii.integrationTesting.testCaseHolder", {
     }
 });
 
-gpii.integrationTesting.buildTests = function (testDefs) {
+gpii.integrationTesting.buildTests = function (testDefs, gpiiConfig) {
+    var serverName = kettle.config.createDefaults(gpiiConfig); 
     var tests = [];
     fluid.each(testDefs, function (testDef, index) {
         var testDef = testDefs[index];
@@ -287,6 +298,7 @@ gpii.integrationTesting.buildTests = function (testDefs) {
         fluid.defaults(testId, {
             gradeNames: ["autoInit", "gpii.integrationTesting.testCaseHolder"],
             testDef: gpii.lifecycleManager.resolver().resolve(testDef),
+            serverName: serverName, 
             modules: [ {
                 name: "Full login/logout cycle",
                 tests: [ gpii.integrationTesting.buildSingleTestFixture(testDef) ]
