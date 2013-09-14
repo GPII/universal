@@ -288,37 +288,44 @@ fluid.defaults("gpii.acceptanceTesting.testCaseHolder", {
     }
 });
 
+//definition of tests, sequence, etc.
+fluid.defaults("gpii.acceptanceTesting.testEnvironment", {
+    gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+    components: {
+        httpReq: {
+            type: "gpii.acceptanceTesting.httpReq"
+        },
+        exec: {
+            type: "gpii.acceptanceTesting.exec"
+        }
+    }
+});
+
+
 gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
     var serverName = kettle.config.createDefaults(gpiiConfig); 
     var tests = [];
     fluid.each(testDefs, function (testDef, index) {
-        var testId = "gpii.acceptanceTesting.test"+index;
-
-        //definition of tests, sequence, etc.
-        fluid.defaults(testId+"Env", {
-            gradeNames: ["fluid.test.testEnvironment", "autoInit"],
-            components: {
-                httpReq: {
-                    type: "gpii.acceptanceTesting.httpReq"
-                },
-                exec: {
-                    type: "gpii.acceptanceTesting.exec"
-                },
-                tests: {
-                    type: "gpii.acceptanceTesting.testCaseHolder",
-                    options: {
-                        testDef: gpii.lifecycleManager.resolver().resolve(testDef),
-                        serverName: serverName, 
-                        modules: [ {
-                            name: "Full login/logout cycle",
-                            tests: [ gpii.acceptanceTesting.buildSingleTestFixture(testDef) ]
-                        }]
+        var test = {
+            type: "gpii.acceptanceTesting.testEnvironment",
+            options: {
+                components: {
+                    tests: {
+                        type: "gpii.acceptanceTesting.testCaseHolder",
+                        options: {
+                            testDef: gpii.lifecycleManager.resolver().resolve(testDef),
+                            serverName: serverName, 
+                            modules: [ {
+                                name: "Full login/logout cycle",
+                                tests: [ gpii.acceptanceTesting.buildSingleTestFixture(testDef) ]
+                            }]
+                        }
                     }
-                }
+                }               
             }
-        });
+        };
 
-        tests.push(testId+"Env");
+        tests.push(test);
     });
 
     fluid.test.runTests(tests);
