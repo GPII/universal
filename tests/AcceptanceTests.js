@@ -1,6 +1,6 @@
 /*
 
-GPII Integration Testing
+GPII Acceptance Testing
 
 Copyright 2013 Raising the Floor International
 Copyright 2013 OCAD University
@@ -23,10 +23,10 @@ var fluid = require("infusion"),
     jqUnit = fluid.require("jqUnit"),
     child_process = require('child_process');
 
-fluid.registerNamespace("gpii.integrationTesting");
+fluid.registerNamespace("gpii.acceptanceTesting");
 
 // Definition and defaults of exec component
-fluid.defaults("gpii.integrationTesting.exec", {
+fluid.defaults("gpii.acceptanceTesting.exec", {
     gradeNames: ["autoInit", "fluid.eventedComponent"],
     events: {
         onExec: null,
@@ -34,17 +34,17 @@ fluid.defaults("gpii.integrationTesting.exec", {
     },
     invokers: {
         exec: {
-            funcName: "gpii.integrationTesting.exec.exec",
+            funcName: "gpii.acceptanceTesting.exec.exec",
             args: ["{that}", "{arguments}.0"]
         },
         execAndExpect: {
-            funcName: "gpii.integrationTesting.exec.execAndExpect",
+            funcName: "gpii.acceptanceTesting.exec.execAndExpect",
             args: ["{that}", "{arguments}.0", "{arguments}.1" ]
         }
     }
 });
 
-gpii.integrationTesting.exec.exec = function (that, processSpec) {
+gpii.acceptanceTesting.exec.exec = function (that, processSpec) {
     var command = processSpec.command;
 
     fluid.log("Exec'ing: ", command);
@@ -61,7 +61,7 @@ gpii.integrationTesting.exec.exec = function (that, processSpec) {
 };
 
 
-gpii.integrationTesting.exec.execAndExpect = function (that, processSpec, expected) {
+gpii.acceptanceTesting.exec.execAndExpect = function (that, processSpec, expected) {
     var command = processSpec.command,
         maxLoops = 6;
 
@@ -81,7 +81,7 @@ gpii.integrationTesting.exec.execAndExpect = function (that, processSpec, expect
             } else {
                 processSpec.count++;
                 setTimeout(function () {
-                    gpii.integrationTesting.exec.execAndExpect(that, processSpec, expected);
+                    gpii.acceptanceTesting.exec.execAndExpect(that, processSpec, expected);
                 }, 500);
             }
         }
@@ -89,7 +89,7 @@ gpii.integrationTesting.exec.execAndExpect = function (that, processSpec, expect
 };
 
 //Definition and defaults of http request component
-fluid.defaults("gpii.integrationTesting.httpReq", {
+fluid.defaults("gpii.acceptanceTesting.httpReq", {
     gradeNames: ["autoInit", "fluid.eventedComponent"],
     events: {
         onLogin: null,
@@ -97,17 +97,17 @@ fluid.defaults("gpii.integrationTesting.httpReq", {
     },
     invokers: {
         login: {
-            funcName: "gpii.integrationTesting.httpReq.call",
+            funcName: "gpii.acceptanceTesting.httpReq.call",
             args: ["{arguments}.0", "login", "{that}.events.onLogin.fire"]
         },
         logout: {
-            funcName: "gpii.integrationTesting.httpReq.call",
+            funcName: "gpii.acceptanceTesting.httpReq.call",
             args: ["{arguments}.0", "logout", "{that}.events.onLogout.fire"]
         }
     }
 });
 
-gpii.integrationTesting.httpReq.call = function (token, action, callback) {
+gpii.acceptanceTesting.httpReq.call = function (token, action, callback) {
     http.get({
         host: "localhost",
         port: 8081,
@@ -138,7 +138,7 @@ gpii.integrationTesting.httpReq.call = function (token, action, callback) {
 * Sets the settings given in the json paramater. The content of the json passed
 * is the values to set in a format similar to the content of 'initialState'
 */
-gpii.integrationTesting.getSettings = function (payload) {
+gpii.acceptanceTesting.getSettings = function (payload) {
     var ret = {};
     fluid.each(payload, function (handlerBlock, handlerID) {
         ret[handlerID]=fluid.invokeGlobalFunction(handlerID + ".get",
@@ -147,7 +147,7 @@ gpii.integrationTesting.getSettings = function (payload) {
     return ret;
 };
 
-gpii.integrationTesting.removeOptionsBlocks = function (payload) {
+gpii.acceptanceTesting.removeOptionsBlocks = function (payload) {
     var togo = fluid.copy(payload);
     return fluid.transform(togo, function (settingHandler) {
         return fluid.transform(settingHandler, function (solutionBlocks) {
@@ -158,46 +158,46 @@ gpii.integrationTesting.removeOptionsBlocks = function (payload) {
     });
 }
 
-gpii.integrationTesting.startServer = function (testDef, tests) {
+gpii.acceptanceTesting.startServer = function (testDef, tests) {
     tests.events.createServer.fire();
 };
 
-gpii.integrationTesting.snapshotSettings = function (testDef, settingsStore) {
-    settingsStore.orig = gpii.integrationTesting.getSettings(
+gpii.acceptanceTesting.snapshotSettings = function (testDef, settingsStore) {
+    settingsStore.orig = gpii.acceptanceTesting.getSettings(
         testDef.settingsHandlers);
 };
 
-gpii.integrationTesting.loginRequestListen = function (data, token) {
+gpii.acceptanceTesting.loginRequestListen = function (data, token) {
     jqUnit.assertNotEquals("Successful login message returned " + data, -1,
         data.indexOf(
             "User with token " + token + " was successfully logged in."));
 };
 
-gpii.integrationTesting.checkConfiguration = function (testDef) {
-    var config = gpii.integrationTesting.getSettings(testDef.settingsHandlers);
-    var noOptions = gpii.integrationTesting.removeOptionsBlocks(
+gpii.acceptanceTesting.checkConfiguration = function (testDef) {
+    var config = gpii.acceptanceTesting.getSettings(testDef.settingsHandlers);
+    var noOptions = gpii.acceptanceTesting.removeOptionsBlocks(
         testDef.settingsHandlers);
     jqUnit.assertDeepEq("Checking that settings are set", config, noOptions);
 };
 
-gpii.integrationTesting.onExecAndExpectExit = function (result, processSpec) {
+gpii.acceptanceTesting.onExecAndExpectExit = function (result, processSpec) {
     jqUnit.assertTrue("Checking the process with command: " + processSpec, result);
 };
 
-gpii.integrationTesting.logoutRequestListen = function (data, token) {
+gpii.acceptanceTesting.logoutRequestListen = function (data, token) {
     jqUnit.assertNotEquals("Successful logout message returned " + data, -1,
         data.indexOf(
             "User with token " + token + " was successfully logged out."));
 };
 
-gpii.integrationTesting.checkRestoredConfiguration = function (testDef, settingsStore) {
-    var currentSettings = gpii.integrationTesting.getSettings(
+gpii.acceptanceTesting.checkRestoredConfiguration = function (testDef, settingsStore) {
+    var currentSettings = gpii.acceptanceTesting.getSettings(
         testDef.settingsHandlers);
     jqUnit.assertDeepEq("Checking that settings are properly reset",
         settingsStore.orig, currentSettings);
 };
 
-gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
+gpii.acceptanceTesting.buildSingleTestFixture = function (testDef) {
     var processes = testDef.processes;
     var testDefRef = "{tests}.options.testDef";
     // Storing state, start server, logging in and checking that
@@ -207,19 +207,19 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
         //number of asserts is 4 + number of checks for running processes (both on login and logout)
         expect: 4 + testDef.processes.length*2,
         sequence: [ {
-            func: "gpii.integrationTesting.startServer",
+            func: "gpii.acceptanceTesting.startServer",
             args: [ testDefRef, "{tests}" ]
         }, {
-            func: "gpii.integrationTesting.snapshotSettings",
+            func: "gpii.acceptanceTesting.snapshotSettings",
             args: [ testDefRef, "{tests}.settingsStore" ]
         }, {
             func: "{httpReq}.login",
             args: [ testDefRef + ".token" ]
         }, {
-            listener: "gpii.integrationTesting.loginRequestListen",
+            listener: "gpii.acceptanceTesting.loginRequestListen",
             event: "{httpReq}.events.onLogin"
         }, {
-            func: "gpii.integrationTesting.checkConfiguration",
+            func: "gpii.acceptanceTesting.checkConfiguration",
             args: [ testDefRef ]
         }]
     };
@@ -230,7 +230,7 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
             func: "{exec}.execAndExpect",
             args: [ testDefRef + ".processes." + pindex, testDefRef + ".processes." + pindex + ".expectConfigured" ]
         }, {
-            listener: "gpii.integrationTesting.onExecAndExpectExit",
+            listener: "gpii.acceptanceTesting.onExecAndExpectExit",
             event: "{exec}.events.onExecAndExpect"
         });
     });
@@ -239,7 +239,7 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
         func: "{httpReq}.logout",
         args: [ testDefRef + ".token" ]
     }, {
-        listener: "gpii.integrationTesting.logoutRequestListen",
+        listener: "gpii.acceptanceTesting.logoutRequestListen",
         event: "{httpReq}.events.onLogout"
     });
 
@@ -249,30 +249,30 @@ gpii.integrationTesting.buildSingleTestFixture = function (testDef) {
             func: "{exec}.execAndExpect",
             args: [ testDefRef + ".processes." + pindex, testDefRef + ".processes." + pindex + ".expectRestored" ]
         }, {
-            listener: "gpii.integrationTesting.onExecAndExpectExit",
+            listener: "gpii.acceptanceTesting.onExecAndExpectExit",
             event: "{exec}.events.onExecAndExpect"
         });
     });
 
     testFixture.sequence.push({
-        func: "gpii.integrationTesting.checkRestoredConfiguration",
+        func: "gpii.acceptanceTesting.checkRestoredConfiguration",
         args: [ testDefRef, "{tests}.settingsStore"]
     });
 
     return testFixture;
 };
 
-fluid.defaults("gpii.integrationTesting.server", {
+fluid.defaults("gpii.acceptanceTesting.server", {
     gradeNames: ["autoInit", "fluid.littleComponent", "{that}.buildServerGrade"],
     invokers: {
         buildServerGrade: {
             funcName: "fluid.identity",
-            args: "{gpii.integrationTesting.testCaseHolder}.options.serverName"
+            args: "{gpii.acceptanceTesting.testCaseHolder}.options.serverName"
         }
     }
 });
 
-fluid.defaults("gpii.integrationTesting.testCaseHolder", {
+fluid.defaults("gpii.acceptanceTesting.testCaseHolder", {
     gradeNames: ["autoInit", "fluid.test.testCaseHolder"],
     members: {
         settingsStore: {}
@@ -282,41 +282,38 @@ fluid.defaults("gpii.integrationTesting.testCaseHolder", {
     },
     components: {
         server: {
-            type: "gpii.integrationTesting.server",
+            type: "gpii.acceptanceTesting.server",
             createOnEvent: "createServer"
         }
     }
 });
 
-gpii.integrationTesting.buildTests = function (testDefs, gpiiConfig) {
+gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
     var serverName = kettle.config.createDefaults(gpiiConfig); 
     var tests = [];
     fluid.each(testDefs, function (testDef, index) {
-        var testDef = testDefs[index];
-        var testId = "gpii.integrationTesting.test"+index;
-
-        fluid.defaults(testId, {
-            gradeNames: ["autoInit", "gpii.integrationTesting.testCaseHolder"],
-            testDef: gpii.lifecycleManager.resolver().resolve(testDef),
-            serverName: serverName, 
-            modules: [ {
-                name: "Full login/logout cycle",
-                tests: [ gpii.integrationTesting.buildSingleTestFixture(testDef) ]
-            }]
-        });
+        var testId = "gpii.acceptanceTesting.test"+index;
 
         //definition of tests, sequence, etc.
         fluid.defaults(testId+"Env", {
             gradeNames: ["fluid.test.testEnvironment", "autoInit"],
             components: {
                 httpReq: {
-                    type: "gpii.integrationTesting.httpReq"
+                    type: "gpii.acceptanceTesting.httpReq"
                 },
                 exec: {
-                    type: "gpii.integrationTesting.exec"
+                    type: "gpii.acceptanceTesting.exec"
                 },
                 tests: {
-                    type: testId
+                    type: "gpii.acceptanceTesting.testCaseHolder",
+                    options: {
+                        testDef: gpii.lifecycleManager.resolver().resolve(testDef),
+                        serverName: serverName, 
+                        modules: [ {
+                            name: "Full login/logout cycle",
+                            tests: [ gpii.acceptanceTesting.buildSingleTestFixture(testDef) ]
+                        }]
+                    }
                 }
             }
         });
