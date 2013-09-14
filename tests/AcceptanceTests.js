@@ -97,17 +97,17 @@ fluid.defaults("gpii.acceptanceTesting.httpReq", {
     },
     invokers: {
         login: {
-            funcName: "gpii.acceptanceTesting.httpReq.call",
+            funcName: "gpii.acceptanceTesting.httpReq.send",
             args: ["{arguments}.0", "login", "{that}.events.onLogin.fire"]
         },
         logout: {
-            funcName: "gpii.acceptanceTesting.httpReq.call",
+            funcName: "gpii.acceptanceTesting.httpReq.send",
             args: ["{arguments}.0", "logout", "{that}.events.onLogout.fire"]
         }
     }
 });
 
-gpii.acceptanceTesting.httpReq.call = function (token, action, callback) {
+gpii.acceptanceTesting.httpReq.send = function (token, action, callback) {
     http.get({
         host: "localhost",
         port: 8081,
@@ -156,7 +156,7 @@ gpii.acceptanceTesting.removeOptionsBlocks = function (payload) {
             });
         });
     });
-}
+};
 
 gpii.acceptanceTesting.startServer = function (testDef, tests) {
     tests.events.createServer.fire();
@@ -262,6 +262,7 @@ gpii.acceptanceTesting.buildSingleTestFixture = function (testDef) {
     return testFixture;
 };
 
+//holds the GPII server to run the integration testing against
 fluid.defaults("gpii.acceptanceTesting.server", {
     gradeNames: ["autoInit", "fluid.littleComponent", "{that}.buildServerGrade"],
     invokers: {
@@ -305,7 +306,7 @@ fluid.defaults("gpii.acceptanceTesting.testEnvironment", {
 gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
     var serverName = kettle.config.createDefaults(gpiiConfig); 
     var tests = [];
-    fluid.each(testDefs, function (testDef, index) {
+    fluid.each(testDefs, function (testDef) {
         var test = {
             type: "gpii.acceptanceTesting.testEnvironment",
             options: {
