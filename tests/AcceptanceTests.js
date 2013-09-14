@@ -35,11 +35,13 @@ fluid.defaults("gpii.acceptanceTesting.exec", {
     invokers: {
         exec: {
             funcName: "gpii.acceptanceTesting.exec.exec",
-            args: ["{that}", "{arguments}.0"]
+            args: ["{that}", "{arguments}.0"],
+            dynamic: true
         },
         execAndExpect: {
             funcName: "gpii.acceptanceTesting.exec.execAndExpect",
-            args: ["{that}", "{arguments}.0", "{arguments}.1" ]
+            args: ["{that}", "{arguments}.0", "{arguments}.1" ],
+            dynamic: true
         }
     }
 });
@@ -98,11 +100,13 @@ fluid.defaults("gpii.acceptanceTesting.httpReq", {
     invokers: {
         login: {
             funcName: "gpii.acceptanceTesting.httpReq.send",
-            args: ["{arguments}.0", "login", "{that}.events.onLogin.fire"]
+            args: ["{arguments}.0", "login", "{that}.events.onLogin.fire"],
+            dynamic: true
         },
         logout: {
             funcName: "gpii.acceptanceTesting.httpReq.send",
-            args: ["{arguments}.0", "logout", "{that}.events.onLogout.fire"]
+            args: ["{arguments}.0", "logout", "{that}.events.onLogout.fire"],
+            dynamic: true
         }
     }
 });
@@ -268,7 +272,8 @@ fluid.defaults("gpii.acceptanceTesting.server", {
     invokers: {
         buildServerGrade: {
             funcName: "fluid.identity",
-            args: "{gpii.acceptanceTesting.testCaseHolder}.options.serverName"
+            args: "{gpii.acceptanceTesting.testCaseHolder}.options.serverName",
+            dynamic: true
         }
     }
 });
