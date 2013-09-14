@@ -120,7 +120,7 @@
                             "type": "fluid.model.transform.binaryOp",
                             "leftPath": "display.screenEnhancement.fontSize",
                             "operator": "/",
-                            "right": 11
+                            "right": 12
                         }
                     }
                 },
