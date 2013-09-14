@@ -25,12 +25,42 @@
                     "mag-factor": "display.screenEnhancement.magnification",
                     "show-cross-hairs": "display.screenEnhancement.-provisional-showCrosshairs",
                     "mouse-tracking": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
                             "inputPath": "display.screenEnhancement.tracking",
                             "options": {
                                 "mouse": {
                                     "outputValue": "centered"
+                                }
+                            }
+                        }
+                    },
+                    "screen-position": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-magnifierPosition",
+                            "defaultInputValue": "Custom",
+                            "options": {
+                                "FullScreen": {
+                                    "outputValue": "full-screen"
+                                },
+                                "Lens": {
+                                    "outputValue": "full-screen"
+                                },
+                                "LeftHalf": {
+                                    "outputValue": "left-half"
+                                },
+                                "RightHalf": {
+                                    "outputValue": "right-half"
+                                },
+                                "TopHalf": {
+                                    "outputValue": "top-half"
+                                },
+                                "BottomHalf": {
+                                    "outputValue": "bottom-half"
+                                },
+                                "Custom": {
+                                    "outputValue": "full-screen"
                                 }
                             }
                         }
@@ -116,10 +146,75 @@
                 ],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
-                        "expander": {
+                        "transform": {
                             "type": "gpii.transformer.fontSizeToScale",
                             "inputPath": "display.screenEnhancement.fontSize",
                             "baseFontSize": 12
+                        }
+                    },
+                    "cursor-size": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": ">",
+                                    "right": 0.666
+                                }
+                            },
+                            "true": 41,
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": ">",
+                                            "right": 0.333
+                                        }
+                                    },
+                                    "true": 29,
+                                    "false": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "condition": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                                    "operator": ">",
+                                                    "right": 0
+                                                }
+                                            },
+                                            "true": 20,
+                                            "false": -1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "gtk-theme": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.highContrast",
+                            "options": {
+                                "true": {
+                                    "outputValue": "HighContrast"
+                                }
+                            }
+                        }
+                    },
+                    "icon-theme": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.highContrast",
+                            "options": {
+                                "true": {
+                                    "outputValue": "HighContrast"
+                                }
+                            }
                         }
                     }
                 },
@@ -221,39 +316,39 @@
                     "stickykeys-enable": "control.keyboardEnhancement.stickyKeys",
                     "slowkeys-enable": "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable",
                     "slowkeys-delay": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "control.keyboardEnhancement.slowKeys.slowKeysInterval",
                             "factor": 1000
                         }
                     },
                     "bouncekeys-enable": "control.keyboardEnhancement.debounceKeys.-provisional-debounceEnable",
                     "bouncekeys-delay": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "control.keyboardEnhancement.debounceKeys.debounceInterval",
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "control.keyboardEnhancement.debounceKeys.debounceInterval",
                             "factor": 1000
                         }
                     },
                     "mousekeys-enable": "control.mouseEmulation.-provisional-mouseEmulationEnabled",
                     "mousekeys-init-delay": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "control.mouseEmulation.-provisional-initDelay",
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "control.mouseEmulation.-provisional-initDelay",
                             "factor": 1000
                         }
                     },
                     "mousekeys-max-speed": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "control.mouseEmulation.cursorSpeed",
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "control.mouseEmulation.cursorSpeed",
                             "factor": 1000
                         }
                     },
                     "mousekeys-accel-time": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "control.mouseEmulation.cursorAcceleration",
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "control.mouseEmulation.cursorAcceleration",
                             "factor": 1000
                         }
                     }
@@ -280,16 +375,779 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.orca.set",
+                "options": {
+                    "user": "${{userToken}}"
+                },
                 "capabilities": [
                     "display.screenReader",
                     "applications.org\\.gnome\\.orca.id",
                     "display.screenReader.applications.org\\.gnome\\.orca.name"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "enableTutorialMessages": "display.screenReader.-provisional-speakTutorialMessages",
+                    "enableEchoByCharacter": "display.screenReader.-provisional-keyEcho",
+                    "enableEchoByWord": "display.screenReader.-provisional-wordEcho",
+                    "enableBraille": "display.screenReader.-provisional-screenReaderBrailleOutput",
+                    "enableSpeech": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                    "sayAllStyle": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.textReadingHighlight.readingUnit",
+                            "defaultInputValue": "sentence",
+                            "options": {
+                                "line": {
+                                    "outputValue": 0
+                                },
+                                "sentence": {
+                                    "outputValue": 1
+                                }
+                            }
+                        }
+                    },
+                    "voices\\.default\\.rate": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "right": 50,
+                            "operator": "+",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "operator": "/",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenReader.speechRate",
+                                            "operator": "-",
+                                            "right": 170
+                                        }
+                                    },
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "condition": {
+                                                "transform" : {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "<",
+                                                    "right": 170
+                                                }
+                                            },
+                                            "true": 1.8,
+                                            "false": 4.4
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "voices\\.default\\.family": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-auditoryOutLanguage",
+                            "defaultInputValue": "en",
+                            "options": {
+                                "en": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "english"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-GB": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "english"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-US": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "english-us"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-scotland": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "en-scottish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-BZ": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "en-westindies"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-BS": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "en-westindies"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-AG": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "en-westindies"
+                                            }
+                                        }
+                                    }
+                                },
+                                "en-AI": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "en",
+                                                "name": "en-westindies"
+                                            }
+                                        }
+                                    }
+                                },
+                                "af": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "af",
+                                                "name": "afrikaans"
+                                            }
+                                        }
+                                    }
+                                },
+                                "bg": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "bg",
+                                                "name": "bulgarian-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "bs": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "bs",
+                                                "name": "bosnian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "ca": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ca",
+                                                "name": "catalan"
+                                            }
+                                        }
+                                    }
+                                },
+                                "cs": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "cs",
+                                                "name": "czech"
+                                            }
+                                        }
+                                    }
+                                },
+                                "cy": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "cy",
+                                                "name": "welsh-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "da": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "da",
+                                                "name": "danish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "de": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "de",
+                                                "name": "german"
+                                            }
+                                        }
+                                    }
+                                },
+                                "el": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "el",
+                                                "name": "greek"
+                                            }
+                                        }
+                                    }
+                                },
+                                "grc": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "grc",
+                                                "name": "greek-ancient"
+                                            }
+                                        }
+                                    }
+                                },
+                                "eo": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "eo",
+                                                "name": "esperanto"
+                                            }
+                                        }
+                                    }
+                                },
+                                "es": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "es",
+                                                "name": "spanish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "es-419": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "es",
+                                                "name": "spanish-latin-american"
+                                            }
+                                        }
+                                    }
+                                },
+                                "et": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                 "locale": "et",
+                                                 "name": "estonian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "fi": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "fi",
+                                                "name": "finnish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "fr": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "fr",
+                                                "name": "french"
+                                            }
+                                        }
+                                    }
+                                },
+                                "fr-BE": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "(Belgium)",
+                                                "name": "french"
+                                            }
+                                        }
+                                    }
+                                },
+                                "hi": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "hi",
+                                                "name": "hindi"
+                                            }
+                                        }
+                                    }
+                                },
+                                "hr": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "hr",
+                                                "name": "croatian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "hu": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "hu",
+                                                "name": "hungarian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "hy": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "hy",
+                                                "name": "armenian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "hy-arevmda": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "hy",
+                                                "name": "armenian-west"
+                                            }
+                                        }
+                                    }
+                                },
+                                "id": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "id",
+                                                "name": "indonesian-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "is": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "is",
+                                                "name": "icelandic-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "it": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "it",
+                                                "name": "italian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "jbo": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "jbo",
+                                                "name": "lojban"
+                                            }
+                                        }
+                                    }
+                                },
+                                "ka": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ka",
+                                                "name": "georgian-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "kn": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "kn",
+                                                "name": "kannada"
+                                            }
+                                        }
+                                    }
+                                },
+                                "ku": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ku",
+                                                "name": "kurdish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "la": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "la",
+                                                "name": "latin"
+                                            }
+                                        }
+                                    }
+                                },
+                                "lv": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "lv",
+                                                "name": "latvian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "mk": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "mk",
+                                                "name": "macedonian-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "ml": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ml",
+                                                "name": "malayalam"
+                                            }
+                                        }
+                                    }
+                                },
+                                "nl": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "nl",
+                                                "name": "dutch-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "no": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "no",
+                                                "name": "norwegian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "pap": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "pap",
+                                                "name": "papiamento-test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "pl": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "pl",
+                                                "name": "polish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "pt-BR": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "pt",
+                                                "name": "brazil"
+                                            }
+                                        }
+                                    }
+                                },
+                                "pt-PT": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "pt",
+                                                "name": "portugal"
+                                            }
+                                        }
+                                    }
+                                },
+                                "ro": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ro",
+                                                "name": "romanian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "ru": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ru",
+                                                "name": "russian_test"
+                                            }
+                                        }
+                                    }
+                                },
+                                "sk": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "sk",
+                                                "name": "slovak"
+                                            }
+                                        }
+                                    }
+                                },
+                                "sq": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "sq",
+                                                "name": "albanian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "sr": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "sr",
+                                                "name": "serbian"
+                                            }
+                                        }
+                                    }
+                                },
+                                "sv": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "sv",
+                                                "name": "swedish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "sw": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                             "value": {
+                                                 "locale": "sw",
+                                                 "name": "swahili-test"
+                                             }
+                                        }
+                                    }
+                                },
+                                "ta": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "ta",
+                                                "name": "tamil"
+                                            }
+                                        }
+                                    }
+                                },
+                                "tr": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "tr",
+                                                "name": "turkish"
+                                            }
+                                        }
+                                    }
+                                },
+                                "vi": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "vi",
+                                                "name": "vietnam"
+                                            }
+                                        }
+                                    }
+                                },
+                                "zh-cmn": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "zh",
+                                                "name": "Mandarin"
+                                            }
+                                        }
+                                    }
+                                },
+                                "cmn": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "zh",
+                                                "name": "Mandarin"
+                                            }
+                                        }
+                                    }
+                                },
+                                "zh-yue": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "zh",
+                                                "name": "cantonese"
+                                            }
+                                        }
+                                    }
+                                },
+                                "yue": {
+                                    "outputValue": {
+                                        "transform" : {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "locale": "zh",
+                                                "name": "cantonese"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "verbalizePunctuationStyle": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                            "defaultInputValue": "most",
+                            "options": {
+                                "none": {
+                                    "outputValue": 3
+                                },
+                                "some": {
+                                    "outputValue": 2
+                                },
+                                "most": {
+                                    "outputValue": 1
+                                },
+                                "all": {
+                                    "outputValue": 0
+                                }
+                            }
+                        }
+                    }
+                }
             }
         ],
         "lifecycleManager": {
             "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
@@ -299,7 +1157,8 @@
                 {
                     "type": "gpii.launch.exec",
                     "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
-                }
+                },
+                "restoreSettings"
             ]
         }
     },
