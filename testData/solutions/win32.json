@@ -46,7 +46,7 @@
                             "dataType": "REG_DWORD"
                         },
                         "options": {
-                            "focus": "FollowFocus", 
+                            "focus": "FollowFocus",
                             "caret": "FollowCaret",
                             "mouse": "FollowMouse"
                         }
@@ -60,7 +60,7 @@
                             }
                         },
                         "outputPath": "Magnification.value"
-                    }],                    
+                    }],
                     "MagnificationMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -244,11 +244,11 @@
                             "presentValue": true,
                             "missingValue": false,
                             "options": {
-                                "focus": "reviewCursor\\.followFocus", 
+                                "focus": "reviewCursor\\.followFocus",
                                 "caret": "reviewCursor\\.followCaret",
                                 "mouse": "reviewCursor\\.followMouse"
                             }
-                        }, 
+                        },
                         {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
@@ -264,7 +264,7 @@
                                             {
                                                 "type": "fluid.transforms.literalValue",
                                                 "value": "Microsoft Sound Mapper",
-                                                "outputPath": "speech\\.outputDevice"  
+                                                "outputPath": "speech\\.outputDevice"
                                             }
                                         ]
                                     }
@@ -291,7 +291,7 @@
                                                     "type": "fluid.transforms.binaryOp",
                                                     "leftPath": "display.screenReader.speechRate",
                                                     "operator": "/",
-                                                    "right": 3                                                
+                                                    "right": 3
                                                 }
                                             },
                                             "condition": {
@@ -530,21 +530,21 @@
                                 "zh-yue": {
                                     "outputValue": "yue"
                                 }
-                            }    
+                            }
                         }
                     }
                 }
             }
         ],
         "lifecycleManager": {
-            "start": [ 
+            "start": [
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
                     "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
                 }
             ],
-            "stop": [ 
+            "stop": [
                 {
                     "type": "gpii.launch.exec",
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
@@ -555,7 +555,7 @@
                 "restoreSettings"
             ]
         }
-    },     
+    },
 
     {
         "name": "EasyOne Communicator Windows",
@@ -928,7 +928,7 @@
             ]
         }
     },
-  
+
     {
         "name": "Windows Cursors",
         "id": "com.microsoft.windows.cursors",
@@ -952,7 +952,7 @@
                     "applications.com\\.microsoft\\.windows\\.cursors.id"
                 ],
                 "capabilitiesTransformations": {
-                    "transform": [ 
+                    "transform": [
                         {
                             "type": "fluid.transforms.condition",
                             "outputPath": "Arrow.value",
@@ -977,7 +977,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_arrow_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
                                 }
                             }
                         }, {
@@ -1008,7 +1008,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_link_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_link_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_link_xl.cur"
                                 }
                             }
                         }, {
@@ -1039,7 +1039,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_helpsel_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
                                 }
                             }
                         }, {
@@ -1070,7 +1070,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_working_l.ani",
-                                    "false": "%SystemRoot%\\cursors\\aero_working_xl.ani"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_working_xl.ani"
                                 }
                             }
                         }, {
@@ -1101,7 +1101,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_unavail_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
                                 }
                             }
                         }, {
@@ -1132,7 +1132,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_pen_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_pen_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
                                 }
                             }
                         }, {
@@ -1163,7 +1163,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_move_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_move_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_move_xl.cur"
                                 }
                             }
                         }, {
@@ -1194,7 +1194,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_nesw_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
                                 }
                             }
                         }, {
@@ -1225,7 +1225,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_ns_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_ns_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
                                 }
                             }
                         }, {
@@ -1256,7 +1256,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_nwse_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
                                 }
                             }
                         }, {
@@ -1287,7 +1287,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_ew_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_ew_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
                                 }
                             }
                         }, {
@@ -1318,7 +1318,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_up_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_up_xl.cur"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_up_xl.cur"
                                 }
                             }
                         }, {
@@ -1349,7 +1349,7 @@
                                         }
                                     },
                                     "true": "%SystemRoot%\\cursors\\aero_busy_l.ani",
-                                    "false": "%SystemRoot%\\cursors\\aero_busy_xl.ani"                                        
+                                    "false": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
                                 }
                             }
                         }, {
@@ -1362,8 +1362,8 @@
             }
         ],
         "lifecycleManager": {
-            "start": [ 
-                "setSettings", 
+            "start": [
+                "setSettings",
                 {
                     "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
