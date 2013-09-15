@@ -124,7 +124,7 @@ gpii.acceptanceTesting.httpReq.send = function (token, action, callback) {
 gpii.acceptanceTesting.getSettings = function (payload) {
     var ret = {};
     fluid.each(payload, function (handlerBlock, handlerID) {
-        ret[handlerID]=fluid.invokeGlobalFunction(handlerID + ".get",
+        ret[handlerID] = fluid.invokeGlobalFunction(handlerID + ".get",
             [handlerBlock]);
     });
     return ret;
@@ -287,7 +287,7 @@ fluid.defaults("gpii.acceptanceTesting.testEnvironment", {
 });
 
 
-gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
+gpii.acceptanceTesting.runTests = function (testDefs, gpiiConfig) {
     var serverName = kettle.config.createDefaults(gpiiConfig);
     var tests = [];
     fluid.each(testDefs, function (testDef) {
