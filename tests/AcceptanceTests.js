@@ -29,63 +29,42 @@ fluid.registerNamespace("gpii.acceptanceTesting");
 fluid.defaults("gpii.acceptanceTesting.exec", {
     gradeNames: ["autoInit", "fluid.eventedComponent"],
     events: {
-        onExec: null,
-        onExecAndExpect: null
+        onExecExit: null
     },
     invokers: {
         exec: {
             funcName: "gpii.acceptanceTesting.exec.exec",
-            args: ["{that}", "{arguments}.0"],
-            dynamic: true
-        },
-        execAndExpect: {
-            funcName: "gpii.acceptanceTesting.exec.execAndExpect",
             args: ["{that}", "{arguments}.0", "{arguments}.1" ],
             dynamic: true
         }
     }
 });
 
-gpii.acceptanceTesting.exec.exec = function (that, processSpec) {
-    var command = processSpec.command;
-
-    fluid.log("Exec'ing: ", command);
-    child_process.exec(command, function (err, stdout, stderr) {
-        if (err) {
-            if (stderr) {
-                fluid.log("stderr from '", command, "': ", stderr);
-            }
-            jqUnit.assertFalse("Got an error on exec... " + err.message, true);
-        } else {
-            that.events.onExec.fire(stdout, processSpec);
-        }
-    });
-};
-
-
-gpii.acceptanceTesting.exec.execAndExpect = function (that, processSpec, expected) {
+gpii.acceptanceTesting.exec.exec = function (that, processSpec, expected) {
     var command = processSpec.command,
+        //looping 6*500ms, which seems like a reasonable maximum amount of time to wait for an application to launch/close
         maxLoops = 6;
 
     fluid.log("Exec'ing: ", command);
-    
+
     child_process.exec(command, function (err, stdout, stderr) {
         if (stderr) {
             fluid.log("stderr from command '", command, "': ", stderr);
         }
         if (stdout.trim() === expected) {
-            that.events.onExecAndExpect.fire(true, processSpec);
+            that.events.onExecExit.fire(true, processSpec);
         } else {
             processSpec.count = processSpec.count || 0;
-            
+
             if (processSpec.count >= maxLoops) {
-                that.events.onExecAndExpect.fire(false, processSpec);
-            } else {
-                processSpec.count++;
-                setTimeout(function () {
-                    gpii.acceptanceTesting.exec.execAndExpect(that, processSpec, expected);
-                }, 500);
+                that.events.onExecExit.fire(false, processSpec);
+                return;
             }
+
+            processSpec.count++;
+            setTimeout(function () {
+                gpii.acceptanceTesting.exec.exec(that, processSpec, expected);
+            }, 500);
         }
     });
 };
@@ -184,7 +163,7 @@ gpii.acceptanceTesting.checkConfiguration = function (testDef) {
     jqUnit.assertDeepEq("Checking that settings are set", config, noOptions);
 };
 
-gpii.acceptanceTesting.onExecAndExpectExit = function (result, processSpec) {
+gpii.acceptanceTesting.onExecExit = function (result, processSpec) {
     jqUnit.assertTrue("Checking the process with command: " + processSpec, result);
 };
 
@@ -231,11 +210,11 @@ gpii.acceptanceTesting.buildSingleTestFixture = function (testDef) {
     // expected output
     fluid.each(processes, function (process, pindex) {
         testFixture.sequence.push({
-            func: "{exec}.execAndExpect",
+            func: "{exec}.exec",
             args: [ testDefRef + ".processes." + pindex, testDefRef + ".processes." + pindex + ".expectConfigured" ]
         }, {
-            listener: "gpii.acceptanceTesting.onExecAndExpectExit",
-            event: "{exec}.events.onExecAndExpect"
+            listener: "gpii.acceptanceTesting.onExecExit",
+            event: "{exec}.events.onExecExit"
         });
     });
     //Logout, check that configuration is properly restored
@@ -250,11 +229,11 @@ gpii.acceptanceTesting.buildSingleTestFixture = function (testDef) {
     // Check that the processes are in the expected state after logout
     fluid.each(processes, function (process, pindex) {
         testFixture.sequence.push({
-            func: "{exec}.execAndExpect",
+            func: "{exec}.exec",
             args: [ testDefRef + ".processes." + pindex, testDefRef + ".processes." + pindex + ".expectRestored" ]
         }, {
-            listener: "gpii.acceptanceTesting.onExecAndExpectExit",
-            event: "{exec}.events.onExecAndExpect"
+            listener: "gpii.acceptanceTesting.onExecExit",
+            event: "{exec}.events.onExecExit"
         });
     });
 
@@ -309,7 +288,7 @@ fluid.defaults("gpii.acceptanceTesting.testEnvironment", {
 
 
 gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
-    var serverName = kettle.config.createDefaults(gpiiConfig); 
+    var serverName = kettle.config.createDefaults(gpiiConfig);
     var tests = [];
     fluid.each(testDefs, function (testDef) {
         var test = {
@@ -320,14 +299,14 @@ gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
                         type: "gpii.acceptanceTesting.testCaseHolder",
                         options: {
                             testDef: gpii.lifecycleManager.resolver().resolve(testDef),
-                            serverName: serverName, 
+                            serverName: serverName,
                             modules: [ {
                                 name: "Full login/logout cycle",
                                 tests: [ gpii.acceptanceTesting.buildSingleTestFixture(testDef) ]
                             }]
                         }
                     }
-                }               
+                }
             }
         };
 
@@ -335,4 +314,4 @@ gpii.acceptanceTesting.buildTests = function (testDefs, gpiiConfig) {
     });
 
     fluid.test.runTests(tests);
-};  
+};
