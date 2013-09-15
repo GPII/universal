@@ -19,7 +19,7 @@
                 },
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id",
-                    "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name" 
+                    "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
                     "mag-factor": "display.screenEnhancement.magnification",
@@ -85,11 +85,11 @@
             ]
         }
     },
-  
+
     {
         "name": "UI Options",
         "id": "fluid.uiOptions.linux",
-        "contexts": {             
+        "contexts": {
             "OS": [
                 {
                     "id": "linux",
@@ -140,16 +140,17 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ 
+                "capabilities": [
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
-                    "applications.org\\.gnome\\.desktop\\.interface.id" 
+                    "applications.org\\.gnome\\.desktop\\.interface.id"
                 ],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "transform": {
-                            "type": "gpii.transformer.fontSizeToScale",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "baseFontSize": 12
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "display.screenEnhancement.fontSize",
+                            "operator": "/",
+                            "right": 12
                         }
                     },
                     "cursor-size": {
@@ -238,11 +239,11 @@
                 "version": ">=2.6.26"
             }]
         },
-        
+
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ 
+                "capabilities": [
                     "applications.org\\.gnome\\.nautilus.id",
                     "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name"
                 ],
@@ -254,7 +255,7 @@
                 }
             }
         ],
-        
+
         "lifecycleManager": {
             "start": [ "setSettings" ],
             "stop": [ "restoreSettings" ]
@@ -307,12 +308,12 @@
         },
         "settingsHandlers": [ {
                 "type": "gpii.gsettings.set",
-                "capabilities": [ 
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id", 
+                "capabilities": [
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id",
                     "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
                     "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name"
                  ],
-                "capabilitiesTransformations": { 
+                "capabilitiesTransformations": {
                     "stickykeys-enable": "control.keyboardEnhancement.stickyKeys",
                     "slowkeys-enable": "control.keyboardEnhancement.slowKeys.-provisional-slowKeysEnable",
                     "slowkeys-delay": {
