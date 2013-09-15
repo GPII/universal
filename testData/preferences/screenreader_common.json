@@ -1,0 +1,12 @@
+{
+    "http://registry.gpii.org/common/speakTutorialMessages": [{ "value": false }],
+    "http://registry.gpii.org/common/keyEcho": [{ "value": false }],
+    "http://registry.gpii.org/common/wordEcho": [{ "value": true }],
+    "http://registry.gpii.org/common/announceCapitals": [{ "value": true }],
+    "http://registry.gpii.org/common/readingUnit": [{ "value": "word" }],
+    "http://registry.gpii.org/common/punctuationVerbosity": [{ "value": "all" }],
+    "http://registry.gpii.org/common/screenReaderTTSEnabled": [{ "value": true }],
+    "http://registry.gpii.org/common/trackingTTS": [{ "value": ["mouse", "caret"] }],
+    "http://registry.gpii.org/common/speechRate": [{ "value": 400 }],
+    "http://registry.gpii.org/common/auditoryOutLanguage": [{ "value": "en-BS" }]
+}
