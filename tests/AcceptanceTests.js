@@ -141,7 +141,7 @@ gpii.acceptanceTesting.removeOptionsBlocks = function (payload) {
     return fluid.transform(togo, function (settingHandler) {
         return fluid.transform(settingHandler, function (solutionBlocks) {
             return fluid.transform(solutionBlocks, function (solutionBlock) {
-                return { settings: solutionBlock.settings};
+                return {settings: solutionBlock.settings};
             });
         });
     });
@@ -152,8 +152,7 @@ gpii.acceptanceTesting.startServer = function (testDef, tests) {
 };
 
 gpii.acceptanceTesting.snapshotSettings = function (testDef, settingsStore) {
-    settingsStore.orig = gpii.acceptanceTesting.getSettings(
-        testDef.settingsHandlers);
+    settingsStore.orig = gpii.acceptanceTesting.getSettings(testDef.settingsHandlers);
 };
 
 gpii.acceptanceTesting.loginRequestListen = function (data) {
@@ -174,8 +173,7 @@ gpii.acceptanceTesting.onExecExit = function (result, processSpec) {
 
 gpii.acceptanceTesting.logoutRequestListen = function (data) {
     jqUnit.assertNotEquals("Successful logout message returned " + data, -1,
-        data.indexOf(
-            "was successfully logged out."));
+        data.indexOf("was successfully logged out."));
 };
 
 gpii.acceptanceTesting.checkRestoredConfiguration = function (testDef, settingsStore) {
