@@ -34,15 +34,17 @@ fluid.defaults("gpii.acceptanceTesting.exec", {
     invokers: {
         exec: {
             funcName: "gpii.acceptanceTesting.exec.exec",
-            args: ["{that}", "{arguments}.0", "{arguments}.1" ]
+            args: ["{that}", "{arguments}.0", "{arguments}.1"]
         }
-    }
+    },
+    timeout: 500,
+    maxTimeouts: 6
 });
 
 gpii.acceptanceTesting.exec.exec = function (that, processSpec, expected) {
     var command = processSpec.command,
-        //looping 6*500ms, which seems like a reasonable maximum amount of time to wait for an application to launch/close
-        maxLoops = 6;
+        timeout = that.options.timeout,
+        maxTimeouts = that.options.maxTimeouts;
 
     fluid.log("Exec'ing: ", command);
 
@@ -55,7 +57,7 @@ gpii.acceptanceTesting.exec.exec = function (that, processSpec, expected) {
         } else {
             processSpec.count = processSpec.count || 0;
 
-            if (processSpec.count >= maxLoops) {
+            if (processSpec.count >= maxTimeouts) {
                 that.events.onExecExit.fire(false, processSpec);
                 return;
             }
@@ -63,7 +65,7 @@ gpii.acceptanceTesting.exec.exec = function (that, processSpec, expected) {
             processSpec.count++;
             setTimeout(function () {
                 gpii.acceptanceTesting.exec.exec(that, processSpec, expected);
-            }, 500);
+            }, timeout);
         }
     });
 };
@@ -78,21 +80,30 @@ fluid.defaults("gpii.acceptanceTesting.httpReq", {
     invokers: {
         login: {
             funcName: "gpii.acceptanceTesting.httpReq.send",
-            args: ["{arguments}.0", "login", "{that}.events.onLogin.fire"]
+            args: ["{that}.options.requestOptions", {
+                token: "{arguments}.0",
+                action: "login"
+            }, "{that}.events.onLogin.fire"]
         },
         logout: {
             funcName: "gpii.acceptanceTesting.httpReq.send",
-            args: ["{arguments}.0", "logout", "{that}.events.onLogout.fire"]
+            args: ["{that}.options.requestOptions", {
+                token: "{arguments}.0",
+                action: "logout"
+            }, "{that}.events.onLogout.fire"]
         }
+    },
+    requestOptions: {
+        host: "localhost",
+        port: 8081,
+        path: "/user/%token/%action"
     }
 });
 
-gpii.acceptanceTesting.httpReq.send = function (token, action, callback) {
-    http.get({
-        host: "localhost",
-        port: 8081,
-        path: "/user/" + token + "/" + action
-    }, function(response) {
+gpii.acceptanceTesting.httpReq.send = function (requestOptions, pathTermMap, callback) {
+    var roptions = fluid.copy(requestOptions);
+    roptions.path = fluid.stringTemplate(roptions.path, pathTermMap);
+    http.get(roptions, function(response) {
         var data = "";
 
         response.on("data", function (chunk) {
@@ -100,17 +111,16 @@ gpii.acceptanceTesting.httpReq.send = function (token, action, callback) {
         });
         response.on("close", function(err) {
             if (err) {
-                jqUnit.assertFalse("Got an error on " + action + ": " +
+                jqUnit.assertFalse("Got an error on request to " + roptions.path + ": " +
                     err.message, true);
             }
             fluid.log("Connection to the server was closed");
         });
         response.on("end", function() {
-            callback(data, token);
+            callback(data);
         });
     }).on('error', function(err) {
-        jqUnit.assertFalse("Got an error on " + action + ": " + err.message,
-            true);
+        jqUnit.assertFalse("Got an error on request to " + roptions.path + ": " + err.message, true);
     });
 };
 
@@ -121,8 +131,7 @@ gpii.acceptanceTesting.httpReq.send = function (token, action, callback) {
 gpii.acceptanceTesting.getSettings = function (payload) {
     var ret = {};
     fluid.each(payload, function (handlerBlock, handlerID) {
-        ret[handlerID] = fluid.invokeGlobalFunction(handlerID + ".get",
-            [handlerBlock]);
+        ret[handlerID] = fluid.invokeGlobalFunction(handlerID + ".get", [handlerBlock]);
     });
     return ret;
 };
@@ -147,10 +156,9 @@ gpii.acceptanceTesting.snapshotSettings = function (testDef, settingsStore) {
         testDef.settingsHandlers);
 };
 
-gpii.acceptanceTesting.loginRequestListen = function (data, token) {
+gpii.acceptanceTesting.loginRequestListen = function (data) {
     jqUnit.assertNotEquals("Successful login message returned " + data, -1,
-        data.indexOf(
-            "User with token " + token + " was successfully logged in."));
+        data.indexOf("was successfully logged in."));
 };
 
 gpii.acceptanceTesting.checkConfiguration = function (testDef) {
@@ -164,10 +172,10 @@ gpii.acceptanceTesting.onExecExit = function (result, processSpec) {
     jqUnit.assertTrue("Checking the process with command: " + processSpec, result);
 };
 
-gpii.acceptanceTesting.logoutRequestListen = function (data, token) {
+gpii.acceptanceTesting.logoutRequestListen = function (data) {
     jqUnit.assertNotEquals("Successful logout message returned " + data, -1,
         data.indexOf(
-            "User with token " + token + " was successfully logged out."));
+            "was successfully logged out."));
 };
 
 gpii.acceptanceTesting.checkRestoredConfiguration = function (testDef, settingsStore) {
@@ -285,9 +293,8 @@ fluid.defaults("gpii.acceptanceTesting.testEnvironment", {
 
 gpii.acceptanceTesting.runTests = function (testDefs, gpiiConfig) {
     var serverName = kettle.config.createDefaults(gpiiConfig);
-    var tests = [];
-    fluid.each(testDefs, function (testDef) {
-        var test = {
+    var tests = fluid.transform(testDefs, function (testDef) {
+        return {
             type: "gpii.acceptanceTesting.testEnvironment",
             options: {
                 components: {
@@ -305,8 +312,6 @@ gpii.acceptanceTesting.runTests = function (testDefs, gpiiConfig) {
                 }
             }
         };
-
-        tests.push(test);
     });
 
     fluid.test.runTests(tests);
