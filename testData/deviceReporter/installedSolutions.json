@@ -32,7 +32,7 @@
     },
     
     {
-        "id": "nvda.screenReader"
+        "id": "org.nvda-project"
     },
     
     {
@@ -88,7 +88,7 @@
     },
     
     {
-        "id": "com.microsoft.windows.mouseTracking"
+        "id": "com.microsoft.windows.mouseTrailing"
     },
     
     {
