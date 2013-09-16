@@ -1,12 +1,17 @@
-[
-    {
-        "id": "com.android.activitymanager"
+{
+    "OS": {
+        "id": "android",
+        "version": "3.0.31-693204"
     },
-    {
-        "id": "com.android.talkback"
-    },
-    {
-        "id": "com.android.freespeech"
-    }
-
-]
+    "solutions": [
+        {
+            "id": "com.android.activitymanager"
+        },
+        {
+            "id": "com.android.talkback"
+        },
+        {
+            "id": "com.android.freespeech"
+        }
+    ]
+}
