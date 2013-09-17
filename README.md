@@ -34,3 +34,8 @@ open `{universal}/tests/web/html/all-tests.html` in your preferred browser:
 Running node tests:
 
     node tests/all-tests.js
+
+
+OTHER:
+-------
+Will soon work with Webanywhere
