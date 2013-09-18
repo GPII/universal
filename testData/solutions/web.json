@@ -1,0 +1,21 @@
+[
+   {
+        "name": "BrowseAloud Plus",
+        "id": "com.browsealoud.plus",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.com\\.browsealoud\\.plus.id"
+                ]
+            }
+        ]
+    }
+]
