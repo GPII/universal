@@ -1,0 +1,9 @@
+{
+	"http://registry.gpii.org/applications/com.browsealoud.plus": [{
+        "value": {
+            "DefaultHoverToSpeakOn": true,
+			"DefaultTextMagnifierOn": true,
+			"TextMagnifierSize": "XL"
+		}
+	}]
+}
