@@ -471,7 +471,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\NVDA\\InstallDir}\\nvda.exe\""
                 }
             ],
             "stop": [
