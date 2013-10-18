@@ -789,10 +789,15 @@
                 "capabilitiesTransformations": {
                     "CaptionFontHeight": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
+                            "type": "fluid.transforms.round",
                             "outputPath": "value",
-                            "factor": -1
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": -1
+                                }
+                            }
                         },
                         "path": {
                             "literalValue": "pvParam.lfCaptionFont.lfHeight"
@@ -806,10 +811,15 @@
                     },
                     "MenuFontHeight": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
+                            "type": "fluid.transforms.round",
                             "outputPath": "value",
-                            "factor": -1
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": -1
+                                }
+                            }
                         },
                         "path": {
                             "literalValue": "pvParam.lfCaptionFont.lfHeight"
@@ -824,10 +834,15 @@
                     },
                     "SmallCaptionFontHeight": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
+                            "type": "fluid.transforms.round",
                             "outputPath": "value",
-                            "factor": -1
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": -1
+                                }
+                            }
                         },
                         "path": {
                             "literalValue": "pvParam.lfCaptionFont.lfHeight"
@@ -841,10 +856,15 @@
                     },
                     "StatusFontHeight": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
+                            "type": "fluid.transforms.round",
                             "outputPath": "value",
-                            "factor": -1
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": -1
+                                }
+                            }
                         },
                         "path": {
                             "literalValue": "pvParam.lfCaptionFont.lfHeight"
@@ -852,10 +872,15 @@
                     },
                     "MessageFontHeight": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
+                            "type": "fluid.transforms.round",
                             "outputPath": "value",
-                            "factor": -1
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": -1
+                                }
+                            }
                         },
                         "path": {
                             "literalValue": "pvParam.lfCaptionFont.lfHeight"
