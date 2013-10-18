@@ -1273,5 +1273,32 @@
                 }
             ]
         }
+    },
+    {
+        "name": "Xrandr",
+        "id": "org.freedesktop.xrandr",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.xrandr.set",
+                "capabilities": [
+                    "display.screenEnhacements",
+                    "applications.org\\.freedesktop\\.xrandr.id"
+                ]
+           }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
     }
 ]
