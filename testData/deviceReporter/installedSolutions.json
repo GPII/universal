@@ -105,5 +105,9 @@
 
     {
         "id": "com.android.freespeech"
+    },
+
+    {
+        "id": "org.alsa-project"
     }
 ]

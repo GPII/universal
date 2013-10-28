@@ -1165,6 +1165,31 @@
     },
 
     {
+        "name": "ALSA System Volume",
+        "id": "org.alsa-project",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.alsa.set",
+                "capabilities": [
+                    "applications.org\\.alsa-project.id"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+            "start": ["setSettings"],
+            "stop": ["restoreSettings"]
+        }
+    },
+
+    {
         "name": "EasyOne Communicator Linux",
         "id": "trace.easyOne.communicator.linux",
         "contexts": {
