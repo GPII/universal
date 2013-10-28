@@ -17,7 +17,7 @@
         }
     ],
 
-    "http://registry.gpii.net/common/invertImages": [
+    "http://registry.gpii.net/common/invertColours": [
         {
             "value": true
         }

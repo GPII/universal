@@ -6,7 +6,7 @@
     "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "SERIF" }],
     "http://registry.gpii.org/common/magnification": [{ "value": 1 }],
     "http://registry.gpii.org/common/tracking": [{ "value": ["mouse"] }],
-    "http://registry.gpii.org/common/invertImages": [{ "value": false }],
+    "http://registry.gpii.org/common/invertColours": [{ "value": false }],
     "http://registry.gpii.org/common/links": [{ "value": true }],
     "http://registry.gpii.org/common/toc": [{ "value": false }],
     "http://registry.gpii.org/common/inputsLarger": [{ "value": true }],

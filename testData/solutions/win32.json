@@ -29,7 +29,7 @@
                         }
                     },
                     "Invert": {
-                        "value": "display.screenEnhancement.invertImages",
+                        "value": "display.screenEnhancement.-provisional-invertColours",
                         "dataType": {
                             "literalValue": "REG_DWORD"
                         }
