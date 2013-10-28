@@ -20,10 +20,10 @@
         "applications": {
             "fluid.uiOptions.windows": {
                 "name": "UI Options"
-            }, 
+            },
             "fluid.uiOptions.linux": {
                 "name": "UI Options"
-            }, 
+            },
             "fluid.uiOptions": {
                 "name": "UI Options",
                 "parameters": {
@@ -46,7 +46,7 @@
                 ],
                 "genericFontFace": "sans serif"
             },
-            
+
             "screenMagnification": {
                 "applications": {
                     "org.gnome.desktop.a11y.magnifier": {
