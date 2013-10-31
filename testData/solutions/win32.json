@@ -218,6 +218,20 @@
                     "display.screenReader.applications.org\\.nvda-project.name"
                 ],
                 "capabilitiesTransformations": {
+                    "speech\\.espeak\\.pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.pitch",
+                            "factor": 100
+                        }
+                    },
+                    "speech\\.espeak\\.volume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "factor": 100
+                        }
+                    },
                     "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
                     "keyboard\\.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
                     "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
