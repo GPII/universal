@@ -729,14 +729,14 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.highContrast",
+                    "display.screenEnhancement.-provisional-highContrastEnabled",
                     "applications.com\\.microsoft\\.windows\\.highContrast.id"
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "display.screenEnhancement.highContrast",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastEnabled",
                             "outputPath": "value"
                         },
                         "path": {
