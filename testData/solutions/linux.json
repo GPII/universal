@@ -1180,7 +1180,16 @@
                 "type": "gpii.alsa.set",
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
-                ]
+                ],
+                "capabilitiesTrasformations": {
+                    "masterVolume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "-provisional-general.-provisional-volume",
+                            "factor": 100
+                        }
+                    }
+                }
             }
         ],
         "lifecycleManager" : {
