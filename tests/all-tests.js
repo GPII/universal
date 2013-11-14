@@ -11,14 +11,28 @@ https://github.com/gpii/universal/LICENSE.txt
 */
 
 /*global require, __dirname*/
-// This loads universal.
-var fluid = fluid || require("infusion");
 
-(function () {
+var fluid = require("infusion"),
+    kettle = fluid.require("kettle", require);
 
-    fluid.require("../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js", require);
-    fluid.require("../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js", require);
-    fluid.require("../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js", require);
-    fluid.require("../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js", require);
+fluid.require("kettle/test/utils/js/KettleTestUtils", require);
 
-}());
+kettle.tests.allTests = true;
+
+var testIncludes = [
+
+    // Run all tests included in the list.
+    "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
+    "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
+    "./DevelopmentTests.js",
+
+];
+var tests = [];
+
+fluid.each(testIncludes, function (path) {
+    tests = tests.concat(fluid.require(path, require));
+});
+
+fluid.test.runTests(tests);
