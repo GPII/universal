@@ -1165,6 +1165,40 @@
     },
 
     {
+        "name": "ALSA System Volume",
+        "id": "org.alsa-project",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.alsa.set",
+                "capabilities": [
+                    "applications.org\\.alsa-project.id"
+                ],
+                "capabilitiesTrasformations": {
+                    "masterVolume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "-provisional-general.-provisional-volume",
+                            "factor": 100
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager" : {
+            "start": ["setSettings"],
+            "stop": ["restoreSettings"]
+        }
+    },
+
+    {
         "name": "EasyOne Communicator Linux",
         "id": "trace.easyOne.communicator.linux",
         "contexts": {
