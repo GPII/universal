@@ -10,5 +10,10 @@
             "cursor-size": 90,
             "text-scaling-factor": 0.75
         }
+    }],
+    "http://registry.gpii.org/applications/org.alsa-project": [{
+        "value": {
+            "masterVolume": 50
+        }
     }]
 }
