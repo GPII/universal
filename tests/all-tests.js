@@ -22,6 +22,7 @@ kettle.tests.allTests = true;
 var testIncludes = [
 
     // Run all tests included in the list.
+    "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
