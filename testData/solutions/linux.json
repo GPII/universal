@@ -199,7 +199,7 @@
                     "gtk-theme": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenEnhancement.highContrast",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastEnabled",
                             "options": {
                                 "true": {
                                     "outputValue": "HighContrast"
@@ -210,7 +210,7 @@
                     "icon-theme": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenEnhancement.highContrast",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastEnabled",
                             "options": {
                                 "true": {
                                     "outputValue": "HighContrast"
