@@ -1,22 +1,21 @@
-[    
+[
     {
-         "name": "Cloud4Chrome",
-         "id": "org.chrome.cloud4chrome",
-         "contexts": {
-             "OS": [
-                 {
-                     "id": "web"
-                 }
-             ]
-         },
-         "settingsHandlers": [
-             {
-                 "type": "gpii.settingsHandlers.noSettings",
-                 "capabilities": [
-                     "applications.org\\.chrome\\.cloud4chrome.id"
-                 ]
-             }
-         ]
-     }
-    
+        "name": "Cloud4Chrome",
+        "id": "org.chrome.cloud4chrome",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.org\\.chrome\\.cloud4chrome.id"
+                ]
+            }
+        ]
+    }
 ]
