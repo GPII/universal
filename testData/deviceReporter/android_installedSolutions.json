@@ -12,6 +12,9 @@
         },
         {
             "id": "com.android.freespeech"
+        },
+        {
+            "id": "com.android.audioManager"
         }
     ]
 }
