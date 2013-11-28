@@ -21,16 +21,18 @@ var fluid = require("infusion"),
 
 fluid.require("kettle/test/utils/js/KettleTestUtils", require);
 
-kettle.tests.token = "carla";
+var dev = fluid.registerNamespace("kettle.tests.development");
 
-kettle.tests.testLoginResponse = function (data) {
+dev.token = "carla";
+
+dev.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        kettle.tests.token + " was successfully logged in.", data);
+        dev.token + " was successfully logged in.", data);
 };
 
-kettle.tests.testLogoutResponse = function (data) {
+dev.testLogoutResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        kettle.tests.token + " was successfully logged out.", data);
+        dev.token + " was successfully logged out.", data);
 };
 
 var testDefs = [{
@@ -49,7 +51,7 @@ var testDefs = [{
                     port: 8081
                 },
                 termMap: {
-                    token: kettle.tests.token
+                    token: dev.token
                 }
             }
         },
@@ -61,7 +63,7 @@ var testDefs = [{
                     port: 8081
                 },
                 termMap: {
-                    token: kettle.tests.token
+                    token: dev.token
                 }
             }
         }
@@ -70,12 +72,12 @@ var testDefs = [{
         func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
-        listener: "kettle.tests.testLoginResponse"
+        listener: "kettle.tests.development.testLoginResponse"
     }, {
         func: "{logoutRequest}.send"
     }, {
         event: "{logoutRequest}.events.onComplete",
-        listener: "kettle.tests.testLogoutResponse"
+        listener: "kettle.tests.development.testLogoutResponse"
     }]
 }];
 
