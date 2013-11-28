@@ -13,8 +13,118 @@
             {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.info\\.cloud4all\\.JME.id"
-                ]
+                    "applications.info\\.cloud4all\\.JME.id",
+                    "display.screenEnhancement.-provisional-highContrastTheme",
+                    "display.screenEnhancement.fontSize",
+                    "-provisional-general.-provisional-volume",
+                    "-provisional-general.-provisional-language"
+                ],
+                "capabilitiesTransformations": {
+                    "theme": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "defaultInputValue": "Leather",
+                            "options": {
+                                "black-white": {
+                                    "outputValue": "Black-White"
+                                },
+                                "white-black": {
+                                    "outputValue": "White-Black"
+                                },
+                                "yellow-black": {
+                                    "outputValue": "Yellow-Black"
+                                }
+                            }
+                        }
+                    },
+                    "fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.fontSize",
+                                    "operator": ">",
+                                    "right": 42
+                                }
+                            },
+                            "true": "hughe",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.fontSize",
+                                            "operator": "<",
+                                            "right": 42
+                                        }
+                                    },
+                                    "true": "veryLarge",
+                                    "false": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "condition": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "display.screenEnhancement.fontSize",
+                                                    "operator": "<",
+                                                    "right": 32
+                                                }
+                                            },
+                                            "true": "large",
+                                            "false": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.condition",
+                                                    "condition": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "display.screenEnhancement.fontSize",
+                                                            "operator": "<",
+                                                            "right": 24
+                                                        }
+                                                    },
+                                                    "true": "medium",
+                                                    "false": "small"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "volume": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "-provisional-general.-provisional-volume",
+                            "operator": "*",
+                            "right": 100
+                        }
+                    },
+                    "language": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "-provisional-general.-provisional-language",
+                            "defaultInputValue": "English",
+                            "options": {
+                                "el": {
+                                    "outputValue": "Greek"
+                                },
+                                "en": {
+                                    "outputValue": "English"
+                                },
+                                "es": {
+                                    "outputValue": "Spanish"
+                                },
+                                "de": {
+                                    "outputValue": "German"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         ]
     }
