@@ -1,0 +1,42 @@
+[
+   {
+        "name": "BrowseAloud Plus",
+        "id": "com.browsealoud.plus",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.com\\.browsealoud\\.plus.id"
+                ]
+            }
+        ]
+    }, 
+    
+    {
+         "name": "Cloud4Chrome",
+         "id": "org.chrome.cloud4chrome",
+         "contexts": {
+             "OS": [
+                 {
+                     "id": "web"
+                 }
+             ]
+         },
+         "settingsHandlers": [
+             {
+                 "type": "gpii.settingsHandlers.noSettings",
+                 "capabilities": [
+                     "applications.org\\.chrome\\.cloud4chrome.id"
+                 ]
+             }
+         ]
+     }
+    
+]
