@@ -57,7 +57,7 @@
             "control.structuralNavigation.tableOfContents": "{http://registry.gpii.org/common/tableOfContents}.0.value",
 
             "-provisional-general.-provisional-volume": "{http://registry.gpii.org/common/volume}.0.value",
-            "language": "{http://registry.gpii.org/common/language}.0.value",
+            "-provisional-general.-provisional-language": "{http://registry.gpii.org/common/language}.0.value",
             "": {
                 "transform": {
                     "type": "gpii.ontologyServer.transform.application",
