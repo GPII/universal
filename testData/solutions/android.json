@@ -129,5 +129,30 @@
             "start": [ "setSettings" ],
             "stop": [ "restoreSettings" ]
         }
+    },
+
+    {
+        "name": "Android Audio Manager",
+        "id": "com.android.audioManager",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidActivityManager.androidAudioManager.setVolume",
+                "capabilities": [
+                    "applications.com\\.android\\.audioManager.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
     }
 ]

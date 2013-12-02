@@ -109,5 +109,9 @@
 
     {
         "id": "com.android.persistentConfiguration"
+    },
+
+    {
+        "id": "com.android.audioManager"
     }
 ]
