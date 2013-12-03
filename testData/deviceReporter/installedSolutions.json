@@ -105,5 +105,8 @@
 
     {
         "id": "com.android.freespeech"
+    },
+    {
+        "id": "org.chrome.cloud4chrome"
     }
 ]
