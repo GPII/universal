@@ -14,8 +14,55 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.org\\.chrome\\.cloud4chrome.id"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled":"display.screenReader.-provisional-screenReaderTTSEnabled",
+                    "fontSize": {
+                        "transform":{
+                            "type":"gpii.transformer.quantize",
+                            "inputPath":"display.screenEnhancement.fontSize",
+                            "input":9,
+                            "ranges":[
+                                {
+                                    "upperBound":12,
+                                    "output":"medium"
+                                },
+                                {
+                                    "upperBound":18,
+                                    "output":"large"
+                                },
+                                {
+                                    "output":"x-large"
+                                }
+                            ]
+                        }
+                    },
+                    "magnifierEnabled":"display.screenEnhancement.-provisional-magnifierEnabled",
+                    "magnification": {
+                        "transform": {
+                            "type":"gpii.transformer.quantize",
+                            "inputPath":"display.screenEnhancement.magnification",
+                            "input":1,
+                            "ranges":[
+                                {
+                                    "upperBound":1.5,
+                                    "output":1
+                                },
+                                {
+                                    "upperBound":2.5,
+                                    "output":2
+                                },
+                                {
+                                    "output":3
+                                }
+                            ]
+                        }
+                    },
+                    "highContrastEnabled":"display.screenEnhancement.-provisional-highContrastEnabled",
+                    "highContrastTheme":"display.screenEnhancement.-provisional-highContrastTheme",
+                    "invertColours":"display.screenEnhancement.-provisional-invertColours"
+                }
             }
-        ]
+        ]    
     }
 ]
