@@ -1,0 +1,21 @@
+[
+    {
+        "name": "JME Cloud4all Themes",
+        "id": "info.cloud4all.JME",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.info\\.cloud4all\\.JME.id"
+                ]
+            }
+        ]
+    }
+]
