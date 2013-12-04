@@ -132,8 +132,13 @@
 		        "applications.se\\.omnitor\\.ecmobile.id"
 		    ],
 		    "capabilitiesTransformations": {
-		        "map\\.string\\.fontsize\\.$t": "display.screenEnhancement.fontSize",
-		        
+		        "map\\.string\\.fontsize\\.$t": {
+		            "transform": {
+		                "type": "fluid.transforms.linearScale",
+		                "valuePath": "display.screenEnhancement.fontSize",
+		                "factor": 2
+		            }
+		        },
 		        "map\\.string\\.theme\\.$t": {
 		            "transform": {
 		                "type": "fluid.transforms.condition",
