@@ -76,7 +76,7 @@
                     "language": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "-provisional-general.-provisional-language",
+                            "inputPath": "language",
                             "defaultInputValue": "English",
                             "options": {
                                 "el": {
