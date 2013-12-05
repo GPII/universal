@@ -108,5 +108,9 @@
     },
     {
         "id": "org.chrome.cloud4chrome"
-    }
+    },
+		
+	{
+		"id": "eu.singularlogic.pixelsense.sociable"
+	}
 ]
