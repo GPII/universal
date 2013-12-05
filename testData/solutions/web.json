@@ -1,0 +1,101 @@
+[
+    {
+        "name": "JME Cloud4all Themes",
+        "id": "info.cloud4all.JME",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.info\\.cloud4all\\.JME.id",
+                    "display.screenEnhancement.-provisional-highContrastTheme",
+                    "display.screenEnhancement.fontSize",
+                    "-provisional-general.-provisional-volume",
+                    "-provisional-general.-provisional-language"
+                ],
+                "capabilitiesTransformations": {
+                    "theme": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "defaultInputValue": "Leather",
+                            "options": {
+                                "black-white": {
+                                    "outputValue": "Black-White"
+                                },
+                                "white-black": {
+                                    "outputValue": "White-Black"
+                                },
+                                "yellow-black": {
+                                    "outputValue": "Yellow-Black"
+                                }
+                            }
+                        }
+                    },
+                    "fontSize": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "small"
+                                },
+                                {
+                                    "upperBound": 24,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 32,
+                                    "output": "large"
+                                },
+                                {
+                                    "upperBound": 42,
+                                    "output": "veryLarge"
+                                },
+                                {
+                                    "output": "huge"
+                                }
+                            ]
+                        }
+                    },
+                    "volume": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "-provisional-general.-provisional-volume",
+                            "operator": "*",
+                            "right": 100
+                        }
+                    },
+                    "language": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "language",
+                            "defaultInputValue": "English",
+                            "options": {
+                                "el": {
+                                    "outputValue": "Greek"
+                                },
+                                "en": {
+                                    "outputValue": "English"
+                                },
+                                "es": {
+                                    "outputValue": "Spanish"
+                                },
+                                "de": {
+                                    "outputValue": "German"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+]
