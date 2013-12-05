@@ -40,59 +40,29 @@
                     },
                     "fontSize": {
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.fontSize",
-                                    "operator": ">",
-                                    "right": 42
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.screenEnhancement.fontSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "small"
+                                },
+                                {
+                                    "upperBound": 24,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 32,
+                                    "output": "large"
+                                },
+                                {
+                                    "upperBound": 42,
+                                    "output": "veryLarge"
+                                },
+                                {
+                                    "output": "huge"
                                 }
-                            },
-                            "true": "hughe",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.fontSize",
-                                            "operator": "<",
-                                            "right": 42
-                                        }
-                                    },
-                                    "true": "veryLarge",
-                                    "false": {
-                                        "transform": {
-                                            "type": "fluid.transforms.condition",
-                                            "condition": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "display.screenEnhancement.fontSize",
-                                                    "operator": "<",
-                                                    "right": 32
-                                                }
-                                            },
-                                            "true": "large",
-                                            "false": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.condition",
-                                                    "condition": {
-                                                        "transform": {
-                                                            "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "display.screenEnhancement.fontSize",
-                                                            "operator": "<",
-                                                            "right": 24
-                                                        }
-                                                    },
-                                                    "true": "medium",
-                                                    "false": "small"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            ]
                         }
                     },
                     "volume": {
