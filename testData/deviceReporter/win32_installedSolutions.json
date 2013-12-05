@@ -98,6 +98,10 @@
 
         {
             "id": "com.microsoft.windows.cursors"
+        },
+		
+		{
+            "id": "eu.singularlogic.pixelsense.sociable"
         }
     ]
 }
