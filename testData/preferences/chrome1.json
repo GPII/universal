@@ -1,0 +1,10 @@
+{
+    "http://registry.gpii.org/applications/org.chrome.cloud4chrome": [
+        {
+            "value": {
+                "screenReaderTTSEnabled": true,
+                "simplifier": true
+            }
+        }
+    ]
+}
