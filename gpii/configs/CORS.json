@@ -1,0 +1,11 @@
+{
+    "typeName": "gpii.CORS",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "distributeOptions": {
+            "source": "{that}.options.serverCORSGradeNames",
+            "target": "{that server}.options.gradeNames"
+        },
+        "serverCORSGradeNames": ["kettle.use.CORS"]
+    }
+}
