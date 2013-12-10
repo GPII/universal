@@ -446,7 +446,7 @@
                                             "rightPath": "display.screenReader.speechRate"
                                         }
                                     },
-                                    "operator": "+",
+                                    "operator": "-",
                                     "right": {
                                         "transform": {
                                             "type": "fluid.transforms.binaryOp",
