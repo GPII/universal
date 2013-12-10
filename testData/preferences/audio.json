@@ -1,13 +1,13 @@
 {
     "http://registry.gpii.org/applications/com.android.audioManager": [{ 
         "value": {
-            "STREAM_VOICE_CALL": 500,
-            "STREAM_SYSTEM": 500, 
-            "STREAM_RING": 500,
-            "STREAM_MUSIC": 500,
-            "STREAM_ALARM": 500,
-            "STREAM_NOTIFICATION": 500,
-            "STREAM_DTMF": 500
+            "STREAM_VOICE_CALL": 15,
+            "STREAM_SYSTEM": 14.5,
+            "STREAM_RING": 15,
+            "STREAM_MUSIC": 15,
+            "STREAM_ALARM": 15,
+            "STREAM_NOTIFICATION": 15,
+            "STREAM_DTMF": 15
         }
     }]
 }
