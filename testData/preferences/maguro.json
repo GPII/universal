@@ -1,8 +1,8 @@
 {
     "http://registry.gpii.org/applications/com.android.persistentConfiguration": [{
         "value": {
-            "fontScale": "1.5",
-            "locale": "en"
+            "fontScale": 1.5,
+            "locale": "en_GB"
         }
     }]
 }
