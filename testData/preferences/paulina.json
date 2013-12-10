@@ -1,3 +1,9 @@
 {
-    "http://registry.gpii.org/applications/com.android.talkback": [{ "value": { "tts_default_rate": "50" }}]
+    "http://registry.gpii.org/applications/com.android.talkback": [{ "value": {} }],
+    "http://registry.gpii.org/applications/com.android.settings.secure": [{ 
+        "value": {
+            "tts_default_rate": 450.99,
+            "tts_default_pitch": 450.99
+        }
+    }]
 }
