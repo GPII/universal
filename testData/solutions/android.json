@@ -389,7 +389,7 @@
                     "screen_off_timeout": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.-provisiona-general.-provisional-volume",
+                            "valuePath": "display.-provisional-screenOffTime",
                             "factor": 1000
                         }
                     }
