@@ -42,10 +42,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidActivityManager.androidSettings.set",
-                "options": {
-                    "settingType": "Secure"
-                },
+                "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
                     "applications.com\\.android\\.talkback.id",
@@ -55,7 +52,6 @@
         ],
         "lifecycleManager": {
             "start": [
-                "setSettings",
                 {
                     "type": "gpii.androidActivityManager.startTalkback"
                 }
@@ -63,8 +59,7 @@
             "stop": [
                 {
                     "type": "gpii.androidActivityManager.stopTalkback"
-                },
-                "restoreSettings"
+                }
             ]
         }
     },
@@ -107,6 +102,7 @@
     },
 
     {
+<<<<<<< HEAD
         "name": "Android Configuration",
         "id": "com.android.persistentConfiguration",
         "contexts": {
