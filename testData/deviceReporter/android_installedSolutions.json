@@ -18,6 +18,12 @@
         },
         {
             "id": "com.android.audioManager"
+        },
+        {
+            "id": "com.android.settings.system"
+        },
+        {
+            "id": "com.android.settings.secure"
         }
     ]
 }
