@@ -1,6 +1,6 @@
 {
 
-  "matchMakerType": "ruleBased",
+  "http://registry.gpii.org/common/matchMakerType": [{ "value": "ruleBased" }],
 
   "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
   "http://registry.gpii.org/common/foregroundColor": [{"value": "white"}],
