@@ -114,7 +114,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidActivityManager.persistentConfiguration.set",
+                "type": "gpii.androidPersistentConfiguration.set",
                 "capabilities": [
                     "applications.com\\.android\\.persistentConfiguration.id"
                 ]
