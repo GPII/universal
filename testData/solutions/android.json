@@ -370,7 +370,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidActivityManager.androidSettings.set",
+                "type": "gpii.androidSettings.set",
                 "options": {
                     "settingType": "System"
                 },
@@ -411,7 +411,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidActivityManager.androidSettings.set",
+                "type": "gpii.androidSettings.set",
                 "options": {
                     "settingType": "Secure"
                 },
