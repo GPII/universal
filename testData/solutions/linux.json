@@ -263,8 +263,8 @@
     },
 
     {
-        "name": "GNOME Caribou Onscreen Keyboard",
-        "id": "org.gnome.desktop.a11y.caribou-keyboard",
+        "name": "GNOME Assistive Technology - Screen Keyboard",
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard",
         "contexts": {
             "OS": [{
                 "id": "linux",
@@ -276,8 +276,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
-                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.name",
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.id"
+                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.name",
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.id"
                 ]
             }
         ],
