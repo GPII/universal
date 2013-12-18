@@ -130,8 +130,8 @@
     },
 
     {
-        "name": "Android UI Settings Secure",
-        "id": "com.android.settings.secure",
+        "name": "Android Audio Manager",
+        "id": "com.android.audioManager",
         "contexts": {
             "OS": [
                 {
@@ -142,12 +142,9 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidSettings.set",
-                "options": {
-                    "settingType": "Secure"
-                },
+                "type": "gpii.androidAudioManager.setVolume",
                 "capabilities": [
-                    "applications.com\\.android\\.settings\\.secure.id"
+                    "applications.com\\.android\\.audioManager.id"
                 ]
             }
         ],

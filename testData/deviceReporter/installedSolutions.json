@@ -113,5 +113,9 @@
 
     {
         "id": "com.android.settings.secure"
+    },
+
+    {
+        "id": "com.android.audioManager"
     }
 ]
