@@ -106,7 +106,12 @@
     {
         "id": "com.android.freespeech"
     },
+
     {
         "id": "org.chrome.cloud4chrome"
+    },
+
+    {
+        "id": "com.android.settings.secure"
     }
 ]
