@@ -18,6 +18,9 @@
         },
         {
             "id": "com.android.audioManager"
+        },
+        {
+            "id": "com.android.persistentConfiguration"
         }
     ]
 }
