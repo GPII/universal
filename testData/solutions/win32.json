@@ -118,46 +118,6 @@
     },
 
     {
-        "name": "UI Options",
-        "id": "fluid.uiOptions.windows",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "display.applications.fluid\\.uiOptions\\.windows.name",
-                    "applications.fluid\\.uiOptions\\.windows.id",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.foregroundColor",
-                    "display.screenEnhancement.backgroundColor",
-                    "display.screenEnhancement.fontFace"
-                ]
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
-                }
-            ]
-        }
-    },
-
-    {
         "name": "Windows Built-in Onscreen Keyboard",
         "id": "com.microsoft.windows.onscreenKeyboard",
         "contexts": {
@@ -194,7 +154,7 @@
         }
     },
 
-        {
+    {
         "name": "NVDA Screen Reader",
         "id": "org.nvda-project",
         "contexts": {

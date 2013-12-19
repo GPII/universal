@@ -17,25 +17,6 @@
         }
     },
     "display": {
-        "applications": {
-            "fluid.uiOptions.windows": {
-                "name": "UI Options"
-            }, 
-            "fluid.uiOptions.linux": {
-                "name": "UI Options"
-            }, 
-            "fluid.uiOptions": {
-                "name": "UI Options",
-                "parameters": {
-                    "lineSpacing": "2",
-                    "links": true,
-                    "inputsLarger": true,
-                    "captions": false,
-                    "transcripts": false,
-                    "volume": "50"
-                }
-            }
-        },
         "screenEnhancement": {
             "fontSize": 24,
             "foregroundColor": "white",
@@ -46,7 +27,7 @@
                 ],
                 "genericFontFace": "sans serif"
             },
-            
+
             "screenMagnification": {
                 "applications": {
                     "org.gnome.desktop.a11y.magnifier": {
