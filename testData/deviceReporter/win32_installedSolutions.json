@@ -85,10 +85,6 @@
         },
 
         {
-            "id": "com.microsoft.windows.nonClientMetrics"
-        },
-
-        {
             "id": "com.microsoft.windows.mouseTracking"
         },
 
