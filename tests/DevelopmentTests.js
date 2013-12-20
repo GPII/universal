@@ -23,7 +23,7 @@ fluid.require("kettle/test/utils/js/KettleTestUtils", require);
 
 var dev = fluid.registerNamespace("kettle.tests.development");
 
-dev.token = "carla";
+dev.token = "testUser1";
 
 dev.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
