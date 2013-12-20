@@ -121,5 +121,9 @@
 
     {
         "id": "com.android.persistentConfiguration"
+    },
+
+    {
+        "id": "org.alsa-project"
     }
 ]
