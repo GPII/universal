@@ -99,6 +99,83 @@
             "start": [ "setSettings" ],
             "stop": [ "restoreSettings" ]
         }
+    },
+
+    {
+        "name": "Android UI Settings Secure",
+        "id": "com.android.settings.secure",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidSettings.set",
+                "options": {
+                    "settingType": "Secure"
+                },
+                "capabilities": [
+                    "applications.com\\.android\\.settings\\.secure.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "Android Audio Manager",
+        "id": "com.android.audioManager",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidAudioManager.setVolume",
+                "capabilities": [
+                    "applications.com\\.android\\.audioManager.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "Android Configuration",
+        "id": "com.android.persistentConfiguration",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidPersistentConfiguration.set",
+                "capabilities": [
+                    "applications.com\\.android\\.persistentConfiguration.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
     }
- 
 ]
