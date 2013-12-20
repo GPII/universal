@@ -125,5 +125,9 @@
 
     {
         "id": "org.alsa-project"
+    },
+
+    {
+        "id": "org.freedesktop.xrandr"
     }
 ]
