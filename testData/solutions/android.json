@@ -65,43 +65,6 @@
     },
 
     {
-        "name": "Android System Font Size Demo",
-        "id": "com.android.activitymanager",
-        "contexts": {
-            "OS": [{
-                    "id": "android",
-                    "version": ">=0.1"
-                }]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.androidActivityManager.set",
-                "capabilities": [ 
-                    "display.screenEnhancement.applications.com\\.android\\.activityManager\\.interface.name",
-                    "applications.com\\.android\\.activityManager\\.interface.id" 
-                ],
-                "capabilitiesTransformations": {
-                    "text-scaling-factor": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "display.screenEnhancement.fontSize",
-                            "operator": "/",
-                            "right": 12
-                        }
-                    }
-                },
-                "options": {
-                    "schema": "com.android.activityManager"
-                }
-            }
-        ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
-    },
-
-    {
         "name": "Android Configuration",
         "id": "com.android.persistentConfiguration",
         "contexts": {
