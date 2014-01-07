@@ -1,0 +1,11 @@
+{
+    "OS": {
+        "id": "win32",
+        "version": "5.0.0"
+    },
+    "solutions": [
+        {
+            "eu.singularlogic.pixelsense.sociable"
+        }
+    ]
+}

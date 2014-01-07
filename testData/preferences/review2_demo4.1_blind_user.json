@@ -1,0 +1,14 @@
+{
+    "http://registry.gpii.org/applications/org.nvda-project": [
+        {
+            "value": {
+                "speech.synth": "espeak",
+                "speech.outputDevice": "Microsoft Sound Mapper",
+                "keyboard.speakTypedWords": true,
+                "keyboard.speakTypedCharacters": false,
+                "presentation.reportHelpBalloons": false,
+                "speech.espeak.sayCapForCapitals": false
+            }
+        }
+    ]
+}
