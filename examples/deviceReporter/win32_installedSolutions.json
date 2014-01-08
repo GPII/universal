@@ -1,0 +1,99 @@
+{
+    "OS": {
+        "id": "win32",
+        "version": "5.0.0"
+    },
+    "solutions": [
+        {
+            "id": "org.gnome.desktop.interface"
+        },
+
+        {
+            "id": "org.gnome.nautilus"
+        },
+
+        {
+            "id": "org.gnome.desktop.a11y.keyboard"
+        },
+
+        {
+            "id": "org.gnome.orca"
+        },
+
+        {
+            "id": "org.gnome.desktop.a11y.magnifier"
+        },
+
+        {
+            "id": "com.microsoft.windows.magnifier"
+        },
+
+        {
+            "id": "com.microsoft.windows.onscreenKeyboard"
+        },
+
+        {
+            "id": "org.nvda-project"
+        },
+
+        {
+            "id": "fluid.uiOptions.windows"
+        },
+
+        {
+            "id": "fluid.uiOptions.linux"
+        },
+
+        {
+            "id": "org.gnome.desktop.interface"
+        },
+
+        {
+            "id": "org.gnome.nautilus"
+        },
+
+        {
+            "id": "trace.easyOne.communicator.windows"
+        },
+
+        {
+            "id": "trace.easyOne.communicator.linux"
+        },
+
+        {
+            "id": "trace.easyOne.sudan.windows"
+        },
+
+        {
+            "id": "trace.easyOne.sudan.linux"
+        },
+
+        {
+            "id": "webinsight.webAnywhere.windows"
+        },
+
+        {
+            "id": "webinsight.webAnywhere.linux"
+        },
+
+        {
+            "id": "net.opendirective.maavis"
+        },
+
+        {
+            "id": "com.microsoft.windows.highContrast"
+        },
+
+        {
+            "id": "com.microsoft.windows.nonClientMetrics"
+        },
+
+        {
+            "id": "com.microsoft.windows.mouseTracking"
+        },
+
+        {
+            "id": "com.microsoft.windows.cursors"
+        }
+    ]
+}
