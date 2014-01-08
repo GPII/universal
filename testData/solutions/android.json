@@ -1,0 +1,181 @@
+[
+    {
+        "name": "FreeSpeech",
+        "id": "com.android.freespeech",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.com\\.android\\.freespeech.id",
+                    "display.screenReader.applications.com\\.android\\.freespeech.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.androidActivityManager.startFreespeech"
+                }
+            ],
+            "stop": [
+                {
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "TalkBack Screen Reader",
+        "id": "com.android.talkback",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.com\\.android\\.talkback.id",
+                    "display.screenReader.applications.com\\.android\\.talkback.name"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.androidActivityManager.startTalkback"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.androidActivityManager.stopTalkback"
+                }
+            ]
+        }
+    },
+
+    {
+        "name": "Android System Font Size Demo",
+        "id": "com.android.activitymanager",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidActivityManager.set",
+                "capabilities": [ 
+                    "display.screenEnhancement.applications.com\\.android\\.activityManager\\.interface.name",
+                    "applications.com\\.android\\.activityManager\\.interface.id" 
+                ],
+                "capabilitiesTransformations": {
+                    "text-scaling-factor": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "display.screenEnhancement.fontSize",
+                            "operator": "/",
+                            "right": 12
+                        }
+                    }
+                },
+                "options": {
+                    "schema": "com.android.activityManager"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "Android UI Settings Secure",
+        "id": "com.android.settings.secure",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidSettings.set",
+                "options": {
+                    "settingType": "Secure"
+                },
+                "capabilities": [
+                    "applications.com\\.android\\.settings\\.secure.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "Android Audio Manager",
+        "id": "com.android.audioManager",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidAudioManager.setVolume",
+                "capabilities": [
+                    "applications.com\\.android\\.audioManager.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "Android Configuration",
+        "id": "com.android.persistentConfiguration",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.androidPersistentConfiguration.set",
+                "capabilities": [
+                    "applications.com\\.android\\.persistentConfiguration.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    }
+]

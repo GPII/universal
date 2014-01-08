@@ -2,6 +2,14 @@
     {
         "id": "org.gnome.desktop.interface"
     },
+
+    {
+        "id": "org.gnome.shell.overrides"
+    },
+
+    {
+        "id": "org.gnome.desktop.wm.preferences"
+    },
     
     {
         "id": "org.gnome.nautilus"
@@ -12,7 +20,7 @@
     },
     
     {
-        "id": "org.gnome.desktop.a11y.caribou-keyboard"
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
     },
     
     {
@@ -32,7 +40,7 @@
     },
     
     {
-        "id": "nvda.screenReader"
+        "id": "org.nvda-project"
     },
     
     {
@@ -88,10 +96,46 @@
     },
     
     {
-        "id": "com.microsoft.windows.mouseTracking"
+        "id": "com.microsoft.windows.mouseTrailing"
     },
     
     {
         "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "com.android.activitymanager"
+    },
+
+    {
+        "id": "com.android.talkback"
+    },
+
+    {
+        "id": "com.android.freespeech"
+    },
+
+    {
+        "id": "org.chrome.cloud4chrome"
+    },
+
+    {
+        "id": "com.android.settings.secure"
+    },
+
+    {
+        "id": "com.android.audioManager"
+    },
+
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+
+    {
+        "id": "org.alsa-project"
+    },
+
+    {
+        "id": "org.freedesktop.xrandr"
     }
 ]

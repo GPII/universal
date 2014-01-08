@@ -17,10 +17,6 @@
         },
 
         {
-            "id": "org.gnome.desktop.a11y.caribou-keyboard"
-        },
-
-        {
             "id": "org.gnome.orca"
         },
 
@@ -37,7 +33,7 @@
         },
 
         {
-            "id": "nvda.screenReader"
+            "id": "org.nvda-project"
         },
 
         {
