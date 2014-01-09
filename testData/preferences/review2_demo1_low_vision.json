@@ -1,4 +1,9 @@
 {
+    "http://registry.gpii.org/common/matchMakerType": [
+        {
+            "value": "ruleBased"
+        }
+    ],
     "http://registry.gpii.org/common/magnifierPosition": [
         {
             "value": "Lens"

@@ -1,17 +1,14 @@
-{
-    "OS": {
-        "id": "win32",
-        "version": "5.0.0"
+[
+    {
+        "id": "com.serotek.satogo"
     },
-    "solutions": [
-        {
-            "id": "com.serotek.satogo"
-        },
-        {
-            "id": "webinsight.webAnywhere.linux"
-        },
-        {
-            "id": "org.chrome.cloud4chrome"
-        }
-    ]
-}
+    {
+        "id": "webinsight.webAnywhere.linux"
+    },
+    {
+        "id": "webinsight.webAnywhere.windows"
+    },
+    {
+        "id": "org.chrome.cloud4chrome"
+    }
+]
