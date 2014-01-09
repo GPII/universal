@@ -133,5 +133,9 @@
 
     {
         "id": "org.freedesktop.xrandr"
+    },
+
+    {
+        "id": "com.android.settings.system"
     }
 ]
