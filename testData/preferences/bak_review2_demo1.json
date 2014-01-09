@@ -47,24 +47,13 @@
             }
         }
     }],
-    "http://registry.gpii.org/applications/com.android.talkback": [{ "value": {} }],
-    "http://registry.gpii.org/applications/com.android.audioManager": [{ "value": { "STREAM_MUSIC": 14.5 } }],
-    "http://registry.gpii.org/applications/com.android.settings.secure": [{
-        "value": {
-            "tts_default_rate": 300,
-            "tts_default_pitch": 300
-        }
-    }],
-    "http://registry.gpii.org/common/fontSize": [{ "value": 50 }],
-    "http://registry.gpii.org/common/highContrastEnabled": [{ "value": true }],
-    "http://registry.gpii.org/common/highContrastTheme": [{ "value": "yellow-black" }],
     "http://registry.gpii.org/applications/es.codefactory.android.app.ma": [
         {
             "value": {
                 "access_commonprefs_editingkeyboardecho": 3,
                 "access_commonprefs_capitalization": true,
                 "access_commonprefs_punctuation": 3,
-                "access_commonprefs_speechrate": 6,
+                "access_commonprefs_speechrate": 2,
                 "access_commonprefs_speechpitch": 5
             }
         }
