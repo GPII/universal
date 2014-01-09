@@ -61,7 +61,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler",
+                "type": "gpii.windows.registrySettingsHandler.set",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier"
@@ -71,63 +71,78 @@
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
-                    "Magnification": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.magnification",
-                            "outputPath": "value",
-                            "factor": 100
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_DWORD"
-                            }
+                    "Magnification.dataType": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_DWORD"
                         }
                     },
                     "Invert": {
-                        "expander": {
-                            "type": "fluid.model.transform.value",
-                            "inputPath": "display.screenEnhancement.invertImages",
-                            "outputPath": "value"
-                        },
+                        "value": "display.screenEnhancement.invertImages",
                         "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_DWORD"
-                            }
+                            "literalValue": "REG_DWORD"
                         }
                     },
-                    "expander": {
-                        "type": "fluid.model.transform.valueMapper",
+                    "transform": [{
+                        "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "display.screenEnhancement.tracking",
+                        "presentValue": {
+                            "value": 1,
+                            "dataType": "REG_DWORD"
+                        },
+                        "missingValue": {
+                            "value": 0,
+                            "dataType": "REG_DWORD"
+                        },
                         "options": {
-                            "mouse": {
-                                "outputPath": "FollowMouse",
-                                "outputValue": {
-                                    "value": {
-                                        "value": 1,
-                                        "dataType": "REG_DWORD"
-                                    }
+                            "focus": "FollowFocus",
+                            "caret": "FollowCaret",
+                            "mouse": "FollowMouse"
+                        }
+                    }, {
+                        "type": "fluid.transforms.round",
+                        "input": {
+                            "transform": {
+                                "type": "fluid.transforms.linearScale",
+                                "valuePath": "display.screenEnhancement.magnification",
+                                "factor": 100
+                            }
+                        },
+                        "outputPath": "Magnification.value"
+                    }],
+                    "MagnificationMode": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-magnifierPosition",
+                            "defaultOutputPath": "value",
+                            "options": {
+                                "FullScreen": {
+                                    "outputValue": 2
+                                },
+                                "Lens": {
+                                    "outputValue": 3
+                                },
+                                "LeftHalf": {
+                                    "outputValue": 1
+                                },
+                                "RightHalf": {
+                                    "outputValue": 1
+                                },
+                                "TopHalf": {
+                                    "outputValue": 1
+                                },
+                                "BottomHalf": {
+                                    "outputValue": 1
+                                },
+                                "Custom": {
+                                    "outputValue": 2
                                 }
-                            },
-                            "caret": {
-                                "outputPath": "FollowCaret",
-                                "outputValue": {
-                                    "value": {
-                                        "value": 1,
-                                        "dataType": "REG_DWORD"
-                                    }
-                                }
-                            },
-                            "focus": {
-                                "outputPath": "FollowFocus",
-                                "outputValue": {
-                                    "value": {
-                                        "value": 1,
-                                        "dataType": "REG_DWORD"
-                                    }
-                                }
+                            }
+                        },
+                        "dataType": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "value": "REG_DWORD"
                             }
                         }
                     }
@@ -228,9 +243,9 @@
         }
     },
 
-    {
+        {
         "name": "NVDA Screen Reader",
-        "id": "nvda.screenReader",
+        "id": "org.nvda-project",
         "contexts": {
             "OS": [
                 {
@@ -248,8 +263,8 @@
                     "allowSubSections": true
                 },
                 "capabilities": [
-                    "applications.nvda\\.screenReader.id",
-                    "display.screenReader.applications.nvda\\.screenReader.name"
+                    "applications.org\\.nvda-project.id",
+                    "display.screenReader.applications.org\\.nvda-project.name"
                 ],
                 "capabilitiesTransformations": {
                     "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
@@ -257,8 +272,8 @@
                     "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
                     "speech\\.espeak\\.sayCapForCapitals": "display.screenReader.-provisional-announceCapitals",
                     "virtualBuffers\\.autoSayAllOnPageLoad": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
                             "inputPath": "display.textReadingHighlight.readingUnit",
                             "defaultInputValue": "sentence",
                             "options": {
@@ -271,9 +286,88 @@
                             }
                         }
                     },
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.arrayToSetMembership",
+                            "inputPath": "display.screenEnhancement.trackingTTS",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "focus": "reviewCursor\\.followFocus",
+                                "caret": "reviewCursor\\.followCaret",
+                                "mouse": "reviewCursor\\.followMouse"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "options": {
+                                "false": {
+                                    "outputValue": {
+                                        "transform": [
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "value": "silence",
+                                                "outputPath": "speech\\.synth"
+                                            },
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "value": "Microsoft Sound Mapper",
+                                                "outputPath": "speech\\.outputDevice"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "speech\\.espeak\\.rate": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "right": 3.10,
+                            "operator": "/",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "right": 80,
+                                    "operator": "-",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "truePath": "display.screenReader.speechRate",
+                                            "false": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "/",
+                                                    "right": 3
+                                                }
+                                            },
+                                            "condition": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "operator": "<=",
+                                                    "right": 390
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.espeak\\.rateBoost": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "display.screenReader.speechRate",
+                            "operator": ">",
+                            "right": 390
+                        }
+                    },
                     "speech\\.symbolLevel": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
                             "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
                             "options": {
                                 "none": {
@@ -291,33 +385,9 @@
                             }
                         }
                     },
-                    "speech": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
-                            "options": {
-                                "false": {
-                                    "outputValue": {
-                                        "expander": [
-                                            {
-                                                "type": "fluid.model.transform.literalValue",
-                                                "value": "silence",
-                                                "outputPath": "synth"
-                                            },
-                                            {
-                                                "type": "fluid.model.transform.literalValue",
-                                                "value": "Microsoft Sound Mapper",
-                                                "outputPath": "outputDevice"
-                                            }
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "speech\\.espeak\\.voice": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
                             "inputPath": "display.screenReader.-provisional-auditoryOutLanguage",
                             "options": {
                                 "en": {
@@ -520,7 +590,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\NVDA\\nvda.exe\""
+                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
                 }
             ],
             "stop": [
@@ -708,18 +778,19 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.highContrast"
+                    "display.screenEnhancement.-provisional-highContrastEnabled",
+                    "applications.com\\.microsoft\\.windows\\.highContrast.id"
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
-                        "expander": {
-                            "type": "fluid.model.transform.value",
-                            "inputPath": "display.screenEnhancement.highContrast",
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastEnabled",
                             "outputPath": "value"
                         },
                         "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
                                 "value": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                             }
                         }
@@ -738,157 +809,8 @@
     },
 
     {
-        "name": "Windows Non-client Metrics",
-        "id": "com.microsoft.windows.nonClientMetrics",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.set",
-                "options": {
-                    "getAction": "SPI_GETNONCLIENTMETRICS",
-                    "setAction": "SPI_SETNONCLIENTMETRICS",
-                    "uiParam": "struct_size",
-                    "pvParam": {
-                        "type": "struct",
-                        "name": "NONCLIENTMETRICS"
-                    }
-                },
-                "capabilities": [
-                    "display.screenEnhancement.nonClientMetrics"
-                ],
-                "capabilitiesTransformations": {
-                    "CaptionFontHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.lfCaptionFont.lfHeight"
-                            }
-                        }
-                    },
-                    "CaptionHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.literalValue",
-                            "outputPath": "value",
-                            "value": 0
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.iCaptionHeight"
-                            }
-                        }
-                    },
-                    "MenuFontHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.lfMenuFont.lfHeight"
-                            }
-                        }
-                    },
-                    "MenuHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.literalValue",
-                            "outputPath": "value",
-                            "value": 0
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.iMenuHeight"
-                            }
-                        }
-                    },
-                    "SmallCaptionFontHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.lfSmCaptionFont.lfHeight"
-                            }
-                        }
-                    },
-                    "SmallCaptionHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.literalValue",
-                            "outputPath": "value",
-                            "value": 0
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.iSmCaptionHeight"
-                            }
-                        }
-                    },
-                    "StatusFontHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.lfStatusFont.lfHeight"
-                            }
-                        }
-                    },
-                    "MessageFontHeight": {
-                        "expander": {
-                            "type": "fluid.model.transform.scaleValue",
-                            "inputPath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "pvParam.lfMessageFont.lfHeight"
-                            }
-                        }
-                    }
-                }
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
-    },
-
-    {
-        "name": "Windows Mouse Tracking",
-        "id": "com.microsoft.windows.mouseTracking",
+        "name": "Windows Mouse Trailing",
+        "id": "com.microsoft.windows.mouseTrailing",
         "contexts": {
             "OS": [
                 {
@@ -909,18 +831,19 @@
                     }
                 },
                 "capabilities": [
-                    "display.screenEnhancement.mouseTrailing"
+                    "display.screenEnhancement.mouseTrailing",
+                    "applications.com\\.microsoft\\.windows\\.mouseTrailing.id"
                 ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
-                        "expander": {
-                            "type": "fluid.model.transform.value",
+                        "transform": {
+                            "type": "fluid.transforms.value",
                             "inputPath": "display.screenEnhancement.mouseTrailing",
                             "outputPath": "value"
                         },
                         "path": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
                                 "value": {
                                     "get": "pvParam",
                                     "set": "uiParam"
@@ -954,392 +877,422 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler",
+                "type": "gpii.windows.registrySettingsHandler.set",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors"
                 },
                 "capabilities": [
-                    "display.screenEnhancement.cursorSize"
+                    "display.screenEnhancement.cursorSize",
+                    "applications.com\\.microsoft\\.windows\\.cursors.id"
                 ],
                 "capabilitiesTransformations": {
-                    "Arrow": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_arrow.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
-                                    }
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "Arrow.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_arrow.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_arrow_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "Hand": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_link.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_link_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_link_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "Arrow.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "Hand.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_link.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_link_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_link_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "Help": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_helpsel.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "Hand.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "Help.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_helpsel.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_helpsel_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "AppStarting": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working.ani"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working_l.ani"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_working_xl.ani"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "Help.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "AppStarting.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_working.ani",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_working_l.ani",
+                                    "false": "%SystemRoot%\\cursors\\aero_working_xl.ani"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "No": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_unavail.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "AppStarting.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "No.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_unavail.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_unavail_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "NWPen": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_pen.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_pen_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "No.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "NWPen.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_pen.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_pen_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "SizeAll": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_move.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_move_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_move_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "NWPen.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "SizeAll.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_move.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_move_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_move_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "SizeNESW": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nesw.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "SizeAll.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "SizeNESW.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_nesw.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_nesw_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "SizeNS": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ns.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ns_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "SizeNESW.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "SizeNS.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_ns.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_ns_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "SizeNWSE": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nwse.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "SizeNS.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "SizeNWSE.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_nwse.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_nwse_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "SizeWE": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ew.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ew_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "SizeNWSE.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "SizeWE.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_ew.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_ew_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "UpArrow": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_up.cur"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_up_l.cur"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_up_xl.cur"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "SizeWE.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "UpArrow.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_up.cur",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_up_l.cur",
+                                    "false": "%SystemRoot%\\cursors\\aero_up_xl.cur"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
-                        }
-                    },
-                    "Wait": {
-                        "expander": {
-                            "type": "fluid.model.transform.valueMapper",
-                            "inputPath": "display.screenEnhancement.cursorSize",
-                            "options": {
-                                "normal": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy.ani"
-                                    }
-                                },
-                                "large": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy_l.ani"
-                                    }
-                                },
-                                "extralarge": {
-                                    "outputValue": {
-                                        "value": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
-                                    }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "UpArrow.dataType"
+                        }, {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "Wait.value",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenEnhancement.cursorSize",
+                                    "operator": "<",
+                                    "right": 0.333
+                                }
+                            },
+                            "true": "%SystemRoot%\\cursors\\aero_busy.ani",
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "display.screenEnhancement.cursorSize",
+                                            "operator": "<",
+                                            "right": 0.666
+                                        }
+                                    },
+                                    "true": "%SystemRoot%\\cursors\\aero_busy_l.ani",
+                                    "false": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
                                 }
                             }
-                        },
-                        "dataType": {
-                            "expander": {
-                                "type": "fluid.model.transform.literalValue",
-                                "value": "REG_SZ"
-                            }
+                        }, {
+                            "type": "fluid.transforms.literalValue",
+                            "value": "REG_SZ",
+                            "outputPath": "Wait.dataType"
                         }
-                    }
+                    ]
                 }
             }
         ],

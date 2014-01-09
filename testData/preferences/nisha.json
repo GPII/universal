@@ -23,7 +23,7 @@
             "volume": "50"
         }
     }],
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.caribou-keyboard": [{ "value": {}}],
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.applications.onscreen-keyboard": [{ "value": {}}],
     "http://registry.gpii.org/applications/com.microsoft.windows.onscreenKeyboard": [{ "value": {}}],
     "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
         "value": {

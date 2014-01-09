@@ -1,0 +1,16 @@
+{
+    "http://registry.gpii.org/applications/org.chrome.cloud4chrome": [
+        {
+            "value": {
+                "screenReaderTTSEnabled": false,
+                "highContrastEnabled": true,
+                "invertColours": false,
+                "magnifierEnabled": true,
+                "magnification": 2,
+                "fontSize": "medium",
+                "simplifier": false,
+                "highContrastTheme": "white-black"
+            }
+        }
+    ]
+}
