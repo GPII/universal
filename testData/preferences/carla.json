@@ -12,7 +12,7 @@
     }],
     "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
     "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
-    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
+    "http://registry.gpii.org/applications/fluid.uiOptions": [{
         "value": {
             "lineSpacing": "2",
             "links": true,
@@ -22,7 +22,7 @@
             "volume": "50"
         }
     }],
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{
         "value": {
             "show-cross-hairs": true,
             "lens-mode": false,
@@ -32,7 +32,7 @@
             "scroll-at-edges": true
         }
     }],
-    "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{ 
+    "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{
         "value": {
             "Magnification": {
                 "value": 200,
@@ -71,7 +71,7 @@
     "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
     "http://registry.gpii.org/common/magnification": [{ "value": 2.0 }],
     "http://registry.gpii.org/common/tracking": [{ "value": ["mouse"] }],
-    "http://registry.gpii.org/common/invertImages": [{ "value": true }],
+    "http://registry.gpii.org/common/invertColours": [{ "value": true }],
     "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
         {
             "adaptationType": "caption",
