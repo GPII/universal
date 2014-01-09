@@ -4,6 +4,14 @@
     },
 
     {
+        "id": "org.gnome.shell.overrides"
+    },
+
+    {
+        "id": "org.gnome.desktop.wm.preferences"
+    },
+
+    {
         "id": "org.gnome.nautilus"
     },
 
@@ -76,10 +84,6 @@
     },
 
     {
-        "id": "com.microsoft.windows.nonClientMetrics"
-    },
-
-    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
@@ -109,5 +113,21 @@
 
     {
         "id": "com.android.audioManager"
+    },
+
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+
+    {
+        "id": "org.alsa-project"
+    },
+
+    {
+        "id": "org.freedesktop.xrandr"
+    },
+
+    {
+        "id": "com.android.settings.system"
     }
 ]

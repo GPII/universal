@@ -178,6 +178,20 @@
                     "display.screenReader.applications.org\\.nvda-project.name"
                 ],
                 "capabilitiesTransformations": {
+                    "speech\\.espeak\\.pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.pitch",
+                            "factor": 100
+                        }
+                    },
+                    "speech\\.espeak\\.volume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "factor": 100
+                        }
+                    },
                     "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
                     "keyboard\\.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
                     "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
@@ -720,120 +734,6 @@
     },
 
     {
-        "name": "Windows Non-client Metrics",
-        "id": "com.microsoft.windows.nonClientMetrics",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.set",
-                "options": {
-                    "getAction": "SPI_GETNONCLIENTMETRICS",
-                    "setAction": "SPI_SETNONCLIENTMETRICS",
-                    "uiParam": "struct_size",
-                    "pvParam": {
-                        "type": "struct",
-                        "name": "NONCLIENTMETRICS"
-                    }
-                },
-                "capabilities": [
-                    "applications.com\\.microsoft\\.windows\\.nonClientMetrics.id",
-                    "display.screenEnhancement.fontSize"
-                ],
-                "capabilitiesTransformations": {
-                    "CaptionFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    },
-                    "CaptionHeight": {
-                        "literalValue": {
-                            "value": 0,
-                            "path": "pvParam.iCaptionHeight"
-                        }
-                    },
-                    "MenuFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-
-                        }
-                    },
-                    "MenuHeight": {
-                        "value": {
-                            "value": 0,
-                            "path": "pvParam.iMenuHeight"
-                        }
-                    },
-                    "SmallCaptionFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    },
-                    "SmallCaptionHeight": {
-                        "literalValue": {
-                            "value": 0,
-                            "path": "pvParam.iSmCaptionHeight"
-                        }
-                    },
-                    "StatusFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    },
-                    "MessageFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    }
-                }
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
-    },
-{
         "name": "Windows Mouse Trailing",
         "id": "com.microsoft.windows.mouseTrailing",
         "contexts": {

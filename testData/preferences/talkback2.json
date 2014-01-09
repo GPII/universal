@@ -1,0 +1,6 @@
+{
+    "http://registry.gpii.org/applications/com.android.talkback": [{ "value": {} }],
+    "http://registry.gpii.org/common/pitch": [{ "value": 1 }],
+    "http://registry.gpii.org/common/speechRate": [{ "value": 340 }],
+    "http://registry.gpii.org/common/volumeTTS": [{ "value": 0.5 }]
+}
