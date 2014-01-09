@@ -1,5 +1,6 @@
 {
     "http://registry.gpii.org/applications/com.android.talkback": [{ "value": {} }],
+    "http://registry.gpii.org/applications/com.android.audioManager": [{ "value": { "STREAM_MUSIC": 14.5 } }],
     "http://registry.gpii.org/applications/com.android.settings.secure": [{ 
         "value": {
             "tts_default_rate": 450.99,
