@@ -8,5 +8,7 @@
     "http://registry.gpii.org/common/screenReaderTTSEnabled": [{ "value": true }],
     "http://registry.gpii.org/common/trackingTTS": [{ "value": ["mouse", "caret"] }],
     "http://registry.gpii.org/common/speechRate": [{ "value": 400 }],
-    "http://registry.gpii.org/common/auditoryOutLanguage": [{ "value": "en-BS" }]
+    "http://registry.gpii.org/common/auditoryOutLanguage": [{ "value": "en-BS" }],
+    "http://registry.gpii.org/common/pitch": [{ "value": 0.15 }],
+    "http://registry.gpii.org/common/volumeTTS": [{ "value": 0.75 }]
 }
