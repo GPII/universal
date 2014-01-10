@@ -460,6 +460,20 @@
                             }
                         }
                     },
+                    "voices\\.default\\.average-pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.pitch",
+                            "factor": 10
+                        }
+                    },
+                    "voices\\.default\\.gain": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "factor": 10
+                        }
+                    },
                     "voices\\.default\\.family": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
