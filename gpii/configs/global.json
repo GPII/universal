@@ -1,6 +1,0 @@
-{
-    "urls": {
-        "preferences": "http://preferences.gpii.net/user/%token",
-        "solutions": "http://solutions.gpii.net/solution?os=%os"
-    }
-}
