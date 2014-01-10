@@ -1,0 +1,22 @@
+{
+    "http://registry.gpii.org/common/matchMakerType": [
+        {
+            "value": "ruleBased"
+        }
+    ],
+    "http://registry.gpii.org/common/magnificationEnabled": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/screenReaderTTSEnabled": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/auditoryOutLanguage": [
+        {
+            "value": "en-BS"
+        }
+    ]
+}
