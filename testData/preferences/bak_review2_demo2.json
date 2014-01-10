@@ -1,0 +1,40 @@
+{
+    "http://registry.gpii.org/applications/trace.easyOne.communicator.windows": [{ "value": {} }],
+    "http://registry.gpii.org/applications/info.cloud4all.JME": [{
+        "value": {
+            "theme": "Black-White",
+            "fontSize": "veryLarge",
+            "language": "English",
+            "volume": 100,
+            "vibrationMode": 2
+        }
+    }],
+    "http://registry.gpii.org/applications/com.android.persistentConfiguration": [{
+        "value": {
+            "fontScale": "2",
+            "locale": "en"
+        }
+    }],
+    "http://registry.gpii.org/applications/com.android.audioManager": [{
+        "value": {
+            "STREAM_VOICE_CALL": 15,
+            "STREAM_SYSTEM": 15,
+            "STREAM_RING": 15,
+            "STREAM_MUSIC": 15,
+            "STREAM_ALARM": 15,
+            "STREAM_NOTIFICATION": 15,
+            "STREAM_DTMF": 15
+        }
+    }],
+    "http://registry.gpii.org/applications/eu.singularlogic.pixelsense.sociable": [{
+        "value": {
+            "user.$t": 1,
+            "expert.$t": 1,
+            "careCenter.$t": 1,
+            "screenReaderTTSEnabled": true,
+            "highContrastEnabled": true,
+            "fontSize": "large"
+        }
+    }]
+}
+
