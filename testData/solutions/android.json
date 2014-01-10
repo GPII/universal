@@ -431,5 +431,73 @@
             "start": [ "setSettings" ],
             "stop": [ "restoreSettings" ]
         }
+    },
+
+    {
+        "name": "Omnitor eCtouch/eCmobile",
+        "id": "se.omnitor.ecmobile",
+        "contexts": {
+        "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+              }]
+        },
+        "settingsHandlers": [
+        {
+            "type": "gpii.settingsHandlers.XMLHandler.set",
+            "options": {
+                "filename": "/sdcard/output.xml",
+                "encoding": "utf-8",
+                "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
+                "rules": {
+                    "map": "map",
+                    "map.string": {
+                        "transform": {
+                            "type": "fluid.transforms.arrayToObject",
+                            "inputPath": "map.string",
+                            "key": "name"
+                        }
+                    }
+                }
+            },
+            "capabilities": [
+                "applications.se\\.omnitor\\.ecmobile.id"
+            ],
+            "capabilitiesTransformations": {
+                "map\\.string\\.fontsize\\.$t": {
+                    "transform": {
+                        "type": "fluid.transforms.linearScale",
+                        "valuePath": "display.screenEnhancement.fontSize",
+                        "factor": 2
+                    }
+                },
+                "map\\.string\\.theme\\.$t": {
+                    "transform": {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "display.screenEnhancement.-provisional-highContrastEnabled",
+                        "true": "yellow-black",
+                        "truePath": "display.screenEnhancement.-provisional-highContrastTheme",
+                        "false": "none"
+                    }
+                }
+            }
+        }
+        ],
+        "lifecycleManager": {
+        "start": [
+            "setSettings",
+            {
+                "type": "gpii.androidActivityManager.startActivityByPackageName",
+                "packageName": "se.omnitor.ecmobile"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                "packageName": "se.omnitor.ecmobile"
+            },
+            "restoreSettings"
+        ]
+        }
     }
 ]
