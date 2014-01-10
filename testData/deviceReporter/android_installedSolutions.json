@@ -12,6 +12,18 @@
         },
         {
             "id": "com.android.freespeech"
+        },
+        {
+            "id": "com.android.persistentConfiguration"
+        },
+        {
+            "id": "com.android.audioManager"
+        },
+        {
+            "id": "com.android.settings.system"
+        },
+        {
+            "id": "com.android.settings.secure"
         }
     ]
 }

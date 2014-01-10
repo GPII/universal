@@ -17,10 +17,6 @@
         },
 
         {
-            "id": "org.gnome.desktop.a11y.caribou-keyboard"
-        },
-
-        {
             "id": "org.gnome.orca"
         },
 
@@ -38,14 +34,6 @@
 
         {
             "id": "org.nvda-project"
-        },
-
-        {
-            "id": "fluid.uiOptions.windows"
-        },
-
-        {
-            "id": "fluid.uiOptions.linux"
         },
 
         {
@@ -86,10 +74,6 @@
 
         {
             "id": "com.microsoft.windows.highContrast"
-        },
-
-        {
-            "id": "com.microsoft.windows.nonClientMetrics"
         },
 
         {

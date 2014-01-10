@@ -5,5 +5,5 @@
 
     "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
     "http://registry.gpii.org/common/tracking": [{"value": ["focus"]}],
-    "http://registry.gpii.org/common/invertImages": [{"value": false}]
+    "http://registry.gpii.org/common/invertColours": [{"value": false}]
 }
