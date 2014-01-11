@@ -1357,5 +1357,58 @@
                 "restoreSettings"
             ]
         }
+    },
+
+    {
+        "name": "Supernova Access Suite",
+        "id": "com.yourdolphin.supernova-as",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "options": {
+                    "path": "${{environment}.APPDATA}\\dolphin\\snova-as.ini",
+                    "allowNumberSignComments": true,
+                    "allowSubSections": true
+                },
+                "capabilities": [
+                    "applications.com\\.yourdolphin\\.supernova-as",
+                    "display.screenReader.applications.com\\.yourdolphin\\.supernova-as"
+                ],  
+                "capabilitiesTransformations": {    
+                    "screenReaderTTSEnabled": {
+                        "value": "display.screenReader.-provisional-screenReaderTTSEnabled"
+                    },
+                    "speechRate": {
+                        "value": "display.screenReader.speechRate"
+                    }
+                }
+				
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "notepad.exe"
+                }
+            ],
+            "stop": [
+				{
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im notepad.exe"
+                },
+                "restoreSettings"
+            ]
+        }
     }
+	
 ]
