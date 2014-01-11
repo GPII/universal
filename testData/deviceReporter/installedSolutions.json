@@ -76,6 +76,10 @@
     },
 
     {
+        "id": "com.texthelp.readWriteGold"
+    },
+
+    {
         "id": "net.opendirective.maavis"
     },
 
@@ -130,4 +134,5 @@
     {
         "id": "com.android.settings.system"
     }
+
 ]
