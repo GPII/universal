@@ -37,14 +37,6 @@
         },
 
         {
-            "id": "fluid.uiOptions.windows"
-        },
-
-        {
-            "id": "fluid.uiOptions.linux"
-        },
-
-        {
             "id": "org.gnome.desktop.interface"
         },
 
@@ -82,10 +74,6 @@
 
         {
             "id": "com.microsoft.windows.highContrast"
-        },
-
-        {
-            "id": "com.microsoft.windows.nonClientMetrics"
         },
 
         {

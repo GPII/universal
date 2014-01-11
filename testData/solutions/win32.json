@@ -29,7 +29,7 @@
                         }
                     },
                     "Invert": {
-                        "value": "display.screenEnhancement.invertImages",
+                        "value": "display.screenEnhancement.-provisional-invertColours",
                         "dataType": {
                             "literalValue": "REG_DWORD"
                         }
@@ -118,46 +118,6 @@
     },
 
     {
-        "name": "UI Options",
-        "id": "fluid.uiOptions.windows",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "display.applications.fluid\\.uiOptions\\.windows.name",
-                    "applications.fluid\\.uiOptions\\.windows.id",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.foregroundColor",
-                    "display.screenEnhancement.backgroundColor",
-                    "display.screenEnhancement.fontFace"
-                ]
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
-                }
-            ]
-        }
-    },
-
-    {
         "name": "Windows Built-in Onscreen Keyboard",
         "id": "com.microsoft.windows.onscreenKeyboard",
         "contexts": {
@@ -194,7 +154,7 @@
         }
     },
 
-        {
+    {
         "name": "NVDA Screen Reader",
         "id": "org.nvda-project",
         "contexts": {
@@ -218,6 +178,20 @@
                     "display.screenReader.applications.org\\.nvda-project.name"
                 ],
                 "capabilitiesTransformations": {
+                    "speech\\.espeak\\.pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.pitch",
+                            "factor": 100
+                        }
+                    },
+                    "speech\\.espeak\\.volume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "factor": 100
+                        }
+                    },
                     "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
                     "keyboard\\.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
                     "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
@@ -760,120 +734,6 @@
     },
 
     {
-        "name": "Windows Non-client Metrics",
-        "id": "com.microsoft.windows.nonClientMetrics",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32",
-                    "version": ">=5.0"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.set",
-                "options": {
-                    "getAction": "SPI_GETNONCLIENTMETRICS",
-                    "setAction": "SPI_SETNONCLIENTMETRICS",
-                    "uiParam": "struct_size",
-                    "pvParam": {
-                        "type": "struct",
-                        "name": "NONCLIENTMETRICS"
-                    }
-                },
-                "capabilities": [
-                    "applications.com\\.microsoft\\.windows\\.nonClientMetrics.id",
-                    "display.screenEnhancement.fontSize"
-                ],
-                "capabilitiesTransformations": {
-                    "CaptionFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    },
-                    "CaptionHeight": {
-                        "literalValue": {
-                            "value": 0,
-                            "path": "pvParam.iCaptionHeight"
-                        }
-                    },
-                    "MenuFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-
-                        }
-                    },
-                    "MenuHeight": {
-                        "value": {
-                            "value": 0,
-                            "path": "pvParam.iMenuHeight"
-                        }
-                    },
-                    "SmallCaptionFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    },
-                    "SmallCaptionHeight": {
-                        "literalValue": {
-                            "value": 0,
-                            "path": "pvParam.iSmCaptionHeight"
-                        }
-                    },
-                    "StatusFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    },
-                    "MessageFontHeight": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.screenEnhancement.fontSize",
-                            "outputPath": "value",
-                            "factor": -1
-                        },
-                        "path": {
-                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
-                        }
-                    }
-                }
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
-    },
-{
         "name": "Windows Mouse Trailing",
         "id": "com.microsoft.windows.mouseTrailing",
         "contexts": {
@@ -1373,6 +1233,79 @@
                 {
                     "type": "gpii.windows.spiSettingsHandler.updateCursors"
                 }
+            ]
+        }
+    },
+    
+    {
+        "name": "Sociable",
+        "id": "eu.singularlogic.pixelsense.sociable",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "C:\\Sociable\\Configuration.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version=\"1.0\"?>"
+                    
+                },
+                "capabilities": [
+                    "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
+                ],
+                "capabilitiesTransformations": {    
+                    "user.$t": {
+                        "literalValue": 1
+                    },
+                    "expert.$t": {
+                        "literalValue": 1
+                    },
+                    "careCenter.$t": {
+                        "literalValue": 1
+                    },
+                    "screenReaderTTSEnabled": {
+                        "value": "display.screenReader.-provisional-screenReaderTTSEnabled"
+                    },
+                    "highContrastEnabled": {
+                        "value": "display.screenEnhancement.-provisional-highContrastEnabled"
+                    },
+                     "fontSize": {
+                        "value": {
+                            "transform": {
+                                "type": "gpii.transformer.quantize",
+                                "inputPath": "display.screenEnhancement.fontSize",
+                                "ranges": [{
+                                    "upperBound": 14,
+                                    "output": "normal"
+                                },{
+                                    "output": "large"
+                                }]
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "C:\\Sociable\\Cloud4All.exe"
+                }
+            ],
+            "stop": [ {
+                    "type": "gpii.launch.exec",
+                    "command": "C:\\Sociable\\Cloud4All.exe -stop"
+                },
+                "restoreSettings"
             ]
         }
     }
