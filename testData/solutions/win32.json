@@ -515,7 +515,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
                 }
             ],
             "stop": [
@@ -1236,7 +1236,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Sociable",
         "id": "eu.singularlogic.pixelsense.sociable",
@@ -1255,12 +1255,11 @@
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
-                    
                 },
                 "capabilities": [
                     "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
                 ],
-                "capabilitiesTransformations": {    
+                "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
                     },
