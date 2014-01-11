@@ -1,5 +1,51 @@
 [
     {
+        "name": "smarthouse",
+        "id": "net.gpii.smarthouses",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.net\\.gpii\\.smarthouses.id",
+                    "display.applications.net\\.gpii\\.smarthouses.name",
+                    "language",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.-provisional-highContrastTheme",
+                    "-provisional-general.-provisional-volume"
+                ],
+                "capabilitiesTransformations": {
+                    "fontSize": "display.screenEnhancement.fontSize",
+                    "language": "language",
+                    "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
+                    "volume": "-provisional-general.-provisional-volume"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "pkill -2 chrome"
+                }
+            ]
+        }
+    },
+
+    {
         "name": "Windows Built-in Screen Magnifier",
         "id": "com.microsoft.windows.magnifier",
         "contexts": {
@@ -1236,7 +1282,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Sociable",
         "id": "eu.singularlogic.pixelsense.sociable",
@@ -1255,12 +1301,12 @@
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
-                    
+
                 },
                 "capabilities": [
                     "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
                 ],
-                "capabilitiesTransformations": {    
+                "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
                     },
