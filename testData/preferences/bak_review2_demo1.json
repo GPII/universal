@@ -14,9 +14,21 @@
             "enableTutorialMessages": false,
             "voices.default.family": {
                 "locale": "en",
-                "name": "en-westindies"
+                "name": "english-us"
             },
             "verbalizePunctuationStyle": 0
+        }
+    }],
+    "http://registry.gpii.org/applications/org.nvda-project": [{
+        "value": {
+            "keyboard.speakTypedCharacters": false,
+            "keyboard.speakTypedWords": true,
+            "presentation.reportHelpBalloons": false,
+            "speech.espeak.rate": 29.032258064516128,
+            "speech.espeak.rateBoost": false,
+            "speech.espeak.voice": "en\\en-us",
+            "speech.symbolLevel": "300",
+            "virtualBuffers.autoSayAllOnPageLoad": false
         }
     }],
     "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{
