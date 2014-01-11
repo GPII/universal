@@ -1,0 +1,23 @@
+[
+    {
+        "id": "org.gnome.desktop.interface"
+    },
+    {
+        "id": "org.gnome.nautilus"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.keyboard"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.caribou-keyboard"
+    },
+    {
+        "id": "org.gnome.orca"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.magnifier"
+    },
+    {
+        "id": "org.alsa-project"
+    }
+]
