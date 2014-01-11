@@ -1,5 +1,54 @@
 [
     {
+        "name": "Read Write Gold",
+        "id": "com.texthelp.readWriteGold",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+                },
+                "capabilities": [
+                    "applications.com\\.texthelp\\.readWriteGold.id",
+                    "languageAssistance"
+                ],
+                "capabilitiesTransformations": {
+                    "ApplicationSettings": "ApplicationSettings"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write10\\InstallPath}\\ReadAndWrite.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+    {
         "name": "Windows Built-in Screen Magnifier",
         "id": "com.microsoft.windows.magnifier",
         "contexts": {
@@ -515,7 +564,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
                 }
             ],
             "stop": [
@@ -1236,7 +1285,7 @@
             ]
         }
     },
-    
+
     {
         "name": "Sociable",
         "id": "eu.singularlogic.pixelsense.sociable",
@@ -1255,12 +1304,11 @@
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
-                    
                 },
                 "capabilities": [
                     "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
                 ],
-                "capabilitiesTransformations": {    
+                "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
                     },
