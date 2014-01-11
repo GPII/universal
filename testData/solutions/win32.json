@@ -680,7 +680,7 @@
              "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=?http://cloud4all.info/&token=${{userToken}}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http://cloud4all.info/&token=${{userToken}}\""
                 }
             ],
             "stop": [
