@@ -512,7 +512,7 @@
         "settingsHandlers": [{
                       "type": "gpii.settingsHandlers.noSettings",
                       "capabilities": [
-                                       "applications.es\\.codefactory\\.android\\.app\\.ma\\.vocalizerenuc4a.id"
+                                       "applications.es\\.codefactory\\.android\\.app\\.ma.id"
                                        ],
                       "capabilitiesTransformations": {
                              "access_commonprefs_speechrate": {
