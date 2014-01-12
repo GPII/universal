@@ -1,0 +1,4 @@
+{
+    "http://registry.gpii.org/common/screenReaderTTSEnabled":[{ "value": true }],
+	"http://registry.gpii.org/common/speechRate":[{ "value": 50 }]
+}
