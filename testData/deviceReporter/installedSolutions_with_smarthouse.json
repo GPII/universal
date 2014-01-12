@@ -1,5 +1,8 @@
 [
     {
+        "id": "net.gpii.smarthouses"
+    },
+    {
         "id": "org.gnome.desktop.interface"
     },
 
@@ -76,10 +79,6 @@
     },
 
     {
-        "id": "com.texthelp.readWriteGold"
-    },
-
-    {
         "id": "net.opendirective.maavis"
     },
 
@@ -134,5 +133,4 @@
     {
         "id": "com.android.settings.system"
     }
-
 ]
