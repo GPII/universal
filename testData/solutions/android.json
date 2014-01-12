@@ -502,7 +502,7 @@
     },
     {
         "name": "Mobile Accessibility",
-        "id": "es.codefactory.android.app.ma.vocalizerenuc4a",
+        "id": "es.codefactory.android.app.ma",
         "contexts": {
             "OS": [{
                 "id": "android",
