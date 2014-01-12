@@ -1388,7 +1388,32 @@
                     },
                     "speechRate": {
                         "value": "display.screenReader.speechRate"
+                    },
+                    "keyEcho": {
+                        "value": "display.screenReader.-provisional-keyEcho"
+                    },
+                    "wordEcho": {
+                        "value": "display.screenReader.-provisional-wordEcho"
+                    },
+                    "announceCapitals": {
+                        "value": "display.screenReader.-provisional-announceCapitals"
+                    },
+                    "punctuationVerbosity": {
+                        "value": "display.screenReader.-provisional-punctuationVerbosity"
+                    },
+                    "screenReaderBrailleOutput": {
+                        "value": "display.screenReader.-provisional-screenReaderBrailleOutput"
+                    },
+                    "magnifierEnabled": {
+                        "value": "display.screenEnhancement.-provisional-magnifierEnabled"
+                    },
+                    "magnification": {
+                        "value": "display.screenEnhancement.magnification"
+                    },
+                    "magnifierPosition": {
+                        "value": "display.screenEnhancement.-provisional-magnifierPosition"
                     }
+
                 }
 				
             }
@@ -1398,13 +1423,13 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "notepad.exe"
+                    "command": "${{environment}.APPDATA}\\dolphin\\snova-ctrl.bat /s"
                 }
             ],
             "stop": [
 				{
                     "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im notepad.exe"
+                    "command": "${{environment}.APPDATA}\\dolphin\\snova-ctrl.bat /q"
                 },
                 "restoreSettings"
             ]
