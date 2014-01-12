@@ -1,5 +1,5 @@
 {
-	"matchMakerType": "statistical",
+    "http://registry.gpii.org/common/matchMakerType": [{ "value": "statistical" }],
     "http://registry.gpii.org/applications/net.opendirective.maavis": [{
         "value": {
             "theme": "bw",
