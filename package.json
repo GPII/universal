@@ -12,7 +12,7 @@
         "semver": "~1.1.4",
         "when": "~1.8.1",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/fluid-project/kettle.git#0b7d329c13ed2a19bdbc01da29265973513224d3"
+        "kettle": "git://github.com/fluid-project/kettle.git#76365412d0ed986b399fbdeaae928bf201eae17f"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e9bf72445bd343a4f3aabe3ba96a1087d3498612"
