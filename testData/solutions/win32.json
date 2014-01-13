@@ -703,13 +703,96 @@
                 }
             ]
         },
-
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
             "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
             "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
         }],
-
+        "capabilitiesTransformations": {
+            "transform": [
+                {
+                    "type": "fluid.transforms.condition",
+                    "conditionPath": "display.textReadingHighlight.-provisional-selfVoicingEnabled",
+                    "outputPath": "speakOnActivate",
+                    "true": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "yes"
+                        }
+                    },
+                    "false": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "no"
+                        }
+                    }
+                }, {
+                    "type": "fluid.transforms.condition",
+                    "conditionPath": "display.textReadingHighlight.-provisional-selfVoicingEnabled",
+                    "outputPath": "speakTitles",
+                    "true": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "yes"
+                        }
+                    },
+                    "false": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "no"
+                        }
+                    }
+                }, {
+                    "type": "fluid.transforms.condition",
+                    "conditionPath": "display.textReadingHighlight.-provisional-selfVoicingEnabled",
+                    "outputPath": "speakLabels",
+                    "true": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "yes"
+                        }
+                    },
+                    "false": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "no"
+                        }
+                    }
+                }, {
+                    "type": "fluid.transforms.condition",
+                    "conditionPath": "display.screenEnhancement.-provisional-highContrastEnabled",
+                    "condition": false,
+                    "outputPath": "theme",
+                    "false": {
+                        "transform": {
+                            "type": "literalValue",
+                            "value": "colour"
+                        }
+                    },
+                    "true": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "defaultOutputValue": "bw",
+                            "options": {
+                                "black-white": {
+                                    "outputValue": "bw"
+                                },
+                                "white-black": {
+                                    "outputValue": "bw"
+                                },
+                                "black-yellow": {
+                                    "outputValue": "hc"
+                                },
+                                "yellow-black": {
+                                    "outputValue": "hc"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
          "lifecycleManager": {
             "start": [
                 "setSettings",
