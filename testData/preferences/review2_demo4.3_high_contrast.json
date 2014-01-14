@@ -1,0 +1,17 @@
+﻿{
+    "http://registry.gpii.org/common/fontSize": [
+        {
+            "value": 18
+        }
+    ],
+    "http://registry.gpii.org/common/highContrastEnabled": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/highContrastTheme": [
+        {
+            "value": "white-black"
+        }
+    ]
+}

@@ -1,0 +1,68 @@
+[
+    {
+        "id": "com.android.activitymanager"
+    },
+    {
+        "id": "com.android.talkback"
+    },
+    {
+        "id": "com.android.freespeech"
+    },
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+    {
+        "id": "com.android.audioManager"
+    },
+    {
+        "id": "com.android.settings.system"
+    },
+    {
+        "id": "com.android.settings.secure"
+    },
+    {
+        "id": "org.gnome.desktop.interface"
+    },
+    {
+        "id": "org.gnome.nautilus"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.keyboard"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.caribou-keyboard"
+    },
+    {
+        "id": "org.gnome.orca"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.magnifier"
+    },
+    {
+        "id": "org.alsa-project"
+    },
+    {
+        "id": "com.microsoft.windows.magnifier"
+    },
+    {
+        "id": "com.microsoft.windows.onscreenKeyboard"
+    },
+    {
+        "id": "org.nvda-project"
+    },
+    {
+        "id": "com.microsoft.windows.highContrast"
+    },
+    {
+        "id": "com.microsoft.windows.nonClientMetrics"
+    },
+    {
+        "id": "com.microsoft.windows.mouseTracking"
+    },
+    {
+        "id": "com.microsoft.windows.cursors"
+    },
+    {
+        "id": "com.yourdolphin.supernova-as"
+    }
+]

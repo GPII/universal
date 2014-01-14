@@ -11,24 +11,12 @@
             "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
         }
     }],
-    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
-    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
-    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
-        "value": {
-            "lineSpacing": "1.5",
-            "links": true,
-            "inputsLarger": true,
-            "captions": false,
-            "transcripts": false,
-            "volume": "50"
-        }
-    }],
-    "http://registry.gpii.org/applications/org.gnome.desktop.interface": [{ 
+    "http://registry.gpii.org/applications/org.gnome.desktop.interface": [{
         "value": {
             "text-scaling-factor": 1.6
         }
     }],
-    "http://registry.gpii.org/applications/org.gnome.nautilus": [{ 
+    "http://registry.gpii.org/applications/org.gnome.nautilus": [{
         "value": {
             "font": "Cantarell 18"
         }

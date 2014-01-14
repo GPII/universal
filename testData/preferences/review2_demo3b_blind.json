@@ -1,0 +1,17 @@
+{
+    "http://registry.gpii.org/common/matchMakerType": [{ "value": "statistical" }],
+    "http://registry.gpii.org/applications/org.gnome.orca": [{
+        "value": {
+            "sayAllStyle": 2,
+            "enableEchoByWord": true,
+            "enableEchoByCharacter": false,
+            "voices.default.rate": 35,
+            "enableTutorialMessages": false,
+            "voices.default.family": {
+                "locale": "en",
+                "name": "en-westindies"
+            },
+            "verbalizePunctuationStyle": 0
+        }
+    }]
+}

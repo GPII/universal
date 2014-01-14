@@ -133,46 +133,6 @@
     },
 
     {
-        "name": "UI Options",
-        "id": "fluid.uiOptions.linux",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "linux",
-                    "version": ">=2.6.26"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.fluid\\.uiOptions\\.linux.id",
-                    "display.applications.fluid\\.uiOptions\\.linux.name",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.foregroundColor",
-                    "display.screenEnhancement.backgroundColor",
-                    "display.screenEnhancement.fontFace"
-                ]
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
-    },
-
-    {
         "name": "GNOME Interface Settings",
         "id": "org.gnome.desktop.interface",
         "contexts": {
@@ -309,8 +269,8 @@
     },
 
     {
-        "name": "GNOME Caribou Onscreen Keyboard",
-        "id": "org.gnome.desktop.a11y.caribou-keyboard",
+        "name": "GNOME Assistive Technology - Screen Keyboard",
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard",
         "contexts": {
             "OS": [{
                 "id": "linux",
@@ -322,8 +282,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
-                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.name",
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.caribou-keyboard.id"
+                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.name",
+                    "applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.id"
                 ]
             }
         ],
@@ -412,6 +372,64 @@
     },
 
     {
+        "name": "GNOME desktop Window Manager preferences",
+        "id": "org.gnome.desktop.wm.preferences",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "capabilities": [
+                    "applications.org\\.gnome\\.desktop\\.wm\\.preferences.id",
+                    "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.wm\\.preferences.name"
+                ],
+                "options": {
+                    "schema": "org.gnome.desktop.wm.preferences"
+                }
+            }
+        ],
+
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
+        "name": "GNOME Shell overrides",
+        "id": "org.gnome.shell.overrides",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+
+        "settingsHandlers": [
+            {
+                "type": "gpii.gsettings.set",
+                "capabilities": [
+                    "applications.org\\.gnome\\.shell\\.overrides.id",
+                    "display.screenEnhancement.applications.org\\.gnome\\.shell\\.overrides.name"
+                ],
+                "options": {
+                    "schema": "org.gnome.shell.overrides"
+                }
+            }
+        ],
+
+        "lifecycleManager": {
+            "start": [ "setSettings" ],
+            "stop": [ "restoreSettings" ]
+        }
+    },
+
+    {
         "name": "ORCA Screen Reader",
         "id": "org.gnome.orca",
         "contexts": {
@@ -486,6 +504,20 @@
                                     }
                                 }
                             }
+                        }
+                    },
+                    "voices\\.default\\.average-pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.pitch",
+                            "factor": 10
+                        }
+                    },
+                    "voices\\.default\\.gain": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "factor": 10
                         }
                     },
                     "voices\\.default\\.family": {
@@ -1211,6 +1243,40 @@
     },
 
     {
+        "name": "ALSA System Volume",
+        "id": "org.alsa-project",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.alsa.set",
+                "capabilities": [
+                    "applications.org\\.alsa-project.id"
+                ],
+                "capabilitiesTrasformations": {
+                    "masterVolume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "-provisional-general.-provisional-volume",
+                            "factor": 100
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager" : {
+            "start": ["setSettings"],
+            "stop": ["restoreSettings"]
+        }
+    },
+
+    {
         "name": "EasyOne Communicator Linux",
         "id": "trace.easyOne.communicator.linux",
         "contexts": {
@@ -1235,7 +1301,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy1234.org/user/${{userToken}}"
+                    "command": "google-chrome http://easy123.org/user/${{userToken}}"
                 }
             ],
             "stop": [
@@ -1272,7 +1338,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy1234.org/sudan"
+                    "command": "google-chrome http://easy123.org/sudan"
                 }
             ],
             "stop": [
@@ -1309,7 +1375,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
+                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http://cloud4all.info"
                 }
             ],
             "stop": [
@@ -1317,6 +1383,33 @@
                     "type": "gpii.launch.exec",
                     "command": "pkill -2 chrome"
                 }
+            ]
+        }
+    },
+    {
+        "name": "Xrandr",
+        "id": "org.freedesktop.xrandr",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.xrandr.set",
+                "capabilities": [
+                    "display.screenEnhacements",
+                    "applications.org\\.freedesktop\\.xrandr.id"
+                ]
+           }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
             ]
         }
     }

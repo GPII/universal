@@ -1,0 +1,23 @@
+{
+    "http://registry.gpii.org/common/matchMakerType": [{ "value": "statistical" }],
+    "http://registry.gpii.org/applications/net.opendirective.maavis": [{
+        "value": {
+            "theme": "bw",
+            "playStartSound":"yes",
+            "speakOnActivate":"yes",
+            "speakTitles":"yes",
+            "speakLabels":"yes",
+            "showLabels":"yes",
+            "showImages":"no",
+            "useSkype":"no",
+            "userType":"touch",
+            "splashTime":2,
+            "scanRate":"1000",
+            "scanMode":"AUTO1SWITCHAUTOSTART",
+
+            "selectionsSetSize":"2x3",
+
+            "passwordSetSize":"4x3"
+        }
+    }]
+}
