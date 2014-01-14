@@ -14,6 +14,11 @@
             "value": 1.5
         }
     ],
+    "http://registry.gpii.org/common/speechRate": [
+        { 
+            "value": 200
+        }
+    ],
     "http://registry.gpii.org/common/screenReaderTTSEnabled": [
         {
             "value": true
@@ -48,6 +53,14 @@
                 "keyboard.speakTypedCharacters": false,
                 "presentation.reportHelpBalloons": false,
                 "speech.espeak.sayCapForCapitals": false
+            }
+        }
+    ],
+    "http://registry.gpii.org/applications/se.omnitor.ecmobile": [
+        {
+            "value": {
+                "map.string.theme.$t": "yellow-black",
+                "map.string.fontsize.$t": 50
             }
         }
     ]
