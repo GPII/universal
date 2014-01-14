@@ -496,7 +496,10 @@
                 "type": "gpii.androidActivityManager.stopActivityByPackageName",
                 "packageName": "se.omnitor.ecmobile"
             },
-            "restoreSettings"
+            "restoreSettings",
+            {
+                "type": "gpii.androidActivityManager.goToHomeScreen"
+            }
         ]
         }
     },

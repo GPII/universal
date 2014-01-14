@@ -45,6 +45,40 @@
     },
 
     {
+        "name": "System Access To Go",
+        "id": "com.serotek.satogo",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.com\\.serotek\\.satogo.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\IEXPLORE.EXE\\}\" http://www.satogo.com/en"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im iexplore.exe"
+                }
+            ]
+        }
+    },
+
+    {
         "name": "Read Write Gold",
         "id": "com.texthelp.readWriteGold",
         "contexts": {
