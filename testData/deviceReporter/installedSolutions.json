@@ -1,5 +1,8 @@
 [
     {
+       "id": "net.gpii.smarthouses"
+    },
+    {
         "id": "org.gnome.desktop.interface"
     },
 
