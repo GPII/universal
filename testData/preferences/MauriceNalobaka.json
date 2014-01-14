@@ -1,7 +1,0 @@
-{
-    "http://registry.gpii.org/common/genericFontName": [{"value": "sans-serif"}],
-    "http://registry.gpii.org/common/fontSize": [{"value": 30}],
-    "http://registry.gpii.org/common/highContrastTheme": [{"value": "white-black"}],
-    "http://registry.gpii.org/common/language": [{"value": "es"}],
-    "http://registry.gpii.org/common/volume": [{"value": "75"}]
-}
