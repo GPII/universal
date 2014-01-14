@@ -4,19 +4,7 @@
             "value": "ruleBased"
         }
     ],
-    "http://registry.gpii.org/common/magnifierEnabled": [
-        {
-            "value": true
-        }
-    ],
-    "http://registry.gpii.org/common/screenReaderTTSEnabled": [
-        {
-            "value": true
-        }
-    ],
-    "http://registry.gpii.org/common/auditoryOutLanguage": [
-        {
-            "value": "en-BS"
-        }
-    ]
+
+    "http://registry.gpii.org/applications/webinsight.webAnywhere.windows": [{ "value": {}}],
+    "http://registry.gpii.org/applications/webinsight.webAnywhere.linux": [{ "value": {}}]
 }
