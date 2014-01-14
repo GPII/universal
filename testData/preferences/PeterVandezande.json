@@ -1,11 +1,3 @@
 {
-   "http://registry.gpii.org/common/language": [{ "value": "en-GB"}],
-   "http://registry.gpii.org/common/screenEnhancement.magnification": [{ "value": 2.0 }],
-   "http://registry.gpii.org/common/screenEnhancement.invertImages": [{ "value": false }],
-   "http://registry.gpii.org/common/screenEnhancement.screenMagnification": [{ "value": "ZoomText" }],
-   "http://registry.gpii.org/application/ZoomText.priority": [{ "value": 0 }],
-   "http://registry.gpii.org/common/mouseEmulation": [{ "value": "Keyboard" }],
-   "http://registry.gpii.org/common/voiceRecognition.microphoneGain": [{ "value": 0.5 }],
-   "http://registry.gpii.org/common/voiceRecognition.dictation": [{ "value": true }],
-   "http://registry.gpii.org/common/voiceRecognition.commandAndControl.vocabulary": [{ "value": "Natural" }]
+   "http://registry.gpii.org/common/language": [{ "value": "en-GB"}]
 }
