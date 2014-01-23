@@ -4,7 +4,7 @@
             "value": "ruleBased"
         }
     ],
-    "http://registry.gpii.org/common/magnificationEnabled": [
+    "http://registry.gpii.org/common/magnifierEnabled": [
         {
             "value": true
         }

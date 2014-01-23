@@ -69,5 +69,15 @@
                 "access_commonprefs_speechpitch": 5
             }
         }
+    ],
+    "http://registry.gpii.org/applications/net.gpii.smarthouses": [
+        {
+            "value": {
+                "language": "en",
+                "volume": "100",
+                "highContrastTheme": "defaultTheme",
+                "fontSize": "40"
+            }
+        }
     ]
 }

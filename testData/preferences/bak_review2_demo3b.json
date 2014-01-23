@@ -4,7 +4,7 @@
             "speech.synth": "espeak",
             "speech.outputDevice": "Microsoft Sound Mapper",
             "speech.symbolLevel": "300",
-            "speech.espeak.rate": 80,
+            "speech.espeak.rate": 40,
             "speech.espeak.voice": "en\\en-wi",
             "reviewCursor.followFocus": false,
             "reviewCursor.followCaret": true,
