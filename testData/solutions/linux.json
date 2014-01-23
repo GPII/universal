@@ -87,46 +87,6 @@
     },
 
     {
-        "name": "UI Options",
-        "id": "fluid.uiOptions.linux",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "linux",
-                    "version": ">=2.6.26"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.fluid\\.uiOptions\\.linux.id",
-                    "display.applications.fluid\\.uiOptions\\.linux.name",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.foregroundColor",
-                    "display.screenEnhancement.backgroundColor",
-                    "display.screenEnhancement.fontFace"
-                ]
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
-    },
-
-    {
         "name": "GNOME Interface Settings",
         "id": "org.gnome.desktop.interface",
         "contexts": {

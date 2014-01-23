@@ -37,14 +37,6 @@
         },
 
         {
-            "id": "fluid.uiOptions.windows"
-        },
-
-        {
-            "id": "fluid.uiOptions.linux"
-        },
-
-        {
             "id": "org.gnome.desktop.interface"
         },
 
@@ -74,6 +66,10 @@
 
         {
             "id": "webinsight.webAnywhere.linux"
+        },
+
+        {
+            "id": "com.texthelp.readWriteGold"
         },
 
         {

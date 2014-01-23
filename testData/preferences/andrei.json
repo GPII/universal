@@ -13,20 +13,8 @@
     "http://registry.gpii.org/applications/org.gnome.orca": [{ "value": {}}],
     "http://registry.gpii.org/applications/nvda.screenReader": [{ "value": {}}],
     "http://registry.gpii.org/applications/webinsight.webAnywhere.windows": [{ "value": {}}],
-    "http://registry.gpii.org/applications/webinsight.webAnywhere.linux": [{ "value": {}}],    
-    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
-    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
-    "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
-        "value": {
-            "lineSpacing": "1",
-            "links": false,
-            "inputsLarger": false,
-            "captions": false,
-            "transcripts": false,
-            "volume": "50"
-        }
-    }],
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{ 
+    "http://registry.gpii.org/applications/webinsight.webAnywhere.linux": [{ "value": {}}],
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{
         "value": {
             "feature-state-change-beep": true
         }
