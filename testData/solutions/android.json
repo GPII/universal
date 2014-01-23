@@ -499,5 +499,31 @@
             "restoreSettings"
         ]
         }
+    },
+    {
+        "name": "Mobile Accessibility",
+        "id": "es.codefactory.android.app.ma",
+        "contexts": {
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
+        },
+        "settingsHandlers": [{
+                      "type": "gpii.settingsHandlers.noSettings",
+                      "capabilities": [
+                                       "applications.es\\.codefactory\\.android\\.app\\.ma.id"
+                                       ],
+                      "capabilitiesTransformations": {
+                             "access_commonprefs_speechrate": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "display.screenReader.speechRate",
+                                    "operator": "/",
+                                    "right": 40
+                                }
+                            }
+                      }
+        }]
     }
 ]
