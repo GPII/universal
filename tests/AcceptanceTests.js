@@ -234,9 +234,11 @@ gpii.acceptanceTesting.buildTests = function (testDefs) {
         gpii.acceptanceTesting.buildSingleTestFixture);
 };
 
-gpii.acceptanceTesting.FMRequestListen = function (data, headers, cookies, signedCookies, passthrough) {
-    jqUnit.assertDeepEq("Checking the returned data from the flowmanager: ",
-    JSON.parse(data), passthrough);
+gpii.acceptanceTesting.FMRequestListenerMaker = function (expected) {
+    return function (data) {
+        jqUnit.assertDeepEq("Checking the returned data from the flowmanager: ",
+            JSON.parse(data), expected);
+    }
 };
 
 gpii.acceptanceTesting.buildFlowManagerTestFixture = function (testDef) {
@@ -268,7 +270,8 @@ gpii.acceptanceTesting.buildFlowManagerTestFixture = function (testDef) {
         func: "{fmrequest}.send"
     }, {
         event: "{fmrequest}.events.onComplete",
-        listener: "gpii.acceptanceTesting.FMRequestListen"
+        listenerMaker: "gpii.acceptanceTesting.FMRequestListenerMaker",
+        makerArgs: ["{tests}.options.expected"]
     });
 
     return testDef;
