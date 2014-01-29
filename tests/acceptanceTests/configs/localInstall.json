@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.base.config",
+    "typeName": "acceptanceTests.base.development.config",
     "options": {
         "components": {
             "server": {
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "../../gpii/configs/fm.ps.sr.dr.mm.os.lms.development.json"
+        "../../../gpii/configs/fm.ps.sr.dr.mm.os.lms.development.json"
     ]
 }
