@@ -1,12 +1,4 @@
 {
    "http://registry.gpii.org/common/language": [{ "value": "en-GB"}],
-   "http://registry.gpii.org/common/visualAlert.usage": [{ "value": "preferred" }],
-   "http://registry.gpii.org/common/visualAlert.systemSounds": [{ "value": "window" }],
-   "http://registry.gpii.org/common/voiceRecognition.microphoneGain": [{ "value": 1.0 }],
-   "http://registry.gpii.org/common/voiceRecognition.volume": [{ "value": 1.0 }],
-   "http://registry.gpii.org/common/voiceRecognition.dictation": [{ "value": true }],
-   "http://registry.gpii.org/common/voiceRecognition.commandAndControl.vocabulary": [{ "value": "Natural" }],
-   "http://registry.gpii.org/common/adaptationPreference.adaptationType": [{ "value": "visual representation" }],
-   "http://registry.gpii.org/common/adaptationPreference.language": [{ "value": "en" }],
     "http://registry.gpii.org/common/volume": [{"value": "100"}]
 }

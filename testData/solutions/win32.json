@@ -32,7 +32,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
                 }
             ],
             "stop": [

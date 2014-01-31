@@ -1,6 +1,4 @@
 {
-    "http://registry.gpii.org/common/adaptationType": [{"value": ["audio description", "audio representation", "tactile representation"]}],
     "http://registry.gpii.org/common/language": [{"value": "es"}],
-    "http://registry.gpii.org/applications/uk.co.jads.android.speechRate": [{"value": 5}],
     "http://registry.gpii.org/common/highContrastTheme": [{"value": "white-black"}]
 }
