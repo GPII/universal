@@ -34,13 +34,13 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
+                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
                 }
             ],
             "stop": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
                 }
             ]
         }
