@@ -30,6 +30,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "./acceptanceTests/AcceptanceTests_gnome_keyboard.js",
+    "./acceptanceTests/AcceptanceTests_gnome_magnifier.js",
     "./DevelopmentTests.js",
 
 ];
