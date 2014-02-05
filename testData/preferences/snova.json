@@ -1,0 +1,14 @@
+{
+    "http://registry.gpii.org/common/screenReaderTTSEnabled":[{ "value": true }],
+	"http://registry.gpii.org/common/speechRate":[{ "value": 125 }],
+	"http://registry.gpii.org/common/keyEcho":[{ "value": false }],
+	"http://registry.gpii.org/common/wordEcho":[{ "value": true }],
+	"http://registry.gpii.org/common/announceCapitals":[{ "value": true }],
+	"http://registry.gpii.org/common/punctuationVerbosity":[{ "value": "some" }],
+	"http://registry.gpii.org/common/screenReaderBrailleOutput":[{ "value": true }],
+
+	"http://registry.gpii.org/common/magnifierEnabled":[{ "value": true }],
+	"http://registry.gpii.org/common/magnification":[{ "value": 3 }],	
+	"http://registry.gpii.org/common/magnifierPosition":[{ "value": "FullScreen" }]
+
+}

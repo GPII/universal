@@ -1357,5 +1357,83 @@
                 "restoreSettings"
             ]
         }
+    },
+
+    {
+        "name": "Supernova Access Suite",
+        "id": "com.yourdolphin.supernova-as",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "options": {
+                    "path": "${{environment}.APPDATA}\\dolphin\\snova-as.ini",
+                    "allowNumberSignComments": true,
+                    "allowSubSections": true
+                },
+                "capabilities": [
+                    "applications.com\\.yourdolphin\\.supernova-as",
+                    "display.screenReader.applications.com\\.yourdolphin\\.supernova-as"
+                ],  
+                "capabilitiesTransformations": {    
+                    "screenReaderTTSEnabled": {
+                        "value": "display.screenReader.-provisional-screenReaderTTSEnabled"
+                    },
+                    "speechRate": {
+                        "value": "display.screenReader.speechRate"
+                    },
+                    "keyEcho": {
+                        "value": "display.screenReader.-provisional-keyEcho"
+                    },
+                    "wordEcho": {
+                        "value": "display.screenReader.-provisional-wordEcho"
+                    },
+                    "announceCapitals": {
+                        "value": "display.screenReader.-provisional-announceCapitals"
+                    },
+                    "punctuationVerbosity": {
+                        "value": "display.screenReader.-provisional-punctuationVerbosity"
+                    },
+                    "screenReaderBrailleOutput": {
+                        "value": "display.screenReader.-provisional-screenReaderBrailleOutput"
+                    },
+                    "magnifierEnabled": {
+                        "value": "display.screenEnhancement.-provisional-magnifierEnabled"
+                    },
+                    "magnification": {
+                        "value": "display.screenEnhancement.magnification"
+                    },
+                    "magnifierPosition": {
+                        "value": "display.screenEnhancement.-provisional-magnifierPosition"
+                    }
+
+                }
+				
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.APPDATA}\\dolphin\\snova-ctrl.bat /s"
+                }
+            ],
+            "stop": [
+				{
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.APPDATA}\\dolphin\\snova-ctrl.bat /q"
+                },
+                "restoreSettings"
+            ]
+        }
     }
+	
 ]
