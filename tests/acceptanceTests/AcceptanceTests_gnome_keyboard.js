@@ -15,6 +15,7 @@ https://github.com/gpii/universal/LICENSE.txt
 
 "use strict";
 var fluid = require("universal"),
+    kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.require("./AcceptanceTests_include", require);
@@ -40,4 +41,5 @@ var testDefs = [
     }
 ];
 
-gpii.acceptanceTesting.flowmanager.runTests(testDefs);
+testDefs = gpii.acceptanceTesting.flowManager.runTests(testDefs);
+module.exports = kettle.tests.bootstrap(testDefs);

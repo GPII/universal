@@ -16,14 +16,13 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     path = require("path"),
-    kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.registerNamespace("gpii.acceptanceTesting.flowmanager");
+fluid.registerNamespace("gpii.acceptanceTesting.flowManager");
 
 fluid.require("universal/tests/AcceptanceTests", require);
 
-gpii.acceptanceTesting.flowmanager.runTests = function (testDefs) {
+gpii.acceptanceTesting.flowManager.runTests = function (testDefs) {
     var gpiiConfig = {
        nodeEnv: "cloudBasedFlowManager",
        configPath: path.resolve(__dirname, "./configs")
@@ -31,6 +30,5 @@ gpii.acceptanceTesting.flowmanager.runTests = function (testDefs) {
     fluid.each(testDefs, function (testDef) {
         testDef.config = gpiiConfig;
     });
-    testDefs = gpii.acceptanceTesting.buildFlowManagerTests(testDefs);
-    module.exports = kettle.tests.bootstrap(testDefs);
+    return gpii.acceptanceTesting.buildFlowManagerTests(testDefs);
 };
