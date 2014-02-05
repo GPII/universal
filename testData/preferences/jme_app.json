@@ -1,0 +1,11 @@
+{
+    "http://registry.gpii.org/applications/info.cloud4all.JME": [{
+        "value": {
+            "theme": "Black-White",
+            "fontSize": "veryLarge",
+            "language": "English",
+            "volume": 50,
+            "vibrationMode": 2
+        }
+    }]
+}

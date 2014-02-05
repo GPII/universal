@@ -1,0 +1,7 @@
+{
+    "http://registry.gpii.org/applications/org.alsa-project": [{
+        "value": {
+            "masterVolume": 0
+        }
+    }]
+}
