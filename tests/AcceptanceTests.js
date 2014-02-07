@@ -12,13 +12,12 @@
  *
  */
 
-/*global require*/
+/*global require, __dirname*/
 
 var fluid = require("infusion"),
     path = require("path"),
     jqUnit = fluid.require("jqUnit"),
     $ = fluid.registerNamespace("jQuery"),
-    configPath = path.resolve(__dirname, "../gpii/configs"),
     kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii"),
     child_process = require("child_process");
@@ -233,4 +232,52 @@ gpii.acceptanceTesting.buildSingleTestFixture = function (testDef) {
 gpii.acceptanceTesting.buildTests = function (testDefs) {
     return fluid.transform(testDefs,
         gpii.acceptanceTesting.buildSingleTestFixture);
+};
+
+gpii.acceptanceTesting.FMRequestListenerMaker = function (expected) {
+    return function (data) {
+        jqUnit.assertDeepEq("Checking the returned data from the flowmanager: ",
+            JSON.parse(data), expected);
+    }
+};
+
+gpii.acceptanceTesting.buildFlowManagerTestFixture = function (testDef) {
+    testDef.expect = 1;
+    testDef.sequence = fluid.makeArray(testDef.sequence);
+
+    testDef.members = {
+        settingsStore: {}
+    };
+
+    testDef.components = $.extend(true, testDef.components, {
+        fmrequest: {
+            type: "kettle.tests.request.http",
+            options: {
+                requestOptions: {
+                    path: "/%token/settings/%appinfo",
+                    port: 8081,
+                    passthrough: testDef.expected
+                },
+                termMap: {
+                    token: "{tests}.options.token",
+                    appinfo: "{tests}.options.appinfo"
+                }
+            }
+        }
+    });
+
+    testDef.sequence.unshift({
+        func: "{fmrequest}.send"
+    }, {
+        event: "{fmrequest}.events.onComplete",
+        listenerMaker: "gpii.acceptanceTesting.FMRequestListenerMaker",
+        makerArgs: ["{tests}.options.expected"]
+    });
+
+    return testDef;
+};
+
+gpii.acceptanceTesting.buildFlowManagerTests = function (testDefs) {
+    return fluid.transform(testDefs,
+        gpii.acceptanceTesting.buildFlowManagerTestFixture);
 };

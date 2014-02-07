@@ -1,0 +1,7 @@
+AcceptanceTests_gnome_keyboard.js
+
+Description:
+This is an example of a tests using the online flowmanager. It relies on the 'fm_gnome_keyboard.json' NP set in the testData/preferences/acceptanceTests/ folder. Since the gnome keyboard doesn't support talking directly to the cloudbased flowmanager, etc., this testcase is strictly meant as an example of how a cloudbased acceptance test can be written (using gnome keyboard as an example) - and as a confrimation that the cloudBased flowmanager (running locally with the given setup) works.
+
+Requirements:
+Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode.
