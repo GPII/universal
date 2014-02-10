@@ -24,6 +24,7 @@ var testIncludes = [
     // Run all tests included in the list.
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
+    "../gpii/node_modules/flowManager/test/GetTokenTests.js",
     "../gpii/node_modules/matchMaker/test/ProxyTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
