@@ -1,0 +1,14 @@
+[
+    {
+        "id": "org.gnome.desktop.interface"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.magnifier"
+    },
+    {
+        "id": "org.alsa-project"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.keyboard"
+    }
+]
