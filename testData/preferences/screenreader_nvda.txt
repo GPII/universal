@@ -1,8 +1,0 @@
-screenreader_nvda.json
-
-This file is currently duplicated across this folder (preferences) and its subfolder 'acceptanceTests'.
-
-This is a temporary state:
-(1) The windows acceptance tests (acceptanceTests_builtIn.js) are referring to this file in the correct (/acceptanceTests) location
-(2) The linux acceptance tests need to be updated according to our new format for acceptance tests, and when doing that the reference to the NP sets should be updated to point at the acceptanceTests folder. (GPII-571)
-(3) Once (2) is done, this NP set should be removed from the 'preferences' folder, so only one copy exists; namely that in the preferences/acceptanceTests folder.
