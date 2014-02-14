@@ -6,7 +6,7 @@
     "bugs": "http://wiki.gpii.net/index.php/Main_Page",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "git://github.com/fluid-project/infusion.git#2c9d4c1a4b5bc72041c49ca4f819bd6ebb3fdb2b",
+        "infusion": "git://github.com/fluid-project/infusion.git#22ede0adb2419237b114709a3da4264080373a3f",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
