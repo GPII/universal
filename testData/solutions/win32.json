@@ -265,7 +265,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler.set",
                 "options": {
                     "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                    "allowNumberSignComments": true,
+                    "allowHashComments": true,
                     "allowSubSections": true
                 },
                 "capabilities": [
