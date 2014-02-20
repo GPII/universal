@@ -503,109 +503,82 @@
     {
         "name": "Mobile Accessibility",
         "id": "es.codefactory.android.app.ma",
-        "contexts": 
-        {
-            "OS": 
-            [{
-                "id": "android",
-                "version": ">=0.1"
-            }]
-        },
-        "settingsHandlers": 
-        [{
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": 
-                [
-                	"applications.es\\.codefactory\\.android\\.app\\.ma.id"
-                ],
-                "capabilitiesTransformations": 
+        "contexts": {
+            "OS": [
                 {
-                       "access_commonprefs_speechrate": 
-                       {
-                          "transform": 
-                          {
-                              "type": "fluid.transforms.binaryOp",
-                              "leftPath": "display.screenReader.speechRate",
-                              "operator": "/",
-                              "right": 40
-                          }
-                       },
-                       "access_commonprefs_speechpitch": 
-                       {
-                          "transform": 
-                          {
-                              "type": "fluid.transforms.binaryOp",
-                              "leftPath": "display.textReadingHighlight.pitch",
-                              "operator": "*",
-                              "right": 10
-                          }
-                       },
-                       "access_commonprefs_editingkeyboardecho": 
-                       {
-                          "transform": 
-                          {
-                              "type": "fluid.transforms.condition",
-                              "conditionPath": "display.screenReader.-provisional-keyEcho",
-                              	"true": 
-                              	{
-                                      "transform": 
-                                      {
-                                          "type": "fluid.transforms.condition",
-                                          "conditionPath": "display.screenReader.-provisional-wordEcho",
-                                          "true": "3",
-                                          "false": "1"
-                                      }
-                              	},
-                                "false": 
-                                {
-                                     "transform": 
-                                     {
-                                          "type": "fluid.transforms.condition",
-                                          "conditionPath": "display.screenReader.-provisional-wordEcho",
-                                          "true": "2",
-                                          "false": "0"
-                                      }
-                                }
-                           }
-                       },
-                       "access_commonprefs_punctuation": 
-                       {
-                          "transform": 
-                          {
-                              "type": "fluid.transforms.valueMapper",
-                              "inputPath": "language",
-                              "options": 
-                              {
-                                  "none": 
-                                  {
-                                      "outputValue": "none"
-                                  },
-                                  "some": 
-                                  {
-                                      "outputValue": "some"
-                                  },
-                                  "most": 
-                                  {
-                                      "outputValue": "most"
-                                  },
-                                  "all": 
-                                  {
-                                      "outputValue": "all"
-                                  }
-                              }
-                          }
-                       },
-                       "access_commonprefs_capitalization": 
-                       {
-                          "transform": 
-                          {
-                              "type": "fluid.transforms.condition",
-                              "conditionPath": "display.screenReader.-provisional-announceCapitals",
-                              "true": "true",
-                              "false": "false"
-                          }
-                      }
+                    "id": "android",
+                    "version": ">=0.1"
                 }
-        }]
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.es\\.codefactory\\.android\\.app\\.ma.id"
+                ],
+                "capabilitiesTransformations": {
+                    "access_commonprefs_speechrate": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "display.screenReader.speechRate",
+                            "operator": "/",
+                            "right": 40
+                        }
+                    },
+                    "access_commonprefs_speechpitch": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "display.textReadingHighlight.pitch",
+                            "operator": "*",
+                            "right": 10
+                        }
+                    },
+                    "access_commonprefs_editingkeyboardecho": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "display.screenReader.-provisional-keyEcho",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "display.screenReader.-provisional-wordEcho",
+                                    "true": "3",
+                                    "false": "1"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "display.screenReader.-provisional-wordEcho",
+                                    "true": "2",
+                                    "false": "0"
+                                }
+                            }
+                        }
+                    },
+                    "access_commonprefs_punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                            "options": {
+                                "none": {
+                                    "outputValue": "none"
+                                },
+                                "some": {
+                                    "outputValue": "some"
+                                },
+                                "most": {
+                                    "outputValue": "most"
+                                },
+                                "all": {
+                                    "outputValue": "all"
+                                }
+                            }
+                        }
+                    },
+                    "access_commonprefs_capitalization": "display.screenReader.-provisional-announceCapitals"
+                }
+            }
+        ]
     }
 ]
