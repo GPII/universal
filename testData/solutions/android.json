@@ -504,10 +504,12 @@
         "name": "Mobile Accessibility",
         "id": "es.codefactory.android.app.ma",
         "contexts": {
-            "OS": [{
-                "id": "android",
-                "version": ">=0.1"
-            }]
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
         },
         "settingsHandlers": [
             {
@@ -516,14 +518,46 @@
                     "applications.es\\.codefactory\\.android\\.app\\.ma.id"
                 ],
                 "capabilitiesTransformations": {
-                     "access_commonprefs_speechrate": {
+                    "access_commonprefs_speechrate": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
                             "leftPath": "display.screenReader.speechRate",
                             "operator": "/",
                             "right": 40
                         }
-                    }
+                    },
+                    "access_commonprefs_speechpitch": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "display.textReadingHighlight.pitch",
+                            "operator": "*",
+                            "right": 10
+                        }
+                    },
+                    "access_commonprefs_editingkeyboardecho": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "display.screenReader.-provisional-keyEcho",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "display.screenReader.-provisional-wordEcho",
+                                    "true": "3",
+                                    "false": "1"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "display.screenReader.-provisional-wordEcho",
+                                    "true": "2",
+                                    "false": "0"
+                                }
+                            }
+                        }
+                    },
+                    "access_commonprefs_punctuation": "display.screenReader.-provisional-punctuationVerbosity",
+                    "access_commonprefs_capitalization": "display.screenReader.-provisional-announceCapitals"
                 }
             }
         ]
