@@ -556,26 +556,7 @@
                             }
                         }
                     },
-                    "access_commonprefs_punctuation": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
-                            "options": {
-                                "none": {
-                                    "outputValue": "none"
-                                },
-                                "some": {
-                                    "outputValue": "some"
-                                },
-                                "most": {
-                                    "outputValue": "most"
-                                },
-                                "all": {
-                                    "outputValue": "all"
-                                }
-                            }
-                        }
-                    },
+                    "access_commonprefs_punctuation": "display.screenReader.-provisional-punctuationVerbosity",
                     "access_commonprefs_capitalization": "display.screenReader.-provisional-announceCapitals"
                 }
             }
