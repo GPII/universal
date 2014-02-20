@@ -1,0 +1,8 @@
+{
+    "http://registry.gpii.org/common/fontSize":[{"value":12}],
+	"http://registry.gpii.org/common/screenReaderTTSEnabled":[{"value":false}],
+	"http://registry.gpii.org/common/magnifierEnabled":[{"value":true}],
+	"http://registry.gpii.org/common/magnification":[{"value":1.5}],
+	"http://registry.gpii.org/common/highContrastEnabled":[{"value":false}],	
+	"http://registry.gpii.org/common/invertColours":[{"value":false}]
+}
