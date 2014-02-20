@@ -2,7 +2,8 @@
 GPII Universal Tests
 
 Copyright 2013 OCAD University
-Copyright 2014 OCAD Emergya
+Copyright 2014 Emergya
+Copyright 2014 Technosite
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -11,7 +12,7 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global require, __dirname*/
+/*global require*/
 
 var fluid = require("infusion"),
     kettle = fluid.require("kettle", require);
@@ -33,7 +34,8 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "./acceptanceTests/AcceptanceTests_gnome_keyboard.js",
     "./acceptanceTests/AcceptanceTests_jme.js",
-    "./DevelopmentTests.js",
+    "./acceptanceTests/AcceptanceTests_chrome.js",
+    "./DevelopmentTests.js"
 
 ];
 var tests = [];
