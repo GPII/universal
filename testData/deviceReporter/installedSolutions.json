@@ -1,6 +1,17 @@
 [
     {
+        "id": "net.gpii.smarthouses"
+    },
+    {
         "id": "org.gnome.desktop.interface"
+    },
+
+    {
+        "id": "org.gnome.shell.overrides"
+    },
+
+    {
+        "id": "org.gnome.desktop.wm.preferences"
     },
 
     {
@@ -9,6 +20,10 @@
 
     {
         "id": "org.gnome.desktop.a11y.keyboard"
+    },
+
+    {
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
     },
 
     {
@@ -76,13 +91,51 @@
     },
 
     {
-        "id": "com.microsoft.windows.mouseTracking"
+        "id": "com.microsoft.windows.mouseTrailing"
     },
 
     {
         "id": "com.microsoft.windows.cursors"
     },
 
-    {   "id": "com.microsoft.windows.mouseTrailing"
-}
+    {
+        "id": "com.android.activitymanager"
+    },
+
+    {
+        "id": "com.android.talkback"
+    },
+
+    {
+        "id": "com.android.freespeech"
+    },
+
+    {
+        "id": "org.chrome.cloud4chrome"
+    },
+
+    {
+        "id": "com.android.settings.secure"
+    },
+
+    {
+        "id": "com.android.audioManager"
+    },
+
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+
+    {
+        "id": "org.alsa-project"
+    },
+
+    {
+        "id": "org.freedesktop.xrandr"
+    },
+
+    {
+        "id": "com.android.settings.system"
+    }
+
 ]
