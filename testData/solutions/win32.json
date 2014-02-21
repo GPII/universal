@@ -112,6 +112,32 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier"
                 },
+                "applicationSettings": {
+                    "Magnification": {
+                        "dataType": "REG_DWORD",
+                        "value": null
+                    },
+                    "Invert": {
+                        "value": null,
+                        "dataType": "REG_DWORD"
+                    },
+                    "FollowFocus": {
+                        "value": null,
+                        "dataType": "REG_DWORD"
+                    },
+                    "FollowCaret": {
+                        "value": null,
+                        "dataType": "REG_DWORD"
+                    },
+                    "FollowMouse": {
+                        "value": null,
+                        "dataType": "REG_DWORD"
+                    },
+                    "MagnificationMode": {
+                        "value": null,
+                        "dataType": "REG_DWORD"
+                    }
+                },
                 "capabilities": [
                     "applications.com\\.microsoft\\.windows\\.magnifier.id",
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
@@ -267,6 +293,24 @@
                     "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowHashComments": true,
                     "allowSubSections": true
+                },
+                "applicationSettings": {
+                    "speech.espeak.pitch": null,
+                    "speech.espeak.volume": null,
+                    "presentation.reportHelpBalloons": null,
+                    "keyboard.speakTypedCharacters": null,
+                    "keyboard.speakTypedWords": null,
+                    "speech.espeak.sayCapForCapitals": null,
+                    "virtualBuffers.autoSayAllOnPageLoad": null,
+                    "reviewCursor.followFocus": null,
+                    "reviewCursor.followCaret": null,
+                    "reviewCursor.followMouse": null,
+                    "speech.synth": null,
+                    "speech.outputDevice": null,
+                    "speech.espeak.rate": null,
+                    "speech.espeak.rateBoost": null,
+                    "speech.symbolLevel": null,
+                    "speech.espeak.voice": null
                 },
                 "capabilities": [
                     "applications.org\\.nvda-project.id",
@@ -797,6 +841,12 @@
                         "name": "HIGHCONTRAST"
                     }
                 },
+                "applicationSettings": {
+                    "HighContrastOn": {
+                        "value": null,
+                        "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                    }
+                },
                 "capabilities": [
                     "display.screenEnhancement.-provisional-highContrastEnabled",
                     "applications.com\\.microsoft\\.windows\\.highContrast.id"
@@ -850,6 +900,15 @@
                         "type": "BOOL"
                     }
                 },
+                "applicationSettings": {
+                    "HighContrastOn": {
+                        "value": null,
+                        "path": {
+                            "get": "pvParam",
+                            "set": "uiParam"
+                        }
+                    }
+                },
                 "capabilities": [
                     "display.screenEnhancement.mouseTrailing",
                     "applications.com\\.microsoft\\.windows\\.mouseTrailing.id"
@@ -901,6 +960,60 @@
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors"
+                },
+                "applicationSettings": {
+                    "Arrow": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "Hand": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "Help": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "AppStarting": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "No": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "NWPen": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "SizeAll": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "SizeNESW": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "SizeNS": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "SizeNWSE": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "SizeWE": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "UpArrow": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    },
+                    "Wait": {
+                        "value": null,
+                        "dataType": "REG_SZ"
+                    }
                 },
                 "capabilities": [
                     "display.screenEnhancement.cursorSize",
@@ -1350,7 +1463,14 @@
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
-
+                },
+                "applicationSettings": {
+                    "user.$t": null,
+                    "expert.$t": null,
+                    "careCenter.$t": null,
+                    "screenReaderTTSEnabled": null,
+                    "highContrastEnabled": null,
+                    "fontSize": null
                 },
                 "capabilities": [
                     "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
