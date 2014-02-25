@@ -1,5 +1,4 @@
 [
-
     {
         "id": "org.gnome.desktop.interface"
     },
@@ -95,5 +94,4 @@
     {
         "id": "com.android.settings.system"
     }
-
 ]

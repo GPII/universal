@@ -1,5 +1,4 @@
 [
-
     {
         "id": "org.gnome.desktop.interface"
     },
@@ -99,7 +98,8 @@
     {
         "id": "com.android.settings.system"
     },
+	
     {
         "id": "info.cloud4all.JME"
-    },
+    }
 ]
