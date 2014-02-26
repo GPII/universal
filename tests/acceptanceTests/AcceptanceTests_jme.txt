@@ -1,0 +1,13 @@
+AcceptanceTests_jme.js
+
+Description:
+This is the acceptanceTests for the cloudBased solution 'info.cloud4all.JME'.
+This solution is used by simple phones that have the Cloud4allThemes application
+installed on them to make use of the GPII.
+It uses the 'fm_jme_common' NP set which contains a set of common-terms
+settings.
+
+Requirements:
+Since it's using the online flowmanager, there are NO REQUIREMENTS to the system
+other than the GPII being installed (and able to run in local 'cloudBased'
+flowmanager mode.

@@ -45,7 +45,7 @@
                             "input":1,
                             "ranges":[
                                 {
-                                    "upperBound":1.5,
+                                    "upperBound":1.2,
                                     "output":1
                                 },
                                 {
