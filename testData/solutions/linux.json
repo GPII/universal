@@ -1302,7 +1302,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy1234.org/user/${{userToken}}"
+                    "command": "google-chrome http://easy123.org/user/${{userToken}}"
                 }
             ],
             "stop": [
@@ -1339,7 +1339,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy1234.org/sudan"
+                    "command": "google-chrome http://easy123.org/sudan"
                 }
             ],
             "stop": [
@@ -1376,7 +1376,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}"
+                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
                 }
             ],
             "stop": [
