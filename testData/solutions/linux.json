@@ -1,6 +1,53 @@
 [
 
     {
+        "name": "smarthouse",
+        "id": "net.gpii.smarthouses",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.net\\.gpii\\.smarthouses.id",
+                    "display.applications.net\\.gpii\\.smarthouses.name",
+                    "language",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.-provisional-highContrastTheme",
+                    "-provisional-general.-provisional-volume"
+                ],
+                "capabilitiesTransformations": {
+                    "fontSize": "display.screenEnhancement.fontSize",
+                    "language": "language",
+                    "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
+                    "volume": "-provisional-general.-provisional-volume"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "pkill -2 chrome"
+                }
+            ]
+        }
+    },
+
+    {
         "name": "GNOME Shell Magnifier",
         "id": "org.gnome.desktop.a11y.magnifier",
         "contexts": {
@@ -458,6 +505,20 @@
                                     }
                                 }
                             }
+                        }
+                    },
+                    "voices\\.default\\.average-pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.pitch",
+                            "factor": 10
+                        }
+                    },
+                    "voices\\.default\\.gain": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "factor": 10
                         }
                     },
                     "voices\\.default\\.family": {
@@ -1315,7 +1376,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http://cloud4all.info"
+                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
                 }
             ],
             "stop": [

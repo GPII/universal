@@ -1,0 +1,10 @@
+This configuration file is used for acceptance testing of applications using the cloudbased flowmanager.
+
+It sets up the system as a modified cloudbased flowmanager, running everything locally. It will expose it on port 8081 of the local macine.
+
+To be more specific it:
+* Runs a "cloudBased flowmanager" on the local machine
+* is based on (includes) the "cloudbased" config of gpii and flowmanager
+* is based on (includes) the standard "development" config of the preferences server
+* Runs the all the required services (incl. MMs and prefs server) locally
+* Uses the preference sets from the testData/preferences/acceptanceTests/ folder
