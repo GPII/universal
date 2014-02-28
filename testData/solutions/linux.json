@@ -64,6 +64,12 @@
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
+                "applicationSettings": {
+                    "mag-factor": null,
+                    "show-cross-hairs": null,
+                    "mouse-tracking": null,
+                    "screen-position": null
+                },
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id",
                     "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name"
@@ -147,6 +153,12 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
+                "applicationSettings": {
+                    "text-scaling-factor": null,
+                    "cursor-size":  null,
+                    "gtk-theme":  null,
+                    "icon-theme":  null
+                },
                 "capabilities": [
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
                     "applications.org\\.gnome\\.desktop\\.interface.id"
@@ -250,6 +262,9 @@
         "settingsHandlers": [
             {
                 "type": "gpii.gsettings.set",
+                "applicationSettings": {
+                    "font": null
+                },
                 "capabilities": [
                     "applications.org\\.gnome\\.nautilus.id",
                     "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name"
@@ -315,6 +330,17 @@
         },
         "settingsHandlers": [ {
                 "type": "gpii.gsettings.set",
+                "applicationSettings": {
+                    "stickykeys-enable": null,
+                    "slowkeys-enable": null,
+                    "slowkeys-delay": null,
+                    "bouncekeys-enable": null,
+                    "bouncekeys-delay": null,
+                    "mousekeys-enable": null,
+                    "mousekeys-init-delay": null,
+                    "mousekeys-max-speed": null,
+                    "mousekeys-accel-time": null
+                },
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id",
                     "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
@@ -1257,6 +1283,9 @@
         "settingsHandlers": [
             {
                 "type": "gpii.alsa.set",
+                "applicationSettings": {
+                    "masterVolume": null
+               },
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
                 ],
