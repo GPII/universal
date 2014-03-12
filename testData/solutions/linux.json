@@ -1302,7 +1302,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy1234.org/user/${{userToken}}"
+                    "command": "google-chrome http://easy123.org/user/${{userToken}}"
                 }
             ],
             "stop": [
@@ -1339,7 +1339,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy1234.org/sudan"
+                    "command": "google-chrome http://easy123.org/sudan"
                 }
             ],
             "stop": [
