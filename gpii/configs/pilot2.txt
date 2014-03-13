@@ -1,0 +1,12 @@
+pilot2.json
+============
+
+Configuration file to be used for the second round of pilots in the CLOUD4All project.
+
+It is set up to use:
+* The multiple matchmaker configuration (ie. pointing to the online matchmakers)
+* Does NOT start a local preferences server
+* Everything else is started locally
+* The "pilot2" config of the flowmanager -
+** see universal/gpii/node_modules/flowmanager/configs/pilot2.txt
+** Roughly speaking that config expects everything to run locally except for the remote prefs server
