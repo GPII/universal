@@ -77,7 +77,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidPersistentConfiguration.set",
+                "type": "gpii.androidPersistentConfiguration",
                 "capabilities": [
                     "applications.com\\.android\\.persistentConfiguration.id"
                 ],
@@ -332,7 +332,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidSettings.set",
+                "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "System"
                 },
@@ -373,7 +373,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidSettings.set",
+                "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "Secure"
                 },
@@ -444,7 +444,7 @@
         },
         "settingsHandlers": [
         {
-            "type": "gpii.settingsHandlers.XMLHandler.set",
+            "type": "gpii.settingsHandlers.XMLHandler",
             "options": {
                 "filename": "/sdcard/output.xml",
                 "encoding": "utf-8",

@@ -60,7 +60,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.gsettings.set",
+                "type": "gpii.gsettings",
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
@@ -146,7 +146,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.gsettings.set",
+                "type": "gpii.gsettings",
                 "capabilities": [
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
                     "applications.org\\.gnome\\.desktop\\.interface.id"
@@ -249,7 +249,7 @@
 
         "settingsHandlers": [
             {
-                "type": "gpii.gsettings.set",
+                "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.nautilus.id",
                     "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name"
@@ -314,7 +314,7 @@
             }]
         },
         "settingsHandlers": [ {
-                "type": "gpii.gsettings.set",
+                "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id",
                     "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
@@ -384,7 +384,7 @@
 
         "settingsHandlers": [
             {
-                "type": "gpii.gsettings.set",
+                "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.wm\\.preferences.id",
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.wm\\.preferences.name"
@@ -413,7 +413,7 @@
 
         "settingsHandlers": [
             {
-                "type": "gpii.gsettings.set",
+                "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.shell\\.overrides.id",
                     "display.screenEnhancement.applications.org\\.gnome\\.shell\\.overrides.name"
@@ -441,7 +441,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.orca.set",
+                "type": "gpii.orca",
                 "options": {
                     "user": "${{userToken}}"
                 },
@@ -1256,7 +1256,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.alsa.set",
+                "type": "gpii.alsa",
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
                 ],
@@ -1398,7 +1398,7 @@
         },
         "settingsHandlers": [
            {
-                "type": "gpii.xrandr.set",
+                "type": "gpii.xrandr",
                 "capabilities": [
                     "display.screenEnhacements",
                     "applications.org\\.freedesktop\\.xrandr.id"
