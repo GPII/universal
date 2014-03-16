@@ -291,7 +291,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidAudioManager.setVolume",
+                "type": "gpii.androidAudioManager.volume",
                 "capabilities": [
                     "applications.com\\.android\\.audioManager.id"
                 ],
