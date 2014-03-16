@@ -1,5 +1,5 @@
 {
-    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.lifecycleManagerServer.multipleMatchMakers",
+    "typeName": "Pilots2.configuration.multipleMatchMakers.remotePrefs",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
@@ -18,7 +18,6 @@
         "../node_modules/matchMaker/configs/proxy.json",
         "../node_modules/ontologyServer/configs/development.json",
         "../node_modules/lifecycleManager/configs/development.json",
-        "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
     ]
 }
