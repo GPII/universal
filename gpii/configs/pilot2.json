@@ -15,7 +15,7 @@
     "includes": [
         "../node_modules/deviceReporter/configs/development.json",
         "../node_modules/flowManager/configs/pilot2.json",
-        "../node_modules/matchMaker/configs/proxy.json",
+        "../node_modules/matchMaker/configs/pilot2.json",
         "../node_modules/ontologyServer/configs/development.json",
         "../node_modules/lifecycleManager/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
