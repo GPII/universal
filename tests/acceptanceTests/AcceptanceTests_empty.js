@@ -22,7 +22,7 @@ fluid.require("./AcceptanceTests_include", require);
 
 var testDefs = [
     {
-        name: "Acceptance test for background color change in chrome",
+        name: "Acceptance test for empty preferences set",
         token: "empty",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {}
