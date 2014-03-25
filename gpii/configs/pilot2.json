@@ -1,0 +1,23 @@
+{
+    "typeName": "Pilots2.configuration.multipleMatchMakers.remotePrefs",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/flowManager/configs/pilot2.json",
+        "../node_modules/matchMaker/configs/pilot2.json",
+        "../node_modules/ontologyServer/configs/development.json",
+        "../node_modules/lifecycleManager/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json"
+    ]
+}
