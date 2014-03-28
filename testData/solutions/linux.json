@@ -438,10 +438,12 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "gpii.packageKit": {
-                "name": "orca",
-                "version": ">=3.4"
-            }
+            "gpii.packageKit": [
+                {
+                    "name": "orca",
+                    "version": ">=3.4"
+                }
+            ]
         },
         "settingsHandlers": [
             {
@@ -1257,10 +1259,16 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "gpii.packageKit": {
-                "name": "alsa",
-                "version": ">=1"
-            }
+            "gpii.packageKit": [
+                {
+                    "name": "alsa",
+                    "version": ">=1"
+                },
+                {
+                    "name": "alsa-lib",
+                    "version": ">=1"
+                }
+            ]
         },
         "settingsHandlers": [
             {
