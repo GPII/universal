@@ -329,7 +329,9 @@
                             "transform": {
                                 "type": "binaryOp",
                                 "leftPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                                "left": false,
                                 "rightPath": "display.screenReader.-provisional-screenReaderBrailleOutput",
+                                "right": false,
                                 "operator": "||"
                             }
                         },
