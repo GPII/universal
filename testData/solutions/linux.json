@@ -507,6 +507,27 @@
                                     }
                                 }
                             },
+                            "verbalizePunctuationStyle": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                                    "defaultInputValue": "most",
+                                    "options": {
+                                        "none": {
+                                            "outputValue": 3
+                                        },
+                                        "some": {
+                                            "outputValue": 2
+                                        },
+                                        "most": {
+                                            "outputValue": 1
+                                        },
+                                        "all": {
+                                            "outputValue": 0
+                                        }
+                                    }
+                                }
+                            },
                             "voices\\.default\\.rate": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
@@ -1234,27 +1255,6 @@
                                                 }
                                             }
                                         }
-                                    }
-                                }
-                            }
-                        },
-                        "verbalizePunctuationStyle": {
-                            "transform": {
-                                "type": "fluid.transforms.valueMapper",
-                                "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
-                                "defaultInputValue": "most",
-                                "options": {
-                                    "none": {
-                                        "outputValue": 3
-                                    },
-                                    "some": {
-                                        "outputValue": 2
-                                    },
-                                    "most": {
-                                        "outputValue": 1
-                                    },
-                                    "all": {
-                                        "outputValue": 0
                                     }
                                 }
                             }
