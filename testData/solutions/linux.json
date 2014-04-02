@@ -1301,7 +1301,7 @@
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
                 ],
-                "capabilitiesTrasformations": {
+                "capabilitiesTransformations": {
                     "masterVolume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
