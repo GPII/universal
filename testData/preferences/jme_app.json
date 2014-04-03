@@ -5,7 +5,7 @@
             "fontSize": "veryLarge",
             "language": "English",
             "volume": 50,
-            "vibrationMode": 2
+            "hapticFeedback": 2
         }
     }]
 }
