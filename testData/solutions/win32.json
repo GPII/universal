@@ -140,7 +140,8 @@
                 },
                 "capabilities": [
                     "applications.com\\.microsoft\\.windows\\.magnifier.id",
-                    "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
+                    "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name",
+                    "display.screenEnhancement.-provisional-magnifierEnabled"
                 ],
                 "capabilitiesTransformations": {
                     "transform": {
