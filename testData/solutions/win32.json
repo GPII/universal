@@ -366,26 +366,36 @@
                             }
                         },
                         {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
-                            "defaultInputValue": "false",
-                            "options": {
-                                "false": {
-                                    "outputValue": {
-                                        "transform": [
-                                            {
-                                                "type": "fluid.transforms.literalValue",
-                                                "value": "silence",
-                                                "outputPath": "speech\\.synth"
-                                            },
-                                            {
-                                                "type": "fluid.transforms.literalValue",
-                                                "value": "Microsoft Sound Mapper",
-                                                "outputPath": "speech\\.outputDevice"
-                                            }
-                                        ]
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "condition": false,
+                            "false": {
+                                "transform": [
+                                    {
+                                        "type": "fluid.transforms.literalValue",
+                                        "value": "silence",
+                                        "outputPath": "speech\\.synth"
+                                    },
+                                    {
+                                        "type": "fluid.transforms.literalValue",
+                                        "value": "Microsoft Sound Mapper",
+                                        "outputPath": "speech\\.outputDevice"
                                     }
-                                }
+                                ]
+                            },
+                            "true": {
+                                "transform": [
+                                    {
+                                        "type": "fluid.transforms.literalValue",
+                                        "value": "espeak",
+                                        "outputPath": "speech\\.synth"
+                                    },
+                                    {
+                                        "type": "fluid.transforms.literalValue",
+                                        "value": "Microsoft Sound Mapper",
+                                        "outputPath": "speech\\.outputDevice"
+                                    }
+                                ]
                             }
                         }
                     ],
