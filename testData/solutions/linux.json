@@ -35,7 +35,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
+                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de/#/?token=${{userToken}}"
                 }
             ],
             "stop": [
