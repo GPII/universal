@@ -8,7 +8,8 @@ fluid.require("lifecycleManager", require);
 fluid.require("lifecycleActions", require);
 fluid.require("flowManager", require);
 fluid.require("settingsHandlers", require);
-fluid.require("preferencesServer", require);
-fluid.require("ontologyServer", require);
+fluid.require("rawPreferencesServer", require);
+fluid.require("ontologyHandler", require);
+fluid.require("preferencesFramework", require);
 
 module.exports = fluid;
