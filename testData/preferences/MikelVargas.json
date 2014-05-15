@@ -1,12 +1,14 @@
 {
-    "http://registry.gpii.org/common/onscreenKeyboard": [{ "value": true }],
-    "http://registry.gpii.org/common/-provisional-initDelay": [{ "value": 0.120 }],
-    "http://registry.gpii.org/common/cursorSpeed": [{ "value": 0.850 }],
-    "http://registry.gpii.org/common/cursorAcceleration": [{ "value": 0.800 }],
-    "http://registry.gpii.org/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
-    "http://registry.gpii.org/common/stickyKeys": [{ "value": true }],
-    "http://registry.gpii.org/common/-provisional-slowKeysEnable": [{ "value": true }],
-    "http://registry.gpii.org/common/slowKeysInterval": [{ "value": 0.4 }],
-    "http://registry.gpii.org/common/-provisional-debounceEnable": [{ "value": true }],
-    "http://registry.gpii.org/common/debounceInterval": [{ "value": 0.20 }]
+    "flat": {
+        "http://registry.gpii.org/common/onscreenKeyboard": [{ "value": true }],
+        "http://registry.gpii.org/common/-provisional-initDelay": [{ "value": 0.120 }],
+        "http://registry.gpii.org/common/cursorSpeed": [{ "value": 0.850 }],
+        "http://registry.gpii.org/common/cursorAcceleration": [{ "value": 0.800 }],
+        "http://registry.gpii.org/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
+        "http://registry.gpii.org/common/stickyKeys": [{ "value": true }],
+        "http://registry.gpii.org/common/-provisional-slowKeysEnable": [{ "value": true }],
+        "http://registry.gpii.org/common/slowKeysInterval": [{ "value": 0.4 }],
+        "http://registry.gpii.org/common/-provisional-debounceEnable": [{ "value": true }],
+        "http://registry.gpii.org/common/debounceInterval": [{ "value": 0.20 }]
+    }
 }

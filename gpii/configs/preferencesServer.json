@@ -14,6 +14,6 @@
     },
     "includes": [
         "../node_modules/preferencesServer/configs/development.json",
-        "../node_modules/ontologyServer/configs/devMode.json"
+        "../node_modules/ontologyServer/configs/development.json"
     ]
 }

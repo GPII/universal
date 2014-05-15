@@ -39,7 +39,7 @@ var testDefs = [{
     name: "Flow Manager development tests.",
     expect: 2,
     config: {
-        nodeEnv: "fm.ps.sr.dr.mm.os.lms.development",
+        nodeEnv: "development.all.local",
         configPath: configPath
     },
     components: {
