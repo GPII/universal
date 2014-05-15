@@ -1,6 +1,8 @@
 {
-    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
-    "http://registry.gpii.org/common/highContrastTheme": [{ "value": "yellow-black" }],
-    "http://registry.gpii.org/common/volume": [{ "value": 0.25 }],
-    "http://registry.gpii.org/common/language": [{ "value": "es" }]
+    "flat": {
+        "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
+        "http://registry.gpii.org/common/highContrastTheme": [{ "value": "yellow-black" }],
+        "http://registry.gpii.org/common/volume": [{ "value": 0.25 }],
+        "http://registry.gpii.org/common/language": [{ "value": "es" }]
+    }
 }
