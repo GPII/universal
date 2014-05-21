@@ -78,15 +78,15 @@
                 "capabilitiesTransformations": {
                     "mag-factor": "display.screenEnhancement.magnification",
                     "show-cross-hairs": "display.screenEnhancement.-provisional-showCrosshairs",
-                    "mouse-tracking": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenEnhancement.tracking",
-                            "options": {
-                                "mouse": {
-                                    "outputValue": "centered"
-                                }
-                            }
+                    "transform": {
+                        "type": "fluid.transforms.arrayToSetMembership",
+                        "inputPath": "display.screenEnhancement.tracking",
+                        "presentValue": "proportional",
+                        "missingValue": "none",
+                        "options": {
+                            "focus": "focus-tracking",
+                            "caret": "caret-tracking",
+                            "mouse": "mouse-tracking"
                         }
                     },
                     "screen-position": {
