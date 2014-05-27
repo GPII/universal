@@ -1,5 +1,5 @@
 {
     "http://registry.gpii.org/common/highContrastEnabled": [{ "value": true }],
     "http://registry.gpii.org/common/highContrastTheme": [{ "value": "yellow-black" }],
-    "http://registry.gpii.org/common/selfVoicingEnabled": [{ "value": false }]
+    "http://registry.gpii.org/common/screenReaderTTSEnabled": [{ "value": false }]
 }
