@@ -36,14 +36,6 @@
     },
 
     {
-        "id": "org.gnome.desktop.interface"
-    },
-
-    {
-        "id": "org.gnome.nautilus"
-    },
-
-    {
         "id": "com.microsoft.windows.highContrast"
     },
 
