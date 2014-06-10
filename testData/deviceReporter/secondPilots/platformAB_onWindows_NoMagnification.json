@@ -56,31 +56,7 @@
     },
 
     {
-        "id": "com.android.activitymanager"
-    },
-
-    {
-        "id": "com.android.talkback"
-    },
-
-    {
-        "id": "com.android.freespeech"
-    },
-
-    {
         "id": "org.chrome.cloud4chrome"
-    },
-
-    {
-        "id": "com.android.settings.secure"
-    },
-
-    {
-        "id": "com.android.audioManager"
-    },
-
-    {
-        "id": "com.android.persistentConfiguration"
     },
 
     {
@@ -89,10 +65,6 @@
 
     {
         "id": "org.freedesktop.xrandr"
-    },
-
-    {
-        "id": "com.android.settings.system"
     }
 
 ]
