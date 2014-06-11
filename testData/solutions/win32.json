@@ -24,7 +24,40 @@
                     "fontSize": "display.screenEnhancement.fontSize",
                     "language": "language",
                     "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
-                    "volume": "-provisional-general.-provisional-volume"
+                    "volume": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "-provisional-general.-provisional-volume",
+                                    "operator": "<",
+                                    "right": 0
+                                }
+                            },
+                            "true": 0,
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "condition": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "-provisional-general.-provisional-volume",
+                                            "operator": ">",
+                                            "right": 100
+                                        }
+                                    },
+                                    "true": 100,
+                                    "false": {
+                                        "transform": {
+                                            "type": "fluid.transforms.round",
+                                            "inputPath": "-provisional-general.-provisional-volume"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         ],
