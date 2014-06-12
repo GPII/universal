@@ -1,0 +1,14 @@
+[
+    {
+        "id": "webinsight.webAnywhere.linux"
+    },
+    {
+        "id": "webinsight.webAnywhere.windows"
+    },
+    {
+        "id": "org.chrome.cloud4chrome"
+    },
+    {
+        "id": "com.serotek.satogo"
+    }
+]

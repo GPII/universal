@@ -1,0 +1,67 @@
+{
+    "http://registry.gpii.org/common/matchMakerType": [
+        {
+            "value": "ruleBased"
+        }
+    ],
+    "http://registry.gpii.org/common/magnifierPosition": [
+        {
+            "value": "Lens"
+        }
+    ],
+    "http://registry.gpii.org/common/magnification": [
+        {
+            "value": 1.5
+        }
+    ],
+    "http://registry.gpii.org/common/speechRate": [
+        {
+            "value": 200
+        }
+    ],
+    "http://registry.gpii.org/common/screenReaderTTSEnabled": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/speakTutorialMessages": [
+        {
+            "value": false
+        }
+    ],
+    "http://registry.gpii.org/common/keyEcho": [
+        {
+            "value": false
+        }
+    ],
+    "http://registry.gpii.org/common/wordEcho": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/common/announceCapitals": [
+        {
+            "value": true
+        }
+    ],
+    "http://registry.gpii.org/applications/org.nvda-project": [
+        {
+            "value": {
+                "speech.synth": "espeak",
+                "speech.outputDevice": "Microsoft Sound Mapper",
+                "keyboard.speakTypedWords": true,
+                "keyboard.speakTypedCharacters": false,
+                "presentation.reportHelpBalloons": false,
+                "speech.espeak.sayCapForCapitals": false
+            }
+        }
+    ],
+    "http://registry.gpii.org/applications/se.omnitor.ecmobile": [
+        {
+            "value": {
+                "map.string.theme.$t": "yellow-black",
+                "map.string.fontsize.$t": 50
+            }
+        }
+    ]
+}
