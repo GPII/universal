@@ -9,6 +9,20 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
+                }
             ]
         },
 
@@ -56,7 +70,13 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ]
+            ],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
+            ]            
         },
         "settingsHandlers": [
             {
@@ -141,6 +161,12 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
+                }
+            ],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-themes-standard"
                 }
             ]
         },
@@ -244,7 +270,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "nautilus"
+                }
+            ]              
         },
 
         "settingsHandlers": [
@@ -276,7 +308,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "caribou"
+                }
+            ]              
         },
         "settingsHandlers": [
             {
@@ -311,7 +349,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "control-center"
+                }
+            ]
         },
         "settingsHandlers": [ {
                 "type": "gpii.gsettings.set",
@@ -379,7 +423,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
+            ]
         },
 
         "settingsHandlers": [
@@ -1302,6 +1352,20 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1338,6 +1402,20 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
+                }
+            ],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
                 }
             ]
         },
@@ -1376,6 +1454,20 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1410,7 +1502,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "libXrandr"
+                }
+            ]
         },
         "settingsHandlers": [
            {
