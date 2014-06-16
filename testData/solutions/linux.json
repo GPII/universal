@@ -76,7 +76,7 @@
                     "type": "gpii.packageKit.find",
                     "name": "gnome-shell"
                 }
-            ]            
+            ]
         },
         "settingsHandlers": [
             {
@@ -166,7 +166,7 @@
             "deviceReporters": [
                 {
                     "type": "gpii.packageKit.find",
-                    "name": "gnome-themes-standard"
+                    "name": "gsettings-desktop-schemas"
                 }
             ]
         },
@@ -276,7 +276,7 @@
                     "type": "gpii.packageKit.find",
                     "name": "nautilus"
                 }
-            ]              
+            ]
         },
 
         "settingsHandlers": [
@@ -312,9 +312,9 @@
             "deviceReporters": [
                 {
                     "type": "gpii.packageKit.find",
-                    "name": "caribou"
+                    "name": "gsettings-desktop-schemas"
                 }
-            ]              
+            ]
         },
         "settingsHandlers": [
             {
@@ -353,7 +353,7 @@
             "deviceReporters": [
                 {
                     "type": "gpii.packageKit.find",
-                    "name": "control-center"
+                    "name": "gsettings-desktop-schemas"
                 }
             ]
         },
