@@ -312,9 +312,9 @@
             "deviceReporters": [
                 {
                     "type": "gpii.packageKit.find",
-                    "name": "gsettings-desktop-schemas"
+                    "name": "gnome-shell"
                 }
-            ]
+            ]3
         },
         "settingsHandlers": [
             {
@@ -458,7 +458,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "deviceReporters": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
+            ]
         },
 
         "settingsHandlers": [
