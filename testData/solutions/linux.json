@@ -314,7 +314,7 @@
                     "type": "gpii.packageKit.find",
                     "name": "gnome-shell"
                 }
-            ]3
+            ]
         },
         "settingsHandlers": [
             {
