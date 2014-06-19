@@ -3,10 +3,12 @@ AcceptanceTests_chrome.js
 Description:
 This is an series of tests using the online flowmanager. 
 
-Three N&P sets have been created in order to test the different transformations between the common terms and the clouc4all specific settings:
-* chrome_font_size tests the transformation from a numeric value in the common terms to an enumeration value ("medium", "large", "x-large")
-* chrome_magnification tests the transformation from a double value (1.2) to an integer (1, 2 or 3)
+Five N&P sets have been created in order to test the different transformations between the common terms and the clouc4all specific settings:
+* chrome_font_size tests the transformation from a numeric value in the common terms to an enumeration value ("normal", "large", "x-large")
+* chrome_magnification tests that the magnification value is now not transformed, and double values are accepted
 * chrome_high_contrast tests if the high contrast themes are correctly set.
+* chrome_low_vision tests that high contrast theme, cursor size, magnification and font size are properly transformed
+* chrome_osk tests that the value of the on screen keyboard is transmitted
 
 Requirements:
 Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode.

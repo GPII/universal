@@ -21,11 +21,10 @@
                         "transform":{
                             "type":"gpii.transformer.quantize",
                             "inputPath":"display.screenEnhancement.fontSize",
-                            "input":9,
                             "ranges":[
                                 {
                                     "upperBound":12,
-                                    "output":"medium"
+                                    "output":"normal"
                                 },
                                 {
                                     "upperBound":18,
@@ -38,29 +37,31 @@
                         }
                     },
                     "magnifierEnabled":"display.screenEnhancement.-provisional-magnifierEnabled",
-                    "magnification": {
+                    "magnification":"display.screenEnhancement.magnification",
+                    "cursorSize": {
                         "transform": {
                             "type":"gpii.transformer.quantize",
-                            "inputPath":"display.screenEnhancement.magnification",
-                            "input":1,
+                            "inputPath":"display.screenEnhancement.cursorSize",
                             "ranges":[
                                 {
-                                    "upperBound":1.2,
-                                    "output":1
+                                    "upperBound":0.3,
+                                    "output":"normal"
                                 },
                                 {
-                                    "upperBound":2.5,
-                                    "output":2
+                                    "upperBound":0.6,
+                                    "output":"large"
                                 },
                                 {
-                                    "output":3
+                                    "output":"x-large"
                                 }
                             ]
                         }
                     },
                     "highContrastEnabled":"display.screenEnhancement.-provisional-highContrastEnabled",
                     "highContrastTheme":"display.screenEnhancement.-provisional-highContrastTheme",
-                    "invertColours":"display.screenEnhancement.-provisional-invertColours"
+                    "invertColours":"display.screenEnhancement.-provisional-invertColours",
+                    "onScreenKeyboardEnabled":"control.onscreenKeyboard",
+                    "fontFace":"display.screenEnhancement.fontFaceFontName"
                 }
             }
         ]

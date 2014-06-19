@@ -28,7 +28,7 @@ var testDefs = [
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
             "org.chrome.cloud4chrome": {
-                "fontSize": "medium",
+                "fontSize": "normal",
                 "invertColours": false,
                 "magnifierEnabled": false,
                 "magnification": 1,
@@ -59,15 +59,42 @@ var testDefs = [
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
             "org.chrome.cloud4chrome": {
-                "fontSize": "medium",
+                "fontSize": "normal",
                 "invertColours": false,
                 "magnifierEnabled": true,
-                "magnification": 2,
+                "magnification": 1.5,
                 "highContrastEnabled":false,
                 "screenReaderTTSEnabled":false
             }
         }
+    },
+    {
+        name: "Acceptance test for user with low vision in chrome",
+        token: "chrome_low_vision",
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        expected: {
+            "org.chrome.cloud4chrome": {
+                "fontSize": "x-large",
+                "cursorSize": "x-large",
+                "invertColours": false,
+                "magnifierEnabled": true,
+                "magnification": 2,
+                "highContrastEnabled":true,
+                "highContrastTheme":"yellow-black"
+            }
+        }
+    },
+    {
+        name: "Acceptance test for on screen keyboard",
+        token: "chrome_osk",
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        expected: {
+            "org.chrome.cloud4chrome": {
+                "onScreenKeyboardEnabled": true
+            }
+        }
     }
+
 ];
 
 testDefs = gpii.acceptanceTesting.flowManager.runTests(testDefs);
