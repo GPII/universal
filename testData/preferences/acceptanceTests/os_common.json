@@ -1,4 +1,5 @@
 {
+    "http://registry.gpii.org/common/magnifierEnabled": [{ "value": true }],
     "http://registry.gpii.org/common/magnifierPosition": [{ "value": "Lens" }],
     "http://registry.gpii.org/common/magnification": [{ "value": 1.5 }],
     "http://registry.gpii.org/common/tracking": [{ "value": [ "mouse", "caret" ] }],
