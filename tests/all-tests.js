@@ -12,7 +12,7 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global require*/
+"use strict";
 
 var fluid = require("infusion"),
     kettle = fluid.require("kettle", require);

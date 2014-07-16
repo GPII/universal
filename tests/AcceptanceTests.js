@@ -12,13 +12,11 @@
  *
  */
 
-/*global require, __dirname*/
+"use strict";
 
 var fluid = require("infusion"),
-    path = require("path"),
     jqUnit = fluid.require("jqUnit"),
     $ = fluid.registerNamespace("jQuery"),
-    kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii"),
     child_process = require("child_process");
 
@@ -238,7 +236,7 @@ gpii.acceptanceTesting.FMRequestListenerMaker = function (expected) {
     return function (data) {
         jqUnit.assertDeepEq("Checking the returned data from the flowmanager: ",
             JSON.parse(data), expected);
-    }
+    };
 };
 
 gpii.acceptanceTesting.buildFlowManagerTestFixture = function (testDef) {
