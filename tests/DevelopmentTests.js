@@ -21,7 +21,7 @@ var fluid = require("infusion"),
 
 fluid.require("kettle/test/utils/js/KettleTestUtils", require);
 
-var dev = fluid.registerNamespace("kettle.tests.development");
+var dev = fluid.registerNamespace("gpii.tests.development");
 
 dev.token = "testUser1";
 
@@ -72,12 +72,12 @@ var testDefs = [{
         func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
-        listener: "kettle.tests.development.testLoginResponse"
+        listener: "gpii.tests.development.testLoginResponse"
     }, {
         func: "{logoutRequest}.send"
     }, {
         event: "{logoutRequest}.events.onComplete",
-        listener: "kettle.tests.development.testLogoutResponse"
+        listener: "gpii.tests.development.testLogoutResponse"
     }]
 }];
 
