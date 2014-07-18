@@ -1,0 +1,11 @@
+AcceptanceTests_firefox.js
+
+Description:
+This is an series of tests using the online flowmanager. 
+
+Two N&P sets have been created in order to test the different transformations between the common terms and the cloud4firefox specific settings:
+* firefox_high_contrast_theme tests the transformation from a high contrast theme to specific values of background and foreground colors
+* firefox_mag_font_size tests that the magnification value is now not transformed, and that the font size values are transformed from pt values into an enum ["M", "L", "XL"]
+
+Requirements:
+Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode.

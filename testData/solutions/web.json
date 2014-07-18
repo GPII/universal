@@ -67,6 +67,75 @@
         ]
     },
     {
+        "name": "Cloud4Firefox",
+        "id": "org.mozilla.cloud4firefox",
+        "contexts": {
+            "OS": [
+                {
+                    "id":"web"    
+                }
+            ]
+        },
+         "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.org\\.mozilla\\.cloud4firefox.id"
+                ],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled":"display.screenReader.-provisional-screenReaderTTSEnabled",
+                    "magnifierEnabled": "display.screenEnhancement.-provisional-magnifierEnabled",
+                    "magnification": "display.screenEnhancement.magnification",
+                    "fontSize": {
+                        "transform":{
+                            "type":"gpii.transformer.quantize",
+                            "inputPath":"display.screenEnhancement.fontSize",
+                            "ranges":[
+                                {
+                                    "upperBound":14,
+                                    "output":"M"
+                                },
+                                {
+                                    "upperBound":24,
+                                    "output":"L"
+                                },
+                                {
+                                    "output":"XL"
+                                }
+                            ]
+                        }
+                    },
+                    "backgroundColour": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "options": {
+                                "white-black": "#000000",
+                                "black-white": "#FFFFFF",
+                                "yellow-black": "#000000",
+                                "black-yellow": "#FFFF00"
+                            }
+                        }
+                    },
+                    "foregroundColour": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "options": {
+                                "white-black": "#FFFFFF",
+                                "black-white": "#000000",
+                                "yellow-black": "#FFFF00",
+                                "black-yellow": "#000000"
+                            }
+                        }
+                    },
+                    "invertColours": "display.screenEnhancement.-provisional-invertColours",
+                    "tracking":"display.screenEnhancement.tracking"
+                }
+            }
+        ]
+    },
+    {
         "name": "JME Cloud4all Themes",
         "id": "info.cloud4all.JME",
         "contexts": {
