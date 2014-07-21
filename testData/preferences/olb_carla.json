@@ -10,8 +10,6 @@
             "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
         }
     }],
-    "http://registry.gpii.org/applications/fluid.uiOptions.windows": [{ "value": {}}],
-    "http://registry.gpii.org/applications/fluid.uiOptions.linux": [{ "value": {}}],
     "http://registry.gpii.org/applications/fluid.uiOptions": [{ 
         "value": {
             "lineSpacing": "2",
@@ -22,6 +20,10 @@
             "volume": "50"
         }
     }],
+    "http://registry.gpii.org/applications/eu.gpii.olb/lineSpacing": "2",
+    "http://registry.gpii.org/applications/eu.gpii.olb/links": true,
+    "http://registry.gpii.org/applications/eu.gpii.olb/inputsLarger": true,
+    "http://registry.gpii.org/applications/eu.gpii.olb/captions": false,
     "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
         "value": {
             "show-cross-hairs": true,
