@@ -1218,5 +1218,41 @@
                 "restoreSettings"
             ]
         }
+    },
+    {
+        "name": "Online Banking Demonstrator",
+        "id": "eu.gpii.olb",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.eu\\.gpii\\.olb.id",
+                    
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://gpii.eu/olb/"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                }
+            ]
+        },
     }
 ]
