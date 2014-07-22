@@ -1,0 +1,6 @@
+{
+    "http://registry.gpii.org/applications/eu.gpii.olb/signLanguageEnabled": true,
+    "http://registry.gpii.org/applications/eu.gpii.olb/signLanguage": "ase",
+    "http://registry.gpii.org/applications/eu.gpii.olb/interpreterType": "avatar",
+    "http://registry.gpii.org/applications/eu.gpii.olb/textStyle": "verdana"
+}
