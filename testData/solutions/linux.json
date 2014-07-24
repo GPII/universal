@@ -155,7 +155,7 @@
                     "text-scaling-factor": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "leftPath": "display.screenEnhancement.fontSize",
+                            "inputPath": "display.screenEnhancement.fontSize",
                             "factor": 0.08333333333333333
                         }
                     },
