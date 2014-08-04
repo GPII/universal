@@ -106,7 +106,7 @@ gpii.acceptanceTesting.checkConfiguration = function (settingsHandlers) {
     var config = gpii.acceptanceTesting.getSettings(settingsHandlers);
     var noOptions = gpii.acceptanceTesting.removeOptionsBlocks(
         settingsHandlers);
-    jqUnit.assertDeepEq("Checking that settings are set", config, noOptions);
+    jqUnit.assertDeepEq("Checking that settings are set", noOptions, config);
 };
 
 gpii.acceptanceTesting.onExecExit = function (result, processSpec) {

@@ -6,7 +6,7 @@
     "bugs": "http://wiki.gpii.net/index.php/Main_Page",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "git://github.com/fluid-project/infusion.git#6c8ea3098c80bf4297ae773cda144c4e58939017",
+        "infusion": "git://github.com/amb26/infusion.git#aaaf47c904021bcc551068f8dff9a8c6df3d3b5b",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
@@ -19,7 +19,8 @@
         "grunt": "~0.4.4",
         "grunt-shell": "0.6.4",
         "grunt-contrib-jshint": "~0.9.0",
-        "grunt-gpii": "git://github.com/gpii/grunt-gpii.git#27e5fc40bc36765d28f77d40fed83ead7e197edd"
+        "grunt-jsonlint": "1.0.4",
+        "grunt-gpii": "git://github.com/amb26/grunt-gpii.git#1030d2b8e116ce8d0a77dbd1af5759c7db27ad34"
     },
     "licenses": [
         {
