@@ -44,14 +44,20 @@
                                             "type": "fluid.transforms.binaryOp",
                                             "leftPath": "-provisional-general.-provisional-volume",
                                             "operator": ">",
-                                            "right": 100
+                                            "right": 1
                                         }
                                     },
                                     "true": 100,
                                     "false": {
                                         "transform": {
                                             "type": "fluid.transforms.round",
-                                            "inputPath": "-provisional-general.-provisional-volume"
+                                            "input": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.linearScale",
+                                                    "valuePath": "-provisional-general.-provisional-volume",
+                                                    "factor": 100
+                                                }
+                                            }
                                         }
                                     }
                                 }
