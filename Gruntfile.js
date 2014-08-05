@@ -31,15 +31,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-jsonlint");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-gpii");
-    
-    var gpiiGrunt = grunt.config.getRaw("gpiiGruntGlobal");
-    
-    grunt.registerTask("test-shell-immediate", "Test immediate shell", function () {
-        gpiiGrunt.shellImmediate({
-            name: "test-shell-immediate",
-            command: "test shell immediate"
-        });
-        console.log(JSON.stringify(gpiiGrunt.packageFile));
-    });
 
 };
