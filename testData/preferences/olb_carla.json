@@ -1,8 +1,9 @@
 {
-
+    "http://registry.gpii.org/applications/eu.gpii.olb/textSize": "2",
     "http://registry.gpii.org/applications/eu.gpii.olb/lineSpacing": "2",
     "http://registry.gpii.org/applications/eu.gpii.olb/links": true,
     "http://registry.gpii.org/applications/eu.gpii.olb/inputsLarger": true,
+    "http://registry.gpii.org/applications/eu.gpii.olb/contrastTheme": "wb",
     "http://registry.gpii.org/applications/eu.gpii.olb/toc": false,
     "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
         "value": {
