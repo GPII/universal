@@ -2,5 +2,6 @@
     "http://registry.gpii.org/applications/eu.gpii.olb/signLanguageEnabled": true,
     "http://registry.gpii.org/applications/eu.gpii.olb/signLanguage": "gsg",
     "http://registry.gpii.org/applications/eu.gpii.olb/interpreterType": "human",
-    "http://registry.gpii.org/applications/eu.gpii.olb/interpreterName": "default"
+    "http://registry.gpii.org/applications/eu.gpii.olb/interpreterName": "default",
+    "http://registry.gpii.org/common/-provisional-general.-provisional-language": "de-DE"
 }
