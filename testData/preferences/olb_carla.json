@@ -47,6 +47,7 @@
             }
         }
     }],
+    "http://registry.gpii.org/common/-provisional-general.-provisional-language": [{ "value": "en-GB" }],
     "http://registry.gpii.org/common/display.screenEnhancement.fontSize": [{ "value": 24 }],
     "http://registry.gpii.org/common/display.screenEnhancement.magnification": [{ "value": 2.0 }],
     "http://registry.gpii.org/common/display.screenEnhancement.tracking": [{ "value": "mouse" }]
