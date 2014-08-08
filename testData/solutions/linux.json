@@ -1448,7 +1448,7 @@
                     "command": "pkill -2 chrome"
                 }
             ]
-        },
+        }
     }
     
 ]
