@@ -1253,6 +1253,6 @@
                     "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
                 }
             ]
-        },
+        }
     }
 ]
