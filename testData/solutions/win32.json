@@ -1233,8 +1233,7 @@
             {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.eu\\.gpii\\.olb.id",
-                    
+                    "applications.eu\\.gpii\\.olb.id"
                 ],
                 "capabilitiesTransformations": {
                 }
