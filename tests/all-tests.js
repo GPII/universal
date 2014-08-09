@@ -28,6 +28,7 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetTokenTests.js",
     "../gpii/node_modules/matchMaker/test/ProxyTests.js",
+    "../gpii/node_modules/matchMaker/test/InverseCapabilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
