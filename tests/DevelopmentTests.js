@@ -10,11 +10,10 @@
  * https://github.com/GPII/kettle/LICENSE.txt
  */
 
-/*global require, __dirname*/
+"use strict";
 
 var fluid = require("infusion"),
     path = require("path"),
-    flowManager = fluid.require("../gpii/node_modules/flowManager", require);
     jqUnit = fluid.require("jqUnit"),
     configPath = path.resolve(__dirname, "../gpii/configs"),
     kettle = fluid.registerNamespace("kettle");
