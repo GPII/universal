@@ -20,7 +20,7 @@
         "grunt-shell": "0.6.4",
         "grunt-contrib-jshint": "~0.9.0",
         "grunt-jsonlint": "1.0.4",
-        "grunt-gpii": "git://github.com/amb26/grunt-gpii.git#a1ec3cba74de0a481a921be2985f7bb443364bfb"
+        "grunt-gpii": "git://github.com/GPII/grunt-gpii.git#a4aca06cbaf7523eb1af56ed65ce6bd30b8ec325"
     },
     "licenses": [
         {
