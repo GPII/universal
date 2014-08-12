@@ -1,0 +1,6 @@
+empty.json
+================
+
+Empty NP set, used by acceptance tests to check whether the system crashes when logging in. This is
+done by ensuring that we still get the expected login/logout messages and that no errors
+are thrown.
