@@ -23,9 +23,7 @@
 
     "maxerr": 1000,
 
-    "browser": true,
-    "jquery": true,
-    "worker": true,
+    "node": true,
 
     "globals": {
         "fluid_1_5": true

@@ -1,3 +1,0 @@
-The os_common.json file is used by one of the universal unit tests - it also has an identical twin (copy) in the preferences/acceptanceTests folder, where it's being used by acceptance tests.
-
-We are in the process of cleaning up the preferences folder, and this file should be considered moved to a different folder, eg. "unitTests" subfolder of preferences.

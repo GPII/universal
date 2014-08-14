@@ -49,7 +49,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de?token=${{userToken}}"
+                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de/#/?token=${{userToken}}"
                 }
             ],
             "stop": [
@@ -180,53 +180,29 @@
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "display.screenEnhancement.fontSize",
-                            "operator": "/",
-                            "right": 12
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "display.screenEnhancement.fontSize",
+                            "factor": 0.08333333333333333
                         }
                     },
                     "cursor-size": {
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": ">",
-                                    "right": 0.666
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.screenEnhancement.cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0,
+                                    "output": -1
+                                }, {
+                                    "upperBound": 0.333,
+                                    "output": 20
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": 29
+                                }, {
+                                    "output": 41
                                 }
-                            },
-                            "true": 41,
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": ">",
-                                            "right": 0.333
-                                        }
-                                    },
-                                    "true": 29,
-                                    "false": {
-                                        "transform": {
-                                            "type": "fluid.transforms.condition",
-                                            "condition": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                                    "operator": ">",
-                                                    "right": 0
-                                                }
-                                            },
-                                            "true": 20,
-                                            "false": -1
-                                        }
-                                    }
-                                }
-                            }
+                            ]
                         }
                     },
                     "gtk-theme": {
@@ -1332,7 +1308,7 @@
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
                 ],
-                "capabilitiesTrasformations": {
+                "capabilitiesTransformations": {
                     "masterVolume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
