@@ -1,0 +1,9 @@
+{
+    "http://registry.gpii.org/applications/eu.gpii.olb/textSize": [{ "value": "2" }],
+    "http://registry.gpii.org/applications/eu.gpii.olb/lineSpacing": [{ "value": "2" }],
+    "http://registry.gpii.org/applications/eu.gpii.olb/links": [{ "value": true }],
+    "http://registry.gpii.org/applications/eu.gpii.olb/inputsLarger": [{ "value": true }],
+    "http://registry.gpii.org/applications/eu.gpii.olb/contrastTheme": [{ "value": "wb" }],
+    "http://registry.gpii.org/applications/eu.gpii.olb/toc": [{ "value": false }],
+    "http://registry.gpii.org/common/language": [{ "value": "en-GB" }]
+}
