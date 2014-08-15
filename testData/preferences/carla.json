@@ -22,34 +22,13 @@
     }],
     "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{
         "value": {
-            "Magnification": {
-                "value": 200,
-                "dataType": "REG_DWORD"
-            },
-            "ZoomIncrement": {
-                "value": 50,
-                "dataType": "REG_DWORD"
-            },
-            "Invert": {
-                "value": 0,
-                "dataType": "REG_DWORD"
-            },
-            "FollowMouse": {
-                "value": 1,
-                "dataType": "REG_DWORD"
-            },
-            "FollowFocus": {
-                "value": 1,
-                "dataType": "REG_DWORD"
-            },
-            "FollowCaret": {
-                "value": 1,
-                "dataType": "REG_DWORD"
-            },
-            "MagnificationModel": {
-                "value": 1,
-                "dataType": "REG_DWORD"
-            }
+            "Magnification": 200,
+            "ZoomIncrement": 50,
+            "Invert": 0,
+            "FollowMouse": 1,
+            "FollowFocus": 1,
+            "FollowCaret": 1,
+            "MagnificationModel": 1
         }
     }],
     "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
