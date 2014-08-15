@@ -1434,6 +1434,7 @@
                     "language"
                 ],
                 "capabilitiesTransformations": {
+                    "language": "language"
                 }
             }
         ],
