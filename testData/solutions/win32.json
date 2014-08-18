@@ -90,7 +90,18 @@
                     "-provisional-general.-provisional-volume"
                 ],
                 "capabilitiesTransformations": {
-                    "fontSize": "display.screenEnhancement.fontSize",
+                    "fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": 1.33
+                                }
+                            }
+                        }
+                    },
                     "language": "language",
                     "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
                     "volume": "-provisional-general.-provisional-volume"

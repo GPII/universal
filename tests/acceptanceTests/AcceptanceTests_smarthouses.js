@@ -27,8 +27,8 @@ var testDefs = [
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
         expected: {
             "net.gpii.smarthouses": {
-                "volume": "100",
-                "fontSize": "40",
+                "volume": 100,
+                "fontSize": 53,
                 "language": "gr",
                 "highContrastTheme": "black-yellow"
             }
@@ -40,8 +40,8 @@ var testDefs = [
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
         expected: {
             "net.gpii.smarthouses": {
-                "volume": "30",
-                "fontSize": "25",
+                "volume": 30,
+                "fontSize": 33,
                 "language": "en",
                 "highContrastTheme": "defaultTheme"
             }
