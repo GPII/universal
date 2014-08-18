@@ -26,29 +26,15 @@
                     "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
                     "volume": {
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "-provisional-general.-provisional-volume",
-                                    "operator": "<",
-                                    "right": 0
-                                }
-                            },
-                            "true": 0,
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "-provisional-general.-provisional-volume",
-                                            "operator": ">",
-                                            "right": 1
-                                        }
-                                    },
-                                    "true": 100,
-                                    "false": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "-provisional-general.-provisional-volume",
+                            "ranges": [
+                                {
+                                    "upperBound": 0,
+                                    "output": 0
+                                }, {
+                                    "upperBound": 1,
+                                    "output": {
                                         "transform": {
                                             "type": "fluid.transforms.round",
                                             "input": {
@@ -60,8 +46,10 @@
                                             }
                                         }
                                     }
+                                }, {
+                                    "output": 100
                                 }
-                            }
+                            ]
                         }
                     }
                 }
