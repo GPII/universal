@@ -27,7 +27,34 @@
                     "fontSize": "display.screenEnhancement.fontSize",
                     "language": "language",
                     "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
-                    "volume": "-provisional-general.-provisional-volume"
+                    "volume": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "-provisional-general.-provisional-volume",
+                            "ranges": [
+                                {
+                                    "upperBound": 0,
+                                    "output": 0
+                                }, {
+                                    "upperBound": 1,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.round",
+                                            "input": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.linearScale",
+                                                    "valuePath": "-provisional-general.-provisional-volume",
+                                                    "factor": 100
+                                                }
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": 100
+                                }
+                            ]
+                        }
+                    }
                 }
             }
         ],
