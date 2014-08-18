@@ -1,9 +1,7 @@
 {
     "typeName": "cloudBased.development",
     "includes": [
-        "../node_modules/matchMaker/configs/development.json",
-        "../node_modules/ontologyServer/configs/development.json",
-        "../node_modules/lifecycleManager/configs/development.json",
-        "../node_modules/solutionsRegistry/configs/development.json"
+        "../node_modules/matchMaker/configs/cloudBased.json",
+        "../node_modules/flowManager/configs/cloudBased.json"
     ]
 }
