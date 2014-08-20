@@ -1,0 +1,7 @@
+AcceptanceTests_empty.js
+
+Description:
+This is a quick test to ensure that the system doesn't explode when attempting to login with an empty preferences set (see GPII-668). It uses the empty.json NP set and the system configured as a cloudbased flowmanager.
+
+Requirements:
+None
