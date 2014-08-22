@@ -12,7 +12,7 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global require*/
+"use strict";
 
 var fluid = require("infusion"),
     kettle = fluid.require("kettle", require);
@@ -28,6 +28,7 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetTokenTests.js",
     "../gpii/node_modules/matchMaker/test/ProxyTests.js",
+    "../gpii/node_modules/matchMaker/test/InverseCapabilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",

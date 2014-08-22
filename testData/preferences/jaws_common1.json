@@ -1,0 +1,4 @@
+{
+    "http://registry.gpii.org/common/punctuationVerbosity": [{ "value": "all" }],
+    "http://registry.gpii.org/common/speechRate": [{ "value": 400 }]
+}

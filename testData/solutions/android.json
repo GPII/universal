@@ -58,7 +58,8 @@
                 "capabilities": [
                     "display.screenReader",
                     "applications.com\\.android\\.talkback.id",
-                    "display.screenReader.applications.com\\.android\\.talkback.name"
+                    "display.screenReader.applications.com\\.android\\.talkback.name",
+                    "display.screenReader.-provisional-screenReaderTTSEnabled"
                 ]
             }
         ],

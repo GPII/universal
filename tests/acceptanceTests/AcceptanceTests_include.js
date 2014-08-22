@@ -11,9 +11,8 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global __dirname, require, module*/
-
 "use strict";
+
 var fluid = require("universal"),
     path = require("path"),
     gpii = fluid.registerNamespace("gpii");
@@ -24,8 +23,8 @@ fluid.require("universal/tests/AcceptanceTests", require);
 
 gpii.acceptanceTesting.flowManager.runTests = function (testDefs) {
     var gpiiConfig = {
-       nodeEnv: "cloudBasedFlowManager",
-       configPath: path.resolve(__dirname, "./configs")
+        nodeEnv: "cloudBasedFlowManager",
+        configPath: path.resolve(__dirname, "./configs")
     };
     fluid.each(testDefs, function (testDef) {
         testDef.config = gpiiConfig;
