@@ -24,16 +24,16 @@ kettle.tests.allTests = true;
 
 var testIncludes = [
     // Run all tests included in the list.
-    //"../gpii/node_modules/flowManager/test/SaveTests.js",
+    "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetTokenTests.js",
-    //"../gpii/node_modules/matchMaker/test/ProxyTests.js",
-    "../gpii/node_modules/matchMaker/test/InverseCapabilitiesTests.js",
+    "../gpii/node_modules/matchMaker/test/ProxyTests.js",
+    // "../gpii/node_modules/matchMaker/test/InverseCapabilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
-    // //"../gpii/node_modules/preferencesFramework/test/preferencesFrameworkTests.js",
+    "../gpii/node_modules/preferencesFramework/test/preferencesFrameworkTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
     // //"./DevelopmentTests.js",
