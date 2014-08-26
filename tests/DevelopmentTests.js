@@ -16,22 +16,23 @@ var fluid = require("infusion"),
     path = require("path"),
     jqUnit = fluid.require("jqUnit"),
     configPath = path.resolve(__dirname, "../gpii/configs"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii"),
+    kettle = require("kettle");
 
-fluid.require("kettle/test/utils/js/KettleTestUtils", require);
+kettle.loadTestingSupport();
 
-var dev = fluid.registerNamespace("gpii.tests.development");
+fluid.registerNamespace("gpii.tests.development");
 
-dev.token = "testUser1";
+gpii.tests.development.token = "testUser1";
 
-dev.testLoginResponse = function (data) {
+gpii.tests.development.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        dev.token + " was successfully logged in.", data);
+        gpii.tests.development.token + " was successfully logged in.", data);
 };
 
-dev.testLogoutResponse = function (data) {
+gpii.tests.development.testLogoutResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        dev.token + " was successfully logged out.", data);
+        gpii.tests.development.token + " was successfully logged out.", data);
 };
 
 var testDefs = [{
@@ -43,26 +44,26 @@ var testDefs = [{
     },
     components: {
         loginRequest: {
-            type: "kettle.tests.request.http",
+            type: "kettle.test.request.http",
             options: {
                 requestOptions: {
                     path: "/user/%token/login",
                     port: 8081
                 },
                 termMap: {
-                    token: dev.token
+                    token: gpii.tests.development.token
                 }
             }
         },
         logoutRequest: {
-            type: "kettle.tests.request.http",
+            type: "kettle.test.request.http",
             options: {
                 requestOptions: {
                     path: "/user/%token/logout",
                     port: 8081
                 },
                 termMap: {
-                    token: dev.token
+                    token: gpii.tests.development.token
                 }
             }
         }
@@ -80,4 +81,4 @@ var testDefs = [{
     }]
 }];
 
-module.exports = kettle.tests.bootstrap(testDefs);
+module.exports = kettle.test.bootstrapServer(testDefs);

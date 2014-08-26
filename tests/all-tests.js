@@ -15,11 +15,11 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    kettle = fluid.require("kettle", require);
+    kettle = fluid.require("kettle");
 
-fluid.require("kettle/test/utils/js/KettleTestUtils", require);
+kettle.loadTestingSupport();
 
-kettle.tests.allTests = true;
+kettle.test.allTests = true;
 
 var testIncludes = [
 
@@ -39,7 +39,6 @@ var testIncludes = [
     "./acceptanceTests/AcceptanceTests_smarthouses.js",
     "./acceptanceTests/AcceptanceTests_empty.js",
     "./DevelopmentTests.js"
-
 ];
 var tests = [];
 
