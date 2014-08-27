@@ -15,7 +15,7 @@
         "kettle": "git://github.com/fluid-project/kettle.git#2cd608b95a7e908769c91f5120cfc50bfc19c4db"
     },
     "devDependencies": {
-        "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#3bdd41d196883e5aeb935e6e6e899b83b1450593",
+        "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#28cf3ca20e59fd48a75511bd47ce7bd550de9972",
         "grunt": "~0.4.4",
         "grunt-shell": "0.6.4",
         "grunt-contrib-jshint": "~0.9.0",
