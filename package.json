@@ -12,7 +12,7 @@
         "semver": "~1.1.4",
         "when": "1.8.1",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/amb26/kettle.git#eb716e590804a70aa7e3b96f23617647216e898d"
+        "kettle": "git://github.com/amb26/kettle.git#280030ae3c9288befdb1df6077905c6f604431ae"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/amb26/node-jqUnit.git#116bdc0ddb2d6e4d144e7d137edb71e421ab768b",
