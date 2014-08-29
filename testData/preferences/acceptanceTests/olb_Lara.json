@@ -1,7 +1,11 @@
 {
-    "http://registry.gpii.org/applications/eu.gpii.olb/signLanguageEnabled": [{ "value": true }],
-    "http://registry.gpii.org/applications/eu.gpii.olb/signLanguage": [{ "value": "gsg" }],
-    "http://registry.gpii.org/applications/eu.gpii.olb/interpreterType": [{ "value": "human" }],
-    "http://registry.gpii.org/applications/eu.gpii.olb/interpreterName": [{ "value": "default" }],
+    "http://registry.gpii.org/applications/eu.gpii.olb": [{ 
+        "value": {
+            "signLanguageEnabled": true,
+            "signLanguage": "gsg",
+            "interpreterType": "human",
+            "interpreterName": "default"
+        }
+    }],
     "http://registry.gpii.org/common/language": [{ "value": "de-DE" }]
 }
