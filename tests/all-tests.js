@@ -36,7 +36,7 @@ var testIncludes = [
     "./acceptanceTests/AcceptanceTests_jme.js",
     "./acceptanceTests/AcceptanceTests_chrome.js",
     "./acceptanceTests/AcceptanceTests_smarthouses.js",
-    "./acceptanceTests/AcceptanceTests_olb_win32.js",
+    "./acceptanceTests/AcceptanceTests_olb_web.js",
     "./acceptanceTests/AcceptanceTests_empty.js",
     "./DevelopmentTests.js"
 
