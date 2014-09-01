@@ -1,7 +1,7 @@
 {
     "flat": {
-        "http://registry.gpii.org/common/fontSize": [{ "value": 25 }],
-        "http://registry.gpii.org/common/highContrastEnabled": [{ "value": true }],
-        "http://registry.gpii.org/common/highContrastTheme": [{ "value": "yellow-black" }]
+        "http://registry.gpii.net/common/fontSize": [{ "value": 25 }],
+        "http://registry.gpii.net/common/highContrastEnabled": [{ "value": true }],
+        "http://registry.gpii.net/common/highContrastTheme": [{ "value": "yellow-black" }]
     }
 }

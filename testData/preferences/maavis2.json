@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/net.opendirective.maavis": [{
+        "http://registry.gpii.net/applications/net.opendirective.maavis": [{
             "value": {
                 "name":"Ethel",
                 "theme":"colour",

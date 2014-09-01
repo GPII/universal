@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/com.android.settings.system": [{
+        "http://registry.gpii.net/applications/com.android.settings.system": [{
             "value": {
                 "dim_screen": true,
                 "haptic_feedback_enabled": true,
@@ -9,15 +9,15 @@
                 "screen_off_timeout": 10000
             }
         }],
-        "http://registry.gpii.org/applications/com.android.audioManager": [{
+        "http://registry.gpii.net/applications/com.android.audioManager": [{
             "value": {
                 "STREAM_SYSTEM": 0.5
             }
         }],
-        "http://registry.gpii.org/applications/com.android.persistentConfiguration": [{
+        "http://registry.gpii.net/applications/com.android.persistentConfiguration": [{
             "value": {
                 "fontScale": 1.5,
-                "locale": "en" 
+                "locale": "en"
             }
         }]
     }

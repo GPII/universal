@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/org.gnome.orca": [{
+        "http://registry.gpii.net/applications/org.gnome.orca": [{
             "value": {
                 "sayAllStyle": 1,
                 "enableEchoByWord": true,

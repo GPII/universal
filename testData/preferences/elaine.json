@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/trace.easyOne.communicator.windows": [{ "value": {} }],
-        "http://registry.gpii.org/applications/trace.easyOne.communicator.linux": [{ "value": {} }]
+        "http://registry.gpii.net/applications/trace.easyOne.communicator.windows": [{ "value": {} }],
+        "http://registry.gpii.net/applications/trace.easyOne.communicator.linux": [{ "value": {} }]
     }
 }

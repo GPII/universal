@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/com.microsoft.windows.mouseTrailing": [{
+        "http://registry.gpii.net/applications/com.microsoft.windows.mouseTrailing": [{
             "value": {
                 "MouseTrails": {
                     "path": {
@@ -11,7 +11,7 @@
                 }
             }
         }],
-        "http://registry.gpii.org/applications/com.microsoft.windows.highContrast": [{
+        "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": [{
             "value": {
                 "HighContrastOn": {
                     "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
@@ -19,7 +19,7 @@
                 }
             }
         }],
-        "http://registry.gpii.org/applications/com.microsoft.windows.cursors": [{
+        "http://registry.gpii.net/applications/com.microsoft.windows.cursors": [{
             "value": {
                 "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
                 "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
@@ -36,7 +36,7 @@
                 "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
             }
         }],
-        "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{
+        "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": [{
             "value": {
                 "FollowFocus": 0,
                 "FollowCaret": 1,

@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/org.chrome.cloud4chrome": [
+        "http://registry.gpii.net/applications/org.chrome.cloud4chrome": [
             {
                 "value": {
                     "screenReaderTTSEnabled": false,

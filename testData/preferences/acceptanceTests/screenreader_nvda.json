@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/org.nvda-project": [{
+        "http://registry.gpii.net/applications/org.nvda-project": [{
             "value": {
                 "speech.synth": "espeak",
                 "speech.outputDevice": "Microsoft Sound Mapper",

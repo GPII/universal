@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/com.android.audioManager": [{ 
+        "http://registry.gpii.net/applications/com.android.audioManager": [{
             "value": {
                 "STREAM_VOICE_CALL": 15,
                 "STREAM_SYSTEM": 14.5,

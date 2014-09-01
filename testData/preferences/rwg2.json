@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
+        "http://registry.gpii.net/applications/com.texthelp.readWriteGold": [{
             "value": {
                 "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
                 "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",

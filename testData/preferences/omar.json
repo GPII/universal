@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/trace.easyOne.sudan.windows": [{ "value": {} }],
-        "http://registry.gpii.org/applications/trace.easyOne.sudan.linux": [{ "value": {} }]
+        "http://registry.gpii.net/applications/trace.easyOne.sudan.windows": [{ "value": {} }],
+        "http://registry.gpii.net/applications/trace.easyOne.sudan.linux": [{ "value": {} }]
     }
 }

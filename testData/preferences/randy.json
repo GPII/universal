@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.org/applications/org.freedesktop.xrandr": [{
+        "http://registry.gpii.net/applications/org.freedesktop.xrandr": [{
             "value": {
                 "screen-resolution": {
                     "width": 800,
