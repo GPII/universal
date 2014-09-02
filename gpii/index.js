@@ -10,6 +10,6 @@ fluid.require("flowManager", require);
 fluid.require("settingsHandlers", require);
 fluid.require("rawPreferencesServer", require);
 fluid.require("ontologyHandler", require);
-fluid.require("preferencesFramework", require);
+fluid.require("preferencesServer", require);
 
 module.exports = fluid;

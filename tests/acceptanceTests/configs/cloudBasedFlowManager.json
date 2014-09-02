@@ -29,6 +29,6 @@
         "../../../gpii/configs/cloudBased.json",
         "../../../gpii/node_modules/flowManager/configs/cloudBased.json",
         "../../../gpii/node_modules/rawPreferencesServer/configs/development.json",
-        "../../../gpii/node_modules/preferencesFramework/configs/development.json"
+        "../../../gpii/node_modules/preferencesServer/configs/development.json"
     ]
 }

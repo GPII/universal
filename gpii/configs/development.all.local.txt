@@ -7,7 +7,7 @@ This mean that:
 * All storage is on the local filesystem (as opposed to couchDB servers/remote URLs)
 * The following components are running on the local machine:
 ** flowManager
-** preferencesFramework
+** preferencesServer
 ** OntologyHandler
 ** rawPreferencesServer (reading preferences from file)
 ** solutionsRegistry (reading registry from file)

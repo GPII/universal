@@ -33,7 +33,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
-    "../gpii/node_modules/preferencesFramework/test/preferencesFrameworkTests.js",
+    "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
     "./DevelopmentTests.js",
