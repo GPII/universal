@@ -29,7 +29,7 @@
                 "FollowMouse": 1,
                 "FollowFocus": 1,
                 "FollowCaret": 1,
-                "MagnificationModel": 1
+                "MagnificationMode": 1
             }
         }],
         "http://registry.gpii.net/common/fontSize": [{ "value": 24 }],
