@@ -1,15 +1,17 @@
 {
-    "http://registry.gpii.org/common/fontSize": [{ "value": 10 }],
-    "http://registry.gpii.org/common/foregroundColor": [{ "value": "default" }],
-    "http://registry.gpii.org/common/backgroundColor": [{ "value": "default" }],
-    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": [ "default" ] }],
-    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "default" }],
-    "http://registry.gpii.org/common/magnification": [{ "value": 1 }],
-    "http://registry.gpii.org/common/tracking": [{ "value": ["mouse"] }],
-    "http://registry.gpii.org/common/invertImages": [{ "value": false }],
-    "http://registry.gpii.org/common/links": [{ "value": false }],
-    "http://registry.gpii.org/common/toc": [{ "value": false }],
-    "http://registry.gpii.org/common/inputsLarger": [{ "value": false }],
-    "http://registry.gpii.org/common/layout": [{ "value": false }],
-    "http://registry.gpii.org/common/lineSpacing": [{ "value": 1 }]
+    "flat": {
+        "http://registry.gpii.net/common/fontSize": [{ "value": 10 }],
+        "http://registry.gpii.net/common/foregroundColor": [{ "value": "default" }],
+        "http://registry.gpii.net/common/backgroundColor": [{ "value": "default" }],
+        "http://registry.gpii.net/common/fontFaceFontName": [{ "value": [ "default" ] }],
+        "http://registry.gpii.net/common/fontFaceGenericFontFace": [{ "value": "default" }],
+        "http://registry.gpii.net/common/magnification": [{ "value": 1 }],
+        "http://registry.gpii.net/common/tracking": [{ "value": ["mouse"] }],
+        "http://registry.gpii.net/common/invertImages": [{ "value": false }],
+        "http://registry.gpii.net/common/links": [{ "value": false }],
+        "http://registry.gpii.net/common/toc": [{ "value": false }],
+        "http://registry.gpii.net/common/inputsLarger": [{ "value": false }],
+        "http://registry.gpii.net/common/layout": [{ "value": false }],
+        "http://registry.gpii.net/common/lineSpacing": [{ "value": 1 }]
+    }
 }

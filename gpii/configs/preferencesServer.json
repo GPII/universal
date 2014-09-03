@@ -1,0 +1,19 @@
+{
+    "typeName": "preferencesServer.standalone.development",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/preferencesServer/configs/development.json",
+        "../node_modules/ontologyServer/configs/development.json"
+    ]
+}

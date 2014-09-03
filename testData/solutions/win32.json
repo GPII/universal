@@ -65,9 +65,9 @@
                 },
                 "restoreSettings"
             ]
-        }   
+        }
     },
-    
+
     {
         "name": "smarthouse",
         "id": "net.gpii.smarthouses",
@@ -186,7 +186,8 @@
                         "FollowFocus": "REG_DWORD",
                         "FollowCaret": "REG_DWORD",
                         "FollowMouse": "REG_DWORD",
-                        "MagnificationMode": "REG_DWORD"
+                        "MagnificationMode": "REG_DWORD",
+                        "ZoomIncrement": "REG_DWORD"
                     }
                 },
                 "capabilities": [

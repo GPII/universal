@@ -1,8 +1,8 @@
 {
-    "languageAssistance": {
+    "ISO24751": {
         "applications": {
             "com.texthelp.readWriteGold": {
-                "name": "Read Write Gold",
+                "id": "com.texthelp.readWriteGold",
                 "priority": 100,
                 "parameters": {
                     "ApplicationSettings.AppBar.Width.$t": 788,
@@ -13,64 +13,62 @@
                     "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
                     "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
                 }
-            }
-        }
-    },
-    "display": {
-        "screenEnhancement": {
-            "fontSize": 24,
-            "foregroundColor": "white",
-            "backgroundColor": "black",
-            "fontFace": {
-                "fontName": [
-                    "Comic Sans"
-                ],
-                "genericFontFace": "sans serif"
             },
-
-            "screenMagnification": {
-                "applications": {
-                    "org.gnome.desktop.a11y.magnifier": {
-                        "name": "GNOME Shell Magnifier",
-                        "priority": 100,
-                        "parameters": {
-                            "show-cross-hairs": true,
-                            "lens-mode": false,
-                            "mag-factor": 2,
-                            "mouse-tracking": "proportional",
-                            "screen-position": "right-half",
-                            "scroll-at-edges": true
-                        }
-                    },
-                    "com.microsoft.windows.magnifier": {
-                        "name": "Windows Built-in Screen Magnifier",
-                        "priority": 100,
-                        "parameters": {
-                            "Magnification": 200,
-                            "ZoomIncrement": 50,
-                            "Invert": 0,
-                            "FollowMouse": 1,
-                            "FollowFocus": 1,
-                            "FollowCaret": 1,
-                            "MagnificationModel": 1
-                        }
-                    }
+            "org.gnome.desktop.a11y.magnifier": {
+                "id": "org.gnome.desktop.a11y.magnifier",
+                "priority": 100,
+                "parameters": {
+                    "show-cross-hairs": true,
+                    "lens-mode": false,
+                    "mag-factor": 2,
+                    "mouse-tracking": "proportional",
+                    "screen-position": "right-half",
+                    "scroll-at-edges": true
+                }
+            },
+            "com.microsoft.windows.magnifier": {
+                "id": "Windows Built-in Screen Magnifier",
+                "priority": 100,
+                "parameters": {
+                    "Magnification": 200,
+                    "ZoomIncrement": 50,
+                    "Invert": 0,
+                    "FollowMouse": 1,
+                    "FollowFocus": 1,
+                    "FollowCaret": 1,
+                    "MagnificationMode": 1
                 }
             }
-        }
-    },
-    "content": {
-        "adaptationPreference": [
-            {
-                "adaptationType": "caption",
-                "language": "en"
-            },
-            {}
-        ]
-    },
-    "control": {
-        "structuralNavigation": {
-            "tableOfContents": false
+        },
+        "display": {
+            "screenEnhancement": {
+                "fontSize": 24,
+                "foregroundColor": "white",
+                "backgroundColor": "black",
+                "fontFace": {
+                    "fontName": [
+                        "Comic Sans"
+                    ],
+                    "genericFontFace": "sans serif"
+                },
+                "screenMagnification": {
+
+                }
+            }
+        },
+        "content": {
+            "adaptationPreference": [
+                {
+                    "adaptationType": "caption",
+                    "language": "en"
+                },
+                {}
+            ]
+        },
+        "control": {
+            "structuralNavigation": {
+                "tableOfContents": false
+            }
         }
     }
 }

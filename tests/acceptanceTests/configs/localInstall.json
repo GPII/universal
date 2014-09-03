@@ -5,9 +5,9 @@
             "server": {
                 "options": {
                     "components": {
-                        "preferencesServer": {
+                        "rawPreferencesServer": {
                             "options": {
-                                "userSourceUrl": "file://%root/../../../testData/preferences/acceptanceTests/%token.json"
+                                "rawPreferencesSourceUrl": "file://%root/../../../testData/preferences/acceptanceTests/%token.json"
                             }
                         }
                     }
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "../../../gpii/configs/fm.ps.sr.dr.mm.os.lms.development.json"
+        "../../../gpii/configs/development.all.local.json"
     ]
 }
