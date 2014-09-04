@@ -6,7 +6,7 @@ As the name suggests, the purpose of the preferences server framework is to serv
 Currently, the preferences server Framework consist of three components:
 * The Raw Preferences Server
 * The Ontology Handler
-* The Preferences Server
+* [The Preferences Server](PreferencesServer.md)
 
 _The raw preferences server_ is a very basic service, sitting in front of a database of records (eg. couchDB). It stores and serves the full, unmodified preferences sets, keyed by the ontology they are in. A raw preferences set can be stored in multiple ontologies (ie. one part can be in ISO-24751, another in the 'flat' format). The raw preferences document consist of containers with preferences, each keyed by the format in which they are in. Since the raw preferences server exposes _all_ the users needs and preferences, this should generally not be public fracing without a preferences server in front of it to filter the settings according to permissions and views.
 
@@ -16,7 +16,7 @@ _The Preferences Server_ is the public facing component of the preferences serve
 
 ### Motivation and rules
 
-We have identified a set of requirements to a new Preferences Framework and Ontology Handler implementatiosn, and the components using it:
+We have identified a set of requirements to a new Preferences Framework and Ontology Handler implementations, and the components using it:
 
 * **Each ontology should have a (ontology-global) unique ID** for the framework to be able to identify it
 * **Preferences sets should consist of containers keyed by ontology IDs** - as opposed to before, where it's guessed by the pattern of the preferences what ontology is used, the preference sets should explicitly declare what ontology they're in.
@@ -368,7 +368,7 @@ If we look at what's going on at the raw preferences server level, imagine that 
         },
         "control": {
             "onscreenKeyboard": true
-        },
+        }
     },
     "bogus": {
         "foo": "bar"
@@ -387,7 +387,7 @@ After the PUT request, it would be changed to:
     "ISO24751": {
         "control": {
             "onscreenKeyboard": true
-        },
+        }
     },
     "bogus": {
         "foo": "bar"
