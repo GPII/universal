@@ -65,22 +65,52 @@ Example return payload:
     "token": "mytoken",
     "preferences": {
         "flat": {
-            "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
-            "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
-            "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
-            "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
-            "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
-            "http://registry.gpii.net/common/flatOnly": [{ "value": true }]
-        },
-        "ISO24751": {
-            "display": {
-                "screenEnhancement": {
-                    "fontSize": 24
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/common/fontSize": 12
+                    }
+                },
+                "nighttime-at-home": {
+                    "name": "Nighttime at home",
+
+                    "preferences": {
+                        "http://registry.gpii.net/common/fontSize": 24
+                    },
+                    "metadata": [
+                        {
+                            "type": "provenance",
+                            "scope": ["http://registry.gpii.net/common/fontSize"],
+                            "source": "snapshotter"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "http://registry.gpii.net/conditions/timeOfDay",
+                            "range": {
+                                "start": 1730,
+                                "end": 730
+                            }
+                        }
+                    ],
+                    "priority": 100
                 }
             }
         },
-        "bogus": {
-            "foo": "bar"
+        "ISO-24571-2": {
+            "contexts": {
+                "gpii-default": {
+                    "preferences": {
+                        "display": {
+                            "screenEnhancement": {
+                                "magnification": 2.5
+                            }
+                        }
+                    }
+                }
+            },
+            "metadata": {}
         }
     }
 }
