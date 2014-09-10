@@ -1,0 +1,9 @@
+{
+    "http://registry.gpii.org/common/fontSize":[{"value":20}],
+    "http://registry.gpii.org/common/magnifierEnabled":[{"value":true}],
+    "http://registry.gpii.org/common/magnification":[{"value":2}],
+    "http://registry.gpii.org/common/highContrastEnabled":[{"value":true}],
+    "http://registry.gpii.org/common/highContrastTheme":[{"value":"yellow-black"}],
+    "http://registry.gpii.org/common/invertColours":[{"value":false}],
+    "http://registry.gpii.org/common/cursorSize":[{"value":0.8}]
+}

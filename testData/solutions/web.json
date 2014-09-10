@@ -21,11 +21,10 @@
                         "transform":{
                             "type":"gpii.transformer.quantize",
                             "inputPath":"display.screenEnhancement.fontSize",
-                            "input":9,
                             "ranges":[
                                 {
                                     "upperBound":12,
-                                    "output":"medium"
+                                    "output":"normal"
                                 },
                                 {
                                     "upperBound":18,
@@ -38,29 +37,100 @@
                         }
                     },
                     "magnifierEnabled":"display.screenEnhancement.-provisional-magnifierEnabled",
-                    "magnification": {
+                    "magnification":"display.screenEnhancement.magnification",
+                    "cursorSize": {
                         "transform": {
                             "type":"gpii.transformer.quantize",
-                            "inputPath":"display.screenEnhancement.magnification",
-                            "input":1,
+                            "inputPath":"display.screenEnhancement.cursorSize",
                             "ranges":[
                                 {
-                                    "upperBound":1.2,
-                                    "output":1
+                                    "upperBound":0.3,
+                                    "output":"normal"
                                 },
                                 {
-                                    "upperBound":2.5,
-                                    "output":2
+                                    "upperBound":0.6,
+                                    "output":"large"
                                 },
                                 {
-                                    "output":3
+                                    "output":"x-large"
                                 }
                             ]
                         }
                     },
                     "highContrastEnabled":"display.screenEnhancement.-provisional-highContrastEnabled",
                     "highContrastTheme":"display.screenEnhancement.-provisional-highContrastTheme",
-                    "invertColours":"display.screenEnhancement.-provisional-invertColours"
+                    "invertColours":"display.screenEnhancement.-provisional-invertColours",
+                    "onScreenKeyboardEnabled":"control.onscreenKeyboard",
+                    "fontFace":"display.screenEnhancement.fontFaceFontName"
+                }
+            }
+        ]
+    },
+    {
+        "name": "Cloud4Firefox",
+        "id": "org.mozilla.cloud4firefox",
+        "contexts": {
+            "OS": [
+                {
+                    "id":"web"    
+                }
+            ]
+        },
+         "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.org\\.mozilla\\.cloud4firefox.id"
+                ],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled":"display.screenReader.-provisional-screenReaderTTSEnabled",
+                    "magnifierEnabled": "display.screenEnhancement.-provisional-magnifierEnabled",
+                    "magnification": "display.screenEnhancement.magnification",
+                    "fontSize": {
+                        "transform":{
+                            "type":"gpii.transformer.quantize",
+                            "inputPath":"display.screenEnhancement.fontSize",
+                            "ranges":[
+                                {
+                                    "upperBound":14,
+                                    "output":"M"
+                                },
+                                {
+                                    "upperBound":24,
+                                    "output":"L"
+                                },
+                                {
+                                    "output":"XL"
+                                }
+                            ]
+                        }
+                    },
+                    "backgroundColour": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "options": {
+                                "white-black": "#000000",
+                                "black-white": "#FFFFFF",
+                                "yellow-black": "#000000",
+                                "black-yellow": "#FFFF00"
+                            }
+                        }
+                    },
+                    "foregroundColour": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "options": {
+                                "white-black": "#FFFFFF",
+                                "black-white": "#000000",
+                                "yellow-black": "#FFFF00",
+                                "black-yellow": "#000000"
+                            }
+                        }
+                    },
+                    "invertColours": "display.screenEnhancement.-provisional-invertColours",
+                    "tracking":"display.screenEnhancement.tracking"
                 }
             }
         ]
