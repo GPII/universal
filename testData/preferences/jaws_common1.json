@@ -1,4 +1,13 @@
 {
-    "http://registry.gpii.net/common/punctuationVerbosity": "all",
-    "http://registry.gpii.net/common/speechRate": 400
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/punctuationVerbosity": "all",
+                    "http://registry.gpii.net/common/speechRate": 400
+                }
+            }
+        }
+    }
 }

@@ -1,6 +1,13 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": 12,
-        "http://registry.gpii.net/common/highContrastEnabled": false
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 12,
+                    "http://registry.gpii.net/common/highContrastEnabled": false
+                }
+            }
+        }
     }
 }

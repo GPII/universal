@@ -1,7 +1,14 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": 25,
-        "http://registry.gpii.net/common/highContrastEnabled": true,
-        "http://registry.gpii.net/common/highContrastTheme": "yellow-black"
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 25,
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "yellow-black"
+                }
+            }
+        }
     }
 }

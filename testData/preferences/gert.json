@@ -1,5 +1,12 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": 24
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 24
+                }
+            }
+        }
     }
 }
