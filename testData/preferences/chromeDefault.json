@@ -1,15 +1,11 @@
 {
     "flat": {
-        "http://registry.gpii.net/applications/org.chrome.cloud4chrome": [
-            {
-                "value": {
-                    "screenReaderTTSEnabled": false,
-                    "highContrast": "none",
-                    "magnification": 1,
-                    "fontSize": "medium",
-                    "simplifier": true
-                }
-            }
-        ]
+        "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
+            "screenReaderTTSEnabled": false,
+            "highContrast": "none",
+            "magnification": 1,
+            "fontSize": "medium",
+            "simplifier": true
+        }
     }
 }

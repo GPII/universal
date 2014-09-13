@@ -1,37 +1,33 @@
 {
     "flat": {
-        "http://registry.gpii.net/applications/com.texthelp.readWriteGold": [{
-            "value": {
-                "ApplicationSettings.AppBar.Width.$t": 788,
-                "ApplicationSettings.AppBar.LargeIcons.$t": false,
-                "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
-                "ApplicationSettings.AppBar.ShowText.$t": false,
-                "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
-                "ApplicationSettings.Speech.optSAPI5Speed.$t": 90,
-                "ApplicationSettings.Speech.optAutoUseScreenReading.$t": true
-            }
-        }],
-        "http://registry.gpii.net/applications/org.gnome.orca": [{ "value": {}}],
-        "http://registry.gpii.net/applications/nvda.screenReader": [{ "value": {}}],
-        "http://registry.gpii.net/applications/webinsight.webAnywhere.windows": [{ "value": {}}],
-        "http://registry.gpii.net/applications/webinsight.webAnywhere.linux": [{ "value": {}}],
-        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.keyboard": [{
-            "value": {
-                "feature-state-change-beep": true
-            }
-        }],
-        "http://registry.gpii.net/common/fontSize": [{ "value": 12 }],
-        "http://registry.gpii.net/common/foregroundColor": [{ "value": "white" }],
-        "http://registry.gpii.net/common/backgroundColor": [{ "value": "black" }],
-        "http://registry.gpii.net/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
-        "http://registry.gpii.net/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
-        "http://registry.gpii.net/common/adaptationPreference": [{ "value": [
+        "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+            "ApplicationSettings.AppBar.Width.$t": 788,
+            "ApplicationSettings.AppBar.LargeIcons.$t": false,
+            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": false,
+            "ApplicationSettings.AppBar.ShowText.$t": false,
+            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
+            "ApplicationSettings.Speech.optSAPI5Speed.$t": 90,
+            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": true
+        },
+        "http://registry.gpii.net/applications/org.gnome.orca": {},
+        "http://registry.gpii.net/applications/nvda.screenReader": {},
+        "http://registry.gpii.net/applications/webinsight.webAnywhere.windows": {},
+        "http://registry.gpii.net/applications/webinsight.webAnywhere.linux": {},
+        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.keyboard": {
+            "feature-state-change-beep": true
+        },
+        "http://registry.gpii.net/common/fontSize": 12 ,
+        "http://registry.gpii.net/common/foregroundColor": "white" ,
+        "http://registry.gpii.net/common/backgroundColor": "black" ,
+        "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
+        "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif" ,
+        "http://registry.gpii.net/common/adaptationPreference": [
             {
                 "adaptationType": "caption",
                 "language": "en"
             },
             {}
-        ]}],
-        "http://registry.gpii.net/common/tableOfContents": [{ "value": false }]
+        ],
+        "http://registry.gpii.net/common/tableOfContents": false
     }
 }

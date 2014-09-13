@@ -1,12 +1,12 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/hapticFeedback": [{ "value": true }],
-        "http://registry.gpii.net/common/screenDim": [{ "value": true }],
-        "http://registry.gpii.net/common/screenRotation": [{ "value": false }],
-        "http://registry.gpii.net/common/screenDefaultRotation": [{ "value":  1 }],
-        "http://registry.gpii.net/common/screenOffTime": [{ "value": 15 }],
-        "http://registry.gpii.net/common/volume": [{ "value": 0.5 }],
-        "http://registry.gpii.net/common/fontSize": [{ "value": 24 }],
-        "http://registry.gpii.net/common/language": [{ "value": "en-GB" }]
+        "http://registry.gpii.net/common/hapticFeedback": true,
+        "http://registry.gpii.net/common/screenDim": true,
+        "http://registry.gpii.net/common/screenRotation": false,
+        "http://registry.gpii.net/common/screenDefaultRotation": 1,
+        "http://registry.gpii.net/common/screenOffTime": 15,
+        "http://registry.gpii.net/common/volume": 0.5,
+        "http://registry.gpii.net/common/fontSize": 24,
+        "http://registry.gpii.net/common/language": "en-GB"
     }
 }

@@ -1,6 +1,6 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": [{ "value": 12 }],
-        "http://registry.gpii.net/common/highContrastEnabled": [{ "value": false }]
+        "http://registry.gpii.net/common/fontSize": 12,
+        "http://registry.gpii.net/common/highContrastEnabled": false
     }
 }

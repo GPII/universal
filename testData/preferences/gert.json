@@ -1,5 +1,5 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": [{ "value": 24 }]
+        "http://registry.gpii.net/common/fontSize": 24
     }
 }

@@ -1,9 +1,7 @@
 {
     "flat": {
-        "http://registry.gpii.net/applications/org.alsa-project": [{
-            "value": {
-                "masterVolume": 0
-            }
-        }]
+        "http://registry.gpii.net/applications/org.alsa-project": {
+            "masterVolume": 0
+        }
     }
 }

@@ -1,5 +1,5 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/screenReaderTTSEnabled":[{ "value": true }]
+        "http://registry.gpii.net/common/screenReaderTTSEnabled": true
     }
 }

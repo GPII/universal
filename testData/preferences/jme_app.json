@@ -1,13 +1,11 @@
 {
     "flat": {
-        "http://registry.gpii.net/applications/info.cloud4all.JME": [{
-            "value": {
-                "theme": "Black-White",
-                "fontSize": "veryLarge",
-                "language": "English",
-                "volume": 50,
-                "hapticFeedback": 2
-            }
-        }]
+        "http://registry.gpii.net/applications/info.cloud4all.JME": {
+            "theme": "Black-White",
+            "fontSize": "veryLarge",
+            "language": "English",
+            "volume": 50,
+            "hapticFeedback": 2
+        }
     }
 }

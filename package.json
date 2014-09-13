@@ -12,7 +12,7 @@
         "semver": "~1.1.4",
         "when": "~1.8.1",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/kaspermarkus/kettle.git#9d46824ee4b3d18dc841a044a191dd03f6a372c5"
+        "kettle": "git://github.com/kaspermarkus/kettle.git#a942cdd5eed651bac20b7052a73b225b08ff1519"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/kaspermarkus/node-jqUnit.git#7e7e79303e354915842931424afd427c7d61d36a",

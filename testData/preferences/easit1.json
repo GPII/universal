@@ -1,17 +1,17 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": [{ "value": 11 }],
-        "http://registry.gpii.net/common/foregroundColor": [{ "value": "yellow" }],
-        "http://registry.gpii.net/common/backgroundColor": [{ "value": "black" }],
-        "http://registry.gpii.net/common/fontFaceFontName": [{ "value": [ "ARIAL" ] }],
-        "http://registry.gpii.net/common/fontFaceGenericFontFace": [{ "value": "SERIF" }],
-        "http://registry.gpii.net/common/magnification": [{ "value": 1 }],
-        "http://registry.gpii.net/common/tracking": [{ "value": ["mouse"] }],
-        "http://registry.gpii.net/common/invertImages": [{ "value": false }],
-        "http://registry.gpii.net/common/links": [{ "value": true }],
-        "http://registry.gpii.net/common/toc": [{ "value": false }],
-        "http://registry.gpii.net/common/inputsLarger": [{ "value": true }],
-        "http://registry.gpii.net/common/layout": [{ "value": false }],
-        "http://registry.gpii.net/common/lineSpacing": [{ "value": 1.2 }]
+        "http://registry.gpii.net/common/fontSize": 11,
+        "http://registry.gpii.net/common/foregroundColor": "yellow",
+        "http://registry.gpii.net/common/backgroundColor": "black",
+        "http://registry.gpii.net/common/fontFaceFontName": [ "ARIAL" ],
+        "http://registry.gpii.net/common/fontFaceGenericFontFace": "SERIF",
+        "http://registry.gpii.net/common/magnification": 1,
+        "http://registry.gpii.net/common/tracking": ["mouse"],
+        "http://registry.gpii.net/common/invertImages": false,
+        "http://registry.gpii.net/common/links": true,
+        "http://registry.gpii.net/common/toc": false,
+        "http://registry.gpii.net/common/inputsLarger": true,
+        "http://registry.gpii.net/common/layout": false,
+        "http://registry.gpii.net/common/lineSpacing": 1.2
     }
 }

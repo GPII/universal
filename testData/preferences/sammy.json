@@ -1,12 +1,12 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": [{ "value": 24 }],
-        "http://registry.gpii.net/common/foregroundColor": [{"value": "white"}],
-        "http://registry.gpii.net/common/backgroundColor": [{"value": "black"}],
-        "http://registry.gpii.net/common/fontFaceFontName": [{"value": ["Comic Sans"]}],
-        "http://registry.gpii.net/common/fontFaceGenericFontFace": [{"value": "sans serif"}],
-        "http://registry.gpii.net/common/magnification": [{"value": 2.0}],
-        "http://registry.gpii.net/common/tracking": [{"value": ["mouse"]}],
-        "http://registry.gpii.net/common/invertColours": [{"value": true}]
+        "http://registry.gpii.net/common/fontSize": 24,
+        "http://registry.gpii.net/common/foregroundColor": "white",
+        "http://registry.gpii.net/common/backgroundColor": "black",
+        "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
+        "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
+        "http://registry.gpii.net/common/magnification": 2.0,
+        "http://registry.gpii.net/common/tracking": ["mouse"],
+        "http://registry.gpii.net/common/invertColours": true
     }
 }

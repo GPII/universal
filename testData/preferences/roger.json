@@ -1,11 +1,11 @@
 {
     "flat": {
-        "http://registry.gpii.net/common/cursorSize": [{"value": 0.9}],
-        "http://registry.gpii.net/common/fontSize": [{"value": 20}],
-        "http://registry.gpii.net/common/mouseTrailing": [{"value": 16}],
+        "http://registry.gpii.net/common/cursorSize": 0.9,
+        "http://registry.gpii.net/common/fontSize": 20,
+        "http://registry.gpii.net/common/mouseTrailing": 16,
 
-        "http://registry.gpii.net/common/magnification": [{"value": 2.0}],
-        "http://registry.gpii.net/common/tracking": [{"value": ["focus"]}],
-        "http://registry.gpii.net/common/invertColours": [{"value": false}]
+        "http://registry.gpii.net/common/magnification": 2.0,
+        "http://registry.gpii.net/common/tracking": ["focus"],
+        "http://registry.gpii.net/common/invertColours": false
     }
 }
