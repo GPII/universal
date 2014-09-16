@@ -8,7 +8,7 @@ The main bulk of work of the Preferences Server is done in other components of t
 
 The main types of filtering provided by the Preferences Server are the following:
 
-* **?view=:view** - the ontology the preferences is given/required in. For each REST API call, there is the option of providing desired 'view' or 'ontology' of the preferences. If none is given the _'flat'_ view is defaulted to. The Preferences Server draws on the ontologyHandler component to take care of the bulk of this filtering, merging, etc., of the prefs.
+* **?view=:view** - the ontology the preferences is given/required in. For each REST API call, there is the option of providing desired 'view' or 'ontology' of the preferences. If none is given the _'flat'_ view is defaulted to. The Preferences Server draws on the ontologyHandler component to take care of the bulk of this filtering, merging, etc., of the prefs and metadata sections.
 
 ### API
 
@@ -20,25 +20,28 @@ Retrieves the preferences sets for the token (`:token`). The optional `view` par
 
 Example of a basic GET request to the Preferences Server (given that the Preferences Server is located on preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/sammy?view=ISO24751`
+`http://preferences.gpii.net/preferences/sammy`
 
 Return payload:
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
-    "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
-    "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
-    "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
-    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
-    "http://registry.gpii.net/common/unknown": [{ "value": true }],
-    "http://registry.gpii.net/applications/org.alsa-project": [
-        {
-            "value": {
-                "volume": 14,
-                "pitch": 100
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/onscreenKeyboard": true,
+                "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
+                "http://registry.gpii.net/common/cursorSpeed": 0.850,
+                "http://registry.gpii.net/common/cursorAcceleration": 0.800,
+                "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
+                "http://registry.gpii.net/common/unknown": true,
+                "http://registry.gpii.net/applications/org.alsa-project": {
+                    "volume": 14,
+                    "pitch": 100
+                }
             }
         }
-    ]
+    }
 }
 ```
 
@@ -53,20 +56,27 @@ Return payload:
 
 ```
 {
-    "control": {
-        "onscreenKeyboard": true,
-        "mouseEmulation": {
-            "cursorSpeed": 0.85,
-            "cursorAcceleration": 0.8,
-            "-provisional-initDelay": 0.12,
-            "-provisional-mouseEmulationEnabled": true
-        }
-    },
-    "applications": {
-        "org.alsa-project": {
-            "parameters": {
-                "volume": 14,
-                "pitch": 100
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "control": {
+                    "onscreenKeyboard": true,
+                    "mouseEmulation": {
+                        "cursorSpeed": 0.85,
+                        "cursorAcceleration": 0.8,
+                        "-provisional-initDelay": 0.12,
+                        "-provisional-mouseEmulationEnabled": true
+                    }
+                },
+                "applications": {
+                    "org.alsa-project": {
+                        "parameters": {
+                            "volume": 14,
+                            "pitch": 100
+                        }
+                    }
+                }
             }
         }
     }
@@ -92,12 +102,23 @@ Example POST body:
 
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
-    "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
-    "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
-    "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
-    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
-    "http://registry.gpii.net/common/unknown": [{ "value": true }]
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/onscreenKeyboard": true,
+                "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
+                "http://registry.gpii.net/common/cursorSpeed": 0.850,
+                "http://registry.gpii.net/common/cursorAcceleration": 0.800,
+                "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
+                "http://registry.gpii.net/common/unknown": true,
+                "http://registry.gpii.net/applications/org.alsa-project": {
+                    "volume": 14,
+                    "pitch": 100
+                }
+            }
+        }
+    }
 }
 ```
 
@@ -109,12 +130,23 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 {
     "token": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
-        "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
-        "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
-        "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
-        "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
-        "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
-        "http://registry.gpii.net/common/unknown": [{ "value": true }]
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/onscreenKeyboard": true,
+                    "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
+                    "http://registry.gpii.net/common/cursorSpeed": 0.850,
+                    "http://registry.gpii.net/common/cursorAcceleration": 0.800,
+                    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
+                    "http://registry.gpii.net/common/unknown": true,
+                    "http://registry.gpii.net/applications/org.alsa-project": {
+                        "volume": 14,
+                        "pitch": 100
+                    }
+                }
+            }
+        }
     }
 }
 ```
@@ -126,9 +158,9 @@ This is used to update an existing preferences set to the Preferences Server. In
 
 As with GET and POST, this takes an optional `view` parameter denoting the ontology of the settings provided in the payload of the request body. If no `view` is provided, the preferences will be stored and interpreted as being in the `flat` format.
 
-When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I have some settings A, B and C already existing in my preference set, and a put request is made containing only settings B and D, the resulting preferences set will contain only settings B and D.
+When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I have some settings A, B and C already existing in my preference set (in a given view), and a put request is made containing only settings B and D, the resulting preferences set will contain only settings B and D.
 
-As described earlier in the introduction to the preferences framework, underlying the preferences server, there is the raw preferences server allowing the preferences to be stored in different ontologies. A (transformable) user preference should only be stored once in the preference set. This also means that if a put request is make containing a preference A1, which already exists in the preference set, but in a different ontology (lets call this same setting in a different ontology Ax), the preference A1 will be stored in the provided ontology, while Ax will be removed from the preference set. An example will be given below to help make this clearer.
+As described earlier in the introduction to the preferences framework, underlying the preferences server, there is the raw preferences server allowing the preferences to be stored in different ontologies. A (transformable) user preference will only be stored once in the preference set. This also means that if a put request is make containing a preference A1, which already exists in the preference set, but in a different ontology (lets call this same setting in a different ontology Ax), the preference A1 will be stored in the provided ontology, while Ax will be removed from the preference set. An example will be given below to help make this clearer.
 
 ##### Example PUT query
 
@@ -142,8 +174,15 @@ putBody:
 
 ```
 {
-    "http://registry.gpii.net/common/fontSize": [{ "value": 18 }],
-    "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }]
+   "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/fontSize": 18,
+                "http://registry.gpii.net/common/cursorSpeed": 0.850
+            }
+        }
+    }
 }
 ```
 
@@ -153,8 +192,15 @@ The return payload would then be the following:
 {
     "token": "mytoken",
     "preferences": {
-        "http://registry.gpii.net/common/fontSize": [{ "value": 18 }],
-        "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.2 }]
+       "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 18,
+                    "http://registry.gpii.net/common/cursorSpeed": 0.850
+                }
+            }
+        }
     }
 }
 ```
@@ -164,22 +210,43 @@ If we look at what's going on at the raw preferences server level, imagine that 
 ```
 {
     "flat": {
-        "http://registry.gpii.net/common/initDelay": [{ "value": 0.120 }],
-        "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
-        "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/initDelay": 0.120,
+                    "http://registry.gpii.net/common/cursorSpeed": 0.850,
+                    "http://registry.gpii.net/common/cursorAcceleration": 0.800
+                }
+            }
+        }
     },
     "ISO24751": {
-        "display": {
-            "screenEnhancement": {
-                "fontSize": 24
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "display": {
+                        "screenEnhancement": {
+                            "fontSize": 24
+                        }
+                    },
+                    "control": {
+                        "onscreenKeyboard": true
+                    }
+                }
             }
-        },
-        "control": {
-            "onscreenKeyboard": true
         }
     },
     "bogus": {
-        "foo": "bar"
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "foo": "bar"
+                }
+            }
+        }
     }
 }
 ```
@@ -189,16 +256,37 @@ After the PUT request, it would be changed to:
 ```
 {
     "flat": {
-        "http://registry.gpii.net/common/fontSize": [{ "value": 18 }],
-        "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.2 }]
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 18,
+                    "http://registry.gpii.net/common/cursorSpeed": 0.2
+                }
+            }
+        }
     },
     "ISO24751": {
-        "control": {
-            "onscreenKeyboard": true
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "control": {
+                        "onscreenKeyboard": true
+                    }
+                }
+            }
         }
     },
     "bogus": {
-        "foo": "bar"
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "foo": "bar"
+                }
+            }
+        }
     }
 }
 ```
