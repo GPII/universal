@@ -1,6 +1,13 @@
 ## Preferences Server:
 
-**URL: `/preferences`**
+The preferences server currently has two APIs: one for the new style preferences and one for the  old style preferences, used for backward compatibility. The URLS are as follows: 
+
+* **URL: `/preferences`**: The main URL to be used for the preferences server. Any new development should be using this URL.
+* **URL: `/oldPreferences`**: URL for serving preferences in the format the old preferences server did. This should *only* be used by existing services to ensure they do not break. All services currently using this style of preferences should be updated to use the `/preferences` URL instead.
+
+The `/preferences` API will be described immediately below here, while the old, backward compatible URL `/oldPreferences` will be described on the [Old Preferences Server API documentation](OldPreferencesServer.md).
+
+### Description
 
 The Preferences Server is a server meant to be the public facing, REST based interface for consumers of preferences. It's main purpose is to be able to present a filtered view of the user preferences based on the requirements of the consumer - ie. the preferences shown in a specific ontology, filtered according to a specific set of contexts, a certain set of security/privacy rules, etc.
 
@@ -294,3 +301,10 @@ After the PUT request, it would be changed to:
 There are two important things to note here:
 1. As the PUT request was made in the flat format, all the existing preferences in the flat format were replaced by the ones in the body of the PUT request. This means that a setting like _cursorAcceleration_ is no longer present in the preference set.
 2. In the example, we consider the ISO-24751 setting "display.screenEnhancement.fontSize" to be ontologically equivalent to http://registry.gpii.net/common/fontSize. Since we do not allow the same setting to be present multiple times in the NP set, the fontSize has been stored in the flat ontology and removed from the ISO24751 block.
+
+### Other relevant documentation:
+
+* [The Preferences Server Framework](PreferencesServerFramework.md)
+* [The Raw Preferences Server](RawPreferencesServer.md)
+* [The Old Preferences Server](OldPreferencesServer.md) _for backward compatibility only_
+

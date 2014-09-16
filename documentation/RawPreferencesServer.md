@@ -261,6 +261,7 @@ For the above example, the return payload would like the the following:
 
 ### Other relevant documentation:
 
-Currently, the preferences server Framework consist of three components:
 * [The Preferences Server Framework](PreferencesServerFramework.md)
 * [The Preferences Server](PreferencesServer.md)
+* [The Old Preferences Server](OldPreferencesServer.md) _for backward compatibility only_
+
