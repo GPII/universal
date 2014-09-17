@@ -1,7 +1,6 @@
-[
-    {
+{
+    "com.freedomscientific.jaws": {
         "name": "JAWS",
-        "id": "com.freedomscientific.jaws",
         "contexts": {
             "OS": [
                 {
@@ -68,9 +67,8 @@
         }
     },
 
-    {
+    "net.gpii.smarthouses": {
         "name": "smarthouse",
-        "id": "net.gpii.smarthouses",
         "contexts": {
             "OS": [
                 {
@@ -113,9 +111,8 @@
         }
     },
 
-    {
+    "com.texthelp.readWriteGold": {
         "name": "Read Write Gold",
-        "id": "com.texthelp.readWriteGold",
         "contexts": {
             "OS": [
                 {
@@ -163,9 +160,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
-        "id": "com.microsoft.windows.magnifier",
         "contexts": {
             "OS": [
                 {
@@ -268,9 +264,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.onscreenKeyboard": {
         "name": "Windows Built-in Onscreen Keyboard",
-        "id": "com.microsoft.windows.onscreenKeyboard",
         "contexts": {
             "OS": [
                 {
@@ -305,9 +300,8 @@
         }
     },
 
-    {
+    "org.nvda-project": {
         "name": "NVDA Screen Reader",
-        "id": "org.nvda-project",
         "contexts": {
             "OS": [
                 {
@@ -682,9 +676,8 @@
         }
     },
 
-    {
+    "trace.easyOne.communicator.windows": {
         "name": "EasyOne Communicator Windows",
-        "id": "trace.easyOne.communicator.windows",
         "contexts": {
             "OS": [
                 {
@@ -720,9 +713,8 @@
         }
     },
 
-    {
+    "trace.easyOne.sudan.windows": {
         "name": "EasyOne Communicator Sudan",
-        "id": "trace.easyOne.sudan.windows",
         "contexts": {
             "OS": [
                 {
@@ -757,9 +749,8 @@
         }
     },
 
-    {
+    "webinsight.webAnywhere.windows": {
         "name": "Web Anywhere",
-        "id": "webinsight.webAnywhere.windows",
         "contexts": {
             "OS": [
                 {
@@ -794,9 +785,8 @@
         }
     },
 
-    {
+    "net.opendirective.maavis": {
         "name": "maavis",
-        "id": "net.opendirective.maavis",
         "contexts": {
             "OS": [
                 {
@@ -830,9 +820,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
-        "id": "com.microsoft.windows.highContrast",
         "contexts": {
             "OS": [
                 {
@@ -884,9 +873,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.mouseTrailing": {
         "name": "Windows Mouse Trailing",
-        "id": "com.microsoft.windows.mouseTrailing",
         "contexts": {
             "OS": [
                 {
@@ -940,9 +928,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
-        "id": "com.microsoft.windows.cursors",
         "contexts": {
             "OS": [
                 {
@@ -1218,9 +1205,8 @@
         }
     },
 
-    {
+    "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
-        "id": "eu.singularlogic.pixelsense.sociable",
         "contexts": {
             "OS": [
                 {
@@ -1289,4 +1275,4 @@
             ]
         }
     }
-]
+}

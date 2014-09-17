@@ -1,7 +1,6 @@
 var fluid = require("infusion");
 
 fluid.require("kettle", require);
-fluid.require("matchMaker", require);
 fluid.require("transformer", require);
 fluid.require("deviceReporter", require);
 fluid.require("lifecycleManager", require);
@@ -11,5 +10,7 @@ fluid.require("settingsHandlers", require);
 fluid.require("rawPreferencesServer", require);
 fluid.require("ontologyHandler", require);
 fluid.require("preferencesServer", require);
+fluid.require("matchMakerFramework", require);
+fluid.require("flatMatchMaker", require);
 
 module.exports = fluid;
