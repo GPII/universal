@@ -31,6 +31,7 @@ The applications read their settings from an XML file on the device's internal s
 This preference set uses the default settings, same as if the app was launched without the GPII.
 
 The XML file will contain:
+
     <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
     <map>
       <string name='fontsize'>24</string>
@@ -44,6 +45,7 @@ The XML file will contain:
 This preference set uses the yellow-black high contrast theme and the maximum possible font size. Note that we apply a scaling factor of 2 to the font size setting, and that the high contrast setting is transformed to fit our format.
 
 The XML file will contain:
+
     <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
     <map>
       <string name='fontsize'>50</string>
