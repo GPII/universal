@@ -12,5 +12,6 @@ fluid.require("ontologyHandler", require);
 fluid.require("preferencesServer", require);
 fluid.require("matchMakerFramework", require);
 fluid.require("flatMatchMaker", require);
+fluid.require("contextManager", require);
 
 module.exports = fluid;
