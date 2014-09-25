@@ -1,0 +1,2 @@
+## MM Ideas for canopy
+* to avoid firing two solutions (ie. knowing which overlab) have an array with "should only be launched in one instance". eg: screenReader.speechRate, display.screenEnhancement.magnification, control.onscreenKeyboard, control.speechRecognition, etc., etc. The system would then set settings for all the relevant applications, but then have `active: false`. Tie breaks would be priority or 'deepest match'

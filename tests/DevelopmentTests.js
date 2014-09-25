@@ -18,6 +18,7 @@ var fluid = require("infusion"),
     configPath = path.resolve(__dirname, "../gpii/configs"),
     kettle = fluid.registerNamespace("kettle");
 
+require("../gpii/index.js");
 fluid.require("kettle/test/utils/js/KettleTestUtils", require);
 
 var dev = fluid.registerNamespace("gpii.tests.development");

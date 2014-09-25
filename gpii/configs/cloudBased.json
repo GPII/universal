@@ -1,7 +1,8 @@
 {
     "typeName": "cloudBased.development",
     "includes": [
-        "../node_modules/matchMaker/configs/development.json",
+        "../node_modules/matchMakerFramework/configs/development.all.local.json",
+        "../node_modules/flatMatchMaker/configs/development.all.local.json",
         "../node_modules/lifecycleManager/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
     ]

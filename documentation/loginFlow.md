@@ -1,52 +1,20 @@
 ## User login flow
 
-Description of the various functions/events that happens on user login:
+The User login process is as follows:
 
-`gpii.request.flowManager.onUserLogin()` (_flowmanager/src/UserLogin.js_) listens to the `/user/:token/login` url and is called with token. Fires event `onUserListener`
-
-The `onUserListener` event is listened to by:
-* `gpii.request.flowManager.getDevice()` (_flowmanager/src/FlowManagerUtilities.js_), which fetches the device reporter data. When this has been fetched an `onDevice` event is fired.
-* `gpii.request.flowManager.getPreferences` (_flowmanager/src/FlowManagerUtilities.js_), which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
-
-The event `onReadyToMatch` listens to the two events: `onPreferences` and `onDevice` and is fired when the two events happen. This is listened to by the ``gpii.request.flowManager.getMatch()` function (_flowmanager/src/FlowManagerUtilities.js_). This function in turn calls `gpii.matchMakerFramework.match()` (_matchMaker/src/MatchMakerFramework.js_).
-
-
-
-
-
-## Matchmaker Framework
-
-A locally running component, with the responsiblity of:
-* Doing the preprocessing - that is, preparing the input payload for the mathmakers
-* Making the decision of which MM to call (ie. hybrid matchmaking), and call that MM
-* Doing the post-processing - that is, taking the return payload from the matchmakers and transformat
+1. GET request is sent to the `/user/:token/login` URL and handled by the `{userLogin}.handle` function which fires the `onToken` event is fired.
+1. `onToken` event has two listeners:
+** `{userLogin}.getDevice`: which fetches the device reporter data. When this has been fetched an `onDevice` event is fired.
+** `{flowManagerUtilities}.getPreferences`: which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
+1. `onDevice` event has one listener:
+** `{flowManagerUtilities}.getSolutions`: which fetches the solutions registry and filters it based on the device reporter info. The `onSolutionsRegistry` event is fired with the result.
+1. the `onReadyToMatch` event is listening to the three events described above: `onDevice`, `onPreferences` and `onSolutionsRegistry`. When these three events have been fired, the `onReadyToMatchEvent` will be fired.
+1. `onReadyToMatch` has two listeners:
+** `{userLogin}.recordMatch` which stores the preferences, device and solution info to the request object.
+** `{flowManagerUtitilies}.runMatchMakerFramework`: which kicks off the matchMaker framework. For the purpose of describing the overall login flow, it suffices to say that when the matchmaker framework has finished the matchmaking process, the `onMatch` event is called on the flow manager. For more details on the match maker frameworks internal workings, see: [Match Maker Framework Documentation](MatchMakerFramework.md)
+1. `onMatch` is being listened to by `{userLogin}.runContextManager` which in turns fires up the (Context Manager)[ContextManager.md] which evaluates the Match Maker Frameworks output and fires the `onReadyForLifecycle` event.
+1. `onReadyForLifecycle` is being listened to by `{userLogin}.sendToLifecycle` which applies the settings to the system.
 
 
 
-##TODOs:
-* Currently matchmakerframework is a kettle app... it shouldn't have to be but seems to be misbehaving if not on callbacks when getting solutions  registry entry.
-* Check at solution registry stadig fungerer som server - at queries virker
-* Remove MM utilities fil et andet sted hen
-* Flat MM doesn't work for application specific settings (in particular empty blocks)
-* Support for the http://registry.gpii.net/applications/some.app.id/setting8 conversion into opague blocks (or vice versa)
-* Meta data sections
-* Get the canopy matchmaker working again
-* Copy over copyrights from documents - currently original authors are not there
-##Changes to the original proposal
-* inverseCapabilities block has been **renamed to inferredCommonTerms** and will be **indexed by context**, then application id
-* Solution registry keyed by ID - including in the payloads sent to the MM.
-* currently MMframework first and event on contextManager - should be contextManager listening to an event on MMFramework.
-* Consider keeping token in MM input as well?
-* Describe flow for user login
-* Describe flow for user logout
-* Describe flow for changed context
-* Describe flow for update to/from PCP
-* Fix up flow for different components to be a bit more sensible
-
-##Major framework changes:
-* Solutions registry keyed by solution id. solution id variable removed from the entry
-* All transformations in the solutionsregistry changed to flat
-
-## MM Ideas for canopy
-* to avoid firing two solutions (ie. knowing which overlab) have an array with "should only be launched in one instance". eg: screenReader.speechRate, display.screenEnhancement.magnification, control.onscreenKeyboard, control.speechRecognition, etc., etc. The system would then set settings for all the relevant applications, but then have `active: false`. Tie breaks would be priority or 'deepest match'
 
