@@ -38,11 +38,11 @@ var testIncludes = [
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
-    // "./acceptanceTests/AcceptanceTests_gnome_keyboard.js",
-    // "./acceptanceTests/AcceptanceTests_jme.js",
-    // "./acceptanceTests/AcceptanceTests_chrome.js",
-    // "./acceptanceTests/AcceptanceTests_smarthouses.js",
-    // "./acceptanceTests/AcceptanceTests_empty.js",
+    "./acceptanceTests/AcceptanceTests_gnome_keyboard.js",
+    "./acceptanceTests/AcceptanceTests_jme.js",
+    "./acceptanceTests/AcceptanceTests_chrome.js",
+    "./acceptanceTests/AcceptanceTests_smarthouses.js",
+    "./acceptanceTests/AcceptanceTests_empty.js",
     "./DevelopmentTests.js"
 ];
 var tests = [];

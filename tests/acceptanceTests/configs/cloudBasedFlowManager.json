@@ -22,7 +22,8 @@
             "preferences": "http://localhost:8081/preferences/%token",
             "lifecycleManagerServer": "",
             "deviceReporter": "",
-            "matchMaker": "http://localhost:8081/match"
+            "matchMaker": "http://localhost:8081/match",
+            "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         }
     },
     "includes": [

@@ -235,7 +235,7 @@ gpii.acceptanceTesting.buildTests = function (testDefs) {
 gpii.acceptanceTesting.FMRequestListenerMaker = function (expected) {
     return function (data) {
         jqUnit.assertDeepEq("Checking the returned data from the flowmanager: ",
-            JSON.parse(data), expected);
+            expected, JSON.parse(data));
     };
 };
 

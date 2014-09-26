@@ -5,7 +5,7 @@
 
 
 ##TODOs:
-* Get inferredSettings tests working again
+* onMatch and onReadyToMatch do the same things in settings.js and userlogin.js - merge and update documentation accordingly
 * 3) Finalize flow of the components - then start writing tests
 * Write tests for the flat MM
 * Flat MM: supplement preferences with the ones inverse
