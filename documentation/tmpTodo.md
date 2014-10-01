@@ -5,11 +5,8 @@
 
 
 ##TODOs:
-* URL /token doesn't work
-* get remaining tests workign:
-    - Save
+* get remaining tests working:
     - update
-    - token
 Flat MM remaining:
 * Flat MM doesn't work for application specific settings (in particular empty blocks)
 * Write tests
@@ -17,7 +14,7 @@ Flat MM remaining:
 * Write documentation for the Flat MM
 
 * Check at solution registry stadig fungerer som server - at queries virker
-* slet matchmkaser folder helt
+* slet matchmaker folder helt
 * Support for the http://registry.gpii.net/applications/some.app.id/setting8 conversion into opague blocks (or vice versa)
 * Meta data sections - kommer de hen hvor de skal?
 * Get the canopy matchmaker working again
@@ -34,6 +31,9 @@ Flat MM remaining:
 * Implement the context evaluation proper
 * Implement the sending of PCP stuff to PCP
 * Ensure that the solution id in capabilities blocks is no longer a requirement for the flat MM
+* Clean up configs
+* Ensure top-level cloud based configs
+* Ensure that "save" works in cloudbased mode
 
 
 ##Changes to the original proposal
