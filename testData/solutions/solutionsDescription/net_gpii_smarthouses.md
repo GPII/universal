@@ -4,7 +4,7 @@
 
 * __Name__: Smart House
 * __Id__: net.gpii.smarthouses
-* __Platform__: Linux, Windows
+* __Platform__: Web
 * __Contact__: Evgeni Tsakov <etsakov@asteasolutions.com>
 
 ## Description
