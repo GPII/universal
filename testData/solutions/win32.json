@@ -65,51 +65,6 @@
                 },
                 "restoreSettings"
             ]
-        }   
-    },
-    
-    {
-        "name": "smarthouse",
-        "id": "net.gpii.smarthouses",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.net\\.gpii\\.smarthouses.id",
-                    "display.applications.net\\.gpii\\.smarthouses.name",
-                    "language",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.-provisional-highContrastTheme",
-                    "-provisional-general.-provisional-volume"
-                ],
-                "capabilitiesTransformations": {
-                    "fontSize": "display.screenEnhancement.fontSize",
-                    "language": "language",
-                    "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
-                    "volume": "-provisional-general.-provisional-volume"
-                }
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" https://smarthouse-dev.remex.hdm-stuttgart.de/#/?token=${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
-                }
-            ]
         }
     },
 
