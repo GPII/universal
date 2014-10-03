@@ -24,11 +24,11 @@ var testDefs = [
     {
         name: "Acceptance test with 'cloudbased' flow manager for smarthouse1 token",
         token: "smarthouse1",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
         expected: {
             "net.gpii.smarthouses": {
-                "volume": "100",
-                "fontSize": "40",
+                "volume": 30,
+                "fontSize": 32,
                 "language": "gr",
                 "highContrastTheme": "black-yellow"
             }
@@ -37,11 +37,11 @@ var testDefs = [
     {
         name: "Acceptance test with 'cloudbased' flow manager for smarthouse2 token",
         token: "smarthouse2",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
         expected: {
             "net.gpii.smarthouses": {
-                "volume": "30",
-                "fontSize": "25",
+                "volume": 100,
+                "fontSize": 19,
                 "language": "en",
                 "highContrastTheme": "defaultTheme"
             }

@@ -166,5 +166,75 @@
                 }
             }
         ]
+    },
+    {
+        "name": "smarthouse",
+        "id": "net.gpii.smarthouses",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.net\\.gpii\\.smarthouses.id",
+                    "display.applications.net\\.gpii\\.smarthouses.name",
+                    "language",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.-provisional-highContrastTheme",
+                    "-provisional-general.-provisional-volume"
+                ],
+                "capabilitiesTransformations": {
+                    "fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.screenEnhancement.fontSize",
+                                    "factor": 1.33
+                                }
+                            }
+                        }
+                    },
+                    "language": "language",
+                    "highContrastTheme": "display.screenEnhancement.-provisional-highContrastTheme",
+                    "volume": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "-provisional-general.-provisional-volume",
+                            "ranges": [
+                                {
+                                    "upperBound": 0,
+                                    "output": 0
+                                },
+                                {
+                                    "upperBound": 1,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.round",
+                                            "input": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.linearScale",
+                                                    "valuePath": "-provisional-general.-provisional-volume",
+                                                    "factor": 100
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "output": 100
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
     }
 ]

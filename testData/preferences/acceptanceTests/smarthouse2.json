@@ -1,6 +1,6 @@
 {
    "http://registry.gpii.org/common/language": [{ "value": "en"}],
-   "http://registry.gpii.org/common/volume": [{"value": "30"}],
+   "http://registry.gpii.org/common/volume": [{"value": 1.0}],
    "http://registry.gpii.org/common/highContrastTheme": [{"value": "defaultTheme"}],
-   "http://registry.gpii.org/common/fontSize": [{"value": "25"}]
+   "http://registry.gpii.org/common/fontSize": [{"value": 14}]
 }
