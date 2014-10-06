@@ -22,7 +22,6 @@
     "http://registry\\.gpii\\.net/common/keyEcho": "display.screenReader.-provisional-keyEcho",
     "http://registry\\.gpii\\.net/common/wordEcho": "display.screenReader.-provisional-wordEcho",
     "http://registry\\.gpii\\.net/common/announceCapitals": "display.screenReader.-provisional-announceCapitals",
-    "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": "display.screenReader.-provisional-brailleOutput",
     "http://registry\\.gpii\\.net/common/punctuationVerbosity": "display.screenReader.-provisional-punctuationVerbosity",
     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled": "display.screenReader.-provisional-screenReaderTTSEnabled",
     "http://registry\\.gpii\\.net/common/pitch": "display.textReadingHighlight.pitch",

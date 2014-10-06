@@ -1,0 +1,5 @@
+==preferencesServer.json==
+
+Preferences server running as only thing on the server
+
+**WARNING: This config this is untrusted and most likely broken**

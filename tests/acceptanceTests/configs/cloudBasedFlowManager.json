@@ -1,13 +1,9 @@
 {
     "typeName": "acceptanceTests.base.cloudBased",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
-                "type": "kettle.server",
                 "options": {
-                    "logging": true,
-                    "port": 8081,
                     "components": {
                         "rawPreferencesServer": {
                             "options": {
@@ -17,19 +13,9 @@
                     }
                 }
             }
-        },
-        "cloudBasedUrls": {
-            "preferences": "http://localhost:8081/preferences/%token",
-            "lifecycleManagerServer": "",
-            "deviceReporter": "",
-            "matchMaker": "http://localhost:8081/match",
-            "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         }
     },
     "includes": [
-        "../../../gpii/configs/cloudBased.json",
-        "../../../gpii/node_modules/flowManager/configs/cloudBased.json",
-        "../../../gpii/node_modules/rawPreferencesServer/configs/development.json",
-        "../../../gpii/node_modules/preferencesServer/configs/development.json"
+        "../../../gpii/configs/cloudBased.development.all.local.json"
     ]
 }
