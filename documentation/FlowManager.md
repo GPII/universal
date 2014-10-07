@@ -54,16 +54,6 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** A payload with the token (keyed by `token`) and the stored preferences (keyed by `preferences`).
 
 
-#### Update system configuration (/update) //TODO
-* **description**: Apply updated preferences (of currently logged-in user) to the system
-* **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
-* **route:** `/update`
-* **method:** `io`
-* **body:** The preferences to save as a JSON structure
-* **return:** A payload with the token (keyed by `token`) and the stored preferences (keyed by `preferences`).
-
-
-
 #### Get settings from Online Flowmanager (/:token/settings/:device)
 * **description**: Get settings from the online flowmanager
 * **Supported modes**: Cloud based (online) flowmanager only

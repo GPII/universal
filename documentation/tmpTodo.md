@@ -1,12 +1,9 @@
 ##TODOs:
-* slet matchmaker folder helt
-* Get the canopy matchmaker working again
-* Copy over and ensure that canopy MM tests are still passing
-* Add readme on canopy MM
 * Code comments/review changes
 * Check for TODO's
 * Merge with Antranigs updates
 * JSONlint/JShint
+* lifecycle manager tests fixing
 
 ##Todo round 2+
 * Configs cleanup
