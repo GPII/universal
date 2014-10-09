@@ -10,7 +10,10 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-var fluid = require("./gpii/index.js"),
-    gpii = fluid.registerNamespace("gpii");
+// A simple boostrap file which allows a default configuration of the GPII to be
+// simply started from the command line from universal
+
+var fluid = require("./index.js")
+     gpii = fluid.registerNamespace("gpii");
 
 gpii.start();

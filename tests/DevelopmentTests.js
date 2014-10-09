@@ -13,13 +13,20 @@
 "use strict";
 
 var fluid = require("infusion"),
-    path = require("path"),
     jqUnit = fluid.require("jqUnit"),
+    path = require("path"),
     configPath = path.resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
-    kettle = require("kettle");
+    kettle = fluid.registerNamespace("kettle");
 
-kettle.loadTestingSupport();
+require("../index.js");
+
+gpii.loadTestingSupport();
+
+// These tests simply execute the login and logout cycle for a user with some basic
+// dummy preference settings that will not attempt to configure any solutions. We
+// observe that the expected responses are received to login and logout and that no
+// errors are triggered
 
 fluid.registerNamespace("gpii.tests.development");
 
@@ -35,39 +42,15 @@ gpii.tests.development.testLogoutResponse = function (data) {
         gpii.tests.development.token + " was successfully logged out.", data);
 };
 
-var testDefs = [{
-    name: "Flow Manager development tests.",
+gpii.tests.development.testDefs = [{
+    name: "Flow Manager development tests",
     expect: 2,
     config: {
         nodeEnv: "fm.ps.sr.dr.mm.os.lms.development",
         configPath: configPath
     },
-    components: {
-        loginRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                requestOptions: {
-                    path: "/user/%token/login",
-                    port: 8081
-                },
-                termMap: {
-                    token: gpii.tests.development.token
-                }
-            }
-        },
-        logoutRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                requestOptions: {
-                    path: "/user/%token/logout",
-                    port: 8081
-                },
-                termMap: {
-                    token: gpii.tests.development.token
-                }
-            }
-        }
-    },
+    gradeNames: "gpii.test.loginLogout",
+    token: gpii.tests.development.token,
     sequence: [{
         func: "{loginRequest}.send"
     }, {
@@ -81,4 +64,4 @@ var testDefs = [{
     }]
 }];
 
-module.exports = kettle.test.bootstrapServer(testDefs);
+module.exports = kettle.test.bootstrapServer(gpii.tests.development.testDefs);
