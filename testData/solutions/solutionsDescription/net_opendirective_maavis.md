@@ -36,14 +36,14 @@ When using a NP set that makes use of Maavis, it should be launched and configur
 
 ### High contrast
 
-NP set: universal/testData/preferences/acceptanceTests/maavis_highcontrast.json
+NP set: [preferences/acceptanceTests/maavis_highcontrast.json](https://github.com/GPII/universal/blob/GPII-881/testData/preferences/acceptanceTests/maavis_highcontrast.json)
 
 * When logging in, Maavis should be started automatically and you should see the yellow on black theme.
 * When logging out, Maavis should be stopped and default settings will be restored.
 
 ### Self voicing
 
-NP set: universal/testData/preferences/acceptanceTests/maavis_selfvoicing.json
+NP set: [preferences/acceptanceTests/maavis_selfvoicing.json](https://github.com/GPII/universal/blob/GPII-881/testData/preferences/acceptanceTests/maavis_selfvoicing.json)
 
 * When logging in, Maavis should be started automatically and you should see the yellow on black theme.
 * When logging out, Maavis should be stopped and default settings will be restored.
