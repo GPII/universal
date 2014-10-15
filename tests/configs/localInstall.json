@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "../../../gpii/configs/fm.ps.sr.dr.mm.os.lms.development.json"
+        "${universal}/gpii/configs/fm.ps.sr.dr.mm.os.lms.development.json"
     ]
 }

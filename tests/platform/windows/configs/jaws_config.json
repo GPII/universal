@@ -1,0 +1,21 @@
+{
+    "typeName": "acceptanceTests.jaws",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/jaws.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "../../../../node_modules/universal/tests/acceptanceTests/configs/localInstall.json"
+    ]
+}

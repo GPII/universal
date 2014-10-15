@@ -64,4 +64,4 @@ gpii.tests.development.testDefs = [{
     }]
 }];
 
-module.exports = kettle.test.bootstrapServer(gpii.tests.development.testDefs);
+kettle.test.bootstrapServer(gpii.tests.development.testDefs);

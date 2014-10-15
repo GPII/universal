@@ -1,0 +1,10 @@
+AcceptanceTests_jaws.js
+
+Descriptions:
+This will run the acceptance tests for the JAWS screenreader (Freedom Scientific). It uses 2 NP sets: jaws_common.json and jaws_application.json
+
+Prerequisites:
+* JAWS needs to be installed
+* In JAWS, a profile should be created by going to "options"->voices->Voice Adjustment. Make sure that "Eloquence - (factory)" is selected in the profile name. Click "Save As.." button and write "cloud4all" as the name (no quotes). Once this is done, Jaws should be working properly
+
+Has been tested with JAWS 15.0

@@ -1,0 +1,9 @@
+AcceptanceTests_nvda.js
+
+Descriptions:
+This will run the acceptance tests for the free and open source screen reader NVDA. It uses 3 NP sets: screenreader_orca, screenreader_nvda and screenreader_common.
+
+Requirements:
+* NVDA installed
+
+To run these tests, you need to have NVDA INSTALLED. NVDA is free and can be downloaded from: http://www.nvaccess.org/download/
