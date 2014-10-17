@@ -14,20 +14,25 @@
 
 var fluid = require("infusion"),
     path = require("path"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
+
+fluid.registerNamespace("gpii.test.integration");
 
 require("../index.js");
 
 gpii.loadTestingSupport();
 
+gpii.test.integration.runSuite = function (files, rootGrades) {
+    fluid.each(files, function (oneFile) {
+        var filePath = path.resolve(__dirname, "platform", oneFile);
+        var fileDir = path.dirname(filePath);
+        var record = require(filePath);
+        gpii.test.runTests(record, fileDir, ["gpii.test.integration.testCaseHolder"].concat(rootGrades));
+    });
+};
+
 var windowsFiles = require("./platform/index-windows.js");
+var linuxFiles = require("./platform/index-linux.js");
 
-console.log("Got windows files ", windowsFiles);
-
-fluid.each(windowsFiles, function (oneFile) {
-    var filePath = path.resolve(__dirname, "platform", oneFile);
-    var fileDir = path.dirname(filePath);
-    var record = require(filePath);
-    gpii.test.runTests(record, fileDir, ["gpii.test.integration.testCaseHolder"]);
-});
+gpii.test.integration.runSuite(windowsFiles, ["gpii.test.integration.testCaseHolder.windows"]);
+gpii.test.integration.runSuite(linuxFiles, ["gpii.test.integration.testCaseHolder.linux"]);

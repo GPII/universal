@@ -1,6 +1,6 @@
 /*
 
-GPII Acceptance Testing
+GPII Integration and Acceptance Testing
 
 Copyright 2014 Raising the Floor International
 
@@ -18,6 +18,8 @@ var fluid = require("universal"),
     
 gpii.loadTestingSupport();
 
+fluid.registerNamespace("gpii.tests.windows");
+
 gpii.tests.windows.nvda = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
@@ -27,14 +29,14 @@ gpii.tests.windows.nvda = [
                 "data": [
                     {
                         "settings": {
-                            "speech.espeak.rate": "17.20430107526882",
-                            "speech.espeak.volume": "80",
-                            "speech.espeak.pitch": "60",
+                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.volume": 80,
+                            "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": true,
                             "virtualBuffers.autoSayAllOnPageLoad": false,
                             "speech.synth": "espeak",
                             "speech.outputDevice": "Microsoft Sound Mapper",
-                            "speech.symbolLevel": "300",
+                            "speech.symbolLevel": 300,
                             "speech.espeak.voice": "en\\en-wi",
                             "reviewCursor.followFocus": false,
                             "reviewCursor.followCaret": true,
@@ -69,12 +71,12 @@ gpii.tests.windows.nvda = [
                 "data": [
                     {
                         "settings": {
-                            "speech.espeak.rate": "17.20430107526882",
-                            "speech.espeak.volume": "75",
-                            "speech.espeak.pitch": "15",
+                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.volume": 75,
+                            "speech.espeak.pitch": 15,
                             "speech.espeak.rateBoost": true,
                             "virtualBuffers.autoSayAllOnPageLoad": false,
-                            "speech.symbolLevel": "300",
+                            "speech.symbolLevel": 300,
                             "speech.espeak.voice": "en\\en-wi",
                             "reviewCursor.followFocus": false,
                             "reviewCursor.followCaret": true,
@@ -109,8 +111,8 @@ gpii.tests.windows.nvda = [
                 "data": [
                     {
                         "settings": {
-                            "speech.symbolLevel": "300",
-                            "speech.espeak.rate": "17.20430107526882",
+                            "speech.symbolLevel": 300,
+                            "speech.espeak.rate": 17.20430107526882,
                             "speech.espeak.voice": "en\\en-wi",
                             "keyboard.speakTypedWords": true,
                             "speech.espeak.rateBoost": true,
@@ -138,9 +140,8 @@ gpii.tests.windows.nvda = [
     }
 ];
 
-module.exports = {
-    testDefs: "gpii.tests.windows.nvda",
-    config:   "nvda_config"
-};
-
-// gpii.acceptanceTesting.windows.runTests("nvda_config", testDefs);
+module.exports = gpii.test.bootstrap({
+    testDefs:  "gpii.tests.windows.nvda",
+    configName: "windows-nvda-config",
+    configPath: "configs"
+}, module, require, __dirname);

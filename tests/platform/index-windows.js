@@ -17,7 +17,7 @@ https://github.com/gpii/universal/LICENSE.txt
 // This is a useful site for manipulating which test fixtures will run during the development process
 
 module.exports = [
-    "windows/builtIn-testSpec.js",
-//    "windows/jaws-testSpec.js",
-//    "windows/nvda-testSpec.js"
+    "windows/windows-builtIn-testSpec.js",
+    "windows/windows-jaws-testSpec.js",
+    "windows/windows-nvda-testSpec.js"
 ];

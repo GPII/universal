@@ -46,10 +46,10 @@ gpii.tests.development.testDefs = [{
     name: "Flow Manager development tests",
     expect: 2,
     config: {
-        nodeEnv: "fm.ps.sr.dr.mm.os.lms.development",
+        configName: "fm.ps.sr.dr.mm.os.lms.development",
         configPath: configPath
     },
-    gradeNames: "gpii.test.loginLogout",
+    gradeNames: "gpii.test.common.testCaseHolder",
     token: gpii.tests.development.token,
     sequence: [{
         func: "{loginRequest}.send"

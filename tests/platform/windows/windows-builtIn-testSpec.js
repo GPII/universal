@@ -1,6 +1,6 @@
 /*
 
-GPII Acceptance Testing
+GPII Integration and Acceptance Testing
 
 Copyright 2014 Raising the Floor International
 
@@ -312,10 +312,6 @@ gpii.tests.windows.builtIn = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn",
-    configName: "builtIn_config",
+    configName: "windows-builtIn-config",
     configPath: "configs"
 }, module, require, __dirname);
-
-//gpii.test.cloudBased.bootstrap(gpii.tests.windows.acceptance.builtIn, __dirname);
-
-//gpii.acceptanceTesting.windows.runTests("builtIn_config", testDefs);

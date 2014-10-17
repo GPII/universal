@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.jaws",
+    "typeName": "acceptanceTests.windows.builtIn",
     "options": {
         "components": {
             "server": {
@@ -7,7 +7,7 @@
                     "components": {
                         "deviceReporter": {
                             "options": {
-                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/jaws.json"
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/win7_builtIn.json"
                             }
                         }
                     }
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "../../../../node_modules/universal/tests/acceptanceTests/configs/localInstall.json"
+        "${universal}/tests/configs/localInstall.json"
     ]
 }

@@ -1,0 +1,10 @@
+AcceptanceTests_builtIn.js
+
+Description:
+
+This tests the built in functionality of GNU/Linux+GNOME, incl. magnifier,
+onscreen keyboard, etc. It tests the system using three NP sets:
+ (1) os_common: common terms compatible with windows built in settings
+ (2) os_win7: application specific windows settings
+ (3) os_gnome: application specific gnome settings
+

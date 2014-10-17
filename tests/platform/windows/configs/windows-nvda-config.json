@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.nvda",
+    "typeName": "acceptanceTests.windows.nvda",
     "options": {
         "components": {
             "server": {
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "../../../../node_modules/universal/tests/acceptanceTests/configs/localInstall.json"
+        "${universal}/tests/configs/localInstall.json"
     ]
 }

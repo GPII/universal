@@ -1,4 +1,4 @@
-AcceptanceTests_jaws.js
+windows-jaws-testSpec.js
 
 Descriptions:
 This will run the acceptance tests for the JAWS screenreader (Freedom Scientific). It uses 2 NP sets: jaws_common.json and jaws_application.json

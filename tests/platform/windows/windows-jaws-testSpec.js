@@ -22,14 +22,14 @@ fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.jaws = [
     {
-        name: "Testing NP set 'jaws_application' using Flat matchmaker",
+        name: "Testing NP set \"jaws_application\" using Flat matchmaker",
         token: "jaws_application",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
                     {
                         "settings": {
-                            "cloud4allVoiceProfile-GlobalContext.Speed": "115"
+                            "cloud4allVoiceProfile-GlobalContext.Speed": 115
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
@@ -47,15 +47,15 @@ gpii.tests.windows.jaws = [
             }
         ]
     }, {
-        name: "Testing NP set 'jaws_common' using Flat matchmaker",
+        name: "Testing NP set \"jaws_common\" using Flat matchmaker",
         token: "jaws_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
                     {
                         "settings": {
-                            "cloud4allVoiceProfile-GlobalContext.Speed": "37.875",
-                            "cloud4allVoiceProfile-GlobalContext.Punctuation": "3"
+                            "cloud4allVoiceProfile-GlobalContext.Speed": 37.875,
+                            "cloud4allVoiceProfile-GlobalContext.Punctuation": 3
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
@@ -75,9 +75,8 @@ gpii.tests.windows.jaws = [
     }
 ];
 
-module.exports = {
-    testDefs: "gpii.tests.windows.jaws",
-    config:   "jaws_config"
-};
-
-//gpii.acceptanceTesting.windows.runTests("jaws_config", testDefs);
+module.exports = gpii.test.bootstrap({
+    testDefs:  "gpii.tests.windows.jaws",
+    configName: "windows-jaws-config",
+    configPath: "configs"
+}, module, require, __dirname);
