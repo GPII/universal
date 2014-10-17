@@ -23,7 +23,7 @@ fluid.require("universal/tests/AcceptanceTests", require);
 
 gpii.acceptanceTesting.flowManager.runTests = function (testDefs) {
     var gpiiConfig = {
-        nodeEnv: "cloudBasedFlowManager",
+        configName: "cloudBasedFlowManager",
         configPath: path.resolve(__dirname, "./configs")
     };
     fluid.each(testDefs, function (testDef) {

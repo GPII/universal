@@ -19,16 +19,16 @@ Example of a basic GET request to the P;d Preferences Server (given that the Pre
 Return payload:
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": true,
-    "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
-    "http://registry.gpii.net/common/cursorSpeed": 0.850,
-    "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
-    "http://registry.gpii.net/common/unknown": true,
-    "http://registry.gpii.net/applications/org.alsa-project": {
+    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+    "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
+    "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
+    "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
+    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
+    "http://registry.gpii.net/common/unknown": [{ "value": true }],
+    "http://registry.gpii.net/applications/org.alsa-project": [{ "value": {
         "volume": 14,
         "pitch": 100
-    }
+    }}]
 }
 ```
 
@@ -49,16 +49,16 @@ Example POST body:
 
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": true,
-    "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
-    "http://registry.gpii.net/common/cursorSpeed": 0.850,
-    "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
-    "http://registry.gpii.net/common/unknown": true,
-    "http://registry.gpii.net/applications/org.alsa-project": {
+    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+    "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
+    "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
+    "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
+    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
+    "http://registry.gpii.net/common/unknown": [{ "value": true }],
+    "http://registry.gpii.net/applications/org.alsa-project": [{ "value": {
         "volume": 14,
         "pitch": 100
-    }
+    } }]
 }
 ```
 
@@ -70,16 +70,16 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 {
     "token": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
-        "http://registry.gpii.net/common/onscreenKeyboard": true,
-        "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
-        "http://registry.gpii.net/common/cursorSpeed": 0.850,
-        "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-        "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
-        "http://registry.gpii.net/common/unknown": true,
-        "http://registry.gpii.net/applications/org.alsa-project": {
+        "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+        "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0 }].120,
+        "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
+        "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
+        "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
+        "http://registry.gpii.net/common/unknown": [{ "value": true }],
+        "http://registry.gpii.net/applications/org.alsa-project": [{ "value": {
             "volume": 14,
             "pitch": 100
-        }
+        } }]
     }
 }
 ```
@@ -97,16 +97,16 @@ Example POST body:
 
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": true,
-    "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
-    "http://registry.gpii.net/common/cursorSpeed": 0.850,
-    "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
-    "http://registry.gpii.net/common/unknown": true,
-    "http://registry.gpii.net/applications/org.alsa-project": {
+    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+    "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
+    "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
+    "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
+    "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
+    "http://registry.gpii.net/common/unknown": [{ "value": true }],
+    "http://registry.gpii.net/applications/org.alsa-project": [{ "value": {
         "volume": 14,
         "pitch": 100
-    }
+    } }]
 }
 ```
 
@@ -118,16 +118,16 @@ Given that the above body was sent to the `http://preferences.gpii.net/oldPrefer
 {
     "token": "mytoken",
     "preferences": {
-        "http://registry.gpii.net/common/onscreenKeyboard": true,
-        "http://registry.gpii.net/common/-provisional-initDelay": 0.120,
-        "http://registry.gpii.net/common/cursorSpeed": 0.850,
-        "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-        "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": true,
-        "http://registry.gpii.net/common/unknown": true,
-        "http://registry.gpii.net/applications/org.alsa-project": {
+        "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+        "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
+        "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
+        "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
+        "http://registry.gpii.net/common/-provisional-mouseEmulationEnabled": [{ "value": true }],
+        "http://registry.gpii.net/common/unknown": [{ "value": true }],
+        "http://registry.gpii.net/applications/org.alsa-project": [{ "value": {
             "volume": 14,
             "pitch": 100
-        }
+        } }]
     }
 }
 ```

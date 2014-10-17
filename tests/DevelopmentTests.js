@@ -16,6 +16,7 @@ var fluid = require("infusion"),
     path = require("path"),
     jqUnit = fluid.require("jqUnit"),
     configPath = path.resolve(__dirname, "../gpii/configs"),
+    gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
 fluid.require("kettle/test/utils/js/KettleTestUtils", require);
@@ -38,12 +39,12 @@ var testDefs = [{
     name: "Flow Manager development tests.",
     expect: 2,
     config: {
-        nodeEnv: "development.all.local",
+        configName: "development.all.local",
         configPath: configPath
     },
     components: {
         loginRequest: {
-            type: "kettle.tests.request.http",
+            type: "kettle.test.request.http",
             options: {
                 requestOptions: {
                     path: "/user/%token/login",
@@ -55,7 +56,7 @@ var testDefs = [{
             }
         },
         logoutRequest: {
-            type: "kettle.tests.request.http",
+            type: "kettle.test.request.http",
             options: {
                 requestOptions: {
                     path: "/user/%token/logout",
@@ -80,4 +81,4 @@ var testDefs = [{
     }]
 }];
 
-module.exports = kettle.tests.bootstrap(testDefs);
+module.exports = kettle.test.bootstrapServer(testDefs);
