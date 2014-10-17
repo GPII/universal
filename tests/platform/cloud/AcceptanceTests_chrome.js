@@ -12,18 +12,15 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global require*/
-
 "use strict";
 var fluid = require("universal"),
-    kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
-
-fluid.require("./AcceptanceTests_include", require);
+    
+gpii.loadTestingSupport();
 
 var testDefs = [
     {
-        name: "Acceptance test for background color change in chrome",
+        name: "Acceptance test for background color change in Chrome",
         token: "chrome_high_contrast",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
@@ -33,13 +30,13 @@ var testDefs = [
                 "magnifierEnabled": false,
                 "magnification": 1,
                 "highContrastTheme":"white-black",
-                "highContrastEnabled":true,
-                "screenReaderTTSEnabled":false
+                "highContrastEnabled": true,
+                "screenReaderTTSEnabled": false
             }
         }
     },
     {
-        name: "Acceptance test for font size transformation in chrome",
+        name: "Acceptance test for font size transformation in Chrome",
         token: "chrome_font_size",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
@@ -48,13 +45,13 @@ var testDefs = [
                 "invertColours": false,
                 "magnifierEnabled": false,
                 "magnification": 1,
-                "highContrastEnabled":false,
-                "screenReaderTTSEnabled":false
+                "highContrastEnabled": false,
+                "screenReaderTTSEnabled": false
             }
         }
     },
     {
-        name: "Acceptance test for magnification transformation in chrome",
+        name: "Acceptance test for magnification transformation in Chrome",
         token: "chrome_magnification",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
@@ -63,12 +60,11 @@ var testDefs = [
                 "invertColours": false,
                 "magnifierEnabled": true,
                 "magnification": 2,
-                "highContrastEnabled":false,
-                "screenReaderTTSEnabled":false
+                "highContrastEnabled": false,
+                "screenReaderTTSEnabled": false
             }
         }
     }
 ];
 
-testDefs = gpii.acceptanceTesting.flowManager.runTests(testDefs);
-module.exports = kettle.tests.bootstrap(testDefs);
+module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);

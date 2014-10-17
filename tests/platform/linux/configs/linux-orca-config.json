@@ -1,0 +1,21 @@
+{
+    "typeName": "acceptanceTests.linux.orca",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/orca.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/tests/configs/localInstall.json"
+    ]
+}

@@ -7,7 +7,7 @@
                     "http://registry.gpii.net/applications/org.nvda-project": {
                         "speech.synth": "espeak",
                         "speech.outputDevice": "Microsoft Sound Mapper",
-                        "speech.symbolLevel": "300",
+                        "speech.symbolLevel": 300,
                         "speech.espeak.rate": 17.20430107526882,
                         "speech.espeak.voice": "en\\en-wi",
                         "speech.espeak.pitch": 60,

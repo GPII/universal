@@ -11,14 +11,11 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global require*/
-
 "use strict";
 var fluid = require("universal"),
-    kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
-
-fluid.require("./AcceptanceTests_include", require);
+    
+gpii.loadTestingSupport();
 
 var testDefs = [
     {
@@ -29,5 +26,4 @@ var testDefs = [
     }
 ];
 
-testDefs = gpii.acceptanceTesting.flowManager.runTests(testDefs);
-module.exports = kettle.tests.bootstrap(testDefs);
+module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);

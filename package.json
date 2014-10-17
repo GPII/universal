@@ -3,19 +3,18 @@
     "description": "Cross platform, core components of the GPII personalization infrastructure.",
     "version": "0.1.0",
     "author": "GPII",
-    "bugs": "http://wiki.gpii.net/index.php/Main_Page",
+    "bugs": "http://issues.gpii.net/browse/GPII",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "git://github.com/fluid-project/infusion.git#d591ebe6e5f2475dffda1ffbdd12d4247de9de09",
+        "infusion": "git://github.com/amb26/infusion.git#8a5c15f98d3c086e0bfae85f3355df1b70c040b8",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
-        "when": "~1.8.1",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/amb26/kettle.git#6f493ee75d8c90f97f6c69c961f177b98f0fda9e"
+        "kettle": "git://github.com/amb26/kettle.git#b93c81dd41ecd05a3a79c81137a6d4ff6a258e03"
     },
     "devDependencies": {
-        "jqUnit": "git://github.com/kaspermarkus/node-jqUnit.git#7e7e79303e354915842931424afd427c7d61d36a",
+        "jqUnit": "git://github.com/amb26/node-jqUnit.git#116bdc0ddb2d6e4d144e7d137edb71e421ab768b",
         "grunt": "~0.4.4",
         "grunt-shell": "0.6.4",
         "grunt-contrib-jshint": "~0.9.0",
@@ -39,9 +38,9 @@
         "evented"
     ],
     "repository": "git://github.com/GPII/universal.git",
-    "main": "./gpii/index.js",
+    "main": "./index.js",
     "engines": {
-        "node": ">=0.6.0"
+        "node": ">=0.8.0"
     },
     "scripts": {
         "test": "node tests/all-tests.js"

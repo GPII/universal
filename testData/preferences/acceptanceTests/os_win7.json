@@ -38,7 +38,7 @@
                         "FollowFocus": 0,
                         "FollowCaret": 1,
                         "FollowMouse": 1,
-                        "Invert": true,
+                        "Invert": 1,
                         "Magnification": 150,
                         "MagnificationMode": 3
                     }

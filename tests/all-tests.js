@@ -16,36 +16,30 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    kettle = fluid.require("kettle", require);
+    kettle = fluid.require("kettle");
 
 kettle.loadTestingSupport();
-kettle.test.allTests = true;
 
 var testIncludes = [
-    // Run all tests included in the list.
-    "../gpii/node_modules/flowManager/test/SaveTests.js",
-    // "../gpii/node_modules/flowManager/test/UpdateTests.js",
-    // "../gpii/node_modules/flowManager/test/GetTokenTests.js",
-    // "../gpii/node_modules/matchMaker/test/ProxyTests.js",
+    // "../gpii/node_modules/flowManager/test/SaveTests.js",
+    "../gpii/node_modules/flowManager/test/UpdateTests.js",
+    "../gpii/node_modules/flowManager/test/GetTokenTests.js",
+    "../gpii/node_modules/matchMaker/test/ProxyTests.js",
     "../gpii/node_modules/matchMaker/test/InverseCapabilitiesTests.js",
-    "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    // "./DevelopmentTests.js",
-    // "./acceptanceTests/AcceptanceTests_gnome_keyboard.js",
-    // "./acceptanceTests/AcceptanceTests_jme.js",
-    // "./acceptanceTests/AcceptanceTests_chrome.js",
-    // "./acceptanceTests/AcceptanceTests_smarthouses.js",
-    // "./acceptanceTests/AcceptanceTests_empty.js"
+    "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
+    "./platform/cloud/AcceptanceTests_jme.js",
+    "./platform/cloud/AcceptanceTests_chrome.js",
+    "./platform/cloud/AcceptanceTests_smarthouses.js",
+    "./platform/cloud/AcceptanceTests_empty.js",
+    "./DevelopmentTests.js"
 ];
-var tests = [];
 
 fluid.each(testIncludes, function (path) {
-    tests = tests.concat(fluid.require(path, require));
+    require(path);
 });
-
-fluid.test.runTests(tests);
