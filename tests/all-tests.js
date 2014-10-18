@@ -21,7 +21,7 @@ var fluid = require("infusion"),
 kettle.loadTestingSupport();
 
 var testIncludes = [
-    // "../gpii/node_modules/flowManager/test/SaveTests.js",
+    "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetTokenTests.js",
     "../gpii/node_modules/matchMaker/test/ProxyTests.js",

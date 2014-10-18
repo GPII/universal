@@ -11,7 +11,7 @@
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/amb26/kettle.git#b93c81dd41ecd05a3a79c81137a6d4ff6a258e03"
+        "kettle": "git://github.com/amb26/kettle.git#c28225fb519bd19871799424b2d2137191846a89"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/amb26/node-jqUnit.git#116bdc0ddb2d6e4d144e7d137edb71e421ab768b",
