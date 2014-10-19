@@ -1,0 +1,24 @@
+
+{
+    "typeName": "acceptanceTests.base.cloudBased",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "components": {
+                        "rawPreferencesServer": {
+                            "options": {
+                                "rawPreferencesSourceUrl": "file://%root/../../../testData/preferences/acceptanceTests/%token.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/gpii/configs/cloudBased.development.all.local.json"
+    ]
+}

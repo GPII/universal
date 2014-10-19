@@ -1,23 +1,34 @@
 ##TODOs:
-* Code comments/review changes
-* Check for TODO's
-* Merge with Antranigs updates
+* Tell antranig to:
+** Add the integration tests to all-tests.json
+
+* Tell alex that things should be working again now
+** Fix issue for Alex
+
+* Check whether flat MM tests can run in browser again
+* inverseCapabilities as browser tests
+** move flat MM to the MMFramework folder
+    - And get everything to pass and run again
+* Merge GPII-784 with GPII-941 and get tests to pass again
+* Why am i sticking the solutionsRegistry onto the request (see login function of the MM)
 * JSONlint/JShint
-* lifecycle manager tests fixing
+* Do pull request for GPII-941
+
+* implement the stuff for Guillem
 
 ##Todo round 2+
 * Configs cleanup
     - all local installed, remote prefs server
     - all local cloudBased, remote prefs server
     - prefs server standalone
-* Non-hardcoded context evaluator
-* /contextChanged URL support
-* Sending of PCP settings to PCP
 * support for http://registry.gpii.net/applications/some.app.id/setting8 style settings
 * Lifecycle support for "active: [boolean]"
+    - Update all payloads
+    - Split up lifecycle actions into launch/settings separation, add update and detect whether app is running sections
 * Flat MM support for PCP info
 * Check at solution registry stadig fungerer som server - at queries virker
 * Implement the context evaluation proper
+   - /contextChanged URL support
 * Implement the sending of PCP stuff to PCP
 * Describe flow for changed context
 * Describe flow for update to/from PCP
