@@ -27,7 +27,7 @@ gpii.test.integration.runSuite = function (files, rootGrades) {
         var filePath = path.resolve(__dirname, "platform", oneFile);
         var fileDir = path.dirname(filePath);
         var record = require(filePath);
-        gpii.test.runTests(record, fileDir, ["gpii.test.integration.testCaseHolder"].concat(rootGrades));
+        gpii.test.runTests(record, fileDir, rootGrades);
     });
 };
 

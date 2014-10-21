@@ -17,6 +17,8 @@ https://github.com/gpii/universal/LICENSE.txt
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
 
+gpii.loadTestingSupport();
+
 fluid.registerNamespace("gpii.tests.linux.builtIn");
 
 gpii.tests.linux.builtIn = [
@@ -132,4 +134,6 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.builtIn",
     configName: "linux-builtIn-config",
     configPath: "configs"
-}, module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.linux"],
+    module, require, __dirname);
+
