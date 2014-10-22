@@ -1,5 +1,5 @@
 /*!
-GPII Universal Personalization Framework Node.js Bootstrap
+GPII Universal Personalization Framework GPII universal index
 
 Copyright 2012 OCAD University
 

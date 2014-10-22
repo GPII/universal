@@ -13,7 +13,6 @@
 "use strict";
 
 var fluid = require("infusion"),
-    path = require("path"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.test.integration");
@@ -22,17 +21,5 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 
-gpii.test.integration.runSuite = function (files, rootGrades) {
-    fluid.each(files, function (oneFile) {
-        var filePath = path.resolve(__dirname, "platform", oneFile);
-        var fileDir = path.dirname(filePath);
-        var record = require(filePath);
-        gpii.test.runTests(record, fileDir, rootGrades);
-    });
-};
-
-var windowsFiles = require("./platform/index-windows.js");
-var linuxFiles = require("./platform/index-linux.js");
-
-gpii.test.integration.runSuite(windowsFiles, ["gpii.test.integration.testCaseHolder.windows"]);
-gpii.test.integration.runSuite(linuxFiles, ["gpii.test.integration.testCaseHolder.linux"]);
+gpii.test.runSuitesWithFiltering(require("./platform/index-windows.js"), __dirname, ["gpii.test.integration.testCaseHolder.windows"]);
+gpii.test.runSuitesWithFiltering(require("./platform/index-linux.js"), __dirname, ["gpii.test.integration.testCaseHolder.linux"]);
