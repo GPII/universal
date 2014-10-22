@@ -12,7 +12,7 @@ Retrieves the preferences sets for the token (`:token`).
 
 ##### Example of GET request
 
-Example of a basic GET request to the P;d Preferences Server (given that the Preferences Server is located on preferences.gpii.net):
+Example of a basic GET request to the Old Preferences Server (given that the Preferences Server is located on preferences.gpii.net):
 
 `http://preferences.gpii.net/oldPreferences/sammy`
 

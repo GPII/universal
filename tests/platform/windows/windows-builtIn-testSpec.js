@@ -16,7 +16,7 @@ var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
 
 gpii.loadTestingSupport();
-    
+
 fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.builtIn = [
@@ -174,7 +174,7 @@ gpii.tests.windows.builtIn = [
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
-                "data": [{ //magnifier stuff
+                "data": [{ // magnifier stuff
                     "settings": {
                         "Invert": 1,
                         "Magnification": 150,
