@@ -11,7 +11,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "path": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
                 },
@@ -65,9 +65,9 @@
                 },
                 "restoreSettings"
             ]
-        }   
+        }
     },
-    
+
     {
         "name": "smarthouse",
         "id": "net.gpii.smarthouses",
@@ -126,7 +126,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
                     "encoding": "utf-8",
@@ -176,7 +176,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler.set",
+                "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier",
@@ -186,7 +186,8 @@
                         "FollowFocus": "REG_DWORD",
                         "FollowCaret": "REG_DWORD",
                         "FollowMouse": "REG_DWORD",
-                        "MagnificationMode": "REG_DWORD"
+                        "MagnificationMode": "REG_DWORD",
+                        "ZoomIncrement": "REG_DWORD"
                     }
                 },
                 "capabilities": [
@@ -194,7 +195,12 @@
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
-                    "Invert": "display.screenEnhancement.-provisional-invertColours",
+                    "Invert": {
+                        "transform": {
+                            "type": "gpii.transformer.booleanToNumber",
+                            "inputPath": "display.screenEnhancement.-provisional-invertColours"
+                        }
+                    },
                     "Magnification": {
                         "transform": {
                             "type": "fluid.transforms.round",
@@ -317,7 +323,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
@@ -446,16 +452,16 @@
                             "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
                             "options": {
                                 "none": {
-                                    "outputValue": "0"
+                                    "outputValue": 0
                                 },
                                 "some": {
-                                    "outputValue": "100"
+                                    "outputValue": 100
                                 },
                                 "most": {
-                                    "outputValue": "200"
+                                    "outputValue": 200
                                 },
                                 "all": {
-                                    "outputValue": "300"
+                                    "outputValue": 300
                                 }
                             }
                         }
@@ -806,7 +812,7 @@
         },
 
         "settingsHandlers": [{
-            "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
+            "type": "gpii.settingsHandlers.JSONSettingsHandler",
             "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
             "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
         }],
@@ -842,7 +848,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.spiSettingsHandler.set",
+                "type": "gpii.windows.spiSettingsHandler",
                 "options": {
                     "getAction": "SPI_GETHIGHCONTRAST",
                     "setAction": "SPI_SETHIGHCONTRAST",
@@ -896,7 +902,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.spiSettingsHandler.set",
+                "type": "gpii.windows.spiSettingsHandler",
                 "options": {
                     "getAction": "SPI_GETMOUSETRAILS",
                     "setAction": "SPI_SETMOUSETRAILS",
@@ -952,7 +958,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler.set",
+                "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors",
@@ -1230,7 +1236,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",

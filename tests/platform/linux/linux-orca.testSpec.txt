@@ -1,0 +1,6 @@
+AcceptanceTests_orca.js
+
+Descriptions:
+
+This will run the acceptance tests for GNOME Orca screen reader.
+It uses 3 NP sets: screenreader_orca, screenreader_nvda and screenreader_common.

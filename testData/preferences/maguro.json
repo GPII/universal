@@ -1,8 +1,15 @@
 {
-    "http://registry.gpii.org/applications/com.android.persistentConfiguration": [{
-        "value": {
-            "fontScale": 1.5,
-            "locale": "en_GB"
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.android.persistentConfiguration": {
+                        "fontScale": 1.5,
+                        "locale": "en_GB"
+                    }
+                }
+            }
         }
-    }]
+    }
 }

@@ -1,0 +1,9 @@
+windows-builtIn-testSpec.js
+
+Description:
+This tests the built in functionality of windows, incl. magnifier, onscreen keyboard, mouse trails, etc. It tests the system using three NP sets; (1) os_common: common terms compatible with windows built in settings, (2) os_win7: application specific windows settings (3) os_gnome: application specific gnome settings
+
+Requirements:
+* Basic Windows 7 install
+
+There are NO REQUIREMENTS to be able to run this as an acceptance test, except being on a windows 7 machine. It should just run on a fresh install.

@@ -1,50 +1,53 @@
 {
-    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
-        "value": {
-            "ApplicationSettings.AppBar.Width.$t": 788,
-            "ApplicationSettings.AppBar.ShowText.$t": true,
-            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
-            "ApplicationSettings.AppBar.LargeIcons.$t": true,
-            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
-            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        "ApplicationSettings.AppBar.Width.$t": 788,
+                        "ApplicationSettings.AppBar.ShowText.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+                    },
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                        "show-cross-hairs": true,
+                        "lens-mode": false,
+                        "mag-factor": 2,
+                        "mouse-tracking": "proportional",
+                        "screen-position": "right-half",
+                        "scroll-at-edges": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                        "Magnification": 200,
+                        "ZoomIncrement": 50,
+                        "Invert": 0,
+                        "FollowMouse": 1,
+                        "FollowFocus": 1,
+                        "FollowCaret": 1,
+                        "MagnificationMode": 1
+                    },
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/foregroundColor": "white",
+                    "http://registry.gpii.net/common/backgroundColor": "black",
+                    "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
+                    "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
+                    "http://registry.gpii.net/common/magnification": 2.0,
+                    "http://registry.gpii.net/common/tracking": ["mouse"],
+                    "http://registry.gpii.net/common/invertColours": true,
+                    "http://registry.gpii.net/common/adaptationPreference": [
+                        {
+                            "adaptationType": "caption",
+                            "language": "en"
+                        },
+                        {}
+                    ],
+                    "http://registry.gpii.net/common/tableOfContents": false
+                }
+            }
         }
-    }],
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{
-        "value": {
-            "show-cross-hairs": true,
-            "lens-mode": false,
-            "mag-factor": 2,
-            "mouse-tracking": "proportional",
-            "screen-position": "right-half",
-            "scroll-at-edges": true
-        }
-    }],
-    "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{
-        "value": {
-            "Magnification": 200,
-            "ZoomIncrement": 50,
-            "Invert": 0,
-            "FollowMouse": 1,
-            "FollowFocus": 1,
-            "FollowCaret": 1,
-            "MagnificationModel": 1
-        }
-    }],
-    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
-    "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
-    "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
-    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
-    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
-    "http://registry.gpii.org/common/magnification": [{ "value": 2.0 }],
-    "http://registry.gpii.org/common/tracking": [{ "value": ["mouse"] }],
-    "http://registry.gpii.org/common/invertColours": [{ "value": true }],
-    "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
-        {
-            "adaptationType": "caption",
-            "language": "en"
-        },
-        {}
-    ]}],
-    "http://registry.gpii.org/common/tableOfContents": [{ "value": false }]
+    }
 }
