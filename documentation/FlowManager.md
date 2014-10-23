@@ -36,19 +36,19 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** A JSON array with a string entry for each user
 
 
-#### Save new preferences set (/save)
+#### Save new preferences set (/savePreferences)
 * **description**: Save a preferences set to a new token
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
-* **route:** `/save`
+* **route:** `/user/preferences`
 * **method:** `POST`
 * **body:** The preferences to save as a JSON structure
 * **return:** A payload with the newly generated token (keyed by `token`) and the stored preferences (keyed by `preferences`).
 
 
-#### Save preferences set to existing token (/save/:token)
+#### Save preferences set to existing token (/savePreferences:token)
 * **description**: Save a preferences set to an existing token
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
-* **route:** `/save/:token` where `:token` is to token to save the preferences for
+* **route:** `/user/preferences/:token` where `:token` is to token to save the preferences for
 * **method:** `PUT`
 * **body:** The preferences to save as a JSON structure
 * **return:** A payload with the token (keyed by `token`) and the stored preferences (keyed by `preferences`).
