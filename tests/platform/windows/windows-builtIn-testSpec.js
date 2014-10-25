@@ -314,4 +314,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn",
     configName: "windows-builtIn-config",
     configPath: "configs"
-}, module, require, __dirname);
+}, ["gpii.test.integration.testCaseHolder.windows"],
+    module, require, __dirname);
