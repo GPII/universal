@@ -48,7 +48,7 @@ gpii.tests.windows.nvda = [
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
-                            "path": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
+                            "filename": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
@@ -88,7 +88,7 @@ gpii.tests.windows.nvda = [
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
-                            "path": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
+                            "filename": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
@@ -122,7 +122,7 @@ gpii.tests.windows.nvda = [
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
-                            "path": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
+                            "filename": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }

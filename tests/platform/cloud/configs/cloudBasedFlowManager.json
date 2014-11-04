@@ -20,7 +20,6 @@
         },
         "cloudBasedUrls": {
             "preferences": "http://localhost:8081/user/%token",
-            "lifecycleManagerServer": "",
             "deviceReporter": "",
             "matchMaker": "http://localhost:8081/match"
         }
