@@ -92,6 +92,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.displaySettings"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
     },
 

@@ -940,6 +940,38 @@
     },
 
     {
+        "name": "Windows Display Settings",
+        "id": "com.microsoft.windows.displaySettings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+                {
+                "capabilities": "applications.com\\.microsoft\\.windows\\.displaySettings.id"
+                }
+            ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "for /f \"usebackq tokens=2,3\" %i in (`\"%ProgramFiles(x86)%\\winsetres.exe\"`) do echo \"%ProgramFiles(x86)%\\winsetres.exe\" %i %j > \"%TEMP%\\gpiidispsetres.bat\" & \"${{environment}.ProgramFiles(x86)}\\winsetres.exe\" 1024 768"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"%TEMP%\\gpiidispsetres.bat\""
+                }
+            ]
+        }
+    },
+
+    {
         "name": "Windows Cursors",
         "id": "com.microsoft.windows.cursors",
         "contexts": {
