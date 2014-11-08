@@ -12,7 +12,7 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "path": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
@@ -319,7 +319,7 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                    "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
                     "allowSubSections": true
                 },
@@ -803,7 +803,7 @@
 
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler",
-            "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
+            "options": { "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
             "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
         }],
 

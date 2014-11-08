@@ -33,7 +33,7 @@ gpii.tests.windows.jaws = [
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
-                            "path": path.resolve(process.env.APPDATA, "Freedom Scientific/JAWS/15.0/Settings/VoiceProfiles.ini")
+                            "filename": path.resolve(process.env.APPDATA, "Freedom Scientific/JAWS/15.0/Settings/VoiceProfiles.ini")
                         }
                     }
                 ]
@@ -59,7 +59,7 @@ gpii.tests.windows.jaws = [
                         },
                         "options": {
                             // This needs to be addressed with GPII-497.
-                            "path": path.resolve(process.env.APPDATA, "Freedom Scientific/JAWS/15.0/Settings/VoiceProfiles.ini")
+                            "filename": path.resolve(process.env.APPDATA, "Freedom Scientific/JAWS/15.0/Settings/VoiceProfiles.ini")
                         }
                     }
                 ]

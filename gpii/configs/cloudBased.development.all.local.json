@@ -15,7 +15,6 @@
     "includes": [
         "../node_modules/matchMakerFramework/configs/development.all.local.json",
         "../node_modules/flatMatchMaker/configs/development.all.local.json",
-        "../node_modules/lifecycleManager/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json",
         "../node_modules/flowManager/configs/cloudBased.development.all.local.json",
         "../node_modules/rawPreferencesServer/configs/development.json",
