@@ -338,7 +338,7 @@
                     "speech\\.espeak\\.volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "valuePath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
