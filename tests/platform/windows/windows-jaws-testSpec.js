@@ -13,7 +13,6 @@ https://github.com/gpii/universal/LICENSE.txt
 
 "use strict";
 var fluid = require("universal"),
-    path = require("path"),
     gpii = fluid.registerNamespace("gpii");
     
 gpii.loadTestingSupport();
@@ -32,8 +31,7 @@ gpii.tests.windows.jaws = [
                             "cloud4allVoiceProfile-GlobalContext.Speed": 115
                         },
                         "options": {
-                            // This needs to be addressed with GPII-497.
-                            "filename": path.resolve(process.env.APPDATA, "Freedom Scientific/JAWS/15.0/Settings/VoiceProfiles.ini")
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
                         }
                     }
                 ]
@@ -58,8 +56,7 @@ gpii.tests.windows.jaws = [
                             "cloud4allVoiceProfile-GlobalContext.Punctuation": 3
                         },
                         "options": {
-                            // This needs to be addressed with GPII-497.
-                            "filename": path.resolve(process.env.APPDATA, "Freedom Scientific/JAWS/15.0/Settings/VoiceProfiles.ini")
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
                         }
                     }
                 ]
