@@ -13,7 +13,6 @@ https://github.com/gpii/universal/LICENSE.txt
 
 "use strict";
 var fluid = require("universal"),
-    path = require("path"),
     gpii = fluid.registerNamespace("gpii");
     
 gpii.loadTestingSupport();
@@ -47,8 +46,7 @@ gpii.tests.windows.nvda = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            // This needs to be addressed with GPII-497.
-                            "filename": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
@@ -87,8 +85,7 @@ gpii.tests.windows.nvda = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            // This needs to be addressed with GPII-497.
-                            "filename": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
@@ -121,8 +118,7 @@ gpii.tests.windows.nvda = [
                             "virtualBuffers.autoSayAllOnPageLoad": false
                         },
                         "options": {
-                            // This needs to be addressed with GPII-497.
-                            "filename": path.resolve(process.env.APPDATA, "nvda/nvda.ini"),
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
