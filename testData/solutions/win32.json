@@ -896,7 +896,7 @@
                     "setAction": "SPI_SETMOUSETRAILS",
                     "uiParam": 0,
                     "pvParam": {
-                        "type": "BOOL"
+                        "type": "UINT"
                     }
                 },
                 "capabilities": [
