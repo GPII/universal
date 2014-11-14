@@ -2,8 +2,8 @@
 
 The User login process is as follows:
 
-1. GET request is sent to the `:token/settings/:device` URL where `:token` is the user token to log in and `:device` is a device reporter payload, like: `{"OS":{"id":"web"},"solutions":[{"id":"org.chrome.cloud4chrome"}]}`. It is handled by `{settings}.handle` function which ensures the device payload is valid and fires two events: `onToken` and `onDevice`
-1. `onToken` event has one listener:
+1. GET request is sent to the `:token/settings/:device` URL where `:token` is the user token to log in and `:device` is a device reporter payload, like: `{"OS":{"id":"web"},"solutions":[{"id":"org.chrome.cloud4chrome"}]}`. It is handled by `{settings}.handle` function which ensures the device payload is valid and fires two events: `onUserToken` and `onDevice`
+1. `onUserToken` event has one listener:
   *`{flowManagerUtilities}.getPreferences`: which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
 1. `onDevice` event has one listener:
 ** `{flowManagerUtilities}.getSolutions`: which fetches the solutions registry and filters it based on the device reporter info. The `onSolutionsRegistry` event is fired with the result.

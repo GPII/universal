@@ -21,7 +21,7 @@ fluid.registerNamespace("gpii.tests.linux.orca");
 gpii.tests.linux.orca = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
-        token: "screenreader_common",
+        userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.orca": {
                 "data": [
@@ -58,7 +58,7 @@ gpii.tests.linux.orca = [
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
-        token: "screenreader_orca",
+        userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.orca": {
                 "data": [
@@ -94,7 +94,7 @@ gpii.tests.linux.orca = [
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        token: "screenreader_nvda",
+        userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.orca": {
                 "data": [

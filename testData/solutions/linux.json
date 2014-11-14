@@ -33,7 +33,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de/#/?token=${{token}}"
+                    "command": "google-chrome https://smarthouse-dev.remex.hdm-stuttgart.de/#/?token=${{userToken}}"
                 }
             ],
             "stop": [
@@ -409,7 +409,7 @@
             {
                 "type": "gpii.orca",
                 "options": {
-                    "user": "${{token}}"
+                    "user": "${{userToken}}"
                 },
                 "capabilities": [
                     "display.screenReader",
@@ -1266,7 +1266,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy123.org/user/${{token}}"
+                    "command": "google-chrome http://easy123.org/user/${{userToken}}"
                 }
             ],
             "stop": [

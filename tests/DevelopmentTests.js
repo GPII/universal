@@ -30,16 +30,16 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.development");
 
-gpii.tests.development.token = "testUser1";
+gpii.tests.development.userToken = "testUser1";
 
 gpii.tests.development.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.token + " was successfully logged in.", data);
+        gpii.tests.development.userToken + " was successfully logged in.", data);
 };
 
 gpii.tests.development.testLogoutResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.token + " was successfully logged out.", data);
+        gpii.tests.development.userToken + " was successfully logged out.", data);
 };
 
 gpii.tests.development.testDefs = [{
@@ -50,7 +50,7 @@ gpii.tests.development.testDefs = [{
         configPath: configPath
     },
     gradeNames: "gpii.test.common.testCaseHolder",
-    token: gpii.tests.development.token,
+    userToken: gpii.tests.development.userToken,
 
     sequence: [{
         func: "{loginRequest}.send"

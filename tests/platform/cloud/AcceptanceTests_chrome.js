@@ -15,13 +15,13 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
 
 var testDefs = [
     {
         name: "Acceptance test for background color change in Chrome",
-        token: "chrome_high_contrast",
+        userToken: "chrome_high_contrast",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
             "org.chrome.cloud4chrome": {
@@ -37,7 +37,7 @@ var testDefs = [
     },
     {
         name: "Acceptance test for font size transformation in Chrome",
-        token: "chrome_font_size",
+        userToken: "chrome_font_size",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
             "org.chrome.cloud4chrome": {
@@ -52,7 +52,7 @@ var testDefs = [
     },
     {
         name: "Acceptance test for magnification transformation in Chrome",
-        token: "chrome_magnification",
+        userToken: "chrome_magnification",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {
             "org.chrome.cloud4chrome": {
