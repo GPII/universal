@@ -28,10 +28,10 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** Message saying that user successfully logged out of the system or error message.
 
 
-#### Retrieve token (GET /token)
+#### Retrieve token (GET /userToken)
 * **description**: Get the token of the user(s) who is currently logged into the system
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
-* **route:** `/token`
+* **route:** `/userToken`
 * **method:** `GET`
 * **return:** A JSON array with a string entry for each user
 
