@@ -16,13 +16,13 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
 
 var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using gnome keyboard settings",
-        token: "fm_gnome_keyboard",
+        userToken: "fm_gnome_keyboard",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"org.gnome.desktop.a11y.keyboard\"}]}"),
         expected: {
             "org.gnome.desktop.a11y.keyboard": {

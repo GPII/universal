@@ -22,7 +22,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.builtIn = [
     {
         name: "Testing os_win7 using Flat matchmaker",
-        token: "os_win7",
+        userToken: "os_win7",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "data": [
@@ -132,7 +132,7 @@ gpii.tests.windows.builtIn = [
         ]
     }, {
         name: "Testing os_common using Flat matchmaker",
-        token: "os_common",
+        userToken: "os_common",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "data": [
@@ -242,7 +242,7 @@ gpii.tests.windows.builtIn = [
         ]
     }, {
         name: "Testing os_gnome using Flat matchmaker",
-        token: "os_gnome",
+        userToken: "os_gnome",
         settingsHandlers: {
             "gpii.windows.registrySettingsHandler": {
                 "data": [{ // magnifier stuff

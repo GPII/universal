@@ -14,13 +14,13 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
 
 var testDefs = [
     {
         name: "Acceptance test for empty preferences set",
-        token: "empty",
+        userToken: "empty",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
         expected: {}
     }

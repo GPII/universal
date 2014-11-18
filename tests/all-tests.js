@@ -23,7 +23,7 @@ kettle.loadTestingSupport();
 var testIncludes = [
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
-    "../gpii/node_modules/flowManager/test/GetTokenTests.js",
+    "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
     "../gpii/node_modules/matchMakerFramework/test/InverseCapabilitiesTests.js",
     "../gpii/node_modules/matchMakerFramework/test/matchMakerFrameworkTests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",

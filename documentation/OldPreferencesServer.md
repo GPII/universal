@@ -68,7 +68,7 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 
 ```
 {
-    "token": "123e4567-e89b-12d3-a456-426655440000",
+    "userToken": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
         "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
         "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0 }].120,
@@ -116,7 +116,7 @@ Given that the above body was sent to the `http://preferences.gpii.net/oldPrefer
 
 ```
 {
-    "token": "mytoken",
+    "userToken": "mytoken",
     "preferences": {
         "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
         "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],

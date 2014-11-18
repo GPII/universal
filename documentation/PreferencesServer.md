@@ -135,7 +135,7 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 
 ```
 {
-    "token": "123e4567-e89b-12d3-a456-426655440000",
+    "userToken": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
         "contexts": {
             "gpii-default": {
@@ -197,7 +197,7 @@ The return payload would then be the following:
 
 ```
 {
-    "token": "mytoken",
+    "userToken": "mytoken",
     "preferences": {
        "contexts": {
             "gpii-default": {

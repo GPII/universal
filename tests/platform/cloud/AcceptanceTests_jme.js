@@ -17,13 +17,13 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
 
 var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using common JME settings",
-        token: "fm_jme_common",
+        userToken: "fm_jme_common",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"info.cloud4all.JME\"}]}"),
         expected: {
             "info.cloud4all.JME": {

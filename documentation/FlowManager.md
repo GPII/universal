@@ -7,12 +7,12 @@ Depending on what the usage of the system is, there flows will be different. For
 * **User Login** (`UserLogin.js`) - the flow for a user keying in to the system. The flow is described in details in the [loginFlow](LoginFlow.md) document
 * **User Logout** (`UserLogout.js`) - the flow for a user keying out of the system
 * **Retrieving Settings** (`Settings.js`) - used to retrieve the settings when the system is running in cloud based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
-* **Get Token** (`GetToken.js`) - retrieval of the token of the currently logged in user.
+* **Get User Token** (`GetUserToken.js`) - retrieval of the token of the currently logged in user.
 
 
 ###APIs
 
-#### User Login (/user/:token/login)
+#### User Login (GET /user/:token/login)
 * **description**: Log in a user to the system
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
 * **route:** `/user/:token/login` where :token should be the token of the user
@@ -20,7 +20,7 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** Message saying that user successfully logged into the system or error message.
 
 
-#### User Logout (/user/:token/logout)
+#### User Logout (GET /user/:token/logout)
 * **description**: Log out a user of the system
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
 * **route:** `/user/:token/logout` where `:token` should be the token of the user
@@ -28,16 +28,16 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** Message saying that user successfully logged out of the system or error message.
 
 
-#### Retrieve token (/token)
+#### Retrieve token (GET /userToken)
 * **description**: Get the token of the user(s) who is currently logged into the system
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
-* **route:** `/token`
+* **route:** `/userToken`
 * **method:** `GET`
 * **return:** A JSON array with a string entry for each user
 
 
-#### Save new preferences set (/savePreferences)
-* **description**: Save a preferences set to a new token
+#### Save new preferences set (POST /user/preferences)
+* **description**: Save a preferences set to a new user token
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
 * **route:** `/user/preferences`
 * **method:** `POST`
@@ -45,7 +45,7 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** A payload with the newly generated token (keyed by `token`) and the stored preferences (keyed by `preferences`).
 
 
-#### Save preferences set to existing token (/savePreferences:token)
+#### Save preferences set to existing token (PUT /user/preferences/:token)
 * **description**: Save a preferences set to an existing token
 * **Supported modes**: works only on installed GPII (ie. non-cloud based flowmanager)
 * **route:** `/user/preferences/:token` where `:token` is to token to save the preferences for
@@ -54,7 +54,7 @@ Depending on what the usage of the system is, there flows will be different. For
 * **return:** A payload with the token (keyed by `token`) and the stored preferences (keyed by `preferences`).
 
 
-#### Get settings from Online Flowmanager (/:token/settings/:device)
+#### Get settings from Online Flowmanager (GET /:token/settings/:device)
 * **description**: Get settings from the online flowmanager
 * **Supported modes**: Cloud based (online) flowmanager only
 * **route:** `/:token/settings/:device` where:

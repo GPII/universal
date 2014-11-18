@@ -14,15 +14,15 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
-    
+
 fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.jaws = [
     {
         name: "Testing NP set \"jaws_application\" using Flat matchmaker",
-        token: "jaws_application",
+        userToken: "jaws_application",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
@@ -46,7 +46,7 @@ gpii.tests.windows.jaws = [
         ]
     }, {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
-        token: "jaws_common",
+        userToken: "jaws_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [

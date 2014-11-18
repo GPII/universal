@@ -22,7 +22,7 @@ Example return payload:
 
 ```
 {
-    "token": "mytoken",
+    "userToken": "mytoken",
     "preferences": {
         "flat": {
             "contexts": {
@@ -136,7 +136,7 @@ Given that the generated token is `123e4567-e89b-12d3-a456-426655440000`, the re
 
 ```
 {
-    "token": "123e4567-e89b-12d3-a456-426655440000",
+    "userToken": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
         "flat": {
             "contexts": {
@@ -229,7 +229,7 @@ For the above example, the return payload would like the the following:
 
 ```
 {
-    "token": "mytoken",
+    "userToken": "mytoken",
     "preferences": {
         "flat": {
             "contexts": {

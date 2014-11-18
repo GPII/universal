@@ -2,8 +2,8 @@
 
 The User login process is as follows:
 
-1. GET request is sent to the `/user/:token/login` URL and handled by the `{userLogin}.handle` function which fires the `onToken` event is fired.
-1. `onToken` event has two listeners:
+1. GET request is sent to the `/user/:token/login` URL and handled by the `{userLogin}.handle` function which fires the `onUserToken` event is fired.
+1. `onUserToken` event has two listeners:
  * `{userLogin}.getDevice`: which fetches the device reporter data. When this has been fetched an `onDevice` event is fired.
  * `{flowManagerUtilities}.getPreferences`: which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
 1. `onDevice` event has one listener:

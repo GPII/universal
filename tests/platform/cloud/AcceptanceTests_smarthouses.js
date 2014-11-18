@@ -16,13 +16,13 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
 
 var testDefs = [
     {
         name: "Acceptance test with 'cloudbased' flow manager for smarthouse1 token",
-        token: "smarthouse1",
+        userToken: "smarthouse1",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
         expected: {
             "net.gpii.smarthouses": {
@@ -35,7 +35,7 @@ var testDefs = [
     },
     {
         name: "Acceptance test with 'cloudbased' flow manager for smarthouse2 token",
-        token: "smarthouse2",
+        userToken: "smarthouse2",
         appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"net.gpii.smarthouses\"}]}"),
         expected: {
             "net.gpii.smarthouses": {

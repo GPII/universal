@@ -24,7 +24,7 @@ fluid.registerNamespace("gpii.tests.linux.builtIn");
 gpii.tests.linux.builtIn = [
     {
         name: "Testing os_common using Flat matchmaker",
-        token: "os_common",
+        userToken: "os_common",
         settingsHandlers: {
             "gpii.gsettings": {
                 "data": [{
@@ -58,7 +58,7 @@ gpii.tests.linux.builtIn = [
     },
     {
         name: "Testing os_gnome using Flat matchmaker",
-        token: "os_gnome",
+        userToken: "os_gnome",
         settingsHandlers: {
             "gpii.gsettings": {
                 "data": [{
@@ -97,7 +97,7 @@ gpii.tests.linux.builtIn = [
     },
     {
         name: "Testing os_win7 using Flat matchmaker",
-        token: "os_win7",
+        userToken: "os_win7",
         settingsHandlers: {
             "gpii.gsettings": {
                 "data": [{

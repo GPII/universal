@@ -14,7 +14,7 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
-    
+
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.windows");
@@ -22,7 +22,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.nvda = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        token: "screenreader_nvda",
+        userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
@@ -63,7 +63,7 @@ gpii.tests.windows.nvda = [
         ]
     }, {
         name: "Testing screenreader_common using Flat matchmaker",
-        token: "screenreader_common",
+        userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
@@ -102,7 +102,7 @@ gpii.tests.windows.nvda = [
         ]
     }, {
         name: "Testing screenreader_orca using Flat matchmaker",
-        token: "screenreader_orca",
+        userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
