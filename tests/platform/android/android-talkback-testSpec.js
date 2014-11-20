@@ -74,7 +74,7 @@ gpii.tests.android.talkback = [
                 "data": [
                     {
                         "settings": {
-                            "tts_default_rate": 681,
+                            "tts_default_rate": 681
                         },
                         "options": {
                             "settingType": "Secure"
@@ -92,7 +92,7 @@ gpii.tests.android.talkback = [
                 "data": [
                     {
                         "settings": {
-                            "tts_default_rate": 681,
+                            "tts_default_rate": 681
                         },
                         "options": {
                             "settingType": "Secure"
