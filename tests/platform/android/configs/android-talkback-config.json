@@ -1,0 +1,21 @@
+{
+    "typeName": "acceptanceTests.android.talkback",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/talkback.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/tests/configs/localInstall.json"
+    ]
+}
