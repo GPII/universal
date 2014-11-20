@@ -78,7 +78,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidPersistentConfiguration.set",
+                "type": "gpii.androidPersistentConfiguration",
                 "capabilities": [
                     "applications.com\\.android\\.persistentConfiguration.id"
                 ],
@@ -292,23 +292,33 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidAudioManager.setVolume",
+                "type": "gpii.androidAudioManager.volume",
                 "capabilities": [
                     "applications.com\\.android\\.audioManager.id"
                 ],
                 "capabilitiesTransformations": {
                     "STREAM_MUSIC": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
-                            "factor": 15
-                         }
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                                    "factor": 15
+                                }
+                            }
+                        }
                     },
                     "STREAM_SYSTEM": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "-provisional-general.-provisional-volume",
-                            "factor": 15
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "-provisional-general.-provisional-volume",
+                                    "factor": 7
+                                }
+                            }
                         }
                     }
                 }
@@ -333,7 +343,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidSettings.set",
+                "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "System"
                 },
@@ -341,9 +351,30 @@
                     "applications.com\\.android\\.settings\\.system.id"
                 ],
                 "capabilitiesTransformations": {
-                    "dim_screen": "display.-provisional-screenDim",
-                    "haptic_feedback_enabled": "control.-provisional-hapticFeedback",
-                    "accelerometer_rotation": "display.-provisional-screenRotation",
+                    "dim_screen": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "display.-provisional-screenDim",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "haptic_feedback_enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "control.-provisional-hapticFeedback",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "accelerometer_rotation": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "display.-provisional-screenRotation",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
                     "user_rotation": "display.-provisional-screenDefaultRotation",
                     "screen_off_timeout": {
                         "transform": {
@@ -374,7 +405,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.androidSettings.set",
+                "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "Secure"
                 },
@@ -384,39 +415,49 @@
                 "capabilitiesTransformations": {
                     "tts_default_pitch": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.textReadingHighlight.pitch",
-                            "factor": 500
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "display.textReadingHighlight.pitch",
+                                    "factor": 500
+                                }
+                            }
                         }
                     },
                     "tts_default_rate": {
                         "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "left": 21.753,
-                            "operator": "-",
-                            "right": {
+                            "type": "fluid.transforms.round",
+                            "input": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "left": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "left": 0.0317,
-                                            "operator": "*",
-                                            "rightPath": "display.screenReader.speechRate"
-                                        }
-                                    },
+                                    "left": 21.753,
                                     "operator": "-",
                                     "right": {
                                         "transform": {
                                             "type": "fluid.transforms.binaryOp",
-                                            "left": "0.0042",
-                                            "operator": "*",
+                                            "left": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "left": 0.0317,
+                                                    "operator": "*",
+                                                    "rightPath": "display.screenReader.speechRate"
+                                                }
+                                            },
+                                            "operator": "-",
                                             "right": {
                                                 "transform": {
                                                     "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "left": "0.0042",
                                                     "operator": "*",
-                                                    "rightPath": "display.screenReader.speechRate"
+                                                    "right": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "display.screenReader.speechRate",
+                                                            "operator": "*",
+                                                            "rightPath": "display.screenReader.speechRate"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -445,7 +486,7 @@
         },
         "settingsHandlers": [
         {
-            "type": "gpii.settingsHandlers.XMLHandler.set",
+            "type": "gpii.settingsHandlers.XMLHandler",
             "options": {
                 "filename": "/sdcard/output.xml",
                 "encoding": "utf-8",
