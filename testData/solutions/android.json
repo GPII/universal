@@ -83,7 +83,7 @@
                     "fontScale": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "display.screenEnhancement.fontSize",
+                            "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "operator": "/",
                             "right": 12
                         }
@@ -91,7 +91,7 @@
                     "locale": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "language",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language",
                             "options": {
                                "en": {
                                     "outputValue": "en"
@@ -299,7 +299,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                                    "valuePath": "http://registry\\.gpii\\.net/common/volumeTTS",
                                     "factor": 15
                                 }
                             }
@@ -311,7 +311,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "-provisional-general.-provisional-volume",
+                                    "valuePath": "http://registry\\.gpii\\.net/common/volume",
                                     "factor": 7
                                 }
                             }
@@ -349,7 +349,7 @@
                     "dim_screen": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "display.-provisional-screenDim",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/screenDim",
                             "true": 1,
                             "false": 0
                         }
@@ -357,7 +357,7 @@
                     "haptic_feedback_enabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "control.-provisional-hapticFeedback",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/hapticFeedback",
                             "true": 1,
                             "false": 0
                         }
@@ -365,16 +365,16 @@
                     "accelerometer_rotation": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "display.-provisional-screenRotation",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/screenRotation",
                             "true": 1,
                             "false": 0
                         }
                     },
-                    "user_rotation": "display.-provisional-screenDefaultRotation",
+                    "user_rotation": "http://registry\\.gpii\\.net/common/screenDefaultRotation",
                     "screen_off_timeout": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.-provisional-screenOffTime",
+                            "valuePath": "http://registry\\.gpii\\.net/common/screenOffTime",
                             "factor": 1000
                         }
                     }
@@ -413,7 +413,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "display.textReadingHighlight.pitch",
+                                    "valuePath": "http://registry\\.gpii\\.net/common/pitch",
                                     "factor": 500
                                 }
                             }
@@ -435,7 +435,7 @@
                                                     "type": "fluid.transforms.binaryOp",
                                                     "left": 0.0317,
                                                     "operator": "*",
-                                                    "rightPath": "display.screenReader.speechRate"
+                                                    "rightPath": "http://registry\\.gpii\\.net/common/speechRate"
                                                 }
                                             },
                                             "operator": "-",
@@ -447,9 +447,9 @@
                                                     "right": {
                                                         "transform": {
                                                             "type": "fluid.transforms.binaryOp",
-                                                            "leftPath": "display.screenReader.speechRate",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                             "operator": "*",
-                                                            "rightPath": "display.screenReader.speechRate"
+                                                            "rightPath": "http://registry\\.gpii\\.net/common/speechRate"
                                                         }
                                                     }
                                                 }
@@ -502,16 +502,16 @@
                 "map\\.string\\.fontsize\\.$t": {
                     "transform": {
                         "type": "fluid.transforms.linearScale",
-                        "valuePath": "display.screenEnhancement.fontSize",
+                        "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
                         "factor": 2
                     }
                 },
                 "map\\.string\\.theme\\.$t": {
                     "transform": {
                         "type": "fluid.transforms.condition",
-                        "conditionPath": "display.screenEnhancement.-provisional-highContrastEnabled",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                         "true": "yellow-black",
-                        "truePath": "display.screenEnhancement.-provisional-highContrastTheme",
+                        "truePath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                         "false": "none"
                     }
                 }
@@ -556,7 +556,7 @@
                     "access_commonprefs_speechrate": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "display.screenReader.speechRate",
+                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                             "operator": "/",
                             "right": 40
                         }
@@ -564,7 +564,7 @@
                     "access_commonprefs_speechpitch": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "display.textReadingHighlight.pitch",
+                            "leftPath": "http://registry\\.gpii\\.net/common/pitch",
                             "operator": "*",
                             "right": 10
                         }
@@ -572,11 +572,11 @@
                     "access_commonprefs_editingkeyboardecho": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "display.screenReader.-provisional-keyEcho",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.condition",
-                                    "conditionPath": "display.screenReader.-provisional-wordEcho",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
                                     "true": "3",
                                     "false": "1"
                                 }
@@ -584,7 +584,7 @@
                             "false": {
                                 "transform": {
                                     "type": "fluid.transforms.condition",
-                                    "conditionPath": "display.screenReader.-provisional-wordEcho",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
                                     "true": "2",
                                     "false": "0"
                                 }

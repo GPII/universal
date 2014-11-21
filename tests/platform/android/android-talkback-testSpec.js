@@ -65,70 +65,70 @@ gpii.tests.android.talkback = [
                 ]
             }
         }
-    //},
-    //{
-    //    name: "Testing screenreader_orca using Flat matchmaker",
-    //    userToken: "screenreader_orca",
-    //    settingsHandlers: {
-    //        "gpii.androidSettings": {
-    //            "data": [
-    //                {
-    //                    "settings": {
-    //                        "tts_default_rate": 681
-    //                    },
-    //                    "options": {
-    //                        "settingType": "Secure"
-    //                    }
-    //                }
-    //            ]
-    //        }
-    //    }
-    //},
-    //{
-    //    name: "Testing screenreader_nvda using Flat matchmaker",
-    //    userToken: "screenreader_nvda",
-    //    settingsHandlers: {
-    //        "gpii.androidSettings": {
-    //            "data": [
-    //                {
-    //                    "settings": {
-    //                        "tts_default_rate": 681
-    //                    },
-    //                    "options": {
-    //                        "settingType": "Secure"
-    //                    }
-    //                }
-    //            ]
-    //        }
-    //    }
-    //},
-    //{
-    //    name: "Testing screenreader_nvda using Flat matchmaker",
-    //    userToken: "screenreader_common",
-    //    settingsHandlers: {
-    //        "gpii.androidAudioManager.volume": {
-    //            "data": [
-    //                {
-    //                    "settings": {
-    //                        "STREAM_MUSIC": 11
-    //                    }
-    //                }
-    //            ]
-    //        },
-    //        "gpii.androidSettings": {
-    //            "data": [
-    //                {
-    //                    "settings": {
-    //                        "tts_default_rate": 681,
-    //                        "tts_default_pitch": 75
-    //                    },
-    //                    "options": {
-    //                        "settingType": "Secure"
-    //                    }
-    //                }
-    //            ]
-    //        }
-    //    }
+    },
+    {
+        name: "Testing screenreader_orca using Flat matchmaker",
+        userToken: "screenreader_orca",
+        settingsHandlers: {
+            "gpii.androidSettings": {
+                "data": [
+                    {
+                        "settings": {
+                            "tts_default_rate": 681
+                        },
+                        "options": {
+                            "settingType": "Secure"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        name: "Testing screenreader_nvda using Flat matchmaker",
+        userToken: "screenreader_nvda",
+        settingsHandlers: {
+            "gpii.androidSettings": {
+                "data": [
+                    {
+                        "settings": {
+                            "tts_default_rate": 681
+                        },
+                        "options": {
+                            "settingType": "Secure"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        name: "Testing screenreader_nvda using Flat matchmaker",
+        userToken: "screenreader_common",
+        settingsHandlers: {
+            "gpii.androidAudioManager.volume": {
+                "data": [
+                    {
+                        "settings": {
+                            "STREAM_MUSIC": 11
+                        }
+                    }
+                ]
+            },
+            "gpii.androidSettings": {
+                "data": [
+                    {
+                        "settings": {
+                            "tts_default_rate": 681,
+                            "tts_default_pitch": 75
+                        },
+                        "options": {
+                            "settingType": "Secure"
+                        }
+                    }
+                ]
+            }
+        }
     }
 ];
 
