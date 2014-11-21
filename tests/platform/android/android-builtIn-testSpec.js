@@ -23,7 +23,7 @@ fluid.registerNamespace("gpii.tests.android.builtIn");
 gpii.tests.android.builtIn = [
     {
         name: "Testing os_android using Flat matchmaker",
-        token: "os_android",
+        userToken: "os_android",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "data": [{
@@ -58,7 +58,7 @@ gpii.tests.android.builtIn = [
     },
     {
         name: "Testing os_android_common using Flat matchmaker",
-        token: "os_android_common",
+        userToken: "os_android_common",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "data": [{
@@ -93,7 +93,7 @@ gpii.tests.android.builtIn = [
     },
     {
         name: "Testing os_gnome using Flat matchmaker",
-        token: "os_gnome",
+        userToken: "os_gnome",
         settingsHandlers: {
             "gpii.androidPersistentConfiguration": {
                 "data": [{
@@ -106,7 +106,7 @@ gpii.tests.android.builtIn = [
     },
     {
         name: "Testing os_common using Flat matchmaker",
-        token: "os_common",
+        userToken: "os_common",
         settingsHandlers: {
             "gpii.androidPersistentConfiguration": {
                 "data": [{

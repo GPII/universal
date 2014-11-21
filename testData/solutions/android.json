@@ -1,7 +1,6 @@
-[
-    {
+{
+    "com.android.freespeech": {
         "name": "FreeSpeech",
-        "id": "com.android.freespeech",
         "contexts": {
             "OS": [{
                     "id": "android",
@@ -31,9 +30,8 @@
         }
     },
 
-    {
+    "com.android.talkback": {
         "name": "TalkBack Screen Reader",
-        "id": "com.android.talkback",
         "contexts": {
             "OS": [{
                     "id": "android",
@@ -65,9 +63,8 @@
         }
     },
 
-    {
+    "com.android.persistentConfiguration": {
         "name": "Android Configuration",
-        "id": "com.android.persistentConfiguration",
         "contexts": {
             "OS": [
                 {
@@ -279,9 +276,8 @@
         }
     },
 
-    {
+    "com.android.audioManager": {
         "name": "Android Audio Manager",
-        "id": "com.android.audioManager",
         "contexts": {
             "OS": [
                 {
@@ -330,9 +326,8 @@
         }
     },
 
-    {
+    "com.android.settings.system": {
         "name": "Android UI Settings.System",
-        "id": "com.android.settings.system",
         "contexts": {
             "OS": [
                 {
@@ -392,9 +387,8 @@
         }
     },
 
-    {
+    "com.android.settings.secure": {
         "name": "Android UI Settings Secure",
-        "id": "com.android.settings.secure",
         "contexts": {
             "OS": [
                 {
@@ -475,9 +469,8 @@
         }
     },
 
-    {
+    "se.omnitor.ecmobile": {
         "name": "Omnitor eCtouch/eCmobile",
-        "id": "se.omnitor.ecmobile",
         "contexts": {
         "OS": [{
                 "id": "android",
@@ -542,9 +535,9 @@
         ]
         }
     },
-    {
+
+    "es.codefactory.android.app.ma": {
         "name": "Mobile Accessibility",
-        "id": "es.codefactory.android.app.ma",
         "contexts": {
             "OS": [
                 {
@@ -604,4 +597,4 @@
             }
         ]
     }
-]
+}
