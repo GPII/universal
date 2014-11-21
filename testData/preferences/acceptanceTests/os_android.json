@@ -1,0 +1,22 @@
+{
+    "http://registry.gpii.org/applications/com.android.settings.system": [{
+        "value": {
+            "dim_screen": 1,
+            "haptic_feedback_enabled": 1,
+            "accelerometer_rotation": 0,
+            "user_rotation": 2,
+            "screen_off_timeout": 10000
+        }
+    }],
+    "http://registry.gpii.org/applications/com.android.audioManager": [{
+        "value": {
+            "STREAM_SYSTEM": 7
+        }
+    }],
+    "http://registry.gpii.org/applications/com.android.persistentConfiguration": [{
+        "value": {
+            "fontScale": 1.5,
+            "locale": "en" 
+        }
+    }]
+}
