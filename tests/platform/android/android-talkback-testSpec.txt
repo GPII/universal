@@ -1,0 +1,11 @@
+AcceptanceTests_talkback.js
+
+Description:
+
+This will run the acceptance tests for Talkback screen reader.
+It tests the system using four NP sets:
+ (1) talkback1: application specific talkback settings
+ (2) talkback2: screen reader common terms
+ (3) screenreader_common: screen reader common terms
+ (4) screenreader_orca: application specific orca settings
+ (5) screenreader_nvda: application specific nvda settings
