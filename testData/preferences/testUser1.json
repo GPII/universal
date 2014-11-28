@@ -1,8 +1,17 @@
 {
-    "http://registry.gpii.org/common/setting1": [{ "value": 12 }],
-    "http://registry.gpii.org/common/setting2": [{ "value": "white" }],
-    "http://registry.gpii.org/common/setting3": [{ "value": "black" }],
-    "http://registry.gpii.org/common/setting4": [{ "value": ["Comic Sans"] }],
-    "http://registry.gpii.org/common/setting5": [{ "value": "sans serif" }],
-    "http://registry.gpii.org/common/setting6": [{ "value": false }]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/setting1": 12 ,
+                    "http://registry.gpii.net/common/setting2": "white",
+                    "http://registry.gpii.net/common/setting3": "black",
+                    "http://registry.gpii.net/common/setting4": ["Comic Sans"],
+                    "http://registry.gpii.net/common/setting5": "sans serif",
+                    "http://registry.gpii.net/common/setting6": false
+                }
+            }
+        }
+    }
 }
