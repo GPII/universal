@@ -1,0 +1,18 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/eu.gpii.olb": {
+                        "signLanguageEnabled": true,
+                        "signLanguage": "gsg",
+                        "interpreterType": "human",
+                        "interpreterName": "default"
+                    },
+                    "http://registry.gpii.net/common/language": "de-DE"
+                }
+            }
+        }
+    }
+}
