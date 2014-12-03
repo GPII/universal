@@ -39,6 +39,7 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_chrome.js",
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./platform/cloud/AcceptanceTests_empty.js",
+    "./platform/cloud/olb-testSpec.js",
     "./DevelopmentTests.js",
     "./IntegrationTests.js"
 ];
