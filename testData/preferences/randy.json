@@ -1,11 +1,18 @@
 {
-    "http://registry.gpii.org/applications/org.freedesktop.xrandr": [{
-        "value": {
-            "screen-resolution": {
-                "width": 800,
-                "height": 600
-            },
-            "screen-brightness": 10
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.freedesktop.xrandr": {
+                        "screen-resolution": {
+                            "width": 800,
+                            "height": 600
+                        },
+                        "screen-brightness": 10
+                    }
+                }
+            }
         }
-    }]
+    }
 }

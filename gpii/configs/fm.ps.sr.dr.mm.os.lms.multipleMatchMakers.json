@@ -16,7 +16,6 @@
         "../node_modules/deviceReporter/configs/development.json",
         "../node_modules/flowManager/configs/development.json",
         "../node_modules/matchMaker/configs/proxy.json",
-        "../node_modules/lifecycleManager/configs/development.json",
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"
     ]

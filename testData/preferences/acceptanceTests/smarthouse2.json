@@ -1,6 +1,15 @@
 {
-   "http://registry.gpii.org/common/language": [{ "value": "en"}],
-   "http://registry.gpii.org/common/volume": [{"value": "30"}],
-   "http://registry.gpii.org/common/highContrastTheme": [{"value": "defaultTheme"}],
-   "http://registry.gpii.org/common/fontSize": [{"value": "25"}]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                   "http://registry.gpii.net/common/language": "en",
+                   "http://registry.gpii.net/common/volume": "30",
+                   "http://registry.gpii.net/common/highContrastTheme": "defaultTheme",
+                   "http://registry.gpii.net/common/fontSize": "25"
+                }
+            }
+        }
+    }
 }

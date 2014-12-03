@@ -1,0 +1,97 @@
+[
+    {
+        "id": "org.gnome.desktop.interface"
+    },
+
+    {
+        "id": "org.gnome.shell.overrides"
+    },
+
+    {
+        "id": "org.gnome.desktop.wm.preferences"
+    },
+
+    {
+        "id": "org.gnome.nautilus"
+    },
+
+    {
+        "id": "org.gnome.desktop.a11y.keyboard"
+    },
+
+    {
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
+    },
+
+    {
+        "id": "org.gnome.orca"
+    },
+
+    {
+        "id": "org.gnome.desktop.a11y.magnifier"
+    },
+
+    {
+        "id": "com.microsoft.windows.magnifier"
+    },
+
+    {
+        "id": "com.microsoft.windows.onscreenKeyboard"
+    },
+
+    {
+        "id": "org.nvda-project"
+    },
+
+    {
+        "id": "org.gnome.desktop.interface"
+    },
+
+    {
+        "id": "org.gnome.nautilus"
+    },
+
+    {
+        "id": "com.microsoft.windows.highContrast"
+    },
+
+    {
+        "id": "com.microsoft.windows.mouseTrailing"
+    },
+
+    {
+        "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "com.android.activitymanager"
+    },
+
+    {
+        "id": "com.android.freespeech"
+    },
+
+    {
+        "id": "com.android.audioManager"
+    },
+
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+
+    {
+        "id": "org.alsa-project"
+    },
+
+    {
+        "id": "org.freedesktop.xrandr"
+    },
+
+    {
+        "id": "com.android.settings.system"
+    },
+
+    {
+        "id": "es.codefactory.android.app.ma"
+    }
+]
