@@ -1,0 +1,20 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/eu.gpii.olb": {
+                        "textSize": "2",
+                        "lineSpacing": "2",
+                        "links": true,
+                        "inputsLarger": true,
+                        "contrastTheme": "wb",
+                        "toc": false
+                    },
+                    "http://registry.gpii.net/common/language": "en-GB"
+                }
+            }
+        }
+    }
+}
