@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+					"http://registry.gpii.org/applications/com.technosite.smarttwitter":{
+						"pref_tam_font.$t": "Enorme"
+					}
+                }
+            }
+        }
+    }
+}
