@@ -164,5 +164,28 @@
                 }
             }
         ]
+    },
+    "eu.gpii.olb": {
+        "name": "Online Banking Demonstrator",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.eu\\.gpii\\.olb.id",
+                    "display.applications.eu\\.gpii\\.olb.name",
+                    "language"
+                ],
+                "capabilitiesTransformations": {
+                    "language": "http://registry\\.gpii\\.net/common/language"
+                }
+            }
+        ]
     }
 }
