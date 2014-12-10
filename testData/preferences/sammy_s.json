@@ -20,7 +20,7 @@
                 },
                 "conditions": [
                     {
-                        "type": "http://gpii.net/common/operators/inRange",
+                        "type": "http://registry.gpii.net/common/operators/inRange",
                         "max": 1800,
                         "min": 600,
                         "inputPath": "http://registry.gpii.net/conditions/timeOfDay"
