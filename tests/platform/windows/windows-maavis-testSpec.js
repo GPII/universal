@@ -1,0 +1,115 @@
+/*
+
+GPII Integration and Acceptance Testing
+
+Copyright 2014 Raising the Floor International
+
+Licensed under the New BSD license. You may not use this file except in
+compliance with this License.
+
+You may obtain a copy of the License at
+https://github.com/gpii/universal/LICENSE.txt
+*/
+
+"use strict";
+var fluid = require("universal"),
+    gpii = fluid.registerNamespace("gpii");
+
+gpii.loadTestingSupport();
+
+fluid.registerNamespace("gpii.tests.windows");
+
+gpii.tests.windows.maavis = [
+    {
+        name: "Testing maavis_highcontrast using Flat matchmaker",
+        userToken: "maavis_highcontrast",
+        settingsHandlers: {
+            "gpii.settingsHandlers.JSONSettingsHandler": {
+                "data": [
+                    {
+                        "settings": {
+                            "theme": "hc",
+                            "speakTitles": "no",
+                            "speakLabels": "no",
+                            "speakOnActivate": "no"
+                        },
+                        "options": {
+                            "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: [
+            {
+                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq MaavisPortable.exe\" | find /I \"MaavisPortable.exe\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"
+            }
+        ]
+    }, {
+        name: "Testing maavis_selfvoicing using Flat matchmaker",
+        userToken: "maavis_selfvoicing",
+        settingsHandlers: {
+            "gpii.settingsHandlers.JSONSettingsHandler": {
+                "data": [
+                    {
+                        "settings": {
+                            "theme": "colour",
+                            "speakTitles": "yes",
+                            "speakLabels": "yes",
+                            "speakOnActivate": "yes"
+                        },
+                        "options": {
+                            "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: [
+            {
+                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq MaavisPortable.exe\" | find /I \"MaavisPortable.exe\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"
+            }
+        ]
+    }
+];
+
+module.exports = gpii.test.bootstrap({
+    testDefs:  "gpii.tests.windows.maavis",
+    configName: "windows-maavis-config",
+    configPath: "configs"
+}, ["gpii.test.integration.testCaseHolder.windows"],
+    module, require, __dirname);
+// [
+//     {
+//         "settings": {
+//             "theme": "colour",
+//             "speakTitles": "no",
+//             "speakLabels": "no",
+//             "speakOnActivate": "no"
+//         },
+//         "type": "gpii.settingsHandlers.JSONSettingsHandler",
+//         "options": {
+//             "filename": "C:\\Users\\kasper\\Desktop\\MaavisPortable\\MaavisMedia\\Users\\Default\\userconfig.json"
+//         }
+//     }
+// ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
