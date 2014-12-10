@@ -83,33 +83,3 @@ module.exports = gpii.test.bootstrap({
     configPath: "configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);
-// [
-//     {
-//         "settings": {
-//             "theme": "colour",
-//             "speakTitles": "no",
-//             "speakLabels": "no",
-//             "speakOnActivate": "no"
-//         },
-//         "type": "gpii.settingsHandlers.JSONSettingsHandler",
-//         "options": {
-//             "filename": "C:\\Users\\kasper\\Desktop\\MaavisPortable\\MaavisMedia\\Users\\Default\\userconfig.json"
-//         }
-//     }
-// ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
