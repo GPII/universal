@@ -1,8 +1,18 @@
 ## Introduction
 
-This page describes how to run the services that GPII generally depend on and which is used to test the configuration files for these services
+This page describes how to set up an environment that can run the backend online services that GPII generally depend on in production mode. These are *preferences server* and *cloud based flowmanager*. 
 
-## Setting up a VM to test with
+The setup will be using Vagrant and Virtual Box to set up a machine with CentOS 7.0. 
+
+The document contain the following parts:
+* The first part describes how to create and spin up a CentOS virtual machine and installing the dependencies (node, npm, git).
+* Next is a section describing how to install couchDB and initialize, which is used when running the preferences server in production mode.
+* Then a very brief description on installing the GPII and dependencies
+* Finally there are two sections dedicated to describing how to run:
+** Preferences server in production mode
+** Cloud based flowmanager in production mode
+
+## Setting up a basic VM with CentOS
 
 We will be using CentOS 7.0 64bit for testing the configuration files and services. 
 
@@ -66,7 +76,7 @@ vagrant ssh
 
 Now you should see something like `[vagrant@localhost]$` indicating that you're inside the VM. 
 
-## Installing the required services in CentOS
+### Installing the required services in CentOS
  
  First add the yum repositories required for installing the dependencies:
 
@@ -123,7 +133,7 @@ now check that it's working by doing a `curl http://localhost:5984/user/carla` w
 
 
 
-## Now you can test the configurations
+## Testing the vagrant box
 
 You now have everything set up in the VM and should be able to test that things are working as expected. Note that the sync'ing between your local machine is one-way - namely changes you do on your local machine will be pushed to the VM, not the other way around. So if you modify any files, etc., that should happen on the local machine. Running the server, etc., should of course happen inside the VM.
 
@@ -179,7 +189,7 @@ cd /vagrant/node_modules/universal
 set the NODE_ENV to be `preferencesServer.production` and run the system as you normally would:
 
 ```
-export preferencesServer.production
+export NODE_ENV=preferencesServer.production
 node gpii.js
 ```
 
@@ -211,7 +221,7 @@ cd /vagrant/node_modules/universal
 set the NODE_ENV to be `cloudBased.production` and run the system as you normally would:
 
 ```
-export cloudBased.production
+export NODE_ENV=cloudBased.production
 node gpii.js
 ```
 
