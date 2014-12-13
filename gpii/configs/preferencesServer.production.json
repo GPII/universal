@@ -1,5 +1,5 @@
 {
-    "typeName": "preferencesServer.standalone.development",
+    "typeName": "preferencesServer.standalone.production",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
@@ -7,13 +7,13 @@
                 "type": "kettle.server",
                 "options": {
                     "logging": true,
-                    "port": 8081
+                    "port": 8082
                 }
             }
         }
     },
     "includes": [
         "../node_modules/preferencesServer/configs/development.json",
-        "../node_modules/ontologyServer/configs/development.json"
+        "../node_modules/rawPreferencesServer/configs/production.json"
     ]
 }
