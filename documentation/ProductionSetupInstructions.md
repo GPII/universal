@@ -9,12 +9,12 @@ The document contain the following parts:
 * Next is a section describing how to install couchDB and initialize, which is used when running the preferences server in production mode.
 * Then a very brief description on installing the GPII and dependencies
 * Finally there are two sections dedicated to describing how to run:
-** Preferences server in production mode
-** Cloud based flowmanager in production mode
+ * Preferences server in production mode
+ * Cloud based flowmanager in production mode
 
 ## Setting up a basic VM with CentOS
 
-We will be using CentOS 7.0 64bit for testing the configuration files and services. 
+We will be using CentOS 7.0 64-bit for testing the configuration files and services. 
 
 ### Prerequisites:
 First you should ensure that you have the following installed on your machine
@@ -176,9 +176,10 @@ grunt dedupe-infusion
 
 .. And that's it. When you ssh into your VM, you should now have the installation of GPII in the folder `/vagrant/node_modules/universal`.
 
-##Running the preferences server as standalone production mode##
+##Running the preferences server in standalone production mode##
 
-To run the preferences server in standalone production mode, made sure you've either followed the steps above (incl. the installation of couchDB) or a similar setup. Make sure that no services is blocking port 8081 and that couchDB is running and is set up to use its default port.
+To run the preferences server in standalone production mode, made sure you've either followed the steps above (incl. the installation of couchDB) or a similar setup.
+Make sure that no service is blocking port 8081 and that couchDB is running and is set up to use its default port of 5984.
 
 To run the preferences server in standalone mode, simply go to your universal folder:
 
@@ -205,12 +206,12 @@ which should give you the content of the carla NP set. To test it from outside t
 curl 127.0.0.1:8888/preferences/carla
 ```
 
-which should give you the same output (ie. the content of the Carla NP set).
+which should give you the same output (i.e. the content of the Carla NP set).
 
 
 ##Running the cloud based flowmanager production mode##
 
-To run the cloudBased flowmanager in production mode, made sure you've followed the steps above (excl. the installation of couchDB, this is not required) or a similar setup. Make sure that no services is blocking port 8081. The cloudbased flowmanager is expecting a preferences server to be running at `http://preferences.gpii.net` so make sure this is the case as well.
+To run the cloudBased flowmanager in production mode, made sure you've followed the steps above (excl. the installation of couchDB, this is not required) or a similar setup. Make sure that no service is blocking port 8081. The cloudbased flowmanager is expecting a preferences server to be running at `http://preferences.gpii.net` so make sure this is the case as well.
 
 Now, to run the system in cloudBased flowmanager mode, simply go to your universal folder:
 
@@ -244,15 +245,3 @@ curl 127.0.0.1:8888/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22sol
 ```
 
 which should give you the same output.
-
-
-
-
-
-
-
-
-
-
-
-
