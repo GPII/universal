@@ -11,7 +11,7 @@
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/fluid-project/kettle.git#5a2e8b8fb5b198b266d6b7b7d0d9eb94185a3759"
+        "kettle": "git://github.com/fluid-project/kettle.git#27a3bf7cfd51f62e66b45bc1b7bae9f407052586"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#b7ef53aac1ca365bf23d35d255fae874faa88b70",
