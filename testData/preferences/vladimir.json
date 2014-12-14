@@ -1,0 +1,92 @@
+{
+    "preferences": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
+                    "http://registry.gpii.net/common/cursorSize": 0.5,
+                    "http://registry.gpii.net/common/mouseTrailing": true,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/speechRate": 300,
+                    "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
+                        "fontSize": "medium",
+                        "highContrastEnabled": true
+                    },
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                },
+                "metadata": [
+                    {
+                        "type": "required",
+                        "scope": [
+                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
+                        ],
+                        "value": 1024
+                    },
+                    {
+                        "type": "priority",
+                        "scope": [
+                            "http://registry.gpii.net/applications/com.freedomScientific.jaws",
+                            "http://registry.gpii.net/applications/com.android.talkback"
+                        ],
+                        "value": 1024
+                    }
+                ]
+            },
+            "noise": {
+                "name": "noise",
+                "preferences": {
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
+                    "http://registry.gpii.net/common/cursorSize": 0.5,
+                    "http://registry.gpii.net/common/mouseTrailing": true,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/speechRate": 300,
+                    "http://registry.gpii.net/common/volumeTTS": 0.9,
+                    "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
+                        "fontSize": "medium",
+                        "highContrastEnabled": true
+                    }
+                },
+                "metadata": [
+                    {
+                        "type": "required",
+                        "scope": [
+                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
+                        ],
+                        "value": 1024
+                    },
+                    {
+                        "type": "priority",
+                        "scope": [
+                            "http://registry.gpii.net/applications/com.freedomScientific.jaws",
+                            "http://registry.gpii.net/applications/com.android.talkback"
+                        ],
+                        "value": 1024
+                    }
+                ],
+                "conditions": [
+                    {
+                        "type": "http://gpii.net/common/operators/inRange",
+                        "min": "18:00",
+                        "max": "6:00",
+                        "inputPath": "http://registry.gpii.net/conditions/noise"
+                    }
+                ]
+            },
+            "hotel_room": {
+                "name": "Activate for the sake of the review: The hotel room",
+                "preferences": {
+                    "http://registry.gpii.net/common/matchMakerType": "Statistical"
+                }
+            },
+            "vending_machine": {
+                "name": "Activate for the sake of the review: The vending machine",
+                "preferences": {
+                    "http://registry.gpii.net/common/matchMakerType": "Statistical"
+                }
+            }
+        }
+    }
+}
