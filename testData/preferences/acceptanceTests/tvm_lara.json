@@ -8,7 +8,7 @@
                     "http://registry.gpii.net/common/highContrastEnabled": true,
                     "http://registry.gpii.net/common/highContrastTheme": "white-black",
                     "http://registry.gpii.net/common/fontSize": 24,
-                    "http://registry.gpii.net/common/sessionTimeout": "60"
+                    "http://registry.gpii.net/common/sessionTimeout": 60
                 }
             }
         }
