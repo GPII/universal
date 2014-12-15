@@ -63,8 +63,16 @@
                 }
             }
         ],
-        "start": [],
-        "stop": []
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "echo 'HELLO WORLD'"
+                }
+            ],
+            "stop": [
+            ]
+        }
     },
     "com.freedomscientific.jaws": {
         "name": "JAWS",
@@ -1316,9 +1324,9 @@
        },
        "settingsHandlers": [
            {
-               "type": "gpii.settingsHandlers.INISettingsHandler.set",
+               "type": "gpii.settingsHandlers.INISettingsHandler",
                "options": {
-                   "path": "${{environment}.APPDATA}\\dolphin\\snova-as.ini",
+                   "filename": "${{environment}.APPDATA}\\dolphin\\snova-as.ini",
                    "allowNumberSignComments": true,
                    "allowSubSections": true
                },
