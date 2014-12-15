@@ -187,7 +187,7 @@
                     "contrastTheme",
                     "signLanguageEnabled",
                     "signLanguage",
-                    "signLanguageInterpreterType",
+                    "interpreterType",
                     "pictogramEnabled",
                     "pictogramMode",
                     "pictogramSymbolSet"
@@ -272,7 +272,7 @@
                             }
                         }
                     },
-                    "signLanguageInterpreterType": {
+                    "interpreterType": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/signLanguageInterpreterType",
