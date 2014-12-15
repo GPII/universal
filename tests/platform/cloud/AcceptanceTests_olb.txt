@@ -1,4 +1,4 @@
-olb-testSpec.js
+AcceptanceTests_olb.js
 
 Description:
 This is a set of acceptance tests for the Online Banking demonstrator (OLB) using the Online Flow Manager. 
@@ -6,8 +6,6 @@ It relies on the following preference sets in ..\..\testData\preferences\accepta
 * olb_Carla.json
 * olb_KimCallahan.json
 * olb_Lara.json
-
-The first version of these tests only checks a basic transformer for "language".
 
 
 Requirements: 
