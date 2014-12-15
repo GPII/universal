@@ -54,12 +54,12 @@ var testDefs = [
         expected: {
             "eu.gpii.olb": {
                 "language": "en-GB",
-                "textSize": "2",
-                "lineSpacing": "2",
+                "textSize": 2,
                 "links": true,
-                "inputsLarger": true,
                 "contrastTheme": "wb",
-                "toc": false
+                "signLanguageEnabled": false,
+                "lineSpacing": 2,
+                "inputsLarger": true
             }
         }
     }
