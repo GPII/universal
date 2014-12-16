@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Privacy Settings Test Suite</title>
+
+    <!--  This is the jqUnit test css file -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../infusion/tests/lib/qunit/css/qunit.css" />
+
+    <!--  These are the required javascript modules for Privacy Settings -->
+    <script type="text/javascript" src="../../../../infusion/src/lib/jquery/core/js/jquery.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/Fluid.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidDocument.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidIoC.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/DataBinding.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidView.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidDOMUtilities.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidRequests.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/JavaProperties.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidParser.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidRenderer.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/RendererUtilities.js"></script>
+    <script type="text/javascript" src="../../../../src/components/privacySettings/js/PrivacySettings.js"></script>
+
+    <!--  These are the jqUnit test framework js files -->
+    <script type="text/javascript" src="../../../../infusion/tests/lib/qunit/js/qunit.js"></script>
+    <script type="text/javascript" src="../../../../infusion/tests/test-core/jqUnit/js/jqUnit.js"></script>
+    <script type="text/javascript" src="../../../../infusion/tests/test-core/jqUnit/js/jqUnit-browser.js"></script>
+    <script type="text/javascript" src="../../../../infusion/tests/test-core/utils/js/IoCTestUtils.js"></script>
+
+    <!--  These are tests that have been written using this page as data and test supports -->
+    <script type="text/javascript" src="../js/PrivacySettingsTests.js"></script>
+
+</head>
+<body id="body">
+    <!-- This is the markup that jqUnit will look for when running tests and displaying the results -->
+    <h1 id="qunit-header">Privacy Settings Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">
+
+        <!-- This is the test data -->
+        <section class="gpiic-oauth2-privacySettings gpii-oauth2-panel small-10 large-8 small-centered columns">
+            <div class="gpii-ouath2-inset">
+                <div class="gpii-oauth2-activeUser clearfix">
+                    <span class="right">
+                        <span class="gpii-icon gpii-icon-profile" role="presentation"></span>
+                        <span class="gpiic-oauth2-privacySettings-user gpii-oauth2-userName"></span>
+                        <a href=""><strong class="gpiic-oauth2-privacySettings-logout"></strong></a>
+                    </span>
+                </div>
+
+                <h1 class="gpiic-oauth2-privacySettings-header">Heading</h1>
+
+                <div class="gpiic-oauth2-privacySettings-description">Description</div>
+                <form action="/remove_authorization" method="post">
+                    <p><strong class="gpiic-oauth2-privacySettings-directions"></strong></p>
+                    <div class="gpii-oauth2-privacySettings-serviceList">
+                        <ul>
+                            <li class="gpii-oauth2-privacySettings-service gpii-ouath2-inset-horizontal">
+                                <strong>test service</strong>
+                                <button class="gpii-oauth2-privacySettings-removeService" type="submit" name="remove" value="decisionID">
+                                    <span  class="gpii-icon gpii-icon-x-small" aria-hidden="true"></span>
+                                    <span class="gpiic-oauth2-privacySettings-removeServiceLabel gpii-oauth2-privacySettings-removeServiceLabel"></span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

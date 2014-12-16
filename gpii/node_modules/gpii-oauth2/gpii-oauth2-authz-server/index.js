@@ -1,0 +1,1 @@
+require("./src/AuthServer.js");

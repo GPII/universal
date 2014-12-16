@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Fluid framework complete tests runner</title>
+
+        <link rel="stylesheet" href="../infusion/tests/lib/qunit/css/qunit.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="../infusion/tests/lib/qunit/addons/composite/qunit-composite.css">
+        <script src="../infusion/tests/lib/qunit/js/qunit.js"></script>
+        <script src="../infusion/tests/lib/qunit/addons/composite/qunit-composite.js"></script>
+
+        <!--
+        command line search:
+        find . -name "*-test.html" | awk '{print "\""$1"\","}'
+        -->
+        <script>
+            QUnit.testSuites("Component Tests", [
+                "./components/authorization/html/Authorization-test.html",
+                "./components/login/html/Login-test.html",
+                "./components/privaceySettings/html/PrivacySettings-test.html"
+            ]);
+        </script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+html {
+    font-size: 20px;
+}
+
+.gpii-oauth2 :focus {
+    outline: 3px solid #3D3F4C;
+}
+
+body.gpii-oauth2 {
+    color: #3D3F4C;
+    background-color: #51585D;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.gpii-oauth2 .gpii-ouath2-inset {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.gpii-oauth2 .gpii-ouath2-inset-horizontal {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.gpii-oauth2 .gpii-ouath2-inset-vertical {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.gpii-oauth2 .gpii-oauth2-panel {
+    background-color: #D2D2D1;
+    border-radius: 3px;
+}
+
+
+.gpii-oauth2 .gpii-oauth2-activeUser {
+    padding-bottom: 1.5rem;
+    /*color: #3D3F4C;*/
+}
+
+.gpii-oauth2 .gpii-oauth2-activeUser .gpii-oauth2-userName {
+    padding-right: 0.5rem;
+}
+
+.gpii-oauth2 .gpii-oauth2-footer {
+    background-color: #5FA9A8;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 5px 5px;
+    margin-top: 100px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+}
+
+.gpii-oauth2 .gpii-oauth2-footer a {
+    padding: 1rem;
+    color: #000000;
+}
+
+/******************
+ * Icon Overrides *
+ ******************/
+
+.gpii-oauth2 .gpii-icon.gpii-icon-profile {
+    margin-right: -0.25rem;
+}
+
+/************************
+ * Foundation Overrides *
+ ************************/
+
+.gpii-oauth2 a,
+.gpii-oauth2 h1,
+.gpii-oauth2 h2,
+.gpii-oauth2 h3,
+.gpii-oauth2 h4,
+.gpii-oauth2 h5,
+.gpii-oauth2 h6 {
+    color: #3D3F4C;
+}
+
+.gpii-oauth2 a:hover {
+    text-decoration: underline;
+}
+
+.gpii-oauth2 .button {
+    border: solid 3px #3D3F4C;
+    color: #FFFFFF;
+    background-color: #3D3F4C;
+}
+
+.gpii-oauth2 .button:hover {
+    color: #3D3F4C;
+    background-color: #FFFFFF;
+}
+
+.gpii-oauth2 .button:focus {
+    border-color: #D2D2D1;
+    border-radius: 0;
+}
+
+.gpii-oauth2 .gpii-oauth2-panel.columns {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.gpii-oauth2 .gpii-oauth2-footer .button {
+    margin: 0;
+}
