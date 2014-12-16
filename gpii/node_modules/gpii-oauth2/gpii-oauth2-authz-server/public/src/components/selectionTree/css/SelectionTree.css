@@ -73,6 +73,10 @@
     color: #FFFFFF;
 }
 
+.gpii-oauth2 .gpii-oauth2-selectionTree-branch a.gpii-icon:hover {
+    text-decoration: none;
+}
+
 .gpii-oauth2 .gpii-oauth2-selectionTree input[type=checkbox] + .gpii-icon {
     margin-right: 0.2rem;
     border-radius: 3px;
