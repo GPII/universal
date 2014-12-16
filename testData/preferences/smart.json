@@ -4,9 +4,8 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-					"http://registry.gpii.org/applications/com.technosite.smarttwitter":{
-						"pref_tam_font.$t": "Enorme"
-					}
+					  "http://registry.gpii.net/applications/com.technosite.smarttwitter": { },
+					  "http://registry.gpii.net/common/fontSize" : 6
                 }
             }
         }

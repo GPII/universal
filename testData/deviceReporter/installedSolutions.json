@@ -112,10 +112,6 @@
     },
 
     {
-        "id": "com.android.persistentConfiguration"
-    },
-
-    {
         "id": "org.alsa-project"
     },
 
@@ -126,8 +122,8 @@
     {
         "id": "com.android.settings.system"
     },
-	
-	{
+
+    {
         "id": "com.technosite.smarttwitter"
     }
 
