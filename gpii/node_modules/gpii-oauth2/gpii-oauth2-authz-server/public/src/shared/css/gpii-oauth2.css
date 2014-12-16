@@ -88,6 +88,10 @@ body.gpii-oauth2 {
     color: #3D3F4C;
 }
 
+.gpii-oauth2 a.gpii-icon {
+    text-decoration: none;
+}
+
 .gpii-oauth2 a:hover {
     text-decoration: underline;
 }

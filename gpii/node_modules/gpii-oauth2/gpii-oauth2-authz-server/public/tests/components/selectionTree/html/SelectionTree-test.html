@@ -7,6 +7,7 @@
     <!--  This is the jqUnit test css file -->
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../infusion/tests/lib/qunit/css/qunit.css" />
     <link rel="stylesheet" type="text/css" href="../../../../src/shared/css/c4a-all-icons.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../src/shared/css/gpii-oauth2.css" />
     <link rel="stylesheet" type="text/css" href="../../../../src/components/selectionTree/css/SelectionTree.css" />
 
     <!--  These are the required javascript modules for Selection Tree -->
@@ -45,105 +46,107 @@
     <!-- <div id="qunit-fixture"> -->
 
         <!-- This is the test data -->
-        <section class="gpiic-oauth2-selectionTree gpii-oauth2-selectionTree">
-            <ul>
-                <li>
-                    <labeL>
-                        <input type="checkbox">
-                        <span class="gpii-icon"></span>
-                        <span>All</span>
-                    </label>
-                    <ul>
-                        <li class="gpii-oauth2-selectionTree-leaf">
-                            <labeL>
-                                <input type="checkbox">
-                                <span class="gpii-icon"></span>
-                                Change Contrast
-                            </label>
-                        </li>
-                        <li class="gpii-oauth2-selectionTree-leaf">
-                            <span class="gpii-oauth2-selectionTree-branch">
-                                <span class="gpii-icon gpii-icon-plus-small"></span>
+        <div class="gpii-oauth2">
+            <section class="gpiic-oauth2-selectionTree gpii-oauth2-selectionTree">
+                <ul>
+                    <li>
+                        <labeL>
+                            <input type="checkbox">
+                            <span class="gpii-icon"></span>
+                            <span>All</span>
+                        </label>
+                        <ul>
+                            <li class="gpii-oauth2-selectionTree-leaf">
                                 <labeL>
                                     <input type="checkbox">
                                     <span class="gpii-icon"></span>
-                                    Increase Size
+                                    Change Contrast
                                 </label>
-                            </span>
-                            <ul>
-                                <li class="gpii-oauth2-selectionTree-leaf">
+                            </li>
+                            <li class="gpii-oauth2-selectionTree-leaf">
+                                <span class="gpii-oauth2-selectionTree-branch">
+                                    <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
                                     <labeL>
                                         <input type="checkbox">
                                         <span class="gpii-icon"></span>
-                                        Appearance
+                                        Increase Size
                                     </label>
-                                    <ul>
-                                        <li class="gpii-oauth2-selectionTree-leaf">
-                                            <labeL>
-                                                <input type="checkbox">
-                                                <span class="gpii-icon"></span>
-                                                Text Size
-                                            </label>
-                                        </li>
-                                        <li class="gpii-oauth2-selectionTree-leaf">
-                                            <labeL>
-                                                <input type="checkbox">
-                                                <span class="gpii-icon"></span>
-                                                Cursor Size
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="gpii-oauth2-selectionTree-leaf">
-                                    <labeL>
-                                        <input type="checkbox">
-                                        <span class="gpii-icon"></span>
-                                        Magnifier
-                                    </label>
-                                    <ul>
-                                        <li class="gpii-oauth2-selectionTree-leaf">
-                                            <labeL>
-                                                <input type="checkbox">
-                                                <span class="gpii-icon"></span>
-                                                Magnification Level
-                                            </label>
-                                        </li>
-                                        <li class="gpii-oauth2-selectionTree-leaf">
-                                            <labeL>
-                                                <input type="checkbox">
-                                                <span class="gpii-icon"></span>
-                                                Magnification Position
-                                            </label>
-                                        </li>
-                                        <li class="gpii-oauth2-selectionTree-leaf">
-                                            <labeL>
-                                                <input type="checkbox">
-                                                <span class="gpii-icon"></span>
-                                                Magnification Location Follows
-                                            </label>
-                                        </li>
-                                        <li class="gpii-oauth2-selectionTree-leaf">
-                                            <labeL>
-                                                <input type="checkbox">
-                                                <span class="gpii-icon"></span>
-                                                Magnification Location
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="gpii-oauth2-selectionTree-leaf">
-                            <labeL>
-                                <input type="checkbox">
-                                <span class="gpii-icon"></span>
-                                Universal Volume
-                            </label>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+                                </span>
+                                <ul>
+                                    <li class="gpii-oauth2-selectionTree-leaf">
+                                        <labeL>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Appearance
+                                        </label>
+                                        <ul>
+                                            <li class="gpii-oauth2-selectionTree-leaf">
+                                                <labeL>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Text Size
+                                                </label>
+                                            </li>
+                                            <li class="gpii-oauth2-selectionTree-leaf">
+                                                <labeL>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Cursor Size
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="gpii-oauth2-selectionTree-leaf">
+                                        <labeL>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Magnifier
+                                        </label>
+                                        <ul>
+                                            <li class="gpii-oauth2-selectionTree-leaf">
+                                                <labeL>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Level
+                                                </label>
+                                            </li>
+                                            <li class="gpii-oauth2-selectionTree-leaf">
+                                                <labeL>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Position
+                                                </label>
+                                            </li>
+                                            <li class="gpii-oauth2-selectionTree-leaf">
+                                                <labeL>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Location Follows
+                                                </label>
+                                            </li>
+                                            <li class="gpii-oauth2-selectionTree-leaf">
+                                                <labeL>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Location
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gpii-oauth2-selectionTree-leaf">
+                                <labeL>
+                                    <input type="checkbox">
+                                    <span class="gpii-icon"></span>
+                                    Universal Volume
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </div>
 
     <!-- </div> -->
 </body>
