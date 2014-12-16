@@ -659,6 +659,19 @@
 					}
 				    }]
 			        }
+			    },
+			    "map.int": {
+			        "transform": {
+			            "type": "fluid.transforms.arrayToObject",
+			            "inputPath": "map.int",
+			            "key": "name",
+				    "innerValue": [{
+					"transform": {
+						"type":"fluid.transforms.value",
+						"inputPath": "value"
+					}
+				    }]
+			        }
 			    }
 			}
 		    },
