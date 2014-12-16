@@ -1,5 +1,30 @@
+@font-face {
+    font-family: "OpenSans";
+    src: url("../../../lib/fonts/OpenSans-Light.ttf");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src:url('../../../lib/fonts/OpenSans-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src:url('../../../lib/fonts/OpenSans-Semibold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
 html {
     font-size: 20px;
+}
+
+.gpii-oauth2 {
+    font-family: 'OpenSans',"Myriad Pro", Helvetica, Arial, sans-serif;
 }
 
 .gpii-oauth2 :focus {
@@ -86,6 +111,7 @@ body.gpii-oauth2 {
 .gpii-oauth2 h5,
 .gpii-oauth2 h6 {
     color: #3D3F4C;
+    font-family: 'OpenSans',"Myriad Pro", Helvetica, Arial, sans-serif;
 }
 
 .gpii-oauth2 a.gpii-icon {
