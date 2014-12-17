@@ -45,6 +45,8 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             args: ["{that}.model.clients", "{arguments}.0"]
                 // oauth2ClientId
         },
+        // TODO: updateAuthDecision will go here, as well as refactored saveAuthDecision to accept arbitrary payload into
+        // the decision record to encode preferences filtering information
         saveAuthDecision: {
             funcName: "gpii.oauth2.dataStore.saveAuthDecision",
             args: ["{that}.model", "{that}.applier",

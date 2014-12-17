@@ -3,9 +3,7 @@
 var morgan = require("morgan");
 
 var fluid = require("infusion");
-require("../../gpii-oauth2-datastore");
-require("../../gpii-oauth2-utilities");
-require("../../gpii-oauth2-authz-server");
+require("../../../gpii/node_modules/gpii-oauth2");
 require("../../gpii-oauth2-resource-server");
 
 var gpii = fluid.registerNamespace("gpii");

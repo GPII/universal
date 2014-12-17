@@ -11,7 +11,17 @@
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/fluid-project/kettle.git#5a2e8b8fb5b198b266d6b7b7d0d9eb94185a3759"
+        "kettle": "git://github.com/fluid-project/kettle.git#5a2e8b8fb5b198b266d6b7b7d0d9eb94185a3759",
+        
+        "express": "~3.4.3",
+        "body-parser": "^1.9.2",
+        "connect-ensure-login": "^0.1.1",
+        "express-handlebars": "^1.1.0",
+        "express-session": "^1.9.1",
+        "oauth2orize": "^1.0.1",
+        "passport": "^0.2.1",
+        "passport-local": "^1.0.0",
+        "passport-oauth2-client-password": "^0.1.2"
     },
     "devDependencies": {
         "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#b7ef53aac1ca365bf23d35d255fae874faa88b70",

@@ -1,6 +1,6 @@
 "use strict";
 
-var config = require("../config");
+var config = require("../../gpii/node_modules/gpii-oauth2/oauth2SamplesConfig");
 
 var fluid = require("infusion");
 require("./src/ResourceServer.js");
