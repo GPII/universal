@@ -7,7 +7,7 @@ var morgan = require("morgan");
 var querystring = require("querystring");
 var url = require("url");
 var util = require("util");
-var config = require("../../gpii/node_modules/gpii-oauth2/config");
+var config = require("../../gpii/node_modules/gpii-oauth2/oauth2SamplesConfig");
 
 var clientId = "client_id_1";
 var clientSecret = "client_secret_1";
