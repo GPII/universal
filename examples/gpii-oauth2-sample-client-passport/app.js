@@ -70,7 +70,12 @@ app.use(morgan(":method :url", { immediate: true }));
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 // TODO move the secret to configuration
-app.use(session({ name: "client_pp_connect.sid", secret: "some secret" }));
+app.use(session({
+    name: "client_pp_connect.sid",
+    secret: "some secret",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
