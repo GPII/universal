@@ -1,32 +1,7 @@
 GPII OAuth2
 ===========
 
-At the top level of the universal project, get Infusion and dedupe:
-
-- `npm install`
-- `grunt dedupe-infusion`
-
-Install dependencies:
-
-- `cd gpii-oauth2-authz-server`
-- `npm install`
-- `cd gpii-oauth2-single-process-auth-server`
-- `npm install`
-- `cd gpii-oauth2-utilities`
-- `npm install`
-
-Start the server:
-
-- `cd gpii-oauth2-single-process-auth-server`
-- `node app.js`
-
-Sample OAuth 2.0 clients can be found at: [/examples](../../../examples)
-
-Pages:
-
-- [http://localhost:3002/](http://localhost:3002/) - Sample client
-- [http://localhost:3003/](http://localhost:3003/) - Sample client with Passport
-- [http://localhost:3000/privacy](http://localhost:3000/privacy) - Privacy settings
+Sample OAuth 2.0 servers and web application clients can be found at: [/examples](../../../examples)
 
 Sample users and clients
 ------------------------
