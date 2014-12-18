@@ -163,12 +163,35 @@ fluid.defaults("gpii.oauth2.authServer", {
             }
         }
     },
+    events: {
+        onContributeMiddleware: null,
+        onContributeRouteHandlers: null
+    },
     listeners: {
-        onCreate: {
-            listener: "gpii.oauth2.authServer.listenApp",
+        onContributeMiddleware: {
+            listener: "gpii.oauth2.authServer.contributeMiddleware",
+            args: ["{that}.expressApp", "{that}.passport.passport"]
+        },
+        onContributeRouteHandlers: {
+            listener: "gpii.oauth2.authServer.contributeRouteHandlers",
             args: ["{that}.expressApp", "{that}.oauth2orizeServer.oauth2orizeServer",
                 "{that}.clientService", "{that}.authorizationService", "{that}.passport.passport"]
         }
+    }
+});
+
+gpii.oauth2.authServer.registerBodyParser = function (that) {
+    that.expressApp.use(gpii.oauth2.bodyParser());
+};
+
+fluid.defaults("gpii.oauth2.authServer.standalone", {
+    gradeNames: ["gpii.oauth2.authServer", "autoInit"],
+    listeners: {
+        onCreate: [
+            "gpii.oauth2.authServer.registerBodyParser",
+            "{that}.events.onContributeMiddleware.fire",
+            "{that}.events.onContributeRouteHandlers.fire"
+        ]
     }
 });
 
@@ -219,9 +242,7 @@ gpii.oauth2.bodyParser = function () {
     return bodyParser.urlencoded({ extended: true });
 };
 
-gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientService, authorizationService, passport) {
-
-    // TODO in Express 3, what are the semantics of middleware and route ordering?
+gpii.oauth2.authServer.contributeMiddleware = function (app, passport) {
 
     var hbs = exphbs.create({
         layoutsDir: __dirname + "/../views/layouts",
@@ -244,6 +265,8 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
     app.use(gpii.oauth2.expressStatic(__dirname + "/../public"));
     app.use("/infusion", gpii.oauth2.expressStatic(fluid.module.modules.infusion.baseDir));
     // TODO move the secret to configuration
+    // TODO: Worry about which URL patterns are guarded by this session allocator - will this pollute the
+    // entire express app? Perhaps these can be attached just to the respective URLs, e.g. /authorize
     app.use(session({
         name: "auth_server_connect.sid",
         secret: "some secret",
@@ -255,6 +278,9 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
     app.set("views", __dirname + "/../views");
     app.engine("handlebars", hbs.engine);
     app.set("view engine", "handlebars");
+};
+
+gpii.oauth2.authServer.contributeRouteHandlers = function (app, oauth2orizeServer, clientService, authorizationService, passport) {
 
     app.get("/login", function(req, res) {
         console.log("At login");
@@ -264,13 +290,11 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
     });
 
     app.post("/login",
-        gpii.oauth2.bodyParser(),
         gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: "/", failureRedirect: "/login"})
     );
 
     app.get("/authorize",
         login.ensureLoggedIn("/login"),
-        gpii.oauth2.bodyParser(),
         oauth2orizeServer.authorize(function (oauth2ClientId, redirectUri, done) {
             done(null, clientService.checkClientRedirectUri(oauth2ClientId, redirectUri), redirectUri);
         }),
@@ -293,7 +317,6 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
 
     app.post("/authorize_decision",
         login.ensureLoggedIn("/login"),
-        gpii.oauth2.bodyParser(),
         oauth2orizeServer.decision()
     );
 
@@ -315,7 +338,6 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
 
     app.post("/remove_authorization",
         login.ensureLoggedIn("/login"),
-        gpii.oauth2.bodyParser(),
         function (req, res) {
             var userId = req.user.id;
             var authDecisionId = parseInt(req.body.remove, 10);
@@ -325,7 +347,6 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
     );
 
     app.post("/access_token",
-        gpii.oauth2.bodyParser(),
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
     );

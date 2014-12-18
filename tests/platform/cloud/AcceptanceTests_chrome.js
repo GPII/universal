@@ -18,7 +18,9 @@ var fluid = require("universal"),
 
 gpii.loadTestingSupport();
 
-var testDefs = [
+fluid.registerNamespace("gpii.tests.cloud");
+
+gpii.tests.cloud.chrome = [
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
@@ -67,4 +69,15 @@ var testDefs = [
     }
 ];
 
-module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);
+// We would like to write something like this, but we lost Kettle's transformer chain when implementing
+// the GPII's test drivers:
+
+
+// module.exports = gpii.test.bootstrap({
+//     testDefs:  "gpii.tests.cloud.chrome",
+//     configName: "cloudBasedFlowManager.json",
+//     configPath: "configs"
+// }, ["gpii.test.cloudBased.testCaseHolder"],
+//     module, require, __dirname);
+
+module.exports = (require.main === module ? gpii.test.cloudBased.bootstrap(gpii.tests.cloud.chrome, __dirname) : gpii.tests.cloud.chrome);

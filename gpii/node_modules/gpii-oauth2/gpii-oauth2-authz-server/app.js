@@ -6,6 +6,6 @@ var fluid = require("infusion");
 require("./src/AuthServer.js");
 var gpii = fluid.registerNamespace("gpii");
 
-var server = gpii.oauth2.authServer();
+var server = gpii.oauth2.authServer.standalone();
 // TODO replace the line below with: server.expressApp.listen(server.options.port);
 server.expressApp.listen(config.authorizationServerPort);
