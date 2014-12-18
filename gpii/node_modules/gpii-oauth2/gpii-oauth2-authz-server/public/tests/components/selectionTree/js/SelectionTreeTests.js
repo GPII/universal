@@ -18,7 +18,76 @@ https://github.com/gpii/universal/LICENSE.txt
 
     $(document).ready(function () {
 
-        // fluid.registerNamespace("gpii.tests");
+        fluid.registerNamespace("gpii.tests.oauth2.selectionTree");
+
+        jqUnit.test("gpii.oauth2.selectionTree.setCheckbox", function () {
+            var checkbox = $(".gpiic-ouath2-selectionTree-testCheckbox");
+
+            gpii.oauth2.selectionTree.setCheckbox(checkbox, "checked");
+            jqUnit.assertTrue("The checkbox should be checked", checkbox.prop("checked"));
+            jqUnit.assertFalse("The checkbox should not be indeterminate", checkbox.prop("indeterminate"));
+
+            gpii.oauth2.selectionTree.setCheckbox(checkbox, "indeterminate");
+            jqUnit.assertFalse("The checkbox should not be checked", checkbox.prop("checked"));
+            jqUnit.assertTrue("The checkbox should be indeterminate", checkbox.prop("indeterminate"));
+
+            gpii.oauth2.selectionTree.setCheckbox(checkbox, "unchecked");
+            jqUnit.assertFalse("The checkbox should not be checked", checkbox.prop("checked"));
+            jqUnit.assertFalse("The checkbox should not be indeterminate", checkbox.prop("indeterminate"));
+
+            gpii.oauth2.selectionTree.setCheckbox(checkbox);
+            jqUnit.assertFalse("The checkbox should not be checked", checkbox.prop("checked"));
+            jqUnit.assertFalse("The checkbox should not be indeterminate", checkbox.prop("indeterminate"));
+        });
+
+        gpii.tests.oauth2.selectionTree.testSetDescendants = function (container, parentIsChecked) {
+            var parent = $(container).find(".gpiic-ouath2-selectionTree-testDescendants-parent");
+            var siblings = $(container).find(".gpiic-ouath2-selectionTree-testDescendants-sibling");
+            var descendants = $(container).find(".gpiic-ouath2-selectionTree-testDescendants-descendant");
+            var assertSiblings;
+            var assertDescendants;
+
+            if (parentIsChecked) {
+                assertSiblings = function (state) {
+                    jqUnit.assertFalse("The sibling checkbox should be unchecked", state);
+                };
+                assertDescendants = function (state) {
+                    jqUnit.assertTrue("The descendant checkbox should be checked", state);
+                };
+            } else {
+                assertSiblings = function (state) {
+                    jqUnit.assertTrue("The sibling checkbox should be checked", state);
+                };
+                assertDescendants = function (state) {
+                    jqUnit.assertFalse("The descendant checkbox should be unchecked", state);
+                };
+            }
+
+            parent.prop("checked", parentIsChecked);
+            descendants.prop("checked", !parentIsChecked);
+            siblings.prop("checked", !parentIsChecked);
+
+            gpii.oauth2.selectionTree.setDescendants(parent);
+
+            siblings.each(function (idx, elm) {
+                var state = $(elm).prop("checked");
+                assertSiblings(state);
+            });
+
+            descendants.each(function (idx, elm) {
+                var state = $(elm).prop("checked");
+                assertDescendants(state);
+            });
+        };
+
+        jqUnit.test("gpii.oauth2.selectionTree.setDescendants - checked", function () {
+            gpii.tests.oauth2.selectionTree.testSetDescendants(".gpiic-ouath2-selectionTree-testDescendants-checked", true);
+        });
+
+        jqUnit.test("gpii.oauth2.selectionTree.setDescendants - unchecked", function () {
+            gpii.tests.oauth2.selectionTree.testSetDescendants(".gpiic-ouath2-selectionTree-testDescendants-checked", false);
+        });
+
         //
         // fluid.defaults("gpii.tests.oauth2.privacySettings", {
         //     gradeNames: ["gpii.oauth2.privacySettings", "autoInit"],

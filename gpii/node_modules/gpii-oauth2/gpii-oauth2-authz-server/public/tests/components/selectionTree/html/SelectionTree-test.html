@@ -46,14 +46,40 @@
     <!-- <div id="qunit-fixture"> -->
 
         <!-- This is the test data -->
+        <input type="checkbox" class="gpiic-ouath2-selectionTree-testCheckbox">
+
+        <div class="gpiic-ouath2-selectionTree-testDescendants-checked">
+            <ul>
+                <li>
+                    <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-parent">
+                    <ul>
+                        <li>
+                            <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-descendant">
+                        </li>
+                        <li>
+                            <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-descendant">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-descendant">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-sibling">
+                </li>
+            </ul>
+        </div>
+
         <div class="gpii-oauth2">
             <section class="gpiic-oauth2-selectionTree gpii-oauth2-selectionTree">
                 <ul>
                     <li>
                         <labeL>
-                            <input type="checkbox">
+                            <input type="checkbox" class="gpiic-oauth2-selectionTree-all">
                             <span class="gpii-icon"></span>
-                            <span>All</span>
+                            <span class="gpiic-oauth2-selectionTree-allLabel">All</span>
                         </label>
                         <ul>
                             <li class="gpii-oauth2-selectionTree-leaf">
