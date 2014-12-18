@@ -32,7 +32,7 @@ fluid.defaults("gpii.oauth2.singleProcessAuthServer", {
             type: "gpii.oauth2.dataStoreWithSampleData"
         },
         authServer: {
-            type: "gpii.oauth2.authServer",
+            type: "gpii.oauth2.authServer.standalone",
             createOnEvent: "expressReady",
             options: {
                 gradeNames: ["gpii.oauth2.singleProcessAuthServerOptions"]
