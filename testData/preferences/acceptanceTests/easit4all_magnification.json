@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 1,
+                    "http://registry.gpii.org/common/magnification":6,
+                    "http://registry.gpii.net/common/fontName": "default"
+                }
+            }
+        }
+    }
+}
