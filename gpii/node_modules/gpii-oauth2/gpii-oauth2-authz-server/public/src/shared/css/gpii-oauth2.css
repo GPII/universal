@@ -41,10 +41,7 @@ body.gpii-oauth2 {
 }
 
 .gpii-oauth2 .gpii-ouath2-inset {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding: 3rem;
 }
 
 .gpii-oauth2 .gpii-ouath2-inset-horizontal {
@@ -65,7 +62,6 @@ body.gpii-oauth2 {
 
 .gpii-oauth2 .gpii-oauth2-activeUser {
     padding-bottom: 1.5rem;
-    /*color: #3D3F4C;*/
 }
 
 .gpii-oauth2 .gpii-oauth2-activeUser .gpii-oauth2-userName {
