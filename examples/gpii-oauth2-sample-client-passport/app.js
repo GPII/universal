@@ -6,7 +6,7 @@ var http = require("http");
 var morgan = require("morgan");
 var session = require("express-session");
 var util = require("util");
-var config = require("../../gpii/node_modules/gpii-oauth2/oauth2SamplesConfig");
+var config = require("../oauth2SamplesConfig");
 var passport = require("passport");
 var OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 
