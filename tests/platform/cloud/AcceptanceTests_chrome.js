@@ -24,7 +24,7 @@ gpii.tests.cloud.chrome = [
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {
             "org.chrome.cloud4chrome": {
                 "fontSize": "medium",
@@ -40,7 +40,7 @@ gpii.tests.cloud.chrome = [
     {
         name: "Acceptance test for font size transformation in Chrome",
         userToken: "chrome_font_size",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {
             "org.chrome.cloud4chrome": {
                 "fontSize": "large",
@@ -55,7 +55,7 @@ gpii.tests.cloud.chrome = [
     {
         name: "Acceptance test for magnification transformation in Chrome",
         userToken: "chrome_magnification",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {
             "org.chrome.cloud4chrome": {
                 "fontSize": "medium",
@@ -71,8 +71,6 @@ gpii.tests.cloud.chrome = [
 
 // We would like to write something like this, but we lost Kettle's transformer chain when implementing
 // the GPII's test drivers:
-
-
 // module.exports = gpii.test.bootstrap({
 //     testDefs:  "gpii.tests.cloud.chrome",
 //     configName: "cloudBasedFlowManager.json",
