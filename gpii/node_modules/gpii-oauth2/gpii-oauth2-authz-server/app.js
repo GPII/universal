@@ -1,6 +1,6 @@
 "use strict";
 
-var config = require("../oauth2SamplesConfig");
+var config = require("../../../../examples/oauth2SamplesConfig");
 
 var fluid = require("infusion");
 require("./src/AuthServer.js");
