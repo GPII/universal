@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Selection Tree Test Suite</title>
+
+    <!--  This is the jqUnit test css file -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../infusion/tests/lib/qunit/css/qunit.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../src/shared/css/c4a-all-icons.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../src/shared/css/gpii-oauth2.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../src/components/selectionTree/css/SelectionTree.css" />
+
+    <!--  These are the required javascript modules for Selection Tree -->
+    <script type="text/javascript" src="../../../../infusion/src/lib/jquery/core/js/jquery.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/Fluid.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidDocument.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidIoC.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/DataBinding.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidView.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidDOMUtilities.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidRequests.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/JavaProperties.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidParser.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidRenderer.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/RendererUtilities.js"></script>
+    <script type="text/javascript" src="../../../../src/components/selectionTree/js/SelectionTree.js"></script>
+
+    <!--  These are the jqUnit test framework js files -->
+    <script type="text/javascript" src="../../../../infusion/tests/lib/qunit/js/qunit.js"></script>
+    <script type="text/javascript" src="../../../../infusion/tests/test-core/jqUnit/js/jqUnit.js"></script>
+    <script type="text/javascript" src="../../../../infusion/tests/test-core/jqUnit/js/jqUnit-browser.js"></script>
+    <script type="text/javascript" src="../../../../infusion/tests/test-core/utils/js/IoCTestUtils.js"></script>
+
+    <!--  These are tests that have been written using this page as data and test supports -->
+    <script type="text/javascript" src="../js/SelectionTreeTests.js"></script>
+
+</head>
+<body id="body">
+    <!-- This is the markup that jqUnit will look for when running tests and displaying the results -->
+    <h1 id="qunit-header">Selection Tree Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <!-- <div id="qunit-fixture"> -->
+
+        <!-- This is the test data -->
+        <input type="checkbox" class="gpiic-ouath2-selectionTree-testCheckbox">
+
+        <div class="gpiic-ouath2-selectionTree-testDescendants-checked">
+            <ul>
+                <li>
+                    <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-parent">
+                    <ul>
+                        <li>
+                            <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-descendant">
+                        </li>
+                        <li>
+                            <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-descendant">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-descendant">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <input type="checkbox" class="gpiic-ouath2-selectionTree-testDescendants-sibling">
+                </li>
+            </ul>
+        </div>
+
+        <div class="gpii-oauth2">
+            <section class="gpiic-oauth2-selectionTree gpii-oauth2-selectionTree">
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox" class="gpiic-oauth2-selectionTree-all">
+                            <span class="gpii-icon"></span>
+                            <span class="gpiic-oauth2-selectionTree-allLabel">All</span>
+                        </label>
+                        <ul>
+                            <li class="gpiic-oauth2-prefSelection-increase-size gpii-oauth2-selectionTree-leaf">
+                                <span class="gpii-oauth2-selectionTree-branch">
+                                    <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="gpii-icon"></span>
+                                        Increase Size
+                                    </label>
+                                </span>
+                                <ul>
+                                    <li class="gpiic-oauth2-prefSelection-increase-size_appearance gpii-oauth2-selectionTree-leaf">
+                                        <span class="gpii-oauth2-selectionTree-branch">
+                                            <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                            <label>
+                                                <input type="checkbox">
+                                                <span class="gpii-icon"></span>
+                                                Appearance
+                                            </label>
+                                        </span>
+                                        <ul>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_appearance_text-size gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Text Size
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_appearance_cursor-size gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Cursor Size
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_appearance_inputs-larger gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Buttons &amp; Inputs Size
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_appearance_line-spacing gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Line Spacing
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="gpiic-oauth2-prefSelection-increase-size_magnifier gpii-oauth2-selectionTree-leaf">
+                                        <span class="gpii-oauth2-selectionTree-branch">
+                                            <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                            <label>
+                                                <input type="checkbox">
+                                                <span class="gpii-icon"></span>
+                                                Magnifier
+                                            </label>
+                                        </span>
+                                        <ul>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_magnifier_magnification-level gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Level
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_magnifier_magnifier-position gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Position
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_magnifier_follows gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Magnification Location Follows
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-increase-size_magnifier_emphasize-location gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Emphasize Location
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gpiic-oauth2-prefSelection-simplify gpii-oauth2-selectionTree-leaf">
+                                <span class="gpii-oauth2-selectionTree-branch">
+                                    <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="gpii-icon"></span>
+                                        Simplify
+                                    </label>
+                                </span>
+                                <ul>
+                                    <li class="gpiic-oauth2-prefSelection-simplify_table-of-contents gpii-oauth2-selectionTree-leaf">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Table of Contents
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gpiic-oauth2-prefSelection-universal-volume gpii-oauth2-selectionTree-leaf">
+                                <label>
+                                    <input type="checkbox">
+                                    <span class="gpii-icon"></span>
+                                    Universal Volume
+                                </label>
+                            </li>
+                            <li class="gpiic-oauth2-prefSelection-universal-language gpii-oauth2-selectionTree-leaf">
+                                <label>
+                                    <input type="checkbox">
+                                    <span class="gpii-icon"></span>
+                                    Universal Language
+                                </label>
+                            </li>
+                            <li class="gpiic-oauth2-prefSelection-visual-alternatives gpii-oauth2-selectionTree-leaf">
+                                <span class="gpii-oauth2-selectionTree-branch">
+                                    <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="gpii-icon"></span>
+                                        Visual Alternatives
+                                    </label>
+                                </span>
+                                <ul>
+                                    <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text gpii-oauth2-selectionTree-leaf">
+                                        <span class="gpii-oauth2-selectionTree-branch">
+                                            <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                            <label>
+                                                <input type="checkbox">
+                                                <span class="gpii-icon"></span>
+                                                Speak Text
+                                            </label>
+                                        </span>
+                                        <ul>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_rate gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Words Spoken per Minute
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_volume gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Volume
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_pitch gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Voice Pitch
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_language gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Screen-reader Language
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_announce gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Announce
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_read-back gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Read-back
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_text-highlighting gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Text Highlighting
+                                                </label>
+                                            </li>
+                                            <li class="gpiic-oauth2-prefSelection-visual-alternatives_speak-text_follows gpii-oauth2-selectionTree-leaf">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="gpii-icon"></span>
+                                                    Screen-reader Follows
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="gpiic-oauth2-prefSelection-visual-alternatives_braille gpii-oauth2-selectionTree-leaf">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Braille
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="gpiic-oauth2-prefSelection-visual-styling gpii-oauth2-selectionTree-leaf">
+                                <span class="gpii-oauth2-selectionTree-branch">
+                                    <a href="#_" class="gpii-icon gpii-icon-minus-small"></a>
+                                    <label>
+                                        <input type="checkbox">
+                                        <span class="gpii-icon"></span>
+                                        Visual Styling
+                                    </label>
+                                </span>
+                                <ul>
+                                    <li class="gpiic-oauth2-prefSelection-visual-styling_change-contrast gpii-oauth2-selectionTree-leaf">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Change Contrast
+                                        </label>
+                                    </li>
+                                    <li class="gpiic-oauth2-prefSelection-visual-styling_emphasize-links gpii-oauth2-selectionTree-leaf">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Emphasize Links
+                                        </label>
+                                    </li>
+                                    <li class="gpiic-oauth2-prefSelection-visual-styling_text-style gpii-oauth2-selectionTree-leaf">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span class="gpii-icon"></span>
+                                            Text Style
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+    <!-- </div> -->
+</body>
+</html>
