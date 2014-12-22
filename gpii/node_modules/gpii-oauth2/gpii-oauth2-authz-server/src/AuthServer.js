@@ -126,6 +126,17 @@ fluid.defaults("gpii.oauth2.authServer", {
             expander: {
                 func: "gpii.oauth2.createExpressApp"
             }
+        },
+        sessionMiddleware: {
+            expander: {
+                func: "gpii.oauth2.authServer.createSessionMiddleware"
+            }
+        },
+        passportMiddleware: {
+            expander: {
+                func: "gpii.oauth2.authServer.createPassportMiddleware",
+                args: ["{that}.passport.passport"]
+            }
         }
     },
     components: {
@@ -163,12 +174,49 @@ fluid.defaults("gpii.oauth2.authServer", {
             }
         }
     },
+    events: {
+        onContributeMiddleware: null,
+        onContributeRouteHandlers: null
+    },
     listeners: {
-        onCreate: {
-            listener: "gpii.oauth2.authServer.listenApp",
-            args: ["{that}.expressApp", "{that}.oauth2orizeServer.oauth2orizeServer",
-                "{that}.clientService", "{that}.authorizationService", "{that}.passport.passport"]
+        onContributeMiddleware: {
+            listener: "gpii.oauth2.authServer.contributeMiddleware",
+            args: ["{that}.expressApp"]
+        },
+        onContributeRouteHandlers: {
+            listener: "gpii.oauth2.authServer.contributeRouteHandlers",
+            args: ["{that}", "{that}.oauth2orizeServer.oauth2orizeServer",
+                "{that}.passport.passport"]
         }
+    }
+});
+
+gpii.oauth2.authServer.createSessionMiddleware = function () {
+    // TODO move the secret to configuration
+    return session({
+        name: "auth_server_connect.sid",
+        secret: "some secret",
+        resave: false,
+        saveUninitialized: false
+    });
+};
+
+gpii.oauth2.authServer.createPassportMiddleware = function (passport) {
+    return [ passport.initialize(), passport.session() ];
+};
+
+gpii.oauth2.authServer.registerBodyParser = function (that) {
+    that.expressApp.use(gpii.oauth2.bodyParser());
+};
+
+fluid.defaults("gpii.oauth2.authServer.standalone", {
+    gradeNames: ["gpii.oauth2.authServer", "autoInit"],
+    listeners: {
+        onCreate: [
+            "gpii.oauth2.authServer.registerBodyParser",
+            "{that}.events.onContributeMiddleware.fire",
+            "{that}.events.onContributeRouteHandlers.fire"
+        ]
     }
 });
 
@@ -215,9 +263,11 @@ gpii.oauth2.authServer.loginRouting = function (passport, options) {
     };
 };
 
-gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientService, authorizationService, passport) {
+gpii.oauth2.bodyParser = function () {
+    return bodyParser.urlencoded({ extended: true });
+};
 
-    // TODO in Express 3, what are the semantics of middleware and route ordering?
+gpii.oauth2.authServer.contributeMiddleware = function (app) {
 
     var hbs = exphbs.create({
         layoutsDir: __dirname + "/../views/layouts",
@@ -237,36 +287,45 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
 
     });
 
+    // TODO Let's not mount at the root as it will be hit for every request
     app.use(gpii.oauth2.expressStatic(__dirname + "/../public"));
     app.use("/infusion", gpii.oauth2.expressStatic(fluid.module.modules.infusion.baseDir));
-    app.use(bodyParser.urlencoded({ extended: true }));
-    // TODO move the secret to configuration
-    app.use(session({ name: "auth_server_connect.sid", secret: "some secret" }));
-    app.use(passport.initialize()); // TODO: warning, dependency risk
-    app.use(passport.session()); // TODO: warning, dependency risk
     app.set("views", __dirname + "/../views");
     app.engine("handlebars", hbs.engine);
     app.set("view engine", "handlebars");
+};
 
-    app.get("/login", function(req, res) {
-        console.log("At login");
-        var loginFailed = req.session.loginFailed || false;
-        delete req.session.loginFailed;
-        res.render("login", {loginFailed: loginFailed});
-    });
+gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
 
-    app.post("/login", gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: "/", failureRedirect: "/login"}));
+    that.expressApp.get("/login",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        function(req, res) {
+            console.log("At login");
+            var loginFailed = req.session.loginFailed || false;
+            delete req.session.loginFailed;
+            res.render("login", {loginFailed: loginFailed});
+        }
+    );
 
-    app.get("/authorize",
+    that.expressApp.post("/login",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: "/", failureRedirect: "/login"})
+    );
+
+    that.expressApp.get("/authorize",
+        that.sessionMiddleware,
+        that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.authorize(function (oauth2ClientId, redirectUri, done) {
-            done(null, clientService.checkClientRedirectUri(oauth2ClientId, redirectUri), redirectUri);
+            done(null, that.clientService.checkClientRedirectUri(oauth2ClientId, redirectUri), redirectUri);
         }),
         function (req, res, next) {
             var userId = req.user.id;
             var clientId = req.oauth2.client.id;
             var redirectUri = req.oauth2.redirectURI;
-            if (authorizationService.userHasAuthorized(userId, clientId, redirectUri)) {
+            if (that.authorizationService.userHasAuthorized(userId, clientId, redirectUri)) {
                 // The user has previously authorized so we can grant a code without asking them
                 req.query.transaction_id = req.oauth2.transactionID;
                 // TODO we can cache the oauth2orizeServer.decision middleware as it doesn't change for each request
@@ -279,15 +338,19 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
         }
     );
 
-    app.post("/authorize_decision",
+    that.expressApp.post("/authorize_decision",
+        that.sessionMiddleware,
+        that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.decision()
     );
 
-    app.get("/privacy",
+    that.expressApp.get("/privacy",
+        that.sessionMiddleware,
+        that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
-            var authorizedClients = authorizationService.getAuthorizedClientsForUser(req.user.id);
+            var authorizedClients = that.authorizationService.getAuthorizedClientsForUser(req.user.id);
             // Build view objects
             var services = [];
             authorizedClients.forEach(function (client) {
@@ -300,17 +363,19 @@ gpii.oauth2.authServer.listenApp = function (app, oauth2orizeServer, clientServi
         }
     );
 
-    app.post("/remove_authorization",
+    that.expressApp.post("/remove_authorization",
+        that.sessionMiddleware,
+        that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
             var authDecisionId = parseInt(req.body.remove, 10);
-            authorizationService.revokeAuthorization(userId, authDecisionId);
+            that.authorizationService.revokeAuthorization(userId, authDecisionId);
             res.redirect("/privacy");
         }
     );
 
-    app.post("/access_token",
+    that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
     );

@@ -50,4 +50,4 @@ The GPII OAuth 2.0 server code can be found at: [/gpii/node_modules/gpii-oauth2]
 Sample users and clients
 ------------------------
 
-- [sample users and clients](../gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/src/DataStoreWithSampleData.js)
+- [sample users and clients](gpii-oauth2-sample-data/src/DataStoreWithSampleData.js)

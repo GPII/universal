@@ -6,7 +6,7 @@ var http = require("http");
 var morgan = require("morgan");
 var session = require("express-session");
 var util = require("util");
-var config = require("../../gpii/node_modules/gpii-oauth2/oauth2SamplesConfig");
+var config = require("../oauth2SamplesConfig");
 var passport = require("passport");
 var OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 
@@ -70,7 +70,12 @@ app.use(morgan(":method :url", { immediate: true }));
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 // TODO move the secret to configuration
-app.use(session({ name: "client_pp_connect.sid", secret: "some secret" }));
+app.use(session({
+    name: "client_pp_connect.sid",
+    secret: "some secret",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

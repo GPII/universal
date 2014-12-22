@@ -4,6 +4,7 @@ var morgan = require("morgan");
 
 var fluid = require("infusion");
 require("../../../gpii/node_modules/gpii-oauth2");
+require("../../gpii-oauth2-sample-data");
 require("../../gpii-oauth2-resource-server");
 
 var gpii = fluid.registerNamespace("gpii");
@@ -32,7 +33,7 @@ fluid.defaults("gpii.oauth2.singleProcessAuthServer", {
             type: "gpii.oauth2.dataStoreWithSampleData"
         },
         authServer: {
-            type: "gpii.oauth2.authServer",
+            type: "gpii.oauth2.authServer.standalone",
             createOnEvent: "expressReady",
             options: {
                 gradeNames: ["gpii.oauth2.singleProcessAuthServerOptions"]
