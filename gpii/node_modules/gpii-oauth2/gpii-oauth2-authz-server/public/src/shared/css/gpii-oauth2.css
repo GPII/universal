@@ -122,6 +122,7 @@ body.gpii-oauth2 {
     border: solid 3px #3D3F4C;
     color: #FFFFFF;
     background-color: #3D3F4C;
+    font-family: inherit;
 }
 
 .gpii-oauth2 .button:hover {
@@ -140,5 +141,13 @@ body.gpii-oauth2 {
 }
 
 .gpii-oauth2 .gpii-oauth2-footer .button {
+    margin: 0;
+}
+
+.gpii-oauth2 .gpii-oauth2-activeUser button {
+    color: inherit;
+    font-family: inherit;
+    background-color: transparent;
+    padding: 0;
     margin: 0;
 }
