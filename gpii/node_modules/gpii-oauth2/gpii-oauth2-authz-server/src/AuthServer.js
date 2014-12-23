@@ -137,7 +137,8 @@ fluid.defaults("gpii.oauth2.authServer", {
                 func: "gpii.oauth2.authServer.createPassportMiddleware",
                 args: ["{that}.passport.passport"]
             }
-        }
+        },
+        homePage: "/privacy"
     },
     components: {
         oauth2orizeServer: {
@@ -311,7 +312,16 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
     that.expressApp.post("/login",
         that.sessionMiddleware,
         that.passportMiddleware,
-        gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: "/", failureRedirect: "/login"})
+        gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: that.homePage, failureRedirect: "/login"})
+    );
+
+    that.expressApp.post("/logout",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        function (req, res) {
+            req.logout();
+            res.redirect(that.homePage);
+        }
     );
 
     that.expressApp.get("/authorize",
