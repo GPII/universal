@@ -147,7 +147,7 @@ fluid.defaults("gpii.oauth2.authServer", {
             type: "gpii.oauth2.passport"
         },
         dataStore: {
-            type: "gpii.oauth2.dataStoreWithSampleData" // variants here
+            type: "gpii.oauth2.dataStore" // variants here
         },
         authorizationService: {
             type: "gpii.oauth2.authorizationService",
@@ -355,8 +355,9 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var services = [];
             authorizedClients.forEach(function (client) {
                 services.push({
-                    serviceName: client.clientName,
-                    authDecisionId: client.authDecisionId
+                    authDecisionId: client.authDecisionId,
+                    oauth2ClientId: client.oauth2ClientId,
+                    serviceName: client.clientName
                 });
             });
             res.render("privacy", { user: req.user, authorizedServices: services });
