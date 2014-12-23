@@ -1328,5 +1328,30 @@
                 "restoreSettings"
             ]
         }
+    },
+    "org.chrome.cloud4chrome": {
+        "name": "Cloud4all Chrome extension",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.settingsHandlers.WebSocketsSettingsHandler",
+                "capabilities": [
+                    "applications.org\\.chrome\\.cloud4chrome.id"
+                ]
+           }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
     }
 }
