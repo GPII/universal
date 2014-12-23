@@ -146,11 +146,13 @@ var fluid = fluid || require("infusion");
 
     gpii.tests.oauth2.dataStore.verifyAuthorizedClientB = function (authClient, authDecisionId) {
         jqUnit.assertEquals("authDecisionId", authDecisionId, authClient.authDecisionId);
+        jqUnit.assertEquals("oauth2ClientId", "client_id_B", authClient.oauth2ClientId);
         jqUnit.assertEquals("clientName", "Client B", authClient.clientName);
     };
 
     gpii.tests.oauth2.dataStore.verifyAuthorizedClientC = function (authClient, authDecisionId) {
         jqUnit.assertEquals("authDecisionId", authDecisionId, authClient.authDecisionId);
+        jqUnit.assertEquals("oauth2ClientId", "client_id_C", authClient.oauth2ClientId);
         jqUnit.assertEquals("clientName", "Client C", authClient.clientName);
     };
 

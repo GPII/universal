@@ -220,6 +220,7 @@ gpii.oauth2.dataStore.findAuthorizedClientsByUserId = function (authDecisions, c
         if (client) {
             authorizedClients.push({
                 authDecisionId: ad.id,
+                oauth2ClientId: client.oauth2ClientId,
                 clientName: client.name
             });
         }
