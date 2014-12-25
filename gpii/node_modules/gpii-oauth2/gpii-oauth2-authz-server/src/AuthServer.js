@@ -301,7 +301,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.sessionMiddleware,
         that.passportMiddleware,
         function(req, res) {
-            console.log("At login");
             var loginFailed = req.session.loginFailed || false;
             delete req.session.loginFailed;
             res.render("login", {loginFailed: loginFailed});
