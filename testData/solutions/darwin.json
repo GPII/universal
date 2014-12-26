@@ -1,1 +1,64 @@
-[]
+{
+    "mac.test": {
+        "name": "maavis",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "darwin",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+
+        "settingsHandlers": [{
+            "type": "gpii.settingsHandlers.JSONSettingsHandler",
+            "options": {
+                "filename": "${{environment}.HOME}/deleteme.json"
+            },
+            "capabilities": [ "applications.mac\\.test.id" ],
+            "capabilitiesTransformations": {
+                "font": "http://registry\\.gpii\\.net/common/fontSize"
+            }
+        }],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
+    },
+
+    "webinsight.webAnywhere.windows": {
+        "name": "Web Anywhere",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "darwin",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "display.screenReader",
+                    "applications.webinsight\\.webAnywhere\\.windows.id",
+                    "display.screenReader.applications.webinsight\\.webAnywhere\\.windows.name"
+                ]
+            }
+        ],
+        "lifecycleManager" : {
+             "start": [
+                {
+                    "type": "gpii.launch.webpage",
+                    "url": "http://webanywhere.cs.washington.edu/beta/"
+                }
+            ],
+            "stop": [
+            ]
+        }
+    }
+}

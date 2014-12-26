@@ -1,0 +1,44 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 12
+                },
+                "metadata" : [
+                    {
+                        "message" : {
+                            "de" : {
+                                "learnMore" : "http://cloud4all.info",
+                                "message" : "blablabla DE"
+                            },
+                            "en" : {
+                                "learnMore" : "http://cloud4all.info",
+                                "message" : "Your preferred Assistive Technology is not available on the device. We have launched this alternative solution for you."
+                            },
+                            "gr" : {
+                                "learnMore" : "http://cloud4all.info",
+                                "message" : "Bla Bla Bla in Greek."
+                            }
+                        },
+                        "scope" : [ "com.yourdolphin.supernova-as" ],
+                        "type" : "helpMessage"
+                    }
+                ]
+            },
+            "later": {
+                "name": "Later",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 16
+                },
+                "conditions": [{
+                    "type": "http://registry.gpii.net/conditions/timeInRange",
+                    "from": "20:00",
+                    "to": "20:46",
+                    "inputPath": "http://registry\\.gpii\\.net/common/environment/temporal\\.time"
+                }]
+            }
+        }
+    }
+}
