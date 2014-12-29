@@ -1,4 +1,13 @@
 {
-    "http://registry.gpii.org/applications/trace.easyOne.sudan.windows": [{ "value": {} }],
-    "http://registry.gpii.org/applications/trace.easyOne.sudan.linux": [{ "value": {} }]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/trace.easyOne.sudan.windows": {},
+                    "http://registry.gpii.net/applications/trace.easyOne.sudan.linux": {}
+                }
+            }
+        }
+    }
 }

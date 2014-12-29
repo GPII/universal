@@ -1,7 +1,6 @@
-[
-    {
-        "name": "System Access To Go",
-        "id": "com.serotek.satogo",
+{
+    "com.freedomscientific.jaws": {
+        "name": "JAWS",
         "contexts": {
             "OS": [
                 {
@@ -11,31 +10,160 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                },
                 "capabilities": [
-                    "applications.com\\.serotek\\.satogo.id"
-                ]
+                    "applications.com\\.freedomscientific\\.jaws.id"
+                ],
+                "capabilitiesTransformations": {
+                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "options": {
+                                "none": {
+                                    "outputValue": 0
+                                },
+                                "some": {
+                                    "outputValue": 1
+                                },
+                                "most": {
+                                    "outputValue": 2
+                                },
+                                "all": {
+                                    "outputValue": 3
+                                }
+                            }
+                        }
+                    },
+                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "factor": 0.125,
+                            "offset": -12.125
+                        }
+                    }
+                }
             }
         ],
         "lifecycleManager": {
             "start": [
+                "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\IEXPLORE.EXE\\}\" http://www.satogo.com/en"
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
                 }
             ],
             "stop": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im iexplore.exe"
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
+    "com.serotek.satogo": {
+        "name": "System Access To Go",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "${{environment}.TMP}\\satogo.json"
+                },
+                "capabilities": [
+                    "applications.com\\.serotek\\.satogo.id"
+                ],
+                "capabilitiesTransformations": {
+                    "keyEcho": "http://registry\\.gpii\\.net/common/keyEcho",
+                    "wordEcho": "http://registry\\.gpii\\.net/common/wordEcho",
+                    "averagePitch": "http://registry\\.gpii\\.net/common/pitch",
+                    "invertColors": "http://registry\\.gpii\\.net/common/invertColours",
+                    "magnifyScreen": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "punctuation": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                    "sayCapOnCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "readToolTips": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "true": "always",
+                            "false": "off",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
+                        }
+                    },
+                    "magnificationFactor": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "ranges": [
+                                {
+                                    "upperBound": 1.25,
+                                    "output": 1.25
+                                },
+                                {
+                                    "upperBound": 6,
+                                    "output": {
+                                        "transform": {
+                                            "type": "value",
+                                            "inputPath": "http://registry\\.gpii\\.net/common/magnification"
+                                        }
+                                    }
+                                },
+                                {
+                                    "output": 6
+                                }
+                            ]
+                        }
+                    },
+                    "speakingRate": "http://registry\\.gpii\\.net/common/speechRate"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.lifecycleActions.download",
+                    "URL": "/Users/kasper/dev/web/i.nfo",
+                    "localFolder": "${{environment}.TMP}\\satogo-en.exe"
+                },
+                {
+                    "type": "gpii.lifecycleActions.createFile",
+                    "fileName": "${{environment}.TMP}\\satogo.json",
+                    "content": "{}"
+                },
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.TMP}\\satogo-en.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im satogo-en.exe"
+                },
+                {
+                    "type": "gpii.lifecycleActions.deleteFile",
+                    "fileName": "/tmp/satogo.json"
+                },
+                {
+                    "type": "gpii.lifecycleActions.deleteFile",
+                    "fileName": "/tmp/deleteme3.nfo"
                 }
             ]
         }
     },
-
-    {
+    "com.texthelp.readWriteGold": {
         "name": "Read Write Gold",
-        "id": "com.texthelp.readWriteGold",
         "contexts": {
             "OS": [
                 {
@@ -46,7 +174,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
                     "encoding": "utf-8",
@@ -82,9 +210,9 @@
             ]
         }
     },
-    {
+
+    "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
-        "id": "com.microsoft.windows.magnifier",
         "contexts": {
             "OS": [
                 {
@@ -95,60 +223,58 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler.set",
+                "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Microsoft\\ScreenMagnifier"
+                    "path": "Software\\Microsoft\\ScreenMagnifier",
+                    "dataTypes": {
+                        "Magnification": "REG_DWORD",
+                        "Invert": "REG_DWORD",
+                        "FollowFocus": "REG_DWORD",
+                        "FollowCaret": "REG_DWORD",
+                        "FollowMouse": "REG_DWORD",
+                        "MagnificationMode": "REG_DWORD",
+                        "ZoomIncrement": "REG_DWORD"
+                    }
                 },
                 "capabilities": [
                     "applications.com\\.microsoft\\.windows\\.magnifier.id",
                     "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
                 ],
                 "capabilitiesTransformations": {
-                    "Magnification.dataType": {
+                    "Invert": {
                         "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_DWORD"
+                            "type": "gpii.transformer.booleanToNumber",
+                            "inputPath": "http://registry\\.gpii\\.net/common/invertColours"
                         }
                     },
-                    "Invert": {
-                        "value": "display.screenEnhancement.-provisional-invertColours",
-                        "dataType": {
-                            "literalValue": "REG_DWORD"
+                    "Magnification": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "http://registry\\.gpii\\.net/common/magnification",
+                                    "factor": 100
+                                }
+                            }
                         }
                     },
                     "transform": [{
                         "type": "fluid.transforms.arrayToSetMembership",
-                        "inputPath": "display.screenEnhancement.tracking",
-                        "presentValue": {
-                            "value": 1,
-                            "dataType": "REG_DWORD"
-                        },
-                        "missingValue": {
-                            "value": 0,
-                            "dataType": "REG_DWORD"
-                        },
+                        "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "presentValue": 1,
+                        "missingValue": 0,
                         "options": {
                             "focus": "FollowFocus",
                             "caret": "FollowCaret",
                             "mouse": "FollowMouse"
                         }
-                    }, {
-                        "type": "fluid.transforms.round",
-                        "input": {
-                            "transform": {
-                                "type": "fluid.transforms.linearScale",
-                                "valuePath": "display.screenEnhancement.magnification",
-                                "factor": 100
-                            }
-                        },
-                        "outputPath": "Magnification.value"
                     }],
                     "MagnificationMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenEnhancement.-provisional-magnifierPosition",
-                            "defaultOutputPath": "value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
                             "options": {
                                 "FullScreen": {
                                     "outputValue": 2
@@ -172,12 +298,6 @@
                                     "outputValue": 2
                                 }
                             }
-                        },
-                        "dataType": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "value": "REG_DWORD"
-                            }
                         }
                     }
                 }
@@ -200,9 +320,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.onscreenKeyboard": {
         "name": "Windows Built-in Onscreen Keyboard",
-        "id": "com.microsoft.windows.onscreenKeyboard",
         "contexts": {
             "OS": [
                 {
@@ -237,9 +356,8 @@
         }
     },
 
-    {
+    "org.nvda-project": {
         "name": "NVDA Screen Reader",
-        "id": "org.nvda-project",
         "contexts": {
             "OS": [
                 {
@@ -250,9 +368,9 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.INISettingsHandler.set",
+                "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                    "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
                     "allowSubSections": true
                 },
@@ -264,25 +382,25 @@
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.textReadingHighlight.pitch",
+                            "valuePath": "http://registry\\.gpii\\.net/common/pitch",
                             "factor": 100
                         }
                     },
                     "speech\\.espeak\\.volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "display.textReadingHighlight.-provisional-volumeTTS",
+                            "valuePath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
-                    "presentation\\.reportHelpBalloons": "display.screenReader.-provisional-speakTutorialMessages",
-                    "keyboard\\.speakTypedCharacters": "display.screenReader.-provisional-keyEcho",
-                    "keyboard\\.speakTypedWords": "display.screenReader.-provisional-wordEcho",
-                    "speech\\.espeak\\.sayCapForCapitals": "display.screenReader.-provisional-announceCapitals",
+                    "presentation\\.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
+                    "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
+                    "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
+                    "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
                     "virtualBuffers\\.autoSayAllOnPageLoad": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.textReadingHighlight.readingUnit",
+                            "inputPath": "http://registry\\.gpii\\.net/common/readingUnit",
                             "defaultInputValue": "sentence",
                             "options": {
                                 "all": {
@@ -297,7 +415,7 @@
                     "transform": [
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
-                            "inputPath": "display.screenEnhancement.trackingTTS",
+                            "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
                             "presentValue": true,
                             "missingValue": false,
                             "options": {
@@ -308,7 +426,7 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-screenReaderTTSEnabled",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                             "options": {
                                 "false": {
                                     "outputValue": {
@@ -342,11 +460,11 @@
                                     "left": {
                                         "transform": {
                                             "type": "fluid.transforms.condition",
-                                            "truePath": "display.screenReader.speechRate",
+                                            "truePath": "http://registry\\.gpii\\.net/common/speechRate",
                                             "false": {
                                                 "transform": {
                                                     "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                     "operator": "/",
                                                     "right": 3
                                                 }
@@ -354,7 +472,7 @@
                                             "condition": {
                                                 "transform": {
                                                     "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "display.screenReader.speechRate",
+                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                     "operator": "<=",
                                                     "right": 390
                                                 }
@@ -368,7 +486,7 @@
                     "speech\\.espeak\\.rateBoost": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "display.screenReader.speechRate",
+                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                             "operator": ">",
                             "right": 390
                         }
@@ -376,19 +494,19 @@
                     "speech\\.symbolLevel": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-punctuationVerbosity",
+                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
                             "options": {
                                 "none": {
-                                    "outputValue": "0"
+                                    "outputValue": 0
                                 },
                                 "some": {
-                                    "outputValue": "100"
+                                    "outputValue": 100
                                 },
                                 "most": {
-                                    "outputValue": "200"
+                                    "outputValue": 200
                                 },
                                 "all": {
-                                    "outputValue": "300"
+                                    "outputValue": 300
                                 }
                             }
                         }
@@ -396,7 +514,7 @@
                     "speech\\.espeak\\.voice": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenReader.-provisional-auditoryOutLanguage",
+                            "inputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
                             "options": {
                                 "en": {
                                     "outputValue": "en\\en"
@@ -598,7 +716,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES}\\NVDA\\nvda.exe\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
                 }
             ],
             "stop": [
@@ -614,9 +732,8 @@
         }
     },
 
-    {
+    "trace.easyOne.communicator.windows": {
         "name": "EasyOne Communicator Windows",
-        "id": "trace.easyOne.communicator.windows",
         "contexts": {
             "OS": [
                 {
@@ -640,7 +757,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://easy1234.org/user/${{userToken}}"
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/user/${{userToken}}"
                 }
             ],
             "stop": [
@@ -652,9 +769,8 @@
         }
     },
 
-    {
+    "trace.easyOne.sudan.windows": {
         "name": "EasyOne Communicator Sudan",
-        "id": "trace.easyOne.sudan.windows",
         "contexts": {
             "OS": [
                 {
@@ -677,7 +793,7 @@
             "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" http://easy1234.org/sudan"
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/sudan"
                 }
             ],
             "stop": [
@@ -689,9 +805,8 @@
         }
     },
 
-    {
+    "webinsight.webAnywhere.windows": {
         "name": "Web Anywhere",
-        "id": "webinsight.webAnywhere.windows",
         "contexts": {
             "OS": [
                 {
@@ -714,7 +829,7 @@
              "start": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.PROGRAMFILES(x86)}\\Mozilla Firefox\\firefox.exe\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http://ec2-107-21-143-113.compute-1.amazonaws.com:443/demos/Mammals.html?token=${{userToken}}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
                 }
             ],
             "stop": [
@@ -726,9 +841,8 @@
         }
     },
 
-    {
+    "net.opendirective.maavis": {
         "name": "maavis",
-        "id": "net.opendirective.maavis",
         "contexts": {
             "OS": [
                 {
@@ -739,8 +853,8 @@
         },
 
         "settingsHandlers": [{
-            "type": "gpii.settingsHandlers.JSONSettingsHandler.set",
-            "options": { "path": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
+            "type": "gpii.settingsHandlers.JSONSettingsHandler",
+            "options": { "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
             "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
         }],
 
@@ -762,9 +876,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
-        "id": "com.microsoft.windows.highContrast",
         "contexts": {
             "OS": [
                 {
@@ -775,7 +888,7 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.spiSettingsHandler.set",
+                "type": "gpii.windows.spiSettingsHandler",
                 "options": {
                     "getAction": "SPI_GETHIGHCONTRAST",
                     "setAction": "SPI_SETHIGHCONTRAST",
@@ -793,7 +906,7 @@
                     "HighContrastOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "display.screenEnhancement.-provisional-highContrastEnabled",
+                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                             "outputPath": "value"
                         },
                         "path": {
@@ -816,9 +929,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.mouseTrailing": {
         "name": "Windows Mouse Trailing",
-        "id": "com.microsoft.windows.mouseTrailing",
         "contexts": {
             "OS": [
                 {
@@ -829,13 +941,13 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.spiSettingsHandler.set",
+                "type": "gpii.windows.spiSettingsHandler",
                 "options": {
                     "getAction": "SPI_GETMOUSETRAILS",
                     "setAction": "SPI_SETMOUSETRAILS",
                     "uiParam": 0,
                     "pvParam": {
-                        "type": "BOOL"
+                        "type": "UINT"
                     }
                 },
                 "capabilities": [
@@ -846,7 +958,7 @@
                     "MouseTrails": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "display.screenEnhancement.mouseTrailing",
+                            "inputPath": "http://registry\\.gpii\\.net/common/mouseTrailing",
                             "outputPath": "value"
                         },
                         "path": {
@@ -872,9 +984,8 @@
         }
     },
 
-    {
+    "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
-        "id": "com.microsoft.windows.cursors",
         "contexts": {
             "OS": [
                 {
@@ -885,422 +996,252 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.windows.registrySettingsHandler.set",
+                "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Control Panel\\Cursors"
+                    "path": "Control Panel\\Cursors",
+                    "dataTypes": {
+                        "Arrow": "REG_SZ",
+                        "Hand": "REG_SZ",
+                        "Help": "REG_SZ",
+                        "AppStarting": "REG_SZ",
+                        "No": "REG_SZ",
+                        "NWPen": "REG_SZ",
+                        "SizeAll": "REG_SZ",
+                        "SizeNESW": "REG_SZ",
+                        "SizeNS": "REG_SZ",
+                        "SizeNWSE": "REG_SZ",
+                        "SizeWE": "REG_SZ",
+                        "UpArrow": "REG_SZ",
+                        "Wait": "REG_SZ"
+                    }
                 },
                 "capabilities": [
                     "display.screenEnhancement.cursorSize",
                     "applications.com\\.microsoft\\.windows\\.cursors.id"
                 ],
                 "capabilitiesTransformations": {
-                    "transform": [
-                        {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "Arrow.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
+                    "Arrow": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_arrow.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
                                 }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_arrow.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_arrow_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "Arrow.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "Hand.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_link.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_link_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_link_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "Hand.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "Help.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_helpsel.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_helpsel_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "Help.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "AppStarting.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_working.ani",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_working_l.ani",
-                                    "false": "%SystemRoot%\\cursors\\aero_working_xl.ani"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "AppStarting.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "No.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_unavail.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_unavail_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "No.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "NWPen.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_pen.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_pen_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "NWPen.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "SizeAll.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_move.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_move_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_move_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "SizeAll.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "SizeNESW.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_nesw.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_nesw_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "SizeNESW.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "SizeNS.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_ns.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_ns_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "SizeNS.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "SizeNWSE.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_nwse.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_nwse_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "SizeNWSE.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "SizeWE.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_ew.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_ew_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "SizeWE.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "UpArrow.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_up.cur",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_up_l.cur",
-                                    "false": "%SystemRoot%\\cursors\\aero_up_xl.cur"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "UpArrow.dataType"
-                        }, {
-                            "type": "fluid.transforms.condition",
-                            "outputPath": "Wait.value",
-                            "condition": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "display.screenEnhancement.cursorSize",
-                                    "operator": "<",
-                                    "right": 0.333
-                                }
-                            },
-                            "true": "%SystemRoot%\\cursors\\aero_busy.ani",
-                            "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.condition",
-                                    "condition": {
-                                        "transform": {
-                                            "type": "fluid.transforms.binaryOp",
-                                            "leftPath": "display.screenEnhancement.cursorSize",
-                                            "operator": "<",
-                                            "right": 0.666
-                                        }
-                                    },
-                                    "true": "%SystemRoot%\\cursors\\aero_busy_l.ani",
-                                    "false": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
-                                }
-                            }
-                        }, {
-                            "type": "fluid.transforms.literalValue",
-                            "value": "REG_SZ",
-                            "outputPath": "Wait.dataType"
+                            ]
                         }
-                    ]
+                    },
+                    "Hand": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_link.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_link_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_link_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "Help": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_helpsel.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "AppStarting": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_working.ani"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_working_l.ani"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                                }
+                            ]
+                        }
+                    },
+                    "No": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_unavail.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "NWPen": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_pen.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_pen_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "SizeAll": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_move.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_move_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_move_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "SizeNESW": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_nesw.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "SizeNS": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_ns.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_ns_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "SizeNWSE": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_nwse.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "SizeWE": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_ew.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_ew_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "UpArrow": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_up.cur"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_up_l.cur"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_up_xl.cur"
+                                }
+                            ]
+                        }
+                    },
+                    "Wait": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": "%SystemRoot%\\cursors\\aero_busy.ani"
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": "%SystemRoot%\\cursors\\aero_busy_l.ani"
+                                }, {
+                                    "output": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
+                                }
+                            ]
+                        }
+                    }
                 }
             }
         ],
@@ -1319,10 +1260,9 @@
             ]
         }
     },
-    
-    {
+
+    "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
-        "id": "eu.singularlogic.pixelsense.sociable",
         "contexts": {
             "OS": [
                 {
@@ -1333,17 +1273,16 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
-                    
                 },
                 "capabilities": [
                     "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
                 ],
-                "capabilitiesTransformations": {    
+                "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
                     },
@@ -1354,16 +1293,16 @@
                         "literalValue": 1
                     },
                     "screenReaderTTSEnabled": {
-                        "value": "display.screenReader.-provisional-screenReaderTTSEnabled"
+                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                     },
                     "highContrastEnabled": {
-                        "value": "display.screenEnhancement.-provisional-highContrastEnabled"
+                        "value": "http://registry\\.gpii\\.net/common/highContrastEnabled"
                     },
                      "fontSize": {
                         "value": {
                             "transform": {
                                 "type": "gpii.transformer.quantize",
-                                "inputPath": "display.screenEnhancement.fontSize",
+                                "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                                 "ranges": [{
                                     "upperBound": 14,
                                     "output": "normal"
@@ -1392,4 +1331,4 @@
             ]
         }
     }
-]
+}

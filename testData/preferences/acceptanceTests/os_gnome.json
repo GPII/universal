@@ -1,0 +1,22 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                        "mag-factor": 1.5,
+                        "screen-position": "full-screen"
+                    },
+                    "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
+                        "cursor-size": 90,
+                        "text-scaling-factor": 0.75
+                    },
+                    "http://registry.gpii.net/applications/org.alsa-project": {
+                        "masterVolume": 50
+                    }
+                }
+            }
+        }
+    }
+}
