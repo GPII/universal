@@ -45,10 +45,10 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             args: ["{that}.model.clients", "{arguments}.0"]
                 // oauth2ClientId
         },
-        // TODO: updateAuthDecision will go here, as well as refactored saveAuthDecision to accept arbitrary payload into
+        // TODO: updateAuthDecision will go here, as well as refactored addAuthDecision to accept arbitrary payload into
         // the decision record to encode preferences filtering information
-        saveAuthDecision: {
-            funcName: "gpii.oauth2.dataStore.saveAuthDecision",
+        addAuthDecision: {
+            funcName: "gpii.oauth2.dataStore.addAuthDecision",
             args: ["{that}.model", "{that}.applier", "{arguments}.0"]
                 // authDecision
         },
@@ -120,7 +120,7 @@ gpii.oauth2.dataStore.findClientByOauth2ClientId = function (clients, oauth2Clie
 // recorded user 'authorization decisions' and access tokens. We may want to
 // rethink this and give them different lifetimes.
 
-gpii.oauth2.dataStore.saveAuthDecision = function (model, applier, authDecisionData) {
+gpii.oauth2.dataStore.addAuthDecision = function (model, applier, authDecisionData) {
     var authDecisionId = model.authDecisionsIdSeq;
     applier.change("authDecisionsIdSeq", model.authDecisionsIdSeq + 1);
     var authDecision = {
@@ -129,6 +129,7 @@ gpii.oauth2.dataStore.saveAuthDecision = function (model, applier, authDecisionD
         clientId: authDecisionData.clientId, // foreign key
         redirectUri: authDecisionData.redirectUri,
         accessToken: authDecisionData.accessToken,
+        selectedPreferences: authDecisionData.selectedPreferences,
         revoked: false
     };
     model.authDecisions.push(authDecision);

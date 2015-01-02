@@ -58,7 +58,7 @@ gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, u
     var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
     if (!authDecision) {
         var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
-        authDecision = dataStore.saveAuthDecision({
+        authDecision = dataStore.addAuthDecision({
             userId: userId,
             clientId: clientId,
             redirectUri: redirectUri,
