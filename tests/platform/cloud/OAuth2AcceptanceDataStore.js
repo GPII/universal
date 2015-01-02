@@ -15,9 +15,8 @@ var fluid = require("infusion");
 fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
     gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
     model: {
-        users: [
-            { id: 1, username: "alice", password: "a", gpiiToken: "alice_gpii_token" },
-            { id: 2, username: "bob", password: "b", gpiiToken: "bob_gpii_token" }
+        users: [ // this model is rewritten on startup to hold the token of the fixture's current user
+            { id: 1, username: "bob", password: "b", gpiiToken: "placeholder_token" }
         ],
         clients: [
             {
@@ -25,7 +24,7 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 name: "Cloud4Chrome",
                 oauth2ClientId: "org.chrome.cloud4chrome",
                 oauth2ClientSecret: "client_secret_chrome",
-                redirectUri: "http://the-client%27s-uri/"
+                redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/"
             },
             {
                 id: 2,
