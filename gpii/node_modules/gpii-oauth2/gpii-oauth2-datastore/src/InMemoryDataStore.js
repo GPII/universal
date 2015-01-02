@@ -137,8 +137,6 @@ gpii.oauth2.dataStore.addAuthDecision = function (model, applier, authDecisionDa
     };
     model.authDecisions.push(authDecision);
     applier.change("authDecisions", model.authDecisions);
-    console.log("SAVE AUTH DECISION: id=" + authDecisionId);
-    console.log(JSON.stringify(model.authDecisions, null, 4));
     return authDecision;
 };
 
@@ -166,8 +164,6 @@ gpii.oauth2.dataStore.revokeAuthDecision = function (authDecisions, applier, use
         // to allow a more fine grained update)
         applier.change("authDecisions", authDecisions);
     }
-    console.log("REVOKE AUTH DECISION: id=" + authDecisionId);
-    console.log(JSON.stringify(authDecisions, null, 4));
 };
 
 gpii.oauth2.dataStore.findAuthDecisionById = function (authDecisions, id) {
@@ -197,8 +193,6 @@ gpii.oauth2.dataStore.saveAuthCode = function (authCodes, applier, authDecisionI
         code: code
     });
     applier.change("authCodes", authCodes);
-    console.log("SAVE AUTH CODE: code=" + code);
-    console.log(JSON.stringify(authCodes, null, 4));
 };
 
 // Authorization Decision join Authorization Code
