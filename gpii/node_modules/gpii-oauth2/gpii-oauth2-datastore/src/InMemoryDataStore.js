@@ -45,12 +45,20 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             args: ["{that}.model.clients", "{arguments}.0"]
                 // oauth2ClientId
         },
-        // TODO: updateAuthDecision will go here, as well as refactored addAuthDecision to accept arbitrary payload into
-        // the decision record to encode preferences filtering information
         addAuthDecision: {
             funcName: "gpii.oauth2.dataStore.addAuthDecision",
             args: ["{that}.model", "{that}.applier", "{arguments}.0"]
                 // authDecision
+        },
+        updateAuthDecision: {
+            funcName: "gpii.oauth2.dataStore.updateAuthDecision",
+            args: ["{that}.model.authDecisions", "{that}.applier", "{arguments}.0", "{arguments}.1"]
+                // userId, authDecision
+        },
+        revokeAuthDecision: {
+            funcName: "gpii.oauth2.dataStore.revokeAuthDecision",
+            args: ["{that}.model.authDecisions", "{that}.applier", "{arguments}.0", "{arguments}.1"]
+                // userId, authDecisionId
         },
         findAuthDecisionById: {
             funcName: "gpii.oauth2.dataStore.findAuthDecisionById",
@@ -61,11 +69,6 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             funcName: "gpii.oauth2.dataStore.findAuthDecision",
             args: ["{that}.model.authDecisions", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // userId, clientId, redirectUri
-        },
-        revokeAuthDecision: {
-            funcName: "gpii.oauth2.dataStore.revokeAuthDecision",
-            args: ["{that}.model.authDecisions", "{that}.applier", "{arguments}.0", "{arguments}.1"]
-                // userId, authDecisionId
         },
         saveAuthCode: {
             funcName: "gpii.oauth2.dataStore.saveAuthCode",
@@ -139,6 +142,34 @@ gpii.oauth2.dataStore.addAuthDecision = function (model, applier, authDecisionDa
     return authDecision;
 };
 
+gpii.oauth2.dataStore.updateAuthDecision = function (authDecisions, applier, userId, authDecisionData) {
+    // Only update the authDecision if it is owned by userId so that
+    // users cannot update authorizations owned by others
+    var authDecision = gpii.oauth2.dataStore.findAuthDecisionById(authDecisions, authDecisionData.id);
+    if (authDecision && authDecision.userId === userId) {
+        authDecision.selectedPreferences = fluid.copy(authDecisionData.selectedPreferences);
+        // We are changing one of the authDecision items in the collection but
+        // notifying on the collection (it's not worth it to extend the query api
+        // to allow a more fine grained update)
+        applier.change("authDecisions", authDecisions);
+    }
+};
+
+gpii.oauth2.dataStore.revokeAuthDecision = function (authDecisions, applier, userId, authDecisionId) {
+    // Only revoke the authorization with authDecisionId if it is owned
+    // by userId so that users cannot revoke authorizations owned by others
+    var authDecision = gpii.oauth2.dataStore.findAuthDecisionById(authDecisions, authDecisionId);
+    if (authDecision && authDecision.userId === userId) {
+        authDecision.revoked = true;
+        // We are changing one of the authDecision items in the collection but
+        // notifying on the collection (it's not worth it to extend the query api
+        // to allow a more fine grained update)
+        applier.change("authDecisions", authDecisions);
+    }
+    console.log("REVOKE AUTH DECISION: id=" + authDecisionId);
+    console.log(JSON.stringify(authDecisions, null, 4));
+};
+
 gpii.oauth2.dataStore.findAuthDecisionById = function (authDecisions, id) {
     return fluid.find_if(authDecisions, function (ad) {
         return ad.id === id;
@@ -152,21 +183,6 @@ gpii.oauth2.dataStore.findAuthDecision = function (authDecisions, userId, client
             ad.redirectUri === redirectUri &&
             ad.revoked === false;
     });
-};
-
-gpii.oauth2.dataStore.revokeAuthDecision = function (authDecisions, applier, userId, authDecisionId) {
-    // Only revoke the authorization with authDecisionId if it is owned
-    // by userId so that users cannot revoke authorizations owned by others
-    var authDecision = gpii.oauth2.dataStore.findAuthDecisionById(authDecisions, authDecisionId);
-    if (authDecision && authDecision.userId === userId) {
-        authDecision.revoked = true;
-    }
-    // We are changing one of the authDecision items in the collection but
-    // notifying on the collection (it's not worth it to extend the query api
-    // to allow a more fine grained update)
-    applier.change("authDecisions", authDecisions);
-    console.log("REVOKE AUTH DECISION: id=" + authDecisionId);
-    console.log(JSON.stringify(authDecisions, null, 4));
 };
 
 // Authorization Codes

@@ -121,12 +121,16 @@ var fluid = fluid || require("infusion");
             gpii.tests.oauth2.dataStore.testdata.authDecision1.redirectUri);
     };
 
-    gpii.tests.oauth2.dataStore.verifyAuthDecision1 = function (authDecision) {
+    gpii.tests.oauth2.dataStore.verifyAuthDecision1 = function (authDecision, expectedSelectedPreferences) {
         jqUnit.assertEquals("userId", gpii.tests.oauth2.dataStore.testdata.authDecision1.userId, authDecision.userId);
         jqUnit.assertEquals("clientId", gpii.tests.oauth2.dataStore.testdata.authDecision1.clientId, authDecision.clientId);
         jqUnit.assertEquals("redirectUri", gpii.tests.oauth2.dataStore.testdata.authDecision1.redirectUri, authDecision.redirectUri);
         jqUnit.assertEquals("accessToken", gpii.tests.oauth2.dataStore.testdata.authDecision1.accessToken, authDecision.accessToken);
-        jqUnit.assertUndefined("selectedPreferences", authDecision.selectedPreferences);
+        if (expectedSelectedPreferences) {
+            jqUnit.assertEquals("selectedPreferences", expectedSelectedPreferences, authDecision.selectedPreferences);
+        } else {
+            jqUnit.assertUndefined("selectedPreferences", authDecision.selectedPreferences);
+        }
         jqUnit.assertFalse("not revoked", authDecision.revoked);
     };
 
@@ -248,7 +252,7 @@ var fluid = fluid || require("infusion");
 
         jqUnit.test("findAuthDecision() finds an existing authorization and falsey for revoked", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
-            // save
+            // add
             var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
             // find and verify
             gpii.tests.oauth2.dataStore.verifyAuthDecision1(gpii.tests.oauth2.dataStore.findAuthDecision1(dataStore));
@@ -265,9 +269,27 @@ var fluid = fluid || require("infusion");
                 gpii.tests.oauth2.dataStore.findAuthDecision1(dataStore));
         });
 
+        jqUnit.test("updateAuthDecision() updates selectedPreferences", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+            // add
+            var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
+            // set selectedPreferences
+            authDecision1.selectedPreferences = "selectedPreferencesUpdate 1";
+            dataStore.updateAuthDecision(authDecision1.userId, authDecision1);
+            // verify
+            var retrieved = dataStore.findAuthDecisionById(authDecision1.id);
+            gpii.tests.oauth2.dataStore.verifyAuthDecision1(retrieved, "selectedPreferencesUpdate 1");
+            // update selectedPreferences
+            authDecision1.selectedPreferences = "selectedPreferencesUpdate 2";
+            dataStore.updateAuthDecision(authDecision1.userId, authDecision1);
+            // verify
+            retrieved = dataStore.findAuthDecisionById(authDecision1.id);
+            gpii.tests.oauth2.dataStore.verifyAuthDecision1(retrieved, "selectedPreferencesUpdate 2");
+        });
+
         jqUnit.test("saveAuthCode(), verify findAuthByCode(), revoke, and then verify no longer found", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
-            // save authDecision and authCode
+            // add authDecision and authCode
             var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
             gpii.tests.oauth2.dataStore.saveAuthCode1(dataStore, authDecision1.id);
             // find and verify
@@ -289,7 +311,7 @@ var fluid = fluid || require("infusion");
 
         jqUnit.test("findAuthorizedClientsByUserId() with revoking", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
-            // save authDecisions
+            // add authDecisions
             var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
             var authDecision2 = gpii.tests.oauth2.dataStore.addAuthDecision2(dataStore);
             var userId = gpii.tests.oauth2.dataStore.testdata.userId1;
@@ -303,7 +325,7 @@ var fluid = fluid || require("infusion");
             clients = dataStore.findAuthorizedClientsByUserId(userId);
             jqUnit.assertEquals("1 client", 1, clients.length);
             gpii.tests.oauth2.dataStore.verifyAuthorizedClientC(clients[0], authDecision2.id);
-            // save a new authDecision and verify found
+            // add a new authDecision and verify found
             var authDecision3 = gpii.tests.oauth2.dataStore.addAuthDecision3(dataStore);
             clients = dataStore.findAuthorizedClientsByUserId(userId);
             jqUnit.assertEquals("2 clients", 2, clients.length);
@@ -331,7 +353,7 @@ var fluid = fluid || require("infusion");
 
         jqUnit.test("findAuthByAccessToken() finds an existing authorization and undefined for revoked", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
-            // save
+            // add
             var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
             // find and verify
             gpii.tests.oauth2.dataStore.verifyAuthForAccessToken1(dataStore.findAuthByAccessToken(authDecision1.accessToken));
