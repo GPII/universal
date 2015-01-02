@@ -16,7 +16,7 @@ fluid.defaults("gpii.oauth2.userService", {
         authenticateUser: {
             funcName: "gpii.oauth2.userService.authenticateUser",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
-            //                    username, password
+                // username, password
         },
         getUserById: {
             func: "{dataStore}.findUserById"

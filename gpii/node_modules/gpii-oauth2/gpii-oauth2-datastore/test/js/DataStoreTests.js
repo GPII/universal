@@ -102,24 +102,16 @@ var fluid = fluid || require("infusion");
         jqUnit.assertEquals("redirectUri", "http://example.com/callback_B", client.redirectUri);
     };
 
-    gpii.tests.oauth2.dataStore.saveAuthDecision = function (dataStore, authDecision) {
-        return dataStore.saveAuthDecision(authDecision.userId, authDecision.clientId,
-            authDecision.redirectUri, authDecision.accessToken);
-    };
-
     gpii.tests.oauth2.dataStore.saveAuthDecision1 = function (dataStore) {
-        return gpii.tests.oauth2.dataStore.saveAuthDecision(dataStore,
-            gpii.tests.oauth2.dataStore.testdata.authDecision1);
+        return dataStore.saveAuthDecision(gpii.tests.oauth2.dataStore.testdata.authDecision1);
     };
 
     gpii.tests.oauth2.dataStore.saveAuthDecision2 = function (dataStore) {
-        return gpii.tests.oauth2.dataStore.saveAuthDecision(dataStore,
-            gpii.tests.oauth2.dataStore.testdata.authDecision2);
+        return dataStore.saveAuthDecision(gpii.tests.oauth2.dataStore.testdata.authDecision2);
     };
 
     gpii.tests.oauth2.dataStore.saveAuthDecision3 = function (dataStore) {
-        return gpii.tests.oauth2.dataStore.saveAuthDecision(dataStore,
-            gpii.tests.oauth2.dataStore.testdata.authDecision3);
+        return dataStore.saveAuthDecision(gpii.tests.oauth2.dataStore.testdata.authDecision3);
     };
 
     gpii.tests.oauth2.dataStore.findAuthDecision1 = function (dataStore) {
