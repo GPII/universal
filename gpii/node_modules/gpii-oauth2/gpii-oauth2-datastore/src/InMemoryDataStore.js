@@ -257,6 +257,7 @@ gpii.oauth2.dataStore.findAuthByAccessToken = function (authDecisions, users, cl
     }
     return {
         userGpiiToken: user.gpiiToken,
-        oauth2ClientId: client.oauth2ClientId
+        oauth2ClientId: client.oauth2ClientId,
+        selectedPreferences: authDecision.selectedPreferences
     };
 };
