@@ -6,7 +6,7 @@
                 "preferences": {
                     "http://registry.gpii.net/common/fontSize": 1,
                     "http://registry.gpii.org/common/magnification":6,
-                    "http://registry.gpii.net/common/fontName": "default"
+                    "http://registry.gpii.net/applications/com.bdigital.easit4all/fontName": "default"
                 }
             }
         }

@@ -90,7 +90,7 @@
                   "fontFaceFontName": {
                       "transform":{                            
                         "type": "fluid.transforms.valueMapper",
-                        "inputPath": "http://registry\\.gpii\\.net/common/fontName",
+                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/fontName",
                         "defaultInputValue": "default",
                         "options": {
                             "times": {
@@ -114,7 +114,7 @@
                     "foregroundColor": {
                       "transform":{                            
                         "type": "fluid.transforms.valueMapper",
-                        "inputPath": "http://registry\\.gpii\\.net/common/foregroundColor",
+                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/foregroundColor",
                         "defaultInputValue": "default",
                         "options": {
                             "black": {
@@ -135,7 +135,7 @@
                   "backgroundColor": {
                       "transform":{                            
                         "type": "fluid.transforms.valueMapper",
-                        "inputPath": "http://registry\\.gpii\\.net/common/backgroundColor",
+                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/backgroundColor",
                         "defaultInputValue": "default",
                         "options": {
                             "black": {
@@ -153,13 +153,13 @@
                         }
                       }
                     },
-                  "lineSpacing": "http://registry\\.gpii\\.net/common/lineSpacing",
-                  "inputsLarger": "http://registry\\.gpii\\.net/common/inputsLarger",
-                  "toc": "http://registry\\.gpii\\.net/common/toc",
-                  "links": "http://registry\\.gpii\\.net/common/links",                    
-                  "layout": "http://registry\\.gpii\\.net/common/layout",
-                  "invertImages": "http://registry\\.gpii\\.net/common/invertImages",
-                  "tracking": "http://registry\\.gpii\\.net/common/tracking",
+                  "lineSpacing": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/lineSpacing",
+                  "inputsLarger": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/inputsLarger",
+                  "toc": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/toc",
+                  "links": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/links",                    
+                  "layout": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/layout",
+                  "invertImages": "http://registry\\.gpii\\.net/common/invertColours",
+                  "tracking": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/tracking",
                   "magnification": {
                         "transform": {
                             "type": "gpii.transformer.quantize",
