@@ -26,12 +26,6 @@ var gpii = gpii || {};
                     funcName: "gpii.oauth2.privacySettingsWithPrefs.initDialog",
                     args: ["{that}.dom.removeDecisionDialog", "{that}.options.styles.dialogForRemovalClass"]
                 }
-            },
-            dialogForEdit: {
-                expander: {
-                    funcName: "gpii.oauth2.privacySettingsWithPrefs.initDialog",
-                    args: ["{that}.dom.editDecisionDialog", "{that}.options.styles.dialogForEditClass"]
-                }
             }
         },
         requestInfos: {
@@ -42,24 +36,20 @@ var gpii = gpii || {};
             }
         },
         selectors: {
-            editButton: ".gpiic-oauth2-privacySettings-edit",
             removeButton: ".gpiic-oauth2-privacySettings-removeService",
             serviceName: "#gpiic-oauth2-privacySettings-serviceName",
             authDecisionId: "#gpiic-oauth2-privacySettings-authDecisionId",
             oauth2ClientId: "#gpiic-oauth2-privacySettings-oauth2ClientId",
             removeDecisionDialog: ".gpiic-oauth2-privacySettings-removeDecision-dialog",
-            removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
-            editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog"
+            removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content"
         },
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
             dialogForRemovalOkButton: "gpii-oauth2-privacySettings-removeDecision-ok",
-            dialogForRemovalCancelButton: "gpii-oauth2-privacySettings-removeDecision-cancel",
-            dialogForEditClass: "gpii-oauth2-privacySettings-dialogForEdit"
+            dialogForRemovalCancelButton: "gpii-oauth2-privacySettings-removeDecision-cancel"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent"],
+        selectorsToIgnore: ["removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent"],
         strings: {
-            editLabel: "edit",
             removeLabel: "delete",
             removeDecisionContent: "Remove %serviceName from your list of allowed services?",
             ok: "OK",
@@ -87,9 +77,6 @@ var gpii = gpii || {};
                 my: "left+35 bottom-10"
             }
         },
-        events: {
-            onRenderEditContent: null
-        },
         listeners: {
             "afterRender.createTooltips": {
                 listener: "gpii.oauth2.privacySettingsWithPrefs.createTooltips",
@@ -99,11 +86,6 @@ var gpii = gpii || {};
                 "this": "{that}.dom.removeButton",
                 method: "click",
                 args: "{that}.popupDialogForRemoval"
-            },
-            "afterRender.bindEdit": {
-                "this": "{that}.dom.editButton",
-                method: "click",
-                args: "{that}.populateDialogForEdit"
             }
         },
         invokers: {
@@ -113,10 +95,6 @@ var gpii = gpii || {};
             },
             popupDialogForRemoval: {
                 funcName: "gpii.oauth2.privacySettingsWithPrefs.popupDialogForRemoval",
-                args: ["{arguments}.0", "{that}"]
-            },
-            populateDialogForEdit: {
-                funcName: "gpii.oauth2.privacySettingsWithPrefs.populateDialogForEdit",
                 args: ["{arguments}.0", "{that}"]
             }
         }
@@ -141,15 +119,10 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.privacySettingsWithPrefs.createTooltips = function (that) {
-        var editButtons = that.locate("editButton");
         var removeButtons = that.locate("removeButton");
 
-        var tooltipOptionsForEdit = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.editLabel});
         var tooltipOptionsForRemove = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.removeLabel});
 
-        fluid.each(editButtons, function (thisEditButton) {
-            fluid.tooltip(thisEditButton, tooltipOptionsForEdit);
-        });
         fluid.each(removeButtons, function (thisRemoveButton) {
             fluid.tooltip(thisRemoveButton, tooltipOptionsForRemove);
         });
@@ -197,8 +170,4 @@ var gpii = gpii || {};
         dialogForRemoval.dialog("open");
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.populateDialogForEdit = function (evt, that) {
-        that.currentClientData = that.getClientData(evt.target);
-        that.events.onRenderEditContent.fire();
-    };
 })();
