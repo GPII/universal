@@ -22,7 +22,12 @@ var gpii = gpii || {};
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         selectors: {
             leaf: ".gpiic-oauth2-selectionTree-leaf",
-            domMap: {} // must supply a mapping with a key that is an ELPath and a value of the corresponding selector
+            branchToggle: ".gpiic-oauth2-selectionTree-branchToggle"
+        },
+        domMap: {}, // must supply a mapping with a key that is an ELPath and a value of the corresponding selector
+        styles: {
+            collapse: "gpii-icon-minus-small",
+            expand: "gpii-icon-plus-small"
         },
         model: {},
         requestedPrefs: [],
@@ -47,50 +52,56 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.removeLeaf",
                 args: ["{arguments}.0", "{that}.dom.leaf"]
             },
+            initDOM: {
+                funcName: "gpii.oauth2.selectionTree.DOMSetup",
+                args: ["{that}"]
+            },
             updateDOMState: {
                 funcName: "" // must implement a method for setting the DOM state
             },
             bindDOMListener: {
                 funcName: "" // must implement a method for listening to the DOM state changes
             }
+        },
+        listeners: {
+            "onCreate.initDOM": "{that}.initDOM"
         }
     });
 
     fluid.defaults("gpii.oauth2.preferencesSelectionTree", {
         gradeNames: ["gpii.oauth2.selectionTree", "autoInit"],
-        selectors: {
-            domMap: {
-                "increase-size": ".gpiic-oauth2-prefSelection-increase-size",
-                "increase-size.appearance": ".gpiic-oauth2-prefSelection-increase-size_appearance",
-                "increase-size.appearance.text-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_text-size",
-                "increase-size.appearance.cursor-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_cursor-size",
-                "increase-size.appearance.inputs-larger": ".gpiic-oauth2-prefSelection-increase-size_appearance_inputs-larger",
-                "increase-size.appearance.line-spacing": ".gpiic-oauth2-prefSelection-increase-size_appearance_line-spacing",
-                "increase-size.magnifier": ".gpiic-oauth2-prefSelection-increase-size_magnifier",
-                "increase-size.magnifier.magnification-level": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnification-level",
-                "increase-size.magnifier.magnifier-position": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnifier-position",
-                "increase-size.magnifier.follows": ".gpiic-oauth2-prefSelection-increase-size_magnifier_follows",
-                "increase-size.magnifier.emphasize-location": ".gpiic-oauth2-prefSelection-increase-size_magnifier_emphasize-location",
-                "simplify": ".gpiic-oauth2-prefSelection-simplify",
-                "simplify.table-of-contents": ".gpiic-oauth2-prefSelection-simplify_table-of-contents",
-                "universal-volume": ".gpiic-oauth2-prefSelection-universal-volume",
-                "universal-language": ".gpiic-oauth2-prefSelection-universal-language",
-                "visual-alternatives": ".gpiic-oauth2-prefSelection-visual-alternatives",
-                "visual-alternatives.speak-text": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text",
-                "visual-alternatives.speak-text.rate": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_rate",
-                "visual-alternatives.speak-text.volume": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_volume",
-                "visual-alternatives.speak-text.pitch": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_pitch",
-                "visual-alternatives.speak-text.language": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_language",
-                "visual-alternatives.speak-text.announce": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_announce",
-                "visual-alternatives.speak-text.read-back": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_read-back",
-                "visual-alternatives.speak-text.text-highlighting": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_text-highlighting",
-                "visual-alternatives.speak-text.follows": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_follows",
-                "visual-alternatives.braille": ".gpiic-oauth2-prefSelection-visual-alternatives_braille",
-                "visual-styling": ".gpiic-oauth2-prefSelection-visual-styling",
-                "visual-styling.change-contrast": ".gpiic-oauth2-prefSelection-visual-styling_change-contrast",
-                "visual-styling.emphasize-links": ".gpiic-oauth2-prefSelection-visual-styling_emphasize-links",
-                "visual-styling.text-style": ".gpiic-oauth2-prefSelection-visual-styling_text-style"
-            }
+        domMap: {
+            "": ".gpiic-oauth2-selectionTree-all",
+            "increase-size": ".gpiic-oauth2-prefSelection-increase-size",
+            "increase-size.appearance": ".gpiic-oauth2-prefSelection-increase-size_appearance",
+            "increase-size.appearance.text-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_text-size",
+            "increase-size.appearance.cursor-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_cursor-size",
+            "increase-size.appearance.inputs-larger": ".gpiic-oauth2-prefSelection-increase-size_appearance_inputs-larger",
+            "increase-size.appearance.line-spacing": ".gpiic-oauth2-prefSelection-increase-size_appearance_line-spacing",
+            "increase-size.magnifier": ".gpiic-oauth2-prefSelection-increase-size_magnifier",
+            "increase-size.magnifier.magnification-level": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnification-level",
+            "increase-size.magnifier.magnifier-position": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnifier-position",
+            "increase-size.magnifier.follows": ".gpiic-oauth2-prefSelection-increase-size_magnifier_follows",
+            "increase-size.magnifier.emphasize-location": ".gpiic-oauth2-prefSelection-increase-size_magnifier_emphasize-location",
+            "simplify": ".gpiic-oauth2-prefSelection-simplify",
+            "simplify.table-of-contents": ".gpiic-oauth2-prefSelection-simplify_table-of-contents",
+            "universal-volume": ".gpiic-oauth2-prefSelection-universal-volume",
+            "universal-language": ".gpiic-oauth2-prefSelection-universal-language",
+            "visual-alternatives": ".gpiic-oauth2-prefSelection-visual-alternatives",
+            "visual-alternatives.speak-text": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text",
+            "visual-alternatives.speak-text.rate": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_rate",
+            "visual-alternatives.speak-text.volume": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_volume",
+            "visual-alternatives.speak-text.pitch": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_pitch",
+            "visual-alternatives.speak-text.language": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_language",
+            "visual-alternatives.speak-text.announce": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_announce",
+            "visual-alternatives.speak-text.read-back": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_read-back",
+            "visual-alternatives.speak-text.text-highlighting": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_text-highlighting",
+            "visual-alternatives.speak-text.follows": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_follows",
+            "visual-alternatives.braille": ".gpiic-oauth2-prefSelection-visual-alternatives_braille",
+            "visual-styling": ".gpiic-oauth2-prefSelection-visual-styling",
+            "visual-styling.change-contrast": ".gpiic-oauth2-prefSelection-visual-styling_change-contrast",
+            "visual-styling.emphasize-links": ".gpiic-oauth2-prefSelection-visual-styling_emphasize-links",
+            "visual-styling.text-style": ".gpiic-oauth2-prefSelection-visual-styling_text-style"
         },
         invokers: {
             updateDOMState: {
@@ -226,6 +237,13 @@ var gpii = gpii || {};
 
 */
 
+    gpii.oauth2.selectionTree.toggleBranch = function (that, elm) {
+        elm.toggleClass(that.options.styles.collapse);
+        elm.toggleClass(that.options.styles.expand);
+
+        elm.closest(that.locate("leaf")).children("ul").toggle();
+    };
+
     gpii.oauth2.selectionTree.updateModelFromServer = function (that, serverModel) {
         var newModel = that.toModel(serverModel);
         that.applier.change("", newModel);
@@ -233,20 +251,29 @@ var gpii = gpii || {};
 
     gpii.oauth2.selectionTree.DOMSetup = function (that) {
         var requestedPrefs = fluid.arrayToHash(that.options.requestedPrefs);
-        fluid.each(that.options.selectors.domMap, function (selector, selectorName) {
-            var elm = that.locate(selectorName);
-            if (requestedPrefs[selectorName]) {
+        fluid.each(that.options.domMap, function (selector, selectorName) {
+            var elm = that.container.find(selector);
+            if (requestedPrefs[selectorName] || selectorName === "") {
                 // bind change event to update model (checked/unchecked)
                 that.bindDOMListener(elm, selectorName);
-
-                // bind modelListener to update dom (checked/indeterminate)
-                that.applier.modelChanged.addListener(selectorName, function (value) {
-                    that.updateDOMState(elm, value.value);
-                });
-
             } else {
                 that.removeLeaf(elm);
             }
+        });
+
+        // bind modelListener to update dom (checked/indeterminate)
+        that.applier.modelChanged.addListener("", function (newModel, oldModel) {
+            var requestedPrefs = [""].concat(that.options.requestedPrefs);
+            fluid.each(requestedPrefs, function (requestedPref) {
+                var segs = gpii.oauth2.selectionTree.expandSegs(requestedPref);
+                var newVal = fluid.get(newModel, segs);
+                var oldVal = fluid.get(oldModel, segs);
+
+                if (newVal !== oldVal) {
+                    var elm = that.container.find(that.options.domMap[requestedPref]);
+                    that.updateDOMState(elm, newVal);
+                }
+            });
         });
     };
 
@@ -306,13 +333,18 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.selectionTree.setAllDescendants = function (model, value) {
-        fluid.each(model, function (state, prop) {
+        fluid.each(model, function (state, key) {
             if(fluid.isPlainObject(state)) {
                 gpii.oauth2.selectionTree.setAllDescendants(state, value);
             } else {
-                model[prop] = value;
+                model[key] = value;
             }
         });
+    };
+
+    gpii.oauth2.selectionTree.expandSegs = function (ELPath) {
+        var segs = fluid.model.pathToSegments(ELPath);
+        return segs.concat(["value"]);
     };
 
     /**
@@ -321,7 +353,7 @@ var gpii = gpii || {};
      * checked (all children checked), unchecked (all children unchecked), indeterminate (mixture of checked, unchecked, and/or indeterminate)
      */
     gpii.oauth2.selectionTree.setAncestors = function (model, ELPath) {
-        var segs = gpii.oauth2.selectionTree.pathsToSegs(fluid.makeArray(ELPath))[0]; // get back just the array of segments
+        var segs = fluid.model.pathToSegments(ELPath);
 
         do {
             segs.pop(); // remove last segment since we want to work on the parent.
@@ -329,7 +361,7 @@ var gpii = gpii || {};
             var subModel = fluid.get(model, segs);
             fluid.each(subModel, function (value, key) {
                 if (fluid.isPlainObject(value)) {
-                    var currentState = fluid.get(subModel, [key, "value"]);
+                    var currentState = fluid.get(subModel, gpii.oauth2.selectionTree.expandSegs(key));
 
                     if (!state) {
                         state = currentState;
@@ -344,14 +376,14 @@ var gpii = gpii || {};
             // to the state variable.
             }); // jshint ignore:line
 
-            var segsToSet = segs.concat(["value"]);
+            var segsToSet = gpii.oauth2.selectionTree.expandSegs(segs);
             fluid.set(model, segsToSet, state || fluid.get(model, segsToSet));
         } while (segs.length);
     };
 
     gpii.oauth2.selectionTree.pathsToSegs = function (pathsArray) {
         return fluid.transform(pathsArray, function (elPath) {
-            return elPath.split(".");
+            return fluid.model.pathToSegments(elPath);
         });
     };
 

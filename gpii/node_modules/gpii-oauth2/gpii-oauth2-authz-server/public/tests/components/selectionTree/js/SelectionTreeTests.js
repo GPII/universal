@@ -98,7 +98,7 @@ https://github.com/gpii/universal/LICENSE.txt
                 expected: []
             }, {
                 paths: [""],
-                expected: [[""]]
+                expected: [[]]
             }, {
                 paths: ["a"],
                 expected: [["a"]]
@@ -681,6 +681,119 @@ https://github.com/gpii/universal/LICENSE.txt
             jqUnit.assertFalse("The checkbox should not be indeterminate", checkbox.prop("indeterminate"));
 
             gpii.tests.oauth2.selectionTree.checkboxCleanup(checkbox);
+        });
+
+        /*
+
+        "increase-size": ".gpiic-oauth2-prefSelection-increase-size",
+        "increase-size.appearance": ".gpiic-oauth2-prefSelection-increase-size_appearance",
+        "increase-size.appearance.text-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_text-size",
+        "increase-size.appearance.cursor-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_cursor-size",
+        "increase-size.appearance.inputs-larger": ".gpiic-oauth2-prefSelection-increase-size_appearance_inputs-larger",
+        "increase-size.appearance.line-spacing": ".gpiic-oauth2-prefSelection-increase-size_appearance_line-spacing",
+        "increase-size.magnifier": ".gpiic-oauth2-prefSelection-increase-size_magnifier",
+        "increase-size.magnifier.magnification-level": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnification-level",
+        "increase-size.magnifier.magnifier-position": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnifier-position",
+        "increase-size.magnifier.follows": ".gpiic-oauth2-prefSelection-increase-size_magnifier_follows",
+        "increase-size.magnifier.emphasize-location": ".gpiic-oauth2-prefSelection-increase-size_magnifier_emphasize-location",
+        "simplify": ".gpiic-oauth2-prefSelection-simplify",
+        "simplify.table-of-contents": ".gpiic-oauth2-prefSelection-simplify_table-of-contents",
+        "universal-volume": ".gpiic-oauth2-prefSelection-universal-volume",
+        "universal-language": ".gpiic-oauth2-prefSelection-universal-language",
+        "visual-alternatives": ".gpiic-oauth2-prefSelection-visual-alternatives",
+        "visual-alternatives.speak-text": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text",
+        "visual-alternatives.speak-text.rate": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_rate",
+        "visual-alternatives.speak-text.volume": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_volume",
+        "visual-alternatives.speak-text.pitch": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_pitch",
+        "visual-alternatives.speak-text.language": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_language",
+        "visual-alternatives.speak-text.announce": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_announce",
+        "visual-alternatives.speak-text.read-back": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_read-back",
+        "visual-alternatives.speak-text.text-highlighting": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_text-highlighting",
+        "visual-alternatives.speak-text.follows": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_follows",
+        "visual-alternatives.braille": ".gpiic-oauth2-prefSelection-visual-alternatives_braille",
+        "visual-styling": ".gpiic-oauth2-prefSelection-visual-styling",
+        "visual-styling.change-contrast": ".gpiic-oauth2-prefSelection-visual-styling_change-contrast",
+        "visual-styling.emphasize-links": ".gpiic-oauth2-prefSelection-visual-styling_emphasize-links",
+        "visual-styling.text-style": ".gpiic-oauth2-prefSelection-visual-styling_text-style"
+
+         */
+
+        fluid.defaults("gpii.tests.oauth2.preferencesSelectionTree", {
+            gradeNames: ["gpii.oauth2.preferencesSelectionTree", "autoInit"],
+            model: {
+                value: "unchecked",
+                "increase-size": {
+                    value: "unchecked",
+                    appearance: {
+                        value: "unchecked",
+                        "text-size": {
+                            value: "unchecked"
+                        }
+                    }
+                },
+                simplify: {
+                    value: "unchecked",
+                    "table-of-contents": {
+                        value: "unchecked"
+                    }
+                },
+                "universal-volume": {
+                    value: "unchecked"
+                },
+                "universal-language": {
+                    value: "unchecked"
+                },
+                "visual-alternatives": {
+                    value: "unchecked",
+                    "speak-text": {
+                        value: "unchecked",
+                        rate: {
+                            value: "unchecked"
+                        },
+                        volume: {
+                            value: "unchecked"
+                        }
+                    }
+                },
+                "visual-styling": {
+                    value: "unchecked",
+                    "change-contrast": {
+                        value: "unchecked"
+                    }
+                }
+            },
+            requestedPrefs: [
+                "increase-size",
+                "increase-size.appearance",
+                "increase-size.appearance.text-size",
+                "simplify",
+                "simplify.table-of-contents",
+                "universal-volume",
+                "universal-language",
+                "visual-alternatives",
+                "visual-alternatives.speak-text",
+                "visual-alternatives.speak-text.rate",
+                "visual-alternatives.speak-text.volume",
+                "visual-styling",
+                "visual-styling.change-contrast"
+            ]
+        });
+
+        jqUnit.test("gpii.oauth2.preferencesSelectionTree", function () {
+            var that = gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree");
+
+            var requested = fluid.arrayToHash(that.options.requestedPrefs);
+
+            fluid.each(that.options.domMap, function (selector, selectorName) {
+                var elm = that.container.find(selector);
+                if (requested[selectorName] || selectorName === "") {
+                    jqUnit.exists("'" + selector + "' should exist", elm);
+                } else {
+                    jqUnit.notExists("'" + selector + "' should not exist", elm);
+                }
+            });
+
+            // that.updateModel("increase-size.appearance", "checked");
         });
 
         // gpii.tests.oauth2.selectionTree.testSetDescendants = function (container, parentIsChecked) {
