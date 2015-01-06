@@ -56,6 +56,10 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.DOMSetup",
                 args: ["{that}"]
             },
+            toggleBranch: {
+                funcName: "gpii.oauth2.selectionTree.toggleBranch",
+                args: ["{that}", "{arguments}.0.target"]
+            },
             updateDOMState: {
                 funcName: "" // must implement a method for setting the DOM state
             },
@@ -64,7 +68,12 @@ var gpii = gpii || {};
             }
         },
         listeners: {
-            "onCreate.initDOM": "{that}.initDOM"
+            "onCreate.initDOM": "{that}.initDOM",
+            "onCreate.bindToggles": {
+                "this": "{that}.dom.branchToggle",
+                "method": "click",
+                "args": ["{that}.toggleBranch"]
+            }
         }
     });
 
@@ -238,6 +247,7 @@ var gpii = gpii || {};
 */
 
     gpii.oauth2.selectionTree.toggleBranch = function (that, elm) {
+        elm = $(elm);
         elm.toggleClass(that.options.styles.collapse);
         elm.toggleClass(that.options.styles.expand);
 
