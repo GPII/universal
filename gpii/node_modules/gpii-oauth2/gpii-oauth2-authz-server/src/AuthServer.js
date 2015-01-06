@@ -54,7 +54,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     });
 
     oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
-        return done(null, authorizationService.grantAuthorizationCode(user.id, client.id, redirectUri));
+        return done(null, authorizationService.grantAuthorizationCode(user.id, client.id, redirectUri, ares.selectedPreferences));
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
@@ -137,7 +137,8 @@ fluid.defaults("gpii.oauth2.authServer", {
                 func: "gpii.oauth2.authServer.createPassportMiddleware",
                 args: ["{that}.passport.passport"]
             }
-        }
+        },
+        homePage: "/privacy"
     },
     components: {
         oauth2orizeServer: {
@@ -301,7 +302,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.sessionMiddleware,
         that.passportMiddleware,
         function(req, res) {
-            console.log("At login");
             var loginFailed = req.session.loginFailed || false;
             delete req.session.loginFailed;
             res.render("login", {loginFailed: loginFailed});
@@ -311,7 +311,16 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
     that.expressApp.post("/login",
         that.sessionMiddleware,
         that.passportMiddleware,
-        gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: "/", failureRedirect: "/login"})
+        gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: that.homePage, failureRedirect: "/login"})
+    );
+
+    that.expressApp.post("/logout",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        function (req, res) {
+            req.logout();
+            res.redirect(that.homePage);
+        }
     );
 
     that.expressApp.get("/authorize",
@@ -342,7 +351,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
-        oauth2orizeServer.decision()
+        oauth2orizeServer.decision(function (req, done) {
+            // TODO parse/validate selectedPreferences
+            return done(null, { selectedPreferences: req.body.selectedPreferences });
+        })
     );
 
     that.expressApp.get("/privacy",
@@ -373,6 +385,19 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var authDecisionId = parseInt(req.body.remove, 10);
             that.authorizationService.revokeAuthorization(userId, authDecisionId);
             res.redirect("/privacy");
+        }
+    );
+
+    that.expressApp["delete"]("/authorizations/:authDecisionId",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO this implementation will fail silently if (userId, authDecisionId) are not valid -- is this what we want?
+            that.authorizationService.revokeAuthorization(userId, authDecisionId);
+            res.send(200);
         }
     );
 

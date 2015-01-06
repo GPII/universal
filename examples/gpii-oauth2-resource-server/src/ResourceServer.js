@@ -36,17 +36,16 @@ gpii.oauth2.resourceServer.listenApp = function (app, dataStore) {
         function (req, res) {
             var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
             if (!accessToken) {
-                // TODO integrate with Kettle error handling
                 gpii.oauth2.resourceServer.sendUnauthorized(res);
             } else {
                 var auth = dataStore.findAuthByAccessToken(accessToken);
                 if (!auth) {
-                    // TODO integrate with Kettle error handling
                     gpii.oauth2.resourceServer.sendUnauthorized(res);
                 } else {
                     res.send("PREFERENCES RESPONSE GOES HERE" +
                         " gpiiToken=" + auth.userGpiiToken +
-                        " oauth2ClientId=" + auth.oauth2ClientId);
+                        " oauth2ClientId=" + auth.oauth2ClientId +
+                        " selectedPreferences=" + auth.selectedPreferences);
                 }
             }
         }
