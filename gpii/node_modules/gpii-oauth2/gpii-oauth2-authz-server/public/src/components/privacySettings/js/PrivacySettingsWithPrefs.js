@@ -36,7 +36,7 @@ var gpii = gpii || {};
         },
         requestInfos: {
             removeDecision: {
-                url: "/authorization",
+                url: "/authorizations",
                 type: "DELETE",
                 redirectTo: "/authorized-services"
             }
@@ -87,28 +87,14 @@ var gpii = gpii || {};
                 my: "left+35 bottom-10"
             }
         },
-        components: {
-            tooltipForEdit: {
-                type: "fluid.tooltip",
-                container: "{privacySettingsWithPrefs}.dom.editButton",
-                createOnEvent: "afterRender",
-                options: {
-                    content: "{privacySettingsWithPrefs}.options.strings.editLabel"
-                }
-            },
-            tooltipForDelete: {
-                type: "fluid.tooltip",
-                container: "{privacySettingsWithPrefs}.dom.removeButton",
-                createOnEvent: "afterRender",
-                options: {
-                    content: "{privacySettingsWithPrefs}.options.strings.removeLabel"
-                }
-            }
-        },
         events: {
             onRenderEditContent: null
         },
         listeners: {
+            "afterRender.createTooltips": {
+                listener: "gpii.oauth2.privacySettingsWithPrefs.createTooltips",
+                args: ["{that}"]
+            },
             "afterRender.bindRemove": {
                 "this": "{that}.dom.removeButton",
                 method: "click",
@@ -133,10 +119,6 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.privacySettingsWithPrefs.populateDialogForEdit",
                 args: ["{arguments}.0", "{that}"]
             }
-        },
-        distributeOptions: {
-            source: "{that}.options.tooltipOptions",
-            target: "{that > fluid.tooltip}.options"
         }
     });
 
@@ -155,6 +137,21 @@ var gpii = gpii || {};
             resizable: false,
             model: true,
             dialogClass: dialogForRemovalClass
+        });
+    };
+
+    gpii.oauth2.privacySettingsWithPrefs.createTooltips = function (that) {
+        var editButtons = that.locate("editButton");
+        var removeButtons = that.locate("removeButton");
+
+        var tooltipOptionsForEdit = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.editLabel});
+        var tooltipOptionsForRemove = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.removeLabel});
+
+        fluid.each(editButtons, function (thisEditButton) {
+            fluid.tooltip(thisEditButton, tooltipOptionsForEdit);
+        });
+        fluid.each(removeButtons, function (thisRemoveButton) {
+            fluid.tooltip(thisRemoveButton, tooltipOptionsForRemove);
         });
     };
 
@@ -177,9 +174,8 @@ var gpii = gpii || {};
                     click: function () {
                         // send a request to remove the authorization
                         $.ajax({
-                            url: that.options.requestInfos.removeDecision.url,
+                            url: that.options.requestInfos.removeDecision.url + "/" + clientData.authDecisionId,
                             type: that.options.requestInfos.removeDecision.type,
-                            data: "remove=" + clientData.authDecisionId,
                             success: function () {
                                 if (that.options.requestInfos.removeDecision.redirectTo) {
                                     window.location = that.options.requestInfos.removeDecision.redirectTo;
