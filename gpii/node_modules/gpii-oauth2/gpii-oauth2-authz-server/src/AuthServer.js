@@ -388,6 +388,19 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    that.expressApp["delete"]("/authorizations/:authDecisionId",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO this implementation will fail silently if (userId, authDecisionId) are not valid -- is this what we want?
+            that.authorizationService.revokeAuthorization(userId, authDecisionId);
+            res.send(200);
+        }
+    );
+
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
