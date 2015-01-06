@@ -54,7 +54,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     });
 
     oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
-        return done(null, authorizationService.grantAuthorizationCode(user.id, client.id, redirectUri));
+        return done(null, authorizationService.grantAuthorizationCode(user.id, client.id, redirectUri, ares.selectedPreferences));
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
@@ -351,7 +351,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
-        oauth2orizeServer.decision()
+        oauth2orizeServer.decision(function (req, done) {
+            // TODO parse/validate selectedPreferences
+            return done(null, { selectedPreferences: req.body.selectedPreferences });
+        })
     );
 
     that.expressApp.get("/privacy",

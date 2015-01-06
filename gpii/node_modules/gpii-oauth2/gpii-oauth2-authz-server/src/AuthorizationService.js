@@ -16,8 +16,8 @@ fluid.defaults("gpii.oauth2.authorizationService", {
     invokers: {
         grantAuthorizationCode: {
             funcName: "gpii.oauth2.authorizationService.grantAuthorizationCode",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                // userId, clientId, redirectUri
+            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
+                // userId, clientId, redirectUri, selectedPreferences
         },
         userHasAuthorized: {
             funcName: "gpii.oauth2.authorizationService.userHasAuthorized",
@@ -53,7 +53,7 @@ gpii.oauth2.authorizationService.generateAccessToken = function () {
     return gpii.oauth2.authorizationService.generateHandle();
 };
 
-gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, userId, clientId, redirectUri) {
+gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, userId, clientId, redirectUri, selectedPreferences) {
     // Record the authorization decision if we haven't already
     var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
     if (!authDecision) {
@@ -62,7 +62,8 @@ gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, u
             userId: userId,
             clientId: clientId,
             redirectUri: redirectUri,
-            accessToken: accessToken
+            accessToken: accessToken,
+            selectedPreferences: selectedPreferences
         });
     }
     // Generate the authorization code and record it
