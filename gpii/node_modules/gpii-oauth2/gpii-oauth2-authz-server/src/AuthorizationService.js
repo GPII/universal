@@ -29,6 +29,11 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // code, clientId, redirectUri
         },
+        getSelectedPreferences: {
+            funcName: "gpii.oauth2.authorizationService.getSelectedPreferences",
+            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+                // userId, authDecisionId
+        },
         getAuthorizedClientsForUser: {
             func: "{dataStore}.findAuthorizedClientsByUserId"
         },
@@ -83,5 +88,15 @@ gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStor
         return auth.accessToken;
     } else {
         return false;
+    }
+};
+
+gpii.oauth2.authorizationService.getSelectedPreferences = function (dataStore, userId, authDecisionId) {
+    var authDecision = dataStore.findAuthDecisionById(authDecisionId);
+    if (authDecision && authDecision.userId === userId) {
+        return authDecision.selectedPreferences;
+    } else {
+        // TODO is this the best course of action? or throw an exception?
+        return undefined;
     }
 };
