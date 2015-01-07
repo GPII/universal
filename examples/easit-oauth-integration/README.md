@@ -12,7 +12,7 @@ You can test this endpoint using the sample OAuth2 client held in /examples/gpii
 
     node app.js
 
-and then browsing to localhost:3002/ - log on with the user "chrome1" and password "c", accept the service, and you should
+and then browsing to localhost:3002/ - log on with the user "chrome1" and password "chrome1", accept the service, and you should
 then receive the JSON rendered preferences in the final interaction step.
 
 Note that various points of agreement are required amongst these files and the ones held in
