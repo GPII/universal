@@ -9,7 +9,7 @@ var url = require("url");
 var util = require("util");
 var config = require("../oauth2SamplesConfig");
 
-var clientId = "client_id_1";
+var clientId = "org.chrome.cloud4chrome";
 var clientSecret = "client_secret_1";
 
 var requestedScope = "scope_1";
