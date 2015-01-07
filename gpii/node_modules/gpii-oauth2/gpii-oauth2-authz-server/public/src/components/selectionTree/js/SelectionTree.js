@@ -30,7 +30,7 @@ var gpii = gpii || {};
             expand: "gpii-icon-plus-small"
         },
         model: {},
-        requestedPrefs: [],
+        requestedPrefs: {},
         invokers: {
             toModel: {
                 funcName: "gpii.oauth2.selectionTree.toModel",
@@ -260,10 +260,9 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.selectionTree.DOMSetup = function (that) {
-        var requestedPrefs = fluid.arrayToHash(that.options.requestedPrefs);
         fluid.each(that.options.domMap, function (selector, selectorName) {
             var elm = that.container.find(selector);
-            if (requestedPrefs[selectorName] || selectorName === "") {
+            if (that.options.requestedPrefs[selectorName] || selectorName === "") {
                 // bind change event to update model (checked/unchecked)
                 that.bindDOMListener(elm, selectorName);
             } else {
@@ -273,7 +272,7 @@ var gpii = gpii || {};
 
         // bind modelListener to update dom (checked/indeterminate)
         that.applier.modelChanged.addListener("", function (newModel, oldModel) {
-            var requestedPrefs = [""].concat(that.options.requestedPrefs);
+            var requestedPrefs = [""].concat(fluid.keys(that.options.requestedPrefs));
             fluid.each(requestedPrefs, function (requestedPref) {
                 var segs = gpii.oauth2.selectionTree.expandSegs(requestedPref);
                 var newVal = fluid.get(newModel, segs);
@@ -317,16 +316,16 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.toServerModel = function (model) {
+    gpii.oauth2.selectionTree.gatherPaths = function (model) {
         var pathValue = model.value;
         var paths = [];
 
         if (pathValue === "checked") {
             paths.push("");
         } else if (pathValue === "indeterminate") {
-            fluid.each(model, function (state, seg) {
-                if (fluid.isPlainObject(state)) {
-                    var subPaths = gpii.oauth2.selectionTree.toServerModel(state);
+            fluid.each(model, function (subModel, seg) {
+                if (fluid.isPlainObject(subModel)) {
+                    var subPaths = gpii.oauth2.selectionTree.gatherPaths(subModel);
                     fluid.each(subPaths, function (path) {
                         if (path) {
                             paths.push(seg + "." + path);
@@ -340,6 +339,12 @@ var gpii = gpii || {};
         }
 
         return paths;
+    };
+
+    gpii.oauth2.selectionTree.toServerModel = function (model) {
+        var paths = gpii.oauth2.selectionTree.gatherPaths(model);
+
+        return fluid.arrayToHash(paths);
     };
 
     gpii.oauth2.selectionTree.setAllDescendants = function (model, value) {
@@ -391,7 +396,8 @@ var gpii = gpii || {};
         } while (segs.length);
     };
 
-    gpii.oauth2.selectionTree.pathsToSegs = function (pathsArray) {
+    gpii.oauth2.selectionTree.pathsToSegs = function (paths) {
+        var pathsArray = fluid.keys(paths);
         return fluid.transform(pathsArray, function (elPath) {
             return fluid.model.pathToSegments(elPath);
         });
@@ -417,7 +423,7 @@ var gpii = gpii || {};
             gpii.oauth2.selectionTree.setEachSeg(model, segs, "unchecked");
         });
 
-        fluid.each(setPrefs, function (path) {
+        fluid.each(setPrefsSegs, function (path) {
             gpii.oauth2.selectionTree.setAllDescendants(fluid.get(model, path), "checked");
         });
 

@@ -20,15 +20,15 @@ https://github.com/gpii/universal/LICENSE.txt
 
         fluid.registerNamespace("gpii.tests.oauth2.selectionTree");
 
-        gpii.tests.oauth2.selectionTree.sampleReqPrefs = [
-            "a.d",
-            "b.e",
-            "b.f.g",
-            "c.h",
-            "c.i.j",
-            "c.k.l",
-            "c.k.m"
-        ];
+        gpii.tests.oauth2.selectionTree.sampleReqPrefs = {
+            "a.d": true,
+            "b.e": true,
+            "b.f.g": true,
+            "c.h": true,
+            "c.i.j": true,
+            "c.k.l": true,
+            "c.k.m": true
+        };
 
         gpii.tests.oauth2.selectionTree.sampleComponetModel = {
             value: "indeterminate",
@@ -76,13 +76,13 @@ https://github.com/gpii/universal/LICENSE.txt
         jqUnit.test("gpii.oauth2.selectionTree.toServerModel", function () {
 
             var testPaths = {
-                "a.d": [],
-                "b.e": [""],
-                "c.k": ["m"],
-                "a": [],
-                "b": [""],
-                "c": ["i", "k.m"],
-                "": ["b", "c.i", "c.k.m"]
+                "a.d": {},
+                "b.e": {"": true},
+                "c.k": {"m": true},
+                "a": {},
+                "b": {"": true},
+                "c": {"i": true, "k.m": true},
+                "": {"b": true, "c.i": true, "c.k.m": true}
             };
 
             fluid.each(testPaths, function (expected, path) {
@@ -94,19 +94,19 @@ https://github.com/gpii/universal/LICENSE.txt
 
         jqUnit.test("gpii.oauth2.selectionTree.pathsToSegs", function () {
             var tests = [{
-                paths: [],
+                paths: {},
                 expected: []
             }, {
-                paths: [""],
+                paths: {"": true},
                 expected: [[]]
             }, {
-                paths: ["a"],
+                paths: {"a": true},
                 expected: [["a"]]
             }, {
-                paths: ["a.b"],
+                paths: {"a.b": true},
                 expected: [["a", "b"]]
             }, {
-                paths: ["a.b", "c.d"],
+                paths: {"a.b": true, "c.d": true},
                 expected: [["a", "b"], ["c", "d"]]
             }];
 
@@ -401,7 +401,7 @@ https://github.com/gpii/universal/LICENSE.txt
         jqUnit.test("gpii.oauth2.selectionTree.toModel", function () {
 
             var tests = [{
-                serverModel: [],
+                serverModel: {},
                 expected: {
                     value: "unchecked",
                     a: {
@@ -445,7 +445,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 }
             }, {
-                serverModel: [""],
+                serverModel: {"": true},
                 expected: {
                     value: "checked",
                     a: {
@@ -489,7 +489,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 }
             }, {
-                serverModel: ["a"],
+                serverModel: {"a": true},
                 expected: {
                     value: "indeterminate",
                     a: {
@@ -533,7 +533,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 }
             }, {
-                serverModel: ["b.f"],
+                serverModel: {"b.f": true},
                 expected: {
                     value: "indeterminate",
                     a: {
@@ -577,7 +577,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 }
             }, {
-                serverModel: ["a", "b.f", "c.i", "c.k.m"],
+                serverModel: {"a": true, "b.f": true, "c.i": true, "c.k.m": true},
                 expected: {
                     value: "indeterminate",
                     a: {
@@ -624,7 +624,7 @@ https://github.com/gpii/universal/LICENSE.txt
 
             fluid.each(tests, function (testObj) {
                 var result = gpii.oauth2.selectionTree.toModel(testObj.serverModel, gpii.tests.oauth2.selectionTree.sampleReqPrefs);
-                jqUnit.assertDeepEq("The component model should be generated correctly for '" + testObj.serverModel + "'", testObj.expected, result);
+                jqUnit.assertDeepEq("The component model should be generated correctly for '" + JSON.stringify(testObj.serverModel) + "'", testObj.expected, result);
             });
 
         });
@@ -762,31 +762,29 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 }
             },
-            requestedPrefs: [
-                "increase-size",
-                "increase-size.appearance",
-                "increase-size.appearance.text-size",
-                "simplify",
-                "simplify.table-of-contents",
-                "universal-volume",
-                "universal-language",
-                "visual-alternatives",
-                "visual-alternatives.speak-text",
-                "visual-alternatives.speak-text.rate",
-                "visual-alternatives.speak-text.volume",
-                "visual-styling",
-                "visual-styling.change-contrast"
-            ]
+            requestedPrefs: {
+                "increase-size": true,
+                "increase-size.appearance": true,
+                "increase-size.appearance.text-size": true,
+                "simplify": true,
+                "simplify.table-of-contents": true,
+                "universal-volume": true,
+                "universal-language": true,
+                "visual-alternatives": true,
+                "visual-alternatives.speak-text": true,
+                "visual-alternatives.speak-text.rate": true,
+                "visual-alternatives.speak-text.volume": true,
+                "visual-styling": true,
+                "visual-styling.change-contrast": true
+            }
         });
 
         jqUnit.test("gpii.oauth2.preferencesSelectionTree", function () {
             var that = gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree");
 
-            var requested = fluid.arrayToHash(that.options.requestedPrefs);
-
             fluid.each(that.options.domMap, function (selector, selectorName) {
                 var elm = that.container.find(selector);
-                if (requested[selectorName] || selectorName === "") {
+                if (that.options.requestedPrefs[selectorName] || selectorName === "") {
                     jqUnit.exists("'" + selector + "' should exist", elm);
                 } else {
                     jqUnit.notExists("'" + selector + "' should not exist", elm);
