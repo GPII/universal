@@ -21,13 +21,17 @@ var gpii = gpii || {};
     fluid.defaults("gpii.oauth2.selectionTree", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         selectors: {
+            tree: ".gpiic-oauth2-selectionTree-tree",
             leaf: ".gpiic-oauth2-selectionTree-leaf",
-            branchToggle: ".gpiic-oauth2-selectionTree-branchToggle"
+            branch: ".gpiic-oauth2-selectionTree-branch",
+            branchToggle: ".gpiic-oauth2-selectionTree-branchToggle",
+            prefereces: "label"
         },
         domMap: {}, // must supply a mapping with a key that is an ELPath and a value of the corresponding selector
         styles: {
             collapse: "gpii-icon-minus-small",
-            expand: "gpii-icon-plus-small"
+            expand: "gpii-icon-plus-small",
+            select: "gpii-oauth2-focus"
         },
         model: {},
         requestedPrefs: {},
@@ -60,6 +64,18 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.toggleBranch",
                 args: ["{that}", "{arguments}.0.target"]
             },
+            relayClick: {
+                funcName: "gpii.oauth2.selectionTree.relayClick",
+                args: ["{arguments}.0.target"]
+            },
+            select: {
+                funcName: "gpii.oauth2.selectionTree.toggleClass",
+                args: ["{arguments}.0", "{that}.options.styles.select", true]
+            },
+            unselect: {
+                funcName: "gpii.oauth2.selectionTree.toggleClass",
+                args: ["{arguments}.0", "{that}.options.styles.select", false]
+            },
             updateDOMState: {
                 funcName: "" // must implement a method for setting the DOM state
             },
@@ -68,11 +84,29 @@ var gpii = gpii || {};
             }
         },
         listeners: {
-            "onCreate.initDOM": "{that}.initDOM",
+            "onCreate.initDOM": {
+                listener: "{that}.initDOM",
+                priority: "first"
+            },
+            "onCreate.addAria": {
+                "this": "{that}.dom.branchToggle",
+                "method": "attr",
+                "args": [{role: "button"}]
+            },
             "onCreate.bindToggles": {
                 "this": "{that}.dom.branchToggle",
                 "method": "click",
                 "args": ["{that}.toggleBranch"]
+            },
+            //TODO: Modify keyboard a11y to use arrows instead of tabs.
+            // http://oaa-accessibility.org/example/41/
+            "onCreate.makeTabbable": {
+                listener: "fluid.tabbable",
+                args: ["{that}.dom.prefereces"]
+            },
+            "onCreate.addKeyboardActivation": {
+                funcName: "fluid.activatable",
+                args: ["{that}.dom.prefereces", "{that}.relayClick"]
             }
         }
     });
@@ -300,6 +334,14 @@ var gpii = gpii || {};
             var state = $(e.target).prop("checked") ? "checked" : "unchecked";
             updateModelFn(ELPath, state);
         });
+    };
+
+    gpii.oauth2.selectionTree.relayClick = function (elm) {
+        $(elm).click();
+    };
+
+    gpii.oauth2.selectionTree.toggleClass = function (elm, classes, state) {
+        $(elm).toggleClass(classes, state);
     };
 
     gpii.oauth2.selectionTree.removeLeaf = function (elm, leafSel) {

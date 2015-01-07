@@ -790,8 +790,6 @@ https://github.com/gpii/universal/LICENSE.txt
                     jqUnit.notExists("'" + selector + "' should not exist", elm);
                 }
             });
-
-            // that.updateModel("increase-size.appearance", "checked");
         });
 
         // gpii.tests.oauth2.selectionTree.testSetDescendants = function (container, parentIsChecked) {

@@ -64,7 +64,8 @@
  * gpii-oauth2 styling overrides
  */
 
-.gpii-oauth2 label:focus {
+.gpii-oauth2 label:focus,
+.gpii-oauth2 label.gpii-oauth2-focus {
     outline: none;
 }
 
@@ -83,7 +84,8 @@
     height: 1rem;
 }
 
-.gpii-oauth2 .gpii-oauth2-selectionTree label:focus input[type=checkbox] + .gpii-icon {
+.gpii-oauth2 .gpii-oauth2-selectionTree label:focus input[type=checkbox] + .gpii-icon,
+.gpii-oauth2 .gpii-oauth2-selectionTree label.gpii-oauth2-focus input[type=checkbox] + .gpii-icon {
     outline: 3px solid #3D3F4C;
     border-radius: 0;
 }
