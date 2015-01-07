@@ -683,41 +683,6 @@ https://github.com/gpii/universal/LICENSE.txt
             gpii.tests.oauth2.selectionTree.checkboxCleanup(checkbox);
         });
 
-        /*
-
-        "increase-size": ".gpiic-oauth2-prefSelection-increase-size",
-        "increase-size.appearance": ".gpiic-oauth2-prefSelection-increase-size_appearance",
-        "increase-size.appearance.text-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_text-size",
-        "increase-size.appearance.cursor-size": ".gpiic-oauth2-prefSelection-increase-size_appearance_cursor-size",
-        "increase-size.appearance.inputs-larger": ".gpiic-oauth2-prefSelection-increase-size_appearance_inputs-larger",
-        "increase-size.appearance.line-spacing": ".gpiic-oauth2-prefSelection-increase-size_appearance_line-spacing",
-        "increase-size.magnifier": ".gpiic-oauth2-prefSelection-increase-size_magnifier",
-        "increase-size.magnifier.magnification-level": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnification-level",
-        "increase-size.magnifier.magnifier-position": ".gpiic-oauth2-prefSelection-increase-size_magnifier_magnifier-position",
-        "increase-size.magnifier.follows": ".gpiic-oauth2-prefSelection-increase-size_magnifier_follows",
-        "increase-size.magnifier.emphasize-location": ".gpiic-oauth2-prefSelection-increase-size_magnifier_emphasize-location",
-        "simplify": ".gpiic-oauth2-prefSelection-simplify",
-        "simplify.table-of-contents": ".gpiic-oauth2-prefSelection-simplify_table-of-contents",
-        "universal-volume": ".gpiic-oauth2-prefSelection-universal-volume",
-        "universal-language": ".gpiic-oauth2-prefSelection-universal-language",
-        "visual-alternatives": ".gpiic-oauth2-prefSelection-visual-alternatives",
-        "visual-alternatives.speak-text": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text",
-        "visual-alternatives.speak-text.rate": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_rate",
-        "visual-alternatives.speak-text.volume": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_volume",
-        "visual-alternatives.speak-text.pitch": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_pitch",
-        "visual-alternatives.speak-text.language": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_language",
-        "visual-alternatives.speak-text.announce": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_announce",
-        "visual-alternatives.speak-text.read-back": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_read-back",
-        "visual-alternatives.speak-text.text-highlighting": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_text-highlighting",
-        "visual-alternatives.speak-text.follows": ".gpiic-oauth2-prefSelection-visual-alternatives_speak-text_follows",
-        "visual-alternatives.braille": ".gpiic-oauth2-prefSelection-visual-alternatives_braille",
-        "visual-styling": ".gpiic-oauth2-prefSelection-visual-styling",
-        "visual-styling.change-contrast": ".gpiic-oauth2-prefSelection-visual-styling_change-contrast",
-        "visual-styling.emphasize-links": ".gpiic-oauth2-prefSelection-visual-styling_emphasize-links",
-        "visual-styling.text-style": ".gpiic-oauth2-prefSelection-visual-styling_text-style"
-
-         */
-
         fluid.defaults("gpii.tests.oauth2.preferencesSelectionTree", {
             gradeNames: ["gpii.oauth2.preferencesSelectionTree", "autoInit"],
             model: {
@@ -791,82 +756,5 @@ https://github.com/gpii/universal/LICENSE.txt
                 }
             });
         });
-
-        // gpii.tests.oauth2.selectionTree.testSetDescendants = function (container, parentIsChecked) {
-        //     var parent = $(container).find(".gpiic-ouath2-selectionTree-testDescendants-parent");
-        //     var siblings = $(container).find(".gpiic-ouath2-selectionTree-testDescendants-sibling");
-        //     var descendants = $(container).find(".gpiic-ouath2-selectionTree-testDescendants-descendant");
-        //     var assertSiblings;
-        //     var assertDescendants;
-        //
-        //     if (parentIsChecked) {
-        //         assertSiblings = function (state) {
-        //             jqUnit.assertFalse("The sibling checkbox should be unchecked", state);
-        //         };
-        //         assertDescendants = function (state) {
-        //             jqUnit.assertTrue("The descendant checkbox should be checked", state);
-        //         };
-        //     } else {
-        //         assertSiblings = function (state) {
-        //             jqUnit.assertTrue("The sibling checkbox should be checked", state);
-        //         };
-        //         assertDescendants = function (state) {
-        //             jqUnit.assertFalse("The descendant checkbox should be unchecked", state);
-        //         };
-        //     }
-        //
-        //     parent.prop("checked", parentIsChecked);
-        //     descendants.prop("checked", !parentIsChecked);
-        //     siblings.prop("checked", !parentIsChecked);
-        //
-        //     gpii.oauth2.selectionTree.setDescendants(parent);
-        //
-        //     siblings.each(function (idx, elm) {
-        //         var state = $(elm).prop("checked");
-        //         assertSiblings(state);
-        //     });
-        //
-        //     descendants.each(function (idx, elm) {
-        //         var state = $(elm).prop("checked");
-        //         assertDescendants(state);
-        //     });
-        // };
-        //
-        // jqUnit.test("gpii.oauth2.selectionTree.setDescendants - checked", function () {
-        //     gpii.tests.oauth2.selectionTree.testSetDescendants(".gpiic-ouath2-selectionTree-testDescendants-checked", true);
-        // });
-        //
-        // jqUnit.test("gpii.oauth2.selectionTree.setDescendants - unchecked", function () {
-        //     gpii.tests.oauth2.selectionTree.testSetDescendants(".gpiic-ouath2-selectionTree-testDescendants-checked", false);
-        // });
-
-        //
-        // fluid.defaults("gpii.tests.oauth2.privacySettings", {
-        //     gradeNames: ["gpii.oauth2.privacySettings", "autoInit"],
-        //     model: {
-        //         user: "testUser"
-        //     }
-        // });
-        //
-        // var assertRenderedText = function (that, root, paths, method) {
-        //     fluid.each(paths, function (path) {
-        //         var expected = fluid.get(root, path);
-        //         jqUnit.assertEquals("The '" + path + "' string should have been rendered", expected, that.locate(path)[method]());
-        //     });
-        // };
-        //
-        // var assertRendering = function (that) {
-        //     assertRenderedText(that, that.options.strings, ["logout", "header", "directions", "removeServiceLabel"], "text");
-        //     assertRenderedText(that, that.model, ["user"], "text");
-        //     assertRenderedText(that, that.options.strings, ["description"], "html");
-        // };
-        //
-        // jqUnit.test("Initialization", function () {
-        //     gpii.tests.oauth2.privacySettings(".gpiic-oauth2-privacySettings", {
-        //         listeners: {
-        //             afterRender: assertRendering
-        //         }
-        //     });
-        // });
     });
 })(jQuery);
