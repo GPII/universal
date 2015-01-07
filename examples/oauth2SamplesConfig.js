@@ -1,6 +1,6 @@
 var config = {
-    authorizationServerPort: 3000,
-    resourceServerPort: 3000,
+    authorizationServerPort: 8081,
+    resourceServerPort: 8081,
     clientPort: 3002,
     passportClientPort: 3003
 };
