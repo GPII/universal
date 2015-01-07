@@ -29,8 +29,8 @@ var gpii = gpii || {};
         },
         domMap: {}, // must supply a mapping with a key that is an ELPath and a value of the corresponding selector
         styles: {
-            collapse: "gpii-icon-minus-small",
-            expand: "gpii-icon-plus-small",
+            collapsed: "gpii-icon-plus-small",
+            expanded: "gpii-icon-minus-small",
             select: "gpii-oauth2-focus"
         },
         model: {},
@@ -64,6 +64,10 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.toggleBranch",
                 args: ["{that}", "{arguments}.0.target"]
             },
+            setBranches: {
+                funcName: "gpii.oauth2.selectionTree.toggleBranches",
+                args: ["{that}", "{that}.dom.branchToggle", "{arguments}.0"]
+            },
             relayClick: {
                 funcName: "gpii.oauth2.selectionTree.relayClick",
                 args: ["{arguments}.0.target"]
@@ -89,14 +93,17 @@ var gpii = gpii || {};
                 priority: "first"
             },
             "onCreate.addAria": {
-                "this": "{that}.dom.branchToggle",
-                "method": "attr",
-                "args": [{role: "button"}]
+                listener: "gpii.oauth2.selectionTree.addAria",
+                args: ["{that}"]
             },
             "onCreate.bindToggles": {
                 "this": "{that}.dom.branchToggle",
                 "method": "click",
                 "args": ["{that}.toggleBranch"]
+            },
+            "onCreate.collapseTree": {
+                listener: "{that}.setBranches",
+                args: [false]
             },
             //TODO: Modify keyboard a11y to use arrows instead of tabs.
             // http://oaa-accessibility.org/example/41/
@@ -280,12 +287,38 @@ var gpii = gpii || {};
 
 */
 
-    gpii.oauth2.selectionTree.toggleBranch = function (that, elm) {
-        elm = $(elm);
-        elm.toggleClass(that.options.styles.collapse);
-        elm.toggleClass(that.options.styles.expand);
+    gpii.oauth2.selectionTree.addAria = function (that) {
+        that.locate("tree").attr("role", "tree");
+        that.locate("leaf").attr("role", "treeitem");
+        that.locate("branch").attr("role", "group");
+        that.locate("branchToggle").attr("aria-expanded", false);
+    };
 
-        elm.closest(that.locate("leaf")).children("ul").toggle();
+    gpii.oauth2.selectionTree.toggleBranch = function (that, elm, state) {
+        elm = $(elm);
+        var collapseState;
+        var expandState;
+
+        if (arguments.length === 3) {
+            collapseState = !state;
+            expandState = state;
+        } else {
+            var wasExpanded = elm.attr("aria-expanded") === "true" ? true : false;
+            collapseState = wasExpanded;
+            expandState = !wasExpanded;
+        }
+
+        elm.toggleClass(that.options.styles.collapsed, collapseState);
+        elm.toggleClass(that.options.styles.expanded, expandState);
+        elm.attr("aria-expanded", expandState);
+
+        elm.closest(that.locate("leaf")).children("ul").toggle(expandState);
+    };
+
+    gpii.oauth2.selectionTree.toggleBranches = function (that, elms, state) {
+        fluid.each(elms, function (elm) {
+            gpii.oauth2.selectionTree.toggleBranch(that, elm, state);
+        });
     };
 
     gpii.oauth2.selectionTree.updateModelFromServer = function (that, serverModel) {
