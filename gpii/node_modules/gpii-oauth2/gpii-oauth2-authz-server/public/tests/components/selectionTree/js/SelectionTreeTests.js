@@ -686,13 +686,13 @@ https://github.com/gpii/universal/LICENSE.txt
         fluid.defaults("gpii.tests.oauth2.preferencesSelectionTree", {
             gradeNames: ["gpii.oauth2.preferencesSelectionTree", "autoInit"],
             model: {
-                value: "unchecked",
+                value: "indeterminate",
                 "increase-size": {
-                    value: "unchecked",
+                    value: "checked",
                     appearance: {
-                        value: "unchecked",
+                        value: "checked",
                         "text-size": {
-                            value: "unchecked"
+                            value: "checked"
                         }
                     }
                 },
