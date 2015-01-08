@@ -12,13 +12,19 @@
             }
         },
         "cloudBasedUrls": {
-            "preferences": "http://localhost:8082/preferences/%userToken",
+            "preferences": "http://preferences.gpii.net/preferences/%userToken",
             "deviceReporter": "",
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },
         "matchMakers": {
             "flat": {
                 "url": "http://localhost:8081"
+            },
+            "Statistical": {
+                "url": "http://stmm.gpii.net"
+            },
+            "RuleBased": {
+                "url": "http://rbmm.gpii.net"
             }
         }
     },
