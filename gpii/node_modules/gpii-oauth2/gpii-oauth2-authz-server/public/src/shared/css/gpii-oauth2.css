@@ -55,8 +55,12 @@ body.gpii-oauth2 {
 }
 
 .gpii-oauth2 .gpii-oauth2-panel {
-    background-color: #D2D2D1;
+    background-color: #FFFFFF;
     border-radius: 3px;
+}
+
+.gpii-oauth2 .gpii-oauth2-innerPanel {
+    background-color: #D2D2D1;
 }
 
 

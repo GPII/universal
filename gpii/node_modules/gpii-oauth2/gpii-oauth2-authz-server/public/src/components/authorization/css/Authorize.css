@@ -1,0 +1,12 @@
+.gpii-oauth2-selectionTree.gpii-oauth2-innerPanel {
+    margin-top: -1.2rem;
+    margin-bottom: 1rem;
+}
+
+.gpii-oauth2-selectionTree.gpii-oauth2-innerPanel > ul {
+    padding: 1rem 1.5rem;
+    height: 8.875rem;
+    overflow: scroll;
+    border-radius: 0;
+    line-height: 0;
+}
