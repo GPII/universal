@@ -116,7 +116,7 @@
     background-color: #FFFFFF;
 }
 
-.gpii-oauth2-privacySettings-editDecision-selectionTree {
+.gpii-oauth2-privacySettings-editDecision-dialog .gpii-oauth2-selectionTree {
     width: 20em;
     height: 20em;
     overflow: scroll;
