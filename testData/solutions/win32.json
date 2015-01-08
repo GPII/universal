@@ -132,8 +132,8 @@
             "start": [
                 {
                     "type": "gpii.lifecycleActions.download",
-                    "URL": "/Users/kasper/dev/web/i.nfo",
-                    "localFolder": "${{environment}.TMP}\\satogo-en.exe"
+                    "URL": "http://www.satogo.com/SAToGo-en.exe",
+                    "localFolder": "${{environment}.TMP}"
                 },
                 {
                     "type": "gpii.lifecycleActions.createFile",
@@ -143,7 +143,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{environment}.TMP}\\satogo-en.exe\""
+                    "command": "\"${{environment}.TMP}\\satogo-en.exe\" -gpii ${{environment}.TMP}\\satogo.json"
                 }
             ],
             "stop": [
