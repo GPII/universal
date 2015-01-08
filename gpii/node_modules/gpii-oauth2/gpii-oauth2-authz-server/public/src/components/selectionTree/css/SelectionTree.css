@@ -38,7 +38,6 @@
     position: absolute;
     left: -0.5rem;
     margin-top: 0.5rem;
-    z-index: -1;
 }
 
 .gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:last-child:before {
@@ -58,6 +57,8 @@
     margin-left: -0.7rem;
     font-size: 0.6rem;
     margin-right: 0.125rem;
+    /* place the icon over the tree lines */
+    z-index: 1;
 }
 
 /*
