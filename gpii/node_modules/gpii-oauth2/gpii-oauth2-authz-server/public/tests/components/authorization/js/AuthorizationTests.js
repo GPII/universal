@@ -38,6 +38,7 @@ https://github.com/gpii/universal/LICENSE.txt
             jqUnit.assertEquals("The 'cancel' string should have been rendered", str.cancel, that.locate("cancel").attr("value"));
             jqUnit.assertEquals("The 'directions' string should have been rendered", str.directions, that.locate("directions").text());
             jqUnit.assertEquals("The 'logout' string should have been rendered", str.logout, that.locate("logout").text());
+            jqUnit.assertEquals("The 'selection label' string should have been rendered", str.selectionLabel, that.locate("selectionLabel").text());
         };
 
         var assertUsername = function (that) {
