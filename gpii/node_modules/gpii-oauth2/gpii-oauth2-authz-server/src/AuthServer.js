@@ -352,8 +352,12 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.decision(function (req, done) {
-            // TODO parse/validate selectedPreferences
-            return done(null, { selectedPreferences: req.body.selectedPreferences });
+            var selectedPreferences = undefined; // jshint ignore:line
+            if (req.body.selectedPreferences) {
+                // TODO validate selectedPreferences?
+                selectedPreferences = JSON.parse(req.body.selectedPreferences);
+            }
+            return done(null, { selectedPreferences: selectedPreferences });
         })
     );
 
