@@ -34,6 +34,11 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                 // userId, authDecisionId
         },
+        setSelectedPreferences: {
+            funcName: "gpii.oauth2.authorizationService.setSelectedPreferences",
+            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                // userId, authDecisionId, selectedPreferences
+        },
         getAuthorizedClientsForUser: {
             func: "{dataStore}.findAuthorizedClientsByUserId"
         },
@@ -96,7 +101,16 @@ gpii.oauth2.authorizationService.getSelectedPreferences = function (dataStore, u
     if (authDecision && authDecision.userId === userId) {
         return authDecision.selectedPreferences;
     } else {
-        // TODO is this the best course of action? or throw an exception?
+        // TODO or throw an exception?
         return undefined;
     }
+};
+
+gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, userId, authDecisionId, selectedPreferences) {
+    var authDecision = dataStore.findAuthDecisionById(authDecisionId);
+    if (authDecision && authDecision.userId === userId) {
+        authDecision.selectedPreferences = selectedPreferences;
+        dataStore.updateAuthDecision(userId, authDecision);
+    }
+    // TODO else communicate not found?
 };
