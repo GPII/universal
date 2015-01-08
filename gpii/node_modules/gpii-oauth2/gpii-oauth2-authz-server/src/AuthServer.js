@@ -401,6 +401,19 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    that.expressApp.get("/authorizations/:authDecisionId/preferences",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO format the response body and set the content-type header appropriately
+            // TODO how to handle a bad authDecisionId or an id for an authDecision that is not yours?
+            res.send(that.authorizationService.getSelectedPreferences(userId, authDecisionId));
+        }
+    );
+
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
