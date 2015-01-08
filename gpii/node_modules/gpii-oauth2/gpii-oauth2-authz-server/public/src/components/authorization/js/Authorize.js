@@ -95,7 +95,11 @@ var gpii = gpii || {};
                     modelListeners: {
                         "": {
                             listener: "gpii.oauth2.authorization.setSelection",
-                            args: ["{authorization}.dom.selectionValue", "{that}.model"]
+                            args: ["{authorization}.dom.selectionValue", {
+                                expander: {
+                                    func: "{that}.toServerModel"
+                                }
+                            }]
                         }
                     }
                 }
