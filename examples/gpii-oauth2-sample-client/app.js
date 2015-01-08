@@ -21,7 +21,7 @@ function buildAuthorizeUrl (redirectUri) {
     // TODO generate the state parameter
     return url.format({
         protocol: "http",
-        hostname: "localhost",
+        hostname: config.authorizationServerHostname,
         port: config.authorizationServerPort,
         pathname: "/authorize",
         query: {
@@ -36,7 +36,7 @@ function buildAuthorizeUrl (redirectUri) {
 
 function getAccessToken (code, redirectUri, callback) {
     var options = {
-        hostname: "localhost",
+        hostname: config.authorizationServerHostname,
         port: config.authorizationServerPort,
         path: "/access_token",
         method: "POST",
@@ -72,7 +72,7 @@ function getAccessToken (code, redirectUri, callback) {
 
 function getPreferences (accessToken, callback) {
     var options = {
-        hostname: "localhost",
+        hostname: config.resourceServerHostname,
         port: config.resourceServerPort,
         path: "/settings",
         headers: {
