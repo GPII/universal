@@ -19,7 +19,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.selectionTree", {
-        gradeNames: ["fluid.rendererRelayComponent", "autoInit"],
+        gradeNames: ["fluid.viewRelayComponent", "autoInit"],
         selectors: {
             tree: ".gpiic-oauth2-selectionTree-tree",
             leaf: ".gpiic-oauth2-selectionTree-leaf",
