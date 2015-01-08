@@ -42,18 +42,20 @@
     color: #3D3F4C;
 }
 
-.gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-removeDecision-dialog {
-    display: none;
-    width: 20em;
-    height: 8em;
-}
-
+/* Tooltips */
 .ui-tooltip {
     background-color: #FCD500;
     background-image: none;
 }
 
-.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-titlebar {
+/* Dialogs for editing/removing privacy settings */
+.gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-removeDecision-dialog,
+.gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-editDecision-dialog {
+    display: none;
+}
+
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-titlebar,
+.gpii-oauth2-privacySettings-editDecision-dialog .ui-dialog-titlebar {
     display: none
 }
 
@@ -63,11 +65,19 @@
 
 .gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane {
     background-color: #FCD500;
+}
+
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane {
     margin-top: 0;
     border-width: 0;
 }
 
-.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-ok {
+.gpii-oauth2-privacySettings-editDecision-buttonPane {
+    margin-top: 2em;
+}
+
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-ok,
+.gpii-oauth2-privacySettings-editDecision-dialog .gpii-oauth2-privacySettings-editDecision-done {
     background-image: none;
     background-color: #2C3854;
     color: #FFFFFF;
@@ -75,17 +85,39 @@
 
 .gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel {
     border-width: 0;
+}
+
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel {
     margin-right: 3.5em;
 }
 
-.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel:hover {
+.gpii-oauth2-privacySettings-editDecision-dialog .gpii-oauth2-privacySettings-editDecision-done {
+    margin-left: 9em;
+}
+
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel:hover,
+.gpii-oauth2-privacySettings-editDecision-dialog .gpii-oauth2-privacySettings-editDecision-cancel:hover {
     border-bottom: 1px solid #1e2f45;
 }
 
-.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel .ui-button-text {
-    background-color: #FCD500;
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel .ui-button-text,
+.gpii-oauth2-privacySettings-editDecision-dialog .gpii-oauth2-privacySettings-editDecision-cancel {
     color: #2C3854;
     margin: 0;
     padding: 0;
     border-width: 0;
+}
+
+.gpii-oauth2-privacySettings-dialogForRemoval .ui-dialog-buttonpane .gpii-oauth2-privacySettings-removeDecision-cancel .ui-button-text {
+    background-color: #FCD500;
+}
+
+.gpii-oauth2-privacySettings-editDecision-dialog .gpii-oauth2-privacySettings-editDecision-cancel {
+    background-color: #FFFFFF;
+}
+
+.gpii-oauth2-privacySettings-editDecision-selectionTree {
+    width: 20em;
+    height: 20em;
+    overflow: scroll;
 }
