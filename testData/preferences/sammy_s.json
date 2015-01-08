@@ -1,0 +1,35 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                        "mag-factor": 3.7
+                    },
+                    "http://registry.gpii.net/common/matchMakerType": "Statistical"
+                }
+            },
+
+            "nighttime-at-home": {
+                "name": "Nighttime at home",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                        "mag-factor": 6.0
+                    }
+                },
+                "conditions": [
+                    {
+                        "type": "http://registry.gpii.net/common/operators/inRange",
+                        "max": 1800,
+                        "min": 600,
+                        "inputPath": "http://registry.gpii.net/conditions/timeOfDay"
+                    }
+                ]
+            }
+            
+            
+            
+        }
+    }
+}

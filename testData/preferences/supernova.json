@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/speechRate": 125,
+                    "http://registry.gpii.net/common/keyEcho": false,
+                    "http://registry.gpii.net/common/wordEcho": true,
+                    "http://registry.gpii.net/common/announceCapitals": true,
+                    "http://registry.gpii.net/common/punctuationVerbosity": "some",
+                    "http://registry.gpii.net/common/screenReaderBrailleOutput": true,
+                    "http://registry.gpii.net/common/magnifierEnabled": true,
+                    "http://registry.gpii.net/common/magnification": 2,
+                    "http://registry.gpii.net/common/magnifierPosition": "Bottom"
+                }
+            }
+        }
+    }
+}
