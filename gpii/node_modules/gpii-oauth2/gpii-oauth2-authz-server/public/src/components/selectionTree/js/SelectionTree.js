@@ -80,6 +80,10 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.toggleClass",
                 args: ["{arguments}.0", "{that}.options.styles.select", false]
             },
+            updateDOMFromModel: {
+                funcName: "gpii.oauth2.selectionTree.updateDOMFromModel",
+                args: ["{that}", "{arguments}.0", "{arguments}.1"]
+            },
             updateDOMState: {
                 funcName: "" // must implement a method for setting the DOM state
             },
@@ -104,6 +108,10 @@ var gpii = gpii || {};
             "onCreate.collapseTree": {
                 listener: "{that}.setBranches",
                 args: [false]
+            },
+            "onCreate.setState": {
+                listener: "{that}.updateDOMFromModel",
+                args: ["{that}.model"]
             },
             //TODO: Modify keyboard a11y to use arrows instead of tabs.
             // http://oaa-accessibility.org/example/41/
@@ -203,6 +211,20 @@ var gpii = gpii || {};
         that.applier.change("", newModel);
     };
 
+    gpii.oauth2.selectionTree.updateDOMFromModel = function (that, newModel, oldModel) {
+        var requestedPrefs = [""].concat(fluid.keys(that.options.requestedPrefs));
+        fluid.each(requestedPrefs, function (requestedPref) {
+            var segs = gpii.oauth2.selectionTree.expandSegs(requestedPref);
+            var newVal = fluid.get(newModel, segs);
+            var oldVal = fluid.get(oldModel, segs);
+
+            if (newVal !== oldVal) {
+                var elm = that.container.find(that.options.domMap[requestedPref]);
+                that.updateDOMState(elm, newVal);
+            }
+        });
+    };
+
     gpii.oauth2.selectionTree.DOMSetup = function (that) {
         fluid.each(that.options.domMap, function (selector, selectorName) {
             var elm = that.container.find(selector);
@@ -215,19 +237,7 @@ var gpii = gpii || {};
         });
 
         // bind modelListener to update dom (checked/indeterminate)
-        that.applier.modelChanged.addListener("", function (newModel, oldModel) {
-            var requestedPrefs = [""].concat(fluid.keys(that.options.requestedPrefs));
-            fluid.each(requestedPrefs, function (requestedPref) {
-                var segs = gpii.oauth2.selectionTree.expandSegs(requestedPref);
-                var newVal = fluid.get(newModel, segs);
-                var oldVal = fluid.get(oldModel, segs);
-
-                if (newVal !== oldVal) {
-                    var elm = that.container.find(that.options.domMap[requestedPref]);
-                    that.updateDOMState(elm, newVal);
-                }
-            });
-        });
+        that.applier.modelChanged.addListener("", that.updateDOMFromModel);
     };
 
     gpii.oauth2.selectionTree.updateModel = function (that, ELPath, state) {
