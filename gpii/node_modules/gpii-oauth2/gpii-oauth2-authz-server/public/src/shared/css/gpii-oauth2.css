@@ -61,8 +61,15 @@ body.gpii-oauth2 {
 
 .gpii-oauth2 .gpii-oauth2-innerPanel {
     background-color: #D2D2D1;
+    margin-top: -1.2rem;
+    margin-bottom: 1rem;
 }
 
+.gpii-oauth2 .gpii-oauth2-scrollPanel {
+    padding: 1rem 1.5rem;
+    height: 8.875rem;
+    overflow: scroll;
+}
 
 .gpii-oauth2 .gpii-oauth2-activeUser {
     padding-bottom: 1.5rem;

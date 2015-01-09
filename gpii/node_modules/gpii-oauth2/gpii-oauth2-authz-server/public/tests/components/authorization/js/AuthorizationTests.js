@@ -28,7 +28,7 @@ https://github.com/gpii/universal/LICENSE.txt
                 transactionID: "testTransactionID"
             },
             availableAuthorizationsURL: "../../../../src/shared/data/available-authorized-preferences.json",
-            selectionTreeTemplate: "../../../../src/components/selectionTree/html/selectionTreeTemplate.html"
+            selectionTreeTemplate: "../../../../src/components/selectionTree/html/SelectionTreeTemplate.html"
         });
 
         var assertStrings = function (that) {

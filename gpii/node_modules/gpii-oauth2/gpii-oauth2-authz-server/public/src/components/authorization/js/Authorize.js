@@ -73,7 +73,7 @@ var gpii = gpii || {};
             }
         },
         availableAuthorizationsURL: "src/shared/data/available-authorized-preferences.json",
-        selectionTreeTemplate: "src/components/selectionTree/html/selectionTreeTemplate.html",
+        selectionTreeTemplate: "src/components/selectionTree/html/SelectionTreeTemplate.html",
         modelListeners: {
             "availableAuthorizedPrefs": {
                 listener: "{that}.events.afterAuthorizedPrefsSet",
