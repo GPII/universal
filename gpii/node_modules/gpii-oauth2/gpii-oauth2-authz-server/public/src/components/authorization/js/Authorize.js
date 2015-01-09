@@ -86,16 +86,14 @@ var gpii = gpii || {};
                             args: [{}, "{that}.options.requestedPrefs"]
                         }
                     },
-                    listeners: {
-                        "onCreate.collapseTree": {
-                            listener: "{that}.setBranches",
-                            args: [true]
-                        }
-                    },
                     modelListeners: {
                         "": {
                             listener: "gpii.oauth2.authorization.setSelection",
-                            args: ["{authorization}.dom.selectionValue", "{that}.model"]
+                            args: ["{authorization}.dom.selectionValue", {
+                                expander: {
+                                    func: "{that}.toServerModel"
+                                }
+                            }]
                         }
                     }
                 }

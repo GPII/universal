@@ -7,6 +7,20 @@
     padding: 1rem 1.5rem;
     height: 8.875rem;
     overflow: scroll;
-    border-radius: 0;
-    line-height: 0;
 }
+
+/*
+ * Foundation overrides
+ */
+
+.gpii-oauth2-selectionTree ul {
+    line-height: 1;
+}
+
+.gpii-oauth2-selectionTree a.gpii-icon {
+    line-height: 1.1;
+}
+
+ .gpii-oauth2-selection-Tree-selectionState:before {
+     box-sizing: content-box;
+ }
