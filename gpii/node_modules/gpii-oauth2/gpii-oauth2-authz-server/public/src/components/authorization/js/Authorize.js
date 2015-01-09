@@ -73,6 +73,7 @@ var gpii = gpii || {};
             }
         },
         availableAuthorizationsURL: "src/shared/data/available-authorized-preferences.json",
+        selectionTreeTemplate: "src/components/selectionTree/html/selectionTreeTemplate.html",
         modelListeners: {
             "availableAuthorizedPrefs": {
                 listener: "{that}.events.afterAuthorizedPrefsSet",
@@ -80,9 +81,7 @@ var gpii = gpii || {};
             }
         },
         listeners: {
-            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
-            afterAuthorizedPrefsSet: function () {console.log("authorizedPrefSet");},
-            onCreateSelectionTree: function () {console.log("onCreateSelectionTree");}
+            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs"
         },
         invokers: {
             fetchAvailableAuthorizedPrefs: {
@@ -98,6 +97,10 @@ var gpii = gpii || {};
                 changePath: "availableAuthorizedPrefs",
                 value: "{arguments}.0"
             }
+        },
+        distributeOptions: {
+            source: "{that}.options.selectionTreeTemplate",
+            target: "{that > selectionTree}.options.resources.template.href"
         },
         components: {
             selectionTree: {
