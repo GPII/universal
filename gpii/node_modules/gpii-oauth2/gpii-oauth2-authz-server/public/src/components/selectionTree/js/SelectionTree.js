@@ -41,7 +41,16 @@ var gpii = gpii || {};
         },
         model: {},
         requestedPrefs: {},
+        resources: {
+            template: {
+                href: "../html/selectionTreeTemplate.html"
+            }
+        },
         invokers: {
+            refresh: {
+                funcName: "gpii.oauth2.selectionTree.refresh",
+                args: ["{that}"]
+            },
             toModel: {
                 funcName: "gpii.oauth2.selectionTree.toModel",
                 args: ["{arguments}.0", "{that}.options.requestedPrefs"]
@@ -97,40 +106,47 @@ var gpii = gpii || {};
                 funcName: "" // must implement a method for listening to the DOM state changes
             }
         },
+        events: {
+            "afterTemplateLoaded": null
+        },
         listeners: {
-            "onCreate.initDOM": {
+            "onCreate.fetchTemplate": {
+                listener: "gpii.oauth2.selectionTree.fetchResources",
+                args: ["{that}"]
+            },
+            "afterTemplateLoaded.initDOM": {
                 listener: "{that}.initDOM",
                 priority: "first"
             },
-            "onCreate.addAria": {
+            "afterTemplateLoaded.addAria": {
                 listener: "gpii.oauth2.selectionTree.addAria",
                 args: ["{that}"]
             },
-            "onCreate.bindToggles": {
+            "afterTemplateLoaded.bindToggles": {
                 "this": "{that}.dom.branchToggle",
                 "method": "click",
                 "args": ["{that}.toggleBranch"]
             },
-            "onCreate.preventDefault": {
+            "afterTemplateLoaded.preventDefault": {
                 "this": "{that}.dom.branchToggle",
                 "method": "click",
                 "args": [gpii.oauth2.selectionTree.preventDefault]
             },
-            "onCreate.collapseTree": {
+            "afterTemplateLoaded.collapseTree": {
                 listener: "{that}.setBranches",
                 args: [false]
             },
-            "onCreate.setState": {
+            "afterTemplateLoaded.setState": {
                 listener: "{that}.updateDOMFromModel",
                 args: ["{that}.model"]
             },
             //TODO: Modify keyboard a11y to use arrows instead of tabs.
             // http://oaa-accessibility.org/example/41/
-            "onCreate.makeTabbable": {
+            "afterTemplateLoaded.makeTabbable": {
                 listener: "fluid.tabbable",
                 args: ["{that}.dom.prefereces"]
             },
-            "onCreate.addKeyboardActivation": {
+            "afterTemplateLoaded.addKeyboardActivation": {
                 funcName: "fluid.activatable",
                 args: ["{that}.dom.prefereces", "{that}.relayClick"]
             }
@@ -182,6 +198,17 @@ var gpii = gpii || {};
             }
         }
     });
+
+    gpii.oauth2.selectionTree.fetchResources = function (that) {
+        fluid.fetchResources(that.options.resources, function () {
+            that.refresh();
+        });
+    };
+
+    gpii.oauth2.selectionTree.refresh = function (that) {
+        that.container.html(that.options.resources.template.resourceText);
+        that.events.afterTemplateLoaded.fire(that);
+    };
 
     gpii.oauth2.selectionTree.addAria = function (that) {
         that.locate("tree").attr("role", "tree");
