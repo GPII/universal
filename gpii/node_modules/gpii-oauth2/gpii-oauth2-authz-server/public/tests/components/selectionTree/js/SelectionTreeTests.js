@@ -744,7 +744,7 @@ https://github.com/gpii/universal/LICENSE.txt
             },
             resources: {
                 template: {
-                    href: "../../../../src/components/selectionTree/html/selectionTreeTemplate.html"
+                    href: "../../../../src/components/selectionTree/html/SelectionTreeTemplate.html"
                 }
             }
         });
