@@ -21,14 +21,17 @@ var gpii = gpii || {};
     fluid.defaults("gpii.oauth2.editPrivacySettings", {
         gradeNames: ["fluid.rendererRelayComponent","autoInit"],
         requestInfos: {
-            retrieveDecisionPrefs: {
+            fetchDecisionPrefs: {
                 url: "/authorizations/%authDecisionId/preferences",
                 type: "get"
             },
-            retrieveAvailableAuthorizedPrefs: {
-                url: "src/shared/data/available-authorized-preferences.json",
-                // url: "/available-authorized-preferences/%clientId",
-                // type: "get"
+            saveDecisionPrefs: {
+                url: "/authorizations/%authDecisionId/preferences",
+                type: "put"
+            },
+            fetchAvailableAuthorizedPrefs: {
+                url: "/available-authorized-preferences/%clientId",
+                type: "get"
             }
         },
         dialogOptions: {
@@ -67,26 +70,20 @@ var gpii = gpii || {};
             }
         },
         events: {
-            onDecisoinPrefsReady: null,
+            afterDecisoinPrefsSet: null,
             afterAuthorizedPrefsSet: null,
-            onSelectionTreeTemplateReady: null,
             onCreateSelectionTree: {
                 events: {
-                    "onDecisoinPrefsReady": "onDecisoinPrefsReady",
+                    "afterDecisoinPrefsSet": "afterDecisoinPrefsSet",
                     "afterAuthorizedPrefsSet": "afterAuthorizedPrefsSet",
-                    "onSelectionTreeTemplateReady": "onSelectionTreeTemplateReady",
                     "afterRender": "afterRender"
                 },
                 args: ["{that}"]
             }
         },
         listeners: {
-            "onCreate.appendSelectionTreeTemplate": {
-                listener: "gpii.oauth2.editPrivacySettings.appendSelectionTreeTemplate",
-                args: ["{that}"]
-            },
             "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
-            "onCreate.retrieveAvailableAuthorizedPrefs": "{that}.retrieveAvailableAuthorizedPrefs",
+            "onCreate.fetchDecisionPrefs": "{that}.fetchDecisionPrefs",
             "afterRender.setCancelButtonText": {
                 "this": "{that}.dom.cancel",
                 method: "text",
@@ -109,28 +106,55 @@ var gpii = gpii || {};
             "afterRender.bindDone": {
                 "this": "{that}.dom.done",
                 method: "click",
-                args: "{that}.closeDialog"
+                args: "{that}.savePrefsAndExit"
             }
         },
         invokers: {
-            retrieveDecisionPrefs: {
-                funcName: "gpii.oauth2.editPrivacySettings.retrieveDecisionPrefs",
-                args: ["{that}"]
-            },
-            retrieveAvailableAuthorizedPrefs: {
-                funcName: "gpii.oauth2.editPrivacySettings.retrieveAvailableAuthorizedPrefs",
-                args: ["{that}"]
-            },
             closeDialog: {
-                funcName: "gpii.oauth2.editPrivacySettings.closeDialog",
-                args: ["{that}.dialog"]
+                "this": "{that}.dialog",
+                method: "dialog",
+                args: ["close"]
+            },
+            fetchDecisionPrefs: {
+                "this": "$",
+                "method": "ajax",
+                args: [{
+                    expander: {
+                        funcName: "{that}.composeRequestURL",
+                        args: ["{that}.options.requestInfos.fetchDecisionPrefs.url"]
+                    }
+                }, {
+                    type: "{that}.options.requestInfos.fetchDecisionPrefs.type",
+                    dataType: "json",
+                    success: "{that}.setDecisionPrefs"
+                }]
+            },
+            saveDecisionPrefs: {
+                "this": "$",
+                "method": "ajax",
+                args: [{
+                    expander: {
+                        funcName: "{that}.composeRequestURL",
+                        args: ["{that}.options.requestInfos.saveDecisionPrefs.url"]
+                    }
+                }, {
+                    type: "{that}.options.requestInfos.saveDecisionPrefs.type",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: {
+                        expander: {
+                            funcName: "JSON.stringify",
+                            args: ["{that}.selectedPrefs"]
+                        }
+                    }
+                }]
             },
             fetchAvailableAuthorizedPrefs: {
                 "this": "$",
                 "method": "ajax",
-                args: ["{that}.options.requestInfos.retrieveAvailableAuthorizedPrefs.url", {
+                args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
                     //TODO: Handle errors
-                    // type: "{that}.options.requestInfos.retrieveAvailableAuthorizedPrefs.type"
+                    // type: "{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.type",
                     dataType: "json",
                     success: "{that}.setAvailableAuthorizedPrefs"
                 }]
@@ -138,12 +162,24 @@ var gpii = gpii || {};
             setAvailableAuthorizedPrefs: {
                 changePath: "availableAuthorizedPrefs",
                 value: "{arguments}.0"
-            }
-        },
-        selectionTreeResources: {
-            template: {
-                forceCache: true,
-                url: "../html/SelectionTreeTemplate.html"
+            },
+            composeRequestURL: {
+                funcName: "fluid.stringTemplate",
+                args: ["{arguments}.0", {
+                    authDecisionId: "{that}.model.clientData.authDecisionId"
+                }]
+            },
+            setDecisionPrefs: {
+                changePath: "decisionPrefs",
+                value: "{arguments}.0"
+            },
+            savePrefsAndExit: {
+                funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
+                args: ["{that}"]
+            },
+            setSelectedPrefs: {
+                funcName: "fluid.set",
+                args: ["{that}", "selectedPrefs", "{arguments}.0"]
             }
         },
         model: {
@@ -154,7 +190,19 @@ var gpii = gpii || {};
             //     oauth2ClientId: xx
             // }
             clientData: null,
-            afterAuthorizedPrefsSet: {}
+            afterAuthorizedPrefsSet: {},
+            decisionPrefs: {}
+        },
+        modelListeners: {
+            "availableAuthorizedPrefs": {
+                listener: "{that}.events.afterAuthorizedPrefsSet",
+                excludeSource: "init"
+            },
+            "decisionPrefs": {
+                listener: "{that}.events.afterDecisoinPrefsSet",
+                excludeSource: "init"
+            },
+            "selectedPrefs": "console.log"
         },
         components: {
             selectionTree: {
@@ -166,30 +214,23 @@ var gpii = gpii || {};
                     model: {
                         expander: {
                             funcName: "gpii.oauth2.selectionTree.toModel",
-                            args: [{"increase-size.appearance.text-size": true}, "{editPrivacySettings}.model.availableAuthorizedPrefs"]
+                            args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
                         }
                     },
-                    listeners: {
-                        "onCreate.debug": "console.log"
+                    modelListeners: {
+                        "": [{
+                            listener: "{editPrivacySettings}.setSelectedPrefs",
+                            args: [{
+                                expander: {
+                                    func: "{that}.toServerModel"
+                                }
+                            }]
+                        }]
                     }
                 }
             }
-        },
-        modelListeners: {
-            "availableAuthorizedPrefs": {
-                listener: "{that}.events.afterAuthorizedPrefsSet",
-                excludeSource: "init"
-            }
-        },
+        }
     });
-
-    gpii.oauth2.editPrivacySettings.appendSelectionTreeTemplate = function (that) {
-        var template = that.options.selectionTreeResources.template.resourceText;
-        fluid.fetchResources(that.options.selectionTreeResources, function () {
-            that.locate("selection").html(that.options.selectionTreeResources.template.resourceText);
-            that.events.onSelectionTreeTemplateReady.fire();
-        });
-    };
 
     gpii.oauth2.editPrivacySettings.openDialog = function (that) {
         var dialogOptions = {
@@ -200,39 +241,9 @@ var gpii = gpii || {};
         that.dialog.dialog("open");
     };
 
-    gpii.oauth2.editPrivacySettings.closeDialog = function (dialog) {
-        dialog.dialog("close");
-    };
-
-    gpii.oauth2.editPrivacySettings.retrieveDecisionPrefs = function (that) {
-        // $.ajax({
-        //     url: fluid.stringTemplate(that.options.requestInfos.retrieveDecisionPrefs.url, {authDecisionId: that.model.clientData.authDecisionId}),
-        //     type: that.options.requestInfos.retrieveDecisionPrefs.type,
-        //     success: function (data) {
-        //         console.log(data/*, JSON.parse(data)*/);
-        //         // that.applier.change("decisionPrefs", JSON.parse(data));
-        //         // that.events.onDecisoinPrefsReady.fire();
-        //     },
-        //     error: function (jqXHR, textStatus, errorThrown) {
-        //         // console.log("in error", jqXHR, textStatus, errorThrown);
-        //     }
-        // });
-        that.events.onDecisoinPrefsReady.fire();
-    };
-
-    gpii.oauth2.editPrivacySettings.retrieveAvailableAuthorizedPrefs = function (that) {
-        // $.ajax({
-        //     url: fluid.stringTemplate(that.options.requestInfos.retrieveAvailableAuthorizedPrefs.url, {clientId: that.model.clientData.oauth2ClientId}),
-        //     type: that.options.requestInfos.retrieveAvailableAuthorizedPrefs.type,
-        //     success: function (data) {
-        //         console.log(data/*, JSON.parse(data)*/);
-        //         // that.applier.change("clientRequiredPrefs", JSON.parse(data));
-        //         // that.events.afterAuthorizedPrefsSet.fire();
-        //     },
-        //     error: function (jqXHR, textStatus, errorThrown) {
-        //         // console.log("in error", jqXHR, textStatus, errorThrown);
-        //     }
-        // });
+    gpii.oauth2.editPrivacySettings.savePrefsAndExit = function (that) {
+        that.saveDecisionPrefs();
+        that.closeDialog();
     };
 
 })();

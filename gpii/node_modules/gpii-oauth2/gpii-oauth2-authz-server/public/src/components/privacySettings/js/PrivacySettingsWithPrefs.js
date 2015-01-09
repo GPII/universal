@@ -34,13 +34,18 @@ var gpii = gpii || {};
                 type: "DELETE",
                 redirectTo: "/authorized-services"
             },
-            retrieveDecisionPrefs: {
+            fetchDecisionPrefs: {
                 url: "/authorizations/%authDecisionId/preferences",
                 type: "get"
             },
-            retrieveClientRequiredPrefs: {
-                url: "/available-authorized-preferences/%clientId",
-                type: "get"
+            saveDecisionPrefs: {
+                url: "/authorizations/%authDecisionId/preferences",
+                type: "put"
+            },
+            fetchAvailableAuthorizedPrefs: {
+                url: "src/shared/data/available-authorized-preferences.json"
+                // url: "/available-authorized-preferences/%clientId",
+                // type: "get"
             }
         },
         components: {
@@ -218,10 +223,10 @@ var gpii = gpii || {};
 
     fluid.defaults("gpii.oauth2.selectionTreeTemplate", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
-        selectionTreeTemplate: "../html/SelectionTreeTemplate.html",
+        selectionTreeTemplate: "../../selectionTree/html/SelectionTreeTemplate.html",
         distributeOptions: {
             source: "{that}.options.selectionTreeTemplate",
-            target: "{that > editPrivacySettings}.options.selectionTreeResources.template.url"
+            target: "{that selectionTree}.options.resources.template.href"
         }
     });
 })();
