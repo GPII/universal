@@ -430,10 +430,14 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var userId = req.user.id;
             var authDecisionId = parseInt(req.params.authDecisionId, 10);
             // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
-            var selectedPreferences = req.body;
-            // TODO validate selectedPreferences?
-            that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
-            res.send(200);
+            if (req.is("application/json")) {
+                var selectedPreferences = req.body;
+                // TODO validate selectedPreferences?
+                that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+                res.send(200);
+            } else {
+                res.send(400);
+            }
         }
     );
 
