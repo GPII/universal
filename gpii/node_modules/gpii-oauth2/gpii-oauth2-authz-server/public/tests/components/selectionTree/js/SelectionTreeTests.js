@@ -741,6 +741,11 @@ https://github.com/gpii/universal/LICENSE.txt
                 "visual-alternatives.speak-text.volume": true,
                 "visual-styling": true,
                 "visual-styling.change-contrast": true
+            },
+            resources: {
+                template: {
+                    href: "../../../../src/components/selectionTree/html/selectionTreeTemplate.html"
+                }
             }
         });
 
@@ -748,46 +753,58 @@ https://github.com/gpii/universal/LICENSE.txt
         // - consider changing this to the IoC Testing framework
         // - add tests for visibility of collapsed leafs
         // - add tests for the various state changes (checked, unchecked, indeterminate)
-        jqUnit.test("gpii.oauth2.preferencesSelectionTree", function () {
-            var that = gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree");
+        jqUnit.asyncTest("gpii.oauth2.preferencesSelectionTree", function () {
+            var assertSelectionTree = function (that) {
+                fluid.each(that.options.domMap, function (selector, selectorName) {
+                    var elm = that.container.find(selector);
+                    if (that.options.requestedPrefs[selectorName] || selectorName === "") {
+                        jqUnit.exists("'" + selector + "' should exist", elm);
+                    } else {
+                        jqUnit.notExists("'" + selector + "' should not exist", elm);
+                    }
+                });
 
-            fluid.each(that.options.domMap, function (selector, selectorName) {
-                var elm = that.container.find(selector);
-                if (that.options.requestedPrefs[selectorName] || selectorName === "") {
-                    jqUnit.exists("'" + selector + "' should exist", elm);
-                } else {
-                    jqUnit.notExists("'" + selector + "' should not exist", elm);
+                // assert aria
+                jqUnit.assertEquals("The tree role should be added", "tree", that.locate("tree").attr("role"));
+                fluid.each(that.locate("branch"), function (branch, idx) {
+                    branch = $(branch);
+                    jqUnit.assertEquals("The group role should have been set on branch: " + idx, "group", branch.attr("role"));
+                });
+                fluid.each(that.locate("leaf"), function (leaf, idx) {
+                    leaf = $(leaf);
+                    jqUnit.assertEquals("The treeitem role should have been set on leaf: " + idx, "treeitem", leaf.attr("role"));
+                });
+                fluid.each(that.locate("branchToggle"), function (branchToggle, idx) {
+                    branchToggle = $(branchToggle);
+                    jqUnit.assertTrue("The aria-controls property should be set for branchToggle: " + idx, branchToggle.attr("aria-controls"));
+                    jqUnit.assertEquals("The aria-expanded property should be set for branchToggle: " + idx, "false", branchToggle.attr("aria-expanded"));
+                    jqUnit.assertTrue("The collapsed style should be applied", branchToggle.hasClass(that.options.styles.collapsed));
+                    jqUnit.assertFalse("The expanded style should not be applied", branchToggle.hasClass(that.options.styles.expanded));
+                });
+
+                // assert expand and collapse
+                var firstToggle = that.locate("branchToggle").eq(0);
+                firstToggle.click();
+                jqUnit.assertEquals("The aria-expanded state should be true", "true", firstToggle.attr("aria-expanded"));
+                jqUnit.assertTrue("The expanded style should be applied", firstToggle.hasClass(that.options.styles.expanded));
+                jqUnit.assertFalse("The collapsed style should not be applied", firstToggle.hasClass(that.options.styles.collapsed));
+                firstToggle.click();
+                jqUnit.assertEquals("The aria-expanded state should be false", "false", firstToggle.attr("aria-expanded"));
+                jqUnit.assertTrue("The collapsed style should be applied", firstToggle.hasClass(that.options.styles.collapsed));
+                jqUnit.assertFalse("The expanded style should not be applied", firstToggle.hasClass(that.options.styles.expanded));
+
+                // continue test
+                jqUnit.start();
+            };
+
+            gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree", {
+                listeners: {
+                    afterTemplateLoaded: {
+                        func: assertSelectionTree,
+                        priority: "last"
+                    }
                 }
             });
-
-            // assert aria
-            jqUnit.assertEquals("The tree role should be added", "tree", that.locate("tree").attr("role"));
-            fluid.each(that.locate("branch"), function (branch, idx) {
-                branch = $(branch);
-                jqUnit.assertEquals("The group role should have been set on branch: " + idx, "group", branch.attr("role"));
-            });
-            fluid.each(that.locate("leaf"), function (leaf, idx) {
-                leaf = $(leaf);
-                jqUnit.assertEquals("The treeitem role should have been set on leaf: " + idx, "treeitem", leaf.attr("role"));
-            });
-            fluid.each(that.locate("branchToggle"), function (branchToggle, idx) {
-                branchToggle = $(branchToggle);
-                jqUnit.assertTrue("The aria-controls property should be set for branchToggle: " + idx, branchToggle.attr("aria-controls"));
-                jqUnit.assertEquals("The aria-expanded property should be set for branchToggle: " + idx, "false", branchToggle.attr("aria-expanded"));
-                jqUnit.assertTrue("The collapsed style should be applied", branchToggle.hasClass(that.options.styles.collapsed));
-                jqUnit.assertFalse("The expanded style should not be applied", branchToggle.hasClass(that.options.styles.expanded));
-            });
-
-            // assert expand and collapse
-            var firstToggle = that.locate("branchToggle").eq(0);
-            firstToggle.click();
-            jqUnit.assertEquals("The aria-expanded state should be true", "true", firstToggle.attr("aria-expanded"));
-            jqUnit.assertTrue("The expanded style should be applied", firstToggle.hasClass(that.options.styles.expanded));
-            jqUnit.assertFalse("The collapsed style should not be applied", firstToggle.hasClass(that.options.styles.collapsed));
-            firstToggle.click();
-            jqUnit.assertEquals("The aria-expanded state should be false", "false", firstToggle.attr("aria-expanded"));
-            jqUnit.assertTrue("The collapsed style should be applied", firstToggle.hasClass(that.options.styles.collapsed));
-            jqUnit.assertFalse("The expanded style should not be applied", firstToggle.hasClass(that.options.styles.expanded));
         });
     });
 })(jQuery);
