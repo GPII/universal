@@ -70,11 +70,11 @@ var gpii = gpii || {};
             }
         },
         events: {
-            afterDecisoinPrefsSet: null,
+            afterDecisionPrefsSet: null,
             afterAuthorizedPrefsSet: null,
             onCreateSelectionTree: {
                 events: {
-                    "afterDecisoinPrefsSet": "afterDecisoinPrefsSet",
+                    "afterDecisionPrefsSet": "afterDecisionPrefsSet",
                     "afterAuthorizedPrefsSet": "afterAuthorizedPrefsSet",
                     "afterRender": "afterRender"
                 },
@@ -144,7 +144,7 @@ var gpii = gpii || {};
                     data: {
                         expander: {
                             funcName: "JSON.stringify",
-                            args: ["{that}.selectedPrefs"]
+                            args: ["{that}.model.selectedPrefs"]
                         }
                     }
                 }]
@@ -178,8 +178,10 @@ var gpii = gpii || {};
                 args: ["{that}"]
             },
             setSelectedPrefs: {
-                funcName: "fluid.set",
-                args: ["{that}", "selectedPrefs", "{arguments}.0"]
+                funcName: "gpii.oauth2.editPrivacySettings.setSelectedPrefs",
+                args: ["{that}", "{arguments}.0", "{arguments}.1"]
+                // funcName: "fluid.set",
+                // args: ["{that}", "selectedPrefs", "{arguments}.0"]
             }
         },
         model: {
@@ -191,7 +193,8 @@ var gpii = gpii || {};
             // }
             clientData: null,
             afterAuthorizedPrefsSet: {},
-            decisionPrefs: {}
+            decisionPrefs: {},
+            selectedPrefs: {}
         },
         modelListeners: {
             "availableAuthorizedPrefs": {
@@ -199,7 +202,7 @@ var gpii = gpii || {};
                 excludeSource: "init"
             },
             "decisionPrefs": {
-                listener: "{that}.events.afterDecisoinPrefsSet",
+                listener: "{that}.events.afterDecisionPrefsSet",
                 excludeSource: "init"
             },
             "selectedPrefs": "console.log"
@@ -220,11 +223,9 @@ var gpii = gpii || {};
                     modelListeners: {
                         "": [{
                             listener: "{editPrivacySettings}.setSelectedPrefs",
-                            args: [{
-                                expander: {
-                                    func: "{that}.toServerModel"
-                                }
-                            }]
+                            args: ["{change}.value", "{that}.toServerModel"]
+                        }, {
+                            listener: "console.log"
                         }]
                     }
                 }
@@ -246,4 +247,9 @@ var gpii = gpii || {};
         that.closeDialog();
     };
 
+    gpii.oauth2.editPrivacySettings.setSelectedPrefs = function (that, selectionTreeModel, toServerModelFunc) {
+        var selectedPrefs = toServerModelFunc(selectionTreeModel);
+        console.log("setSelectedPrefs", selectedPrefs);
+        that.applier.change("selectedPrefs", selectedPrefs);
+    };
 })();
