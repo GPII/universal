@@ -1,0 +1,13 @@
+{
+    "increase-size": true,
+    "increase-size.appearance": true,
+    "increase-size.appearance.text-size": true,
+    "increase-size.appearance.inputs-larger": true,
+    "increase-size.appearance.line-spacing": true,
+    "simplify": true,
+    "simplify.table-of-contents": true,
+    "visual-styling": true,
+    "visual-styling.change-contrast": true,
+    "visual-styling.emphasize-links": true,
+    "visual-styling.text-style": true
+}
