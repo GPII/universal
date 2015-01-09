@@ -18,6 +18,12 @@ var gpii = gpii || {};
 (function ($) {
     "use strict";
 
+    fluid.registerNamespace("gpii.oauth2.selectionTree");
+
+    gpii.oauth2.selectionTree.preventDefault = function (e) {
+        e.preventDefault();
+    };
+
     fluid.defaults("gpii.oauth2.selectionTree", {
         gradeNames: ["fluid.viewRelayComponent", "autoInit"],
         selectors: {
@@ -104,6 +110,11 @@ var gpii = gpii || {};
                 "this": "{that}.dom.branchToggle",
                 "method": "click",
                 "args": ["{that}.toggleBranch"]
+            },
+            "onCreate.preventDefault": {
+                "this": "{that}.dom.branchToggle",
+                "method": "click",
+                "args": [gpii.oauth2.selectionTree.preventDefault]
             },
             "onCreate.collapseTree": {
                 listener: "{that}.setBranches",
