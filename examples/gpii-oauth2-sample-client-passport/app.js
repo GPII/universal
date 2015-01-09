@@ -15,13 +15,13 @@ var clientSecret = "client_secret_pp";
 
 var requestedScope = "scope_1";
 
-var authorizeUri = util.format("http://localhost:%d/authorize", config.authorizationServerPort);
+var authorizeUri = util.format("http://%s:%d/authorize", config.authorizationServerHostname, config.authorizationServerPort);
 var authorizeCallbackUri = util.format("http://localhost:%d/authorize_callback", config.passportClientPort);
-var authorizeTokenUri = util.format("http://localhost:%d/access_token", config.authorizationServerPort);
+var authorizeTokenUri = util.format("http://%s:%d/access_token", config.authorizationServerHostname, config.authorizationServerPort);
 
 function getPreferences (accessToken, callback) {
     var options = {
-        hostname: "localhost",
+        hostname: config.resourceServerHostname,
         port: config.resourceServerPort,
         path: "/settings",
         headers: {
