@@ -352,8 +352,12 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.decision(function (req, done) {
-            // TODO parse/validate selectedPreferences
-            return done(null, { selectedPreferences: req.body.selectedPreferences });
+            var selectedPreferences = undefined; // jshint ignore:line
+            if (req.body.selectedPreferences) {
+                // TODO validate selectedPreferences?
+                selectedPreferences = JSON.parse(req.body.selectedPreferences);
+            }
+            return done(null, { selectedPreferences: selectedPreferences });
         })
     );
 
@@ -408,9 +412,25 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         function (req, res) {
             var userId = req.user.id;
             var authDecisionId = parseInt(req.params.authDecisionId, 10);
-            // TODO format the response body and set the content-type header appropriately
-            // TODO how to handle a bad authDecisionId or an id for an authDecision that is not yours?
-            res.send(that.authorizationService.getSelectedPreferences(userId, authDecisionId));
+            // TODO 404 for bad authDecisionId or an id for an authDecision that is not yours
+            var selectedPreferences = that.authorizationService.getSelectedPreferences(userId, authDecisionId);
+            res.type("application/json");
+            res.send(JSON.stringify(selectedPreferences, null, "    "));
+        }
+    );
+
+    that.expressApp.put("/authorizations/:authDecisionId/preferences",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
+            var selectedPreferences = req.body;
+            // TODO validate selectedPreferences?
+            that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+            res.send(200);
         }
     );
 

@@ -45,7 +45,7 @@ gpii.oauth2.resourceServer.listenApp = function (app, dataStore) {
                     res.send("PREFERENCES RESPONSE GOES HERE" +
                         " gpiiToken=" + auth.userGpiiToken +
                         " oauth2ClientId=" + auth.oauth2ClientId +
-                        " selectedPreferences=" + auth.selectedPreferences);
+                        " selectedPreferences=" + JSON.stringify(auth.selectedPreferences, null, "    "));
                 }
             }
         }

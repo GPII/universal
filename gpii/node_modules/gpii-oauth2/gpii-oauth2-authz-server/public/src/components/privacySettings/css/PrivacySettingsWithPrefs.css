@@ -1,3 +1,19 @@
+/*
+* Foundation overrides
+*/
+.gpii-oauth2-selectionTree ul {
+    line-height: 1;
+}
+
+.gpii-oauth2-selectionTree a.gpii-icon {
+    line-height: 1.1;
+}
+
+.gpii-oauth2-selection-Tree-selectionState:before {
+    box-sizing: content-box;
+}
+/* End of foundation overrides */
+
 .gpii-oauth2-privacySettings-logout-button:hover {
     border-bottom: 1px solid #1e2f45;
 }
@@ -121,3 +137,4 @@
     height: 20em;
     overflow: scroll;
 }
+

@@ -34,11 +34,7 @@ var gpii = gpii || {};
             autoOpen: false,
             resizable: false,
             modal: true,
-            width: 500,
-            close: function () {
-                // To restore the dialog container to the initial state for the next render.
-                $(this).dialog("destroy");
-            }
+            width: 500
         },
         selectors: {
             title: ".gpiic-oauth2-privacySettings-editDecision-title",
@@ -79,8 +75,8 @@ var gpii = gpii || {};
             }
         },
         listeners: {
-            "onCreate.fetchSelectionTreeTemplate": {
-                listener: "gpii.oauth2.editPrivacySettings.fetchSelectionTreeTemplate",
+            "onCreate.appendSelectionTreeTemplate": {
+                listener: "gpii.oauth2.editPrivacySettings.appendSelectionTreeTemplate",
                 args: ["{that}"]
             },
             "onCreate.retrieveDecisionPrefs": "{that}.retrieveDecisionPrefs",
@@ -145,10 +141,11 @@ var gpii = gpii || {};
                 container: "{that}.dom.selection",
                 createOnEvent: "onCreateSelectionTreeReady",
                 options: {
+                    requestedPrefs: "{editPrivacySettings}.clientRequiredPrefs",
                     model: {
                         expander: {
                             funcName: "gpii.oauth2.selectionTree.toModel",
-                            args: [{}, "{editPrivacySettings}.clientRequiredPrefs"]
+                            args: [{"increase-size.appearance.text-size": true}, "{editPrivacySettings}.clientRequiredPrefs"]
                         }
                     },
                     listeners: {
@@ -159,16 +156,26 @@ var gpii = gpii || {};
         }
     });
 
-    gpii.oauth2.editPrivacySettings.fetchSelectionTreeTemplate = function (that) {
-        fluid.fetchResources(that.options.selectionTreeResources, function () {
-            that.locate("selection").append(that.options.selectionTreeResources.template.resourceText);
-            that.events.onSelectionTreeTemplateReady.fire();
-        });
+    gpii.oauth2.editPrivacySettings.appendSelectionTreeTemplate = function (that) {
+        var template = that.options.selectionTreeResources.template.resourceText;
+        if (!template) {
+            fluid.fetchResources(that.options.selectionTreeResources, function () {
+                that.locate("selection").append(that.options.selectionTreeResources.template.resourceText);
+                that.events.onSelectionTreeTemplateReady.fire();
+            });
+        } else {
+            that.locate("selection").append(template);
+        }
     };
 
     gpii.oauth2.editPrivacySettings.openDialog = function (that) {
         var dialogOptions = {
             dialogClass: that.options.styles.dialogCss,
+            close: function () {
+                // To restore the dialog container to the initial state for the next render.
+                $(this).dialog("destroy");
+                that.locate("selection").remove();
+            }
         };
         var fullDialogOptions = $.extend(true, {}, dialogOptions, that.options.dialogOptions);
         that.dialog = that.container.dialog(fullDialogOptions);
