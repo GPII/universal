@@ -43,7 +43,8 @@ var gpii = gpii || {};
         requestedPrefs: {},
         resources: {
             template: {
-                href: "../html/SelectionTreeTemplate.html"
+                href: "../html/SelectionTreeTemplate.html",
+                forceCache: true
             }
         },
         invokers: {
