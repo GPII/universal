@@ -43,7 +43,8 @@ var gpii = gpii || {};
         model: {
             user: "",
             service: "",
-            transactionID: ""
+            transactionID: "",
+            availableAuthorizedPrefs: {}
         },
         protoTree: {
             user: "${{that}.model.user}",
@@ -61,28 +62,54 @@ var gpii = gpii || {};
             selectionLabel: {messagekey: "selectionLabel"}
         },
         renderOnInit: true,
+        events: {
+            afterAuthorizedPrefsSet: null,
+            onCreateSelectionTree: {
+                events: {
+                    afterRender: "afterRender",
+                    afterAuthorizedPrefsSet: "afterAuthorizedPrefsSet"
+                },
+                args: ["{that}"]
+            }
+        },
+        availableAuthorizationsURL: "src/shared/data/available-authorized-preferences.json",
+        modelListeners: {
+            "availableAuthorizedPrefs": {
+                listener: "{that}.events.afterAuthorizedPrefsSet",
+                excludeSource: "init"
+            }
+        },
+        listeners: {
+            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
+            afterAuthorizedPrefsSet: function () {console.log("authorizedPrefSet");},
+            onCreateSelectionTree: function () {console.log("onCreateSelectionTree");}
+        },
+        invokers: {
+            fetchAvailableAuthorizedPrefs: {
+                "this": "$",
+                "method": "ajax",
+                args: ["{that}.options.availableAuthorizationsURL", {
+                    //TODO: Handle errors
+                    dataType: "json",
+                    success: "{that}.setAvailableAuthorizedPrefs"
+                }]
+            },
+            setAvailableAuthorizedPrefs: {
+                changePath: "availableAuthorizedPrefs",
+                value: "{arguments}.0"
+            }
+        },
         components: {
             selectionTree: {
                 type: "gpii.oauth2.preferencesSelectionTree",
                 container: "{that}.dom.selection",
-                createOnEvent: "afterRender",
+                createOnEvent: "onCreateSelectionTree",
                 options: {
-                    requestedPrefs: {
-                        "increase-size": true,
-                        "increase-size.appearance": true,
-                        "increase-size.appearance.text-size": true,
-                        "increase-size.appearance.inputs-larger": true,
-                        "increase-size.appearance.line-spacing": true,
-                        "simplify": true,
-                        "simplify.table-of-contents": true,
-                        "visual-styling": true,
-                        "visual-styling.change-contrast": true,
-                        "visual-styling.emphasize-links": true,
-                        "visual-styling.text-style": true
-                    },
+                    requestedPrefs: "{authorization}.model.availableAuthorizedPrefs",
                     model: {
                         expander: {
                             funcName: "gpii.oauth2.selectionTree.toModel",
+                            // The original model is expected to have nothing selected as no previous decisions have been made
                             args: [{}, "{that}.options.requestedPrefs"]
                         }
                     },
@@ -104,4 +131,5 @@ var gpii = gpii || {};
     gpii.oauth2.authorization.setSelection = function (input, selectionModel) {
         input.val(JSON.stringify(selectionModel));
     };
+
 })(jQuery, fluid);
