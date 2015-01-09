@@ -76,6 +76,7 @@ This form will POST to `/authorize_decision` and will contain a hidden input cal
 Name | Description
 -----|------------
 `transaction_id` | A handle used to connect this authorization decision to the requested authorization
+`selectedPreferences` | A JSON object describing the user selected preferences to share
 `allow` | If set, indicates that the user allows the authorization; send one of `allow` and `cancel`
 `cancel` | If set, indicates refusal of authorization; send one of `allow` and `cancel`
 
