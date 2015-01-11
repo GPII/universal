@@ -353,7 +353,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.decision(function (req, done) {
             var selectedPreferences = undefined; // jshint ignore:line
-            console.log("Got body of " + JSON.stringify(req.body, null, 2));
             if (req.body.selectedPreferences) {
                 // TODO validate selectedPreferences?
                 selectedPreferences = JSON.parse(req.body.selectedPreferences);
