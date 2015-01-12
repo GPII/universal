@@ -31,9 +31,15 @@ fluid.defaults("gpii.oauth2.authorizationService", {
         },
         getAuthorizedClientsForUser: {
             func: "{dataStore}.findAuthorizedClientsByUserId"
+                // userId
         },
         revokeAuthorization: {
             func: "{dataStore}.revokeAuthDecision"
+                // userId, authDecisionId
+        },
+        getAccessTokenForOAuth2ClientIdAndGpiiToken: {
+            func: "{dataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken"
+                // oauth2ClientId, gpiiToken
         }
     }
 });

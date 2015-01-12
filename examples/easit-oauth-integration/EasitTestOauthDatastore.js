@@ -34,21 +34,44 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 name: "Service A",
                 oauth2ClientId: "org.chrome.cloud4chrome",
                 oauth2ClientSecret: "client_secret_1",
-                redirectUri: "http://localhost:3002/authorize_callback"
+                redirectUri: "http://localhost:3002/authorize_callback",
+                allowDirectGpiiTokenAccess: false
             },
             {
                 id: 2,
                 name: "Service Passport Client",
                 oauth2ClientId: "client_id_pp",
                 oauth2ClientSecret: "client_secret_pp",
-                redirectUri: "http://localhost:3003/authorize_callback"
+                redirectUri: "http://localhost:3003/authorize_callback",
+                allowDirectGpiiTokenAccess: false
             },
             {
                 id: 3,
                 name: "Easit4all",
                 oauth2ClientId: "client_easit4all",
                 oauth2ClientSecret: "client_secret_easit4all",
-                redirectUri: "http://localhost:8080/asit/oauth_signin/authorize_callback"
+                redirectUri: "http://localhost:8080/asit/oauth_signin/authorize_callback",
+                allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 4,
+                name: "Mobile Accessibility",
+                oauth2ClientId: "mobile_accessibility",
+                oauth2ClientSecret: false,
+                redirectUri: false,
+                allowDirectGpiiTokenAccess: true
+            }
+        ],
+        authDecisionsIdSeq: 2,
+        authDecisions: [
+            {
+                id: 1,
+                userId: 2,
+                clientId: 4,
+                redirectUri: false,
+                accessToken: "mobile_accessibility_bob_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
             }
         ]
     }

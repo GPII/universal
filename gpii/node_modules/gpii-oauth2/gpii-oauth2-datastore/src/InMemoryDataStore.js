@@ -89,6 +89,11 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             funcName: "gpii.oauth2.dataStore.findAuthByAccessToken",
             args: ["{that}.model.authDecisions", "{that}.model.users", "{that}.model.clients", "{arguments}.0"]
                 // accessToken
+        },
+        findAccessTokenByOAuth2ClientIdAndGpiiToken: {
+            funcName: "gpii.oauth2.dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
+            args: ["{that}.model.authDecisions", "{that}.model.users", "{that}.model.clients", "{arguments}.0", "{arguments}.1"]
+                // oauth2ClientId, gpiiToken
         }
     }
 
@@ -260,4 +265,28 @@ gpii.oauth2.dataStore.findAuthByAccessToken = function (authDecisions, users, cl
         oauth2ClientId: client.oauth2ClientId,
         selectedPreferences: authDecision.selectedPreferences
     };
+};
+
+// findAccessTokenByOAuth2ClientIdAndGpiiToken()
+// ---------------------------------------------
+// TODO this method was added to integrate Mobile Accessibility for the January 2015 review
+// TODO and it needs to be reassessed after the review GPII-1066
+gpii.oauth2.dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (authDecisions, users, clients, oauth2ClientId, gpiiToken) {
+    var client = fluid.find_if(clients, function (c) { return c.oauth2ClientId === oauth2ClientId; });
+    if (!client || client.allowDirectGpiiTokenAccess !== true) {
+        return undefined;
+    }
+    var user = fluid.find_if(users, function (u) { return u.gpiiToken === gpiiToken; });
+    if (!user) {
+        return undefined;
+    }
+    var authDecision = fluid.find_if(authDecisions, function (ad) {
+        return ad.clientId === client.id && ad.userId === user.id && ad.revoked === false;
+    });
+    if (authDecision) {
+        return {
+            accessToken: authDecision.accessToken
+        };
+    }
+    return undefined;
 };

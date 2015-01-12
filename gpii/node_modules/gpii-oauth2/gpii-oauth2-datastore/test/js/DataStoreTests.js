@@ -35,21 +35,24 @@ var fluid = fluid || require("infusion");
                     name: "Client A",
                     oauth2ClientId: "client_id_A",
                     oauth2ClientSecret: "client_secret_A",
-                    redirectUri: "http://example.com/callback_A"
+                    redirectUri: "http://example.com/callback_A",
+                    allowDirectGpiiTokenAccess: false
                 },
                 {
                     id: 2,
                     name: "Client B",
                     oauth2ClientId: "client_id_B",
                     oauth2ClientSecret: "client_secret_B",
-                    redirectUri: "http://example.com/callback_B"
+                    redirectUri: "http://example.com/callback_B",
+                    allowDirectGpiiTokenAccess: true
                 },
                 {
                     id: 3,
                     name: "Client C",
                     oauth2ClientId: "client_id_C",
                     oauth2ClientSecret: "client_secret_C",
-                    redirectUri: "http://example.com/callback_C"
+                    redirectUri: "http://example.com/callback_C",
+                    allowDirectGpiiTokenAccess: false
                 }
             ]
         }
@@ -309,7 +312,7 @@ var fluid = fluid || require("infusion");
             jqUnit.assertFalse("revoked authorization is falsey", gpii.tests.oauth2.dataStore.findAuthByCode1(dataStore));
         });
 
-        jqUnit.test("findAuthorizedClientsByUserId() with revoking", function () {
+        jqUnit.test("findAuthorizedClientsByUserId()", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
             // add authDecisions
             var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
@@ -362,6 +365,31 @@ var fluid = fluid || require("infusion");
             // verify no longer found
             jqUnit.assertUndefined("revoked authDecision is undefined",
                 dataStore.findAuthByAccessToken(authDecision1.accessToken));
+        });
+
+        jqUnit.test("findAccessTokenByOAuth2ClientIdAndGpiiToken()", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+            // add authDecision
+            var authDecision1 = gpii.tests.oauth2.dataStore.addAuthDecision1(dataStore);
+            // find and verify
+            var auth = dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken("client_id_B", "alice_gpii_token");
+            jqUnit.assertEquals("accessToken",
+                gpii.tests.oauth2.dataStore.testdata.authDecision1.accessToken,
+                auth.accessToken);
+            // revoke authorization
+            dataStore.revokeAuthDecision(authDecision1.userId, authDecision1.id);
+            // verify no longer found
+            jqUnit.assertUndefined("revoked authDecision is undefined",
+                dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken("client_id_B", "alice_gpii_token"));
+        });
+
+        jqUnit.test("findAccessTokenByOAuth2ClientIdAndGpiiToken() fails on client not explicited allowed", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+            // add authDecision
+            gpii.tests.oauth2.dataStore.addAuthDecision2(dataStore);
+            // verify undefined
+            jqUnit.assertUndefined("undefined for client without allowDirectGpiiTokenAccess",
+                dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken("client_id_C", "alice_gpii_token"));
         });
 
     };
