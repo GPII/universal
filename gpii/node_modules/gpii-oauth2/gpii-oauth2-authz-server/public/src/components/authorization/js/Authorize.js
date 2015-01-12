@@ -28,17 +28,15 @@ var gpii = gpii || {};
             cancel: ".gpiic-oauth2-authorization-cancel",
             directions: ".gpiic-oauth2-authorization-directions",
             selection: ".gpiic-oauth2-authorization-selection",
-            selectionLabel: ".gpiic-oauth2-authorization-selectionLabel",
             selectionValue: ".gpiic-oauth2-authorization-selectionValue"
         },
         selectorsToIgnore: ["selection", "selectionValue"],
         strings: {
-            description: "In order to personalise your experience, <strong>%service</strong> would like to access some of your Cloud for All preferences.",
+            description: "In order to personalise your experience, <strong>%service</strong> would like to access some of your Cloud for All preferences. To allow access, please select one or more preferences to share:",
             allow: "allow",
             cancel: "do not allow",
             directions: "To edit your privacy settings at any time, go to your Account settings in the Preference Management Tool",
-            logout: "Log Out",
-            selectionLabel: "Select the preferences you wish to share:"
+            logout: "Log Out"
         },
         model: {
             user: "",
@@ -58,8 +56,7 @@ var gpii = gpii || {};
             },
             allow: {messagekey: "allow"},
             cancel: {messagekey: "cancel"},
-            directions: {messagekey: "directions"},
-            selectionLabel: {messagekey: "selectionLabel"}
+            directions: {messagekey: "directions"}
         },
         renderOnInit: true,
         events: {
@@ -97,8 +94,8 @@ var gpii = gpii || {};
                 changePath: "availableAuthorizedPrefs",
                 value: "{arguments}.0"
             },
-            setAllow: {
-                "funcName": "gpii.oauth2.authorization.setAllow",
+            setAllowState: {
+                "funcName": "gpii.oauth2.authorization.setDisabled",
                 "args": ["{that}.dom.allow", "{arguments}.0"]
             }
         },
@@ -130,7 +127,7 @@ var gpii = gpii || {};
                             }]
                         },
                         "value": {
-                            listener: "{authorization}.setAllow",
+                            listener: "{authorization}.setAllowState",
                             args: ["{change}.value"]
                         }
                     }
@@ -143,7 +140,7 @@ var gpii = gpii || {};
         input.val(JSON.stringify(selectionModel));
     };
 
-    gpii.oauth2.authorization.setAllow = function (elm, state) {
+    gpii.oauth2.authorization.setDisabled = function (elm, state) {
         var hasSelection = state && state !== "unchecked";
         elm.prop("disabled", !hasSelection);
     };

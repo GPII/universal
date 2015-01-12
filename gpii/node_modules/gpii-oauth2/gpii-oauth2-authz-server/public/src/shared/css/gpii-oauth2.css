@@ -129,7 +129,8 @@ body.gpii-oauth2 {
     text-decoration: underline;
 }
 
-.gpii-oauth2 .button {
+.gpii-oauth2 .button,
+.gpii-oauth2 .button:disabled:hover {
     border: solid 3px #3D3F4C;
     color: #FFFFFF;
     background-color: #3D3F4C;
