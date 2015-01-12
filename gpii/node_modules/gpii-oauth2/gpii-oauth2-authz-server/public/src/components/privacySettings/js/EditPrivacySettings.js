@@ -144,7 +144,7 @@ var gpii = gpii || {};
                     data: {
                         expander: {
                             funcName: "JSON.stringify",
-                            args: ["{that}.selectedPrefs"]
+                            args: ["{that}.model.selectedPrefs"]
                         }
                     }
                 }]
@@ -154,7 +154,6 @@ var gpii = gpii || {};
                 "method": "ajax",
                 args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
                     //TODO: Handle errors
-                    // type: "{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.type",
                     dataType: "json",
                     success: "{that}.setAvailableAuthorizedPrefs"
                 }]
@@ -176,10 +175,6 @@ var gpii = gpii || {};
             savePrefsAndExit: {
                 funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
                 args: ["{that}"]
-            },
-            setSelectedPrefs: {
-                funcName: "fluid.set",
-                args: ["{that}", "selectedPrefs", "{arguments}.0"]
             }
         },
         model: {
@@ -190,8 +185,8 @@ var gpii = gpii || {};
             //     oauth2ClientId: xx
             // }
             clientData: null,
-            afterAuthorizedPrefsSet: {},
-            decisionPrefs: {}
+            afterAuthorizedPrefsSet: null,
+            decisionPrefs: null
         },
         modelListeners: {
             "availableAuthorizedPrefs": {
@@ -216,15 +211,14 @@ var gpii = gpii || {};
                             args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
                         }
                     },
-                    modelListeners: {
-                        "": [{
-                            listener: "{editPrivacySettings}.setSelectedPrefs",
-                            args: [{
-                                expander: {
-                                    func: "{that}.toServerModel"
-                                }
-                            }]
-                        }]
+                    modelRelay: {
+                        target: "{editPrivacySettings}.model.selectedPrefs",
+                        forward: "liveOnly",
+                        singleTransform: {
+                            type: "fluid.transforms.free",
+                            func: "gpii.oauth2.selectionTree.toServerModel",
+                            args: ["{that}.model"]
+                        }
                     }
                 }
             }
