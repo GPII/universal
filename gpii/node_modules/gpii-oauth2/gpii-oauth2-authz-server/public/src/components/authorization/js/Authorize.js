@@ -96,6 +96,10 @@ var gpii = gpii || {};
             setAvailableAuthorizedPrefs: {
                 changePath: "availableAuthorizedPrefs",
                 value: "{arguments}.0"
+            },
+            setAllow: {
+                "funcName": "gpii.oauth2.authorization.setAllow",
+                "args": ["{that}.dom.allow", "{arguments}.0"]
             }
         },
         distributeOptions: {
@@ -124,6 +128,10 @@ var gpii = gpii || {};
                                     func: "{that}.toServerModel"
                                 }
                             }]
+                        },
+                        "value": {
+                            listener: "{authorization}.setAllow",
+                            args: ["{change}.value"]
                         }
                     }
                 }
@@ -133,6 +141,11 @@ var gpii = gpii || {};
 
     gpii.oauth2.authorization.setSelection = function (input, selectionModel) {
         input.val(JSON.stringify(selectionModel));
+    };
+
+    gpii.oauth2.authorization.setAllow = function (elm, state) {
+        var hasSelection = state && state !== "unchecked";
+        elm.prop("disabled", !hasSelection);
     };
 
 })(jQuery, fluid);
