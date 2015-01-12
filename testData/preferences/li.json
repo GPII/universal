@@ -7,7 +7,8 @@
                     "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
                     "http://registry.gpii.net/common/speechRate": 200,
                     "http://registry.gpii.net/common/magnifierEnabled": true,
-                    "http://registry.gpii.net/common/magnification": 1.5
+                    "http://registry.gpii.net/common/magnification": 1.5,
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
                 },
                 "metadata": [
                     {
@@ -26,8 +27,9 @@
                     "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
                     "http://registry.gpii.net/common/speechRate": 200,
                     "http://registry.gpii.net/common/magnifierEnabled": true,
-                    "http://registry.gpii.net/common/magnification": 2.0,
-                    "http://registry.gpii.net/common/highContrastEnabled": true
+                    "http://registry.gpii.net/common/magnification": 2,
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
                 },
                 "metadata": [
                     {
