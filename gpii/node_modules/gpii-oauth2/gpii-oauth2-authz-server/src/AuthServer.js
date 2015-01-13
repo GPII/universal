@@ -138,7 +138,7 @@ fluid.defaults("gpii.oauth2.authServer", {
                 args: ["{that}.passport.passport"]
             }
         },
-        homePage: "/privacy"
+        homePage: "/authorized-services"
     },
     components: {
         oauth2orizeServer: {
@@ -364,7 +364,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         })
     );
 
-    that.expressApp.get("/privacy",
+    // BEGIN OLD privacy page
+    // TODO once we are happy with the new /authorized-services page, remove the old privacy page
+    // TODO remove /OLD-privacy and /remove_authorization and associated templates and other files
+    that.expressApp.get("/OLD-privacy",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
@@ -382,7 +385,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             res.render("privacy", { user: req.user, authorizedServices: services });
         }
     );
-
     that.expressApp.post("/remove_authorization",
         that.sessionMiddleware,
         that.passportMiddleware,
@@ -391,9 +393,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var userId = req.user.id;
             var authDecisionId = parseInt(req.body.remove, 10);
             that.authorizationService.revokeAuthorization(userId, authDecisionId);
-            res.redirect("/privacy");
+            res.redirect("/OLD-privacy");
         }
     );
+    // END OLD privacy page
 
     that.expressApp["delete"]("/authorizations/:authDecisionId",
         that.sessionMiddleware,
