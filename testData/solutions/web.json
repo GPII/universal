@@ -20,7 +20,6 @@
                         "transform":{
                             "type": "gpii.transformer.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
-                            "input": 9,
                             "ranges": [
                                 {
                                     "upperBound": 12,
@@ -41,7 +40,6 @@
                         "transform": {
                             "type": "gpii.transformer.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
-                            "input": 1,
                             "ranges": [
                                 {
                                     "upperBound": 1.2,

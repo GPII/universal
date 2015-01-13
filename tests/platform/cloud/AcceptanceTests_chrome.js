@@ -21,6 +21,15 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.cloud.chrome");
 
 gpii.tests.cloud.chrome.testDefs = [
+    { // TODO: This check should be a standard and automatic part of the "baseline acceptance tests" for every solution
+        name: "Acceptance test for empty preferences in Chrome",
+        userToken: "chrome_empty",
+        solutionId: "org.chrome.cloud4chrome",
+        expected: {
+            "org.chrome.cloud4chrome": {
+            }
+        }
+    },
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
