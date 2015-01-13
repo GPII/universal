@@ -78,11 +78,7 @@ var gpii = gpii || {};
             }
         },
         listeners: {
-            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
-            "onCreate.test": {
-                listener: function (model) {console.log("model:", model);},
-                args: ["{that}.model"]
-            }
+            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs"
         },
         invokers: {
             fetchAvailableAuthorizedPrefs: {
