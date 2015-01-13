@@ -60,6 +60,10 @@
  * gpii-oauth2 styling overrides
  */
 
+.gpii-oauth2 .gpii-oauth2-panel {
+    background-color: #D2D2D1;
+}
+
 .gpii-oauth2-login-username input:focus,
 .gpii-oauth2-login-password input:focus {
     outline: none;
