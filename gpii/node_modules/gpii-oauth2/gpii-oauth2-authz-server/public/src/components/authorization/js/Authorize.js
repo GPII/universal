@@ -69,7 +69,7 @@ var gpii = gpii || {};
                 args: ["{that}"]
             }
         },
-        availableAuthorizationsURL: "src/shared/data/%clientID.json",
+        availableAuthorizationsURL: "src/core/data/%clientID.json",
         selectionTreeTemplate: "src/components/selectionTree/html/SelectionTreeTemplate.html",
         modelListeners: {
             "availableAuthorizedPrefs": {
@@ -78,11 +78,7 @@ var gpii = gpii || {};
             }
         },
         listeners: {
-            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
-            "onCreate.test": {
-                listener: function (model) {console.log("model:", model);},
-                args: ["{that}.model"]
-            }
+            "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs"
         },
         invokers: {
             fetchAvailableAuthorizedPrefs: {

@@ -27,7 +27,7 @@ https://github.com/gpii/universal/LICENSE.txt
                 service: "testService",
                 transactionID: "testTransactionID"
             },
-            availableAuthorizationsURL: "../../../../src/shared/data/available-authorized-preferences.json",
+            availableAuthorizationsURL: "../../../../src/core/data/available-authorized-preferences.json",
             selectionTreeTemplate: "../../../../src/components/selectionTree/html/SelectionTreeTemplate.html"
         });
 
