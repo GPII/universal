@@ -13,8 +13,7 @@ https://github.com/gpii/universal/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-     kettle = fluid.registerNamespace("kettle"),
-     gpii = fluid.registerNamespace("gpii");
+     kettle = fluid.registerNamespace("kettle");
      
 require("kettle");
 require("../../index.js");

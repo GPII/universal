@@ -5,8 +5,7 @@ var fluid = require("universal"),
 fluid.registerNamespace("gpii.tests.cloud.oauth2.chrome");
 
 require("./OAuth2AcceptanceDataStore.js");
-
-var testDefs = require("./AcceptanceTests_chrome.js");
+require("./AcceptanceTests_chrome.js");
 
 gpii.tests.cloud.oauth2.chrome.common = {
     client_id: "org.chrome.cloud4chrome",
@@ -43,7 +42,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptLoginRequest", {
     finalRecord: {
         event: "{loginRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{loginRequest}", "{testCaseHolder}.options.expectedStatusCode", ]
+        args: ["{arguments}.0", "{loginRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 });
 
@@ -56,7 +55,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptDecisionRequest", {
     finalRecord: {
         event: "{decisionRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{decisionRequest}", "{testCaseHolder}.options.expectedStatusCode", ]
+        args: ["{arguments}.0", "{decisionRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 });
 
@@ -69,7 +68,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptAccessToken", {
     finalRecord: {
         event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode", ]
+        args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 });
 
@@ -83,7 +82,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptSettingsRequest", {
     finalRecord: {
         event: "{securedSettingsRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{securedSettingsRequest}", "{testCaseHolder}.options.expectedStatusCode", ]
+        args: ["{arguments}.0", "{securedSettingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 });
 
@@ -149,7 +148,7 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
     }
 }];
 
-gpii.test.cloudBased.oauth2.bootstrap(testDefs, gpii.tests.cloud.oauth2.chrome.common, __dirname);
+gpii.test.cloudBased.oauth2.bootstrap(gpii.tests.cloud.chrome.testDefs, gpii.tests.cloud.oauth2.chrome.common, __dirname);
 
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(testDefs[0], gpii.tests.cloud.oauth2.chrome.common,
+gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(gpii.tests.cloud.chrome.testDefs[0], gpii.tests.cloud.oauth2.chrome.common,
     gpii.tests.cloud.oauth2.chrome.disruptions, __dirname);

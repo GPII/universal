@@ -55,10 +55,21 @@ body.gpii-oauth2 {
 }
 
 .gpii-oauth2 .gpii-oauth2-panel {
-    background-color: #D2D2D1;
+    background-color: #FFFFFF;
     border-radius: 3px;
 }
 
+.gpii-oauth2 .gpii-oauth2-innerPanel {
+    background-color: #D2D2D1;
+    margin-top: -1.2rem;
+    margin-bottom: 1rem;
+}
+
+.gpii-oauth2 .gpii-oauth2-scrollPanel {
+    padding: 1rem 1.5rem;
+    height: 8.875rem;
+    overflow: scroll;
+}
 
 .gpii-oauth2 .gpii-oauth2-activeUser {
     padding-bottom: 1.5rem;
@@ -118,19 +129,28 @@ body.gpii-oauth2 {
     text-decoration: underline;
 }
 
-.gpii-oauth2 .button {
-    border: solid 3px #3D3F4C;
+.gpii-oauth2 .button,
+.gpii-oauth2 button,
+.gpii-oauth2 .button:disabled:hover,
+.gpii-oauth2 button:disabled:hover {
     color: #FFFFFF;
     background-color: #3D3F4C;
     font-family: inherit;
 }
 
-.gpii-oauth2 .button:hover {
+.gpii-oauth2 .button,
+.gpii-oauth2 .button:disabled:hover {
+    border: solid 3px #3D3F4C;
+}
+
+.gpii-oauth2 .button:hover,
+.gpii-oauth2 button:hover {
     color: #3D3F4C;
     background-color: #FFFFFF;
 }
 
-.gpii-oauth2 .button:focus {
+.gpii-oauth2 .button:focus,
+.gpii-oauth2 button:focus {
     border-color: #D2D2D1;
     border-radius: 0;
 }
