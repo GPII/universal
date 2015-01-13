@@ -352,12 +352,15 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.decision(function (req, done) {
-            var selectedPreferences = undefined; // jshint ignore:line
             if (req.body.selectedPreferences) {
                 // TODO validate selectedPreferences?
-                selectedPreferences = JSON.parse(req.body.selectedPreferences);
+                var selectedPreferences = JSON.parse(req.body.selectedPreferences);
+                return done(null, { selectedPreferences: selectedPreferences });
+            } else {
+                var err = new Error("Missing parameter selectedPreferences");
+                err.status = 400;
+                return done(err);
             }
-            return done(null, { selectedPreferences: selectedPreferences });
         })
     );
 
@@ -427,15 +430,38 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var userId = req.user.id;
             var authDecisionId = parseInt(req.params.authDecisionId, 10);
             // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
-            var selectedPreferences = req.body;
-            // TODO validate selectedPreferences?
-            that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
-            res.send(200);
+            if (req.is("application/json")) {
+                var selectedPreferences = req.body;
+                // TODO validate selectedPreferences?
+                that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+                res.send(200);
+            } else {
+                res.send(400);
+            }
         }
     );
 
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
+    );
+
+    that.expressApp.get("/authorized-services",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var authorizedClients = that.authorizationService.getAuthorizedClientsForUser(req.user.id);
+            // Build view objects
+            var services = [];
+            authorizedClients.forEach(function (client) {
+                services.push({
+                    authDecisionId: client.authDecisionId,
+                    oauth2ClientId: client.oauth2ClientId,
+                    serviceName: client.clientName
+                });
+            });
+            res.render("privacySettings", { user: req.user, authorizedServices: services });
+        }
     );
 };

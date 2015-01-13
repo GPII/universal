@@ -1,4 +1,11 @@
 {{#section 'head'}}
+
+    <link rel="stylesheet" type="text/css" href="src/components/selectionTree/css/SelectionTree.css" />
+    <link rel="stylesheet" type="text/css" href="src/components/selectionTree/css/SelectionTreeFoundation.css" />
+
+    <script type="text/javascript" src="lib/infusion/infusion-tooltip.js"></script>
+    <script type="text/javascript" src="infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
+    <script type="text/javascript" src="src/components/selectionTree/js/SelectionTree.js"></script>
     <script type="text/javascript" src="src/components/authorization/js/Authorize.js"></script>
 
     <title>Authorize Service</title>
@@ -17,9 +24,11 @@
 
             <p class="gpiic-oauth2-authorization-description"></p>
 
+            <section class="gpiic-oauth2-authorization-selection gpiic-oauth2-selectionTree gpii-oauth2-selectionTree gpii-oauth2-innerPanel gpii-oauth2-scrollPanel"></section>
+
             <form action="/authorize_decision" method="post">
                 <input type="hidden" class="gpiic-oauth2-authorization-transaction" name="transaction_id" value="">
-                <input type="hidden" name="selectedPreferences" value="{ &quot;somePreference&quot;: &quot;someValue&quot; }">
+                <input type="hidden" class="gpiic-oauth2-authorization-selectionValue" name="selectedPreferences" value="{ &quot;&quot;: true }">
                 <input type="submit" class="gpiic-oauth2-authorization-allow button radius" name="allow" value="">
                 <input type="submit" class="gpiic-oauth2-authorization-cancel button radius" name="cancel" value="">
             </form>

@@ -19,7 +19,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.privacySettings", {
-        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        gradeNames: ["fluid.rendererRelayComponent", "autoInit"],
         selectors: {
             user: ".gpiic-oauth2-privacySettings-user",
             logout: ".gpiic-oauth2-privacySettings-logout",
