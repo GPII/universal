@@ -209,7 +209,6 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit = function (evt, that) {
-        console.log("calculating", evt);
         that.applier.change("currentClientData", that.getClientData(evt.target, that.options.selectors.editButton));
         that.events.onRenderEditDialog.fire();
     };
