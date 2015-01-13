@@ -22,7 +22,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
     },
     model: {
         users: [
-            { id: 1, username: "chrome1", password: "chrome1", gpiiToken: "chrome1" },
+            { id: 1, username: "chromehc", password: "chromehc", gpiiToken: "review3_chrome_high_contrast" },
             { id: 2, username: "bob", password: "b", gpiiToken: "bob_gpii_token" },
             { id: 3, username: "test31", password: "test12", gpiiToken: "u2v00s7c3celq836ffmbf48q8u" },
             { id: 4, username: "test32", password: "test12", gpiiToken: "dsjs5c95k3q8oj3o9vopdathlr" },

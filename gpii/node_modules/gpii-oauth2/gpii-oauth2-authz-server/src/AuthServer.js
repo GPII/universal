@@ -138,7 +138,7 @@ fluid.defaults("gpii.oauth2.authServer", {
                 args: ["{that}.passport.passport"]
             }
         },
-        homePage: "/privacy"
+        homePage: "/authorized-services"
     },
     components: {
         oauth2orizeServer: {
@@ -364,7 +364,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         })
     );
 
-    that.expressApp.get("/privacy",
+    // BEGIN OLD privacy page
+    // TODO once we are happy with the new /authorized-services page, remove the old privacy page
+    // TODO remove /OLD-privacy and /remove_authorization and associated templates and other files
+    that.expressApp.get("/OLD-privacy",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
@@ -382,7 +385,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             res.render("privacy", { user: req.user, authorizedServices: services });
         }
     );
-
     that.expressApp.post("/remove_authorization",
         that.sessionMiddleware,
         that.passportMiddleware,
@@ -391,13 +393,79 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var userId = req.user.id;
             var authDecisionId = parseInt(req.body.remove, 10);
             that.authorizationService.revokeAuthorization(userId, authDecisionId);
-            res.redirect("/privacy");
+            res.redirect("/OLD-privacy");
+        }
+    );
+    // END OLD privacy page
+
+    that.expressApp["delete"]("/authorizations/:authDecisionId",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO this implementation will fail silently if (userId, authDecisionId) are not valid -- is this what we want?
+            that.authorizationService.revokeAuthorization(userId, authDecisionId);
+            res.send(200);
+        }
+    );
+
+    that.expressApp.get("/authorizations/:authDecisionId/preferences",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO 404 for bad authDecisionId or an id for an authDecision that is not yours
+            var selectedPreferences = that.authorizationService.getSelectedPreferences(userId, authDecisionId);
+            res.type("application/json");
+            res.send(JSON.stringify(selectedPreferences, null, "    "));
+        }
+    );
+
+    that.expressApp.put("/authorizations/:authDecisionId/preferences",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
+            if (req.is("application/json")) {
+                var selectedPreferences = req.body;
+                // TODO validate selectedPreferences?
+                that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+                res.send(200);
+            } else {
+                res.send(400);
+            }
         }
     );
 
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
+    );
+
+    that.expressApp.get("/authorized-services",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var authorizedClients = that.authorizationService.getAuthorizedClientsForUser(req.user.id);
+            // Build view objects
+            var services = [];
+            authorizedClients.forEach(function (client) {
+                services.push({
+                    authDecisionId: client.authDecisionId,
+                    oauth2ClientId: client.oauth2ClientId,
+                    serviceName: client.clientName
+                });
+            });
+            res.render("privacySettings", { user: req.user, authorizedServices: services });
+        }
     );
 
     // TODO the /access_token_for_gpii_token endpoint was added to integrate Mobile Accessibility for the January 2015 review

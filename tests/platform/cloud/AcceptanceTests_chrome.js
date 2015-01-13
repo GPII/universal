@@ -18,9 +18,18 @@ var fluid = require("universal"),
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.cloud");
+fluid.registerNamespace("gpii.tests.cloud.chrome");
 
-gpii.tests.cloud.chrome = [
+gpii.tests.cloud.chrome.testDefs = [
+    { // TODO: This check should be a standard and automatic part of the "baseline acceptance tests" for every solution
+        name: "Acceptance test for empty preferences in Chrome",
+        userToken: "chrome_empty",
+        solutionId: "org.chrome.cloud4chrome",
+        expected: {
+            "org.chrome.cloud4chrome": {
+            }
+        }
+    },
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
@@ -78,4 +87,6 @@ gpii.tests.cloud.chrome = [
 // }, ["gpii.test.cloudBased.testCaseHolder"],
 //     module, require, __dirname);
 
-module.exports = (require.main === module ? gpii.test.cloudBased.bootstrap(gpii.tests.cloud.chrome, __dirname) : gpii.tests.cloud.chrome);
+if (require.main === module) {
+    module.exports = gpii.test.cloudBased.bootstrap(gpii.tests.cloud.chrome.testDefs, __dirname);
+}
