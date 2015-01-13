@@ -11,11 +11,11 @@ https://github.com/gpii/universal/LICENSE.txt
 */
 
 // Declare dependencies
-/* global fluid */
+/* global fluid, jQuery */
 
 var gpii = gpii || {};
 
-(function () {
+(function ($, fluid) {
     "use strict";
 
     fluid.defaults("gpii.oauth2.editPrivacySettings", {
@@ -257,4 +257,4 @@ var gpii = gpii || {};
         elm.prop("disabled", !hasSelection);
     };
 
-})();
+})(jQuery, fluid);

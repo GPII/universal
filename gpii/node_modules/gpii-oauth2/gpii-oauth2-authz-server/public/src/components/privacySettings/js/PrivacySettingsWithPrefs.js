@@ -11,11 +11,11 @@ https://github.com/gpii/universal/LICENSE.txt
 */
 
 // Declare dependencies
-/* global fluid */
+/* global fluid, jQuery, location */
 
 var gpii = gpii || {};
 
-(function () {
+(function ($, fluid) {
     "use strict";
 
     fluid.defaults("gpii.oauth2.privacySettingsWithPrefs", {
@@ -31,8 +31,7 @@ var gpii = gpii || {};
         requestInfos: {
             removeDecision: {
                 url: "/authorizations",
-                type: "DELETE",
-                redirectTo: "/authorized-services"
+                type: "DELETE"
             },
             fetchDecisionPrefs: {
                 url: "/authorizations/%authDecisionId/preferences",
@@ -44,8 +43,6 @@ var gpii = gpii || {};
             },
             fetchAvailableAuthorizedPrefs: {
                 url: "src/shared/data/available-authorized-preferences.json"
-                // url: "/available-authorized-preferences/%clientId",
-                // type: "get"
             }
         },
         components: {
@@ -97,7 +94,7 @@ var gpii = gpii || {};
                     messagekey: "description"
                 }
             },
-            directions: {messagekey: "directions"},
+            directions: {messagekey: "directions"}
         },
         tooltipOptions: {
             delay: 0,
@@ -197,11 +194,8 @@ var gpii = gpii || {};
                             type: that.options.requestInfos.removeDecision.type,
                             success: function () {
                                 if (that.options.requestInfos.removeDecision.redirectTo) {
-                                    window.location = that.options.requestInfos.removeDecision.redirectTo;
+                                    location.reload(true);
                                 }
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                // console.log("in error", jqXHR, textStatus, errorThrown);
                             }
                         });
                         $(this).dialog("close");
@@ -229,4 +223,4 @@ var gpii = gpii || {};
             target: "{that selectionTree}.options.resources.template.href"
         }
     });
-})();
+})(jQuery, fluid);
