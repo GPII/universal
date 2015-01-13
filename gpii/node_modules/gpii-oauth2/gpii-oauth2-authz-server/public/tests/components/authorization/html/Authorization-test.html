@@ -21,13 +21,15 @@
     <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidParser.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidRenderer.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/RendererUtilities.js"></script>
+    <script type="text/javascript" src="../../../../lib/infusion/infusion-tooltip.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
+    <script type="text/javascript" src="../../../../src/components/selectionTree/js/SelectionTree.js"></script>
     <script type="text/javascript" src="../../../../src/components/authorization/js/Authorize.js"></script>
 
     <!--  These are the jqUnit test framework js files -->
     <script type="text/javascript" src="../../../../infusion/tests/lib/qunit/js/qunit.js"></script>
     <script type="text/javascript" src="../../../../infusion/tests/test-core/jqUnit/js/jqUnit.js"></script>
     <script type="text/javascript" src="../../../../infusion/tests/test-core/jqUnit/js/jqUnit-browser.js"></script>
-    <script type="text/javascript" src="../../../../infusion/tests/lib/jquery-ui/js/jquery.simulate.js"></script>
 
     <!--  These are tests that have been written using this page as data and test supports -->
     <script type="text/javascript" src="../js/AuthorizationTests.js"></script>
@@ -55,8 +57,11 @@
 
                 <p class="gpiic-oauth2-authorization-description"></p>
 
+                <section class="gpiic-oauth2-authorization-selection gpiic-oauth2-selectionTree gpii-oauth2-selectionTree gpii-oauth2-innerPanel"></section>
+
                 <form action="/authorize_decision" method="post">
                     <input type="hidden" class="gpiic-oauth2-authorization-transaction" name="transaction_id" value="">
+                    <input type="hidden" class="gpiic-oauth2-authorization-selectionValue" name="selectedPreferences" value="USER SELECTED PREFERENCES FROM FORM">
                     <input type="submit" class="gpiic-oauth2-authorization-allow button radius" name="allow" value="">
                     <input type="submit" class="gpiic-oauth2-authorization-cancel button radius" name="cancel" value="">
                 </form>

@@ -445,4 +445,23 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
     );
+
+    that.expressApp.get("/authorized-services",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var authorizedClients = that.authorizationService.getAuthorizedClientsForUser(req.user.id);
+            // Build view objects
+            var services = [];
+            authorizedClients.forEach(function (client) {
+                services.push({
+                    authDecisionId: client.authDecisionId,
+                    oauth2ClientId: client.oauth2ClientId,
+                    serviceName: client.clientName
+                });
+            });
+            res.render("privacySettings", { user: req.user, authorizedServices: services });
+        }
+    );
 };
