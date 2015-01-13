@@ -193,9 +193,7 @@ var gpii = gpii || {};
                             url: that.options.requestInfos.removeDecision.url + "/" + clientData.authDecisionId,
                             type: that.options.requestInfos.removeDecision.type,
                             success: function () {
-                                if (that.options.requestInfos.removeDecision.redirectTo) {
-                                    location.reload(true);
-                                }
+                                location.reload(true);
                             }
                         });
                         $(this).dialog("close");
