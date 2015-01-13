@@ -130,19 +130,27 @@ body.gpii-oauth2 {
 }
 
 .gpii-oauth2 .button,
-.gpii-oauth2 .button:disabled:hover {
-    border: solid 3px #3D3F4C;
+.gpii-oauth2 button,
+.gpii-oauth2 .button:disabled:hover,
+.gpii-oauth2 button:disabled:hover {
     color: #FFFFFF;
     background-color: #3D3F4C;
     font-family: inherit;
 }
 
-.gpii-oauth2 .button:hover {
+.gpii-oauth2 .button,
+.gpii-oauth2 .button:disabled:hover {
+    border: solid 3px #3D3F4C;
+}
+
+.gpii-oauth2 .button:hover,
+.gpii-oauth2 button:hover {
     color: #3D3F4C;
     background-color: #FFFFFF;
 }
 
-.gpii-oauth2 .button:focus {
+.gpii-oauth2 .button:focus,
+.gpii-oauth2 button:focus {
     border-color: #D2D2D1;
     border-radius: 0;
 }

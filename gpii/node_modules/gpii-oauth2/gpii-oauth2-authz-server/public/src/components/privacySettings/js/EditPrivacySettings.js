@@ -56,7 +56,7 @@ var gpii = gpii || {};
             dialogCss: "gpii-oauth2-privacySettings-editDecision-dialog"
         },
         strings: {
-            description: "Select the preferences you wish to share:",
+            description: "To allow access, please select one or more preferences to share:",
             done: "done",
             cancel: "cancel"
         },
@@ -144,7 +144,7 @@ var gpii = gpii || {};
                     data: {
                         expander: {
                             funcName: "JSON.stringify",
-                            args: ["{that}.model.selectedPrefs"]
+                            args: ["{that}.selectedPrefs"]
                         }
                     }
                 }]
@@ -175,6 +175,10 @@ var gpii = gpii || {};
             savePrefsAndExit: {
                 funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
                 args: ["{that}"]
+            },
+            setSelectedPrefs: {
+                funcName: "fluid.set",
+                args: ["{that}", "selectedPrefs", "{arguments}.0"]
             }
         },
         model: {
@@ -211,13 +215,14 @@ var gpii = gpii || {};
                             args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
                         }
                     },
-                    modelRelay: {
-                        target: "{editPrivacySettings}.model.selectedPrefs",
-                        forward: "liveOnly",
-                        singleTransform: {
-                            type: "fluid.transforms.free",
-                            func: "gpii.oauth2.selectionTree.toServerModel",
-                            args: ["{that}.model"]
+                    modelListeners: {
+                        "": {
+                            listener: "{editPrivacySettings}.setSelectedPrefs",
+                            args: [{
+                                expander: {
+                                    func: "{that}.toServerModel"
+                                }
+                            }]
                         }
                     }
                 }

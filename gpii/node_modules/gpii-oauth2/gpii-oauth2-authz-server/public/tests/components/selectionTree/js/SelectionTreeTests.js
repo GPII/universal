@@ -807,4 +807,59 @@ https://github.com/gpii/universal/LICENSE.txt
             });
         });
     });
+
+    var selectionTreeSubModelValue;
+
+    fluid.defaults("gpii.tests.selectionTreeRoot", {
+        gradeNames: ["fluid.standardRelayComponent", "autoInit"],
+        model: {
+            subModel: null
+        },
+        modelListeners: {
+            "subModel": {
+                listener: function (newValue) {
+                    selectionTreeSubModelValue = newValue;
+                },
+                args: ["{change}.value"]
+            }
+        },
+        components: {
+            sub: {
+                type: "gpii.oauth2.selectionTree",
+                options: {
+                    model: {},
+                    modelRelay: {
+                        source: "{that}.model",
+                        target: "{selectionTreeRoot}.model.subModel",
+                        singleTransform: {
+                            type: "fluid.transforms.free",
+                            func: "gpii.tests.selectionTreeRoot.getSubModel",
+                            args: ["{that}.model"]
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    gpii.tests.selectionTreeRoot.getSubModel = function (subModel) {
+        return subModel;
+    };
+
+    jqUnit.test("FLUID-9999: model relay for removing all or part of source value nodes", function () {
+        var that = gpii.tests.selectionTreeRoot();
+        var initialSubModelValue = {
+            a: true,
+            b: true
+        };
+        that.sub.applier.change("", initialSubModelValue);
+        jqUnit.assertDeepEq("The model relay relays the initial value from the sub-component", initialSubModelValue, selectionTreeSubModelValue);
+
+        var newSubModelValue = {
+            b: true
+        };
+        that.sub.applier.change("", newSubModelValue);
+        jqUnit.assertDeepEq("The model relay relays the new value from the sub-component", newSubModelValue, selectionTreeSubModelValue);
+    });
+
 })(jQuery);
