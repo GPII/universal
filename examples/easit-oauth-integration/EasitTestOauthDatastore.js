@@ -26,7 +26,8 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             { id: 2, username: "bob", password: "b", gpiiToken: "bob_gpii_token" },
             { id: 3, username: "test31", password: "test12", gpiiToken: "u2v00s7c3celq836ffmbf48q8u" },
             { id: 4, username: "test32", password: "test12", gpiiToken: "dsjs5c95k3q8oj3o9vopdathlr" },
-            { id: 5, username: "test33", password: "test12", gpiiToken: "68574tivtoemmm174gof9rf3pe" }
+            { id: 5, username: "test33", password: "test12", gpiiToken: "68574tivtoemmm174gof9rf3pe" },
+            { id: 6, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" }
         ],
         clients: [
             {
@@ -56,7 +57,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             {
                 id: 4,
                 name: "Mobile Accessibility",
-                oauth2ClientId: "mobile_accessibility",
+                oauth2ClientId: "es.codefactory.android.app.ma",
                 oauth2ClientSecret: false,
                 redirectUri: false,
                 allowDirectGpiiTokenAccess: true
@@ -66,10 +67,10 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
         authDecisions: [
             {
                 id: 1,
-                userId: 2,
+                userId: 6,
                 clientId: 4,
                 redirectUri: false,
-                accessToken: "mobile_accessibility_bob_access_token",
+                accessToken: "ma1_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             }

@@ -26,5 +26,7 @@
     "http://registry\\.gpii\\.net/common/signLanguageEnabled": "textual-alternatives.sign-language.enable",
     
     "http://registry\\.gpii\\.net/common/invertColours": "uncategorized.invert-colours",
-    "http://registry\\.gpii\\.net/common/highContrastTheme": "uncategorized.high-contrast-theme"
+    "http://registry\\.gpii\\.net/common/highContrastTheme": "uncategorized.high-contrast-theme",
+    "http://registry\\.gpii\\.net/common/keyEcho": "uncategorized.key-echo",
+    "http://registry\\.gpii\\.net/common/wordEcho": "uncategorized.word-echo"
 }

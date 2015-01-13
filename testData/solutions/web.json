@@ -343,5 +343,65 @@
                 }
             }
         ]
+    },
+    "es.codefactory.android.app.ma": {
+        "name": "Mobile Accessibility",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.es\\.codefactory\\.android\\.app\\.ma.id"
+                ],
+                "capabilitiesTransformations": {
+                    "access_commonprefs_speechrate": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "operator": "/",
+                            "right": 40
+                        }
+                    },
+                    "access_commonprefs_speechpitch": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "operator": "*",
+                            "right": 10
+                        }
+                    },
+                    "access_commonprefs_editingkeyboardecho": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                                    "true": "3",
+                                    "false": "1"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                                    "true": "2",
+                                    "false": "0"
+                                }
+                            }
+                        }
+                    },
+                    "access_commonprefs_punctuation": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                    "access_commonprefs_capitalization": "http://registry\\.gpii\\.net/common/announceCapitals"
+                }
+            }
+        ]
     }
 }
