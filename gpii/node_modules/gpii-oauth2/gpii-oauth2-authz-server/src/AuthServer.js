@@ -408,6 +408,39 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    that.expressApp.get("/authorizations/:authDecisionId/preferences",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO 404 for bad authDecisionId or an id for an authDecision that is not yours
+            var selectedPreferences = that.authorizationService.getSelectedPreferences(userId, authDecisionId);
+            res.type("application/json");
+            res.send(JSON.stringify(selectedPreferences, null, "    "));
+        }
+    );
+
+    that.expressApp.put("/authorizations/:authDecisionId/preferences",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var userId = req.user.id;
+            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
+            if (req.is("application/json")) {
+                var selectedPreferences = req.body;
+                // TODO validate selectedPreferences?
+                that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+                res.send(200);
+            } else {
+                res.send(400);
+            }
+        }
+    );
+
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()

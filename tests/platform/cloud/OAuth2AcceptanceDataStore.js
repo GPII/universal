@@ -28,10 +28,10 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
             },
             {
                 id: 2,
-                name: "Smart Houses",
-                oauth2ClientId: "net.gpii.smarthouses",
-                oauth2ClientSecret: "client_secret_smarthouses",
-                redirectUri: "/authorize_callback"
+                name: "Easit4all",
+                oauth2ClientId: "com.bdigital.easit4all",
+                oauth2ClientSecret: "client_secret_easit4all",
+                redirectUri: "http://com.bdigital.easit4all/the-client%27s-uri/"
             }
         ]
     }
