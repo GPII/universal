@@ -179,6 +179,10 @@ var gpii = gpii || {};
             setSelectedPrefs: {
                 funcName: "fluid.set",
                 args: ["{that}", "selectedPrefs", "{arguments}.0"]
+            },
+            setDoneState: {
+                "funcName": "gpii.oauth2.editPrivacySettings.setDisabled",
+                "args": ["{that}.dom.done", "{arguments}.0"]
             }
         },
         model: {
@@ -223,6 +227,10 @@ var gpii = gpii || {};
                                     func: "{that}.toServerModel"
                                 }
                             }]
+                        },
+                        "value": {
+                            listener: "{editPrivacySettings}.setDoneState",
+                            args: ["{change}.value"]
                         }
                     }
                 }
@@ -242,6 +250,11 @@ var gpii = gpii || {};
     gpii.oauth2.editPrivacySettings.savePrefsAndExit = function (that) {
         that.saveDecisionPrefs();
         that.closeDialog();
+    };
+
+    gpii.oauth2.editPrivacySettings.setDisabled = function (elm, state) {
+        var hasSelection = state && state !== "unchecked";
+        elm.prop("disabled", !hasSelection);
     };
 
 })();
