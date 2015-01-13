@@ -130,7 +130,7 @@ var gpii = gpii || {};
         invokers: {
             getClientData: {
                 funcName: "gpii.oauth2.privacySettingsWithPrefs.getClientData",
-                args: ["{arguments}.0", "{that}.options.selectors.serviceName", "{that}.options.selectors.authDecisionId", "{that}.options.selectors.oauth2ClientId"]
+                args: ["{arguments}.0", "{arguments}.1", "{that}.options.selectors.serviceName", "{that}.options.selectors.authDecisionId", "{that}.options.selectors.oauth2ClientId"]
             },
             popupDialogForRemoval: {
                 funcName: "gpii.oauth2.privacySettingsWithPrefs.popupDialogForRemoval",
@@ -143,8 +143,8 @@ var gpii = gpii || {};
         }
     });
 
-    gpii.oauth2.privacySettingsWithPrefs.getClientData = function (element, serviceNameSelector, authDecisionIdSelector, oauth2ClientIdSelector) {
-        element = $(element);
+    gpii.oauth2.privacySettingsWithPrefs.getClientData = function (element, buttonSelector, serviceNameSelector, authDecisionIdSelector, oauth2ClientIdSelector) {
+        element = $(element).closest(buttonSelector);
         return {
             serviceName: element.siblings(serviceNameSelector).attr("value"),
             authDecisionId: element.siblings(authDecisionIdSelector).attr("value"),
@@ -172,7 +172,7 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.privacySettingsWithPrefs.popupDialogForRemoval = function (evt, that) {
-        var clientData = that.getClientData(evt.target);
+        var clientData = that.getClientData(evt.target, that.options.selectors.removeButton);
         var dialogForRemoval = that.dialogForRemoval;
         var dialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: clientData.serviceName});
         dialogForRemoval.find(that.options.selectors.removeDecisionContent).html(dialogContent);
@@ -209,7 +209,8 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit = function (evt, that) {
-        that.applier.change("currentClientData", that.getClientData(evt.target));
+        console.log("calculating", evt);
+        that.applier.change("currentClientData", that.getClientData(evt.target, that.options.selectors.editButton));
         that.events.onRenderEditDialog.fire();
     };
 
