@@ -20,20 +20,6 @@ https://github.com/gpii/universal/LICENSE.txt
 
         fluid.registerNamespace("gpii.tests.ajax");
 
-        /*
-
-        gpii.oauth2.ajax = function (urlTemplate, urlParams, options) {
-            var url = fluid.stringTemplate(urlTemplate, urlParams);
-            $.ajax(url, options);
-        };
-
-        gpii.oauth2.setDisabled = function (elm, state) {
-            var hasSelection = state && state !== "unchecked";
-            elm.prop("disabled", !hasSelection);
-        };
-
-        */
-
         gpii.tests.ajax.assertSuccess = function (actual, expected) {
             jqUnit.assertDeepEq("The ajax request should have returned the correct data", expected, actual);
         };
@@ -53,6 +39,28 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             gpii.oauth2.ajax(urlTemplate, urlParams, options);
+        });
+
+        jqUnit.test("gpii.oauth2.setDisabled", function () {
+            var selectors = {
+                bool: ".test-bool",
+                checked: ".test-checked",
+                indeterminate: ".test-indeterminate"
+            };
+
+            fluid.each(selectors, function (selector, type) {
+                var elm = $(selector);
+                var enabledState = type === "bool" ? true : type;
+                var disabledState = type === "bool" ? false : "unchecked";
+
+                jqUnit.assertFalse("'" + type + "' test - the button should be enabled to start", elm.prop("disabled"));
+
+                gpii.oauth2.setDisabled(elm, disabledState);
+                jqUnit.assertTrue("'" + type + "' test - the button should be disabled", elm.prop("disabled"));
+
+                gpii.oauth2.setDisabled(elm, enabledState);
+                jqUnit.assertFalse("'" + type + "' test - the button should be enabled", elm.prop("disabled"));
+            });
         });
 
     });
