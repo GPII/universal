@@ -496,4 +496,24 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // TODO the /gpii_token endpoint was added to integrate Easit4All for the January 2015 review
+    // TODO it should be removed after the review GPII-1069
+    that.expressApp.get("/gpii_token",
+        function (req, res) {
+            var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+            if (!accessToken) {
+                res.send(401);
+                return;
+            }
+            var auth = that.authorizationService.getAuthForAccessToken(accessToken);
+            if (!auth) {
+                res.send(401);
+                return;
+            }
+            res.json({
+                "gpii_token": auth.userGpiiToken
+            });
+        }
+    );
+
 };

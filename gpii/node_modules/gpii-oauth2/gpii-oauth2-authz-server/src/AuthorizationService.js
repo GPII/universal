@@ -50,6 +50,10 @@ fluid.defaults("gpii.oauth2.authorizationService", {
         getAccessTokenForOAuth2ClientIdAndGpiiToken: {
             func: "{dataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken"
                 // oauth2ClientId, gpiiToken
+        },
+        getAuthForAccessToken: {
+            func: "{dataStore}.findAuthByAccessToken"
+                // accessToken
         }
     }
 });
