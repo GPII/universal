@@ -28,7 +28,7 @@ https://github.com/gpii/universal/LICENSE.txt
                 clientID: "client_easit4all",
                 transactionID: "testTransactionID"
             },
-            availableAuthorizationsURL: "../../../../src/core/data/%clientID.json",
+            availableAuthorizationsURL: "../../../../src/core/available-authorized-preferences/%clientID.json",
             selectionTreeTemplate: "../../../../src/components/selectionTree/html/SelectionTreeTemplate.html"
         });
 
