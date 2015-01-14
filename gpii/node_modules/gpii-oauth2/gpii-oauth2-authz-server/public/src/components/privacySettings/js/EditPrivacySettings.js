@@ -136,7 +136,12 @@ var gpii = gpii || {};
                     data: {
                         expander: {
                             funcName: "JSON.stringify",
-                            args: ["{that}.selectedPrefs"]
+                            args: [{
+                                expander: {
+                                    func: "{selectionTree}.toServerModel",
+                                    args: "{selectionTree}.model"
+                                }
+                            }]
                         }
                     }
                 }]
@@ -168,10 +173,6 @@ var gpii = gpii || {};
             savePrefsAndExit: {
                 funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
                 args: ["{that}"]
-            },
-            setSelectedPrefs: {
-                funcName: "fluid.set",
-                args: ["{that}", "selectedPrefs", "{arguments}.0"]
             },
             setDoneState: {
                 "funcName": "gpii.oauth2.setDisabled",
@@ -213,14 +214,6 @@ var gpii = gpii || {};
                         }
                     },
                     modelListeners: {
-                        "": {
-                            listener: "{editPrivacySettings}.setSelectedPrefs",
-                            args: [{
-                                expander: {
-                                    func: "{that}.toServerModel"
-                                }
-                            }]
-                        },
                         "value": {
                             listener: "{editPrivacySettings}.setDoneState",
                             args: ["{change}.value"]
