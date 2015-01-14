@@ -42,7 +42,7 @@ var gpii = gpii || {};
                 type: "put"
             },
             fetchAvailableAuthorizedPrefs: {
-                url: "src/core/data/available-authorized-preferences.json"
+                url: "src/core/available-authorized-preferences/available-authorized-preferences.json"
             }
         },
         components: {

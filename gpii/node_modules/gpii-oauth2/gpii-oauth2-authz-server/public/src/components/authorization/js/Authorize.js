@@ -69,7 +69,7 @@ var gpii = gpii || {};
                 args: ["{that}"]
             }
         },
-        availableAuthorizationsURL: "src/core/data/%clientID.json",
+        availableAuthorizationsURL: "src/core/available-authorized-preferences/%clientID.json",
         selectionTreeTemplate: "src/components/selectionTree/html/SelectionTreeTemplate.html",
         modelListeners: {
             "availableAuthorizedPrefs": {
