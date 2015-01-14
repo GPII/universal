@@ -84,10 +84,6 @@
     },
 
     {
-        "id": "com.microsoft.windows.displaySettings"
-    },
-
-    {
         "id": "com.microsoft.windows.cursors"
     },
 
@@ -129,6 +125,10 @@
 
     {
         "id": "com.android.settings.system"
+    },
+
+    {
+        "id": "com.yourdolphin.supernova-as"
     }
 
 ]

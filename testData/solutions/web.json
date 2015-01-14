@@ -234,5 +234,79 @@
                 }
             }
         ]
+    },
+    "de.fraunhofer.iao.C4A-TVM": {
+        "name": "C4A-TVM",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "de\\.fraunhofer\\.iao\\.C4A-TVM.id",
+                    "de\\.fraunhofer\\.iao\\.gpii\\.C4A-TVM.name",
+                    "contrastTheme",
+                    "fontSize",
+                    "timeOut"
+                ],
+                "capabilitiesTransformations": {
+                    "language": "http://registry\\.gpii\\.net/common/language",
+                    "contrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "defaultInputValue": "default",
+                                    "options": {
+                                        "white-black": {
+                                            "outputValue": "yellow-black"
+                                        },
+                                        "yellow-black": {
+                                            "outputValue": "yellow-black"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "fontSize": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 18,
+                                    "output": "default"
+                                }, {
+                                    "output": "big"
+                                }
+                            ]
+                        }
+                    },
+                    "timeOut": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/sessionTimeout",
+                            "ranges": [
+                                {
+                                    "upperBound": 30,
+                                    "output": "default"
+                                }, {
+                                    "output": "long"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
     }
 }
