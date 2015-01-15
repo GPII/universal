@@ -1,0 +1,8 @@
+{
+    "visual-alternatives": true,
+    "visual-alternatives.speak-text": true,
+    "visual-alternatives.speak-text.rate": true,
+    "visual-alternatives.speak-text.pitch": true,
+    "visual-alternatives.speak-text.announce": true,
+    "visual-alternatives.speak-text.read-back": true
+}
