@@ -4,18 +4,18 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry\\.gpii\\.net/common/fontSize": 1,
-                    "http://registry\\.gpii\\.net/provisional-common/fontName": "default",
-                    "http://registry\\.gpii\\.net/provisional-common/foregroundColor": "black",
-                    "http://registry\\.gpii\\.net/provisional-common/backgroundColor": "white",
-                    "http://registry\\.gpii\\.net/common/magnification": 1,
-                    "http://registry\\.gpii\\.net/provisional-common/magnifierFollows": true,
-                    "http://registry\\.gpii\\.net/common/invertColours": true,
-                    "http://registry\\.gpii\\.net/provisional-common/inputsLarger": true,
-                    "http://registry\\.gpii\\.net/provisional-common/simplifyLayout": true,
-                    "http://registry\\.gpii\\.net/provisional-common/lineSpacing": 1,
-                    "http://registry\\.gpii\\.net/provisional-common/emphasizeLinks": true,
-                    "http://registry\\.gpii\\.net/provisional-common/tableOfContents": 1
+                    "http://registry.gpii.net/common/fontSize": 1,
+                    "http://registry.gpii.net/provisional-common/fontName": "default",
+                    "http://registry.gpii.net/provisional-common/foregroundColor": "black",
+                    "http://registry.gpii.net/provisional-common/backgroundColor": "white",
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry.gpii.net/provisional-common/magnifierFollows": true,
+                    "http://registry.gpii.net/common/invertColours": true,
+                    "http://registry.gpii.net/provisional-common/inputsLarger": true,
+                    "http://registry.gpii.net/provisional-common/simplifyLayout": true,
+                    "http://registry.gpii.net/provisional-common/lineSpacing": 1,
+                    "http://registry.gpii.net/provisional-common/emphasizeLinks": true,
+                    "http://registry.gpii.net/provisional-common/tableOfContents": 1
                 }
             }
         }
