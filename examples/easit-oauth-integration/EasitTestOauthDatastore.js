@@ -28,7 +28,10 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             { id: 4, username: "review3_user_2", password: "test1234", gpiiToken: "review3_user_2" },
             { id: 5, username: "review3_user_3", password: "test1234", gpiiToken: "review3_user_3" },
             { id: 6, username: "review3_user_4", password: "test1234", gpiiToken: "review3_user_4" },
-            { id: 7, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" }
+            { id: 7, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" },
+            { id: 8, username: "ma2", password: "ma2", gpiiToken: "review3_ma2" },
+            { id: 9, username: "chris", password: "chris", gpiiToken: "chris" },
+            { id: 10, username: "li", password: "li", gpiiToken: "li" }
         ],
         clients: [
             {
@@ -64,7 +67,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 allowDirectGpiiTokenAccess: true
             }
         ],
-        authDecisionsIdSeq: 2,
+        authDecisionsIdSeq: 5,
         authDecisions: [
             {
                 id: 1,
@@ -72,6 +75,33 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "ma1_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
+            },
+            {
+                id: 2,
+                userId: 8,
+                clientId: 4,
+                redirectUri: false,
+                accessToken: "ma2_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
+            },
+            {
+                id: 3,
+                userId: 9,
+                clientId: 4,
+                redirectUri: false,
+                accessToken: "ma_chris_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
+            },
+            {
+                id: 4,
+                userId: 10,
+                clientId: 4,
+                redirectUri: false,
+                accessToken: "ma_li_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             }
