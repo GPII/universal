@@ -12,7 +12,7 @@
     "http://registry\\.gpii\\.net/common/volume": "universal-volume",
     "http://registry\\.gpii\\.net/common/language": "universal-language",
 
-    "http://registry\\.gpii\\.net/provisional-common/simplifyLayout": "simplify",
+    "http://registry\\.gpii\\.net/provisional-common/simplifyLayout": "simplify.enable",
     "http://registry\\.gpii\\.net/provisional-common/tableOfContents": "simplify.table-of-contents",
 
     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled": "visual-alternatives.speak-text.enable",
