@@ -25,7 +25,7 @@ https://github.com/gpii/universal/LICENSE.txt
             model: {
                 user: "testUser",
                 service: "testService",
-                clientID: "client_easit4all",
+                clientID: "com.bdigital.easit4all",
                 transactionID: "testTransactionID"
             },
             availableAuthorizationsURL: "../../../../src/core/available-authorized-preferences/%clientID.json",

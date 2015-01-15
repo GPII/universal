@@ -24,10 +24,11 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
         users: [
             { id: 1, username: "chromehc", password: "chromehc", gpiiToken: "review3_chrome_high_contrast" },
             { id: 2, username: "bob", password: "b", gpiiToken: "bob_gpii_token" },
-            { id: 3, username: "test31", password: "test12", gpiiToken: "u2v00s7c3celq836ffmbf48q8u" },
-            { id: 4, username: "test32", password: "test12", gpiiToken: "dsjs5c95k3q8oj3o9vopdathlr" },
-            { id: 5, username: "test33", password: "test12", gpiiToken: "68574tivtoemmm174gof9rf3pe" },
-            { id: 6, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" }
+            { id: 3, username: "review3_user_1", password: "test1234", gpiiToken: "review3_user_1" },
+            { id: 4, username: "review3_user_2", password: "test1234", gpiiToken: "review3_user_2" },
+            { id: 5, username: "review3_user_3", password: "test1234", gpiiToken: "review3_user_3" },
+            { id: 6, username: "review3_user_4", password: "test1234", gpiiToken: "review3_user_4" },
+            { id: 7, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" }
         ],
         clients: [
             {
@@ -49,7 +50,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             {
                 id: 3,
                 name: "Easit4all",
-                oauth2ClientId: "client_easit4all",
+                oauth2ClientId: "com.bdigital.easit4all",
                 oauth2ClientSecret: "client_secret_easit4all",
                 redirectUri: "http://localhost:8080/asit/oauth_signin/authorize_callback",
                 allowDirectGpiiTokenAccess: false
@@ -67,7 +68,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
         authDecisions: [
             {
                 id: 1,
-                userId: 6,
+                userId: 7,
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "ma1_access_token",
