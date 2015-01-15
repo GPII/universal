@@ -1,5 +1,5 @@
 {
-    "typeName": "development.all.local",
+    "typeName": "production.with.logging",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
