@@ -25,7 +25,7 @@
     "http://registry\\.gpii\\.net/common/brailleMode": "visual-alternatives.braille.enable",
     "http://registry\\.gpii\\.net/common/signLanguageEnabled": "textual-alternatives.sign-language.enable",
 
-    "http://registry\\.gpii\\.net/common/invertColours": "increase-size.magnifier.invert-colours",
+    "http://registry\\.gpii\\.net/common/invertColours": "visual-styling.change-contrast.invert-colours",
     "http://registry\\.gpii\\.net/common/highContrastTheme": "visual-styling.change-contrast.high-contrast-theme",
     "http://registry\\.gpii\\.net/common/keyEcho": "visual-alternatives.speak-text.read-back.key-echo",
     "http://registry\\.gpii\\.net/common/wordEcho": "visual-alternatives.speak-text.read-back.word-echo"
