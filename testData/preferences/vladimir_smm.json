@@ -14,7 +14,7 @@
                         "fontSize": "medium",
                         "highContrastEnabled": true
                     },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    "http://registry.gpii.net/common/matchMakerType": "Statistical"
                 },
                 "metadata": [
                     {
@@ -47,7 +47,7 @@
                         "fontSize": "medium",
                         "highContrastEnabled": true
                     },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    "http://registry.gpii.net/common/matchMakerType": "Statistical"
                 },
                 "metadata": [
                     {
