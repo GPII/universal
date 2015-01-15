@@ -248,8 +248,8 @@
             {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "de\\.fraunhofer\\.iao\\.C4A-TVM.id",
-                    "de\\.fraunhofer\\.iao\\.gpii\\.C4A-TVM.name",
+                    "applications.de\\.fraunhofer\\.iao\\.C4A-TVM.id",
+                    "applications.de\\.fraunhofer\\.iao\\.gpii\\.C4A-TVM.name",
                     "contrastTheme",
                     "fontSize",
                     "timeOut"
