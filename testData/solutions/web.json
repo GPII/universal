@@ -164,5 +164,75 @@
                 }
             }
         ]
+    },
+    "net.gpii.smarthouses": {
+        "name": "smarthouse",
+        "id": "net.gpii.smarthouses",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.net\\.gpii\\.smarthouses.id",
+                    "display.applications.net\\.gpii\\.smarthouses.name",
+                    "language",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.-provisional-highContrastTheme",
+                    "-provisional-general.-provisional-volume"
+                ],
+                "capabilitiesTransformations": {
+                    "fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                                    "factor": 1.33
+                                }
+                            }
+                        }
+                    },
+                    "language": "http://registry\\.gpii\\.net/common/language",
+                    "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "volume": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "ranges": [
+                                {
+                                    "upperBound": 0,
+                                    "output": 0
+                                },
+                                {
+                                    "upperBound": 1,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.round",
+                                            "input": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.linearScale",
+                                                    "valuePath": "http://registry\\.gpii\\.net/common/volume",
+                                                    "factor": 100
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "output": 100
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
     }
 }
