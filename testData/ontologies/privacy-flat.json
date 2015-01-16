@@ -30,6 +30,7 @@
     "http://registry\\.gpii\\.net/provisional-common/fontName": "visual-styling.text-style",
 
     "http://registry\\.gpii\\.net/common/brailleMode": "visual-alternatives.braille.enable",
+    "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": "visual-alternatives.braille.screen-reader-braille-output",
     "http://registry\\.gpii\\.net/common/signLanguageEnabled": "textual-alternatives.sign-language.enable",
 
     "http://registry\\.gpii\\.net/common/invertColours": "visual-styling.change-contrast.invert-colours",
