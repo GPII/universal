@@ -13,7 +13,7 @@
 
 .gpii-oauth2-selectionTree li > ul {
     margin-left: 0.7rem;
-    padding-left: 0.5rem;
+    padding-left: 0.8rem;
 }
 
 .gpii-oauth2-selectionTree li > ul label {
@@ -25,23 +25,37 @@
     padding-top: 0.2rem;
 }
 
+.gpii-oauth2-selectionTree-top {
+    padding-left: 0.5rem;
+}
+
 .gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf {
     position: relative;
 }
 
-.gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:before {
+.gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:before,
+.gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:first-child:after {
     content: "";
     width: 0.7rem;
-    height: 100%;
-    border-top: 1px solid;
     border-left: 1px solid;
     position: absolute;
     left: -0.5rem;
     margin-top: 0.5rem;
 }
 
+.gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:before {
+    height: 100%;
+    border-top: 1px solid;
+}
+
 .gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:last-child:before {
     border-left: none;
+}
+
+.gpii-oauth2-selectionTree .gpii-oauth2-selectionTree-leaf:first-child:after {
+    height: 0.7rem;
+    border-left: 1px solid;
+    top: -0.5rem;
 }
 
 .gpii-oauth2-selectionTree-branch,
