@@ -1265,35 +1265,5 @@
                 "restoreSettings"
             ]
         }
-    },
-	
-    "org.mozilla.cloud4firefox": {
-        "name": "Cloud4all firefox extension",
-        "contexts": {
-            "OS": [{
-                    "id": "win32",
-                    "version": ">=5.0"
-            }]
-        },
-        "settingsHandlers": [
-           {
-                "type": "gpii.settingsHandlers.WebSocketsSettingsHandler",
-                "capabilities": [
-                    "applications.org\\.chrome\\.cloud4firefox.id"
-                ]
-           }
-        ],
-        "lifecycleManager" : {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://wiki.gpii.net/"
-                }
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
     }
 }
