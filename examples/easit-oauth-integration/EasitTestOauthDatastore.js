@@ -55,7 +55,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 name: "Easit4all",
                 oauth2ClientId: "com.bdigital.easit4all",
                 oauth2ClientSecret: "client_secret_easit4all",
-                redirectUri: "http://localhost:8080/asit/oauth_signin/authorize_callback",
+                redirectUri: "http://www.easit4all.com/asit/oauth_signin/authorize_callback",
                 allowDirectGpiiTokenAccess: false
             },
             {
