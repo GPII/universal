@@ -467,4 +467,53 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             res.render("privacySettings", { user: req.user, authorizedServices: services });
         }
     );
+
+    // TODO the /access_token_for_gpii_token endpoint was added to integrate Mobile Accessibility for the January 2015 review
+    // TODO and it needs to be reassessed after the review GPII-1066
+    // TODO it does not provide for any authentication of the user beyond knowledge of the GPII token
+    // TODO and it does not provide for any authentication of the client beyond knowledge of the client_id
+    that.expressApp.post("/access_token_for_gpii_token",
+        function (req, res) {
+            var oauth2ClientId = req.body.client_id;
+            if (!oauth2ClientId) {
+                res.send(400);
+                return;
+            }
+            var gpiiToken = req.body.gpii_token;
+            if (!gpiiToken) {
+                res.send(400);
+                return;
+            }
+            var auth = that.authorizationService.getAccessTokenForOAuth2ClientIdAndGpiiToken(oauth2ClientId, gpiiToken);
+            if (!auth) {
+                res.send(404);
+                return;
+            }
+            res.json({
+                "access_token": auth.accessToken,
+                "token_type": "Bearer"
+            });
+        }
+    );
+
+    // TODO the /gpii_token endpoint was added to integrate Easit4All for the January 2015 review
+    // TODO it should be removed after the review GPII-1069
+    that.expressApp.get("/gpii_token",
+        function (req, res) {
+            var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+            if (!accessToken) {
+                res.send(401);
+                return;
+            }
+            var auth = that.authorizationService.getAuthForAccessToken(accessToken);
+            if (!auth) {
+                res.send(401);
+                return;
+            }
+            res.json({
+                "gpii_token": auth.userGpiiToken
+            });
+        }
+    );
+
 };

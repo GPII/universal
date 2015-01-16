@@ -1,7 +1,7 @@
 /*!
 GPII OAuth2 server
 
-Copyright 2014 OCAD University
+Copyright 2014-2015 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -69,7 +69,7 @@ var gpii = gpii || {};
                 args: ["{that}"]
             }
         },
-        availableAuthorizationsURL: "src/shared/data/available-authorized-preferences.json",
+        availableAuthorizationsURL: "src/core/available-authorized-preferences/%clientID.json",
         selectionTreeTemplate: "src/components/selectionTree/html/SelectionTreeTemplate.html",
         modelListeners: {
             "availableAuthorizedPrefs": {
@@ -82,9 +82,8 @@ var gpii = gpii || {};
         },
         invokers: {
             fetchAvailableAuthorizedPrefs: {
-                "this": "$",
-                "method": "ajax",
-                args: ["{that}.options.availableAuthorizationsURL", {
+                funcName: "gpii.oauth2.ajax",
+                args: ["{that}.options.availableAuthorizationsURL", "{that}.model", {
                     //TODO: Handle errors
                     dataType: "json",
                     success: "{that}.setAvailableAuthorizedPrefs"
@@ -95,7 +94,7 @@ var gpii = gpii || {};
                 value: "{arguments}.0"
             },
             setAllowState: {
-                "funcName": "gpii.oauth2.authorization.setDisabled",
+                "funcName": "gpii.oauth2.setDisabled",
                 "args": ["{that}.dom.allow", "{arguments}.0"]
             }
         },
@@ -138,11 +137,6 @@ var gpii = gpii || {};
 
     gpii.oauth2.authorization.setSelection = function (input, selectionModel) {
         input.val(JSON.stringify(selectionModel));
-    };
-
-    gpii.oauth2.authorization.setDisabled = function (elm, state) {
-        var hasSelection = state && state !== "unchecked";
-        elm.prop("disabled", !hasSelection);
     };
 
 })(jQuery, fluid);

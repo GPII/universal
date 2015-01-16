@@ -116,13 +116,9 @@ var gpii = gpii || {};
                 args: ["close"]
             },
             fetchDecisionPrefs: {
-                "this": "$",
-                "method": "ajax",
-                args: [{
-                    expander: {
-                        funcName: "{that}.composeRequestURL",
-                        args: ["{that}.options.requestInfos.fetchDecisionPrefs.url"]
-                    }
+                funcName: "gpii.oauth2.ajax",
+                args: ["{that}.options.requestInfos.fetchDecisionPrefs.url", {
+                    authDecisionId: "{that}.model.clientData.authDecisionId"
                 }, {
                     type: "{that}.options.requestInfos.fetchDecisionPrefs.type",
                     dataType: "json",
@@ -130,13 +126,9 @@ var gpii = gpii || {};
                 }]
             },
             saveDecisionPrefs: {
-                "this": "$",
-                "method": "ajax",
-                args: [{
-                    expander: {
-                        funcName: "{that}.composeRequestURL",
-                        args: ["{that}.options.requestInfos.saveDecisionPrefs.url"]
-                    }
+                funcName: "gpii.oauth2.ajax",
+                args: ["{that}.options.requestInfos.saveDecisionPrefs.url", {
+                    authDecisionId: "{that}.model.clientData.authDecisionId"
                 }, {
                     type: "{that}.options.requestInfos.saveDecisionPrefs.type",
                     dataType: "json",
@@ -144,15 +136,21 @@ var gpii = gpii || {};
                     data: {
                         expander: {
                             funcName: "JSON.stringify",
-                            args: ["{that}.selectedPrefs"]
+                            args: [{
+                                expander: {
+                                    func: "{selectionTree}.toServerModel",
+                                    args: "{selectionTree}.model"
+                                }
+                            }]
                         }
                     }
                 }]
             },
             fetchAvailableAuthorizedPrefs: {
-                "this": "$",
-                "method": "ajax",
+                funcName: "gpii.oauth2.ajax",
                 args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
+                    clientID: "{that}.model.clientData.oauth2ClientId"
+                }, {
                     //TODO: Handle errors
                     dataType: "json",
                     success: "{that}.setAvailableAuthorizedPrefs"
@@ -176,12 +174,8 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
                 args: ["{that}"]
             },
-            setSelectedPrefs: {
-                funcName: "fluid.set",
-                args: ["{that}", "selectedPrefs", "{arguments}.0"]
-            },
             setDoneState: {
-                "funcName": "gpii.oauth2.editPrivacySettings.setDisabled",
+                "funcName": "gpii.oauth2.setDisabled",
                 "args": ["{that}.dom.done", "{arguments}.0"]
             }
         },
@@ -220,14 +214,6 @@ var gpii = gpii || {};
                         }
                     },
                     modelListeners: {
-                        "": {
-                            listener: "{editPrivacySettings}.setSelectedPrefs",
-                            args: [{
-                                expander: {
-                                    func: "{that}.toServerModel"
-                                }
-                            }]
-                        },
                         "value": {
                             listener: "{editPrivacySettings}.setDoneState",
                             args: ["{change}.value"]
@@ -250,11 +236,6 @@ var gpii = gpii || {};
     gpii.oauth2.editPrivacySettings.savePrefsAndExit = function (that) {
         that.saveDecisionPrefs();
         that.closeDialog();
-    };
-
-    gpii.oauth2.editPrivacySettings.setDisabled = function (elm, state) {
-        var hasSelection = state && state !== "unchecked";
-        elm.prop("disabled", !hasSelection);
     };
 
 })(jQuery, fluid);
