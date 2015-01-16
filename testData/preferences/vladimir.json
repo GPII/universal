@@ -68,6 +68,7 @@
                 "conditions": [
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
+                        "max": 400000,
                         "min": 400,
                         "inputPath": "http://registry\\.gpii\\.net/common/environment/visual\\.luminance"
                     }
