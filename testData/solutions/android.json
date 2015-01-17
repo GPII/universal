@@ -596,5 +596,141 @@
                 }
             }
         ]
+    },
+
+    "com.socialnmobile.dictapps.notepad.color.note": {
+        "name": "Color Note",
+	"contexts": {
+	    "OS": [
+	        {
+	            "id": "android",
+	            "version": ">=0.1"
+	        }
+	    ]
+	},
+	"settingsHandlers": [
+	    {
+	        "type": "gpii.settingsHandlers.XMLHandler.set",
+	        "options": {
+	            "filename": "/data/data/com.socialnmobile.dictapps.notepad.color.note/shared_prefs/com.socialnmobile.dictapps.notepad.color.note_preferences.xml",
+	            "encoding": "utf-8",
+	            "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
+	            "rules": {
+	                "map": "map",
+	                "map.string": {
+	                    "transform": {
+	                        "type": "fluid.transforms.arrayToObject",
+	                        "inputPath": "map.string",
+	                        "key": "name"
+	                    }
+	                }
+	            }
+	        },
+	        "capabilities": [
+	            "applications.com\\.socialnmobile\\.dictapps\\.notepad\\.color\\.note.id"
+	        ],
+	        "capabilitiesTransformations": {
+	            "map\\.string\\.PREF_THEME\\.$t": {
+	                "transform": {
+	                    "type": "fluid.transforms.condition",
+	                    "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+	                    "true": "COLORTABLE/DARK",
+	                    "truePath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+	                    "false": "none"
+	                }
+	            }
+	        }
+	    }
+	],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.androidActivityManager.startActivityByPackageName",
+                    "packageName": "com.socialnmobile.dictapps.notepad.color.note"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                    "packageName": "com.socialnmobile.dictapps.notepad.color.note"
+                },
+                "restoreSettings",
+                {
+                    "type": "gpii.androidActivityManager.goToHomeScreen"
+                }
+            ]
+        }
+    },
+
+    "com.android.browser": {
+        "name": "Android Browser",
+        "contexts": {
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler.set",
+                "options": {
+                    "filename": "/data/data/com.android.browser/shared_prefs/com.android.browser_preferences.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
+                    "rules": {
+                        "map": "map",
+                        "map.boolean": {
+                            "transform": {
+                                "type": "fluid.transforms.arrayToObject",
+                                "inputPath": "map.boolean",
+                                "key": "name",
+                                "innerValue": [{
+                                    "transform": {
+                                        "type":"fluid.transforms.value",
+                                        "inputPath": "value"
+                                    }
+                                }]
+                            }
+                        },
+                        "map.int": {
+                            "transform": {
+                                "type": "fluid.transforms.arrayToObject",
+                                "inputPath": "map.int",
+                                "key": "name",
+                                "innerValue": [{
+                                    "transform": {
+                                        "type":"fluid.transforms.value",
+                                        "inputPath": "value"
+                                    }
+                                }]
+                            }
+                        }
+                    }
+                },
+                "capabilities": [
+                    "applications.com\\.android\\.browser.id"
+                ]
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.androidActivityManager.startActivityByPackageName",
+                    "packageName": "com.android.browser"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                    "packageName": "com.android.browser"
+                },
+                "restoreSettings",
+                {
+                    "type": "gpii.androidActivityManager.goToHomeScreen"
+                }
+            ]
+        }
     }
 }
