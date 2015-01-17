@@ -785,7 +785,7 @@
         }
     },
 
-    "webinsight.webAnywhere.windows": {
+   "webinsight.webAnywhere": {
         "name": "Web Anywhere",
         "contexts": {
             "OS": [
@@ -800,23 +800,30 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
-                    "applications.webinsight\\.webAnywhere\\.windows.id",
-                    "display.screenReader.applications.webinsight\\.webAnywhere\\.windows.name"
-                ]
+                    "applications.webinsight\\.webAnywhere.id"
+                ],
+                "capabilitiesTransformations": {
+                    "locale": "http://registry\\.gpii\\.net/common/language",
+                    "voicepitch": "http://registry\\.gpii\\.net/common/pitch",
+                    "voicespeed": "http://registry\\.gpii\\.net/common/speechRate"
+                }
             }
         ],
         "lifecycleManager" : {
              "start": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
+                    "type": "gpii.launch.browser",
+                    "URL": "http://webanywhere.cs.washington.edu/beta/",
+                    "parameters": {
+                        "locale": "${{settings.webinsight.webAnywhere.locale}}",
+                        "voicepitch": "${{settings.webinsight.webAnywhere.voicepitch}}",
+                        "voicespeed": "${{settings.webinsight.webAnywhere.voicespeed}}"
+
+
+                    }
                 }
             ],
             "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
-                }
             ]
         }
     },
@@ -1344,79 +1351,79 @@
     },
 
     "com.yourdolphin.supernova-as": {
-       "name": "Supernova Access Suite",
-       "contexts": {
-           "OS": [
+        "name": "Supernova Access Suite",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\dolphin\\snova-as.ini",
+                    "allowNumberSignComments": true,
+                    "allowSubSections": true
+                },
+                "capabilities": [
+                    "applications.com\\.yourdolphin\\.supernova-as",
+                    "display.screenReader.applications.com\\.yourdolphin\\.supernova-as"
+                ],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled": {
+                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                    },
+                    "speechRate": {
+                        "value": "http://registry\\.gpii\\.net/common/speechRate"
+                    },
+                    "keyEcho": {
+                        "value": "http://registry\\.gpii\\.net/common/keyEcho"
+                    },
+                    "wordEcho": {
+                        "value": "http://registry\\.gpii\\.net/common/wordEcho"
+                    },
+                    "announceCapitals": {
+                        "value": "http://registry\\.gpii\\.net/common/announceCapitals"
+                    },
+                    "punctuationVerbosity": {
+                        "value": "http://registry\\.gpii\\.net/common/punctuationVerbosity"
+                    },
+                    "screenReaderBrailleOutput": {
+                        "value": "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput"
+                    },
+                    "magnifierEnabled": {
+                        "value": "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                    },
+                    "magnification": {
+                        "value": "http://registry\\.gpii\\.net/common/magnification"
+                    },
+                    "magnifierPosition": {
+                        "value": "http://registry\\.gpii\\.net/common/magnifierPosition"
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\enLogic\\InstallPath}\\snconf.exe\" /s"
+                }
+            ],
+            "stop": [
                {
-                   "id": "win32",
-                   "version": ">=5.0"
-               }
-           ]
-       },
-       "settingsHandlers": [
-           {
-               "type": "gpii.settingsHandlers.INISettingsHandler",
-               "options": {
-                   "filename": "${{environment}.APPDATA}\\dolphin\\snova-as.ini",
-                   "allowNumberSignComments": true,
-                   "allowSubSections": true
-               },
-               "capabilities": [
-                   "applications.com\\.yourdolphin\\.supernova-as",
-                   "display.screenReader.applications.com\\.yourdolphin\\.supernova-as"
-               ],
-               "capabilitiesTransformations": {
-                   "screenReaderTTSEnabled": {
-                       "value": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                   },
-                   "speechRate": {
-                       "value": "http://registry\\.gpii\\.net/common/speechRate"
-                   },
-                   "keyEcho": {
-                       "value": "http://registry\\.gpii\\.net/common/keyEcho"
-                   },
-                   "wordEcho": {
-                       "value": "http://registry\\.gpii\\.net/common/wordEcho"
-                   },
-                   "announceCapitals": {
-                       "value": "http://registry\\.gpii\\.net/common/announceCapitals"
-                   },
-                   "punctuationVerbosity": {
-                       "value": "http://registry\\.gpii\\.net/common/punctuationVerbosity"
-                   },
-                   "screenReaderBrailleOutput": {
-                       "value": "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput"
-                   },
-                   "magnifierEnabled": {
-                       "value": "http://registry\\.gpii\\.net/common/magnifierEnabled"
-                   },
-                   "magnification": {
-                       "value": "http://registry\\.gpii\\.net/common/magnification"
-                   },
-                   "magnifierPosition": {
-                       "value": "http://registry\\.gpii\\.net/common/magnifierPosition"
-                   }
-               }
-           }
-       ],
-       "lifecycleManager": {
-           "start": [
-               "setSettings",
-               {
-                   "type": "gpii.launch.exec",
-                   "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\enLogic\\InstallPath}\\snconf.exe\" /s"
-               }
-           ],
-           "stop": [
-              {
-                   "type": "gpii.launch.exec",
-                   "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\enLogic\\InstallPath}\\snconf.exe\" /q"
-               },
-               "restoreSettings"
-           ]
-       }
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\enLogic\\InstallPath}\\snconf.exe\" /q"
+                },
+                "restoreSettings"
+            ]
+        }
     },
-	
+
     "org.chrome.cloud4chrome": {
         "name": "Cloud4all Chrome extension",
         "contexts": {

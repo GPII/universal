@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/language": "es",
+                    "http://registry.gpii.net/common/pitch": 0.4,
+                    "http://registry.gpii.net/common/speechRate": 160
+                }
+            }
+        }
+    }
+}
