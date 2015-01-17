@@ -25,9 +25,9 @@
         {
             "id": "com.android.settings.secure"
         },
-		{
-			"id": "com.technosite.smarttwitter"
-		}
-	
+        {
+            "id": "com.technosite.smarttwitter"
+        }
+    
     ]
 }

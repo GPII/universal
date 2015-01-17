@@ -560,7 +560,7 @@
                             "key": "name"
                         }
                     },
-					"map.boolean": {
+                    "map.boolean": {
                         "transform": {
                             "type": "fluid.transforms.arrayToObject",
                             "inputPath": "map.boolean",
@@ -573,29 +573,55 @@
                 "applications.com\\.technosite\\.smarttwitter.id"
             ],
             "capabilitiesTransformations": {
-                 "transform": {
-					"type": "fluid.transforms.literalValue",
-					"outputPath": "map",
-					"value": {
-						"boolean": {
-							"prefTTS": {
-								"value": "false"
-							},
-							"pref_mode_notification": {
-								"value": "false"
-							},
-							"pref_change_theme": {
-								"value": "false"
-							},
-							"pref_change_tam": {
-								"value": "false"
-							},
-							"prefShake": {
-								"value": "false"
-							}
-						}
-					}
-				}
+                "transform": [
+                    {
+                        "type": "fluid.transforms.literalValue",
+                        "outputPath": "map",
+                        "value": {
+                            "boolean": {
+                                "prefTTS": {
+                                    "value": "false"
+                                },
+                                "pref_mode_notification": {
+                                    "value": "false"
+                                },
+                                "pref_change_theme": {
+                                    "value": "false"
+                                },
+                                "pref_change_tam": {
+                                    "value": "true"
+                                },
+                                "prefShake": {
+                                    "value": "true"
+                                }
+                            },
+                            "string": {
+                                "pref_notification": {
+                                    "$t": "3"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "gpii.transformer.quantize",
+                        "outputPath": "map.string.pref_tam_font.$t",
+                        "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                        "input": 12,
+                        "ranges": [
+                            {
+                                "upperBound": 11,
+                                "output": "Media"
+                            },
+                            {
+                                "upperBound": 18,
+                                "output": "Grande"
+                            },
+                            {
+                                "output": "Enorme"
+                            }
+                        ]
+                    }
+                ]
             }
         }
         ],
@@ -612,10 +638,10 @@
                 "type": "gpii.androidActivityManager.stopActivityByPackageName",
                 "packageName": "com.technosite.twitter"
             },
-			"restoreSettings",
-			{
-					"type": "gpii.androidActivityManager.goToHomeScreen"
-			}
+            "restoreSettings",
+            {
+                    "type": "gpii.androidActivityManager.goToHomeScreen"
+            }
         ]
         }
     },
