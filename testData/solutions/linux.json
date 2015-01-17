@@ -1268,7 +1268,7 @@
         }
     },
 
-    "webinsight.webAnywhere.linux": {
+   "webinsight.webAnywhere": {
         "name": "Web Anywhere",
         "contexts": {
             "OS": [
@@ -1283,26 +1283,34 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
-                    "applications.webinsight\\.webAnywhere\\.linux.id",
-                    "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
-                ]
+                    "applications.webinsight\\.webAnywhere.id"
+                ],
+                "capabilitiesTransformations": {
+                    "locale": "http://registry\\.gpii\\.net/common/language",
+                    "voicepitch": "http://registry\\.gpii\\.net/common/pitch",
+                    "voicespeed": "http://registry\\.gpii\\.net/common/speechRate"
+                }
             }
         ],
         "lifecycleManager" : {
-            "start": [
+             "start": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
+                    "type": "gpii.launch.browser",
+                    "URL": "http://webanywhere.cs.washington.edu/beta/",
+                    "parameters": {
+                        "locale": "${{settings.webinsight.webAnywhere.locale}}",
+                        "voicepitch": "${{settings.webinsight.webAnywhere.voicepitch}}",
+                        "voicespeed": "${{settings.webinsight.webAnywhere.voicespeed}}"
+
+
+                    }
                 }
             ],
             "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
             ]
         }
     },
+
     "org.freedesktop.xrandr": {
         "name": "Xrandr",
         "contexts": {
