@@ -1,6 +1,6 @@
 ## FlowManager
 
-The flowmanager is the component in the system that is largely responsible for managing the flow. For example, the steps involved in logging in requires retrieving preferences, solutions, device data, etc. and passing this to the [MatchMaker Framework](MatchMakerFramework.md). And following that sending this via the [Context Manager](ContextManager.md) and then to the [Lifecycle Manager](LifecycleManager.md).
+The flowmanager is the component in the system that is largely responsible for managing the flow. For example, the steps involved in logging in requires retrieving preferences, solutions, device data, etc. and passing this to the [MatchMaker Framework](MatchMakerFramework.md). And following that sending this via the [Context Manager](ContextManager.md) and then to the Lifecycle Manager.
 
 ###Important flows
 Depending on what the usage of the system is, there flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different. Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerUtitilies.js`. The different kinds of flows are:
