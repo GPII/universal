@@ -296,6 +296,22 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
     app.set("view engine", "handlebars");
 };
 
+gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
+    var authorizedClients = authorizationService.getAuthorizedClientsForUser(user.id);
+    // Build view objects
+    var services = fluid.transform(authorizedClients, function  (client) {
+        return {
+            authDecisionId: client.authDecisionId,
+            oauth2ClientId: client.oauth2ClientId,
+            serviceName: client.clientName
+        };
+    });
+    return {
+        user: user,
+        authorizedServices: services
+    };
+};
+
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
 
     that.expressApp.get("/login",
@@ -372,17 +388,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
-            var authorizedClients = that.authorizationService.getAuthorizedClientsForUser(req.user.id);
-            // Build view objects
-            var services = [];
-            authorizedClients.forEach(function (client) {
-                services.push({
-                    authDecisionId: client.authDecisionId,
-                    oauth2ClientId: client.oauth2ClientId,
-                    serviceName: client.clientName
-                });
-            });
-            res.render("privacy", { user: req.user, authorizedServices: services });
+            var authorizedServicesPayload = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
+            res.render("privacy", authorizedServicesPayload);
         }
     );
     that.expressApp.post("/remove_authorization",
@@ -411,6 +418,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // TODO: Perhaps a better URL would be /authorization/:authDecisionId/selectedPreferences
     that.expressApp.get("/authorizations/:authDecisionId/preferences",
         that.sessionMiddleware,
         that.passportMiddleware,
@@ -448,23 +456,28 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
     );
-
+    
+    // TODO: This API is an exact workalike of /authorized-services, only it returns the
+    // JSON payload directly rather than baking it into the markup. Currently this is used
+    // only in our cloud-based acceptance tests. In future, when this view is refactored, this
+    // API will become the main one and the /authorized-services impl will be removed.
+    that.expressApp.get("/authorized-services-payload",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            var authorizedServicesPayload = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
+            res.json(authorizedServicesPayload);
+        }
+    );
+    
     that.expressApp.get("/authorized-services",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
-            var authorizedClients = that.authorizationService.getAuthorizedClientsForUser(req.user.id);
-            // Build view objects
-            var services = [];
-            authorizedClients.forEach(function (client) {
-                services.push({
-                    authDecisionId: client.authDecisionId,
-                    oauth2ClientId: client.oauth2ClientId,
-                    serviceName: client.clientName
-                });
-            });
-            res.render("privacySettings", { user: req.user, authorizedServices: services });
+            var authorizedServicesPayload = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
+            res.render("privacySettings", authorizedServicesPayload);
         }
     );
 
