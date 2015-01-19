@@ -1,4 +1,4 @@
-FROM inclusivedesign/nodejs:0.10.33
+FROM inclusivedesign/nodejs
  
 RUN yum -y install git && \
 yum clean all
