@@ -10,11 +10,16 @@
                     "http://registry.gpii.net/common/mouseTrailing": 5,
                     "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
                     "http://registry.gpii.net/common/speechRate": 300,
-                    "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
+                    "http://registry.gpii.net/common/language": "en",
+					"http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "fontSize": "medium",
                         "highContrastEnabled": true
                     },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                    "http://registry.gpii.net/applications/de.fraunhofer.iao.C4A-TVM": {
+                        "buttonSize": "big",
+                        "fontSize": "big"
+                    },
+					"http://registry.gpii.net/common/matchMakerType": "RuleBased"
                 },
                 "metadata": [
                     {
