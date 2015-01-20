@@ -586,7 +586,7 @@
                                     "value": "false"
                                 },
                                 "pref_change_theme": {
-                                    "value": "false"
+                                    "value": "true"
                                 },
                                 "pref_change_tam": {
                                     "value": "true"
@@ -620,6 +620,13 @@
                                 "output": "Enorme"
                             }
                         ]
+                    },
+                    {
+                        "type" : "fluid.transforms.condition",
+                        "outputPath" : "map.string.pref_theme.$t",
+                        "conditionPath" : "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                        "true" : "Negro",
+                        "false" : "Blanco"
                     }
                 ]
             }
