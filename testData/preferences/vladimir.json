@@ -14,7 +14,8 @@
                     "http://registry.gpii.net/common/readingUnit": "sentence",
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "fontSize": "medium",
-                        "highContrastEnabled": true
+                        "highContrastEnabled": true,
+                        "highContrastTheme": "white-black"
                     },
                     "http://registry.gpii.net/common/matchMakerType": "RuleBased"
                 },
