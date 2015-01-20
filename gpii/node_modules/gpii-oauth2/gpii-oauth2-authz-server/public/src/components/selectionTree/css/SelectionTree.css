@@ -19,6 +19,7 @@
 .gpii-oauth2-selectionTree li > ul label {
     padding-left: 0.5rem;
     display: inline;
+    white-space: nowrap
 }
 
 .gpii-oauth2-selectionTree li > ul li {
