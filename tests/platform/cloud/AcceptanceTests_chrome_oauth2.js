@@ -42,13 +42,31 @@ fluid.defaults("gpii.tests.cloud.oauth2.authorizationRequests", {
         putAuthorizationRequest: {
             type: "kettle.test.request.httpCookie",
             options: {
-                // path: "/authorizations/%authorizationId/preferences", // currently cannot be dynamically templated
+                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
                 method: "PUT"
             }
         },
         getAuthorizationRequest2: {
             type: "kettle.test.request.httpCookie"
-                // path: "/authorizations/%authorizationId/preferences", // currently cannot be dynamically templated
+                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+        }
+    }
+});
+
+fluid.defaults("gpii.tests.cloud.oauth2.revocationRequests", {
+    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    updatedSelectedPreferences: {},
+    components: {
+        revocationRequest: {
+            type: "kettle.test.request.httpCookie",
+            options: {
+                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+                method: "DELETE"
+            }
+        },
+        getAuthorizationRequest2: {
+            type: "kettle.test.request.httpCookie"
+                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
         }
     }
 });
@@ -134,6 +152,38 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
     ]
 });
 
+fluid.defaults("gpii.tests.cloud.oauth2.disruptWithRevocation", {
+    gradeNames: ["gpii.tests.disruption"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.revocationRequests",
+    truncateAt: 15,
+    insertAt: 14,
+    expect: 20,
+    insertRecords: [{
+        funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
+        args: ["{revocationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
+            null , "{testCaseHolder}.options.updatedSelectedPreferences"]
+    }, {
+        event: "{revocationRequest}.events.onComplete",
+        listener: "fluid.identity"
+    }, {
+        funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
+            "/preferences"]
+    }, {
+        event: "{getAuthorizationRequest2}.events.onComplete",
+        listener: "gpii.test.verifyStatusCodeResponse",
+        args: ["{arguments}.0", "{getAuthorizationRequest2}", 404]
+    }, {
+        funcName: "gpii.test.cloudBased.oauth2.sendSecuredSettingsRequest",
+        args: ["{securedSettingsRequest}", "{accessTokenRequest}"]
+    }, { // TODO: We should have a method of rescuing this duplicated material from gpii.tests.cloud.oauth2.disruptSettingsRequest
+        event: "{securedSettingsRequest}.events.onComplete",
+        listener: "gpii.test.verifyStatusCodeResponse",
+        args: ["{arguments}.0", "{securedSettingsRequest}", 401]
+    }
+    ]
+});
+
 gpii.tests.cloud.oauth2.chrome.disruptions = [{
     name: "Access secured settings with false token",
     gradeName: "gpii.tests.cloud.oauth2.disruptSettingsRequest"
@@ -210,10 +260,13 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
     expected: {
         "org.chrome.cloud4chrome": {}
     }
+}, {
+    name: "Test ability to revoke an authorization decision",
+    gradeName: "gpii.tests.cloud.oauth2.disruptWithRevocation"
 }
 ];
 
-gpii.test.cloudBased.oauth2.bootstrap(gpii.tests.cloud.chrome.testDefs, gpii.tests.cloud.oauth2.chrome.common, __dirname);
+// gpii.test.cloudBased.oauth2.bootstrap(gpii.tests.cloud.chrome.testDefs, gpii.tests.cloud.oauth2.chrome.common, __dirname);
 
 // Test 1 is the first with nonempty preference set
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(gpii.tests.cloud.chrome.testDefs[1], gpii.tests.cloud.oauth2.chrome.common,

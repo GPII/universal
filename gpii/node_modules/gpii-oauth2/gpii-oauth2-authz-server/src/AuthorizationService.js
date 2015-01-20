@@ -108,7 +108,7 @@ gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStor
 
 gpii.oauth2.authorizationService.getSelectedPreferences = function (dataStore, userId, authDecisionId) {
     var authDecision = dataStore.findAuthDecisionById(authDecisionId);
-    if (authDecision && authDecision.userId === userId) {
+    if (authDecision && authDecision.userId === userId && !authDecision.revoked) {
         return authDecision.selectedPreferences;
     } else {
         // TODO or throw an exception?
