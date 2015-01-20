@@ -38,6 +38,7 @@ body.gpii-oauth2 {
     display: flex;
     -webkit-align-items: center;
     align-items: center;
+    min-height: 30rem;
 }
 
 .gpii-oauth2 .gpii-ouath2-inset {
