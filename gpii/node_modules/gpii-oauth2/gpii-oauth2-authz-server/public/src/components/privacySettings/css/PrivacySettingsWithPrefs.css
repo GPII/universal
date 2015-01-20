@@ -27,19 +27,24 @@
     background-color: transparent;
 }
 
-.gpii-oauth2-privacySettings button .gpii-icon {
+.gpii-oauth2 .gpii-oauth2-privacySettings button .gpii-icon {
     border: 2px solid #3D3F4C;
     border-radius: 50%;
     font-size: 0.7rem;
     text-align: center;
 }
 
-.gpii-oauth2-privacySettings button:hover .gpii-icon {
+.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-edit .gpii-icon {
+    border: none;
+    font-size: 1rem;
+}
+
+.gpii-oauth2 .gpii-oauth2-privacySettings button:hover .gpii-icon {
     background-color: #3D3F4C;
     color: #FFFFFF;
 }
 
-.gpii-oauth2-privacySettings button {
+.gpii-oauth2 .gpii-oauth2-privacySettings button {
     margin: 0;
     padding: 0 0.5rem;
     background-color: transparent;
