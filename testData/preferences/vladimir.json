@@ -4,65 +4,23 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": true,
-                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
-                    "http://registry.gpii.net/common/cursorSize": 0.5,
-                    "http://registry.gpii.net/common/mouseTrailing": 5,
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
-                    "http://registry.gpii.net/common/speechRate": 300,
-                    "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
-                        "fontSize": "medium",
-                        "highContrastEnabled": true
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
-                },
-                "metadata": [
-                    {
-                        "type": "required",
-                        "scope": [
-                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
-                        ],
-                        "value": 1024
-                    },
-                    {
-                        "type": "priority",
-                        "scope": [
-                            "http://registry.gpii.net/applications/com.freedomScientific.jaws"
-                        ],
-                        "value": 1024
-                    }
-                ]
+                      "http://registry.gpii.net/applications/com.technosite.smarttwitter": { },
+                      "http://registry.gpii.net/common/fontSize" : 48,
+                      "http://registry.gpii.net/common/highContrastEnabled" : true
+                }
             },
-            "subway": {
-                "name": "subway",
+			"bright": {
+                "name": "bright",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": true,
-                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
-                    "http://registry.gpii.net/common/cursorSize": 0.5,
-                    "http://registry.gpii.net/common/mouseTrailing": 5,
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
-                    "http://registry.gpii.net/common/speechRate": 300,
-                    "http://registry.gpii.net/common/volumeTTS": 0.9,
-                    "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
-                        "fontSize": "medium",
-                        "highContrastEnabled": true
-                    },
-                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                      "http://registry.gpii.net/applications/com.technosite.smarttwitter": { },
+                      "http://registry.gpii.net/common/fontSize" : 48,
+                      "http://registry.gpii.net/common/highContrastEnabled" : false
                 },
                 "metadata": [
-                    {
+                   {
                         "type": "required",
-                        "scope": [
-                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
-                        ],
-                        "value": 1024
-                    },
-                    {
-                        "type": "priority",
-                        "scope": [
-                            "http://registry.gpii.net/applications/com.freedomScientific.jaws"
-                        ],
-                        "value": 1024
+                        "scope": ["http://registry.gpii.net/common/fontSize"],
+                        "value": 100
                     }
                 ],
                 "conditions": [
