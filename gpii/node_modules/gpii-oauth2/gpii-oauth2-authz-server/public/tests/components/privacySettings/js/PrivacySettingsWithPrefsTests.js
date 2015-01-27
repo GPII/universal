@@ -20,8 +20,8 @@ https://github.com/gpii/universal/LICENSE.txt
 
         fluid.registerNamespace("gpii.tests");
 
-        fluid.defaults("gpii.tests.oauth2.privacySettings", {
-            gradeNames: ["gpii.oauth2.privacySettings", "autoInit"],
+        fluid.defaults("gpii.tests.oauth2.privacySettingsWithPrefs", {
+            gradeNames: ["gpii.oauth2.privacySettingsWithPrefs", "autoInit"],
             model: {
                 user: "testUser"
             }
@@ -35,13 +35,13 @@ https://github.com/gpii/universal/LICENSE.txt
         };
 
         var assertRendering = function (that) {
-            assertRenderedText(that, that.options.strings, ["logout", "header", "directions", "removeServiceLabel"], "text");
+            assertRenderedText(that, that.options.strings, ["logout", "header", "directions"], "text");
             assertRenderedText(that, that.model, ["user"], "text");
             assertRenderedText(that, that.options.strings, ["description"], "html");
         };
 
         jqUnit.test("Initialization", function () {
-            gpii.tests.oauth2.privacySettings(".gpiic-oauth2-privacySettings", {
+            gpii.tests.oauth2.privacySettingsWithPrefs(".gpiic-oauth2-privacySettings", {
                 listeners: {
                     afterRender: assertRendering
                 }

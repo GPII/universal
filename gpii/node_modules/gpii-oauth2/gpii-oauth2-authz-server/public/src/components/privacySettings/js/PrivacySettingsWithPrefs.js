@@ -19,7 +19,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.privacySettingsWithPrefs", {
-        gradeNames: ["gpii.oauth2.privacySettings","autoInit"],
+        gradeNames: ["fluid.rendererRelayComponent","autoInit"],
         members: {
             dialogForRemoval: {
                 expander: {
@@ -59,6 +59,12 @@ var gpii = gpii || {};
             }
         },
         selectors: {
+            user: ".gpiic-oauth2-privacySettings-user",
+            logout: ".gpiic-oauth2-privacySettings-logout",
+            header: ".gpiic-oauth2-privacySettings-header",
+            description: ".gpiic-oauth2-privacySettings-description",
+            directions: ".gpiic-oauth2-privacySettings-directions",
+            removeServiceLabel: ".gpiic-oauth2-privacySettings-removeServiceLabel",
             editButton: ".gpiic-oauth2-privacySettings-edit",
             removeButton: ".gpiic-oauth2-privacySettings-removeService",
             serviceName: "#gpiic-oauth2-privacySettings-serviceName",
@@ -75,6 +81,16 @@ var gpii = gpii || {};
         },
         selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog"],
         strings: {
+            logout: "Log Out",
+            header: "Privacy",
+            description: "<p>Services listed here will be able to access your " +
+                         "GPII preferences. For services which do not appear " +
+                         "in this list, you will be given the option to allow " +
+                         "or deny access when first encountering each service.</p>" +
+                         "<p>Services may include things like a social media web " +
+                         "application or an online banking website.</p>",
+            directions: "Allow the following services to access my preferences:",
+            removeServiceLabel: "remove",
             editLabel: "edit",
             removeLabel: "delete",
             removeDecisionContent: "Remove %serviceName from your list of allowed services?",

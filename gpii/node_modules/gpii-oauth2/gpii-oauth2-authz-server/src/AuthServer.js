@@ -307,7 +307,7 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
         };
     });
     return {
-        user: user,
+        username: user.username,
         authorizedServices: services
     };
 };
@@ -379,31 +379,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             }
         })
     );
-
-    // BEGIN OLD privacy page
-    // TODO once we are happy with the new /authorized-services page, remove the old privacy page
-    // TODO remove /OLD-privacy and /remove_authorization and associated templates and other files
-    that.expressApp.get("/OLD-privacy",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var authorizedServicesPayload = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
-            res.render("privacy", authorizedServicesPayload);
-        }
-    );
-    that.expressApp.post("/remove_authorization",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var userId = req.user.id;
-            var authDecisionId = parseInt(req.body.remove, 10);
-            that.authorizationService.revokeAuthorization(userId, authDecisionId);
-            res.redirect("/OLD-privacy");
-        }
-    );
-    // END OLD privacy page
 
     that.expressApp["delete"]("/authorizations/:authDecisionId",
         that.sessionMiddleware,
