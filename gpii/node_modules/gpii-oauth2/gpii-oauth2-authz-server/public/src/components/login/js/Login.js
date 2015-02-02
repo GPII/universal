@@ -11,7 +11,7 @@ https://github.com/gpii/universal/LICENSE.txt
 */
 
 // Declare dependencies
-/* global fluid, history */
+/* global fluid */
 
 var gpii = gpii || {};
 
@@ -29,7 +29,6 @@ var gpii = gpii || {};
             passwordInput: ".gpiic-oauth2-login-passwordInput",
             error: ".gpiic-oauth2-login-error",
             errorIcon: ".gpiic-oauth2-login-errorIcon",
-            cancel: ".gpiic-oauth2-login-cancel",
             submit: ".gpiic-oauth2-login-submit"
         },
         strings: {
@@ -38,7 +37,6 @@ var gpii = gpii || {};
             usernameLabel: "Enter email or username",
             passwordLabel: "Password",
             error: "Password and username do not match.",
-            cancel: "cancel",
             submit: "log in"
         },
         model: {
@@ -51,7 +49,6 @@ var gpii = gpii || {};
             usernameInput: {value: ""},
             passwordLabel: {messagekey: "passwordLabel"},
             passwordInput: {value: ""},
-            cancel: {messagekey: "cancel"},
             submit: {messagekey: "submit"},
             expander: {
                 type: "fluid.renderer.condition",
@@ -63,22 +60,8 @@ var gpii = gpii || {};
             }
         },
         renderOnInit: true,
-        invokers: {
-            cancel: "gpii.oauth2.login.cancel"
-        },
-        listeners: {
-            "afterRender.bindCancel": {
-                "this": "{that}.dom.cancel",
-                "method": "click",
-                "args": "{that}.cancel"
-            }
-        },
         modelListeners: {
             "loginFailure": "{that}.refreshView"
         }
     });
-
-    gpii.oauth2.login.cancel = function () {
-        history.back();
-    };
 })();

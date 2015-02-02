@@ -27,7 +27,7 @@ https://github.com/gpii/universal/LICENSE.txt
     });
 
     gpii.tests.oauth2.login.assertRendering = function (that) {
-        var keys = ["header", "instructions", "usernameLabel", "passwordLabel", "cancel"];
+        var keys = ["header", "instructions", "usernameLabel", "passwordLabel"];
 
         fluid.each(keys, function (key) {
             var str = that.options.strings[key];
@@ -79,7 +79,7 @@ https://github.com/gpii/universal/LICENSE.txt
             name: "Login tests",
             tests: [{
                 name: "Rendering",
-                expect: 20,
+                expect: 18,
                 sequence: [{
                     func: "{login}.refreshView"
                 }, {
