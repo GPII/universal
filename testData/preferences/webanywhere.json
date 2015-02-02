@@ -1,0 +1,16 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/webinsight.webAnywhere": {
+                        "locale": "en",
+                        "voicepitch": 12,
+                        "voicespeed": 400
+                    }
+                }
+            }
+        }
+    }
+}
