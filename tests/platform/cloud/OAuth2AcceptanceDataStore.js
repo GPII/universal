@@ -16,7 +16,8 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
     gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
     model: {
         users: [ // this model is rewritten on startup to hold the token of the fixture's current user
-            { id: 1, username: "bob", password: "b", gpiiToken: "placeholder_token" }
+            { id: 1, username: "bob", password: "b", gpiiToken: "placeholder_token" },
+            { id: 2, username: "alice", password: "a", gpiiToken: "alice_gpii_token" }
         ],
         clients: [
             {
@@ -32,6 +33,18 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 oauth2ClientId: "com.bdigital.easit4all",
                 oauth2ClientSecret: "client_secret_easit4all",
                 redirectUri: "http://com.bdigital.easit4all/the-client%27s-uri/"
+            }
+        ],
+        authDecisionsIdSeq: 2,
+        authDecisions: [
+            {
+                id: 1,
+                userId: 2,
+                clientId: 2,
+                redirectUri: false,
+                accessToken: "alice_easit_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
             }
         ]
     }
