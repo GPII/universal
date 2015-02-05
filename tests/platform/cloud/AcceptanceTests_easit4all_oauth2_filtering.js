@@ -13,7 +13,9 @@ gpii.tests.cloud.oauth2.easit4all.common = {
     redirect_uri: "http://com.bdigital.easit4all/the-client%27s-uri/",
     state: "The Client's Other Unique State",
     username: "bob",
-    password: "b"
+    password: "b",
+    // TODO I think we want some indirection here
+    sequence: gpii.test.cloudBased.oauth2.mainSequence
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptFiltering", {

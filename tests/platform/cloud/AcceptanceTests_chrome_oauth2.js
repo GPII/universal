@@ -13,7 +13,9 @@ gpii.tests.cloud.oauth2.chrome.common = {
     redirect_uri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
     state: "The Client's Unique State",
     username: "bob",
-    password: "b"
+    password: "b",
+    // TODO I think we want some indirection here
+    sequence: gpii.test.cloudBased.oauth2.mainSequence
 };
 
 // A grade, applied to the testCaseHolder itself, to be used for testing whether
