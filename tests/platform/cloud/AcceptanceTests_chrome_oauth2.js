@@ -72,11 +72,11 @@ fluid.defaults("gpii.tests.cloud.oauth2.revocationRequests", {
 });
 
 
-// A set of grades derived from "gpii.tests.disruption.mainSequence" encoding disruptions of the
+// A set of grades derived from "gpii.test.disruption.mainSequence" encoding disruptions of the
 // OAuth conversation at four interception points
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptLoginRequest", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     truncateAt: 3,
     expect: 4,
     expectedStatusCode: 302,
@@ -89,7 +89,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptLoginRequest", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptDecisionRequest", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     truncateAt: 7,
     expect: 11,
     expectedStatusCode: 400,
@@ -102,7 +102,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptDecisionRequest", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptAccessToken", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     truncateAt: 9,
     expect: 14,
     expectedStatusCode: 401,
@@ -115,7 +115,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptAccessToken", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptSettingsRequest", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.falseTokenHolder",
     truncateAt: 15,
     expect: 1,
@@ -129,7 +129,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptSettingsRequest", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.authorizationRequests",
     insertAt: 14,
     expect: 22,
@@ -153,7 +153,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptWithRevocation", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.revocationRequests",
     truncateAt: 15,
     insertAt: 14,

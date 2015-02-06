@@ -97,7 +97,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
 });
 
 fluid.defaults("gpii.tests.disruption.privacySettingsSequence", {
-    gradeNames: ["gpii.tests.disruption"],
+    gradeNames: ["gpii.test.disruption"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.privacySettingsRequests",
     sequenceName: "gpii.tests.cloud.oauth2.privacySettings.sequence"
 });

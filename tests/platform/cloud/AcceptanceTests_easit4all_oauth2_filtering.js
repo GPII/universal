@@ -17,7 +17,7 @@ gpii.tests.cloud.oauth2.easit4all.common = {
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.disruptFiltering", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+    gradeNames: ["gpii.test.disruption.mainSequence"],
     recordName: "decisionRequestForm",
     changes: {
         path: ["selectedPreferences", ""],
