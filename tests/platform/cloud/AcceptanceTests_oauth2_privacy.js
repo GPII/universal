@@ -57,9 +57,7 @@ gpii.tests.cloud.oauth2.privacy.testDefs = [
         password: "a",
         expectedPrivacySettingsContents: [
             "Easit4all"
-        ],
-        // TODO I think we want some indirection here
-        sequence: gpii.tests.cloud.oauth2.privacy.sequence
+        ]
     }
 ];
 
@@ -98,13 +96,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
     }
 });
 
-fluid.defaults("gpii.tests.cloud.oauth2.noDisruption", {
+fluid.defaults("gpii.tests.disruption.privacySettingsSequence", {
     gradeNames: ["gpii.tests.disruption"],
-    testCaseGradeNames: "gpii.tests.cloud.oauth2.privacySettingsRequests"
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.privacySettingsRequests",
+    sequenceName: "gpii.tests.cloud.oauth2.privacy.sequence"
 });
 
 gpii.tests.cloud.oauth2.privacy.disruptions = [{
-    gradeName: "gpii.tests.cloud.oauth2.noDisruption"
+    gradeName: "gpii.tests.disruption.privacySettingsSequence"
 }];
 
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
