@@ -67,7 +67,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
         privacySettingsRequest: {
             type: "kettle.test.request.httpCookie",
             options: {
-                path: "/authorized-services",
+                path: "/privacy-settings",
                 port: 8081
             }
         },
@@ -89,7 +89,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
         privacySettingsRequest3: {
             type: "kettle.test.request.httpCookie",
             options: {
-                path: "/authorized-services",
+                path: "/privacy-settings",
                 port: 8081
             }
         }
