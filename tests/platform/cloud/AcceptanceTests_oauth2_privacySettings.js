@@ -7,9 +7,9 @@ gpii.loadTestingSupport();
 
 require("./OAuth2AcceptanceDataStore.js");
 
-fluid.registerNamespace("gpii.tests.cloud.oauth2.privacy");
+fluid.registerNamespace("gpii.tests.cloud.oauth2.privacySettings");
 
-gpii.tests.cloud.oauth2.privacy.sequence = [
+gpii.tests.cloud.oauth2.privacySettings.sequence = [
     {
         func: "{privacySettingsRequest}.send"
     },
@@ -50,7 +50,7 @@ gpii.tests.cloud.oauth2.privacy.sequence = [
     }
 ];
 
-gpii.tests.cloud.oauth2.privacy.testDefs = [
+gpii.tests.cloud.oauth2.privacySettings.testDefs = [
     {
         name: "Acceptance test for Privacy Settings page with Easit4all authorization",
         username: "alice",
@@ -99,16 +99,16 @@ fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
 fluid.defaults("gpii.tests.disruption.privacySettingsSequence", {
     gradeNames: ["gpii.tests.disruption"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.privacySettingsRequests",
-    sequenceName: "gpii.tests.cloud.oauth2.privacy.sequence"
+    sequenceName: "gpii.tests.cloud.oauth2.privacySettings.sequence"
 });
 
-gpii.tests.cloud.oauth2.privacy.disruptions = [{
+gpii.tests.cloud.oauth2.privacySettings.disruptions = [{
     gradeName: "gpii.tests.disruption.privacySettingsSequence"
 }];
 
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.privacy.testDefs[0],
+    gpii.tests.cloud.oauth2.privacySettings.testDefs[0],
     {},
-    gpii.tests.cloud.oauth2.privacy.disruptions,
+    gpii.tests.cloud.oauth2.privacySettings.disruptions,
     __dirname
 );
