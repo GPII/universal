@@ -138,7 +138,7 @@ fluid.defaults("gpii.oauth2.authServer", {
                 args: ["{that}.passport.passport"]
             }
         },
-        homePage: "/authorized-services"
+        homePage: "/privacy-settings"
     },
     components: {
         oauth2orizeServer: {
@@ -435,11 +435,12 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         oauth2orizeServer.token()
     );
     
-    // TODO: This API is an exact workalike of /authorized-services, only it returns the
-    // JSON payload directly rather than baking it into the markup. Currently this is used
-    // only in our cloud-based acceptance tests. In future, when this view is refactored, this
-    // API will become the main one and the /authorized-services impl will be removed.
-    that.expressApp.get("/authorized-services-payload",
+    // TODO: This API is a workalike of /privacy-settings, only it returns the JSON
+    // payload directly rather than baking it into the markup. Currently this is used
+    // only in our cloud-based acceptance tests. In future, when /privacy-settings is
+    // refactored to use AJAX, this API will be used to retieve the services listed
+    // on the Privacy Settings page.
+    that.expressApp.get("/authorized-services",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
@@ -449,7 +450,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
     
-    that.expressApp.get("/authorized-services",
+    that.expressApp.get("/privacy-settings",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
