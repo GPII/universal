@@ -24,6 +24,10 @@
         },
         {
             "id": "com.android.settings.secure"
+        },
+        {
+            "id": "com.technosite.smarttwitter"
         }
+    
     ]
 }

@@ -4,8 +4,10 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/fontSize": 12,
-                    "http://registry.gpii.net/common/highContrastEnabled": false
+                    "http://registry.gpii.net/applications/se.omnitor.ecmobile": {
+                        "map\\.string\\.fontsize\\.$t": 18,
+                        "map\\.string\\.theme\\.$t": "yellow-black"
+                    }
                 }
             }
         }
