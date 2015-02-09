@@ -1,8 +1,5 @@
 [
     {
-        "id": "net.gpii.smarthouses"
-    },
-    {
         "id": "org.gnome.desktop.interface"
     },
 
@@ -76,14 +73,6 @@
 
     {
         "id": "webinsight.webAnywhere.linux"
-    },
-
-    {
-        "id": "com.texthelp.readWriteGold"
-    },
-
-    {
-        "id": "net.opendirective.maavis"
     },
 
     {

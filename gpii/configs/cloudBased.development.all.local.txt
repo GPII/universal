@@ -1,0 +1,19 @@
+cloudBased.development.all.local.json
+==========================
+
+This configuration runs the entire system as a cloudBased flowmanager, but with everything locally and in development mode.
+
+This mean that:
+* All storage is on the local filesystem (as opposed to couchDB servers/remote URLs)
+* The following components are running on the local machine:
+** flowManager
+** preferencesServer
+** OntologyHandler
+** rawPreferencesServer (reading preferences from file)
+** solutionsRegistry (reading registry from file)
+** flatMatchMaker
+** matchMakerFramework
+** lifecycleManager
+
+Notes on testing:
+This setup is used by the acceptance tests in universal testing the cloudBased applications. Since the acceptance tests might use slightly different paths for the tests (ie. a special folder for reading prefs and solutionsRegistry), what is actually being used for testing is a slight variation of this config - in other words, this configuration file is a basis for those tests but is in practice tested using slight modifications. For more details, see the txt files describing the configs in the acceptance tests folder.

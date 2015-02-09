@@ -1,7 +1,6 @@
-[
-    {
+{
+    "org.chrome.cloud4chrome": {
         "name": "Cloud4Chrome",
-        "id": "org.chrome.cloud4chrome",
         "contexts": {
             "OS": [
                 {
@@ -16,58 +15,57 @@
                     "applications.org\\.chrome\\.cloud4chrome.id"
                 ],
                 "capabilitiesTransformations": {
-                    "screenReaderTTSEnabled":"display.screenReader.-provisional-screenReaderTTSEnabled",
+                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
-                            "type":"gpii.transformer.quantize",
-                            "inputPath":"display.screenEnhancement.fontSize",
-                            "input":9,
-                            "ranges":[
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "input": 9,
+                            "ranges": [
                                 {
-                                    "upperBound":12,
-                                    "output":"medium"
+                                    "upperBound": 12,
+                                    "output": "medium"
                                 },
                                 {
-                                    "upperBound":18,
-                                    "output":"large"
+                                    "upperBound": 18,
+                                    "output": "large"
                                 },
                                 {
-                                    "output":"x-large"
+                                    "output": "x-large"
                                 }
                             ]
                         }
                     },
-                    "magnifierEnabled":"display.screenEnhancement.-provisional-magnifierEnabled",
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "magnification": {
                         "transform": {
-                            "type":"gpii.transformer.quantize",
-                            "inputPath":"display.screenEnhancement.magnification",
-                            "input":1,
-                            "ranges":[
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "input": 1,
+                            "ranges": [
                                 {
-                                    "upperBound":1.2,
-                                    "output":1
+                                    "upperBound": 1.2,
+                                    "output": 1
                                 },
                                 {
-                                    "upperBound":2.5,
-                                    "output":2
+                                    "upperBound": 2.5,
+                                    "output": 2
                                 },
                                 {
-                                    "output":3
+                                    "output": 3
                                 }
                             ]
                         }
                     },
-                    "highContrastEnabled":"display.screenEnhancement.-provisional-highContrastEnabled",
-                    "highContrastTheme":"display.screenEnhancement.-provisional-highContrastTheme",
-                    "invertColours":"display.screenEnhancement.-provisional-invertColours"
+                    "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
                 }
             }
         ]
     },
-    {
+    "info.cloud4all.JME": {
         "name": "JME Cloud4all Themes",
-        "id": "info.cloud4all.JME",
         "contexts": {
             "OS": [
                 {
@@ -89,7 +87,7 @@
                     "theme": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "display.screenEnhancement.-provisional-highContrastTheme",
+                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                             "defaultInputValue": "leather",
                             "options": {
                                 "black-white": {
@@ -110,7 +108,7 @@
                     "fontSize": {
                         "transform": {
                             "type": "gpii.transformer.quantize",
-                            "inputPath": "display.screenEnhancement.fontSize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "ranges": [
                                 {
                                     "upperBound": 12,
@@ -137,7 +135,7 @@
                     "volume": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "-provisional-general.-provisional-volume",
+                            "leftPath": "http://registry\\.gpii\\.net/common/volume",
                             "operator": "*",
                             "right": 100
                         }
@@ -145,7 +143,7 @@
                     "language": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "language",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language",
                             "defaultInputValue": "en",
                             "options": {
                                 "el": {
@@ -167,4 +165,4 @@
             }
         ]
     }
-]
+}

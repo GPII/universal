@@ -1,22 +1,28 @@
 {
-    "http://registry.gpii.org/applications/net.opendirective.maavis": [{
-        "value": {
-            "theme": "bw",
-            "playStartSound":"yes",
-            "speakOnActivate":"yes",
-            "speakTitles":"yes",
-            "speakLabels":"yes",
-            "showLabels":"yes",
-            "showImages":"no",
-            "useSkype":"no",
-            "userType":"touch",
-            "splashTime":2,
-            "scanRate":"1000",
-            "scanMode":"AUTO1SWITCHAUTOSTART",
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/net.opendirective.maavis": {
+                        "theme": "bw",
+                        "playStartSound":"yes",
+                        "speakOnActivate":"yes",
+                        "speakTitles":"yes",
+                        "speakLabels":"yes",
+                        "showLabels":"yes",
+                        "showImages":"no",
+                        "useSkype":"no",
+                        "userType":"touch",
+                        "splashTime":2,
+                        "scanRate":"1000",
+                        "scanMode":"AUTO1SWITCHAUTOSTART",
 
-            "selectionsSetSize":"2x3",
-            
-            "passwordSetSize":"4x3"
+                        "selectionsSetSize":"2x3",
+                        "passwordSetSize":"4x3"
+                	}
+                }
+            }
         }
-	}]
+    }
 }

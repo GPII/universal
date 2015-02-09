@@ -1,0 +1,15 @@
+The configuration files in this folder were used for the second round of pilot testing in the Cloud4All project.
+
+Each configuration file sets up a machine according to some scenario that should be tested in the second pilots phase - these files are used instead of the dynamic device reporter to statically report what's "installed" on the machine.
+
+The machines were 'configured' by using a configuration tool (web page - https://github.com/Cloud4AllTUD/pilotsConfig), which would replace the static device reporter file that was used by GPII with the relevant one from this folder.
+
+To make sense of the use case of each device reporter file, see
+* https://docs.google.com/document/d/1f4s6EUpLRR9ZMqQyJufmwx0l7HfzxdSNYusZa8vysSc/
+
+Page with all documents related to the second pilot phase:
+* http://wiki.gpii.net/w/Cloud4all_Second_Pilot_Phase
+
+Setup and installation instructions:
+* http://wiki.gpii.net/w/Cloud4all_Pilot_2_-_Set_up_and_installation
+
