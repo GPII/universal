@@ -401,7 +401,7 @@
                 "version": ">=2.6.26"
             }],
             "deviceReporters": [
-                { 
+                {
                     "type": "gpii.packageKit.find",
                     "name": "orca"
                 }
