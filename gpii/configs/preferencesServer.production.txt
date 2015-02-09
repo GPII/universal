@@ -1,5 +1,5 @@
-==production.json==
+==preferencesServer.json==
 
-Raw Preferences server running in production mode. This means it is expecting a couchDB server to be running on port 5984 of the local host.
+Preferences server running as only thing on the server (incl. dependencies). It will expect a couchDB to be running on the local host using the default port.
 
 **WARNING: This config has been tested manually with the setup described in the production setup documentation (Dec. 13, 2014). It is NOT regularly tested by acceptance/integration or unit tests and therefore cannot be fully trusted.**
