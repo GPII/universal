@@ -286,35 +286,7 @@
                             }
                         }
                     },
-                    "pictogramEnabled": "http://registry\\.gpii\\.net/common/pictogramEnabled",
-                    "pictogramMode": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/pictogramMode",
-                            "options": {
-                                "popup": {
-                                    "outputValue": "popup"
-                                },
-                                "replace": {
-                                    "outputValue": "replace"
-                                },
-                                "ruby": {
-                                    "outputValue": "popup"
-                                }
-                            }
-                        }
-                    },
-                    "pictogramSymbolSet": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/pictogramSymbolSet",
-                            "options": {
-                                "Wahl": {
-                                    "outputValue": "Wahl"
-                                }
-                            }
-                        }
-                    }
+                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled"
                 }
             }
         ]
