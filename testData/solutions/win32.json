@@ -302,21 +302,6 @@
                     "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
                     "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
                     "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "virtualBuffers\\.autoSayAllOnPageLoad": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/readingUnit",
-                            "defaultInputValue": "sentence",
-                            "options": {
-                                "all": {
-                                    "outputValue": true
-                                },
-                                "sentence": {
-                                    "outputValue": false
-                                }
-                            }
-                        }
-                    },
                     "transform": [
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
