@@ -228,7 +228,7 @@ var gpii = gpii || {};
         var collapseState;
         var expandState;
 
-        if (arguments.length === 3) {
+        if (state !== undefined) {
             collapseState = !state;
             expandState = state;
         } else {
