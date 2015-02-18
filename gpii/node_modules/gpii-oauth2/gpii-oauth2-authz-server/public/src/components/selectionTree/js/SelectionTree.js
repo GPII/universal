@@ -60,6 +60,11 @@ var gpii = gpii || {};
                 funcName:"gpii.oauth2.selectionTree.toServerModel",
                 args: ["{that}.model"]
             },
+            // TODO: Currently the Security UI's are a mixture of
+            // payload (ajax) and markup-driven (via handlebars rendering).
+            // In the future this will all be moved to payload driven, at
+            // which point all of the serverModel logic should be moved out
+            // of this implementation.
             updateModelFromServer: {
                 funcName: "gpii.oauth2.selectionTree.updateModelFromServer",
                 args: ["{that}", "{arguments}.0"]
