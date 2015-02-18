@@ -20,7 +20,7 @@ var gpii = gpii || {};
     fluid.registerNamespace("gpii.oauth2");
 
     gpii.oauth2.ajax = function (urlTemplate, urlParams, options) {
-        var url = fluid.stringTemplate(urlTemplate, urlParams);
+        var url = encodeURI(fluid.stringTemplate(urlTemplate, urlParams));
         $.ajax(url, options);
     };
 
