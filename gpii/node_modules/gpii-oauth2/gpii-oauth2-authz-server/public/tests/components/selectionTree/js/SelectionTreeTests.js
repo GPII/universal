@@ -30,7 +30,7 @@ https://github.com/gpii/universal/LICENSE.txt
             "c.k.m": true
         };
 
-        gpii.tests.oauth2.selectionTree.sampleComponetModel = {
+        gpii.tests.oauth2.selectionTree.sampleComponentModel = {
             value: "indeterminate",
             a: {
                 value: "unchecked",
@@ -86,7 +86,7 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(testPaths, function (expected, path) {
-                var model = fluid.get(gpii.tests.oauth2.selectionTree.sampleComponetModel, path);
+                var model = fluid.get(gpii.tests.oauth2.selectionTree.sampleComponentModel, path);
                 var result = gpii.oauth2.selectionTree.toServerModel(model);
                 jqUnit.assertDeepEq("The server model should be generated correctly for '" + path + "'", expected, result);
             });
@@ -632,9 +632,9 @@ https://github.com/gpii/universal/LICENSE.txt
         gpii.tests.oauth2.selectionTree.testRemoveLeaf = function (name, container) {
             container = $(container);
             var selectors = {
-                removeElm: ".gpiic-ouath2-selectionTree-removeLeaf-removeElm",
-                removed: ".gpiic-ouath2-selectionTree-removeLeaf-removed",
-                preserved: ".gpiic-ouath2-selectionTree-removeLeaf-preserved"
+                removeElm: ".gpiic-oauth2-selectionTree-removeLeaf-removeElm",
+                removed: ".gpiic-oauth2-selectionTree-removeLeaf-removed",
+                preserved: ".gpiic-oauth2-selectionTree-removeLeaf-preserved"
             };
 
             var find = function (sel) {
@@ -649,8 +649,8 @@ https://github.com/gpii/universal/LICENSE.txt
         };
 
         jqUnit.test("gpii.oauth2.selectionTree.removeLeaf", function () {
-            gpii.tests.oauth2.selectionTree.testRemoveLeaf("Top Level", ".gpiic-ouath2-selectionTree-removeLeaf-topLevel");
-            gpii.tests.oauth2.selectionTree.testRemoveLeaf("Nested", ".gpiic-ouath2-selectionTree-removeLeaf-nested");
+            gpii.tests.oauth2.selectionTree.testRemoveLeaf("Top Level", ".gpiic-oauth2-selectionTree-removeLeaf-topLevel");
+            gpii.tests.oauth2.selectionTree.testRemoveLeaf("Nested", ".gpiic-oauth2-selectionTree-removeLeaf-nested");
         });
 
         gpii.tests.oauth2.selectionTree.checkboxCleanup = function (checkbox) {
@@ -661,7 +661,7 @@ https://github.com/gpii/universal/LICENSE.txt
         };
 
         jqUnit.test("gpii.oauth2.selectionTree.setCheckbox", function () {
-            var checkbox = $(".gpiic-ouath2-selectionTree-testCheckbox");
+            var checkbox = $(".gpiic-oauth2-selectionTree-testCheckbox");
             gpii.tests.oauth2.selectionTree.checkboxCleanup(checkbox);
 
             gpii.oauth2.selectionTree.setCheckbox(checkbox, "checked");
