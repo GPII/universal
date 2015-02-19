@@ -40,7 +40,7 @@ Pages:
 
 - [http://localhost:3002/](http://localhost:3002/) - Sample client
 - [http://localhost:3003/](http://localhost:3003/) - Sample client with Passport
-- [http://localhost:3000/privacy](http://localhost:3000/privacy) - Privacy settings
+- [http://localhost:8081/privacy-settings](http://localhost:8081/privacy-settings) - Privacy settings
 
 GPII OAuth 2.0 server
 ---------------------

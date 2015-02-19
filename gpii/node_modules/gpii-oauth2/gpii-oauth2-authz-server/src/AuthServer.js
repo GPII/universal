@@ -207,7 +207,8 @@ gpii.oauth2.authServer.createPassportMiddleware = function (passport) {
 };
 
 gpii.oauth2.authServer.registerBodyParser = function (that) {
-    that.expressApp.use(gpii.oauth2.bodyParser());
+    that.expressApp.use(gpii.oauth2.jsonBodyParser());
+    that.expressApp.use(gpii.oauth2.urlencodedBodyParser());
 };
 
 fluid.defaults("gpii.oauth2.authServer.standalone", {
@@ -264,7 +265,11 @@ gpii.oauth2.authServer.loginRouting = function (passport, options) {
     };
 };
 
-gpii.oauth2.bodyParser = function () {
+gpii.oauth2.jsonBodyParser = function () {
+    return bodyParser.json();
+};
+
+gpii.oauth2.urlencodedBodyParser = function () {
     return bodyParser.urlencoded({ extended: true });
 };
 
