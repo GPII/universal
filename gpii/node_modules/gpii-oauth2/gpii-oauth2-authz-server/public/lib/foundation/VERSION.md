@@ -5,8 +5,7 @@ The instance of [Foundation v5.4.7](http://foundation.zurb.com/develop/download.
 * humans.txt
 * img
 * index.html
-* js/foundation.min.js
-* js/vendor/jquery.js
+* js
 * robots.txt
 
 These are either already included or are not used.

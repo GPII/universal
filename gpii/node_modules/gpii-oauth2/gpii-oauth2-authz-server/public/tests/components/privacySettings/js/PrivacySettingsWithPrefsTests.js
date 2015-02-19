@@ -27,23 +27,23 @@ https://github.com/gpii/universal/LICENSE.txt
             }
         });
 
-        var assertRenderedText = function (that, root, paths, method) {
+        gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText = function (that, root, paths, method) {
             fluid.each(paths, function (path) {
                 var expected = fluid.get(root, path);
                 jqUnit.assertEquals("The '" + path + "' string should have been rendered", expected, that.locate(path)[method]());
             });
         };
 
-        var assertRendering = function (that) {
-            assertRenderedText(that, that.options.strings, ["logout", "header", "directions"], "text");
-            assertRenderedText(that, that.model, ["user"], "text");
-            assertRenderedText(that, that.options.strings, ["description"], "html");
+        gpii.tests.oauth2.privacySettingsWithPrefsassertRendering = function (that) {
+            gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.options.strings, ["logout", "header", "directions"], "text");
+            gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.model, ["user"], "text");
+            gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.options.strings, ["description"], "html");
         };
 
         jqUnit.test("Initialization", function () {
             gpii.tests.oauth2.privacySettingsWithPrefs(".gpiic-oauth2-privacySettings", {
                 listeners: {
-                    afterRender: assertRendering
+                    afterRender: "gpii.tests.oauth2.privacySettingsWithPrefsassertRendering"
                 }
             });
         });
