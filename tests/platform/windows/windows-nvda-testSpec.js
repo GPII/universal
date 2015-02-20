@@ -25,7 +25,7 @@ gpii.tests.windows.nvda = [
         userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "speech.espeak.rate": 17.20430107526882,
@@ -66,7 +66,7 @@ gpii.tests.windows.nvda = [
         userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "speech.espeak.rate": 17.20430107526882,
@@ -105,7 +105,7 @@ gpii.tests.windows.nvda = [
         userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "speech.symbolLevel": 300,
