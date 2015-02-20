@@ -19,26 +19,62 @@ https://github.com/gpii/universal/LICENSE.txt
     $(document).ready(function () {
 
         fluid.registerNamespace("gpii.tests.ajax");
+        fluid.registerNamespace("gpii.tests.ajax.testdata");
 
         gpii.tests.ajax.assertSuccess = function (actual, expected) {
             jqUnit.assertDeepEq("The ajax request should have returned the correct data", expected, actual);
         };
 
-        jqUnit.asyncTest("gpii.oauth2.ajax", function () {
-            var expected = {test: "test"};
-            var urlTemplate = "../data/%fileName.json";
-            var urlParams = {
-                fileName: "gpii.oauth2.ajax"
-            };
-            var options = {
+        gpii.tests.ajax.testdata.response = { test: "test" };
+
+        fluid.defaults("gpii.tests.ajax.testCase", {
+            gradeNames: ["fluid.littleComponent", "autoInit"],
+            mockResponse: gpii.tests.ajax.testdata.response,
+            ajaxOptions: {
                 dataType: "json",
                 success: function (data) {
-                    gpii.tests.ajax.assertSuccess(data, expected);
+                    gpii.tests.ajax.assertSuccess(data, gpii.tests.ajax.testdata.response);
                     jqUnit.start();
                 }
-            };
+            }
+        });
 
-            gpii.oauth2.ajax(urlTemplate, urlParams, options);
+        gpii.tests.ajax.testCases = [
+            {
+                name: "with simple replacement",
+                urlTemplate: "../data/%fileName.json",
+                urlTemplateValues: {
+                    fileName: "gpii.oauth2.ajax"
+                },
+                expectedUrl: "../data/gpii.oauth2.ajax.json"
+            },
+            {
+                name: "with space",
+                urlTemplate: "/%fileName.json",
+                urlTemplateValues: {
+                    fileName: "with space"
+                },
+                expectedUrl: "/with%20space.json"
+            },
+            {
+                name: "with &",
+                urlTemplate: "/%fileName.json",
+                urlTemplateValues: {
+                    fileName: "with&ampersand"
+                },
+                expectedUrl: "/with%26ampersand.json"
+            }
+        ];
+
+        fluid.each(gpii.tests.ajax.testCases, function (testCaseOptions) {
+            var testCase = gpii.tests.ajax.testCase(testCaseOptions);
+            $.mockjax({
+                url: testCase.options.expectedUrl,
+                responseText: testCase.options.mockResponse
+            });
+            jqUnit.asyncTest("gpii.oauth2.ajax " + testCase.options.name, function () {
+                gpii.oauth2.ajax(testCase.options.urlTemplate, testCase.options.urlTemplateValues, testCase.options.ajaxOptions);
+            });
         });
 
         jqUnit.test("gpii.oauth2.setDisabled", function () {

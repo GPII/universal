@@ -34,7 +34,7 @@ https://github.com/gpii/universal/LICENSE.txt
             });
         };
 
-        gpii.tests.oauth2.privacySettingsWithPrefsassertRendering = function (that) {
+        gpii.tests.oauth2.privacySettingsWithPrefs.assertRendering = function (that) {
             gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.options.strings, ["logout", "header", "directions"], "text");
             gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.model, ["user"], "text");
             gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.options.strings, ["description"], "html");
@@ -43,7 +43,7 @@ https://github.com/gpii/universal/LICENSE.txt
         jqUnit.test("Initialization", function () {
             gpii.tests.oauth2.privacySettingsWithPrefs(".gpiic-oauth2-privacySettings", {
                 listeners: {
-                    afterRender: "gpii.tests.oauth2.privacySettingsWithPrefsassertRendering"
+                    afterRender: "gpii.tests.oauth2.privacySettingsWithPrefs.assertRendering"
                 }
             });
         });
