@@ -19,7 +19,7 @@ The Context Manager is active on the following times in the system.
 ```
 {
     "timestamp": "2014-10-10T09:59:01.0000123+02:00",
-    "http://registry.gpii.net/common/environment/visual.luminance": 762,
+    "http://registry.gpii.net/common/environment/illuminance": 762,
     "http://registry.gpii.net/common/environment/auditory.noise": -40
 }
 ```
@@ -27,7 +27,7 @@ The Context Manager is active on the following times in the system.
 ```
  {
     "timestamp": "2014-23-12T09:59:01.01123923+01:00",
-    "http://registry.gpii.net/common/environment/temporal.time": "23:15"
+    "http://registry.gpii.net/common/environment/timeOfDay": "23:15"
 }
 ```
 
@@ -36,7 +36,7 @@ The Context Manager is active on the following times in the system.
 To test the context managers handling of environment changes, use CURL to send a post request with the desired payload, eg:
 
 ```
-curl  -H "Content-Type: application/json" -X PUT -d '{"timestamp": "2014-23-12T09:59:01.01123923+01:00","http://registry.gpii.net/common/environment/visual.luminance": 122}' http://localhost:8081/environmentChanged
+curl  -H "Content-Type: application/json" -X PUT -d '{"timestamp": "2014-23-12T09:59:01.01123923+01:00","http://registry.gpii.net/common/environment/illuminance": 122}' http://localhost:8081/environmentChanged
 ```
 
 ## Supported Contexts and Condition Transformations
@@ -53,25 +53,25 @@ These conditions along with their expected inputs are described below:
 
 #### http://registry.gpii.net/conditions/inRange
 
-This condition is declared using the `http://registry.gpii.net/conditions/inRange` type. It can be used for any condition which deals with a range in which a context value has to fall between. Besides the context, it can take two parameters; `min` and `max`. These expresses the values (inclusive) which the `inputPath` context must fall between for the condition to be true. If one of these are omitted, that part of the range will be considered open ended (ie. if no `max` is specified, any input above or equal to `min` will be considered true)
+This condition is declared using the `http://registry.gpii.net/conditions/inRange` type. It can be used for any condition which deals with a range in which a context value has to fall between. Besides the context, it can take two parameters; `min` and `max`. These expresses the values (inclusive) which the `inputPath` context must fall between for the condition to be true. If one of these are omitted, that part of the range will be considered open ended (i.e. if no `max` is specified, any input above or equal to `min` will be considered true)
 
-The `inputPath` can be any context that is expressed as a number. Examples of contexts that can be used with the inRange condition are `http://registry.gpii.net/common/environment/auditory.noise` and `http://registry.gpii.net/common/environment/visual.luminosity`, denoting the background noise in dB and light in luminosity.
+The `inputPath` can be any context that is expressed as a number. Examples of contexts that can be used with the inRange condition are `http://registry.gpii.net/common/environment/auditory.noise` and `http://registry.gpii.net/common/environment/visual.illuminosity`, denoting the background noise in dB and light in luminosity.
 
 **Examples:**
 
-Example 1: Any value of visual.luminance above or equal to 700 will be considered true.
+Example 1: Any value of illuminance above or equal to 700 will be considered true.
 ```{
     "type": "http://registry.gpii.net/conditions/inRange",
     "min": 700,
-    "inputPath": "http://registry\\.gpii\\.net/common/environment/visual\\.luminance"
+    "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
 }```
 
-Example 2: Any value of visual.luminance between (incl.) 600 and 1000  will be considered true.
+Example 2: Any value of illuminance between (incl.) 600 and 1000  will be considered true.
 ```{
     "type": "http://registry.gpii.net/conditions/inRange",
     "min": 600,
     "max": 1000,
-    "inputPath": "http://registry\\.gpii\\.net/common/environment/visual\\.luminance"
+    "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
 }```
 
 Example 3: Any value of auditory.noise below or equal to 100 will be considered true.
@@ -85,7 +85,7 @@ Example 3: Any value of auditory.noise below or equal to 100 will be considered 
 
 This condition is declared using the `http://registry.gpii.net/conditions/timeInRange` type. It is used to express conditions that are related to a timespan. Besides the context, it expects two inputs, both of which much be present. These are `from` and `to` declaring the times which the current time of day must be between (inclusive) for the condition to be evaluated to true. The format of the time should be a string denoting hours (24 hours) and minutes separated by `:`, for example: `"06:30"`, `"19:20"`, `"4:12"`. The condition supports wrapped hours, ie. a `from` time of `"20:00"` and `to` time of `"02:00"`, would evaluate to true between 8 at night and 2 in the morning.
 
-The `inputPath` can be any context that is expressed as unix time (in ms). The one supported by a standard install of the system is `http://registry.gpii.net/common/environment/temporal.time` denoting the current time of day in the user timezone.
+The `inputPath` can be any context that is as a time of day string, matching the format of the `to` and `from` paramaeters (e.g. "19:15"). The one supported by a standard install of the system is `http://registry.gpii.net/common/environment/timeOfDay` denoting the current time of day in the machines timezone. Note that timezone here is retrieved based on the system time - the geographical location of the user is not taken into account (unless the OS does so by default) - see GPII-1105
 
 **Examples:**
 
@@ -95,7 +95,7 @@ Example 1: Any time between, including, 8 o'clock at night and 8.46 at night wil
     "type": "http://registry.gpii.net/conditions/timeInRange",
     "from": "20:00",
     "to": "20:46",
-    "inputPath": "http://registry\\.gpii\\.net/common/environment/temporal\\.time"
+    "inputPath": "http://registry\\.gpii\\.net/common/environment/timeOfDay"
 }
 ```
 
@@ -105,6 +105,6 @@ Example 2: Any value between (incl.) 6 at night and 6 in the morning will evalua
     "type": "http://registry.gpii.net/conditions/timeInRange",
     "from": "18:00",
     "to": "06:00",
-    "inputPath": "http://registry\\.gpii\\.net/common/environment/temporal\\.time"
+    "inputPath": "http://registry\\.gpii\\.net/common/environment/timeOfDay"
 }
 ```
