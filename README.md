@@ -16,7 +16,7 @@ This repository should be installed using one of the top-level GPII architecture
 For development purposes this repository could be cloned directly - however, please ensure that it is housed
 in a directory named `node_modules` otherwise its test cases will not be able to self-resolve.
 
-Whenever you run `npm install` for this project, you must always follow by issuing the grunt task `npm dedupe-infusion`. 
+Whenever you run `npm install` for this project, you must always follow by issuing the grunt task `grunt dedupe-infusion`. 
 The reason for this requirement is explained at http://issues.gpii.net/browse/GPII-492
 
 Usage
