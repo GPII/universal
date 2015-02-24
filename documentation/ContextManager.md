@@ -55,7 +55,7 @@ These conditions along with their expected inputs are described below:
 
 This condition is declared using the `http://registry.gpii.net/conditions/inRange` type. It can be used for any condition which deals with a range in which a context value has to fall between. Besides the context, it can take two parameters; `min` and `max`. These expresses the values (inclusive) which the `inputPath` context must fall between for the condition to be true. If one of these are omitted, that part of the range will be considered open ended (i.e. if no `max` is specified, any input above or equal to `min` will be considered true)
 
-The `inputPath` can be any context that is expressed as a number. Examples of contexts that can be used with the inRange condition are `http://registry.gpii.net/common/environment/auditory.noise` and `http://registry.gpii.net/common/environment/visual.illuminosity`, denoting the background noise in dB and light in luminosity.
+The `inputPath` can be any context that is expressed as a number. Examples of contexts that can be used with the inRange condition are `http://registry.gpii.net/common/environment/auditory.noise` and `http://registry.gpii.net/common/environment/illuminance`, denoting the background noise in dB and light in luminosity.
 
 **Examples:**
 
