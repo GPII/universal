@@ -140,7 +140,8 @@
                         "FollowMouse": "REG_DWORD",
                         "MagnificationMode": "REG_DWORD",
                         "ZoomIncrement": "REG_DWORD"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "applications.com\\.microsoft\\.windows\\.magnifier.id",
@@ -801,7 +802,8 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "HIGHCONTRAST"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.-provisional-highContrastEnabled",
@@ -853,7 +855,8 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.mouseTrailing",
@@ -919,7 +922,8 @@
                         "SizeWE": "REG_SZ",
                         "UpArrow": "REG_SZ",
                         "Wait": "REG_SZ"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.cursorSize",

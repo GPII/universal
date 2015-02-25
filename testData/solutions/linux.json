@@ -13,7 +13,8 @@
             {
                 "type": "gpii.gsettings",
                 "options": {
-                    "schema": "org.gnome.desktop.a11y.magnifier"
+                    "schema": "org.gnome.desktop.a11y.magnifier",
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id",
@@ -153,7 +154,8 @@
                     }
                 },
                 "options": {
-                    "schema": "org.gnome.desktop.interface"
+                    "schema": "org.gnome.desktop.interface",
+                    "verifySettings": true
                 }
             }
         ],
@@ -183,7 +185,8 @@
                     "font": "http://registry\\.gpii\\.net/common/0"
                 },
                 "options": {
-                    "schema": "org.gnome.nautilus.desktop"
+                    "schema": "org.gnome.nautilus.desktop",
+                    "verifySettings": true
                 }
             }
         ],
@@ -285,7 +288,8 @@
                     }
                 },
                 "options": {
-                    "schema": "org.gnome.desktop.a11y.keyboard"
+                    "schema": "org.gnome.desktop.a11y.keyboard",
+                    "verifySettings": true
                 }
             }
         ],
@@ -312,7 +316,8 @@
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.wm\\.preferences.name"
                 ],
                 "options": {
-                    "schema": "org.gnome.desktop.wm.preferences"
+                    "schema": "org.gnome.desktop.wm.preferences",
+                    "verifySettings": true
                 }
             }
         ],
@@ -340,7 +345,8 @@
                     "display.screenEnhancement.applications.org\\.gnome\\.shell\\.overrides.name"
                 ],
                 "options": {
-                    "schema": "org.gnome.shell.overrides"
+                    "schema": "org.gnome.shell.overrides",
+                    "verifySettings": true
                 }
             }
         ],
