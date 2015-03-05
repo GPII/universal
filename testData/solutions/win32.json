@@ -12,13 +12,49 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF",
+                    "initialContent": "[options]\nTest = 0\n[Voice Profiles]\nActiveVoiceProfileName = default\n"
+                },
+                "capabilities": [
+                    "applications.com\\.freedomscientific\\.jaws.id"
+                ],
+
+                "capabilitiesTransformations": {
+                    "Voice Profiles\\.ActiveVoiceProfileName": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "http://registry\\.gpii\\.net/common/voiceProfile",
+                            "value": "GPII"
+                        }
+                    },
+                    "options\\.TypingEcho": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/typingEcho",
+                            "options": {
+                                "on": {
+                                    "outputValue": 1
+                                },
+                                "off": {
+                                    "outputValue": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF",
+                    "initialContent": "[ENU-Global]\ntest=0"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
                 "capabilitiesTransformations": {
-                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
+                    "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -38,7 +74,24 @@
                             }
                         }
                     },
-                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
+                    "ENU-Global\\.Pitch":{
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/voicePitch",
+                            "options": {
+                                "low": {
+                                    "outputValue": 25
+                                },
+                                "medium": {
+                                    "outputValue": 75
+                                },
+                                "high": {
+                                    "outputValue": 125
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Rate": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
                             "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
@@ -54,7 +107,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS16.exe\\}\""
                 }
             ],
             "stop": [
