@@ -44,14 +44,13 @@ gpii.test.contextIntegration.changeEnvironmentAndCheck = function (contextName) 
             func: "{environmentChangedRequest}.send",
             args: gpii.test.contextIntegration.data[contextName].environment
         }, {
-            event: "{environmentChangedRequest}.events.onComplete",
-            listener: "gpii.test.environmentChangedListen"
+            event: "{environmentChangedRequest}.events.onComplete"
         }, {
             func: "gpii.test.checkConfiguration",
             args: ["{tests}." + contextName + ".settingsHandlers", "{nameResolver}"]
         }
     ];
-}
+};
 
 
 gpii.test.contextIntegration.data = {
@@ -66,13 +65,13 @@ gpii.test.contextIntegration.data = {
     "gpii-default": {
         "environment": {
             "http://registry.gpii.net/common/environment/illuminance": 200,
-            "http://registry.gpii.net/common/environment/auditory.noise": 10000,
+            "http://registry.gpii.net/common/environment/auditory.noise": 10000
         },
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
-                        "mag-factor": 1.5,
+                        "mag-factor": 1.5
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -91,14 +90,14 @@ gpii.test.contextIntegration.data = {
     "bright": {
         "environment": {
             "http://registry.gpii.net/common/environment/illuminance": 500,
-            "http://registry.gpii.net/common/environment/auditory.noise": 10000,
+            "http://registry.gpii.net/common/environment/auditory.noise": 10000
 
         },
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
-                        "mag-factor": 2,
+                        "mag-factor": 2
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -117,14 +116,13 @@ gpii.test.contextIntegration.data = {
     "noise": {
         "environment": {
             "http://registry.gpii.net/common/environment/illuminance": 200,
-            "http://registry.gpii.net/common/environment/auditory.noise": 30000,
-
+            "http://registry.gpii.net/common/environment/auditory.noise": 30000
         },
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
-                        "mag-factor": 1.5,
+                        "mag-factor": 1.5
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -143,14 +141,14 @@ gpii.test.contextIntegration.data = {
     "brightandnoise": {
         "environment": {
             "http://registry.gpii.net/common/environment/illuminance": 500,
-            "http://registry.gpii.net/common/environment/auditory.noise": 30000,
+            "http://registry.gpii.net/common/environment/auditory.noise": 30000
 
         },
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
-                        "mag-factor": 2,
+                        "mag-factor": 2
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -165,13 +163,8 @@ gpii.test.contextIntegration.data = {
                 }]
             }
         }
-    },
-}
-
-gpii.test.environmentChangedListen = function (a) {
-    console.log("hello world: "+ a);
-    return true;
-}
+    }
+};
 
 gpii.test.contextIntegration.fixtures = [
     {
@@ -228,11 +221,10 @@ gpii.test.contextIntegration.fixtures = [
                 }, {
                     func: "{environmentChangedRequest}.send",
                     args: {
-                        "http://registry.gpii.net/common/environment/illuminance": 500,
+                        "http://registry.gpii.net/common/environment/illuminance": 500
                     }
                 }, {
-                    event: "{environmentChangedRequest}.events.onComplete",
-                    listener: "gpii.test.environmentChangedListen"
+                    event: "{environmentChangedRequest}.events.onComplete"
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -298,7 +290,7 @@ gpii.test.contextIntegration.fixtures = [
                 }
             ]
         ]
-    },
+    }
 ];
 
 gpii.test.contextIntegration.buildTestFixtures = function (fixtures) {
