@@ -40,7 +40,8 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./platform/cloud/AcceptanceTests_empty.js",
     "./DevelopmentTests.js",
-    "./IntegrationTests.js"
+    "./IntegrationTests.js",
+    "./ContextIntegrationTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {
