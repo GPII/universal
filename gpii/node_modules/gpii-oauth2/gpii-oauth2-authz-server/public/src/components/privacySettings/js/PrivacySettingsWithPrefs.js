@@ -20,14 +20,6 @@ var gpii = gpii || {};
 
     fluid.defaults("gpii.oauth2.privacySettingsWithPrefs", {
         gradeNames: ["fluid.rendererRelayComponent","autoInit"],
-        members: {
-            dialogForRemoval: {
-                expander: {
-                    funcName: "gpii.oauth2.privacySettingsWithPrefs.initDialog",
-                    args: ["{that}.dom.removeDecisionDialog", "{that}.options.styles.dialogForRemovalCss", "{that}.options.dialogOptionsForRemoval"]
-                }
-            }
-        },
         requestInfos: {
             removeDecision: {
                 url: "/authorizations",
@@ -56,6 +48,34 @@ var gpii = gpii || {};
                         clientData: "{privacySettingsWithPrefs}.model.currentClientData"
                     }
                 }
+            },
+            dialogForRemoval: {
+                type: "gpii.oauth2.OKCancelDialog",
+                container: "{privacySettingsWithPrefs}.dom.removeDecisionDialog",
+                options: {
+                    selectors: {
+                        dialogContent: "{privacySettingsWithPrefs}.options.selectors.removeDecisionContent"
+                    },
+                    styles: {
+                        dialogClass: "{privacySettingsWithPrefs}.options.styles.dialogForRemovalClass",
+                        cancelButtonClass: "{privacySettingsWithPrefs}.options.styles.cancelButtonClass",
+                        okButtonClass: "{privacySettingsWithPrefs}.options.styles.okButtonClass"
+                    },
+                    model: {
+                        authDecisionId: null
+                    },
+                    listeners: {
+                        "clickOK.removeDecision": {
+                            funcName: "gpii.oauth2.privacySettingsWithPrefs.removeDecision",
+                            args: [
+                                "{that}",
+                                "{privacySettingsWithPrefs}.options.requestInfos.removeDecision.url",
+                                "{privacySettingsWithPrefs}.options.requestInfos.removeDecision.type",
+                                "{that}.model.authDecisionId"
+                            ]
+                        }
+                    }
+                }
             }
         },
         selectors: {
@@ -75,9 +95,9 @@ var gpii = gpii || {};
             editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog"
         },
         styles: {
-            dialogForRemovalCss: "gpii-oauth2-privacySettings-dialogForRemoval",
-            okButtonCss: "gpii-oauth2-privacySettings-removeDecision-ok",
-            cancelButtonCss: "gpii-oauth2-privacySettings-removeDecision-cancel"
+            dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
+            okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
+            cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel"
         },
         selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog"],
         strings: {
@@ -118,11 +138,6 @@ var gpii = gpii || {};
             position: {
                 my: "left+35 bottom-10"
             }
-        },
-        dialogOptionsForRemoval: {
-            autoOpen: false,
-            resizable: false,
-            modal: true
         },
         events: {
             onRenderEditDialog: null
@@ -168,10 +183,6 @@ var gpii = gpii || {};
         };
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.initDialog = function (dialogContainer, dialogForRemovalCss, dialogOptions) {
-        return dialogContainer.dialog($.extend(true, {}, {dialogClass: dialogForRemovalCss}, dialogOptions));
-    };
-
     gpii.oauth2.privacySettingsWithPrefs.createTooltips = function (that) {
         var editButtons = that.locate("editButton");
         var removeButtons = that.locate("removeButton");
@@ -189,39 +200,24 @@ var gpii = gpii || {};
 
     gpii.oauth2.privacySettingsWithPrefs.popupDialogForRemoval = function (evt, that) {
         var clientData = that.getClientData(evt.target, that.options.selectors.removeButton);
-        var dialogForRemoval = that.dialogForRemoval;
         var dialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: clientData.serviceName});
-        dialogForRemoval.find(that.options.selectors.removeDecisionContent).html(dialogContent);
 
-        var dialogOptions = {
-            buttons: {
-                cancelButton: {
-                    click: function () {
-                        $(this).dialog("close");
-                    },
-                    text: that.options.strings.cancel,
-                    "class": that.options.styles.cancelButtonCss
-                },
-                okButton: {
-                    click: function () {
-                        // send a request to remove the authorization
-                        $.ajax({
-                            url: that.options.requestInfos.removeDecision.url + "/" + clientData.authDecisionId,
-                            type: that.options.requestInfos.removeDecision.type,
-                            success: function () {
-                                location.reload(true);
-                            }
-                        });
-                        $(this).dialog("close");
-                    },
-                    text: that.options.strings.ok,
-                    "class": that.options.styles.okButtonCss
-                }
+        var dialogForRemoval = that.dialogForRemoval;
+        dialogForRemoval.applier.change("dialogContent", dialogContent);
+        dialogForRemoval.applier.change("authDecisionId", clientData.authDecisionId);
+
+        dialogForRemoval.open();
+    };
+
+    gpii.oauth2.privacySettingsWithPrefs.removeDecision = function (dialog, url, type, authDecisionId) {
+        $.ajax({
+            url: url + "/" + authDecisionId,
+            type: type,
+            success: function () {
+                location.reload(true);
             }
-        };
-
-        dialogForRemoval.dialog("option", dialogOptions);
-        dialogForRemoval.dialog("open");
+        });
+        dialog.close();
     };
 
     gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit = function (evt, that) {
