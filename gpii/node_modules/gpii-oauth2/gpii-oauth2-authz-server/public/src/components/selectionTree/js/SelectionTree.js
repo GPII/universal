@@ -323,27 +323,25 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.selectionTree.gatherPaths = function (model) {
-        var pathValue = model.value;
         var paths = [];
-
-        if (pathValue === "checked") {
-            paths.push("");
-        } else if (pathValue === "indeterminate") {
-            fluid.each(model, function (subModel, seg) {
-                if (fluid.isPlainObject(subModel)) {
+        if (!fluid.isPrimitive(model)) {
+            var nodeValue = model.value;
+            if (nodeValue === "checked") {
+                paths.push("");
+            } else if (nodeValue === "indeterminate") {
+                fluid.each(model, function (subModel, seg) {
                     var subPaths = gpii.oauth2.selectionTree.gatherPaths(subModel);
-                    fluid.each(subPaths, function (path) {
-                        if (path) {
-                            paths.push(seg + "." + path);
+                    fluid.each(subPaths, function (subPath) {
+                        if (subPath) {
+                            paths.push(seg + "." + subPath);
                         } else {
                             paths.push(seg);
                             return false;
                         }
                     });
-                }
-            });
+                });
+            }
         }
-
         return paths;
     };
 
