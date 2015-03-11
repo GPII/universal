@@ -322,31 +322,24 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.gatherPaths = function (model) {
-        var paths = [];
-        if (!fluid.isPrimitive(model)) {
-            var nodeValue = model.value;
-            if (nodeValue === "checked") {
-                paths.push("");
-            } else if (nodeValue === "indeterminate") {
-                fluid.each(model, function (subModel, seg) {
-                    var subPaths = gpii.oauth2.selectionTree.gatherPaths(subModel);
-                    fluid.each(subPaths, function (subPath) {
-                        if (subPath) {
-                            paths.push(seg + "." + subPath);
-                        } else {
-                            paths.push(seg);
-                            return false;
-                        }
-                    });
-                });
-            }
+    gpii.oauth2.selectionTree.gatherPaths = function (paths, prefix, model) {
+        var nodeValue = model.value;
+        if (nodeValue === "checked") {
+            paths.push(prefix.join("."));
+        } else if (nodeValue === "indeterminate") {
+            fluid.each(model, function (subModel, seg) {
+                if (seg !== "value") {
+                    prefix.push(seg);
+                    gpii.oauth2.selectionTree.gatherPaths(paths, prefix, subModel);
+                    prefix.pop();
+                }
+            });
         }
-        return paths;
     };
 
     gpii.oauth2.selectionTree.toServerModel = function (model) {
-        var paths = gpii.oauth2.selectionTree.gatherPaths(model);
+        var paths = [];
+        gpii.oauth2.selectionTree.gatherPaths(paths, [], model);
 
         return fluid.arrayToHash(paths);
     };
