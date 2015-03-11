@@ -16,7 +16,7 @@ var gpii = gpii || {};
 (function ($, fluid) {
     "use strict";
 
-    fluid.defaults("gpii.oauth2.OKCancelDialog", {
+    fluid.defaults("gpii.OKCancelDialog", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         dialogOptions: {
             autoOpen: false,
@@ -36,12 +36,12 @@ var gpii = gpii || {};
             }
         },
         selectors: {
-            dialogContent: ".gpiic-oauth2-OKCancelDialog-content"
+            dialogContent: ".gpiic-OKCancelDialog-content"
         },
         styles: {
-            dialogClass: "gpii-oauth2-OKCancelDialog",
-            cancelButtonClass: "gpii-oauth2-OKCancelDialog-cancel",
-            okButtonClass: "gpii-oauth2-OKCancelDialog-ok"
+            dialogClass: "gpii-OKCancelDialog",
+            cancelButtonClass: "gpii-OKCancelDialog-cancel",
+            okButtonClass: "gpii-OKCancelDialog-ok"
         },
         strings: {
             cancel: "cancel",
@@ -52,7 +52,7 @@ var gpii = gpii || {};
         },
         modelListeners: {
             dialogContent: {
-                funcName: "gpii.oauth2.OKCancelDialog.updateContent",
+                funcName: "gpii.OKCancelDialog.updateContent",
                 args: ["{that}.container", "{that}.options.selectors.dialogContent", "{change}.value"]
             }
         },
@@ -62,11 +62,11 @@ var gpii = gpii || {};
         },
         listeners: {
             "onCreate.initDialog": {
-                funcName: "gpii.oauth2.OKCancelDialog.initDialog",
+                funcName: "gpii.OKCancelDialog.initDialog",
                 args: ["{that}.container", "{that}.options.styles.dialogClass", "{that}.options.dialogOptions"]
             },
             "onCreate.setInitialDialogContent": {
-                funcName: "gpii.oauth2.OKCancelDialog.updateContent",
+                funcName: "gpii.OKCancelDialog.updateContent",
                 args: ["{that}.container", "{that}.options.selectors.dialogContent", "{that}.model.dialogContent"]
             },
             "clickCancel.closeDialog": "{that}.close"
@@ -85,11 +85,11 @@ var gpii = gpii || {};
         }
     });
 
-    gpii.oauth2.OKCancelDialog.initDialog = function (container, dialogClass, dialogOptions) {
+    gpii.OKCancelDialog.initDialog = function (container, dialogClass, dialogOptions) {
         container.dialog($.extend(true, {}, {dialogClass: dialogClass}, dialogOptions));
     };
 
-    gpii.oauth2.OKCancelDialog.updateContent = function (container, selector, content) {
+    gpii.OKCancelDialog.updateContent = function (container, selector, content) {
         container.find(selector).html(content);
     };
 

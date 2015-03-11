@@ -50,7 +50,7 @@ var gpii = gpii || {};
                 }
             },
             dialogForRemoval: {
-                type: "gpii.oauth2.OKCancelDialog",
+                type: "gpii.OKCancelDialog",
                 container: "{privacySettingsWithPrefs}.dom.removeDecisionDialog",
                 options: {
                     selectors: {
