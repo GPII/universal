@@ -258,9 +258,9 @@ var gpii = gpii || {};
     gpii.oauth2.selectionTree.updateDOMFromModel = function (that, newModel, oldModel) {
         var requestedPrefs = [""].concat(fluid.keys(that.options.requestedPrefs));
         fluid.each(requestedPrefs, function (requestedPref) {
-            var segs = gpii.oauth2.selectionTree.expandSegs(requestedPref);
-            var newVal = fluid.get(newModel, segs);
-            var oldVal = fluid.get(oldModel, segs);
+            var segs = fluid.model.pathToSegments(requestedPref);
+            var newVal = gpii.oauth2.selectionTree.getModelNodeValue(newModel, segs);
+            var oldVal = gpii.oauth2.selectionTree.getModelNodeValue(oldModel, segs);
 
             if (newVal !== oldVal) {
                 var elm = that.container.find(that.options.domMap[requestedPref]);
@@ -287,8 +287,9 @@ var gpii = gpii || {};
     gpii.oauth2.selectionTree.updateModel = function (that, ELPath, state) {
         var model = fluid.copy(that.model);
 
-        gpii.oauth2.selectionTree.setAllDescendants(fluid.get(model, ELPath), state);
-        gpii.oauth2.selectionTree.setAncestors(model, ELPath);
+        var segs = fluid.model.pathToSegments(ELPath);
+        gpii.oauth2.selectionTree.setValueAndAllDescendants(gpii.oauth2.selectionTree.getModelNode(model, segs), state);
+        gpii.oauth2.selectionTree.updateAncestors(model, segs);
 
         that.applier.change("", model);
     };
@@ -322,41 +323,40 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.gatherPaths = function (paths, prefix, model) {
-        var nodeValue = model.value;
-        if (nodeValue === "checked") {
-            paths.push(prefix.join("."));
-        } else if (nodeValue === "indeterminate") {
-            fluid.each(model, function (subModel, seg) {
-                if (seg !== "value") {
-                    prefix.push(seg);
-                    gpii.oauth2.selectionTree.gatherPaths(paths, prefix, subModel);
-                    prefix.pop();
-                }
-            });
-        }
+    gpii.oauth2.selectionTree.getModelNode = function (model, segs) {
+        var nodePath = [];
+        fluid.each(segs, function (seg) {
+            nodePath.push("children");
+            nodePath.push(seg);
+        });
+        return fluid.get(model, nodePath);
     };
 
-    gpii.oauth2.selectionTree.toServerModel = function (model) {
-        var paths = [];
-        gpii.oauth2.selectionTree.gatherPaths(paths, [], model);
-
-        return fluid.arrayToHash(paths);
+    gpii.oauth2.selectionTree.getModelNodeValue = function (model, segs) {
+        var node = gpii.oauth2.selectionTree.getModelNode(model, segs);
+        return node ? node.value : undefined;
     };
 
-    gpii.oauth2.selectionTree.setAllDescendants = function (model, value) {
-        fluid.each(model, function (state, key) {
-            if(fluid.isPlainObject(state)) {
-                gpii.oauth2.selectionTree.setAllDescendants(state, value);
-            } else {
-                model[key] = value;
-            }
+    gpii.oauth2.selectionTree.setValueAndAllDescendants = function (model, value) {
+        model.value = value;
+        fluid.each(model.children, function (childModel) {
+            gpii.oauth2.selectionTree.setValueAndAllDescendants(childModel, value);
         });
     };
 
-    gpii.oauth2.selectionTree.expandSegs = function (ELPath) {
-        var segs = fluid.model.pathToSegments(ELPath);
-        return segs.concat(["value"]);
+    gpii.oauth2.selectionTree.setValueAndAllAncestors = function (model, segs, value) {
+        model.value = value;
+        if (segs.length > 0) {
+            // build out the structure if it doesn't exist yet
+            if (!model.children) {
+                model.children = {};
+            }
+            if (!model.children[segs[0]]) {
+                model.children[segs[0]] = {};
+            }
+            // recurse down the segs
+            gpii.oauth2.selectionTree.setValueAndAllAncestors(model.children[segs[0]], segs.slice(1), value);
+        }
     };
 
     /**
@@ -364,33 +364,46 @@ var gpii = gpii || {};
      * The state is calculated by determining the states of all the children.
      * checked (all children checked), unchecked (all children unchecked), indeterminate (mixture of checked, unchecked, and/or indeterminate)
      */
-    gpii.oauth2.selectionTree.setAncestors = function (model, ELPath) {
-        var segs = fluid.model.pathToSegments(ELPath);
+    gpii.oauth2.selectionTree.updateAncestors = function (model, segs) {
+        var parentSegs = fluid.copy(segs);
+        while (parentSegs.length > 0) {
+            parentSegs.pop();
+            var parent = gpii.oauth2.selectionTree.getModelNode(model, parentSegs);
+            parent.value = gpii.oauth2.selectionTree.calculateValueFromChildren(parent);
+        }
+    };
 
-        do {
-            segs.pop(); // remove last segment since we want to work on the parent.
-            var state;
-            var subModel = fluid.get(model, segs);
-            fluid.each(subModel, function (value, key) {
-                if (fluid.isPlainObject(value)) {
-                    var currentState = fluid.get(subModel, gpii.oauth2.selectionTree.expandSegs(key));
+    gpii.oauth2.selectionTree.calculateValueFromChildren = function (model) {
+        var calculatedValue;
+        fluid.each(model.children, function (childModel) {
+            var childValue = childModel.value;
+            if (!calculatedValue) {
+                calculatedValue = childValue;
+            }
+            if (childValue === "indeterminate" || calculatedValue !== childValue) {
+                calculatedValue = "indeterminate";
+            }
+        });
+        return calculatedValue;
+    };
 
-                    if (!state) {
-                        state = currentState;
-                    }
+    gpii.oauth2.selectionTree.gatherPaths = function (paths, prefix, model) {
+        var nodeValue = model.value;
+        if (nodeValue === "checked") {
+            paths.push(prefix.join("."));
+        } else if (nodeValue === "indeterminate") {
+            fluid.each(model.children, function (childModel, seg) {
+                prefix.push(seg);
+                gpii.oauth2.selectionTree.gatherPaths(paths, prefix, childModel);
+                prefix.pop();
+            });
+        }
+    };
 
-                    if (currentState === "indeterminate" || state !== currentState) {
-                        state = "indeterminate";
-                        return false;
-                    }
-                }
-            // The function needs to be supplied to fluid.each and requires access
-            // to the state variable.
-            }); // jshint ignore:line
-
-            var segsToSet = gpii.oauth2.selectionTree.expandSegs(segs);
-            fluid.set(model, segsToSet, state || fluid.get(model, segsToSet));
-        } while (segs.length);
+    gpii.oauth2.selectionTree.toServerModel = function (model) {
+        var paths = [];
+        gpii.oauth2.selectionTree.gatherPaths(paths, [], model);
+        return fluid.arrayToHash(paths);
     };
 
     gpii.oauth2.selectionTree.pathsToSegs = function (paths) {
@@ -400,35 +413,27 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.setEachSeg = function (model, segs, value, prop) {
-        var propSeg = [prop || "value"];
-        while (segs.length) {
-            var modelPath = segs.concat(propSeg);
-            fluid.set(model, modelPath, value);
-            segs.pop();
-        }
-        fluid.set(model, propSeg, value);
-    };
-
-    gpii.oauth2.selectionTree.toModel = function (setPrefs, reqPrefs) {
+    gpii.oauth2.selectionTree.toModel = function (setPrefs, clientAvailablePrefs) {
         var model = {};
-        var reqPrefsSegs = gpii.oauth2.selectionTree.pathsToSegs(reqPrefs);
+        var clientAvailablePrefsSegs = gpii.oauth2.selectionTree.pathsToSegs(clientAvailablePrefs);
         var setPrefsSegs = gpii.oauth2.selectionTree.pathsToSegs(setPrefs);
 
-
-        fluid.each(reqPrefsSegs, function (segs) {
-            gpii.oauth2.selectionTree.setEachSeg(model, segs, "unchecked");
+        // build out the model, setting each client available pref to "unchecked"
+        fluid.each(clientAvailablePrefsSegs, function (segs) {
+            gpii.oauth2.selectionTree.setValueAndAllAncestors(model, segs, "unchecked");
         });
 
-        fluid.each(setPrefsSegs, function (path) {
-            gpii.oauth2.selectionTree.setAllDescendants(fluid.get(model, path), "checked");
+        // set each user selected pref value to "checked"
+        fluid.each(setPrefsSegs, function (segs) {
+            gpii.oauth2.selectionTree.setValueAndAllDescendants(gpii.oauth2.selectionTree.getModelNode(model, segs), "checked");
         });
 
         fluid.each(setPrefsSegs, function (segs) {
             // if there are no segs all are unchecked, if segs[0] === "" all are checked
-            if (segs.length && segs[0]) {
+            // otherwise, set each non-leaf node value to "indeterminate"
+            if ((segs.length > 0) && (segs[0] !== "")) {
                 segs.pop(); // remove last segment as it was checked
-                gpii.oauth2.selectionTree.setEachSeg(model, segs, "indeterminate");
+                gpii.oauth2.selectionTree.setValueAndAllAncestors(model, segs, "indeterminate");
             }
         });
 

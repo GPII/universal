@@ -20,7 +20,7 @@ https://github.com/gpii/universal/LICENSE.txt
 
         fluid.registerNamespace("gpii.tests.oauth2.selectionTree");
 
-        gpii.tests.oauth2.selectionTree.sampleReqPrefs = {
+        gpii.tests.oauth2.selectionTree.sampleClientAvailablePrefs = {
             "a.d": true,
             "b.e": true,
             "b.f.g": true,
@@ -32,56 +32,133 @@ https://github.com/gpii/universal/LICENSE.txt
 
         gpii.tests.oauth2.selectionTree.sampleComponentModel = {
             value: "indeterminate",
-            a: {
-                value: "unchecked",
-                d: {
-                    value: "unchecked"
-                }
-            },
-            b: {
-                value: "checked",
-                e: {
-                    value: "checked"
-                },
-                f: {
-                    value: "checked",
-                    g: {
-                        value: "checked"
-                    }
-                }
-            },
-            c: {
-                value: "indeterminate",
-                h: {
-                    value: "unchecked"
-                },
-                i: {
-                    value: "checked",
-                    j: {
-                        value: "checked"
+            children: {
+                a: {
+                    value: "unchecked",
+                    children: {
+                        d: {
+                            value: "unchecked"
+                        }
                     }
                 },
-                k: {
+                b: {
+                    value: "checked",
+                    children: {
+                        e: {
+                            value: "checked"
+                        },
+                        f: {
+                            value: "checked",
+                            children: {
+                                g: {
+                                    value: "checked"
+                                }
+                            }
+                        }
+                    }
+                },
+                c: {
                     value: "indeterminate",
-                    l: {
-                        value: "unchecked"
-                    },
-                    m: {
-                        value: "checked"
+                    children: {
+                        h: {
+                            value: "unchecked"
+                        },
+                        i: {
+                            value: "checked",
+                            children: {
+                                j: {
+                                    value: "checked"
+                                }
+                            }
+                        },
+                        k: {
+                            value: "indeterminate",
+                            children: {
+                                l: {
+                                    value: "unchecked"
+                                },
+                                m: {
+                                    value: "checked"
+                                }
+                            }
+                        }
                     }
                 }
             }
         };
 
+        jqUnit.test("gpii.oauth2.selectionTree.getModelNode", function () {
+
+            var model = {
+                value: "root",
+                children: {
+                    a: {
+                        value: "a-val",
+                        children: {
+                            c: {
+                                value: "c-val"
+                            }
+                        }
+                    },
+                    b: {
+                        value: "b-val"
+                    }
+                }
+            };
+
+            var tests = {
+                nullModel: {
+                    model: null,
+                    segs: ["a"],
+                    expected: null
+                },
+                root: {
+                    model: model,
+                    segs: [],
+                    expected: model
+                },
+                missingNode1: {
+                    model: model,
+                    segs: ["z"],
+                    expected: undefined
+                },
+                missingNode2: {
+                    model: model,
+                    segs: ["b", "c"],
+                    expected: undefined
+                },
+                a: {
+                    model: model,
+                    segs: ["a"],
+                    expected: model.children.a
+                },
+                b: {
+                    model: model,
+                    segs: ["b"],
+                    expected: model.children.b
+                },
+                c: {
+                    model: model,
+                    segs: ["a", "c"],
+                    expected: model.children.a.children.c
+                }
+            };
+
+            fluid.each(tests, function (testObj, testName) {
+                var result = gpii.oauth2.selectionTree.getModelNode(testObj.model, testObj.segs);
+                jqUnit.assertEquals("Model node '" + testName + "'", testObj.expected, result);
+            });
+        });
+
         jqUnit.test("gpii.oauth2.selectionTree.toServerModel", function () {
 
             var testPaths = {
-                "a.d": {},
-                "b.e": {"": true},
-                "c.k": {"m": true},
-                "a": {},
-                "b": {"": true},
-                "c": {"i": true, "k.m": true},
+                "children.a.children.d": {},
+                "children.b.children.e": {"": true},
+                "children.c.children.k": {"m": true},
+                "children.a": {},
+                "children.b": {"": true},
+                "children.c": {"i": true, "k.m": true},
                 "": {"b": true, "c.i": true, "c.k.m": true}
             };
 
@@ -116,7 +193,7 @@ https://github.com/gpii/universal/LICENSE.txt
             });
         });
 
-        jqUnit.test("gpii.oauth2.selectionTree.setAllDescendants", function () {
+        jqUnit.test("gpii.oauth2.selectionTree.setValueAndAllDescendants", function () {
             var tests = {
                 topLevel: {
                     model: {
@@ -129,39 +206,51 @@ https://github.com/gpii/universal/LICENSE.txt
                 singleLevel: {
                     model: {
                         value: "unset",
-                        a: {
-                            value: "unset"
-                        }
-                    },
-                    expected: {
-                        value: "set",
-                        a: {
-                            value: "set"
-                        }
-                    }
-                },
-                multiLevel: {
-                    model: {
-                        value: "unset",
-                        a: {
-                            value: "unset"
-                        },
-                        b: {
-                            value: "unset",
-                            c: {
+                        children: {
+                            a: {
                                 value: "unset"
                             }
                         }
                     },
                     expected: {
                         value: "set",
-                        a: {
-                            value: "set"
-                        },
-                        b: {
-                            value: "set",
-                            c: {
+                        children: {
+                            a: {
                                 value: "set"
+                            }
+                        }
+                    }
+                },
+                multiLevel: {
+                    model: {
+                        value: "unset",
+                        children: {
+                            a: {
+                                value: "unset"
+                            },
+                            b: {
+                                value: "unset",
+                                children: {
+                                    c: {
+                                        value: "unset"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    expected: {
+                        value: "set",
+                        children: {
+                            a: {
+                                value: "set"
+                            },
+                            b: {
+                                value: "set",
+                                children: {
+                                    c: {
+                                        value: "set"
+                                    }
+                                }
                             }
                         }
                     }
@@ -169,18 +258,18 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(tests, function (testObj, testName) {
-                gpii.oauth2.selectionTree.setAllDescendants(testObj.model, "set");
+                gpii.oauth2.selectionTree.setValueAndAllDescendants(testObj.model, "set");
                 jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.model);
             });
         });
 
-        jqUnit.test("gpii.oauth2.selectionTree.setAncestors", function () {
+        jqUnit.test("gpii.oauth2.selectionTree.updateAncestors", function () {
             var tests = {
                 topLevelChecked: {
                     model: {
                         value: "checked"
                     },
-                    path: "",
+                    segs: [],
                     expected: {
                         value: "checked"
                     }
@@ -189,7 +278,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     model: {
                         value: "unchecked"
                     },
-                    path: "",
+                    segs: [],
                     expected: {
                         value: "unchecked"
                     }
@@ -198,7 +287,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     model: {
                         value: "indeterminate"
                     },
-                    path: "",
+                    segs: [],
                     expected: {
                         value: "indeterminate"
                     }
@@ -206,71 +295,91 @@ https://github.com/gpii/universal/LICENSE.txt
                 singleLevelChecked: {
                     model: {
                         value: "",
-                        a: {
-                            value: "checked"
+                        children: {
+                            a: {
+                                value: "checked"
+                            }
                         }
                     },
-                    path: "a",
+                    segs: ["a"],
                     expected: {
                         value: "checked",
-                        a: {
-                            value: "checked"
+                        children: {
+                            a: {
+                                value: "checked"
+                            }
                         }
                     }
                 },
                 singleLevelUnchecked: {
                     model: {
                         value: "",
-                        a: {
-                            value: "unchecked"
+                        children: {
+                            a: {
+                                value: "unchecked"
+                            }
                         }
                     },
-                    path: "a",
+                    segs: ["a"],
                     expected: {
                         value: "unchecked",
-                        a: {
-                            value: "unchecked"
+                        children: {
+                            a: {
+                                value: "unchecked"
+                            }
                         }
                     }
                 },
                 singleLevelIndeterminate: {
                     model: {
                         value: "",
-                        a: {
-                            value: "indeterminate"
+                        children: {
+                            a: {
+                                value: "indeterminate"
+                            }
                         }
                     },
-                    path: "a",
+                    segs: ["a"],
                     expected: {
                         value: "indeterminate",
-                        a: {
-                            value: "indeterminate"
+                        children: {
+                            a: {
+                                value: "indeterminate"
+                            }
                         }
                     }
                 },
                 multiLevelChecked: {
                     model: {
                         value: "",
-                        a: {
-                            value: "checked"
-                        },
-                        b: {
-                            value: "",
-                            c: {
+                        children: {
+                            a: {
                                 value: "checked"
+                            },
+                            b: {
+                                value: "",
+                                children: {
+                                    c: {
+                                        value: "checked"
+                                    }
+                                }
                             }
                         }
                     },
-                    path: "b.c",
+                    segs: ["b", "c"],
                     expected: {
                         value: "checked",
-                        a: {
-                            value: "checked"
-                        },
-                        b: {
-                            value: "checked",
-                            c: {
+                        children: {
+                            a: {
                                 value: "checked"
+                            },
+                            b: {
+                                value: "checked",
+                                children: {
+                                    c: {
+                                        value: "checked"
+                                    }
+                                }
                             }
                         }
                     }
@@ -278,26 +387,34 @@ https://github.com/gpii/universal/LICENSE.txt
                 multiLevelUnChecked: {
                     model: {
                         value: "",
-                        a: {
-                            value: "unchecked"
-                        },
-                        b: {
-                            value: "",
-                            c: {
+                        children: {
+                            a: {
                                 value: "unchecked"
+                            },
+                            b: {
+                                value: "",
+                                children: {
+                                    c: {
+                                        value: "unchecked"
+                                    }
+                                }
                             }
                         }
                     },
-                    path: "b.c",
+                    segs: ["b", "c"],
                     expected: {
                         value: "unchecked",
-                        a: {
-                            value: "unchecked"
-                        },
-                        b: {
-                            value: "unchecked",
-                            c: {
+                        children: {
+                            a: {
                                 value: "unchecked"
+                            },
+                            b: {
+                                value: "unchecked",
+                                children: {
+                                    c: {
+                                        value: "unchecked"
+                                    }
+                                }
                             }
                         }
                     }
@@ -305,26 +422,34 @@ https://github.com/gpii/universal/LICENSE.txt
                 multiLevelIndeterminate: {
                     model: {
                         value: "",
-                        a: {
-                            value: "checked"
-                        },
-                        b: {
-                            value: "",
-                            c: {
-                                value: "unchecked"
+                        children: {
+                            a: {
+                                value: "checked"
+                            },
+                            b: {
+                                value: "",
+                                children: {
+                                    c: {
+                                        value: "unchecked"
+                                    }
+                                }
                             }
                         }
                     },
-                    path: "b.c",
+                    segs: ["b", "c"],
                     expected: {
                         value: "indeterminate",
-                        a: {
-                            value: "checked"
-                        },
-                        b: {
-                            value: "unchecked",
-                            c: {
-                                value: "unchecked"
+                        children: {
+                            a: {
+                                value: "checked"
+                            },
+                            b: {
+                                value: "unchecked",
+                                children: {
+                                    c: {
+                                        value: "unchecked"
+                                    }
+                                }
                             }
                         }
                     }
@@ -332,12 +457,12 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(tests, function (testObj, testName) {
-                gpii.oauth2.selectionTree.setAncestors(testObj.model, testObj.path);
+                gpii.oauth2.selectionTree.updateAncestors(testObj.model, testObj.segs);
                 jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.model);
             });
         });
 
-        jqUnit.test("gpii.oauth2.selectionTree.setEachSeg", function () {
+        jqUnit.test("gpii.oauth2.selectionTree.setValueAndAllAncestors", function () {
             var tests = {
                 topLevel: {
                     model: {
@@ -351,41 +476,70 @@ https://github.com/gpii/universal/LICENSE.txt
                 singleLevel: {
                     model: {
                         value: "unset",
-                        a: {
-                            value: "unset"
+                        children: {
+                            a: {
+                                value: "unset"
+                            }
                         }
                     },
                     segs: ["a"],
                     expected: {
                         value: "set",
-                        a: {
-                            value: "set"
+                        children: {
+                            a: {
+                                value: "set"
+                            }
                         }
                     }
                 },
                 multiLevel: {
                     model: {
                         value: "unset",
-                        a: {
-                            value: "unset"
-                        },
-                        b: {
-                            value: "unset",
-                            c: {
+                        children: {
+                            a: {
                                 value: "unset"
+                            },
+                            b: {
+                                value: "unset",
+                                children: {
+                                    c: {
+                                        value: "unset"
+                                    }
+                                }
                             }
                         }
                     },
                     segs: ["b", "c"],
                     expected: {
                         value: "set",
-                        a: {
-                            value: "unset"
-                        },
-                        b: {
-                            value: "set",
-                            c: {
-                                value: "set"
+                        children: {
+                            a: {
+                                value: "unset"
+                            },
+                            b: {
+                                value: "set",
+                                children: {
+                                    c: {
+                                        value: "set"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                multiLevelFromEmpty: {
+                    model: {},
+                    segs: ["b", "c"],
+                    expected: {
+                        value: "set",
+                        children: {
+                            b: {
+                                value: "set",
+                                children: {
+                                    c: {
+                                        value: "set"
+                                    }
+                                }
                             }
                         }
                     }
@@ -393,7 +547,7 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(tests, function (testObj, testName) {
-                gpii.oauth2.selectionTree.setEachSeg(testObj.model, testObj.segs, "set");
+                gpii.oauth2.selectionTree.setValueAndAllAncestors(testObj.model, testObj.segs, "set");
                 jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.model);
             });
         });
@@ -404,42 +558,56 @@ https://github.com/gpii/universal/LICENSE.txt
                 serverModel: {},
                 expected: {
                     value: "unchecked",
-                    a: {
-                        value: "unchecked",
-                        d: {
-                            value: "unchecked"
-                        }
-                    },
-                    b: {
-                        value: "unchecked",
-                        e: {
-                            value: "unchecked"
-                        },
-                        f: {
+                    children: {
+                        a: {
                             value: "unchecked",
-                            g: {
-                                value: "unchecked"
-                            }
-                        }
-                    },
-                    c: {
-                        value: "unchecked",
-                        h: {
-                            value: "unchecked"
-                        },
-                        i: {
-                            value: "unchecked",
-                            j: {
-                                value: "unchecked"
+                            children: {
+                                d: {
+                                    value: "unchecked"
+                                }
                             }
                         },
-                        k: {
+                        b: {
                             value: "unchecked",
-                            l: {
-                                value: "unchecked"
-                            },
-                            m: {
-                                value: "unchecked"
+                            children: {
+                                e: {
+                                    value: "unchecked"
+                                },
+                                f: {
+                                    value: "unchecked",
+                                    children: {
+                                        g: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        c: {
+                            value: "unchecked",
+                            children: {
+                                h: {
+                                    value: "unchecked"
+                                },
+                                i: {
+                                    value: "unchecked",
+                                    children: {
+                                        j: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                },
+                                k: {
+                                    value: "unchecked",
+                                    children: {
+                                        l: {
+                                            value: "unchecked"
+                                        },
+                                        m: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -448,42 +616,56 @@ https://github.com/gpii/universal/LICENSE.txt
                 serverModel: {"": true},
                 expected: {
                     value: "checked",
-                    a: {
-                        value: "checked",
-                        d: {
-                            value: "checked"
-                        }
-                    },
-                    b: {
-                        value: "checked",
-                        e: {
-                            value: "checked"
-                        },
-                        f: {
+                    children: {
+                        a: {
                             value: "checked",
-                            g: {
-                                value: "checked"
-                            }
-                        }
-                    },
-                    c: {
-                        value: "checked",
-                        h: {
-                            value: "checked"
-                        },
-                        i: {
-                            value: "checked",
-                            j: {
-                                value: "checked"
+                            children: {
+                                d: {
+                                    value: "checked"
+                                }
                             }
                         },
-                        k: {
+                        b: {
                             value: "checked",
-                            l: {
-                                value: "checked"
-                            },
-                            m: {
-                                value: "checked"
+                            children: {
+                                e: {
+                                    value: "checked"
+                                },
+                                f: {
+                                    value: "checked",
+                                    children: {
+                                        g: {
+                                            value: "checked"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        c: {
+                            value: "checked",
+                            children: {
+                                h: {
+                                    value: "checked"
+                                },
+                                i: {
+                                    value: "checked",
+                                    children: {
+                                        j: {
+                                            value: "checked"
+                                        }
+                                    }
+                                },
+                                k: {
+                                    value: "checked",
+                                    children: {
+                                        l: {
+                                            value: "checked"
+                                        },
+                                        m: {
+                                            value: "checked"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -492,42 +674,56 @@ https://github.com/gpii/universal/LICENSE.txt
                 serverModel: {"a": true},
                 expected: {
                     value: "indeterminate",
-                    a: {
-                        value: "checked",
-                        d: {
-                            value: "checked"
-                        }
-                    },
-                    b: {
-                        value: "unchecked",
-                        e: {
-                            value: "unchecked"
-                        },
-                        f: {
-                            value: "unchecked",
-                            g: {
-                                value: "unchecked"
-                            }
-                        }
-                    },
-                    c: {
-                        value: "unchecked",
-                        h: {
-                            value: "unchecked"
-                        },
-                        i: {
-                            value: "unchecked",
-                            j: {
-                                value: "unchecked"
+                    children: {
+                        a: {
+                            value: "checked",
+                            children: {
+                                d: {
+                                    value: "checked"
+                                }
                             }
                         },
-                        k: {
+                        b: {
                             value: "unchecked",
-                            l: {
-                                value: "unchecked"
-                            },
-                            m: {
-                                value: "unchecked"
+                            children: {
+                                e: {
+                                    value: "unchecked"
+                                },
+                                f: {
+                                    value: "unchecked",
+                                    children: {
+                                        g: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        c: {
+                            value: "unchecked",
+                            children: {
+                                h: {
+                                    value: "unchecked"
+                                },
+                                i: {
+                                    value: "unchecked",
+                                    children: {
+                                        j: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                },
+                                k: {
+                                    value: "unchecked",
+                                    children: {
+                                        l: {
+                                            value: "unchecked"
+                                        },
+                                        m: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -536,42 +732,56 @@ https://github.com/gpii/universal/LICENSE.txt
                 serverModel: {"b.f": true},
                 expected: {
                     value: "indeterminate",
-                    a: {
-                        value: "unchecked",
-                        d: {
-                            value: "unchecked"
-                        }
-                    },
-                    b: {
-                        value: "indeterminate",
-                        e: {
-                            value: "unchecked"
-                        },
-                        f: {
-                            value: "checked",
-                            g: {
-                                value: "checked"
-                            }
-                        }
-                    },
-                    c: {
-                        value: "unchecked",
-                        h: {
-                            value: "unchecked"
-                        },
-                        i: {
+                    children: {
+                        a: {
                             value: "unchecked",
-                            j: {
-                                value: "unchecked"
+                            children: {
+                                d: {
+                                    value: "unchecked"
+                                }
                             }
                         },
-                        k: {
+                        b: {
+                            value: "indeterminate",
+                            children: {
+                                e: {
+                                    value: "unchecked"
+                                },
+                                f: {
+                                    value: "checked",
+                                    children: {
+                                        g: {
+                                            value: "checked"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        c: {
                             value: "unchecked",
-                            l: {
-                                value: "unchecked"
-                            },
-                            m: {
-                                value: "unchecked"
+                            children: {
+                                h: {
+                                    value: "unchecked"
+                                },
+                                i: {
+                                    value: "unchecked",
+                                    children: {
+                                        j: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                },
+                                k: {
+                                    value: "unchecked",
+                                    children: {
+                                        l: {
+                                            value: "unchecked"
+                                        },
+                                        m: {
+                                            value: "unchecked"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -580,42 +790,56 @@ https://github.com/gpii/universal/LICENSE.txt
                 serverModel: {"a": true, "b.f": true, "c.i": true, "c.k.m": true},
                 expected: {
                     value: "indeterminate",
-                    a: {
-                        value: "checked",
-                        d: {
-                            value: "checked"
-                        }
-                    },
-                    b: {
-                        value: "indeterminate",
-                        e: {
-                            value: "unchecked"
-                        },
-                        f: {
+                    children: {
+                        a: {
                             value: "checked",
-                            g: {
-                                value: "checked"
-                            }
-                        }
-                    },
-                    c: {
-                        value: "indeterminate",
-                        h: {
-                            value: "unchecked"
-                        },
-                        i: {
-                            value: "checked",
-                            j: {
-                                value: "checked"
+                            children: {
+                                d: {
+                                    value: "checked"
+                                }
                             }
                         },
-                        k: {
+                        b: {
                             value: "indeterminate",
-                            l: {
-                                value: "unchecked"
-                            },
-                            m: {
-                                value: "checked"
+                            children: {
+                                e: {
+                                    value: "unchecked"
+                                },
+                                f: {
+                                    value: "checked",
+                                    children: {
+                                        g: {
+                                            value: "checked"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        c: {
+                            value: "indeterminate",
+                            children: {
+                                h: {
+                                    value: "unchecked"
+                                },
+                                i: {
+                                    value: "checked",
+                                    children: {
+                                        j: {
+                                            value: "checked"
+                                        }
+                                    }
+                                },
+                                k: {
+                                    value: "indeterminate",
+                                    children: {
+                                        l: {
+                                            value: "unchecked"
+                                        },
+                                        m: {
+                                            value: "checked"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -623,7 +847,7 @@ https://github.com/gpii/universal/LICENSE.txt
             }];
 
             fluid.each(tests, function (testObj) {
-                var result = gpii.oauth2.selectionTree.toModel(testObj.serverModel, gpii.tests.oauth2.selectionTree.sampleReqPrefs);
+                var result = gpii.oauth2.selectionTree.toModel(testObj.serverModel, gpii.tests.oauth2.selectionTree.sampleClientAvailablePrefs);
                 jqUnit.assertDeepEq("The component model should be generated correctly for '" + JSON.stringify(testObj.serverModel) + "'", testObj.expected, result);
             });
 
