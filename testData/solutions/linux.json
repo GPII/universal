@@ -136,6 +136,9 @@
                             "options": {
                                 "true": {
                                     "outputValue": "HighContrast"
+                                },
+                                "false": {
+                                    "outputValue": "Adwaita"
                                 }
                             }
                         }
@@ -147,6 +150,9 @@
                             "options": {
                                 "true": {
                                     "outputValue": "HighContrast"
+                                },
+                                "false": {
+                                    "outputValue": "gnome"
                                 }
                             }
                         }
