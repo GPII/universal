@@ -54,7 +54,12 @@ gpii.tests.linux.dynamicDeviceReporter = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     }
 ];
 
