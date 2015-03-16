@@ -22,15 +22,15 @@
                 "capabilitiesTransformations": {
                     "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
                     "show-cross-hairs": "http://registry\\.gpii\\.net/common/showCrosshairs",
-                    "mouse-tracking": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/tracking",
-                            "options": {
-                                "mouse": {
-                                    "outputValue": "centered"
-                                }
-                            }
+                    "transform": {
+                        "type": "fluid.transforms.arrayToSetMembership",
+                        "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "presentValue": "proportional",
+                        "missingValue": "none",
+                        "options": {
+                            "focus": "focus-tracking",
+                            "caret": "caret-tracking",
+                            "mouse": "mouse-tracking"
                         }
                     },
                     "screen-position": {

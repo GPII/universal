@@ -30,7 +30,9 @@ gpii.tests.linux.builtIn = [
                 "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
-                        "screen-position": "full-screen"
+                        "screen-position": "full-screen",
+                        "mouse-tracking": "proportional",
+                        "caret-tracking": "proportional"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -103,7 +105,9 @@ gpii.tests.linux.builtIn = [
                 "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
-                        "screen-position": "full-screen"
+                        "screen-position": "full-screen",
+                        "mouse-tracking": "proportional",
+                        "caret-tracking": "proportional"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
