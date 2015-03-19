@@ -1,7 +1,7 @@
 /**
  * GPII Context Integration Tests
  *
- * Copyright 2014 Lucendo Development Ltd.
+ * Copyright 2014 Raising the Floor - International
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
