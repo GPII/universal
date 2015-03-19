@@ -77,26 +77,16 @@ https://github.com/gpii/universal/LICENSE.txt
             });
         });
 
-        jqUnit.test("gpii.oauth2.setDisabled", function () {
-            var selectors = {
-                bool: ".test-bool",
-                checked: ".test-checked",
-                indeterminate: ".test-indeterminate"
-            };
+        jqUnit.test("gpii.oauth2.setEnabled", function () {
+            var elm = $(".test-setEnabled");
 
-            fluid.each(selectors, function (selector, type) {
-                var elm = $(selector);
-                var enabledState = type === "bool" ? true : type;
-                var disabledState = type === "bool" ? false : "unchecked";
+            jqUnit.assertFalse("the button should be enabled to start", elm.prop("disabled"));
 
-                jqUnit.assertFalse("'" + type + "' test - the button should be enabled to start", elm.prop("disabled"));
+            gpii.oauth2.setEnabled(elm, false);
+            jqUnit.assertTrue("the button should be disabled", elm.prop("disabled"));
 
-                gpii.oauth2.setDisabled(elm, disabledState);
-                jqUnit.assertTrue("'" + type + "' test - the button should be disabled", elm.prop("disabled"));
-
-                gpii.oauth2.setDisabled(elm, enabledState);
-                jqUnit.assertFalse("'" + type + "' test - the button should be enabled", elm.prop("disabled"));
-            });
+            gpii.oauth2.setEnabled(elm, true);
+            jqUnit.assertFalse("the button should be enabled", elm.prop("disabled"));
         });
 
     });

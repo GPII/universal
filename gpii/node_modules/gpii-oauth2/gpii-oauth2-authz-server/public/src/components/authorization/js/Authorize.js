@@ -94,7 +94,7 @@ var gpii = gpii || {};
                 value: "{arguments}.0"
             },
             setAllowState: {
-                "funcName": "gpii.oauth2.setDisabled",
+                "funcName": "gpii.oauth2.setEnabled",
                 "args": ["{that}.dom.allow", "{arguments}.0"]
             }
         },
@@ -108,16 +108,18 @@ var gpii = gpii || {};
                 container: "{that}.dom.selection",
                 createOnEvent: "onCreateSelectionTree",
                 options: {
-                    requestedPrefs: "{authorization}.model.availableAuthorizedPrefs",
+                    availablePrefs: "{authorization}.model.availableAuthorizedPrefs",
                     model: {
-                        expander: {
-                            funcName: "gpii.oauth2.selectionTree.toModel",
-                            // The original model is expected to have nothing selected as no previous decisions have been made
-                            args: [{}, "{that}.options.requestedPrefs"]
+                        selections: {
+                            expander: {
+                                funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
+                                // The original model is expected to have nothing selected as no previous decisions have been made
+                                args: [{}, "{that}.options.availablePrefs"]
+                            }
                         }
                     },
                     modelListeners: {
-                        "": {
+                        "selections": {
                             listener: "gpii.oauth2.authorization.setSelection",
                             args: ["{authorization}.dom.selectionValue", {
                                 expander: {
@@ -125,7 +127,7 @@ var gpii = gpii || {};
                                 }
                             }]
                         },
-                        "value": {
+                        "hasSelection": {
                             listener: "{authorization}.setAllowState",
                             args: ["{change}.value"]
                         }

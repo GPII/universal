@@ -139,7 +139,7 @@ var gpii = gpii || {};
                             args: [{
                                 expander: {
                                     func: "{selectionTree}.toServerModel",
-                                    args: "{selectionTree}.model"
+                                    args: "{selectionTree}.model.selections"
                                 }
                             }]
                         }
@@ -175,7 +175,7 @@ var gpii = gpii || {};
                 args: ["{that}"]
             },
             setDoneState: {
-                "funcName": "gpii.oauth2.setDisabled",
+                "funcName": "gpii.oauth2.setEnabled",
                 "args": ["{that}.dom.done", "{arguments}.0"]
             }
         },
@@ -206,15 +206,17 @@ var gpii = gpii || {};
                 container: "{that}.dom.selection",
                 createOnEvent: "onCreateSelectionTree",
                 options: {
-                    requestedPrefs: "{editPrivacySettings}.model.availableAuthorizedPrefs",
+                    availablePrefs: "{editPrivacySettings}.model.availableAuthorizedPrefs",
                     model: {
-                        expander: {
-                            funcName: "gpii.oauth2.selectionTree.toModel",
-                            args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
+                        selections: {
+                            expander: {
+                                funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
+                                args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
+                            }
                         }
                     },
                     modelListeners: {
-                        "value": {
+                        "hasSelection": {
                             listener: "{editPrivacySettings}.setDoneState",
                             args: ["{change}.value"]
                         }

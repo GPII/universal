@@ -27,9 +27,8 @@ var gpii = gpii || {};
         $.ajax(url, options);
     };
 
-    gpii.oauth2.setDisabled = function (elm, state) {
-        var hasSelection = state && state !== "unchecked";
-        elm.prop("disabled", !hasSelection);
+    gpii.oauth2.setEnabled = function (elm, enabled) {
+        elm.prop("disabled", !enabled);
     };
 
 })(jQuery, fluid);

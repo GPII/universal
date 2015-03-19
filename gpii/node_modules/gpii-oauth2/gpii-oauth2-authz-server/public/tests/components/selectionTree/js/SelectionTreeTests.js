@@ -30,7 +30,7 @@ https://github.com/gpii/universal/LICENSE.txt
             "c.k.m": true
         };
 
-        gpii.tests.oauth2.selectionTree.sampleComponentModel = {
+        gpii.tests.oauth2.selectionTree.sampleComponentSelections = {
             value: "indeterminate",
             children: {
                 a: {
@@ -87,9 +87,9 @@ https://github.com/gpii/universal/LICENSE.txt
             }
         };
 
-        jqUnit.test("gpii.oauth2.selectionTree.getModelNode", function () {
+        jqUnit.test("gpii.oauth2.selectionTree.getSelectionNode", function () {
 
-            var model = {
+            var selections = {
                 value: "root",
                 children: {
                     a: {
@@ -107,46 +107,46 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             var tests = {
-                nullModel: {
-                    model: null,
+                nullSelections: {
+                    selections: null,
                     segs: ["a"],
                     expected: null
                 },
                 root: {
-                    model: model,
+                    selections: selections,
                     segs: [],
-                    expected: model
+                    expected: selections
                 },
                 missingNode1: {
-                    model: model,
+                    selections: selections,
                     segs: ["z"],
                     expected: undefined
                 },
                 missingNode2: {
-                    model: model,
+                    selections: selections,
                     segs: ["b", "c"],
                     expected: undefined
                 },
                 a: {
-                    model: model,
+                    selections: selections,
                     segs: ["a"],
-                    expected: model.children.a
+                    expected: selections.children.a
                 },
                 b: {
-                    model: model,
+                    selections: selections,
                     segs: ["b"],
-                    expected: model.children.b
+                    expected: selections.children.b
                 },
                 c: {
-                    model: model,
+                    selections: selections,
                     segs: ["a", "c"],
-                    expected: model.children.a.children.c
+                    expected: selections.children.a.children.c
                 }
             };
 
             fluid.each(tests, function (testObj, testName) {
-                var result = gpii.oauth2.selectionTree.getModelNode(testObj.model, testObj.segs);
-                jqUnit.assertEquals("Model node '" + testName + "'", testObj.expected, result);
+                var result = gpii.oauth2.selectionTree.getSelectionNode(testObj.selections, testObj.segs);
+                jqUnit.assertEquals("Selections node '" + testName + "'", testObj.expected, result);
             });
         });
 
@@ -163,8 +163,8 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(testPaths, function (expected, path) {
-                var model = fluid.get(gpii.tests.oauth2.selectionTree.sampleComponentModel, path);
-                var result = gpii.oauth2.selectionTree.toServerModel(model);
+                var selections = fluid.get(gpii.tests.oauth2.selectionTree.sampleComponentSelections, path);
+                var result = gpii.oauth2.selectionTree.toServerModel(selections);
                 jqUnit.assertDeepEq("The server model should be generated correctly for '" + path + "'", expected, result);
             });
         });
@@ -196,7 +196,7 @@ https://github.com/gpii/universal/LICENSE.txt
         jqUnit.test("gpii.oauth2.selectionTree.setValueAndAllDescendants", function () {
             var tests = {
                 topLevel: {
-                    model: {
+                    selections: {
                         value: "unset"
                     },
                     expected: {
@@ -204,7 +204,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 singleLevel: {
-                    model: {
+                    selections: {
                         value: "unset",
                         children: {
                             a: {
@@ -222,7 +222,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 multiLevel: {
-                    model: {
+                    selections: {
                         value: "unset",
                         children: {
                             a: {
@@ -258,15 +258,15 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(tests, function (testObj, testName) {
-                gpii.oauth2.selectionTree.setValueAndAllDescendants(testObj.model, "set");
-                jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.model);
+                gpii.oauth2.selectionTree.setValueAndAllDescendants(testObj.selections, "set");
+                jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.selections);
             });
         });
 
         jqUnit.test("gpii.oauth2.selectionTree.updateAncestors", function () {
             var tests = {
                 topLevelChecked: {
-                    model: {
+                    selections: {
                         value: "checked"
                     },
                     segs: [],
@@ -275,7 +275,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 topLevelUnChecked: {
-                    model: {
+                    selections: {
                         value: "unchecked"
                     },
                     segs: [],
@@ -284,7 +284,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 topLevelIndeterminate: {
-                    model: {
+                    selections: {
                         value: "indeterminate"
                     },
                     segs: [],
@@ -293,7 +293,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 singleLevelChecked: {
-                    model: {
+                    selections: {
                         value: "",
                         children: {
                             a: {
@@ -312,7 +312,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 singleLevelUnchecked: {
-                    model: {
+                    selections: {
                         value: "",
                         children: {
                             a: {
@@ -331,7 +331,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 singleLevelIndeterminate: {
-                    model: {
+                    selections: {
                         value: "",
                         children: {
                             a: {
@@ -350,7 +350,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 multiLevelChecked: {
-                    model: {
+                    selections: {
                         value: "",
                         children: {
                             a: {
@@ -385,7 +385,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 multiLevelUnChecked: {
-                    model: {
+                    selections: {
                         value: "",
                         children: {
                             a: {
@@ -420,7 +420,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 multiLevelIndeterminate: {
-                    model: {
+                    selections: {
                         value: "",
                         children: {
                             a: {
@@ -457,15 +457,15 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(tests, function (testObj, testName) {
-                gpii.oauth2.selectionTree.updateAncestors(testObj.model, testObj.segs);
-                jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.model);
+                gpii.oauth2.selectionTree.updateAncestors(testObj.selections, testObj.segs);
+                jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.selections);
             });
         });
 
         jqUnit.test("gpii.oauth2.selectionTree.setValueAndAllAncestors", function () {
             var tests = {
                 topLevel: {
-                    model: {
+                    selections: {
                         value: "unset"
                     },
                     segs: [],
@@ -474,7 +474,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 singleLevel: {
-                    model: {
+                    selections: {
                         value: "unset",
                         children: {
                             a: {
@@ -493,7 +493,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 multiLevel: {
-                    model: {
+                    selections: {
                         value: "unset",
                         children: {
                             a: {
@@ -528,7 +528,7 @@ https://github.com/gpii/universal/LICENSE.txt
                     }
                 },
                 multiLevelFromEmpty: {
-                    model: {},
+                    selections: {},
                     segs: ["b", "c"],
                     expected: {
                         value: "set",
@@ -547,12 +547,12 @@ https://github.com/gpii/universal/LICENSE.txt
             };
 
             fluid.each(tests, function (testObj, testName) {
-                gpii.oauth2.selectionTree.setValueAndAllAncestors(testObj.model, testObj.segs, "set");
-                jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.model);
+                gpii.oauth2.selectionTree.setValueAndAllAncestors(testObj.selections, testObj.segs, "set");
+                jqUnit.assertDeepEq("The '" + testName + "' test object should be set correctly", testObj.expected, testObj.selections);
             });
         });
 
-        jqUnit.test("gpii.oauth2.selectionTree.toModel", function () {
+        jqUnit.test("gpii.oauth2.selectionTree.toSelectionsModel", function () {
 
             var tests = [{
                 serverModel: {},
@@ -847,7 +847,7 @@ https://github.com/gpii/universal/LICENSE.txt
             }];
 
             fluid.each(tests, function (testObj) {
-                var result = gpii.oauth2.selectionTree.toModel(testObj.serverModel, gpii.tests.oauth2.selectionTree.sampleClientAvailablePrefs);
+                var result = gpii.oauth2.selectionTree.toSelectionsModel(testObj.serverModel, gpii.tests.oauth2.selectionTree.sampleClientAvailablePrefs);
                 jqUnit.assertDeepEq("The component model should be generated correctly for '" + JSON.stringify(testObj.serverModel) + "'", testObj.expected, result);
             });
 
@@ -909,49 +909,7 @@ https://github.com/gpii/universal/LICENSE.txt
 
         fluid.defaults("gpii.tests.oauth2.preferencesSelectionTree", {
             gradeNames: ["gpii.oauth2.preferencesSelectionTree", "autoInit"],
-            model: {
-                value: "indeterminate",
-                "increase-size": {
-                    value: "checked",
-                    appearance: {
-                        value: "checked",
-                        "text-size": {
-                            value: "checked"
-                        }
-                    }
-                },
-                simplify: {
-                    value: "unchecked",
-                    "table-of-contents": {
-                        value: "unchecked"
-                    }
-                },
-                "universal-volume": {
-                    value: "unchecked"
-                },
-                "universal-language": {
-                    value: "unchecked"
-                },
-                "visual-alternatives": {
-                    value: "unchecked",
-                    "speak-text": {
-                        value: "unchecked",
-                        rate: {
-                            value: "unchecked"
-                        },
-                        volume: {
-                            value: "unchecked"
-                        }
-                    }
-                },
-                "visual-styling": {
-                    value: "unchecked",
-                    "change-contrast": {
-                        value: "unchecked"
-                    }
-                }
-            },
-            requestedPrefs: {
+            availablePrefs: {
                 "increase-size": true,
                 "increase-size.appearance": true,
                 "increase-size.appearance.text-size": true,
@@ -981,7 +939,7 @@ https://github.com/gpii/universal/LICENSE.txt
             var assertSelectionTree = function (that) {
                 fluid.each(that.options.domMap, function (selector, selectorName) {
                     var elm = that.container.find(selector);
-                    if (that.options.requestedPrefs[selectorName] || selectorName === "") {
+                    if (that.options.availablePrefs[selectorName] || selectorName === "") {
                         jqUnit.exists("'" + selector + "' should exist", elm);
                     } else {
                         jqUnit.notExists("'" + selector + "' should not exist", elm);
@@ -1030,5 +988,39 @@ https://github.com/gpii/universal/LICENSE.txt
                 }
             });
         });
+
+        jqUnit.asyncTest("model.hasSelection is updated after selections model change", function () {
+            var testHasSelection = function (that) {
+                jqUnit.assertFalse("model.hasSelection is initially false", that.model.hasSelection);
+
+                // load an all-checked preferences set
+                gpii.oauth2.selectionTree.updateSelectionsFromServer(that, {"": true});
+                jqUnit.assertEquals("model.selections.value is \"checked\" after loading an all-checked preferences set", "checked", that.model.selections.value);
+                jqUnit.assertTrue("model.hasSelection is true after loading an all-checked preferences set", that.model.hasSelection);
+
+                // uncheck root
+                gpii.oauth2.selectionTree.updateSelectionsModel(that, "", "unchecked");
+                jqUnit.assertEquals("model.selections.value is \"unchecked\" after unchecking root", "unchecked", that.model.selections.value);
+                jqUnit.assertFalse("model.hasSelection is false after unchecking root", that.model.hasSelection);
+
+                // check a child value
+                gpii.oauth2.selectionTree.updateSelectionsModel(that, "simplify", "checked");
+                jqUnit.assertEquals("model.selections.value is \"indeterminate\" after checking a child value", "indeterminate", that.model.selections.value);
+                jqUnit.assertTrue("model.hasSelection is true after checking a child value", that.model.hasSelection);
+
+                // continue test
+                jqUnit.start();
+            };
+
+            gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree-testHasSelection", {
+                listeners: {
+                    afterTemplateLoaded: {
+                        func: testHasSelection,
+                        priority: "last"
+                    }
+                }
+            });
+        });
+
     });
 })(jQuery);

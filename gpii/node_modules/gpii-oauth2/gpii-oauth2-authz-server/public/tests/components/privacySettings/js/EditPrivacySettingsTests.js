@@ -106,13 +106,13 @@ https://github.com/gpii/universal/LICENSE.txt
         };
 
         gpii.tests.oauth2.editPrivacySettings.assertAllowState = function (that) {
-            var noSelections = that.selectionTree.model.value === "unchecked";
+            var hasSelection = that.selectionTree.model.hasSelection;
             var isDisabled = that.locate("done").prop("disabled");
 
-            if (noSelections) {
-                jqUnit.assertTrue("The done button should be disabled", isDisabled);
-            } else {
+            if (hasSelection) {
                 jqUnit.assertFalse("The done button should be enabled", isDisabled);
+            } else {
+                jqUnit.assertTrue("The done button should be disabled", isDisabled);
             }
         };
 
@@ -146,11 +146,11 @@ https://github.com/gpii/universal/LICENSE.txt
 
         gpii.tests.oauth2.editPrivacySettings.assertSelectionChange = function (that) {
             jqUnit.expect(5);
-            that.selectionTree.applier.change("value", "checked");
+            that.selectionTree.applier.change("selections.value", "checked");
             gpii.tests.oauth2.editPrivacySettings.assertSelectedPreferences(that, {"": true});
             gpii.tests.oauth2.editPrivacySettings.assertAllowState(that);
 
-            that.selectionTree.applier.change("value", "unchecked");
+            that.selectionTree.applier.change("selections.value", "unchecked");
             gpii.tests.oauth2.editPrivacySettings.assertSelectedPreferences(that, {});
             gpii.tests.oauth2.editPrivacySettings.assertAllowState(that);
 

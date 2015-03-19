@@ -39,8 +39,26 @@ var gpii = gpii || {};
             expanded: "gpii-icon-minus-small",
             select: "gpii-oauth2-focus"
         },
-        model: {},
-        requestedPrefs: {},
+        model: {
+            selections: {},
+            hasSelection: false
+        },
+        modelRelay: {
+            source: "{that}.model.selections.value",
+            target: "{that}.model.hasSelection",
+            backward: "never",
+            singleTransform: {
+                type: "fluid.transforms.valueMapper",
+                inputPath: "",
+                defaultInputValue: "otherwise",
+                options: {
+                    "checked": true,
+                    "indeterminate": true,
+                    "otherwise": { outputValue: false }
+                }
+            }
+        },
+        availablePrefs: {},
         resources: {
             template: {
                 href: "../html/SelectionTreeTemplate.html",
@@ -52,25 +70,25 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.refresh",
                 args: ["{that}"]
             },
-            toModel: {
-                funcName: "gpii.oauth2.selectionTree.toModel",
-                args: ["{arguments}.0", "{that}.options.requestedPrefs"]
+            toSelectionsModel: {
+                funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
+                args: ["{arguments}.0", "{that}.options.availablePrefs"]
             },
             toServerModel: {
                 funcName:"gpii.oauth2.selectionTree.toServerModel",
-                args: ["{that}.model"]
+                args: ["{that}.model.selections"]
             },
             // TODO: Currently the Security UI's are a mixture of
             // payload (ajax) and markup-driven (via handlebars rendering).
             // In the future this will all be moved to payload driven, at
             // which point all of the serverModel logic should be moved out
             // of this implementation.
-            updateModelFromServer: {
-                funcName: "gpii.oauth2.selectionTree.updateModelFromServer",
+            updateSelectionsFromServer: {
+                funcName: "gpii.oauth2.selectionTree.updateSelectionsFromServer",
                 args: ["{that}", "{arguments}.0"]
             },
-            updateModel: {
-                funcName: "gpii.oauth2.selectionTree.updateModel",
+            updateSelectionsModel: {
+                funcName: "gpii.oauth2.selectionTree.updateSelectionsModel",
                 args: ["{that}", "{arguments}.0", "{arguments}.1"]
             },
             removeLeaf: {
@@ -101,8 +119,8 @@ var gpii = gpii || {};
                 funcName: "gpii.oauth2.selectionTree.toggleClass",
                 args: ["{arguments}.0", "{that}.options.styles.select", false]
             },
-            updateDOMFromModel: {
-                funcName: "gpii.oauth2.selectionTree.updateDOMFromModel",
+            updateDOMFromSelectionsModel: {
+                funcName: "gpii.oauth2.selectionTree.updateDOMFromSelectionsModel",
                 args: ["{that}", "{arguments}.0", "{arguments}.1"]
             },
             updateDOMState: {
@@ -143,8 +161,8 @@ var gpii = gpii || {};
                 args: [false]
             },
             "afterTemplateLoaded.setState": {
-                listener: "{that}.updateDOMFromModel",
-                args: ["{that}.model"]
+                listener: "{that}.updateDOMFromSelectionsModel",
+                args: ["{that}.model.selections"]
             },
             //TODO: Modify keyboard a11y to use arrows instead of tabs.
             // http://oaa-accessibility.org/example/41/
@@ -200,7 +218,7 @@ var gpii = gpii || {};
             },
             bindDOMListener: {
                 funcName: "gpii.oauth2.selectionTree.bindDOMListener",
-                args: ["{that}", "{arguments}.0", "{arguments}.1", "{that}.updateModel"]
+                args: ["{that}", "{arguments}.0", "{arguments}.1", "{that}.updateSelectionsModel"]
             }
         }
     });
@@ -250,20 +268,20 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.updateModelFromServer = function (that, serverModel) {
-        var newModel = that.toModel(serverModel);
-        that.applier.change("", newModel);
+    gpii.oauth2.selectionTree.updateSelectionsFromServer = function (that, serverModel) {
+        var newSelections = that.toSelectionsModel(serverModel);
+        that.applier.change("selections", newSelections);
     };
 
-    gpii.oauth2.selectionTree.updateDOMFromModel = function (that, newModel, oldModel) {
-        var requestedPrefs = [""].concat(fluid.keys(that.options.requestedPrefs));
-        fluid.each(requestedPrefs, function (requestedPref) {
-            var segs = fluid.model.pathToSegments(requestedPref);
-            var newVal = gpii.oauth2.selectionTree.getModelNodeValue(newModel, segs);
-            var oldVal = gpii.oauth2.selectionTree.getModelNodeValue(oldModel, segs);
+    gpii.oauth2.selectionTree.updateDOMFromSelectionsModel = function (that, newSelections, oldSelections) {
+        var availablePrefs = [""].concat(fluid.keys(that.options.availablePrefs));
+        fluid.each(availablePrefs, function (availablePref) {
+            var segs = fluid.model.pathToSegments(availablePref);
+            var newVal = gpii.oauth2.selectionTree.getSelectionNodeValue(newSelections, segs);
+            var oldVal = gpii.oauth2.selectionTree.getSelectionNodeValue(oldSelections, segs);
 
             if (newVal !== oldVal) {
-                var elm = that.container.find(that.options.domMap[requestedPref]);
+                var elm = that.container.find(that.options.domMap[availablePref]);
                 that.updateDOMState(elm, newVal);
             }
         });
@@ -272,7 +290,7 @@ var gpii = gpii || {};
     gpii.oauth2.selectionTree.DOMSetup = function (that) {
         fluid.each(that.options.domMap, function (selector, selectorName) {
             var elm = that.container.find(selector);
-            if (that.options.requestedPrefs[selectorName] || selectorName === "") {
+            if (that.options.availablePrefs[selectorName] || selectorName === "") {
                 // bind change event to update model (checked/unchecked)
                 that.bindDOMListener(elm, selectorName);
             } else {
@@ -281,17 +299,17 @@ var gpii = gpii || {};
         });
 
         // bind modelListener to update dom (checked/indeterminate)
-        that.applier.modelChanged.addListener("", that.updateDOMFromModel);
+        that.applier.modelChanged.addListener("selections", that.updateDOMFromSelectionsModel);
     };
 
-    gpii.oauth2.selectionTree.updateModel = function (that, ELPath, state) {
-        var model = fluid.copy(that.model);
+    gpii.oauth2.selectionTree.updateSelectionsModel = function (that, ELPath, state) {
+        var newSelections = fluid.copy(that.model.selections);
 
         var segs = fluid.model.pathToSegments(ELPath);
-        gpii.oauth2.selectionTree.setValueAndAllDescendants(gpii.oauth2.selectionTree.getModelNode(model, segs), state);
-        gpii.oauth2.selectionTree.updateAncestors(model, segs);
+        gpii.oauth2.selectionTree.setValueAndAllDescendants(gpii.oauth2.selectionTree.getSelectionNode(newSelections, segs), state);
+        gpii.oauth2.selectionTree.updateAncestors(newSelections, segs);
 
-        that.applier.change("", model);
+        that.applier.change("selections", newSelections);
     };
 
     gpii.oauth2.selectionTree.bindDOMListener = function (that, elm, ELPath, updateModelFn) {
@@ -323,39 +341,39 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.getModelNode = function (model, segs) {
+    gpii.oauth2.selectionTree.getSelectionNode = function (selections, segs) {
         var nodePath = [];
         fluid.each(segs, function (seg) {
             nodePath.push("children");
             nodePath.push(seg);
         });
-        return fluid.get(model, nodePath);
+        return fluid.get(selections, nodePath);
     };
 
-    gpii.oauth2.selectionTree.getModelNodeValue = function (model, segs) {
-        var node = gpii.oauth2.selectionTree.getModelNode(model, segs);
+    gpii.oauth2.selectionTree.getSelectionNodeValue = function (selections, segs) {
+        var node = gpii.oauth2.selectionTree.getSelectionNode(selections, segs);
         return node ? node.value : undefined;
     };
 
-    gpii.oauth2.selectionTree.setValueAndAllDescendants = function (model, value) {
-        model.value = value;
-        fluid.each(model.children, function (childModel) {
-            gpii.oauth2.selectionTree.setValueAndAllDescendants(childModel, value);
+    gpii.oauth2.selectionTree.setValueAndAllDescendants = function (newSelections, value) {
+        newSelections.value = value;
+        fluid.each(newSelections.children, function (child) {
+            gpii.oauth2.selectionTree.setValueAndAllDescendants(child, value);
         });
     };
 
-    gpii.oauth2.selectionTree.setValueAndAllAncestors = function (model, segs, value) {
-        model.value = value;
+    gpii.oauth2.selectionTree.setValueAndAllAncestors = function (newSelections, segs, value) {
+        newSelections.value = value;
         if (segs.length > 0) {
             // build out the structure if it doesn't exist yet
-            if (!model.children) {
-                model.children = {};
+            if (!newSelections.children) {
+                newSelections.children = {};
             }
-            if (!model.children[segs[0]]) {
-                model.children[segs[0]] = {};
+            if (!newSelections.children[segs[0]]) {
+                newSelections.children[segs[0]] = {};
             }
             // recurse down the segs
-            gpii.oauth2.selectionTree.setValueAndAllAncestors(model.children[segs[0]], segs.slice(1), value);
+            gpii.oauth2.selectionTree.setValueAndAllAncestors(newSelections.children[segs[0]], segs.slice(1), value);
         }
     };
 
@@ -364,19 +382,19 @@ var gpii = gpii || {};
      * The state is calculated by determining the states of all the children.
      * checked (all children checked), unchecked (all children unchecked), indeterminate (mixture of checked, unchecked, and/or indeterminate)
      */
-    gpii.oauth2.selectionTree.updateAncestors = function (model, segs) {
+    gpii.oauth2.selectionTree.updateAncestors = function (newSelections, segs) {
         var parentSegs = fluid.copy(segs);
         while (parentSegs.length > 0) {
             parentSegs.pop();
-            var parent = gpii.oauth2.selectionTree.getModelNode(model, parentSegs);
+            var parent = gpii.oauth2.selectionTree.getSelectionNode(newSelections, parentSegs);
             parent.value = gpii.oauth2.selectionTree.calculateValueFromChildren(parent);
         }
     };
 
-    gpii.oauth2.selectionTree.calculateValueFromChildren = function (model) {
+    gpii.oauth2.selectionTree.calculateValueFromChildren = function (selection) {
         var calculatedValue;
-        fluid.each(model.children, function (childModel) {
-            var childValue = childModel.value;
+        fluid.each(selection.children, function (child) {
+            var childValue = child.value;
             if (!calculatedValue) {
                 calculatedValue = childValue;
             }
@@ -387,22 +405,22 @@ var gpii = gpii || {};
         return calculatedValue;
     };
 
-    gpii.oauth2.selectionTree.gatherPaths = function (paths, prefix, model) {
-        var nodeValue = model.value;
+    gpii.oauth2.selectionTree.gatherPaths = function (paths, prefix, selections) {
+        var nodeValue = selections.value;
         if (nodeValue === "checked") {
             paths.push(prefix.join("."));
         } else if (nodeValue === "indeterminate") {
-            fluid.each(model.children, function (childModel, seg) {
+            fluid.each(selections.children, function (child, seg) {
                 prefix.push(seg);
-                gpii.oauth2.selectionTree.gatherPaths(paths, prefix, childModel);
+                gpii.oauth2.selectionTree.gatherPaths(paths, prefix, child);
                 prefix.pop();
             });
         }
     };
 
-    gpii.oauth2.selectionTree.toServerModel = function (model) {
+    gpii.oauth2.selectionTree.toServerModel = function (selections) {
         var paths = [];
-        gpii.oauth2.selectionTree.gatherPaths(paths, [], model);
+        gpii.oauth2.selectionTree.gatherPaths(paths, [], selections);
         return fluid.arrayToHash(paths);
     };
 
@@ -413,19 +431,19 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.selectionTree.toModel = function (setPrefs, clientAvailablePrefs) {
-        var model = {};
-        var clientAvailablePrefsSegs = gpii.oauth2.selectionTree.pathsToSegs(clientAvailablePrefs);
+    gpii.oauth2.selectionTree.toSelectionsModel = function (setPrefs, availablePrefs) {
+        var newSelections = {};
+        var clientAvailablePrefsSegs = gpii.oauth2.selectionTree.pathsToSegs(availablePrefs);
         var setPrefsSegs = gpii.oauth2.selectionTree.pathsToSegs(setPrefs);
 
         // build out the model, setting each client available pref to "unchecked"
         fluid.each(clientAvailablePrefsSegs, function (segs) {
-            gpii.oauth2.selectionTree.setValueAndAllAncestors(model, segs, "unchecked");
+            gpii.oauth2.selectionTree.setValueAndAllAncestors(newSelections, segs, "unchecked");
         });
 
         // set each user selected pref value to "checked"
         fluid.each(setPrefsSegs, function (segs) {
-            gpii.oauth2.selectionTree.setValueAndAllDescendants(gpii.oauth2.selectionTree.getModelNode(model, segs), "checked");
+            gpii.oauth2.selectionTree.setValueAndAllDescendants(gpii.oauth2.selectionTree.getSelectionNode(newSelections, segs), "checked");
         });
 
         fluid.each(setPrefsSegs, function (segs) {
@@ -433,11 +451,11 @@ var gpii = gpii || {};
             // otherwise, set each non-leaf node value to "indeterminate"
             if ((segs.length > 0) && (segs[0] !== "")) {
                 segs.pop(); // remove last segment as it was checked
-                gpii.oauth2.selectionTree.setValueAndAllAncestors(model, segs, "indeterminate");
+                gpii.oauth2.selectionTree.setValueAndAllAncestors(newSelections, segs, "indeterminate");
             }
         });
 
-        return model;
+        return newSelections;
     };
 
 })(jQuery);

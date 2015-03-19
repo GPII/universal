@@ -38,13 +38,13 @@ https://github.com/gpii/universal/LICENSE.txt
         };
 
         gpii.tests.oauth2.authorization.assertAllowState = function (that) {
-            var noSelections = that.selectionTree.model.value === "unchecked";
+            var hasSelection = that.selectionTree.model.hasSelection;
             var isDisabled = that.locate("allow").prop("disabled");
 
-            if (noSelections) {
-                jqUnit.assertTrue("The allow button should be disabled", isDisabled);
-            } else {
+            if (hasSelection) {
                 jqUnit.assertFalse("The allow button should be enabled", isDisabled);
+            } else {
+                jqUnit.assertTrue("The allow button should be disabled", isDisabled);
             }
         };
 
@@ -67,11 +67,11 @@ https://github.com/gpii/universal/LICENSE.txt
         };
 
         gpii.tests.oauth2.authorization.assertSelectionChange = function (that) {
-            that.selectionTree.applier.change("value", "checked");
+            that.selectionTree.applier.change("selections.value", "checked");
             gpii.tests.oauth2.authorization.assertSelectedPreferences(that);
             gpii.tests.oauth2.authorization.assertAllowState(that);
 
-            that.selectionTree.applier.change("value", "unchecked");
+            that.selectionTree.applier.change("selections.value", "unchecked");
             gpii.tests.oauth2.authorization.assertSelectedPreferences(that);
             gpii.tests.oauth2.authorization.assertAllowState(that);
 

@@ -20,6 +20,8 @@
     <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidDOMUtilities.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/framework/core/js/FluidRequests.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/framework/core/js/JavaProperties.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/ModelTransformation.js"></script>
+    <script type="text/javascript" src="../../../../infusion/src/framework/core/js/ModelTransformationTransforms.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/lib/fastXmlPull/js/fastXmlPull.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidParser.js"></script>
     <script type="text/javascript" src="../../../../infusion/src/framework/renderer/js/fluidRenderer.js"></script>
@@ -50,30 +52,6 @@
         <!-- This is the test data -->
         <input type="checkbox" class="gpiic-oauth2-selectionTree-testCheckbox">
 
-        <div class="gpiic-oauth2-selectionTree-testDescendants-checked">
-            <ul>
-                <li>
-                    <input type="checkbox" class="gpiic-oauth2-selectionTree-testDescendants-parent">
-                    <ul>
-                        <li>
-                            <input type="checkbox" class="gpiic-oauth2-selectionTree-testDescendants-descendant">
-                        </li>
-                        <li>
-                            <input type="checkbox" class="gpiic-oauth2-selectionTree-testDescendants-descendant">
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="gpiic-oauth2-selectionTree-testDescendants-descendant">
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <input type="checkbox" class="gpiic-oauth2-selectionTree-testDescendants-sibling">
-                </li>
-            </ul>
-        </div>
-
         <div class="gpiic-oauth2-selectionTree-removeLeaf">
             <div class="gpiic-oauth2-selectionTree-removeLeaf-topLevel">
                 <span class="gpiic-oauth2-selectionTree-removeLeaf-preserved"></span>
@@ -90,6 +68,7 @@
 
         <div class="gpii-oauth2">
             <section class="gpiic-oauth2-selectionTree gpii-oauth2-selectionTree"></section>
+            <section class="gpiic-oauth2-selectionTree-testHasSelection gpii-oauth2-selectionTree"></section>
         </div>
 
     </div>
