@@ -16,14 +16,20 @@ var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.registerNamespace("gpii.test.contextIntegration");
+fluid.registerNamespace("gpii.tests.contextIntegration");
 
 require("../index.js");
 
 gpii.loadTestingSupport();
 
-fluid.defaults("gpii.test.contextIntegration.testCaseHolder", {
-    gradeNames: [ "gpii.test.integration.testCaseHolder.linux" ],
+fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.linux", {
+    gradeNames: [
+        "gpii.test.integration.testCaseHolder.linux",
+        "gpii.tests.contextIntegration.testCaseHolder"
+    ]
+});
+
+fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
     components: {
         environmentChangedRequest: {
             type: "kettle.test.request.http",
@@ -38,11 +44,11 @@ fluid.defaults("gpii.test.contextIntegration.testCaseHolder", {
     }
 });
 
-gpii.test.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
+gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
     return [
         {
             func: "{environmentChangedRequest}.send",
-            args: gpii.test.contextIntegration.data[contextName].environment
+            args: gpii.tests.contextIntegration.data[contextName].environment
         }, {
             event: "{environmentChangedRequest}.events.onComplete"
         }, {
@@ -53,7 +59,7 @@ gpii.test.contextIntegration.changeEnvironmentAndCheck = function (contextName) 
 };
 
 
-gpii.test.contextIntegration.data = {
+gpii.tests.contextIntegration.data = {
     userToken: "context1",
     processes: [
         {
@@ -91,7 +97,6 @@ gpii.test.contextIntegration.data = {
         "environment": {
             "http://registry.gpii.net/common/environment/illuminance": 500,
             "http://registry.gpii.net/common/environment/auditory.noise": 10000
-
         },
         "settingsHandlers": {
             "gpii.gsettings": {
@@ -166,10 +171,10 @@ gpii.test.contextIntegration.data = {
     }
 };
 
-gpii.test.contextIntegration.fixtures = [
+gpii.tests.contextIntegration.fixtures = [
     {
         name: "Simple context change after login",
-        expected: 6,
+        expect: 7,
         sequenceSegments: [
             [
                 {
@@ -188,8 +193,8 @@ gpii.test.contextIntegration.fixtures = [
                     args: ["{tests}.gpii-default.settingsHandlers", "{nameResolver}"]
                 }
             ],
-            gpii.test.createProcessChecks(gpii.test.contextIntegration.data.processes, "expectConfigured"),
-            gpii.test.contextIntegration.changeEnvironmentAndCheck("bright"),
+            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
+            gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
             [
                 {
                     func: "{logoutRequest}.send"
@@ -198,7 +203,7 @@ gpii.test.contextIntegration.fixtures = [
                     listener: "gpii.test.logoutRequestListen"
                 }
             ],
-            gpii.test.createProcessChecks(gpii.test.contextIntegration.data.processes, "expectRestored"),
+            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectRestored"),
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
@@ -209,7 +214,7 @@ gpii.test.contextIntegration.fixtures = [
     },
     {
         name: "Context changed before login",
-        expected: 5,
+        expect: 5,
         sequenceSegments: [
             [
                 {
@@ -240,7 +245,7 @@ gpii.test.contextIntegration.fixtures = [
                     listener: "gpii.test.logoutRequestListen"
                 }
             ],
-            gpii.test.createProcessChecks(gpii.test.contextIntegration.data.processes, "expectRestored"),
+            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectRestored"),
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
@@ -250,7 +255,7 @@ gpii.test.contextIntegration.fixtures = [
         ]
     }, {
         name: "Multiple context changes",
-        expected: 8,
+        expect: 9,
         sequenceSegments: [
             [
                 {
@@ -269,10 +274,10 @@ gpii.test.contextIntegration.fixtures = [
                     args: ["{tests}.gpii-default.settingsHandlers", "{nameResolver}"]
                 }
             ],
-            gpii.test.createProcessChecks(gpii.test.contextIntegration.data.processes, "expectConfigured"),
-            gpii.test.contextIntegration.changeEnvironmentAndCheck("bright"),
-            gpii.test.contextIntegration.changeEnvironmentAndCheck("noise"),
-            gpii.test.contextIntegration.changeEnvironmentAndCheck("brightandnoise"),
+            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
+            gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
+            gpii.tests.contextIntegration.changeEnvironmentAndCheck("noise"),
+            gpii.tests.contextIntegration.changeEnvironmentAndCheck("brightandnoise"),
 
             [
                 {
@@ -282,7 +287,7 @@ gpii.test.contextIntegration.fixtures = [
                     listener: "gpii.test.logoutRequestListen"
                 }
             ],
-            gpii.test.createProcessChecks(gpii.test.contextIntegration.data.processes, "expectRestored"),
+            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectRestored"),
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
@@ -293,13 +298,13 @@ gpii.test.contextIntegration.fixtures = [
     }
 ];
 
-gpii.test.contextIntegration.buildTestFixtures = function (fixtures) {
+gpii.tests.contextIntegration.buildTestFixtures = function (fixtures) {
     return fluid.transform(fixtures, function (fixture) {
         var testDef = {
             name: fixture.name,
             userToken: "context1",
-            expext: fixture.expected,
-            gradeNames: "gpii.test.contextIntegration.testCaseHolder",
+            expect: fixture.expect,
+            gradeNames: "gpii.tests.contextIntegration.testCaseHolder.linux",
             config: {
                 configName: "linux-builtIn-config",
                 configPath: "tests/platform/linux/configs"
@@ -314,5 +319,5 @@ gpii.test.contextIntegration.buildTestFixtures = function (fixtures) {
     });
 };
 
-kettle.test.bootstrapServer(gpii.test.contextIntegration.buildTestFixtures(
-        gpii.test.contextIntegration.fixtures));
+kettle.test.bootstrapServer(gpii.tests.contextIntegration.buildTestFixtures(
+        gpii.tests.contextIntegration.fixtures));

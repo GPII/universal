@@ -11,7 +11,7 @@
                         "message" : {
                             "de" : {
                                 "learnMore" : "http://cloud4all.info",
-                                "message" : "blablabla DE"
+                                "message" : "Ihr bevorzugtes technisches Hilfsmittel ist auf diesem Gerät nicht vorhanden. Als Ersatz haben wir ein anderes Hilfsmittel gestartet."
                             },
                             "en" : {
                                 "learnMore" : "http://cloud4all.info",
