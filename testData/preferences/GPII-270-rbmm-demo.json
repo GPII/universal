@@ -1,34 +1,40 @@
 {
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/matchMakerType": "ruleBased",
 
-    "http://registry.gpii.org/common/matchMakerType": [{ "value": "ruleBased" }],
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/foregroundColor": "white",
+                    "http://registry.gpii.net/common/backgroundColor": "black",
+                    "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
+                    "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
+                    "http://registry.gpii.net/common/magnification": 2.0,
+                    "http://registry.gpii.net/common/tracking": "mouse",
+                    "http://registry.gpii.net/common/speechRate": 42,
+                    "http://registry.gpii.net/common/trackingTTS": "mouse",
+                    "http://registry.gpii.net/common/speakTutorialMessages": true,
+                    "http://registry.gpii.net/common/keyEcho": true,
+                    "http://registry.gpii.net/common/wordEcho": true,
+                    "http://registry.gpii.net/common/announceCapitals": false,
+                    "http://registry.gpii.net/common/screenReaderBrailleOutput": false,
+                    "http://registry.gpii.net/common/punctuationVerbosity": "some",
+                    "http://registry.gpii.net/common/readingUnit": "word",
+                    "http://registry.gpii.net/common/auditoryOutLanguage": "GR",
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/pitch": 0.4,
+                    "http://registry.gpii.net/common/volumeTTS": 0.5,
 
-    "http://registry.gpii.org/common/fontSize": [{ "value": 24 }],
-    "http://registry.gpii.org/common/foregroundColor": [{"value": "white"}],
-    "http://registry.gpii.org/common/backgroundColor": [{"value": "black"}],
-    "http://registry.gpii.org/common/fontFaceFontName": [{"value": ["Comic Sans"]}],
-    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{"value": "sans serif"}],
-    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
-    "http://registry.gpii.org/common/tracking": [{"value": "mouse"}],
-    "http://registry.gpii.net/common/speechRate": [{"value": 42 }],
-    "http://registry.gpii.net/common/trackingTTS": [{"value": "mouse" }],
-    "http://registry.gpii.net/common/speakTutorialMessages": [{"value": true }],
-    "http://registry.gpii.net/common/keyEcho": [{"value": true }],
-    "http://registry.gpii.net/common/wordEcho": [{"value": true }],
-    "http://registry.gpii.net/common/announceCapitals": [{"value": false }],
-    "http://registry.gpii.net/common/screenReaderBrailleOutput": [{"value": false }],
-    "http://registry.gpii.net/common/punctuationVerbosity": [{"value": "some" }],
-    "http://registry.gpii.net/common/readingUnit": [{"value": "word" }],
-    "http://registry.gpii.net/common/auditoryOutLanguage": [{"value": "GR" }],
-    "http://registry.gpii.net/common/screenReaderTTSEnabled": [{"value": true }],
-    "http://registry.gpii.net/common/pitch": [{"value": 0.4 }],
-    "http://registry.gpii.net/common/volumeTTS": [{"value": 0.5 }],
-
-    "http://registry.gpii.org/applications/com.microsoft.windows.highContrast": [{
-        "value": {
-            "HighContrastOn": {
-                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
-                "value": true
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
+                        "HighContrastOn": {
+                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                            "value": true
+                        }
+                    }
+                }
             }
         }
-    }]
+    }
 }

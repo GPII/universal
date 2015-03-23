@@ -1,6 +1,15 @@
 {
-    "http://registry.gpii.org/applications/com.android.talkback": [{ "value": {} }],
-    "http://registry.gpii.org/common/pitch": [{ "value": 1 }],
-    "http://registry.gpii.org/common/speechRate": [{ "value": 340 }],
-    "http://registry.gpii.org/common/volumeTTS": [{ "value": 0.5 }]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.android.talkback": {},
+                    "http://registry.gpii.net/common/pitch": 1,
+                    "http://registry.gpii.net/common/speechRate": 340,
+                    "http://registry.gpii.net/common/volumeTTS": 0.5
+                }
+            }
+        }
+    }
 }

@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             }
         },
         jsonlint: {
-            src: ["gpii/**/*.json", "tests/**/*.json"]
+            src: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json"]
         }
     });
 

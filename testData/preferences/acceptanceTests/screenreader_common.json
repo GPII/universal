@@ -1,14 +1,23 @@
 {
-    "http://registry.gpii.org/common/speakTutorialMessages": [{ "value": false }],
-    "http://registry.gpii.org/common/keyEcho": [{ "value": false }],
-    "http://registry.gpii.org/common/wordEcho": [{ "value": true }],
-    "http://registry.gpii.org/common/announceCapitals": [{ "value": true }],
-    "http://registry.gpii.org/common/readingUnit": [{ "value": "word" }],
-    "http://registry.gpii.org/common/punctuationVerbosity": [{ "value": "all" }],
-    "http://registry.gpii.org/common/screenReaderTTSEnabled": [{ "value": true }],
-    "http://registry.gpii.org/common/trackingTTS": [{ "value": ["mouse", "caret"] }],
-    "http://registry.gpii.org/common/speechRate": [{ "value": 400 }],
-    "http://registry.gpii.org/common/auditoryOutLanguage": [{ "value": "en-BS" }],
-    "http://registry.gpii.org/common/pitch": [{ "value": 0.15 }],
-    "http://registry.gpii.org/common/volumeTTS": [{ "value": 0.75 }]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/speakTutorialMessages": false ,
+                    "http://registry.gpii.net/common/keyEcho": false ,
+                    "http://registry.gpii.net/common/wordEcho": true ,
+                    "http://registry.gpii.net/common/announceCapitals": true ,
+                    "http://registry.gpii.net/common/readingUnit": "word" ,
+                    "http://registry.gpii.net/common/punctuationVerbosity": "all" ,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true ,
+                    "http://registry.gpii.net/common/trackingTTS": ["mouse", "caret"],
+                    "http://registry.gpii.net/common/speechRate": 400 ,
+                    "http://registry.gpii.net/common/auditoryOutLanguage": "en-BS",
+                    "http://registry.gpii.net/common/pitch": 0.15 ,
+                    "http://registry.gpii.net/common/volumeTTS": 0.75
+                }
+            }
+        }
+    }
 }
