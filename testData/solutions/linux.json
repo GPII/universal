@@ -8,7 +8,7 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "gnome-shell"
@@ -99,7 +99,7 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "gsettings-desktop-schemas"
@@ -182,7 +182,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "nautilus"
@@ -219,7 +219,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "gnome-shell"
@@ -259,7 +259,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "gsettings-desktop-schemas"
@@ -332,7 +332,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "gnome-shell"
@@ -366,7 +366,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "gnome-shell"
@@ -400,7 +400,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "orca"
@@ -1220,7 +1220,7 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "alsa"
@@ -1263,7 +1263,7 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "google-chrome-beta"
@@ -1313,7 +1313,7 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "google-chrome-beta"
@@ -1363,7 +1363,7 @@
                     "version": ">=2.6.26"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "google-chrome-beta"
@@ -1410,7 +1410,7 @@
                 "id": "linux",
                 "version": ">=2.6.26"
             }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.packageKit.find",
                     "name": "libXrandr"
