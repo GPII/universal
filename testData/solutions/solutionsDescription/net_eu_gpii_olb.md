@@ -9,7 +9,7 @@
 * __Contact__: Sebastian Kelle <kelle@hdm-stuttgart.de>
 
 ## Description
-The __Online Banking Demonstrator__ is a web-based application built to demonstrate 
+The __[Online Banking Demonstrator](http://gpii.eu/olb/)__ is a web-based application built to demonstrate 
 auto-personalisation from preference sets across multiple levels:
  * the application itself,
  * the browser (through browser extensions such as Cloud4Chrome),
