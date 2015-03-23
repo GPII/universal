@@ -6,7 +6,7 @@
                     "id": "android",
                     "version": ">=0.1"
                 }],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "com.blogspot.tonyatkins.freespeech"
@@ -43,7 +43,7 @@
                     "id": "android",
                     "version": ">=0.1"
              }],
-             "deviceReporters": [
+             "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "com.google.android.marvin.talkback"
@@ -84,7 +84,7 @@
                     "version": ">=0.1"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "android"
@@ -303,7 +303,7 @@
                     "version": ">=0.1"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "com.android.providers.media"
@@ -359,7 +359,7 @@
                     "version": ">=0.1"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "com.android.providers.settings"
@@ -426,7 +426,7 @@
                     "version": ">=0.1"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "com.android.providers.settings"
@@ -514,7 +514,7 @@
                     "version": ">=0.1"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findService",
                     "name": "se.omnitor.ecmobile"
@@ -592,7 +592,7 @@
                     "version": ">=0.1"
                 }
             ],
-            "deviceReporters": [
+            "isInstalled": [
                 {
                     "type": "gpii.androidDeviceReporter.findApplication",
                     "name": "Mobile Accessibility"
