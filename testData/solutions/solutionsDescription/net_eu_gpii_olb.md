@@ -27,7 +27,7 @@ in the sense that all settings avaiable through the UIOptions panel are mapped t
 
 Information about value ranges and some mappings to common terms can be found [in the spreadsheet "SP3 Settings for 2nd pilots"](https://docs.google.com/spreadsheet/ccc?key=0AppduB_JZh5EdDRYT1pmOTc5eUpNbkpMckhacUVxWXc&usp=drive_web#gid=31).
 (Find the tabe "eu.gpii.olb".)
-Note, however, that some of the application-specific terms for the OLB cannot yet be mapped to common terms, since the corresponding common terms still need to be define.
+Note, however, that some of the application-specific terms for the OLB cannot yet be mapped to common terms, since the corresponding common terms still need to be defined.
 
 These acceptance tests will be expanded when all application-specific terms can be mapped to common terms. 
 
