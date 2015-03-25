@@ -33,7 +33,9 @@ var gpii = gpii || {};
                     text: "{that}.options.strings.ok",
                     "class": "{that}.options.styles.okButtonClass"
                 }
-            }
+            },
+            open: "{that}.events.open.fire",
+            close: "{that}.events.close.fire"
         },
         selectors: {
             dialogContent: ".gpiic-OKCancelDialog-content"
@@ -57,6 +59,8 @@ var gpii = gpii || {};
             }
         },
         events: {
+            open: null,
+            close: null,
             clickCancel: null,
             clickOK: null
         },
@@ -69,7 +73,12 @@ var gpii = gpii || {};
                 funcName: "gpii.OKCancelDialog.updateContent",
                 args: ["{that}.container", "{that}.options.selectors.dialogContent", "{that}.model.dialogContent"]
             },
-            "clickCancel.closeDialog": "{that}.close"
+            "clickCancel.closeDialog": "{that}.close",
+            onDestroy: {
+                "this": "{that}.container",
+                method: "dialog",
+                args: ["destroy"]
+            }
         },
         invokers: {
             open: {
