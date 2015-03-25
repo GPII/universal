@@ -14,6 +14,7 @@
 
 var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle"),
+    path = require("path"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.contextIntegration");
@@ -307,7 +308,7 @@ gpii.tests.contextIntegration.buildTestFixtures = function (fixtures) {
             gradeNames: "gpii.tests.contextIntegration.testCaseHolder.linux",
             config: {
                 configName: "linux-builtIn-config",
-                configPath: "tests/platform/linux/configs"
+                configPath: path.resolve(__dirname, "platform/linux/configs")
             },
             sequence: []
         };
