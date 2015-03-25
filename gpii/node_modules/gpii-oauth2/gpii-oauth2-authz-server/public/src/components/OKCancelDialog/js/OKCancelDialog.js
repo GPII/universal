@@ -34,6 +34,7 @@ var gpii = gpii || {};
                     "class": "{that}.options.styles.okButtonClass"
                 }
             },
+            create: "{that}.fireCreateDialogWidget",
             open: "{that}.events.open.fire",
             close: "{that}.events.close.fire"
         },
@@ -59,6 +60,7 @@ var gpii = gpii || {};
             }
         },
         events: {
+            createDialogWidget: null,
             open: null,
             close: null,
             clickCancel: null,
@@ -73,6 +75,14 @@ var gpii = gpii || {};
                 funcName: "gpii.OKCancelDialog.updateContent",
                 args: ["{that}.container", "{that}.options.selectors.dialogContent", "{that}.model.dialogContent"]
             },
+            "createDialogWidget.registerWidget": {
+                funcName: "gpii.OKCancelDialog.registerWidget",
+                args: ["{that}", "{arguments}.0"]
+            },
+            "createDialogWidget.registerButtonElements": {
+                funcName: "gpii.OKCancelDialog.registerButtonElements",
+                args: ["{that}", "{arguments}.0"]
+            },
             "clickCancel.closeDialog": "{that}.close",
             onDestroy: {
                 "this": "{that}.container",
@@ -81,6 +91,10 @@ var gpii = gpii || {};
             }
         },
         invokers: {
+            fireCreateDialogWidget: {
+                funcName: "gpii.OKCancelDialog.fireCreateDialogWidget",
+                args: ["{that}"]
+            },
             open: {
                 "this": "{that}.container",
                 method: "dialog",
@@ -96,6 +110,19 @@ var gpii = gpii || {};
 
     gpii.OKCancelDialog.initDialog = function (container, dialogClass, dialogOptions) {
         container.dialog($.extend(true, {}, {dialogClass: dialogClass}, dialogOptions));
+    };
+
+    gpii.OKCancelDialog.fireCreateDialogWidget = function (that) {
+        that.events.createDialogWidget.fire(that.container.dialog("widget"));
+    };
+
+    gpii.OKCancelDialog.registerWidget = function (that, widget) {
+        that.widget = widget;
+    };
+
+    gpii.OKCancelDialog.registerButtonElements = function (that, widget) {
+        that.okButton = widget.find("." + that.options.styles.okButtonClass);
+        that.cancelButton = widget.find("." + that.options.styles.cancelButtonClass);
     };
 
     gpii.OKCancelDialog.updateContent = function (container, selector, content) {

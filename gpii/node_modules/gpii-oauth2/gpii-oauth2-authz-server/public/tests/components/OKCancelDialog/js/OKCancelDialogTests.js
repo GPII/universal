@@ -15,26 +15,8 @@ https://github.com/gpii/universal/LICENSE.txt
 
 fluid.defaults("gpii.tests.OKCancelDialog", {
     gradeNames: ["gpii.OKCancelDialog", "autoInit"],
-    dialogOptions: {
-        create: "{that}.fireCreateDialogWidget"
-    },
     model: {
         dialogContent: "Initial dialog content"
-    },
-    events: {
-        createDialogWidget: null
-    },
-    listeners: {
-        "createDialogWidget.registerButtonElements": {
-            funcName: "gpii.tests.OKCancelDialog.registerButtonElements",
-            args: ["{that}", "{arguments}.0"]
-        }
-    },
-    invokers: {
-        "fireCreateDialogWidget": {
-            funcName: "gpii.tests.OKCancelDialog.fireCreateDialogWidget",
-            args: ["{that}"]
-        }
     }
 });
 
@@ -64,6 +46,12 @@ fluid.defaults("gpii.tests.OKCancelDialogTester", {
                 expect: 1,
                 func: "gpii.tests.OKCancelDialog.verifyDialogContent",
                 args: ["Initial dialog content", "{dialog}.dom.dialogContent"]
+            },
+            {
+                name: "Widget is attached",
+                expect: 2,
+                func: "gpii.tests.OKCancelDialog.verifyWidgetIsAttached",
+                args: ["{dialog}"]
             },
             {
                 name: "Change dialog content",
@@ -113,17 +101,13 @@ fluid.defaults("gpii.tests.OKCancelDialogTester", {
     } ]
 });
 
-gpii.tests.OKCancelDialog.fireCreateDialogWidget = function (that) {
-    that.events.createDialogWidget.fire(that.container.dialog("widget"));
-};
-
-gpii.tests.OKCancelDialog.registerButtonElements = function (that, widget) {
-    that.okButton = widget.find("." + that.options.styles.okButtonClass);
-    that.cancelButton = widget.find("." + that.options.styles.cancelButtonClass);
-};
-
 gpii.tests.OKCancelDialog.verifyDialogContent = function (expected, elem) {
     jqUnit.assertEquals("Verify dialog content", expected, elem.html());
+};
+
+gpii.tests.OKCancelDialog.verifyWidgetIsAttached = function (dialog) {
+    jqUnit.assertValue("dialog.widget is assigned", dialog.widget);
+    jqUnit.assertTrue("dialog.widget has the dialogClass", dialog.widget.hasClass(dialog.options.styles.dialogClass));
 };
 
 gpii.tests.OKCancelDialog.runTests = function () {
