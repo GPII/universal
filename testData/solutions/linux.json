@@ -1374,43 +1374,5 @@
                 "restoreSettings"
             ]
         }
-    },
-    "eu.gpii.olb": {
-        "name": "Online Banking Demonstrator",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "linux",
-                    "version": ">=2.6.26"
-                }
-            ]
-        },
-        "settingsHandlers": [
-            {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.eu\\.gpii\\.olb.id",
-                    "display.applications.eu\\.gpii\\.olb.name",
-                    "language"
-                ],
-                "capabilitiesTransformations": {
-                    "language": "http://registry\\.gpii\\.net/common/language"
-                }
-            }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://gpii.eu/olb/"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
     }
 }
