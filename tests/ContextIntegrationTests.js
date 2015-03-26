@@ -279,7 +279,6 @@ gpii.tests.contextIntegration.fixtures = [
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("noise"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("brightandnoise"),
-
             [
                 {
                     func: "{logoutRequest}.send"

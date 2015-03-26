@@ -18,9 +18,21 @@ https://github.com/gpii/universal/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
+require("universal");
+
 kettle.loadTestingSupport();
 
 var testIncludes = [
+    "./platform/cloud/AcceptanceTests_chrome.js",
+    "./platform/cloud/AcceptanceTests_chrome_oauth2.js",
+    "./platform/cloud/AcceptanceTests_easit4all.js",
+    "./platform/cloud/AcceptanceTests_easit4all_oauth2_filtering.js",
+    "./platform/cloud/AcceptanceTests_empty.js",
+    "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
+    "./platform/cloud/AcceptanceTests_jme.js",
+    "./platform/cloud/AcceptanceTests_smarthouses.js",
+    "./DevelopmentTests.js",
+    "./IntegrationTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
