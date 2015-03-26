@@ -87,6 +87,20 @@ https://github.com/gpii/universal/LICENSE.txt
             }
         };
 
+        jqUnit.test("gpii.oauth2.selectionTree.deriveHasSelection", function () {
+            var tests = [
+                { value: "checked", expected: true },
+                { value: "indeterminate", expected: true },
+                { value: "unchecked", expected: false },
+                { value: undefined, expected: false }
+            ];
+
+            fluid.each(tests, function (testcase) {
+                jqUnit.assertEquals(testcase.value + " => " + testcase.expected, testcase.expected,
+                    gpii.oauth2.selectionTree.deriveHasSelection({ rootSelectionsValue: testcase.value }));
+            });
+        });
+
         jqUnit.test("gpii.oauth2.selectionTree.getSelectionNode", function () {
 
             var selections = {

@@ -46,16 +46,12 @@ var gpii = gpii || {};
         modelRelay: {
             source: "{that}.model.selections.value",
             target: "{that}.model.hasSelection",
-            backward: "never",
             singleTransform: {
-                type: "fluid.transforms.valueMapper",
-                inputPath: "",
-                defaultInputValue: "otherwise",
-                options: {
-                    "checked": true,
-                    "indeterminate": true,
-                    "otherwise": { outputValue: false }
-                }
+                type: "fluid.transforms.free",
+                args: {
+                    rootSelectionsValue: "{that}.model.selections.value"
+                },
+                func: "gpii.oauth2.selectionTree.deriveHasSelection"
             }
         },
         availablePrefs: {},
@@ -266,6 +262,10 @@ var gpii = gpii || {};
         fluid.each(elms, function (elm) {
             gpii.oauth2.selectionTree.toggleBranch(that, elm, state);
         });
+    };
+
+    gpii.oauth2.selectionTree.deriveHasSelection = function (args) {
+        return args.rootSelectionsValue === "checked" || args.rootSelectionsValue === "indeterminate";
     };
 
     gpii.oauth2.selectionTree.updateSelectionsFromServer = function (that, serverModel) {

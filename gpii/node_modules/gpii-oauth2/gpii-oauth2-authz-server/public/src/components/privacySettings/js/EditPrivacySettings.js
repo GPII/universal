@@ -131,7 +131,6 @@ var gpii = gpii || {};
                     authDecisionId: "{that}.model.clientData.authDecisionId"
                 }, {
                     type: "{that}.options.requestInfos.saveDecisionPrefs.type",
-                    dataType: "json",
                     contentType: "application/json",
                     data: {
                         expander: {

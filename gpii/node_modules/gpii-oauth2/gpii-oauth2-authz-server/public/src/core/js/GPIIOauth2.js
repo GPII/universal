@@ -24,6 +24,21 @@ var gpii = gpii || {};
             return encodeURIComponent(value);
         });
         var url = fluid.stringTemplate(urlTemplate, encodedValues);
+
+        if (!options.error) {
+            options = $.extend({}, options, {
+                error: function (jqXHR, textStatus, errorThrown) {
+                    fluid.fail("AJAX ERROR" +
+                        " url: " + url +
+                        " method: " + options.method +
+                        " type: " + options.type +
+                        " status: " + jqXHR.status +
+                        " textStatus: " + textStatus +
+                        " errorThrown: " + errorThrown);
+                }
+            });
+        }
+
         $.ajax(url, options);
     };
 
