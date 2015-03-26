@@ -21,7 +21,7 @@ var testDefs = [
     {
         name: "Acceptance test for empty preferences set",
         userToken: "empty",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {}
     }
 ];
