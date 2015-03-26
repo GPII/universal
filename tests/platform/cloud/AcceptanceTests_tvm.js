@@ -31,6 +31,21 @@ var testDefs = [
                 "timeOut": "long"
             }
         }
+    },
+    {
+        name: "Test the Ticket Vending Machine with application-specific preferences.",
+        userToken: "tvm_applicationSpecific_01",
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"de.fraunhofer.iao.C4A-TVM\"}]}"),
+        expected: {
+            "de.fraunhofer.iao.C4A-TVM": {
+                "contrastTheme": "yellow-black",
+                "fontFace": "Comic Sans",
+                "fontSize": "big",
+                "buttonSize": "big",
+                "timeOut": "long",
+                "language": "de"
+            }
+        }
     }
 ];
 
