@@ -62,6 +62,27 @@ var testDefs = [
                 "inputsLarger": true
             }
         }
+    },
+    {
+        name: "Test for Online Banking demonstrator (OLB) with only application-specific terms.",
+        userToken: "olb_applicationSpecific_01",
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"eu.gpii.olb\"}]}"),
+        expected: {
+            "eu.gpii.olb": {
+                "textSize": 1.1,
+                "lineSpacing": 2,
+                "textStyle": "comic",
+                "toc": true,
+                "links": true,
+                "inputsLarger": true,
+                "contrastTheme": "yb",
+                "signLanguageEnabled": true,
+                "signLanguage": "ils",
+                "interpreterType": "avatar",
+                "interpreterName": "Neytiri",
+                "pictogramsEnabled": false
+            }
+        }
     }
 ];
 
