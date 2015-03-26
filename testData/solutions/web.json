@@ -64,6 +64,118 @@
             }
         ]
     },
+    "com.bdigital.easit4all": {
+        "name": "Easit4all",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.com\\.bdigital\\.easit4all.id"
+                ],
+                "capabilitiesTransformations": {
+                  "fontSize": {
+                      "transform":{                            
+                          "type": "fluid.transforms.linearScale",
+                          "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                          "factor": 10
+                      }
+                  },
+                  "fontFaceFontName": {
+                      "transform":{                            
+                        "type": "fluid.transforms.valueMapper",
+                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/fontName",
+                        "defaultInputValue": "default",
+                        "options": {
+                            "times": {
+                                "outputValue": "Times New Roman"
+                            },
+                            "comic": {
+                                "outputValue": "Comic Sans"
+                            },
+                            "arial": {
+                                "outputValue": "Arial"
+                            },
+                            "verdana": {
+                                "outputValue": "Verdana"
+                            },
+                            "default": {
+                                "outputValue": "Times New Roman"
+                            }
+                        }
+                      }
+                    },
+                    "foregroundColor": {
+                      "transform":{                            
+                        "type": "fluid.transforms.valueMapper",
+                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/foregroundColor",
+                        "defaultInputValue": "default",
+                        "options": {
+                            "black": {
+                                "outputValue": "Black"
+                            },
+                            "yellow": {
+                                "outputValue": "Yellow"
+                            },
+                            "white": {
+                                "outputValue": "White"
+                            },
+                            "default": {
+                                "outputValue": "Black"
+                            }
+                        }
+                      }
+                    },
+                  "backgroundColor": {
+                      "transform":{                            
+                        "type": "fluid.transforms.valueMapper",
+                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/backgroundColor",
+                        "defaultInputValue": "default",
+                        "options": {
+                            "black": {
+                                "outputValue": "Black"
+                            },
+                            "yellow": {
+                                "outputValue": "Yellow"
+                            },
+                            "white": {
+                                "outputValue": "White"
+                            },
+                            "default": {
+                                "outputValue": "White"
+                            }
+                        }
+                      }
+                    },
+                  "lineSpacing": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/lineSpacing",
+                  "inputsLarger": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/inputsLarger",
+                  "toc": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/toc",
+                  "links": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/links",                    
+                  "layout": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/layout",
+                  "invertImages": "http://registry\\.gpii\\.net/common/invertColours",
+                  "tracking": "http://registry\\.gpii\\.net/applications/com\\.bdigital\\.easit4all/tracking",
+                  "magnification": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "input": 1,
+                            "ranges": [
+                                {
+                                    "output": 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+    },    
     "info.cloud4all.JME": {
         "name": "JME Cloud4all Themes",
         "contexts": {
