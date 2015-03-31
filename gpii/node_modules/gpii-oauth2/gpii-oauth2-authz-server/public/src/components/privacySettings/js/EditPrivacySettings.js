@@ -172,10 +172,6 @@ var gpii = gpii || {};
             savePrefsAndExit: {
                 funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
                 args: ["{that}"]
-            },
-            setDoneState: {
-                "funcName": "gpii.oauth2.setEnabled",
-                "args": ["{that}.dom.done", "{arguments}.0"]
             }
         },
         model: {
@@ -187,7 +183,8 @@ var gpii = gpii || {};
             // }
             clientData: null,
             afterAuthorizedPrefsSet: null,
-            decisionPrefs: null
+            decisionPrefs: null,
+            hasSelection: false
         },
         modelListeners: {
             "availableAuthorizedPrefs": {
@@ -197,6 +194,10 @@ var gpii = gpii || {};
             "decisionPrefs": {
                 listener: "{that}.events.afterDecisionPrefsSet",
                 excludeSource: "init"
+            },
+            "hasSelection": {
+                listener: "gpii.oauth2.setEnabled",
+                args: ["{that}.dom.done", "{that}.model.hasSelection"]
             }
         },
         components: {
@@ -212,13 +213,8 @@ var gpii = gpii || {};
                                 funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
                                 args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
                             }
-                        }
-                    },
-                    modelListeners: {
-                        "hasSelection": {
-                            listener: "{editPrivacySettings}.setDoneState",
-                            args: ["{change}.value"]
-                        }
+                        },
+                        hasSelection: "{editPrivacySettings}.model.hasSelection"
                     }
                 }
             }
