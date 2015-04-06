@@ -184,7 +184,7 @@ var gpii = gpii || {};
             clientData: null,
             afterAuthorizedPrefsSet: null,
             decisionPrefs: null,
-            hasSelection: false
+            doneButtonEnabled: false
         },
         modelListeners: {
             "availableAuthorizedPrefs": {
@@ -195,9 +195,9 @@ var gpii = gpii || {};
                 listener: "{that}.events.afterDecisionPrefsSet",
                 excludeSource: "init"
             },
-            "hasSelection": {
+            "doneButtonEnabled": {
                 listener: "gpii.oauth2.setEnabled",
-                args: ["{that}.dom.done", "{that}.model.hasSelection"]
+                args: ["{that}.dom.done", "{that}.model.doneButtonEnabled"]
             }
         },
         components: {
@@ -213,8 +213,15 @@ var gpii = gpii || {};
                                 funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
                                 args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
                             }
-                        },
-                        hasSelection: "{editPrivacySettings}.model.hasSelection"
+                        }
+                    },
+                    modelRelay: {
+                        source: "{selectionTree}.model.hasSelection",
+                        target: "{editPrivacySettings}.model.doneButtonEnabled",
+                        backward: "never",
+                        singleTransform: {
+                            type: "fluid.transforms.identity"
+                        }
                     }
                 }
             }
