@@ -58,6 +58,7 @@ var testDefs = [
                 "links": true,
                 "contrastTheme": "wb",
                 "signLanguageEnabled": false,
+                "signLanguage": "ils",
                 "lineSpacing": 2,
                 "inputsLarger": true
             }
