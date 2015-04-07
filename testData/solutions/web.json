@@ -259,6 +259,7 @@
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/signLanguage",
+                            "defaultInputValue": "ils",
                             "options": {
                                 "ase": {
                                     "outputValue": "ase"
