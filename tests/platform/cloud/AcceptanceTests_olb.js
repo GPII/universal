@@ -83,6 +83,19 @@ var testDefs = [
                 "pictogramsEnabled": false
             }
         }
+    },
+    {
+        name: "Test for Online Banking demonstrator (OLB) with Online Flow Manager: unsupported sign language.",
+        userToken: "olb_QinKesheng",
+        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"eu.gpii.olb\"}]}"),
+        expected: {
+            "eu.gpii.olb": {
+                "language": "zho",
+                "signLanguageEnabled": true,
+                "signLanguage": "ils",
+                "interpreterType": "avatar"
+            }
+        }
     }
 ];
 
