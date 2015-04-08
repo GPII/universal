@@ -33,6 +33,7 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./DevelopmentTests.js",
     "./IntegrationTests.js",
+    "./ContextIntegrationTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
