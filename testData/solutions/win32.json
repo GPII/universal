@@ -66,7 +66,102 @@
             ]
         }
     },
-
+    "com.serotek.satogo": {
+        "name": "System Access To Go",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "${{environment}.TMP}\\satogo.json"
+                },
+                "capabilities": [
+                    "applications.com\\.serotek\\.satogo.id"
+                ],
+                "capabilitiesTransformations": {
+                    "keyEcho": "http://registry\\.gpii\\.net/common/keyEcho",
+                    "wordEcho": "http://registry\\.gpii\\.net/common/wordEcho",
+                    "averagePitch": "http://registry\\.gpii\\.net/common/pitch",
+                    "invertColors": "http://registry\\.gpii\\.net/common/invertColours",
+                    "magnifyScreen": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "punctuation": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                    "sayCapOnCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "readToolTips": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "true": "always",
+                            "false": "off",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
+                        }
+                    },
+                    "magnificationFactor": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "ranges": [
+                                {
+                                    "upperBound": 1.25,
+                                    "output": 1.25
+                                },
+                                {
+                                    "upperBound": 6,
+                                    "output": {
+                                        "transform": {
+                                            "type": "value",
+                                            "inputPath": "http://registry\\.gpii\\.net/common/magnification"
+                                        }
+                                    }
+                                },
+                                {
+                                    "output": 6
+                                }
+                            ]
+                        }
+                    },
+                    "speakingRate": "http://registry\\.gpii\\.net/common/speechRate"
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                {
+                    "type": "gpii.lifecycleActions.download",
+                    "URL": "http://www.satogo.com/SAToGo-en.exe",
+                    "localFolder": "${{environment}.TMP}"
+                },
+                {
+                    "type": "gpii.lifecycleActions.createFile",
+                    "fileName": "${{environment}.TMP}\\satogo.json",
+                    "content": "{}"
+                },
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{environment}.TMP}\\satogo-en.exe\" -gpii ${{environment}.TMP}\\satogo.json"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im satogo-en.exe"
+                },
+                {
+                    "type": "gpii.lifecycleActions.deleteFile",
+                    "fileName": "/tmp/satogo.json"
+                },
+                {
+                    "type": "gpii.lifecycleActions.deleteFile",
+                    "fileName": "/tmp/deleteme3.nfo"
+                }
+            ]
+        }
+    },
     "com.texthelp.readWriteGold": {
         "name": "Read Write Gold",
         "contexts": {
