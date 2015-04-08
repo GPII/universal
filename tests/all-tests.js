@@ -33,6 +33,7 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./DevelopmentTests.js",
     "./IntegrationTests.js",
+    "./ContextIntegrationTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
@@ -45,15 +46,7 @@ var testIncludes = [
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
-    "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
-    "./platform/cloud/AcceptanceTests_jme.js",
-    "./platform/cloud/AcceptanceTests_chrome.js",
-    "./platform/cloud/AcceptanceTests_smarthouses.js",
-    "./platform/cloud/AcceptanceTests_empty.js",
-    "./DevelopmentTests.js",
-    "./IntegrationTests.js",
-    "./ContextIntegrationTests.js"
+    "../gpii/node_modules/contextManager/test/ContextManagerTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

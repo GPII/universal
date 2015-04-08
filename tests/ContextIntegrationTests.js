@@ -49,12 +49,12 @@ gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName)
     return [
         {
             func: "{environmentChangedRequest}.send",
-            args: gpii.tests.contextIntegration.data[contextName].environment
+            args: gpii.tests.contextIntegration.data.contexts[contextName].environment
         }, {
             event: "{environmentChangedRequest}.events.onComplete"
         }, {
             func: "gpii.test.checkConfiguration",
-            args: ["{tests}." + contextName + ".settingsHandlers", "{nameResolver}"]
+            args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}"]
         }
     ];
 };
@@ -69,104 +69,119 @@ gpii.tests.contextIntegration.data = {
             "expectRestored": "false"
         }
     ],
-    "gpii-default": {
-        "environment": {
-            "http://registry.gpii.net/common/environment/illuminance": 200,
-            "http://registry.gpii.net/common/environment/auditory.noise": 10000
-        },
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 1.5
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
+    contexts: {
+        "gpii-default": {
+            "environment": {
+                "http://registry.gpii.net/common/environment/illuminance": 200,
+                "http://registry.gpii.net/common/environment/auditory.noise": 10000
             },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 50
-                    }
-                }]
+            "settingsHandlers": {
+                "gpii.gsettings": {
+                    "data": [{
+                        "settings": {
+                            "mag-factor": 1.5
+                        },
+                        "options": {
+                            "schema": "org.gnome.desktop.a11y.magnifier"
+                        }
+                    }]
+                },
+                "gpii.alsa": {
+                    "data": [{
+                        "settings": {
+                            "masterVolume": 50
+                        }
+                    }]
+                }
             }
-        }
-    },
-    "bright": {
-        "environment": {
-            "http://registry.gpii.net/common/environment/illuminance": 500,
-            "http://registry.gpii.net/common/environment/auditory.noise": 10000
         },
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 2
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
+        "bright": {
+            "environment": {
+                "http://registry.gpii.net/common/environment/illuminance": 500,
+                "http://registry.gpii.net/common/environment/auditory.noise": 10000
             },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 50
-                    }
-                }]
+            "settingsHandlers": {
+                "gpii.gsettings": {
+                    "data": [{
+                        "settings": {
+                            "mag-factor": 2
+                        },
+                        "options": {
+                            "schema": "org.gnome.desktop.a11y.magnifier"
+                        }
+                    }]
+                },
+                "gpii.alsa": {
+                    "data": [{
+                        "settings": {
+                            "masterVolume": 50
+                        }
+                    }]
+                }
             }
-        }
-    },
-    "noise": {
-        "environment": {
-            "http://registry.gpii.net/common/environment/illuminance": 200,
-            "http://registry.gpii.net/common/environment/auditory.noise": 30000
         },
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 1.5
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
-            },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 100
-                    }
-                }]
+        "onlyBright": { //if user logs in when brightnes is active from the beginning - only expect mag
+            "settingsHandlers": {
+                "gpii.gsettings": {
+                    "data": [{
+                        "settings": {
+                            "mag-factor": 2
+                        },
+                        "options": {
+                            "schema": "org.gnome.desktop.a11y.magnifier"
+                        }
+                    }]
+                }
             }
-        }
-    },
-    "brightandnoise": {
-        "environment": {
-            "http://registry.gpii.net/common/environment/illuminance": 500,
-            "http://registry.gpii.net/common/environment/auditory.noise": 30000
-
         },
-        "settingsHandlers": {
-            "gpii.gsettings": {
-                "data": [{
-                    "settings": {
-                        "mag-factor": 2
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }]
+        "noise": {
+            "environment": {
+                "http://registry.gpii.net/common/environment/illuminance": 200,
+                "http://registry.gpii.net/common/environment/auditory.noise": 30000
             },
-            "gpii.alsa": {
-                "data": [{
-                    "settings": {
-                        "masterVolume": 100
-                    }
-                }]
+            "settingsHandlers": {
+                "gpii.gsettings": {
+                    "data": [{
+                        "settings": {
+                            "mag-factor": 1.5
+                        },
+                        "options": {
+                            "schema": "org.gnome.desktop.a11y.magnifier"
+                        }
+                    }]
+                },
+                "gpii.alsa": {
+                    "data": [{
+                        "settings": {
+                            "masterVolume": 100
+                        }
+                    }]
+                }
+            }
+        },
+        "brightandnoise": {
+            "environment": {
+                "http://registry.gpii.net/common/environment/illuminance": 500,
+                "http://registry.gpii.net/common/environment/auditory.noise": 30000
+            },
+            "settingsHandlers": {
+                "gpii.gsettings": {
+                    "data": [{
+                        "settings": {
+                            "mag-factor": 2
+                        },
+                        "options": {
+                            "schema": "org.gnome.desktop.a11y.magnifier"
+                        }
+                    }]
+                },
+                "gpii.alsa": {
+                    "data": [{
+                        "settings": {
+                            "masterVolume": 100
+                        }
+                    }]
+                }
             }
         }
     }
@@ -180,10 +195,10 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     "func": "gpii.test.expandSettings",
-                    args: [ "{tests}", [ "bright", "gpii-default" ]]
+                    args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -191,7 +206,7 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
                 }
             ],
             gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
@@ -208,7 +223,7 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }
             ]
         ]
@@ -220,14 +235,14 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     "func": "gpii.test.expandSettings",
-                    args: [ "{tests}", [ "bright", "gpii-default" ]]
+                    args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }, {
                     func: "{environmentChangedRequest}.send",
                     args: {
-                        "http://registry.gpii.net/common/environment/illuminance": 500
+                        "http://registry.gpii.net/common/environment/illuminance": 500,
                     }
                 }, {
                     event: "{environmentChangedRequest}.events.onComplete"
@@ -238,7 +253,7 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.bright.settingsHandlers", "{nameResolver}"]
+                    args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}"]
                 }, {
                     func: "{logoutRequest}.send"
                 }, {
@@ -250,21 +265,21 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }
             ]
         ]
     }, {
         name: "Multiple context changes",
-        expect: 9,
+        expect: 10,
         sequenceSegments: [
             [
                 {
-                    "func": "gpii.test.expandSettings",
-                    args: [ "{tests}", [ "bright", "gpii-default" ]]
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -272,11 +287,12 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
                 }
             ],
             gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
+            gpii.tests.contextIntegration.changeEnvironmentAndCheck("gpii-default"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("noise"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("brightandnoise"),
             [
@@ -291,7 +307,7 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }
             ]
         ]
@@ -309,7 +325,8 @@ gpii.tests.contextIntegration.buildTestFixtures = function (fixtures) {
                 configName: "linux-builtIn-config",
                 configPath: path.resolve(__dirname, "platform/linux/configs")
             },
-            sequence: []
+            sequence: [],
+            contexts: gpii.tests.contextIntegration.data.contexts
         };
         fluid.each(fixture.sequenceSegments, function (arr) {
             testDef.sequence = testDef.sequence.concat(arr);
