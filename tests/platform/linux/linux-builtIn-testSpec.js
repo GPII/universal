@@ -57,6 +57,24 @@ gpii.tests.linux.builtIn = [
         ]
     },
     {
+        name: "Testing os_common2 using Flat matchmaker",
+        userToken: "os_common2",
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "some.app.id": [{
+                    "settings": {
+                        "gtk-theme": "Adwaita",
+                        "icon-theme": "gnome"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        },
+        processes: []
+    },
+    {
         name: "Testing os_gnome using Flat matchmaker",
         userToken: "os_gnome",
         settingsHandlers: {
