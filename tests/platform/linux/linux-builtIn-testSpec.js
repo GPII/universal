@@ -27,7 +27,7 @@ gpii.tests.linux.builtIn = [
         userToken: "os_common",
         settingsHandlers: {
             "gpii.gsettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
                         "screen-position": "full-screen"
@@ -61,7 +61,7 @@ gpii.tests.linux.builtIn = [
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.gsettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
                         "screen-position": "full-screen"
@@ -80,7 +80,7 @@ gpii.tests.linux.builtIn = [
                 }]
             },
             "gpii.alsa": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "masterVolume": 50
                     }
@@ -100,7 +100,7 @@ gpii.tests.linux.builtIn = [
         userToken: "os_win7",
         settingsHandlers: {
             "gpii.gsettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
                         "screen-position": "full-screen"
@@ -108,10 +108,10 @@ gpii.tests.linux.builtIn = [
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
                     }
-                } , {
+                }, {
                     "settings": {
-                        "gtk-theme":"HighContrast",
-                        "icon-theme":"HighContrast",
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast",
                         "cursor-size": 41
                     },
                     "options": {

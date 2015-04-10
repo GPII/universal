@@ -24,7 +24,7 @@ var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using common JME settings",
         userToken: "fm_jme_common",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"info.cloud4all.JME\"}]}"),
+        solutionId: "info.cloud4all.JME",
         expected: {
             "info.cloud4all.JME": {
                 "theme": "Yellow-Black",

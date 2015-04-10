@@ -24,7 +24,7 @@ gpii.tests.linux.orca = [
         userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.orca": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -61,7 +61,7 @@ gpii.tests.linux.orca = [
         userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.orca": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -97,7 +97,7 @@ gpii.tests.linux.orca = [
         userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.orca": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "sayAllStyle": 1,

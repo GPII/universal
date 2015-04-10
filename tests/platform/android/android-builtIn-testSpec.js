@@ -26,7 +26,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_android",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "dim_screen": 1,
                         "haptic_feedback_enabled": 1,
@@ -40,14 +40,14 @@ gpii.tests.android.builtIn = [
                 }]
             },
             "gpii.androidAudioManager.volume": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "STREAM_SYSTEM": 7
                     }
                 }]
             },
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 1.5,
                         "locale": "en"
@@ -61,7 +61,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_android_common",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "dim_screen": 1,
                         "haptic_feedback_enabled": 1,
@@ -75,14 +75,14 @@ gpii.tests.android.builtIn = [
                 }]
             },
             "gpii.androidAudioManager.volume": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "STREAM_SYSTEM": 4
                     }
                 }]
             },
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 2,
                         "locale": "en_GB"
@@ -96,7 +96,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 0.75
                     }
@@ -109,7 +109,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_common",
         settingsHandlers: {
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 0.75
                     }
