@@ -25,7 +25,7 @@ gpii.tests.windows.jaws = [
         userToken: "jaws_application",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "cloud4allVoiceProfile-GlobalContext.Speed": 115
@@ -49,7 +49,7 @@ gpii.tests.windows.jaws = [
         userToken: "jaws_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "cloud4allVoiceProfile-GlobalContext.Speed": 37.875,

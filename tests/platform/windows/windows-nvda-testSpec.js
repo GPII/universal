@@ -25,14 +25,13 @@ gpii.tests.windows.nvda = [
         userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "speech.espeak.rate": 17.20430107526882,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": true,
-                            "virtualBuffers.autoSayAllOnPageLoad": false,
                             "speech.synth": "espeak",
                             "speech.outputDevice": "Microsoft Sound Mapper",
                             "speech.symbolLevel": 300,
@@ -66,14 +65,13 @@ gpii.tests.windows.nvda = [
         userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "speech.espeak.rate": 17.20430107526882,
                             "speech.espeak.volume": 75,
                             "speech.espeak.pitch": 15,
                             "speech.espeak.rateBoost": true,
-                            "virtualBuffers.autoSayAllOnPageLoad": false,
                             "speech.symbolLevel": 300,
                             "speech.espeak.voice": "en\\en-wi",
                             "reviewCursor.followFocus": false,
@@ -105,7 +103,7 @@ gpii.tests.windows.nvda = [
         userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "speech.symbolLevel": 300,
@@ -114,8 +112,7 @@ gpii.tests.windows.nvda = [
                             "keyboard.speakTypedWords": true,
                             "speech.espeak.rateBoost": true,
                             "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "virtualBuffers.autoSayAllOnPageLoad": false
+                            "presentation.reportHelpBalloons": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",

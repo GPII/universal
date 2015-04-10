@@ -37,8 +37,8 @@ Change the NODE_ENV environment variable to the cloudbased config file:
 * in Windows: `SET NODE_ENV=cloudBased.development.all.local`
 * in linux: `EXPORT NODE_ENV=cloudBased.development.all.local`
 
-Then start up the server by running the following command:
-`node node_modules/kettle/lib/init.js gpii/configs/`
+Then start up the server by running the following command from the universal folder:
+`node gpii.js`
 
 This will set up the system to run in cloudBased mode, but with everything running on the same (local) device.
 

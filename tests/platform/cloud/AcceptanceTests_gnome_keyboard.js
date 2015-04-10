@@ -11,8 +11,6 @@ You may obtain a copy of the License at
 https://github.com/gpii/universal/LICENSE.txt
 */
 
-/*global require*/
-
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
@@ -23,7 +21,8 @@ var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using gnome keyboard settings",
         userToken: "fm_gnome_keyboard",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"org.gnome.desktop.a11y.keyboard\"}]}"),
+        OSid: "linux",
+        solutionId: "org.gnome.desktop.a11y.keyboard",
         expected: {
             "org.gnome.desktop.a11y.keyboard": {
                 "slowkeys-delay": 400,
