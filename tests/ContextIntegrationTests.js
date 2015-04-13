@@ -242,7 +242,7 @@ gpii.tests.contextIntegration.fixtures = [
                 }, {
                     func: "{environmentChangedRequest}.send",
                     args: {
-                        "http://registry.gpii.net/common/environment/illuminance": 500,
+                        "http://registry.gpii.net/common/environment/illuminance":  500
                     }
                 }, {
                     event: "{environmentChangedRequest}.events.onComplete"
