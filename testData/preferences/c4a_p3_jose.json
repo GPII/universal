@@ -14,8 +14,8 @@
                     "http://registry.gpii.net/common/invertColours": false,
                     "http://registry.gpii.net/common/showCrosshairs": false,
 
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": false,
-                    "http://registry.gpii.net/common/screenReaderBrailleOutput": true,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true, 
+                    "http://registry.gpii.net/common/speechRate": 180,
                     "http://registry.gpii.net/common/trackingTTS": "mouse, caret, focus",
 
                     "http://registry.gpii.net/applications/com.microsoft.windows.displaySettings": {
