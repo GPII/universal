@@ -1,0 +1,10 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {}
+            }
+        }
+    }
+}

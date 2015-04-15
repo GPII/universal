@@ -24,7 +24,7 @@ gpii.tests.android.talkback = [
         userToken: "talkback1",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "STREAM_MUSIC": 14
@@ -33,7 +33,7 @@ gpii.tests.android.talkback = [
                 ]
             },
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 450,
@@ -52,7 +52,7 @@ gpii.tests.android.talkback = [
         userToken: "talkback2",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 496,
@@ -71,7 +71,7 @@ gpii.tests.android.talkback = [
         userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 681
@@ -89,7 +89,7 @@ gpii.tests.android.talkback = [
         userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 681
@@ -107,7 +107,7 @@ gpii.tests.android.talkback = [
         userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "STREAM_MUSIC": 11
@@ -116,7 +116,7 @@ gpii.tests.android.talkback = [
                 ]
             },
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 681,

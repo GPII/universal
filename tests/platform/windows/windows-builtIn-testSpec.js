@@ -25,7 +25,7 @@ gpii.tests.windows.builtIn = [
         userToken: "os_win7",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "MouseTrails": {
@@ -64,7 +64,7 @@ gpii.tests.windows.builtIn = [
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
-                "data": [{ // magnifier stuff
+                "some.app.id": [{ // magnifier stuff
                     "settings": {
                         "Invert": 1,
                         "Magnification": 150,
@@ -135,7 +135,7 @@ gpii.tests.windows.builtIn = [
         userToken: "os_common",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "MouseTrails": {
@@ -174,7 +174,7 @@ gpii.tests.windows.builtIn = [
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
-                "data": [{ // magnifier stuff
+                "some.app.id": [{ // magnifier stuff
                     "settings": {
                         "Invert": 1,
                         "Magnification": 150,
@@ -245,7 +245,7 @@ gpii.tests.windows.builtIn = [
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.windows.registrySettingsHandler": {
-                "data": [{ // magnifier stuff
+                "some.app.id": [{ // magnifier stuff
                     "settings": {
                         "Magnification": 150,
                         "MagnificationMode": 2

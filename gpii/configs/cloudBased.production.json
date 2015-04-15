@@ -1,0 +1,30 @@
+{
+    "typeName": "cloudBased.flowManager.production",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        },
+        "cloudBasedUrls": {
+            "preferences": "http://localhost:8082/preferences/%userToken",
+            "deviceReporter": "",
+            "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
+        },
+        "matchMakers": {
+            "flat": {
+                "url": "http://localhost:8081"
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/flatMatchMaker/configs/development.all.local.json",
+        "../node_modules/solutionsRegistry/configs/development.json",
+        "../node_modules/flowManager/configs/cloudBased.development.all.local.json"
+    ]
+}
