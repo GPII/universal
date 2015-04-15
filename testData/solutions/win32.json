@@ -808,7 +808,8 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "HIGHCONTRAST"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.-provisional-highContrastEnabled",
@@ -860,7 +861,8 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.mouseTrailing",
@@ -957,7 +959,8 @@
                         "SizeWE": "REG_SZ",
                         "UpArrow": "REG_SZ",
                         "Wait": "REG_SZ"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.cursorSize",

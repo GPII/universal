@@ -108,10 +108,10 @@ gpii.tests.linux.builtIn = [
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
                     }
-                } , {
+                }, {
                     "settings": {
-                        "gtk-theme":"HighContrast",
-                        "icon-theme":"HighContrast",
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast",
                         "cursor-size": 41
                     },
                     "options": {
