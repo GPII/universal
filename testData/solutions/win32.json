@@ -1417,11 +1417,7 @@
         ],
         "lifecycleManager" : {
             "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe\\}\" http://wiki.gpii.net/"
-                }
+                "setSettings"
             ],
             "stop": [
                 "restoreSettings"
