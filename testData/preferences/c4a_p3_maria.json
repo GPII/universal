@@ -1,0 +1,33 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/net.opendirective.maavis": {
+                        "theme": "colour",
+                        "speakOnActivate": "yes",
+                        "speakTitles": "yes",
+                        "speakLabels": "yes",
+                        "showLabels": "yes",
+                        "showImages": "yes",
+                        "userType": "touch",
+                        "playStartSound": "yes"
+                    },
+
+                    "http://registry.gpii.net/applications/trace.easyOne.communicator.linux": {}
+                },
+                "metadata": [
+                    {
+                        "type": "required",
+                        "scope": [
+                            "http://registry.gpii.net/applications/trace.easyOne.communicator.linux"
+                        ],
+                        "value": 1024
+                    }
+                ]
+            }
+        }
+    }
+}
+
