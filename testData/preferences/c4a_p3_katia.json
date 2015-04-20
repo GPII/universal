@@ -9,7 +9,7 @@
 
                     "http://registry.gpii.net/common/magnifierEnabled": true,
                     "http://registry.gpii.net/common/magnification": 2.5,
-                    "http://registry.gpii.net/common/tracking": ["mouse, caret, focus"],
+                    "http://registry.gpii.net/common/tracking": ["mouse", "caret", "focus"],
                     "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                     "http://registry.gpii.net/common/invertColours": false,
                     "http://registry.gpii.net/common/showCrosshairs": false,
