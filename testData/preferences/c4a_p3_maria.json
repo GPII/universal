@@ -15,17 +15,9 @@
                         "playStartSound": "yes"
                     },
 
-                    "http://registry.gpii.net/applications/trace.easyOne.communicator.linux": {}
-                },
-                "metadata": [
-                    {
-                        "type": "required",
-                        "scope": [
-                            "http://registry.gpii.net/applications/trace.easyOne.communicator.linux"
-                        ],
-                        "value": 1024
-                    }
-                ]
+                    "http://registry.gpii.net/applications/trace.easyOne.communicator.linux": {},
+                    "http://registry.gpii.net/applications/trace.easyOne.communicator.windows": {}
+                }
             }
         }
     }

@@ -36,6 +36,10 @@
                     "http://registry.gpii.net/applications/com.android.settings.system": {
                         "screen_time_off": 300,
                         "haptic_feedback_enabled": 1
+                    },
+                    "http://registry.gpii.net/applications/com.android.audioManager": {
+                        "STREAM_MUSIC": 15,
+                        "STREAM_SYSTEM": 15
                     }
                 }
             }
