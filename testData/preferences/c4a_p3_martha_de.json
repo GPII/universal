@@ -36,16 +36,17 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.displaySettings": {
                         "isActive": true
                     },
+
                     "http://registry.gpii.net/applications/de.fraunhofer.iao.C4A-TVM": {
                         "contrastTheme": "yellow-black",
                         "fontSize": "big",
                         "buttonSize": "big",
-                        "language": "en"
+                        "language": "de"
                     },
                     "http://registry.gpii.net/applications/info.cloud4all.JME": {
                         "theme": "Yellow-Black",
                         "fontSize": "large",
-                        "language": "English"
+                        "language": "German"
                     }
                 }
             }

@@ -4,23 +4,6 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-<<<<<<< HEAD
-                    "http://registry.gpii.net/common/highContrastEnabled": false,
-                    "http://registry.gpii.net/common/invertColours": true,
-                    "http://registry.gpii.net/common/cursorSize": 0.6,
-
-                    "http://registry.gpii.net/common/screenDim": true,
-                    "http://registry.gpii.net/common/screenOffTime": 60,
-                    "http://registry.gpii.net/common/screenRotation": true,
-
-                    "http://registry.gpii.net/applications/info.cloud4all.JME": {
-                        "theme": "Yellow-Black",
-                        "fontSize": "large"
-                    },
-
-                    "http://registry.gpii.net/applications/com.microsoft.windows.displaySettings": {
-                        "isActive": true
-=======
                     "http://registry.gpii.net/applications/com.microsoft.windows.displaySettings": {
                         "isActive": true
                     },
@@ -38,8 +21,7 @@
                     "http://registry.gpii.net/applications/info.cloud4all.JME": {
                         "theme": "Yellow-Black",
                         "fontSize": "large",
-                        "language": "English"
->>>>>>> cstrobbe/review3
+                        "language": "Greek"
                     }
                 }
             }

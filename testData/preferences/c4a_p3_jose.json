@@ -4,25 +4,58 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": false,
-                    "http://registry.gpii.net/common/cursorSize": 0.6,
-
-                    "http://registry.gpii.net/common/magnifierEnabled": true,
-                    "http://registry.gpii.net/common/magnification": 2.5,
-                    "http://registry.gpii.net/common/tracking": ["mouse", "caret", "focus"],
-                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                    "http://registry.gpii.net/common/invertColours": false,
-                    "http://registry.gpii.net/common/showCrosshairs": false,
-
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
-                    "http://registry.gpii.net/common/speechRate": 180,
-                    "http://registry.gpii.net/common/trackingTTS": [ "mouse", "caret", "focus" ],
-
+                    "http://registry.gpii.net/applications/org.nvda-project": {
+                        "speech\\.espeak\\.rate": 40,
+                        "reviewCursor\\.followFocus": true,
+                        "reviewCursor\\.followCaret": true,
+                        "reviewCursor\\.followMouse": true,
+                        "keyboard\\.speakTypedCharacters": true,
+                        "keyboard\\.speakTypedWords": false,
+                        "speech\\.espeak\\.sayCapForCapitals": false,
+                        "speech\\.symbolLevel": 200,
+                        "virtualBuffers\\.autoSayAllOnPageLoad": true,
+                        "speech\\.espeak\\.pitch": 50,
+                        "speech\\.espeak\\.volume": 60,
+                        "speech\\.espeak\\.voice": "en-GB"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
+                        "HighContrastOn": {
+                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
+                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
+                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
+                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
+                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                        "FollowFocus": 1,
+                        "FollowCaret": 1,
+                        "FollowMouse": 1,
+                        "Invert": 0,
+                        "Magnification": 250,
+                        "MagnificationMode": 3
+                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.displaySettings": {
                         "isActive": true
                     },
-
                     "http://registry.gpii.net/applications/es.codefactory.android.app.ma": {
+                        "access_commonprefs_speechrate": 5.10,
+                        "access_commonprefs_editingkeyboardecho": 1,
+                        "access_commonprefs_capitalization": false,
+                        "access_commonprefs_punctuation": "most",
+                        "access_commonprefs_speechpitch": 5,
                         "access_commonprefs_editingsecretmode": 0
                     }
                 }

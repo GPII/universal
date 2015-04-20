@@ -4,36 +4,25 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": true,
-                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
+                        "HighContrastOn": {
+                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseTrailing": {
+                        "MouseTrails": 4
+                    },
 
-                    "http://registry.gpii.net/common/cursorSize": 0.5,
-                    "http://registry.gpii.net/common/mouseTrailing": 5,
-
-
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
-                    "http://registry.gpii.net/common/speechRate": 300,
-
+                    "http://registry.gpii.net/applications/com.yourdolphin.supernova-as": {
+                        "screenReaderTTSEnabled": true,
+                        "speechRate": 204,
+                        "magnification": 3.0
+                    },
                     "http://registry.gpii.net/applications/com.tpvision.gpiitvproxy": {
                         "audioDescription": 1
                     }
-                },
-                "metadata": [
-                    {
-                        "type": "required",
-                        "scope": [
-                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
-                        ],
-                        "value": 1024
-                    },
-                    {
-                        "type": "priority",
-                        "scope": [
-                            "http://registry.gpii.net/applications/com.yourdolphin.supernova-as"
-                        ],
-                        "value": 1024
-                    }
-                ]
+                }
             }
         }
     }

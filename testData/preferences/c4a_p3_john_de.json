@@ -16,7 +16,7 @@
                         "virtualBuffers\\.autoSayAllOnPageLoad": true,
                         "speech\\.espeak\\.pitch": 50,
                         "speech\\.espeak\\.volume": 60,
-                        "speech\\.espeak\\.voice": "en-GB"
+                        "speech\\.espeak\\.voice": "de"
                     },
                     "http://registry.gpii.net/applications/org.gnome.orca": {
                         "enableSpeech": true,
@@ -29,8 +29,8 @@
                         "voices\\.default\\.average-pitch": 5,
                         "voices\\.default\\.gain": 6,
                         "voices\\.default\\.family": {
-                            "locale": "en",
-                            "name": "english"
+                            "locale": "de",
+                            "name": "german"
                         }
                     },
                     "http://registry.gpii.net/applications/es.codefactory.android.app.ma": {
