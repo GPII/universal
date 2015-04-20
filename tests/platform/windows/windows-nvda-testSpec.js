@@ -28,7 +28,7 @@ gpii.tests.windows.nvda = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.rate": 17,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": true,
@@ -68,7 +68,7 @@ gpii.tests.windows.nvda = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.rate": 17,
                             "speech.espeak.volume": 75,
                             "speech.espeak.pitch": 15,
                             "speech.espeak.rateBoost": true,
@@ -107,7 +107,7 @@ gpii.tests.windows.nvda = [
                     {
                         "settings": {
                             "speech.symbolLevel": 300,
-                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.rate": 17,
                             "speech.espeak.voice": "en\\en-wi",
                             "keyboard.speakTypedWords": true,
                             "speech.espeak.rateBoost": true,

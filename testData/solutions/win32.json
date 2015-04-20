@@ -339,32 +339,37 @@
                     ],
                     "speech\\.espeak\\.rate": {
                         "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "right": 3.10,
-                            "operator": "/",
-                            "left": {
+                            "type": "fluid.transforms.round",
+                            "input": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "right": 80,
-                                    "operator": "-",
+                                    "right": 3.10,
+                                    "operator": "/",
                                     "left": {
                                         "transform": {
-                                            "type": "fluid.transforms.condition",
-                                            "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                            "false": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "right": 80,
+                                            "operator": "-",
+                                            "left": {
                                                 "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "operator": "/",
-                                                    "right": 3
-                                                }
-                                            },
-                                            "condition": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "operator": "<=",
-                                                    "right": 390
+                                                    "type": "fluid.transforms.condition",
+                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "false": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 3
+                                                        }
+                                                    },
+                                                    "condition": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "<=",
+                                                            "right": 390
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
