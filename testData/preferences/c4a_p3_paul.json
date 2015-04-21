@@ -20,7 +20,7 @@
                     },
                     "http://registry.gpii.net/applications/info.cloud4all.JME": {
                         "theme": "Yellow-Black",
-                        "fontSize": "large",
+                        "fontSize": "huge",
                         "language": "English"
                     }
                 }
