@@ -28,7 +28,8 @@
                     },
 
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
-                        "screenReaderTTSEnabled": true
+                        "screenReaderTTSEnabled": true,
+                        "lineHeight": 1.4
                     }
                 }
             }

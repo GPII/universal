@@ -5,18 +5,20 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/org.nvda-project": {
-                        "speech\\.espeak\\.rate": 40,
-                        "reviewCursor\\.followFocus": true,
-                        "reviewCursor\\.followCaret": true,
-                        "reviewCursor\\.followMouse": true,
-                        "keyboard\\.speakTypedCharacters": true,
-                        "keyboard\\.speakTypedWords": false,
-                        "speech\\.espeak\\.sayCapForCapitals": false,
-                        "speech\\.symbolLevel": 200,
-                        "virtualBuffers\\.autoSayAllOnPageLoad": true,
-                        "speech\\.espeak\\.pitch": 50,
-                        "speech\\.espeak\\.volume": 60,
-                        "speech\\.espeak\\.voice": "de"
+                        "speech.synth": "espeak",
+                        "speech.outputDevice": "Microsoft Sound Mapper",
+                        "speech.espeak.rate": 40,
+                        "reviewCursor.followFocus": true,
+                        "reviewCursor.followCaret": true,
+                        "reviewCursor.followMouse": true,
+                        "keyboard.speakTypedCharacters": true,
+                        "keyboard.speakTypedWords": false,
+                        "speech.espeak.sayCapForCapitals": false,
+                        "speech.symbolLevel": 200,
+                        "virtualBuffers.autoSayAllOnPageLoad": true,
+                        "speech.espeak.pitch": 50,
+                        "speech.espeak.volume": 60,
+                        "speech.espeak.voice": "de"
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
                         "HighContrastOn": {
@@ -25,19 +27,19 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
-                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
-                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
-                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
-                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
-                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                        "No": "%SystemRoot%cursorsaero_unavail_xl.cur",
+                        "Hand": "%SystemRoot%cursorsaero_link_xl.cur",
+                        "Help": "%SystemRoot%cursorsaero_helpsel_xl.cur",
+                        "Wait": "%SystemRoot%cursorsaero_busy_xl.ani",
+                        "Arrow": "%SystemRoot%cursorsaero_arrow_xl.cur",
+                        "NWPen": "%SystemRoot%cursorsaero_pen_xl.cur",
+                        "SizeNS": "%SystemRoot%cursorsaero_ns_xl.cur",
+                        "SizeWE": "%SystemRoot%cursorsaero_ew_xl.cur",
+                        "SizeAll": "%SystemRoot%cursorsaero_move_xl.cur",
+                        "UpArrow": "%SystemRoot%cursorsaero_up_xl.cur",
+                        "SizeNESW": "%SystemRoot%cursorsaero_nesw_xl.cur",
+                        "SizeNWSE": "%SystemRoot%cursorsaero_nwse_xl.cur",
+                        "AppStarting": "%SystemRoot%cursorsaero_working_xl.ani"
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
                         "FollowFocus": 1,

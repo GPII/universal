@@ -5,30 +5,32 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/org.nvda-project": {
-                        "speech\\.espeak\\.rate": 35,
-                        "reviewCursor\\.followFocus": true,
-                        "reviewCursor\\.followCaret": false,
-                        "reviewCursor\\.followMouse": false,
-                        "keyboard\\.speakTypedCharacters": true,
-                        "keyboard\\.speakTypedWords": false,
-                        "speech\\.espeak\\.sayCapForCapitals": false,
-                        "speech\\.symbolLevel": 200,
-                        "virtualBuffers\\.autoSayAllOnPageLoad": true,
-                        "speech\\.espeak\\.pitch": 50,
-                        "speech\\.espeak\\.volume": 60,
-                        "speech\\.espeak\\.voice": "es"
+                        "speech.synth": "espeak",
+                        "speech.outputDevice": "Microsoft Sound Mapper",
+                        "speech.espeak.rate": 35,
+                        "reviewCursor.followFocus": true,
+                        "reviewCursor.followCaret": false,
+                        "reviewCursor.followMouse": false,
+                        "keyboard.speakTypedCharacters": true,
+                        "keyboard.speakTypedWords": false,
+                        "speech.espeak.sayCapForCapitals": false,
+                        "speech.symbolLevel": 200,
+                        "virtualBuffers.autoSayAllOnPageLoad": true,
+                        "speech.espeak.pitch": 50,
+                        "speech.espeak.volume": 60,
+                        "speech.espeak.voice": "es"
                     },
                     "http://registry.gpii.net/applications/org.gnome.orca": {
                         "enableSpeech": true,
-                        "voices\\.default\\.rate": 60,
+                        "voices.default.rate": 60,
                         "enableEchoByCharacter": true,
                         "enableEchoByWord": false,
                         "enableBraille": true,
                         "verbalizePunctuationStyle": 1,
                         "sayAllStyle": 1,
-                        "voices\\.default\\.average-pitch": 5,
-                        "voices\\.default\\.gain": 6,
-                        "voices\\.default\\.family": {
+                        "voices.default.average-pitch": 5,
+                        "voices.default.gain": 6,
+                        "voices.default.family": {
                             "locale": "es",
                             "name": "spanish"
                         }
