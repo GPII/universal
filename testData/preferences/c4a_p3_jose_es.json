@@ -59,6 +59,10 @@
                         "access_commonprefs_punctuation": "most",
                         "access_commonprefs_speechpitch": 5,
                         "access_commonprefs_editingsecretmode": 0
+                    },
+                    "http://registry.gpii.net/applications/com.android.audioManager": {
+                        "STREAM_MUSIC": 10,
+                        "STREAM_SYSTEM": 10
                     }
                 }
             }
