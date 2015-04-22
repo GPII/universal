@@ -26,7 +26,7 @@
 
                     "http://registry.gpii.net/applications/com.android.persistentConfiguration": {
                         "fontScale": 1.5,
-                        "language": "en"
+                        "language": "es"
                     },
                     "http://registry.gpii.net/applications/com.android.settings.secure": {
                         "tts_default_rate": 190
@@ -35,6 +35,7 @@
                         "screen_time_off": 300,
                         "haptic_feedback_enabled": 1
                     },
+
                     "http://registry.gpii.net/applications/com.tpvision.gpiitvproxy": {
                         "audioDescription": 1
                     }
