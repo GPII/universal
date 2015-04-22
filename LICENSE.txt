@@ -32,5 +32,4 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The research leading to these results has received funding from
-the European Union's Seventh Framework Programme (FP7/2007-2013)
-under grant agreement no. 289016.
+the European Union's Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
