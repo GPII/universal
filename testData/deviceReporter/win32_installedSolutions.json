@@ -50,6 +50,9 @@
 
         {
             "id": "com.microsoft.windows.displaySettings"
+        },
+        {
+            "id": "com.yourdolphin.supernova-as"
         }
     ]
 }
