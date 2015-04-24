@@ -37,18 +37,6 @@
         },
 
         {
-            "id": "com.microsoft.windows.magnifier"
-        },
-
-        {
-            "id": "com.microsoft.windows.onscreenKeyboard"
-        },
-
-        {
-            "id": "nvda.screenReader"
-        },
-
-        {
             "id": "org.gnome.desktop.interface"
         },
 
@@ -57,15 +45,7 @@
         },
 
         {
-            "id": "trace.easyOne.communicator.windows"
-        },
-
-        {
             "id": "trace.easyOne.communicator.linux"
-        },
-
-        {
-            "id": "trace.easyOne.sudan.windows"
         },
 
         {
