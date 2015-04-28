@@ -1,5 +1,5 @@
 {
-    "typeName": "development.all.local",
+    "typeName": "all.development.pr.production",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
@@ -13,7 +13,7 @@
         }
     },
     "includes": [
-        "../node_modules/processReporter/configs/development.json",
+        "../node_modules/processReporter/configs/production.json",
         "../node_modules/deviceReporter/configs/development.json",
         "../node_modules/flowManager/configs/development.json",
         "../node_modules/preferencesServer/configs/development.json",

@@ -31,6 +31,7 @@ require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
 require("./gpii/node_modules/contextManager");
+require("./gpii/node_modules/processReporter");
 
 gpii.loadTestingSupport = function () {
     require("./gpii/node_modules/testing");
@@ -38,7 +39,8 @@ gpii.loadTestingSupport = function () {
 
 gpii.start = function () {
     kettle.config.makeConfigLoader({
-        configName: kettle.config.getNodeEnv("development.all.local"),
+        configName: kettle.config.getNodeEnv("all.development.pr.production"),
+//        configName: kettle.config.getNodeEnv("development.all.local"),
         configPath: kettle.config.getConfigPath() || __dirname + "/gpii/configs"
     });
 };

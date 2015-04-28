@@ -7,7 +7,14 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "gnome-shell"
+                }
             ]
+
         },
         "settingsHandlers": [
             {
@@ -357,7 +364,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "orca"
+                }
+            ]
         },
         "settingsHandlers": [
             {
