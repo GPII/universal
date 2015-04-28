@@ -15,12 +15,10 @@
                         "playStartSound": "yes"
                     },
 
-                    "http://registry.gpii.net/applications/trace.easyOne.communicator.linux": {},
-
                     "http://registry.gpii.net/applications/info.cloud4all.JME": {
                         "theme": "Leather",
                         "fontSize": "large",
-                        "language": "English"
+                        "language": "German"
                     }
                 }
             }
