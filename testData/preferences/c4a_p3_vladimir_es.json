@@ -11,7 +11,13 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseTrailing": {
-                        "MouseTrails": 4
+                        "MouseTrails": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 4
+                        }
                     },
 
                     "http://registry.gpii.net/applications/com.yourdolphin.supernova-as": {

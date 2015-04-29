@@ -1302,7 +1302,7 @@
                     "allowSubSections": true
                 },
                 "capabilities": [
-                    "applications.com\\.yourdolphin\\.supernova-as",
+                    "applications.com\\.yourdolphin\\.supernova-as.id",
                     "display.screenReader.applications.com\\.yourdolphin\\.supernova-as"
                 ],
                 "capabilitiesTransformations": {
