@@ -20,6 +20,8 @@
                         "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
                         "ApplicationSettings.Speech.WebHighlighting.$t": false,
                         "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
+                        "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": "Arial",
+                        "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": 18,
                         "ApplicationSettings.Scanning.ScanDestination.$t": "Word",
                         "ApplicationSettings.Scanning.ScanToFile.$t": false,
                         "ApplicationSettings.Spelling.SpellAsIType.$t": true
