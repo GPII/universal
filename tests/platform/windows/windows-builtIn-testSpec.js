@@ -240,7 +240,7 @@ gpii.tests.windows.builtIn = [
                 "expectRestored": "0"
             }
         ]
-    }, {
+    }/*, {
         name: "Testing os_gnome using Flat matchmaker",
         userToken: "os_gnome",
         settingsHandlers: {
@@ -307,7 +307,7 @@ gpii.tests.windows.builtIn = [
                 "expectRestored": "0"
             }
         ]
-    }
+    }*/
 ];
 
 module.exports = gpii.test.bootstrap({

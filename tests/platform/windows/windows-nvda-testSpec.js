@@ -100,7 +100,7 @@ gpii.tests.windows.nvda = [
                 "expectRestored": "0"
             }
         ]
-    }, {
+    }/*, {
         name: "Testing screenreader_orca using Flat matchmaker",
         userToken: "screenreader_orca",
         settingsHandlers: {
@@ -133,7 +133,7 @@ gpii.tests.windows.nvda = [
                 "expectRestored": "0"
             }
         ]
-    }
+    }*/
 ];
 
 module.exports = gpii.test.bootstrap({

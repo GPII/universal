@@ -94,7 +94,7 @@ gpii.tests.linux.builtIn = [
                 "expectRestored": "false"
             }
         ]
-    },
+    }/*,
     {
         name: "Testing os_win7 using Flat matchmaker",
         userToken: "os_win7",
@@ -127,7 +127,7 @@ gpii.tests.linux.builtIn = [
                 "expectRestored": "false"
             }
         ]
-    }
+    }*/
 ];
 
 module.exports = gpii.test.bootstrap({

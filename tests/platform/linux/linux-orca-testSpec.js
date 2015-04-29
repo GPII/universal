@@ -91,7 +91,7 @@ gpii.tests.linux.orca = [
                 "expectRestored": "false"
             }
         ]
-    },
+    }/*,
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
@@ -126,7 +126,7 @@ gpii.tests.linux.orca = [
                 "expectRestored": "false"
             }
         ]
-    }
+    }*/
 ];
 
 module.exports = gpii.test.bootstrap({

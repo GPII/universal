@@ -66,42 +66,42 @@ gpii.tests.android.talkback = [
             }
         }
     },
-    {
-        name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
-        settingsHandlers: {
-            "gpii.androidSettings": {
-                "data": [
-                    {
-                        "settings": {
-                            "tts_default_rate": 681
-                        },
-                        "options": {
-                            "settingType": "Secure"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
-        settingsHandlers: {
-            "gpii.androidSettings": {
-                "data": [
-                    {
-                        "settings": {
-                            "tts_default_rate": 675
-                        },
-                        "options": {
-                            "settingType": "Secure"
-                        }
-                    }
-                ]
-            }
-        }
-    },
+    //{
+    //    name: "Testing screenreader_orca using Flat matchmaker",
+    //    userToken: "screenreader_orca",
+    //    settingsHandlers: {
+    //        "gpii.androidSettings": {
+    //            "data": [
+    //                {
+    //                    "settings": {
+    //                        "tts_default_rate": 681
+    //                    },
+    //                    "options": {
+    //                        "settingType": "Secure"
+    //                    }
+    //                }
+    //            ]
+    //        }
+    //    }
+    //},
+    //{
+    //    name: "Testing screenreader_nvda using Flat matchmaker",
+    //    userToken: "screenreader_nvda",
+    //    settingsHandlers: {
+    //        "gpii.androidSettings": {
+    //            "data": [
+    //                {
+    //                    "settings": {
+    //                        "tts_default_rate": 675
+    //                    },
+    //                    "options": {
+    //                        "settingType": "Secure"
+    //                    }
+    //                }
+    //            ]
+    //        }
+    //    }
+    //},
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_common",
