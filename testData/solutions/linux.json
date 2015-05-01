@@ -14,7 +14,6 @@
                     "command": "gnome-shell"
                 }
             ]
-
         },
         "settingsHandlers": [
             {
@@ -99,6 +98,12 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "dunno"
+                }
             ]
         },
         "settingsHandlers": [
@@ -176,7 +181,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "nautilus"
+                }
+            ]
         },
 
         "settingsHandlers": [
@@ -207,7 +218,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isRunning": [
+               {
+                   "type": "gpii.processReporter.find",
+                    "command": "caribou"
+               }
+            ]
         },
         "settingsHandlers": [
             {
@@ -1184,6 +1201,12 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "alsactl"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1216,6 +1239,12 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
+                }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "chrome"
                 }
             ]
         },
@@ -1253,6 +1282,12 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "chrome"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1289,6 +1324,12 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "chrome"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1322,7 +1363,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "Xrandr"
+                }
+            ]
         },
         "settingsHandlers": [
            {
