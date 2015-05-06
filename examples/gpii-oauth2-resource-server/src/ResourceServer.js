@@ -10,7 +10,7 @@
  * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
- "use strict";
+"use strict";
 
 var fluid = require("infusion");
 require("../../../gpii/node_modules/gpii-oauth2");

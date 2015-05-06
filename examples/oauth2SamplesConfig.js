@@ -10,7 +10,7 @@
  * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
- var config = {
+var config = {
     authorizationServerHostname: "localhost",
     authorizationServerPort: 8081,
     resourceServerHostname: "localhost",
