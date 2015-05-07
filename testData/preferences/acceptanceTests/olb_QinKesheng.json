@@ -1,0 +1,16 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/language": "zho",
+                    "http://registry.gpii.net/common/signLanguageEnabled": true,
+                    "http://registry.gpii.net/common/signLanguage": "csl",
+                    "http://registry.gpii.net/common/signLanguageInterpreterType": "avatar"
+                }
+            }
+        }
+    }
+}
+
