@@ -22,7 +22,7 @@ var testDefs = [
     {
         name: "Test the Ticket Vending Machine with Online Flow Manager.",
         userToken: "tvm_lara",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"de.fraunhofer.iao.C4A-TVM\"}]}"),
+        solutionId: "de.fraunhofer.iao.C4A-TVM",
         expected: {
             "de.fraunhofer.iao.C4A-TVM": {
                 "language": "el",
@@ -35,7 +35,7 @@ var testDefs = [
     {
         name: "Test the Ticket Vending Machine with application-specific preferences.",
         userToken: "tvm_applicationSpecific_01",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"de.fraunhofer.iao.C4A-TVM\"}]}"),
+        solutionId: "de.fraunhofer.iao.C4A-TVM",
         expected: {
             "de.fraunhofer.iao.C4A-TVM": {
                 "contrastTheme": "yellow-black",
