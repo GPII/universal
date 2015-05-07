@@ -32,4 +32,5 @@ Run the acceptance tests located at universal's _tests/platform/cloud/Acceptance
 
 As mentioned above, a preference set containing only application-specific terms is available at universal's _testData/preferences/tvm_applicationSpecific_01.json_.
 
-However, at this point in time, the ticket vending machine can only be tested by Fraunhofer IAO. 
+However, at this point in time, the ticket vending machine can only be tested by Fraunhofer IAO.
+
