@@ -1,13 +1,13 @@
 ## Matchmaker Framework
 
-A locally running component, with the responsiblity of:
-* Doing the preprocessing - that is, preparing the input payload for the mathmakers
-* Making the decision of which MM to call (ie. hybrid matchmaking), and call that MM
+A locally running component, with the following responsiblities:
+* Doing the preprocessing - that is, preparing the input payload for the matchmakers
+* Making the decision of which MM to call (ie. hybrid matchmaking), and then call that MM
 * Doing the post-processing - that is, taking the return payload from the matchmakers and transformat
 
 ## Configuration
 
-The matchMakerFramwork has, like all other kettle apps a config file. Generally, the Match Maker Framework configs are located in the `configs` folder of the matchMakerFramework component. The declaration of what Match Makers are available to the Match Maker Framework, and where to find them should be set under the `matchMakers` option of the `gpii.matchMakerFramework`. Each entry should have the name of the mathcmaker as key, and then the value of an object which at least contains a `url`.  For example, in the following config file, two matchmakers are listed to be available. The "flat", located at the url http://localhost:8081 and the "RuleBased" at the url http://localhost:8078.
+Like all other Kettle apps, the Matchmaker Framework has a config file. Generally, the Matchmaker Framework configs are located in the `configs` folder of the matchMakerFramework component. The declaration of what matchmakers are available to the Matchmaker Framework, and where to find them should be set under the `matchMakers` option of the `gpii.matchMakerFramework`. Each entry should have the name of the mathcmaker as key, and then the value of an object which at least contains a `url`.  For example, in the following config file, two matchmakers are listed to be available. The "flat" matchmaker, located at the url http://localhost:8081 and the "RuleBased" one at the url http://localhost:8078.
 
 ```
 {
@@ -46,15 +46,15 @@ The matchMakerFramwork has, like all other kettle apps a config file. Generally,
 
 ## API:
 
-The MatchMakers that can be called from the MatchMakerFramework needs to adhere to the following API. 
+The matchmakers that can be called from the Matchmaker Framework need to adhere to the following API. 
 
 ### URL: `/match`
 
-They need to have a path called `/match` which accepts POST requests. If the matchmaker lives on the URL `http://my.matchmaker.org`, it should expose the URL: `http://my.matchmaker.org/match`
+They need to have a path called `/match` which accepts POST requests. If the matchmaker lives at the URL `http://my.matchmaker.org`, it should expose the URL: `http://my.matchmaker.org/match`
 
 ### Input format
 
-The input for these POST requests will be in the format. Note that it will be JSON - the comments in the below document is just to explain the format
+The input for these POST requests will be in the following format. Note that it will be JSON - the comments in the below document is just to explain the format
 
 ```
 {
@@ -148,7 +148,7 @@ The input for these POST requests will be in the format. Note that it will be JS
 
 ### Return payload
 
-The return payload from at call to `/match` should be in the below form:
+The return payload from at call to `/match` should be in the following format:
 
 ```
 {
