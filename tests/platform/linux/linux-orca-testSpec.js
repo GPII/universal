@@ -108,7 +108,7 @@ gpii.tests.linux.orca = [
                             "enableSpeech": true,
                             "enableEchoByWord": true,
                             "enableEchoByCharacter": false,
-                            "voices.default.rate": 102.27272727272727,
+                            "voices.default.rate": 101.84090909090908,
                             "enableTutorialMessages": false,
                             "voices.default.family": {
                                 "locale": "en",
