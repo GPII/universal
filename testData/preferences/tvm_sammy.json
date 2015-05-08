@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/de.fraunhofer.iao.C4A-TVM": {
+                        "contrastTheme": "yellow-black",
+                        "fontFace": "Comic Sans",
+                        "buttonSize": "big",
+                        "fontSize": "big"
+                    },
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/magnification": 3,
+                    "http://registry.gpii.net/common/highContrast": true
+                }
+            }
+        }
+    }
+}
+
