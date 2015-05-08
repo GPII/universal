@@ -134,16 +134,10 @@
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                             "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "value": "HighContrast"
-                                }
+                                "literalValue": "HighContrast"
                             },
                             "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "value": "Adwaita"
-                                }
+                                "literalValue": "Adwaita"
                             }
                         }
                     },
@@ -152,16 +146,10 @@
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                             "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "value": "HighContrast"
-                                }
+                                "literalValue": "HighContrast"
                             },
                             "false": {
-                                "transform": {
-                                    "type": "fluid.transforms.literalValue",
-                                    "value": "gnome"
-                                }
+                                "literalValue": "gnome"
                             }
                         }
                     }
