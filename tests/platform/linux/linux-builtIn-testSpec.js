@@ -36,7 +36,8 @@ gpii.tests.linux.builtIn = [
                         "mag-factor": 1.5,
                         "screen-position": "full-screen",
                         "mouse-tracking": "proportional",
-                        "caret-tracking": "proportional"
+                        "caret-tracking": "proportional",
+                        "focus-tracking": "none"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -111,7 +112,8 @@ gpii.tests.linux.builtIn = [
                         "mag-factor": 1.5,
                         "screen-position": "full-screen",
                         "mouse-tracking": "proportional",
-                        "caret-tracking": "proportional"
+                        "caret-tracking": "proportional",
+                        "focus-tracking": "none"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
