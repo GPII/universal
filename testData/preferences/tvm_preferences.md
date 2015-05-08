@@ -11,7 +11,7 @@ The following preference sets are used for testing and demonstrating the ticket 
 
 * `tvm_jasmin.json`: preference set with only application-specific terms for the following settings:
 ** big buttons,
-** Frenc user interface.
+** French user interface.
 
 * `tvm_sammy.json`: preference set with a combination of common and application-specific terms for the following settings:
 ** a yellow-on-black contrast theme,
