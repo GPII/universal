@@ -299,7 +299,9 @@ After the PUT request, it would be changed to:
 ```
 
 There are two important things to note here:
+
 1. As the PUT request was made in the flat format, all the existing preferences in the flat format were replaced by the ones in the body of the PUT request. This means that a setting like _cursorAcceleration_ is no longer present in the preference set.
+
 2. In the example, we consider the ISO-24751 setting "display.screenEnhancement.fontSize" to be ontologically equivalent to http://registry.gpii.net/common/fontSize. Since we do not allow the same setting to be present multiple times in the NP set, the fontSize has been stored in the flat ontology and removed from the ISO24751 block.
 
 ### Other relevant documentation:
