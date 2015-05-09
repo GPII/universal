@@ -45,11 +45,11 @@ Running node-based tests:
 Docker
 ------
 
-The [Docker Hub's Automated Build service](http://docs.docker.com/docker-hub/builds/) is used to automatically build a [GPII Universal Docker image](https://registry.hub.docker.com/u/gpii/universal/). The Docker client can then be used to download updated images and launch containers.
+The [Docker Hub Automated Build service](http://docs.docker.com/docker-hub/builds/) is used to automatically build a [GPII Universal Docker image](https://registry.hub.docker.com/u/gpii/universal/). The Docker client can then be used to download updated images and launch containers.
 
 The following command can be used to build an image locally as long as it is run relative to the repository's Dockerfile:
 
-    docker build --rm -t gpii/universal:$(git --git-dir=universal/.git --work-tree=universal rev-parse --short HEAD) .
+    docker build --rm -t gpii/universal:$(git rev-parse --short HEAD) .
 
 That will use the Git repository's current abbreviated commit hash as a [Docker tag](https://docs.docker.com/reference/commandline/cli/#tag). If you would like to download the latest public Universal image you can use this command:
 
