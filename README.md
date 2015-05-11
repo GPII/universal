@@ -42,8 +42,8 @@ Running node-based tests:
 
     node tests/all-tests.js
 
-Docker
-------
+Deploying with Docker
+---------------------
 
 The [Docker Hub Automated Build service](http://docs.docker.com/docker-hub/builds/) is used to automatically build a [GPII Universal Docker image](https://registry.hub.docker.com/u/gpii/universal/). The Docker client can then be used to download updated images and launch containers.
 
@@ -63,3 +63,4 @@ GPII component images can then be built using the Universal image. Here are two 
 
 * https://github.com/gpii-ops/docker-preferences-server/
 * https://github.com/gpii-ops/docker-flow-manager/
+
