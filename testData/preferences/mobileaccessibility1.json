@@ -1,0 +1,41 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/es.codefactory.android.app.ma": {
+                        "MA_CLOUD4ALL_USER":{
+                            "type":"class java.lang.String",
+                            "value":"mobileaccessibility1"
+                        },
+                        "access_commonprefs_editingkeyboardecho":{
+                            "type":"class java.lang.String",
+                            "value":"3"
+                        },
+                        "access_commonprefs_speechpitch":{
+                            "type":"class java.lang.String",
+                            "value":"6"
+                        },
+                        "access_commonprefs_speechrate":{
+                            "type":"class java.lang.String",
+                            "value":"10"
+                        },
+                        "access_commonprefs_spellphonetically":{
+                            "type":"class java.lang.Boolean",
+                            "value":"false"
+                        },
+                        "access_commonprefs_punctuation":{
+                            "type":"class java.lang.String",
+                            "value":"2"
+                        },
+                        "access_commonprefs_capitalization":{
+                            "type":"class java.lang.Boolean",
+                            "value":"true"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

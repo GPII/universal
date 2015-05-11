@@ -1,0 +1,11 @@
+[
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+    {
+        "id": "com.android.audioManager"
+    },
+    {
+        "id": "com.android.settings.system"
+    }
+]

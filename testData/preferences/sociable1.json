@@ -1,3 +1,12 @@
 {
-    "http://registry.gpii.org/common/screenReaderTTSEnabled":[{ "value": true }]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true
+                }
+            }
+        }
+    }
 }

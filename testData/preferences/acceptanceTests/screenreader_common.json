@@ -1,0 +1,23 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/speakTutorialMessages": false ,
+                    "http://registry.gpii.net/common/keyEcho": false ,
+                    "http://registry.gpii.net/common/wordEcho": true ,
+                    "http://registry.gpii.net/common/announceCapitals": true ,
+                    "http://registry.gpii.net/common/readingUnit": "word" ,
+                    "http://registry.gpii.net/common/punctuationVerbosity": "all" ,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true ,
+                    "http://registry.gpii.net/common/trackingTTS": ["mouse", "caret"],
+                    "http://registry.gpii.net/common/speechRate": 400 ,
+                    "http://registry.gpii.net/common/auditoryOutLanguage": "en-BS",
+                    "http://registry.gpii.net/common/pitch": 0.15 ,
+                    "http://registry.gpii.net/common/volumeTTS": 0.75
+                }
+            }
+        }
+    }
+}

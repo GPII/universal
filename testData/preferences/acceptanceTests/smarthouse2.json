@@ -1,0 +1,15 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                   "http://registry.gpii.net/common/language": "en",
+                   "http://registry.gpii.net/common/volume": 1,
+                   "http://registry.gpii.net/common/highContrastTheme": "defaultTheme",
+                   "http://registry.gpii.net/common/fontSize": 14
+                }
+            }
+        }
+    }
+}

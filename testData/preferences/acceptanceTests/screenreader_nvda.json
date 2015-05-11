@@ -1,0 +1,29 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.nvda-project": {
+                        "speech.synth": "espeak",
+                        "speech.outputDevice": "Microsoft Sound Mapper",
+                        "speech.symbolLevel": 300,
+                        "speech.espeak.rate": 17,
+                        "speech.espeak.voice": "en\\en-wi",
+                        "speech.espeak.pitch": 60,
+                        "speech.espeak.volume": 80,
+                        "reviewCursor.followFocus": false,
+                        "reviewCursor.followCaret": true,
+                        "reviewCursor.followMouse": true,
+                        "keyboard.speakTypedWords": true,
+                        "speech.espeak.rateBoost": true,
+                        "keyboard.speakTypedCharacters": false,
+                        "presentation.reportHelpBalloons": false,
+                        "speech.espeak.sayCapForCapitals": true,
+                        "virtualBuffers.autoSayAllOnPageLoad": false
+                    }
+                }
+            }
+        }
+    }
+}

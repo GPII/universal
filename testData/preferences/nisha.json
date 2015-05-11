@@ -1,43 +1,48 @@
 {
-    "http://registry.gpii.org/applications/com.texthelp.readWriteGold": [{
-        "value": {
-            "ApplicationSettings.AppBar.Width.$t": 788,
-            "ApplicationSettings.AppBar.ShowText.$t": false,
-            "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
-            "ApplicationSettings.AppBar.LargeIcons.$t": true,
-            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
-            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
-            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
-            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        "ApplicationSettings.AppBar.Width.$t": 788,
+                        "ApplicationSettings.AppBar.ShowText.$t": false,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
+                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+                    },
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.applications.onscreen-keyboard": {},
+                    "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {},
+                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.keyboard": {
+                        "stickykeys-enable": true,
+                        "enable": true,
+                        "bouncekeys-enable": true,
+                        "bouncekeys-delay": 300,
+                        "mousekeys-enable": true,
+                        "mousekeys-init-delay": 120,
+                        "mousekeys-max-speed": 850,
+                        "mousekeys-accel-time": 800,
+                        "slowkeys-enable": true,
+                        "togglekeys-enable": true
+                    },
+                    "http://registry.gpii.net/common/fontSize": 12,
+                    "http://registry.gpii.net/common/foregroundColor": "white",
+                    "http://registry.gpii.net/common/backgroundColor": "black",
+                    "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
+                    "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
+                    "http://registry.gpii.net/common/adaptationPreference": [
+                        {
+                            "adaptationType": "caption",
+                            "language": "en"
+                        },
+                        {}
+                    ],
+                    "http://registry.gpii.net/common/tableOfContents": false
+                }
+            }
         }
-    }],
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.applications.onscreen-keyboard": [{ "value": {}}],
-    "http://registry.gpii.org/applications/com.microsoft.windows.onscreenKeyboard": [{ "value": {}}],
-    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.keyboard": [{
-        "value": {
-            "stickykeys-enable": true,
-            "enable": true,
-            "bouncekeys-enable": true,
-            "bouncekeys-delay": 300,
-            "mousekeys-enable": true,
-            "mousekeys-init-delay": 120,
-            "mousekeys-max-speed": 850,
-            "mousekeys-accel-time": 800,
-            "slowkeys-enable": true,
-            "togglekeys-enable": true
-        }
-    }],
-    "http://registry.gpii.org/common/fontSize": [{ "value": 12 }],
-    "http://registry.gpii.org/common/foregroundColor": [{ "value": "white" }],
-    "http://registry.gpii.org/common/backgroundColor": [{ "value": "black" }],
-    "http://registry.gpii.org/common/fontFaceFontName": [{ "value": ["Comic Sans"] }],
-    "http://registry.gpii.org/common/fontFaceGenericFontFace": [{ "value": "sans serif" }],
-    "http://registry.gpii.org/common/adaptationPreference": [{ "value": [
-        {
-            "adaptationType": "caption",
-            "language": "en"
-        },
-        {}
-    ]}],
-    "http://registry.gpii.org/common/tableOfContents": [{ "value": false }]
+    }
 }

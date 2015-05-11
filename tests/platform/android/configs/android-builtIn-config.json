@@ -1,0 +1,21 @@
+{
+    "typeName": "acceptanceTests.android.builtIn",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/android_builtIn.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/tests/configs/localInstall.json"
+    ]
+}
