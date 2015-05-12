@@ -17,14 +17,14 @@ Since running the system in local install mode is expected to configure the mach
 
 If you have installed GPII in the folder <GPII-install>:
 * In Microsoft Windows, go to <GPII-install>\windows
-* In GNU Linux, go to <GPII-install>/linux
+* In GNU/Linux, go to <GPII-install>/linux
 * In Android, go to <GPII-install>/android
 
 Then run the command: `grunt start`
 
 By default this will start up the system with everything running locally, using the `development.all.local.json` configuration file of universal repository (see the `universal/gpii/configs` folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
 * in Microsoft Windows: `SET NODE_ENV=dev.remote.prefs`
-* in GNU Linux: `EXPORT NODE_ENV=dev.remote.prefs`
+* in GNU/Linux: `export NODE_ENV=dev.remote.prefs`
 
 Followed by the `grunt start` command.
 
@@ -35,7 +35,7 @@ Since the Cloud-Based Flowmanager does not require any platform-specific binding
 
 Change the NODE_ENV environment variable to the cloudbased config file:
 * in Microsoft Windows: `SET NODE_ENV=cloudBased.development.all.local`
-* in GNU Linux: `EXPORT NODE_ENV=cloudBased.development.all.local`
+* in GNU/Linux: `export NODE_ENV=cloudBased.development.all.local`
 
 Then start up the server by running the following command from the universal folder:
 `node gpii.js`
