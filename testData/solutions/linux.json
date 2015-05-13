@@ -131,23 +131,25 @@
                     },
                     "gtk-theme": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                            "options": {
-                                "true": {
-                                    "outputValue": "HighContrast"
-                                }
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "literalValue": "HighContrast"
+                            },
+                            "false": {
+                                "literalValue": "Adwaita"
                             }
                         }
                     },
                     "icon-theme": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                            "options": {
-                                "true": {
-                                    "outputValue": "HighContrast"
-                                }
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "literalValue": "HighContrast"
+                            },
+                            "false": {
+                                "literalValue": "gnome"
                             }
                         }
                     }
