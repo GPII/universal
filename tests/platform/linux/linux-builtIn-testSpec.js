@@ -7,9 +7,13 @@ Copyright 2014 Emergya
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
+
 
 /*global require*/
 
@@ -27,7 +31,7 @@ gpii.tests.linux.builtIn = [
         userToken: "os_common",
         settingsHandlers: {
             "gpii.gsettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
                         "screen-position": "full-screen"
@@ -61,7 +65,7 @@ gpii.tests.linux.builtIn = [
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.gsettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
                         "screen-position": "full-screen"
@@ -80,7 +84,7 @@ gpii.tests.linux.builtIn = [
                 }]
             },
             "gpii.alsa": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "masterVolume": 50
                     }
@@ -100,7 +104,7 @@ gpii.tests.linux.builtIn = [
         userToken: "os_win7",
         settingsHandlers: {
             "gpii.gsettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
                         "screen-position": "full-screen"
@@ -108,10 +112,10 @@ gpii.tests.linux.builtIn = [
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
                     }
-                } , {
+                }, {
                     "settings": {
-                        "gtk-theme":"HighContrast",
-                        "icon-theme":"HighContrast",
+                        "gtk-theme": "HighContrast",
+                        "icon-theme": "HighContrast",
                         "cursor-size": 41
                     },
                     "options": {
