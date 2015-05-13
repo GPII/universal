@@ -7,9 +7,13 @@ Copyright 2014 Emergya
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
+
 
 /*global require*/
 
@@ -30,7 +34,10 @@ gpii.tests.linux.builtIn = [
                 "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
-                        "screen-position": "full-screen"
+                        "screen-position": "full-screen",
+                        "mouse-tracking": "proportional",
+                        "caret-tracking": "proportional",
+                        "focus-tracking": "none"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -55,6 +62,24 @@ gpii.tests.linux.builtIn = [
                 "expectRestored": "false"
             }
         ]
+    },
+    {
+        name: "Testing os_common2 using Flat matchmaker",
+        userToken: "os_common2",
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "some.app.id": [{
+                    "settings": {
+                        "gtk-theme": "Adwaita",
+                        "icon-theme": "gnome"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        },
+        processes: []
     },
     {
         name: "Testing os_gnome using Flat matchmaker",
@@ -103,7 +128,10 @@ gpii.tests.linux.builtIn = [
                 "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
-                        "screen-position": "full-screen"
+                        "screen-position": "full-screen",
+                        "mouse-tracking": "proportional",
+                        "caret-tracking": "proportional",
+                        "focus-tracking": "none"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"

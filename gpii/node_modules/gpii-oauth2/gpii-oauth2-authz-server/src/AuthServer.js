@@ -1,3 +1,16 @@
+/*!
+Copyright 2014 OCAD university
+
+Licensed under the New BSD license. You may not use this file except in
+compliance with this License.
+
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
+You may obtain a copy of the License at
+https://github.com/GPII/universal/blob/master/LICENSE.txt
+*/
+
 "use strict";
 
 var bodyParser = require("body-parser");
@@ -439,7 +452,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
     );
-    
+
     // TODO: This API is a workalike of /privacy-settings, only it returns the JSON
     // payload directly rather than baking it into the markup. Currently this is used
     // only in our cloud-based acceptance tests. In future, when /privacy-settings is
@@ -454,7 +467,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             res.json(authorizedServicesPayload);
         }
     );
-    
+
     that.expressApp.get("/privacy-settings",
         that.sessionMiddleware,
         that.passportMiddleware,

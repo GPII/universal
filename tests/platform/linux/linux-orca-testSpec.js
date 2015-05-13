@@ -6,9 +6,13 @@ Copyright 2014 Emergya
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
+
 
 "use strict";
 var fluid = require("universal"),
@@ -104,7 +108,7 @@ gpii.tests.linux.orca = [
                             "enableSpeech": true,
                             "enableEchoByWord": true,
                             "enableEchoByCharacter": false,
-                            "voices.default.rate": 102.27272727272727,
+                            "voices.default.rate": 101.84090909090908,
                             "enableTutorialMessages": false,
                             "voices.default.family": {
                                 "locale": "en",

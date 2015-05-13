@@ -1,3 +1,16 @@
+/*!
+Copyright 2014 OCAD University
+
+Licensed under the New BSD license. You may not use this file except in
+compliance with this License.
+
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
+You may obtain a copy of the License at
+https://github.com/GPII/universal/blob/master/LICENSE.txt
+*/
+
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
@@ -19,7 +32,7 @@ gpii.tests.cloud.oauth2.chrome.common = {
 // A grade, applied to the testCaseHolder itself, to be used for testing whether
 // the access token supplied for the settings request is checked. This overrides
 // the definition of the settings request so that the member, ordinarily returned
-// by the accessTokenRequest's fixture, holds an invalid value - and the test 
+// by the accessTokenRequest's fixture, holds an invalid value - and the test
 // sequence as a whole is truncated so that this request is never actually issued
 fluid.defaults("gpii.tests.cloud.oauth2.falseTokenHolder", {
     gradeNames: ["fluid.eventedComponent", "autoInit"],

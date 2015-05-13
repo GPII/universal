@@ -7,8 +7,11 @@ Copyright 2014 Lucendo Development Ltd.
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This file lists the test fixtures for the GPII system which run in the Windows environment -
