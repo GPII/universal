@@ -1,0 +1,8 @@
+reset.json
+===========
+
+This NP set contains no preferences at all. It is meant as a token for 'resetting' the system (which we needed for the 3rd review). 
+
+The problem this NP set helps solve is that if user A logs in and then leaves the machine, there is no way to just "turn the system back to what it was". Logging this user ('reset') in (or logging it in and out) will ensure that the system is back in it's original state - this happens becuase when 'reset' token keys in the following things happen:
+* User A will get logged out - which means the will be reverted back to the  state it was in before A logged in
+* Settings from 'reset' will be applied, but since 'reset' has no settings, the system will stay in it's previous state - which is also the state of the system before user A logged in
