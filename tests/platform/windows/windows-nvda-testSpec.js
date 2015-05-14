@@ -7,8 +7,11 @@ Copyright 2014 Raising the Floor International
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 "use strict";
@@ -28,7 +31,7 @@ gpii.tests.windows.nvda = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.rate": 17,
                             "speech.espeak.volume": 80,
                             "speech.espeak.pitch": 60,
                             "speech.espeak.rateBoost": true,
@@ -68,7 +71,7 @@ gpii.tests.windows.nvda = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.rate": 17,
                             "speech.espeak.volume": 75,
                             "speech.espeak.pitch": 15,
                             "speech.espeak.rateBoost": true,
@@ -107,7 +110,7 @@ gpii.tests.windows.nvda = [
                     {
                         "settings": {
                             "speech.symbolLevel": 300,
-                            "speech.espeak.rate": 17.20430107526882,
+                            "speech.espeak.rate": 17,
                             "speech.espeak.voice": "en\\en-wi",
                             "keyboard.speakTypedWords": true,
                             "speech.espeak.rateBoost": true,
