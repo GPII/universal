@@ -34,6 +34,7 @@
                         "fontScale": 1.5,
                         "language": "de"
                     },
+                    "http://registry.gpii.net/applications/com.android.talkback": {},
                     "http://registry.gpii.net/applications/com.android.settings.secure": {
                         "tts_default_rate": 190
                     },
