@@ -6,8 +6,11 @@ Copyright 2014 Emergya
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 /*global require*/
@@ -26,7 +29,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_android",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "dim_screen": 1,
                         "haptic_feedback_enabled": 1,
@@ -40,14 +43,14 @@ gpii.tests.android.builtIn = [
                 }]
             },
             "gpii.androidAudioManager.volume": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "STREAM_SYSTEM": 7
                     }
                 }]
             },
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 1.5,
                         "locale": "en"
@@ -61,7 +64,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_android_common",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "dim_screen": 1,
                         "haptic_feedback_enabled": 1,
@@ -75,14 +78,14 @@ gpii.tests.android.builtIn = [
                 }]
             },
             "gpii.androidAudioManager.volume": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "STREAM_SYSTEM": 4
                     }
                 }]
             },
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 2,
                         "locale": "en_GB"
@@ -96,7 +99,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 0.75
                     }
@@ -109,7 +112,7 @@ gpii.tests.android.builtIn = [
         userToken: "os_common",
         settingsHandlers: {
             "gpii.androidPersistentConfiguration": {
-                "data": [{
+                "some.app.id": [{
                     "settings": {
                         "fontScale": 0.75
                     }

@@ -1,0 +1,62 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/magnification": 1.5,
+                    "http://registry.gpii.net/common/volume": 0.5
+                }
+            },
+            "bright": {
+                "name": "bright",
+                "preferences": {
+                    "http://registry.gpii.net/common/magnification": 2
+                },
+                "conditions": [
+                    {
+                        "type": "http://registry.gpii.net/conditions/inRange",
+                        "max": 400000,
+                        "min": 400,
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
+                    }
+                ]
+            },
+            "noise": {
+                "name": "noise",
+                "preferences": {
+                    "http://registry.gpii.net/common/volume": 1
+                },
+                "conditions": [
+                    {
+                        "type": "http://registry.gpii.net/conditions/inRange",
+                        "max": 200000,
+                        "min": 20000,
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/auditory\\.noise"
+                    }
+                ]
+            },
+            "brightandnoise": {
+                "name": "bright and noise",
+                "preferences": {
+                    "http://registry.gpii.net/common/volume": 1,
+                    "http://registry.gpii.net/common/magnification": 2
+                },
+                "conditions": [
+                    {
+                        "type": "http://registry.gpii.net/conditions/inRange",
+                        "max": 400000,
+                        "min": 400,
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
+                    },
+                    {
+                        "type": "http://registry.gpii.net/conditions/inRange",
+                        "max": 200000,
+                        "min": 20000,
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/auditory\\.noise"
+                    }
+                ]
+            }
+        }
+    }
+}
