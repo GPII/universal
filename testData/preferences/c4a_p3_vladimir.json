@@ -33,7 +33,7 @@
                         "tts_default_rate": 190
                     },
                     "http://registry.gpii.net/applications/com.android.settings.system": {
-                        "screen_time_off": 300,
+                        "screen_off_timeout": 300000,
                         "haptic_feedback_enabled": 1
                     },
                     "http://registry.gpii.net/applications/com.tpvision.gpiitvproxy": {
