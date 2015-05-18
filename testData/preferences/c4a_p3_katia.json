@@ -34,7 +34,7 @@
                         "fontScale": 2.0
                     },
                     "http://registry.gpii.net/applications/com.android.settings.system": {
-                        "screen_time_off": 300,
+                        "screen_off_timeout": 300000,
                         "haptic_feedback_enabled": 1,
                         "accelerometer_rotation": 1
                     },
