@@ -43,7 +43,7 @@ Below is an example of a post query where no token is provided (given that a Pre
 
 `http://preferences.gpii.net/oldPreferences/`
 
-The body of the POST should contain the preferences to be stored. 
+The body of the POST should contain the preferences to be stored.
 
 Example POST body:
 
@@ -91,7 +91,7 @@ Below is an example of a post query where no token is provided (given that a Pre
 
 `http://preferences.gpii.net/oldPreferences/mytoken`
 
-The body of the POST should contain the preferences to be stored. 
+The body of the POST should contain the preferences to be stored.
 
 Example POST body:
 
