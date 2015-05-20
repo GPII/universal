@@ -19,7 +19,7 @@ Example of a basic GET request to the Old Preferences Server (given that the Pre
 Return payload:
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+    "http://registry.gpii.net/common/onScreenKeyboardEnabled": [{ "value": true }],
     "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
     "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
     "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
@@ -49,7 +49,7 @@ Example POST body:
 
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+    "http://registry.gpii.net/common/onScreenKeyboardEnabled": [{ "value": true }],
     "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
     "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
     "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
@@ -70,7 +70,7 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 {
     "userToken": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
-        "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+        "http://registry.gpii.net/common/onScreenKeyboardEnabled": [{ "value": true }],
         "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0 }].120,
         "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
         "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
@@ -97,7 +97,7 @@ Example POST body:
 
 ```
 {
-    "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+    "http://registry.gpii.net/common/onScreenKeyboardEnabled": [{ "value": true }],
     "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
     "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
     "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
@@ -118,7 +118,7 @@ Given that the above body was sent to the `http://preferences.gpii.net/oldPrefer
 {
     "userToken": "mytoken",
     "preferences": {
-        "http://registry.gpii.net/common/onscreenKeyboard": [{ "value": true }],
+        "http://registry.gpii.net/common/onScreenKeyboardEnabled": [{ "value": true }],
         "http://registry.gpii.net/common/-provisional-initDelay": [{ "value": 0.120 }],
         "http://registry.gpii.net/common/cursorSpeed": [{ "value": 0.850 }],
         "http://registry.gpii.net/common/cursorAcceleration": [{ "value": 0.800 }],
