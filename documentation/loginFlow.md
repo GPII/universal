@@ -17,6 +17,6 @@ The user login process is as follows:
 1. `onReadyToMatch` has two listeners:
  * `recordMatch` (in userLogin), which stores the preferences, device and solution info to the request object.
  * `runMatchMakerFramework` (flowManagerUtilities), which kicks off the matchMaker framework. For the purpose of describing the overall login flow, it suffices to say that when the matchmaker framework has finished the matchmaking process, the `onMatch` event is called on the flow manager. For more details on the matchmaker framework's internal workings, see: [Match Maker Framework Documentation](MatchMakerFramework.md)
-1. `onMatch` is being listened to by `runContextManager` (userLogin) which in turns fires up the (Context Manager)[ContextManager.md], which evaluates the Match Maker Frameworks output and fires the `onReadyForLifecycle` event.
+1. `onMatch` is being listened to by `runContextManager` (userLogin) which in turns fires up the [Context Manager](ContextManager.md), which evaluates the Match Maker Frameworks output and fires the `onReadyForLifecycle` event.
 1. `onReadyForLifecycle` is being listened to by `startLifecycle` (Userlogin), which applies the settings to the system.
 
