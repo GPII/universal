@@ -1,17 +1,18 @@
 /*
-
-GPII Acceptance Testing
-
-Copyright 2014 Raising the Floor International
-
-Licensed under the New BSD license. You may not use this file except in
-compliance with this License.
-
-You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
-*/
-
-/*global require*/
+ * GPII Acceptance Testing
+ *
+ * Copyright 2014 Raising the Floor International
+ *
+ * Licensed under the New BSD license. You may not use this file except in
+ * compliance with this License.
+ *
+ * The research leading to these results has received funding from the European Union's
+ * Seventh Framework Programme (FP7/2007-2013)
+ * under grant agreement no. 289016.
+ *
+ * You may obtain a copy of the License at
+ * https://github.com/GPII/universal/blob/master/LICENSE.txt
+ */
 
 "use strict";
 var fluid = require("universal"),
@@ -23,7 +24,8 @@ var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using gnome keyboard settings",
         userToken: "fm_gnome_keyboard",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"linux\"},\"solutions\":[{\"id\":\"org.gnome.desktop.a11y.keyboard\"}]}"),
+        OSid: "linux",
+        solutionId: "org.gnome.desktop.a11y.keyboard",
         expected: {
             "org.gnome.desktop.a11y.keyboard": {
                 "slowkeys-delay": 400,

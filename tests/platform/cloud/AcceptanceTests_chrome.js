@@ -8,8 +8,11 @@ Copyright 2014 Technosite
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 "use strict";
@@ -18,11 +21,22 @@ var fluid = require("universal"),
 
 gpii.loadTestingSupport();
 
-var testDefs = [
+fluid.registerNamespace("gpii.tests.cloud.chrome");
+
+gpii.tests.cloud.chrome.testDefs = [
+    { // TODO: This check should be a standard and automatic part of the "baseline acceptance tests" for every solution
+        name: "Acceptance test for empty preferences in Chrome",
+        userToken: "chrome_empty",
+        solutionId: "org.chrome.cloud4chrome",
+        expected: {
+            "org.chrome.cloud4chrome": {
+            }
+        }
+    },
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {
             "org.chrome.cloud4chrome": {
                 "fontSize": "medium",
@@ -38,7 +52,7 @@ var testDefs = [
     {
         name: "Acceptance test for font size transformation in Chrome",
         userToken: "chrome_font_size",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {
             "org.chrome.cloud4chrome": {
                 "fontSize": "large",
@@ -53,7 +67,7 @@ var testDefs = [
     {
         name: "Acceptance test for magnification transformation in Chrome",
         userToken: "chrome_magnification",
-        appinfo: encodeURIComponent("{\"OS\":{\"id\":\"web\"},\"solutions\":[{\"id\":\"org.chrome.cloud4chrome\"}]}"),
+        solutionId: "org.chrome.cloud4chrome",
         expected: {
             "org.chrome.cloud4chrome": {
                 "fontSize": "medium",
@@ -67,4 +81,15 @@ var testDefs = [
     }
 ];
 
-module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);
+// We would like to write something like this, but we lost Kettle's transformer chain when implementing
+// the GPII's test drivers:
+// module.exports = gpii.test.bootstrap({
+//     testDefs:  "gpii.tests.cloud.chrome",
+//     configName: "cloudBasedFlowManager.json",
+//     configPath: "configs"
+// }, ["gpii.test.cloudBased.testCaseHolder"],
+//     module, require, __dirname);
+
+if (require.main === module) {
+    module.exports = gpii.test.cloudBased.bootstrap(gpii.tests.cloud.chrome.testDefs, __dirname);
+}

@@ -6,8 +6,11 @@ Copyright 2014 Emergya
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 "use strict";
@@ -24,7 +27,7 @@ gpii.tests.android.talkback = [
         userToken: "talkback1",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "STREAM_MUSIC": 14
@@ -33,7 +36,7 @@ gpii.tests.android.talkback = [
                 ]
             },
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 450,
@@ -52,7 +55,7 @@ gpii.tests.android.talkback = [
         userToken: "talkback2",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 496,
@@ -71,7 +74,7 @@ gpii.tests.android.talkback = [
         userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 681
@@ -89,10 +92,10 @@ gpii.tests.android.talkback = [
         userToken: "screenreader_nvda",
         settingsHandlers: {
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
-                            "tts_default_rate": 681
+                            "tts_default_rate": 675
                         },
                         "options": {
                             "settingType": "Secure"
@@ -107,7 +110,7 @@ gpii.tests.android.talkback = [
         userToken: "screenreader_common",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "STREAM_MUSIC": 11
@@ -116,7 +119,7 @@ gpii.tests.android.talkback = [
                 ]
             },
             "gpii.androidSettings": {
-                "data": [
+                "some.app.id": [
                     {
                         "settings": {
                             "tts_default_rate": 681,
