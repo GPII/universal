@@ -9,9 +9,9 @@ It has also been used in the [third review of Cloud4all](https://github.com/GPII
 
 ## Details
 `franklin.json`: preference set with a combination of common and application-specific terms for the following settings:
-** Read&Write Gold settings:
-*** App bar width, 
-*** show text on the app bar, 
-*** optional tool bar shows large icons and text,
-*** SAPI5 speed set to 50,
-** Rule-Based Matchmaker.
+ * Read&Write Gold settings:
+  * App bar width, 
+  * show text on the app bar, 
+  * optional tool bar shows large icons and text,
+  * SAPI5 speed set to 50,
+ * Rule-Based Matchmaker.
