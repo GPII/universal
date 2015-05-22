@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "flat": {
         "contexts": {
@@ -10,4 +11,18 @@
             }
         }
     }
+=======
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                }
+            }
+        }
+    }
+>>>>>>> 6795566d92138eaca5feebfb669d73f62d7afc02
 }

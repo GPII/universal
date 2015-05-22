@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
     {
         "id": "com.microsoft.windows.onscreenKeyboard"
@@ -20,4 +21,28 @@
     {
         "id": "com.texthelp.readWriteGold"
     }
+=======
+[
+    {
+        "id": "com.microsoft.windows.onscreenKeyboard"
+    },
+    {
+        "id": "com.microsoft.windows.magnifier"
+    },
+    {
+        "id": "com.microsoft.windows.displaySettings"
+    },
+    {
+        "id": "com.microsoft.windows.highContrast"
+    },
+    {
+        "id": "org.nvda-project"
+    },
+    {
+        "id": "com.yourdolphin.supernova-as"
+    },
+    {
+        "id": "com.texthelp.readWriteGold"
+    }
+>>>>>>> 6795566d92138eaca5feebfb669d73f62d7afc02
 ]
