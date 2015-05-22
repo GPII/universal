@@ -9,9 +9,9 @@ It has also been used in the [third review of Cloud4all](https://github.com/GPII
 
 ## Details
 `chris.json`: preference set with a combination of common and application-specific terms for the following settings:
-** screen reader with TTS using a speech rate of 350 wpm,
-** Braille output,
-** a lower screen resolution on Windows,
-** NVDA is prioritised on Windows,
-** Mobile Accessibility for Android is prioritised over other Android accessibility features,
-** Rule-Based Matchmaker.
+* screen reader with TTS using a speech rate of 350 wpm,
+* Braille output,
+* a lower screen resolution on Windows,
+* NVDA is prioritised on Windows,
+* Mobile Accessibility for Android is prioritised over other Android accessibility features,
+* Rule-Based Matchmaker.
