@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [
     {
         "id": "com.android.talkback"
@@ -15,22 +14,4 @@
     {
         "id": "com.android.settings.secure"
     }
-=======
-[
-    {
-        "id": "com.android.talkback"
-    },
-    {
-        "id": "com.android.persistentConfiguration"
-    },
-    {
-        "id": "com.android.audioManager"
-    },
-    {
-        "id": "com.android.settings.system"
-    },
-    {
-        "id": "com.android.settings.secure"
-    }
->>>>>>> 6795566d92138eaca5feebfb669d73f62d7afc02
 ]

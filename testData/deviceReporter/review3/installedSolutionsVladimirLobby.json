@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [
     {
         "id": "com.microsoft.windows.cursors"
@@ -15,22 +14,4 @@
     {
         "id": "org.nvda-project"
     }
-=======
-[
-    {
-        "id": "com.microsoft.windows.cursors"
-    },
-    {
-        "id": "com.microsoft.windows.highContrast"
-    },
-    {
-        "id": "com.microsoft.windows.mouseTrailing"
-    },
-    {
-        "id": "org.chrome.cloud4chrome"
-    },
-    {
-        "id": "org.nvda-project"
-    }
->>>>>>> 6795566d92138eaca5feebfb669d73f62d7afc02
 ]
