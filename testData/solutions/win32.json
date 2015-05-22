@@ -357,21 +357,6 @@
                     "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
                     "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
                     "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "virtualBuffers\\.autoSayAllOnPageLoad": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/readingUnit",
-                            "defaultInputValue": "sentence",
-                            "options": {
-                                "all": {
-                                    "outputValue": true
-                                },
-                                "sentence": {
-                                    "outputValue": false
-                                }
-                            }
-                        }
-                    },
                     "transform": [
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
@@ -409,32 +394,37 @@
                     ],
                     "speech\\.espeak\\.rate": {
                         "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "right": 3.10,
-                            "operator": "/",
-                            "left": {
+                            "type": "fluid.transforms.round",
+                            "input": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "right": 80,
-                                    "operator": "-",
+                                    "right": 3.10,
+                                    "operator": "/",
                                     "left": {
                                         "transform": {
-                                            "type": "fluid.transforms.condition",
-                                            "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                            "false": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "right": 80,
+                                            "operator": "-",
+                                            "left": {
                                                 "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "operator": "/",
-                                                    "right": 3
-                                                }
-                                            },
-                                            "condition": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "operator": "<=",
-                                                    "right": 390
+                                                    "type": "fluid.transforms.condition",
+                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "false": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 3
+                                                        }
+                                                    },
+                                                    "condition": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "<=",
+                                                            "right": 390
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -856,7 +846,8 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "HIGHCONTRAST"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.-provisional-highContrastEnabled",
@@ -908,7 +899,8 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.mouseTrailing",
@@ -974,7 +966,8 @@
                         "SizeWE": "REG_SZ",
                         "UpArrow": "REG_SZ",
                         "Wait": "REG_SZ"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.cursorSize",

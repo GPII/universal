@@ -1,0 +1,17 @@
+[
+    {
+        "id": "com.android.talkback"
+    },
+    {
+        "id": "com.android.persistentConfiguration"
+    },
+    {
+        "id": "com.android.audioManager"
+    },
+    {
+        "id": "com.android.settings.system"
+    },
+    {
+        "id": "com.android.settings.secure"
+    }
+]

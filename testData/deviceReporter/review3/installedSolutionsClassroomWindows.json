@@ -1,0 +1,23 @@
+[
+    {
+        "id": "com.microsoft.windows.onscreenKeyboard"
+    },
+    {
+        "id": "com.microsoft.windows.magnifier"
+    },
+    {
+        "id": "com.microsoft.windows.displaySettings"
+    },
+    {
+        "id": "com.microsoft.windows.highContrast"
+    },
+    {
+        "id": "org.nvda-project"
+    },
+    {
+        "id": "com.yourdolphin.supernova-as"
+    },
+    {
+        "id": "com.texthelp.readWriteGold"
+    }
+]

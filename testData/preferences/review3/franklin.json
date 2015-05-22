@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        "ApplicationSettings.AppBar.Width.$t": 1072,
+                        "ApplicationSettings.AppBar.ShowText.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+                    },
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                }
+            }
+        }
+    }
+}
