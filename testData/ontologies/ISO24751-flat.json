@@ -48,8 +48,6 @@
     "http://registry\\.gpii\\.net/common/tableOfContents": "control.structuralNavigation.tableOfContents",
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
     "http://registry\\.gpii\\.net/common/language": "language",
-    "http://registry\\.gpii\\.net/common.test1": "display.screenReader",
-    "http://registry\\.gpii\\.net/common.test2": "display.screenReader",
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",
