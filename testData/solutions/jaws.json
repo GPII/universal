@@ -13,7 +13,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF",
-                    "initialContent": "[options]\nTest = 0\n[Voice Profiles]\nActiveVoiceProfileName = default\n"
+                    "createFile": true
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
@@ -48,7 +48,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF",
-                    "initialContent": "[ENU-Global]\ntest=0"
+                    "createFile": true
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
