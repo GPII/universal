@@ -5,10 +5,6 @@
     },
     "solutions": [
         {
-            "id": "com.freedomscientific.jaws"
-        },
-        
-        {
             "id": "org.gnome.desktop.interface"
         },
 
@@ -34,6 +30,10 @@
 
         {
             "id": "com.microsoft.windows.onscreenKeyboard"
+        },
+
+        {
+            "id": "org.nvda-project"
         },
 
         {
