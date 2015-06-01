@@ -20,7 +20,7 @@
                         "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
                         "ApplicationSettings.Speech.WebHighlighting.$t": false,
                         "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
-                        "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": "Arial",
+                        "ApplicationSettings.Speech.optSpeechHighTRFontName.$t": "Verdana",
                         "ApplicationSettings.Speech.optSpeechHighTRFontSize.$t": 18,
                         "ApplicationSettings.Scanning.ScanDestination.$t": "Word",
                         "ApplicationSettings.Scanning.ScanToFile.$t": false,
@@ -30,9 +30,9 @@
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "highContrastEnabled": true,
                         "highContrastTheme": "black-white",
-                        "lineHeight": 1.5,
+                        "lineHeight": 1.8,
                         "fontSize": 18,
-                        "fontFace": "Arial"
+                        "fontFace": "Verdana"
                     }
                 }
             }
