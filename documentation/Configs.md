@@ -20,13 +20,13 @@ If you have installed GPII in the folder <GPII-install>:
 * In GNU/Linux and other Unix-like systems, go to <GPII-install>/linux
 * In Android, go to <GPII-install>/android
 
-Then run the command: `grunt start`
+Then run the command: `node gpii.js`
 
 By default this will start up the system with everything running locally, using the `development.all.local.json` configuration file of universal repository (see the `universal/gpii/configs` folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
 * in Microsoft Windows: `SET NODE_ENV=dev.remote.prefs`
 * in GNU/Linux and other Unix-like systems: `export NODE_ENV=dev.remote.prefs`
 
-Followed by the `grunt start` command.
+Followed by the `node gpii.js` command.
 
 
 #### Cloud-Based Flowmanager
