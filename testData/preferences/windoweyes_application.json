@@ -5,8 +5,8 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.gwmicro.windoweyes": {
-                        "Test.test1": "test",
-                        "Test.test2": "test"
+                        "we_settings.screen.voice.rate": 100,
+                        "we_settings.screen.voice.pitch": 3
                     }
                 }
             }
