@@ -36,7 +36,7 @@ Return payload:
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/onscreenKeyboard": true,
+                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
                 "http://registry.gpii.net/common/initDelay": 0.120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
@@ -113,7 +113,7 @@ Example POST body:
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/onscreenKeyboard": true,
+                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
                 "http://registry.gpii.net/common/initDelay": 0.120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
@@ -141,7 +141,7 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/onscreenKeyboard": true,
+                    "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
                     "http://registry.gpii.net/common/initDelay": 0.120,
                     "http://registry.gpii.net/common/cursorSpeed": 0.850,
                     "http://registry.gpii.net/common/cursorAcceleration": 0.800,
