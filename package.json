@@ -11,15 +11,25 @@
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/fluid-project/kettle.git#5a2e8b8fb5b198b266d6b7b7d0d9eb94185a3759"
+        "kettle": "git://github.com/fluid-project/kettle.git#e79bb81196df68c97eaa9f96c485a4321b69af75",
+        
+        "express": "~3.4.3",
+        "body-parser": "^1.9.2",
+        "connect-ensure-login": "^0.1.1",
+        "express-handlebars": "^1.1.0",
+        "express-session": "^1.9.1",
+        "oauth2orize": "^1.0.1",
+        "passport": "^0.2.1",
+        "passport-local": "^1.0.0",
+        "passport-oauth2-client-password": "^0.1.2"
     },
     "devDependencies": {
-        "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#b7ef53aac1ca365bf23d35d255fae874faa88b70",
+        "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e2083fba5404c8e7a474712102871150c037e20b",
         "grunt": "~0.4.4",
         "grunt-shell": "0.6.4",
         "grunt-contrib-jshint": "~0.9.0",
         "grunt-jsonlint": "1.0.4",
-        "grunt-gpii": "git://github.com/GPII/grunt-gpii.git#a4aca06cbaf7523eb1af56ed65ce6bd30b8ec325"
+        "grunt-gpii": "git://github.com/GPII/grunt-gpii.git#ec8412064e107febb120f0b7437d403453b40d2d"
     },
     "licenses": [
         {
