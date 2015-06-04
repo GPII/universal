@@ -21,23 +21,21 @@
                 ],
 
                 "capabilitiesTransformations": {
-                    "Test\\.test1": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "inputPath": "http://registry\\.gpii\\.net/common/test1",
-                            "value": "GPII"
-                        }
-                    },
-                    "Test\\.test2": {
+                    "we_settings\\.screen\\.voice\\.rate": "http://registry\\.gpii\\.net/common/rate",
+                    "we_settings\\.hot_keys\\.cursor.key": "http://registry.gpii.net/common/hotKey.10",
+                    "we_settings\\.screen\\.voice\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/test2",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "options": {
-                                "57803": {
-                                    "outputValue": 76
+                                "low": {
+                                    "outputValue": 1
                                 },
-                                "17454": {
-                                    "outputValue": 84
+                                "medium": {
+                                    "outputValue": 3
+                                },
+                                "high": {
+                                    "outputValue": 5
                                 }
                             }
                         }
