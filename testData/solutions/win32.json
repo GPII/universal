@@ -142,23 +142,21 @@
                 ],
 
                 "capabilitiesTransformations": {
-                    "we_settings\\.screen\\.voice\\.rate": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "inputPath": "http://registry\\.gpii\\.net/common/rate",
-                            "value": 100
-                        }
-                    },
+                    "we_settings\\.screen\\.voice\\.rate": "http://registry\\.gpii\\.net/common/rate",
+                    "we_settings\\.hot_keys\\.cursor.key": "http://registry.gpii.net/common/hotKey.10",
                     "we_settings\\.screen\\.voice\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "options": {
-                                "57803": {
-                                    "outputValue": 76
+                                "low": {
+                                    "outputValue": 1
                                 },
-                                "17454": {
-                                    "outputValue": 84
+                                "medium": {
+                                    "outputValue": 3
+                                },
+                                "high": {
+                                    "outputValue": 5
                                 }
                             }
                         }
