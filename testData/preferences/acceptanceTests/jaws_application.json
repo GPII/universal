@@ -5,7 +5,11 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
-                        "cloud4allVoiceProfile-GlobalContext.Speed": 115
+                        "Voice Profiles.ActiveVoiceProfileName" : "GPII",
+                        "options.TypingEcho" : 1,
+                        "ENU-Global.Punctuation" : 2,
+                        "ENU-Global.Pitch" : 75,
+                        "ENU-Global.Rate" : 100
                     }
                 }
             }

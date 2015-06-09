@@ -1,0 +1,34 @@
+<<<<<<< HEAD:testData/preferences/jaws1.json
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "cloud4allVoiceProfile-GlobalContext.Speed": 115
+                    }
+                }
+            }
+        }
+    }
+}
+=======
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/typingEcho": "on",
+                    "http://registry.gpii.net/common/voiceProfile": "GPII",
+                    "http://registry.gpii.net/common/punctuationVerbosity": "all",
+                    "http://registry.gpii.net/common/speechRate": 200,
+                    "http://registry.gpii.net/common/voicePitch": "high"
+
+                }
+            }
+        }
+    }
+}
+>>>>>>> 962c0e1eb3e7f089acf96da14899fe092a1dec4f:testData/preferences/jaws_common.json
