@@ -5,8 +5,6 @@
     },
     "solutions": [
         {
-<<<<<<< HEAD
-=======
             "id": "com.gwmicro.windoweyes"
         },
         
@@ -15,7 +13,6 @@
         },
         
         {
->>>>>>> 962c0e1eb3e7f089acf96da14899fe092a1dec4f
             "id": "org.gnome.desktop.interface"
         },
 

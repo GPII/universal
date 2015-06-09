@@ -12,20 +12,13 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-<<<<<<< HEAD
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
-=======
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF",
                     "createFile": true
->>>>>>> 962c0e1eb3e7f089acf96da14899fe092a1dec4f
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
                 "capabilitiesTransformations": {
-<<<<<<< HEAD
-                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
-=======
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "transform": {
                             "type": "fluid.transforms.literalValue",
@@ -61,7 +54,6 @@
                 ],
                 "capabilitiesTransformations": {
                     "ENU-Global\\.Punctuation": {
->>>>>>> 962c0e1eb3e7f089acf96da14899fe092a1dec4f
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",

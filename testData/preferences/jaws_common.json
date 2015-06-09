@@ -1,19 +1,3 @@
-<<<<<<< HEAD:testData/preferences/jaws1.json
-{
-    "flat": {
-        "contexts": {
-            "gpii-default": {
-                "name": "Default preferences",
-                "preferences": {
-                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
-                        "cloud4allVoiceProfile-GlobalContext.Speed": 115
-                    }
-                }
-            }
-        }
-    }
-}
-=======
 {
     "flat": {
         "contexts": {
@@ -31,4 +15,4 @@
         }
     }
 }
->>>>>>> 962c0e1eb3e7f089acf96da14899fe092a1dec4f:testData/preferences/jaws_common.json
+
