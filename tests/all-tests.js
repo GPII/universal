@@ -35,6 +35,7 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_jme.js",
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./platform/cloud/AcceptanceTests_tvm.js",
+    "./platform/cloud/AcceptanceTests_olb.js",
     "./DevelopmentTests.js",
     "./IntegrationTests.js",
     "./ContextIntegrationTests.js",
