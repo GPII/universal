@@ -14,3 +14,4 @@
     - [Canopy Match Maker](CanopyMatchMaker.md)
 * [Context Manager](ContextManager.md)
 * [Transformer](Transformer.md)
+* [BrowserChannel and WebSockets settings handler](BrowserChannel.md)
