@@ -23,6 +23,7 @@ kettle.loadTestingSupport();
 var testIncludes = [
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
+    "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
     "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
     "../gpii/node_modules/matchMakerFramework/test/InverseCapabilitiesTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
@@ -30,6 +31,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
