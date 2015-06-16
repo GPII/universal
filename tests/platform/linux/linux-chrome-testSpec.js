@@ -29,13 +29,13 @@ gpii.tests.linux.chrome = [
                 "data": [
                     {
                         "settings": {
-                             "fontSize": "medium",
-                             "invertColours": false,
-                             "magnifierEnabled": false,
-                             "magnification": 1,
-                             "highContrastTheme":"white-black",
-                             "highContrastEnabled": true,
-                             "screenReaderTTSEnabled": false
+                            "fontSize": "medium",
+                            "invertColours": false,
+                            "magnifierEnabled": false,
+                            "magnification": 1,
+                            "highContrastTheme":"white-black",
+                            "highContrastEnabled": true,
+                            "screenReaderTTSEnabled": false
                         }
                     }
                 ]
