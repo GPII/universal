@@ -120,7 +120,8 @@
                 },
                 "capabilities": [
                     "applications.com\\.gwmicro\\.windoweyes.id",
-                    "display.screenReader"
+                    "display.screenReader.speechRate",
+                    "display.textReadingHighlight.pitch"
                 ],
 
                 "capabilitiesTransformations": {
