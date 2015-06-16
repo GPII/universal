@@ -1346,6 +1346,7 @@
                     "fontSize"
                 ],
                 "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
                             "type": "gpii.transformer.quantize",
