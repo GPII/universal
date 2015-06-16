@@ -7,14 +7,14 @@ This feature consists on:
 * The component behind this new route is the _gpii.settingsHandlers.WebSocketsComponent_
 
 ### The browser channel
-This handler processes every request to _http://localhost:8081/browserChannel and is responsible for:
+This handler processes every request to _http://localhost:8081/browserChannel_ and is responsible for:
 * Processing every request and determining whether a client is allowed or not to connect
 * Registering and removing the clients as they are connecting or disconnecting
 
 ### The WebSockets settings handler
 
 This settings handler follows the standard settings handler API and exposes both the .get and .set methods to the rest of the system.
-The settings handler is an instance of _gpii.settingsHandler.WebSocketsComponent_, which can be found in WebSocketsComponent.js.
+The settings handler is an instance of _gpii.settingsHandler.WebSocketsComponent_, which can be found in _gpii/node_modules/settingsHandlers/src/WebSocketsComponent.js_.
 
 This component stores the information about clients and keeps a list of settings for every solution that makes use of this settings handler.
 Also, this component create notifications for every connected client at any time when the settings change.
