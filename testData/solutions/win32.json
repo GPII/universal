@@ -12,13 +12,48 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF",
+                    "createFile": true
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
                 "capabilitiesTransformations": {
-                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
+                    "Voice Profiles\\.ActiveVoiceProfileName": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "http://registry\\.gpii\\.net/common/voiceProfile",
+                            "value": "GPII"
+                        }
+                    },
+                    "options\\.TypingEcho": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/typingEcho",
+                            "options": {
+                                "on": {
+                                    "outputValue": 1
+                                },
+                                "off": {
+                                    "outputValue": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF",
+                    "createFile": true
+                },
+                "capabilities": [
+                    "applications.com\\.freedomscientific\\.jaws.id"
+                ],
+                "capabilitiesTransformations": {
+                    "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
