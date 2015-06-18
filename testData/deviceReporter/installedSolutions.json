@@ -1,5 +1,9 @@
 [   
     {
+        "id": "com.gwmicro.windoweyes"
+    },
+
+    {
         "id": "org.gnome.desktop.interface"
     },
 
@@ -42,7 +46,7 @@
     {
         "id": "org.nvda-project"
     },
-
+    
     {
         "id": "org.gnome.desktop.interface"
     },

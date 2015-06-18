@@ -1,6 +1,6 @@
 {
-    "com.freedomscientific.jaws": {
-        "name": "JAWS",
+    "com.gwmicro.windoweyes": {
+        "name": "Window-Eyes",
         "contexts": {
             "OS": [
                 {
@@ -10,40 +10,35 @@
         },
         "settingsHandlers": [
             {
-                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                    "filename": "${{environment}.APPDATA}\\GW Micro\\Window-Eyes\\users\\default\\sets.dat",
+                    "createFile": true
                 },
                 "capabilities": [
-                    "applications.com\\.freedomscientific\\.jaws.id"
+                    "applications.com\\.gwmicro\\.windoweyes.id",
+                    "display.screenReader.speechRate",
+                    "display.textReadingHighlight.pitch"
                 ],
+
                 "capabilitiesTransformations": {
-                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
+                    "we_settings\\.screen\\.voice\\.rate": "http://registry\\.gpii\\.net/common/rate",
+                    "we_settings\\.hot_keys\\.cursor.key": "http://registry.gpii.net/common/hotKey.10",
+                    "we_settings\\.screen\\.voice\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "options": {
-                                "none": {
-                                    "outputValue": 0
-                                },
-                                "some": {
+                                "low": {
                                     "outputValue": 1
                                 },
-                                "most": {
-                                    "outputValue": 2
-                                },
-                                "all": {
+                                "medium": {
                                     "outputValue": 3
+                                },
+                                "high": {
+                                    "outputValue": 5
                                 }
                             }
-                        }
-                    },
-                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
-                            "factor": 0.125,
-                            "offset": -12.125
                         }
                     }
                 }
@@ -54,13 +49,13 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\wineyes.exe\\}\""
                 }
             ],
             "stop": [
                 {
                     "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im wineyes.exe"
                 },
                 "restoreSettings"
             ]

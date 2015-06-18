@@ -1,0 +1,64 @@
+{
+    "com.gwmicro.windoweyes": {
+        "name": "Window-Eyes",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\GW Micro\\Window-Eyes\\users\\default\\sets.dat",
+                    "createFile": true
+                },
+                "capabilities": [
+                    "applications.com\\.gwmicro\\.windoweyes.id",
+                    "display.screenReader.speechRate",
+                    "display.textReadingHighlight.pitch"
+                ],
+
+                "capabilitiesTransformations": {
+                    "we_settings\\.screen\\.voice\\.rate": "http://registry\\.gpii\\.net/common/rate",
+                    "we_settings\\.hot_keys\\.cursor.key": "http://registry.gpii.net/common/hotKey.10",
+                    "we_settings\\.screen\\.voice\\.pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "options": {
+                                "low": {
+                                    "outputValue": 1
+                                },
+                                "medium": {
+                                    "outputValue": 3
+                                },
+                                "high": {
+                                    "outputValue": 5
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\wineyes.exe\\}\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im wineyes.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    }
+}
