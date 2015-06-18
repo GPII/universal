@@ -1,0 +1,16 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.gwmicro.windoweyes": {
+                        "we_settings.screen.voice.rate": 4,
+                        "we_settings.screen.voice.pitch": 3,
+                        "we_settings.hot_keys.cursor.key": {"hkid": "10","$t": "Control-Alt-Delete"}
+                    }
+                }
+            }
+        }
+    }
+}
