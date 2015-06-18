@@ -16,7 +16,8 @@
                     "createFile": true
                 },
                 "capabilities": [
-                    "applications.com\\.freedomscientific\\.magic.id"
+                    "applications.com\\.freedomscientific\\.magic.id",
+                    "display.screenReader.-provisional-typingEcho"
                 ],
 
                 "capabilitiesTransformations": {
@@ -69,7 +70,9 @@
                     "createFile": true
                 },
                 "capabilities": [
-                    "applications.com\\.freedomscientific\\.magic.id"
+                    "applications.com\\.freedomscientific\\.magic.id",
+                    "display.screenReader.-provisional-punctuationVerbosity",
+                    "display.textReadingHighlight.pitch"
                 ],
                 "capabilitiesTransformations": {
                     "ENU-Global\\.Punctuation": {
@@ -95,7 +98,7 @@
                     "ENU-Global\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/voicePitch",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "options": {
                                 "low": {
                                     "outputValue": 25

@@ -8,7 +8,7 @@
                     "http://registry.gpii.net/common/voiceProfile": "GPII",
                     "http://registry.gpii.net/common/punctuationVerbosity": "all",
                     "http://registry.gpii.net/common/speechRate": 200,
-                    "http://registry.gpii.net/common/voicePitch": "high",
+                    "http://registry.gpii.net/common/pitch": "high",
                     "http://registry.gpii.net/common/magnifierEnabled": 1,
                     "http://registry.gpii.net/common/magnification": 3
                 }
