@@ -1342,6 +1342,9 @@
         "settingsHandlers": [
            {
                 "type": "gpii.settingsHandlers.WebSockets",
+                "options": {
+                    "path": "org.chrome.cloud4chrome"
+                },
                 "capabilities": [
                     "applications.org\\.chrome\\.cloud4chrome.id",
                     "contrastTheme",
