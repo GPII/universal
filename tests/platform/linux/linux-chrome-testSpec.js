@@ -33,7 +33,7 @@ gpii.tests.linux.chrome = [
                             "invertColours": false,
                             "magnifierEnabled": false,
                             "magnification": 1,
-                            "highContrastTheme":"white-black",
+                            "highContrastTheme": "white-black",
                             "highContrastEnabled": true,
                             "screenReaderTTSEnabled": false
                         }
