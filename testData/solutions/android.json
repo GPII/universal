@@ -519,20 +519,23 @@
         }
         ],
         "lifecycleManager": {
-        "start": [
-            "setSettings",
-            {
-                "type": "gpii.androidActivityManager.startActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.androidActivityManager.stopActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            },
-            "restoreSettings"
-        ]
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.androidActivityManager.startActivityByPackageName",
+                    "packageName": "se.omnitor.ecmobile"
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                    "packageName": "se.omnitor.ecmobile"
+                },
+                "restoreSettings",
+                {
+                    "type": "gpii.androidActivityManager.goToHomeScreen"
+                }
+            ]
         }
     },
 
