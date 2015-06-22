@@ -18,6 +18,7 @@
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
+
                 "capabilitiesTransformations": {
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "transform": {
@@ -73,7 +74,24 @@
                             }
                         }
                     },
-                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
+                    "ENU-Global\\.Pitch":{
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/voicePitch",
+                            "options": {
+                                "low": {
+                                    "outputValue": 25
+                                },
+                                "medium": {
+                                    "outputValue": 75
+                                },
+                                "high": {
+                                    "outputValue": 125
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Rate": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
                             "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
@@ -89,7 +107,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS16.exe\\}\""
                 }
             ],
             "stop": [

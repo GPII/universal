@@ -76,8 +76,8 @@ gpii.tests.windows.jaws = [
                     {
                         "settings": {
                             "ENU-Global.Punctuation" : 2,
-                            "ENU-Global.Pitch" : 75,
-                            "ENU-Global.Rate" : 100
+                            "ENU-Global.Pitch" : 125,
+                            "ENU-Global.Rate" : 12.875
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
