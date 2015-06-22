@@ -60,8 +60,8 @@ gpii.tests.windows.windoweyes = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "we_settings.screen.voice.rate": 4,
-                            "we_settings.screen.voice.pitch": 3,
+                            "we_settings.screen.voice.rate": "4",
+                            "we_settings.screen.voice.pitch": "5",
                             "we_settings.hot_keys.cursor.key": {"hkid": "10","$t": "Control-Alt-Delete"}
                         },
                         "options": {
