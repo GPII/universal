@@ -23,7 +23,7 @@
 
                 "capabilitiesTransformations": {
                     "we_settings\\.screen\\.voice\\.rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "we_settings\\.hot_keys\\.cursor.key": "http://registry.gpii.net/common/hotKey.10",
+                    "we_settings\\.hot_keys\\.cursor.key": "http://registry\\.gpii\\.net/common/hotKey.10",
                     "we_settings\\.screen\\.voice\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
