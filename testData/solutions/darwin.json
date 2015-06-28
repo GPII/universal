@@ -1,1 +1,35 @@
-[]
+{
+    "test.darwin.app": {
+        "name": "Test",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "darwin"
+                }
+            ]
+        },
+
+        "configure": {
+            "settingsHandlers": [{
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "${{environment}.HOME}/c4a-deleteme.json"
+                },
+                "capabilities": [
+                    "applications.test\\.darwin\\.app.id"
+                ]
+            }]
+        },
+        "start": {
+            "settingsHandlers": [{
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "${{environment}.HOME}/c4a-deleteme2.json"
+                },
+                "capabilitiesTransformations": {
+                    "starter": "http://registry.gpii.net/common/screenReaderTTSEnabled"
+                }
+            }]
+        }
+    }
+}
