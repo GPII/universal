@@ -36,14 +36,14 @@ socket.on("connect", function () {
     console.log("## Socket connected");
     socket.send("org.chrome.cloud4chrome");
 });
- 
+
 // Right after sending the id to the flow manager, the server will return back
 // the current settings in the system (if any)
 //
 socket.on("connectionSucceeded", function (settings) {
     console.log("## Received the following settings: " + JSON.stringify(settings));
 });
- 
+
 // By listening to this signal, the client will be notified when the system has
 // new settings to be applied on the client side
 //
@@ -56,7 +56,7 @@ The _contract API_ between client and server can be resumed as follows:
 
 * After connecting to the flow manager, the client sends a socket message to the channel, which is basically a string containing the *id* of the client. ie: _org.chrome.cloud4chrome_
 * The client will be registered if the solution's id can be found of the solutions registry, otherwise, the registration will be rejected and the system will emit en error, and the client will disconnected.
-* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onBrowserSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available settings for the client in the following way: 
+* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onBrowserSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available settings for the client in the following way:
 ```
 {
     "screenReaderTTSEnabled":false,
