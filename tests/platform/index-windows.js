@@ -24,5 +24,5 @@ module.exports = [
     "windows/windows-builtIn-testSpec.js",
     "windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
-    "windows/windows-windoweyes-testSpec.js"
+    "windows/windows-zoomtext-testSpec.js"
 ];

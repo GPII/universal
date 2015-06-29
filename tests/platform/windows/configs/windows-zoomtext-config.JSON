@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.windows.windoweyes",
+    "typeName": "acceptanceTests.windows.zoomtext",
     "options": {
         "components": {
             "server": {
@@ -7,7 +7,7 @@
                     "components": {
                         "deviceReporter": {
                             "options": {
-                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/windoweyes.json"
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/zoomtext.json"
                             }
                         }
                     }
