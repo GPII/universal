@@ -1,0 +1,21 @@
+{
+    "typeName": "acceptanceTests.windows.zoomtext",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/zoomtext.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/tests/configs/localInstall.json"
+    ]
+}

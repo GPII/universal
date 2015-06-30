@@ -66,6 +66,70 @@
             ]
         }
     },
+    
+    "com.aisquared.zoomtext": {
+        "name": "ZoomText",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "C:\\Program Files (x86)\\ZoomText 10.1\\Config\\users\\user\\zten-US.zxc",
+                    "createFile": true
+                },
+                "capabilities": [
+                    "applications.com\\.aisquared\\.zoomtext.id",
+                    "display.screenReader.speechRate",
+                    "display.screenEnhancement.-provisional-magnifierEnabled",
+                    "display.screenEnhancement.magnification",
+                    "-provisional-general.-provisional-volume"
+                ],
+
+                "capabilitiesTransformations": {
+                    "ZoomText\\.ZoomOn": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "PRIMARY\\.magPower": "http://registry\\.gpii\\.net/common/magnification",
+                    "ZT English, United States  (Paul) Speech - Screen Reader\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ZT English, United States  (Paul) Speech - Screen Reader\\.Volume": "http://registry\\.gpii\\.net/common/volume",
+                    "ZT English, United States  (Paul) Speech - Screen Reader\\.Muted": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/speechEnabled",
+                            "options": {
+                                "on": {
+                                    "outputValue": 0
+                                },
+                                "off": {
+                                    "outputValue": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"C:\\Program Files (x86)\\ZoomText 10.1\\zt.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Zt.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
 
     "com.texthelp.readWriteGold": {
         "name": "Read Write Gold",
