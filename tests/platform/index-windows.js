@@ -23,5 +23,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 module.exports = [
     "windows/windows-builtIn-testSpec.js",
     "windows/windows-jaws-testSpec.js",
-    "windows/windows-nvda-testSpec.js"
+    "windows/windows-nvda-testSpec.js",
+    "windows/windows-magic-testSpec.js"
 ];
