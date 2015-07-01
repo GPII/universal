@@ -151,5 +151,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.linux.orca",
     configName: "linux-dynamicDeviceReporter-config",
     configPath: "configs"
-}, ["gpii.test.integration.testCaseHolder.linux"],
+}, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);
