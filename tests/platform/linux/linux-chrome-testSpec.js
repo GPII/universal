@@ -25,7 +25,7 @@ gpii.tests.linux.chrome = [
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
         settingsHandlers: {
-            "gpii.settingsHandlers.WebSockets": {
+            "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
@@ -47,7 +47,7 @@ gpii.tests.linux.chrome = [
         name: "Acceptance test for font size transformation in Chrome",
         userToken: "chrome_font_size",
         settingsHandlers: {
-            "gpii.settingsHandlers.WebSockets": {
+            "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
@@ -68,7 +68,7 @@ gpii.tests.linux.chrome = [
         name: "Acceptance test for magnification transformation in Chrome",
         userToken: "chrome_magnification",
         settingsHandlers: {
-            "gpii.settingsHandlers.WebSockets": {
+            "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {

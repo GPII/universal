@@ -1341,7 +1341,7 @@
         },
         "settingsHandlers": [
            {
-                "type": "gpii.settingsHandlers.WebSockets",
+                "type": "gpii.settingsHandlers.webSockets",
                 "options": {
                     "path": "org.chrome.cloud4chrome"
                 },
