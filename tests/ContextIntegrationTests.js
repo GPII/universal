@@ -78,7 +78,7 @@ gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName)
             args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}"]
         }, {
             func: "gpii.tests.contextIntegration.checkCurrentContext",
-            args: ["{lifecycleManager}", "context1", contextName ]
+            args: ["{lifecycleManager}", "context1", contextName]
         }
     ];
 };
@@ -233,7 +233,7 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
                 }, {
                     func: "gpii.tests.contextIntegration.checkCurrentContext",
-                    args: ["{lifecycleManager}", "context1", "gpii-default" ]
+                    args: ["{lifecycleManager}", "context1", "gpii-default"]
                 }
             ],
             gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
@@ -283,7 +283,7 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}"]
                 }, {
                     func: "gpii.tests.contextIntegration.checkCurrentContext",
-                    args: ["{lifecycleManager}", "context1", "bright" ]
+                    args: ["{lifecycleManager}", "context1", "bright"]
                 }, {
                     func: "{logoutRequest}.send"
                 }, {
@@ -320,7 +320,7 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
                 }, {
                     func: "gpii.tests.contextIntegration.checkCurrentContext",
-                    args: ["{lifecycleManager}", "context1", "gpii-default" ]
+                    args: ["{lifecycleManager}", "context1", "gpii-default"]
                 }
             ],
             gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
