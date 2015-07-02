@@ -8,28 +8,53 @@
                 }
             ]
         },
-
-        "configure": {
-            "settingsHandlers": [{
+        "settingsHandlers": {
+            "configure": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "${{environment}.HOME}/c4a-deleteme.json"
                 },
                 "capabilities": [
                     "applications.test\\.darwin\\.app.id"
-                ]
-            }]
-        },
-        "start": {
-            "settingsHandlers": [{
+                ],
+                "capabilitiesTransformations": {
+                    "font": "http://registry\\.gpii\\.net/common/fontSize"
+                }
+            },
+            "launcher": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "${{environment}.HOME}/c4a-deleteme2.json"
                 },
+                "capabilities": [
+                    "applications.test\\.darwin\\.app.id"
+                ],
                 "capabilitiesTransformations": {
-                    "starter": "http://registry.gpii.net/common/screenReaderTTSEnabled"
+                    "run": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "value": true
+                        }
+                    }
                 }
-            }]
-        }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "update": [
+            "stop",
+            "configure",
+            "start"
+        ],
+        "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ]
     }
 }

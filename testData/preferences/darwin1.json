@@ -4,10 +4,22 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/test.darwin.app": {
-                        "font": 18
-                    }
+                    "http://registry.gpii.net/common/fontSize": 18
                 }
+            },
+            "light-lim": {
+                "name": "turn down light",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 22
+                },
+                "conditions": [
+                    {
+                        "type": "http://registry.gpii.net/conditions/inRange",
+                        "max": 200,
+                        "min": 0,
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/visual\\.luminance"
+                    }
+                ]
             }
         }
     }
