@@ -59,12 +59,12 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
 
 gpii.tests.contextIntegration.receiveLifecycleManager = function (testCaseHolder, flowManager) {
     testCaseHolder.flowManager = flowManager;
-}
+};
 
 gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, token, expected) {
     jqUnit.assertEquals("Checking that the activeContextName matches: ", expected,
         lifecycleManager.activeSessions[token].activeContextName);
-}
+};
 
 gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
     return [
