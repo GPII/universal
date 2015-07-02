@@ -19,6 +19,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle"),
     path = require("path"),
+    jqUnit = jqUnit || fluid.require("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.contextIntegration");
@@ -46,8 +47,24 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
                 }
             }
         }
+    },
+    distributeOptions: {
+        record: {
+            funcName: "gpii.tests.contextIntegration.receiveLifecycleManager",
+            args: ["{testCaseHolder}", "{arguments}.0"]
+        },
+        target: "{that lifecycleManager}.options.listeners.onCreate"
     }
 });
+
+gpii.tests.contextIntegration.receiveLifecycleManager = function (testCaseHolder, flowManager) {
+    testCaseHolder.flowManager = flowManager;
+}
+
+gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, token, expected) {
+    jqUnit.assertEquals("Checking that the activeContextName matches: ", expected,
+        lifecycleManager.activeSessions[token].activeContextName);
+}
 
 gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
     return [
@@ -59,6 +76,9 @@ gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName)
         }, {
             func: "gpii.test.checkConfiguration",
             args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}"]
+        }, {
+            func: "gpii.tests.contextIntegration.checkCurrentContext",
+            args: ["{lifecycleManager}", "context1", contextName ]
         }
     ];
 };
@@ -194,7 +214,7 @@ gpii.tests.contextIntegration.data = {
 gpii.tests.contextIntegration.fixtures = [
     {
         name: "Simple context change after login",
-        expect: 7,
+        expect: 9,
         sequenceSegments: [
             [
                 {
@@ -211,6 +231,9 @@ gpii.tests.contextIntegration.fixtures = [
                 }, {
                     func: "gpii.test.checkConfiguration",
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
+                }, {
+                    func: "gpii.tests.contextIntegration.checkCurrentContext",
+                    args: ["{lifecycleManager}", "context1", "gpii-default" ]
                 }
             ],
             gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
@@ -234,7 +257,7 @@ gpii.tests.contextIntegration.fixtures = [
     },
     {
         name: "Context changed before login",
-        expect: 5,
+        expect: 6,
         sequenceSegments: [
             [
                 {
@@ -259,6 +282,9 @@ gpii.tests.contextIntegration.fixtures = [
                     func: "gpii.test.checkConfiguration",
                     args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}"]
                 }, {
+                    func: "gpii.tests.contextIntegration.checkCurrentContext",
+                    args: ["{lifecycleManager}", "context1", "bright" ]
+                }, {
                     func: "{logoutRequest}.send"
                 }, {
                     event: "{logoutRequest}.events.onComplete",
@@ -275,7 +301,7 @@ gpii.tests.contextIntegration.fixtures = [
         ]
     }, {
         name: "Multiple context changes",
-        expect: 10,
+        expect: 15,
         sequenceSegments: [
             [
                 {
@@ -292,6 +318,9 @@ gpii.tests.contextIntegration.fixtures = [
                 }, {
                     func: "gpii.test.checkConfiguration",
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
+                }, {
+                    func: "gpii.tests.contextIntegration.checkCurrentContext",
+                    args: ["{lifecycleManager}", "context1", "gpii-default" ]
                 }
             ],
             gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
