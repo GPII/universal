@@ -9,8 +9,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
@@ -65,23 +65,25 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
-                },
-                "restoreSettings"
-            ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
+            }
+        ]
     },
 
     "org.gnome.desktop.interface": {
@@ -94,8 +96,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
@@ -158,11 +160,13 @@
                     "schema": "org.gnome.desktop.interface"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "org.gnome.nautilus": {
@@ -174,8 +178,8 @@
             }]
         },
 
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.nautilus.id",
@@ -188,12 +192,13 @@
                     "schema": "org.gnome.nautilus.desktop"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "org.gnome.desktop.a11y.applications.onscreen-keyboard": {
@@ -204,8 +209,8 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
@@ -213,21 +218,19 @@
                     "applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.id"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
+            }
         ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
+            }
+        ]
     },
 
     "org.gnome.desktop.a11y.keyboard": {
@@ -238,7 +241,8 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": [ {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id",
@@ -290,11 +294,13 @@
                     "schema": "org.gnome.desktop.a11y.keyboard"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "org.gnome.desktop.wm.preferences": {
@@ -306,8 +312,8 @@
             }]
         },
 
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.wm\\.preferences.id",
@@ -317,12 +323,13 @@
                     "schema": "org.gnome.desktop.wm.preferences"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "org.gnome.shell.overrides": {
@@ -334,8 +341,8 @@
             }]
         },
 
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.shell\\.overrides.id",
@@ -345,12 +352,13 @@
                     "schema": "org.gnome.shell.overrides"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "org.gnome.orca": {
@@ -361,8 +369,8 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.orca",
                 "options": {
                     "user": "${{userToken}}"
@@ -1146,23 +1154,25 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
-                },
-                "restoreSettings"
-            ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
+            }
+        ]
     },
 
     "org.alsa-project": {
@@ -1175,8 +1185,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.alsa",
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
@@ -1191,11 +1201,13 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager" : {
-            "start": ["setSettings"],
-            "stop": ["restoreSettings"]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "trace.easyOne.communicator.linux": {
@@ -1208,8 +1220,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.simplification",
@@ -1217,21 +1229,19 @@
                     "content.simplification.applications.trace\\.easyOne\\.communicator\\.linux.name"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome http://easy123.org/user/${{userToken}}"
+            }
         ],
-        "lifecycleManager" : {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy123.org/user/${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ]
     },
 
     "trace.easyOne.sudan.linux": {
@@ -1244,8 +1254,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.pictorialSimplification",
@@ -1253,21 +1263,19 @@
                     "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.linux.name"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome http://easy123.org/sudan"
+            }
         ],
-        "lifecycleManager" : {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy123.org/sudan"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ]
     },
 
     "webinsight.webAnywhere.linux": {
@@ -1280,8 +1288,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
@@ -1289,22 +1297,21 @@
                     "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
+            }
         ],
-        "lifecycleManager" : {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ]
     },
+
     "org.freedesktop.xrandr": {
         "name": "Xrandr",
         "contexts": {
@@ -1313,22 +1320,20 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": [
-           {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.xrandr",
                 "capabilities": [
                     "display.screenEnhacements",
                     "applications.org\\.freedesktop\\.xrandr.id"
                 ]
            }
+        },
+        "start": [
+            "setSettings"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
+        "stop": [
+            "restoreSettings"
+        ]
     }
 }
