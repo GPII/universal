@@ -36,6 +36,9 @@ gpii.tests.linux.chrome = [
                             "highContrastTheme": "white-black",
                             "highContrastEnabled": true,
                             "screenReaderTTSEnabled": false
+                        },
+                        "options": {
+                            "path": "org.chrome.cloud4chrome"
                         }
                     }
                 ]
@@ -57,6 +60,9 @@ gpii.tests.linux.chrome = [
                             "magnification": 1,
                             "highContrastEnabled": false,
                             "screenReaderTTSEnabled": false
+                        },
+                        "options": {
+                            "path": "org.chrome.cloud4chrome"
                         }
                     }
                 ]
@@ -78,6 +84,9 @@ gpii.tests.linux.chrome = [
                             "magnification": 2,
                             "highContrastEnabled": false,
                             "screenReaderTTSEnabled": false
+                        },
+                        "options": {
+                            "path": "org.chrome.cloud4chrome"
                         }
                     }
                 ]
