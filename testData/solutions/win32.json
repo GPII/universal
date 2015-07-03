@@ -80,8 +80,7 @@
             {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\GW Micro\\Window-Eyes\\users\\default\\sets.dat",
-                    "createFile": true
+                    "filename": "${{environment}.APPDATA}\\GW Micro\\Window-Eyes\\users\\default\\sets.dat"
                 },
                 "capabilities": [
                     "applications.com\\.gwmicro\\.windoweyes.id",
