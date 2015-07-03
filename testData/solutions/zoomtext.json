@@ -49,8 +49,7 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomTextUAC_v10.1\\StartExe}\""
-
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{F7F20305-1476-4421-B909-BB5B90D1F222}\\DisplayIcon}\""
                 }
             ],
             "stop": [
