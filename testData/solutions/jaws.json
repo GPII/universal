@@ -51,7 +51,10 @@
                     "createFile": true
                 },
                 "capabilities": [
-                    "applications.com\\.freedomscientific\\.jaws.id"
+                    "applications.com\\.freedomscientific\\.jaws.id",
+                    "display.screenReader.-provisional-punctuationVerbosity",
+                    "display.screenReader.speechRate",
+                    "display.textReadingHighlight.pitch"
                 ],
                 "capabilitiesTransformations": {
                     "ENU-Global\\.Punctuation": {
@@ -77,7 +80,7 @@
                     "ENU-Global\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/voicePitch",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "options": {
                                 "low": {
                                     "outputValue": 25
