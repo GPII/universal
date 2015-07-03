@@ -1,17 +1,13 @@
 {
-    "typeName": "deviceReporter.production",
+    "typeName": "acceptanceTests.maavis",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
             "server": {
-                "type": "kettle.server",
                 "options": {
-                    "logging": false,
                     "components": {
                         "deviceReporter": {
-                            "type": "gpii.deviceReporter.live",
                             "options": {
-                                "gradeNames": ["gpii.deviceReporter.dev"]
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/maavis.json"
                             }
                         }
                     }
@@ -20,6 +16,6 @@
         }
     },
     "includes": [
-        "./base.json"
+        "${universal}/tests/configs/localInstall.json"
     ]
 }
