@@ -12,8 +12,7 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": { 
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.0\\Settings\\enu\\DEFAULT.JCF",
-                    "createFile": true
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.0\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.magic.id",
@@ -48,8 +47,7 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": { 
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.0\\Settings\\enu\\DEFAULT.MCF",
-                    "createFile": true
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.0\\Settings\\enu\\DEFAULT.MCF"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.magic.id",
@@ -66,8 +64,7 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": { 
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.0\\Settings\\VoiceProfiles\\GPII.VPF",
-                    "createFile": true
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.magic.id",
