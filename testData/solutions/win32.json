@@ -748,7 +748,7 @@
         },
 
         "settingsHandlers": {
-            "configure": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
