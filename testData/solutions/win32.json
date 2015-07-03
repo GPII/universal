@@ -749,8 +749,98 @@
 
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler",
-            "options": { "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
-            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+            "options": {
+                "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+            },
+            "capabilities": [
+                "applications.net\\.opendirective\\.maavis.id",
+                "display.textReadingHighlight.-provisional-selfVoicingEnabled"
+            ],
+            "capabilitiesTransformations": {
+                "transform": [
+                    {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakOnActivate",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakTitles",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakLabels",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                        "condition": false,
+                        "outputPath": "theme",
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "colour"
+                            }
+                        },
+                        "true": {
+                            "transform": {
+                                "type": "fluid.transforms.valueMapper",
+                                "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                "defaultOutputValue": "bw",
+                                "options": {
+                                    "black-white": {
+                                        "outputValue": "bw"
+                                    },
+                                    "white-black": {
+                                        "outputValue": "bw"
+                                    },
+                                    "black-yellow": {
+                                        "outputValue": "hc"
+                                    },
+                                    "yellow-black": {
+                                        "outputValue": "hc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
         }],
 
          "lifecycleManager": {
