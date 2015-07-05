@@ -7,12 +7,6 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
             ]
         },
         "settingsHandlers": {
@@ -92,6 +86,12 @@
                 "type": "gpii.launch.exec",
                 "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
         ]
     },
 
@@ -102,12 +102,6 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
-                }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gsettings-desktop-schemas"
                 }
             ]
         },
@@ -181,6 +175,12 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gsettings-desktop-schemas"
+            }
         ]
     },
 
@@ -190,13 +190,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "nautilus"
-                }
-            ]
+            }]
         },
 
         "settingsHandlers": {
@@ -219,6 +213,12 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "nautilus"
+            }
         ]
     },
 
@@ -228,13 +228,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
-            ]
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -257,6 +251,12 @@
                 "type": "gpii.launch.exec",
                 "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
         ]
     },
 
@@ -266,13 +266,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gsettings-desktop-schemas"
-                }
-            ]
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -333,6 +327,12 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gsettings-desktop-schemas"
+            }
         ]
     },
 
@@ -342,13 +342,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
-            ]
+            }]
         },
 
         "settingsHandlers": {
@@ -368,6 +362,12 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
         ]
     },
 
@@ -377,13 +377,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
-            ]
+            }]
         },
 
         "settingsHandlers": {
@@ -403,6 +397,12 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
         ]
     },
 
@@ -412,13 +412,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "orca"
-                }
-            ]
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -1223,6 +1217,12 @@
                 "type": "gpii.launch.exec",
                 "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "orca"
+            }
         ]
     },
 
@@ -1233,16 +1233,6 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
-                }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "alsa"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "alsa-lib"
                 }
             ]
         },
@@ -1271,6 +1261,16 @@
         ],
         "update": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "alsa"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "alsa-lib"
+            }
         ]
     },
 
@@ -1281,20 +1281,6 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
-                }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-beta"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-stable"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-unstable"
                 }
             ]
         },
@@ -1319,6 +1305,20 @@
                 "type": "gpii.launch.exec",
                 "command": "pkill -2 chrome"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-beta"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-stable"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-unstable"
+            }
         ]
     },
 
@@ -1329,20 +1329,6 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
-                }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-beta"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-stable"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-unstable"
                 }
             ]
         },
@@ -1367,6 +1353,20 @@
                 "type": "gpii.launch.exec",
                 "command": "pkill -2 chrome"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-beta"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-stable"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-unstable"
+            }
         ]
     },
 
@@ -1377,20 +1377,6 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
-                }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-beta"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-stable"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-unstable"
                 }
             ]
         },
@@ -1415,6 +1401,20 @@
                 "type": "gpii.launch.exec",
                 "command": "pkill -2 chrome"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-beta"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-stable"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-unstable"
+            }
         ]
     },
 
@@ -1424,13 +1424,7 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "libXrandr"
-                }
-            ]
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -1446,6 +1440,12 @@
         ],
         "stop": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "libXrandr"
+            }
         ]
     },
 

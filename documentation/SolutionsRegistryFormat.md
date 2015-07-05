@@ -1,22 +1,133 @@
 ##Solutions Registry format
 
+### Overall format:
+Each entry in the solution registry should have a unique ID (`Solution.id` in the below example), as well as a name (`name`), and a description of which context it requires to run (`context`). Besides these, information can be provided describing different potential aspects of its lifecycle. This can for example be information about how to start and stop the solution, detect whether it is running, set its settings, etc. These will all be described in the below. The overall structure and allowed keys in a solution description can be seen here.
+
 ```
 "Solution.id": {
     "name": "My Solution"
     "contexts": { ... },
-    "isInstalled": [ ... ],
-    "isRunning": [ ... ],
-    "isConfigurable": [ ... ],
+    "settingsHandlers": { ... },
+    "configure": [ .. ],
+    "restore": [ .. ],
+    "update": [ .. ],
+    "start": [ .. ],
+    "stop": [ .. ],
+    "isInstalled": [ .. ],
+    
+    // Not yet supported. Post-Cloud4All features.
+    "install": [ ... ],
+    "uninstall": [ ... ],
     "makeConfigurable": [ ... ],
-    "configure": { ... },
-    "start": { ... },
-    "stop" { ... },
-    "notifyUpdate": { ... }
+    "isRunning": { ... },
+    "isConfigurable": { ... }
 }
 ```
-#### isInstalled:
 
-To detect whether a solution is installed. If any of these blocks evaluate to `true` (implicit OR), the application is considered to be installed.
+### contexts
+The `contexts` block describes what the required context is for the solution to run. Currently only one type of context is supported, namely `os`. The context block is **mandatory**.
+
+**Example Context**:
+```
+"contexts": {
+    "OS": [
+        {
+            "id": "win32"
+        }
+    ]
+}
+```
+
+### settingsHandlers
+The `settingsHandlers` block is unique and one of the most important blocks in the solutions registry entry. It consists of zero or more settingsHandler entries, each keyed by an arbitrary name (that is unique within this solutions settingsHandlers block). Inside each settingsHandler entry, the properties for that settingsHandler is provided. The entries in the settingsHandlers block can be referred to from the other lifecycle blocks of the solutions registry entry. The settingsHandlers block is mandatory.
+
+**Example settingsHandlers block**:
+```
+"settingsHandlers": {
+    "myconf": {
+        "type": "gpii.settingsHandlers.XMLHandler",
+        "options": {
+            "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
+        },
+        "capabilities": [
+            "applications.com\\.texthelp\\.readWriteGold.id"
+        ],
+        "capabilitiesTransformations": {
+            "ApplicationSettings": "ApplicationSettings"
+        }
+    },
+    "otherconf": {
+        "type": "gpii.settingsHandlers.INIHandler",
+        "options": {
+            "filename": "${{environment}.HOME}\\mySettings.ini"
+        },
+        "capabilities": [
+            "applications.com\\.texthelp\\.readWriteGold.id"
+        ]
+    }
+}
+```
+
+The important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+
+### configure, restore, start and stop
+These four lifecycle blocks have different meanings to the system but has the same format. Their meanings are the following:
+
+* `configure`: Configure the solution with the users setting (eg. on login)
+* `restore`: Restore the settings of the system from before the user logged in
+* `start`: Launch/start the solution
+* `stop`: Stop/kill the solution
+
+Each of these lifecycle blocks allow the same content - which is an array with entries that are either references to settingsHandlers blocks or customized lifecycle blocks. To reference a settingsHandler block, the keywork `settings.<blockname>` is used, where `<blockname>` should be replaced with the name of a settingsHandler block. In the case of `configure` and `start`, a consequence of referencing a settingsHandler is that the settings given in the settingsHandler and users preferences set will be applied to that solution (and their original values will be saved to the system - if user just logged in). In the case of `restore` and `stop`, the settings that has previously been written using the settingshandler(s) in question will be restored. Alternative to referencings setting and restoring settings, arbitrary lifecycle actions are allowed - the syntax for this is an object that contains at least a `type` key for the function to call. None of these blocks are mandatory. 
+
+**Example blocks**:
+```
+"configure": [
+    "settings.myconf"
+],
+"restore": [
+    "settings.myconf"
+],
+"start": [
+    {
+        "type": "gpii.launch.exec",
+        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+    }
+],
+"stop": [
+    {
+        "type": "gpii.windows.killProcessByName",
+        "filename": "nvda.exe"
+    }
+]
+```
+
+### update
+
+The `update` block works very similarly to the configure, restore, start and stop blocks. It describes what should happen when the configuration needs to be updated (eg. due to context changes, PCP adjustments, etc).
+
+The format of the `update` block allows for the same entries as the configure, restore, start and stop blocks - that is: arbitrary lifecycle action blocks and `settings.<blockname>`. Unlike for the other lifecycle blocks, the `update` block furthermore allows references to the `start`, `stop` and `configure` blocks. This is one by putting a string with the name of that block. When the system encounters one of these references, the entries of that block will be run.
+
+**Example block**:
+```
+"configure": [
+    "settings.myconf"
+],
+"update": [
+    "configure",
+    {
+        "type": "gpii.launch.exec",
+        "command": "my_application --refresh"
+    }
+]
+```
+
+In the above example, the process of updating the application settings would consists of running the contents of the `configure` block (that is `"settings.myconf"`), followed by a custom lifecycle actions.
+
+
+### isInstalled:
+
+This directive is used to detect whether a solution is installed. If any of these blocks evaluate to `true` (implicit **OR**), the application is considered to be installed.
 
 **Example Entry**:
 ```
@@ -32,8 +143,11 @@ To detect whether a solution is installed. If any of these blocks evaluate to `t
 ]
 ```
 
+### NOT IMPLEMENTED blocks:
+There are several advanced options that we're not planning to implement in the short term, but which will make the implementation of things like the ORCA settings handler much less horrible.
+
 #### isRunning:
-To detect whether a solution is running. If any of these blocks evaluate to `true` (implicit OR), the application is considered to be running.
+To detect whether a solution is running - this is planned to be integrated in the relatively short run. If any of these blocks evaluate to `true` (implicit OR), the application is considered to be running.
 
 **Example Entry**:
 ```
@@ -50,91 +164,8 @@ To detect whether a solution is running. If any of these blocks evaluate to `tru
 ]
 ```
 
-#### configure
-Is the portion of the solutions registry entry that describes how to configure a solution (ie. setting the settings for it). This block is useful for the system when a user keys in, keys out and when the settings updates while being logged in (due to PCP or context changes).
-
-**Example Entry**:
-```
-"configure": {
-    "settingsHandlers": [
-        {
-            "type": "gpii.settingsHandlers.INISettingsHandler",
-            "options": {
-                "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                "allowNumberSignComments": true,
-                "allowSubSections": true
-            },
-            "capabilities": [
-                "applications.org\\.nvda-project.id"
-            ],
-            "capabilitiesTransformations": {
-                "speech\\.espeak\\.pitch": {
-                    "transform": {
-                        "type": "fluid.transforms.linearScale",
-                        "valuePath": "http://registry\\.gpii\\.net/common/pitch",
-                        "factor": 100
-                    }
-                },
-                "presentation\\.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
-            }
-        }
-    ]
-}
-```
-
-#### start
-This will be triggered whenever the application should be launched - which generally would happen on user login. While this section will generally be one or more lifecycle actions, it can also contain a settingsHandler section, in case that is part of the launching process. Note that the general setting of settings should be defined in the settingshandlers block of the `configure` block.
-
-**Example Entry**:
-```
-"start": {
-     "actions": [
-        {
-            "type": "gpii.launch.exec",
-            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
-        }
-    ],
-    "settingsHandlers": [ (...) ]
-}
-```
-
-#### stop
-This will be triggered whenever the application should be close - which generally would happen on user logout. While this section will generally be one or more lifecycle actions, it can also contain a settingsHandler section, in case that is part of the process of killing the application. Note that the general restoration of settings will be done automatically by the system when relevant based on the content of the `configure` block.
-
-**Example Entry**:
-```
-"stop": {
-     "actions": [
-        {
-            "type": "gpii.launch.exec",
-            "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
-        }
-    ],
-    "settingsHandlers": [ (...) ]
-}
-```
-
-#### notifyUpdate
-This will be triggered whenever the settings of the applications has been updated. It is useful if the application needs to be notified of the updated settings (eg. to reread the settings file or the like).
-
-**Example Entry**:
-```
-"nofifyUpdate": {
-     "actions": [
-        {
-            "type": "gpii.launch.exec",
-            "command": "${{environment}.APPDATA}\\myapp\reread-settings.exe"
-        }
-    ],
-    "settingsHandlers": [ (...) ]
-}
-```
-
-
-#### isConfigurable and makeConfigurable (NOT IMPLEMENTED):
-These are two advanced options that we're not planning to implement in the short term, but which will make the implementation of things like the ORCA settings handler much less horrible.
-
-`isConfigurable` is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where eg. a configuration file needs to be present, a tutorial needs to be run on the first launch, etc.
+####isConfigurable
+This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where eg. a configuration file needs to be present, a tutorial needs to be run on the first launch, etc.
 
 **Example Entry**:
 ```
@@ -144,7 +175,8 @@ These are two advanced options that we're not planning to implement in the short
 }]
 ```
 
-`makeConfigurable` is the actions that need to be taken to make the application configurable (such as running a wizard, creating a default configuration file, adding a new system user, etc).
+####makeConfigurable
+Is the actions that need to be taken to make the application configurable (such as running a wizard, creating a default configuration file, adding a new system user, etc).
 
 **Example Entry**:
 ```
@@ -152,4 +184,11 @@ These are two advanced options that we're not planning to implement in the short
     "launch" // A special key meaning "start it, wait until isConfigurable is met, and then stop it"
 }]
 ```
+
+####install:
+Used for describing the steps required for installing the application
+
+####uninstall:
+Used for describing the steps
+
 
