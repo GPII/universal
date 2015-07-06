@@ -8,8 +8,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.org\\.chrome\\.cloud4chrome.id"
@@ -60,7 +60,7 @@
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
                 }
             }
-        ]
+        }
     },
     "com.bdigital.easit4all": {
         "name": "Easit4all",
@@ -71,8 +71,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.com\\.bdigital\\.easit4all.id"
@@ -171,7 +171,7 @@
                     }
                 }
             }
-        ]
+        }
     },
     "info.cloud4all.JME": {
         "name": "JME Cloud4all Themes",
@@ -182,8 +182,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.info\\.cloud4all\\.JME.id",
@@ -272,7 +272,7 @@
                     }
                 }
             }
-        ]
+        }
     },
     "net.gpii.smarthouses": {
         "name": "smarthouse",
@@ -284,8 +284,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.net\\.gpii\\.smarthouses.id",
@@ -342,7 +342,7 @@
                     }
                 }
             }
-        ]
+        }
     },
     "es.codefactory.android.app.ma": {
         "name": "Mobile Accessibility",
@@ -353,8 +353,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.es\\.codefactory\\.android\\.app\\.ma.id"
@@ -403,7 +403,7 @@
                     "access_commonprefs_c4a_enable_braille": "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput"
                 }
             }
-        ]
+        }
     },
     "de.fraunhofer.iao.C4A-TVM": {
         "name": "C4A-TVM",
@@ -414,8 +414,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.de\\.fraunhofer\\.iao\\.C4A-TVM.id",
@@ -477,7 +477,7 @@
                     }
                 }
             }
-        ]
+        }
     },
 
     "eu.gpii.olb": {
@@ -489,8 +489,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.eu\\.gpii\\.olb.id",
@@ -605,7 +605,7 @@
                     "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled"
                 }
             }
-        ]
+        }
     }
 }
 
