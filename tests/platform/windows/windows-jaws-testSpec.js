@@ -32,10 +32,27 @@ gpii.tests.windows.jaws = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "cloud4allVoiceProfile-GlobalContext.Speed": 115
+                            "Voice Profiles.ActiveVoiceProfileName" : "GPII",
+                            "options.TypingEcho" : 1,
+                            "ENU-Global.Punctuation" : 2,
+                            "ENU-Global.Pitch" : 75,
+                            "ENU-Global.Rate" : 100
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
+                        }
+                    },
+
+                    {
+                        "settings": {
+                            "Voice Profiles.ActiveVoiceProfileName" : "GPII",
+                            "options.TypingEcho" : 1,
+                            "ENU-Global.Punctuation" : 2,
+                            "ENU-Global.Pitch" : 75,
+                            "ENU-Global.Rate" : 100
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -48,7 +65,9 @@ gpii.tests.windows.jaws = [
                 "expectRestored": "0"
             }
         ]
-    }, {
+    }, 
+
+    {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
         userToken: "jaws_common",
         settingsHandlers: {
@@ -56,11 +75,22 @@ gpii.tests.windows.jaws = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "cloud4allVoiceProfile-GlobalContext.Speed": 37.875,
-                            "cloud4allVoiceProfile-GlobalContext.Punctuation": 3
+                            "ENU-Global.Punctuation" : 2,
+                            "ENU-Global.Pitch" : 125,
+                            "ENU-Global.Rate" : 12.875
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                        }
+                    },
+
+                    {
+                        "settings": {
+                            "Voice Profiles.ActiveVoiceProfileName" : "GPII",
+                            "options.TypingEcho" : 1
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]

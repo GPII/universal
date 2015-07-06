@@ -1,0 +1,123 @@
+{
+    "com.freedomscientific.jaws": {
+        "name": "JAWS",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
+                },
+                "capabilities": [
+                    "applications.com\\.freedomscientific\\.jaws.id"
+                ],
+
+                "capabilitiesTransformations": {
+                    "Voice Profiles\\.ActiveVoiceProfileName": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "http://registry\\.gpii\\.net/common/voiceProfile",
+                            "value": "GPII"
+                        }
+                    },
+                    "options\\.TypingEcho": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/typingEcho",
+                            "options": {
+                                "on": {
+                                    "outputValue": 1
+                                },
+                                "off": {
+                                    "outputValue": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                },
+                "capabilities": [
+                    "applications.com\\.freedomscientific\\.jaws.id",
+                    "display.screenReader.-provisional-punctuationVerbosity",
+                    "display.screenReader.speechRate",
+                    "display.textReadingHighlight.pitch"
+                ],
+                "capabilitiesTransformations": {
+                    "ENU-Global\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "options": {
+                                "none": {
+                                    "outputValue": 0
+                                },
+                                "some": {
+                                    "outputValue": 1
+                                },
+                                "most": {
+                                    "outputValue": 2
+                                },
+                                "all": {
+                                    "outputValue": 3
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Pitch":{
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "options": {
+                                "low": {
+                                    "outputValue": 25
+                                },
+                                "medium": {
+                                    "outputValue": 75
+                                },
+                                "high": {
+                                    "outputValue": 125
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Rate": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "factor": 0.125,
+                            "offset": -12.125
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS16.exe\\}\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    }
+}
