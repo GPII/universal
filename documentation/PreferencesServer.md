@@ -9,9 +9,9 @@ The `/preferences` API will be described immediately below here, while the old, 
 
 ### Description
 
-The Preferences Server is a server meant to be the public facing, REST based interface for consumers of preferences. It's main purpose is to be able to present a filtered view of the user preferences based on the requirements of the consumer - ie. the preferences shown in a specific ontology, filtered according to a specific set of contexts, a certain set of security/privacy rules, etc.
+The Preferences Server is a server meant to be the public-facing, REST-based interface for consumers of preferences. Its main purpose is to be able to present a filtered view of the user preferences based on the requirements of the consumer - i.e. the preferences shown in a specific ontology, filtered according to a specific set of contexts, a certain set of security/privacy rules, etc.
 
-The main bulk of work of the Preferences Server is done in other components of the GPII system, leaving the Preferences Server with the task of acting on the parameters supplied to the rest calls, calling the relevant functions in other components accordingly, etc.
+The bulk of work of the Preferences Server is done in other components of the GPII system, leaving the Preferences Server with the task of acting on the parameters supplied to the REST calls, calling the relevant functions in other components accordingly, etc.
 
 The main types of filtering provided by the Preferences Server are the following:
 
@@ -299,7 +299,9 @@ After the PUT request, it would be changed to:
 ```
 
 There are two important things to note here:
+
 1. As the PUT request was made in the flat format, all the existing preferences in the flat format were replaced by the ones in the body of the PUT request. This means that a setting like _cursorAcceleration_ is no longer present in the preference set.
+
 2. In the example, we consider the ISO-24751 setting "display.screenEnhancement.fontSize" to be ontologically equivalent to http://registry.gpii.net/common/fontSize. Since we do not allow the same setting to be present multiple times in the NP set, the fontSize has been stored in the flat ontology and removed from the ISO24751 block.
 
 ### Other relevant documentation:
@@ -307,4 +309,3 @@ There are two important things to note here:
 * [The Preferences Server Framework](PreferencesServerFramework.md)
 * [The Raw Preferences Server](RawPreferencesServer.md)
 * [The Old Preferences Server](OldPreferencesServer.md) _for backward compatibility only_
-

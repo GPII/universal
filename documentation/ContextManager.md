@@ -11,7 +11,7 @@ The Context Manager is active on the following times in the system.
 
 ### Reporting Changes in Environment (PUT /environmentChanged)
 * **description**: For environment reporters to notify the system that the environment has changed
-* **Supported modes**: works only on installed GPII (i.e. non-cloud based flowmanager)
+* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
 * **route:** `/environmentChanged`
 * **method:** `PUT`
 * **data format:** The data of the PUT request should be a JSON object, containing at least a timestamp key and one or more environment contexts. The timestamp should be in the ISO_8601 format (e.g "2014-10-10T09:59:01.0000123+02:00"). Examples of payloads to the PUT request are the following:
