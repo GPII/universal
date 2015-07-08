@@ -1,5 +1,9 @@
 [
     {
+        "id": "com.freedomscientific.jaws"
+    },
+    
+    {
         "id": "org.gnome.desktop.interface"
     },
 

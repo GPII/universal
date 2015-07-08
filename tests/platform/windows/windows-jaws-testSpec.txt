@@ -5,6 +5,6 @@ This will run the acceptance tests for the JAWS screenreader (Freedom Scientific
 
 Prerequisites:
 * JAWS needs to be installed
-* In JAWS, a profile should be created by going to "options"->voices->Voice Adjustment. Make sure that "Eloquence - (factory)" is selected in the profile name. Click "Save As.." button and write "cloud4all" as the name (no quotes). Once this is done, Jaws should be working properly
+* In JAWS, a profile should be created by going to "options"->voices->Voice Adjustment. Make sure that "Eloquence - (factory)" is selected in the profile name. Click "Save As.." button and write "GPII" as the name (no quotes). Once this is done, Jaws should be working properly
 
-Has been tested with JAWS 15.0
+Has been tested with JAWS 16.0

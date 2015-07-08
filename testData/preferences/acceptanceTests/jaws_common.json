@@ -4,8 +4,12 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/punctuationVerbosity": "all",
-                    "http://registry.gpii.net/common/speechRate": 400
+                    "http://registry.gpii.net/common/typingEcho": "on",
+                    "http://registry.gpii.net/common/voiceProfile": "GPII",
+                    "http://registry.gpii.net/common/punctuationVerbosity": "most",
+                    "http://registry.gpii.net/common/speechRate": 200,
+                    "http://registry.gpii.net/common/pitch": "high"
+
                 }
             }
         }

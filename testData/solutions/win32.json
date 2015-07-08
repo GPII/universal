@@ -12,13 +12,50 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
+
                 "capabilitiesTransformations": {
-                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
+                    "Voice Profiles\\.ActiveVoiceProfileName": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "http://registry\\.gpii\\.net/common/voiceProfile",
+                            "value": "GPII"
+                        }
+                    },
+                    "options\\.TypingEcho": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/typingEcho",
+                            "options": {
+                                "on": {
+                                    "outputValue": 1
+                                },
+                                "off": {
+                                    "outputValue": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                },
+                "capabilities": [
+                    "applications.com\\.freedomscientific\\.jaws.id",
+                    "display.screenReader.-provisional-punctuationVerbosity",
+                    "display.screenReader.speechRate",
+                    "display.textReadingHighlight.pitch"
+                ],
+                "capabilitiesTransformations": {
+                    "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -38,7 +75,24 @@
                             }
                         }
                     },
-                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
+                    "ENU-Global\\.Pitch":{
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "options": {
+                                "low": {
+                                    "outputValue": 25
+                                },
+                                "medium": {
+                                    "outputValue": 75
+                                },
+                                "high": {
+                                    "outputValue": 125
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Rate": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
                             "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
@@ -54,13 +108,13 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS16.exe\\}\""
                 }
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "jfw.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
                 },
                 "restoreSettings"
             ]
@@ -217,8 +271,8 @@
                 }
             ],
             "stop": [ {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "Magnify.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
                 },
                 "restoreSettings"
             ]
@@ -254,8 +308,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "osk.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im osk.exe"
                 }
             ]
         }
@@ -616,11 +670,11 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "nvda_service.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
                 },{
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "nvda.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
                 },
                 "restoreSettings"
             ]
@@ -657,8 +711,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "firefox.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
                 }
             ]
         }
@@ -693,8 +747,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "firefox.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
                 }
             ]
         }
@@ -729,8 +783,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "firefox.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
                 }
             ]
         }
@@ -749,98 +803,8 @@
 
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler",
-            "options": {
-                "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
-            },
-            "capabilities": [
-                "applications.net\\.opendirective\\.maavis.id",
-                "display.textReadingHighlight.-provisional-selfVoicingEnabled"
-            ],
-            "capabilitiesTransformations": {
-                "transform": [
-                    {
-                        "type": "fluid.transforms.condition",
-                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                        "outputPath": "speakOnActivate",
-                        "true": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "yes"
-                            }
-                        },
-                        "false": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "no"
-                            }
-                        }
-                    }, {
-                        "type": "fluid.transforms.condition",
-                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                        "outputPath": "speakTitles",
-                        "true": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "yes"
-                            }
-                        },
-                        "false": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "no"
-                            }
-                        }
-                    }, {
-                        "type": "fluid.transforms.condition",
-                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                        "outputPath": "speakLabels",
-                        "true": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "yes"
-                            }
-                        },
-                        "false": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "no"
-                            }
-                        }
-                    }, {
-                        "type": "fluid.transforms.condition",
-                        "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                        "condition": false,
-                        "outputPath": "theme",
-                        "false": {
-                            "transform": {
-                                "type": "literalValue",
-                                "value": "colour"
-                            }
-                        },
-                        "true": {
-                            "transform": {
-                                "type": "fluid.transforms.valueMapper",
-                                "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                "defaultOutputValue": "bw",
-                                "options": {
-                                    "black-white": {
-                                        "outputValue": "bw"
-                                    },
-                                    "white-black": {
-                                        "outputValue": "bw"
-                                    },
-                                    "black-yellow": {
-                                        "outputValue": "hc"
-                                    },
-                                    "yellow-black": {
-                                        "outputValue": "hc"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]
-            }
+            "options": { "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
+            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
         }],
 
          "lifecycleManager": {
@@ -853,8 +817,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.windows.killProcessByName",
-                    "filename": "firefox.exe"
+                    "type": "gpii.launch.exec",
+                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
                 },
                 "restoreSettings"
             ]
