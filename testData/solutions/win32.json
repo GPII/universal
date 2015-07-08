@@ -271,8 +271,8 @@
                 }
             ],
             "stop": [ {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "Magnify.exe"
                 },
                 "restoreSettings"
             ]
@@ -308,8 +308,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im osk.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "osk.exe"
                 }
             ]
         }
@@ -670,11 +670,11 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "nvda_service.exe"
                 },{
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "nvda.exe"
                 },
                 "restoreSettings"
             ]
@@ -711,8 +711,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 }
             ]
         }
@@ -747,8 +747,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 }
             ]
         }
@@ -783,8 +783,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 }
             ]
         }
@@ -803,8 +803,98 @@
 
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler",
-            "options": { "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
-            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+            "options": {
+                "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+            },
+            "capabilities": [
+                "applications.net\\.opendirective\\.maavis.id",
+                "display.textReadingHighlight.-provisional-selfVoicingEnabled"
+            ],
+            "capabilitiesTransformations": {
+                "transform": [
+                    {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakOnActivate",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakTitles",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakLabels",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                        "condition": false,
+                        "outputPath": "theme",
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "colour"
+                            }
+                        },
+                        "true": {
+                            "transform": {
+                                "type": "fluid.transforms.valueMapper",
+                                "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                "defaultOutputValue": "bw",
+                                "options": {
+                                    "black-white": {
+                                        "outputValue": "bw"
+                                    },
+                                    "white-black": {
+                                        "outputValue": "bw"
+                                    },
+                                    "black-yellow": {
+                                        "outputValue": "hc"
+                                    },
+                                    "yellow-black": {
+                                        "outputValue": "hc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
         }],
 
          "lifecycleManager": {
@@ -817,8 +907,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 },
                 "restoreSettings"
             ]
