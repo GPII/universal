@@ -12,50 +12,13 @@
             {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
                 },
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
-
                 "capabilitiesTransformations": {
-                    "Voice Profiles\\.ActiveVoiceProfileName": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "inputPath": "http://registry\\.gpii\\.net/common/voiceProfile",
-                            "value": "GPII"
-                        }
-                    },
-                    "options\\.TypingEcho": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/typingEcho",
-                            "options": {
-                                "on": {
-                                    "outputValue": 1
-                                },
-                                "off": {
-                                    "outputValue": 0
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-
-            {
-                "type": "gpii.settingsHandlers.INISettingsHandler",
-                "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
-                },
-                "capabilities": [
-                    "applications.com\\.freedomscientific\\.jaws.id",
-                    "display.screenReader.-provisional-punctuationVerbosity",
-                    "display.screenReader.speechRate",
-                    "display.textReadingHighlight.pitch"
-                ],
-                "capabilitiesTransformations": {
-                    "ENU-Global\\.Punctuation": {
+                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -75,24 +38,7 @@
                             }
                         }
                     },
-                    "ENU-Global\\.Pitch":{
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
-                            "options": {
-                                "low": {
-                                    "outputValue": 25
-                                },
-                                "medium": {
-                                    "outputValue": 75
-                                },
-                                "high": {
-                                    "outputValue": 125
-                                }
-                            }
-                        }
-                    },
-                    "ENU-Global\\.Rate": {
+                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
                             "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
@@ -108,13 +54,13 @@
                 "setSettings",
                 {
                     "type": "gpii.launch.exec",
-                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS16.exe\\}\""
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
                 }
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "jfw.exe"
                 },
                 "restoreSettings"
             ]
