@@ -5,6 +5,10 @@
     },
     "solutions": [
         {
+            "id": "com.freedomscientific.magic"
+        },
+        
+        {
             "id": "org.gnome.desktop.interface"
         },
 
