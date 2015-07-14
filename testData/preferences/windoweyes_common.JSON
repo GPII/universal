@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/speechRate": 4,
+                    "http://registry.gpii.net/common/pitch": "high",
+                    "http://registry.gpii.net/common/hotKey.10": {"hkid": "10","$t": "Control-Alt-Delete"}
+                }
+            }
+        }
+    }
+}

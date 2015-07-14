@@ -1,5 +1,9 @@
 [
     {
+        "id": "com.gwmicro.windoweyes"
+    },
+    
+    {
         "id": "org.gnome.desktop.interface"
     },
 
