@@ -1318,5 +1318,91 @@
                 "restoreSettings"
             ]
         }
+
+    },
+	
+    "org.mozilla.cloud4firefox": {
+        "name": "Cloud4all firefox extension",
+        "contexts": {
+            "OS": [{
+                    "id": "win32",
+                    "version": ">=5.0"
+            }]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "org.mozilla.cloud4firefox"
+                },
+                "capabilities": [
+                    "applications.org\\.mozilla\\.cloud4firefox.id"
+                ],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled":"http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "magnification": "http://registry\\.gpii\\.net/common/magnification",
+                    "fontSize": {
+                        "transform":{
+                            "type":"gpii.transformer.quantize",
+                            "inputPath":"http://registry\\.gpii\\.net/common/fontSize",
+                            "ranges":[
+                                {
+                                    "upperBound":14,
+                                    "output":"M"
+                                },
+                                {
+                                    "upperBound":24,
+                                    "output":"L"
+                                },
+                                {
+                                    "output":"XL"
+                                }
+                            ]
+                        }
+                    },
+                    "backgroundColour": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "options": {
+                                "white-black": "#000000",
+                                "black-white": "#FFFFFF",
+                                "yellow-black": "#000000",
+                                "black-yellow": "#FFFF00"
+                            }
+                        }
+                    },
+                    "foregroundColour": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "options": {
+                                "white-black": "#FFFFFF",
+                                "black-white": "#000000",
+                                "yellow-black": "#FFFF00",
+                                "black-yellow": "#000000"
+                            }
+                        }
+                    },
+					
+					"highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "invertColours": "http://registry\\.gpii\\.net/common/invertColours",
+                    "tracking":"display.screenEnhancement.tracking"
+                }
+           }
+        ],
+        "lifecycleManager" : {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://wiki.gpii.net/"
+                }
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
     }
 }

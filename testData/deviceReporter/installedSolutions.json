@@ -104,6 +104,10 @@
     },
 
     {
+        "id": "org.mozilla.cloud4firefox"
+    },
+
+    {
         "id": "com.android.settings.secure"
     },
 
