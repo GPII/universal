@@ -1246,12 +1246,15 @@
             }]
         },
         "settingsHandlers": [
-           {
-                "type": "gpii.settingsHandlers.WebSocketsSettingsHandler",
+            {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "org.chrome.cloud4chrome"
+                },
                 "capabilities": [
                     "applications.org\\.chrome\\.cloud4chrome.id"
                 ],
-				"capabilitiesTransformations": {
+                "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
