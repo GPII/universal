@@ -16,8 +16,10 @@
             ],
             "isRunning": [
                 {
-                    "type": "gpii.processReporter.find",
-                    "command": "gnome-shell"
+                    "type": "gpii.processReporter.findAndCheckSetting",
+                    "command": "gnome-shell",
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "setting": "screen-magnifier-enabled"
                 }
             ]
         },
