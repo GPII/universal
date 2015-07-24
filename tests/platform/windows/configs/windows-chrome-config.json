@@ -1,0 +1,21 @@
+{
+    "typeName": "acceptanceTests.windows.chrome",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/linux_chrome.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/tests/configs/localInstall.json"
+    ]
+}
