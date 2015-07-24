@@ -1,14 +1,15 @@
-# Smart House
+# Cloud4chrome
 
 ## Details
 
 * __Name__: cloud4chrome
 * __Id__: org.chrome.cloud4chrome
-* __Platform__: Web
+* __Platform__: Tested on MS Windows and GNU/Linux (it should also work on Mac OSX)
 * __Contact__: José Antonio Gutiérrez Dueñas <jagutierrez@consultoria.ilunion.com>
 
 ## Description
-The Chrome extension is a component installable in the web browser. This extension establishes a connection with GPII to get the active preferences. These preferences are used, by the extension, to adapt the web browser content, I mean, the web site interfaces.
+The Chrome extension for Google Chrome is a component installable in the web browser. This extension establishes a connection with GPII to get the active preferences. These preferences are used, by the extension, to adapt the web browser content, I mean, the web site interfaces.
+The Chrome extension can work autonomously, with cloud-based flowManager, or by local flowManager.
 
 Useful links:
 
