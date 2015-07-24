@@ -1,0 +1,8 @@
+This configuration file is used for testing the firefox extension in Windows
+
+It includes to the basic localInstall setup for acceptance tests (modifying the
+preferences folder used), which in turn includes the standard development
+config file (running GPII locally, using development setup).
+
+This config sets the device reporter file to be 'windows_firefox.json', which will report
+the Cloud4all Firefox extension for Mozilla Firefox as being installed on the system.
