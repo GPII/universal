@@ -59,8 +59,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im jfw.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "jfw.exe"
                 },
                 "restoreSettings"
             ]
@@ -217,8 +217,8 @@
                 }
             ],
             "stop": [ {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Magnify.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "Magnify.exe"
                 },
                 "restoreSettings"
             ]
@@ -254,8 +254,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im osk.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "osk.exe"
                 }
             ]
         }
@@ -302,21 +302,6 @@
                     "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
                     "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
                     "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "virtualBuffers\\.autoSayAllOnPageLoad": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/readingUnit",
-                            "defaultInputValue": "sentence",
-                            "options": {
-                                "all": {
-                                    "outputValue": true
-                                },
-                                "sentence": {
-                                    "outputValue": false
-                                }
-                            }
-                        }
-                    },
                     "transform": [
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
@@ -354,32 +339,37 @@
                     ],
                     "speech\\.espeak\\.rate": {
                         "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "right": 3.10,
-                            "operator": "/",
-                            "left": {
+                            "type": "fluid.transforms.round",
+                            "input": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "right": 80,
-                                    "operator": "-",
+                                    "right": 3.10,
+                                    "operator": "/",
                                     "left": {
                                         "transform": {
-                                            "type": "fluid.transforms.condition",
-                                            "truePath": "http://registry\\.gpii\\.net/common/speechRate",
-                                            "false": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "right": 80,
+                                            "operator": "-",
+                                            "left": {
                                                 "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "operator": "/",
-                                                    "right": 3
-                                                }
-                                            },
-                                            "condition": {
-                                                "transform": {
-                                                    "type": "fluid.transforms.binaryOp",
-                                                    "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
-                                                    "operator": "<=",
-                                                    "right": 390
+                                                    "type": "fluid.transforms.condition",
+                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "false": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 3
+                                                        }
+                                                    },
+                                                    "condition": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "<=",
+                                                            "right": 390
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -626,11 +616,11 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda_service.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "nvda_service.exe"
                 },{
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im nvda.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "nvda.exe"
                 },
                 "restoreSettings"
             ]
@@ -667,8 +657,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 }
             ]
         }
@@ -703,8 +693,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 }
             ]
         }
@@ -739,8 +729,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 }
             ]
         }
@@ -759,8 +749,98 @@
 
         "settingsHandlers": [{
             "type": "gpii.settingsHandlers.JSONSettingsHandler",
-            "options": { "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json" },
-            "capabilities": [ "applications.net\\.opendirective\\.maavis.id" ]
+            "options": {
+                "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+            },
+            "capabilities": [
+                "applications.net\\.opendirective\\.maavis.id",
+                "display.textReadingHighlight.-provisional-selfVoicingEnabled"
+            ],
+            "capabilitiesTransformations": {
+                "transform": [
+                    {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakOnActivate",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakTitles",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                        "outputPath": "speakLabels",
+                        "true": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "yes"
+                            }
+                        },
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "no"
+                            }
+                        }
+                    }, {
+                        "type": "fluid.transforms.condition",
+                        "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                        "condition": false,
+                        "outputPath": "theme",
+                        "false": {
+                            "transform": {
+                                "type": "literalValue",
+                                "value": "colour"
+                            }
+                        },
+                        "true": {
+                            "transform": {
+                                "type": "fluid.transforms.valueMapper",
+                                "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                "defaultOutputValue": "bw",
+                                "options": {
+                                    "black-white": {
+                                        "outputValue": "bw"
+                                    },
+                                    "white-black": {
+                                        "outputValue": "bw"
+                                    },
+                                    "black-yellow": {
+                                        "outputValue": "hc"
+                                    },
+                                    "yellow-black": {
+                                        "outputValue": "hc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
         }],
 
          "lifecycleManager": {
@@ -773,8 +853,8 @@
             ],
             "stop": [
                 {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im firefox.exe"
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "firefox.exe"
                 },
                 "restoreSettings"
             ]
@@ -801,7 +881,8 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "HIGHCONTRAST"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.-provisional-highContrastEnabled",
@@ -853,7 +934,8 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.mouseTrailing",
@@ -919,7 +1001,8 @@
                         "SizeWE": "REG_SZ",
                         "UpArrow": "REG_SZ",
                         "Wait": "REG_SZ"
-                    }
+                    },
+                    "verifySettings": true
                 },
                 "capabilities": [
                     "display.screenEnhancement.cursorSize",

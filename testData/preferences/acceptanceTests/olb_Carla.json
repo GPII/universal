@@ -1,0 +1,22 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/language": "en-GB",
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/linkAdaptation": "emphasizeLinks",
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
+                    "http://registry.gpii.net/common/signLanguageEnabled": false,
+                    "http://registry.gpii.net/applications/eu.gpii.olb": {
+                        "lineSpacing": 2,
+                        "inputsLarger": true
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,17 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/speechRate": 200,
+                    "http://registry.gpii.net/common/pitch": 0.5,
+                    "http://registry.gpii.net/common/punctuationVerbosity": "all",
+                    "http://registry.gpii.net/common/announceCapitals": true,
+                    "http://registry.gpii.net/common/keyEcho": true,
+                    "http://registry.gpii.net/common/wordEcho": true
+                }
+            }
+        }
+    }
+}
