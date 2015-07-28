@@ -19,8 +19,8 @@ Each entry in the solution registry should have a unique ID (`Solution.id` in th
     "install": [ ... ],
     "uninstall": [ ... ],
     "makeConfigurable": [ ... ],
-    "isRunning": { ... },
-    "isConfigurable": { ... }
+    "isRunning": [ ... ],
+    "isConfigurable": [ ... ]
 }
 ```
 
@@ -143,7 +143,9 @@ This directive is used to detect whether a solution is installed. If any of thes
 ]
 ```
 
-### NOT IMPLEMENTED blocks:
+*****
+
+### UNIMPLEMENTED BLOCKS
 There are several advanced options that we're not planning to implement in the short term, but which will make the implementation of things like the ORCA settings handler much less horrible.
 
 #### isRunning:
@@ -157,8 +159,8 @@ To detect whether a solution is running - this is planned to be integrated in th
         "fileName": "firefox.exe"
     },
     {
-       "type": "gpii.processReporter.findProcessesByCommand",
-       "command": "ps aux | grep 'myprocess | wc -l",
+       "type": "gpii.processReporter.find",
+       "command": "ps aux | grep 'myprocess | wc -l'",
        "expected": 1
     }
 ]
