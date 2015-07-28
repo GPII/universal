@@ -34,7 +34,10 @@ gpii.tests.linux.builtIn = [
                 "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
-                        "screen-position": "full-screen"
+                        "screen-position": "full-screen",
+                        "mouse-tracking": "proportional",
+                        "caret-tracking": "proportional",
+                        "focus-tracking": "none"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"
@@ -59,6 +62,24 @@ gpii.tests.linux.builtIn = [
                 "expectRestored": "false"
             }
         ]
+    },
+    {
+        name: "Testing os_common2 using Flat matchmaker",
+        userToken: "os_common2",
+        settingsHandlers: {
+            "gpii.gsettings": {
+                "some.app.id": [{
+                    "settings": {
+                        "gtk-theme": "Adwaita",
+                        "icon-theme": "gnome"
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            }
+        },
+        processes: []
     },
     {
         name: "Testing os_gnome using Flat matchmaker",
@@ -107,7 +128,10 @@ gpii.tests.linux.builtIn = [
                 "some.app.id": [{
                     "settings": {
                         "mag-factor": 1.5,
-                        "screen-position": "full-screen"
+                        "screen-position": "full-screen",
+                        "mouse-tracking": "proportional",
+                        "caret-tracking": "proportional",
+                        "focus-tracking": "none"
                     },
                     "options": {
                         "schema": "org.gnome.desktop.a11y.magnifier"

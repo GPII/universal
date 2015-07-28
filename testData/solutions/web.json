@@ -79,14 +79,14 @@
                 ],
                 "capabilitiesTransformations": {
                     "fontSize": {
-                        "transform":{                            
+                        "transform":{
                             "type": "fluid.transforms.linearScale",
                             "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
                             "factor": 10
                         }
                     },
                     "fontFaceFontName": {
-                        "transform":{                            
+                        "transform":{
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/provisional-common/fontName",
                             "defaultInputValue": "default",
@@ -110,7 +110,7 @@
                         }
                     },
                     "foregroundColor": {
-                        "transform": {                            
+                        "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "inputPath": "http://registry\\.gpii\\.net/provisional-common/foregroundColor",
                             "defaultInputValue": "default",
@@ -131,7 +131,7 @@
                       }
                   },
                   "backgroundColor": {
-                      "transform":{                            
+                      "transform":{
                           "type": "fluid.transforms.valueMapper",
                           "inputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
                           "defaultInputValue": "default",
@@ -172,7 +172,7 @@
                 }
             }
         ]
-    },    
+    },
     "info.cloud4all.JME": {
         "name": "JME Cloud4all Themes",
         "contexts": {
@@ -475,6 +475,134 @@
                             ]
                         }
                     }
+                }
+            }
+        ]
+    },
+
+    "eu.gpii.olb": {
+        "name": "Online Banking Demonstrator",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.eu\\.gpii\\.olb.id",
+                    "display.applications.eu\\.gpii\\.olb.name",
+                    "language",
+                    "textSize",
+                    "toc",
+                    "links",
+                    "contrastTheme",
+                    "signLanguageEnabled",
+                    "signLanguage",
+                    "interpreterType",
+                    "pictogramEnabled",
+                    "pictogramMode",
+                    "pictogramSymbolSet"
+                ],
+                "capabilitiesTransformations": {
+                    "language": "http://registry\\.gpii\\.net/common/language",
+                    "textSize": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "operator": "/",
+                            "right": 12
+                        }
+                    },
+                    "toc": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/navigationAdaptation",
+                            "options": {
+                                "showToC": {
+                                    "outputValue": true
+                                },
+                                "default": {
+                                    "outputValue": false
+                                }
+                            }
+                        }
+                    },
+                    "links": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/linkAdaptation",
+                            "options": {
+                                "emphasizeLinks": {
+                                    "outputValue": true
+                                }
+                            }
+                        }
+                    },
+                    "contrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "defaultInputValue": "default",
+                                    "options": {
+                                        "black-white": {
+                                            "outputValue": "bw"
+                                        },
+                                        "white-black": {
+                                            "outputValue": "wb"
+                                        },
+                                        "black-yellow": {
+                                            "outputValue": "by"
+                                        },
+                                        "yellow-black": {
+                                            "outputValue": "yb"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "signLanguageEnabled": "http://registry\\.gpii\\.net/common/signLanguageEnabled",
+                    "signLanguage": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/signLanguage",
+                            "defaultInputValue": "ils",
+                            "options": {
+                                "ase": {
+                                    "outputValue": "ase"
+                                },
+                                "gsg": {
+                                    "outputValue": "gsg"
+                                },
+                                "ils": {
+                                    "outputValue": "ils"
+                                }
+                            }
+                        }
+                    },
+                    "interpreterType": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/signLanguageInterpreterType",
+                            "options": {
+                                "avatar": {
+                                    "outputValue": "avatar"
+                                },
+                                "human": {
+                                    "outputValue": "human"
+                                }
+                            }
+                        }
+                    },
+                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled"
                 }
             }
         ]
