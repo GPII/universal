@@ -1,0 +1,352 @@
+@font-face {
+    font-family: "icons";
+    src:url('../fonts/c4a-all-icons.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/c4a-all-icons.eot'),
+    url('../fonts/c4a-all-icons.ttf');
+}
+
+.gpii-icon {
+    font-family: "icons" !important; /* FLUID-5321: use important to keep learner prefs from changing it. */
+    font-weight: normal !important; /* Bold icons look poor. */
+    margin-right: -0.25rem;
+}
+
+.gpii-icon.gpii-icon-application:before {
+    content: "\e600";
+}
+
+.gpii-icon.gpii-icon-arrow-close:before {
+    content: "\e601";
+}
+
+.gpii-icon.gpii-icon-arrow-down:before {
+    content: "\e602";
+}
+
+.gpii-icon.gpii-icon-arrow-left:before {
+    content: "\e603";
+}
+
+.gpii-icon.gpii-icon-arrow-open:before {
+    content: "\e604";
+}
+
+.gpii-icon.gpii-icon-arrow-right:before {
+    content: "\e605";
+}
+
+.gpii-icon.gpii-icon-arrow-up:before {
+    content: "\e606";
+}
+
+.gpii-icon.gpii-icon-arrowhead-down:before {
+    content: "\e607";
+}
+
+.gpii-icon.gpii-icon-arrowhead-left:before {
+    content: "\e608";
+}
+
+.gpii-icon.gpii-icon-arrowhead-outline-down:before {
+    content: "\e609";
+}
+
+.gpii-icon.gpii-icon-arrowhead-outline-left:before {
+    content: "\e60a";
+}
+
+.gpii-icon.gpii-icon-arrowhead-outline-right:before {
+    content: "\e60b";
+}
+
+.gpii-icon.gpii-icon-arrowhead-outline-up:before {
+    content: "\e60c";
+}
+
+.gpii-icon.gpii-icon-arrowhead-right:before {
+    content: "\e60d";
+}
+
+.gpii-icon.gpii-icon-arrowhead-up:before {
+    content: "\e60e";
+}
+
+.gpii-icon.gpii-icon-check-small:before {
+    content: "\e60f";
+}
+
+.gpii-icon.gpii-icon-check:before {
+    content: "\e610";
+}
+
+.gpii-icon.gpii-icon-cloud:before {
+    content: "\e611";
+}
+
+.gpii-icon.gpii-icon-cloud2:before {
+    content: "\e612";
+}
+
+.gpii-icon.gpii-icon-contrast:before {
+    content: "\e613";
+}
+
+.gpii-icon.gpii-icon-crosshair:before {
+    content: "\e614";
+}
+
+.gpii-icon.gpii-icon-ctr-alias:before {
+    content: "\e615";
+}
+
+.gpii-icon.gpii-icon-ctr-all:before {
+    content: "\e616";
+}
+
+.gpii-icon.gpii-icon-ctr-approved:before {
+    content: "\e617";
+}
+
+.gpii-icon.gpii-icon-ctr-candidate:before {
+    content: "\e618";
+}
+
+.gpii-icon.gpii-icon-ctr-condition:before {
+    content: "\e619";
+}
+
+.gpii-icon.gpii-icon-ctr-deleted:before {
+    content: "\e61a";
+}
+
+.gpii-icon.gpii-icon-ctr-draft:before {
+    content: "\e61b";
+}
+
+.gpii-icon.gpii-icon-ctr-term:before {
+    content: "\e61c";
+}
+
+.gpii-icon.gpii-icon-cursor-hand:before {
+    content: "\e61d";
+}
+
+.gpii-icon.gpii-icon-cursor-text-typing:before {
+    content: "\e61e";
+}
+
+.gpii-icon.gpii-icon-cursor-text:before {
+    content: "\e61f";
+}
+
+.gpii-icon.gpii-icon-cursor:before {
+    content: "\e620";
+}
+
+.gpii-icon.gpii-icon-device:before {
+    content: "\e621";
+}
+
+.gpii-icon.gpii-icon-download:before {
+    content: "\e622";
+}
+
+.gpii-icon.gpii-icon-edit:before {
+    content: "\e623";
+}
+
+.gpii-icon.gpii-icon-exclamation-small:before {
+    content: "\e624";
+}
+
+.gpii-icon.gpii-icon-exclamation:before {
+    content: "\e625";
+}
+
+.gpii-icon.gpii-icon-gear:before {
+    content: "\e626";
+}
+
+.gpii-icon.gpii-icon-help:before {
+    content: "\e627";
+}
+
+.gpii-icon.gpii-icon-info:before {
+    content: "\e628";
+}
+
+.gpii-icon.gpii-icon-key:before {
+    content: "\e629";
+}
+
+.gpii-icon.gpii-icon-language:before {
+    content: "\e62a";
+}
+
+.gpii-icon.gpii-icon-link:before {
+    content: "\e62b";
+}
+
+.gpii-icon.gpii-icon-location:before {
+    content: "\e62c";
+}
+
+.gpii-icon.gpii-icon-login:before {
+    content: "\e62d";
+}
+
+.gpii-icon.gpii-icon-magnifier-bottom:before {
+    content: "\e62e";
+}
+
+.gpii-icon.gpii-icon-magnifier-float:before {
+    content: "\e62f";
+}
+
+.gpii-icon.gpii-icon-magnifier-full:before {
+    content: "\e630";
+}
+
+.gpii-icon.gpii-icon-magnifier-left:before {
+    content: "\e631";
+}
+
+.gpii-icon.gpii-icon-magnifier-outline:before {
+    content: "\e632";
+}
+
+.gpii-icon.gpii-icon-magnifier-right:before {
+    content: "\e633";
+}
+
+.gpii-icon.gpii-icon-magnifier-top:before {
+    content: "\e634";
+}
+
+.gpii-icon.gpii-icon-mail:before {
+    content: "\e635";
+}
+
+.gpii-icon.gpii-icon-minus-small:before {
+    content: "\e636";
+}
+
+.gpii-icon.gpii-icon-minus:before {
+    content: "\e637";
+}
+
+.gpii-icon.gpii-icon-orientation-180:before {
+    content: "\e638";
+}
+
+.gpii-icon.gpii-icon-orientation-0:before {
+    content: "\e639";
+}
+
+.gpii-icon.gpii-icon-orientation-90:before {
+    content: "\e63a";
+}
+
+.gpii-icon.gpii-icon-orientation-270:before {
+    content: "\e63b";
+}
+
+.gpii-icon.gpii-icon-password:before {
+    content: "\e63c";
+}
+
+.gpii-icon.gpii-icon-plus-small:before {
+    content: "\e63d";
+}
+
+.gpii-icon.gpii-icon-plus:before {
+    content: "\e63e";
+}
+
+.gpii-icon.gpii-icon-preview:before {
+    content: "\e63f";
+}
+
+.gpii-icon.gpii-icon-profile:before {
+    content: "\e640";
+}
+
+.gpii-icon.gpii-icon-qr:before {
+    content: "\e641";
+}
+
+.gpii-icon.gpii-icon-question-small:before {
+    content: "\e642";
+}
+
+.gpii-icon.gpii-icon-question:before {
+    content: "\e643";
+}
+
+.gpii-icon.gpii-icon-reset:before {
+    content: "\e644";
+}
+
+.gpii-icon.gpii-icon-restart:before {
+    content: "\e645";
+}
+
+.gpii-icon.gpii-icon-rfid:before {
+    content: "\e646";
+}
+
+.gpii-icon.gpii-icon-search:before {
+    content: "\e647";
+}
+
+.gpii-icon.gpii-icon-size:before {
+    content: "\e648";
+}
+
+.gpii-icon.gpii-icon-speak:before {
+    content: "\e649";
+}
+
+.gpii-icon.gpii-icon-star-empty:before {
+    content: "\e64a";
+}
+
+.gpii-icon.gpii-icon-star-full:before {
+    content: "\e64b";
+}
+
+.gpii-icon.gpii-icon-time:before {
+    content: "\e64c";
+}
+
+.gpii-icon.gpii-icon-undo:before {
+    content: "\e64d";
+}
+
+.gpii-icon.gpii-icon-usb:before {
+    content: "\e64e";
+}
+
+.gpii-icon.gpii-icon-volume-low:before {
+    content: "\e64f";
+}
+
+.gpii-icon.gpii-icon-volume:before {
+    content: "\e650";
+}
+
+.gpii-icon.gpii-icon-wave:before {
+    content: "\e651";
+}
+
+.gpii-icon.gpii-icon-wrench:before {
+    content: "\e652";
+}
+
+.gpii-icon.gpii-icon-x-small:before {
+    content: "\e653";
+}
+
+.gpii-icon.gpii-icon-x:before {
+    content: "\e654";
+}

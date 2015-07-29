@@ -7,6 +7,12 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
             ]
         },
         "settingsHandlers": [
@@ -22,15 +28,15 @@
                 "capabilitiesTransformations": {
                     "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
                     "show-cross-hairs": "http://registry\\.gpii\\.net/common/showCrosshairs",
-                    "mouse-tracking": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/tracking",
-                            "options": {
-                                "mouse": {
-                                    "outputValue": "centered"
-                                }
-                            }
+                    "transform": {
+                        "type": "fluid.transforms.arrayToSetMembership",
+                        "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "presentValue": "proportional",
+                        "missingValue": "none",
+                        "options": {
+                            "focus": "focus-tracking",
+                            "caret": "caret-tracking",
+                            "mouse": "mouse-tracking"
                         }
                     },
                     "screen-position": {
@@ -92,6 +98,12 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gsettings-desktop-schemas"
+                }
             ]
         },
         "settingsHandlers": [
@@ -131,23 +143,25 @@
                     },
                     "gtk-theme": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                            "options": {
-                                "true": {
-                                    "outputValue": "HighContrast"
-                                }
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "literalValue": "HighContrast"
+                            },
+                            "false": {
+                                "literalValue": "Adwaita"
                             }
                         }
                     },
                     "icon-theme": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                            "options": {
-                                "true": {
-                                    "outputValue": "HighContrast"
-                                }
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "literalValue": "HighContrast"
+                            },
+                            "false": {
+                                "literalValue": "gnome"
                             }
                         }
                     }
@@ -169,7 +183,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "nautilus"
+                }
+            ]
         },
 
         "settingsHandlers": [
@@ -200,7 +220,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
+            ]
         },
         "settingsHandlers": [
             {
@@ -234,7 +260,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gsettings-desktop-schemas"
+                }
+            ]
         },
         "settingsHandlers": [ {
                 "type": "gpii.gsettings",
@@ -301,7 +333,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
+            ]
         },
 
         "settingsHandlers": [
@@ -329,7 +367,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "gnome-shell"
+                }
+            ]
         },
 
         "settingsHandlers": [
@@ -357,7 +401,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "orca"
+                }
+            ]
         },
         "settingsHandlers": [
             {
@@ -1171,6 +1221,16 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "alsa"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "alsa-lib"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1203,6 +1263,20 @@
                 {
                     "id": "linux",
                     "version": ">=2.6.26"
+                }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
                 }
             ]
         },
@@ -1240,6 +1314,20 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1276,6 +1364,20 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-beta"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-stable"
+                },
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "google-chrome-unstable"
+                }
             ]
         },
         "settingsHandlers": [
@@ -1309,7 +1411,13 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }]
+            }],
+            "isInstalled": [
+                {
+                    "type": "gpii.packageKit.find",
+                    "name": "libXrandr"
+                }
+            ]
         },
         "settingsHandlers": [
            {
@@ -1318,6 +1426,83 @@
                     "display.screenEnhacements",
                     "applications.org\\.freedesktop\\.xrandr.id"
                 ]
+           }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings"
+            ],
+            "stop": [
+                "restoreSettings"
+            ]
+        }
+    },
+    "org.chrome.cloud4chrome": {
+        "name": "Cloud4all Chrome extension",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "org.chrome.cloud4chrome"
+                },
+                "capabilities": [
+                    "applications.org\\.chrome\\.cloud4chrome.id",
+                    "contrastTheme",
+                    "fontSize"
+                ],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "fontSize": {
+                        "transform":{
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "input": 9,
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 18,
+                                    "output": "large"
+                                },
+                                {
+                                    "output": "x-large"
+                                }
+                            ]
+                        }
+                    },
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "magnification": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "input": 1,
+                            "ranges": [
+                                {
+                                    "upperBound": 1.2,
+                                    "output": 1
+                                },
+                                {
+                                    "upperBound": 2.5,
+                                    "output": 2
+                                },
+                                {
+                                    "output": 3
+                                }
+                            ]
+                        }
+                    },
+                    "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
+                }
            }
         ],
         "lifecycleManager": {
