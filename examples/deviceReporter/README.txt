@@ -10,5 +10,5 @@ The content of this folder are:
 * win32_installedSolutions.json: example device reporter file for Windows 7
 * osx_installedSolutions.json: example device reporter file for OSX (darwin)
 
-NOTE that these entries are only meant as examples and not exaustive lists of solutions available
+NOTE that these entries are only meant as examples and not exhaustive lists of solutions available
 on each platform.
