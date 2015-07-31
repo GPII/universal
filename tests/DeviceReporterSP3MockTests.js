@@ -34,19 +34,38 @@ fluid.registerNamespace("gpii.tests.deviceReporterMockChecks");
 gpii.tests.deviceReporterMockChecks.userToken = "testUser1";
 
 gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.deviceReporterMockChecks.userToken + " was successfully logged in.", data);
+        data = JSON.parse(data);
+        jqUnit.assertTrue("Received error as expected", data.isError);
+        jqUnit.assertEquals("Received message as expected", "Error in device reporter data: Unexpected token o", data.message);
+        jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
+
+        // jqUnit.assertEquals("Response is correct", "User with token " +
+        // gpii.tests.deviceReporterMockChecks.userToken + " was successfully logged in.", data);
 };
 
-gpii.tests.deviceReporterMockChecks.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.deviceReporterMockChecks.userToken + " was successfully logged out.", data);
+gpii.tests.deviceReporterMockChecks.testRejectedResponse = function (request) {
+    return function (data) {
+        data = JSON.parse(data);
+        jqUnit.assertTrue("Received error as expected", data.isError);
+        jqUnit.assertEquals("Received message as expected", "this is a failure", data.message);
+        // jqUnit.assertEquals("Received error code 500", 500, request.nativeResponse.statusCode);
+    };
 };
 
+gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors = function () {
+    // Restore Kettle's default uncaught exception handler (beating jqUnit's) so that we can test it
+    fluid.onUncaughtException.addListener(kettle.requestUncaughtExceptionHandler, "fail", null,
+        fluid.handlerPriorities.uncaughtException.fail);
+};
+
+gpii.tests.deviceReporterMockChecks.popInstrumentedErrors = function () {
+    // restore jqUnit's exception handler for the next test
+    fluid.onUncaughtException.removeListener("fail");
+};
 gpii.tests.deviceReporterMockChecks.buildTestDef = function (path) {
     return {
-        name: "Flow Manager development tests",
-        expect: 2,
+        name: "Device Reporter faulty data tests",
+        expect: 3,
         config: {
             configName: "development.all.local",
             configPath: configPath
@@ -60,18 +79,20 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (path) {
         userToken: gpii.tests.deviceReporterMockChecks.userToken,
 
         sequence: [{
+            funcName: "gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors"
+        }, {
             func: "{loginRequest}.send"
         }, {
+            // listenerMaker: "gpii.tests.deviceReporterMockChecks.testRejectedResponse",
+            // makerArgs: [ "{failRequest}" ],
             event: "{loginRequest}.events.onComplete",
             listener: "gpii.tests.deviceReporterMockChecks.testLoginResponse"
         }, {
-            func: "{logoutRequest}.send"
-        }, {
-            event: "{logoutRequest}.events.onComplete",
-            listener: "gpii.tests.deviceReporterMockChecks.testLogoutResponse"
+            func: "gpii.tests.deviceReporterMockChecks.popInstrumentedErrors"
         }]
     };
 };
+
 
 gpii.tests.deviceReporterMockChecks.buildAllTestDefs = function () {
     var dirname = __dirname + "/../testData/deviceReporter/SP3Apps/";
@@ -80,7 +101,7 @@ gpii.tests.deviceReporterMockChecks.buildAllTestDefs = function () {
 
     var regexp = new RegExp(".json$");
     fluid.each(dirContent, function (filename) {
-        if (regexp.test(filename)) {
+        if (regexp.test(filename) && filename === "easyone.json") {
             testDefs.push(gpii.tests.deviceReporterMockChecks.buildTestDef(dirname + filename));
         }
     });
