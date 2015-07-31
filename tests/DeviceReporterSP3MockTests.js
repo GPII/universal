@@ -95,13 +95,13 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (path) {
 
 
 gpii.tests.deviceReporterMockChecks.buildAllTestDefs = function () {
-    var dirname = __dirname + "/../testData/deviceReporter/SP3Apps/";
+    var dirname = __dirname + "/data/";
     var dirContent = fs.readdirSync(dirname);
     var testDefs = [];
 
     var regexp = new RegExp(".json$");
     fluid.each(dirContent, function (filename) {
-        if (regexp.test(filename) && filename === "easyone.json") {
+        if (regexp.test(filename) && filename === "faultyDeviceReport.json") {
             testDefs.push(gpii.tests.deviceReporterMockChecks.buildTestDef(dirname + filename));
         }
     });
