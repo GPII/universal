@@ -50,27 +50,22 @@ gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse = function (data) {
         data = JSON.parse(data);
         jqUnit.assertTrue("Received error as expected", data.isError);
         jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-        // jqUnit.assertEquals("Received message as expected", "Error in device reporter data: Unexpected token o", data.message);
 };
 
 gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
         data = JSON.parse(data);
         jqUnit.assertTrue("Received error as expected", data.isError);
-        jqUnit.assertEquals("Received message as expected", "Error in device reporter data: Unexpected token o", data.message);
         jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-
-        // jqUnit.assertEquals("Response is correct", "User with token " +
-        // gpii.tests.deviceReporterMockChecks.userToken + " was successfully logged in.", data);
 };
 
-gpii.tests.deviceReporterMockChecks.testRejectedResponse = function (request) {
-    return function (data) {
-        data = JSON.parse(data);
-        jqUnit.assertTrue("Received error as expected", data.isError);
-        jqUnit.assertEquals("Received message as expected", "this is a failure", data.message);
-        // jqUnit.assertEquals("Received error code 500", 500, request.nativeResponse.statusCode);
-    };
-};
+// gpii.tests.deviceReporterMockChecks.testRejectedResponse = function (request) {
+//     return function (data) {
+//         data = JSON.parse(data);
+//         jqUnit.assertTrue("Received error as expected", data.isError);
+//         jqUnit.assertEquals("Received message as expected", "this is a failure", data.message);
+//         // jqUnit.assertEquals("Received error code 500", 500, request.nativeResponse.statusCode);
+//     };
+// };
 
 gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors = function () {
     // Restore Kettle's default uncaught exception handler (beating jqUnit's) so that we can test it
