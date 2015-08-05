@@ -58,6 +58,18 @@ gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
         jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
 };
 
+gpii.tests.softFailureHandler = function (args, activity) {
+    var messages = ["ASSERTION FAILED: "].concat(args).concat(activity);
+    fluid.log.apply(null, [fluid.logLevel.FATAL].concat(messages));
+    var request = kettle.getCurrentRequest();
+    if (request) {
+        request.events.onError.fire({
+            isError: true,
+            message: args[0]
+        });
+    }
+};
+
 // gpii.tests.deviceReporterMockChecks.testRejectedResponse = function (request) {
 //     return function (data) {
 //         data = JSON.parse(data);
@@ -68,19 +80,16 @@ gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
 // };
 
 gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors = function () {
-    // Restore Kettle's default uncaught exception handler (beating jqUnit's) so that we can test it
-    fluid.onUncaughtException.addListener(kettle.requestUncaughtExceptionHandler, "fail", null,
-        fluid.handlerPriorities.uncaughtException.fail);
+    fluid.pushSoftFailure(gpii.tests.softFailureHandler);
 };
 
 gpii.tests.deviceReporterMockChecks.popInstrumentedErrors = function () {
-    // restore jqUnit's exception handler for the next test
-    fluid.onUncaughtException.removeListener("fail");
+    fluid.pushSoftFailure(-1);
 };
 gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
     return [{
         name: "Device Reporter faulty data tests",
-        expect: 3,
+        expect: 2,
         config: {
             configName: "development.all.local",
             configPath: configPath
