@@ -25,7 +25,7 @@ Each entry in the solution registry should have a unique ID (`Solution.id` in th
 ```
 
 ### contexts
-The `contexts` block describes what the required context is for the solution to run. Currently only one type of context is supported, namely `os`. The context block is **mandatory**.
+The `contexts` block describes what the required context is for the solution to run. Currently only one type of context is supported, namely `OS`. The context block is **mandatory**.
 
 **Example Context**:
 ```
@@ -73,7 +73,7 @@ The important thing to notice here is that this solution example has two referen
 ### configure, restore, start and stop
 These four lifecycle blocks have different meanings to the system but has the same format. Their meanings are the following:
 
-* `configure`: Configure the solution with the users setting (eg. on login)
+* `configure`: Configure the solution with the users setting (e.g. on login)
 * `restore`: Restore the settings of the system from before the user logged in
 * `start`: Launch/start the solution
 * `stop`: Stop/kill the solution
@@ -104,7 +104,7 @@ Each of these lifecycle blocks allow the same content - which is an array with e
 
 ### update
 
-The `update` block works very similarly to the configure, restore, start and stop blocks. It describes what should happen when the configuration needs to be updated (eg. due to context changes, PCP adjustments, etc).
+The `update` block works very similarly to the configure, restore, start and stop blocks. It describes what should happen when the configuration needs to be updated (e.g. due to context changes, PCP adjustments, etc).
 
 The format of the `update` block allows for the same entries as the configure, restore, start and stop blocks - that is: arbitrary lifecycle action blocks and `settings.<blockname>`. Unlike for the other lifecycle blocks, the `update` block furthermore allows references to the `start`, `stop` and `configure` blocks. This is one by putting a string with the name of that block. When the system encounters one of these references, the entries of that block will be run.
 
@@ -155,19 +155,14 @@ To detect whether a solution is running - this is planned to be integrated in th
 ```
 "isRunning": [
     {
-        "type": "gpii.processReporter.byName",
-        "fileName": "firefox.exe"
-    },
-    {
-       "type": "gpii.processReporter.find",
-       "command": "ps aux | grep 'myprocess | wc -l'",
-       "expected": 1
+        "type": "gpii.processReporter.find",
+        "command": "orca"
     }
 ]
 ```
 
 ####isConfigurable
-This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where eg. a configuration file needs to be present, a tutorial needs to be run on the first launch, etc.
+This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where e.g. a configuration file needs to be present, a tutorial needs to be run on the first launch, etc.
 
 **Example Entry**:
 ```
