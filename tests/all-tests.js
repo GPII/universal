@@ -33,6 +33,7 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_empty.js",
     "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
     "./platform/cloud/AcceptanceTests_jme.js",
+    "./platform/cloud/AcceptanceTests_oauth2_privacySettings.js",
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./platform/cloud/AcceptanceTests_tvm.js",
     "./platform/cloud/AcceptanceTests_olb.js",
