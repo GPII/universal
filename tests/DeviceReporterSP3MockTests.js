@@ -18,7 +18,6 @@
 
 var fluid = require("infusion"),
     jqUnit = fluid.require("jqUnit"),
-    fs = require("fs"),
     configPath = require("path").resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
@@ -27,8 +26,7 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 
-// These tests simply launches the system and does a login/logout cycle checking that
-// no errors are triggered
+// These tests checks that a failing device reporter is handled properly
 fluid.registerNamespace("gpii.tests.deviceReporterMockChecks");
 
 fluid.defaults("gpii.tests.deviceReporterMockChecks.testCaseHolder", {
@@ -47,15 +45,16 @@ fluid.defaults("gpii.tests.deviceReporterMockChecks.testCaseHolder", {
 gpii.tests.deviceReporterMockChecks.userToken = "testUser1";
 
 gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse = function (data) {
-        data = JSON.parse(data);
-        jqUnit.assertTrue("Received error as expected", data.isError);
-        jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
+    data = JSON.parse(data);
+    jqUnit.assertTrue("Received error as expected", data.isError);
+    jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
 };
 
 gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
-        data = JSON.parse(data);
-        jqUnit.assertTrue("Received error as expected", data.isError);
-        jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
+    data = JSON.parse(data);
+    jqUnit.assertTrue("Received error as expected", data.isError);
+    jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
+    jqUnit.assertEquals("tester", "Error in device reporter data", data.message);
 };
 
 gpii.tests.softFailureHandler = function (args, activity) {
@@ -70,15 +69,6 @@ gpii.tests.softFailureHandler = function (args, activity) {
     }
 };
 
-// gpii.tests.deviceReporterMockChecks.testRejectedResponse = function (request) {
-//     return function (data) {
-//         data = JSON.parse(data);
-//         jqUnit.assertTrue("Received error as expected", data.isError);
-//         jqUnit.assertEquals("Received message as expected", "this is a failure", data.message);
-//         // jqUnit.assertEquals("Received error code 500", 500, request.nativeResponse.statusCode);
-//     };
-// };
-
 gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors = function () {
     fluid.pushSoftFailure(gpii.tests.softFailureHandler);
 };
@@ -86,10 +76,11 @@ gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors = function () {
 gpii.tests.deviceReporterMockChecks.popInstrumentedErrors = function () {
     fluid.pushSoftFailure(-1);
 };
+
 gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
     return [{
-        name: "Device Reporter faulty data tests",
-        expect: 2,
+        name: "Login fails on error in Device Reporter and reports to login",
+        expect: 3,
         config: {
             configName: "development.all.local",
             configPath: configPath
@@ -107,19 +98,17 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
         }, {
             func: "{loginRequest}.send"
         }, {
-            // listenerMaker: "gpii.tests.deviceReporterMockChecks.testRejectedResponse",
-            // makerArgs: [ "{failRequest}" ],
             event: "{loginRequest}.events.onComplete",
             listener: "gpii.tests.deviceReporterMockChecks.testLoginResponse"
         }, {
             func: "gpii.tests.deviceReporterMockChecks.popInstrumentedErrors"
         }]
     }, {
-        name: "Flow Manager development tests",
+        name: "Device Reporter fails on corrupt JSON file",
         expect: 2,
         config: {
             configName: "deviceReporterOnly",
-            configPath: require("path").resolve(__dirname, "configs"),
+            configPath: require("path").resolve(__dirname, "configs")
         },
         deviceReporterUrl: "file://" + reporterURL,
         gradeNames: [ "gpii.tests.deviceReporterMockChecks.testCaseHolder" ],

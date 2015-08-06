@@ -11,8 +11,8 @@
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/fluid-project/kettle.git#e79bb81196df68c97eaa9f96c485a4321b69af75",
-        
+        "kettle": "git://github.com/fluid-project/kettle.git#ef796237b7b157df6837a970a8b798370ef14144",
+
         "express": "~3.4.3",
         "body-parser": "^1.9.2",
         "connect-ensure-login": "^0.1.1",
