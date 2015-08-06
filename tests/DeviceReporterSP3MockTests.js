@@ -1,5 +1,5 @@
 /*
- * GPII Tests for all SP3 Apps device reporter configs
+ * GPII Tests to ensure that failing device reporter is handled properly
  *
  * Copyright 2015 Raising the FLoor - International
  *
@@ -26,7 +26,6 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 
-// These tests checks that a failing device reporter is handled properly
 fluid.registerNamespace("gpii.tests.deviceReporterMockChecks");
 
 fluid.defaults("gpii.tests.deviceReporterMockChecks.testCaseHolder", {
@@ -107,8 +106,8 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
         name: "Device Reporter fails on corrupt JSON file",
         expect: 2,
         config: {
-            configName: "deviceReporterOnly",
-            configPath: require("path").resolve(__dirname, "configs")
+             configName: "development.all.local",
+            configPath: configPath
         },
         deviceReporterUrl: "file://" + reporterURL,
         gradeNames: [ "gpii.tests.deviceReporterMockChecks.testCaseHolder" ],
