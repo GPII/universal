@@ -1,0 +1,11 @@
+windows-firefox-testSpec.txt
+
+Descriptions:
+
+* Solution: Cloud4all's Firefox extension for Mozilla Firefox (cloud4firefox)
+* Configuration file: windows-firefox-config.json
+* Device reporter file: windows_firefox.json
+* NP sets:
+ * chrome_high_contrast
+ * chrome_font_size
+ * chrome_magnification

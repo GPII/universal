@@ -23,5 +23,6 @@ module.exports = [
     "windows/windows-builtIn-testSpec.js",
     "windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
-    "windows/windows-maavis-testSpec.js"
+    "windows/windows-maavis-testSpec.js",
+    "windows/windows-firefox-testSpec.js"
 ];

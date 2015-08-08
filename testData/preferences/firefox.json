@@ -1,0 +1,23 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.mozilla.cloud4firefox": {
+                        "screenReaderTTSEnabled": false,
+                        "highContrastEnabled": true,
+                        "invertColours": false,
+                        "magnifierEnabled": true,
+                        "magnification": 1,
+                        "fontSize": "L",
+                        "simplifier": false,
+						"lineheight": 3,
+						"backgroundColour": "#000000",
+                        "foregroundColour": "#FFFF00"
+                    }
+                }
+            }
+        }
+    }
+}
