@@ -50,6 +50,11 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             args: ["{that}.model.users", "{arguments}.0"]
                 // username
         },
+        findUserByGpiiToken: {
+            funcName: "gpii.oauth2.dataStore.findUserByGpiiToken",
+            args: ["{that}.model.users", "{arguments}.0"]
+                // gpiiToken
+        },
         findClientById: {
             funcName: "gpii.oauth2.dataStore.findClientById",
             args: ["{that}.model.clients", "{arguments}.0"]
@@ -80,6 +85,11 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             args: ["{that}.model.authDecisions", "{arguments}.0"]
                 // id
         },
+        findAuthDecisionsByUserId: {
+            funcName: "gpii.oauth2.dataStore.findAuthDecisionsByUserId",
+            args: ["{that}.model.authDecisions", "{arguments}.0"]
+                // userId
+        },
         findAuthDecision: {
             funcName: "gpii.oauth2.dataStore.findAuthDecision",
             args: ["{that}.model.authDecisions", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
@@ -99,6 +109,11 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             funcName: "gpii.oauth2.dataStore.findAuthorizedClientsByUserId",
             args: ["{that}.model.authDecisions", "{that}.model.clients", "{arguments}.0"]
                 // userId
+        },
+        findAuthorizedClientsByGpiiToken: {
+            funcName: "gpii.oauth2.dataStore.findAuthorizedClientsByGpiiToken",
+            args: ["{that}.model.authDecisions", "{that}.model.users", "{that}.model.clients", "{arguments}.0"]
+                // gpiiToken
         },
         findAuthByAccessToken: {
             funcName: "gpii.oauth2.dataStore.findAuthByAccessToken",
@@ -123,6 +138,10 @@ gpii.oauth2.dataStore.findUserById = function (users, id) {
 
 gpii.oauth2.dataStore.findUserByUsername = function (users, username) {
     return fluid.find_if(users, function (user) { return user.username === username; });
+};
+
+gpii.oauth2.dataStore.findUserByGpiiToken = function (users, gpiiToken) {
+    return fluid.find_if(users, function (user) { return user.gpiiToken === gpiiToken; });
 };
 
 // Clients
@@ -192,6 +211,14 @@ gpii.oauth2.dataStore.findAuthDecisionById = function (authDecisions, id) {
     });
 };
 
+gpii.oauth2.dataStore.findAuthDecisionsByUserId = function (authDecisions, userId) {
+    var userAuthDecisions = fluid.copy(authDecisions);
+    fluid.remove_if(userAuthDecisions, function (ad) {
+        return ad.userId !== userId || ad.revoked !== false;
+    });
+    return userAuthDecisions;
+};
+
 gpii.oauth2.dataStore.findAuthDecision = function (authDecisions, userId, clientId, redirectUri) {
     return fluid.find_if(authDecisions, function (ad) {
         return ad.userId === userId &&
@@ -239,23 +266,29 @@ gpii.oauth2.dataStore.findAuthByCode = function (authCodes, authDecisions, code)
 // ----------------------------------
 
 gpii.oauth2.dataStore.findAuthorizedClientsByUserId = function (authDecisions, clients, userId) {
-    var userAuthDecisions = fluid.copy(authDecisions);
-    fluid.remove_if(userAuthDecisions, function (ad) {
-        return ad.userId !== userId || ad.revoked !== false;
-    });
+    var userAuthDecisions = gpii.oauth2.dataStore.findAuthDecisionsByUserId(authDecisions, userId);
     // TODO when move to CouchDB, do join there, rather than by hand
     var authorizedClients = [];
-    userAuthDecisions.forEach(function (ad) {
+    fluid.each(userAuthDecisions, function (ad) {
         var client = gpii.oauth2.dataStore.findClientById(clients, ad.clientId);
         if (client) {
             authorizedClients.push({
                 authDecisionId: ad.id,
                 oauth2ClientId: client.oauth2ClientId,
-                clientName: client.name
+                clientName: client.name,
+                selectedPreferences: ad.selectedPreferences
             });
         }
     });
     return authorizedClients;
+};
+
+gpii.oauth2.dataStore.findAuthorizedClientsByGpiiToken = function (authDecisions, users, clients, gpiiToken) {
+    var user = gpii.oauth2.dataStore.findUserByGpiiToken(users, gpiiToken);
+    if (!user) {
+        return undefined;
+    }
+    return gpii.oauth2.dataStore.findAuthorizedClientsByUserId(authDecisions, clients, user.id);
 };
 
 // Authorization Decision join User and Client
