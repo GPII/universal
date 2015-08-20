@@ -106,7 +106,7 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
         name: "Device Reporter fails on corrupt JSON file",
         expect: 2,
         config: {
-             configName: "development.all.local",
+            configName: "development.all.local",
             configPath: configPath
         },
         deviceReporterUrl: "file://" + reporterURL,
@@ -126,7 +126,7 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
 
 
 gpii.tests.deviceReporterMockChecks.buildAllTestDefs = function () {
-    var filename = __dirname + "/data/faultyDeviceReport.json";
+    var filename = __dirname + "/data/faultyDeviceReport.jsonx";
     return gpii.tests.deviceReporterMockChecks.buildTestDef(filename);
 };
 

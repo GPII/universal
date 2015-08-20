@@ -39,7 +39,7 @@ var testIncludes = [
     "./DevelopmentTests.js",
     "./IntegrationTests.js",
     "./ContextIntegrationTests.js",
-    "./DeviceReporterSP3MockTests.js",
+    "./DeviceReporterErrorTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
