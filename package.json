@@ -31,12 +31,7 @@
         "grunt-jsonlint": "1.0.4",
         "grunt-gpii": "git://github.com/GPII/grunt-gpii.git#ec8412064e107febb120f0b7437d403453b40d2d"
     },
-    "licenses": [
-        {
-            "type": "BSD-3-Clause",
-            "url": "http://www.opensource.org/licenses/BSD-3-Clause"
-        }
-    ],
+    "license" : "BSD-3-Clause",
     "keywords": [
         "gpii",
         "accessibility",
@@ -53,6 +48,7 @@
         "node": ">=0.8.0"
     },
     "scripts": {
-        "test": "node tests/all-tests.js"
+        "test": "node tests/all-tests.js",
+        "postinstall": "grunt dedupe-infusion"
     }
 }

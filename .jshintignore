@@ -4,5 +4,5 @@
 
 /gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/node_modules/**
 /gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/public/lib/**
-/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/public/tests/lib/**
+/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/webTests/lib/**
 /gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/node_modules/**
