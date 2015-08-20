@@ -3,74 +3,66 @@
 This document describes how the __PCP Interface__ works and what its API is.
 
 ### Introduction
-The PCP stands for the Personal Control Panel and can be considered the GPIIs main place for displaying messages to the user as well as providing the user with a place to adjust some of their settings, along with other useful controls.
+The PCP stands for the Personal Control Panel and can be considered the GPIIs main place for displaying messages to the user as well as providing the user with a place to adjust some of their settings, along with other useful controls
 
 The PCP Interface can be connected to via the web socket: `http://localhost:8081/pcpChannel` and its API provide functionality for:
 * Notifying when a user is logging in and logging out
-* Sending a list of desired adjusters on login
+* Sending a list of desired adjusters to the PCP
 * Sending messages to be displayed in the PCP
 * Receiving responses to messages from PCP
 
-### API
+Message types:
+(Info<- default), Error, Warning
+{
+    type: "infoMessage",
+    message: {
+        dk: "Katte er nogle trælse kræ",
+        en: "Howdy user! This is a message to you",
+        es: "¿Hola Pedro, donde esta la biblioteca?"
+    }
+}
 
-This settings handler follows the standard settings handler API and exposes both the .get and .set methods to the rest of the system.
-The settings handler is an instance of _gpii.settingsHandler.WebSocketsComponent_, which can be found in _gpii/node_modules/settingsHandlers/src/WebSocketsComponent.js_.
+### Internal API
 
-This component stores the information about clients and keeps a list of settings for every solution that makes use of this settings handler.
-Also, this component create notifications for every connected client at any time when the settings change.
+The PCPChannel is a component of the Flowmanager, used in the local/hybrid deployment on the local device. Its 3 main invokers are:
+* `sendUserMessage`: This will send a message to be displayed in the PCP and takes a 'message' and a 'messageType' argument. 
+  * **message** Can be either an object with messages keyed by language code, e.g.: `{ "en": "My message", "es": "Mi mensaje"}`, or a simple string, which the system will assume is an english message wrap accordingly
+  * **messageType** (optional) should be either "infoMessage", "warningMessage" or "errorMessage" - and will default to "infoMessage" if no second argument is given.
+* `notifyLogin`: Should be called when notifying the PCP of a new user login. It takes two arguments; userToken and adjusters:
+  * **userToken** should be the token of the user logging in
+  * **adjusters** (optional) An object of the adjusters to display as keys and the value to show for the given adjuster as value. Will default to `{ "http://registry.gpii.net/common/highContrastEnabled": false }`
+* `notifyLogout`: Should be called when notifying the PCP of a user logout. Does not take any arguments
 
-### Usage
+### External API
 
-This small and documented client illustrates the workflow.
 
-```javascript
-var io = require("socket.io-client");
+#### Connection
 
-// The client starts the communication
-//
-var socket = io.connect("http://localhost:8081/browserChannel");
+Connection to the PCP is done as a socket connection to the URL `/pcpChannel`.
 
-// When the connection is done, the client tells to the flow manager its id
-//
-socket.on("connect", function () {
-    console.log("## Socket connected");
-    socket.send("org.chrome.cloud4chrome");
-});
 
-// Right after sending the id to the flow manager, the server will return back
-// the current settings in the system (if any)
-//
-socket.on("connectionSucceeded", function (settings) {
-    console.log("## Received the following settings: " + JSON.stringify(settings));
-});
+#### On login [`login` signal]:
 
-// By listening to this signal, the client will be notified when the system has
-// new settings to be applied on the client side
-//
-socket.on("onBrowserSettingsChanged", function (newSettings) {
-    console.log("## Got newSettings: " + JSON.stringify(newSettings));
-});
-```
+When a user logs into the system, it will emit a `login` signal. The body of this will be a JSON object with a key `userToken` for the userToken of the user logging in, and a `settings` key with the adjusters to be displayed. An example of a `settings` value is: `{ "http://registry.gpii.net/common/highContrastEnabled": false }`
 
-The _contract API_ between client and server can be resumed as follows:
 
-* After connecting to the flow manager, the client sends a socket message to the channel, which is basically a string containing the *id* of the client. ie: _org.chrome.cloud4chrome_
-* The client will be registered if the solution's id can be found of the solutions registry, otherwise, the registration will be rejected and the system will emit en error, and the client will disconnected.
-* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onBrowserSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available settings for the client in the following way:
+#### On logout [`logout` signal]
+
+When a user logs out of the system, it will emit a `logout` signal to the socket.
+
+
+#### Sending user messages [`message` signal]
+
+When the system has a message it will emit a `message` signal. It will have the format:
+
 ```
 {
-    "screenReaderTTSEnabled":false,
-    "highContrastEnabled":true,
-    "invertColours":false,
-    "magnifierEnabled":true,
-    "magnification":2,
-    "fontSize":"medium",
-    "simplifier":false,
-    "highContrastTheme":"white-black"
+    "type": "infoMessage",
+    "message": {
+        "en": "My message", 
+        "es": "Mi mensaje"}
+    }
 }
 ```
-* When a client disconnects, it'll be removed from the list of registered clients
 
-## Testing
-
-This new feature has been tested with [this version of the Cloud4Chrome extension](https://github.com/GutiX/chrome4cloud/commit/3d064bb7efc93bf90fde90b0192c273fb76817e5).
+Where the `"type"` can be either "infoMessage", "warningMessage" or "errorMessage", and `"message"` will contains messages keyed by language codes.
