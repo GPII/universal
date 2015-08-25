@@ -46,6 +46,8 @@ gpii.tests.deviceReporterMockChecks.userToken = "testUser1";
 gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse = function (data) {
     data = JSON.parse(data);
     jqUnit.assertTrue("Received error as expected", data.isError);
+    jqUnit.assertEquals("Received error message",
+        "Failed to read deviceReporter source.. SyntaxError: Unexpected token a", data.message);
     jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
 };
 
@@ -104,7 +106,7 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
         }]
     }, {
         name: "Device Reporter fails on corrupt JSON file",
-        expect: 2,
+        expect: 3,
         config: {
             configName: "development.all.local",
             configPath: configPath
@@ -119,7 +121,8 @@ gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
             func: "{deviceRequest}.send"
         }, {
             event: "{deviceRequest}.events.onComplete",
-            listener: "gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse"
+            listener: "gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse",
+            args: [ "{arguments}.0" ]
         }]
     }];
 };

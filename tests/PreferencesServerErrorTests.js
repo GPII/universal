@@ -28,26 +28,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 
-fluid.defaults("gpii.tests.preferencesServerErrorTests.testCaseHolder", {
-    gradeNames: ["kettle.test.testCaseHolder", "autoInit"],
-    components: {
-        deviceRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/device",
-                port: 8081
-            }
-        }
-    }
-});
-
 gpii.tests.preferencesServerErrorTests.userToken = "testUser1";
-
-gpii.tests.preferencesServerErrorTests.testDeviceErrorResponse = function (data) {
-    data = JSON.parse(data);
-    jqUnit.assertTrue("Received error as expected", data.isError);
-    jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-};
 
 gpii.tests.preferencesServerErrorTests.testMalformedResponse = function (data) {
     data = JSON.parse(data);
@@ -61,27 +42,6 @@ gpii.tests.preferencesServerErrorTests.prefsNotFoundResponse = function (data) {
     jqUnit.assertTrue("Received error as expected", data.isError);
     jqUnit.assertEquals("Received error code 404", 404, data.statusCode);
     jqUnit.assertEquals("Recieved correct error message", "Unable to retrieve raw preferences for user idontexist", data.message);
-
-};
-
-gpii.tests.softFailureHandler = function (args, activity) {
-    var messages = ["ASSERTION FAILED: "].concat(args).concat(activity);
-    fluid.log.apply(null, [fluid.logLevel.FATAL].concat(messages));
-    var request = kettle.getCurrentRequest();
-    if (request) {
-        request.events.onError.fire({
-            isError: true,
-            message: args[0]
-        });
-    }
-};
-
-gpii.tests.preferencesServerErrorTests.pushInstrumentedErrors = function () {
-    fluid.pushSoftFailure(gpii.tests.softFailureHandler);
-};
-
-gpii.tests.preferencesServerErrorTests.popInstrumentedErrors = function () {
-    fluid.pushSoftFailure(-1);
 };
 
 gpii.tests.preferencesServerErrorTests.buildTestDef = function () {
@@ -96,14 +56,10 @@ gpii.tests.preferencesServerErrorTests.buildTestDef = function () {
         userToken: "idontexist",
 
         sequence: [{
-            funcName: "gpii.tests.preferencesServerErrorTests.pushInstrumentedErrors"
-        }, {
             func: "{loginRequest}.send"
         }, {
             event: "{loginRequest}.events.onComplete",
             listener: "gpii.tests.preferencesServerErrorTests.prefsNotFoundResponse"
-        }, {
-            func: "gpii.tests.preferencesServerErrorTests.popInstrumentedErrors"
         }]
     }, {
         name: "Login fails due to malformed preference set and reports to login",
@@ -121,22 +77,17 @@ gpii.tests.preferencesServerErrorTests.buildTestDef = function () {
         userToken: "malformed",
 
         sequence: [{
-            funcName: "gpii.tests.preferencesServerErrorTests.pushInstrumentedErrors"
-        }, {
             func: "{loginRequest}.send"
         }, {
             event: "{loginRequest}.events.onComplete",
             listener: "gpii.tests.preferencesServerErrorTests.testMalformedResponse"
-        }, {
-            func: "gpii.tests.preferencesServerErrorTests.popInstrumentedErrors"
         }]
     }];
 };
 
 
 gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {
-    var filename = __dirname + "/data/faultyDeviceReport.json";
-    return gpii.tests.preferencesServerErrorTests.buildTestDef(filename);
+    return gpii.tests.preferencesServerErrorTests.buildTestDef();
 };
 
 kettle.test.bootstrapServer(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());
