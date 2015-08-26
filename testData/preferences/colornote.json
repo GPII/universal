@@ -1,0 +1,5 @@
+{
+    "http://registry.gpii.org/common/highContrastEnabled": [{"value": true }],
+    "http://registry.gpii.org/common/highContrastTheme": [{"value": "COLORTABLE/DARK" }],
+    "http://registry.gpii.org/applications/com.socialnmobile.dictapps.notepad.color.note": [{"value":{"map.string.pref_default_font_size.$t":"32"}}]
+}
