@@ -36,6 +36,7 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_oauth2_privacySettings.js",
     "./platform/cloud/AcceptanceTests_smarthouses.js",
     "./platform/cloud/AcceptanceTests_tvm.js",
+    "./platform/cloud/AcceptanceTests_untrustedSettings.js",
     "./platform/cloud/AcceptanceTests_olb.js",
     "./DevelopmentTests.js",
     "./IntegrationTests.js",

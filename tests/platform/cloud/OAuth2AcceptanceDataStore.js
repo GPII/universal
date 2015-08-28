@@ -29,17 +29,27 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 name: "Cloud4Chrome",
                 oauth2ClientId: "org.chrome.cloud4chrome",
                 oauth2ClientSecret: "client_secret_chrome",
-                redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/"
+                redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
+                allowDirectGpiiTokenAccess: false
             },
             {
                 id: 2,
                 name: "Easit4all",
                 oauth2ClientId: "com.bdigital.easit4all",
                 oauth2ClientSecret: "client_secret_easit4all",
-                redirectUri: "http://com.bdigital.easit4all/the-client%27s-uri/"
+                redirectUri: "http://com.bdigital.easit4all/the-client%27s-uri/",
+                allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 3,
+                name: "GNOME Magnifier",
+                oauth2ClientId: "org.gnome.desktop.a11y.magnifier",
+                oauth2ClientSecret: false,
+                redirectUri: false,
+                allowDirectGpiiTokenAccess: false
             }
         ],
-        authDecisionsIdSeq: 2,
+        authDecisionsIdSeq: 3,
         authDecisions: [
             {
                 id: 1,
@@ -47,6 +57,15 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 clientId: 2,
                 redirectUri: false,
                 accessToken: "alice_easit_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
+            },
+            {
+                id: 2,
+                userId: 1,
+                clientId: 3,
+                redirectUri: false,
+                accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             }
