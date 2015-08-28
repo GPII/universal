@@ -35,8 +35,66 @@ gpii.tests.cloud.untrustedSettings.sequence = [
 
 gpii.tests.cloud.untrustedSettings.testDefs = [
     {
-        name: "Acceptance test for cloud part of the hybrid Flow Manager",
+        name: "No authorized solutions",
         userToken: "os_gnome",
+        expectedMatchMakerOutput: {
+            "inferredConfiguration": {
+                "gpii-default": {
+                    "applications": { }
+                }
+            }
+        }
+    },
+    {
+        name: "Authorize magnifier (share magnifier settings)",
+        userToken: "os_gnome",
+        authDecisions: [
+            {
+                userId: 1,
+                clientId: 3,
+                redirectUri: false,
+                accessToken: "os_gnome_magnifier_access_token",
+                selectedPreferences: { "increase-size.magnifier": true },
+                revoked: false
+            }
+        ],
+        expectedMatchMakerOutput: {
+            "inferredConfiguration": {
+                "gpii-default": {
+                    "applications": {
+                        "org.gnome.desktop.a11y.magnifier": {
+                            "active": true,
+                            "settings": {
+                                "http://registry.gpii.net/common/magnification": 1.5,
+                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    {
+        name: "Authorize magnifier (share all) and desktop (share text size)",
+        userToken: "os_gnome",
+        authDecisions: [
+            {
+                userId: 1,
+                clientId: 3,
+                redirectUri: false,
+                accessToken: "os_gnome_magnifier_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
+            },
+            {
+                userId: 1,
+                clientId: 4,
+                redirectUri: false,
+                accessToken: "os_gnome_desktop_access_token",
+                selectedPreferences: { "increase-size.appearance.text-size": true },
+                revoked: false
+            }
+        ],
         expectedMatchMakerOutput: {
             "inferredConfiguration": {
                 "gpii-default": {
@@ -48,6 +106,12 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
                                 "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
+                            }
+                        },
+                        "org.gnome.desktop.interface": {
+                            "active": true,
+                            "settings": {
+                                "http://registry.gpii.net/common/fontSize": 9
                             }
                         }
                     }
@@ -97,7 +161,7 @@ gpii.tests.cloud.untrustedSettings.disruptions = [{
 }];
 
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.untrustedSettings.testDefs[0],
+    gpii.tests.cloud.untrustedSettings.testDefs,
     {},
     gpii.tests.cloud.untrustedSettings.disruptions,
     __dirname

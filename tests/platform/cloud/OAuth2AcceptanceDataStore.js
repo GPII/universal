@@ -47,9 +47,17 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 oauth2ClientSecret: false,
                 redirectUri: false,
                 allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 4,
+                name: "GNOME Desktop",
+                oauth2ClientId: "org.gnome.desktop.interface",
+                oauth2ClientSecret: false,
+                redirectUri: false,
+                allowDirectGpiiTokenAccess: false
             }
         ],
-        authDecisionsIdSeq: 3,
+        authDecisionsIdSeq: 2,
         authDecisions: [
             {
                 id: 1,
@@ -57,15 +65,6 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 clientId: 2,
                 redirectUri: false,
                 accessToken: "alice_easit_access_token",
-                selectedPreferences: { "": true },
-                revoked: false
-            },
-            {
-                id: 2,
-                userId: 1,
-                clientId: 3,
-                redirectUri: false,
-                accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             }
