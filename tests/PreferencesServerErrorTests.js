@@ -34,7 +34,7 @@ gpii.tests.preferencesServerErrorTests.testMalformedResponse = function (data) {
     data = JSON.parse(data);
     jqUnit.assertTrue("Received error as expected", data.isError);
     jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-    jqUnit.assertEquals("Recieved proper error message", "Rejected promise from raw preferences server.. Reason: SyntaxError: Unexpected string", data.message);
+    jqUnit.assertEquals("Recieved proper error message", "Unable to retrieve preferences from raw preferences server.. Reason: SyntaxError: Unexpected string", data.message);
 };
 
 gpii.tests.preferencesServerErrorTests.prefsNotFoundResponse = function (data) {
