@@ -7,8 +7,7 @@
                     "http://registry.gpii.net/applications/com.certh.service-synthesis": {
                         "serviceName": "Translatewebpage",
                         "serviceInput": {
-                            "targetLanguage": "fr",
-                            "inputUrl": ""                        
+                            "targetLanguage": "fr"                        
                         }
                     }
                 }
