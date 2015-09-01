@@ -16,7 +16,7 @@ var fluid = require("universal"),
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows.chrome");
+fluid.registerNamespace("gpii.tests.windows.chromeSST");
 
 
 
@@ -143,7 +143,7 @@ gpii.tests.windows.chromeSST = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.chromeSST",
-    configName: "windows-chrome-config",
+    configName: "windows-chromesst-config",
     configPath: "configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);
