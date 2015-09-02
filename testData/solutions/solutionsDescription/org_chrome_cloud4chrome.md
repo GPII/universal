@@ -8,12 +8,12 @@
 * __Contact__: José Antonio Gutiérrez Dueñas <jagutierrez@consultoria.ilunion.com>
 
 ## Description
-The Chrome extension for Google Chrome is a component installable in the web browser. This extension establishes a connection with GPII to get the active preferences. These preferences are used, by the extension, to adapt the web browser content, I mean, the web site interfaces.
-The Chrome extension can work autonomously, with cloud-based flowManager, or by local flowManager.
+The cloud4chrome extension for Google Chrome is a component installable in the web browser. This extension establishes a connection with GPII to get the active preferences. These preferences are used, by the extension, to adapt the web browser content, I mean, the web site interfaces.
+The cloud4chrome extension can work autonomously, with cloud-based flowManager, or by local flowManager.
 
 Useful links:
 
-  * [Chrome extensions developer](https://developer.chrome.com/extensions)
+  * [cloud4chrome extensions developer](https://developer.chrome.com/extensions)
   * [Source code at github.com](https://github.com/GutiX/chrome4cloud)
 
 ## Integration
