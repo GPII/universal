@@ -1330,7 +1330,7 @@
         }
     },
 	
-    "org.chrome.cloud4chrome": {
+    "com.ilunion.cloud4chrome": {
         "name": "Cloud4all Chrome extension",
         "contexts": {
             "OS": [{
@@ -1342,10 +1342,10 @@
             {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
-                    "path": "org.chrome.cloud4chrome"
+                    "path": "com.ilunion.cloud4chrome"
                 },
                 "capabilities": [
-                    "applications.org\\.chrome\\.cloud4chrome.id"
+                    "applications.com\\.ilunion\\.cloud4chrome.id"
                 ],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
