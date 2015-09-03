@@ -80,6 +80,12 @@ var gpii = gpii || {};
                         }
                     }
                 }
+/*
+            },
+            servicesMenu: {
+                type: "gpii.oauth2.servicesMenu",
+                container: "{privacySettingsWithPrefs}.dom.servicesMenu"
+*/
             }
         },
         selectors: {
@@ -96,14 +102,16 @@ var gpii = gpii || {};
             oauth2ClientId: "#gpiic-oauth2-privacySettings-oauth2ClientId",
             removeDecisionDialog: ".gpiic-oauth2-privacySettings-removeDecision-dialog",
             removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
-            editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog"
+            editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog",
+            addServiceButton: ".gpiic-oauth2-privacySettings-addService",
+            servicesMenu: ".gpiic-oauth2-privacySettings-servicesMenu"
         },
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
             okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
             cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog"],
+        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "servicesMenu"],
         strings: {
             logout: "Log Out",
             header: "Privacy",
@@ -160,6 +168,12 @@ var gpii = gpii || {};
                 "this": "{that}.dom.editButton",
                 method: "click",
                 args: "{that}.renderDialogForEdit"
+            },
+            "afterRender.bindAddService": {
+                "this": "{that}.dom.addServiceButton",
+                method: "click",
+                args: "{that}.openAddServiceMenu"
+                //args: "{sevicesMenu}.open"
             }
         },
         invokers: {
@@ -174,6 +188,10 @@ var gpii = gpii || {};
             renderDialogForEdit: {
                 funcName: "gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit",
                 args: ["{arguments}.0", "{that}"]
+            },
+            openAddServiceMenu: {
+                funcName: "gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu",
+                args: "{servicesMenu}"
             }
         }
     });
@@ -227,6 +245,10 @@ var gpii = gpii || {};
     gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit = function (evt, that) {
         that.applier.change("currentClientData", that.getClientData(evt.target, that.options.selectors.editButton));
         that.events.onRenderEditDialog.fire();
+    };
+
+    gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu = function (menu) {
+        menu.open();
     };
 
     fluid.defaults("gpii.oauth2.selectionTreeTemplate", {
