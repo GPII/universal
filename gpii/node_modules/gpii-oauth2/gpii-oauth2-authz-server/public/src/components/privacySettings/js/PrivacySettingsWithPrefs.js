@@ -80,12 +80,11 @@ var gpii = gpii || {};
                         }
                     }
                 }
-/*
             },
             servicesMenu: {
                 type: "gpii.oauth2.servicesMenu",
-                container: "{privacySettingsWithPrefs}.dom.servicesMenu"
-*/
+                container: "{privacySettingsWithPrefs}.dom.servicesMenu",
+                createOnEvent: "afterRender"
             }
         },
         selectors: {
