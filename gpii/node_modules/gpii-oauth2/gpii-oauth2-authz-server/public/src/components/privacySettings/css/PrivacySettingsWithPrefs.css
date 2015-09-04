@@ -128,12 +128,10 @@
     background-color: #FFFFFF;
 }
 
-.gpii-oauth2-privacySettings-servicesMenu {
-    /*display: none;*/
-    background-color: #FF0000;
+.gpii-oauth2-privacySettings-addServiceMenu {
+    display: none;
 }
 
-.x-gpii-oauth2-privacySettings-servicesMenuOpen {
-    /*display: block;*/
-    background-color: #0000FF;
+.gpii-oauth2-privacySettings-addServiceMenu.gpii-oauth2-servicesMenuOpen {
+    display: block;
 }

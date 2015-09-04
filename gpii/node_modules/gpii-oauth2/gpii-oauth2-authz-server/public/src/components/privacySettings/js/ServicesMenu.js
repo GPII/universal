@@ -12,7 +12,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // Declare dependencies
-/* global alert, fluid, gpii, jQuery */
+/* global fluid, gpii, jQuery */
 
 (function ($, fluid) {
 
@@ -21,48 +21,40 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.oauth2.servicesMenu", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         widgetOptions: {
-            select: "{that}.selectMenuItem"
+            select: "{that}.fireServiceSelected"
         },
-        invokers: {
-            /*
-            open: {
-                funcName: "gpii.oauth2.servicesMenu.openMenu",
-                args: ["{that}"],
-                dynamic: true
-            },
-             */
-            open: {
-                "this": "{that}.container",
-                method: "toggleClass",
-                args: ["gpii-oauth2-privacySettings-servicesMenu"]
-            },
-            selectMenuItem: {
-                funcName: "gpii.oauth2.servicesMenu.selectMenuItem",
-                args: ["{that}", "{arguments}.0", "{arguments}.1"]
-            }
+        events: {
+            serviceSelected: null
         },
         listeners: {
             "onCreate.setup": "gpii.oauth2.servicesMenu.setup"
         },
+        invokers: {
+            open: {
+                "this": "{that}.container",
+                method: "toggleClass",
+                args: ["{that}.options.styles.menuOpen", true]
+            },
+            fireServiceSelected: {
+                funcName: "gpii.oauth2.servicesMenu.fireServiceSelected",
+                args: ["{that}", "{that}.options.selectors.oauth2ClientId", "{arguments}.0", "{arguments}.1"]
+            }
+        },
+        selectors: {
+            oauth2ClientId: "[name=oauth2ClientId]"
+        },
         styles: {
-            menuOpen: "gpii-oauth2-privacySettings-servicesMenuOpen"
+            menuOpen: "gpii-oauth2-servicesMenuOpen"
         }
     });
 
-    gpii.oauth2.servicesMenu.openMenu = function (that) {
-        // that.container.toggleClass(that.options.styles.menuOpen, true);
-        // that.container.menu("widget").toggleClass("gpii-oauth2-privacySettings-servicesMenu");
-        that.container.toggleClass("gpii-oauth2-privacySettings-servicesMenu");
-        // that.container.show();
-    };
-
     gpii.oauth2.servicesMenu.setup = function (that) {
         that.container.menu(that.options.widgetOptions);
-        $("#toggleMenu").click(that.open);
     };
 
-    gpii.oauth2.servicesMenu.selectMenuItem = function (that, event, ui) {
-        alert("SELECT MENU ITEM: " + ui.item.text());
+    gpii.oauth2.servicesMenu.fireServiceSelected = function (that, oauth2ClientIdSelector, evt, ui) {
+        var oauth2ClientId = ui.item.find(oauth2ClientIdSelector).attr("value");
+        that.events.serviceSelected.fire(oauth2ClientId);
     };
 
 })(jQuery, fluid);

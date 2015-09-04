@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 
 // Declare dependencies
-/* global fluid, jQuery, location */
+/* global fluid, jQuery, location, alert */
 
 var gpii = gpii || {};
 
@@ -81,10 +81,18 @@ var gpii = gpii || {};
                     }
                 }
             },
-            servicesMenu: {
+            addServiceMenu: {
                 type: "gpii.oauth2.servicesMenu",
-                container: "{privacySettingsWithPrefs}.dom.servicesMenu",
-                createOnEvent: "afterRender"
+                container: "{privacySettingsWithPrefs}.dom.addServiceMenu",
+                createOnEvent: "afterRender",
+                options: {
+                    listeners: {
+                        "serviceSelected": {
+                            funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
+                            args: ["{arguments}.0"]
+                        }
+                    }
+                }
             }
         },
         selectors: {
@@ -96,6 +104,8 @@ var gpii = gpii || {};
             removeServiceLabel: ".gpiic-oauth2-privacySettings-removeServiceLabel",
             editButton: ".gpiic-oauth2-privacySettings-edit",
             removeButton: ".gpiic-oauth2-privacySettings-removeService",
+            // TODO Rather than ids for serviceName, authDecisionId, and oauth2ClientId, can't we just use their names?
+            // If we use ids, then we have multiple elements with the same id (one per authorized service).
             serviceName: "#gpiic-oauth2-privacySettings-serviceName",
             authDecisionId: "#gpiic-oauth2-privacySettings-authDecisionId",
             oauth2ClientId: "#gpiic-oauth2-privacySettings-oauth2ClientId",
@@ -103,14 +113,14 @@ var gpii = gpii || {};
             removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
             editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog",
             addServiceButton: ".gpiic-oauth2-privacySettings-addService",
-            servicesMenu: ".gpiic-oauth2-privacySettings-servicesMenu"
+            addServiceMenu: ".gpiic-oauth2-privacySettings-addServiceMenu"
         },
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
             okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
             cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "servicesMenu"],
+        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "addServiceMenu"],
         strings: {
             logout: "Log Out",
             header: "Privacy",
@@ -172,7 +182,6 @@ var gpii = gpii || {};
                 "this": "{that}.dom.addServiceButton",
                 method: "click",
                 args: "{that}.openAddServiceMenu"
-                //args: "{sevicesMenu}.open"
             }
         },
         invokers: {
@@ -189,8 +198,8 @@ var gpii = gpii || {};
                 args: ["{arguments}.0", "{that}"]
             },
             openAddServiceMenu: {
-                funcName: "gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu",
-                args: "{servicesMenu}"
+                "this": "{addServiceMenu}",
+                method: "open"
             }
         }
     });
@@ -246,8 +255,8 @@ var gpii = gpii || {};
         that.events.onRenderEditDialog.fire();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu = function (menu) {
-        menu.open();
+    gpii.oauth2.privacySettingsWithPrefs.addService = function (oauth2ClientId) {
+        alert("RECEIVED EVENT " + oauth2ClientId);
     };
 
     fluid.defaults("gpii.oauth2.selectionTreeTemplate", {

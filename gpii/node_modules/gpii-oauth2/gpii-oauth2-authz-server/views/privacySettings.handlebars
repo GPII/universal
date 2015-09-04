@@ -53,18 +53,15 @@
 
             <div>
                 <button class="gpiic-oauth2-privacySettings-addService">Add service</button>
-                <ul class="gpiic-oauth2-privacySettings-servicesMenu gpii-oauth2-privacySettings-servicesMenu">
-                    <li><button id="toggleMenu">toggle</button></a><li>
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
-                    <li><a href="#">Item 4</a></li>
-                    <li><a href="#">Item 5</a></li>
-                    <li><a href="#">Item 6</a></li>
-                    <li><a href="#">Item 7</a></li>
-                    <li><a href="#">Item 8</a></li>
-                    <li><a href="#">Item 9</a></li>
-                    <li><a href="#">Item 10</a></li>
+                <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
+                    <li>
+                        <a href="#">Service A</a>
+                        <input type="hidden" name="oauth2ClientId" value="org.chome.cloud4chrome" />
+                    </li>
+                    <li>
+                        <a href="#">Easit4all</a>
+                        <input type="hidden" name="oauth2ClientId" value="com.bdigital.easit4all" />
+                    </li>
                 </ul>
             </div>
 
@@ -94,7 +91,5 @@
             },
             selectionTreeTemplate: "src/components/selectionTree/html/SelectionTreeTemplate.html"
         });
-
-        // gpii.oauth2.servicesMenu(".gpiic-oauth2-privacySettings-servicesMenu");
     </script>
 {{/section}}
