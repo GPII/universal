@@ -135,7 +135,7 @@ This directive is used to detect whether a solution is installed. If any of thes
     {
         "type": "gpii.reporter.fileExists",
         "fileName": "${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write10\\InstallPath}\\ReadAndWrite.exe"
-    }, // SEEMS LIKE IMPLICIT OR BETWEEN THESE BLOCKS
+    }, // IMPLICIT OR BETWEEN THESE BLOCKS
     {
         "type": "gpii.packageKit.find",
         "name": "orca"
@@ -186,6 +186,6 @@ Is the actions that need to be taken to make the application configurable (such 
 Used for describing the steps required for installing the application
 
 ####uninstall:
-Used for describing the steps
+Used for describing the steps required for uninstalling the application (i.e. completely removing it from the system)
 
 
