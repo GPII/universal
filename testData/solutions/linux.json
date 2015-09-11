@@ -7,16 +7,10 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
@@ -71,23 +65,34 @@
                     }
                 }
             }
+        },
+        "update": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
-                },
-                "restoreSettings"
-            ]
-        }
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
+        ]
     },
 
     "org.gnome.desktop.interface": {
@@ -98,16 +103,10 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gsettings-desktop-schemas"
-                }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
@@ -170,11 +169,19 @@
                     "schema": "org.gnome.desktop.interface"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gsettings-desktop-schemas"
+            }
+        ]
     },
 
     "org.gnome.nautilus": {
@@ -183,17 +190,11 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "nautilus"
-                }
-            ]
+            }]
         },
 
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.nautilus.id",
@@ -206,12 +207,19 @@
                     "schema": "org.gnome.nautilus.desktop"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "nautilus"
+            }
+        ]
     },
 
     "org.gnome.desktop.a11y.applications.onscreen-keyboard": {
@@ -220,16 +228,10 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
-            ]
+            }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "control.onscreenKeyboard",
@@ -237,21 +239,25 @@
                     "applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.id"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
+            }
         ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
+        ]
     },
 
     "org.gnome.desktop.a11y.keyboard": {
@@ -260,15 +266,10 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gsettings-desktop-schemas"
-                }
-            ]
+            }]
         },
-        "settingsHandlers": [ {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id",
@@ -320,11 +321,19 @@
                     "schema": "org.gnome.desktop.a11y.keyboard"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gsettings-desktop-schemas"
+            }
+        ]
     },
 
     "org.gnome.desktop.wm.preferences": {
@@ -333,17 +342,11 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
-            ]
+            }]
         },
 
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.desktop\\.wm\\.preferences.id",
@@ -353,12 +356,19 @@
                     "schema": "org.gnome.desktop.wm.preferences"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
+        ]
     },
 
     "org.gnome.shell.overrides": {
@@ -367,17 +377,11 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "gnome-shell"
-                }
-            ]
+            }]
         },
 
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
                     "applications.org\\.gnome\\.shell\\.overrides.id",
@@ -387,12 +391,19 @@
                     "schema": "org.gnome.shell.overrides"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "gnome-shell"
+            }
+        ]
     },
 
     "org.gnome.orca": {
@@ -401,16 +412,10 @@
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "orca"
-                }
-            ]
+            }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.orca",
                 "options": {
                     "user": "${{userToken}}"
@@ -1194,23 +1199,31 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
-                },
-                "restoreSettings"
-            ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "orca"
+            }
+        ]
     },
 
     "org.alsa-project": {
@@ -1221,20 +1234,10 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "alsa"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "alsa-lib"
-                }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.alsa",
                 "capabilities": [
                     "applications.org\\.alsa-project.id"
@@ -1249,11 +1252,26 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager" : {
-            "start": ["setSettings"],
-            "stop": ["restoreSettings"]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "update": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "alsa"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "alsa-lib"
+            }
+        ]
     },
 
     "trace.easyOne.communicator.linux": {
@@ -1264,24 +1282,10 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-beta"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-stable"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-unstable"
-                }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.simplification",
@@ -1289,21 +1293,33 @@
                     "content.simplification.applications.trace\\.easyOne\\.communicator\\.linux.name"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome http://easy123.org/user/${{userToken}}"
+            }
         ],
-        "lifecycleManager" : {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy123.org/user/${{userToken}}"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-beta"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-stable"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-unstable"
+            }
+        ]
     },
 
     "trace.easyOne.sudan.linux": {
@@ -1314,24 +1330,10 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-beta"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-stable"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-unstable"
-                }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "content.pictorialSimplification",
@@ -1339,21 +1341,33 @@
                     "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.linux.name"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome http://easy123.org/sudan"
+            }
         ],
-        "lifecycleManager" : {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://easy123.org/sudan"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-beta"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-stable"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-unstable"
+            }
+        ]
     },
 
     "webinsight.webAnywhere.linux": {
@@ -1364,24 +1378,10 @@
                     "id": "linux",
                     "version": ">=2.6.26"
                 }
-            ],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-beta"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-stable"
-                },
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "google-chrome-unstable"
-                }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
@@ -1389,54 +1389,66 @@
                     "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
+            }
         ],
-        "lifecycleManager" : {
-            "start": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "pkill -2 chrome"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-beta"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-stable"
+            },
+            {
+                "type": "gpii.packageKit.find",
+                "name": "google-chrome-unstable"
+            }
+        ]
     },
+
     "org.freedesktop.xrandr": {
         "name": "Xrandr",
         "contexts": {
             "OS": [{
                 "id": "linux",
                 "version": ">=2.6.26"
-            }],
-            "isInstalled": [
-                {
-                    "type": "gpii.packageKit.find",
-                    "name": "libXrandr"
-                }
-            ]
+            }]
         },
-        "settingsHandlers": [
-           {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.xrandr",
                 "capabilities": [
                     "display.screenEnhacements",
                     "applications.org\\.freedesktop\\.xrandr.id"
                 ]
            }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
+        "stop": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.packageKit.find",
+                "name": "libXrandr"
+            }
+        ]
     },
+
     "org.chrome.cloud4chrome": {
         "name": "Cloud4all Chrome extension",
         "contexts": {
@@ -1445,8 +1457,8 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": [
-           {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
                     "path": "org.chrome.cloud4chrome"
@@ -1503,15 +1515,25 @@
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
                 }
-           }
+            }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "google-chrome"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "pkill -2 chrome"
+            }
+        ]
     }
 }
