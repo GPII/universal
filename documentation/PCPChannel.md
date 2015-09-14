@@ -60,7 +60,7 @@ When the system has a message it will emit a `message` signal. It will have the 
     "type": "infoMessage",
     "message": {
         "en": "My message", 
-        "es": "Mi mensaje"}
+        "es": "Mi mensaje"
     }
 }
 ```
