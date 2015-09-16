@@ -32,6 +32,11 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
                 // userId, clientId, redirectUri, selectedPreferences
         },
+        addAuthorization: {
+            funcName: "gpii.oauth2.authorizationService.addAuthorization",
+            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                // userId, clientId, selectedPreferences
+        },
         userHasAuthorized: {
             funcName: "gpii.oauth2.authorizationService.userHasAuthorized",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
@@ -103,6 +108,26 @@ gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, u
     var code = gpii.oauth2.authorizationService.generateAuthCode();
     dataStore.saveAuthCode(authDecision.id, code);
     return code;
+};
+
+gpii.oauth2.authorizationService.addAuthorization = function (dataStore, userId, clientId, selectedPreferences) {
+    var client = dataStore.findClientById(clientId);
+    if (client) {
+        var redirectUri = client.redirectUri;
+        // Check to see if we have an existing authorization
+        var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
+        if (!authDecision) {
+            // If not, add one
+            var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
+            dataStore.addAuthDecision({
+                userId: userId,
+                clientId: clientId,
+                redirectUri: redirectUri,
+                accessToken: accessToken,
+                selectedPreferences: selectedPreferences
+            });
+        }
+    }
 };
 
 gpii.oauth2.authorizationService.userHasAuthorized = function (dataStore, userId, clientId, redirectUri) {

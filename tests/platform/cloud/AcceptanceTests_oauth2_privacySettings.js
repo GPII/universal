@@ -51,6 +51,16 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = [
             "{testCaseHolder}.options.expectedPrivacySettingsContents"]
     },
     {
+        func: "{postAuthorizationRequest}.send",
+        args: ["{testCaseHolder}.options.newAuthorization"]
+    },
+    {
+        event: "{postAuthorizationRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyDataStoreAuthorization",
+        args: ["{testCaseHolder}.configuration.server.flowManager.oauth2DataStore",
+              "{testCaseHolder}.options.expectedAuthDecision"]
+    },
+    {
         func: "{logoutRequest}.send"
     },
     {
@@ -70,7 +80,18 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
         password: "a",
         expectedPrivacySettingsContents: [
             "Easit4all"
-        ]
+        ],
+        newAuthorization: {
+            clientId: 1,
+            selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true }
+        },
+        expectedAuthDecision: {
+            userId: 2,
+            clientId: 1,
+            redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
+            selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true },
+            revoked: false
+        }
     }
 ];
 
@@ -89,6 +110,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
             options: {
                 // path: - supplied dynamically based on returned redirect from previous request
                 port: 8081
+            }
+        },
+        postAuthorizationRequest: {
+            type: "kettle.test.request.httpCookie",
+            options: {
+                path: "/authorizations",
+                port: 8081,
+                method: "POST"
             }
         },
         logoutRequest: {

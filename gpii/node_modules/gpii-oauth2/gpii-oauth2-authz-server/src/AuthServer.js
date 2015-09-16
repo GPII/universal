@@ -429,6 +429,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // TODO CSRF Prevention mechanism
+    // TODO https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet
     that.expressApp.put("/authorizations/:authDecisionId/preferences",
         that.sessionMiddleware,
         that.passportMiddleware,
@@ -441,6 +443,26 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var selectedPreferences = req.body;
                 // TODO validate selectedPreferences?
                 that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+                res.send(200);
+            } else {
+                res.send(400);
+            }
+        }
+    );
+
+    // TODO CSRF Prevention mechanism
+    // TODO https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet
+    that.expressApp.post("/authorizations",
+        that.sessionMiddleware,
+        that.passportMiddleware,
+        login.ensureLoggedIn("/login"),
+        function (req, res) {
+            if (req.is("application/json")) {
+                var userId = req.user.id;
+                var clientId = req.body.clientId;
+                var selectedPreferences = req.body.selectedPreferences;
+                // TODO validate selectedPreferences?
+                that.authorizationService.addAuthorization(userId, clientId, selectedPreferences);
                 res.send(200);
             } else {
                 res.send(400);
