@@ -18,5 +18,6 @@ https://github.com/gpii/universal/LICENSE.txt
 
 module.exports = [
     "linux/linux-builtIn-testSpec.js",
-    "linux/linux-orca-testSpec.js"
+    "linux/linux-orca-testSpec.js",
+    "linux/linux-chrome-testSpec.js"
 ];

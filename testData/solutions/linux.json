@@ -1398,11 +1398,7 @@
         ],
         "lifecycleManager" : {
             "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "google-chrome http://wiki.gpii.net/"
-                }
+                "setSettings"
             ],
             "stop": [
                 "restoreSettings"

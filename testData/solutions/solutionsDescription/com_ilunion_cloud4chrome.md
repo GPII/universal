@@ -13,7 +13,7 @@ The cloud4chrome extension can work autonomously, with cloud-based flowManager, 
 
 Useful links:
 
-  * [cloud4chrome extensions developer](https://developer.chrome.com/extensions)
+  * [Chrome extensions developer documentation](https://developer.chrome.com/extensions)
   * [Source code at github.com](https://github.com/GutiX/chrome4cloud)
 
 ## Integration
