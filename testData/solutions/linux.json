@@ -95,7 +95,7 @@
         ],
         "isRunning": [
             {
-                "type": "gpii.processReporter.findAndCheckSetting",
+                "type": "gpii.processReporter.find",
                 "command": "gnome-shell",
                 "schema": "org.gnome.desktop.a11y.applications",
                 "setting": "screen-magnifier-enabled"
@@ -1501,12 +1501,6 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "libXrandr"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "Xrandr"
             }
         ]
     },
