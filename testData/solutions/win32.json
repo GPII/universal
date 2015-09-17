@@ -1245,8 +1245,8 @@
                     "version": ">=5.0"
             }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "chromeconf": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
                     "path": "com.ilunion.cloud4chrome"
@@ -1302,14 +1302,16 @@
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
                 }
            }
+        },
+        "configure": [
+            "settings.chromeconf"
         ],
-        "lifecycleManager" : {
-            "start": [
-                "setSettings"
-            ],
-            "stop": [
-                "restoreSettings"
-            ]
-        }
+        "restore": [
+            "settings.chromeconf"
+        ],
+        "start": [
+        ],
+        "stop": [
+        ]
     }
 }
