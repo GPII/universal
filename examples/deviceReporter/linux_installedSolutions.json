@@ -1,0 +1,71 @@
+{
+    "OS": {
+        "id": "linux",
+        "version": "2.6.26"
+    },
+    "solutions": [
+        {
+            "id": "org.gnome.desktop.interface"
+        },
+
+        {
+            "id": "org.gnome.nautilus"
+        },
+
+        {
+            "id": "org.gnome.desktop.a11y.keyboard"
+        },
+
+        {
+            "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
+        },
+
+        {
+            "id": "org.gnome.orca"
+        },
+
+        {
+            "id": "org.gnome.desktop.a11y.magnifier"
+        },
+
+        {
+            "id": "org.gnome.shell.overrides"
+        },
+
+        {
+            "id": "org.gnome.desktop.wm.preferences"
+        },
+
+        {
+            "id": "com.microsoft.windows.magnifier"
+        },
+
+        {
+            "id": "com.microsoft.windows.onscreenKeyboard"
+        },
+
+        {
+            "id": "nvda.screenReader"
+        },
+
+        {
+            "id": "org.gnome.desktop.interface"
+        },
+
+        {
+            "id": "org.gnome.nautilus"
+        },
+
+        {
+            "id": "trace.easyOne.communicator.linux"
+        },
+
+        {
+            "id": "trace.easyOne.sudan.linux"
+        },
+
+        {
+            "id": "webinsight.webAnywhere.linux"
+        }
+    ]
+}

@@ -17,7 +17,7 @@ You'll find more information at [our website](http://www.omnitor.com), primarily
 Installation instructions can be found in [this](https://docs.google.com/document/d/1McMtIfCVSSHe9acMLgIMpqFr-psYBuYRzePzobafIW4) document.
 
 ## Integration
-eCtouch and eCmobile are partially integrated with the GPII, limited primarily by the Android operating system. On a non-rooted device, a regular application (ie. the GPII app) cannot shut down another application (eCtouch/eCmobile). This means that the GPII cannot fully control the life cycle of the applications, so upon logging out from the GPII the application remains open.
+eCtouch and eCmobile are partially integrated with the GPII, limited primarily by the Android operating system. On a non-rooted device, a regular application (ie. the GPII app) may not be able to shut down another application (eCtouch/eCmobile). This means that the GPII cannot fully control the life cycle of the applications, so upon logging out from the GPII, although the home screen is shown, the application can still be running in background.
 
 
 Information about value ranges and mappings to common terms can be found [here](https://docs.google.com/spreadsheet/ccc?key=0AppduB_JZh5EdDRYT1pmOTc5eUpNbkpMckhacUVxWXc&usp=sharing#gid=27). If the link doesn't take you to the "eCtouch/eCmobile" page, select it in the bottom row.
