@@ -110,9 +110,10 @@ gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, u
     return code;
 };
 
-gpii.oauth2.authorizationService.addAuthorization = function (dataStore, userId, clientId, selectedPreferences) {
-    var client = dataStore.findClientById(clientId);
+gpii.oauth2.authorizationService.addAuthorization = function (dataStore, userId, oauth2ClientId, selectedPreferences) {
+    var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
     if (client) {
+        var clientId = client.id;
         var redirectUri = client.redirectUri;
         // Check to see if we have an existing authorization
         var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);

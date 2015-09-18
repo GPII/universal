@@ -459,10 +459,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         function (req, res) {
             if (req.is("application/json")) {
                 var userId = req.user.id;
-                var clientId = req.body.clientId;
+                var oauth2ClientId = req.body.oauth2ClientId;
                 var selectedPreferences = req.body.selectedPreferences;
                 // TODO validate selectedPreferences?
-                that.authorizationService.addAuthorization(userId, clientId, selectedPreferences);
+                that.authorizationService.addAuthorization(userId, oauth2ClientId, selectedPreferences);
                 res.send(200);
             } else {
                 res.send(400);

@@ -82,7 +82,7 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
             "Easit4all"
         ],
         newAuthorization: {
-            clientId: 1,
+            oauth2ClientId: "org.chrome.cloud4chrome",
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true }
         },
         expectedAuthDecision: {
