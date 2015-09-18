@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 
 // Declare dependencies
-/* global fluid, jQuery, location, alert */
+/* global fluid, jQuery, location */
 
 var gpii = gpii || {};
 
@@ -46,6 +46,18 @@ var gpii = gpii || {};
                 type: "gpii.oauth2.editPrivacySettings",
                 container: "{privacySettingsWithPrefs}.dom.editDecisionDialog",
                 createOnEvent: "onRenderEditDialog",
+                options: {
+                    requestInfos: "{privacySettingsWithPrefs}.options.requestInfos",
+                    model: {
+                        clientData: "{privacySettingsWithPrefs}.model.currentClientData"
+                    }
+                }
+            },
+            // TODO: Or can I reuse editPrivacySettings?
+            addAuthorizationDialog: {
+                type: "gpii.oauth2.addAuthorizationDialog",
+                container: "{privacySettingsWithPrefs}.dom.addAuthorizationDialog",
+                createOnEvent: "onRenderAddAuthorizationDialog",
                 options: {
                     requestInfos: "{privacySettingsWithPrefs}.options.requestInfos",
                     model: {
@@ -89,7 +101,7 @@ var gpii = gpii || {};
                     listeners: {
                         "serviceSelected": {
                             funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
-                            args: ["{arguments}.0"]
+                            args: ["{privacySettingsWithPrefs}", "{arguments}.0", "{arguments}.1"]
                         }
                     }
                 }
@@ -113,14 +125,15 @@ var gpii = gpii || {};
             removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
             editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog",
             addServiceButton: ".gpiic-oauth2-privacySettings-addService",
-            addServiceMenu: ".gpiic-oauth2-privacySettings-addServiceMenu"
+            addServiceMenu: ".gpiic-oauth2-privacySettings-addServiceMenu",
+            addAuthorizationDialog: ".gpiic-oauth2-privacySettings-addAuthorizationDialog"
         },
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
             okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
             cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "addServiceMenu"],
+        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "addServiceMenu", "addAuthorizationDialog"],
         strings: {
             logout: "Log Out",
             header: "Privacy",
@@ -161,7 +174,8 @@ var gpii = gpii || {};
             }
         },
         events: {
-            onRenderEditDialog: null
+            onRenderEditDialog: null,
+            onRenderAddAuthorizationDialog: null
         },
         listeners: {
             "afterRender.createTooltips": {
@@ -255,8 +269,13 @@ var gpii = gpii || {};
         that.events.onRenderEditDialog.fire();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.addService = function (oauth2ClientId) {
-        alert("RECEIVED EVENT " + oauth2ClientId);
+    gpii.oauth2.privacySettingsWithPrefs.addService = function (that, serviceName, oauth2ClientId) {
+        var clientDataForAdd = {
+            serviceName: serviceName,
+            oauth2ClientId: oauth2ClientId
+        };
+        that.applier.change("currentClientData", clientDataForAdd);
+        that.events.onRenderAddAuthorizationDialog.fire();
     };
 
     fluid.defaults("gpii.oauth2.selectionTreeTemplate", {

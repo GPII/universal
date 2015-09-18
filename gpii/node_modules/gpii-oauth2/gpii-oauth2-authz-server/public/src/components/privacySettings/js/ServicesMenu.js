@@ -37,10 +37,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             },
             fireServiceSelected: {
                 funcName: "gpii.oauth2.servicesMenu.fireServiceSelected",
-                args: ["{that}", "{that}.options.selectors.oauth2ClientId", "{arguments}.0", "{arguments}.1"]
+                args: ["{that}", "{that}.options.selectors.serviceName",
+                       "{that}.options.selectors.oauth2ClientId", "{arguments}.0", "{arguments}.1"]
             }
         },
         selectors: {
+            serviceName: ".gpiic-oauth2-servicesMenu-serviceName",
             oauth2ClientId: "[name=oauth2ClientId]"
         },
         styles: {
@@ -52,9 +54,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         that.container.menu(that.options.widgetOptions);
     };
 
-    gpii.oauth2.servicesMenu.fireServiceSelected = function (that, oauth2ClientIdSelector, evt, ui) {
+    gpii.oauth2.servicesMenu.fireServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {
+        var serviceName = ui.item.find(serviceNameSelector).text();
         var oauth2ClientId = ui.item.find(oauth2ClientIdSelector).attr("value");
-        that.events.serviceSelected.fire(oauth2ClientId);
+        that.events.serviceSelected.fire(serviceName, oauth2ClientId);
     };
 
 })(jQuery, fluid);

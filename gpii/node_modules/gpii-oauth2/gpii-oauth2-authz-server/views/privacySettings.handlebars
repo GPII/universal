@@ -11,6 +11,7 @@
     <script type="text/javascript" src="src/components/privacySettings/js/EditPrivacySettings.js"></script>
     <script type="text/javascript" src="src/components/privacySettings/js/PrivacySettingsWithPrefs.js"></script>
     <script type="text/javascript" src="src/components/privacySettings/js/ServicesMenu.js"></script>
+    <script type="text/javascript" src="src/components/privacySettings/js/AddAuthorizationDialog.js"></script>
     <script type="text/javascript" src="src/components/OKCancelDialog/js/OKCancelDialog.js"></script>
 
     <title>Privacy Settings</title>
@@ -54,12 +55,19 @@
             <div>
                 <button class="gpiic-oauth2-privacySettings-addService">Add service</button>
                 <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
+
+                    {{!--
+                    *********************************************************
+                    TODO These services need to be populated programmatically
+                    *********************************************************
+                    --}}
+
                     <li>
-                        <a href="#">Service A</a>
+                        <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Service A</a>
                         <input type="hidden" name="oauth2ClientId" value="org.chome.cloud4chrome" />
                     </li>
                     <li>
-                        <a href="#">Easit4all</a>
+                        <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Easit4all</a>
                         <input type="hidden" name="oauth2ClientId" value="com.bdigital.easit4all" />
                     </li>
                 </ul>
@@ -70,6 +78,18 @@
             </div>
 
             <div class="gpiic-oauth2-privacySettings-editDecision-dialog gpii-oauth2-privacySettings-editDecision-dialog">
+                <h3 class="gpiic-oauth2-privacySettings-editDecision-title"></h3>
+                <p class="gpiic-oauth2-privacySettings-editDecision-description"></p>
+
+                <section class="gpiic-oauth2-privacySettings-editDecision-selection gpiic-oauth2-selectionTree gpii-oauth2-selectionTree gpii-oauth2-innerPanel gpii-oauth2-scrollPanel"></section>
+
+                <div class="gpii-oauth2-privacySettings-editDecision-buttonPane">
+                    <button class="gpiic-oauth2-privacySettings-editDecision-cancel gpii-oauth2-privacySettings-editDecision-cancel"></button>
+                    <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editDecision-done"></button>
+                </div>
+            </div>
+
+            <div class="gpiic-oauth2-privacySettings-addAuthorizationDialog gpii-oauth2-privacySettings-editDecision-dialog">
                 <h3 class="gpiic-oauth2-privacySettings-editDecision-title"></h3>
                 <p class="gpiic-oauth2-privacySettings-editDecision-description"></p>
 
