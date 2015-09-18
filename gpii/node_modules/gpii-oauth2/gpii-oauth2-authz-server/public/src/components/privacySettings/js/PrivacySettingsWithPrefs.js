@@ -62,6 +62,13 @@ var gpii = gpii || {};
                     requestInfos: "{privacySettingsWithPrefs}.options.requestInfos",
                     model: {
                         clientData: "{privacySettingsWithPrefs}.model.currentClientData"
+                    },
+                    listeners: {
+                        authorizationAdded: {
+                            "this": location,
+                            method: "reload",
+                            args: ["true"]
+                        }
                     }
                 }
             },

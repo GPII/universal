@@ -31,6 +31,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 type: "post"
             }
         },
+        events: {
+            authorizationAdded: null
+        },
         listeners: {
             "onCreate.fetchDecisionPrefs": {
                 listener: "{that}.setDecisionPrefs",
@@ -41,6 +44,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             selectionsAsServerModel: {
                 func: "{selectionTree}.toServerModel",
                 args: ["{selectionTree}.model.selections"]
+            },
+            fireAuthorizationAdded: {
+                "this": "{that}.events.authorizationAdded",
+                method: "fire"
             },
             saveDecisionPrefs: {
                 funcName: "gpii.oauth2.ajax",
@@ -60,7 +67,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                                     selectedPreferences: "@expand:{that}.selectionsAsServerModel()"
                                 }]
                             }
-                        }
+                        },
+                        success: "{that}.fireAuthorizationAdded"
                     }
                 ]
             }
