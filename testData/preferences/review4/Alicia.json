@@ -1,0 +1,67 @@
+{
+    "preferences": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/speechRate": 350,
+                    "http://registry.gpii.net/common/volumeTTS": 0.6,
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
+                    "http://registry.gpii.net/common/auditoryOutLanguage": "en",
+                    "http://registry.gpii.net/common/language": "en",
+                    "http://registry.gpii.net/common/screenResolution": "low",
+                    "http://registry.gpii.net/common/simplifiedUiEnabled": true,
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                }
+            }
+        }
+    },
+    "deviceReporter": {
+        "OS": {
+            "id": "android",
+            "version": "3.0.31-693204"
+        },
+        "solutions": [
+            {
+                "id": "com.microsoft.windows.onscreenKeyboard"
+            },
+            {
+                "id": "com.microsoft.windows.magnifier"
+            },
+            {
+                "id": "com.microsoft.windows.displaySettings"
+            },
+            {
+                "id": "com.microsoft.windows.highContrast"
+            },
+            {
+                "id": "org.nvda-project"
+            },
+            {
+                "id": "com.yourdolphin.supernova-as"
+            },
+            {
+                "id": "com.texthelp.readWriteGold"
+            },
+            {
+                "id": "org.chrome.cloud4chrome"
+            },
+            {
+                "id": "eu.gpii.olb"
+            },
+            {
+                "id": "com.certh.service-synthesis"
+            }
+        ]
+    },
+    "environmentReporter": {},
+    "solutionsRegistry": {},
+    "activeContexts": [
+        "gpii-default",
+        "nighttime-at-home"
+    ],
+    "inverseCapabilities": {},
+    "rematch": {}
+}
