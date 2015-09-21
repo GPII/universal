@@ -168,7 +168,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
 fluid.defaults("gpii.tests.cloud.oauth2.disruptWithRevocation", {
     gradeNames: ["gpii.test.disruption.mainSequence"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.revocationRequests",
-    truncateAt: 15,
+    truncateAt: 14,
     insertAt: 14,
     expect: 20,
     insertRecords: [{
