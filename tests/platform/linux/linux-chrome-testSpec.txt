@@ -6,5 +6,6 @@ Descriptions:
 * Configuration file: linux-chrome-config.json
 * Device reporter file: chrome.json
 * NP sets:
- * chrome1
- * chrome2
+ * chrome_high_contrast
+ * chrome_font_size
+ * chrome_magnification

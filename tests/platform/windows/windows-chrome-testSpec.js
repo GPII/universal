@@ -23,14 +23,19 @@ fluid.registerNamespace("gpii.tests.windows.chrome");
 gpii.tests.windows.chrome = [
     {
         name: "Acceptance test for background color change in Chrome",
-        userToken: "chrome1",
+        userToken: "chrome_high_contrast",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
-                            "screenReaderTTSEnabled": true,
-							"simplifier": true
+                            "fontSize": "medium",
+                            "invertColours": false,
+                            "magnifierEnabled": false,
+                            "magnification": 1,
+                            "highContrastTheme": "white-black",
+                            "highContrastEnabled": true,
+                            "screenReaderTTSEnabled": false
                         },
                         "options": {
                             "path": "com.ilunion.cloud4chrome"
@@ -43,20 +48,42 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for font size transformation in Chrome",
-        userToken: "chrome2",
+        userToken: "chrome_font_size",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
-                            "screenReaderTTSEnabled": false,
-							"highContrastEnabled": true,
-							"invertColours": false,
-							"magnifierEnabled": true,
-							"magnification": 2,
-							"fontSize": "medium",
-							"simplifier": false,
-							"highContrastTheme": "white-black"
+                            "fontSize": "large",
+                            "invertColours": false,
+                            "magnifierEnabled": false,
+                            "magnification": 1,
+                            "highContrastEnabled": false,
+                            "screenReaderTTSEnabled": false
+                        },
+                        "options": {
+                            "path": "com.ilunion.cloud4chrome"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for magnification transformation in Chrome",
+        userToken: "chrome_magnification",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "fontSize": "medium",
+                            "invertColours": false,
+                            "magnifierEnabled": true,
+                            "magnification": 2,
+                            "highContrastEnabled": false,
+                            "screenReaderTTSEnabled": false
                         },
                         "options": {
                             "path": "com.ilunion.cloud4chrome"
