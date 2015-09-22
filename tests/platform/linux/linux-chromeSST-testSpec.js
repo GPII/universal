@@ -35,7 +35,8 @@ gpii.tests.linux.chromeSST = [
 							}
                         },
                         "options": {
-                            "path": "com.certh.service-synthesis"
+                            "path": "com.certh.service-synthesis",
+							"SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
                         }
                     }
                 ]
@@ -61,7 +62,8 @@ gpii.tests.linux.chromeSST = [
 							}
                         },
                         "options": {
-                            "path": "com.certh.service-synthesis"
+                            "path": "com.certh.service-synthesis",
+							"SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
                         }
                     }
                 ]
@@ -84,7 +86,8 @@ gpii.tests.linux.chromeSST = [
 							}
                         },
                         "options": {
-                            "path": "com.certh.service-synthesis"
+                            "path": "com.certh.service-synthesis",
+							"SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
                         }
                     }
                 ]
@@ -131,7 +134,8 @@ gpii.tests.linux.chromeSST = [
 							}
                         },
                         "options": {
-                            "path": "com.certh.service-synthesis"
+                            "path": "com.certh.service-synthesis",
+							"SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
                         }
                     }
                 ]
