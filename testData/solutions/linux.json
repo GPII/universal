@@ -1535,5 +1535,34 @@
                 "command": "pkill -2 chrome"
             }
         ]
+    },
+	"com.certh.service-synthesis": {
+        "name": "Service Synthesis Adapter",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": {
+            "sstconf": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "capabilities": [
+                    "applications.com\\.certh\\.service-synthesis.id"
+                ],
+                "options": {
+                    "path": "com.certh.service-synthesis",
+                    "SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
+                }
+            }
+        },
+        "configure": [
+            "settings.sstconf"
+        ],
+		"restore": [
+            "settings.sstconf"
+        ],
+        "start": [],
+        "stop": []
     }
 }

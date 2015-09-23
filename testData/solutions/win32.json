@@ -1307,7 +1307,7 @@
         "configure": [
             "settings.configuration"
         ],
-        "restore": [
+		"restore": [
             "settings.configuration"
         ],
         "start": [
@@ -1322,5 +1322,34 @@
                 "command": "C:\\Sociable\\Cloud4All.exe -stop"
             }
         ]
+    },
+	"com.certh.service-synthesis": {
+        "name": "Service Synthesis Adapter",
+        "contexts": {
+            "OS": [{
+                "id": "win32",
+                "version": ">=5.0"
+            }]
+        },
+        "settingsHandlers": {
+            "sstconf": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "capabilities": [
+                    "applications.com\\.certh\\.service-synthesis.id"
+                ],
+                "options": {
+                    "path": "com.certh.service-synthesis",
+                    "SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
+                }
+            }
+        },
+        "configure": [
+            "settings.sstconf"
+        ],
+		"restore": [
+            "settings.sstconf"
+        ],
+        "start": [],
+        "stop": []
     }
 }
