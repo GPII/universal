@@ -359,6 +359,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "gnome-settings-daemon"
+            }
         ]
     },
 
