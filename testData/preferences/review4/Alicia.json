@@ -1,5 +1,5 @@
 {
-    "preferences": {
+    "flat": {
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
@@ -17,51 +17,5 @@
                 }
             }
         }
-    },
-    "deviceReporter": {
-        "OS": {
-            "id": "android",
-            "version": "3.0.31-693204"
-        },
-        "solutions": [
-            {
-                "id": "com.microsoft.windows.onscreenKeyboard"
-            },
-            {
-                "id": "com.microsoft.windows.magnifier"
-            },
-            {
-                "id": "com.microsoft.windows.displaySettings"
-            },
-            {
-                "id": "com.microsoft.windows.highContrast"
-            },
-            {
-                "id": "org.nvda-project"
-            },
-            {
-                "id": "com.yourdolphin.supernova-as"
-            },
-            {
-                "id": "com.texthelp.readWriteGold"
-            },
-            {
-                "id": "org.chrome.cloud4chrome"
-            },
-            {
-                "id": "eu.gpii.olb"
-            },
-            {
-                "id": "com.certh.service-synthesis"
-            }
-        ]
-    },
-    "environmentReporter": {},
-    "solutionsRegistry": {},
-    "activeContexts": [
-        "gpii-default",
-        "nighttime-at-home"
-    ],
-    "inverseCapabilities": {},
-    "rematch": {}
+    }
 }
