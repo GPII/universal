@@ -632,6 +632,55 @@
             }
         ]
     },
+    "net.sourceforge.magnifier": {
+        "name": "Virtual Magnifying Glass",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Virtual Magnifying Glass_is1\\InstallLocation}magnifier.ini",
+                    "allowNumberSignComments": false,
+                    "allowSubSections": false
+                },
+                "capabilities": [
+                    "applications.net\\.sourceforge\\.magnifier.id"
+                ],
+                "capabilitiesTransformations": {
+                    "General\\.iMagnification": "http://registry\\.gpii\\.net/common/magnification",
+                    "General\\.InvertColors": {
+                        "transform": {
+                            "type": "gpii.transformer.booleanToNumber",
+                            "inputPath": "http://registry\\.gpii\\.net/common/invertColours"
+                        }
+                    }
+                }
+            }
+        ],
+        "lifecycleManager": {
+            "start": [
+                "setSettings",
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Virtual Magnifying Glass_is1\\InstallLocation}magnifier.exe\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.windows.killProcessByName",
+                    "filename": "magnifier.exe"
+                },
+                "restoreSettings"
+            ]
+        }
+    },
 
     "trace.easyOne.communicator.windows": {
         "name": "EasyOne Communicator Windows",

@@ -1,0 +1,4 @@
+virtualmag_appspecific.json
+
+This NP set contains a set of application specific terms and is used by the acceptance tests for the virtual magnifying glass. 
+
