@@ -1307,7 +1307,7 @@
         "configure": [
             "settings.configuration"
         ],
-		"restore": [
+        "restore": [
             "settings.configuration"
         ],
         "start": [
