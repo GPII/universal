@@ -19,7 +19,7 @@ Useful links:
 ## Integration
 To install the chrome extension, make the following steps.
 
-  * Download the zip file from https://github.com/GutiX/chrome4cloud/archive/master.zip 
+  * Download the zip file from https://github.com/GutiX/chrome4cloud/archive/master.zip
   * Extract the zip file in a folder of your choice
   * In the Chrome browser, click on the ‘settings’ icon in the upper right corner.
   * Once in the ‘settings’ page, go to ‘extensions’ in the left sidebar menu
