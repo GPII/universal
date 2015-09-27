@@ -1,0 +1,12 @@
+linux-chromeSST-testSpec.txt
+
+Descriptions:
+
+* Solution: Cloud4all's SST-Chrome extension for Google Chrome (SSTChrome4cloud)
+* Configuration file: linux-chromesst-config.json
+* Device reporter file: chrome_sst.json
+* NP sets:
+ * chrome_sst_translate
+ * chrome_sst_fontconverter
+ * chrome_sst_callwebanywhere
+ * chrome_sst_combined
