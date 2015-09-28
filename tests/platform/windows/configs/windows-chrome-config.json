@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.linux.chrome",
+    "typeName": "acceptanceTests.windows.chrome",
     "options": {
         "components": {
             "server": {

@@ -1449,7 +1449,7 @@
         ]
     },
 
-    "org.chrome.cloud4chrome": {
+    "com.ilunion.cloud4chrome": {
         "name": "Cloud4all Chrome extension",
         "contexts": {
             "OS": [{
@@ -1458,15 +1458,13 @@
             }]
         },
         "settingsHandlers": {
-            "configuration": {
+            "chromeconf": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
-                    "path": "org.chrome.cloud4chrome"
+                    "path": "com.ilunion.cloud4chrome"
                 },
                 "capabilities": [
-                    "applications.org\\.chrome\\.cloud4chrome.id",
-                    "contrastTheme",
-                    "fontSize"
+                    "applications.com\\.ilunion\\.cloud4chrome.id"
                 ],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
@@ -1518,22 +1516,14 @@
             }
         },
         "configure": [
-            "settings.configuration"
+            "settings.chromeconf"
         ],
         "restore": [
-            "settings.configuration"
+            "settings.chromeconf"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome"
-            }
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
         ]
     }
 }
