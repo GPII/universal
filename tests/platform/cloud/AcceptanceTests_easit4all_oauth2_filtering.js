@@ -15,10 +15,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
 
+gpii.loadTestingSupport();
+
 fluid.registerNamespace("gpii.tests.cloud.oauth2.easit4all");
 
 require("./OAuth2AcceptanceDataStore.js");
-require("./AcceptanceTests_easit4all.js");
 
 gpii.tests.cloud.oauth2.easit4all.common = {
     client_id: "com.bdigital.easit4all",
@@ -60,5 +61,7 @@ gpii.tests.cloud.oauth2.easit4all.disruptions = [{
     }
 }];
 
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(gpii.tests.cloud.easit4all.testDefs[0], gpii.tests.cloud.oauth2.easit4all.common,
+var standardEasit4allTest = require("./AcceptanceTests_easit4all_testDefs.json");
+
+gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(standardEasit4allTest[0], gpii.tests.cloud.oauth2.easit4all.common,
     gpii.tests.cloud.oauth2.easit4all.disruptions, __dirname);
