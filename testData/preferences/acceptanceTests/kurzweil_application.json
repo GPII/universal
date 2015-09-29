@@ -1,0 +1,18 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.kesi.kurzweil": {
+                        "View.MyZoomValue": 200,
+                        "Speech.EnglishReadingSpeed": 100,
+                        "Speech.EnglishReadingVolume": 100,
+                        "Fonts.FontSize": 20,
+                        "Fonts.FontName": "Times New Roman"
+                    }
+                }
+            }
+        }
+    }
+}

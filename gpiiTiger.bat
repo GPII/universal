@@ -1,0 +1,14 @@
+@echo off
+subl testData/deviceReporter/installedSolutions.json
+subl testData/deviceReporter/acceptanceTests/kurzweil.JSON
+subl testData/deviceReporter/win32_installedSolutions.json
+subl testData/preferences/acceptanceTests/kurzweil_application.json
+subl testData/preferences/acceptanceTests/kurzweil_common.JSON
+subl testData/preferences/kurzweil_application.json
+subl testData/preferences/kurzweil_common.JSON
+subl testData/solutions/win32.json
+subl testData/solutions/kurzweil.json
+subl tests/platform/index-windows.js
+subl tests/platform/windows/configs/windows-kurzweil-config.JSON
+subl tests/platform/windows/windows-kurzweil-testSpec.js
+subl tests/platform/windows/windows-kurzweil-testSpec.txt
