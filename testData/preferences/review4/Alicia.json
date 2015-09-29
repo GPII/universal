@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/speechRate": 350,
+                    "http://registry.gpii.net/common/volumeTTS": 0.6,
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "white-black",
+                    "http://registry.gpii.net/common/auditoryOutLanguage": "en",
+                    "http://registry.gpii.net/common/language": "en",
+                    "http://registry.gpii.net/common/screenResolution": "low",
+                    "http://registry.gpii.net/common/simplifiedUiEnabled": true,
+                    "http://registry.gpii.net/common/matchMakerType": "RuleBased"
+                }
+            }
+        }
+    }
+}
