@@ -605,7 +605,13 @@
                     "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled"
                 }
             }
-        }
+        },
+        "configure": [
+            "settings.conf"
+        ],
+        "restore": [
+            "settings.conf"
+        ]
     }
 }
 
