@@ -1,0 +1,21 @@
+production.with.logging.json
+==========================
+
+This configuration runs the system in production mode, but keeps the logging enabled. 'production mode' means that the following services are expected to be available:
+
+* http://stmm.gpii.net - the statistical matchmaker
+* http://rbmm.gpii.net - the rule based matchmaker
+* http://preferences.gpii.net - the preferences server
+
+* The following components are running on the local machine:
+** flowManager
+** OntologyHandler
+** solutionsRegistry (reading registry from file)
+** deviceReporter (reading device context info from file)
+** matchMakerFramework
+** flatMatchMaker
+** lifecycleManager
+
+**WARNING: This config has been tested manually leading up to and during the review meeting (Jan. 2015).
+It is NOT regularly tested by acceptance/integration or unit tests and therefore cannot be fully trusted.**
+

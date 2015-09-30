@@ -1,0 +1,39 @@
+{
+    "typeName": "production.with.logging",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        },
+        "devUrls": {
+            "preferences": "http://preferences.gpii.net/preferences/%userToken",
+            "deviceReporter": "http://localhost:%port/device",
+            "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
+        },
+        "matchMakers": {
+            "flat": {
+                "url": "http://localhost:8081"
+            },
+            "Statistical": {
+                "url": "http://stmm.gpii.net"
+            },
+            "RuleBased": {
+                "url": "http://rbmm.gpii.net"
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/preferencesServer/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json",
+        "../node_modules/flatMatchMaker/configs/development.all.local.json",
+        "../node_modules/rawPreferencesServer/configs/development.json"
+    ]
+}
