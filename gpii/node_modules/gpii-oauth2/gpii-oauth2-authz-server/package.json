@@ -1,0 +1,14 @@
+{
+  "name": "gpii-oauth2-authorization-server",
+  "version": "0.1.0",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "connect-ensure-login": "^0.1.1",
+    "express-handlebars": "^1.1.0",
+    "express-session": "^1.9.1",
+    "oauth2orize": "^1.0.1",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "passport-oauth2-client-password": "^0.1.2"
+  }
+}

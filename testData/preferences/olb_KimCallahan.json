@@ -1,0 +1,19 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/language": "en-US",
+                    "http://registry.gpii.net/common/signLanguageEnabled": true,
+                    "http://registry.gpii.net/common/signLanguage": "ase",
+                    "http://registry.gpii.net/common/signLanguageInterpreterType": "avatar",
+                    "http://registry.gpii.net/applications/eu.gpii.olb": {
+                        "textStyle": "verdana"
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -16,7 +16,7 @@ This repository should be installed using one of the top-level GPII architecture
 For development purposes this repository could be cloned directly - however, please ensure that it is housed
 in a directory named `node_modules` otherwise its test cases will not be able to self-resolve.
 
-Whenever you run `npm install` for this project, you must always follow by issuing the grunt task `npm dedupe-infusion`. 
+Whenever you run `npm install` for this project, you must always follow by issuing the grunt task `grunt dedupe-infusion`. 
 The reason for this requirement is explained at http://issues.gpii.net/browse/GPII-492
 
 Usage
@@ -41,3 +41,26 @@ open `{universal}/tests/web/html/all-tests.html` in your preferred browser:
 Running node-based tests:
 
     node tests/all-tests.js
+
+Deploying with Docker
+---------------------
+
+The [Docker Hub Automated Build service](http://docs.docker.com/docker-hub/builds/) is used to automatically build a [GPII Universal Docker image](https://registry.hub.docker.com/u/gpii/universal/). The Docker client can then be used to download updated images and launch containers.
+
+The following command can be used to build an image locally as long as it is run relative to the repository's Dockerfile:
+
+    docker build --rm -t gpii/universal:$(git rev-parse --short HEAD) .
+
+That will use the Git repository's current abbreviated commit hash as a [Docker tag](https://docs.docker.com/reference/commandline/cli/#tag). If you would like to download the latest public Universal image you can use this command:
+
+    docker pull gpii/universal
+
+Or use the following command to download a particular image identified using a Git commit hash:
+
+    docker pull gpii/universal:<first seven characters of a git commit hash>
+
+GPII component images can then be built using the Universal image. Here are two examples:
+
+* https://github.com/gpii-ops/docker-preferences-server/
+* https://github.com/gpii-ops/docker-flow-manager/
+

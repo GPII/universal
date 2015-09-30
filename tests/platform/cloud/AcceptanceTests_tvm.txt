@@ -1,0 +1,10 @@
+AcceptanceTests_tvm.js
+
+Description:
+These are the acceptance tests for the cloud-based solution 'de.fraunhofer.iao.C4A-TVM', the ticket vending machine (TVM).
+
+They uses the NP set 'tvm_lara' to test the available common term preferences.
+
+Requirements:
+Since the TVM uses the online flow manager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flow manager mode).
+(Installing the solution itself is a different matter.)
