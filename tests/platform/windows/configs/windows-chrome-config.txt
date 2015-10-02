@@ -1,4 +1,4 @@
-This configuration file is used for testing the chrome extension in Linux
+This configuration file is used for testing the chrome extension in Windows
 
 It includes to the basic localInstall setup for acceptance tests (modifying the
 preferences folder used), which in turn includes the standard development
