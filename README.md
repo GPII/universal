@@ -38,15 +38,15 @@ There are currently 3 different sets of tests:
 * the ones run in node.js
 * production tests, running in node.js but having external requirements
 
-=== Running browser tests: ===
+#### Running browser tests:
 open `{universal}/tests/web/html/all-tests.html` in your preferred browser
 
-=== Running node-based tests ===
+#### Running node-based tests
 From the root of the `universal` folder, run the following command:
 
     node tests/all-tests.js
 
-=== Running node-based production tests ===
+#### Running node-based production tests
 The purpose of these tests are to test production config setups of the system. This involves using the online preferences server when fetching preferences sets, so there are extended requirements for these tests.
 
 Requirements:
