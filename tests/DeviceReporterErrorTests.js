@@ -55,7 +55,7 @@ gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
     data = JSON.parse(data);
     jqUnit.assertTrue("Received error as expected", data.isError);
     jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-    jqUnit.assertEquals("tester", "Error in device reporter data", data.message);
+    jqUnit.assertTrue("Received message text", data.message.indexOf("Error in device reporter data") !== -1);
 };
 
 gpii.tests.softFailureHandler = function (args, activity) {
