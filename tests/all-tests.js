@@ -56,8 +56,6 @@ var testIncludes = [
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
-    // expects an internet connection and preferences server running at http://preferences.gpii.net
-    "./ProductionConfigTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

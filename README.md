@@ -29,18 +29,34 @@ following statements to get access to fluid and/or gpii objects.
         gpii = fluid.registerNamespace("gpii");
     // Now you will have access to both fluid and gpii namespaces.
 
+
 Testing
 -------
 
-There are currently 2 different sets of tests: the ones that run in the browser
-and the ones run in node.js.
+There are currently 3 different sets of tests: 
+* the ones that run in the browser
+* the ones run in node.js
+* production tests, running in node.js but having external requirements
 
-Running browser tests:
-open `{universal}/tests/web/html/all-tests.html` in your preferred browser:
+=== Running browser tests: ===
+open `{universal}/tests/web/html/all-tests.html` in your preferred browser
 
-Running node-based tests:
+=== Running node-based tests ===
+From the root of the `universal` folder, run the following command:
 
     node tests/all-tests.js
+
+=== Running node-based production tests ===
+The purpose of these tests are to test production config setups of the system. This involves using the online preferences server when fetching preferences sets, so there are extended requirements for these tests.
+
+Requirements:
+* an internet connection
+* a preferences server running at `http://preferences.gpii.net` containing at least the following (unmodified) NP set present: `MikelVargas`
+
+The tests are run using the following command:
+
+    node tests/ProductionConfigTests.js
+
 
 Deploying with Docker
 ---------------------
