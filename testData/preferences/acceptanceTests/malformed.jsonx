@@ -1,0 +1,13 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences"
+                "preferences": {
+                    ommon/magnification": 1.5,
+                    "http://registry.gpii.net/common/volume": 0.5
+                }
+            }
+        }
+    }
+}
