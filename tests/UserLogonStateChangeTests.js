@@ -69,12 +69,12 @@ gpii.tests.userLogonStateChange.testLogoutResponse = function (data) {
         gpii.tests.userLogonStateChange.userToken + " was successfully logged out.", data);
 };
 
-gpii.tests.userLogonStateChange.testErrorResponse = function (expMsg) {
+gpii.tests.userLogonStateChange.testErrorResponse = function (expMsg, expCode) {
     return function (data) {
         data = JSON.parse(data);
         jqUnit.assertTrue("Received error as expected", data.isError);
         jqUnit.assertEquals("Received message as expected", expMsg, data.message);
-        jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
+        jqUnit.assertEquals("Received correct error code", expCode, data.statusCode);
     };
 };
 
@@ -113,7 +113,7 @@ gpii.tests.userLogonStateChange.testDefs = [{
     }, {
         event: "{resetRequest}.events.onComplete",
         listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "No users currently logged in - nothing to reset" ]
+        makerArgs: [ "No users currently logged in - nothing to reset", 409 ]
     }, { // resetting with user logged in (part 1: login)
         func: "{logonChangeRequest}.send"
     }, {
@@ -139,8 +139,8 @@ gpii.tests.userLogonStateChange.testDefs = [{
         event: "{logonChangeRequest2}.events.onComplete",
         // listener: "gpii.tests.userLogonStateChange.testOtherUserLoggedInResponse"
         listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "Got keyaction from user someotheruser, but the user testUser1 is already " +
-        "logged in. So ignoring key action."]
+        makerArgs: [ "Got logon change request from user someotheruser, but the user testUser1 is "+
+        "already logged in. So ignoring request.", 409]
     }]
 }, {
     name: "Testing standard user/<token>/login and /user/<token>/logout URLs",
@@ -155,15 +155,15 @@ gpii.tests.userLogonStateChange.testDefs = [{
     }, {
         event: "{loginRequest}.events.onComplete",
         listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "Got key in action from user testUser1, but the user testUser1 is already " +
-        "logged in. So ignoring key action."]
+        makerArgs: [ "Got log in request from user testUser1, but the user testUser1 is already "+
+        "logged in. So ignoring login request.", 409]
     }, { // logout of different user
         func: "{logoutRequest2}.send"
     }, {
         event: "{logoutRequest2}.events.onComplete",
         listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "Got key out action from user someotheruser, but the user testUser1 is " +
-        "logged in. So ignoring key action."]
+        makerArgs: [ "Got logout request from user someotheruser, but the user testUser1 is logged "+
+        "in. So ignoring the request.", 409]
     }, { // logout of the correct user
         func: "{logoutRequest}.send"
     }, {
@@ -174,7 +174,7 @@ gpii.tests.userLogonStateChange.testDefs = [{
     }, {
         event: "{logoutRequest}.events.onComplete",
         listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "No user logged in, so ignoring key action."]
+        makerArgs: [ "No user logged in, so ignoring logout action.", 409]
     }]
 }];
 
