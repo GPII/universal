@@ -71,7 +71,6 @@ gpii.tests.userLogonStateChange.testLogoutResponse = function (data) {
 
 gpii.tests.userLogonStateChange.testErrorResponse = function (expMsg) {
     return function (data) {
-        console.log("ERROR RESPONSE: "+data);
         data = JSON.parse(data);
         jqUnit.assertTrue("Received error as expected", data.isError);
         jqUnit.assertEquals("Received message as expected", expMsg, data.message);
@@ -113,7 +112,6 @@ gpii.tests.userLogonStateChange.testDefs = [{
         func: "{resetRequest}.send"
     }, {
         event: "{resetRequest}.events.onComplete",
-        // listener: "gpii.tests.userLogonStateChange.testOtherUserLoggedInResponse"
         listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
         makerArgs: [ "No users currently logged in - nothing to reset" ]
     }, { // resetting with user logged in (part 1: login)
