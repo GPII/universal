@@ -28,20 +28,20 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 
-fluid.defaults("gpii.tests.UserKeyactionTests.testCaseHolder", {
+fluid.defaults("gpii.tests.userLogonStateChange.testCaseHolder", {
     gradeNames: ["gpii.test.common.testCaseHolder", "autoInit"],
     components: {
         resetRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/userKeyaction/reset",
+                path: "/user/reset/logonChange",
                 port: 8081
             }
         },
-        userKeyactionRequest2: {
+        logonChangeRequest2: {
             type: "kettle.test.request.http",
             options: {
-                path: "/userKeyaction/someotheruser",
+                path: "/user/someotheruser/logonChange",
                 port: 8081
             }
         },
@@ -55,22 +55,23 @@ fluid.defaults("gpii.tests.UserKeyactionTests.testCaseHolder", {
     }
 });
 
-fluid.registerNamespace("gpii.tests.UserKeyactionTests");
+fluid.registerNamespace("gpii.tests.userLogonStateChange");
 
-gpii.tests.UserKeyactionTests.userToken = "testUser1";
+gpii.tests.userLogonStateChange.userToken = "testUser1";
 
-gpii.tests.UserKeyactionTests.testLoginResponse = function (data) {
+gpii.tests.userLogonStateChange.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.UserKeyactionTests.userToken + " was successfully logged in.", data);
+        gpii.tests.userLogonStateChange.userToken + " was successfully logged in.", data);
 };
 
-gpii.tests.UserKeyactionTests.testLogoutResponse = function (data) {
+gpii.tests.userLogonStateChange.testLogoutResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.UserKeyactionTests.userToken + " was successfully logged out.", data);
+        gpii.tests.userLogonStateChange.userToken + " was successfully logged out.", data);
 };
 
-gpii.tests.UserKeyactionTests.testErrorResponse = function (expMsg) {
+gpii.tests.userLogonStateChange.testErrorResponse = function (expMsg) {
     return function (data) {
+        console.log("ERROR RESPONSE: "+data);
         data = JSON.parse(data);
         jqUnit.assertTrue("Received error as expected", data.isError);
         jqUnit.assertEquals("Received message as expected", expMsg, data.message);
@@ -78,68 +79,68 @@ gpii.tests.UserKeyactionTests.testErrorResponse = function (expMsg) {
     };
 };
 
-gpii.tests.UserKeyactionTests.buildTestDefs = function (testDefs) {
+gpii.tests.userLogonStateChange.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return $.extend(true, {
             config: {
                 configName: "development.all.local",
                 configPath: configPath
             },
-            gradeNames: "gpii.tests.UserKeyactionTests.testCaseHolder",
-            userToken: gpii.tests.UserKeyactionTests.userToken
+            gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
+            userToken: gpii.tests.userLogonStateChange.userToken
         }, testDef);
     });
 };
 
-gpii.tests.UserKeyactionTests.testDefs = [{
-    name: "Testing standard userKeyaction login and logout",
+gpii.tests.userLogonStateChange.testDefs = [{
+    name: "Testing standard logonChange login and logout",
     expect: 2,
     sequence: [{ // standard login
-        func: "{userKeyactionRequest}.send"
+        func: "{logonChangeRequest}.send"
     }, {
-        event: "{userKeyactionRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLoginResponse"
+        event: "{logonChangeRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // standard logout
-        func: "{userKeyactionRequest}.send"
+        func: "{logonChangeRequest}.send"
     }, {
-        event: "{userKeyactionRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLogoutResponse"
+        event: "{logonChangeRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonStateChange.testLogoutResponse"
     }]
 }, {
-    name: "Testing userKeyaction with 'reset' token",
+    name: "Testing logonChange with 'reset' token",
     expect: 5,
     sequence: [{ // resetting with no user logged in
         func: "{resetRequest}.send"
     }, {
         event: "{resetRequest}.events.onComplete",
-        // listener: "gpii.tests.UserKeyactionTests.testOtherUserLoggedInResponse"
-        listenerMaker: "gpii.tests.UserKeyactionTests.testErrorResponse",
+        // listener: "gpii.tests.userLogonStateChange.testOtherUserLoggedInResponse"
+        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
         makerArgs: [ "No users currently logged in - nothing to reset" ]
     }, { // resetting with user logged in (part 1: login)
-        func: "{userKeyactionRequest}.send"
+        func: "{logonChangeRequest}.send"
     }, {
-        event: "{userKeyactionRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLoginResponse"
+        event: "{logonChangeRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // resetting with user logged in (part 2: reset and check that user is logged out)
         func: "{resetRequest}.send"
     }, {
         event: "{resetRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLogoutResponse"
+        listener: "gpii.tests.userLogonStateChange.testLogoutResponse"
     }]
 }, {
     name: "Testing standard userKeyaction with another user already logged in",
     expect: 4,
     sequence: [{ // standard login
-        func: "{userKeyactionRequest}.send"
+        func: "{logonChangeRequest}.send"
     }, {
-        event: "{userKeyactionRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLoginResponse"
+        event: "{logonChangeRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // logout of different user
-        func: "{userKeyactionRequest2}.send"
+        func: "{logonChangeRequest2}.send"
     }, {
-        event: "{userKeyactionRequest2}.events.onComplete",
-        // listener: "gpii.tests.UserKeyactionTests.testOtherUserLoggedInResponse"
-        listenerMaker: "gpii.tests.UserKeyactionTests.testErrorResponse",
+        event: "{logonChangeRequest2}.events.onComplete",
+        // listener: "gpii.tests.userLogonStateChange.testOtherUserLoggedInResponse"
+        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
         makerArgs: [ "Got keyaction from user someotheruser, but the user testUser1 is already " +
         "logged in. So ignoring key action."]
     }]
@@ -150,33 +151,33 @@ gpii.tests.UserKeyactionTests.testDefs = [{
         func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLoginResponse"
+        listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // standard login with an already logged in user:
         func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
-        listenerMaker: "gpii.tests.UserKeyactionTests.testErrorResponse",
+        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
         makerArgs: [ "Got key in action from user testUser1, but the user testUser1 is already " +
         "logged in. So ignoring key action."]
     }, { // logout of different user
         func: "{logoutRequest2}.send"
     }, {
         event: "{logoutRequest2}.events.onComplete",
-        listenerMaker: "gpii.tests.UserKeyactionTests.testErrorResponse",
+        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
         makerArgs: [ "Got key out action from user someotheruser, but the user testUser1 is " +
         "logged in. So ignoring key action."]
     }, { // logout of the correct user
         func: "{logoutRequest}.send"
     }, {
         event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.UserKeyactionTests.testLogoutResponse"
+        listener: "gpii.tests.userLogonStateChange.testLogoutResponse"
     }, { // logout of user when none is logged
         func: "{logoutRequest}.send"
     }, {
         event: "{logoutRequest}.events.onComplete",
-        listenerMaker: "gpii.tests.UserKeyactionTests.testErrorResponse",
+        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
         makerArgs: [ "No user logged in, so ignoring key action."]
     }]
 }];
 
-kettle.test.bootstrapServer(gpii.tests.UserKeyactionTests.buildTestDefs(gpii.tests.UserKeyactionTests.testDefs));
+kettle.test.bootstrapServer(gpii.tests.userLogonStateChange.buildTestDefs(gpii.tests.userLogonStateChange.testDefs));
