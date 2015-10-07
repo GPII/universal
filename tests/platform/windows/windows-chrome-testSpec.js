@@ -16,10 +16,11 @@ var fluid = require("universal"),
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.linux.chrome");
+fluid.registerNamespace("gpii.tests.windows.chrome");
 
 
-gpii.tests.linux.chrome = [
+
+gpii.tests.windows.chrome = [
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
@@ -96,8 +97,8 @@ gpii.tests.linux.chrome = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.linux.chrome",
-    configName: "linux-chrome-config",
+    testDefs:  "gpii.tests.windows.chrome",
+    configName: "windows-chrome-config",
     configPath: "configs"
-}, ["gpii.test.integration.testCaseHolder.linux"],
+}, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);
