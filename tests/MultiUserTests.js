@@ -105,28 +105,28 @@ fluid.defaults("gpii.tests.multiUserSupport.testCaseHolder.linux", {
         resetRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/userKeyaction/reset",
+                path: "/user/reset/logonChange",
                 port: 8081
             }
         },
         multi1Keyaction: {
             type: "kettle.test.request.http",
             options: {
-                path: "/userKeyaction/multiuser1",
+                path: "/user/multiuser1/logonChange",
                 port: 8081
             }
         },
         multi2Keyaction: {
             type: "kettle.test.request.http",
             options: {
-                path: "/userKeyaction/multiuser2",
+                path: "/user/multiuser2/logonChange",
                 port: 8081
             }
         },
         extraKeyaction: {
             type: "kettle.test.request.http",
             options: {
-                path: "/userKeyaction/extrauser",
+                path: "/user/extrauser/logonChange",
                 port: 8081
             }
         },
@@ -418,7 +418,7 @@ gpii.tests.multiUserSupport.fixtures = [
                 }, {
                     event: "{extraKeyaction}.events.onComplete",
                     listener: "gpii.tests.multiUserSupport.checkErrorResponse",
-                    args: [ "Two other users are already logged in. Ignoring key action", 500, "{arguments}.0" ]
+                    args: [ "Two other users are already logged in. Ignoring logon change request", 409, "{arguments}.0" ]
                 }, { // and check configuration
                     func: "gpii.test.checkConfiguration",
                     args: [ "{tests}.options.data.multiuser2", "{nameResolver}" ]
@@ -479,7 +479,7 @@ gpii.tests.multiUserSupport.fixtures = [
                 }, {
                     event: "{multi2Logout}.events.onComplete",
                     listener: "gpii.tests.multiUserSupport.checkErrorResponse",
-                    args: [ "Got key out action from user multiuser2, but that user  is not logged in. So ignoring key action.", 500, "{arguments}.0" ]
+                    args: [ "Got logout request from user multiuser2, but that user is not logged in. So ignoring request.", 409, "{arguments}.0" ]
                 }
             ]
         ]
