@@ -16,6 +16,7 @@ var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.chrome");
+gpii.loadTestingSupport();
 
 require("./OAuth2AcceptanceDataStore.js");
 
