@@ -55,7 +55,7 @@ var testIncludes = [
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
+    "../gpii/node_modules/contextManager/test/ContextManagerTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {
