@@ -19,7 +19,6 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.linux.chrome");
 
 
-
 gpii.tests.linux.chrome = [
     {
         name: "Acceptance test for background color change in Chrome",
@@ -38,7 +37,7 @@ gpii.tests.linux.chrome = [
                             "screenReaderTTSEnabled": false
                         },
                         "options": {
-                            "path": "org.chrome.cloud4chrome"
+                            "path": "com.ilunion.cloud4chrome"
                         }
                     }
                 ]
@@ -62,7 +61,7 @@ gpii.tests.linux.chrome = [
                             "screenReaderTTSEnabled": false
                         },
                         "options": {
-                            "path": "org.chrome.cloud4chrome"
+                            "path": "com.ilunion.cloud4chrome"
                         }
                     }
                 ]
@@ -86,7 +85,7 @@ gpii.tests.linux.chrome = [
                             "screenReaderTTSEnabled": false
                         },
                         "options": {
-                            "path": "org.chrome.cloud4chrome"
+                            "path": "com.ilunion.cloud4chrome"
                         }
                     }
                 ]

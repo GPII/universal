@@ -16,18 +16,23 @@ This repository should be installed using one of the top-level GPII architecture
 For development purposes this repository could be cloned directly - however, please ensure that it is housed
 in a directory named `node_modules` otherwise its test cases will not be able to self-resolve.
 
-Whenever you run `npm install` for this project, you must always follow by issuing the grunt task `grunt dedupe-infusion`. 
-The reason for this requirement is explained at http://issues.gpii.net/browse/GPII-492
+Whenever you run `npm install` for this project, you must always follow by issuing the npm task `npm run dedupe-infusion`.
+The reason for this requirement is explained at http://issues.gpii.net/browse/GPII-492 . The standard `npm start` task will
+invoke `dedupe-infusion` automatically.
 
-Usage
------
+Quick Start
+-----------
 
-To use any of the gpii components or functionality in node.js, use the
-following statements to get access to fluid and/or gpii objects.
+To verify the basic installation of GPII universal, you can start the core framework with
 
-    var fluid = require("universal"),
-        gpii = fluid.registerNamespace("gpii");
-    // Now you will have access to both fluid and gpii namespaces.
+    npm start
+
+If all is well, you will see a message like
+
+    01:51:07.289:  Kettle Server 2us8uqry-22 is listening on port 8081
+
+Note that this installation will not include any OS-specific features, but can be used to verify system function with
+basic preference sets which only start solutions which require filesystem-based configuration (XML, JSON or .INI files).
 
 Testing
 -------
@@ -40,7 +45,18 @@ open `{universal}/tests/web/html/all-tests.html` in your preferred browser:
 
 Running node-based tests:
 
-    node tests/all-tests.js
+    npm test
+
+Usage
+-----
+
+To use any of the gpii components or functionality in node.js, use the
+following statements to get access to fluid and/or gpii objects.
+
+    var fluid = require("universal"),
+        gpii = fluid.registerNamespace("gpii");
+    // Now you will have access to both fluid and gpii namespaces.
+
 
 Deploying with Docker
 ---------------------
