@@ -1,17 +1,10 @@
 /**
 GPII Production Config tests
 
-The purpose of these tests are to test production config setups of the system. This involves using
-the online preferences server when fetching preferences sets, so there are extended requirements for
-these tests.
-
-These tests are a supplement to the `all-tests.js` (and hence not part of that test suite) and
-should be run separately when testing the system and having the below requirements available.
-
 Requirements:
 * an internet connection
-* a preferences server running at `http://preferences.gpii.net` containing at least the following
-NP sets present: `MikelVargas`
+* a preferences server running at `http://preferences.gpii.net` containing at least the MikelVargas
+NP set
 
 ---
 
