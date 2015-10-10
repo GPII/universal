@@ -1,5 +1,5 @@
 {
-    "typeName": "production.with.logging",
+    "typeName": "review4.production",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {

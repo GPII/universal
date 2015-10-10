@@ -1,4 +1,4 @@
-production.with.logging.json
+review4.production
 ==========================
 
 This configuration runs the system in production mode, but keeps the logging enabled. It refers to both the remote matchmakers and preferences server and uses the dynamic device reporter. The following services are expected to be available when using this configuration:
