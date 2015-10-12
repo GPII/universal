@@ -38,10 +38,10 @@ socket.on("connect", function () {
 });
 
 // Right after sending the id to the flow manager, the server will return back
-// the current settings in the system (if any)
+// the current settings in the system (if any), and the options block of the solutions registry entry as described later.
 //
-socket.on("connectionSucceeded", function (settings) {
-    console.log("## Received the following settings: " + JSON.stringify(settings));
+socket.on("connectionSucceeded", function (payload) {
+    console.log("## Received the following settings: " + JSON.stringify(payload.settings));
 });
 
 // By listening to this signal, the client will be notified when the system has
@@ -56,17 +56,22 @@ The _contract API_ between client and server can be resumed as follows:
 
 * After connecting to the flow manager, the client sends a socket message to the channel, which is basically a string containing the *id* of the client. ie: _org.chrome.cloud4chrome_
 * The client will be registered if the solution's id can be found of the solutions registry, otherwise, the registration will be rejected and the system will emit en error, and the client will disconnected.
-* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onBrowserSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available settings for the client in the following way:
+* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onBrowserSettingsChanged_ (after a user login/logout) signal to the client, it is delivering an object that contains an options block and the current available settings for the client in the following way:
 ```
 {
-    "screenReaderTTSEnabled":false,
-    "highContrastEnabled":true,
-    "invertColours":false,
-    "magnifierEnabled":true,
-    "magnification":2,
-    "fontSize":"medium",
-    "simplifier":false,
-    "highContrastTheme":"white-black"
+    "settings": {
+        "screenReaderTTSEnabled":false,
+        "highContrastEnabled":true,
+        "invertColours":false,
+        "magnifierEnabled":true,
+        "magnification":2,
+        "fontSize":"medium",
+        "simplifier":false,
+        "highContrastTheme":"white-black"
+    },
+    "options": {
+        "path": "org.chrome.cloud4chrome"
+    }
 }
 ```
 * When a client disconnects, it'll be removed from the list of registered clients
