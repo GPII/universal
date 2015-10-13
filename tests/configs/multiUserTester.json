@@ -1,0 +1,26 @@
+{
+    "typeName": "multiuserTests.linux.integration",
+    "options": {
+        "components": {
+            "server": {
+                "options": {
+                    "components": {
+                        "deviceReporter": {
+                            "options": {
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/linux_builtIn.json"
+                            }
+                        },
+                        "rawPreferencesServer": {
+                            "options": {
+                                "rawPreferencesSourceUrl": "file://%root/../../../testData/preferences/acceptanceTests/%userToken.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "includes": [
+        "${universal}/tests/configs/localInstall.json"
+    ]
+}

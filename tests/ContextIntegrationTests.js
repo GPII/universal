@@ -63,7 +63,7 @@ gpii.tests.contextIntegration.receiveLifecycleManager = function (testCaseHolder
 
 gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, token, expected) {
     jqUnit.assertEquals("Checking that the activeContextName matches: ", expected,
-        lifecycleManager.activeSessions[token].activeContextName);
+        lifecycleManager.session.activeContextName);
 };
 
 gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
