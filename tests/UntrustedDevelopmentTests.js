@@ -137,7 +137,12 @@ gpii.tests.development.testDefs = [{
     }, {
         event: "{logoutRequest}.events.onComplete",
         listener: "gpii.tests.development.testLogoutResponse"
-    }]
+    }],
+
+    distributeOptions: {
+        target: "{that kettle.test.request.http}.options.port",
+        record: 8088
+    }
 }];
 
 kettle.test.bootstrapServer(gpii.tests.development.testDefs);
