@@ -37,8 +37,8 @@ gpii.tests.untrusted.development.buildConfig = function () {
     })));
 
     var cloudBasedFlowManagerConfig = fluid.copy(fluid.defaults(kettle.config.createDefaults({
-        configName: "EasitCloudBasedConfig",
-        configPath: path.resolve(__dirname, "../examples/easit-oauth-integration")
+        configName: "cloudBased.development.all.local",
+        configPath: path.resolve(__dirname, "../gpii/configs")
     })));
 
     delete untrustedFlowManagerConfig.gradeNames;
