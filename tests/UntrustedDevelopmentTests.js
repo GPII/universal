@@ -17,75 +17,78 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
     fs = require("fs"),
     path = require("path"),
     gpii = fluid.registerNamespace("gpii"),
+    $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
 
 require("../index.js");
+require("./DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-var untrustedFlowManagerConfig = fluid.copy(fluid.defaults(kettle.config.createDefaults({
-    configName: "untrusted",
-    configPath: path.resolve(__dirname, "../gpii/configs")
-})));
+fluid.registerNamespace("gpii.tests.untrusted.development");
 
-var cloudBasedFlowManagerConfig = fluid.copy(fluid.defaults(kettle.config.createDefaults({
-    configName: "EasitCloudBasedConfig",
-    configPath: path.resolve(__dirname, "../examples/easit-oauth-integration")
-})));
+gpii.tests.untrusted.development.buildConfig = function () {
+    var untrustedFlowManagerConfig = fluid.copy(fluid.defaults(kettle.config.createDefaults({
+        configName: "untrusted",
+        configPath: path.resolve(__dirname, "../gpii/configs")
+    })));
 
-delete untrustedFlowManagerConfig.gradeNames;
-delete cloudBasedFlowManagerConfig.gradeNames;
+    var cloudBasedFlowManagerConfig = fluid.copy(fluid.defaults(kettle.config.createDefaults({
+        configName: "EasitCloudBasedConfig",
+        configPath: path.resolve(__dirname, "../examples/easit-oauth-integration")
+    })));
 
-var config = {
-    type: "fluid.eventedComponent",
-    options: {
-        gradeNames: "autoInit",
-        components: {
-            server: {
-                type: "fluid.eventedComponent",
-                options: {
-                    gradeNames: "autoInit",
-                    components: {
-                        localConfig: {
-                            type: "fluid.eventedComponent",
-                            options: untrustedFlowManagerConfig
-                        },
-                        cloudBasedConfig: {
-                            type: "fluid.eventedComponent",
-                            options: cloudBasedFlowManagerConfig
-                        }
-                    },
-                    events: {
-                        onListen: {
-                            events: {
-                                onListenLocal: "{localConfig}.server.events.onListen",
-                                onListenCould : "{cloudBasedConfig}.server.events.onListen"
+    delete untrustedFlowManagerConfig.gradeNames;
+    delete cloudBasedFlowManagerConfig.gradeNames;
+
+    return {
+        type: "fluid.eventedComponent",
+        options: {
+            gradeNames: "autoInit",
+            components: {
+                server: {
+                    type: "fluid.eventedComponent",
+                    options: {
+                        gradeNames: "autoInit",
+                        components: {
+                            localConfig: {
+                                type: "fluid.eventedComponent",
+                                options: untrustedFlowManagerConfig
+                            },
+                            cloudBasedConfig: {
+                                type: "fluid.eventedComponent",
+                                options: cloudBasedFlowManagerConfig
                             }
                         },
-                        onStopped: {
-                            events: {
-                                onStoppedLocal: "{localConfig}.server.events.onStopped",
-                                onStoppedCould : "{cloudBasedConfig}.server.events.onStopped"
+                        events: {
+                            onListen: {
+                                events: {
+                                    onListenLocal: "{localConfig}.server.events.onListen",
+                                    onListenCould : "{cloudBasedConfig}.server.events.onListen"
+                                }
+                            },
+                            onStopped: {
+                                events: {
+                                    onStoppedLocal: "{localConfig}.server.events.onStopped",
+                                    onStoppedCould : "{cloudBasedConfig}.server.events.onStopped"
+                                }
                             }
-                        }
-                    },
-                    invokers: {
-                        stop: {
-                            funcName: "gpii.tests.untrusted.development.stopServers",
-                            args: [ ["{localConfig}.server", "{cloudBasedConfig}.server"] ]
+                        },
+                        invokers: {
+                            stop: {
+                                funcName: "gpii.tests.untrusted.development.stopServers",
+                                args: [ ["{localConfig}.server", "{cloudBasedConfig}.server"] ]
+                            }
                         }
                     }
                 }
             }
         }
-    }
+    };
 };
-
-fluid.registerNamespace("gpii.tests.untrusted.development");
 
 gpii.tests.untrusted.development.stopServers = function (servers) {
     fluid.each(servers, function (server) {
@@ -93,62 +96,24 @@ gpii.tests.untrusted.development.stopServers = function (servers) {
     });
 };
 
-fs.writeFileSync("UntrustedDevelopmentTestsConfig.json", JSON.stringify(config, null, 4));
+fs.writeFileSync("UntrustedDevelopmentTestsConfig.json",
+                 JSON.stringify(gpii.tests.untrusted.development.buildConfig(), null, 4));
 
-fluid.logObjectRenderChars = undefined;
+gpii.tests.untrusted.development.testDefs = [];
 
-// *************************************
-// BEGIN Copied from DevelopmentTests.js
-// *************************************
+fluid.each(gpii.tests.development.testDefs, function (testDef) {
+    gpii.tests.untrusted.development.testDefs.push($.extend({}, testDef, {
+        config: {
+            configName: "UntrustedDevelopmentTestsConfig",
+            configPath: __dirname
+        },
+        distributeOptions: {
+            target: "{that kettle.test.request.http}.options.port",
+            record: 8088
+        }
+    }));
+});
 
-// TODO: Move shared parts of DevelopmentTests.js to a new file and re-use
-
-fluid.registerNamespace("gpii.tests.development");
-
-gpii.tests.development.userToken = "testUser1";
-
-gpii.tests.development.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged in.", data);
-};
-
-gpii.tests.development.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged out.", data);
-};
-
-gpii.tests.development.testDefs = [{
-    name: "Flow Manager development tests",
-    expect: 2,
-    config: {
-        configName: "UntrustedDevelopmentTestsConfig",
-        configPath: __dirname
-    },
-    gradeNames: "gpii.test.common.testCaseHolder",
-    userToken: gpii.tests.development.userToken,
-
-    sequence: [{
-        func: "{loginRequest}.send"
-    }, {
-        event: "{loginRequest}.events.onComplete",
-        listener: "gpii.tests.development.testLoginResponse"
-    }, {
-        func: "{logoutRequest}.send"
-    }, {
-        event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.development.testLogoutResponse"
-    }],
-
-    distributeOptions: {
-        target: "{that kettle.test.request.http}.options.port",
-        record: 8088
-    }
-}];
-
-kettle.test.bootstrapServer(gpii.tests.development.testDefs);
-
-// *************************************
-// END Copied from DevelopmentTests.js
-// ***********************************
+kettle.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
 
 // TODO: Remove generated config after tests
