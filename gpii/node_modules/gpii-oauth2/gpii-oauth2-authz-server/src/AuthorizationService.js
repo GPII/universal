@@ -67,6 +67,11 @@ fluid.defaults("gpii.oauth2.authorizationService", {
         getAuthForAccessToken: {
             func: "{dataStore}.findAuthByAccessToken"
                 // accessToken
+        },
+        grantAccessTokenForOAuth2CredentialClientId: {
+            funcName: "gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId",
+            args: ["{dataStore}", "{arguments}.0"]
+                // clientId
         }
     }
 });
@@ -136,4 +141,20 @@ gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, u
         dataStore.updateAuthDecision(userId, authDecision);
     }
     // TODO else communicate not found?
+};
+
+gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId = function (dataStore, clientId) {
+    // Record the credential client access token if we haven't already
+    var client = dataStore.findClientById(clientId);
+    var credentialClientToken = dataStore.findCredentialClientTokenByClientId(clientId);
+    if (!credentialClientToken) {
+        var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
+        credentialClientToken = dataStore.addCredentialClientToken({
+            clientId: clientId,
+            accessToken: accessToken,
+            allowAddPrefs: client.allowAddPrefs ? client.allowAddPrefs : false
+        });
+    }
+    // Generate the authorization code and record it
+    return credentialClientToken.accessToken;
 };

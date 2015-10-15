@@ -109,6 +109,16 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
             funcName: "gpii.oauth2.dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
             args: ["{that}.model.authDecisions", "{that}.model.users", "{that}.model.clients", "{arguments}.0", "{arguments}.1"]
                 // oauth2ClientId, gpiiToken
+        },
+        findCredentialClientTokenByClientId: {
+            funcName: "gpii.oauth2.dataStore.findCredentialClientTokenByClientId",
+            args: ["{that}.model.credentialClientTokens", "{that}.model.clients", "{arguments}.0"]
+                // oauth2ClientId, gpiiToken
+        },
+        addCredentialClientToken: {
+            funcName: "gpii.oauth2.dataStore.addCredentialClientToken",
+            args: ["{that}.model", "{that}.applier", "{arguments}.0"]
+                // crendentialClientToken
         }
     }
 
@@ -304,4 +314,26 @@ gpii.oauth2.dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (au
         };
     }
     return undefined;
+};
+
+gpii.oauth2.dataStore.findCredentialClientTokenByClientId = function (credentialClientTokens, clients, clientId) {
+    var credentialClientToken = fluid.find_if(credentialClientTokens, function (cct) {
+        return cct.clientId === clientId && cct.revoked === false;
+    });
+    return credentialClientToken? credentialClientToken : undefined;
+};
+
+gpii.oauth2.dataStore.addCredentialClientToken = function (model, applier, crendentialClientTokenData) {
+    var credentialClientTokenId = model.credentialClientTokensIdSeq;
+    applier.change("credentialClientTokensIdSeq", model.credentialClientTokensIdSeq + 1);
+    var crendentialClientToken = {
+        id: credentialClientTokenId, // primary key
+        clientId: crendentialClientTokenData.clientId, // foreign key
+        accessToken: crendentialClientTokenData.accessToken,
+        allowAddPrefs: crendentialClientTokenData.allowAddPrefs,
+        revoked: false
+    };
+    model.credentialClientTokens.push(crendentialClientToken);
+    applier.change("credentialClientTokens", model.credentialClientTokens);
+    return crendentialClientToken;
 };

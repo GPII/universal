@@ -69,6 +69,14 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 oauth2ClientSecret: false,
                 redirectUri: false,
                 allowDirectGpiiTokenAccess: true
+            },
+            {
+                id: 5,
+                name: "First Discovery",
+                oauth2ClientId: "client_first_discovery",
+                oauth2ClientSecret: "client_secret_firstDiscovery",
+                allowDirectGpiiTokenAccess: false,
+                allowAddPrefs: true
             }
         ],
         authDecisionsIdSeq: 5,
@@ -108,6 +116,16 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 accessToken: "ma_li_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
+            }
+        ],
+        credentialClientTokensIdSeq: 2,
+        credentialClientTokens: [
+            {
+                id: 1,
+                clientId: 5,
+                accessToken: "first_discovery_access_token",
+                revoked: false,
+                allowAddPrefs: true
             }
         ]
     }
