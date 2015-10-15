@@ -10,7 +10,11 @@
                     "port": 8081
                 }
             }
-        }
+        },
+        "distributeOptions": [{
+            "record": "fluid.emptySubcomponent",
+            "target": "{that dataSource errback}.type"
+        }]
     },
     "includes": [
         "../node_modules/processReporter/configs/development.json",

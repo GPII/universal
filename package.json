@@ -7,6 +7,7 @@
     "homepage": "http://gpii.net/",
     "dependencies": {
         "infusion": "git://github.com/fluid-project/infusion.git#df5f8cfabf815a4086b778e73125c3c952dda4ec",
+        "dedupe-infusion": "1.0.0",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
@@ -49,6 +50,7 @@
     },
     "scripts": {
         "test": "node tests/all-tests.js",
-        "postinstall": "grunt dedupe-infusion"
+        "dedupe-infusion": "node -e \"require('dedupe-infusion')()\"",
+        "start": "npm run dedupe-infusion && node gpii.js"
     }
 }
