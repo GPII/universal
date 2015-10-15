@@ -1,0 +1,22 @@
+review4.scenario3.production
+==========================
+
+This configuration runs the system in production mode, but keeps the logging enabled. It is used for the third scenario of the final cloud4all review, and refers to both the a series of remote statistical matchmakers and a remote preferences server and uses the dynamic device reporter. The following services are expected to be available when using this configuration:
+
+* http://preferences.gpii.net - the preferences server
+* http://smm1.gpii.eu/ - Derivate 1 of the statistical matchmaker
+* http://smm2.gpii.eu/ - Derivate 2 of the statistical matchmaker
+* http://smm3.gpii.eu/ - Derivate 3 of the statistical matchmaker
+* http://smm4.gpii.eu/ - Derivate 4 of the statistical matchmaker
+
+* The following components are running on the local machine:
+** flowManager
+** OntologyHandler
+** solutionsRegistry (reading registry from file)
+** deviceReporter (dynamic mode)
+** matchMakerFramework
+** flatMatchMaker
+** lifecycleManager
+
+**THIS CONFIGURATION IS NOT REGULARLY TESTED AND CANNOT BE TRUSTED TO WORK**
+It has been created for the year 4 reviews of C4A and will be tested in that connection, but it currently does not have any test-coverage via acceptance or integration tests.
