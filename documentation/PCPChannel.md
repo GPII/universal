@@ -15,23 +15,20 @@ Message types:
 (Info<- default), Error, Warning
 {
     type: "infoMessage",
-    message: {
-        dk: "Katte er nogle trælse kræ",
-        en: "Howdy user! This is a message to you",
-        es: "¿Hola Pedro, donde esta la biblioteca?"
-    }
+    message: "Howdy user! This is a message to you"
 }
 
 ### Internal API
 
 The PCPChannel is a component of the Flowmanager, used in the local/hybrid deployment on the local device. Its 3 main invokers are:
 * `sendUserMessage`: This will send a message to be displayed in the PCP and takes a 'message' and a 'messageType' argument. 
-  * **message** Can be either an object with messages keyed by language code, e.g.: `{ "en": "My message", "es": "Mi mensaje"}`, or a simple string, which the system will assume is an english message wrap accordingly
+  * **message** A string to display to the user
   * **messageType** (optional) should be either "infoMessage", "warningMessage" or "errorMessage" - and will default to "infoMessage" if no second argument is given.
 * `notifyLogin`: Should be called when notifying the PCP of a new user login. It takes two arguments; userToken and adjusters:
   * **userToken** should be the token of the user logging in
   * **adjusters** (optional) An object of the adjusters to display as keys and the value to show for the given adjuster as value. Will default to `{ "http://registry.gpii.net/common/highContrastEnabled": false }`
 * `notifyLogout`: Should be called when notifying the PCP of a user logout. Does not take any arguments
+
 
 ### External API
 

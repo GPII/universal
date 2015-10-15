@@ -108,7 +108,7 @@ var testDefs = [{
         }
     },
     sequence: [
-        {
+        {   // connect the PCP client first
             func: "{client}.send"
         }, {
             event: "{client}.events.onComplete",
