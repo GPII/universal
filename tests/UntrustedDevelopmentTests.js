@@ -117,7 +117,7 @@ gpii.tests.untrusted.development.makeFileRemover = function (filename) {
 };
 
 // Generate the config, write it to disk, and register a listener to
-// remove it after the test run
+// remove it after the tests are done
 
 fs.writeFileSync(generatedConfigName + ".json",
                  JSON.stringify(gpii.tests.untrusted.development.buildConfig(), null, 4));
