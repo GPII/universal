@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.certh.service-synthesis": {
+                        "serviceName": "FontConverter",
+                        "serviceInput": {
+                            "targetFontSize": "16",
+                            "inputUrl": "",
+                            "targetFontFamily": "Arial",
+                            "targetBackground": "yellow",
+                            "targetColor": "red"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
