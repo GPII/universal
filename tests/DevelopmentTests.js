@@ -25,4 +25,4 @@ require("./DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-kettle.test.bootstrapServer(gpii.tests.development.testDefs);
+kettle.test.bootstrapServer(fluid.copy(gpii.tests.development.testDefs));

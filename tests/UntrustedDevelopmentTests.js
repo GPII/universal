@@ -17,11 +17,14 @@
 "use strict";
 
 var fluid = require("infusion"),
+    jqUnit = fluid.require("jqUnit"),
     fs = require("fs"),
     path = require("path"),
     gpii = fluid.registerNamespace("gpii"),
     $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
+
+var generatedConfigName = "UntrustedDevelopmentTestsConfig";
 
 require("../index.js");
 require("./DevelopmentTestDefs.js");
@@ -29,6 +32,53 @@ require("./DevelopmentTestDefs.js");
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.development");
+
+gpii.tests.untrusted.development.configTemplate = {
+    type: "fluid.eventedComponent",
+    options: {
+        gradeNames: "autoInit",
+        components: {
+            server: {
+                type: "fluid.eventedComponent",
+                options: {
+                    gradeNames: "autoInit",
+                    components: {
+                        localConfig: {
+                            type: "fluid.eventedComponent",
+                            // To be filled in
+                            options: null
+                        },
+                        cloudBasedConfig: {
+                            type: "fluid.eventedComponent",
+                            // To be filled in
+                            options: null
+                        }
+                    },
+                    events: {
+                        onListen: {
+                            events: {
+                                onListenLocal: "{localConfig}.server.events.onListen",
+                                onListenCloud : "{cloudBasedConfig}.server.events.onListen"
+                            }
+                        },
+                        onStopped: {
+                            events: {
+                                onStoppedLocal: "{localConfig}.server.events.onStopped",
+                                onStoppedCloud : "{cloudBasedConfig}.server.events.onStopped"
+                            }
+                        }
+                    },
+                    invokers: {
+                        stop: {
+                            funcName: "gpii.tests.untrusted.development.stopServers",
+                            args: [ ["{localConfig}.server", "{cloudBasedConfig}.server"] ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
 
 gpii.tests.untrusted.development.buildConfig = function () {
     var untrustedFlowManagerConfig = fluid.copy(fluid.defaults(kettle.config.createDefaults({
@@ -44,50 +94,14 @@ gpii.tests.untrusted.development.buildConfig = function () {
     delete untrustedFlowManagerConfig.gradeNames;
     delete cloudBasedFlowManagerConfig.gradeNames;
 
-    return {
-        type: "fluid.eventedComponent",
-        options: {
-            gradeNames: "autoInit",
-            components: {
-                server: {
-                    type: "fluid.eventedComponent",
-                    options: {
-                        gradeNames: "autoInit",
-                        components: {
-                            localConfig: {
-                                type: "fluid.eventedComponent",
-                                options: untrustedFlowManagerConfig
-                            },
-                            cloudBasedConfig: {
-                                type: "fluid.eventedComponent",
-                                options: cloudBasedFlowManagerConfig
-                            }
-                        },
-                        events: {
-                            onListen: {
-                                events: {
-                                    onListenLocal: "{localConfig}.server.events.onListen",
-                                    onListenCould : "{cloudBasedConfig}.server.events.onListen"
-                                }
-                            },
-                            onStopped: {
-                                events: {
-                                    onStoppedLocal: "{localConfig}.server.events.onStopped",
-                                    onStoppedCould : "{cloudBasedConfig}.server.events.onStopped"
-                                }
-                            }
-                        },
-                        invokers: {
-                            stop: {
-                                funcName: "gpii.tests.untrusted.development.stopServers",
-                                args: [ ["{localConfig}.server", "{cloudBasedConfig}.server"] ]
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    };
+    var config = fluid.copy(gpii.tests.untrusted.development.configTemplate);
+
+    fluid.set(config, "options.components.server.options.components.localConfig.options",
+              untrustedFlowManagerConfig);
+    fluid.set(config, "options.components.server.options.components.cloudBasedConfig.options",
+              cloudBasedFlowManagerConfig);
+
+    return config;
 };
 
 gpii.tests.untrusted.development.stopServers = function (servers) {
@@ -96,15 +110,28 @@ gpii.tests.untrusted.development.stopServers = function (servers) {
     });
 };
 
-fs.writeFileSync("UntrustedDevelopmentTestsConfig.json",
+gpii.tests.untrusted.development.makeFileRemover = function (filename) {
+    return function () {
+        fs.unlinkSync(filename);
+    };
+};
+
+// Generate the config, write it to disk, and register a listener to
+// remove it after the test run
+
+fs.writeFileSync(generatedConfigName + ".json",
                  JSON.stringify(gpii.tests.untrusted.development.buildConfig(), null, 4));
+
+jqUnit.onAllTestsDone.addListener(gpii.tests.untrusted.development.makeFileRemover(generatedConfigName + ".json"));
+
+// Build the testDefs and run the tests
 
 gpii.tests.untrusted.development.testDefs = [];
 
 fluid.each(gpii.tests.development.testDefs, function (testDef) {
-    gpii.tests.untrusted.development.testDefs.push($.extend({}, testDef, {
+    gpii.tests.untrusted.development.testDefs.push($.extend(true, {}, testDef, {
         config: {
-            configName: "UntrustedDevelopmentTestsConfig",
+            configName: generatedConfigName,
             configPath: __dirname
         },
         distributeOptions: {
@@ -115,5 +142,3 @@ fluid.each(gpii.tests.development.testDefs, function (testDef) {
 });
 
 kettle.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
-
-// TODO: Remove generated config after tests
