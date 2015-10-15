@@ -38,7 +38,7 @@ The PCPChannel is a component of the Flowmanager, used in the local/hybrid deplo
 
 #### Connection
 
-Connection to the PCP is done as a socket connection to the URL `/pcpChannel`.
+Connection to the PCP is done as a WebSockets connection to the URL `/pcpChannel`.
 
 
 #### On login [`login` signal]:
@@ -53,16 +53,13 @@ When a user logs out of the system, it will emit a `logout` signal to the socket
 
 #### Sending user messages [`message` signal]
 
-When the system has a message it will emit a `message` signal. It will have the format:
+When the GPII system has a message that it wants the PCP client to display, the system will emit a `message` message. It will have the format:
 
 ```
 {
     "type": "infoMessage",
-    "message": {
-        "en": "My message", 
-        "es": "Mi mensaje"}
-    }
+    "message": "My message"
 }
 ```
 
-Where the `"type"` can be either "infoMessage", "warningMessage" or "errorMessage", and `"message"` will contains messages keyed by language codes.
+Where the `"type"` can be either "infoMessage", "warningMessage" or "errorMessage", and `"message"` will contain the message to be displayed
