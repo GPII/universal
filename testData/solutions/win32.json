@@ -970,7 +970,7 @@
         ]
     },
 
-    "com.microsoft.windows.displaySettings" {
+    "com.microsoft.windows.displaySettings": {
         "name": "Windows Display Settings",
         "contexts": {
             "OS": [
