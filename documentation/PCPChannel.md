@@ -38,17 +38,17 @@ The PCPChannel is a component of the Flowmanager, used in the local/hybrid deplo
 Connection to the PCP is done as a WebSockets connection to the URL `/pcpChannel`.
 
 
-#### On login [`login` signal]:
+#### On login [`login` message]:
 
-When a user logs into the system, it will emit a `login` signal. The body of this will be a JSON object with a key `userToken` for the userToken of the user logging in, and a `settings` key with the adjusters to be displayed. An example of a `settings` value is: `{ "http://registry.gpii.net/common/highContrastEnabled": false }`
-
-
-#### On logout [`logout` signal]
-
-When a user logs out of the system, it will emit a `logout` signal to the socket.
+When a user logs into the GPII system, it will emit a `login` message to the PCP client. The body of this will be a JSON object with a key `userToken` for the userToken of the user logging in, and a `settings` key with the adjusters to be displayed. An example of a `settings` value is: `{ "http://registry.gpii.net/common/highContrastEnabled": false }`
 
 
-#### Sending user messages [`message` signal]
+#### On logout [`logout` message]
+
+When a user logs out of the GPII system, it will emit a `logout` message to the PCP client.
+
+
+#### Sending user messages [`message` message]
 
 When the GPII system has a message that it wants the PCP client to display, the system will emit a `message` message. It will have the format:
 
@@ -59,4 +59,4 @@ When the GPII system has a message that it wants the PCP client to display, the 
 }
 ```
 
-Where the `"type"` can be either "infoMessage", "warningMessage" or "errorMessage", and `"message"` will contain the message to be displayed
+Where the `"type"` can be either "infoMessage", "warningMessage" or "errorMessage", and `"message"` will contain the message to be displayed.
