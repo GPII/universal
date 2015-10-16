@@ -59,18 +59,6 @@ gpii.tests.integration.PCPInterface.onMessage = function (data, expected) {
 
 };
 
-gpii.tests.integration.PCPInterface.softFailureHandler = function (args, activity) {
-    var messages = ["ASSERTION FAILED: "].concat(args).concat(activity);
-    fluid.log.apply(null, [fluid.logLevel.FATAL].concat(messages));
-    var request = kettle.getCurrentRequest();
-    if (request) {
-        request.events.onError.fire({
-            isError: true,
-            message: "This is system failure triggered for testing"
-        });
-    }
-};
-
 fluid.defaults("gpii.tests.integration.PCPInterface.mockServer", {
     gradeNames: ["autoInit", "fluid.littleComponent"],
     invokers: {
@@ -79,14 +67,6 @@ fluid.defaults("gpii.tests.integration.PCPInterface.mockServer", {
         }
     }
 });
-
-gpii.tests.integration.PCPInterface.pushInstrumentedErrors = function () {
-    fluid.pushSoftFailure(gpii.tests.integration.PCPInterface.softFailureHandler);
-};
-
-gpii.tests.integration.PCPInterface.popInstrumentedErrors = function () {
-    fluid.pushSoftFailure(-1);
-};
 
 gpii.tests.integration.PCPInterface.mockServer.set = function () {
     fluid.fail();
@@ -130,7 +110,7 @@ var testDefs = [{
             event: "{client}.events.onMessage",
             listener: "gpii.tests.integration.PCPInterface.onMessage",
             args: [ "{arguments}.0",
-                { type: "infoMessage", message: { en: "User with token screenreader_common was successfully logged in." }}
+                { type: "infoMessage", message: "The token screenreader_common was logged in." }
             ]
         }, {
             // Test logout notification gets passed to socket client
@@ -142,49 +122,8 @@ var testDefs = [{
             event: "{client}.events.onMessage",
             listener: "gpii.tests.integration.PCPInterface.onMessage",
             args: [ "{arguments}.0",
-                { type: "infoMessage", message: { en: "User with token screenreader_common was successfully logged out." }}
+                { type: "infoMessage", message: "The token screenreader_common was logged out." }
             ]
-        }
-    ]
-}, {
-    name: "Login fails and is it is reported to the PCP channel",
-    expect: 2,
-    config: {
-        configName: "localInstall",
-        configPath: configPath
-    },
-    userToken: "screenreader_common",
-    gradeNames: "gpii.test.integration.testCaseHolder.windows",
-    rawPreferencesDataSourceGradeNames: ["gpii.tests.integration.PCPInterface.mockServer"],
-    distributeOptions: {
-        source: "{that}.options.rawPreferencesDataSourceGradeNames",
-        target: "{that matchMakerService}.options.gradeNames"
-    },
-    components: {
-        client: {
-            type: "gpii.tests.integration.PCPInterface.basicClient"
-        }
-    },
-    sequence: [
-        {
-            funcName: "gpii.tests.integration.PCPInterface.pushInstrumentedErrors"
-        }, {
-            func: "{client}.send"
-        }, {
-            event: "{client}.events.onComplete",
-            listener: "gpii.tests.integration.PCPInterface.checkConnectionRequest",
-            args: [ "{arguments}.0", "{client}" ]
-        }, {
-            // Test login notification on user login
-            func: "{loginRequest}.send"
-        }, {
-            event: "{client}.events.onMessage",
-            listener: "gpii.tests.integration.PCPInterface.onMessage",
-            args: [ "{arguments}.0",
-                { type: "errorMessage", message: { en: "This is system failure triggered for testing" }}
-            ]
-        }, {
-            func: "gpii.tests.integration.PCPInterface.popInstrumentedErrors"
         }
     ]
 }];
