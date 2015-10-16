@@ -75,7 +75,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
-        return done(null, authorizationService.grantAccessTokenForOAuth2CredentialClientId(client.id));
+        return done(null, authorizationService.grantAccessTokenForOAuth2CredentialClientId(client.id, scope));
     }));
 
 };

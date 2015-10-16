@@ -320,7 +320,7 @@ gpii.oauth2.dataStore.findCredentialClientTokenByClientId = function (credential
     var credentialClientToken = fluid.find_if(credentialClientTokens, function (cct) {
         return cct.clientId === clientId && cct.revoked === false;
     });
-    return credentialClientToken? credentialClientToken : undefined;
+    return credentialClientToken ? credentialClientToken : undefined;
 };
 
 gpii.oauth2.dataStore.addCredentialClientToken = function (model, applier, crendentialClientTokenData) {
