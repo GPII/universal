@@ -1,8 +1,17 @@
 {
-    "http://registry.gpii.org/common/fontSize":[{"value":16}],
-    "http://registry.gpii.org/common/screenReaderTTSEnabled":[{"value":false}],
-    "http://registry.gpii.org/common/magnifierEnabled":[{"value":false}],
-    "http://registry.gpii.org/common/magnification":[{"value":1}],
-    "http://registry.gpii.org/common/highContrastEnabled":[{"value":false}],
-    "http://registry.gpii.org/common/invertColours":[{"value":false}]
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 16,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": false,
+                    "http://registry.gpii.net/common/magnifierEnabled": false,
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry.gpii.net/common/highContrastEnabled": false,
+                    "http://registry.gpii.net/common/invertColours": false
+                }
+            }
+        }
+    }
 }

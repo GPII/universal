@@ -1,9 +1,18 @@
 {
-    "http://registry.gpii.org/common/cursorSize": [{"value": 0.9}],
-    "http://registry.gpii.org/common/fontSize": [{"value": 20}],
-    "http://registry.gpii.org/common/mouseTrailing": [{"value": 16}],
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/cursorSize": 0.9,
+                    "http://registry.gpii.net/common/fontSize": 20,
+                    "http://registry.gpii.net/common/mouseTrailing": 16,
 
-    "http://registry.gpii.org/common/magnification": [{"value": 2.0}],
-    "http://registry.gpii.org/common/tracking": [{"value": ["focus"]}],
-    "http://registry.gpii.org/common/invertColours": [{"value": false}]
+                    "http://registry.gpii.net/common/magnification": 2.0,
+                    "http://registry.gpii.net/common/tracking": ["focus"],
+                    "http://registry.gpii.net/common/invertColours": false
+                }
+            }
+        }
+    }
 }

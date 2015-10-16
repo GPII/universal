@@ -1,0 +1,14 @@
+AcceptanceTests_chrome.js
+
+Description:
+This is an series of tests using the online flowmanager. 
+
+These tests use the testDefinitions from AcceptanceTests_chrome_testDefs.json (which are also shared with the chrome_oauth2 tests)
+
+Three N&P sets have been created in order to test the different transformations between the common terms and the clouc4all specific settings:
+* chrome_font_size tests the transformation from a numeric value in the common terms to an enumeration value ("medium", "large", "x-large")
+* chrome_magnification tests the transformation from a double value (1.2) to an integer (1, 2 or 3)
+* chrome_high_contrast tests if the high contrast themes are correctly set.
+
+Requirements:
+Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode.

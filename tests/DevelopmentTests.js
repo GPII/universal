@@ -1,4 +1,4 @@
-/**
+/*
  * GPII Flow Manager Development Tests
  *
  * Copyright 2013 OCAD University
@@ -6,67 +6,56 @@
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
  *
+ * The research leading to these results has received funding from the European Union's
+ * Seventh Framework Programme (FP7/2007-2013)
+ * under grant agreement no. 289016.
+ *
  * You may obtain a copy of the License at
- * https://github.com/GPII/kettle/LICENSE.txt
+ * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
 "use strict";
 
 var fluid = require("infusion"),
-    path = require("path"),
     jqUnit = fluid.require("jqUnit"),
+    path = require("path"),
     configPath = path.resolve(__dirname, "../gpii/configs"),
+    gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("kettle/test/utils/js/KettleTestUtils", require);
+require("../index.js");
 
-var dev = fluid.registerNamespace("gpii.tests.development");
+gpii.loadTestingSupport();
 
-dev.token = "testUser1";
+// These tests simply execute the login and logout cycle for a user with some basic
+// dummy preference settings that will not attempt to configure any solutions. We
+// observe that the expected responses are received to login and logout and that no
+// errors are triggered
 
-dev.testLoginResponse = function (data) {
+fluid.registerNamespace("gpii.tests.development");
+
+gpii.tests.development.userToken = "testUser1";
+
+gpii.tests.development.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        dev.token + " was successfully logged in.", data);
+        gpii.tests.development.userToken + " was successfully logged in.", data);
 };
 
-dev.testLogoutResponse = function (data) {
+gpii.tests.development.testLogoutResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with token " +
-        dev.token + " was successfully logged out.", data);
+        gpii.tests.development.userToken + " was successfully logged out.", data);
 };
 
-var testDefs = [{
-    name: "Flow Manager development tests.",
+gpii.tests.development.testDefs = [{
+    name: "Flow Manager development tests",
     expect: 2,
     config: {
-        nodeEnv: "fm.ps.sr.dr.mm.os.lms.development",
+        configName: "development.all.local",
         configPath: configPath
     },
-    components: {
-        loginRequest: {
-            type: "kettle.tests.request.http",
-            options: {
-                requestOptions: {
-                    path: "/user/%token/login",
-                    port: 8081
-                },
-                termMap: {
-                    token: dev.token
-                }
-            }
-        },
-        logoutRequest: {
-            type: "kettle.tests.request.http",
-            options: {
-                requestOptions: {
-                    path: "/user/%token/logout",
-                    port: 8081
-                },
-                termMap: {
-                    token: dev.token
-                }
-            }
-        }
-    },
+    gradeNames: "gpii.test.common.testCaseHolder",
+    userToken: gpii.tests.development.userToken,
+
     sequence: [{
         func: "{loginRequest}.send"
     }, {
@@ -80,4 +69,4 @@ var testDefs = [{
     }]
 }];
 
-module.exports = kettle.tests.bootstrap(testDefs);
+kettle.test.bootstrapServer(gpii.tests.development.testDefs);

@@ -1,7 +1,14 @@
 {
-    "http://registry.gpii.org/applications/com.freedomscientific.jaws": [{
-        "value": {
-            "cloud4allVoiceProfile-GlobalContext.Speed": 115
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "cloud4allVoiceProfile-GlobalContext.Speed": 115
+                    }
+                }
+            }
         }
-    }]
+    }
 }

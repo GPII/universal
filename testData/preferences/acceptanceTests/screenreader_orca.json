@@ -1,18 +1,25 @@
 {
-    "http://registry.gpii.org/applications/org.gnome.orca": [{
-        "value": {
-            "sayAllStyle": 1,
-            "enableEchoByWord": true,
-            "enableEchoByCharacter": false,
-            "voices.default.rate": 102.27272727272727,
-            "enableTutorialMessages": false,
-            "voices.default.family": {
-                "locale": "en",
-                "name": "en-westindies"
-            },
-            "voices.default.average-pitch": 1.5,
-            "voices.default.gain": 7.5,
-            "verbalizePunctuationStyle": 0
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.gnome.orca": {
+                        "sayAllStyle": 1,
+                        "enableEchoByWord": true,
+                        "enableEchoByCharacter": false,
+                        "voices.default.rate": 102.27272727272727,
+                        "enableTutorialMessages": false,
+                        "voices.default.family": {
+                            "locale": "en",
+                            "name": "en-westindies"
+                        },
+                        "voices.default.average-pitch": 1.5,
+                        "voices.default.gain": 7.5,
+                        "verbalizePunctuationStyle": 0
+                    }
+                }
+            }
         }
-    }]
+    }
 }
