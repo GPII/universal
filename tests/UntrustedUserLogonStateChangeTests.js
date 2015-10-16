@@ -22,14 +22,14 @@ var fluid = require("infusion"),
     $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
 
-var configName = "UntrustedDevelopmentTestsConfig";
+var configName = "UntrustedUserLogonStateChangeTestsConfig";
 
 require("../index.js");
-require("./DevelopmentTestDefs.js");
+require("./UserLogonStateChangeTestDefs.js");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.untrusted.development");
+fluid.registerNamespace("gpii.tests.untrusted.userLogonStateChange");
 
 // Generate the config, write it to disk, and register a listener to
 // remove it after the tests are done
@@ -39,14 +39,16 @@ jqUnit.onAllTestsDone.addListener(gpii.test.untrustedFlowManager.makeFileRemover
 
 // Build the testDefs and run the tests
 
-gpii.tests.untrusted.development.testDefs = [];
+gpii.tests.untrusted.userLogonStateChange.testDefs = [];
 
-fluid.each(gpii.tests.development.testDefs, function (testDef) {
-    gpii.tests.untrusted.development.testDefs.push($.extend(true, {}, testDef, {
+fluid.each(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
+    gpii.tests.untrusted.userLogonStateChange.testDefs.push($.extend(true, {}, testDef, {
         config: {
             configName: configName,
             configPath: __dirname
         },
+        gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
+        userToken: gpii.tests.userLogonStateChange.userToken,
         distributeOptions: {
             target: "{that kettle.test.request.http}.options.port",
             record: 8088
@@ -54,4 +56,4 @@ fluid.each(gpii.tests.development.testDefs, function (testDef) {
     }));
 });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
+kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonStateChange.testDefs);
