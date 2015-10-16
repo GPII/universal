@@ -37,6 +37,14 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 oauth2ClientId: "com.bdigital.easit4all",
                 oauth2ClientSecret: "client_secret_easit4all",
                 redirectUri: "http://com.bdigital.easit4all/the-client%27s-uri/"
+            },
+            {
+                id: 3,
+                name: "First Discovery",
+                oauth2ClientId: "client_first_discovery",
+                oauth2ClientSecret: "client_secret_firstDiscovery",
+                allowDirectGpiiTokenAccess: false,
+                allowAddPrefs: true
             }
         ],
         authDecisionsIdSeq: 2,
@@ -49,6 +57,16 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 accessToken: "alice_easit_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
+            }
+        ],
+        credentialClientTokensIdSeq: 2,
+        credentialClientTokens: [
+            {
+                id: 1,
+                clientId: 3,
+                accessToken: "first_discovery_access_token",
+                revoked: false,
+                allowAddPrefs: true
             }
         ]
     }
