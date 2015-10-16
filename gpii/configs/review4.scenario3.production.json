@@ -17,14 +17,17 @@
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },
         "matchMakers": {
-            "flat": {
-                "url": "http://localhost:8081"
+            "Statistical1": {
+                "url": "http://smm1.gpii.eu/"
             },
-            "Statistical": {
-                "url": "http://smm.gpii.eu/"
+            "Statistical2": {
+                "url": "http://smm2.gpii.eu/"
             },
-            "RuleBased": {
-                "url": "http://160.40.50.183:8080/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules"
+            "Statistical1": {
+                "url": "http://smm3.gpii.eu/"
+            },
+            "Statistical4": {
+                "url": "http://smm4.gpii.eu/"
             }
         }
     },
