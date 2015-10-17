@@ -246,6 +246,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "Magnify.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -279,6 +284,11 @@
             {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "osk.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -692,6 +702,11 @@
                     "type": "gpii.windows.killProcessByName",
                     "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -726,6 +741,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -759,6 +779,11 @@
             {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -888,6 +913,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -940,6 +970,11 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -994,6 +1029,11 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -1274,6 +1314,11 @@
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -1347,6 +1392,11 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "C:\\Sociable\\Cloud4All.exe -stop"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -1426,6 +1476,11 @@
         "start": [
         ],
         "stop": [
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     }
 }
