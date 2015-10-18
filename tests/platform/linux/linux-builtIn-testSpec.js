@@ -77,6 +77,16 @@ gpii.tests.linux.builtIn = [
                         "schema": "org.gnome.desktop.interface"
                     }
                 }]
+            },
+            "gpii.xrandr": {
+                "some.app.id": [{
+                    "settings": {
+                        "screen-resolution": {
+                            "width": 800,
+                            "height": 600
+                        }
+                    }
+                }]
             }
         },
         processes: []
