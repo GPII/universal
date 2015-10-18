@@ -1430,7 +1430,7 @@
             "configuration": {
                 "type": "gpii.xrandr",
                 "capabilities": [
-                    "display.screenEnhancement"
+                    "display.screenEnhancement",
                     "applications.org\\.freedesktop\\.xrandr.id"
                 ],
                 "capabilitiesTransformations": {
@@ -1442,26 +1442,46 @@
                             "options": {
                                 "high": {
                                     "outputValue": {
-                                        "width": 1366,
-                                        "height": 768
+                                        "transform": {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "width": 1366,
+                                                "height": 768
+                                            }
+                                        }
                                     }
                                 },
                                 "normal": {
                                     "outputValue": {
-                                        "width": 1366,
-                                        "height": 768
+                                        "transform": {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "width": 1366,
+                                                "height": 768
+                                            }
+                                        }
                                     }
                                 },
                                 "low": {
                                     "outputValue": {
-                                        "width": 1024,
-                                        "height": 768
+                                        "transform": {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "width": 1024,
+                                                "height": 768
+                                            }
+                                        }
                                     }
                                 },
-                                "veryLow": {
+                                "very low": {
                                     "outputValue": {
-                                        "width": 800,
-                                        "height": 600
+                                        "transform": {
+                                            "type": "fluid.transforms.literalValue",
+                                            "value": {
+                                                "width": 800,
+                                                "height": 600
+                                            }
+                                        }
                                     }
                                 }
                             }
