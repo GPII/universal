@@ -1393,11 +1393,6 @@
                 "type": "gpii.launch.exec",
                 "command": "C:\\Sociable\\Cloud4All.exe -stop"
             }
-        ],
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
         ]
     },
 
