@@ -1399,6 +1399,11 @@
         "start": [
         ],
         "stop": [
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     }
 }
