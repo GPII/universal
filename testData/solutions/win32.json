@@ -1398,6 +1398,11 @@
         "start": [
         ],
         "stop": [
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
     "com.certh.service-synthesis": {
