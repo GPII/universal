@@ -1,0 +1,40 @@
+{
+    "typeName": "review4.production",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        },
+        "devUrls": {
+            "preferences": "http://preferences.gpii.net/preferences/%userToken",
+            "deviceReporter": "http://localhost:%port/device",
+            "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
+        },
+        "matchMakers": {
+            "Statistical1": {
+                "url": "http://smm1.gpii.eu/"
+            },
+            "Statistical2": {
+                "url": "http://smm2.gpii.eu/"
+            },
+            "Statistical1": {
+                "url": "http://smm3.gpii.eu/"
+            },
+            "Statistical4": {
+                "url": "http://smm4.gpii.eu/"
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/deviceReporter/configs/production.json",
+        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/solutionsRegistry/configs/development.json",
+        "../node_modules/flatMatchMaker/configs/development.all.local.json"
+    ]
+}
