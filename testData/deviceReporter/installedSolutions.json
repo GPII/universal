@@ -89,6 +89,9 @@
 
     {
         "id": "com.android.settings.system"
-    }
+    },
 
+    {
+        "id": "www.cloud4all.info"
+    }
 ]
