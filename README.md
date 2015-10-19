@@ -8,7 +8,7 @@ housed beneath http://wiki.gpii.net/w/Architecture .
 Installation
 ------------
 
-This repository should be installed using one of the top-level GPII architecture-specific repositories - 
+This repository should be installed using one of the top-level GPII architecture-specific repositories -
   * windows - https://github.com/GPII/windows
   * linux - https://github.com/GPII/linux
   * android - https://github.com/GPII/android
@@ -34,16 +34,20 @@ If all is well, you will see a message like
 Note that this installation will not include any OS-specific features, but can be used to verify system function with
 basic preference sets which only start solutions which require filesystem-based configuration (XML, JSON or .INI files).
 
+
 Testing
 -------
 
-There are currently 2 different sets of tests: the ones that run in the browser
-and the ones run in node.js.
+There are currently 3 different sets of tests:
+* the ones that run in the browser
+* the ones run in node.js
+* production tests, running in node.js but having external requirements
 
-Running browser tests:
-open `{universal}/tests/web/html/all-tests.html` in your preferred browser:
+#### Running browser tests:
+open `{universal}/tests/web/html/all-tests.html` in your preferred browser
 
-Running node-based tests:
+#### Running node-based tests
+From the root of the `universal` folder, run the following command:
 
     npm test
 
@@ -56,6 +60,20 @@ following statements to get access to fluid and/or gpii objects.
     var fluid = require("universal"),
         gpii = fluid.registerNamespace("gpii");
     // Now you will have access to both fluid and gpii namespaces.
+
+
+#### Running node-based production tests
+The purpose of these tests are to test production config setups of the system. This involves using the online preferences server when fetching preferences sets, so there are extended requirements for these tests.
+
+These tests are a supplement to the `all-tests.js` (and hence not part of that test suite) and should be run separately when testing the system and having the below requirements available.
+
+Requirements:
+* an internet connection
+* a preferences server running at `http://preferences.gpii.net` containing at least the following (unmodified) NP set: `MikelVargas`
+
+The tests are run using the following command:
+
+    node tests/ProductionConfigTests.js
 
 
 Deploying with Docker

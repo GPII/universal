@@ -1,5 +1,5 @@
 {
-    "typeName": "cloudBased.flowManager.production",
+    "typeName": "production.with.logging",
     "options": {
         "gradeNames": ["autoInit", "fluid.littleComponent"],
         "components": {
@@ -11,9 +11,9 @@
                 }
             }
         },
-        "cloudBasedUrls": {
+        "devUrls": {
             "preferences": "http://preferences.gpii.net/preferences/%userToken",
-            "deviceReporter": "",
+            "deviceReporter": "http://localhost:%port/device",
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },
         "matchMakers": {
@@ -23,8 +23,9 @@
         }
     },
     "includes": [
-        "../node_modules/flatMatchMaker/configs/development.all.local.json",
+        "../node_modules/deviceReporter/configs/production.json",
+        "../node_modules/flowManager/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json",
-        "../node_modules/flowManager/configs/cloudBased.development.all.local.json"
+        "../node_modules/flatMatchMaker/configs/development.all.local.json"
     ]
 }
