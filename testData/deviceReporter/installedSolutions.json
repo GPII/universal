@@ -40,42 +40,6 @@
     },
 
     {
-        "id": "org.nvda-project"
-    },
-
-    {
-        "id": "org.gnome.desktop.interface"
-    },
-
-    {
-        "id": "org.gnome.nautilus"
-    },
-
-    {
-        "id": "trace.easyOne.communicator.windows"
-    },
-
-    {
-        "id": "trace.easyOne.communicator.linux"
-    },
-
-    {
-        "id": "trace.easyOne.sudan.windows"
-    },
-
-    {
-        "id": "trace.easyOne.sudan.linux"
-    },
-
-    {
-        "id": "webinsight.webAnywhere.windows"
-    },
-
-    {
-        "id": "webinsight.webAnywhere.linux"
-    },
-
-    {
         "id": "com.microsoft.windows.highContrast"
     },
 
@@ -100,7 +64,7 @@
     },
 
     {
-        "id": "org.chrome.cloud4chrome"
+        "id": "com.ilunion.cloud4chrome"
     },
 
     {
@@ -125,6 +89,10 @@
 
     {
         "id": "com.android.settings.system"
+    },
+
+    {
+        "id": "com.certh.service-synthesis"
     }
 
 ]

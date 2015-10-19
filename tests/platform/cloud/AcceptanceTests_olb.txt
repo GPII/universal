@@ -1,0 +1,18 @@
+AcceptanceTests_olb.js
+
+Description:
+This is a set of acceptance tests for the Online Banking demonstrator (OLB) using the Online Flow Manager. 
+It relies on the following preference sets in ..\..\testData\preferences\acceptanceTests:
+* olb_Carla.json
+* olb_KimCallahan.json
+* olb_Lara.json
+* olb_QinKesheng.json
+* olb_applicationSpecific_01.json
+* olb_Alicia_cmn.json
+
+
+Requirements: 
+Since the Online Banking demonstrator uses the Online Flow Manager (or "Cloud-based Flow Manager"), there are no requirements other than a local instance of the GPII running with NODE_ENV set to "cloudBased.development.all.local" and starting the server from the "universal" folder by typing "node node_modules/kettle/lib/init.js gpii/configs/".
+Note:
+Using the Online Flow Manager is a temporary workaround until there is infrastructure that allows web applications to request settings through the local Flow Manager.
+

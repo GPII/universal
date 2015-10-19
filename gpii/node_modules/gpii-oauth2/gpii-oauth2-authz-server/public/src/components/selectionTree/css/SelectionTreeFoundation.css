@@ -1,0 +1,17 @@
+/*
+ * Foundation overrides
+ *
+ * Add this css file if the selection tree is used with foundation css
+ */
+
+.gpii-oauth2-selectionTree ul {
+    line-height: 1;
+}
+
+.gpii-oauth2-selectionTree a.gpii-icon {
+    line-height: 1.1;
+}
+
+.gpii-oauth2-selection-Tree-selectionState:before {
+    box-sizing: content-box;
+}
