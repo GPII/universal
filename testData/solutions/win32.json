@@ -1443,7 +1443,7 @@
             "conf": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
-                    "path": "gpii.eu/olb/"
+                    "path": "eu.gpii.olb"
                 },
                 "capabilities": [
                     "applications.eu\\.gpii\\.olb.id",
