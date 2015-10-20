@@ -115,7 +115,7 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
         findCredentialClientTokenById: {
             funcName: "gpii.oauth2.dataStore.findCredentialClientTokenById",
             args: ["{that}.model.credentialClientTokens", "{arguments}.0"]
-                // crendentialClientTokenId
+                // credentialClientTokenId
         },
         findCredentialClientTokenByClientId: {
             funcName: "gpii.oauth2.dataStore.findCredentialClientTokenByClientId",
@@ -125,12 +125,12 @@ fluid.defaults("gpii.oauth2.inMemoryDataStore", {
         addCredentialClientToken: {
             funcName: "gpii.oauth2.dataStore.addCredentialClientToken",
             args: ["{that}.model", "{that}.applier", "{arguments}.0"]
-                // crendentialClientTokenData
+                // credentialClientTokenData
         },
         revokeCredentialClientToken: {
             funcName: "gpii.oauth2.dataStore.revokeCredentialClientToken",
             args: ["{that}.model.credentialClientTokens", "{that}.applier", "{arguments}.0"]
-                // crendentialClientTokenId
+                // credentialClientTokenId
         }
     }
 
@@ -341,25 +341,25 @@ gpii.oauth2.dataStore.findCredentialClientTokenByClientId = function (credential
     return credentialClientToken ? credentialClientToken : undefined;
 };
 
-gpii.oauth2.dataStore.addCredentialClientToken = function (model, applier, crendentialClientTokenData) {
+gpii.oauth2.dataStore.addCredentialClientToken = function (model, applier, credentialClientTokenData) {
     var credentialClientTokenId = model.credentialClientTokensIdSeq;
     applier.change("credentialClientTokensIdSeq", model.credentialClientTokensIdSeq + 1);
-    var crendentialClientToken = {
+    var credentialClientToken = {
         id: credentialClientTokenId, // primary key
-        clientId: crendentialClientTokenData.clientId, // foreign key
-        accessToken: crendentialClientTokenData.accessToken,
-        allowAddPrefs: crendentialClientTokenData.allowAddPrefs,
+        clientId: credentialClientTokenData.clientId, // foreign key
+        accessToken: credentialClientTokenData.accessToken,
+        allowAddPrefs: credentialClientTokenData.allowAddPrefs,
         revoked: false
     };
-    model.credentialClientTokens.push(crendentialClientToken);
+    model.credentialClientTokens.push(credentialClientToken);
     applier.change("credentialClientTokens", model.credentialClientTokens);
-    return crendentialClientToken;
+    return credentialClientToken;
 };
 
 gpii.oauth2.dataStore.revokeCredentialClientToken = function (credentialClientTokens, applier, credentialClientTokenId) {
-    var crendentialClientToken = gpii.oauth2.dataStore.findCredentialClientTokenById(credentialClientTokens, credentialClientTokenId);
-    if (crendentialClientToken) {
-        crendentialClientToken.revoked = true;
+    var credentialClientToken = gpii.oauth2.dataStore.findCredentialClientTokenById(credentialClientTokens, credentialClientTokenId);
+    if (credentialClientToken) {
+        credentialClientToken.revoked = true;
         applier.change("credentialClientTokens", credentialClientTokens);
     }
 };
