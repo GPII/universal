@@ -511,4 +511,23 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    that.expressApp.post('/add-preferences',
+        function(req, res) {
+            var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+            if (!accessToken) {
+                res.send(401);
+            } else {
+                var client = that.authorizationService.getCredentialClientByAccessToken(accessToken);
+                res.json({"client": client});
+                if (!client) {
+                    res.send(404);
+                } else if (!client.allowAddPrefs) {
+                    res.send(401);
+                } else {
+                    // call /preferences to save prefs to the prefs server
+                    that.authorizationService.savePrefs(req.body.preferences);
+                }
+            }
+        }
+    );
 };

@@ -68,10 +68,19 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             func: "{dataStore}.findAuthByAccessToken"
                 // accessToken
         },
+        getCredentialClientByAccessToken: {
+            func: "{dataStore}.findCredentialClientByAccessToken"
+                // accessToken
+        },
         grantAccessTokenForOAuth2CredentialClientId: {
             funcName: "gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                 // clientId, scope
+        },
+        savePrefs: {
+            funcName: "gpii.oauth2.authorizationService.savePrefs",
+            args: ["{dataStore}", "{arguments}.0"]
+                // accessToken, preferences
         }
     }
 });
@@ -161,4 +170,8 @@ gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId = f
     }
     // Generate the authorization code and record it
     return credentialClientToken.accessToken;
+};
+
+gpii.oauth2.authorizationService.savePrefs = function (dataStore, preferences) {
+    // IN DEVELOPMENT
 };
