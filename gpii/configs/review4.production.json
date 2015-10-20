@@ -21,10 +21,10 @@
                 "url": "http://localhost:8081"
             },
             "Statistical": {
-                "url": "http://smm.gpii.eu/"
+                "url": "http://smm.gpii.eu"
             },
             "RuleBased": {
-                "url": "http://160.40.50.183:8080/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules"
+                "url": "http://160.40.50.183:8078"
             }
         }
     },

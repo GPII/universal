@@ -18,16 +18,16 @@
         },
         "matchMakers": {
             "Statistical1": {
-                "url": "http://smm1.gpii.eu/"
+                "url": "http://smm1.gpii.eu"
             },
             "Statistical2": {
-                "url": "http://smm2.gpii.eu/"
+                "url": "http://smm2.gpii.eu"
             },
             "Statistical1": {
-                "url": "http://smm3.gpii.eu/"
+                "url": "http://smm3.gpii.eu"
             },
             "Statistical4": {
-                "url": "http://smm4.gpii.eu/"
+                "url": "http://smm4.gpii.eu"
             }
         }
     },
