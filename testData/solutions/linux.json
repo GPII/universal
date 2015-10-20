@@ -1525,42 +1525,5 @@
         ],
         "stop": [
         ]
-    },
-
-    "www.cloud4all.info": {
-        "name": "Cloud4all site",
-        "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
-        },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.webSockets",
-                "options": {
-                    "path": "www.cloud4all.info"
-                },
-                "capabilities": [
-                    "applications.www\\.cloud4all\\.info.id"
-                ],
-                "capabilitiesTransformations": {
-                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captionsEnabled"
-                }
-            }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "update": [
-            "settings.configuration"
-        ],
-        "start": [
-        ],
-        "stop": [
-        ]
     }
 }
