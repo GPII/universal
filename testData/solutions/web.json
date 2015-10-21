@@ -481,7 +481,7 @@
     },
 
     "eu.gpii.olb": {
-        "name": "Online Banking Demonstrator",
+        "name": "Online Banking Prototype",
         "contexts": {
             "OS": [
                 {
@@ -491,7 +491,10 @@
         },
         "settingsHandlers": {
             "conf": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "eu.gpii.olb"
+                },
                 "capabilities": [
                     "applications.eu\\.gpii\\.olb.id",
                     "display.applications.eu\\.gpii\\.olb.name",
@@ -612,6 +615,9 @@
             "settings.conf"
         ],
         "restore": [
+            "settings.conf"
+        ],
+        "update": [
             "settings.conf"
         ]
     },

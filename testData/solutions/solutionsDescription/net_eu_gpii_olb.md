@@ -1,31 +1,31 @@
-# Online Banking Demonstrator (OLB)
+# Online Banking Prototype (OLB)
 
 ## Details
 
-* __Name__: Online Banking Demonstrator (OLB)
+* __Name__: Online Banking Prototype (OLB)
 * __Id__: eu.gpii.olb
-* __Platform__: Web
+* __Platform__: Win32; Web
 * __Contact__: Christophe Strobbe <strobbe@hdm-stuttgart.de>
 
 ## Description
-The __[Online Banking Demonstrator](http://gpii.eu/olb/)__ is a web-based application built to demonstrate 
+The __[Online Banking Prototype](http://gpii.eu/olb/)__ is a web-based application built to demonstrate 
 auto-personalisation from preference sets across multiple levels:
  * the application itself,
  * the browser (through browser extensions such as Cloud4Chrome),
  * assistive technologies (if any are needed),
  * the platform (typically a desktop operating system).
-The Online Banking Demonstrator uses an adapted version of 
+The Online Banking Prototype uses an adapted version of 
 [Fluid UI Options](http://wiki.fluidproject.org/display/Infusion14/UI+Options)
 with added support for sign language videos and pictograms.
 It will be available in four languages: English, German, Spanish and Greek.
-The Online Banking Demonstrator will be released under the Apache License, Version 2.0.
+The Online Banking Prototype will be released under the Apache License, Version 2.0.
 
 ## Integration
-The Online Banking Demonstrator is fully supported by the GPII personalisation framework
-in the sense that all settings avaiable through the UIOptions panel are mapped to application-specific terms.
+The Online Banking Prototype is fully supported by the GPII personalisation framework
+in the sense that all settings avaiable through its control panel are mapped to application-specific terms.
 
-Information about value ranges and some mappings to common terms can be found [in the spreadsheet "SP3 Settings for 2nd pilots"](https://docs.google.com/spreadsheet/ccc?key=0AppduB_JZh5EdDRYT1pmOTc5eUpNbkpMckhacUVxWXc&usp=drive_web#gid=31).
-(Find the tabe "eu.gpii.olb".)
+Information about value ranges and some mappings to common terms can be found [in the spreadsheet "SP3 Settings for 2nd and 3rd pilots"](https://docs.google.com/spreadsheets/d/1uaZV4mBze4udTlEikT30ApmE7CaO46eM0GLT0HVUESg/edit#gid=31).
+(Find the tab "eu.gpii.olb".)
 Note, however, that some of the application-specific terms for the OLB cannot yet be mapped to common terms, since the corresponding common terms still need to be defined.
 
 These acceptance tests will be expanded when all application-specific terms can be mapped to common terms. 
@@ -37,6 +37,8 @@ Manual testing can be of two kinds:
  * On a platform where GPII is running: Log in a token at the OS level (through USB, NFC, RFID, ...). 
  After the platform has adapted itself to the preferences corresponding to the token, open a browser, go to the OLB and log in there.
  Then check that the adaptations at the level of the web app do not conflict with or cancel out the adaptations at the other levels.
+ * Once the browser extension code has been integrated, GPII installed on a Windows system should pass on 
+ OLB settings from the Local Flow Manager to the OLB. (This information will be updated once that work is complete.)
 
 ### olb_Carla
 
@@ -64,6 +66,7 @@ Using this NP set in the OLB should have the following effects:
 * the sign language videos show a human sign language interpreter,
 * the interface language changes from English to German. 
 
+
 ### [olb_QinKesheng](https://zh.wikipedia.org/wiki/%E6%AC%BD%E5%8F%AF%E8%81%96)
 
 Using this NP set in the OLB should have the following effects:
@@ -71,4 +74,14 @@ Using this NP set in the OLB should have the following effects:
 * 'International Sign' sign language videoes become available (since the OLB does not support Chinese Sign Language or csl),
 * the sign language videos use avatars,
 * the interface language does not change since Chinese (zho) is not supported.
+
+### olb_Alicia_app
+
+Using this NP set in the OLB should have the following effects:
+
+* high contrast (white on black) should be enabled,
+* a simplified UI should be shown.
+
+Note: this NP set is not available in the `acceptanceTests` directory.
+
 
