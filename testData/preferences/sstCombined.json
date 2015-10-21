@@ -1,0 +1,42 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.certh.service-synthesis": {
+                        "serviceName": "callCombinedServices",
+                        "serviceInput": {
+                            "input": [
+                                {
+                                    "serviceName": "Translatewebpage",
+                                    "serviceInput": {
+                                        "inputUrl": "",
+                                        "targetLanguage": "fr"
+                                    }
+                                },
+                                {
+                                    "serviceName": "CallWebAnywhere"
+                                }
+                            ],
+                            "mappedVariables": [
+                                {
+                                    "fromServiceName": "Translatewebpage",
+                                    "fromVariableName": "finalUrl",
+                                    "toServiceName": "CallWebAnywhere",
+                                    "toVariableName": "inputUrl"
+                                },
+                                {
+                                    "fromServiceName": "Translatewebpage",
+                                    "fromVariableName": "targetLanguageCode",
+                                    "toServiceName": "CallWebAnywhere",
+                                    "toVariableName": "voiceLanguage"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
