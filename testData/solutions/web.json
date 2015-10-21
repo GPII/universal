@@ -611,6 +611,38 @@
                 }
             }
         }
+    },
+
+    "info.cloud4all.www": {
+        "name": "Cloud4all site",
+        "contexts": {
+            "OS": [{
+                "id": "web"
+            }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "info.cloud4all.www"
+                },
+                "capabilities": [
+                    "applications.info\\.cloud4all\\.www.id"
+                ],
+                "capabilitiesTransformations": {
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captionsEnabled"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "update": [
+            "settings.configuration"
+        ]
     }
 }
 
