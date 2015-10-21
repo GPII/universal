@@ -13,7 +13,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 "use strict";
 
-var fluid = require("infusion");
+var fluid = fluid || require("infusion");
 
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.oauth2");
@@ -31,8 +31,16 @@ fluid.defaults("gpii.oauth2.userService", {
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                 // username, password
         },
+        getAuthorizedClientsByGpiiToken: {
+            func: "{dataStore}.findAuthorizedClientsByGpiiToken"
+        },
         getUserById: {
             func: "{dataStore}.findUserById"
+        },
+        gpiiTokenHasAssociatedUser: {
+            funcName: "gpii.oauth2.userService.gpiiTokenHasAssociatedUser",
+            args: ["{dataStore}", "{arguments}.0"]
+                // gpiiToken
         }
     }
 });
@@ -44,4 +52,8 @@ gpii.oauth2.userService.authenticateUser = function (dataStore, username, passwo
         return user;
     }
     return false;
+};
+
+gpii.oauth2.userService.gpiiTokenHasAssociatedUser = function (dataStore, gpiiToken) {
+    return dataStore.findUserByGpiiToken(gpiiToken) ? true : false;
 };
