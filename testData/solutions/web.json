@@ -607,7 +607,13 @@
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
                 }
             }
-        }
+        },
+        "configure": [
+            "settings.conf"
+        ],
+        "restore": [
+            "settings.conf"
+        ]
     }
 }
 

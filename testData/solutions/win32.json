@@ -1323,7 +1323,6 @@
             }
         ]
     },
-
     "com.ilunion.cloud4chrome": {
         "name": "Cloud4all Chrome extension",
         "contexts": {
@@ -1399,6 +1398,40 @@
         "start": [
         ],
         "stop": [
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
+    },
+    "com.certh.service-synthesis": {
+        "name": "Service Synthesis Adapter",
+        "contexts": {
+            "OS": [{
+                "id": "win32",
+                "version": ">=5.0"
+            }]
+        },
+        "settingsHandlers": {
+            "sstconf": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "capabilities": [
+                    "applications.com\\.certh\\.service-synthesis.id"
+                ],
+                "options": {
+                    "path": "com.certh.service-synthesis",
+                    "SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
+                }
+            }
+        },
+        "configure": [
+            "settings.sstconf"
+        ],
+        "restore": [
+            "settings.sstconf"
+        ],
+        "start": [],
+        "stop": []
     }
 }

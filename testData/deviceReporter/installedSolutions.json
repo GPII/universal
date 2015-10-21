@@ -89,6 +89,10 @@
 
     {
         "id": "com.android.settings.system"
+    },
+
+    {
+        "id": "com.certh.service-synthesis"
     }
 
 ]

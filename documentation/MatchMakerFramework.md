@@ -114,8 +114,8 @@ The input for these POST requests will be in the following format. Note that it 
         "http://registry.gpii.net/terms/environment/sound": -6
         "http://registry.gpii.net/terms/environment/timeOfDay": "18:29:00"
     },
-    solutionsRegistry: {
-        //stuff from: https://github.com/GPII/universal/blob/master/testData/solutions/win32.json
+    solutionsRegistryEntries: {
+        // entries from: https://github.com/GPII/universal/blob/master/testData/solutions/win32.json (or whichever os is the relevent one) merged with the entries from https://github.com/GPII/universal/blob/master/testData/solutions/web.json
     },
     activeContexts: [
         "gpii-default",
@@ -160,6 +160,11 @@ The return payload from at call to `/match` should be in the following format:
                     "settings": {
                         "http://registry.gpii.net/common/fontSize": 200,
                         "http://registry.gpii.net/applications/com.microsoft.windows.desktop/otherSetting": "reallyBig"
+                    }
+                },
+                "com.bdigital.easit4all": {
+                    "settings": {
+                        "http://registry.gpii.net/common/fontSize": 25
                     }
                 },
                 "org.cats": {}

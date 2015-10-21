@@ -1430,15 +1430,61 @@
             "configuration": {
                 "type": "gpii.xrandr",
                 "capabilities": [
-                    "display.screenEnhacements",
+                    "display.screenEnhancement",
                     "applications.org\\.freedesktop\\.xrandr.id"
-                ]
-           }
+                ],
+                "capabilitiesTransformations": {
+                    "screen-resolution": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenResolution",
+                            "defaultInputValue": "normal",
+                            "options": {
+                                "high": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1366,
+                                            "height": 768
+                                        }
+                                    }
+                                },
+                                "normal": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1366,
+                                            "height": 768
+                                        }
+                                    }
+                                },
+                                "low": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1024,
+                                            "height": 768
+                                        }
+                                    }
+                                },
+                                "very low": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 800,
+                                            "height": 600
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         },
         "configure": [
             "settings.configuration"
         ],
-        "stop": [
+        "restore": [
+            "settings.configuration"
+        ],
+        "update": [
             "settings.configuration"
         ],
         "isInstalled": [
@@ -1524,6 +1570,40 @@
         "start": [
         ],
         "stop": [
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
+    },
+    "com.certh.service-synthesis": {
+        "name": "Service Synthesis Adapter",
+        "contexts": {
+            "OS": [{
+                "id": "linux",
+                "version": ">=2.6.26"
+            }]
+        },
+        "settingsHandlers": {
+            "sstconf": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "capabilities": [
+                    "applications.com\\.certh\\.service-synthesis.id"
+                ],
+                "options": {
+                    "path": "com.certh.service-synthesis",
+                    "SSTURL": "http://160.40.50.183:8080/CLOUD4All_SST_Restful_WS/SST/call_"
+                }
+            }
+        },
+        "configure": [
+            "settings.sstconf"
+        ],
+        "restore": [
+            "settings.sstconf"
+        ],
+        "start": [],
+        "stop": []
     }
 }
