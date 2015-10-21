@@ -1,0 +1,17 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 16,
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": false,
+                    "http://registry.gpii.net/common/magnifierEnabled": false,
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry.gpii.net/common/highContrastEnabled": false,
+                    "http://registry.gpii.net/common/invertColours": false
+                }
+            }
+        }
+    }
+}
