@@ -4,8 +4,9 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": false,
-                    "http://registry.gpii.net/common/screenResolution": "very low"
+                    "http://registry.gpii.net/applications/info.cloud4all.www": {
+                        "captionsEnabled": true
+                    }
                 }
             }
         }
