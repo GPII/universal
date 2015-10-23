@@ -139,6 +139,9 @@ fluid.defaults("gpii.oauth2.dataStoreHolder", {
 
 fluid.defaults("gpii.oauth2.authServer", {
     gradeNames: ["fluid.eventedComponent", "gpii.oauth2.dataStoreHolder", "autoInit"],
+    urls: {
+        preferencesPost: ""
+    },
     members: {
         expressApp: {
             expander: {
@@ -173,7 +176,8 @@ fluid.defaults("gpii.oauth2.authServer", {
             options: {
                 components: {
                     dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
-                }
+                },
+                urls: "{authServer}.options.urls"
             }
         },
         clientService: {
@@ -518,14 +522,12 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 res.send(401);
             } else {
                 var client = that.authorizationService.getCredentialClientByAccessToken(accessToken);
-                res.json({"client": client});
                 if (!client) {
                     res.send(404);
                 } else if (!client.allowAddPrefs) {
                     res.send(401);
                 } else {
-                    // call /preferences to save prefs to the prefs server
-                    that.authorizationService.savePrefs(req.body.preferences);
+                    that.authorizationService.savePrefs(req.body, function (data) { res.json(data) });
                 }
             }
         }

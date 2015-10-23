@@ -21,9 +21,20 @@ fluid.registerNamespace("gpii.oauth2");
 
 fluid.defaults("gpii.oauth2.authorizationService", {
     gradeNames: ["fluid.eventedComponent", "autoInit"],
+    urls: {
+        preferencesPost: ""
+    },
     components: {
         dataStore: {
             type: "gpii.oauth2.dataStore"
+        },
+        preferencesDataSource: {
+            type: "kettle.dataSource.URL",
+            options: {
+                url: "{authorizationService}.options.urls.preferencesPost",
+                writable: true,
+                writeMethod: "POST"
+            }
         }
     },
     invokers: {
@@ -79,8 +90,8 @@ fluid.defaults("gpii.oauth2.authorizationService", {
         },
         savePrefs: {
             funcName: "gpii.oauth2.authorizationService.savePrefs",
-            args: ["{dataStore}", "{arguments}.0"]
-                // accessToken, preferences
+            args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1"]
+                // accessToken, preferences, callback function
         }
     }
 });
@@ -172,6 +183,11 @@ gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId = f
     return credentialClientToken.accessToken;
 };
 
-gpii.oauth2.authorizationService.savePrefs = function (dataStore, preferences) {
-    // IN DEVELOPMENT
+gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, callback) {
+    var promise = preferencesDataSource.set({}, preferences);
+    promise.then(function (data) {
+        callback(data);
+    }, function (err) {
+        callback({"error": "Error when saving preferences"});
+    });
 };
