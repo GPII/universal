@@ -17,12 +17,11 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
+    path = require("path"),
+    configPath = path.resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
     $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
-
-var configName = "UntrustedDevelopmentTestsConfig";
 
 require("../index.js");
 require("./DevelopmentTestDefs.js");
@@ -31,21 +30,13 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.development");
 
-// Generate the config, write it to disk, and register a listener to
-// remove it after the tests are done
-
-gpii.test.untrustedFlowManager.writeCombinedConfig(configName + ".json");
-jqUnit.onAllTestsDone.addListener(gpii.test.untrustedFlowManager.makeFileRemover(configName + ".json"));
-
-// Build the testDefs and run the tests
-
 gpii.tests.untrusted.development.testDefs = [];
 
 fluid.each(gpii.tests.development.testDefs, function (testDef) {
     gpii.tests.untrusted.development.testDefs.push($.extend(true, {}, testDef, {
         config: {
-            configName: configName,
-            configPath: __dirname
+            configName: "untrusted.development.all.local",
+            configPath: configPath
         }
     }));
 });

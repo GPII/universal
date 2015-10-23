@@ -17,12 +17,11 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
+    path = require("path"),
+    configPath = path.resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
     $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
-
-var configName = "UntrustedUserLogonStateChangeTestsConfig";
 
 require("../index.js");
 require("./UserLogonStateChangeTestDefs.js");
@@ -31,21 +30,13 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.userLogonStateChange");
 
-// Generate the config, write it to disk, and register a listener to
-// remove it after the tests are done
-
-gpii.test.untrustedFlowManager.writeCombinedConfig(configName + ".json");
-jqUnit.onAllTestsDone.addListener(gpii.test.untrustedFlowManager.makeFileRemover(configName + ".json"));
-
-// Build the testDefs and run the tests
-
 gpii.tests.untrusted.userLogonStateChange.testDefs = [];
 
 fluid.each(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
     gpii.tests.untrusted.userLogonStateChange.testDefs.push($.extend(true, {}, testDef, {
         config: {
-            configName: configName,
-            configPath: __dirname
+            configName: "untrusted.development.all.local",
+            configPath: configPath
         },
         gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
         userToken: gpii.tests.userLogonStateChange.userToken
