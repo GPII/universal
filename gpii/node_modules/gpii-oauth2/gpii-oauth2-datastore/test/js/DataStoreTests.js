@@ -126,6 +126,14 @@ var fluid = fluid || require("infusion");
         jqUnit.assertEquals("redirectUri", "http://example.com/callback_B", client.redirectUri);
     };
 
+    gpii.tests.oauth2.dataStore.verifyClientD = function (client) {
+        jqUnit.assertEquals("name", "Client D", client.name);
+        jqUnit.assertEquals("oauth2ClientId", "client_id_D", client.oauth2ClientId);
+        jqUnit.assertEquals("oauth2ClientSecret", "client_secret_D", client.oauth2ClientSecret);
+        jqUnit.assertFalse("allowDirectGpiiTokenAccess", client.allowDirectGpiiTokenAccess);
+        jqUnit.assertTrue("allowAddPrefs", client.allowAddPrefs);
+    };
+
     gpii.tests.oauth2.dataStore.addAuthDecision1 = function (dataStore) {
         return dataStore.addAuthDecision(gpii.tests.oauth2.dataStore.testdata.authDecision1);
     };
@@ -163,10 +171,10 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.tests.oauth2.dataStore.verifyCredentialClientToken1 = function (credentialClientToken, expectedRevoked) {
-        jqUnit.assertEquals("clientId", gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.clientId, credentialClientToken.clientId);
-        jqUnit.assertEquals("accessToken", gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.accessToken, credentialClientToken.accessToken);
-        jqUnit.assertEquals("allowAddPrefs", gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.allowAddPrefs, credentialClientToken.allowAddPrefs);
-        jqUnit.assertEquals("revoked", expectedRevoked, credentialClientToken.revoked);
+        jqUnit.assertEquals("The value of clientId is expected", gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.clientId, credentialClientToken.clientId);
+        jqUnit.assertEquals("The value of accessToken is expected", gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.accessToken, credentialClientToken.accessToken);
+        jqUnit.assertEquals("The value of allowAddPrefs is expected", gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.allowAddPrefs, credentialClientToken.allowAddPrefs);
+        jqUnit.assertEquals("The value of revoked is expected", expectedRevoked, credentialClientToken.revoked);
     };
 
     gpii.tests.oauth2.dataStore.saveAuthCode1 = function (dataStore, authDecisionId) {
@@ -435,6 +443,42 @@ var fluid = fluid || require("infusion");
             gpii.tests.oauth2.dataStore.verifyCredentialClientToken1(retrieved, true);
 
             retrieved = dataStore.findCredentialClientTokenByClientId(credentialClientToken.clientId);
+            jqUnit.assertUndefined("Revoked credential client token is not found", retrieved);
+        });
+
+        jqUnit.test("findCredentialClientTokenByAccessToken(), find by a correct token, find by a wrong token, revoke and find again", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+
+            var credentialClientToken = dataStore.addCredentialClientToken(gpii.tests.oauth2.dataStore.testdata.credentialClientToken1);
+            jqUnit.assertValue("Id has been assigned", credentialClientToken.id);
+
+            var retrieved = dataStore.findCredentialClientTokenByAccessToken(gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.accessToken);
+            gpii.tests.oauth2.dataStore.verifyCredentialClientToken1(retrieved, gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.revoked);
+
+            var token = dataStore.findCredentialClientTokenByAccessToken("wrong-token");
+            jqUnit.assertUndefined("non-existing token returns undefined", token);
+
+            dataStore.revokeCredentialClientToken(credentialClientToken.id);
+
+            retrieved = dataStore.findCredentialClientTokenByAccessToken(gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.accessToken);
+            jqUnit.assertUndefined("Revoked credential client token is not found", retrieved);
+        });
+
+        jqUnit.test("findCredentialClientByAccessToken()", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+
+            var credentialClientToken = dataStore.addCredentialClientToken(gpii.tests.oauth2.dataStore.testdata.credentialClientToken1);
+            jqUnit.assertValue("Id has been assigned", credentialClientToken.id);
+
+            var client = dataStore.findCredentialClientByAccessToken("wrong-token");
+            jqUnit.assertUndefined("non-existing token returns undefined", client);
+
+            var retrieved = dataStore.findCredentialClientByAccessToken(gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.accessToken);
+            gpii.tests.oauth2.dataStore.verifyClientD(retrieved);
+
+            dataStore.revokeCredentialClientToken(credentialClientToken.id);
+
+            retrieved = dataStore.findCredentialClientByAccessToken(gpii.tests.oauth2.dataStore.testdata.credentialClientToken1.accessToken);
             jqUnit.assertUndefined("Revoked credential client token is not found", retrieved);
         });
 

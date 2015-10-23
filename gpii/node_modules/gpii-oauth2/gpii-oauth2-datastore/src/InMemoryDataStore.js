@@ -383,6 +383,6 @@ gpii.oauth2.dataStore.revokeCredentialClientToken = function (credentialClientTo
 
 gpii.oauth2.dataStore.findCredentialClientByAccessToken = function (credentialClientTokens, clients, accessToken) {
     var credentialClientToken = gpii.oauth2.dataStore.findCredentialClientTokenByAccessToken(credentialClientTokens, accessToken);
-    return gpii.oauth2.dataStore.findClientById(clients, credentialClientToken.clientId);
+    return credentialClientToken ? gpii.oauth2.dataStore.findClientById(clients, credentialClientToken.clientId) : credentialClientToken;
 };
 
