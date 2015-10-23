@@ -46,10 +46,6 @@ fluid.each(gpii.tests.development.testDefs, function (testDef) {
         config: {
             configName: configName,
             configPath: __dirname
-        },
-        distributeOptions: {
-            target: "{that kettle.test.request.http}.options.port",
-            record: 8088
         }
     }));
 });

@@ -48,11 +48,7 @@ fluid.each(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
             configPath: __dirname
         },
         gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
-        userToken: gpii.tests.userLogonStateChange.userToken,
-        distributeOptions: {
-            target: "{that kettle.test.request.http}.options.port",
-            record: 8088
-        }
+        userToken: gpii.tests.userLogonStateChange.userToken
     }));
 });
 
