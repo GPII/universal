@@ -980,30 +980,68 @@
                 }
             ]
         },
-        "settingsHandlers": [
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
                 "capabilities": [
-                    "display.screenEnhancement.displaySettings",
-                    "applications.com\\.microsoft\\.windows\\.displaySettings.id"
-                ]
-            ]
+                    "display.screenEnhancement",
+                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+                ],
+                "capabilitiesTransformations": {
+                    "screen-resolution": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenResolution",
+                            "defaultInputValue": "normal",
+                            "options": {
+                                "high": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1920,
+                                            "height": 1080
+                                        }
+                                    }
+                                },
+                                "normal": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1600,
+                                            "height": 900
+                                        }
+                                    }
+                                },
+                                "low": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1280,
+                                            "height": 720
+                                        }
+                                    }
+                                },
+                                "very low": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 800,
+                                            "height": 600
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         "configure": [
-            "settings.configure"
+            "settings.configuration"
         ],
         "restore": [
             "settings.configure"
         ],
-        "start": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.setScreenResolution"
-            }
+        "update": [
+            "settings.configuration"
         ],
-        "stop": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.setScreenResolution"
-            }
-        ]
-       },
+    },
 
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
