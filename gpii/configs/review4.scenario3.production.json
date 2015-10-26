@@ -29,7 +29,8 @@
             "Statistical4": {
                 "url": "http://smm4.gpii.eu"
             }
-        }
+        },
+        "matchMakerDispatcherDisabled": false 
     },
     "includes": [
         "../node_modules/deviceReporter/configs/production.json",
