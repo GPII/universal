@@ -982,7 +982,7 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.windows.spiSettingsHandler",
+                "type": "gpii.windowsScreenResolution",
                 "capabilities": [
                     "display.screenEnhancement",
                     "applications.com\\.microsoft\\.windows\\.screenResolution.id"
@@ -1036,7 +1036,7 @@
             "settings.configuration"
         ],
         "restore": [
-            "settings.configure"
+            "settings.configuration"
         ],
         "update": [
             "settings.configuration"
