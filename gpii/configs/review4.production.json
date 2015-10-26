@@ -26,7 +26,8 @@
             "RuleBased": {
                 "url": "http://160.40.50.183:8078"
             }
-        }
+        },
+        "matchMakerDispatcherDisabled": false
     },
     "includes": [
         "../node_modules/deviceReporter/configs/production.json",
