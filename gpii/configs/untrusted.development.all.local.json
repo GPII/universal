@@ -4,7 +4,7 @@
         "gradeNames": ["{that}.buildMultiServerKettleConfig", "autoInit"],
         "servers": {
             "localConfig": {
-                "configName": "untrusted",
+                "configName": "untrusted.development",
                 "configPath": "%universal/gpii/configs"
             },
             "cloudBasedConfig": {
