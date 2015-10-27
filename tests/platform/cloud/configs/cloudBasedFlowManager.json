@@ -2,7 +2,7 @@
 {
     "typeName": "acceptanceTests.base.cloudBased",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",

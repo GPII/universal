@@ -40,7 +40,7 @@ gpii.oauth2.createOauth2orizeServer = function () {
 
 // Unbound references: {clientService} and {authorizationService}
 fluid.defaults("gpii.oauth2.oauth2orizeServer", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     members: {
         oauth2orizeServer: {
             expander: {
@@ -83,7 +83,7 @@ gpii.oauth2.createPassport = function () {
 };
 
 fluid.defaults("gpii.oauth2.passport", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     members: {
         passport: {
             expander: {
@@ -129,11 +129,11 @@ gpii.oauth2.passport.listenPassport = function (passport, userService, clientSer
 
 // An empty grade to guide resolution of IoC expressions onto a suitable gpii.oauth2.dataStore
 fluid.defaults("gpii.oauth2.dataStoreHolder", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"]
+    gradeNames: ["fluid.component"]
 });
 
 fluid.defaults("gpii.oauth2.authServer", {
-    gradeNames: ["fluid.eventedComponent", "gpii.oauth2.dataStoreHolder", "autoInit"],
+    gradeNames: ["fluid.component", "gpii.oauth2.dataStoreHolder"],
     members: {
         expressApp: {
             expander: {
@@ -225,7 +225,7 @@ gpii.oauth2.authServer.registerBodyParser = function (that) {
 };
 
 fluid.defaults("gpii.oauth2.authServer.standalone", {
-    gradeNames: ["gpii.oauth2.authServer", "autoInit"],
+    gradeNames: ["gpii.oauth2.authServer"],
     listeners: {
         onCreate: [
             "gpii.oauth2.authServer.registerBodyParser",

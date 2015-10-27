@@ -1,7 +1,7 @@
 {
     "typeName": "development.all.local",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",
@@ -10,10 +10,6 @@
                     "port": 8081
                 }
             }
-        },
-        "distributeOptions": [{
-            "record": "fluid.emptySubcomponent",
-            "target": "{that dataSource errback}.type"
         }]
     },
     "includes": [

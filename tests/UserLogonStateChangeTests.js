@@ -29,7 +29,7 @@ require("../index.js");
 gpii.loadTestingSupport();
 
 fluid.defaults("gpii.tests.userLogonStateChange.testCaseHolder", {
-    gradeNames: ["gpii.test.common.testCaseHolder", "autoInit"],
+    gradeNames: ["gpii.test.common.testCaseHolder"],
     components: {
         resetRequest: {
             type: "kettle.test.request.http",

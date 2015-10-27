@@ -29,7 +29,7 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.deviceReporterMockChecks");
 
 fluid.defaults("gpii.tests.deviceReporterMockChecks.testCaseHolder", {
-    gradeNames: ["kettle.test.testCaseHolder", "autoInit"],
+    gradeNames: ["kettle.test.testCaseHolder"],
     components: {
         deviceRequest: {
             type: "kettle.test.request.http",

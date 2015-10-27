@@ -23,7 +23,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.registerNamespace("gpii.tests.oauth");
 
     fluid.defaults("gpii.tests.oauth2.login", {
-        gradeNames: ["gpii.oauth2.login", "autoInit"],
+        gradeNames: ["gpii.oauth2.login"],
         model: {
             loginFailure: false
         },
@@ -65,7 +65,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     fluid.defaults("gpii.tests.oauth2.loginTestTree", {
-        gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+        gradeNames: ["fluid.test.testEnvironment"],
         components: {
             login: {
                 type: "gpii.tests.oauth2.login",
@@ -78,7 +78,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.loginTester", {
-        gradeNames: ["fluid.test.testCaseHolder", "autoInit"],
+        gradeNames: ["fluid.test.testCaseHolder"],
         modules: [ {
             name: "Login tests",
             tests: [{

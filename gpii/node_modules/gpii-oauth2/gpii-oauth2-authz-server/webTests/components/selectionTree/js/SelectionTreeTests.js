@@ -926,7 +926,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
 
         fluid.defaults("gpii.tests.oauth2.preferencesSelectionTree", {
-            gradeNames: ["gpii.oauth2.preferencesSelectionTree", "autoInit"],
+            gradeNames: ["gpii.oauth2.preferencesSelectionTree"],
             availablePrefs: {
                 "increase-size": true,
                 "increase-size.appearance": true,

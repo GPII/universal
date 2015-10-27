@@ -15,8 +15,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 
-/*global require*/
-
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");

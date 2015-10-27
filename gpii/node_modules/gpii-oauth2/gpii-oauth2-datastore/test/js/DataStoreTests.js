@@ -26,7 +26,7 @@ var fluid = fluid || require("infusion");
     fluid.registerNamespace("gpii.tests.oauth2.dataStore.testdata");
 
     fluid.defaults("gpii.tests.oauth2.dataStore.dataStoreWithTestData", {
-        gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
+        gradeNames: ["gpii.oauth2.inMemoryDataStore"],
         model: {
             users: [
                 { id: 1, username: "alice", password: "a", gpiiToken: "alice_gpii_token" },

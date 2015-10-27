@@ -1,7 +1,7 @@
 {
     "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.lifecycleManagerServer.production",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",

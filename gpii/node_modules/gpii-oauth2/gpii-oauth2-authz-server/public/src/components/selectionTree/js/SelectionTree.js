@@ -28,7 +28,7 @@ var gpii = gpii || {};
     };
 
     fluid.defaults("gpii.oauth2.selectionTree", {
-        gradeNames: ["fluid.viewRelayComponent", "autoInit"],
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             tree: ".gpiic-oauth2-selectionTree-tree",
             leaf: ".gpiic-oauth2-selectionTree-leaf",
@@ -177,7 +177,7 @@ var gpii = gpii || {};
     });
 
     fluid.defaults("gpii.oauth2.preferencesSelectionTree", {
-        gradeNames: ["gpii.oauth2.selectionTree", "autoInit"],
+        gradeNames: ["gpii.oauth2.selectionTree"],
         domMap: {
             "": ".gpiic-oauth2-selectionTree-all",
             "increase-size": ".gpiic-oauth2-prefSelection-increase-size",

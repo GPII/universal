@@ -57,7 +57,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         };
 
         fluid.defaults("gpii.tests.oauth2.editPrivacySettings", {
-            gradeNames: ["gpii.oauth2.editPrivacySettings", "autoInit"],
+            gradeNames: ["gpii.oauth2.editPrivacySettings"],
             requestInfos: gpii.tests.requestInfos,
             model: {
                 clientData: gpii.tests.clientData
