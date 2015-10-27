@@ -970,8 +970,8 @@
         ]
     },
 
-    "com.microsoft.windows.displaySettings": {
-        "name": "Windows Display Settings",
+    "com.microsoft.windows.screenResolution": {
+        "name": "Windows Screen Resolution",
         "contexts": {
             "OS": [
                 {
@@ -982,10 +982,10 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.windowsScreenResolution",
+                "type": "gpii.windows.displaySettingsHandler",
                 "capabilities": [
-                    "display.screenEnhancement",
-                    "applications.com\\.microsoft\\.windows\\.displaySettings.id"
+                    "display.screenEnhancement.screenResolution",
+                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
                 ],
                 "capabilitiesTransformations": {
                     "screen-resolution": {
@@ -1031,7 +1031,7 @@
                     }
                 }
             }
-        }
+        },
         "configure": [
             "settings.configuration"
         ],
@@ -1040,7 +1040,7 @@
         ],
         "update": [
             "settings.configuration"
-        ],
+        ]
     },
 
     "com.microsoft.windows.cursors": {
