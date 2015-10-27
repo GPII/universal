@@ -985,7 +985,7 @@
                 "type": "gpii.windowsScreenResolution",
                 "capabilities": [
                     "display.screenEnhancement",
-                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+                    "applications.com\\.microsoft\\.windows\\.displaySettings.id"
                 ],
                 "capabilitiesTransformations": {
                     "screen-resolution": {
