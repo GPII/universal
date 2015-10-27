@@ -8,7 +8,7 @@
             },
             {
                 "source": "{that}.options.solutionsRegistryUrl",
-                "target": "{that localConfig flowManager}.options.urls.solutionsRegistry"
+                "target": "{that localConfig}.options.untrustedFlowManagerUrls.solutionsRegistry"
             },
             {
                 "source": "{that}.options.solutionsRegistryUrl",

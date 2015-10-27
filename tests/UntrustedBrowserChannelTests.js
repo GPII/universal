@@ -33,7 +33,7 @@ gpii.tests.untrusted.flowManager.browserChannel.testDefs = [];
 fluid.each(gpii.tests.flowManager.browserChannel.testDefs, function (testDef) {
     gpii.tests.untrusted.flowManager.browserChannel.testDefs.push($.extend(true, {}, testDef, {
         config: {
-            configName: "untrustedAllBrowserChannelTests",
+            configName: "untrustedBrowserChannelTests",
             configPath: configPath
         }
     }));
