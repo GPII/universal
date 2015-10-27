@@ -981,7 +981,7 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
+            "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
                 "capabilities": [
                     "display.screenEnhancement.screenResolution",
