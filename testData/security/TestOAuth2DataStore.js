@@ -19,23 +19,20 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.oauth2");
 
-fluid.defaults("gpii.oauth2.easitSampleDataStore", {
+fluid.defaults("gpii.oauth2.testDataStore", {
     gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
     listeners: {
-        onCreate: "gpii.oauth2.logEasitStartup"
+        onCreate: "gpii.oauth2.logTestDataStoreStartup"
     },
     model: {
         users: [
             { id: 1, username: "chromehc", password: "chromehc", gpiiToken: "review3_chrome_high_contrast" },
-            { id: 2, username: "bob", password: "b", gpiiToken: "bob_gpii_token" },
-            { id: 3, username: "review3_user_1", password: "test1234", gpiiToken: "review3_user_1" },
-            { id: 4, username: "review3_user_2", password: "test1234", gpiiToken: "review3_user_2" },
-            { id: 5, username: "review3_user_3", password: "test1234", gpiiToken: "review3_user_3" },
-            { id: 6, username: "review3_user_4", password: "test1234", gpiiToken: "review3_user_4" },
-            { id: 7, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" },
-            { id: 8, username: "ma2", password: "ma2", gpiiToken: "review3_ma2" },
-            { id: 9, username: "chris", password: "chris", gpiiToken: "chris" },
-            { id: 10, username: "li", password: "li", gpiiToken: "li" }
+            { id: 2, username: "ma1", password: "ma1", gpiiToken: "review3_ma1" },
+            { id: 3, username: "ma2", password: "ma2", gpiiToken: "review3_ma2" },
+            { id: 4, username: "review3_user_1", password: "test1234", gpiiToken: "review3_user_1" },
+            { id: 5, username: "review3_user_2", password: "test1234", gpiiToken: "review3_user_2" },
+            { id: 6, username: "review3_user_3", password: "test1234", gpiiToken: "review3_user_3" },
+            { id: 7, username: "review3_user_4", password: "test1234", gpiiToken: "review3_user_4" }
         ],
         clients: [
             {
@@ -77,60 +74,30 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 oauth2ClientSecret: false,
                 redirectUri: false,
                 allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 6,
+                name: "Windows Magnifier",
+                oauth2ClientId: "com.microsoft.windows.magnifier",
+                oauth2ClientSecret: false,
+                redirectUri: false,
+                allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 7,
+                name: "NVDA Screen Reader",
+                oauth2ClientId: "org.nvda-project",
+                oauth2ClientSecret: false,
+                redirectUri: false,
+                allowDirectGpiiTokenAccess: false
             }
         ],
-        authDecisionsIdSeq: 6,
-        authDecisions: [
-            {
-                id: 1,
-                userId: 7,
-                clientId: 4,
-                redirectUri: false,
-                accessToken: "ma1_access_token",
-                selectedPreferences: { "": true },
-                revoked: false
-            },
-            {
-                id: 2,
-                userId: 8,
-                clientId: 4,
-                redirectUri: false,
-                accessToken: "ma2_access_token",
-                selectedPreferences: { "": true },
-                revoked: false
-            },
-            {
-                id: 3,
-                userId: 9,
-                clientId: 4,
-                redirectUri: false,
-                accessToken: "ma_chris_access_token",
-                selectedPreferences: { "": true },
-                revoked: false
-            },
-            {
-                id: 4,
-                userId: 10,
-                clientId: 4,
-                redirectUri: false,
-                accessToken: "ma_li_access_token",
-                selectedPreferences: { "": true },
-                revoked: false
-            },
-            {
-                id: 5,
-                userId: 10,
-                clientId: 5,
-                redirectUri: false,
-                accessToken: "li_magnifier_access_token",
-                selectedPreferences: { "": true },
-                revoked: false
-            }
-        ]
+        authDecisionsIdSeq: 1,
+        authDecisions: [ ]
     }
 });
 
-gpii.oauth2.logEasitStartup = function (that) {
+gpii.oauth2.logTestDataStoreStartup = function (that) {
     var instantiator = fluid.getInstantiator(that);
-    console.log("Easit datastore starting up at path " + instantiator.idToPath(that.id));
+    fluid.log("OAuth2 test dataStore starting up at path " + instantiator.idToPath(that.id));
 };
