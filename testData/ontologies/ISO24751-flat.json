@@ -47,6 +47,7 @@
     "http://registry\\.gpii\\.net/common/adaptationPreference": "content.adaptationPreference",
     "http://registry\\.gpii\\.net/common/tableOfContents": "control.structuralNavigation.tableOfContents",
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
+    "http://registry\\.gpii\\.net/common/screenResolution": "display.screenEnhancement.screenResolution",
     "http://registry\\.gpii\\.net/common/language": "language",
     "": {
         "transform": {
