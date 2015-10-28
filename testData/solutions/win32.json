@@ -1037,6 +1037,84 @@
         ]
     },
 
+    "com.microsoft.windows.screenResolution": {
+        "name": "Windows Screen Resolution",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.screenResolution",
+                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+                ],
+                "capabilitiesTransformations": {
+                    "screen-resolution": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenResolution",
+                            "defaultInputValue": "normal",
+                            "options": {
+                                "high": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1920,
+                                            "height": 1080
+                                        }
+                                    }
+                                },
+                                "normal": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1600,
+                                            "height": 900
+                                        }
+                                    }
+                                },
+                                "low": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 1024,
+                                            "height": 768
+                                        }
+                                    }
+                                },
+                                "very low": {
+                                    "outputValue": {
+                                        "literalValue": {
+                                            "width": 800,
+                                            "height": 600
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "update": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
