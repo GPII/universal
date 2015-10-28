@@ -20,23 +20,23 @@ gpii.loadTestingSupport();
 
 require("./OAuth2AcceptanceDataStore.js");
 
-fluid.registerNamespace("gpii.tests.cloud.oauth2.addPrefs");
+fluid.registerNamespace("gpii.tests.cloud.oauth2.accessTokenClientCredentials");
 
-gpii.tests.cloud.oauth2.addPrefs.sequence = [
+gpii.tests.cloud.oauth2.accessTokenClientCredentials.sequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendAddPrefs",
-        args: ["{addPrefsRequest}", "{testCaseHolder}.options"]
+        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInClientCredentials",
+        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     { // 1
-        event: "{addPrefsRequest}.events.onComplete",
+        event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyAccessTokenInClientCredentialsResponse",
-        args: ["{arguments}.0", "{addPrefsRequest}"]
+        args: ["{arguments}.0", "{accessTokenRequest}"]
     }
 ];
 
-gpii.tests.cloud.oauth2.addPrefs.testDefs = [
+gpii.tests.cloud.oauth2.accessTokenClientCredentials.testDefs = [
     {
-        name: "Acceptance test for adding preferences",
+        name: "Acceptance test for suppporting the client credentials grant type",
         scope: "add_preferences",
         client_id: "client_first_discovery",
         client_secret: "client_secret_firstDiscovery"
@@ -55,29 +55,29 @@ gpii.tests.cloud.oauth2.addPrefs.testDefs = [
     }
 ];
 
-fluid.defaults("gpii.tests.disruption.addPrefsSequence", {
+fluid.defaults("gpii.tests.disruption.accessTokenClientCredentialsSequence", {
     gradeNames: ["gpii.test.disruption"],
-    sequenceName: "gpii.tests.cloud.oauth2.addPrefs.sequence"
+    sequenceName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.sequence"
 });
 
-fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken", {
-    gradeNames: ["gpii.tests.disruption.addPrefsSequence"],
+fluid.defaults("gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken", {
+    gradeNames: ["gpii.tests.disruption.accessTokenClientCredentialsSequence"],
     truncateAt: 1,
     expect: 1,
     recordName: "accessTokenForm",
     finalRecord: {
-        event: "{addPrefsRequest}.events.onComplete",
+        event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{addPrefsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 });
 
-gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
+gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptions = [{
     name: "A success access token request using the client credentials grant type",
-    gradeName: "gpii.tests.disruption.addPrefsSequence"
+    gradeName: "gpii.tests.disruption.accessTokenClientCredentialsSequence"
 }, {
     name: "Attempt to get access token without sending client_id",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken",
     changes: {
         path: "client_id",
         type: "DELETE"
@@ -85,7 +85,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 401
 }, {
     name: "Attempt to get access token without sending client_secret",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken",
     changes: {
         path: "client_secret",
         type: "DELETE"
@@ -93,7 +93,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 401
 }, {
     name: "Attempt to get access token without sending scope",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken",
     changes: {
         path: "scope",
         type: "DELETE"
@@ -101,7 +101,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 403
 }, {
     name: "Attempt to get access token without sending grant_type",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken",
     changes: {
         path: "grant_type",
         type: "DELETE"
@@ -109,35 +109,35 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 501
 }];
 
-gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient = [{
+gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptionsWithWrongClient = [{
     name: "Attempt to get access token with sending a wrong client",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken",
     expectedStatusCode: 403
 }];
 
-gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope = [{
+gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptionsWithWrongScope = [{
     name: "Attempt to get access token with sending a wrong scope",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptAccessToken",
     expectedStatusCode: 403
 }];
 
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[0],
+    gpii.tests.cloud.oauth2.accessTokenClientCredentials.testDefs[0],
     {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptions,
+    gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptions,
     __dirname
 );
 
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[1],
+    gpii.tests.cloud.oauth2.accessTokenClientCredentials.testDefs[1],
     {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient,
+    gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptionsWithWrongClient,
     __dirname
 );
 
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[2],
+    gpii.tests.cloud.oauth2.accessTokenClientCredentials.testDefs[2],
     {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope,
+    gpii.tests.cloud.oauth2.accessTokenClientCredentials.disruptionsWithWrongScope,
     __dirname
 );
