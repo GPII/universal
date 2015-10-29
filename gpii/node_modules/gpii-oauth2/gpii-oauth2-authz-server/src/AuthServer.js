@@ -527,7 +527,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 } else if (!client.allowAddPrefs) {
                     res.send(401);
                 } else {
-                    that.authorizationService.savePrefs(req.body, function (data) { res.json(data) });
+                    that.authorizationService.savePrefs(req, function (data) { res.json(data) });
                 }
             }
         }

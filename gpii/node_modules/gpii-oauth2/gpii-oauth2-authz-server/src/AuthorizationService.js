@@ -32,6 +32,9 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             type: "kettle.dataSource.URL",
             options: {
                 url: "{authorizationService}.options.urls.preferencesPost",
+                termMap: {
+                    view: "%view"
+                },
                 writable: true,
                 writeMethod: "POST"
             }
@@ -183,8 +186,9 @@ gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId = f
     return credentialClientToken.accessToken;
 };
 
-gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, callback) {
-    var promise = preferencesDataSource.set({}, preferences);
+gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, req, callback) {
+    var view = req.query.view ? req.query.view : "flat";
+    var promise = preferencesDataSource.set({"view": view}, req.body);
     promise.then(function (data) {
         callback(data);
     }, function (err) {
