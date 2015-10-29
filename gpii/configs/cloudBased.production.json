@@ -12,7 +12,7 @@
             }
         },
         "cloudBasedUrls": {
-            "preferences": "http://localhost:8082/preferences/%userToken",
+            "preferences": "http://preferences.gpii.net/preferences/%userToken",
             "deviceReporter": "",
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },

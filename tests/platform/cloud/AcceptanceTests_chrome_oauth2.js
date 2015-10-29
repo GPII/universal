@@ -16,9 +16,9 @@ var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.chrome");
+gpii.loadTestingSupport();
 
 require("./OAuth2AcceptanceDataStore.js");
-require("./AcceptanceTests_chrome.js");
 
 gpii.tests.cloud.oauth2.chrome.common = {
     client_id: "org.chrome.cloud4chrome",
@@ -279,8 +279,8 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
 }
 ];
 
-// gpii.test.cloudBased.oauth2.bootstrap(gpii.tests.cloud.chrome.testDefs, gpii.tests.cloud.oauth2.chrome.common, __dirname);
+var standardChromeTest = require("./AcceptanceTests_chrome_testDefs.json");
 
 // Test 1 is the first with nonempty preference set
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(gpii.tests.cloud.chrome.testDefs[1], gpii.tests.cloud.oauth2.chrome.common,
+gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(standardChromeTest[1], gpii.tests.cloud.oauth2.chrome.common,
     gpii.tests.cloud.oauth2.chrome.disruptions, __dirname);
