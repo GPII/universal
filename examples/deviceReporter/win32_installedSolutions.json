@@ -1,0 +1,51 @@
+{
+    "OS": {
+        "id": "win32",
+        "version": "5.0.0"
+    },
+    "solutions": [
+        {
+            "id": "com.microsoft.windows.magnifier"
+        },
+
+        {
+            "id": "com.microsoft.windows.onscreenKeyboard"
+        },
+
+        {
+            "id": "org.nvda-project"
+        },
+
+        {
+            "id": "trace.easyOne.communicator.windows"
+        },
+
+        {
+            "id": "trace.easyOne.sudan.windows"
+        },
+
+        {
+            "id": "webinsight.webAnywhere.windows"
+        },
+
+        {
+            "id": "com.texthelp.readWriteGold"
+        },
+
+        {
+            "id": "net.opendirective.maavis"
+        },
+
+        {
+            "id": "com.microsoft.windows.highContrast"
+        },
+
+        {
+            "id": "com.microsoft.windows.mouseTracking"
+        },
+
+        {
+            "id": "com.microsoft.windows.cursors"
+        }
+    ]
+}
