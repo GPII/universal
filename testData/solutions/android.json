@@ -3,9 +3,9 @@
         "name": "FreeSpeech",
         "contexts": {
             "OS": [{
-                    "id": "android",
-                    "version": ">=0.1"
-                }]
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -17,20 +17,22 @@
                 ]
             }
         },
-        "start": [
-            {
-                "type": "gpii.androidActivityManager.startFreespeech"
-            }
-        ]
+        "start": [{
+            "type": "gpii.androidActivityManager.startFreespeech"
+        }],
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findService",
+            "name": "com.blogspot.tonyatkins.freespeech"
+        }]
     },
 
     "com.android.talkback": {
         "name": "TalkBack Screen Reader",
         "contexts": {
             "OS": [{
-                    "id": "android",
-                    "version": ">=0.1"
-                }]
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -52,18 +54,20 @@
             {
                 "type": "gpii.androidActivityManager.stopTalkback"
             }
-        ]
+        ],
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findService",
+            "name": "com.google.android.marvin.talkback"
+        }]
     },
 
     "com.android.persistentConfiguration": {
         "name": "Android Configuration",
         "contexts": {
-            "OS": [
-                {
-                    "id": "android",
-                    "version": ">=0.1"
-                }
-            ]
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -267,18 +271,20 @@
         ],
         "restore": [
             "settings.configuration"
-        ]
+        ],
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findService",
+            "name": "android"
+        }]
     },
 
     "com.android.audioManager": {
         "name": "Android Audio Manager",
         "contexts": {
-            "OS": [
-                {
-                    "id": "android",
-                    "version": ">=0.1"
-                }
-            ]
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -319,18 +325,20 @@
         ],
         "restore": [
             "settings.configuration"
-        ]
+        ],
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findService",
+            "name": "com.android.providers.media"
+        }]
     },
 
     "com.android.settings.system": {
         "name": "Android UI Settings.System",
         "contexts": {
-            "OS": [
-                {
-                    "id": "android",
-                    "version": ">=0.1"
-                }
-            ]
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -382,18 +390,20 @@
         ],
         "restore": [
             "settings.configuration"
-        ]
+        ],
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findService",
+            "name": "com.android.providers.settings"
+        }]
     },
 
     "com.android.settings.secure": {
         "name": "Android UI Settings Secure",
         "contexts": {
-            "OS": [
-                {
-                    "id": "android",
-                    "version": ">=0.1"
-                }
-            ]
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -466,16 +476,20 @@
         ],
         "restore": [
             "settings.configuration"
-        ]
+        ],
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findService",
+            "name": "com.android.providers.settings"
+        }]
     },
 
     "se.omnitor.ecmobile": {
         "name": "Omnitor eCtouch/eCmobile",
         "contexts": {
-        "OS": [{
+            "OS": [{
                 "id": "android",
                 "version": ">=0.1"
-              }]
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -524,19 +538,25 @@
         "restore": [
             "settings.configuration"
         ],
-        "start": [
-            {
-                "type": "gpii.androidActivityManager.startActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            }
-        ],
+        "start": [{
+            "type": "gpii.androidActivityManager.startActivityByPackageName",
+            "packageName": "se.omnitor.ecmobile"
+        }],
         "stop": [
             {
                 "type": "gpii.androidActivityManager.stopActivityByPackageName",
                 "packageName": "se.omnitor.ecmobile"
-            },
-            {
+            }, {
                 "type": "gpii.androidActivityManager.goToHomeScreen"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.androidDeviceReporter.findService",
+                "name": "se.omnitor.ecmobile"
+            }, {
+                "type": "gpii.androidDeviceReporter.findService",
+                "name": "se.omnitor.ectouch"
             }
         ]
     },
@@ -544,12 +564,10 @@
     "es.codefactory.android.app.ma": {
         "name": "Mobile Accessibility",
         "contexts": {
-            "OS": [
-                {
-                    "id": "android",
-                    "version": ">=0.1"
-                }
-            ]
+            "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+            }]
         },
         "settingsHandlers": {
             "configuration": {
@@ -600,6 +618,10 @@
                     "access_commonprefs_capitalization": "http://registry\\.gpii\\.net/common/announceCapitals"
                 }
             }
-        }
+        },
+        "isInstalled": [{
+            "type": "gpii.androidDeviceReporter.findApplication",
+            "name": "Mobile Accessibility"
+        }]
     }
 }

@@ -23,5 +23,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 module.exports = [
     "android/android-builtIn-testSpec.js",
-    "android/android-talkback-testSpec.js"
+    "android/android-talkback-testSpec.js",
+    "android/android-dynamicDeviceReporter-testSpec.js"
 ];

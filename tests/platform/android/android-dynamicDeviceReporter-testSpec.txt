@@ -1,0 +1,8 @@
+android-dynamicDeviceReporter-testSpec.js
+
+Description:
+
+This tests the built in functionality of Android settings.
+It tests the system using two NP sets:
+ (1) os_android: application specific android settings
+ (2) talkback1: application specific talkback settings

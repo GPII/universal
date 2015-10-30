@@ -1,0 +1,6 @@
+{
+    "typeName": "acceptanceTests.android.dynamicDeviceReporter",
+    "includes": [
+        "${universal}/tests/configs/localInstallWithDynamicDeviceReporter.json"
+    ]
+}
