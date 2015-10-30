@@ -1,5 +1,5 @@
 {
-    "typeName": "preferencesServer.solutionsRegistry.production",
+    "type": "preferencesServer.solutionsRegistry.production",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

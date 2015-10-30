@@ -1,5 +1,5 @@
 {
-    "typeName": "development.all.local",
+    "type": "development.all.local",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {
@@ -10,7 +10,7 @@
                     "port": 8081
                 }
             }
-        }]
+        }
     },
     "includes": [
         "../node_modules/deviceReporter/configs/development.json",

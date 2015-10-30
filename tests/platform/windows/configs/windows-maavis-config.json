@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.maavis",
+    "type": "acceptanceTests.maavis",
     "options": {
         "components": {
             "server": {
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "${universal}/tests/configs/localInstall.json"
+        "%universal/tests/configs/localInstall.json"
     ]
 }

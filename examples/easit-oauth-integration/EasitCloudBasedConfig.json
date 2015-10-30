@@ -1,5 +1,5 @@
 {
-    "typeName": "cloudBased.flowManager.development.all.local.easitDemo",
+    "type": "cloudBased.flowManager.development.all.local.easitDemo",
     "options": {
         "gradeNames": ["fluid.component"],
         "distributeOptions": [{

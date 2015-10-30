@@ -1,6 +1,6 @@
 {
-    "typeName": "acceptanceTests.linux.dynamicDeviceReporter",
+    "type": "acceptanceTests.linux.dynamicDeviceReporter",
     "includes": [
-        "${universal}/tests/configs/localInstallWithDynamicDeviceReporter.json"
+        "%universal/tests/configs/localInstallWithDynamicDeviceReporter.json"
     ]
 }

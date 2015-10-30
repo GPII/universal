@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.linux.builtIn",
+    "type": "acceptanceTests.linux.builtIn",
     "options": {
         "components": {
             "server": {

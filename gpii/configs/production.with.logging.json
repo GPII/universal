@@ -1,5 +1,5 @@
 {
-    "typeName": "production.with.logging",
+    "type": "production.with.logging",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

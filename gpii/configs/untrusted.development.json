@@ -1,0 +1,19 @@
+{
+    "type": "untrusted",
+    "options": {
+        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "components": {
+            "server": {
+                "type": "kettle.server",
+                "options": {
+                    "logging": true,
+                    "port": 8081
+                }
+            }
+        }
+    },
+    "includes": [
+        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/flowManager/configs/untrusted.development.json"
+    ]
+}

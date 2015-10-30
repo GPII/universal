@@ -1,5 +1,5 @@
 {
-    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.lifecycleManagerServer.multipleMatchMakers",
+    "type": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.lifecycleManagerServer.multipleMatchMakers",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

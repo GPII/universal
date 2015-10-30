@@ -1,6 +1,5 @@
-
 {
-    "typeName": "acceptanceTests.base.cloudBased",
+    "type": "acceptanceTests.base.cloudBased",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {
@@ -19,6 +18,6 @@
         }
     },
     "includes": [
-        "${universal}/gpii/configs/cloudBased.development.all.local.json"
+        "%universal/gpii/configs/cloudBased.development.all.local.json"
     ]
 }

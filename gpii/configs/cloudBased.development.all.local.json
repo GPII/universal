@@ -1,5 +1,5 @@
 {
-    "typeName": "cloudBased.flowManager.development.all.local",
+    "type": "cloudBased.flowManager.development.all.local",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

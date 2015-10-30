@@ -1,5 +1,5 @@
 {
-    "typeName": "all.development.dr.production",
+    "type": "all.development.dr.production",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

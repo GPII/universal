@@ -1,5 +1,5 @@
 {
-    "typeName": "preferencesServer.standalone.production",
+    "type": "preferencesServer.standalone.production",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.windows.jaws",
+    "type": "acceptanceTests.windows.jaws",
     "options": {
         "components": {
             "server": {
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "${universal}/tests/configs/localInstall.json"
+        "%universal/tests/configs/localInstall.json"
     ]
 }

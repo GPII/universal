@@ -11,7 +11,7 @@ Like all other Kettle apps, the Matchmaker Framework has a config file. Generall
 
 ```
 {
-    "typeName": "matchMakerFramework.development.all.local",
+    "type": "matchMakerFramework.development.all.local",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {

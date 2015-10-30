@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.linux.orca",
+    "type": "acceptanceTests.linux.orca",
     "options": {
         "components": {
             "server": {
@@ -16,6 +16,6 @@
         }
     },
     "includes": [
-        "${universal}/tests/configs/localInstall.json"
+        "%universal/tests/configs/localInstall.json"
     ]
 }
