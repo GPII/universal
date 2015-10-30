@@ -1582,7 +1582,12 @@
             "settings.sstconf"
         ],
         "start": [],
-        "stop": []
+        "stop": [],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }
 
