@@ -1,7 +1,7 @@
 {
-    "type": "untrusted",
+    "type": "untrusted.development",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": "fluid.component",
         "components": {
             "server": {
                 "type": "kettle.server",

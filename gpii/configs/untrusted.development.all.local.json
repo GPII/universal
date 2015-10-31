@@ -1,7 +1,7 @@
 {
-    "type": "fluid.eventedComponent",
+    "type": "untrusted.development.all.local",
     "options": {
-        "gradeNames": ["{that}.buildMultiServerKettleConfig", "autoInit"],
+        "gradeNames": ["{that}.buildMultiServerKettleConfig"],
         "servers": {
             "localConfig": {
                 "configName": "untrusted.development",
@@ -38,6 +38,6 @@
         ]
     },
     "modules": [
-        "../../testData/security/TestOAuth2DataStore.js"
+        "%universal/testData/security/TestOAuth2DataStore.js"
     ]
 }
