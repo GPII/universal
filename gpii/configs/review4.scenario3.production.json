@@ -17,17 +17,20 @@
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },
         "matchMakers": {
+            "flat": {
+                "url": "http://localhost:8081"
+            },
             "Statistical1": {
-                "url": "http://smm1.gpii.eu"
+                "url": "http://smm1.gpii.eu:8076"
             },
             "Statistical2": {
-                "url": "http://smm2.gpii.eu"
+                "url": "http://smm2.gpii.eu:8075"
             },
-            "Statistical1": {
-                "url": "http://smm3.gpii.eu"
+            "Statistical3": {
+                "url": "http://smm3.gpii.eu:8074"
             },
             "Statistical4": {
-                "url": "http://smm4.gpii.eu"
+                "url": "http://smm4.gpii.eu:8073"
             }
         },
         "matchMakerDispatcherDisabled": false 
