@@ -67,6 +67,20 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 accessToken: "first_discovery_access_token",
                 revoked: false,
                 allowAddPrefs: true
+            },
+            {
+                id: 2,
+                clientId: 4,
+                accessToken: "non_existent_client",
+                revoked: false,
+                allowAddPrefs: true
+            },
+            {
+                id: 3,
+                clientId: 2,
+                accessToken: "not_allowed_to_add_prefs",
+                revoked: false,
+                allowAddPrefs: false
             }
         ]
     }

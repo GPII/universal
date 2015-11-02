@@ -22,21 +22,83 @@ require("./OAuth2AcceptanceDataStore.js");
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.addPrefs");
 
-gpii.tests.cloud.oauth2.addPrefs.sequence = [
+gpii.tests.cloud.oauth2.addPrefs.prefsData = {
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "gpii_firstDiscovery_language": "en-US"
+            }
+        }
+    }
+};
+
+gpii.tests.cloud.oauth2.addPrefs.transformedPrefs = {
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/language": "en-US"
+            }
+        }
+    }
+};
+
+gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendAddPrefs",
-        args: ["{addPrefsRequest}", "{testCaseHolder}.options"]
+        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInClientCredentials",
+        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+    },
+    { // 1
+        event: "{accessTokenRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyAccessTokenInClientCredentialsResponse",
+        args: ["{arguments}.0", "{accessTokenRequest}"]
+    },
+    { // 2
+        funcName: "gpii.test.cloudBased.oauth2.sendAddPrefsRequest",
+        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{accessTokenRequest}.accessToken", "firstDiscovery"]
+    },
+    { // 3
+        event: "{addPrefsRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyAddPrefsResponse",
+        args: ["{arguments}.0", "{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData]
+    },
+    { // 4
+        funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
+        args: ["{getPrefsRequest}", "{addPrefsRequest}", "firstDiscovery"]
+    },
+    { // 5
+        event: "{getPrefsRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyGetPrefsResponse",
+        args: ["{arguments}.0", "{getPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData]
+    },
+    { // 6
+        funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
+        args: ["{getPrefsRequest}", "{addPrefsRequest}"]
+    },
+    { // 7
+        event: "{getPrefsRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyGetPrefsResponse",
+        args: ["{arguments}.0", "{getPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.transformedPrefs]
+    }
+];
+
+// To test invalid /add-preferences requests
+gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence = [
+    { // 0
+        funcName: "gpii.test.cloudBased.oauth2.sendAddPrefsRequest",
+        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{testCaseHolder}.options.accessToken"]
     },
     { // 1
         event: "{addPrefsRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyAccessTokenInClientCredentialsResponse",
-        args: ["{arguments}.0", "{addPrefsRequest}"]
+        listener: "gpii.test.verifyStatusCodeResponse",
+        args: ["{arguments}.0", "{addPrefsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 ];
 
 gpii.tests.cloud.oauth2.addPrefs.testDefs = [
     {
-        name: "Acceptance test for adding preferences",
+        name: "Acceptance test for adding preferences - a successful entire work flow",
         scope: "add_preferences",
         client_id: "client_first_discovery",
         client_secret: "client_secret_firstDiscovery"
@@ -52,29 +114,46 @@ gpii.tests.cloud.oauth2.addPrefs.testDefs = [
         scope: "update_preferences",
         client_id: "client_first_discovery",
         client_secret: "client_secret_firstDiscovery"
+    },
+    {
+        name: "Acceptance test for suppporting /add-preferences (with false access token)",
+        accessToken: "false token"
+    },
+    {
+        name: "Acceptance test for suppporting /add-preferences (with false access token)",
+        accessToken: "non_existent_client"
+    },
+    {
+        name: "Acceptance test for suppporting /add-preferences (with false access token)",
+        accessToken: "not_allowed_to_add_prefs"
     }
 ];
 
+fluid.defaults("gpii.tests.disruption.mainSequence", {
+    gradeNames: ["gpii.test.disruption"],
+    sequenceName: "gpii.tests.cloud.oauth2.addPrefs.mainSequence"
+});
+
 fluid.defaults("gpii.tests.disruption.addPrefsSequence", {
     gradeNames: ["gpii.test.disruption"],
-    sequenceName: "gpii.tests.cloud.oauth2.addPrefs.sequence"
+    sequenceName: "gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence"
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken", {
-    gradeNames: ["gpii.tests.disruption.addPrefsSequence"],
+    gradeNames: ["gpii.tests.disruption.mainSequence"],
     truncateAt: 1,
     expect: 1,
     recordName: "accessTokenForm",
     finalRecord: {
-        event: "{addPrefsRequest}.events.onComplete",
+        event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{addPrefsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 });
 
 gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     name: "A success access token request using the client credentials grant type",
-    gradeName: "gpii.tests.disruption.addPrefsSequence"
+    gradeName: "gpii.tests.disruption.mainSequence"
 }, {
     name: "Attempt to get access token without sending client_id",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
@@ -121,6 +200,24 @@ gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope = [{
     expectedStatusCode: 403
 }];
 
+gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFlaseToken = [{
+    name: "Attempt to add preference sets with a false token",
+    gradeName: "gpii.tests.disruption.addPrefsSequence",
+    expectedStatusCode: 401
+}];
+
+gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient = [{
+    name: "Attempt to add preference sets with a non existent client",
+    gradeName: "gpii.tests.disruption.addPrefsSequence",
+    expectedStatusCode: 404
+}];
+
+gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs = [{
+    name: "Attempt to add preference sets with no privilege to add prefs",
+    gradeName: "gpii.tests.disruption.addPrefsSequence",
+    expectedStatusCode: 401
+}];
+
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
     gpii.tests.cloud.oauth2.addPrefs.testDefs[0],
     {},
@@ -128,6 +225,7 @@ gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
     __dirname
 );
 
+// Invalid /access_token request: wrong client
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
     gpii.tests.cloud.oauth2.addPrefs.testDefs[1],
     {},
@@ -135,9 +233,34 @@ gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
     __dirname
 );
 
+// Invalid /access_token request: wrong scope
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
     gpii.tests.cloud.oauth2.addPrefs.testDefs[2],
     {},
     gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope,
+    __dirname
+);
+
+// Invalid /add-preferences request: false token
+gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+    gpii.tests.cloud.oauth2.addPrefs.testDefs[3],
+    {},
+    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFlaseToken,
+    __dirname
+);
+
+// Invalid /add-preferences request: non existent client
+gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+    gpii.tests.cloud.oauth2.addPrefs.testDefs[4],
+    {},
+    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient,
+    __dirname
+);
+
+// Invalid /add-preferences request: no privilege to add prefs
+gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+    gpii.tests.cloud.oauth2.addPrefs.testDefs[5],
+    {},
+    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs,
     __dirname
 );
