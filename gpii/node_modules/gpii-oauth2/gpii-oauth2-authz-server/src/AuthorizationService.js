@@ -168,12 +168,18 @@ var fluid = fluid || require("infusion");
             authorizedClientIds[authorization.clientId] = true;
         });
 
-        var clients = fluid.copy(dataStore.findAllClients());
-        fluid.remove_if(clients, function (client) {
-            return authorizedClientIds.hasOwnProperty(client.id);
+        var unauthorizedClients = [];
+        var allClients = dataStore.findAllClients();
+        fluid.each(allClients, function (client) {
+            if (!authorizedClientIds.hasOwnProperty(client.id)) {
+                unauthorizedClients.push({
+                    name: client.name,
+                    oauth2ClientId: client.oauth2ClientId
+                });
+            }
         });
 
-        return clients;
+        return unauthorizedClients;
     };
 
 })();
