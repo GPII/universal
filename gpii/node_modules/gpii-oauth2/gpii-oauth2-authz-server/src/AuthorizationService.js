@@ -14,27 +14,28 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion");
-var crypto = require("crypto");
 
 var gpii = fluid.registerNamespace("gpii");
-fluid.registerNamespace("gpii.oauth2");
 
 fluid.defaults("gpii.oauth2.authorizationService", {
     gradeNames: ["fluid.eventedComponent", "autoInit"],
     components: {
         dataStore: {
             type: "gpii.oauth2.dataStore"
+        },
+        codeGenerator: {
+            type: "gpii.oauth2.codeGenerator"
         }
     },
     invokers: {
         grantAuthorizationCode: {
             funcName: "gpii.oauth2.authorizationService.grantAuthorizationCode",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
+            args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
                 // userId, clientId, redirectUri, selectedPreferences
         },
         addAuthorization: {
             funcName: "gpii.oauth2.authorizationService.addAuthorization",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // userId, clientId, selectedPreferences
         },
         userHasAuthorized: {
@@ -76,26 +77,11 @@ fluid.defaults("gpii.oauth2.authorizationService", {
     }
 });
 
-gpii.oauth2.authorizationService.generateHandle = function () {
-    // TODO ensure that handles cannot be guessed
-    // TODO crypto.randomBytes can fail if there is not enough entropy
-    // see http://nodejs.org/api/crypto.html
-    return crypto.randomBytes(16).toString("hex");
-};
-
-gpii.oauth2.authorizationService.generateAuthCode = function () {
-    return gpii.oauth2.authorizationService.generateHandle();
-};
-
-gpii.oauth2.authorizationService.generateAccessToken = function () {
-    return gpii.oauth2.authorizationService.generateHandle();
-};
-
-gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, userId, clientId, redirectUri, selectedPreferences) {
+gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, codeGenerator, userId, clientId, redirectUri, selectedPreferences) {
     // Record the authorization decision if we haven't already
     var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
     if (!authDecision) {
-        var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
+        var accessToken = codeGenerator.generateAccessToken();
         authDecision = dataStore.addAuthDecision({
             userId: userId,
             clientId: clientId,
@@ -105,12 +91,12 @@ gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, u
         });
     }
     // Generate the authorization code and record it
-    var code = gpii.oauth2.authorizationService.generateAuthCode();
+    var code = codeGenerator.generateAuthCode();
     dataStore.saveAuthCode(authDecision.id, code);
     return code;
 };
 
-gpii.oauth2.authorizationService.addAuthorization = function (dataStore, userId, oauth2ClientId, selectedPreferences) {
+gpii.oauth2.authorizationService.addAuthorization = function (dataStore, codeGenerator, userId, oauth2ClientId, selectedPreferences) {
     var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
     if (client) {
         var clientId = client.id;
@@ -119,7 +105,7 @@ gpii.oauth2.authorizationService.addAuthorization = function (dataStore, userId,
         var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
         if (!authDecision) {
             // If not, add one
-            var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
+            var accessToken = codeGenerator.generateAccessToken();
             dataStore.addAuthDecision({
                 userId: userId,
                 clientId: clientId,

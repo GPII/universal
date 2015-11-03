@@ -28,6 +28,7 @@ require("../../gpii-oauth2-utilities");
 require("./UserService");
 require("./AuthorizationService");
 require("./ClientService");
+require("./CodeGenerator");
 
 var gpii = fluid.registerNamespace("gpii");
 
