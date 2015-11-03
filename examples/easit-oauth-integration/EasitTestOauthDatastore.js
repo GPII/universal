@@ -72,6 +72,14 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             },
             {
                 id: 5,
+                name: "GNOME Magnifier",
+                oauth2ClientId: "org.gnome.desktop.a11y.magnifier",
+                oauth2ClientSecret: false,
+                redirectUri: false,
+                allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 6,
                 name: "First Discovery",
                 oauth2ClientId: "client_first_discovery",
                 oauth2ClientSecret: "client_secret_firstDiscovery",
@@ -79,7 +87,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 allowAddPrefs: true
             }
         ],
-        authDecisionsIdSeq: 5,
+        authDecisionsIdSeq: 6,
         authDecisions: [
             {
                 id: 1,
@@ -116,13 +124,22 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 accessToken: "ma_li_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
+            },
+            {
+                id: 5,
+                userId: 10,
+                clientId: 5,
+                redirectUri: false,
+                accessToken: "li_magnifier_access_token",
+                selectedPreferences: { "": true },
+                revoked: false
             }
         ],
         credentialClientTokensIdSeq: 2,
         credentialClientTokens: [
             {
                 id: 1,
-                clientId: 5,
+                clientId: 6,
                 accessToken: "first_discovery_access_token",
                 revoked: false,
                 allowAddPrefs: true
