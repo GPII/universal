@@ -11,102 +11,80 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-"use strict";
+var fluid = fluid || require("infusion");
 
-var fluid = require("infusion");
+(function () {
 
-var gpii = fluid.registerNamespace("gpii");
+    "use strict";
 
-fluid.defaults("gpii.oauth2.authorizationService", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
-    components: {
-        dataStore: {
-            type: "gpii.oauth2.dataStore"
+    var gpii = fluid.registerNamespace("gpii");
+
+    fluid.defaults("gpii.oauth2.authorizationService", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        components: {
+            dataStore: {
+                type: "gpii.oauth2.dataStore"
+            },
+            codeGenerator: {
+                type: "gpii.oauth2.codeGenerator"
+            }
         },
-        codeGenerator: {
-            type: "gpii.oauth2.codeGenerator"
-        }
-    },
-    invokers: {
-        grantAuthorizationCode: {
-            funcName: "gpii.oauth2.authorizationService.grantAuthorizationCode",
-            args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
+        invokers: {
+            grantAuthorizationCode: {
+                funcName: "gpii.oauth2.authorizationService.grantAuthorizationCode",
+                args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
                 // userId, clientId, redirectUri, selectedPreferences
-        },
-        addAuthorization: {
-            funcName: "gpii.oauth2.authorizationService.addAuthorization",
-            args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            },
+            addAuthorization: {
+                funcName: "gpii.oauth2.authorizationService.addAuthorization",
+                args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // userId, clientId, selectedPreferences
-        },
-        userHasAuthorized: {
-            funcName: "gpii.oauth2.authorizationService.userHasAuthorized",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            },
+            userHasAuthorized: {
+                funcName: "gpii.oauth2.authorizationService.userHasAuthorized",
+                args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // userId, clientId, redirectUri
-        },
-        exchangeCodeForAccessToken: {
-            funcName: "gpii.oauth2.authorizationService.exchangeCodeForAccessToken",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            },
+            exchangeCodeForAccessToken: {
+                funcName: "gpii.oauth2.authorizationService.exchangeCodeForAccessToken",
+                args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // code, clientId, redirectUri
-        },
-        getSelectedPreferences: {
-            funcName: "gpii.oauth2.authorizationService.getSelectedPreferences",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+            },
+            getSelectedPreferences: {
+                funcName: "gpii.oauth2.authorizationService.getSelectedPreferences",
+                args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                 // userId, authDecisionId
-        },
-        setSelectedPreferences: {
-            funcName: "gpii.oauth2.authorizationService.setSelectedPreferences",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            },
+            setSelectedPreferences: {
+                funcName: "gpii.oauth2.authorizationService.setSelectedPreferences",
+                args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                 // userId, authDecisionId, selectedPreferences
-        },
-        getAuthorizedClientsForUser: {
-            func: "{dataStore}.findAuthorizedClientsByUserId"
+            },
+            getAuthorizedClientsForUser: {
+                func: "{dataStore}.findAuthorizedClientsByUserId"
                 // userId
-        },
-        revokeAuthorization: {
-            func: "{dataStore}.revokeAuthDecision"
+            },
+            revokeAuthorization: {
+                func: "{dataStore}.revokeAuthDecision"
                 // userId, authDecisionId
-        },
-        getAccessTokenForOAuth2ClientIdAndGpiiToken: {
-            func: "{dataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken"
+            },
+            getAccessTokenForOAuth2ClientIdAndGpiiToken: {
+                func: "{dataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken"
                 // oauth2ClientId, gpiiToken
-        },
-        getAuthForAccessToken: {
-            func: "{dataStore}.findAuthByAccessToken"
+            },
+            getAuthForAccessToken: {
+                func: "{dataStore}.findAuthByAccessToken"
                 // accessToken
+            }
         }
-    }
-});
+    });
 
-gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, codeGenerator, userId, clientId, redirectUri, selectedPreferences) {
-    // Record the authorization decision if we haven't already
-    var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
-    if (!authDecision) {
-        var accessToken = codeGenerator.generateAccessToken();
-        authDecision = dataStore.addAuthDecision({
-            userId: userId,
-            clientId: clientId,
-            redirectUri: redirectUri,
-            accessToken: accessToken,
-            selectedPreferences: selectedPreferences
-        });
-    }
-    // Generate the authorization code and record it
-    var code = codeGenerator.generateAuthCode();
-    dataStore.saveAuthCode(authDecision.id, code);
-    return code;
-};
-
-gpii.oauth2.authorizationService.addAuthorization = function (dataStore, codeGenerator, userId, oauth2ClientId, selectedPreferences) {
-    var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-    if (client) {
-        var clientId = client.id;
-        var redirectUri = client.redirectUri;
-        // Check to see if we have an existing authorization
+    gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, codeGenerator, userId, clientId, redirectUri, selectedPreferences) {
+        // Record the authorization decision if we haven't already
         var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
         if (!authDecision) {
-            // If not, add one
             var accessToken = codeGenerator.generateAccessToken();
-            dataStore.addAuthDecision({
+            authDecision = dataStore.addAuthDecision({
                 userId: userId,
                 clientId: clientId,
                 redirectUri: redirectUri,
@@ -114,38 +92,64 @@ gpii.oauth2.authorizationService.addAuthorization = function (dataStore, codeGen
                 selectedPreferences: selectedPreferences
             });
         }
-    }
-};
+        // Generate the authorization code and record it
+        var code = codeGenerator.generateAuthCode();
+        dataStore.saveAuthCode(authDecision.id, code);
+        return code;
+    };
 
-gpii.oauth2.authorizationService.userHasAuthorized = function (dataStore, userId, clientId, redirectUri) {
-    return dataStore.findAuthDecision(userId, clientId, redirectUri) ? true : false;
-};
+    gpii.oauth2.authorizationService.addAuthorization = function (dataStore, codeGenerator, userId, oauth2ClientId, selectedPreferences) {
+        var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
+        if (client) {
+            var clientId = client.id;
+            var redirectUri = client.redirectUri;
+            // Check to see if we have an existing authorization
+            var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
+            if (!authDecision) {
+                // If not, add one
+                var accessToken = codeGenerator.generateAccessToken();
+                dataStore.addAuthDecision({
+                    userId: userId,
+                    clientId: clientId,
+                    redirectUri: redirectUri,
+                    accessToken: accessToken,
+                    selectedPreferences: selectedPreferences
+                });
+            }
+        }
+    };
 
-gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStore, code, clientId, redirectUri) {
-    var auth = dataStore.findAuthByCode(code);
-    // TODO flag an authCode after it is found to make single use
-    if (auth && auth.clientId === clientId && auth.redirectUri === redirectUri) {
-        return auth.accessToken;
-    } else {
-        return false;
-    }
-};
+    gpii.oauth2.authorizationService.userHasAuthorized = function (dataStore, userId, clientId, redirectUri) {
+        return dataStore.findAuthDecision(userId, clientId, redirectUri) ? true : false;
+    };
 
-gpii.oauth2.authorizationService.getSelectedPreferences = function (dataStore, userId, authDecisionId) {
-    var authDecision = dataStore.findAuthDecisionById(authDecisionId);
-    if (authDecision && authDecision.userId === userId && !authDecision.revoked) {
-        return authDecision.selectedPreferences;
-    } else {
-        // TODO or throw an exception?
-        return undefined;
-    }
-};
+    gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStore, code, clientId, redirectUri) {
+        var auth = dataStore.findAuthByCode(code);
+        // TODO flag an authCode after it is found to make single use
+        if (auth && auth.clientId === clientId && auth.redirectUri === redirectUri) {
+            return auth.accessToken;
+        } else {
+            return false;
+        }
+    };
 
-gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, userId, authDecisionId, selectedPreferences) {
-    var authDecision = dataStore.findAuthDecisionById(authDecisionId);
-    if (authDecision && authDecision.userId === userId) {
-        authDecision.selectedPreferences = selectedPreferences;
-        dataStore.updateAuthDecision(userId, authDecision);
-    }
-    // TODO else communicate not found?
-};
+    gpii.oauth2.authorizationService.getSelectedPreferences = function (dataStore, userId, authDecisionId) {
+        var authDecision = dataStore.findAuthDecisionById(authDecisionId);
+        if (authDecision && authDecision.userId === userId && !authDecision.revoked) {
+            return authDecision.selectedPreferences;
+        } else {
+            // TODO or throw an exception?
+            return undefined;
+        }
+    };
+
+    gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, userId, authDecisionId, selectedPreferences) {
+        var authDecision = dataStore.findAuthDecisionById(authDecisionId);
+        if (authDecision && authDecision.userId === userId) {
+            authDecision.selectedPreferences = selectedPreferences;
+            dataStore.updateAuthDecision(userId, authDecision);
+        }
+        // TODO else communicate not found?
+    };
+
+})();
