@@ -162,7 +162,7 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.dataStore.findAllClients = function (clients) {
-        return clients;
+        return fluid.copy(clients);
     };
 
     // Authorization Decisions

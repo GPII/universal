@@ -33,48 +33,53 @@ var fluid = fluid || require("infusion");
             grantAuthorizationCode: {
                 funcName: "gpii.oauth2.authorizationService.grantAuthorizationCode",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
-                // userId, clientId, redirectUri, selectedPreferences
+                    // userId, clientId, redirectUri, selectedPreferences
             },
             addAuthorization: {
                 funcName: "gpii.oauth2.authorizationService.addAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                // userId, clientId, selectedPreferences
+                    // userId, clientId, selectedPreferences
             },
             userHasAuthorized: {
                 funcName: "gpii.oauth2.authorizationService.userHasAuthorized",
                 args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                // userId, clientId, redirectUri
+                    // userId, clientId, redirectUri
             },
             exchangeCodeForAccessToken: {
                 funcName: "gpii.oauth2.authorizationService.exchangeCodeForAccessToken",
                 args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                // code, clientId, redirectUri
+                    // code, clientId, redirectUri
             },
             getSelectedPreferences: {
                 funcName: "gpii.oauth2.authorizationService.getSelectedPreferences",
                 args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
-                // userId, authDecisionId
+                    // userId, authDecisionId
             },
             setSelectedPreferences: {
                 funcName: "gpii.oauth2.authorizationService.setSelectedPreferences",
                 args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                // userId, authDecisionId, selectedPreferences
+                    // userId, authDecisionId, selectedPreferences
+            },
+            getUnauthorizedClientsForUser: {
+                funcName: "gpii.oauth2.authorizationService.getUnauthorizedClientsForUser",
+                args: ["{dataStore}", "{arguments}.0"]
+                    // userId
             },
             getAuthorizedClientsForUser: {
                 func: "{dataStore}.findAuthorizedClientsByUserId"
-                // userId
+                    // userId
             },
             revokeAuthorization: {
                 func: "{dataStore}.revokeAuthDecision"
-                // userId, authDecisionId
+                    // userId, authDecisionId
             },
             getAccessTokenForOAuth2ClientIdAndGpiiToken: {
                 func: "{dataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken"
-                // oauth2ClientId, gpiiToken
+                    // oauth2ClientId, gpiiToken
             },
             getAuthForAccessToken: {
                 func: "{dataStore}.findAuthByAccessToken"
-                // accessToken
+                    // accessToken
             }
         }
     });
@@ -150,6 +155,25 @@ var fluid = fluid || require("infusion");
             dataStore.updateAuthDecision(userId, authDecision);
         }
         // TODO else communicate not found?
+    };
+
+    gpii.oauth2.authorizationService.getUnauthorizedClientsForUser = function (dataStore, userId) {
+        if (!dataStore.findUserById(userId)) {
+            return undefined;
+        }
+
+        var authorizations = dataStore.findAuthDecisionsByUserId(userId);
+        var authorizedClientIds = {};
+        fluid.each(authorizations, function (authorization) {
+            authorizedClientIds[authorization.clientId] = true;
+        });
+
+        var clients = fluid.copy(dataStore.findAllClients());
+        fluid.remove_if(clients, function (client) {
+            return authorizedClientIds.hasOwnProperty(client.id);
+        });
+
+        return clients;
     };
 
 })();
