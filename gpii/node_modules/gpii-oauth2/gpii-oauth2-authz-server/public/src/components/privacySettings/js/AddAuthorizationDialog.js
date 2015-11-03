@@ -18,13 +18,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 (function ($, fluid) {
     "use strict";
 
-    // TODO: Factoring of gpii.oauth2.editPrivacySettings
-    // Options:
-    // 1. One grade that can be used for both editing and adding
-    // 2. Three grades: a common base plus one for editing and one for adding
-
     fluid.defaults("gpii.oauth2.addAuthorizationDialog", {
-        gradeNames: ["gpii.oauth2.editPrivacySettings", "autoInit"],
+        gradeNames: ["gpii.oauth2.privacySettingsDialog", "autoInit"],
         requestInfos: {
             addAuthorization: {
                 url: "/authorizations",
@@ -35,9 +30,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             authorizationAdded: null
         },
         listeners: {
-            "onCreate.fetchDecisionPrefs": {
-                listener: "{that}.setDecisionPrefs",
+            "onCreate.setInitialSelectedPrefs": {
+                listener: "{that}.setInitialSelectedPrefs",
                 args: [ {} ]
+            },
+            onDone: {
+                listener: "{that}.sendAddAuthorization"
             }
         },
         invokers: {
@@ -49,7 +47,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 "this": "{that}.events.authorizationAdded",
                 method: "fire"
             },
-            saveDecisionPrefs: {
+            sendAddAuthorization: {
                 funcName: "gpii.oauth2.ajax",
                 args: [
                     "{that}.options.requestInfos.addAuthorization.url",
@@ -61,8 +59,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                             expander: {
                                 funcName: "JSON.stringify",
                                 args: [{
-                                    // TODO: Remove expander below after refactor grades
-                                    expander: null, // Override the expander in gpii.oauth2.editPrivacySettings
                                     oauth2ClientId: "{that}.model.clientData.oauth2ClientId",
                                     selectedPreferences: "@expand:{that}.selectionsAsServerModel()"
                                 }]
