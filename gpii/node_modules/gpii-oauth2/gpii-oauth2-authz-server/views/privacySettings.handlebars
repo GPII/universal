@@ -56,21 +56,12 @@
             <div>
                 <button class="gpiic-oauth2-privacySettings-addService">Add service</button>
                 <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
-
-                    {{!--
-                    *********************************************************
-                    TODO These services need to be populated programmatically
-                    *********************************************************
-                    --}}
-
-                    <li>
-                        <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Service A</a>
-                        <input type="hidden" name="oauth2ClientId" value="org.chome.cloud4chrome" />
-                    </li>
-                    <li>
-                        <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Easit4all</a>
-                        <input type="hidden" name="oauth2ClientId" value="com.bdigital.easit4all" />
-                    </li>
+                    {{#each unauthorizedServices}}
+                        <li>
+                            <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">{{serviceName}}</a>
+                            <input type="hidden" name="oauth2ClientId" value="{{oauth2ClientId}}" />
+                        </li>
+                    {{/each}}
                 </ul>
             </div>
 

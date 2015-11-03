@@ -173,7 +173,7 @@ var fluid = fluid || require("infusion");
         fluid.each(allClients, function (client) {
             if (!authorizedClientIds.hasOwnProperty(client.id)) {
                 unauthorizedClients.push({
-                    name: client.name,
+                    clientName: client.name,
                     oauth2ClientId: client.oauth2ClientId
                 });
             }

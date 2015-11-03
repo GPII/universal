@@ -140,9 +140,9 @@ var fluid = fluid || require("infusion");
             var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
             var clients = authorizationService.getUnauthorizedClientsForUser(1);
             jqUnit.assertEquals("Expect 2 clients", 2, clients.length);
-            jqUnit.assertEquals("Client A", "Client A", clients[0].name);
+            jqUnit.assertEquals("Client A", "Client A", clients[0].clientName);
             jqUnit.assertEquals("client_id_A", "client_id_A", clients[0].oauth2ClientId);
-            jqUnit.assertEquals("Client B", "Client B", clients[1].name);
+            jqUnit.assertEquals("Client B", "Client B", clients[1].clientName);
             jqUnit.assertEquals("client_id_B", "client_id_B", clients[1].oauth2ClientId);
         });
 
@@ -150,7 +150,7 @@ var fluid = fluid || require("infusion");
             var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
             var clients = authorizationService.getUnauthorizedClientsForUser(2);
             jqUnit.assertEquals("Expect 1 client", 1, clients.length);
-            jqUnit.assertEquals("Client B", "Client B", clients[0].name);
+            jqUnit.assertEquals("Client B", "Client B", clients[0].clientName);
             jqUnit.assertEquals("client_id_B", "client_id_B", clients[0].oauth2ClientId);
         });
 
@@ -164,7 +164,7 @@ var fluid = fluid || require("infusion");
             var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
             var clients = authorizationService.getUnauthorizedClientsForUser(4);
             jqUnit.assertEquals("Expect 1 client", 1, clients.length);
-            jqUnit.assertEquals("Client A", "Client A", clients[0].name);
+            jqUnit.assertEquals("Client A", "Client A", clients[0].clientName);
             jqUnit.assertEquals("client_id_A", "client_id_A", clients[0].oauth2ClientId);
         });
 

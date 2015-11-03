@@ -317,17 +317,25 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
 
 gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
     var authorizedClients = authorizationService.getAuthorizedClientsForUser(user.id);
+    var unauthorizedClients = authorizationService.getUnauthorizedClientsForUser(user.id);
     // Build view objects
-    var services = fluid.transform(authorizedClients, function  (client) {
+    var authorizedServices = fluid.transform(authorizedClients, function (client) {
         return {
             authDecisionId: client.authDecisionId,
             oauth2ClientId: client.oauth2ClientId,
             serviceName: client.clientName
         };
     });
+    var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
+        return {
+            oauth2ClientId: client.oauth2ClientId,
+            serviceName: client.clientName
+        };
+    });
     return {
         username: user.username,
-        authorizedServices: services
+        authorizedServices: authorizedServices,
+        unauthorizedServices: unauthorizedServices
     };
 };
 
