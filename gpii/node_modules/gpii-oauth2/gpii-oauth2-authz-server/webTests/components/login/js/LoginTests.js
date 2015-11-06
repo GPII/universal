@@ -13,8 +13,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-
-// Declare dependencies
 /* global fluid, gpii, jqUnit */
 
 (function () {
@@ -45,13 +43,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     gpii.tests.oauth2.login.assertNoErrorMsg = function (that) {
-        jqUnit.notExists("The error message should not be rendered", that.locate("error"));
-        jqUnit.notExists("The error message icon should not be rendered", that.locate("errorIcon"));
+        jqUnit.assertNodeNotExists("The error message should not be rendered", that.locate("error"));
+        jqUnit.assertNodeNotExists("The error message icon should not be rendered", that.locate("errorIcon"));
     };
 
     gpii.tests.oauth2.login.assertErrorMsg = function (that) {
-        jqUnit.exists("The error message should be rendered", that.locate("error"));
-        jqUnit.exists("The error message icon should be rendered", that.locate("errorIcon"));
+        jqUnit.assertNodeExists("The error message should be rendered", that.locate("error"));
+        jqUnit.assertNodeExists("The error message icon should be rendered", that.locate("errorIcon"));
     };
 
     gpii.tests.oauth2.login.testLogin = function (that) {
