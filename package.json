@@ -6,13 +6,13 @@
     "bugs": "http://issues.gpii.net/browse/GPII",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "2.0.0-dev.20151027T140548Z.c9d974c",
+        "infusion": "git://github.com/amb26/infusion.git#539c8dc6bdd2170944c0a4c58da52dd37fb098c0",
         "dedupe-infusion": "1.0.0",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/amb26/kettle.git#80f72e6ebe09ac73e8aa94bda36c15ac3c2d33a1",
+        "kettle": "git://github.com/amb26/kettle.git#c7207e93518b3c61cb6e923f22b1e26f2c365f64",
 
         "express": "~4.13.3",
         "body-parser": "~1.13.3",
