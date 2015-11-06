@@ -26,19 +26,41 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         events: {
             serviceSelected: null
         },
+        model: {
+            menuIsOpen: false
+        },
+        modelListeners: {
+            menuIsOpen: {
+                funcName: "gpii.oauth2.servicesMenu.updateVisibility",
+                args: [
+                    "{that}.container",
+                    "{that}.model.menuIsOpen",
+                    "{that}.options.styles.menuOpen",
+                    "{that}.close"
+                ]
+            }
+        },
         listeners: {
             "onCreate.setup": "gpii.oauth2.servicesMenu.setup"
         },
         invokers: {
             open: {
-                "this": "{that}.container",
-                method: "toggleClass",
-                args: ["{that}.options.styles.menuOpen", true]
+                funcName: "gpii.oauth2.servicesMenu.open",
+                args: ["{that}"]
+            },
+            close: {
+                funcName: "gpii.oauth2.servicesMenu.close",
+                args: ["{that}"]
             },
             fireServiceSelected: {
                 funcName: "gpii.oauth2.servicesMenu.fireServiceSelected",
-                args: ["{that}", "{that}.options.selectors.serviceName",
-                       "{that}.options.selectors.oauth2ClientId", "{arguments}.0", "{arguments}.1"]
+                args: [
+                    "{that}",
+                    "{that}.options.selectors.serviceName",
+                    "{that}.options.selectors.oauth2ClientId",
+                    "{arguments}.0",
+                    "{arguments}.1"
+                ]
             }
         },
         selectors: {
@@ -52,6 +74,24 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.oauth2.servicesMenu.setup = function (that) {
         that.container.menu(that.options.widgetOptions);
+    };
+
+    gpii.oauth2.servicesMenu.updateVisibility = function (container, isOpen, menuOpenStyle, closeFunc) {
+        container.toggleClass(menuOpenStyle, isOpen);
+        if (isOpen) {
+            fluid.focus(container);
+            fluid.globalDismissal({ menu: container }, closeFunc);
+        } else {
+            fluid.globalDismissal({ menu: container }, null);
+        }
+    };
+
+    gpii.oauth2.servicesMenu.open = function (that) {
+        that.applier.change("menuIsOpen", true);
+    };
+
+    gpii.oauth2.servicesMenu.close = function (that) {
+        that.applier.change("menuIsOpen", false);
     };
 
     gpii.oauth2.servicesMenu.fireServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {

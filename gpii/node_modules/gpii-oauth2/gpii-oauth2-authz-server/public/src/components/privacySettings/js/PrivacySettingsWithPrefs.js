@@ -219,8 +219,8 @@ var gpii = gpii || {};
                 args: ["{arguments}.0", "{that}"]
             },
             openAddServiceMenu: {
-                "this": "{addServiceMenu}",
-                method: "open"
+                funcName: "gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu",
+                args: ["{addServiceMenu}", "{arguments}.0"] // event
             }
         }
     });
@@ -274,6 +274,11 @@ var gpii = gpii || {};
     gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit = function (evt, that) {
         that.applier.change("currentClientData", that.getClientData(evt.target, that.options.selectors.editButton));
         that.events.onRenderEditDialog.fire();
+    };
+
+    gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu = function (menu, event) {
+        event.stopPropagation();
+        menu.open();
     };
 
     gpii.oauth2.privacySettingsWithPrefs.addService = function (that, serviceName, oauth2ClientId) {
