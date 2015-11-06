@@ -76,7 +76,8 @@ var gpii = gpii || {};
                 },
                 args: ["{that}"]
             },
-            onDone: null
+            onDone: null,
+            onClose: null
         },
         listeners: {
             "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
@@ -107,9 +108,8 @@ var gpii = gpii || {};
         },
         invokers: {
             closeDialog: {
-                "this": "{that}.dialog",
-                method: "dialog",
-                args: ["close"]
+                funcName: "gpii.oauth2.privacySettingsDialog.closeDialog",
+                args: ["{that}.dialog", "{that}.events.onClose"]
             },
             fetchAvailableAuthorizedPrefs: {
                 funcName: "gpii.oauth2.ajax",
@@ -201,6 +201,11 @@ var gpii = gpii || {};
         var fullDialogOptions = $.extend(true, {}, dialogOptions, that.options.dialogOptions);
         that.dialog = that.container.dialog(fullDialogOptions);
         that.dialog.dialog("open");
+    };
+
+    gpii.oauth2.privacySettingsDialog.closeDialog = function (dialog, onCloseEvt) {
+        dialog.dialog("close");
+        onCloseEvt.fire();
     };
 
 })(jQuery, fluid);

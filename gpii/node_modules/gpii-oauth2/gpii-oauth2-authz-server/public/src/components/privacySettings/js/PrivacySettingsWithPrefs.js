@@ -53,7 +53,6 @@ var gpii = gpii || {};
                     }
                 }
             },
-            // TODO: Or can I reuse editPrivacySettings?
             addAuthorizationDialog: {
                 type: "gpii.oauth2.addAuthorizationDialog",
                 container: "{privacySettingsWithPrefs}.dom.addAuthorizationDialog",
@@ -68,6 +67,10 @@ var gpii = gpii || {};
                             "this": location,
                             method: "reload",
                             args: ["true"]
+                        },
+                        onClose: {
+                            "this": "{addServiceMenu}",
+                            method: "close"
                         }
                     }
                 }
@@ -108,7 +111,7 @@ var gpii = gpii || {};
                     listeners: {
                         "serviceSelected": {
                             funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
-                            args: ["{privacySettingsWithPrefs}", "{arguments}.0", "{arguments}.1"]
+                            args: ["{privacySettingsWithPrefs}", "{addServiceMenu}", "{arguments}.0", "{arguments}.1"]
                         }
                     }
                 }
@@ -281,7 +284,8 @@ var gpii = gpii || {};
         menu.open();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.addService = function (that, serviceName, oauth2ClientId) {
+    gpii.oauth2.privacySettingsWithPrefs.addService = function (that, menu, serviceName, oauth2ClientId) {
+        menu.keepOpen();
         var clientDataForAdd = {
             serviceName: serviceName,
             oauth2ClientId: oauth2ClientId

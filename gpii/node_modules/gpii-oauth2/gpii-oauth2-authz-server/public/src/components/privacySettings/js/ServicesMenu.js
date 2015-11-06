@@ -52,6 +52,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 funcName: "gpii.oauth2.servicesMenu.close",
                 args: ["{that}"]
             },
+            keepOpen: {
+                funcName: "gpii.oauth2.servicesMenu.keepOpen",
+                args: ["{that}.container"]
+            },
             fireServiceSelected: {
                 funcName: "gpii.oauth2.servicesMenu.fireServiceSelected",
                 args: [
@@ -80,10 +84,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         container.toggleClass(menuOpenStyle, isOpen);
         if (isOpen) {
             fluid.focus(container);
-            fluid.globalDismissal({ menu: container }, closeFunc);
+            gpii.oauth2.servicesMenu.registerGlobalDismissal(container, closeFunc);
         } else {
-            fluid.globalDismissal({ menu: container }, null);
+            gpii.oauth2.servicesMenu.removeGlobalDismissal(container);
         }
+    };
+
+    gpii.oauth2.servicesMenu.registerGlobalDismissal = function (container, closeFunc) {
+        fluid.globalDismissal({ menu: container }, closeFunc);
+    };
+
+    gpii.oauth2.servicesMenu.removeGlobalDismissal = function (container) {
+        fluid.globalDismissal({ menu: container }, null);
     };
 
     gpii.oauth2.servicesMenu.open = function (that) {
@@ -92,6 +104,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.oauth2.servicesMenu.close = function (that) {
         that.applier.change("menuIsOpen", false);
+    };
+
+    gpii.oauth2.servicesMenu.keepOpen = function (container) {
+        gpii.oauth2.servicesMenu.removeGlobalDismissal(container);
     };
 
     gpii.oauth2.servicesMenu.fireServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {
