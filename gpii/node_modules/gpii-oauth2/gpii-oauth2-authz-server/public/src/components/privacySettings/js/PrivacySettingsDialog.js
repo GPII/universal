@@ -35,10 +35,7 @@ var gpii = gpii || {};
             resizable: false,
             modal: true,
             width: 500,
-            close: function () {
-                // To restore the dialog container to the initial state for the next render.
-                $(this).dialog("destroy");
-            }
+            close: "{that}.dialogCloseHandler"
         },
         selectors: {
             title: ".gpiic-oauth2-privacySettings-editDecision-title",
@@ -108,8 +105,9 @@ var gpii = gpii || {};
         },
         invokers: {
             closeDialog: {
-                funcName: "gpii.oauth2.privacySettingsDialog.closeDialog",
-                args: ["{that}.dialog", "{that}.events.onClose"]
+                "this": "{that}.dialog",
+                method: "dialog",
+                args: ["close"]
             },
             fetchAvailableAuthorizedPrefs: {
                 funcName: "gpii.oauth2.ajax",
@@ -138,6 +136,10 @@ var gpii = gpii || {};
             fireDone: {
                 "this": "{that}.events.onDone",
                 method: "fire"
+            },
+            dialogCloseHandler: {
+                funcName: "gpii.oauth2.privacySettingsDialog.dialogCloseHandler",
+                args: ["{that}.dialog", "{that}.events.onClose"]
             }
         },
         model: {
@@ -203,8 +205,10 @@ var gpii = gpii || {};
         that.dialog.dialog("open");
     };
 
-    gpii.oauth2.privacySettingsDialog.closeDialog = function (dialog, onCloseEvt) {
-        dialog.dialog("close");
+    gpii.oauth2.privacySettingsDialog.dialogCloseHandler = function (dialog, onCloseEvt) {
+        // To restore the dialog container to the initial state for the next render
+        dialog.dialog("destroy");
+        // And fire close event
         onCloseEvt.fire();
     };
 

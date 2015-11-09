@@ -112,6 +112,10 @@ var gpii = gpii || {};
                         "serviceSelected": {
                             funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
                             args: ["{privacySettingsWithPrefs}", "{addServiceMenu}", "{arguments}.0", "{arguments}.1"]
+                        },
+                        "onClose": {
+                            funcName: "fluid.focus",
+                            args: ["{privacySettingsWithPrefs}.dom.addServiceButton"]
                         }
                     }
                 }

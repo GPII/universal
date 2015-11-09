@@ -24,7 +24,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             select: "{that}.fireServiceSelected"
         },
         events: {
-            serviceSelected: null
+            serviceSelected: null,
+            onClose: null
         },
         model: {
             menuIsOpen: false
@@ -36,12 +37,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     "{that}.container",
                     "{that}.model.menuIsOpen",
                     "{that}.options.styles.menuOpen",
-                    "{that}.close"
+                    "{that}.close",
+                    "{that}.events.onClose"
                 ]
             }
         },
         listeners: {
-            "onCreate.setup": "gpii.oauth2.servicesMenu.setup"
+            "onCreate.setup": "gpii.oauth2.servicesMenu.setup",
+            "onCreate.bindKeyDownHandler": {
+                "this": "{that}.container",
+                method: "keydown",
+                args: ["{that}.keydownHandler"]
+            }
         },
         invokers: {
             open: {
@@ -56,14 +63,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 funcName: "gpii.oauth2.servicesMenu.keepOpen",
                 args: ["{that}.container"]
             },
+            keydownHandler: {
+                funcName: "gpii.oauth2.servicesMenu.keydownHandler",
+                args: ["{that}", "{arguments}.0"] // event
+            },
             fireServiceSelected: {
                 funcName: "gpii.oauth2.servicesMenu.fireServiceSelected",
                 args: [
                     "{that}",
                     "{that}.options.selectors.serviceName",
                     "{that}.options.selectors.oauth2ClientId",
-                    "{arguments}.0",
-                    "{arguments}.1"
+                    "{arguments}.0", // jQuery UI: event
+                    "{arguments}.1"  // jQuery UI: ui
                 ]
             }
         },
@@ -80,13 +91,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         that.container.menu(that.options.widgetOptions);
     };
 
-    gpii.oauth2.servicesMenu.updateVisibility = function (container, isOpen, menuOpenStyle, closeFunc) {
+    gpii.oauth2.servicesMenu.updateVisibility = function (container, isOpen, menuOpenStyle, closeFunc, onCloseEvt) {
         container.toggleClass(menuOpenStyle, isOpen);
         if (isOpen) {
             fluid.focus(container);
             gpii.oauth2.servicesMenu.registerGlobalDismissal(container, closeFunc);
         } else {
             gpii.oauth2.servicesMenu.removeGlobalDismissal(container);
+            onCloseEvt.fire();
         }
     };
 
@@ -108,6 +120,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.oauth2.servicesMenu.keepOpen = function (container) {
         gpii.oauth2.servicesMenu.removeGlobalDismissal(container);
+    };
+
+    gpii.oauth2.servicesMenu.keydownHandler = function (that, evt) {
+        if (evt.keyCode === $.ui.keyCode.ESCAPE) {
+            that.close();
+        }
     };
 
     gpii.oauth2.servicesMenu.fireServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {
