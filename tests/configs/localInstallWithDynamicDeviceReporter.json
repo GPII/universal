@@ -1,5 +1,5 @@
 {
-    "typeName": "acceptanceTests.all.development.dr.production.config",
+    "type": "acceptanceTests.all.development.dr.production.config",
     "options": {
         "components": {
             "server": {

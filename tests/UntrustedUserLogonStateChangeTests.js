@@ -24,7 +24,7 @@ var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle");
 
 require("../index.js");
-require("./UserLogonStateChangeTestDefs.js");
+require("./shared/UserLogonStateChangeTestDefs.js");
 
 gpii.loadTestingSupport();
 

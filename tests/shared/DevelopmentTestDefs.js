@@ -17,9 +17,7 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
-    path = require("path"),
-    configPath = path.resolve(__dirname, "../gpii/configs"),
+    jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
 // These tests simply execute the login and logout cycle for a user with some basic
@@ -46,7 +44,7 @@ gpii.tests.development.testDefs = [{
     expect: 2,
     config: {
         configName: "development.all.local",
-        configPath: configPath
+        configPath: "%universal/gpii/configs"
     },
     gradeNames: "gpii.test.common.testCaseHolder",
     userToken: gpii.tests.development.userToken,

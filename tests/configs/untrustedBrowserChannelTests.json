@@ -1,5 +1,5 @@
 {
-    "typeName": "tests.untrusted.development.all.browserChannel.config",
+    "type": "tests.untrusted.development.all.browserChannel.config",
     "options": {
         "distributeOptions": [
             {

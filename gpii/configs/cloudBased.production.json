@@ -1,5 +1,5 @@
 {
-    "typeName": "cloudBased.flowManager.production",
+    "type": "cloudBased.flowManager.production",
     "options": {
         "gradeNames": ["fluid.component"],
         "components": {
