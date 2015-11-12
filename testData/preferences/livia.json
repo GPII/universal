@@ -1,0 +1,14 @@
+{
+  "flat": {
+    "contexts": {
+      "gpii-default": {
+        "name": "Default preferences",
+        "preferences": {
+          "applications": {
+          },
+          "http://registry.gpii.net/applications/org.nvda-project": {}
+        }
+      }
+    }
+  }
+}

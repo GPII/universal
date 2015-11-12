@@ -1,0 +1,31 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
+                        "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
+                        "ApplicationSettings.AppBar.DocType.$t": "1",
+                        "ApplicationSettings.AppBar.ShowText.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                        "ApplicationSettings.Speech.optSAPI5Pitch.$t": 36,
+                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 38,
+                        "ApplicationSettings.Speech.optSAPI5Volume.$t": 72,
+                        "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
+                        "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
+                        "ApplicationSettings.Speech.WebHighlighting.$t": false,
+                        "ApplicationSettings.Translation.ToLanguage.$t": "fr",
+                        "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
+                        "ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
+                        "ApplicationSettings.Scanning.ScanToFile.$t": false,
+                        "ApplicationSettings.Spelling.SpellAsIType.$t": true
+                    }
+                }
+            }
+        }
+    }
+}
