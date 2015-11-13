@@ -18,26 +18,24 @@
                 "args": ["{that}.options.servers"]
             }
         },
-        "distributeOptions": [
-            {
+        "distributeOptions": {
+            "untrusted.development.port": {
                 "record": 8088,
                 "target": "{that cloudBasedConfig}.options.components.server.options.port"
             },
-            {
+            "untrusted.development.prefs": {
                 "record": "http://localhost:8088/preferences/%userToken",
                 "target": "{that cloudBasedConfig}.options.cloudBasedUrls.preferences"
             },
-            {
+            "untrusted.development.matchmakers": {
                 "record": "http://localhost:8088",
                 "target": "{that cloudBasedConfig}.options.matchMakers.flat.url"
             },
-            {
+            "untrusted.development.dataStore": {
                 "record": "gpii.oauth2.testDataStore",
                 "target": "{that cloudBasedConfig gpii.oauth2.dataStore}.options.gradeNames"
             }
-        ]
+        }
     },
-    "modules": [
-        "%universal/testData/security/TestOAuth2DataStore.js"
-    ]
+    "require": "%universal/testData/security/TestOAuth2DataStore.js"
 }

@@ -15,12 +15,12 @@
                 "target": "{that cloudBasedConfig}.options.cloudBasedUrls.solutionsRegistry"
             },
             {
-                "source": "{that}.options.rawPreferencesSourceUrl",
-                "target": "{that cloudBasedConfig rawPreferencesServer}.options.rawPreferencesSourceUrl"
+                "source": "{that}.options.rawPreferencesDataSourceUrl",
+                "target": "{that cloudBasedConfig rawPreferencesServer}.options.rawPreferencesDataSourceUrl"
             }
         ],
         "installedSolutionsUrl": "file://%root/../flowManager/test/data/browserChannel_deviceReporter.json",
-        "rawPreferencesSourceUrl": "file://%root/../flowManager/test/data/%userToken.json",
+        "rawPreferencesDataSourceUrl": "file://%root/../flowManager/test/data/%userToken.json",
         "solutionsRegistryUrl": "file://%root/../flowManager/test/data/browserChannel_solutionsRegistry.json",
         "port": 8081
     },

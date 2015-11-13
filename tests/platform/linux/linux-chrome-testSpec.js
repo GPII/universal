@@ -18,8 +18,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.chrome");
 
-
-gpii.tests.linux.chrome = [
+gpii.tests.linux.chrome.testDefs = [
     {
         name: "Acceptance test for background color change in Chrome",
         userToken: "chrome_high_contrast",
@@ -96,8 +95,8 @@ gpii.tests.linux.chrome = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.linux.chrome",
-    configName: "linux-chrome-config",
-    configPath: "configs"
+    testDefs:  "gpii.tests.linux.chrome.testDefs",
+    configName: "gpii.tests.acceptance.linux.chrome.config",
+    configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);

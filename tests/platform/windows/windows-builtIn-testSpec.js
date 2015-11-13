@@ -316,7 +316,7 @@ gpii.tests.windows.builtIn = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn",
-    configName: "windows-builtIn-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.windows.builtIn.config",
+    configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

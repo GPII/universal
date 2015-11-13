@@ -1,0 +1,13 @@
+{
+    "type": "gpii.tests.acceptance.localInstall.dynamicDeviceReporter.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.rawPreferencesDataSource": {
+                "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
+                "target": "{that rawPreferencesDataSource}.options.path",
+                "priority": "after:development.rawPreferencesDataSource"
+            }
+        }
+    },
+    "includes": "%universal/gpii/configs/all.development.dr.production.json"
+}

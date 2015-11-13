@@ -20,9 +20,17 @@ var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-require("../index.js"); // TODO: Should not in fact require to load all universal
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
+
+fluid.defaults("gpii.tests.userLogonStateChange.logonChange", {
+    gradeNames: "kettle.test.request.http",
+    path: "/user/%userToken/logonChange",
+    termMap: {
+        userToken: "{tests}.options.userToken"
+    }
+});
 
 fluid.defaults("gpii.tests.userLogonStateChange.testCaseHolder", {
     gradeNames: "gpii.test.common.testCaseHolder",
@@ -30,22 +38,43 @@ fluid.defaults("gpii.tests.userLogonStateChange.testCaseHolder", {
         resetRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/reset/logonChange",
-                port: 8081
+                path: "/user/reset/logonChange"
             }
         },
-        logonChangeRequest2: {
+        resetRequest2: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/someotheruser/logonChange",
-                port: 8081
+                path: "/user/reset/logonChange"
+            }
+        },
+        logonChangeRequest: {
+            type: "gpii.tests.userLogonStateChange.logonChange"
+        },
+        logonChangeRequest2: {
+            type: "gpii.tests.userLogonStateChange.logonChange"
+        },
+        logonChangeRequestOther: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/user/someotheruser/logonChange"
+            }
+        },
+        logoutRequestOther: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/user/someotheruser/logout"
+            }
+        },
+        loginRequest2: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/user/testUser1/login"
             }
         },
         logoutRequest2: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/someotheruser/logout",
-                port: 8081
+                path: "/user/testUser1/logout"
             }
         }
     }
@@ -94,9 +123,9 @@ gpii.tests.userLogonStateChange.testDefs = [{
         event: "{logonChangeRequest}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // standard logout
-        func: "{logonChangeRequest}.send"
+        func: "{logonChangeRequest2}.send"
     }, {
-        event: "{logonChangeRequest}.events.onComplete",
+        event: "{logonChangeRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLogoutResponse"
     }]
 }, {
@@ -106,17 +135,23 @@ gpii.tests.userLogonStateChange.testDefs = [{
         func: "{resetRequest}.send"
     }, {
         event: "{resetRequest}.events.onComplete",
-        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "No users currently logged in - nothing to reset", 409 ]
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            message: "Received 409 error on reset with no users logged on",
+            errorTexts: "No users currently logged in - nothing to reset",
+            statusCode: 409,
+            string: "{arguments}.0",
+            request: "{resetRequest}"
+        }
     }, { // resetting with user logged in (part 1: login)
         func: "{logonChangeRequest}.send"
     }, {
         event: "{logonChangeRequest}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // resetting with user logged in (part 2: reset and check that user is logged out)
-        func: "{resetRequest}.send"
+        func: "{resetRequest2}.send"
     }, {
-        event: "{resetRequest}.events.onComplete",
+        event: "{resetRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLogoutResponse"
     }]
 }, {
@@ -128,13 +163,17 @@ gpii.tests.userLogonStateChange.testDefs = [{
         event: "{logonChangeRequest}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // logout of different user
-        func: "{logonChangeRequest2}.send"
+        func: "{logonChangeRequestOther}.send"
     }, {
-        event: "{logonChangeRequest2}.events.onComplete",
-        // listener: "gpii.tests.userLogonStateChange.testOtherUserLoggedInResponse"
-        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "Got logon change request from user someotheruser, but the user testUser1 is " +
-        "already logged in. So ignoring request.", 409]
+        event: "{logonChangeRequestOther}.events.onComplete",
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            message: "Received 409 error when logging out user who is not logged in",
+            errorTexts: "Got logon change request from user someotheruser, but the user testUser1 is already logged in. So ignoring request.",
+            statusCode: 409,
+            string: "{arguments}.0",
+            request: "{logonChangeRequestOther}"
+        }
     }]
 }, {
     name: "Testing standard user/<token>/login and /user/<token>/logout URLs",
@@ -145,29 +184,45 @@ gpii.tests.userLogonStateChange.testDefs = [{
         event: "{loginRequest}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLoginResponse"
     }, { // standard login with an already logged in user:
-        func: "{loginRequest}.send"
+        func: "{loginRequest2}.send"
     }, {
-        event: "{loginRequest}.events.onComplete",
-        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "Got log in request from user testUser1, but the user testUser1 is already " +
-        "logged in. So ignoring login request.", 409]
+        event: "{loginRequest2}.events.onComplete",
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            message: "Received 409 error when logging in user who is already logged in",
+            errorTexts: "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request.",
+            statusCode: 409,
+            string: "{arguments}.0",
+            request: "{loginRequest2}"
+        }
     }, { // logout of different user
-        func: "{logoutRequest2}.send"
+        func: "{logoutRequestOther}.send"
     }, {
-        event: "{logoutRequest2}.events.onComplete",
-        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "Got logout request from user someotheruser, but the user testUser1 is logged " +
-        "in. So ignoring the request.", 409]
+        event: "{logoutRequestOther}.events.onComplete",
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            message: "Received 409 error when logging out user who is not logged in",
+            errorTexts: "Got logout request from user someotheruser, but the user testUser1 is logged in. So ignoring the request.",
+            statusCode: 409,
+            string: "{arguments}.0",
+            request: "{logoutRequestOther}"
+        }
     }, { // logout of the correct user
         func: "{logoutRequest}.send"
     }, {
         event: "{logoutRequest}.events.onComplete",
         listener: "gpii.tests.userLogonStateChange.testLogoutResponse"
     }, { // logout of user when none is logged
-        func: "{logoutRequest}.send"
+        func: "{logoutRequest2}.send"
     }, {
-        event: "{logoutRequest}.events.onComplete",
-        listenerMaker: "gpii.tests.userLogonStateChange.testErrorResponse",
-        makerArgs: [ "No user logged in, so ignoring logout action.", 409]
+        event: "{logoutRequest2}.events.onComplete",
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            message: "Received 409 error when logging out user when no user is logged in",
+            errorTexts: "No user logged in, so ignoring logout action.",
+            statusCode: 409,
+            string: "{arguments}.0",
+            request: "{logoutRequest2}"
+        }
     }]
 }];

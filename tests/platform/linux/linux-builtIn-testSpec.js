@@ -23,7 +23,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.builtIn");
 
-gpii.tests.linux.builtIn = [
+gpii.tests.linux.builtIn.testDefs = [
     {
         name: "Testing os_common using Flat matchmaker",
         userToken: "os_common",
@@ -157,9 +157,9 @@ gpii.tests.linux.builtIn = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.linux.builtIn",
-    configName: "linux-builtIn-config",
-    configPath: "configs"
+    testDefs:  "gpii.tests.linux.builtIn.testDefs",
+    configName: "gpii.tests.acceptance.linux.builtIn.config",
+    configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);
 

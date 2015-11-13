@@ -201,7 +201,8 @@ fluid.defaults("gpii.oauth2.authServer", {
             listener: "gpii.oauth2.authServer.contributeRouteHandlers",
             args: ["{that}", "{that}.oauth2orizeServer.oauth2orizeServer",
                 "{that}.passport.passport"]
-        }
+        },
+        onCreate: "gpii.oauth2.authServer.registerBodyParser"
     }
 });
 

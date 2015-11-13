@@ -122,7 +122,7 @@ gpii.tests.android.builtIn = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.android.builtIn",
-    configName: "android-builtIn-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.android.builtIn.config",
+    configPath: "%universal/tests/platform/android/configs"
 }, ["gpii.test.integration.testCaseHolder.android"],
     module, require, __dirname);
