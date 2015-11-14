@@ -408,7 +408,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var authDecisionId = parseInt(req.params.authDecisionId, 10);
             // TODO this implementation will fail silently if (userId, authDecisionId) are not valid -- is this what we want?
             that.authorizationService.revokeAuthorization(userId, authDecisionId);
-            res.send(200);
+            res.sendStatus(200);
         }
     );
 
@@ -425,7 +425,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 res.type("application/json");
                 res.send(JSON.stringify(selectedPreferences, null, 4));
             } else {
-                res.send(404);
+                res.sendStatus(404);
             }
         }
     );
@@ -442,9 +442,9 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var selectedPreferences = req.body;
                 // TODO validate selectedPreferences?
                 that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
-                res.send(200);
+                res.sendStatus(200);
             } else {
-                res.send(400);
+                res.sendStatus(400);
             }
         }
     );

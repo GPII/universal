@@ -13,7 +13,7 @@
         }
     },
     "includes": [
-        "../node_modules/deviceReporter/configs/development.json",
-        "../node_modules/flowManager/configs/untrusted.development.json"
+        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.development.json",
+        "../node_modules/flowManager/configs/gpii.flowManager.untrusted.config.development.json"
     ]
 }

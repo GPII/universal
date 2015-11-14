@@ -4,7 +4,7 @@
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
                 "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
-                "target": "{that rawPreferencesDataSource}.options.path",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }
         }

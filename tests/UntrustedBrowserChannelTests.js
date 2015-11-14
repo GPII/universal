@@ -17,7 +17,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-require("../index.js");
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
@@ -25,15 +25,13 @@ fluid.require("%flowManager/test/shared/BrowserChannelTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.untrusted.flowManager.browserChannel");
 
-gpii.tests.untrusted.flowManager.browserChannel.testDefs = [];
-
-fluid.each(gpii.tests.flowManager.browserChannel.testDefs, function (testDef) {
-    gpii.tests.untrusted.flowManager.browserChannel.testDefs.push(fluid.extend(true, {}, testDef, {
+gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.tests.flowManager.browserChannel.testDefs, function (testDef) {
+    return fluid.extend(true, {}, testDef, {
         config: {
-            configName: "untrustedBrowserChannelTests",
+            configName: "gpii.tests.acceptance.untrusted.browserChannel.config",
             configPath: "%universal/tests/configs"
         }
-    }));
+    });
 });
 
 kettle.test.bootstrapServer(gpii.tests.untrusted.flowManager.browserChannel.testDefs);

@@ -47,7 +47,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [{
             listener: "kettle.test.assertErrorResponse",
             args: {
                 message: "Received 404 error when logging in with missing preferences",
-                errorTexts: ["Error when retrieving preferences", "idontexist.json was not found"],
+                errorTexts: ["Error when retrieving preferences", "idontexist"],
                 statusCode: 404,
                 string: "{arguments}.0",
                 request: "{loginRequest}"
@@ -61,7 +61,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [{
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
                 "record": "%universal/testData/preferences/acceptanceTests/%userToken.jsonx",
-                "target": "{that rawPreferencesDataSource}.options.path",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }
         },

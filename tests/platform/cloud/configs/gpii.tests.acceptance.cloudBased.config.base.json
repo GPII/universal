@@ -3,8 +3,14 @@
     "options": {
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
-                "target": "{that rawPreferencesDataSource}.options.path",
+                "record": {
+                    "type": "kettle.dataSource.file",
+                    "options": {
+                        "gradeNames": "kettle.dataSource.file.moduleTerms",
+                        "path": "%universal/testData/preferences/acceptanceTests/%userToken.json"
+                    }
+                },
+                "target": "{that preferencesServer rawPreferencesDataSource}",
                 "priority": "after:development.rawPreferencesDataSource"
             }
         }

@@ -1,8 +1,8 @@
 {
     "type": "untrusted.development.all.local",
     "options": {
-        "gradeNames": ["{that}.buildMultiServerKettleConfig"],
-        "servers": {
+        "gradeNames": ["kettle.multiConfig.config"],
+        "configs": {
             "localConfig": {
                 "configName": "untrusted.development",
                 "configPath": "%universal/gpii/configs"
@@ -12,24 +12,20 @@
                 "configPath": "%universal/gpii/configs"
             }
         },
-        "invokers": {
-            "buildMultiServerKettleConfig": {
-                "funcName": "gpii.multiServerKettleConfig.build",
-                "args": ["{that}.options.servers"]
-            }
-        },
         "distributeOptions": {
             "untrusted.development.port": {
                 "record": 8088,
-                "target": "{that cloudBasedConfig}.options.components.server.options.port"
+                "target": "{that cloudBasedConfig}.options.mainServerPort"
             },
             "untrusted.development.prefs": {
                 "record": "http://localhost:8088/preferences/%userToken",
-                "target": "{that cloudBasedConfig}.options.cloudBasedUrls.preferences"
+                "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
+                "priority": "after:flowManager.development.prefs"
             },
-            "untrusted.development.matchmakers": {
+            "untrusted.development.matchMakers": {
                 "record": "http://localhost:8088",
-                "target": "{that cloudBasedConfig}.options.matchMakers.flat.url"
+                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.flat.url",
+                "priority": "after:flowManager.development.matchMakers"
             },
             "untrusted.development.dataStore": {
                 "record": "gpii.oauth2.testDataStore",
