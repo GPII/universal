@@ -1,7 +1,7 @@
 /*
- * GPII Flow Manager Development Tests
+ * Kettle Module Loader.
  *
- * Copyright 2013 OCAD University
+ * Copyright 2012-2013 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -14,15 +14,7 @@
  * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
-"use strict";
-
-var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
-
-require("../index.js");
-require("./DevelopmentTestDefs.js");
-
-gpii.loadTestingSupport();
-
-kettle.test.bootstrapServer(fluid.copy(gpii.tests.development.testDefs));
+// The purpose of this file is to be copied to a location for which the
+// require function is needed. It allows to find node modules relative
+// to that location that are otherwise non-resolvable.
+module.exports = require;
