@@ -16,7 +16,21 @@
             "deviceReporter": "http://localhost:%port/device",
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },
-        "matchMakers": {
+        "distributeOptions": [{
+            "source": "{that}.options.flowManagerDevGrades",
+            "target": "{that flowManager}.options.gradeNames"
+        }, {
+            "source": "{that}.options.scenario3MatchMakers",
+            "target": "{that flowManager}.options.matchMakers"
+        }, {
+            "source": "{that}.options.devUrls",
+            "target": "{that flowManager}.options.urls"
+        }, {
+            "source": "{that}.options.matchMakerDispatcherDisabled",
+            "target": "{that flowManager}.options.matchMakerDispatcherDisabled"
+        }],
+        "flowManagerDevGrades": ["kettle.urlExpander.distributeDevVariables"],
+        "scenario3MatchMakers": {
             "flat": {
                 "url": "http://localhost:8081"
             },
@@ -33,11 +47,12 @@
                 "url": "http://smm4.gpii.eu:8073"
             }
         },
-        "matchMakerDispatcherDisabled": false 
+        "matchMakerDispatcherDisabled": false
     },
     "includes": [
         "../node_modules/deviceReporter/configs/production.json",
-        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/flowManager/configs/base.json",
+        "../node_modules/flowManager/configs/io.json",
         "../node_modules/solutionsRegistry/configs/development.json",
         "../node_modules/flatMatchMaker/configs/development.all.local.json"
     ]
