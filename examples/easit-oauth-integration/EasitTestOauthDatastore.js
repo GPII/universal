@@ -81,7 +81,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             {
                 id: 6,
                 name: "First Discovery",
-                oauth2ClientId: "client_first_discovery",
+                oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
                 oauth2ClientSecret: "client_secret_firstDiscovery",
                 allowDirectGpiiTokenAccess: false,
                 allowAddPrefs: true
@@ -135,16 +135,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
                 revoked: false
             }
         ],
-        credentialClientTokensIdSeq: 2,
-        credentialClientTokens: [
-            {
-                id: 1,
-                clientId: 6,
-                accessToken: "first_discovery_access_token",
-                revoked: false,
-                allowAddPrefs: true
-            }
-        ]
+        clientCredentialsTokensIdSeq: 1
     }
 });
 

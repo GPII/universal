@@ -200,7 +200,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope = [{
     expectedStatusCode: 403
 }];
 
-gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFlaseToken = [{
+gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken = [{
     name: "Attempt to add preference sets with a false token",
     gradeName: "gpii.tests.disruption.addPrefsSequence",
     expectedStatusCode: 401
@@ -245,7 +245,7 @@ gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
 gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
     gpii.tests.cloud.oauth2.addPrefs.testDefs[3],
     {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFlaseToken,
+    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken,
     __dirname
 );
 

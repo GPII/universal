@@ -77,8 +77,8 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 revoked: false
             }
         ],
-        credentialClientTokensIdSeq: 4,
-        credentialClientTokens: [
+        clientCredentialsTokensIdSeq: 4,
+        clientCredentialsTokens: [
             {
                 id: 1,
                 clientId: 5,

@@ -82,12 +82,12 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             func: "{dataStore}.findAuthByAccessToken"
                 // accessToken
         },
-        getCredentialClientByAccessToken: {
-            func: "{dataStore}.findCredentialClientByAccessToken"
+        getClientCredentialsByAccessToken: {
+            func: "{dataStore}.findClientByClientCredentialsAccessToken"
                 // accessToken
         },
-        grantAccessTokenForOAuth2CredentialClientId: {
-            funcName: "gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId",
+        grantAccessTokenForOAuth2ClientCredentialsId: {
+            funcName: "gpii.oauth2.authorizationService.grantAccessTokenForOAuth2ClientCredentialsId",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                 // clientId, scope
         },
@@ -166,24 +166,24 @@ gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, u
     // TODO else communicate not found?
 };
 
-gpii.oauth2.authorizationService.grantAccessTokenForOAuth2CredentialClientId = function (dataStore, clientId, scope) {
+gpii.oauth2.authorizationService.grantAccessTokenForOAuth2ClientCredentialsId = function (dataStore, clientId, scope) {
     // Record the credential client access token if we haven't already
     var client = dataStore.findClientById(clientId);
     if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
         return false;
     }
 
-    var credentialClientToken = dataStore.findCredentialClientTokenByClientId(clientId);
-    if (!credentialClientToken) {
+    var clientCredentialsToken = dataStore.findClientCredentialsTokenByClientId(clientId);
+    if (!clientCredentialsToken) {
         var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
-        credentialClientToken = dataStore.addCredentialClientToken({
+        clientCredentialsToken = dataStore.addClientCredentialsToken({
             clientId: clientId,
             accessToken: accessToken,
             allowAddPrefs: true
         });
     }
     // Generate the authorization code and record it
-    return credentialClientToken.accessToken;
+    return clientCredentialsToken.accessToken;
 };
 
 gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, req, callback) {

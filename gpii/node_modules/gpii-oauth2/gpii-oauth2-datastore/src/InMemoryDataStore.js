@@ -40,8 +40,8 @@ var fluid = fluid || require("infusion");
             authDecisionsIdSeq: 1,
             authDecisions: [],
             authCodes: [],
-            credentialClientTokensIdSeq: 1,
-            credentialClientTokens: []
+            clientCredentialsTokensIdSeq: 1,
+            clientCredentialsTokens: []
         },
         invokers: {
             findUserById: {
@@ -129,34 +129,34 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.authDecisions", "{that}.model.users", "{that}.model.clients", "{arguments}.0", "{arguments}.1"]
                     // oauth2ClientId, gpiiToken
             },
-            findCredentialClientTokenById: {
-                funcName: "gpii.oauth2.dataStore.findCredentialClientTokenById",
-                args: ["{that}.model.credentialClientTokens", "{arguments}.0"]
-                    // credentialClientTokenId
+            findClientCredentialsTokenById: {
+                funcName: "gpii.oauth2.dataStore.findClientCredentialsTokenById",
+                args: ["{that}.model.clientCredentialsTokens", "{arguments}.0"]
+                    // clientCredentialsTokenId
             },
-            findCredentialClientTokenByClientId: {
-                funcName: "gpii.oauth2.dataStore.findCredentialClientTokenByClientId",
-                args: ["{that}.model.credentialClientTokens", "{arguments}.0"]
+            findClientCredentialsTokenByClientId: {
+                funcName: "gpii.oauth2.dataStore.findClientCredentialsTokenByClientId",
+                args: ["{that}.model.clientCredentialsTokens", "{arguments}.0"]
                     // clientId
             },
-            findCredentialClientTokenByAccessToken: {
-                funcName: "gpii.oauth2.dataStore.findCredentialClientTokenByAccessToken",
-                args: ["{that}.model.credentialClientTokens", "{arguments}.0"]
+            findClientCredentialsTokenByAccessToken: {
+                funcName: "gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken",
+                args: ["{that}.model.clientCredentialsTokens", "{arguments}.0"]
                     // accessToken
             },
-            addCredentialClientToken: {
-                funcName: "gpii.oauth2.dataStore.addCredentialClientToken",
+            addClientCredentialsToken: {
+                funcName: "gpii.oauth2.dataStore.addClientCredentialsToken",
                 args: ["{that}.model", "{that}.applier", "{arguments}.0"]
-                    // credentialClientTokenData
+                    // clientCredentialsTokenData
             },
-            revokeCredentialClientToken: {
-                funcName: "gpii.oauth2.dataStore.revokeCredentialClientToken",
-                args: ["{that}.model.credentialClientTokens", "{that}.applier", "{arguments}.0"]
-                    // credentialClientTokenId
+            revokeClientCredentialsToken: {
+                funcName: "gpii.oauth2.dataStore.revokeClientCredentialsToken",
+                args: ["{that}.model.clientCredentialsTokens", "{that}.applier", "{arguments}.0"]
+                    // clientCredentialsTokenId
             },
-            findCredentialClientByAccessToken: {
-                funcName: "gpii.oauth2.dataStore.findCredentialClientByAccessToken",
-                args: ["{that}.model.credentialClientTokens", "{that}.model.clients", "{arguments}.0"]
+            findClientByClientCredentialsAccessToken: {
+                funcName: "gpii.oauth2.dataStore.findClientByClientCredentialsAccessToken",
+                args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0"]
                     // accessToken
             }
         }
@@ -372,51 +372,51 @@ var fluid = fluid || require("infusion");
         return undefined;
     };
 
-    gpii.oauth2.dataStore.findCredentialClientTokenById = function (credentialClientTokens, id) {
-        return fluid.find_if(credentialClientTokens, function (cct) {
+    gpii.oauth2.dataStore.findClientCredentialsTokenById = function (clientCredentialsTokens, id) {
+        return fluid.find_if(clientCredentialsTokens, function (cct) {
             return cct.id === id;
         });
     };
 
-    gpii.oauth2.dataStore.findCredentialClientTokenByClientId = function (credentialClientTokens, clientId) {
-        var credentialClientToken = fluid.find_if(credentialClientTokens, function (cct) {
+    gpii.oauth2.dataStore.findClientCredentialsTokenByClientId = function (clientCredentialsTokens, clientId) {
+        var clientCredentialsToken = fluid.find_if(clientCredentialsTokens, function (cct) {
             return cct.clientId === clientId && cct.revoked === false;
         });
-        return credentialClientToken ? credentialClientToken : undefined;
+        return clientCredentialsToken ? clientCredentialsToken : undefined;
     };
 
-    gpii.oauth2.dataStore.findCredentialClientTokenByAccessToken = function (credentialClientTokens, accessToken) {
-        var credentialClientToken = fluid.find_if(credentialClientTokens, function (cct) {
+    gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken = function (clientCredentialsTokens, accessToken) {
+        var clientCredentialsToken = fluid.find_if(clientCredentialsTokens, function (cct) {
             return cct.accessToken === accessToken && cct.revoked === false;
         });
-        return credentialClientToken ? credentialClientToken : undefined;
+        return clientCredentialsToken ? clientCredentialsToken : undefined;
     };
 
-    gpii.oauth2.dataStore.addCredentialClientToken = function (model, applier, credentialClientTokenData) {
-        var credentialClientTokenId = model.credentialClientTokensIdSeq;
-        applier.change("credentialClientTokensIdSeq", model.credentialClientTokensIdSeq + 1);
-        var credentialClientToken = {
-            id: credentialClientTokenId, // primary key
-            clientId: credentialClientTokenData.clientId, // foreign key
-            accessToken: credentialClientTokenData.accessToken,
-            allowAddPrefs: credentialClientTokenData.allowAddPrefs,
+    gpii.oauth2.dataStore.addClientCredentialsToken = function (model, applier, clientCredentialsTokenData) {
+        var clientCredentialsTokenId = model.clientCredentialsTokensIdSeq;
+        applier.change("clientCredentialsTokensIdSeq", model.clientCredentialsTokensIdSeq + 1);
+        var clientCredentialsToken = {
+            id: clientCredentialsTokenId, // primary key
+            clientId: clientCredentialsTokenData.clientId, // foreign key
+            accessToken: clientCredentialsTokenData.accessToken,
+            allowAddPrefs: clientCredentialsTokenData.allowAddPrefs,
             revoked: false
         };
-        model.credentialClientTokens.push(credentialClientToken);
-        applier.change("credentialClientTokens", model.credentialClientTokens);
-        return credentialClientToken;
+        model.clientCredentialsTokens.push(clientCredentialsToken);
+        applier.change("clientCredentialsTokens", model.clientCredentialsTokens);
+        return clientCredentialsToken;
     };
 
-    gpii.oauth2.dataStore.revokeCredentialClientToken = function (credentialClientTokens, applier, credentialClientTokenId) {
-        var credentialClientToken = gpii.oauth2.dataStore.findCredentialClientTokenById(credentialClientTokens, credentialClientTokenId);
-        if (credentialClientToken) {
-            credentialClientToken.revoked = true;
-            applier.change("credentialClientTokens", credentialClientTokens);
+    gpii.oauth2.dataStore.revokeClientCredentialsToken = function (clientCredentialsTokens, applier, clientCredentialsTokenId) {
+        var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenById(clientCredentialsTokens, clientCredentialsTokenId);
+        if (clientCredentialsToken) {
+            clientCredentialsToken.revoked = true;
+            applier.change("clientCredentialsTokens", clientCredentialsTokens);
         }
     };
 
-    gpii.oauth2.dataStore.findCredentialClientByAccessToken = function (credentialClientTokens, clients, accessToken) {
-        var credentialClientToken = gpii.oauth2.dataStore.findCredentialClientTokenByAccessToken(credentialClientTokens, accessToken);
-        return credentialClientToken ? gpii.oauth2.dataStore.findClientById(clients, credentialClientToken.clientId) : credentialClientToken;
+    gpii.oauth2.dataStore.findClientByClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
+        var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
+        return clientCredentialsToken ? gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId) : clientCredentialsToken;
     };
 })();

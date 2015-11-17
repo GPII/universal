@@ -75,7 +75,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
-        return done(null, authorizationService.grantAccessTokenForOAuth2CredentialClientId(client.id, scope));
+        return done(null, authorizationService.grantAccessTokenForOAuth2ClientCredentialsId(client.id, scope));
     }));
 
 };
@@ -521,7 +521,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             if (!accessToken) {
                 res.send(401);
             } else {
-                var client = that.authorizationService.getCredentialClientByAccessToken(accessToken);
+                var client = that.authorizationService.getClientCredentialsByAccessToken(accessToken);
                 if (!client) {
                     res.send(404);
                 } else if (!client.allowAddPrefs) {
