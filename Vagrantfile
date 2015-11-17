@@ -44,8 +44,8 @@ Vagrant.configure(2) do |config|
     auto_correct: true
 
   # Port 19531 is needed so logs can be viewed using systemd-journal-gateway
-  config.vm.network "forwarded_port", guest: 19531, host: 19531, protocol: "tcp",
-    auto_correct: true
+  #config.vm.network "forwarded_port", guest: 19531, host: 19531, protocol: "tcp",
+  #  auto_correct: true
 
   config.vm.hostname = app_name
 
@@ -77,8 +77,8 @@ Vagrant.configure(2) do |config|
   #    run: "always"
   #end
 
-  config.vm.provision "shell",
-    inline: "sudo systemctl restart systemd-journal-gatewayd.service",
-    run: "always"
+  #config.vm.provision "shell",
+  #  inline: "sudo systemctl restart systemd-journal-gatewayd.service",
+  #  run: "always"
 
 end
