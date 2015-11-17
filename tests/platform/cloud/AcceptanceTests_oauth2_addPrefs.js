@@ -51,7 +51,7 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     },
     { // 1
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyAccessTokenInClientCredentialsResponse",
+        listener: "gpii.test.cloudBased.oauth2.verifyAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2

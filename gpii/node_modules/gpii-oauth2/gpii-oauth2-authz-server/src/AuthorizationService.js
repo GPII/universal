@@ -86,15 +86,15 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             func: "{dataStore}.findClientByClientCredentialsAccessToken"
                 // accessToken
         },
-        grantAccessTokenForOAuth2ClientCredentialsId: {
-            funcName: "gpii.oauth2.authorizationService.grantAccessTokenForOAuth2ClientCredentialsId",
+        grantClientCredentialsAccessToken: {
+            funcName: "gpii.oauth2.authorizationService.grantClientCredentialsAccessToken",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                 // clientId, scope
         },
         savePrefs: {
             funcName: "gpii.oauth2.authorizationService.savePrefs",
-            args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1"]
-                // accessToken, preferences, callback function
+            args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                // preferences, view, callback function
         }
     }
 });
@@ -166,7 +166,7 @@ gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, u
     // TODO else communicate not found?
 };
 
-gpii.oauth2.authorizationService.grantAccessTokenForOAuth2ClientCredentialsId = function (dataStore, clientId, scope) {
+gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, clientId, scope) {
     // Record the credential client access token if we haven't already
     var client = dataStore.findClientById(clientId);
     if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
@@ -182,13 +182,13 @@ gpii.oauth2.authorizationService.grantAccessTokenForOAuth2ClientCredentialsId = 
             allowAddPrefs: true
         });
     }
-    // Generate the authorization code and record it
+
     return clientCredentialsToken.accessToken;
 };
 
-gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, req, callback) {
-    var view = req.query.view ? req.query.view : "flat";
-    var promise = preferencesDataSource.set({"view": view}, req.body);
+gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, view, callback) {
+    view = view || "";
+    var promise = preferencesDataSource.set({"view": view}, preferences);
     promise.then(function (data) {
         callback(data);
     }, function (err) {

@@ -77,24 +77,17 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 revoked: false
             }
         ],
-        clientCredentialsTokensIdSeq: 4,
+        clientCredentialsTokensIdSeq: 3,
         clientCredentialsTokens: [
             {
                 id: 1,
-                clientId: 5,
-                accessToken: "first_discovery_access_token",
-                revoked: false,
-                allowAddPrefs: true
-            },
-            {
-                id: 2,
                 clientId: 99,
                 accessToken: "non_existent_client",
                 revoked: false,
                 allowAddPrefs: true
             },
             {
-                id: 3,
+                id: 2,
                 clientId: 2,
                 accessToken: "not_allowed_to_add_prefs",
                 revoked: false,
