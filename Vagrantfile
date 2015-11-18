@@ -11,10 +11,9 @@ app_directory = ansible_vars["nodejs_app_install_dir"]
 
 app_start_script = ansible_vars["nodejs_app_start_script"]
 
-# Check for the existence of 'VM_HOST_TCP_PORT' or 'VM_GUEST_TCP_PORT'
-# environment variables. Otherwise if 'nodejs_app_tcp_port' is defined
-# in vars.yml then use that port. Failing that use defaults provided
-# in this file.
+# Check for the existence of the 'VM_HOST_TCP_PORT' environment variable. If it
+# doesn't exist and 'nodejs_app_tcp_port' is defined in vars.yml then use that
+# port. Failing that use defaults provided in this file.
 host_tcp_port = ENV["VM_HOST_TCP_PORT"] || ansible_vars["nodejs_app_tcp_port"] || 8081
 guest_tcp_port = ansible_vars["nodejs_app_tcp_port"] || 8081
 
