@@ -82,8 +82,12 @@ fluid.defaults("gpii.oauth2.authorizationService", {
             func: "{dataStore}.findAuthByAccessToken"
                 // accessToken
         },
-        getClientCredentialsByAccessToken: {
+        getClientByClientCredentialsAccessToken: {
             func: "{dataStore}.findClientByClientCredentialsAccessToken"
+                // accessToken
+        },
+        getClientCredentialsTokenPrivs: {
+            func: "{dataStore}.findClientCredentialsTokenPrivs"
                 // accessToken
         },
         grantClientCredentialsAccessToken: {

@@ -158,6 +158,11 @@ var fluid = fluid || require("infusion");
                 funcName: "gpii.oauth2.dataStore.findClientByClientCredentialsAccessToken",
                 args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0"]
                     // accessToken
+            },
+            findClientCredentialsTokenPrivs: {
+                funcName: "gpii.oauth2.dataStore.findClientCredentialsTokenPrivs",
+                args: ["{that}.model.clientCredentialsTokens", "{arguments}.0"]
+                    // accessToken
             }
         }
     });
@@ -378,6 +383,7 @@ var fluid = fluid || require("infusion");
         });
     };
 
+    // Join clientCredentialsTokens and clients
     gpii.oauth2.dataStore.findClientCredentialsTokenByClientId = function (clientCredentialsTokens, clientId) {
         var clientCredentialsToken = fluid.find_if(clientCredentialsTokens, function (cct) {
             return cct.clientId === clientId && cct.revoked === false;
@@ -390,6 +396,13 @@ var fluid = fluid || require("infusion");
             return cct.accessToken === accessToken && cct.revoked === false;
         });
         return clientCredentialsToken ? clientCredentialsToken : undefined;
+    };
+
+    gpii.oauth2.dataStore.findClientCredentialsTokenPrivs = function (clientCredentialsTokens, accessToken) {
+        var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
+        return clientCredentialsToken ? {
+            allowAddPrefs: clientCredentialsToken.allowAddPrefs
+        } : undefined;
     };
 
     gpii.oauth2.dataStore.addClientCredentialsToken = function (model, applier, clientCredentialsTokenData) {
@@ -415,6 +428,7 @@ var fluid = fluid || require("infusion");
         }
     };
 
+    // Join clientCredentialsTokens and clients
     gpii.oauth2.dataStore.findClientByClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
         return clientCredentialsToken ? gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId) : clientCredentialsToken;

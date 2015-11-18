@@ -554,6 +554,19 @@ var fluid = fluid || require("infusion");
             jqUnit.assertUndefined("Revoked credential client token is not found", retrieved);
         });
 
+        jqUnit.test("findClientCredentialsTokenPrivs()", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+
+            var clientCredentialsToken = dataStore.addClientCredentialsToken(gpii.tests.oauth2.dataStore.testdata.clientCredentialsToken1);
+            jqUnit.assertValue("Id has been assigned", clientCredentialsToken.id);
+
+            var tokenPrivs = dataStore.findClientCredentialsTokenPrivs("wrong-token");
+            jqUnit.assertUndefined("non-existing token returns undefined", tokenPrivs);
+
+            tokenPrivs = dataStore.findClientCredentialsTokenPrivs(gpii.tests.oauth2.dataStore.testdata.clientCredentialsToken1.accessToken);
+            jqUnit.assertDeepEq("The returned privileges for the client credentials token is expected", {allowAddPrefs: true}, tokenPrivs);
+        });
+
     };
 
 })();

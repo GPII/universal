@@ -96,51 +96,19 @@ gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence = [
     }
 ];
 
-gpii.tests.cloud.oauth2.addPrefs.testDefs = [
-    {
-        name: "Acceptance test for adding preferences - a successful entire work flow",
-        scope: "add_preferences",
-        client_id: "client_first_discovery",
-        client_secret: "client_secret_firstDiscovery"
-    },
-    {
-        name: "Acceptance test for suppporting client credentials grant type (with wrong client)",
-        scope: "add_preferences",
-        client_id: "com.bdigital.easit4all",
-        client_secret: "client_secret_easit4all"
-    },
-    {
-        name: "Acceptance test for suppporting client credentials grant type (with wrong client)",
-        scope: "update_preferences",
-        client_id: "client_first_discovery",
-        client_secret: "client_secret_firstDiscovery"
-    },
-    {
-        name: "Acceptance test for suppporting /add-preferences (with false access token)",
-        accessToken: "false token"
-    },
-    {
-        name: "Acceptance test for suppporting /add-preferences (with false access token)",
-        accessToken: "non_existent_client"
-    },
-    {
-        name: "Acceptance test for suppporting /add-preferences (with false access token)",
-        accessToken: "not_allowed_to_add_prefs"
-    }
-];
 
-fluid.defaults("gpii.tests.disruption.mainSequence", {
+fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence", {
     gradeNames: ["gpii.test.disruption"],
     sequenceName: "gpii.tests.cloud.oauth2.addPrefs.mainSequence"
 });
 
-fluid.defaults("gpii.tests.disruption.addPrefsSequence", {
+fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence", {
     gradeNames: ["gpii.test.disruption"],
     sequenceName: "gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence"
 });
 
-fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken", {
-    gradeNames: ["gpii.tests.disruption.mainSequence"],
+fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken", {
+    gradeNames: ["gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence"],
     truncateAt: 1,
     expect: 1,
     recordName: "accessTokenForm",
@@ -153,10 +121,10 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken", {
 
 gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     name: "A success access token request using the client credentials grant type",
-    gradeName: "gpii.tests.disruption.mainSequence"
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence"
 }, {
     name: "Attempt to get access token without sending client_id",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
         path: "client_id",
         type: "DELETE"
@@ -164,7 +132,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 401
 }, {
     name: "Attempt to get access token without sending client_secret",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
         path: "client_secret",
         type: "DELETE"
@@ -172,7 +140,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 401
 }, {
     name: "Attempt to get access token without sending scope",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
         path: "scope",
         type: "DELETE"
@@ -180,7 +148,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
     expectedStatusCode: 403
 }, {
     name: "Attempt to get access token without sending grant_type",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
         path: "grant_type",
         type: "DELETE"
@@ -190,77 +158,90 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient = [{
     name: "Attempt to get access token with sending a wrong client",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     expectedStatusCode: 403
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope = [{
     name: "Attempt to get access token with sending a wrong scope",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruptAccessToken",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     expectedStatusCode: 403
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken = [{
     name: "Attempt to add preference sets with a false token",
-    gradeName: "gpii.tests.disruption.addPrefsSequence",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence",
     expectedStatusCode: 401
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient = [{
     name: "Attempt to add preference sets with a non existent client",
-    gradeName: "gpii.tests.disruption.addPrefsSequence",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence",
     expectedStatusCode: 404
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs = [{
     name: "Attempt to add preference sets with no privilege to add prefs",
-    gradeName: "gpii.tests.disruption.addPrefsSequence",
+    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence",
     expectedStatusCode: 401
 }];
 
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[0],
-    {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptions,
-    __dirname
-);
+gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
+    {
+        testDef: {
+            name: "Acceptance test for adding preferences - a successful entire work flow",
+            scope: "add_preferences",
+            client_id: "client_first_discovery",
+            client_secret: "client_secret_firstDiscovery"
+        },
+        disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptions
+    },
+    {
+        testDef: {
+            name: "Acceptance test for suppporting client credentials grant type (with wrong client)",
+            scope: "add_preferences",
+            client_id: "com.bdigital.easit4all",
+            client_secret: "client_secret_easit4all"
+        },
+        disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient
+    },
+    {
+        testDef: {
+            name: "Acceptance test for suppporting client credentials grant type (with wrong client)",
+            scope: "update_preferences",
+            client_id: "client_first_discovery",
+            client_secret: "client_secret_firstDiscovery"
+        },
+        disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope
+    },
+    {
+        testDef: {
+            name: "Acceptance test for suppporting /add-preferences (with false access token)",
+            accessToken: "false token"
+        },
+        disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken
+    },
+    {
+        testDef: {
+            name: "Acceptance test for suppporting /add-preferences (with false access token)",
+            accessToken: "non_existent_client"
+        },
+        disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient
+    },
+    {
+        testDef: {
+            name: "Acceptance test for suppporting /add-preferences (with false access token)",
+            accessToken: "not_allowed_to_add_prefs"
+        },
+        disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs
+    },
+];
 
-// Invalid /access_token request: wrong client
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[1],
-    {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient,
-    __dirname
-);
-
-// Invalid /access_token request: wrong scope
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[2],
-    {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope,
-    __dirname
-);
-
-// Invalid /add-preferences request: false token
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[3],
-    {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken,
-    __dirname
-);
-
-// Invalid /add-preferences request: non existent client
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[4],
-    {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient,
-    __dirname
-);
-
-// Invalid /add-preferences request: no privilege to add prefs
-gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-    gpii.tests.cloud.oauth2.addPrefs.testDefs[5],
-    {},
-    gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs,
-    __dirname
-);
+fluid.each(gpii.tests.cloud.oauth2.addPrefs.disruptedTests, function (oneTest) {
+    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+        oneTest.testDef,
+        {},
+        oneTest.disruptions,
+        __dirname
+    );
+});

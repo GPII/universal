@@ -521,10 +521,13 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             if (!accessToken) {
                 res.send(401);
             } else {
-                var client = that.authorizationService.getClientCredentialsByAccessToken(accessToken);
+                var client = that.authorizationService.getClientByClientCredentialsAccessToken(accessToken);
                 if (!client) {
                     res.send(404);
-                } else if (!client.allowAddPrefs) {
+                }
+
+                var tokenPrivs = that.authorizationService.getClientCredentialsTokenPrivs(accessToken);
+                if (!tokenPrivs.allowAddPrefs) {
                     res.send(401);
                 } else {
                     that.authorizationService.savePrefs(req.body, req.query.view, function (data) { res.json(data) });
