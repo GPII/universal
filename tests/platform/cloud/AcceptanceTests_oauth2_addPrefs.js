@@ -13,8 +13,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 "use strict";
 
-var fluid = require("universal");
-var gpii = fluid.registerNamespace("gpii");
+var fluid = require("universal"),
+    gpii = fluid.registerNamespace("gpii"),
+    path = require("path"),
+    fs = require("fs");
 
 gpii.loadTestingSupport();
 
@@ -43,6 +45,23 @@ gpii.tests.cloud.oauth2.addPrefs.transformedPrefs = {
         }
     }
 };
+
+gpii.tests.cloud.oauth2.addPrefs.prefsDir = path.resolve(__dirname, "../../../testData/preferences/acceptanceTests/");
+gpii.tests.cloud.oauth2.addPrefs.filesToDelete = [];
+
+gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles = function () {
+    fluid.each(gpii.tests.cloud.oauth2.addPrefs.filesToDelete, function (filePath) {
+        fs.unlinkSync(filePath);
+    });
+    gpii.tests.cloud.oauth2.addPrefs.filesToDelete.length = 0;
+};
+
+fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles", {
+    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    listeners: {
+        "onDestroy.cleanupTmpFiles": gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles
+    }
+});
 
 gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     { // 0
@@ -119,10 +138,12 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken", {
     }
 });
 
-gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
+gpii.tests.cloud.oauth2.addPrefs.disruptions = [
+{
     name: "A success access token request using the client credentials grant type",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence"
-}, {
+},
+{
     name: "Attempt to get access token without sending client_id",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
@@ -130,7 +151,8 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
         type: "DELETE"
     },
     expectedStatusCode: 401
-}, {
+},
+{
     name: "Attempt to get access token without sending client_secret",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
@@ -138,7 +160,8 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
         type: "DELETE"
     },
     expectedStatusCode: 401
-}, {
+},
+{
     name: "Attempt to get access token without sending scope",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
@@ -146,7 +169,8 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [{
         type: "DELETE"
     },
     expectedStatusCode: 403
-}, {
+},
+{
     name: "Attempt to get access token without sending grant_type",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
     changes: {
@@ -192,7 +216,8 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
             name: "Acceptance test for adding preferences - a successful entire work flow",
             scope: "add_preferences",
             client_id: "client_first_discovery",
-            client_secret: "client_secret_firstDiscovery"
+            client_secret: "client_secret_firstDiscovery",
+            gradeNames: ["gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles"]
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptions
     },
@@ -234,7 +259,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
             accessToken: "not_allowed_to_add_prefs"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs
-    },
+    }
 ];
 
 fluid.each(gpii.tests.cloud.oauth2.addPrefs.disruptedTests, function (oneTest) {
