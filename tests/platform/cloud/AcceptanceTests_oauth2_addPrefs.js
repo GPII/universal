@@ -80,7 +80,7 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     { // 3
         event: "{addPrefsRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyAddPrefsResponse",
-        args: ["{arguments}.0", "{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData]
+        args: ["{arguments}.0", "{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, gpii.tests.cloud.oauth2.addPrefs.prefsDir]
     },
     { // 4
         funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
