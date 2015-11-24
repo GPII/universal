@@ -2,7 +2,7 @@
     <link rel="stylesheet" type="text/css" href="lib/infusion/src/lib/jquery/ui/css/default-theme/jquery.ui.theme.css" />
     <link rel="stylesheet" type="text/css" href="src/components/selectionTree/css/SelectionTree.css" />
     <link rel="stylesheet" type="text/css" href="src/components/selectionTree/css/SelectionTreeFoundation.css" />
-    <link rel="stylesheet" type="text/css" href="src/components/privacySettings/css/PrivacySettingsWithPrefs.css" />
+    <link rel="stylesheet" type="text/css" href="src/components/privacySettings/css/PrivacySettings.css" />
     <script type="text/javascript" src="lib/infusion/infusion-tooltip.js"></script>
     <script type="text/javascript" src="lib/jquery.ui.menu.js"></script>
     <script type="text/javascript" src="infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
@@ -33,7 +33,7 @@
 
             <div class="gpiic-oauth2-privacySettings-description">Description</div>
             <p><strong class="gpiic-oauth2-privacySettings-directions"></strong></p>
-            <div class="gpii-oauth2-privacySettings-serviceList">
+            <div class="gpii-oauth2-privacySettings-services">
                 <ul>
                     {{#each authorizedServices}}
                         <li class="gpii-oauth2-privacySettings-service gpii-ouath2-inset-horizontal">
@@ -51,18 +51,21 @@
                         </li>
                     {{/each}}
                 </ul>
-            </div>
 
-            <div>
-                <button class="gpiic-oauth2-privacySettings-addService">Add service</button>
-                <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
-                    {{#each unauthorizedServices}}
-                        <li>
-                            <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">{{serviceName}}</a>
-                            <input type="hidden" name="oauth2ClientId" value="{{oauth2ClientId}}" />
-                        </li>
-                    {{/each}}
-                </ul>
+                <div>
+                    <button class="gpiic-oauth2-privacySettings-addService gpii-oauth2-privacySettings-addService">
+                        <span class="gpii-icon gpii-icon-plus-small" aria-hidden="true"></span>
+                        <strong>Add service</strong>
+                    </button>
+                    <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
+                        {{#each unauthorizedServices}}
+                            <li>
+                                <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">{{serviceName}}</a>
+                                <input type="hidden" name="oauth2ClientId" value="{{oauth2ClientId}}" />
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
             </div>
 
             <div class="gpiic-oauth2-privacySettings-removeDecision-dialog gpii-oauth2-privacySettings-removeDecision-dialog">

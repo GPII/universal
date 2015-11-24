@@ -117,6 +117,13 @@ var gpii = gpii || {};
                             funcName: "fluid.focus",
                             args: ["{privacySettingsWithPrefs}.dom.addServiceButton"]
                         }
+                    },
+                    modelListeners: {
+                        menuIsOpen: {
+                            "this": "{privacySettingsWithPrefs}.dom.addServiceButton",
+                            method: "toggleClass",
+                            args: ["{privacySettingsWithPrefs}.options.styles.addServiceButtonSelected"]
+                        }
                     }
                 }
             }
@@ -145,7 +152,8 @@ var gpii = gpii || {};
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
             okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
-            cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel"
+            cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel",
+            addServiceButtonSelected: "gpiic-oauth2-privacySettings-addService-selected"
         },
         selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "addServiceMenu", "addAuthorizationDialog"],
         strings: {
