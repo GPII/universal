@@ -515,8 +515,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
-    that.expressApp.post('/add-preferences',
-        function(req, res) {
+    that.expressApp.post("/add-preferences",
+        function (req, res) {
             var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
             if (!accessToken) {
                 res.send(401);
@@ -533,7 +533,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                     var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
                     savePrefsPromise.then(function (data) {
                         res.json(data);
-                    }, function (err) {
+                    }, function () {
                         res.send(500);
                     });
                 }

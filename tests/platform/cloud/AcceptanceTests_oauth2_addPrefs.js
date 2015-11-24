@@ -139,46 +139,47 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken", {
 });
 
 gpii.tests.cloud.oauth2.addPrefs.disruptions = [
-{
-    name: "A success access token request using the client credentials grant type",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence"
-},
-{
-    name: "Attempt to get access token without sending client_id",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
-    changes: {
-        path: "client_id",
-        type: "DELETE"
+    {
+        name: "A success access token request using the client credentials grant type",
+        gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence"
     },
-    expectedStatusCode: 401
-},
-{
-    name: "Attempt to get access token without sending client_secret",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
-    changes: {
-        path: "client_secret",
-        type: "DELETE"
+    {
+        name: "Attempt to get access token without sending client_id",
+        gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
+        changes: {
+            path: "client_id",
+            type: "DELETE"
+        },
+        expectedStatusCode: 401
     },
-    expectedStatusCode: 401
-},
-{
-    name: "Attempt to get access token without sending scope",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
-    changes: {
-        path: "scope",
-        type: "DELETE"
+    {
+        name: "Attempt to get access token without sending client_secret",
+        gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
+        changes: {
+            path: "client_secret",
+            type: "DELETE"
+        },
+        expectedStatusCode: 401
     },
-    expectedStatusCode: 403
-},
-{
-    name: "Attempt to get access token without sending grant_type",
-    gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
-    changes: {
-        path: "grant_type",
-        type: "DELETE"
+    {
+        name: "Attempt to get access token without sending scope",
+        gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
+        changes: {
+            path: "scope",
+            type: "DELETE"
+        },
+        expectedStatusCode: 403
     },
-    expectedStatusCode: 501
-}];
+    {
+        name: "Attempt to get access token without sending grant_type",
+        gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
+        changes: {
+            path: "grant_type",
+            type: "DELETE"
+        },
+        expectedStatusCode: 501
+    }
+];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient = [{
     name: "Attempt to get access token with sending a wrong client",
