@@ -190,12 +190,7 @@ gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (d
     return clientCredentialsToken.accessToken;
 };
 
-gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, view, callback) {
+gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, view) {
     view = view || "";
-    var promise = preferencesDataSource.set({"view": view}, preferences);
-    promise.then(function (data) {
-        callback(data);
-    }, function (err) {
-        callback({"error": "Error when saving preferences"});
-    });
+    return preferencesDataSource.set({"view": view}, preferences);
 };
