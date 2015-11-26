@@ -23,6 +23,8 @@ var LocalStrategy = require("passport-local").Strategy;
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;
 
 var fluid = require("infusion");
+var $ = fluid.registerNamespace("jQuery");
+
 require("../../gpii-oauth2-datastore");
 require("../../gpii-oauth2-utilities");
 require("./UserService");
@@ -533,8 +535,11 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                     var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
                     savePrefsPromise.then(function (data) {
                         res.json(data);
-                    }, function () {
-                        res.send(500);
+                    }, function (err) {
+                        var error = $.extend(err, {
+                            message: "Error when saving preferences: " + err.message
+                        });
+                        res.status(500).send(error);
                     });
                 }
             }
