@@ -21,6 +21,7 @@ gpii.tests.deviceReporterAware.windows = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
+        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "data": [
@@ -57,21 +58,38 @@ gpii.tests.deviceReporterAware.windows = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     },
     {
         name: "Testing readwritegold_application1 using Flat matchmaker",
         userToken: "readwritegold_application1",
-        settingsHandlers: {
-
-        },
+        gradeNames: "gpii.test.integration.deviceReporterAware.windows",
+        settingsHandlers: {},
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
                 "expectConfigured": "0",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }
 ];
 
@@ -79,5 +97,5 @@ module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.windows",
     configName: "windows-dynamicDeviceReporter-config",
     configPath: "configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);
