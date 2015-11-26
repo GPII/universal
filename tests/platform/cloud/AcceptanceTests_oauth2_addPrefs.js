@@ -216,7 +216,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
         testDef: {
             name: "Acceptance test for adding preferences - a successful entire work flow",
             scope: "add_preferences",
-            client_id: "client_first_discovery",
+            client_id: "net.gpii.prefsEditors.firstDiscovery",
             client_secret: "client_secret_firstDiscovery",
             gradeNames: ["gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles"]
         },
@@ -235,7 +235,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
         testDef: {
             name: "Acceptance test for suppporting client credentials grant type (with wrong client)",
             scope: "update_preferences",
-            client_id: "client_first_discovery",
+            client_id: "net.gpii.prefsEditors.firstDiscovery",
             client_secret: "client_secret_firstDiscovery"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope

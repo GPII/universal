@@ -59,7 +59,7 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
             {
                 id: 5,
                 name: "First Discovery",
-                oauth2ClientId: "client_first_discovery",
+                oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
                 oauth2ClientSecret: "client_secret_firstDiscovery",
                 allowDirectGpiiTokenAccess: false,
                 allowAddPrefs: true
