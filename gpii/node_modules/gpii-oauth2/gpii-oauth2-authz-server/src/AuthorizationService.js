@@ -97,8 +97,8 @@ fluid.defaults("gpii.oauth2.authorizationService", {
         },
         savePrefs: {
             funcName: "gpii.oauth2.authorizationService.savePrefs",
-            args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                // preferences, view, callback function
+            args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1"]
+                // preferences, view
         }
     }
 });
