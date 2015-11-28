@@ -97,6 +97,19 @@ var testDefs = [
                 "interpreterType": "avatar"
             }
         }
+    },
+    {
+        name: "Test for Online Banking demonstrator (OLB) with Online Flow Manager: simplified UI.",
+        userToken: "olb_Alicia_cmn",
+        solutionId: "eu.gpii.olb",
+        expected: {
+            "eu.gpii.olb": {
+                "language": "en-GB",
+                "contrastTheme": "wb",
+                "signLanguage": "ils", // see https://issues.gpii.net/browse/GPII-1125 
+                "simplifiedUiEnabled": true
+            }
+        }
     }
 ];
 
