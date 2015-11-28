@@ -7,7 +7,7 @@
                     "components": {
                         "deviceReporter": {
                             "options": {
-                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/linux_chrome.json"
+                                "installedSolutionsUrl": "file://%root/../../../testData/deviceReporter/acceptanceTests/chrome.json"
                             }
                         }
                     }

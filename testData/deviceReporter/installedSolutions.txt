@@ -1,0 +1,8 @@
+installedSolutions.json
+==========================
+
+This is the file describing what solutions the 'deviceReporter' reports as installed when
+the system is run in 'development' mode. It contains a list of objects, each reporting the
+ID of a solution. To modify what solutions are reported as installed, simply add/remove entries
+to/from this file.
+

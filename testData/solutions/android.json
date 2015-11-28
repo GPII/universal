@@ -7,8 +7,8 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
@@ -16,18 +16,12 @@
                     "display.screenReader.applications.com\\.android\\.freespeech.name"
                 ]
             }
-        ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.androidActivityManager.startFreespeech"
-                }
-            ],
-            "stop": [
-                {
-                }
-            ]
-        }
+        },
+        "start": [
+            {
+                "type": "gpii.androidActivityManager.startFreespeech"
+            }
+        ]
     },
 
     "com.android.talkback": {
@@ -38,8 +32,8 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "display.screenReader",
@@ -48,19 +42,17 @@
                     "display.screenReader.-provisional-screenReaderTTSEnabled"
                 ]
             }
+        },
+        "start": [
+            {
+                "type": "gpii.androidActivityManager.startTalkback"
+            }
         ],
-        "lifecycleManager": {
-            "start": [
-                {
-                    "type": "gpii.androidActivityManager.startTalkback"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.androidActivityManager.stopTalkback"
-                }
-            ]
-        }
+        "stop": [
+            {
+                "type": "gpii.androidActivityManager.stopTalkback"
+            }
+        ]
     },
 
     "com.android.persistentConfiguration": {
@@ -73,8 +65,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.androidPersistentConfiguration",
                 "capabilities": [
                     "applications.com\\.android\\.persistentConfiguration.id"
@@ -269,11 +261,13 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "com.android.audioManager": {
@@ -286,8 +280,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.androidAudioManager.volume",
                 "capabilities": [
                     "applications.com\\.android\\.audioManager.id"
@@ -319,11 +313,13 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "com.android.settings.system": {
@@ -336,8 +332,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "System"
@@ -380,11 +376,13 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "com.android.settings.secure": {
@@ -397,8 +395,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "Secure"
@@ -462,11 +460,13 @@
                     }
                 }
             }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [ "setSettings" ],
-            "stop": [ "restoreSettings" ]
-        }
+        "restore": [
+            "settings.configuration"
+        ]
     },
 
     "se.omnitor.ecmobile": {
@@ -477,66 +477,68 @@
                 "version": ">=0.1"
               }]
         },
-        "settingsHandlers": [
-        {
-            "type": "gpii.settingsHandlers.XMLHandler",
-            "options": {
-                "filename": "/sdcard/output.xml",
-                "encoding": "utf-8",
-                "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
-                "rules": {
-                    "map": "map",
-                    "map.string": {
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "options": {
+                    "filename": "/sdcard/output.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
+                    "rules": {
+                        "map": "map",
+                        "map.string": {
+                            "transform": {
+                                "type": "fluid.transforms.arrayToObject",
+                                "inputPath": "map.string",
+                                "key": "name"
+                            }
+                        }
+                    }
+                },
+                "capabilities": [
+                    "applications.se\\.omnitor\\.ecmobile.id"
+                ],
+                "capabilitiesTransformations": {
+                    "map\\.string\\.fontsize\\.$t": {
                         "transform": {
-                            "type": "fluid.transforms.arrayToObject",
-                            "inputPath": "map.string",
-                            "key": "name"
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "factor": 2
+                        }
+                    },
+                    "map\\.string\\.theme\\.$t": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": "yellow-black",
+                            "truePath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "false": "none"
                         }
                     }
                 }
-            },
-            "capabilities": [
-                "applications.se\\.omnitor\\.ecmobile.id"
-            ],
-            "capabilitiesTransformations": {
-                "map\\.string\\.fontsize\\.$t": {
-                    "transform": {
-                        "type": "fluid.transforms.linearScale",
-                        "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
-                        "factor": 2
-                    }
-                },
-                "map\\.string\\.theme\\.$t": {
-                    "transform": {
-                        "type": "fluid.transforms.condition",
-                        "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                        "true": "yellow-black",
-                        "truePath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                        "false": "none"
-                    }
-                }
             }
-        }
+        },
+        "configure": [
+            "settings.configuration"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.androidActivityManager.startActivityByPackageName",
-                    "packageName": "se.omnitor.ecmobile"
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.androidActivityManager.stopActivityByPackageName",
-                    "packageName": "se.omnitor.ecmobile"
-                },
-                "restoreSettings",
-                {
-                    "type": "gpii.androidActivityManager.goToHomeScreen"
-                }
-            ]
-        }
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.androidActivityManager.startActivityByPackageName",
+                "packageName": "se.omnitor.ecmobile"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                "packageName": "se.omnitor.ecmobile"
+            },
+            {
+                "type": "gpii.androidActivityManager.goToHomeScreen"
+            }
+        ]
     },
 
     "es.codefactory.android.app.ma": {
@@ -549,8 +551,8 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "applications.es\\.codefactory\\.android\\.app\\.ma.id"
@@ -598,6 +600,6 @@
                     "access_commonprefs_capitalization": "http://registry\\.gpii\\.net/common/announceCapitals"
                 }
             }
-        ]
+        }
     }
 }
