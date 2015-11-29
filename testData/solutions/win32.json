@@ -9,7 +9,7 @@
             ]
         },
         "settingsHandlers": {
-            "configuration": {
+            "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
@@ -17,7 +17,6 @@
                 "capabilities": [
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
-
                 "capabilitiesTransformations": {
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "transform": {
@@ -42,7 +41,7 @@
                     }
                 }
             },
-
+            "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
@@ -103,10 +102,12 @@
             }
         },
         "configure": [
-            "settings.configuration"
+            "settings.configuration1",
+            "settings.configuration2"
         ],
         "restore": [
-            "settings.configuration"
+            "settings.configuration1",
+            "settings.configuration2"
         ],
         "start": [
             {
