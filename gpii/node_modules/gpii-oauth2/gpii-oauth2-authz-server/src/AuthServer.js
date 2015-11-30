@@ -529,7 +529,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 }
 
                 var tokenPrivs = that.authorizationService.getClientCredentialsTokenPrivs(accessToken);
-                if (!tokenPrivs.allowAddPrefs) {
+                if (!tokenPrivs || !tokenPrivs.allowAddPrefs) {
                     res.send(401);
                 } else {
                     var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
