@@ -29,6 +29,9 @@ var fluid = fluid || require("infusion");
             },
             codeGenerator: {
                 type: "fluid.eventedComponent"
+            },
+            preferencesDataSource: {
+                type: "fluid.emptySubcomponent"
             }
         }
     });
@@ -118,6 +121,9 @@ var fluid = fluid || require("infusion");
             },
             codeGenerator: {
                 type: "fluid.eventedComponent"
+            },
+            preferencesDataSource: {
+                type: "fluid.emptySubcomponent"
             }
         }
     });

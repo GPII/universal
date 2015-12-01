@@ -507,7 +507,7 @@ var fluid = fluid || require("infusion");
         jqUnit.test("findAllClients returns all clients", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
             var clients = dataStore.findAllClients();
-            jqUnit.assertEquals("Expect 3 clients", 3, clients.length);
+            jqUnit.assertEquals("Expect 4 clients", 4, clients.length);
             gpii.tests.oauth2.dataStore.verifyClientA(clients[0]);
             gpii.tests.oauth2.dataStore.verifyClientB(clients[1]);
             gpii.tests.oauth2.dataStore.verifyClientC(clients[2]);
