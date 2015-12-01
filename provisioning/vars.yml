@@ -6,7 +6,7 @@ nodejs_app_name: universal
 
 nodejs_app_tcp_port: 8081
 
-# Node.js version required by application (supported versions: 0.10.36*, 0.10.40, 4.1.1)
+# Currently Node.js 0.10.* is required by Universal
 nodejs_version: 0.10.40
 
 # If a specific npm version is needed, specify it here
