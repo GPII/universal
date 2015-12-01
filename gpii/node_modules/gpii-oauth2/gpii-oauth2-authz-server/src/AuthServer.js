@@ -23,6 +23,8 @@ var LocalStrategy = require("passport-local").Strategy;
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;
 
 var fluid = require("infusion");
+var $ = fluid.registerNamespace("jQuery");
+
 require("../../gpii-oauth2-datastore");
 require("../../gpii-oauth2-utilities");
 require("./UserService");
@@ -74,6 +76,11 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
         return done(null, authorizationService.exchangeCodeForAccessToken(code, client.id, redirectUri));
     }));
+
+    oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
+        return done(null, authorizationService.grantClientCredentialsAccessToken(client.id, scope));
+    }));
+
 };
 
 // gpii.oauth2.passport
@@ -135,6 +142,9 @@ fluid.defaults("gpii.oauth2.dataStoreHolder", {
 
 fluid.defaults("gpii.oauth2.authServer", {
     gradeNames: ["fluid.eventedComponent", "gpii.oauth2.dataStoreHolder", "autoInit"],
+    urls: {
+        preferencesPost: ""
+    },
     members: {
         expressApp: {
             expander: {
@@ -169,7 +179,8 @@ fluid.defaults("gpii.oauth2.authServer", {
             options: {
                 components: {
                     dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
-                }
+                },
+                urls: "{authServer}.options.urls"
             }
         },
         clientService: {
@@ -537,4 +548,32 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    that.expressApp.post("/add-preferences",
+        function (req, res) {
+            var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+            if (!accessToken) {
+                res.send(401);
+            } else {
+                var client = that.authorizationService.getClientByClientCredentialsAccessToken(accessToken);
+                if (!client) {
+                    res.send(404);
+                }
+
+                var tokenPrivs = that.authorizationService.getClientCredentialsTokenPrivs(accessToken);
+                if (!tokenPrivs || !tokenPrivs.allowAddPrefs) {
+                    res.send(401);
+                } else {
+                    var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
+                    savePrefsPromise.then(function (data) {
+                        res.json(data);
+                    }, function (err) {
+                        var error = $.extend(err, {
+                            message: "Error when saving preferences: " + err.message
+                        });
+                        res.status(500).send(error);
+                    });
+                }
+            }
+        }
+    );
 };

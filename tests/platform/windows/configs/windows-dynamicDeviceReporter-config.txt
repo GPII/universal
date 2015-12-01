@@ -1,0 +1,4 @@
+This configuration file is used by the acceptance test: windows-dynamicDeviceReporter-config.js.
+
+This config makes use of dynamic device reporting, so it uses localInstallWithDynamicDeviceReporter
+as its base config, which uses the all.development.dr.production gpii's config.

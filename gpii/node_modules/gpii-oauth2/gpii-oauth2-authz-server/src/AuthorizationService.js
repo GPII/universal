@@ -21,12 +21,26 @@ var fluid = fluid || require("infusion");
 
     fluid.defaults("gpii.oauth2.authorizationService", {
         gradeNames: ["fluid.eventedComponent", "autoInit"],
+        urls: {
+            preferencesPost: ""
+        },
         components: {
             dataStore: {
                 type: "gpii.oauth2.dataStore"
             },
             codeGenerator: {
                 type: "gpii.oauth2.codeGenerator"
+            },
+            preferencesDataSource: {
+                type: "kettle.dataSource.URL",
+                options: {
+                    url: "{authorizationService}.options.urls.preferencesPost",
+                    termMap: {
+                        view: "%view"
+                    },
+                    writable: true,
+                    writeMethod: "POST"
+                }
             }
         },
         invokers: {
@@ -80,6 +94,24 @@ var fluid = fluid || require("infusion");
             getAuthForAccessToken: {
                 func: "{dataStore}.findAuthByAccessToken"
                     // accessToken
+            },
+            getClientByClientCredentialsAccessToken: {
+                func: "{dataStore}.findClientByClientCredentialsAccessToken"
+                    // accessToken
+            },
+            getClientCredentialsTokenPrivs: {
+                func: "{dataStore}.findClientCredentialsTokenPrivs"
+                    // accessToken
+            },
+            grantClientCredentialsAccessToken: {
+                funcName: "gpii.oauth2.authorizationService.grantClientCredentialsAccessToken",
+                args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
+                    // clientId, scope
+            },
+            savePrefs: {
+                funcName: "gpii.oauth2.authorizationService.savePrefs",
+                args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1"]
+                    // preferences, view
             }
         }
     });
@@ -180,6 +212,31 @@ var fluid = fluid || require("infusion");
         });
 
         return unauthorizedClients;
+    };
+
+    gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, codeGenerator, clientId, scope) {
+        // Record the credential client access token if we haven't already
+        var client = dataStore.findClientById(clientId);
+        if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
+            return false;
+        }
+
+        var clientCredentialsToken = dataStore.findClientCredentialsTokenByClientId(clientId);
+        if (!clientCredentialsToken) {
+            var accessToken = codeGenerator.generateAccessToken();
+            clientCredentialsToken = dataStore.addClientCredentialsToken({
+                clientId: clientId,
+                accessToken: accessToken,
+                allowAddPrefs: true
+            });
+        }
+
+        return clientCredentialsToken.accessToken;
+    };
+
+    gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, view) {
+        view = view || "";
+        return preferencesDataSource.set({"view": view}, preferences);
     };
 
 })();
