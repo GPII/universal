@@ -653,4 +653,38 @@
             "settings.configuration"
         ]
     }
+ "de.dadracodesign.www": {
+        "name": "Chometestsite",
+        "contexts": {
+            "OS": [{
+                "id": "web"
+            }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "info.cloud4all.www"
+                },
+                "capabilities": [
+                    "applications.de\\.dadracodesign\\.www.id"
+                ],
+                "capabilitiesTransformations": {
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captionsEnabled"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "update": [
+            "settings.configuration"
+        ]
+    }
 }
+
+
+
