@@ -1,6 +1,6 @@
 {
     "type": "cloudBased.development.all.local",    
-    "includes": [
+    "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
         "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
         "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",

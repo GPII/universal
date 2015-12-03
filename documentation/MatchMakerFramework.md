@@ -38,7 +38,7 @@ Like all other Kettle apps, the Matchmaker Framework has a config file. Generall
             }
         }
     },
-    "includes": [
+    "mergeConfigs": [
         "./base.json"
     ]
 }

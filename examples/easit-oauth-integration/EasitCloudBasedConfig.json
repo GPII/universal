@@ -7,7 +7,7 @@
             "target": "{that gpii.oauth2.dataStore}.options.gradeNames"
         }]
     },
-    "includes": [
+    "mergeConfigs": [
         "../../gpii/configs/cloudBased.development.all.local.json"
      ],
     "modules": [

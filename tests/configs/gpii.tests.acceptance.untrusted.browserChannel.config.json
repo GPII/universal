@@ -20,5 +20,5 @@
             }
         }            
     },
-    "includes": "%universal/gpii/configs/untrusted.development.all.local.json"
+    "mergeConfigs": "%universal/gpii/configs/untrusted.development.all.local.json"
 }

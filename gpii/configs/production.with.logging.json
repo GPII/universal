@@ -22,7 +22,7 @@
             }
         }
     },
-    "includes": [
+    "mergeConfigs": [
         "../node_modules/deviceReporter/configs/production.json",
         "../node_modules/flowManager/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json",
