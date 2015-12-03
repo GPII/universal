@@ -35,16 +35,16 @@
                 "url": "http://localhost:8081"
             },
             "Statistical1": {
-                "url": "http://smm1.gpii.eu:8076"
+                "url": "http://smm.gpii.eu:8076"
             },
             "Statistical2": {
-                "url": "http://smm2.gpii.eu:8075"
+                "url": "http://smm.gpii.eu:8075"
             },
             "Statistical3": {
-                "url": "http://smm3.gpii.eu:8074"
+                "url": "http://smm.gpii.eu:8074"
             },
             "Statistical4": {
-                "url": "http://smm4.gpii.eu:8073"
+                "url": "http://smm.gpii.eu:8073"
             }
         },
         "matchMakerDispatcherDisabled": false
