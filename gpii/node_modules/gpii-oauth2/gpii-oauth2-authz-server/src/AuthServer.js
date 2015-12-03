@@ -23,6 +23,8 @@ var LocalStrategy = require("passport-local").Strategy;
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;
 
 var fluid = require("infusion");
+var $ = fluid.registerNamespace("jQuery");
+
 require("../../gpii-oauth2-datastore");
 require("../../gpii-oauth2-utilities");
 require("./UserService");
@@ -73,6 +75,11 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
         return done(null, authorizationService.exchangeCodeForAccessToken(code, client.id, redirectUri));
     }));
+
+    oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
+        return done(null, authorizationService.grantClientCredentialsAccessToken(client.id, scope));
+    }));
+
 };
 
 // gpii.oauth2.passport
@@ -487,17 +494,17 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         function (req, res) {
             var oauth2ClientId = req.body.client_id;
             if (!oauth2ClientId) {
-                res.send(400);
+                res.sendStatus(400);
                 return;
             }
             var gpiiToken = req.body.gpii_token;
             if (!gpiiToken) {
-                res.send(400);
+                res.sendStatus(400);
                 return;
             }
             var auth = that.authorizationService.getAccessTokenForOAuth2ClientIdAndGpiiToken(oauth2ClientId, gpiiToken);
             if (!auth) {
-                res.send(404);
+                res.sendStatus(404);
                 return;
             }
             res.json({
@@ -507,4 +514,38 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // TODO: This endpoint needs to be moved into the prefs server, reimplemented in Kettle, and the extra prefsDataSource in AuthorizationService.js removed - see GPII-1521
+    that.expressApp.post("/add-preferences",
+        function (req, res) {
+            var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+            if (!accessToken) {
+                res.sendStatus(401);
+            } else {
+                var client = that.authorizationService.getClientByClientCredentialsAccessToken(accessToken);
+                if (!client) {
+                    res.sendStatus(404);
+                }
+
+                var tokenPrivs = that.authorizationService.getClientCredentialsTokenPrivs(accessToken);
+                if (!tokenPrivs || !tokenPrivs.allowAddPrefs) {
+                    res.sendStatus(401);
+                } else {
+                    var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
+                    savePrefsPromise.then(function (data) {
+                        res.json(data);
+                    }, function (err) {
+                        console.log("GOT SAVE ERROR ", err);
+                        var error = $.extend(err, {
+                            message: "Error when saving preferences: " + err.message
+                        });
+                        if (!res.headersSent) {
+                            res.status(500).json(error);
+                        } else {
+                            fluid.log(fluid.logLevel.WARN, "Unable to send error response ", error, " since status " + res.statusCode + " has already been set ");
+                        }
+                    });
+                }
+            }
+        }
+    );
 };

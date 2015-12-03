@@ -10,7 +10,7 @@
                         "path": "%universal/testData/preferences/acceptanceTests/%userToken.json"
                     }
                 },
-                "target": "{that preferencesServer rawPreferencesDataSource}",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}",
                 "priority": "after:development.rawPreferencesDataSource"
             }
         }

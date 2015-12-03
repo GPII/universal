@@ -55,6 +55,22 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 oauth2ClientSecret: false,
                 redirectUri: false,
                 allowDirectGpiiTokenAccess: false
+            },
+            {
+                id: 5,
+                name: "First Discovery",
+                oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
+                oauth2ClientSecret: "client_secret_firstDiscovery",
+                allowDirectGpiiTokenAccess: false,
+                allowAddPrefs: true
+            },
+            {
+                id: 6,
+                name: "Cloud4ClientCredentials",
+                oauth2ClientId: "client_for_client_credentials",
+                oauth2ClientSecret: "client_secret_for_client_credentials",
+                allowDirectGpiiTokenAccess: false,
+                allowAddPrefs: true
             }
         ],
         authDecisionsIdSeq: 2,
@@ -67,6 +83,23 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
                 accessToken: "alice_easit_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
+            }
+        ],
+        clientCredentialsTokensIdSeq: 3,
+        clientCredentialsTokens: [
+            {
+                id: 1,
+                clientId: 99,
+                accessToken: "non_existent_client",
+                revoked: false,
+                allowAddPrefs: true
+            },
+            {
+                id: 2,
+                clientId: 6,
+                accessToken: "not_allowed_to_add_prefs",
+                revoked: false,
+                allowAddPrefs: false
             }
         ]
     }

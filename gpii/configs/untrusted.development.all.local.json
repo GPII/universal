@@ -14,24 +14,19 @@
         },
         "distributeOptions": {
             "untrusted.development.port": {
-                "record": 8088,
+                "record": 8084,
                 "target": "{that cloudBasedConfig}.options.mainServerPort"
             },
             "untrusted.development.prefs": {
-                "record": "http://localhost:8088/preferences/%userToken",
+                "record": "http://localhost:8084/preferences/%userToken",
                 "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
                 "priority": "after:flowManager.development.prefs"
             },
             "untrusted.development.matchMakers": {
-                "record": "http://localhost:8088",
+                "record": "http://localhost:8084",
                 "target": "{that cloudBasedConfig flowManager}.options.matchMakers.flat.url",
                 "priority": "after:flowManager.development.matchMakers"
-            },
-            "untrusted.development.dataStore": {
-                "record": "gpii.oauth2.testDataStore",
-                "target": "{that cloudBasedConfig gpii.oauth2.dataStore}.options.gradeNames"
             }
         }
-    },
-    "require": "%universal/testData/security/TestOAuth2DataStore.js"
+    }
 }
