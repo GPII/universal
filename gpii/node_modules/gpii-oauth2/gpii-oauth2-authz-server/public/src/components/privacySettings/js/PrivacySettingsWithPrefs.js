@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 
 // Declare dependencies
-/* global fluid, jQuery, location */
+/* global fluid, jQuery, window */
 
 var gpii = gpii || {};
 
@@ -278,7 +278,7 @@ var gpii = gpii || {};
             url: url + "/" + authDecisionId,
             type: type,
             success: function () {
-                location.reload(true);
+                window.location.reload(true);
             }
         });
         dialog.close();
