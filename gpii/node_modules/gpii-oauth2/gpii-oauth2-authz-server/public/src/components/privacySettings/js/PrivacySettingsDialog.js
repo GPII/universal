@@ -116,12 +116,17 @@ var gpii = gpii || {};
                 }, {
                     //TODO: Handle errors
                     dataType: "json",
-                    success: "{that}.setAvailableAuthorizedPrefs"
+                    success: "{that}.setAvailableAuthorizedPrefs",
+                    error: "{that}.handleFetchPrefsError"
                 }]
             },
             setAvailableAuthorizedPrefs: {
                 changePath: "availableAuthorizedPrefs",
                 value: "{arguments}.0"
+            },
+            handleFetchPrefsError: {
+                funcName: "fluid.fail",
+                args: ["{arguments}.0.responseText"]
             },
             composeRequestURL: {
                 funcName: "fluid.stringTemplate",
@@ -139,7 +144,7 @@ var gpii = gpii || {};
             },
             dialogCloseHandler: {
                 funcName: "gpii.oauth2.privacySettingsDialog.dialogCloseHandler",
-                args: ["{that}.dialog", "{that}.events.onClose"]
+                args: ["{that}"]
             }
         },
         model: {
@@ -171,7 +176,7 @@ var gpii = gpii || {};
         components: {
             selectionTree: {
                 type: "gpii.oauth2.preferencesSelectionTree",
-                container: "{that}.dom.selection",
+                container: "{privacySettingsDialog}.dom.selection",
                 createOnEvent: "onCreateSelectionTree",
                 options: {
                     availablePrefs: "{privacySettingsDialog}.model.availableAuthorizedPrefs",
@@ -205,11 +210,17 @@ var gpii = gpii || {};
         that.dialog.dialog("open");
     };
 
-    gpii.oauth2.privacySettingsDialog.dialogCloseHandler = function (dialog, onCloseEvt) {
-        // To restore the dialog container to the initial state for the next render
-        dialog.dialog("destroy");
+    gpii.oauth2.privacySettingsDialog.dialogCloseHandler = function (that) {
+        // Clean up the markup of the selection tree container to ensure the previous markup
+        // does not re-appear for the next tree view when the next view is empty
+        // (https://issues.gpii.net/browse/GPII-1523)
+        if (that.selectionTree) {
+            that.selectionTree.container.empty();
+        }
+        // To restore the dialog container to the initial state for the next rendering
+        that.dialog.dialog("destroy");
         // And fire close event
-        onCloseEvt.fire();
+        that.events.onClose.fire();
     };
 
 })(jQuery, fluid);
