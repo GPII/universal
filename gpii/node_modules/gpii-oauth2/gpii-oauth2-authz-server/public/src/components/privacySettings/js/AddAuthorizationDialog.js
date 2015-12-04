@@ -34,7 +34,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 listener: "{that}.setInitialSelectedPrefs",
                 args: [ {} ]
             },
-            onDone: {
+            "onDone.sendAddAuthorization": {
                 listener: "{that}.sendAddAuthorization"
             }
         },

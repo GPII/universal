@@ -63,12 +63,10 @@ var gpii = gpii || {};
                         clientData: "{privacySettingsWithPrefs}.model.currentClientData"
                     },
                     listeners: {
-                        authorizationAdded: {
-                            "this": location,
-                            method: "reload",
-                            args: ["true"]
+                        "authorizationAdded.reload": {
+                            listener: "gpii.oauth2.privacySettingsWithPrefs.reload"
                         },
-                        onClose: {
+                        "onClose.closeAddServiceMenu": {
                             "this": "{addServiceMenu}",
                             method: "close"
                         }
@@ -304,6 +302,12 @@ var gpii = gpii || {};
         };
         that.applier.change("currentClientData", clientDataForAdd);
         that.events.onRenderAddAuthorizationDialog.fire();
+    };
+
+    // The use of this function is not made declaratively on the component tree is to work around
+    // an IE issue - https://issues.gpii.net/browse/GPII-1522
+    gpii.oauth2.privacySettingsWithPrefs.reload = function () {
+        window.location.reload(true);
     };
 
     fluid.defaults("gpii.oauth2.selectionTreeTemplate", {

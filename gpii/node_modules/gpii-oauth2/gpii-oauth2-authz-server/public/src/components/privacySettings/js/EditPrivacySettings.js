@@ -36,7 +36,7 @@ var gpii = gpii || {};
         },
         listeners: {
             "onCreate.fetchDecisionPrefs": "{that}.fetchDecisionPrefs",
-            onDone: {
+            "onDone.savePrefsAndExit": {
                 listener: "{that}.savePrefsAndExit"
             }
         },
