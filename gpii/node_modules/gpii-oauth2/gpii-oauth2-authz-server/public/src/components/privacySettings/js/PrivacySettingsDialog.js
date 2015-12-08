@@ -74,7 +74,9 @@ var gpii = gpii || {};
                 args: ["{that}"]
             },
             onDone: null,
-            onClose: null
+            onClose: null,
+            onFetchAvailableAuthorizedPrefsSuccess: null,
+            onFetchAvailableAuthorizedPrefsError: null
         },
         listeners: {
             "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
@@ -101,7 +103,9 @@ var gpii = gpii || {};
                 "this": "{that}.dom.done",
                 method: "click",
                 args: "{that}.fireDone"
-            }
+            },
+            "onFetchAvailableAuthorizedPrefsSuccess.setAvailableAuthorizedPrefs": "{that}.setAvailableAuthorizedPrefs",
+            "onFetchAvailableAuthorizedPrefsError.handleFetchPrefsError": "{that}.handleFetchPrefsError"
         },
         invokers: {
             closeDialog: {
@@ -116,8 +120,8 @@ var gpii = gpii || {};
                 }, {
                     //TODO: Handle errors
                     dataType: "json",
-                    success: "{that}.setAvailableAuthorizedPrefs",
-                    error: "{that}.handleFetchPrefsError"
+                    success: "{that}.events.onFetchAvailableAuthorizedPrefsSuccess.fire",
+                    error: "{that}.events.onFetchAvailableAuthorizedPrefsError.fire"
                 }]
             },
             setAvailableAuthorizedPrefs: {
@@ -144,7 +148,7 @@ var gpii = gpii || {};
             },
             dialogCloseHandler: {
                 funcName: "gpii.oauth2.privacySettingsDialog.dialogCloseHandler",
-                args: ["{that}"]
+                args: ["{that}.dialog", "{that}.events.onClose"]
             }
         },
         model: {
@@ -210,17 +214,11 @@ var gpii = gpii || {};
         that.dialog.dialog("open");
     };
 
-    gpii.oauth2.privacySettingsDialog.dialogCloseHandler = function (that) {
-        // Clean up the markup of the selection tree container to ensure the previous markup
-        // does not re-appear for the next tree view when the next view is empty
-        // (https://issues.gpii.net/browse/GPII-1523)
-        if (that.selectionTree) {
-            that.selectionTree.container.empty();
-        }
+    gpii.oauth2.privacySettingsDialog.dialogCloseHandler = function (dialog, onCloseEvt) {
         // To restore the dialog container to the initial state for the next rendering
-        that.dialog.dialog("destroy");
+        dialog.dialog("destroy");
         // And fire close event
-        that.events.onClose.fire();
+        onCloseEvt.fire();
     };
 
 })(jQuery, fluid);

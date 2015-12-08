@@ -1040,5 +1040,24 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             });
         });
 
+        jqUnit.asyncTest("The destroy of the selectionTree cleans up its container", function () {
+            var testDestroy = function () {
+                jqUnit.assertNotEquals("The selection tree is populated", "", that.container.html());
+                that.destroy();
+                jqUnit.assertEquals("The populated selection tree has been removed at the component destroy", "", that.container.html());
+
+                jqUnit.start();
+            };
+
+            var that = gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree-testDestory", {
+                listeners: {
+                    afterTemplateLoaded: {
+                        func: testDestroy,
+                        priority: "last"
+                    }
+                }
+            });
+        });;
+
     });
 })(jQuery);
