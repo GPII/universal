@@ -16,25 +16,43 @@
             "deviceReporter": "http://localhost:%port/device",
             "solutionsRegistry": "file://%root/../../../testData/solutions/%os.json"
         },
-        "matchMakers": {
+        "distributeOptions": [{
+            "source": "{that}.options.flowManagerDevGrades",
+            "target": "{that flowManager}.options.gradeNames"
+        }, {
+            "source": "{that}.options.scenario3MatchMakers",
+            "target": "{that flowManager}.options.matchMakers"
+        }, {
+            "source": "{that}.options.devUrls",
+            "target": "{that flowManager}.options.urls"
+        }, {
+            "source": "{that}.options.matchMakerDispatcherDisabled",
+            "target": "{that flowManager}.options.matchMakerDispatcherDisabled"
+        }],
+        "flowManagerDevGrades": ["kettle.urlExpander.distributeDevVariables"],
+        "scenario3MatchMakers": {
+            "flat": {
+                "url": "http://localhost:8081"
+            },
             "Statistical1": {
-                "url": "http://smm1.gpii.eu"
+                "url": "http://smm.gpii.eu:8076"
             },
             "Statistical2": {
-                "url": "http://smm2.gpii.eu"
+                "url": "http://smm.gpii.eu:8075"
             },
-            "Statistical1": {
-                "url": "http://smm3.gpii.eu"
+            "Statistical3": {
+                "url": "http://smm.gpii.eu:8074"
             },
             "Statistical4": {
-                "url": "http://smm4.gpii.eu"
+                "url": "http://smm.gpii.eu:8073"
             }
         },
-        "matchMakerDispatcherDisabled": false 
+        "matchMakerDispatcherDisabled": false
     },
     "includes": [
         "../node_modules/deviceReporter/configs/production.json",
-        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/flowManager/configs/base.json",
+        "../node_modules/flowManager/configs/io.json",
         "../node_modules/solutionsRegistry/configs/development.json",
         "../node_modules/flatMatchMaker/configs/development.all.local.json"
     ]

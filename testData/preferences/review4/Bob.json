@@ -18,7 +18,8 @@
                         "SizeWE": "%SystemRoot%\\cursors\\aero_ew_l.cur",
                         "AppStarting": "%SystemRoot%\\cursors\\aero_working_l.ani",
                         "UpArrow": "%SystemRoot%\\cursors\\aero_up_l.cur"
-                    }
+                    },
+                    "http://registry.gpii.net/common/excludedMatchMakers": ["statistical", "RuleBased"]
                 }
             }
         }
