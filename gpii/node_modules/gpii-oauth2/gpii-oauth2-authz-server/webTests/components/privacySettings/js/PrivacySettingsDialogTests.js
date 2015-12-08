@@ -28,25 +28,30 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         };
 
         fluid.defaults("gpii.tests.oauth2.privacySettingsDialog", {
-            gradeNames: ["gpii.oauth2.privacySettingsDialog", "gpii.tests.privacySettingsDialogConfig", "autoInit"],
+            gradeNames: ["gpii.oauth2.privacySettingsDialog", "gpii.tests.oauth2.privacySettingsConfig", "autoInit"],
             members: {
-                doneButtonClicked: false
+                doneButtonClicked: false,
+                closeEventFired: false
             },
-            requestInfos: gpii.tests.privacySettingsDialog.basicRequestInfos,
+            requestInfos: gpii.tests.oauth2.privacySettings.basicRequestInfos,
             model: {
-                clientData: gpii.tests.privacySettingsDialog.clientData
+                clientData: gpii.tests.oauth2.privacySettings.clientData
             },
             listeners: {
                 "onDone.eventFired": {
                     listener: "fluid.set",
                     args: ["{that}", "doneButtonClicked", true]
+                },
+                "onClose.eventFired": {
+                    listener: "fluid.set",
+                    args: ["{that}", "closeEventFired", true]
                 }
             }
         });
 
         gpii.tests.oauth2.privacySettingsDialog.runTest = function (msg, testFunc) {
             jqUnit.asyncTest(msg, function () {
-                fluid.each(gpii.tests.privacySettingsDialog.basicRequestInfos, function (options) {
+                fluid.each(gpii.tests.oauth2.privacySettings.basicRequestInfos, function (options) {
                     $.mockjax(options);
                 });
 
@@ -59,7 +64,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                         "onCreateSelectionTree.runTest": {
                             listener: function (that) {
                                 testFunc(that);
-                                gpii.tests.privacySettingsDialog.cleanUp(that.dialog);
+                                gpii.tests.oauth2.privacySettings.cleanUp(that.dialog);
                                 jqUnit.start();
                             },
                             priority: "last"
@@ -67,11 +72,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     }
                 });
             });
-        };
-
-        gpii.tests.oauth2.privacySettingsDialog.assertSelectedPreferences = function (that, expected) {
-            var serverModel = that.selectionTree.toServerModel();
-            jqUnit.assertDeepEq("The selectedPreferences should be set", expected, serverModel);
         };
 
         gpii.tests.oauth2.privacySettingsDialog.assertAllowState = function (that) {
@@ -85,15 +85,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         };
 
-        gpii.tests.oauth2.privacySettingsDialog.assertDialog = function (that, dialogState) {
-            if (dialogState === "opened") {
-                jqUnit.assertNotNull("The dialog should have been instantiated and attached", that.dialog);
-                jqUnit.assertTrue("The dialog should have been instantiated as a jQuery dialog", that.dialog.hasClass("ui-dialog-content"));
-            } else if (dialogState === "closed") {
-                jqUnit.assertFalse("The dialog should have been destroyed", that.dialog.hasClass("ui-dialog-content"));
-            }
-        };
-
         gpii.tests.oauth2.privacySettingsDialog.assertInit = function (that) {
             jqUnit.expect(8);
             var str = that.options.strings;
@@ -103,26 +94,27 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             jqUnit.assertEquals("The 'cancel' string should have been rendered", str.cancel, that.locate("cancel").text());
             jqUnit.assertTrue("The selectionTree subcomponent should have been initialized", that.selectionTree);
 
-            gpii.tests.oauth2.privacySettingsDialog.assertSelectedPreferences(that, {"increase-size": true});
+            gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {"increase-size": true});
             gpii.tests.oauth2.privacySettingsDialog.assertAllowState(that);
-            gpii.tests.oauth2.privacySettingsDialog.assertDialog(that, "opened");
+            gpii.tests.oauth2.privacySettings.assertDialog(that, "opened");
         };
 
         gpii.tests.oauth2.privacySettingsDialog.assertSelectionChange = function (that) {
             jqUnit.expect(4);
             that.selectionTree.applier.change("selections.value", "checked");
-            gpii.tests.oauth2.privacySettingsDialog.assertSelectedPreferences(that, {"": true});
+            gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {"": true});
             gpii.tests.oauth2.privacySettingsDialog.assertAllowState(that);
 
             that.selectionTree.applier.change("selections.value", "unchecked");
-            gpii.tests.oauth2.privacySettingsDialog.assertSelectedPreferences(that, {});
+            gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {});
             gpii.tests.oauth2.privacySettingsDialog.assertAllowState(that);
         };
 
         gpii.tests.oauth2.privacySettingsDialog.assertCancel = function (that) {
-            jqUnit.expect(1);
+            jqUnit.expect(2);
             that.locate("cancel").click();
-            gpii.tests.oauth2.privacySettingsDialog.assertDialog(that, "closed");
+            gpii.tests.oauth2.privacySettings.assertDialog(that, "closed");
+            jqUnit.assertTrue("The event onClose has been fired", that.closeEventFired);
         };
 
         gpii.tests.oauth2.privacySettingsDialog.assertDone = function (that) {

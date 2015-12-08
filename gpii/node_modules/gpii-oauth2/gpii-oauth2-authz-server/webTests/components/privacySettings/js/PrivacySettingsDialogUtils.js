@@ -14,22 +14,22 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // Declare dependencies
-/* global fluid, gpii, jQuery */
+/* global fluid, gpii, jQuery, jqUnit */
 
 (function ($) {
     "use strict";
 
-    fluid.registerNamespace("gpii.tests.privacySettingsDialog");
+    fluid.registerNamespace("gpii.tests.oauth2.privacySettings");
 
-    gpii.tests.privacySettingsDialog.clientData = {
+    gpii.tests.oauth2.privacySettings.clientData = {
         serviceName: "A Test Service",
         authDecisionId: 10,
         oauth2ClientId: 1
     };
 
-    gpii.tests.privacySettingsDialog.basicRequestInfos = {
+    gpii.tests.oauth2.privacySettings.basicRequestInfos = {
         fetchAvailableAuthorizedPrefs: {
-            url: "/available-authorized-preferences/" + gpii.tests.privacySettingsDialog.clientData.oauth2ClientId,
+            url: "/available-authorized-preferences/" + gpii.tests.oauth2.privacySettings.clientData.oauth2ClientId,
             dataType: "json",
             responseText: {
                 "increase-size": true,
@@ -42,7 +42,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
-    fluid.defaults("gpii.tests.privacySettingsDialogConfig", {
+    fluid.defaults("gpii.tests.oauth2.privacySettingsConfig", {
         gradeNames: ["gpii.oauth2.privacySettingsDialog", "autoInit"],
         components: {
             selectionTree: {
@@ -57,7 +57,21 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     });
 
-    gpii.tests.privacySettingsDialog.cleanUp = function (dialog) {
+    gpii.tests.oauth2.privacySettings.assertSelectedPreferences = function (that, expected) {
+        var serverModel = that.selectionTree.toServerModel();
+        jqUnit.assertDeepEq("The selectedPreferences should be set", expected, serverModel);
+    };
+
+    gpii.tests.oauth2.privacySettings.assertDialog = function (that, dialogState) {
+        if (dialogState === "opened") {
+            jqUnit.assertNotNull("The dialog should have been instantiated and attached", that.dialog);
+            jqUnit.assertTrue("The dialog should have been instantiated as a jQuery dialog", that.dialog.hasClass("ui-dialog-content"));
+        } else if (dialogState === "closed") {
+            jqUnit.assertFalse("The dialog should have been destroyed", that.dialog.hasClass("ui-dialog-content"));
+        }
+    };
+
+    gpii.tests.oauth2.privacySettings.cleanUp = function (dialog) {
         if (dialog.hasClass("ui-dialog-content")) {
             dialog.dialog("close");
         }

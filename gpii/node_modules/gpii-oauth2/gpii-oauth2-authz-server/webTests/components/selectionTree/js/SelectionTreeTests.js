@@ -1057,7 +1057,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     }
                 }
             });
-        });;
+        });
 
     });
 })(jQuery);
