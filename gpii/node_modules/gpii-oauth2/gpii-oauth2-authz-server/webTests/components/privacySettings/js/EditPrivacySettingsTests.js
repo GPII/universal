@@ -35,7 +35,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             saveDecisionPrefs: {
                 url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
                 type: "put",
-                data: "{\"increase-size\":true}",
+                data: "{\"\":true}",
                 status: 200,
                 responseText: {
                     isError: false
@@ -74,27 +74,25 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             });
         };
 
-        gpii.tests.oauth2.editPrivacySettings.assertAjaxCalls = function (expected) {
-            jqUnit.assertEquals(expected + " ajax calls have been made", expected, $.mockjax.mockedAjaxCalls().length);
-        };
-
         gpii.tests.oauth2.editPrivacySettings.assertInit = function (that) {
             jqUnit.expect(2);
             gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {"increase-size": true});
-            gpii.tests.oauth2.editPrivacySettings.assertAjaxCalls(2);
+            gpii.tests.oauth2.privacySettings.assertAjaxCalls(2);
         };
 
         gpii.tests.oauth2.editPrivacySettings.assertCancel = function (that) {
             jqUnit.expect(1);
             that.locate("cancel").click();
-            gpii.tests.oauth2.editPrivacySettings.assertAjaxCalls(2);
+            gpii.tests.oauth2.privacySettings.assertAjaxCalls(2);
         };
 
         gpii.tests.oauth2.editPrivacySettings.assertDone = function (that) {
-            jqUnit.expect(2);
+            jqUnit.expect(3);
+            that.selectionTree.applier.change("selections.value", "checked");
+            gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {"": true});
             that.locate("done").click();
             gpii.tests.oauth2.privacySettings.assertDialog(that, "closed");
-            gpii.tests.oauth2.editPrivacySettings.assertAjaxCalls(3);
+            gpii.tests.oauth2.privacySettings.assertAjaxCalls(3);
         };
 
         gpii.tests.oauth2.editPrivacySettings.runTest("Initialization", gpii.tests.oauth2.editPrivacySettings.assertInit);

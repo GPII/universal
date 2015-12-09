@@ -71,6 +71,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
+    gpii.tests.oauth2.privacySettings.assertAjaxCalls = function (expected) {
+        jqUnit.assertEquals(expected + " ajax calls have been made", expected, $.mockjax.mockedAjaxCalls().length);
+    };
+
     gpii.tests.oauth2.privacySettings.cleanUp = function (dialog) {
         if (dialog.hasClass("ui-dialog-content")) {
             dialog.dialog("close");
