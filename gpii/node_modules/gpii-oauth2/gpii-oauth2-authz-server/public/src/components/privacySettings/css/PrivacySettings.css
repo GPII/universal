@@ -52,23 +52,42 @@
 }
 
 /* For add service */
-.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-addService {
+.gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addService-selected {
+    background-color: #FFFFFF;
+    border: solid 3px #000000;
+}
+
+/* Draw the line under the add service button when the service menu is open */
+.gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addService-selected button:after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    bottom: -0rem;
+    border-bottom: 1px solid #666;
+}
+.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-addServiceButton {
     padding: 1rem 0;
     width: 100%;
     text-align: left;
+    position: relative;
 }
 
-.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-addService:hover,
-.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-addService:focus,
-.gpii-oauth2 .gpii-oauth2-privacySettings button.gpiic-oauth2-privacySettings-addService-selected {
+.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-addServiceButton:hover,
+.gpii-oauth2 .gpii-oauth2-privacySettings button.gpii-oauth2-privacySettings-addServiceButton:focus {
     background-color: #FFFFFF;
     outline: solid 3px #000000;
 }
 
-.gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addService .gpii-icon-plus-small {
+.gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addServiceButton .gpii-icon-plus-small {
     background-color: #3D3F4C;
     color: #FFFFFF;
     margin: 0rem 0.5rem 0rem 4rem;
+}
+
+/* Override the default jQuery styling for menu widgets */
+.ui-widget-content {
+    border: none;
 }
 
 .gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addServiceMenu li {
@@ -77,10 +96,11 @@
 
 .gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addServiceMenu li:hover {
     background-color: #FCD500;
+    border: medium dotted #3d3f4c;
 }
 
-.gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addServiceMenu li:focus {
-    background-color: #FCD500;
+.gpii-oauth2 .gpii-oauth2-privacySettings .gpii-oauth2-privacySettings-addServiceMenu li.gpii-oauth2-servicesMenuItem-focused {
+    border: medium solid #3d3f4c;
 }
 
 /* Override the default focus styling for jQuery menu widgets */

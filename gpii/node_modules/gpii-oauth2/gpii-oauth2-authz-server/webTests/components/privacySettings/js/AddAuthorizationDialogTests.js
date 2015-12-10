@@ -14,7 +14,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // Declare dependencies
-/* global document, fluid, gpii, jQuery, jqUnit */
+/* global document, fluid, gpii, jQuery */
 
 (function ($) {
     "use strict";

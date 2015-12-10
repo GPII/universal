@@ -21,21 +21,22 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.oauth2.servicesMenu", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         widgetOptions: {
-            select: "{that}.fireServiceSelected"
+            select: "{that}.fireServiceSelected",
+            focus: "{that}.addMenuItemFocusCss"
         },
         events: {
             serviceSelected: null,
             onClose: null
         },
         model: {
-            menuIsOpen: false
+            isMenuOpen: false
         },
         modelListeners: {
-            menuIsOpen: {
+            isMenuOpen: {
                 funcName: "gpii.oauth2.servicesMenu.updateVisibility",
                 args: [
                     "{that}.container",
-                    "{that}.model.menuIsOpen",
+                    "{that}.model.isMenuOpen",
                     "{that}.options.styles.menuOpen",
                     "{that}.close",
                     "{that}.events.onClose"
@@ -43,28 +44,32 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         },
         listeners: {
-            "onCreate.setup": "gpii.oauth2.servicesMenu.setup",
-            "onCreate.bindKeyDownHandler": {
+            "onCreate.setup": {
+                "this": "{that}.container",
+                method: "menu",
+                args: ["{that}.options.widgetOptions"]
+            },
+            "onCreate.bindEscape": {
                 "this": "{that}.container",
                 method: "keydown",
-                args: ["{that}.keydownHandler"]
+                args: ["{that}.bindEscape"]
             }
         },
         invokers: {
             open: {
-                funcName: "gpii.oauth2.servicesMenu.open",
-                args: ["{that}"]
+                changePath: "isMenuOpen",
+                value: true
             },
             close: {
-                funcName: "gpii.oauth2.servicesMenu.close",
-                args: ["{that}"]
+                changePath: "isMenuOpen",
+                value: false
             },
             keepOpen: {
-                funcName: "gpii.oauth2.servicesMenu.keepOpen",
+                funcName: "gpii.oauth2.servicesMenu.removeGlobalDismissal",
                 args: ["{that}.container"]
             },
-            keydownHandler: {
-                funcName: "gpii.oauth2.servicesMenu.keydownHandler",
+            bindEscape: {
+                funcName: "gpii.oauth2.servicesMenu.bindEscape",
                 args: ["{that}", "{arguments}.0"] // event
             },
             fireServiceSelected: {
@@ -76,6 +81,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     "{arguments}.0", // jQuery UI: event
                     "{arguments}.1"  // jQuery UI: ui
                 ]
+            },
+            addMenuItemFocusCss: {
+                funcName: "gpii.oauth2.servicesMenu.addMenuItemFocusCss",
+                args: ["{arguments}.1.item", "{that}.options.styles.menuItemFocus"]
             }
         },
         selectors: {
@@ -83,13 +92,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             oauth2ClientId: "[name=oauth2ClientId]"
         },
         styles: {
-            menuOpen: "gpii-oauth2-servicesMenuOpen"
+            menuOpen: "gpii-oauth2-servicesMenuOpen",
+            menuItemFocus: "gpii-oauth2-servicesMenuItem-focused"
         }
     });
-
-    gpii.oauth2.servicesMenu.setup = function (that) {
-        that.container.menu(that.options.widgetOptions);
-    };
 
     gpii.oauth2.servicesMenu.updateVisibility = function (container, isOpen, menuOpenStyle, closeFunc, onCloseEvt) {
         container.toggleClass(menuOpenStyle, isOpen);
@@ -110,19 +116,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         fluid.globalDismissal({ menu: container }, null);
     };
 
-    gpii.oauth2.servicesMenu.open = function (that) {
-        that.applier.change("menuIsOpen", true);
-    };
-
-    gpii.oauth2.servicesMenu.close = function (that) {
-        that.applier.change("menuIsOpen", false);
-    };
-
-    gpii.oauth2.servicesMenu.keepOpen = function (container) {
-        gpii.oauth2.servicesMenu.removeGlobalDismissal(container);
-    };
-
-    gpii.oauth2.servicesMenu.keydownHandler = function (that, evt) {
+    gpii.oauth2.servicesMenu.bindEscape = function (that, evt) {
         if (evt.keyCode === $.ui.keyCode.ESCAPE) {
             that.close();
         }
@@ -132,6 +126,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         var serviceName = ui.item.find(serviceNameSelector).text();
         var oauth2ClientId = ui.item.find(oauth2ClientIdSelector).attr("value");
         that.events.serviceSelected.fire(serviceName, oauth2ClientId);
+    };
+
+    gpii.oauth2.servicesMenu.addMenuItemFocusCss = function (menuItem, cssClass) {
+        // Remove the pre-applied focus css from other menu items
+        menuItem.siblings("li").removeClass(cssClass);
+        menuItem.addClass(cssClass);
     };
 
 })(jQuery, fluid);

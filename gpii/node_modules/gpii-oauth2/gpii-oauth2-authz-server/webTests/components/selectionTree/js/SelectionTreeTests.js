@@ -1049,7 +1049,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 jqUnit.start();
             };
 
-            var that = gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree-testDestory", {
+            gpii.tests.oauth2.preferencesSelectionTree(".gpiic-oauth2-selectionTree-testDestory", {
                 listeners: {
                     afterTemplateLoaded: {
                         func: testDestroy,

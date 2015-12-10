@@ -107,20 +107,20 @@ var gpii = gpii || {};
                 createOnEvent: "afterRender",
                 options: {
                     listeners: {
-                        "serviceSelected": {
+                        "serviceSelected.addService": {
                             funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
                             args: ["{privacySettingsWithPrefs}", "{addServiceMenu}", "{arguments}.0", "{arguments}.1"]
                         },
-                        "onClose": {
+                        "onClose.setFocus": {
                             funcName: "fluid.focus",
                             args: ["{privacySettingsWithPrefs}.dom.addServiceButton"]
                         }
                     },
                     modelListeners: {
-                        menuIsOpen: {
-                            "this": "{privacySettingsWithPrefs}.dom.addServiceButton",
+                        isMenuOpen: {
+                            "this": "{privacySettingsWithPrefs}.dom.addService",
                             method: "toggleClass",
-                            args: ["{privacySettingsWithPrefs}.options.styles.addServiceButtonSelected"]
+                            args: ["{privacySettingsWithPrefs}.options.styles.addServiceSelected"]
                         }
                     }
                 }
@@ -143,7 +143,8 @@ var gpii = gpii || {};
             removeDecisionDialog: ".gpiic-oauth2-privacySettings-removeDecision-dialog",
             removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
             editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog",
-            addServiceButton: ".gpiic-oauth2-privacySettings-addService",
+            addService: ".gpiic-oauth2-privacySettings-addService",
+            addServiceButton: ".gpiic-oauth2-privacySettings-addServiceButton",
             addServiceMenu: ".gpiic-oauth2-privacySettings-addServiceMenu",
             addAuthorizationDialog: ".gpiic-oauth2-privacySettings-addAuthorizationDialog"
         },
@@ -151,9 +152,9 @@ var gpii = gpii || {};
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
             okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
             cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel",
-            addServiceButtonSelected: "gpiic-oauth2-privacySettings-addService-selected"
+            addServiceSelected: "gpii-oauth2-privacySettings-addService-selected"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addServiceButton", "addServiceMenu", "addAuthorizationDialog"],
+        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authDecisionId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addService", "addServiceButton", "addServiceMenu", "addAuthorizationDialog"],
         strings: {
             logout: "Log Out",
             header: "Privacy",
