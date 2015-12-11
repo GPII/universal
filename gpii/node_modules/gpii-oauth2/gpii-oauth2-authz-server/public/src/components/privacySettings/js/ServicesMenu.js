@@ -21,11 +21,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.oauth2.servicesMenu", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         widgetOptions: {
-            select: "{that}.fireServiceSelected",
+            select: "{that}.fireOnServiceSelected",
             focus: "{that}.addMenuItemFocusCss"
         },
         events: {
-            serviceSelected: null,
+            onServiceSelected: null,
             onClose: null
         },
         model: {
@@ -57,12 +57,16 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         invokers: {
             open: {
-                changePath: "isMenuOpen",
-                value: true
+                func: "{that}.setIsMenuOpen",
+                args: true
             },
             close: {
+                func: "{that}.setIsMenuOpen",
+                args: false
+            },
+            setIsMenuOpen: {
                 changePath: "isMenuOpen",
-                value: false
+                value: "{arguments}.0"
             },
             keepOpen: {
                 funcName: "gpii.oauth2.servicesMenu.removeGlobalDismissal",
@@ -72,8 +76,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 funcName: "gpii.oauth2.servicesMenu.bindEscape",
                 args: ["{that}", "{arguments}.0"] // event
             },
-            fireServiceSelected: {
-                funcName: "gpii.oauth2.servicesMenu.fireServiceSelected",
+            fireOnServiceSelected: {
+                funcName: "gpii.oauth2.servicesMenu.fireOnServiceSelected",
                 args: [
                     "{that}",
                     "{that}.options.selectors.serviceName",
@@ -122,10 +126,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
-    gpii.oauth2.servicesMenu.fireServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {
+    gpii.oauth2.servicesMenu.fireOnServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {
         var serviceName = ui.item.find(serviceNameSelector).text();
         var oauth2ClientId = ui.item.find(oauth2ClientIdSelector).attr("value");
-        that.events.serviceSelected.fire(serviceName, oauth2ClientId);
+        that.events.onServiceSelected.fire(serviceName, oauth2ClientId);
     };
 
     gpii.oauth2.servicesMenu.addMenuItemFocusCss = function (menuItem, cssClass) {

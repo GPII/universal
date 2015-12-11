@@ -107,7 +107,7 @@ var gpii = gpii || {};
                 createOnEvent: "afterRender",
                 options: {
                     listeners: {
-                        "serviceSelected.addService": {
+                        "onServiceSelected.addService": {
                             funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
                             args: ["{privacySettingsWithPrefs}", "{addServiceMenu}", "{arguments}.0", "{arguments}.1"]
                         },
