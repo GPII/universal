@@ -1,0 +1,22 @@
+nodejs_app_name: universal
+
+# Currently Node.js 0.10.* is required by Universal
+nodejs_version: 0.10.40
+
+# We load Universal to /opt/gpii/node_modules/{{ nodejs_app_name }} in the Dockerfile
+# And configure the ENV there that we use here
+
+nodejs_app_install_dir: "{{ lookup('env', 'INSTALL_DIR') }}"
+
+nodejs_app_git_clone: false
+
+# Modify this to use a branch other than master
+
+nodejs_app_git_branch: master
+
+nodejs_app_commands:
+  - npm install
+  - grunt dedupe-infusion
+  - npm test
+
+nodejs_app_start_script: gpii.js

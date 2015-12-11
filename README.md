@@ -54,6 +54,10 @@ From the root of the `universal` folder, run the following command:
 #### Running tests using a VM
 A VM can be automatically created using tools provided by the [Prosperity4All Quality Infrastructure](https://github.com/GPII/qi-development-environments/). Please ensure the [requirements](https://github.com/GPII/qi-development-environments/#requirements) have been met. The ``vagrant up`` command can then be used to provision a new VM.
 
+- vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && npm test'
+- vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && node tests/ProductionConfigTests.js'
+- vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && DISPLAY=:0 testem ci --file tests/web/testem_qi.json'
+
 Usage
 -----
 
@@ -100,4 +104,3 @@ GPII component images can then be built using the Universal image. Here are two 
 
 * https://github.com/gpii-ops/docker-preferences-server/
 * https://github.com/gpii-ops/docker-flow-manager/
-
