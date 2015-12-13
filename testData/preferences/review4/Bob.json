@@ -1,0 +1,27 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
+                        "No": "%SystemRoot%\\cursors\\aero_unavail_l.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_l.cur",
+                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\aero_busy_l.ani",
+                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_l.ani",
+                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_l.cur"
+                    }
+                }
+            }
+        }
+    }
+}
+

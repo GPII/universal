@@ -9,26 +9,6 @@
         },
         
         {
-            "id": "org.gnome.desktop.interface"
-        },
-
-        {
-            "id": "org.gnome.nautilus"
-        },
-
-        {
-            "id": "org.gnome.desktop.a11y.keyboard"
-        },
-
-        {
-            "id": "org.gnome.orca"
-        },
-
-        {
-            "id": "org.gnome.desktop.a11y.magnifier"
-        },
-
-        {
             "id": "com.microsoft.windows.magnifier"
         },
 
@@ -41,19 +21,7 @@
         },
 
         {
-            "id": "org.gnome.desktop.interface"
-        },
-
-        {
-            "id": "org.gnome.nautilus"
-        },
-
-        {
             "id": "trace.easyOne.communicator.windows"
-        },
-
-        {
-            "id": "trace.easyOne.communicator.linux"
         },
 
         {
@@ -61,15 +29,7 @@
         },
 
         {
-            "id": "trace.easyOne.sudan.linux"
-        },
-
-        {
             "id": "webinsight.webAnywhere.windows"
-        },
-
-        {
-            "id": "webinsight.webAnywhere.linux"
         },
 
         {

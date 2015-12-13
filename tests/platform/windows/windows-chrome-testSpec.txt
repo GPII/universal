@@ -1,0 +1,11 @@
+windows-chrome-testSpec.txt
+
+Descriptions:
+
+* Solution: Cloud4all's Chrome extension for Google Chrome (cloud4chrome)
+* Configuration file: windows-chrome-config.json
+* Device reporter file: chrome.json
+* NP sets:
+ * chrome_high_contrast
+ * chrome_font_size
+ * chrome_magnification
