@@ -118,6 +118,15 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "jfw.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
         ]
     },
 
@@ -167,6 +176,15 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_CURRENT_USER",
+                "path": "Software\\Texthelp\\Read&Write10\\InstallPath",
+                "subPath": "ReadAndWrite.exe",
+                "dataType": "REG_SZ"
             }
         ]
     },
@@ -280,6 +298,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "Magnify.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -313,6 +336,11 @@
             {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "osk.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -682,6 +710,15 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "nvda.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
         ]
     },
 
@@ -717,6 +754,11 @@
                     "type": "gpii.windows.killProcessByName",
                     "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -751,6 +793,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -784,6 +831,11 @@
             {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -913,6 +965,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -965,6 +1022,11 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -1019,6 +1081,11 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -1299,6 +1366,11 @@
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -1451,6 +1523,11 @@
         "start": [
         ],
         "stop": [
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     }
 }

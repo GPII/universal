@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Acceptance test for font and background color transformation in Easit4all",
+        "userToken": "easit4all_color",
+        "solutionId": "com.bdigital.easit4all",
+        "expected": {
+            "com.bdigital.easit4all": {
+                "fontSize": 10,
+                "magnification": 1,
+                "foregroundColor": "Yellow",
+                "backgroundColor": "Black"
+            }
+        }
+    },
+    {
+        "name": "Acceptance test for font size transformation in Easit4all",
+        "userToken": "easit4all_font_size",
+        "solutionId": "com.bdigital.easit4all",
+        "expected": {
+            "com.bdigital.easit4all": {
+                "fontSize": 20,
+                "fontFaceFontName": "Times New Roman"
+            }
+        }
+    },
+    {
+        "name": "Acceptance test for magnification in Easit4all",
+        "userToken": "easit4all_magnification",
+        "solutionId": "com.bdigital.easit4all",
+        "expected": {
+            "com.bdigital.easit4all": {
+                "magnification": 1
+            }
+        }
+    }
+]
