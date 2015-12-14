@@ -82,7 +82,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             name: "Keyboard interaction",
             tests: [{
                 expect: 15,
-                name: "Navigate thru menu items using arrow keys",
+                name: "Keyboard interaction",
                 sequence: [{
                     func: "{servicesMenu}.applier.change",
                     args: ["isMenuOpen", true]
@@ -121,7 +121,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             name: "Test the firing of the event onServiceSelected",
             tests: [{
                 expect: 4,
-                name: "The event onServiceSelected is fired with correct arguments",
+                name: "The event onServiceSelected is fired with correct arguments at various scenarios",
                 sequence: [{
                     func: "{servicesMenu}.applier.change",
                     args: ["isMenuOpen", true]
@@ -148,8 +148,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     gpii.tests.oauth2.servicesMenu.assertInit = function (that) {
-        jqUnit.assertTrue("The menu has instantiated with the \"select\" option", "function", typeof that.container.menu("option", "select"));
-        jqUnit.assertTrue("The menu has instantiated with the \"focus\" option", "function", typeof that.container.menu("option", "focus"));
+        jqUnit.assertTrue("The menu has been instantiated with the \"select\" option", "function", typeof that.container.menu("option", "select"));
+        jqUnit.assertTrue("The menu has been instantiated with the \"focus\" option", "function", typeof that.container.menu("option", "focus"));
 
         gpii.tests.oauth2.servicesMenu.verifyVisibility(that, false, 0);
     };
@@ -158,8 +158,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         var assertFunc = isMenuOpen ? "assertTrue" : "assertFalse",
             msg = isMenuOpen ? "" : " not";
 
-        jqUnit[assertFunc]("The model value for isMenuOpen is set to false", that.model.isMenuOpen);
-        jqUnit[assertFunc]("The css class for the menu open is" + msg + " applied", that.container.hasClass(that.options.styles.menuOpen));
+        jqUnit[assertFunc]("The model value for isMenuOpen has been set to false", that.model.isMenuOpen);
+        jqUnit[assertFunc]("The css class for the menu open has been" + msg + " applied", that.container.hasClass(that.options.styles.menuOpen));
         jqUnit.assertEquals("The onClose event has been called " + onCloseCalled + " time(s)", onCloseCalled, that.onCloseCalled);
     };
 
