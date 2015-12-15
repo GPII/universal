@@ -54,9 +54,11 @@ From the root of the `universal` folder, run the following command:
 #### Running tests using a VM
 A VM can be automatically created using tools provided by the [Prosperity4All Quality Infrastructure](https://github.com/GPII/qi-development-environments/). Please ensure the [requirements](https://github.com/GPII/qi-development-environments/#requirements) have been met. The ``vagrant up`` command can then be used to provision a new VM.
 
-- vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && npm test'
-- vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && node tests/ProductionConfigTests.js'
-- vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && DISPLAY=:0 testem ci --file tests/web/testem_qi.json'
+Following provisioning, tests can be run in the VM from the host system as follows:
+
+- node-based tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && npm test'`
+- browser-based tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && DISPLAY=:0 testem ci --file tests/web/testem_qi.json'`
+- production tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && node tests/ProductionConfigTests.js'`
 
 Usage
 -----
