@@ -3,19 +3,20 @@
 
 require 'yaml'
 
-ansible_vars = YAML.load_file("provisioning/vars.yml")
+common_ansible_vars = YAML.load_file("provisioning/vars.yml")
+vagrant_ansible_vars = YAML.load_file("provisioning/vagrant-vars.yml")
 
-app_name = ansible_vars["nodejs_app_name"]
+app_name = common_ansible_vars["nodejs_app_name"]
 
-app_directory = ansible_vars["nodejs_app_install_dir"]
+app_directory = vagrant_ansible_vars["nodejs_app_install_dir"]
 
-app_start_script = ansible_vars["nodejs_app_start_script"]
+app_start_script = common_ansible_vars["nodejs_app_start_script"]
 
 # Check for the existence of the 'VM_HOST_TCP_PORT' environment variable. If it
 # doesn't exist and 'nodejs_app_tcp_port' is defined in vars.yml then use that
 # port. Failing that use defaults provided in this file.
-host_tcp_port = ENV["VM_HOST_TCP_PORT"] || ansible_vars["nodejs_app_tcp_port"] || 8081
-guest_tcp_port = ansible_vars["nodejs_app_tcp_port"] || 8081
+host_tcp_port = ENV["VM_HOST_TCP_PORT"] || common_ansible_vars["nodejs_app_tcp_port"] || 8081
+guest_tcp_port = common_ansible_vars["nodejs_app_tcp_port"] || 8081
 
 # By default this VM will use 2 processor cores and 2GB of RAM. The 'VM_CPUS' and
 # "VM_RAM" environment variables can be used to change that behaviour.
@@ -60,7 +61,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo ansible-galaxy install -fr #{app_directory}/provisioning/requirements.yml
-    sudo PYTHONUNBUFFERED=1 ansible-playbook #{app_directory}/provisioning/playbook.yml --tags="install,configure"
+    sudo UNIVERSAL_VARS_FILE=vagrant-vars.yml PYTHONUNBUFFERED=1 ansible-playbook #{app_directory}/provisioning/playbook.yml --tags="install,configure"
   SHELL
 
   # Using config.vm.hostname to set the hostname on Fedora VMs seems to remove the string

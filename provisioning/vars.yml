@@ -1,4 +1,6 @@
 ---
+# Common variables for universal shared between both
+# Docker and Vagrant builds
 # Please refer to https://github.com/idi-ops/ansible-nodejs/blob/master/defaults/main.yml
 # for documentation related to these variables
 
@@ -12,16 +14,6 @@ nodejs_version: 0.10.40
 # If a specific npm version is needed, specify it here
 #nodejs_npm_version: 1.4.28
 
-nodejs_app_npm_packages:
-  - testem
-
-nodejs_app_commands:
-  - npm install
-  - npm run dedupe-infusion
-
 nodejs_app_start_script: gpii.js
 
-nodejs_app_install_dir: /home/vagrant/sync/node_modules/universal
-
 nodejs_app_git_clone: false
-

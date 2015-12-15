@@ -3,7 +3,11 @@
   user: root
 
   vars_files:
-    - "{{ lookup('env', 'UNIVERSAL_VARS_FILE')  | default('vars.yml',true) }}"
+    # The Dockerfile, Vagrantfile or other means of running the playbook
+    # must set the UNIVERSAL_VARS_FILE variable appropriately for its
+    # environment    
+    - "{{ lookup('env', 'UNIVERSAL_VARS_FILE') }}"
+    - vars.yml
 
   roles:
     - facts
