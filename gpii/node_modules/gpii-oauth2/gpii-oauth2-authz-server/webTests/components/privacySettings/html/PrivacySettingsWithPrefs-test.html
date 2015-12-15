@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../public/src/core/js/GPIIOauth2.js"></script>
     <script type="text/javascript" src="../../../../public/src/components/selectionTree/js/SelectionTree.js"></script>
     <script type="text/javascript" src="../../../../public/src/components/privacySettings/js/PrivacySettingsDialog.js"></script>
-    <script type="text/javascript" src="../../../../public/src/components/privacySettings/js/EditPrivacySettings.js"></script>
+    <script type="text/javascript" src="../../../../public/src/components/privacySettings/js/editPrivacySettings.js"></script>
     <script type="text/javascript" src="../../../../public/src/components/privacySettings/js/ServicesMenu.js"></script>
     <script type="text/javascript" src="../../../../public/src/components/privacySettings/js/AddAuthorizationDialog.js"></script>
     <script type="text/javascript" src="../../../../public/src/components/OKCancelDialog/js/OKCancelDialog.js"></script>
@@ -34,6 +34,7 @@
 
     <!--  These are the jqUnit test framework js files -->
     <script type="text/javascript" src="../../../../../../../../node_modules/infusion/tests/lib/qunit/js/qunit.js"></script>
+    <script type="text/javascript" src="../../../lib/mockjax/js/jquery.mockjax.js"></script>
     <script type="text/javascript" src="../../../../../../../../node_modules/infusion/tests/test-core/jqUnit/js/jqUnit.js"></script>
     <script type="text/javascript" src="../../../../../../../../node_modules/infusion/tests/test-core/jqUnit/js/jqUnit-browser.js"></script>
     <script type="text/javascript" src="../../../../../../../../node_modules/infusion/tests/test-core/utils/js/IoCTestUtils.js"></script>
@@ -70,7 +71,7 @@
                 <div class="gpii-oauth2-privacySettings-services">
                     <ul>
                         <li class="gpii-oauth2-privacySettings-service gpii-ouath2-inset-horizontal">
-                            <strong>test service</strong>
+                            <strong>A Test Service</strong>
                             <button class="gpiic-oauth2-privacySettings-edit gpii-oauth2-privacySettings-edit" name="edit">
                                 <span class="gpii-icon gpii-icon-edit" aria-hidden="true"></span>
                             </button>
@@ -78,7 +79,7 @@
                                 <span class="gpii-icon gpii-icon-x-small" aria-hidden="true"></span>
                             </button>
 
-                            <input type="hidden" id="gpiic-oauth2-privacySettings-serviceName" name="serviceName" value="test service" />
+                            <input type="hidden" id="gpiic-oauth2-privacySettings-serviceName" name="serviceName" value="A Test Service" />
                             <input type="hidden" id="gpiic-oauth2-privacySettings-authDecisionId" name="authDecisionId" value="10" />
                             <input type="hidden" id="gpiic-oauth2-privacySettings-oauth2ClientId" name="oauth2ClientId" value="1" />
                         </li>

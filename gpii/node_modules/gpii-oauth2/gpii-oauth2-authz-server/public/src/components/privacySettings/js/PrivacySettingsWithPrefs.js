@@ -63,9 +63,7 @@ var gpii = gpii || {};
                         clientData: "{privacySettingsWithPrefs}.model.currentClientData"
                     },
                     listeners: {
-                        "authorizationAdded.reload": {
-                            listener: "gpii.oauth2.privacySettingsWithPrefs.reload"
-                        },
+                        "authorizationAdded.reload": "gpii.oauth2.privacySettingsWithPrefs.reload",
                         "onClose.closeAddServiceMenu": {
                             "this": "{addServiceMenu}",
                             method: "close"
@@ -95,7 +93,8 @@ var gpii = gpii || {};
                                 "{that}",
                                 "{privacySettingsWithPrefs}.options.requestInfos.removeDecision.url",
                                 "{privacySettingsWithPrefs}.options.requestInfos.removeDecision.type",
-                                "{that}.model.authDecisionId"
+                                "{that}.model.authDecisionId",
+                                "{privacySettingsWithPrefs}.events.onRemovalSuccess"
                             ]
                         }
                     }
@@ -196,7 +195,8 @@ var gpii = gpii || {};
         },
         events: {
             onRenderEditDialog: null,
-            onRenderAddAuthorizationDialog: null
+            onRenderAddAuthorizationDialog: null,
+            onRemovalSuccess: null    // fired with an argument: authDecisionId
         },
         listeners: {
             "afterRender.createTooltips": {
@@ -217,7 +217,8 @@ var gpii = gpii || {};
                 "this": "{that}.dom.addServiceButton",
                 method: "click",
                 args: "{that}.openAddServiceMenu"
-            }
+            },
+            "onRemovalSuccess.reload": "gpii.oauth2.privacySettingsWithPrefs.reload"
         },
         invokers: {
             getClientData: {
@@ -243,8 +244,8 @@ var gpii = gpii || {};
         element = $(element).closest(buttonSelector);
         return {
             serviceName: element.siblings(serviceNameSelector).attr("value"),
-            authDecisionId: element.siblings(authDecisionIdSelector).attr("value"),
-            oauth2ClientId: element.siblings(oauth2ClientIdSelector).attr("value")
+            authDecisionId: parseInt(element.siblings(authDecisionIdSelector).attr("value")),
+            oauth2ClientId: parseInt(element.siblings(oauth2ClientIdSelector).attr("value"))
         };
     };
 
@@ -274,12 +275,12 @@ var gpii = gpii || {};
         dialogForRemoval.open();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.removeDecision = function (dialog, url, type, authDecisionId) {
+    gpii.oauth2.privacySettingsWithPrefs.removeDecision = function (dialog, url, type, authDecisionId, removalSuccessEvt) {
         $.ajax({
             url: url + "/" + authDecisionId,
             type: type,
             success: function () {
-                window.location.reload(true);
+                removalSuccessEvt.fire(authDecisionId);
             }
         });
         dialog.close();

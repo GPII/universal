@@ -19,32 +19,93 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 (function ($) {
     "use strict";
 
-    fluid.registerNamespace("gpii.tests");
+    fluid.registerNamespace("gpii.tests.oauth2.privacySettings");
+
+    gpii.tests.oauth2.privacySettings.additionalRequestInfos = {
+        addAuthorization: {
+            url: "/authorizations",
+            type: "post",
+            data: "{\"oauth2ClientId\":1,\"selectedPreferences\":{\"\":true}}",
+            status: 200,
+            responseText: {
+                isError: false
+            }
+        },
+        removeDecision: {
+            url: "/authorizations/10",
+            type: "DELETE",
+            status: 200,
+            success: function () {}
+        },
+        fetchDecisionPrefs: {
+            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+            type: "get",
+            dataType: "json",
+            responseText: {
+                "increase-size": true
+            }
+        },
+        saveDecisionPrefs: {
+            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+            type: "put",
+            data: "{\"\":true}",
+            status: 200,
+            responseText: {
+                isError: false
+            }
+        }
+    };
+
+    gpii.tests.oauth2.privacySettings.requestInfos = $.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.oauth2.privacySettings.additionalRequestInfos);
+
+    gpii.tests.oauth2.privacySettings.registerMockjax = function () {
+        fluid.each(gpii.tests.oauth2.privacySettings.requestInfos, function (options) {
+            $.mockjax(options);
+        });
+    };
 
     fluid.defaults("gpii.tests.oauth2.privacySettingsWithPrefs", {
         gradeNames: ["gpii.oauth2.privacySettingsWithPrefs", "autoInit"],
         requestInfos: gpii.tests.oauth2.privacySettings.basicRequestInfos,
         model: {
             user: "testUser"
-        }
+        },
+        events: {
+            onRemoveButtonClicked: null
+        },
+        listeners: {
+            "onCreate.registerMockjax": {
+                listener: "gpii.tests.oauth2.privacySettings.registerMockjax",
+                priority: "first"
+            },
+            // Override the page reload listener when a decision is successfully removed
+            "onRemovalSuccess.reload": "fluid.identity"
+        },
+        distributeOptions: [{
+            // Override the page reload listener when a service is successfully added
+            target: "{that addAuthorizationDialog}.options.listeners",
+            record: {
+                "authorizationAdded.reload": "fluid.identity"
+            }
+        }]
     });
 
-    gpii.tests.oauth2.privacySettingsWithPrefs.subcomponents = ["editPrivacySettings", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
+    gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettings", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
 
-    fluid.defaults("gpii.tests.oauth2.privacySettingsWithPrefsTest", {
+    fluid.defaults("gpii.tests.oauth2.privacySettingsTest", {
         gradeNames: ["fluid.test.testEnvironment", "autoInit"],
         components: {
             privacySettingsWithPrefs: {
                 type: "gpii.tests.oauth2.privacySettingsWithPrefs",
                 container: ".gpiic-oauth2-privacySettings"
             },
-            privacySettingsWithPrefsTester: {
-                type: "gpii.tests.oauth2.privacySettingsWithPrefsTester"
+            privacySettingsTester: {
+                type: "gpii.tests.oauth2.privacySettingsTester"
             }
         }
     });
 
-    fluid.defaults("gpii.tests.oauth2.privacySettingsWithPrefsTester", {
+    fluid.defaults("gpii.tests.oauth2.privacySettingsTester", {
         gradeNames: ["fluid.test.testCaseHolder", "autoInit"],
         modules: [{
             name: "Initialization",
@@ -53,65 +114,121 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 sequence: [{
                     func: "{privacySettingsWithPrefs}.refreshView"
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettingsWithPrefs.assertRendering",
+                    listener: "gpii.tests.oauth2.privacySettings.assertRendering",
                     args: ["{privacySettingsWithPrefs}"],
                     priority: "last",
                     event: "{privacySettingsWithPrefs}.events.afterRender"
                 }]
             }]
         }, {
-            name: "Test the edit privacy settings dialog",
+            name: "The edit privacy settings dialog",
             tests: [{
-                // expect: 4,
+                expect: 10,
                 sequence: [{
-                    func: "gpii.tests.oauth2.privacySettingsWithPrefs.clickEdit",
-                    args: ["{privacySettingsWithPrefs}", 0]
+                    func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
+                    args: ["{privacySettingsWithPrefs}", "editButton", 0]
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettingsWithPrefs.verifyEditPrivacySettingsDialog",
+                    listener: "gpii.tests.oauth2.privacySettings.verifyeditPrivacySettings",
                     event: "{privacySettingsWithPrefs}.events.onRenderEditDialog",
                     args: ["{privacySettingsWithPrefs}", ["dialogForRemoval", "addServiceMenu", "editPrivacySettings"]]
+                }, {
+                    jQueryTrigger: "click",
+                    element: "{privacySettingsWithPrefs}.editPrivacySettings.dom.cancel"
+                }, {
+                    func: "gpii.tests.oauth2.privacySettings.assertDialog",
+                    args: ["{privacySettingsWithPrefs}.editPrivacySettings", "closed"]
                 }]
             }]
+        }, {
+            name: "The remove decison dialog",
+            tests: [{
+                expect: 5,
+                sequence: [{
+                    func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
+                    args: ["{privacySettingsWithPrefs}", "removeButton", 0]
+                }, {
+                    func: "gpii.tests.oauth2.privacySettings.verifyDialogForRemoval",
+                    args: ["{privacySettingsWithPrefs}"]
+                }, {
+                    jQueryTrigger: "click",
+                    element: "{privacySettingsWithPrefs}.dialogForRemoval.okButton"
+                }, {
+                    listener: "gpii.tests.oauth2.privacySettings.assertAjaxCalls",
+                    args: [3],
+                    event: "{privacySettingsWithPrefs}.events.onRemovalSuccess",
+                    priority: "last"
+                }]
+            }]
+        // }, {
+        //     name: "The add authorization dialog",
+        //     tests: [{
+        //         // expect: 10,
+        //         sequence: [{
+        //             func: "jqUnit.assertNotVisible",
+        //             args: ["{privacySettingsWithPrefs}", "editButton", 0]
+        //         }, {
+        //             listener: "gpii.tests.oauth2.privacySettings.verifyeditPrivacySettings",
+        //             event: "{privacySettingsWithPrefs}.events.onRenderEditDialog",
+        //             args: ["{privacySettingsWithPrefs}", ["dialogForRemoval", "addServiceMenu", "editPrivacySettings"]]
+        //         }, {
+        //             jQueryTrigger: "click",
+        //             element: "{privacySettingsWithPrefs}.editPrivacySettings.dom.cancel"
+        //         }, {
+        //             func: "gpii.tests.oauth2.privacySettings.assertDialog",
+        //             args: ["{privacySettingsWithPrefs}.editPrivacySettings", "closed"]
+        //         }]
+        //     }]
         }]
     });
 
-    gpii.tests.oauth2.privacySettingsWithPrefs.assertRendering = function (that) {
-        gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.options.strings, ["logout", "header", "directions"], "text");
-        gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.model, ["user"], "text");
-        gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText(that, that.options.strings, ["description"], "html");
+    gpii.tests.oauth2.privacySettings.assertRendering = function (that) {
+        gpii.tests.oauth2.privacySettings.assertRenderedText(that, that.options.strings, ["logout", "header", "directions"], "text");
+        gpii.tests.oauth2.privacySettings.assertRenderedText(that, that.model, ["user"], "text");
+        gpii.tests.oauth2.privacySettings.assertRenderedText(that, that.options.strings, ["description"], "html");
 
-        gpii.tests.oauth2.privacySettingsWithPrefs.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu"]);
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu"]);
     };
 
-    gpii.tests.oauth2.privacySettingsWithPrefs.assertRenderedText = function (that, root, paths, method) {
+    gpii.tests.oauth2.privacySettings.assertRenderedText = function (that, root, paths, method) {
         fluid.each(paths, function (path) {
             var expected = fluid.get(root, path);
             jqUnit.assertEquals("The '" + path + "' string should have been rendered", expected, that.locate(path)[method]());
         });
     };
 
-    gpii.tests.oauth2.privacySettingsWithPrefs.assertSubcomponents = function (that, instantiatedSubcomponents) {
-        fluid.each(gpii.tests.oauth2.privacySettingsWithPrefs.subcomponents, function (subcomponent) {
-            if ($.inArray(subcomponent, instantiatedSubcomponents) === -1) {
-                jqUnit.assertUndefined("The subcomponent " + subcomponent + " has not been instantiated", fluid.get(that, subcomponent));
-            } else {
-                jqUnit.assertNotUndefined("The subcomponent " + subcomponent + " has been instantiated", fluid.get(that, subcomponent));
-            }
+    gpii.tests.oauth2.privacySettings.assertSubcomponents = function (that, instantiatedSubcomponents) {
+        fluid.each(gpii.tests.oauth2.privacySettings.subcomponents, function (subcomponent) {
+            var assertFunc = $.inArray(subcomponent, instantiatedSubcomponents) === -1 ? "assertUndefined" : "assertNotUndefined",
+                msg = $.inArray(subcomponent, instantiatedSubcomponents) === -1 ? " not" : "";
+                jqUnit[assertFunc]("The subcomponent " + subcomponent + " has" + msg + " been instantiated", fluid.get(that, subcomponent));
         });
     };
 
-    gpii.tests.oauth2.privacySettingsWithPrefs.clickEdit = function (that, index) {
-        var editButtons = that.locate("editButton");
-        editButtons[index].click();
+    gpii.tests.oauth2.privacySettings.clickButtonOnDecision = function (that, buttonSelector, index) {
+        var buttons = that.locate(buttonSelector);
+        buttons[index].click();
     };
 
-    gpii.tests.oauth2.privacySettingsWithPrefs.verifyEditPrivacySettingsDialog = function (that, instantiatedSubcomponents) {
-        gpii.tests.oauth2.privacySettingsWithPrefs.assertSubcomponents(that, instantiatedSubcomponents);
+    gpii.tests.oauth2.privacySettings.verifyeditPrivacySettings = function (that, instantiatedSubcomponents) {
+        jqUnit.assertDeepEq("The model value for currentClientData has been set correctly", gpii.tests.oauth2.privacySettings.clientData, that.model.currentClientData);
+        jqUnit.assertDeepEq("The client data has been passed to editPrivacySettings correctly", gpii.tests.oauth2.privacySettings.clientData, that.editPrivacySettings.model.clientData);
+
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, instantiatedSubcomponents);
+        gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettings, "opened");
+        gpii.tests.oauth2.privacySettings.assertAjaxCalls(2);
+    };
+
+    gpii.tests.oauth2.privacySettings.verifyDialogForRemoval = function (that) {
+        var expectedDialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: gpii.tests.oauth2.privacySettings.clientData.serviceName});
+        jqUnit.assertEquals("The authDecisionId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authDecisionId, that.dialogForRemoval.model.authDecisionId);
+        jqUnit.assertEquals("The dialogContent has been set correctly in dialogForRemoval subcomponent", expectedDialogContent, that.dialogForRemoval.model.dialogContent);
+        jqUnit.isVisible("The dialog for removing the decision is visible", that.dialogForRemoval.container);
+        jqUnit.assertTrue("The dialogForRemoval container should have been instantiated as a jQuery dialog", that.dialogForRemoval.container.hasClass("ui-dialog-content"));
     };
 
     $(document).ready(function () {
         fluid.test.runTests([
-            "gpii.tests.oauth2.privacySettingsWithPrefsTest"
+            "gpii.tests.oauth2.privacySettingsTest"
         ]);
     });
 })(jQuery);
