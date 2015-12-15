@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  user: root
-  connection: local
-  vars_files:
-  - docker-vars.yml
-  roles:
-  - facts
-  - nodejs

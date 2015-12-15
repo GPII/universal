@@ -3,9 +3,8 @@
   user: root
 
   vars_files:
-    - vars.yml
+    - "{{ lookup('env', 'UNIVERSAL_VARS_FILE')  | default('vars.yml',true) }}"
 
   roles:
     - facts
     - nodejs
-
