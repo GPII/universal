@@ -26,3 +26,13 @@ The following preference sets are used for testing and demonstrating the Online 
 ** user interface in German,
 ** German Sign Language by a human sign language interpreter.
 
+* `olb_Alicia_cmn.json`: preference set with only common terms for the following settings:
+** user interface in English (British English if available),
+** a white-on-black contrast theme,
+** a simplified User Interface.
+
+* `olb_Alicia_app.json`: preference set with a combination of common and application-specific common terms for the following settings:
+** user interface in English (British English if available),
+** a white-on-black contrast theme,
+** a simplified User Interface (application-specific).
+

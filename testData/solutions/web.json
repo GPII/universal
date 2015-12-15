@@ -505,7 +505,8 @@
                     "interpreterType",
                     "pictogramEnabled",
                     "pictogramMode",
-                    "pictogramSymbolSet"
+                    "pictogramSymbolSet",
+                    "simplifiedUiEnabled"
                 ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
@@ -602,7 +603,8 @@
                             }
                         }
                     },
-                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled"
+                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled",
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
                 }
             }
         }

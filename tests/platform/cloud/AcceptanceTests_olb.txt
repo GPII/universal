@@ -8,6 +8,7 @@ It relies on the following preference sets in ..\..\testData\preferences\accepta
 * olb_Lara.json
 * olb_QinKesheng.json
 * olb_applicationSpecific_01.json
+* olb_Alicia_cmn.json
 
 
 Requirements: 
