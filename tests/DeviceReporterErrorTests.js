@@ -29,8 +29,7 @@ fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
     distributeOptions: {
         "development.installedSolutionsPath": {
             "record": "%universal/tests/data/faultyDeviceReport.jsonx",
-            "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
-            "priority": "after:development.installedSolutionsPath"
+            "target": "{that deviceReporter installedSolutionsDataSource}.options.path"
         }
     },
     components: {
