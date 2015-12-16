@@ -244,8 +244,8 @@ var gpii = gpii || {};
         element = $(element).closest(buttonSelector);
         return {
             serviceName: element.siblings(serviceNameSelector).attr("value"),
-            authDecisionId: parseInt(element.siblings(authDecisionIdSelector).attr("value")),
-            oauth2ClientId: parseInt(element.siblings(oauth2ClientIdSelector).attr("value"))
+            authDecisionId: element.siblings(authDecisionIdSelector).attr("value"),
+            oauth2ClientId: element.siblings(oauth2ClientIdSelector).attr("value")
         };
     };
 

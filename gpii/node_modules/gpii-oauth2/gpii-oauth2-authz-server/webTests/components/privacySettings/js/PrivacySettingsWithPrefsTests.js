@@ -34,13 +34,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         removeDecision: {
             url: "/authorizations/10",
             type: "DELETE",
-            status: 200,
-            success: function () {}
+            status: 200
         },
         fetchDecisionPrefs: {
             url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
             type: "get",
             dataType: "json",
+            status: 200,
             responseText: {
                 "increase-size": true
             }
@@ -123,13 +123,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }, {
             name: "The edit privacy settings dialog",
             tests: [{
-                expect: 10,
+                expect: 14,
                 sequence: [{
                     func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
                     args: ["{privacySettingsWithPrefs}", "editButton", 0]
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettings.verifyeditPrivacySettings",
+                    listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings",
                     event: "{privacySettingsWithPrefs}.events.onRenderEditDialog",
+                    priority: "last",
                     args: ["{privacySettingsWithPrefs}", ["dialogForRemoval", "addServiceMenu", "editPrivacySettings"]]
                 }, {
                     jQueryTrigger: "click",
@@ -159,25 +160,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     priority: "last"
                 }]
             }]
-        // }, {
-        //     name: "The add authorization dialog",
-        //     tests: [{
-        //         // expect: 10,
-        //         sequence: [{
-        //             func: "jqUnit.assertNotVisible",
-        //             args: ["{privacySettingsWithPrefs}", "editButton", 0]
-        //         }, {
-        //             listener: "gpii.tests.oauth2.privacySettings.verifyeditPrivacySettings",
-        //             event: "{privacySettingsWithPrefs}.events.onRenderEditDialog",
-        //             args: ["{privacySettingsWithPrefs}", ["dialogForRemoval", "addServiceMenu", "editPrivacySettings"]]
-        //         }, {
-        //             jQueryTrigger: "click",
-        //             element: "{privacySettingsWithPrefs}.editPrivacySettings.dom.cancel"
-        //         }, {
-        //             func: "gpii.tests.oauth2.privacySettings.assertDialog",
-        //             args: ["{privacySettingsWithPrefs}.editPrivacySettings", "closed"]
-        //         }]
-        //     }]
+        }, {
+            name: "The add authorization dialog",
+            tests: [{
+                // expect: 10,
+                sequence: [{
+                    func: "jqUnit.notVisible",
+                    args: ["The add services menu is invisible initially", "{privacySettingsWithPrefs}.addServiceMenu.container"]
+                }]
+            }]
         }]
     });
 
@@ -200,7 +191,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         fluid.each(gpii.tests.oauth2.privacySettings.subcomponents, function (subcomponent) {
             var assertFunc = $.inArray(subcomponent, instantiatedSubcomponents) === -1 ? "assertUndefined" : "assertNotUndefined",
                 msg = $.inArray(subcomponent, instantiatedSubcomponents) === -1 ? " not" : "";
-                jqUnit[assertFunc]("The subcomponent " + subcomponent + " has" + msg + " been instantiated", fluid.get(that, subcomponent));
+            jqUnit[assertFunc]("The subcomponent " + subcomponent + " has" + msg + " been instantiated", fluid.get(that, subcomponent));
         });
     };
 
@@ -209,9 +200,19 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         buttons[index].click();
     };
 
-    gpii.tests.oauth2.privacySettings.verifyeditPrivacySettings = function (that, instantiatedSubcomponents) {
-        jqUnit.assertDeepEq("The model value for currentClientData has been set correctly", gpii.tests.oauth2.privacySettings.clientData, that.model.currentClientData);
-        jqUnit.assertDeepEq("The client data has been passed to editPrivacySettings correctly", gpii.tests.oauth2.privacySettings.clientData, that.editPrivacySettings.model.clientData);
+    gpii.tests.oauth2.privacySettings.verifyClientData = function (msg, data, elements, expected) {
+        fluid.each(elements, function (elm) {
+            var value = data[elm];
+            if (elm === "authDecisionId" || elm === "oauth2ClientId") {
+                value = parseInt(value);
+            }
+            jqUnit.assertEquals(msg + "The value of " + elm + " is expected", expected[elm], value);
+        });
+    };
+
+    gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings = function (that, instantiatedSubcomponents) {
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.model.currentClientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettings: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.editPrivacySettings.model.clientData);
 
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, instantiatedSubcomponents);
         gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettings, "opened");
