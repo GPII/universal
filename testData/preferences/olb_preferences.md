@@ -36,8 +36,5 @@ The following preference sets are used for testing and demonstrating the Online 
  * a white-on-black contrast theme,
  * a simplified User Interface (application-specific).
 
-* `olb_simplified_cmn.json`: preference set with only the common term for the following setting:
- * a simplified User Interface.
-
 * `olb_simplified_app.json`: preference set with the application-specific term for the following setting:
  * a simplified User Interface (application-specific).
