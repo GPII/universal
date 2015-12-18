@@ -120,6 +120,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             name: "Initialization",
             tests: [{
                 expect: 11,
+                name: "Verify the initial rendering and component states",
                 sequence: [{
                     func: "{privacySettingsWithPrefs}.refreshView"
                 }, {
@@ -133,6 +134,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             name: "Remove a decison",
             tests: [{
                 expect: 5,
+                name: "Verify the opening of the removal dialog and the remove button",
                 sequence: [{
                     func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
                     args: ["{privacySettingsWithPrefs}", "removeButton", 0]
@@ -153,6 +155,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             name: "Add authorization",
             tests: [{
                 expect: 9,
+                name: "Verify the entire process of adding an authorization",
                 sequence: [{
                     jQueryTrigger: "click",
                     element: "{privacySettingsWithPrefs}.dom.addServiceButton"
@@ -183,6 +186,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             name: "Edit privacy settings",
             tests: [{
                 expect: 13,
+                name: "Verify the rendering and closing of the edit dialog",
                 sequence: [{
                     func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
                     args: ["{privacySettingsWithPrefs}", "editButton", 0]
