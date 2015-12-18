@@ -222,12 +222,20 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.privacySettingsDialog.setAvailableAuthorizedPrefs = function (that, availablePrefs) {
+        // fluid.isDestroyed() is to work around the issue with the IoC testing framework
+        // when this function is called by the ajax call back to set the model value, due to
+        // the asynchronous nature of ajax calls, the component itself sometimes has been
+        // destroyed which then causes javascript errors.
         if (!fluid.isDestroyed(that)) {
             that.applier.change("availableAuthorizedPrefs", availablePrefs);
         }
     };
 
     gpii.oauth2.privacySettingsDialog.setInitialSelectedPrefs = function (that, initialSelectedPrefs) {
+        // fluid.isDestroyed() is to work around the issue with the IoC testing framework
+        // when this function is called by the ajax call back to set the model value, due to
+        // the asynchronous nature of ajax calls, the component itself sometimes has been
+        // destroyed which then causes javascript errors.
         if (!fluid.isDestroyed(that)) {
             that.applier.change("initialSelectedPrefs", initialSelectedPrefs);
         }
