@@ -79,7 +79,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             tests: [
                 {
                     name: "Initial dialog state",
-                    expect: 2,
+                    expect: 3,
                     sequence: [{
                         listener: "gpii.tests.oauth2.addAuthorizationDialog.assertInit",
                         event: "{addAuthorizationDialog}.events.onCreateSelectionTree",
@@ -125,6 +125,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.addAuthorizationDialog.assertInit = function (that) {
         gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {});
         gpii.tests.oauth2.privacySettings.assertAjaxCalls(1);
+        jqUnit.assertDeepEq("The model value for initialSelectedPrefs has been set to empty", {}, that.model.initialSelectedPrefs);
     };
 
     $(document).ready(function () {

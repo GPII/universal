@@ -71,7 +71,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             user: "testUser"
         },
         events: {
-            onRemoveButtonClicked: null
+            onAddAuthorizationDialogClose: null
         },
         listeners: {
             "onCreate.registerMockjax": {
@@ -86,6 +86,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             target: "{that addAuthorizationDialog}.options.listeners",
             record: {
                 "authorizationAdded.reload": "fluid.identity"
+            }
+        }, {
+            // Override the page reload listener when a service is successfully added
+            target: "{that addAuthorizationDialog}.options.listeners",
+            record: {
+                "onClose.escalate": {
+                    listener: "{privacySettingsWithPrefs}.events.onAddAuthorizationDialogClose",
+                    priority: "last"
+                }
             }
         }]
     });
@@ -110,7 +119,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         modules: [{
             name: "Initialization",
             tests: [{
-                expect: 9,
+                expect: 11,
                 sequence: [{
                     func: "{privacySettingsWithPrefs}.refreshView"
                 }, {
@@ -121,27 +130,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }]
             }]
         }, {
-            name: "The edit privacy settings dialog",
-            tests: [{
-                expect: 14,
-                sequence: [{
-                    func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
-                    args: ["{privacySettingsWithPrefs}", "editButton", 0]
-                }, {
-                    listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings",
-                    event: "{privacySettingsWithPrefs}.events.onRenderEditDialog",
-                    priority: "last",
-                    args: ["{privacySettingsWithPrefs}", ["dialogForRemoval", "addServiceMenu", "editPrivacySettings"]]
-                }, {
-                    jQueryTrigger: "click",
-                    element: "{privacySettingsWithPrefs}.editPrivacySettings.dom.cancel"
-                }, {
-                    func: "gpii.tests.oauth2.privacySettings.assertDialog",
-                    args: ["{privacySettingsWithPrefs}.editPrivacySettings", "closed"]
-                }]
-            }]
-        }, {
-            name: "The remove decison dialog",
+            name: "Remove a decison",
             tests: [{
                 expect: 5,
                 sequence: [{
@@ -154,19 +143,60 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     jQueryTrigger: "click",
                     element: "{privacySettingsWithPrefs}.dialogForRemoval.okButton"
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettings.assertAjaxCalls",
-                    args: [3],
+                    listener: "gpii.tests.oauth2.privacySettings.verifyRemoval",
+                    args: ["{privacySettingsWithPrefs}"],
                     event: "{privacySettingsWithPrefs}.events.onRemovalSuccess",
                     priority: "last"
                 }]
             }]
         }, {
-            name: "The add authorization dialog",
+            name: "Add authorization",
             tests: [{
-                // expect: 10,
+                expect: 9,
                 sequence: [{
-                    func: "jqUnit.notVisible",
-                    args: ["The add services menu is invisible initially", "{privacySettingsWithPrefs}.addServiceMenu.container"]
+                    jQueryTrigger: "click",
+                    element: "{privacySettingsWithPrefs}.dom.addServiceButton"
+                }, {
+                    listener: "gpii.tests.oauth2.privacySettings.afterAddServiceButtonClicked",
+                    args: ["{privacySettingsWithPrefs}"],
+                    spec: {path: "isMenuOpen", priority: "last"},
+                    changeEvent: "{privacySettingsWithPrefs}.addServiceMenu.applier.modelChanged"
+                }, {
+                    func: "gpii.tests.oauth2.privacySettings.selectOneService",
+                    args: ["{privacySettingsWithPrefs}.addServiceMenu.container", 0]
+                }, {
+                    listener: "gpii.tests.oauth2.privacySettings.oneServiceSelected",
+                    args: ["{privacySettingsWithPrefs}"],
+                    event: "{privacySettingsWithPrefs}.events.onRenderAddAuthorizationDialog",
+                    priority: "last"
+                }, {
+                    jQueryTrigger: "click",
+                    element: "{privacySettingsWithPrefs}.addAuthorizationDialog.dom.cancel"
+                }, {
+                    listener: "gpii.tests.oauth2.privacySettings.addAuthorizationDialogClosed",
+                    args: ["{privacySettingsWithPrefs}"],
+                    event: "{privacySettingsWithPrefs}.events.onAddAuthorizationDialogClose",
+                    priority: "last"
+                }]
+            }]
+        }, {
+            name: "Edit privacy settings",
+            tests: [{
+                expect: 13,
+                sequence: [{
+                    func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
+                    args: ["{privacySettingsWithPrefs}", "editButton", 0]
+                }, {
+                    listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings",
+                    args: ["{privacySettingsWithPrefs}"],
+                    priority: "last",
+                    event: "{privacySettingsWithPrefs}.events.onRenderEditDialog"
+                }, {
+                    jQueryTrigger: "click",
+                    element: "{privacySettingsWithPrefs}.editPrivacySettings.dom.cancel"
+                }, {
+                    func: "gpii.tests.oauth2.privacySettings.assertDialog",
+                    args: ["{privacySettingsWithPrefs}.editPrivacySettings", "closed"]
                 }]
             }]
         }]
@@ -178,6 +208,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         gpii.tests.oauth2.privacySettings.assertRenderedText(that, that.options.strings, ["description"], "html");
 
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu"]);
+        jqUnit.assertFalse("The add service menu is initially closed", that.addServiceMenu.model.isMenuOpen);
+        jqUnit.assertFalse("The selected css class is not applied to the add service container", that.locate("addService").hasClass(that.options.styles.addServiceSelected));
     };
 
     gpii.tests.oauth2.privacySettings.assertRenderedText = function (that, root, paths, method) {
@@ -195,6 +227,32 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
+    gpii.tests.oauth2.privacySettings.afterAddServiceButtonClicked = function (that) {
+        jqUnit.assertTrue("The add service menu is opened", that.addServiceMenu.model.isMenuOpen);
+        jqUnit.assertTrue("The selected css class has been applied to the add service container", that.locate("addService").hasClass(that.options.styles.addServiceSelected));
+    };
+
+    gpii.tests.oauth2.privacySettings.selectOneService = function (addServiceMenu, index) {
+        var menuItem = addServiceMenu.find("a")[index];
+        menuItem.click();
+    };
+
+    gpii.tests.oauth2.privacySettings.oneServiceSelected = function (that) {
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog"]);
+
+        var expectedClientData = {
+            serviceName: "Service 1",
+            oauth2ClientId: "2"
+        };
+
+        jqUnit.assertDeepEq("The model value of currentClientData has been set correctly", expectedClientData, that.model.currentClientData);
+        jqUnit.assertDeepEq("The value of currentClientData has been passed to addAuthorizationDialog.model.clientData", expectedClientData, that.addAuthorizationDialog.model.clientData);
+    };
+
+    gpii.tests.oauth2.privacySettings.addAuthorizationDialogClosed = function (that) {
+        jqUnit.assertDeepEq("The focus returns back to the add service button", that.locate("addServiceButton").is(":focus"));
+    };
+
     gpii.tests.oauth2.privacySettings.clickButtonOnDecision = function (that, buttonSelector, index) {
         var buttons = that.locate(buttonSelector);
         buttons[index].click();
@@ -210,13 +268,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
-    gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings = function (that, instantiatedSubcomponents) {
+    gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings = function (that) {
         gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.model.currentClientData);
         gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettings: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.editPrivacySettings.model.clientData);
 
-        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, instantiatedSubcomponents);
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog", "editPrivacySettings"]);
         gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettings, "opened");
-        gpii.tests.oauth2.privacySettings.assertAjaxCalls(2);
     };
 
     gpii.tests.oauth2.privacySettings.verifyDialogForRemoval = function (that) {
@@ -225,6 +282,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("The dialogContent has been set correctly in dialogForRemoval subcomponent", expectedDialogContent, that.dialogForRemoval.model.dialogContent);
         jqUnit.isVisible("The dialog for removing the decision is visible", that.dialogForRemoval.container);
         jqUnit.assertTrue("The dialogForRemoval container should have been instantiated as a jQuery dialog", that.dialogForRemoval.container.hasClass("ui-dialog-content"));
+    };
+
+    gpii.tests.oauth2.privacySettings.verifyRemoval = function (that) {
+        jqUnit.assertTrue("onRemovalSuccess event is fired", true);
     };
 
     $(document).ready(function () {

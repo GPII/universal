@@ -300,8 +300,13 @@ var gpii = gpii || {};
         menu.keepOpen();
         var clientDataForAdd = {
             serviceName: serviceName,
-            oauth2ClientId: oauth2ClientId
+            oauth2ClientId: oauth2ClientId,
+            // TODO: The line below can be removed by uncommenting line 307
+            // when the infusion used by GPII is upgraded, which currently is in
+            // this pull request: https://github.com/GPII/universal/pull/425
+            authDecisionId: undefined
         };
+        // that.applier.fireChangeRequest({path: "currentClientData.authDecisionId", type: "DELETE"});
         that.applier.change("currentClientData", clientDataForAdd);
         that.events.onRenderAddAuthorizationDialog.fire();
     };

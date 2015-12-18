@@ -34,8 +34,12 @@ var gpii = gpii || {};
                 type: "put"
             }
         },
+        events: {
+            onInitialSelectedPrefsFetched: null
+        },
         listeners: {
             "onCreate.fetchDecisionPrefs": "{that}.fetchDecisionPrefs",
+            "onInitialSelectedPrefsFetched.setInitialSelectedPrefs": "{that}.setInitialSelectedPrefs",
             "onDone.savePrefsAndExit": {
                 listener: "{that}.savePrefsAndExit"
             }
@@ -48,7 +52,7 @@ var gpii = gpii || {};
                 }, {
                     type: "{that}.options.requestInfos.fetchDecisionPrefs.type",
                     dataType: "json",
-                    success: "{that}.setInitialSelectedPrefs"
+                    success: "{that}.events.onInitialSelectedPrefsFetched.fire"
                 }]
             },
             savePrefsAndExit: {

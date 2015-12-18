@@ -125,8 +125,8 @@ var gpii = gpii || {};
                 }]
             },
             setAvailableAuthorizedPrefs: {
-                changePath: "availableAuthorizedPrefs",
-                value: "{arguments}.0"
+                funcName: "gpii.oauth2.privacySettingsDialog.setAvailableAuthorizedPrefs",
+                args: ["{that}", "{arguments}.0"]
             },
             handleFetchPrefsError: {
                 funcName: "fluid.fail",
@@ -139,8 +139,8 @@ var gpii = gpii || {};
                 }]
             },
             setInitialSelectedPrefs: {
-                changePath: "initialSelectedPrefs",
-                value: "{arguments}.0"
+                funcName: "gpii.oauth2.privacySettingsDialog.setInitialSelectedPrefs",
+                args: ["{that}", "{arguments}.0"]
             },
             fireDone: {
                 "this": "{that}.events.onDone",
@@ -219,6 +219,18 @@ var gpii = gpii || {};
         dialog.dialog("destroy");
         // And fire close event
         onCloseEvt.fire();
+    };
+
+    gpii.oauth2.privacySettingsDialog.setAvailableAuthorizedPrefs = function (that, availablePrefs) {
+        if (!fluid.isDestroyed(that)) {
+            that.applier.change("availableAuthorizedPrefs", availablePrefs);
+        }
+    };
+
+    gpii.oauth2.privacySettingsDialog.setInitialSelectedPrefs = function (that, initialSelectedPrefs) {
+        if (!fluid.isDestroyed(that)) {
+            that.applier.change("initialSelectedPrefs", initialSelectedPrefs);
+        }
     };
 
 })(jQuery, fluid);
