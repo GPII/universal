@@ -88,19 +88,19 @@ The tests are run using the following command:
 Building Docker Images
 ----------------------
 
-A Dockerfile can be used to build a containerized version of GPII Universal, primarily for use by downstream containers running components such the Preferences Server and Flow Manager in standalone cloud configuration.
+The Dockerfile can be used to build a containerized version of GPII Universal, at this time primarily for use by downstream containers running components such the Preferences Server and Flow Manager in standalone cloud configuration.
 
 The following command can be used to build an image locally as long as it is run relative to the repository's Dockerfile:
 
-    docker build --rm -t gpii/universal:$(git rev-parse --short HEAD) .
+`docker build --rm -t gpii/universal:$(git rev-parse --short HEAD) .`
 
 That will use the Git repository's current abbreviated commit hash as a [Docker tag](https://docs.docker.com/reference/commandline/cli/#tag). If you would like to download the latest public Universal image you can use this command:    
 
-docker pull gpii/universal
+`docker pull gpii/universal`
 
 Or use the following command to download a particular image identified using a Git commit hash:
 
-docker pull gpii/universal:<first seven characters of a git commit hash>
+`docker pull gpii/universal:<first seven characters of a git commit hash>`
 
 Additional notes:
 
