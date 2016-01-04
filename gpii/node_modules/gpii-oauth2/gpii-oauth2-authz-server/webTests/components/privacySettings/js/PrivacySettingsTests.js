@@ -64,8 +64,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
-    fluid.defaults("gpii.tests.oauth2.privacySettingsWithPrefs", {
-        gradeNames: ["gpii.oauth2.privacySettingsWithPrefs", "autoInit"],
+    fluid.defaults("gpii.tests.oauth2.privacySettings", {
+        gradeNames: ["gpii.oauth2.privacySettings", "autoInit"],
         requestInfos: gpii.tests.oauth2.privacySettings.basicRequestInfos,
         model: {
             user: "testUser"
@@ -92,7 +92,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             target: "{that addAuthorizationDialog}.options.listeners",
             record: {
                 "onClose.escalate": {
-                    listener: "{privacySettingsWithPrefs}.events.onAddAuthorizationDialogClose",
+                    listener: "{privacySettings}.events.onAddAuthorizationDialogClose",
                     priority: "last"
                 }
             }
@@ -104,8 +104,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.tests.oauth2.privacySettingsTest", {
         gradeNames: ["fluid.test.testEnvironment", "autoInit"],
         components: {
-            privacySettingsWithPrefs: {
-                type: "gpii.tests.oauth2.privacySettingsWithPrefs",
+            privacySettings: {
+                type: "gpii.tests.oauth2.privacySettings",
                 container: ".gpiic-oauth2-privacySettings"
             },
             privacySettingsTester: {
@@ -122,12 +122,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 expect: 11,
                 name: "Verify the initial rendering and component states",
                 sequence: [{
-                    func: "{privacySettingsWithPrefs}.refreshView"
+                    func: "{privacySettings}.refreshView"
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.assertRendering",
-                    args: ["{privacySettingsWithPrefs}"],
+                    args: ["{privacySettings}"],
                     priority: "last",
-                    event: "{privacySettingsWithPrefs}.events.afterRender"
+                    event: "{privacySettings}.events.afterRender"
                 }]
             }]
         }, {
@@ -137,17 +137,17 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "Verify the opening of the removal dialog and the remove button",
                 sequence: [{
                     func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
-                    args: ["{privacySettingsWithPrefs}", "removeButton", 0]
+                    args: ["{privacySettings}", "removeButton", 0]
                 }, {
                     func: "gpii.tests.oauth2.privacySettings.verifyDialogForRemoval",
-                    args: ["{privacySettingsWithPrefs}"]
+                    args: ["{privacySettings}"]
                 }, {
                     jQueryTrigger: "click",
-                    element: "{privacySettingsWithPrefs}.dialogForRemoval.okButton"
+                    element: "{privacySettings}.dialogForRemoval.okButton"
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.verifyRemoval",
-                    args: ["{privacySettingsWithPrefs}"],
-                    event: "{privacySettingsWithPrefs}.events.onRemovalSuccess",
+                    args: ["{privacySettings}"],
+                    event: "{privacySettings}.events.onRemovalSuccess",
                     priority: "last"
                 }]
             }]
@@ -158,27 +158,27 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "Verify the entire process of adding an authorization",
                 sequence: [{
                     jQueryTrigger: "click",
-                    element: "{privacySettingsWithPrefs}.dom.addServiceButton"
+                    element: "{privacySettings}.dom.addServiceButton"
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.afterAddServiceButtonClicked",
-                    args: ["{privacySettingsWithPrefs}"],
+                    args: ["{privacySettings}"],
                     spec: {path: "isMenuOpen", priority: "last"},
-                    changeEvent: "{privacySettingsWithPrefs}.addServiceMenu.applier.modelChanged"
+                    changeEvent: "{privacySettings}.addServiceMenu.applier.modelChanged"
                 }, {
                     func: "gpii.tests.oauth2.privacySettings.selectOneService",
-                    args: ["{privacySettingsWithPrefs}.addServiceMenu.container", 0]
+                    args: ["{privacySettings}.addServiceMenu.container", 0]
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.oneServiceSelected",
-                    args: ["{privacySettingsWithPrefs}"],
-                    event: "{privacySettingsWithPrefs}.events.onRenderAddAuthorizationDialog",
+                    args: ["{privacySettings}"],
+                    event: "{privacySettings}.events.onRenderAddAuthorizationDialog",
                     priority: "last"
                 }, {
                     jQueryTrigger: "click",
-                    element: "{privacySettingsWithPrefs}.addAuthorizationDialog.dom.cancel"
+                    element: "{privacySettings}.addAuthorizationDialog.dom.cancel"
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.addAuthorizationDialogClosed",
-                    args: ["{privacySettingsWithPrefs}"],
-                    event: "{privacySettingsWithPrefs}.events.onAddAuthorizationDialogClose",
+                    args: ["{privacySettings}"],
+                    event: "{privacySettings}.events.onAddAuthorizationDialogClose",
                     priority: "last"
                 }]
             }]
@@ -189,18 +189,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "Verify the rendering and closing of the edit dialog",
                 sequence: [{
                     func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
-                    args: ["{privacySettingsWithPrefs}", "editButton", 0]
+                    args: ["{privacySettings}", "editButton", 0]
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog",
-                    args: ["{privacySettingsWithPrefs}"],
+                    args: ["{privacySettings}"],
                     priority: "last",
-                    event: "{privacySettingsWithPrefs}.events.onRenderEditDialog"
+                    event: "{privacySettings}.events.onRenderEditDialog"
                 }, {
                     jQueryTrigger: "click",
-                    element: "{privacySettingsWithPrefs}.editPrivacySettingsDialog.dom.cancel"
+                    element: "{privacySettings}.editPrivacySettingsDialog.dom.cancel"
                 }, {
                     func: "gpii.tests.oauth2.privacySettings.assertDialog",
-                    args: ["{privacySettingsWithPrefs}.editPrivacySettingsDialog", "closed"]
+                    args: ["{privacySettings}.editPrivacySettingsDialog", "closed"]
                 }]
             }]
         }]

@@ -22,7 +22,7 @@ var gpii = gpii || {};
 (function ($, fluid) {
     "use strict";
 
-    fluid.defaults("gpii.oauth2.privacySettingsWithPrefs", {
+    fluid.defaults("gpii.oauth2.privacySettings", {
         gradeNames: ["fluid.rendererRelayComponent", "autoInit"],
         requestInfos: {
             removeDecision: {
@@ -44,26 +44,26 @@ var gpii = gpii || {};
         components: {
             editPrivacySettingsDialog: {
                 type: "gpii.oauth2.editPrivacySettingsDialog",
-                container: "{privacySettingsWithPrefs}.dom.editDecisionDialog",
+                container: "{privacySettings}.dom.editDecisionDialog",
                 createOnEvent: "onRenderEditDialog",
                 options: {
-                    requestInfos: "{privacySettingsWithPrefs}.options.requestInfos",
+                    requestInfos: "{privacySettings}.options.requestInfos",
                     model: {
-                        clientData: "{privacySettingsWithPrefs}.model.currentClientData"
+                        clientData: "{privacySettings}.model.currentClientData"
                     }
                 }
             },
             addAuthorizationDialog: {
                 type: "gpii.oauth2.addAuthorizationDialog",
-                container: "{privacySettingsWithPrefs}.dom.addAuthorizationDialog",
+                container: "{privacySettings}.dom.addAuthorizationDialog",
                 createOnEvent: "onRenderAddAuthorizationDialog",
                 options: {
-                    requestInfos: "{privacySettingsWithPrefs}.options.requestInfos",
+                    requestInfos: "{privacySettings}.options.requestInfos",
                     model: {
-                        clientData: "{privacySettingsWithPrefs}.model.currentClientData"
+                        clientData: "{privacySettings}.model.currentClientData"
                     },
                     listeners: {
-                        "authorizationAdded.reload": "gpii.oauth2.privacySettingsWithPrefs.reload",
+                        "authorizationAdded.reload": "gpii.oauth2.privacySettings.reload",
                         "onClose.closeAddServiceMenu": {
                             "this": "{addServiceMenu}",
                             method: "close"
@@ -73,28 +73,28 @@ var gpii = gpii || {};
             },
             dialogForRemoval: {
                 type: "gpii.OKCancelDialog",
-                container: "{privacySettingsWithPrefs}.dom.removeDecisionDialog",
+                container: "{privacySettings}.dom.removeDecisionDialog",
                 options: {
                     selectors: {
-                        dialogContent: "{privacySettingsWithPrefs}.options.selectors.removeDecisionContent"
+                        dialogContent: "{privacySettings}.options.selectors.removeDecisionContent"
                     },
                     styles: {
-                        dialogClass: "{privacySettingsWithPrefs}.options.styles.dialogForRemovalClass",
-                        cancelButtonClass: "{privacySettingsWithPrefs}.options.styles.cancelButtonClass",
-                        okButtonClass: "{privacySettingsWithPrefs}.options.styles.okButtonClass"
+                        dialogClass: "{privacySettings}.options.styles.dialogForRemovalClass",
+                        cancelButtonClass: "{privacySettings}.options.styles.cancelButtonClass",
+                        okButtonClass: "{privacySettings}.options.styles.okButtonClass"
                     },
                     model: {
                         authDecisionId: null
                     },
                     listeners: {
                         "clickOK.removeDecision": {
-                            funcName: "gpii.oauth2.privacySettingsWithPrefs.removeDecision",
+                            funcName: "gpii.oauth2.privacySettings.removeDecision",
                             args: [
                                 "{that}",
-                                "{privacySettingsWithPrefs}.options.requestInfos.removeDecision.url",
-                                "{privacySettingsWithPrefs}.options.requestInfos.removeDecision.type",
+                                "{privacySettings}.options.requestInfos.removeDecision.url",
+                                "{privacySettings}.options.requestInfos.removeDecision.type",
                                 "{that}.model.authDecisionId",
-                                "{privacySettingsWithPrefs}.events.onRemovalSuccess"
+                                "{privacySettings}.events.onRemovalSuccess"
                             ]
                         }
                     }
@@ -102,24 +102,24 @@ var gpii = gpii || {};
             },
             addServiceMenu: {
                 type: "gpii.oauth2.servicesMenu",
-                container: "{privacySettingsWithPrefs}.dom.addServiceMenu",
+                container: "{privacySettings}.dom.addServiceMenu",
                 createOnEvent: "afterRender",
                 options: {
                     listeners: {
                         "onServiceSelected.addService": {
-                            funcName: "gpii.oauth2.privacySettingsWithPrefs.addService",
-                            args: ["{privacySettingsWithPrefs}", "{addServiceMenu}", "{arguments}.0", "{arguments}.1"]
+                            funcName: "gpii.oauth2.privacySettings.addService",
+                            args: ["{privacySettings}", "{addServiceMenu}", "{arguments}.0", "{arguments}.1"]
                         },
                         "onClose.setFocus": {
                             funcName: "fluid.focus",
-                            args: ["{privacySettingsWithPrefs}.dom.addServiceButton"]
+                            args: ["{privacySettings}.dom.addServiceButton"]
                         }
                     },
                     modelListeners: {
                         isMenuOpen: {
-                            "this": "{privacySettingsWithPrefs}.dom.addService",
+                            "this": "{privacySettings}.dom.addService",
                             method: "toggleClass",
-                            args: ["{privacySettingsWithPrefs}.options.styles.addServiceSelected"]
+                            args: ["{privacySettings}.options.styles.addServiceSelected"]
                         }
                     }
                 }
@@ -200,7 +200,7 @@ var gpii = gpii || {};
         },
         listeners: {
             "afterRender.createTooltips": {
-                listener: "gpii.oauth2.privacySettingsWithPrefs.createTooltips",
+                listener: "gpii.oauth2.privacySettings.createTooltips",
                 args: ["{that}"]
             },
             "afterRender.bindRemove": {
@@ -218,29 +218,29 @@ var gpii = gpii || {};
                 method: "click",
                 args: "{that}.openAddServiceMenu"
             },
-            "onRemovalSuccess.reload": "gpii.oauth2.privacySettingsWithPrefs.reload"
+            "onRemovalSuccess.reload": "gpii.oauth2.privacySettings.reload"
         },
         invokers: {
             getClientData: {
-                funcName: "gpii.oauth2.privacySettingsWithPrefs.getClientData",
+                funcName: "gpii.oauth2.privacySettings.getClientData",
                 args: ["{arguments}.0", "{arguments}.1", "{that}.options.selectors.serviceName", "{that}.options.selectors.authDecisionId", "{that}.options.selectors.oauth2ClientId"]
             },
             popupDialogForRemoval: {
-                funcName: "gpii.oauth2.privacySettingsWithPrefs.popupDialogForRemoval",
+                funcName: "gpii.oauth2.privacySettings.popupDialogForRemoval",
                 args: ["{arguments}.0", "{that}"]
             },
             renderDialogForEdit: {
-                funcName: "gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit",
+                funcName: "gpii.oauth2.privacySettings.renderDialogForEdit",
                 args: ["{arguments}.0", "{that}"]
             },
             openAddServiceMenu: {
-                funcName: "gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu",
+                funcName: "gpii.oauth2.privacySettings.openAddServiceMenu",
                 args: ["{addServiceMenu}", "{arguments}.0"] // event
             }
         }
     });
 
-    gpii.oauth2.privacySettingsWithPrefs.getClientData = function (element, buttonSelector, serviceNameSelector, authDecisionIdSelector, oauth2ClientIdSelector) {
+    gpii.oauth2.privacySettings.getClientData = function (element, buttonSelector, serviceNameSelector, authDecisionIdSelector, oauth2ClientIdSelector) {
         element = $(element).closest(buttonSelector);
         return {
             serviceName: element.siblings(serviceNameSelector).attr("value"),
@@ -249,7 +249,7 @@ var gpii = gpii || {};
         };
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.createTooltips = function (that) {
+    gpii.oauth2.privacySettings.createTooltips = function (that) {
         var editButtons = that.locate("editButton");
         var removeButtons = that.locate("removeButton");
 
@@ -264,7 +264,7 @@ var gpii = gpii || {};
         });
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.popupDialogForRemoval = function (evt, that) {
+    gpii.oauth2.privacySettings.popupDialogForRemoval = function (evt, that) {
         var clientData = that.getClientData(evt.target, that.options.selectors.removeButton);
         var dialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: clientData.serviceName});
 
@@ -275,7 +275,7 @@ var gpii = gpii || {};
         dialogForRemoval.open();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.removeDecision = function (dialog, url, type, authDecisionId, removalSuccessEvt) {
+    gpii.oauth2.privacySettings.removeDecision = function (dialog, url, type, authDecisionId, removalSuccessEvt) {
         $.ajax({
             url: url + "/" + authDecisionId,
             type: type,
@@ -286,17 +286,17 @@ var gpii = gpii || {};
         dialog.close();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.renderDialogForEdit = function (evt, that) {
+    gpii.oauth2.privacySettings.renderDialogForEdit = function (evt, that) {
         that.applier.change("currentClientData", that.getClientData(evt.target, that.options.selectors.editButton));
         that.events.onRenderEditDialog.fire();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.openAddServiceMenu = function (menu, event) {
+    gpii.oauth2.privacySettings.openAddServiceMenu = function (menu, event) {
         event.stopPropagation();
         menu.open();
     };
 
-    gpii.oauth2.privacySettingsWithPrefs.addService = function (that, menu, serviceName, oauth2ClientId) {
+    gpii.oauth2.privacySettings.addService = function (that, menu, serviceName, oauth2ClientId) {
         menu.keepOpen();
         var clientDataForAdd = {
             serviceName: serviceName,
@@ -313,7 +313,7 @@ var gpii = gpii || {};
 
     // The use of this function is not made declaratively on the component tree is to work around
     // an IE issue - https://issues.gpii.net/browse/GPII-1522
-    gpii.oauth2.privacySettingsWithPrefs.reload = function () {
+    gpii.oauth2.privacySettings.reload = function () {
         window.location.reload(true);
     };
 
