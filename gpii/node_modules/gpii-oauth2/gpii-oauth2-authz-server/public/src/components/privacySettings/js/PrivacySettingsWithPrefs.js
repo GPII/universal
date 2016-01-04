@@ -42,8 +42,8 @@ var gpii = gpii || {};
             }
         },
         components: {
-            editPrivacySettings: {
-                type: "gpii.oauth2.editPrivacySettings",
+            editPrivacySettingsDialog: {
+                type: "gpii.oauth2.editPrivacySettingsDialog",
                 container: "{privacySettingsWithPrefs}.dom.editDecisionDialog",
                 createOnEvent: "onRenderEditDialog",
                 options: {

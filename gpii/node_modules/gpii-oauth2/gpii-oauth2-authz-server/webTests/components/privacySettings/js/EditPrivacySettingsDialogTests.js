@@ -45,21 +45,21 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
         gpii.tests.requestInfos = $.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.additionalRequestInfos);
 
-        fluid.defaults("gpii.tests.oauth2.editPrivacySettings", {
-            gradeNames: ["gpii.oauth2.editPrivacySettings", "gpii.tests.oauth2.privacySettingsConfig", "autoInit"],
+        fluid.defaults("gpii.tests.oauth2.editPrivacySettingsDialog", {
+            gradeNames: ["gpii.oauth2.editPrivacySettingsDialog", "gpii.tests.oauth2.privacySettingsConfig", "autoInit"],
             requestInfos: gpii.tests.requestInfos,
             model: {
                 clientData: gpii.tests.oauth2.privacySettings.clientData
             }
         });
 
-        gpii.tests.oauth2.editPrivacySettings.runTest = function (msg, testFunc) {
+        gpii.tests.oauth2.editPrivacySettingsDialog.runTest = function (msg, testFunc) {
             jqUnit.asyncTest(msg, function () {
                 fluid.each(gpii.tests.requestInfos, function (options) {
                     $.mockjax(options);
                 });
 
-                gpii.tests.oauth2.editPrivacySettings(".gpiic-oauth2-privacySettings-editDecision-dialog", {
+                gpii.tests.oauth2.editPrivacySettingsDialog(".gpiic-oauth2-privacySettings-editDecision-dialog", {
                     listeners: {
                         "onCreateSelectionTree.runTest": {
                             listener: function (that) {
@@ -74,19 +74,19 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             });
         };
 
-        gpii.tests.oauth2.editPrivacySettings.assertInit = function (that) {
+        gpii.tests.oauth2.editPrivacySettingsDialog.assertInit = function (that) {
             jqUnit.expect(2);
             gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {"increase-size": true});
             gpii.tests.oauth2.privacySettings.assertAjaxCalls(2);
         };
 
-        gpii.tests.oauth2.editPrivacySettings.assertCancel = function (that) {
+        gpii.tests.oauth2.editPrivacySettingsDialog.assertCancel = function (that) {
             jqUnit.expect(1);
             that.locate("cancel").click();
             gpii.tests.oauth2.privacySettings.assertAjaxCalls(2);
         };
 
-        gpii.tests.oauth2.editPrivacySettings.assertDone = function (that) {
+        gpii.tests.oauth2.editPrivacySettingsDialog.assertDone = function (that) {
             jqUnit.expect(3);
             that.selectionTree.applier.change("selections.value", "checked");
             gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {"": true});
@@ -95,9 +95,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             gpii.tests.oauth2.privacySettings.assertAjaxCalls(3);
         };
 
-        gpii.tests.oauth2.editPrivacySettings.runTest("Initialization", gpii.tests.oauth2.editPrivacySettings.assertInit);
-        gpii.tests.oauth2.editPrivacySettings.runTest("Cancel button", gpii.tests.oauth2.editPrivacySettings.assertCancel);
-        gpii.tests.oauth2.editPrivacySettings.runTest("Done button", gpii.tests.oauth2.editPrivacySettings.assertDone);
+        gpii.tests.oauth2.editPrivacySettingsDialog.runTest("Initialization", gpii.tests.oauth2.editPrivacySettingsDialog.assertInit);
+        gpii.tests.oauth2.editPrivacySettingsDialog.runTest("Cancel button", gpii.tests.oauth2.editPrivacySettingsDialog.assertCancel);
+        gpii.tests.oauth2.editPrivacySettingsDialog.runTest("Done button", gpii.tests.oauth2.editPrivacySettingsDialog.assertDone);
     });
 
 })(jQuery);

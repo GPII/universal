@@ -99,7 +99,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }]
     });
 
-    gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettings", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
+    gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettingsDialog", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
 
     fluid.defaults("gpii.tests.oauth2.privacySettingsTest", {
         gradeNames: ["fluid.test.testEnvironment", "autoInit"],
@@ -191,16 +191,16 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
                     args: ["{privacySettingsWithPrefs}", "editButton", 0]
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings",
+                    listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog",
                     args: ["{privacySettingsWithPrefs}"],
                     priority: "last",
                     event: "{privacySettingsWithPrefs}.events.onRenderEditDialog"
                 }, {
                     jQueryTrigger: "click",
-                    element: "{privacySettingsWithPrefs}.editPrivacySettings.dom.cancel"
+                    element: "{privacySettingsWithPrefs}.editPrivacySettingsDialog.dom.cancel"
                 }, {
                     func: "gpii.tests.oauth2.privacySettings.assertDialog",
-                    args: ["{privacySettingsWithPrefs}.editPrivacySettings", "closed"]
+                    args: ["{privacySettingsWithPrefs}.editPrivacySettingsDialog", "closed"]
                 }]
             }]
         }]
@@ -272,12 +272,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
-    gpii.tests.oauth2.privacySettings.verifyEditPrivacySettings = function (that) {
+    gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog = function (that) {
         gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.model.currentClientData);
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettings: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.editPrivacySettings.model.clientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.editPrivacySettingsDialog.model.clientData);
 
-        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog", "editPrivacySettings"]);
-        gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettings, "opened");
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog", "editPrivacySettingsDialog"]);
+        gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettingsDialog, "opened");
     };
 
     gpii.tests.oauth2.privacySettings.verifyDialogForRemoval = function (that) {

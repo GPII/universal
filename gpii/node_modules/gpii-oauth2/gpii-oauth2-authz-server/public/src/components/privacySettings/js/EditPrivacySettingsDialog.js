@@ -22,7 +22,7 @@ var gpii = gpii || {};
 (function ($, fluid) {
     "use strict";
 
-    fluid.defaults("gpii.oauth2.editPrivacySettings", {
+    fluid.defaults("gpii.oauth2.editPrivacySettingsDialog", {
         gradeNames: ["gpii.oauth2.privacySettingsDialog", "autoInit"],
         requestInfos: {
             fetchDecisionPrefs: {
@@ -56,7 +56,7 @@ var gpii = gpii || {};
                 }]
             },
             savePrefsAndExit: {
-                funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
+                funcName: "gpii.oauth2.editPrivacySettingsDialog.savePrefsAndExit",
                 args: ["{that}"]
             },
             saveDecisionPrefs: {
@@ -82,7 +82,7 @@ var gpii = gpii || {};
         }
     });
 
-    gpii.oauth2.editPrivacySettings.savePrefsAndExit = function (that) {
+    gpii.oauth2.editPrivacySettingsDialog.savePrefsAndExit = function (that) {
         that.saveDecisionPrefs();
         that.closeDialog();
     };
