@@ -51,6 +51,9 @@ From the root of the `universal` folder, run the following command:
 
     npm test
 
+#### Running tests using a VM
+A VM can be automatically created using tools provided by the [Prosperity4All Quality Infrastructure](https://github.com/GPII/qi-development-environments/). Please ensure the [requirements](https://github.com/GPII/qi-development-environments/#requirements) have been met. The ``vagrant up`` command can then be used to provision a new VM.
+
 Usage
 -----
 
