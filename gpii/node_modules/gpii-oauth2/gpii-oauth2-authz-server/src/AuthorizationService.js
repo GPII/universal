@@ -20,7 +20,7 @@ var fluid = fluid || require("infusion");
     var gpii = fluid.registerNamespace("gpii");
 
     fluid.defaults("gpii.oauth2.authorizationService", {
-        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        gradeNames: ["fluid.eventedComponent"],
         urls: {
             preferencesPost: ""
         },
@@ -31,7 +31,7 @@ var fluid = fluid || require("infusion");
             codeGenerator: {
                 type: "gpii.oauth2.codeGenerator"
             },
-            preferencesDataSource: {
+            tempPreferencesDataSource: { // TODO: This should be removed - see GPII-1521
                 type: "kettle.dataSource.URL",
                 options: {
                     url: "{authorizationService}.options.urls.preferencesPost",
@@ -108,10 +108,10 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // clientId, scope
             },
-            savePrefs: {
+            savePrefs: { // TODO: This should be removed - see GPII-1521
                 funcName: "gpii.oauth2.authorizationService.savePrefs",
-                args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1"]
-                    // preferences, view
+                args: ["{tempPreferencesDataSource}", "{arguments}.0", "{arguments}.1"]
+                    // preferences, preferences, view
             }
         }
     });

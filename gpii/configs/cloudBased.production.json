@@ -1,7 +1,7 @@
 {
-    "typeName": "cloudBased.flowManager.production",
+    "type": "cloudBased.flowManager.production",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",
@@ -22,7 +22,7 @@
             }
         }
     },
-    "includes": [
+    "mergeConfigs": [
         "../node_modules/flatMatchMaker/configs/development.all.local.json",
         "../node_modules/solutionsRegistry/configs/development.json",
         "../node_modules/flowManager/configs/cloudBased.development.all.local.json"

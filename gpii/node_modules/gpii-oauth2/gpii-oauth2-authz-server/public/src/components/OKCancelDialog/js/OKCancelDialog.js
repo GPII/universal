@@ -20,7 +20,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.OKCancelDialog", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
+        gradeNames: ["fluid.viewComponent"],
         dialogOptions: {
             autoOpen: false,
             resizable: false,

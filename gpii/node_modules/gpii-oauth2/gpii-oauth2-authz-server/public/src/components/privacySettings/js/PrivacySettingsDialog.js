@@ -23,7 +23,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.privacySettingsDialog", {
-        gradeNames: ["fluid.rendererRelayComponent", "autoInit"],
+        gradeNames: ["fluid.rendererComponent"],
         requestInfos: {
             fetchAvailableAuthorizedPrefs: {
                 url: "/available-authorized-preferences/%clientId",

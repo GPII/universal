@@ -23,7 +23,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.privacySettings", {
-        gradeNames: ["fluid.rendererRelayComponent", "autoInit"],
+        gradeNames: ["fluid.rendererComponent"],
         requestInfos: {
             removeDecision: {
                 url: "/authorizations",
@@ -318,7 +318,7 @@ var gpii = gpii || {};
     };
 
     fluid.defaults("gpii.oauth2.selectionTreeTemplate", {
-        gradeNames: ["fluid.littleComponent", "autoInit"],
+        gradeNames: ["fluid.component"],
         selectionTreeTemplate: "../../selectionTree/html/SelectionTreeTemplate.html",
         distributeOptions: {
             source: "{that}.options.selectionTreeTemplate",

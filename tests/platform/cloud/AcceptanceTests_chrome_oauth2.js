@@ -35,10 +35,10 @@ gpii.tests.cloud.oauth2.chrome.common = {
 // by the accessTokenRequest's fixture, holds an invalid value - and the test
 // sequence as a whole is truncated so that this request is never actually issued
 fluid.defaults("gpii.tests.cloud.oauth2.falseTokenHolder", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     components: {
         accessTokenRequest: {
-            type: "fluid.littleComponent",
+            type: "fluid.component",
             options: {
                 members: {
                     accessToken: "FALSE TOKEN"
@@ -49,7 +49,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.falseTokenHolder", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.authorizationRequests", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     updatedSelectedPreferences: {},
     components: {
         putAuthorizationRequest: {
@@ -67,7 +67,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.authorizationRequests", {
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.revocationRequests", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     updatedSelectedPreferences: {},
     components: {
         revocationRequest: {

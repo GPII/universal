@@ -926,7 +926,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
 
         fluid.defaults("gpii.tests.oauth2.preferencesSelectionTree", {
-            gradeNames: ["gpii.oauth2.preferencesSelectionTree", "autoInit"],
+            gradeNames: ["gpii.oauth2.preferencesSelectionTree"],
             availablePrefs: {
                 "increase-size": true,
                 "increase-size.appearance": true,
@@ -958,9 +958,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 fluid.each(that.options.domMap, function (selector, selectorName) {
                     var elm = that.container.find(selector);
                     if (that.options.availablePrefs[selectorName] || selectorName === "") {
-                        jqUnit.exists("'" + selector + "' should exist", elm);
+                        jqUnit.assertNodeExists("'" + selector + "' should exist", elm);
                     } else {
-                        jqUnit.notExists("'" + selector + "' should not exist", elm);
+                        jqUnit.assertNodeNotExists("'" + selector + "' should not exist", elm);
                     }
                 });
 

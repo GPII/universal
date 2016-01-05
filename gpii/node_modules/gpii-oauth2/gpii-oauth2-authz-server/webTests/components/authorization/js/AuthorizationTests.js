@@ -25,7 +25,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         fluid.registerNamespace("gpii.tests");
 
         fluid.defaults("gpii.tests.oauth2.authorization", {
-            gradeNames: ["gpii.oauth2.authorization", "autoInit"],
+            gradeNames: ["gpii.oauth2.authorization"],
             model: {
                 user: "testUser",
                 service: "testService",

@@ -13,8 +13,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/*global require*/
-
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
@@ -124,7 +122,7 @@ gpii.tests.android.builtIn = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.android.builtIn",
-    configName: "android-builtIn-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.android.builtIn.config",
+    configPath: "%universal/tests/platform/android/configs"
 }, ["gpii.test.integration.testCaseHolder.android"],
     module, require, __dirname);

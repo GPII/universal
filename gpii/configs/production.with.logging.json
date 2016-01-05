@@ -1,7 +1,7 @@
 {
-    "typeName": "production.with.logging",
+    "type": "production.with.logging",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",
@@ -22,7 +22,7 @@
             }
         }
     },
-    "includes": [
+    "mergeConfigs": [
         "../node_modules/deviceReporter/configs/production.json",
         "../node_modules/flowManager/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json",

@@ -43,7 +43,7 @@ gpii.oauth2.createOauth2orizeServer = function () {
 
 // Unbound references: {clientService} and {authorizationService}
 fluid.defaults("gpii.oauth2.oauth2orizeServer", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     members: {
         oauth2orizeServer: {
             expander: {
@@ -91,7 +91,7 @@ gpii.oauth2.createPassport = function () {
 };
 
 fluid.defaults("gpii.oauth2.passport", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     members: {
         passport: {
             expander: {
@@ -137,14 +137,11 @@ gpii.oauth2.passport.listenPassport = function (passport, userService, clientSer
 
 // An empty grade to guide resolution of IoC expressions onto a suitable gpii.oauth2.dataStore
 fluid.defaults("gpii.oauth2.dataStoreHolder", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"]
+    gradeNames: ["fluid.component"]
 });
 
 fluid.defaults("gpii.oauth2.authServer", {
-    gradeNames: ["fluid.eventedComponent", "gpii.oauth2.dataStoreHolder", "autoInit"],
-    urls: {
-        preferencesPost: ""
-    },
+    gradeNames: ["fluid.component", "gpii.oauth2.dataStoreHolder"],
     members: {
         expressApp: {
             expander: {
@@ -179,8 +176,7 @@ fluid.defaults("gpii.oauth2.authServer", {
             options: {
                 components: {
                     dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
-                },
-                urls: "{authServer}.options.urls"
+                }
             }
         },
         clientService: {
@@ -213,7 +209,8 @@ fluid.defaults("gpii.oauth2.authServer", {
             listener: "gpii.oauth2.authServer.contributeRouteHandlers",
             args: ["{that}", "{that}.oauth2orizeServer.oauth2orizeServer",
                 "{that}.passport.passport"]
-        }
+        },
+        onCreate: "gpii.oauth2.authServer.registerBodyParser"
     }
 });
 
@@ -237,7 +234,7 @@ gpii.oauth2.authServer.registerBodyParser = function (that) {
 };
 
 fluid.defaults("gpii.oauth2.authServer.standalone", {
-    gradeNames: ["gpii.oauth2.authServer", "autoInit"],
+    gradeNames: ["gpii.oauth2.authServer"],
     listeners: {
         onCreate: [
             "gpii.oauth2.authServer.registerBodyParser",
@@ -427,7 +424,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var authDecisionId = parseInt(req.params.authDecisionId, 10);
             // TODO this implementation will fail silently if (userId, authDecisionId) are not valid -- is this what we want?
             that.authorizationService.revokeAuthorization(userId, authDecisionId);
-            res.send(200);
+            res.sendStatus(200);
         }
     );
 
@@ -444,7 +441,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 res.type("application/json");
                 res.send(JSON.stringify(selectedPreferences, null, 4));
             } else {
-                res.send(404);
+                res.sendStatus(404);
             }
         }
     );
@@ -463,9 +460,9 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var selectedPreferences = req.body;
                 // TODO validate selectedPreferences?
                 that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
-                res.send(200);
+                res.sendStatus(200);
             } else {
-                res.send(400);
+                res.sendStatus(400);
             }
         }
     );
@@ -528,17 +525,17 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         function (req, res) {
             var oauth2ClientId = req.body.client_id;
             if (!oauth2ClientId) {
-                res.send(400);
+                res.sendStatus(400);
                 return;
             }
             var gpiiToken = req.body.gpii_token;
             if (!gpiiToken) {
-                res.send(400);
+                res.sendStatus(400);
                 return;
             }
             var auth = that.authorizationService.getAccessTokenForOAuth2ClientIdAndGpiiToken(oauth2ClientId, gpiiToken);
             if (!auth) {
-                res.send(404);
+                res.sendStatus(404);
                 return;
             }
             res.json({
@@ -548,29 +545,35 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // TODO: This endpoint needs to be moved into the prefs server, reimplemented in Kettle, and the extra prefsDataSource in AuthorizationService.js removed - see GPII-1521
     that.expressApp.post("/add-preferences",
         function (req, res) {
             var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
             if (!accessToken) {
-                res.send(401);
+                res.sendStatus(401);
             } else {
                 var client = that.authorizationService.getClientByClientCredentialsAccessToken(accessToken);
                 if (!client) {
-                    res.send(404);
+                    res.sendStatus(404);
                 }
 
                 var tokenPrivs = that.authorizationService.getClientCredentialsTokenPrivs(accessToken);
                 if (!tokenPrivs || !tokenPrivs.allowAddPrefs) {
-                    res.send(401);
+                    res.sendStatus(401);
                 } else {
                     var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
                     savePrefsPromise.then(function (data) {
                         res.json(data);
                     }, function (err) {
+                        console.log("GOT SAVE ERROR ", err);
                         var error = $.extend(err, {
                             message: "Error when saving preferences: " + err.message
                         });
-                        res.status(500).send(error);
+                        if (!res.headersSent) {
+                            res.status(500).json(error);
+                        } else {
+                            fluid.log(fluid.logLevel.WARN, "Unable to send error response ", error, " since status " + res.statusCode + " has already been set ");
+                        }
                     });
                 }
             }

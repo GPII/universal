@@ -23,7 +23,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.editPrivacySettingsDialog", {
-        gradeNames: ["gpii.oauth2.privacySettingsDialog", "autoInit"],
+        gradeNames: ["gpii.oauth2.privacySettingsDialog"],
         requestInfos: {
             fetchDecisionPrefs: {
                 url: "/authorizations/%authDecisionId/preferences",

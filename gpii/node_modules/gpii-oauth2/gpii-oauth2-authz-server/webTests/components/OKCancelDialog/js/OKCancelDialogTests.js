@@ -18,14 +18,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 fluid.defaults("gpii.tests.OKCancelDialog", {
-    gradeNames: ["gpii.OKCancelDialog", "autoInit"],
+    gradeNames: ["gpii.OKCancelDialog"],
     model: {
         dialogContent: "Initial dialog content"
     }
 });
 
 fluid.defaults("gpii.tests.OKCancelDialogTestTree", {
-    gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+    gradeNames: ["fluid.test.testEnvironment"],
     components: {
         dialog: {
             type: "gpii.tests.OKCancelDialog",
@@ -38,7 +38,7 @@ fluid.defaults("gpii.tests.OKCancelDialogTestTree", {
 });
 
 fluid.defaults("gpii.tests.OKCancelDialogTester", {
-    gradeNames: ["fluid.test.testCaseHolder", "autoInit"],
+    gradeNames: ["fluid.test.testCaseHolder"],
     testOptions: {
         updatedContent: "Updated content"
     },

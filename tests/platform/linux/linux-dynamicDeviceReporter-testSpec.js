@@ -18,7 +18,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.deviceReporterAware.linux.orca");
 
-gpii.tests.deviceReporterAware.linux.orca = [
+gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
@@ -148,8 +148,8 @@ gpii.tests.deviceReporterAware.linux.orca = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.deviceReporterAware.linux.orca",
-    configName: "linux-dynamicDeviceReporter-config",
-    configPath: "configs"
+    testDefs:  "gpii.tests.deviceReporterAware.linux.orca.testDefs",
+    configName: "gpii.tests.acceptance.linux.dynamicDeviceReporter.config",
+    configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);

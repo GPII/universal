@@ -1,7 +1,7 @@
 {
-    "typeName": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.lifecycleManagerServer.multipleMatchMakers",
+    "type": "flowManager.preferencesServer.solutionsRegistry.deviceReporter.matchMaker.ontologyServer.lifecycleManagerServer.multipleMatchMakers",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",
@@ -12,9 +12,9 @@
             }
         }
     },
-    "includes": [
+    "mergeConfigs": [
         "../node_modules/deviceReporter/configs/development.json",
-        "../node_modules/flowManager/configs/development.json",
+        "../node_modules/flowManager/configs/gpii.flowManager.config.development.json",
         "../node_modules/matchMaker/configs/proxy.json",
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json"

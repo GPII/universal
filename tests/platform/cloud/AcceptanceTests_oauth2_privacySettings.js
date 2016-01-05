@@ -96,7 +96,7 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
 ];
 
 fluid.defaults("gpii.tests.cloud.oauth2.privacySettingsRequests", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     components: {
         privacySettingsRequest: {
             type: "kettle.test.request.httpCookie",

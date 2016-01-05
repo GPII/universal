@@ -1,5 +1,5 @@
 /*!
-GPII OAuth2 In-memory DataStore
+GPII In-Memory OAuth 2 Data Store
 
 Copyright 2014 OCAD university
 
@@ -24,11 +24,11 @@ var fluid = fluid || require("infusion");
 
     // TODO where should this grade live?
     fluid.defaults("gpii.oauth2.dataStore", {
-        gradeNames: ["fluid.eventedComponent", "autoInit"]
+        gradeNames: "fluid.component"
     });
 
     fluid.defaults("gpii.oauth2.inMemoryDataStore", {
-        gradeNames: ["gpii.oauth2.dataStore", "fluid.standardRelayComponent", "autoInit"],
+        gradeNames: ["gpii.oauth2.dataStore", "fluid.modelComponent"],
         // We are using a model but we don't expect to share the model or to
         // have subscribers to change events.
         // By using a model we gain the documentation of the mutable state

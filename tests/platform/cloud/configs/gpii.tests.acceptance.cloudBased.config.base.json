@@ -1,0 +1,21 @@
+{
+    "type": "gpii.tests.acceptance.cloudBased.config.base",
+    "options": {
+        "distributeOptions": {
+            "acceptance.rawPreferencesDataSource": {
+                "record": {
+                    "type": "kettle.dataSource.file",
+                    "options": {
+                        "gradeNames": "kettle.dataSource.file.moduleTerms",
+                        "path": "%universal/testData/preferences/acceptanceTests/%userToken.json"
+                    }
+                },
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}",
+                "priority": "after:development.rawPreferencesDataSource"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%universal/gpii/configs/cloudBased.development.all.local.json"
+    ]
+}

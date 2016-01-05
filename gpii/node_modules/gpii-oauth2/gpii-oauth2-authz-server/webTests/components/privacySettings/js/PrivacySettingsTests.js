@@ -65,7 +65,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     fluid.defaults("gpii.tests.oauth2.privacySettings", {
-        gradeNames: ["gpii.oauth2.privacySettings", "autoInit"],
+        gradeNames: ["gpii.oauth2.privacySettings"],
         requestInfos: gpii.tests.oauth2.privacySettings.basicRequestInfos,
         model: {
             user: "testUser"
@@ -102,7 +102,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettingsDialog", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
 
     fluid.defaults("gpii.tests.oauth2.privacySettingsTest", {
-        gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+        gradeNames: ["fluid.test.testEnvironment"],
         components: {
             privacySettings: {
                 type: "gpii.tests.oauth2.privacySettings",
@@ -115,7 +115,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.privacySettingsTester", {
-        gradeNames: ["fluid.test.testCaseHolder", "autoInit"],
+        gradeNames: ["fluid.test.testCaseHolder"],
         modules: [{
             name: "Initialization",
             tests: [{
