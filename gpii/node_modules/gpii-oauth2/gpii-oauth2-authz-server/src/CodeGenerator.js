@@ -19,7 +19,7 @@ var crypto = require("crypto");
 var gpii = fluid.registerNamespace("gpii");
 
 fluid.defaults("gpii.oauth2.codeGenerator", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.eventedComponent"],
     invokers: {
         generateAuthCode: {
             funcName: "gpii.oauth2.codeGenerator.generateAuthCode"

@@ -22,7 +22,7 @@ var fluid = fluid || require("infusion");
     var gpii = fluid.registerNamespace("gpii");
 
     fluid.defaults("gpii.tests.oauth2.authorizationServiceWithEmptyDataStore", {
-        gradeNames: ["gpii.oauth2.authorizationService", "autoInit"],
+        gradeNames: ["gpii.oauth2.authorizationService"],
         components: {
             dataStore: {
                 type: "gpii.oauth2.inMemoryDataStore"
@@ -37,7 +37,7 @@ var fluid = fluid || require("infusion");
     });
 
     fluid.defaults("gpii.tests.oauth2.authorizationService.dataStoreWithTestData", {
-        gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
+        gradeNames: ["gpii.oauth2.inMemoryDataStore"],
         model: {
             users: [
                 { id: 1, username: "alice", password: "a", gpiiToken: "alice_gpii_token" },
@@ -114,7 +114,7 @@ var fluid = fluid || require("infusion");
     });
 
     fluid.defaults("gpii.tests.oauth2.authorizationServiceWithTestData", {
-        gradeNames: ["gpii.oauth2.authorizationService", "autoInit"],
+        gradeNames: ["gpii.oauth2.authorizationService"],
         components: {
             dataStore: {
                 type: "gpii.tests.oauth2.authorizationService.dataStoreWithTestData"

@@ -19,7 +19,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     "use strict";
 
     fluid.defaults("gpii.oauth2.addAuthorizationDialog", {
-        gradeNames: ["gpii.oauth2.privacySettingsDialog", "autoInit"],
+        gradeNames: ["gpii.oauth2.privacySettingsDialog"],
         requestInfos: {
             addAuthorization: {
                 url: "/authorizations",

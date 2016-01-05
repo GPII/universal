@@ -19,7 +19,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     "use strict";
 
     fluid.defaults("gpii.oauth2.servicesMenu", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
+        gradeNames: ["fluid.viewComponent"],
         widgetOptions: {
             select: "{that}.fireOnServiceSelected",
             focus: "{that}.addMenuItemFocusCss"

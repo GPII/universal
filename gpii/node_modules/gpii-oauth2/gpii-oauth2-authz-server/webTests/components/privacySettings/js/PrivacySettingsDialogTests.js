@@ -28,7 +28,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         };
 
         fluid.defaults("gpii.tests.oauth2.privacySettingsDialog", {
-            gradeNames: ["gpii.oauth2.privacySettingsDialog", "gpii.tests.oauth2.privacySettingsConfig", "autoInit"],
+            gradeNames: ["gpii.oauth2.privacySettingsDialog", "gpii.tests.oauth2.privacySettingsConfig"],
             members: {
                 doneButtonClicked: false,
                 closeEventFired: false

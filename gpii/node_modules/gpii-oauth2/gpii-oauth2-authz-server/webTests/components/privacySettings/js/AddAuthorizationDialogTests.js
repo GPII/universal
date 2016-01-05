@@ -42,7 +42,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     fluid.defaults("gpii.tests.oauth2.addAuthorizationDialog", {
-        gradeNames: ["gpii.oauth2.addAuthorizationDialog", "gpii.tests.oauth2.privacySettingsConfig", "autoInit"],
+        gradeNames: ["gpii.oauth2.addAuthorizationDialog", "gpii.tests.oauth2.privacySettingsConfig"],
         // Using "gpii.tests.oauth2.privacySettings.basicRequestInfos" without including
         // "gpii.tests.additionalRequestInfos" is because otherwise the component instantiation
         // would try to resolve "data" value defined for "addAuthorization" request as this value
@@ -60,7 +60,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.addAuthorizationDialogTest", {
-        gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+        gradeNames: ["fluid.test.testEnvironment"],
         components: {
             addAuthorizationDialog: {
                 type: "gpii.tests.oauth2.addAuthorizationDialog",
@@ -73,7 +73,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.addAuthorizationDialogTester", {
-        gradeNames: ["fluid.test.testCaseHolder", "autoInit"],
+        gradeNames: ["fluid.test.testCaseHolder"],
         modules: [ {
             name: "Add authorizations dialog tests",
             tests: [

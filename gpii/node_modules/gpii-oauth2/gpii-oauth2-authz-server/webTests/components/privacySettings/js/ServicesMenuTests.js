@@ -22,7 +22,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.registerNamespace("gpii.tests.oauth2.servicesMenu");
 
     fluid.defaults("gpii.tests.oauth2.servicesMenu", {
-        gradeNames: ["gpii.oauth2.servicesMenu", "autoInit"],
+        gradeNames: ["gpii.oauth2.servicesMenu"],
         members: {
             onCloseCalled: 0
         },
@@ -37,7 +37,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.servicesMenuTest", {
-        gradeNames: ["fluid.test.testEnvironment", "autoInit"],
+        gradeNames: ["fluid.test.testEnvironment"],
         components: {
             servicesMenu: {
                 type: "gpii.tests.oauth2.servicesMenu",
@@ -50,7 +50,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.servicesMenuTester", {
-        gradeNames: ["fluid.test.testCaseHolder", "autoInit"],
+        gradeNames: ["fluid.test.testCaseHolder"],
         modules: [{
             name: "Initialization",
             tests: [{
