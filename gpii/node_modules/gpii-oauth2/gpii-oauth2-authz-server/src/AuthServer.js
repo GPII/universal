@@ -480,9 +480,9 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var selectedPreferences = req.body.selectedPreferences;
                 // TODO validate selectedPreferences?
                 that.authorizationService.addAuthorization(userId, oauth2ClientId, selectedPreferences);
-                res.send(200);
+                res.sendStatus(200);
             } else {
-                res.send(400);
+                res.sendStatus(400);
             }
         }
     );
