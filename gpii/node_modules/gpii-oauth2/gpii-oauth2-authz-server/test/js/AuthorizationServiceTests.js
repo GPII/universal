@@ -28,7 +28,7 @@ var fluid = fluid || require("infusion");
                 type: "gpii.oauth2.inMemoryDataStore"
             },
             codeGenerator: {
-                type: "fluid.eventedComponent"
+                type: "fluid.component"
             },
             preferencesDataSource: {
                 type: "fluid.emptySubcomponent"
@@ -120,7 +120,7 @@ var fluid = fluid || require("infusion");
                 type: "gpii.tests.oauth2.authorizationService.dataStoreWithTestData"
             },
             codeGenerator: {
-                type: "fluid.eventedComponent"
+                type: "fluid.component"
             },
             preferencesDataSource: {
                 type: "fluid.emptySubcomponent"

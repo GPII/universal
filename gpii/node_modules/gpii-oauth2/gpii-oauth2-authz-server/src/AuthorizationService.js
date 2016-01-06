@@ -20,7 +20,7 @@ var fluid = fluid || require("infusion");
     var gpii = fluid.registerNamespace("gpii");
 
     fluid.defaults("gpii.oauth2.authorizationService", {
-        gradeNames: ["fluid.eventedComponent"],
+        gradeNames: ["fluid.component"],
         urls: {
             preferencesPost: ""
         },
