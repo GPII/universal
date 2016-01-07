@@ -32,16 +32,20 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             isMenuOpen: false
         },
         modelListeners: {
-            isMenuOpen: {
-                funcName: "gpii.oauth2.servicesMenu.updateVisibility",
+            isMenuOpen: [{
+                "this": "{that}.container",
+                method: "toggleClass",
+                args: ["{that}.options.styles.menuOpen", "{change}.value"]
+            }, {
+                funcName: "gpii.oauth2.servicesMenu.handleMenuState",
                 args: [
                     "{that}.container",
                     "{that}.model.isMenuOpen",
-                    "{that}.options.styles.menuOpen",
                     "{that}.close",
                     "{that}.events.onClose"
-                ]
-            }
+                ],
+                excludeSource: "init"
+            }]
         },
         listeners: {
             "onCreate.setup": {
@@ -101,8 +105,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     });
 
-    gpii.oauth2.servicesMenu.updateVisibility = function (container, isOpen, menuOpenStyle, closeFunc, onCloseEvt) {
-        container.toggleClass(menuOpenStyle, isOpen);
+    gpii.oauth2.servicesMenu.handleMenuState = function (container, isOpen, closeFunc, onCloseEvt) {
         if (isOpen) {
             fluid.focus(container);
             gpii.oauth2.servicesMenu.registerGlobalDismissal(container, closeFunc);

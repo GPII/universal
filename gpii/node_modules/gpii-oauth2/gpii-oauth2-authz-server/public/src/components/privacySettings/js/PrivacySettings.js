@@ -119,7 +119,7 @@ var gpii = gpii || {};
                         isMenuOpen: {
                             "this": "{privacySettings}.dom.addService",
                             method: "toggleClass",
-                            args: ["{privacySettings}.options.styles.addServiceSelected"]
+                            args: ["{privacySettings}.options.styles.addServiceSelected", "{change}.value"]
                         }
                     }
                 }
