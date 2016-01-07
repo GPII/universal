@@ -13,7 +13,8 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global fluid, jQuery */
+// Declare dependencies
+/* global fluid, gpii, jQuery */
 
 (function ($, fluid) {
     "use strict";
@@ -40,8 +41,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         invokers: {
             selectionsAsServerModel: {
-                func: "{selectionTree}.toServerModel",
-                args: ["{selectionTree}.model.selections"]
+                funcName: "gpii.oauth2.addAuthorizationDialog.selectionsAsServerModel",
+                args: ["{that}.selectionTree"]
             },
             fireAuthorizationAdded: {
                 "this": "{that}.events.authorizationAdded",
@@ -70,5 +71,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         }
     });
+
+    gpii.oauth2.addAuthorizationDialog.selectionsAsServerModel = function (selectionTree) {
+        if (selectionTree) {
+            return selectionTree.toServerModel(selectionTree.model.selections);
+        }
+    };
 
 })(jQuery, fluid);

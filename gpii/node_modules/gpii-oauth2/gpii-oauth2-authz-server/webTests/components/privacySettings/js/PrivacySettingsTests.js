@@ -145,8 +145,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     jQueryTrigger: "click",
                     element: "{privacySettings}.dialogForRemoval.okButton"
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettings.verifyRemoval",
-                    args: ["{privacySettings}"],
+                    listener: "jqUnit.assertTrue",
+                    args: ["onRemovalSuccess event is fired", true],
                     event: "{privacySettings}.events.onRemovalSuccess",
                     priority: "last"
                 }]
@@ -266,9 +266,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         fluid.each(elements, function (elm) {
             var value = data[elm];
             if (elm === "authDecisionId" || elm === "oauth2ClientId") {
-                value = parseInt(value);
+                value = value.toString();
             }
-            jqUnit.assertEquals(msg + "The value of " + elm + " is expected", expected[elm], value);
+            jqUnit.assertEquals(msg + "aaThe value of " + elm + " is expected", expected[elm], value);
         });
     };
 
@@ -282,14 +282,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.tests.oauth2.privacySettings.verifyDialogForRemoval = function (that) {
         var expectedDialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: gpii.tests.oauth2.privacySettings.clientData.serviceName});
-        jqUnit.assertEquals("The authDecisionId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authDecisionId, that.dialogForRemoval.model.authDecisionId);
+        jqUnit.assertEquals("The authDecisionId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authDecisionId, parseInt(that.dialogForRemoval.model.authDecisionId, 10));
         jqUnit.assertEquals("The dialogContent has been set correctly in dialogForRemoval subcomponent", expectedDialogContent, that.dialogForRemoval.model.dialogContent);
         jqUnit.isVisible("The dialog for removing the decision is visible", that.dialogForRemoval.container);
         jqUnit.assertTrue("The dialogForRemoval container should have been instantiated as a jQuery dialog", that.dialogForRemoval.container.hasClass("ui-dialog-content"));
-    };
-
-    gpii.tests.oauth2.privacySettings.verifyRemoval = function (that) {
-        jqUnit.assertTrue("onRemovalSuccess event is fired", true);
     };
 
     $(document).ready(function () {
