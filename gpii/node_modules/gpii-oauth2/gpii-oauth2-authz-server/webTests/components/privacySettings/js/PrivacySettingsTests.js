@@ -119,7 +119,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         modules: [{
             name: "Initialization",
             tests: [{
-                expect: 11,
+                expect: 15,
                 name: "Verify the initial rendering and component states",
                 sequence: [{
                     func: "{privacySettings}.refreshView"
@@ -214,6 +214,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu"]);
         jqUnit.assertFalse("The add service menu is initially closed", that.addServiceMenu.model.isMenuOpen);
         jqUnit.assertFalse("The selected css class is not applied to the add service container", that.locate("addService").hasClass(that.options.styles.addServiceSelected));
+
+        gpii.tests.oauth2.privacySettings.assertTooltipsForButtons(that.locate("editButton"), that.tooltips.editButtons, that.options.strings.editLabel);
+        gpii.tests.oauth2.privacySettings.assertTooltipsForButtons(that.locate("removeButton"), that.tooltips.removeButtons, that.options.strings.removeLabel);
     };
 
     gpii.tests.oauth2.privacySettings.assertRenderedText = function (that, root, paths, method) {
@@ -228,6 +231,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             var assertFunc = $.inArray(subcomponent, instantiatedSubcomponents) === -1 ? "assertUndefined" : "assertNotUndefined",
                 msg = $.inArray(subcomponent, instantiatedSubcomponents) === -1 ? " not" : "";
             jqUnit[assertFunc]("The subcomponent " + subcomponent + " has" + msg + " been instantiated", fluid.get(that, subcomponent));
+        });
+    };
+
+    gpii.tests.oauth2.privacySettings.assertTooltipsForButtons = function (buttons, trackElm, tooltipContent) {
+        fluid.each(buttons, function (button) {
+            var id = $(button).attr("id");
+            var tooltip = trackElm[id];
+            jqUnit.assertNotUndefined("The tooltip for the edit button " + id + " has been created", tooltip);
+            jqUnit.assertEquals("The tooltip content is expected", tooltipContent, tooltip.options.content);
         });
     };
 
