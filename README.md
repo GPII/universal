@@ -104,5 +104,5 @@ Or use the following command to download a particular image identified using a G
 
 Additional notes:
 
-* The Docker images are built within the container context using the [same Ansible role](https://github.com/idi-ops/ansible-nodejs) used to provision VMs, to simplify the management of different environments.
+* The Docker image is built within the container using the [same Ansible role](https://github.com/idi-ops/ansible-nodejs) used to provision VMs, to simplify the management of different environments.
 * Universal is installed to /opt/gpii/node_modules/universal to allow the test cases to resolve (they are run as part of the container build process to support building and deploying containers with CI)
