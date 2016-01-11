@@ -1,0 +1,13 @@
+{
+    "type": "gpii.tests.acceptance.linux.chrome.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.installedSolutionsPath": {
+                "record": "%universal/testData/deviceReporter/acceptanceTests/chrome.json",
+                "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
+                "priority": "after:development.installedSolutionsPath"
+            }
+        }
+    },    
+    "mergeConfigs": "%universal/tests/configs/gpii.tests.acceptance.localInstall.config.json"
+}

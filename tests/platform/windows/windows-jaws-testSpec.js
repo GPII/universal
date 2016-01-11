@@ -78,7 +78,7 @@ gpii.tests.windows.jaws = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.jaws",
-    configName: "windows-jaws-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.windows.jaws.config",
+    configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

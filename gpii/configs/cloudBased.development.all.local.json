@@ -1,22 +1,9 @@
 {
-    "typeName": "cloudBased.flowManager.development.all.local",
-    "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
-        "components": {
-            "server": {
-                "type": "kettle.server",
-                "options": {
-                    "logging": true,
-                    "port": 8081
-                }
-            }
-        }
-    },
-    "includes": [
-        "../node_modules/flatMatchMaker/configs/development.all.local.json",
-        "../node_modules/solutionsRegistry/configs/development.json",
-        "../node_modules/flowManager/configs/cloudBased.development.all.local.json",
-        "../node_modules/rawPreferencesServer/configs/development.json",
-        "../node_modules/preferencesServer/configs/development.json"
+    "type": "cloudBased.development.all.local",    
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
+        "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
+        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json"
     ]
 }

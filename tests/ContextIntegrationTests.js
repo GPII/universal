@@ -18,8 +18,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle"),
-    path = require("path"),
-    jqUnit = jqUnit || fluid.require("jqUnit"),
+    jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.contextIntegration");
@@ -35,17 +34,25 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.linux", {
     ]
 });
 
+// TODO: The potential for this type name to conflict with an member name is unfortunate!
+// Should always pick an member name if it matches first
+fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
+    gradeNames: "kettle.test.request.http",
+    path: "/environmentChanged",
+    method: "PUT"
+});
+
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
+    events: {
+        refreshEnvironmentChangedRequest: null
+    },
     components: {
         environmentChangedRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                requestOptions: {
-                    path: "/environmentChanged",
-                    port: 8081,
-                    method: "PUT"
-                }
-            }
+            createOnEvent: "refreshEnvironmentChangedRequest",
+            type: "gpii.tests.contextIntegration.environmentChangedRequestType"
+        },
+        environmentChangedRequest2: {
+            type: "gpii.tests.contextIntegration.environmentChangedRequestType"
         }
     },
     distributeOptions: {
@@ -69,6 +76,8 @@ gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, 
 gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
     return [
         {
+            func: "{testCaseHolder}.events.refreshEnvironmentChangedRequest.fire"
+        }, {
             func: "{environmentChangedRequest}.send",
             args: gpii.tests.contextIntegration.data.contexts[contextName].environment
         }, {
@@ -144,7 +153,7 @@ gpii.tests.contextIntegration.data = {
                 }
             }
         },
-        "onlyBright": { //if user logs in when brightnes is active from the beginning - only expect mag
+        "onlyBright": { // if user logs in when brightnes is active from the beginning - only expect mag
             "settingsHandlers": {
                 "gpii.gsettings": {
                     "data": [{
@@ -218,7 +227,7 @@ gpii.tests.contextIntegration.fixtures = [
         sequenceSegments: [
             [
                 {
-                    "func": "gpii.test.expandSettings",
+                    func: "gpii.test.expandSettings",
                     args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
@@ -261,18 +270,18 @@ gpii.tests.contextIntegration.fixtures = [
         sequenceSegments: [
             [
                 {
-                    "func": "gpii.test.expandSettings",
+                    func: "gpii.test.expandSettings",
                     args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
                 }, {
-                    func: "{environmentChangedRequest}.send",
+                    func: "{environmentChangedRequest2}.send",
                     args: {
                         "http://registry.gpii.net/common/environment/illuminance": 500
                     }
                 }, {
-                    event: "{environmentChangedRequest}.events.onComplete"
+                    event: "{environmentChangedRequest2}.events.onComplete"
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -347,25 +356,24 @@ gpii.tests.contextIntegration.fixtures = [
     }
 ];
 
+gpii.tests.contextIntegration.baseTestDef = {
+    userToken: "context1",
+    gradeNames: "gpii.tests.contextIntegration.testCaseHolder.linux",
+    config: {
+        configName: "gpii.tests.acceptance.linux.builtIn.config",
+        configPath: "%universal/tests/platform/linux/configs"
+    },
+    contexts: gpii.tests.contextIntegration.data.contexts
+};
+
 gpii.tests.contextIntegration.buildTestFixtures = function (fixtures) {
     return fluid.transform(fixtures, function (fixture) {
-        var testDef = {
+        var overlay = {
             name: fixture.name,
-            userToken: "context1",
             expect: fixture.expect,
-            gradeNames: "gpii.tests.contextIntegration.testCaseHolder.linux",
-            config: {
-                configName: "linux-builtIn-config",
-                configPath: path.resolve(__dirname, "platform/linux/configs")
-            },
-            sequence: [],
-            contexts: gpii.tests.contextIntegration.data.contexts
+            sequence: fluid.flatten(fixture.sequenceSegments)
         };
-        fluid.each(fixture.sequenceSegments, function (arr) {
-            testDef.sequence = testDef.sequence.concat(arr);
-        });
-
-        return testDef;
+        return fluid.extend(true, {}, gpii.tests.contextIntegration.baseTestDef, overlay);
     });
 };
 

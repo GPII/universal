@@ -1,8 +1,8 @@
 {
-    "type": "fluid.eventedComponent",
+    "type": "untrusted.development.all.local",
     "options": {
-        "gradeNames": ["{that}.buildMultiServerKettleConfig", "autoInit"],
-        "servers": {
+        "gradeNames": ["kettle.multiConfig.config"],
+        "configs": {
             "localConfig": {
                 "configName": "untrusted.development",
                 "configPath": "%universal/gpii/configs"
@@ -12,25 +12,21 @@
                 "configPath": "%universal/gpii/configs"
             }
         },
-        "invokers": {
-            "buildMultiServerKettleConfig": {
-                "funcName": "gpii.multiServerKettleConfig.build",
-                "args": ["{that}.options.servers"]
-            }
-        },
-        "distributeOptions": [
-            {
-                "record": 8088,
-                "target": "{that cloudBasedConfig}.options.components.server.options.port"
+        "distributeOptions": {
+            "untrusted.development.port": {
+                "record": 8084,
+                "target": "{that cloudBasedConfig}.options.mainServerPort"
             },
-            {
-                "record": "http://localhost:8088/preferences/%userToken",
-                "target": "{that cloudBasedConfig}.options.cloudBasedUrls.preferences"
+            "untrusted.development.prefs": {
+                "record": "http://localhost:8084/preferences/%userToken",
+                "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
+                "priority": "after:flowManager.development.prefs"
             },
-            {
-                "record": "http://localhost:8088",
-                "target": "{that cloudBasedConfig}.options.matchMakers.flat.url"
+            "untrusted.development.matchMakers": {
+                "record": "http://localhost:8084",
+                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.flat.url",
+                "priority": "after:flowManager.development.matchMakers"
             }
-        ]
+        }
     }
 }

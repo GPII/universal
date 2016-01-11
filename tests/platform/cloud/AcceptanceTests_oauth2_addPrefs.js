@@ -57,9 +57,9 @@ gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles = function () {
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: "fluid.component",
     listeners: {
-        "onDestroy.cleanupTmpFiles": gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles
+        "onDestroy.cleanupTmpFiles": "gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles"
     }
 });
 
@@ -93,12 +93,12 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     },
     { // 6
         funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
-        args: ["{getPrefsRequest}", "{addPrefsRequest}"]
+        args: ["{getPrefsRequest2}", "{addPrefsRequest}"]
     },
     { // 7
-        event: "{getPrefsRequest}.events.onComplete",
+        event: "{getPrefsRequest2}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyGetPrefsResponse",
-        args: ["{arguments}.0", "{getPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.transformedPrefs]
+        args: ["{arguments}.0", "{getPrefsRequest2}", gpii.tests.cloud.oauth2.addPrefs.transformedPrefs]
     }
 ];
 

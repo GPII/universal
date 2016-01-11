@@ -1,23 +1,18 @@
 {
-    "typeName": "all.development.dr.production",
+    "type": "all.development.dr.production",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
-        "components": {
-            "server": {
-                "type": "kettle.server",
-                "options": {
-                    "logging": true,
-                    "port": 8081
-                }
+        "distributeOptions": {
+            "gpii.config.deviceReporter.flowManager": {
+                "record": "{flowManager}.solutionsRegistryDataSource",
+                "target": "{that gpii.deviceReporter.live}.options.components.solutionsRegistryDataSource"
             }
         }
     },
-    "includes": [
-        "../node_modules/deviceReporter/configs/production.json",
-        "../node_modules/flowManager/configs/development.json",
-        "../node_modules/preferencesServer/configs/development.json",
-        "../node_modules/solutionsRegistry/configs/development.json",
-        "../node_modules/flatMatchMaker/configs/development.all.local.json",
-        "../node_modules/rawPreferencesServer/configs/development.json"
+    "mergeConfigs": [
+        "%deviceReporter/configs/gpii.deviceReporter.config.production.json",
+        "%flowManager/configs/gpii.flowManager.config.development.json",
+        "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
+        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json"
     ]
 }

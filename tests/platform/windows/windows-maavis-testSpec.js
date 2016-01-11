@@ -79,7 +79,7 @@ gpii.tests.windows.maavis = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.maavis",
-    configName: "windows-maavis-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.windows.maavis.config",
+    configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

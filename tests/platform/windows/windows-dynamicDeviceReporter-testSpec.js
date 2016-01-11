@@ -96,6 +96,6 @@ gpii.tests.deviceReporterAware.windows = [
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.windows",
     configName: "windows-dynamicDeviceReporter-config",
-    configPath: "configs"
+    configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

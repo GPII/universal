@@ -137,7 +137,7 @@ gpii.tests.android.talkback = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.android.talkback",
-    configName: "android-talkback-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.android.talkback.config",
+    configPath: "%universal/tests/platform/android/configs"
 }, ["gpii.test.integration.testCaseHolder.android"],
     module, require, __dirname);

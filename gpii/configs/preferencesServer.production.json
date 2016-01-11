@@ -1,7 +1,7 @@
 {
-    "typeName": "preferencesServer.standalone.production",
+    "type": "preferencesServer.standalone.production",
     "options": {
-        "gradeNames": ["autoInit", "fluid.littleComponent"],
+        "gradeNames": ["fluid.component"],
         "components": {
             "server": {
                 "type": "kettle.server",
@@ -12,7 +12,7 @@
             }
         }
     },
-    "includes": [
+    "mergeConfigs": [
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/rawPreferencesServer/configs/production.json"
     ]

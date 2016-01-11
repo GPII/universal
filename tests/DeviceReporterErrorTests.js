@@ -17,8 +17,6 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
-    configPath = require("path").resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
@@ -26,10 +24,14 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.deviceReporterMockChecks");
-
-fluid.defaults("gpii.tests.deviceReporterMockChecks.testCaseHolder", {
-    gradeNames: ["kettle.test.testCaseHolder", "autoInit"],
+fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
+    gradeNames: "gpii.test.common.testCaseHolder",
+    distributeOptions: {
+        "development.installedSolutionsPath": {
+            "record": "%universal/tests/data/faultyDeviceReport.jsonx",
+            "target": "{that deviceReporter installedSolutionsDataSource}.options.path"
+        }
+    },
     components: {
         deviceRequest: {
             type: "kettle.test.request.http",
@@ -41,96 +43,58 @@ fluid.defaults("gpii.tests.deviceReporterMockChecks.testCaseHolder", {
     }
 });
 
-gpii.tests.deviceReporterMockChecks.userToken = "testUser1";
+gpii.tests.deviceReporterErrorTests.userToken = "testUser1";
 
-gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse = function (data) {
-    data = JSON.parse(data);
-    jqUnit.assertTrue("Received error as expected", data.isError);
-    jqUnit.assertEquals("Received error message",
-        "Failed to read deviceReporter source.. SyntaxError: Unexpected token a", data.message);
-    jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
+gpii.tests.deviceReporterErrorTests.testDefCommon = {
+    config: {
+        configName: "development.all.local",
+        configPath: "%universal/gpii/configs"
+    },
+    gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
 };
 
-gpii.tests.deviceReporterMockChecks.testLoginResponse = function (data) {
-    data = JSON.parse(data);
-    jqUnit.assertTrue("Received error as expected", data.isError);
-    jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-    jqUnit.assertTrue("Received message text", data.message.indexOf("Error in device reporter data") !== -1);
-};
-
-gpii.tests.softFailureHandler = function (args, activity) {
-    var messages = ["ASSERTION FAILED: "].concat(args).concat(activity);
-    fluid.log.apply(null, [fluid.logLevel.FATAL].concat(messages));
-    var request = kettle.getCurrentRequest();
-    if (request) {
-        request.events.onError.fire({
-            isError: true,
-            message: args[0]
-        });
-    }
-};
-
-gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors = function () {
-    fluid.pushSoftFailure(gpii.tests.softFailureHandler);
-};
-
-gpii.tests.deviceReporterMockChecks.popInstrumentedErrors = function () {
-    fluid.pushSoftFailure(-1);
-};
-
-gpii.tests.deviceReporterMockChecks.buildTestDef = function (reporterURL) {
-    return [{
+gpii.tests.deviceReporterErrorTests.testDefs = [{
         name: "Login fails on error in Device Reporter and reports to login",
-        expect: 3,
-        config: {
-            configName: "development.all.local",
-            configPath: configPath
-        },
-        deviceReporterUrl: "file://" + reporterURL,
-        gradeNames: [ "gpii.test.common.testCaseHolder" ],
-        distributeOptions: [{
-            "source": "{that}.options.deviceReporterUrl",
-            "target": "{that deviceReporter}.options.installedSolutionsUrl"
-        }],
-        userToken: gpii.tests.deviceReporterMockChecks.userToken,
-
+        expect: 4,
+        userToken: gpii.tests.deviceReporterErrorTests.userToken,
         sequence: [{
-            funcName: "gpii.tests.deviceReporterMockChecks.pushInstrumentedErrors"
-        }, {
             func: "{loginRequest}.send"
         }, {
             event: "{loginRequest}.events.onComplete",
-            listener: "gpii.tests.deviceReporterMockChecks.testLoginResponse"
-        }, {
-            func: "gpii.tests.deviceReporterMockChecks.popInstrumentedErrors"
+            listener: "kettle.test.assertErrorResponse",
+            args: {
+                message: "Received 500 error when logging in with corrupt device reporter",
+                errorTexts: ["Failed to read deviceReporter", "Parse error"],
+                string: "{arguments}.0",
+                request: "{loginRequest}"
+            }
         }]
     }, {
         name: "Device Reporter fails on corrupt JSON file",
-        expect: 3,
+        expect: 4,
         config: {
             configName: "development.all.local",
-            configPath: configPath
+            configPath: "%universal/gpii/configs"
         },
-        deviceReporterUrl: "file://" + reporterURL,
-        gradeNames: [ "gpii.tests.deviceReporterMockChecks.testCaseHolder" ],
-        distributeOptions: [{
-            "source": "{that}.options.deviceReporterUrl",
-            "target": "{that deviceReporter}.options.installedSolutionsUrl"
-        }],
+        gradeNames: [ "gpii.tests.deviceReporterErrorTests.testCaseHolder" ],
         sequence: [{
             func: "{deviceRequest}.send"
         }, {
             event: "{deviceRequest}.events.onComplete",
-            listener: "gpii.tests.deviceReporterMockChecks.testDeviceErrorResponse",
-            args: [ "{arguments}.0" ]
+            listener: "kettle.test.assertErrorResponse",
+            args: {
+                message: "Received 500 error from device reporter direct",
+                errorTexts: ["Failed to read deviceReporter", "Parse error"],
+                string: "{arguments}.0",
+                request: "{deviceRequest}"
+            }
         }]
     }];
+
+gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
+    return fluid.transform(gpii.tests.deviceReporterErrorTests.testDefs, function (testDef) {
+        return fluid.extend(true, {}, gpii.tests.deviceReporterErrorTests.testDefCommon, testDef);
+    });
 };
 
-
-gpii.tests.deviceReporterMockChecks.buildAllTestDefs = function () {
-    var filename = __dirname + "/data/faultyDeviceReport.jsonx";
-    return gpii.tests.deviceReporterMockChecks.buildTestDef(filename);
-};
-
-kettle.test.bootstrapServer(gpii.tests.deviceReporterMockChecks.buildAllTestDefs());
+kettle.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());
