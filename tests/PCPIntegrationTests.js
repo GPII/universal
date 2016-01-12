@@ -75,7 +75,7 @@ gpii.tests.integration.PCPInterface.mockServer.set = function () {
 
 var testDefs = [{
     name: "Flow Manager PCPInterface tests",
-    expect: 5,
+    expect: 3,
     config: {
         configName: "localInstall",
         configPath: configPath
@@ -108,24 +108,24 @@ var testDefs = [{
                 "multiUser": false,
                 "pendingMsgs": []
             }]
-        }, {
-            event: "{client}.events.onMessage",
-            listener: "gpii.tests.integration.PCPInterface.onMessage",
-            args: [ "{arguments}.0",
-                { type: "infoMessage", message: "The token screenreader_common was logged in." }
-            ]
+        // }, {
+        //     event: "{client}.events.onMessage",
+        //     listener: "gpii.tests.integration.PCPInterface.onMessage",
+        //     args: [ "{arguments}.0",
+        //         { type: "infoMessage", message: "The token screenreader_common was logged in." }
+        //     ]
         }, {
             // Test logout notification gets passed to socket client
             func: "{logoutRequest}.send"
         }, {
             event: "{client}.events.onLogout",
             listener: "gpii.tests.integration.PCPInterface.onLogout"
-        }, {
-            event: "{client}.events.onMessage",
-            listener: "gpii.tests.integration.PCPInterface.onMessage",
-            args: [ "{arguments}.0",
-                { type: "infoMessage", message: "The token screenreader_common was logged out." }
-            ]
+        // }, {
+        //     event: "{client}.events.onMessage",
+        //     listener: "gpii.tests.integration.PCPInterface.onMessage",
+        //     args: [ "{arguments}.0",
+        //         { type: "infoMessage", message: "The token screenreader_common was logged out." }
+        //     ]
         }
     ]
 }];
