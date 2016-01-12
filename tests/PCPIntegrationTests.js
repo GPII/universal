@@ -104,7 +104,9 @@ var testDefs = [{
                 "userToken": "screenreader_common",
                 "settings": {
                     "http://registry.gpii.net/common/highContrastEnabled": false
-                }
+                },
+                "multiUser": false,
+                "pendingMsgs": []
             }]
         }, {
             event: "{client}.events.onMessage",
