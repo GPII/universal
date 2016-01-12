@@ -772,13 +772,13 @@
          "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
+                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
             }
         ],
         "stop": [
             {
                 "type": "gpii.windows.killProcessByName",
-                "filename": "firefox.exe"
+                "filename": "chrome.exe"
             }
         ],
         "isInstalled": [
@@ -940,7 +940,7 @@
                     "uiParam": "struct_size",
                     "pvParam": {
                         "type": "struct",
-                        "name": "HIGHCONTRAST"
+                        "name": "HIGHCONTRAST" 
                     },
                     "verifySettings": true
                 },
@@ -963,6 +963,7 @@
                         }
                     }
                 }
+
             }
         },
         "configure": [
