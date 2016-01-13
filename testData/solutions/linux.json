@@ -92,6 +92,14 @@
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "gnome-shell",
+                "schema": "org.gnome.desktop.a11y.applications",
+                "setting": "screen-magnifier-enabled"
+            }
         ]
     },
 
@@ -181,6 +189,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "dunno"
+            }
         ]
     },
 
@@ -218,6 +232,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "nautilus"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "nautilus"
             }
         ]
     },
@@ -257,6 +277,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
             }
+        ],
+        "isRunning": [
+           {
+               "type": "gpii.processReporter.find",
+                "command": "caribou"
+           }
         ]
     },
 
@@ -332,6 +358,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "gnome-settings-daemon"
             }
         ]
     },
@@ -1223,6 +1255,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "orca"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "orca"
+            }
         ]
     },
 
@@ -1270,6 +1308,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "alsa-lib"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "alsactl"
             }
         ]
     },
@@ -1319,6 +1363,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "chrome"
+            }
         ]
     },
 
@@ -1367,6 +1417,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "chrome"
+            }
         ]
     },
 
@@ -1414,6 +1470,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "chrome"
             }
         ]
     },
