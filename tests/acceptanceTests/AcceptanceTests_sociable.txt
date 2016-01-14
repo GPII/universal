@@ -1,0 +1,9 @@
+AcceptanceTests_sociable.js
+
+Descriptions:
+This will run the acceptance tests for the Sociable screen reader. It uses 3 NP sets: sociable_sr, sociable_hc and sociable_fs.
+
+Requirements:
+* Sociable installed
+
+To run these tests, you need to have Sociable INSTALLED. Please contact Thanos Karantjias @ tkarantjias@singularlogic.eu
