@@ -40,42 +40,34 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         },
         invokers: {
-            selectionsAsServerModel: {
-                funcName: "gpii.oauth2.addAuthorizationDialog.selectionsAsServerModel",
-                args: ["{that}.selectionTree"]
-            },
-            fireAuthorizationAdded: {
-                "this": "{that}.events.authorizationAdded",
-                method: "fire"
-            },
             sendAddAuthorization: {
-                funcName: "gpii.oauth2.ajax",
-                args: [
-                    "{that}.options.requestInfos.addAuthorization.url",
-                    {},
-                    {
-                        type: "{that}.options.requestInfos.addAuthorization.type",
-                        contentType: "application/json",
-                        data: {
-                            expander: {
-                                funcName: "JSON.stringify",
-                                args: [{
-                                    oauth2ClientId: "{that}.model.clientData.oauth2ClientId",
-                                    selectedPreferences: "@expand:{that}.selectionsAsServerModel()"
-                                }]
-                            }
-                        },
-                        success: "{that}.fireAuthorizationAdded"
-                    }
-                ]
+                funcName: "gpii.oauth2.addAuthorizationDialog.sendAddAuthorization",
+                args: ["{that}"]
             }
         }
     });
 
-    gpii.oauth2.addAuthorizationDialog.selectionsAsServerModel = function (selectionTree) {
+    // TODO: update to use the dataSource system once it is migrated out of Kettle up into Infusion
+    gpii.oauth2.addAuthorizationDialog.sendAddAuthorization = function (that) {
+        var url = that.options.requestInfos.addAuthorization.url,
+            selectionTree = that.selectionTree,
+            selectedPreferences, data;
+
         if (selectionTree) {
-            return selectionTree.toServerModel(selectionTree.model.selections);
+            selectedPreferences = selectionTree.toServerModel(selectionTree.model.selections);
         }
+
+        data = JSON.stringify({
+            oauth2ClientId: that.model.clientData.oauth2ClientId,
+            selectedPreferences: selectedPreferences
+        });
+
+        gpii.oauth2.ajax(url, {}, {
+            type: that.options.requestInfos.addAuthorization.type,
+            contentType: "application/json",
+            data: data,
+            success: that.events.authorizationAdded.fire
+        });
     };
 
 })(jQuery, fluid);
