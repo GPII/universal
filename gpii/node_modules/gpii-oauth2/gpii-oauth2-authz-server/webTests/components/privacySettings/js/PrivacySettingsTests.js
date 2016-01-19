@@ -64,8 +64,26 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
+    fluid.defaults("gpii.tests.oauth2.privacySettings.trackTooltips", {
+        gradeNames: ["fluid.component"],
+        mergePolicy: {
+            tooltipListeners: "noexpand"
+        },
+        tooltipListeners: {
+            afterOpen: {
+                funcName: "gpii.tests.oauth2.privacySettings.assertTooltip",
+                args: ["{privacySettings}", "{arguments}.1", "{arguments}.2"] // event.target, tooltip
+            }
+        },
+        distributeOptions: {
+            source: "{that}.options.tooltipListeners",
+            removeSource: true,
+            target: "{/ fluid.tooltip}.options.listeners"
+        }
+    });
+
     fluid.defaults("gpii.tests.oauth2.privacySettings", {
-        gradeNames: ["gpii.oauth2.privacySettings", "autoInit"],
+        gradeNames: ["gpii.tests.oauth2.privacySettings.trackTooltips", "gpii.oauth2.privacySettings", "autoInit"],
         requestInfos: gpii.tests.oauth2.privacySettings.basicRequestInfos,
         model: {
             user: "testUser"
@@ -119,7 +137,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         modules: [{
             name: "Initialization",
             tests: [{
-                expect: 15,
+                expect: 11,
                 name: "Verify the initial rendering and component states",
                 sequence: [{
                     func: "{privacySettings}.refreshView"
@@ -128,6 +146,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     args: ["{privacySettings}"],
                     priority: "last",
                     event: "{privacySettings}.events.afterRender"
+                }, {
+                    func: "gpii.tests.oauth2.privacySettings.triggerButtonEvt",
+                    args: ["{privacySettings}", "editButton", 0, "focus"]
                 }]
             }]
         }, {
@@ -136,8 +157,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 expect: 5,
                 name: "Verify the opening of the removal dialog and the remove button",
                 sequence: [{
-                    func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
-                    args: ["{privacySettings}", "removeButton", 0]
+                    func: "gpii.tests.oauth2.privacySettings.triggerButtonEvt",
+                    args: ["{privacySettings}", "removeButton", 0, "click"]
                 }, {
                     func: "gpii.tests.oauth2.privacySettings.verifyDialogForRemoval",
                     args: ["{privacySettings}"]
@@ -188,8 +209,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 expect: 13,
                 name: "Verify the rendering and closing of the edit dialog",
                 sequence: [{
-                    func: "gpii.tests.oauth2.privacySettings.clickButtonOnDecision",
-                    args: ["{privacySettings}", "editButton", 0]
+                    func: "gpii.tests.oauth2.privacySettings.triggerButtonEvt",
+                    args: ["{privacySettings}", "editButton", 0, "click"]
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog",
                     args: ["{privacySettings}"],
@@ -214,9 +235,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu"]);
         jqUnit.assertFalse("The add service menu is initially closed", that.addServiceMenu.model.isMenuOpen);
         jqUnit.assertFalse("The selected css class is not applied to the add service container", that.locate("addService").hasClass(that.options.styles.addServiceSelected));
-
-        gpii.tests.oauth2.privacySettings.assertTooltipsForButtons(that.locate("editButton"), that.tooltips.editButtons, that.options.strings.editLabel);
-        gpii.tests.oauth2.privacySettings.assertTooltipsForButtons(that.locate("removeButton"), that.tooltips.removeButtons, that.options.strings.removeLabel);
     };
 
     gpii.tests.oauth2.privacySettings.assertRenderedText = function (that, root, paths, method) {
@@ -234,13 +252,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
-    gpii.tests.oauth2.privacySettings.assertTooltipsForButtons = function (buttons, trackElm, tooltipContent) {
-        fluid.each(buttons, function (button) {
-            var id = $(button).attr("id");
-            var tooltip = trackElm[id];
-            jqUnit.assertNotUndefined("The tooltip for the edit button " + id + " has been created", tooltip);
-            jqUnit.assertEquals("The tooltip content is expected", tooltipContent, tooltip.options.content);
-        });
+    gpii.tests.oauth2.privacySettings.assertTooltip = function (that, target, tooltip) {
+        console.log("assertTooltip", that, target, tooltip);
+        // fluid.each(buttons, function (button) {
+        //     var id = $(button).attr("id");
+        //     var tooltip = trackElm[id];
+        //     jqUnit.assertNotUndefined("The tooltip for the edit button " + id + " has been created", tooltip);
+        //     jqUnit.assertEquals("The tooltip content is expected", tooltipContent, tooltip.options.content);
+        // });
     };
 
     gpii.tests.oauth2.privacySettings.afterAddServiceButtonClicked = function (that) {
@@ -269,9 +288,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertDeepEq("The focus returns back to the add service button", that.locate("addServiceButton").is(":focus"));
     };
 
-    gpii.tests.oauth2.privacySettings.clickButtonOnDecision = function (that, buttonSelector, index) {
+    gpii.tests.oauth2.privacySettings.triggerButtonEvt = function (that, buttonSelector, index, evtName) {
         var buttons = that.locate(buttonSelector);
-        buttons[index].click();
+        buttons[index][evtName]();
     };
 
     gpii.tests.oauth2.privacySettings.verifyClientData = function (msg, data, elements, expected) {
