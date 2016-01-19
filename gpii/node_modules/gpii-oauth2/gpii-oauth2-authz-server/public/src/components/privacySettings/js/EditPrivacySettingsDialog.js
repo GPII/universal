@@ -60,27 +60,26 @@ var gpii = gpii || {};
                 args: ["{that}"]
             },
             saveDecisionPrefs: {
-                funcName: "gpii.oauth2.ajax",
-                args: ["{that}.options.requestInfos.saveDecisionPrefs.url", {
-                    authDecisionId: "{that}.model.clientData.authDecisionId"
-                }, {
-                    type: "{that}.options.requestInfos.saveDecisionPrefs.type",
-                    contentType: "application/json",
-                    data: {
-                        expander: {
-                            funcName: "JSON.stringify",
-                            args: [{
-                                expander: {
-                                    func: "{selectionTree}.toServerModel",
-                                    args: "{selectionTree}.model.selections"
-                                }
-                            }]
-                        }
-                    }
-                }]
+                funcName: "gpii.oauth2.editPrivacySettingsDialog.saveDecisionPrefs",
+                args: ["{that}"]
             }
         }
     });
+
+    gpii.oauth2.editPrivacySettingsDialog.saveDecisionPrefs = function (that) {
+        var url = that.options.requestInfos.saveDecisionPrefs.url,
+            selectionTree = that.selectionTree,
+            selectedPreferences = selectionTree.toServerModel(selectionTree.model.selections),
+            data = JSON.stringify(selectedPreferences);
+
+        gpii.oauth2.ajax(url, {
+            authDecisionId: that.model.clientData.authDecisionId
+        }, {
+            type: that.options.requestInfos.saveDecisionPrefs.type,
+            contentType: "application/json",
+            data: data
+        });
+    };
 
     gpii.oauth2.editPrivacySettingsDialog.savePrefsAndExit = function (that) {
         that.saveDecisionPrefs();

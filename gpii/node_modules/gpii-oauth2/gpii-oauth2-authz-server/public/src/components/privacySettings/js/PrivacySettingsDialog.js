@@ -118,7 +118,6 @@ var gpii = gpii || {};
                 args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
                     clientID: "{that}.model.clientData.oauth2ClientId"
                 }, {
-                    //TODO: Handle errors
                     dataType: "json",
                     success: "{that}.events.onFetchAvailableAuthorizedPrefsSuccess.fire",
                     error: "{that}.events.onFetchAvailableAuthorizedPrefsError.fire"
