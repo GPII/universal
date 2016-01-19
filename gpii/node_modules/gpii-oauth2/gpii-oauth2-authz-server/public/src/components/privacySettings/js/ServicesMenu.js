@@ -61,16 +61,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         invokers: {
             open: {
-                func: "{that}.setIsMenuOpen",
-                args: true
+                changePath: "isMenuOpen",
+                value: true
             },
             close: {
-                func: "{that}.setIsMenuOpen",
-                args: false
-            },
-            setIsMenuOpen: {
                 changePath: "isMenuOpen",
-                value: "{arguments}.0"
+                value: false
             },
             keepOpen: {
                 funcName: "gpii.oauth2.servicesMenu.removeGlobalDismissal",

@@ -142,11 +142,9 @@ var gpii = gpii || {};
             removeServiceLabel: ".gpiic-oauth2-privacySettings-removeServiceLabel",
             editButton: ".gpiic-oauth2-privacySettings-edit",
             removeButton: ".gpiic-oauth2-privacySettings-removeService",
-            // TODO Rather than ids for serviceName, authDecisionId, and oauth2ClientId, can't we just use their names?
-            // If we use ids, then we have multiple elements with the same id (one per authorized service).
-            serviceName: "#gpiic-oauth2-privacySettings-serviceName",
-            authDecisionId: "#gpiic-oauth2-privacySettings-authDecisionId",
-            oauth2ClientId: "#gpiic-oauth2-privacySettings-oauth2ClientId",
+            serviceName: ".gpiic-oauth2-privacySettings-serviceName",
+            authDecisionId: ".gpiic-oauth2-privacySettings-authDecisionId",
+            oauth2ClientId: ".gpiic-oauth2-privacySettings-oauth2ClientId",
             removeDecisionDialog: ".gpiic-oauth2-privacySettings-removeDecision-dialog",
             removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
             editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog",
@@ -289,8 +287,7 @@ var gpii = gpii || {};
     };
 
     gpii.oauth2.privacySettings.removeDecision = function (dialog, url, type, authDecisionId, removalSuccessEvt) {
-        $.ajax({
-            url: url + "/" + authDecisionId,
+        gpii.oauth2.ajax(url + "/" + authDecisionId, {}, {
             type: type,
             success: function () {
                 removalSuccessEvt.fire(authDecisionId);
