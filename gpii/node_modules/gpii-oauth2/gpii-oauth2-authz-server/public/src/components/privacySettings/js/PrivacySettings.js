@@ -41,14 +41,6 @@ var gpii = gpii || {};
                 url: "src/core/available-authorized-preferences/%clientID.json"
             }
         },
-        members: {
-            // Keep track of tooltips created for edit and remove buttons.
-            // The tracked object elements are in pair of the button id and its tooltip component.
-            tooltips: {
-                editButtons: {},
-                removeButtons: {}
-            }
-        },
         components: {
             editPrivacySettingsDialog: {
                 type: "gpii.oauth2.editPrivacySettingsDialog",
@@ -255,15 +247,6 @@ var gpii = gpii || {};
         };
     };
 
-    gpii.oauth2.privacySettings.trackTooltips = function (buttons, tooltipOptions, trackElement) {
-        fluid.each(buttons, function (button) {
-            var buttonId = fluid.allocateSimpleId(button);
-            var tooltip = fluid.tooltip(button, tooltipOptions);
-
-            fluid.set(trackElement, buttonId, tooltip);
-        });
-    };
-
     gpii.oauth2.privacySettings.createTooltips = function (that) {
         var editButtons = that.locate("editButton");
         var removeButtons = that.locate("removeButton");
@@ -271,8 +254,12 @@ var gpii = gpii || {};
         var tooltipOptionsForEdit = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.editLabel});
         var tooltipOptionsForRemove = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.removeLabel});
 
-        gpii.oauth2.privacySettings.trackTooltips(editButtons, tooltipOptionsForEdit, that.tooltips.editButtons);
-        gpii.oauth2.privacySettings.trackTooltips(removeButtons, tooltipOptionsForRemove, that.tooltips.removeButtons);
+        fluid.each(editButtons, function (thisEditButton) {
+            fluid.tooltip(thisEditButton, tooltipOptionsForEdit);
+        });
+        fluid.each(removeButtons, function (thisRemoveButton) {
+            fluid.tooltip(thisRemoveButton, tooltipOptionsForRemove);
+        });
     };
 
     gpii.oauth2.privacySettings.popupDialogForRemoval = function (evt, that) {
