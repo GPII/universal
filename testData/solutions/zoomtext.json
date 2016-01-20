@@ -8,11 +8,11 @@
                 }
             ]
         },
-        "settingsHandlers": [
-            {
+        "settingsHandlers": {
+            "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": "C:\\Program Files (x86)\\ZoomText 10.1\\Config\\users\\user\\zten-US.zxc"
+                    "filename": "..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextSettings.ini"
                 },
                 "capabilities": [
                     "applications.com\\.aisquared\\.zoomtext.id",
@@ -21,44 +21,44 @@
                     "display.screenEnhancement.magnification",
                     "-provisional-general.-provisional-volume"
                 ],
-
                 "capabilitiesTransformations": {
-                    "ZoomText\\.ZoomOn": "http://registry\\.gpii\\.net/common/magnifierEnabled",
-                    "PRIMARY\\.magPower": "http://registry\\.gpii\\.net/common/magnification",
-                    "ZT English, United States  (Paul) Speech - Screen Reader\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "ZT English, United States  (Paul) Speech - Screen Reader\\.Volume": "http://registry\\.gpii\\.net/common/volume",
-                    "ZT English, United States  (Paul) Speech - Screen Reader\\.Muted": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/speechEnabled",
-                            "options": {
-                                "on": {
-                                    "outputValue": 0
-                                },
-                                "off": {
-                                    "outputValue": 1
-                                }
-                            }
-                        }
-                    }
+                    "Enabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "Magnification": "http://registry\\.gpii\\.net/common/magnification",
+                    "Speed": "http://registry\\.gpii\\.net/common/speechRate",
+                    "Volume": "http://registry\\.gpii\\.net/common/volume"
                 }
             }
+        },
+        "configure": [
+            "settings.configuration1"
         ],
-        "lifecycleManager": {
-            "start": [
-                "setSettings",
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "\"C:\\Program Files (x86)\\ZoomText 10.1\\Zt.exe\""
-                }
-            ],
-            "stop": [
-                {
-                    "type": "gpii.launch.exec",
-                    "command": "${{environment}.SystemRoot}\\System32\\taskkill.exe /f /im Zt.exe"
-                },
-                "restoreSettings"
-            ]
-        }
+        "restore": [
+            "settings.configuration1"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "\"C:\\Program Files (x86)\\ZoomText 10.1\\Zt.exe\""
+            },
+            {
+                "type": "gpii.launch.exec",
+                "command": "Wscript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextScript.js"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.killProcessByName",
+                "filename": "Zt.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v10.1\\StartExe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
+        ]
     }
 }

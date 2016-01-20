@@ -32,14 +32,13 @@ gpii.tests.windows.zoomtext = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "ZoomText.ZoomOn": 1,
-                            "ZT English, United States  (Paul) Speech - Screen Reader.Rate": 100,
-                            "ZT English, United States  (Paul) Speech - Screen Reader.Volume": 50,
-                            "ZT English, United States  (Paul) Speech - Screen Reader.Muted": 0,
-                            "PRIMARY.magPower": 300
+                            "Enabled": 1,
+                            "Speed": 50,
+                            "Volume": 100,
+                            "Magnification": 1
                         },
                         "options": {
-                            "filename": "C:\\Program Files (x86)\\ZoomText 10.1\\Config\\users\\user\\zten-US.zxc"
+                            "filename": "..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextSettings.ini"
                         }
                     }
                 ]
@@ -62,14 +61,13 @@ gpii.tests.windows.zoomtext = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "ZoomText.ZoomOn": 1,
-                            "ZT English, United States  (Paul) Speech - Screen Reader.Rate": 100,
-                            "ZT English, United States  (Paul) Speech - Screen Reader.Volume": 50,
-                            "ZT English, United States  (Paul) Speech - Screen Reader.Muted": 0,
-                            "PRIMARY.magPower": 300
+                            "Enabled": 1,
+                            "Speed": 50,
+                            "Volume": 100,
+                            "Magnification": 1
                         },
                         "options": {
-                            "filename": "C:\\Program Files (x86)\\ZoomText 10.1\\Config\\users\\user\\zten-US.zxc"
+                            "filename": "..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextSettings.ini"
                         }
                     }
                 ]
