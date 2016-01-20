@@ -26,4 +26,5 @@ module.exports = [
     "windows/windows-maavis-testSpec.js",
     "windows/windows-chrome-testSpec.js",
     "windows/windows-dynamicDeviceReporter-testSpec.js"
+    "windows/windows-zoomtext-testSpec.js"
 ];
