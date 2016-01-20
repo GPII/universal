@@ -65,7 +65,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     fluid.defaults("gpii.tests.oauth2.privacySettings.trackTooltips", {
-        gradeNames: ["fluid.component"],
+        gradeNames: ["fluid.component", "fluid.resolveRootSingle"],
+        singleRootType: "gpii.tests.oauth2.privacySettings.trackTooltips",
         mergePolicy: {
             tooltipListeners: "noexpand"
         },
@@ -73,13 +74,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             tooltipMap: {}
         },
         tooltipListeners: {
-            afterOpen: {
+            "onCreate.trackTooltip": {
                 funcName: "gpii.tests.oauth2.privacySettings.trackTooltip",
-                args: ["open", "{that}", "{arguments}.1", "{arguments}.2"] // event.target, tooltip
-            },
-            afterClose: {
-                funcName: "gpii.tests.oauth2.privacySettings.trackTooltip",
-                args: ["close", "{that}", "{arguments}.1", "{arguments}.2"] // event.target, tooltip
+                priority: "last",
+                args: ["{trackTooltips}", "{that}"]
             }
         },
         distributeOptions: {
@@ -89,15 +87,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     });
 
-    gpii.tests.oauth2.privacySettings.trackTooltip = function (disp, that, target, tooltip) {
-        console.log("in trackTooltip", disp, that, target, tooltip);
-
-        // var targetId = target.id;
-        // if (disp === "open") {
-        //     that.tooltipMap[targetId] = tooltip;
-        // } else {
-        //     delete that.tooltipMap[targetId];
-        // }
+    gpii.tests.oauth2.privacySettings.trackTooltip = function (that, tooltip) {
+        var id = fluid.allocateSimpleId(tooltip.container);
+        that.tooltipMap[id] = tooltip;
     };
 
     fluid.defaults("gpii.tests.oauth2.privacySettings", {
@@ -110,24 +102,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             buttonIndex: 0
         },
         events: {
-            onAddAuthorizationDialogClose: null,
-            onEditButtonFocusout: null,
-            onRemoveButtonFocusout: null
+            onAddAuthorizationDialogClose: null
         },
         listeners: {
             "onCreate.registerMockjax": {
                 listener: "gpii.tests.oauth2.privacySettings.registerMockjax",
                 priority: "first"
             },
-            "afterRender.bindFocusOut": {
-                listener: "gpii.tests.oauth2.privacySettings.bindFocusOut",
-                args: ["{that}"]
-            },
             // Override the page reload listener when a decision is successfully removed
-            "onRemovalSuccess.reload": "fluid.identity",
-            "onEditButtonFocusout.debug": {
-                listener: function () {console.log("onEditButtonFocusout fired");}
-            }
+            "onRemovalSuccess.reload": "fluid.identity"
         },
         distributeOptions: [{
             // Override the page reload listener when a service is successfully added
@@ -146,15 +129,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         }]
     });
-
-    gpii.tests.oauth2.privacySettings.bindFocusOut = function (that) {
-        var buttonIndex = that.options.testData.buttonIndex,
-            editButtons = that.locate("editButton"),
-            removeButtons = that.locate("removeButton");
-
-        $(editButtons[buttonIndex]).focusout(that.events.onEditButtonFocusout.fire);
-        $(removeButtons[buttonIndex]).focusout(that.events.onRemoveButtonFocusout.fire);
-    };
 
     gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettingsDialog", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
 
@@ -176,7 +150,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         modules: [{
             name: "Initialization",
             tests: [{
-                expect: 11,
+                expect: 15,
                 name: "Verify the initial rendering and component states",
                 sequence: [{
                     func: "{privacySettings}.refreshView"
@@ -185,9 +159,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     args: ["{privacySettings}"],
                     priority: "last",
                     event: "{privacySettings}.events.afterRender"
-                }, {
-                    func: "gpii.tests.oauth2.privacySettings.triggerButtonEvt",
-                    args: ["{privacySettings}", "editButton", "{privacySettings}.options.testData.buttonIndex", "focus"]
                 }]
             }]
         }, {
@@ -274,6 +245,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu"]);
         jqUnit.assertFalse("The add service menu is initially closed", that.addServiceMenu.model.isMenuOpen);
         jqUnit.assertFalse("The selected css class is not applied to the add service container", that.locate("addService").hasClass(that.options.styles.addServiceSelected));
+
+        gpii.tests.oauth2.privacySettings.assertTooltips(that.locate("editButton"), that.tooltipMap, that.options.strings.editLabel);
+        gpii.tests.oauth2.privacySettings.assertTooltips(that.locate("removeButton"), that.tooltipMap, that.options.strings.removeLabel);
+
     };
 
     gpii.tests.oauth2.privacySettings.assertRenderedText = function (that, root, paths, method) {
@@ -291,16 +266,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
     };
 
-    gpii.tests.oauth2.privacySettings.assertTooltip = function (that, target, tooltip) {
-        console.log("assertTooltip", that, target, tooltip);
-        // fluid.each(buttons, function (button) {
-        //     var id = $(button).attr("id");
-        //     var tooltip = trackElm[id];
-        //     jqUnit.assertNotUndefined("The tooltip for the edit button " + id + " has been created", tooltip);
-        //     jqUnit.assertEquals("The tooltip content is expected", tooltipContent, tooltip.options.content);
-        // });
+    gpii.tests.oauth2.privacySettings.assertTooltips = function (buttons, tooltipMap, tooltipContent) {
+        fluid.each(buttons, function (button) {
+            var id = $(button).attr("id");
+            var tooltip = tooltipMap[id];
+            jqUnit.assertNotUndefined("The tooltip for the edit button " + id + " has been created", tooltip);
+            jqUnit.assertEquals("The tooltip content is expected", tooltipContent, tooltip.options.content);
+        });
     };
-
     gpii.tests.oauth2.privacySettings.afterAddServiceButtonClicked = function (that) {
         jqUnit.assertTrue("The add service menu is opened", that.addServiceMenu.model.isMenuOpen);
         jqUnit.assertTrue("The selected css class has been applied to the add service container", that.locate("addService").hasClass(that.options.styles.addServiceSelected));
