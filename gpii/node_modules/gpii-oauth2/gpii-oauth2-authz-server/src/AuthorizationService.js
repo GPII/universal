@@ -108,6 +108,10 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // clientId, scope
             },
+            revokeClientCredentialsToken: {
+                func: "{dataStore}.revokeClientCredentialsToken"
+                    // clientCredentialsTokenId
+            },
             savePrefs: { // TODO: This should be removed - see GPII-1521
                 funcName: "gpii.oauth2.authorizationService.savePrefs",
                 args: ["{tempPreferencesDataSource}", "{arguments}.0", "{arguments}.1"]
