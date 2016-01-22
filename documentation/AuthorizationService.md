@@ -47,7 +47,8 @@ The authorization service provides API that allows users to add, retrieve, updat
 #### getAuthForAccessToken(accessToken)
 * **description**: Get the authorization information using the access token.
 * **parameters:** 
-    * accessToken: String. The OAuth 2 access token.
+    * accessToken: String. A string representing an authorization issued to the
+client.
 * **return: (one of the below)** 
     * An object. The object contains these authorization information: the user GPII token, the client id, the user selected preferences. An example:
     ```
