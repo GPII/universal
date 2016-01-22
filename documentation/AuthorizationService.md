@@ -10,12 +10,12 @@ The authorization service provides API that allows users to add, retrieve, updat
     * userId: Number. A system generated unique number that identifies the user.
     * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
     * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
-```
-{
-    "visual-alternatives.speak-text.rate": true,
-    "increase-size.appearance.text-size": true
-}
-```
+    ```
+    {
+        "visual-alternatives.speak-text.rate": true,
+        "increase-size.appearance.text-size": true
+    }
+    ```
 * **return:** None.
 
 #### exchangeCodeForAccessToken(code, clientId, redirectUri)
@@ -115,12 +115,12 @@ The authorization service provides API that allows users to add, retrieve, updat
     * clientId: Number. A system generated unique number that identifies the client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
     * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
-```
-{
-    "visual-alternatives.speak-text.rate": true,
-    "increase-size.appearance.text-size": true
-}
-```
+    ```
+    {
+        "visual-alternatives.speak-text.rate": true,
+        "increase-size.appearance.text-size": true
+    }
+    ```
 * **return:** An authorization code.
 
 #### revokeAuthorization(userId, authDecisionId)
@@ -136,12 +136,12 @@ The authorization service provides API that allows users to add, retrieve, updat
     * userId: Number. A system generated unique number that identifies the user.
     * authDecisionId: Number. A system generated unique number that identifies the authorization decision.
     * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
-```
-{
-    "visual-alternatives.speak-text.rate": true,
-    "increase-size.appearance.text-size": true
-}
-```
+    ```
+    {
+        "visual-alternatives.speak-text.rate": true,
+        "increase-size.appearance.text-size": true
+    }
+    ```
 * **return:** None.
 
 #### userHasAuthorized(userId, clientId, redirectUri)
