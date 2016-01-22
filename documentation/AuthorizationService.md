@@ -9,11 +9,11 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
-    * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
-        "textFont": 2,
-        "contrast": "bw"
+        "visual-alternatives.speak-text.rate": true,
+        "increase-size.appearance.text-size": true
     }
     ```
 * **return:** None.
@@ -27,7 +27,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **return:** The access token if the authorization code is valid. Otherwise, return `false`.
 
 #### getAccessTokenForOAuth2ClientIdAndGpiiToken(oauth2ClientId, gpiiToken)
-* **description**: Get the access token that is assigned by the user with the matched GPII token to the client with the matched OAuth2 client id.
+* **description**: Look for an access token by OAuth 2 client id and GPII token.
 * **parameters:** 
     * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
     * gpiiToken: String. A unique string that is used to retrieve user's preferences from the [GPII Preferences Server](PreferencesServer.md).
@@ -47,8 +47,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 #### getAuthForAccessToken(accessToken)
 * **description**: Get the authorization information using the access token.
 * **parameters:** 
-    * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
-    * gpiiToken: String. A unique string that is used to retrieve user's preferences from the [GPII Preferences Server](PreferencesServer.md).
+    * accessToken: String. The OAuth 2 access token.
 * **return: (one of the below)** 
     * An object. The object contains these authorization information: the user GPII token, the client id, the user selected preferences. An example:
     ```
@@ -56,7 +55,8 @@ The authorization service provides API that allows users to add, retrieve, updat
         userGpiiToken: "carla",
         oauth2ClientId: 1,
         selectedPreferences: {
-            "textFont": 2
+            "visual-alternatives.speak-text.rate": true,
+            "increase-size.appearance.text-size": true
         }
     }
     ```
@@ -71,19 +71,20 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
 * **return:** An array of objects. Each object contains these information of an authorized client: the authorization decision id, the OAuth2 client id, the client name and user selected preferences. An example:
-    ```
-    [
-        {
-            authDecisionId: 1,
-            oauth2ClientId: "client_A",
-            clientName: "Client A",
-            selectedPreferences: {
-                "textFont": 2
-            }
-        },
-        ...
-    ]
-    ```
+```
+[
+    {
+        authDecisionId: 1,
+        oauth2ClientId: "client_A",
+        clientName: "Client A",
+        selectedPreferences: {
+            "visual-alternatives.speak-text.rate": true,
+            "increase-size.appearance.text-size": true
+        }
+    },
+    ...
+]
+```
 
 #### getSelectedPreferences(userId, authDecisionId)
 * **description**: Get the user selected preferences that is saved within the authorization decision. The function verifies the authorization decision is made by the user and not revoked.
@@ -108,16 +109,16 @@ The authorization service provides API that allows users to add, retrieve, updat
 ```
 
 #### grantAuthorizationCode(userId, clientId, redirectUri, selectedPreferences)
-* **description**: Grant Authorization Code. Find the user's authorization decision based on the user id, client id and redirect URL. If the authorization decision is found, generate, save and return an authorization code. Otherwise, generate an access token to add user's authorization decision first. 
+* **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization decision for the user, client, and redirect URI. If we do, we issue a new code for that decision. Otherwise we create a new authorization decision record and a new code.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * clientId: Number. A system generated unique number that identifies the client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
-    * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
-        "textFont": 2,
-        "contrast": "bw"
+        "visual-alternatives.speak-text.rate": true,
+        "increase-size.appearance.text-size": true
     }
     ```
 * **return:** An authorization code.
@@ -134,17 +135,17 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * authDecisionId: Number. A system generated unique number that identifies the authorization decision.
-    * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
-        "textFont": 2,
-        "contrast": "bw"
+        "visual-alternatives.speak-text.rate": true,
+        "increase-size.appearance.text-size": true
     }
     ```
 * **return:** None.
 
 #### userHasAuthorized(userId, clientId, redirectUri)
-* **description**: Check if the user has a authorization decision for the client. Return true if has, otherwise, return false.
+* **description**: Check if the user has an authorization decision for the client. Return true if has, otherwise, return false.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * clientId: Number. A system generated unique number that identifies the client.
@@ -157,7 +158,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **description**: Get the client information by using the access token that is assigned to the client.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
-   client. Access tokens are credentials used to access user selected preferences.
+   client.
 * **return:** An object. This object contains the client information. Return `undefined` when the client is not found. An example of a client object:
 ```
 {
@@ -174,7 +175,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **description**: Find whether the access token is allowed to add preferences.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
-   client. Access tokens are credentials used to access user selected preferences.
+   client.
 * **return:** An object. The object contains one element that has a key `allowAddPrefs` with the value `true` or `false`. An example:
 ```
 {
@@ -194,13 +195,13 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **description**: Revoke the access token.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
-   client. Access tokens are credentials used to access user selected preferences.
+   client.
 * **return:** None.
 
 #### savePrefs(preferences[, view])
-* **description**: Save user selected preferences to the server.
+* **description**: Save preferences to the preferences server.
 * **parameters:** 
-    * preferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * preferences: Object. An object containing user preferences in key-value pair. An example:
     ```
     {
         "textFont": 2,
