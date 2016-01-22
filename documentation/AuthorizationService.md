@@ -9,7 +9,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
-    * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
         "visual-alternatives.speak-text.rate": true,
@@ -114,7 +114,7 @@ The authorization service provides API that allows users to add, retrieve, updat
     * userId: Number. A system generated unique number that identifies the user.
     * clientId: Number. A system generated unique number that identifies the client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
-    * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
         "visual-alternatives.speak-text.rate": true,
@@ -135,7 +135,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * authDecisionId: Number. A system generated unique number that identifies the authorization decision.
-    * selectedPreferences: Object. An object containing user selected preferences in key-value pair. An example:
+    * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
         "visual-alternatives.speak-text.rate": true,
