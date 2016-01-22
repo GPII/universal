@@ -30,7 +30,7 @@ var fluid = fluid || require("infusion");
             codeGenerator: {
                 type: "fluid.component"
             },
-            preferencesDataSource: {
+            tempPreferencesDataSource: {
                 type: "fluid.emptySubcomponent"
             }
         }
@@ -122,7 +122,7 @@ var fluid = fluid || require("infusion");
             codeGenerator: {
                 type: "fluid.component"
             },
-            preferencesDataSource: {
+            tempPreferencesDataSource: {
                 type: "fluid.emptySubcomponent"
             }
         }
