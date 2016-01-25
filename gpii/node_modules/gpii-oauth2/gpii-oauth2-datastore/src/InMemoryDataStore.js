@@ -158,14 +158,9 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.clientCredentialsTokens", "{that}.applier", "{arguments}.0"]
                     // clientCredentialsTokenId
             },
-            findClientByClientCredentialsAccessToken: {
-                funcName: "gpii.oauth2.dataStore.findClientByClientCredentialsAccessToken",
+            findAuthForClientCredentialsAccessToken: {
+                funcName: "gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken",
                 args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0"]
-                    // accessToken
-            },
-            findClientCredentialsTokenPrivs: {
-                funcName: "gpii.oauth2.dataStore.findClientCredentialsTokenPrivs",
-                args: ["{that}.model.clientCredentialsTokens", "{arguments}.0"]
                     // accessToken
             }
         }
@@ -406,13 +401,6 @@ var fluid = fluid || require("infusion");
         return clientCredentialsToken ? clientCredentialsToken : undefined;
     };
 
-    gpii.oauth2.dataStore.findClientCredentialsTokenPrivs = function (clientCredentialsTokens, accessToken) {
-        var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
-        return clientCredentialsToken ? {
-            allowAddPrefs: clientCredentialsToken.allowAddPrefs
-        } : undefined;
-    };
-
     gpii.oauth2.dataStore.addClientCredentialsToken = function (model, applier, clientCredentialsTokenData) {
         var clientCredentialsTokenId = model.clientCredentialsTokensIdSeq;
         applier.change("clientCredentialsTokensIdSeq", model.clientCredentialsTokensIdSeq + 1);
@@ -437,7 +425,7 @@ var fluid = fluid || require("infusion");
     };
 
     // Join clientCredentialsTokens and clients
-    gpii.oauth2.dataStore.findClientByClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
+    gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
         return clientCredentialsToken ? gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId) : clientCredentialsToken;
     };

@@ -95,12 +95,8 @@ var fluid = fluid || require("infusion");
                 func: "{dataStore}.findAuthByAccessToken"
                     // accessToken
             },
-            getClientByClientCredentialsAccessToken: {
-                func: "{dataStore}.findClientByClientCredentialsAccessToken"
-                    // accessToken
-            },
-            getClientCredentialsTokenPrivs: {
-                func: "{dataStore}.findClientCredentialsTokenPrivs"
+            getAuthForClientCredentialsAccessToken: {
+                func: "{dataStore}.findAuthForClientCredentialsAccessToken"
                     // accessToken
             },
             grantClientCredentialsAccessToken: {

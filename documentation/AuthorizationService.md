@@ -155,8 +155,8 @@ client.
 
 ###APIs for [Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
 
-#### getClientByClientCredentialsAccessToken(accessToken)
-* **description**: Get the client information by using the access token that is assigned to the client.
+#### getAuthForClientCredentialsAccessToken(accessToken)
+* **description**: Get the authorization information using the access token.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
    client.
@@ -169,18 +169,6 @@ client.
     oauth2ClientSecret: "client_secret_A",
     redirectUri: "http://example.com/callback_A",
     allowDirectGpiiTokenAccess: false
-}
-```
-
-#### getClientCredentialsTokenPrivs(accessToken)
-* **description**: Find whether the access token is allowed to add preferences.
-* **parameters:** 
-    * accessToken: String. A string representing an authorization issued to the
-   client.
-* **return:** An object. The object contains one element that has a key `allowAddPrefs` with the value `true` or `false`. An example:
-```
-{
-    allowAddPrefs: true
 }
 ```
 
