@@ -22,10 +22,10 @@
                     "-provisional-general.-provisional-volume"
                 ],
                 "capabilitiesTransformations": {
-                    "Enabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
-                    "Magnification": "http://registry\\.gpii\\.net/common/magnification",
-                    "Speed": "http://registry\\.gpii\\.net/common/speechRate",
-                    "Volume": "http://registry\\.gpii\\.net/common/volume"
+                    "ZT\\\\\\.Enabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Level": "http://registry\\.gpii\\.net/common/magnification",
+                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume": "http://registry\\.gpii\\.net/common/volume"
                 }
             }
         },

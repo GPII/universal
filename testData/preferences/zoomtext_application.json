@@ -5,10 +5,10 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
-                        "Enabled": 1,
-                        "Speed": 50,
-                        "Volume": 100,
-                        "Magnification": 1
+                        "ZT\\.Enabled": 1,
+                        "ZT\\.Speech\\.CurrentVoice\\.Rate": 50,
+                        "ZT\\.Speech\\.CurrentVoice\\.Volume": 100,
+                        "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1
                     }
                 }
             }

@@ -32,10 +32,10 @@ gpii.tests.windows.zoomtext = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "Enabled": 1,
-                            "Speed": 50,
-                            "Volume": 100,
-                            "Magnification": 1
+                            "ZT\\.Enabled": 1,
+                            "ZT\\.Speech\\.CurrentVoice\\.Rate": 50,
+                            "ZT\\.Speech\\.CurrentVoice\\.Volume": 100,
+                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1
                         },
                         "options": {
                             "filename": "..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextSettings.ini"
@@ -61,10 +61,10 @@ gpii.tests.windows.zoomtext = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "Enabled": 1,
-                            "Speed": 50,
-                            "Volume": 100,
-                            "Magnification": 1
+                            "ZT\\.Enabled": 1,
+                            "ZT\\.Speech\\.CurrentVoice\\.Rate": 50,
+                            "ZT\\.Speech\\.CurrentVoice\\.Volume": 100,
+                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1
                         },
                         "options": {
                             "filename": "..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextSettings.ini"
