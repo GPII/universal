@@ -21,10 +21,15 @@ var fluid = fluid || require("infusion");
 
     fluid.defaults("gpii.oauth2.authGrantFinder", {
         gradeNames: ["gpii.oauth2.authorizationService"],
+        components: {
+            authorizationService: {
+                type: "gpii.oauth2.authorizationService"
+            }
+        },
         invokers: {
             getGrantForAccessToken: {
                 funcName: "gpii.oauth2.authGrantFinder.getGrantForAccessToken",
-                args: ["{that}", "{arguments}.0"]
+                args: ["{that}.authorizationService", "{arguments}.0"]
                     // accessToken
             }
         }
@@ -34,9 +39,9 @@ var fluid = fluid || require("infusion");
     // This function looks up access tokens granted for both authorization code grant
     // and the client credentials grant to find the match. The different data structure
     // can be returned based on the grant type.
-    gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (that, accessToken) {
-        var authCodeResult = that.getAuthForAccessToken(accessToken);
-        var clientCredentialsResult = that.getAuthForClientCredentialsAccessToken(accessToken);
+    gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
+        var authCodeResult = authorizationService.getAuthForAccessToken(accessToken);
+        var clientCredentialsResult = authorizationService.getAuthForClientCredentialsAccessToken(accessToken);
         return authCodeResult ? authCodeResult : clientCredentialsResult;
     };
 

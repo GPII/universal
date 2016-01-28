@@ -1,5 +1,19 @@
 {
-    "type": "cloudBased.development.all.local",    
+    "type": "cloudBased.development.all.local",
+    "options": {
+        "gradeNames": "fluid.component",
+        "components": {
+            "oauth2DataStore": {
+                "type": "gpii.oauth2.inMemoryDataStore"
+            }
+        },
+        "distributeOptions": {
+            "flowManager.dispatchDataStore": {
+                "record": "{that}.oauth2DataStore",
+                "target": "{that flowManager}.oauth2DataStore"
+            }
+        }
+    },
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
         "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
