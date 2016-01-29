@@ -186,17 +186,3 @@ client.
     * accessToken: String. A string representing an authorization issued to the
    client.
 * **return:** None.
-
-#### savePrefs(preferences[, view])
-* **description**: Save preferences to the preferences server.
-* **parameters:** 
-    * preferences: Object. An object containing user preferences in key-value pair. An example:
-    ```
-    {
-        "textFont": 2,
-        "contrast": "bw"
-    }
-    ```
-    * view: String. The optional `view` parameter is to retrieve the preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to. Refer to [Preferences Server](PreferencesServer.md) for more information.
-* **return:** The pay load returned by the preferences server for saving new preferences. Refer to [Preferences Server](https://github.com/GPII/universal/blob/master/documentation/PreferencesServer.md#user-content-post-preferencesviewview) for more information.
-

@@ -150,7 +150,7 @@ var fluid = fluid || require("infusion");
             },
             addClientCredentialsToken: {
                 funcName: "gpii.oauth2.dataStore.addClientCredentialsToken",
-                args: ["{that}.model", "{that}.applier", "{arguments}.0", "{that}"]
+                args: ["{that}.model", "{that}.applier", "{arguments}.0"]
                     // clientCredentialsTokenData
             },
             revokeClientCredentialsToken: {
@@ -160,7 +160,7 @@ var fluid = fluid || require("infusion");
             },
             findAuthForClientCredentialsAccessToken: {
                 funcName: "gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken",
-                args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0", "{that}"]
+                args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0"]
                     // accessToken
             }
         }
@@ -401,7 +401,7 @@ var fluid = fluid || require("infusion");
         return clientCredentialsToken ? clientCredentialsToken : undefined;
     };
 
-    gpii.oauth2.dataStore.addClientCredentialsToken = function (model, applier, clientCredentialsTokenData, that) {
+    gpii.oauth2.dataStore.addClientCredentialsToken = function (model, applier, clientCredentialsTokenData) {
         var clientCredentialsTokenId = model.clientCredentialsTokensIdSeq;
         applier.change("clientCredentialsTokensIdSeq", model.clientCredentialsTokensIdSeq + 1);
         var clientCredentialsToken = {
@@ -413,8 +413,6 @@ var fluid = fluid || require("infusion");
         };
         model.clientCredentialsTokens.push(clientCredentialsToken);
         applier.change("clientCredentialsTokens", model.clientCredentialsTokens);
-        console.log("---- in addClientCredentialsToken, that.id", that.id);
-        console.log("---- in addClientCredentialsToken, clientCredentialsTokens", model.clientCredentialsTokens);
         return clientCredentialsToken;
     };
 
@@ -427,9 +425,7 @@ var fluid = fluid || require("infusion");
     };
 
     // Join clientCredentialsTokens and clients
-    gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken, that) {
-        console.log("==== in findAuthForClientCredentialsAccessToken, that.id", that.id);
-        console.log("==== in findAuthForClientCredentialsAccessToken, clientCredentialsTokens", clientCredentialsTokens);
+    gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
         return clientCredentialsToken ? gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId) : clientCredentialsToken;
     };

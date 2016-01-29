@@ -1,7 +1,6 @@
 {
     "type": "cloudBased.development.all.local",
     "options": {
-        "gradeNames": "fluid.component",
         "components": {
             "oauth2DataStore": {
                 "type": "gpii.oauth2.inMemoryDataStore"
@@ -9,8 +8,12 @@
         },
         "distributeOptions": {
             "flowManager.dispatchDataStore": {
-                "record": "{that}.oauth2DataStore",
-                "target": "{that flowManager}.oauth2DataStore"
+                "record": "{cloudBased.development.all.local}.oauth2DataStore",
+                "target": "{that flowManager}.options.components.oauth2DataStore"
+            },
+            "preferencesServer.dispatchDataStore": {
+                "record": "{cloudBased.development.all.local}.oauth2DataStore",
+                "target": "{that preferencesServer}.options.components.dataStore"
             }
         }
     },

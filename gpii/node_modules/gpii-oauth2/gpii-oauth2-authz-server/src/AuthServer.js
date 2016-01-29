@@ -23,7 +23,6 @@ var LocalStrategy = require("passport-local").Strategy;
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;
 
 var fluid = require("infusion");
-var $ = fluid.registerNamespace("jQuery");
 
 require("../../gpii-oauth2-datastore");
 require("../../gpii-oauth2-utilities");
@@ -546,35 +545,4 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
-    // TODO: This endpoint needs to be moved into the prefs server, reimplemented in Kettle, and the extra prefsDataSource in AuthorizationService.js removed - see GPII-1521
-    // that.expressApp.post("/add-preferences",
-    //     function (req, res) {
-    //         var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
-    //         if (!accessToken) {
-    //             res.sendStatus(401);
-    //         } else {
-    //             var auth = that.authorizationService.getAuthForClientCredentialsAccessToken(accessToken);
-    //             if (!auth) {
-    //                 res.sendStatus(404);
-    //             } else if (!auth.allowAddPrefs) {
-    //                 res.sendStatus(401);
-    //             } else {
-    //                 var savePrefsPromise = that.authorizationService.savePrefs(req.body, req.query.view);
-    //                 savePrefsPromise.then(function (data) {
-    //                     res.json(data);
-    //                 }, function (err) {
-    //                     console.log("GOT SAVE ERROR ", err);
-    //                     var error = $.extend(err, {
-    //                         message: "Error when saving preferences: " + err.message
-    //                     });
-    //                     if (!res.headersSent) {
-    //                         res.status(500).json(error);
-    //                     } else {
-    //                         fluid.log(fluid.logLevel.WARN, "Unable to send error response ", error, " since status " + res.statusCode + " has already been set ");
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //     }
-    // );
 };

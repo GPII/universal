@@ -30,17 +30,6 @@ var fluid = fluid || require("infusion");
             },
             codeGenerator: {
                 type: "gpii.oauth2.codeGenerator"
-            },
-            tempPreferencesDataSource: { // TODO: This should be removed - see GPII-1521
-                type: "kettle.dataSource.URL",
-                options: {
-                    url: "{authorizationService}.options.urls.preferencesPost",
-                    termMap: {
-                        view: "%view"
-                    },
-                    writable: true,
-                    writeMethod: "POST"
-                }
             }
         },
         invokers: {
@@ -107,11 +96,6 @@ var fluid = fluid || require("infusion");
             revokeClientCredentialsToken: {
                 func: "{dataStore}.revokeClientCredentialsToken"
                     // clientCredentialsTokenId
-            },
-            savePrefs: { // TODO: This should be removed - see GPII-1521
-                funcName: "gpii.oauth2.authorizationService.savePrefs",
-                args: ["{tempPreferencesDataSource}", "{arguments}.0", "{arguments}.1"]
-                    // preferences, preferences, view
             }
         }
     });
@@ -232,11 +216,6 @@ var fluid = fluid || require("infusion");
         }
 
         return clientCredentialsToken.accessToken;
-    };
-
-    gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, view) {
-        view = view || "";
-        return preferencesDataSource.set({"view": view}, preferences);
     };
 
 })();
