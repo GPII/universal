@@ -160,15 +160,11 @@ client.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
    client.
-* **return:** An object. This object contains the client information. Return `undefined` when the client is not found. An example of a client object:
+* **return:** An object. This object contains the authorization information for the client. Return `undefined` when the client is not found. An example of a return:
 ```
 {
-    id: 1,
-    name: "Client A",
     oauth2ClientId: "client_id_A",
-    oauth2ClientSecret: "client_secret_A",
-    redirectUri: "http://example.com/callback_A",
-    allowDirectGpiiTokenAccess: false
+    allowAddPrefs: true
 }
 ```
 

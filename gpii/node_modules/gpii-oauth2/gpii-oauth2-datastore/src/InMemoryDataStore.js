@@ -427,6 +427,14 @@ var fluid = fluid || require("infusion");
     // Join clientCredentialsTokens and clients
     gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
-        return clientCredentialsToken ? gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId) : clientCredentialsToken;
+        if (!clientCredentialsToken) {
+            return undefined;
+        } else {
+            var client = gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId);
+            return {
+                oauth2ClientId: client.oauth2ClientId,
+                allowAddPrefs: client.allowAddPrefs
+            };
+        }
     };
 })();

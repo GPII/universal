@@ -158,11 +158,7 @@ var fluid = fluid || require("infusion");
         jqUnit.test("Client credentials grant, getGrantForAccessToken() returns authorization info", function () {
             var authGrantFinder = gpii.tests.oauth2.authGrantFinderWithTestData();
             var expected = {
-                id: 3,
-                name: "First Discovery",
                 oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
-                oauth2ClientSecret: "client_secret_firstDiscovery",
-                allowDirectGpiiTokenAccess: false,
                 allowAddPrefs: true
             };
             var info = authGrantFinder.getGrantForAccessToken("firstDiscovery_access_token");
