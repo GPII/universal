@@ -1,17 +1,81 @@
 var fs = new ActiveXObject("Scripting.FileSystemObject");
 var Wshell = WScript.CreateObject("WScript.Shell");
+var ZT;
 
 // Function to remove whitespaces at the beginning and end of a string
 function trim(word){
 	return word.replace(/^\s+|\s+$/,"");
 }
 
+//Function to center the mouse and move the primary window to the mouse
+function CenterMouse(){
+	var point = ZT.CreateObject("Point");
+	point.Set(ZT.Magnification.PrimaryWindow.Location.Right/2, ZT.Magnification.PrimaryWindow.Location.Bottom/2);
+	ZT.Mouse.Location = point;
+	ZT.Magnification.PrimaryWindow.ViewToMouse();
+}
+
 // Set up array of settings
 var allSettings = [
 	"ZT.Magnification.PrimaryWindow.Power.Level",
+	"ZT.Magnification.PrimaryWindow.Power.Increase",
+	"ZT.Magnification.PrimaryWindow.Power.Decrease",
+	"ZT.Magnification.PrimaryWindow.Enabled",
+	"ZT.Magnification.PrimaryWindow.Type",
+	"ZT.Magnification.CaretEnhancements.Enabled",
+	"ZT.Magnification.CaretEnhancements.Scheme",
+	"ZT.Magnification.CaretEnhancements.Location",
+	"ZT.Magnification.CaretEnhancements.Visible",
+	"ZT.Magnification.ColorEnhancements.Scheme",
+	"ZT.Magnification.ColorEnhancements.Enabled",
+	"ZT.Magnification.DualMonitor.Enabled",
+	"ZT.Magnification.DualMonitor.Mode",
+	"ZT.Magnification.FocusEnhancements.Enabled",
+	"ZT.Magnification.FocusEnhancements.Scheme",
+	"ZT.Magnification.FontEnhancements.Type",
+	"ZT.Magnification.FreezeUsesPrimaryPower",
+	"ZT.Magnification.Tracking.AlertsEnabled",
+	"ZT.Magnification.Tracking.ControlsEnabled",
+	"ZT.Magnification.Tracking.MenusEnabled",
+	"ZT.Magnification.Tracking.MousePointerEnabled",
+	"ZT.Magnification.Tracking.TextCursorEnabled",
+	"ZT.Magnification.Tracking.ToolTipsEnabled",
+	"ZT.Magnification.Tracking.WindowsEnabled",
+	"ZT.Magnification.ViewLocator.Enabled",
+	"ZT.Magnification.ScreenHighlight.Color",
+	"ZT.Magnification.ScreenHighlight.Enabled",
+	"ZT.Magnification.ScreenHighlight.Invert",
+	"ZT.Magnification.ScreenHighlight.Mode",
+	"ZT.Magnification.ScreenHighlight.Timeout",
+	"ZT.Magnification.ScreenHighlight.Location",
+	"ZT.Magnification.ScreenHighlight.Padding",
+	"ZT.Magnification.ScreenHighlight.Shape",
+	"ZT.Magnification.ScreenHighlight.Thickness",
+	"ZT.Magnification.ScreenHighlight.Transparency",
+	"ZT.Magnification.PointerEnhancements.Enabled",
+	"ZT.Magnification.PointerEnhancements.Scheme",
+	"ZT.Magnification.CCTV.Enabled",
+	"ZT.Speech.CurrentVoice.Active",
+	"ZT.Speech.CurrentVoice.Mute",
+	"ZT.Speech.CurrentVoice.Pitch",
 	"ZT.Speech.CurrentVoice.Rate",
 	"ZT.Speech.CurrentVoice.Volume",
-	"ZT.Enabled"
+	"ZT.Speech.CurrentVoice.SpellMode",
+	"ZT.Speech.CurrentVoice.SpeakImmediate",
+	"ZT.Speech.CurrentVoice.AllowInterrupt",
+	"ZT.Reader.MouseEcho.Mode",
+	"ZT.Reader.MouseEcho.Scope",
+	"ZT.Reader.MouseEcho.Time",
+	"ZT.Reader.TypingEcho.Mode",
+	"ZT.Reader.Verbosity.Level",
+	"ZT.Reader.ProgramEcho.AlertsEnabled",
+	"ZT.Reader.ProgramEcho.ControlsEnabled",
+	"ZT.Reader.ProgramEcho.MenusEnabled",
+	"ZT.Reader.ProgramEcho.TextCursorEchosLines",
+	"ZT.Reader.ProgramEcho.TextCursorEnabled",
+	"ZT.Reader.ProgramEcho.TooltipsEnabled",
+	"ZT.Reader.ProgramEcho.WindowTitlesEnabled",
+	"CenterMouse"
 ]
 
 // Check if ZoomText has created it's API, if not, keep looping until ZoomText has created it's API
@@ -27,7 +91,7 @@ while(!exist){
 			WScript.Quit(1);
 		}
 
-		var ZT = new ActiveXObject("Zoomtext.Application");
+		ZT = new ActiveXObject("Zoomtext.Application");
 		exist = true;
 	} catch(e){
 		if((e.number & 0xFFFF) == 429){
@@ -50,7 +114,15 @@ while(!file.AtEndOfStream){
 	var value = trim(arr[1]);
 	for(var i = 0, j = allSettings.length; i < j; i++){
 		if(key == allSettings[i]){
-			eval(key + " =" + value);
+			if(value == "executeFunction"){
+				// To execute functions
+				eval(key + "();");
+				break;
+			}
+			else{
+				// Set settings value
+				eval(key + " =" + value);
+			}
 			break;
 		}
 	}

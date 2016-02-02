@@ -8,7 +8,9 @@
                         "ZT\\.Enabled": 1,
                         "ZT\\.Speech\\.CurrentVoice\\.Rate": 50,
                         "ZT\\.Speech\\.CurrentVoice\\.Volume": 100,
-                        "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1
+                        "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1,
+                        "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": "executeFunction",
+                        "CenterMouse": "executeFunction"
                     }
                 }
             }
