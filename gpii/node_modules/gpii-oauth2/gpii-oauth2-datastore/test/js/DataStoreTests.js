@@ -562,7 +562,11 @@ var fluid = fluid || require("infusion");
             jqUnit.assertUndefined("non-existing token returns undefined", client);
 
             var retrieved = dataStore.findAuthForClientCredentialsAccessToken(gpii.tests.oauth2.dataStore.testdata.clientCredentialsToken1.accessToken);
-            gpii.tests.oauth2.dataStore.verifyClientD(retrieved);
+            var expected = {
+                oauth2ClientId: "client_id_D",
+                allowAddPrefs: true
+            };
+            jqUnit.assertDeepEq("The retrieved auth information is expected", expected, retrieved);
 
             dataStore.revokeClientCredentialsToken(clientCredentialsToken.id);
 

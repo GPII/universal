@@ -431,10 +431,10 @@ var fluid = fluid || require("infusion");
             return undefined;
         } else {
             var client = gpii.oauth2.dataStore.findClientById(clients, clientCredentialsToken.clientId);
-            return {
+            return client ? {
                 oauth2ClientId: client.oauth2ClientId,
-                allowAddPrefs: client.allowAddPrefs
-            };
+                allowAddPrefs: clientCredentialsToken.allowAddPrefs
+            } : undefined;
         }
     };
 })();

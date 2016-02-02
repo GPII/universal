@@ -150,7 +150,7 @@ var fluid = fluid || require("infusion");
                 oauth2ClientId: "client_id_A",
                 userGpiiToken: "bob_gpii_token",
                 selectedPreferences: { "": true }
-            }
+            };
             var info = authGrantFinder.getGrantForAccessToken("bob_A_access_token");
             jqUnit.assertDeepEq("The returned authorization info is expected", expected, info);
         });
