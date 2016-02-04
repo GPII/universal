@@ -307,7 +307,7 @@ There are two important things to note here:
 
 #### POST /add-preferences/[?view=:view]
 
-This is used to post new preferences to the Preferences Server using the [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant). 
+This is used to post new preferences to the Preferences Server using the [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant). The use of this end point requires the collaboration of the Flow Manager and the Preferences Server. The Flow Manager is responsible of generating and returning the access token, while the Preference Server verifies the access token and add new preferences. See [Cloud Based Server Configuratoin](../gpii/configs/cloudBased.development.all.local.json) for how to config the Flow Manager and the Preferences Server.
 
 Before using this request, users needs to `POST` to `/access-token` end point to request an access token. The access token is then be provided in an "Authorization" header when sending a `POST` request to `/add-preferences`.
 
@@ -325,7 +325,7 @@ Below is an example for a post query to the following url (given that [a Cloud B
 
 `http://flowmanager.gpii.net/access-token`
 
-**Note:** See [GPII OAuth2 Guide, `/access-token`](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Step_1:_Request_an_access_token) about the parameters to be sent in the post body and the response to be received.
+**Note:** See [GPII OAuth2 Guide, `/access-token`](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Step_1:_Request_an_access_token) for the parameters to be sent in the post body and the response to be received.
 
 **Step 2:** Use the access token received at the step above to add preferences. 
 
@@ -333,7 +333,7 @@ Below is an example for a post query to the following url (given that a Preferen
 
 `http://preferences.gpii.net/add-preferences/?view=flat`
 
-**Note:** See [GPII OAuth2 Guide, `/add-preferences`](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Step_1:_Request_an_access_token) about the data to be sent in headers and the post body as well as the response to be received.
+**Note:** See [GPII OAuth2 Guide, `/add-preferences`](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Step_1:_Request_an_access_token) for the data to be sent in headers and the post body as well as the response to be received.
 
 ### Other relevant documentation:
 
