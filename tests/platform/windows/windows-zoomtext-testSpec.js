@@ -35,7 +35,9 @@ gpii.tests.windows.zoomtext = [
                             "ZT\\.Enabled": 1,
                             "ZT\\.Speech\\.CurrentVoice\\.Rate": 50,
                             "ZT\\.Speech\\.CurrentVoice\\.Volume": 100,
-                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1
+                            "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1,
+                            "increaseMagnification": "executeFunction",
+                            "CenterMouse": "executeFunction"
                         },
                         "options": {
                             "filename": "..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextSettings.ini"
@@ -47,6 +49,11 @@ gpii.tests.windows.zoomtext = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq zt.exe\" | find /I \"zt.exe\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"
+            },
+            {
+                "command": "CScript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextTest.js //Nologo",
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }

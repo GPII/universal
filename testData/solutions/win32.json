@@ -47,6 +47,10 @@
         ],
         "stop": [
             {
+                "type": "gpii.launch.exec",
+                "command": "Wscript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextScript.js restore"
+            },
+            {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "Zt.exe"
             }
