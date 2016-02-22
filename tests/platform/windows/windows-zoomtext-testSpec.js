@@ -85,6 +85,11 @@ gpii.tests.windows.zoomtext = [
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq zt.exe\" | find /I \"zt.exe\" /C",
                 "expectConfigured": "1",
                 "expectRestored": "0"
+            },
+            {
+                "command": "CScript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextTest.js //Nologo",
+                "expectConfigured": "1",
+                "expectRestored": "0"
             }
         ]
     }

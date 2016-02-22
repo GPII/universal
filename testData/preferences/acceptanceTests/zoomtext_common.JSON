@@ -7,7 +7,9 @@
                     "http://registry.gpii.net/common/speechRate": 50,
                     "http://registry.gpii.net/common/volume": 100,
                     "http://registry.gpii.net/common/magnifierEnabled": 1,
-                    "http://registry.gpii.net/common/magnification": 1
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry\\.gpii\\.net/common/increaseMagnification": "executeFunction",
+                    "http://registry\\.gpii\\.net/common/CenterMouse": "executeFunction"
                 }
             }
         }

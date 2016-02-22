@@ -80,10 +80,10 @@ var allSettings = [
 ]
 
 // Check if ZoomText has created it's API, if not, keep looping until ZoomText has created it's API
-// Script will be terminated after 1 minute (60000ms) if ZoomText API is not created
+// Script will be terminated after 1 minute (5000ms) if ZoomText API is not created
 var defTime = new Date(); // beginning time 
 var exist = false;
-var timeOut = 5000; //one minute
+var timeOut = 5000; //5 seconds
 
 while(!exist){
 	try{
@@ -107,7 +107,7 @@ while(!exist){
 }
 
 // Open the settings file
-var file = fs.OpenTextFile("zoomtextTestSettings.ini");
+var file = fs.OpenTextFile("..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextTestSettings.ini");
 
 // Compare the test cases with the actual value
 while(!file.AtEndOfStream){
@@ -117,6 +117,7 @@ while(!file.AtEndOfStream){
 	for(var i = 0, j = allSettings.length; i < j; i++){
 		if(key == allSettings[i]){
 			if(eval(key).toString() != value){
+				// Echo 0 if wrong settings
 				WScript.Echo(0);
 				WScript.Quit(0);
 			}
@@ -124,4 +125,5 @@ while(!file.AtEndOfStream){
 	}
 }
 
+// Only echo 1 if settings match
 WScript.Echo(1);

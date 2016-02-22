@@ -25,7 +25,9 @@
                     "ZT\\\\\\.Enabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Level": "http://registry\\.gpii\\.net/common/magnification",
                     "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume": "http://registry\\.gpii\\.net/common/volume"
+                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume": "http://registry\\.gpii\\.net/common/volume",
+                    "increaseMagnification": "http://registry\\.gpii\\.net/common/increaseMagnification",
+                    "CenterMouse": "http://registry\\.gpii\\.net/common/CenterMouse"
                 }
             }
         },
@@ -48,11 +50,7 @@
         "stop": [
             {
                 "type": "gpii.launch.exec",
-                "command": "Wscript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextScript.js restore"
-            },
-            {
-                "type": "gpii.windows.killProcessByName",
-                "filename": "Zt.exe"
+                "command": "START /WAIT Wscript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextScript.js restore & TASKKILL /F /IM ZT.exe"
             }
         ],
         "isInstalled": [

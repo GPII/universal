@@ -229,4 +229,3 @@ if(!restore){
 	}
 	originalSettingsFile.Close();
 }
-
