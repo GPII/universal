@@ -22,17 +22,9 @@ var gpii = gpii || {};
 (function ($, fluid) {
     "use strict";
 
-    fluid.defaults("gpii.oauth2.editPrivacySettings", {
+    fluid.defaults("gpii.oauth2.privacySettingsDialog", {
         gradeNames: ["fluid.rendererComponent"],
         requestInfos: {
-            fetchDecisionPrefs: {
-                url: "/authorizations/%authDecisionId/preferences",
-                type: "get"
-            },
-            saveDecisionPrefs: {
-                url: "/authorizations/%authDecisionId/preferences",
-                type: "put"
-            },
             fetchAvailableAuthorizedPrefs: {
                 url: "/available-authorized-preferences/%clientId",
                 type: "get"
@@ -43,10 +35,7 @@ var gpii = gpii || {};
             resizable: false,
             modal: true,
             width: 500,
-            close: function () {
-                // To restore the dialog container to the initial state for the next render.
-                $(this).dialog("destroy");
-            }
+            close: "{that}.dialogCloseHandler"
         },
         selectors: {
             title: ".gpiic-oauth2-privacySettings-editDecision-title",
@@ -74,20 +63,23 @@ var gpii = gpii || {};
             }
         },
         events: {
-            afterDecisionPrefsSet: null,
+            afterInitialSelectedPrefsSet: null,
             afterAuthorizedPrefsSet: null,
             onCreateSelectionTree: {
                 events: {
-                    "afterDecisionPrefsSet": "afterDecisionPrefsSet",
+                    "afterInitialSelectedPrefsSet": "afterInitialSelectedPrefsSet",
                     "afterAuthorizedPrefsSet": "afterAuthorizedPrefsSet",
                     "afterRender": "afterRender"
                 },
                 args: ["{that}"]
-            }
+            },
+            onDone: null,
+            onClose: null,
+            onFetchAvailableAuthorizedPrefsSuccess: null,
+            onFetchAvailableAuthorizedPrefsError: null
         },
         listeners: {
             "onCreate.fetchAuthPrefs": "{that}.fetchAvailableAuthorizedPrefs",
-            "onCreate.fetchDecisionPrefs": "{that}.fetchDecisionPrefs",
             "afterRender.setCancelButtonText": {
                 "this": "{that}.dom.cancel",
                 method: "text",
@@ -99,7 +91,7 @@ var gpii = gpii || {};
                 args: "{that}.options.strings.done"
             },
             "afterRender.openDialog": {
-                listener: "gpii.oauth2.editPrivacySettings.openDialog",
+                listener: "gpii.oauth2.privacySettingsDialog.openDialog",
                 args: ["{that}"]
             },
             "afterRender.bindCancel": {
@@ -110,8 +102,10 @@ var gpii = gpii || {};
             "afterRender.bindDone": {
                 "this": "{that}.dom.done",
                 method: "click",
-                args: "{that}.savePrefsAndExit"
-            }
+                args: "{that}.fireDone"
+            },
+            "onFetchAvailableAuthorizedPrefsSuccess.setAvailableAuthorizedPrefs": "{that}.setAvailableAuthorizedPrefs",
+            "onFetchAvailableAuthorizedPrefsError.handleFetchPrefsError": "{that}.handleFetchPrefsError"
         },
         invokers: {
             closeDialog: {
@@ -119,49 +113,23 @@ var gpii = gpii || {};
                 method: "dialog",
                 args: ["close"]
             },
-            fetchDecisionPrefs: {
-                funcName: "gpii.oauth2.ajax",
-                args: ["{that}.options.requestInfos.fetchDecisionPrefs.url", {
-                    authDecisionId: "{that}.model.clientData.authDecisionId"
-                }, {
-                    type: "{that}.options.requestInfos.fetchDecisionPrefs.type",
-                    dataType: "json",
-                    success: "{that}.setDecisionPrefs"
-                }]
-            },
-            saveDecisionPrefs: {
-                funcName: "gpii.oauth2.ajax",
-                args: ["{that}.options.requestInfos.saveDecisionPrefs.url", {
-                    authDecisionId: "{that}.model.clientData.authDecisionId"
-                }, {
-                    type: "{that}.options.requestInfos.saveDecisionPrefs.type",
-                    contentType: "application/json",
-                    data: {
-                        expander: {
-                            funcName: "JSON.stringify",
-                            args: [{
-                                expander: {
-                                    func: "{selectionTree}.toServerModel",
-                                    args: "{selectionTree}.model.selections"
-                                }
-                            }]
-                        }
-                    }
-                }]
-            },
             fetchAvailableAuthorizedPrefs: {
                 funcName: "gpii.oauth2.ajax",
                 args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
                     clientID: "{that}.model.clientData.oauth2ClientId"
                 }, {
-                    //TODO: Handle errors
                     dataType: "json",
-                    success: "{that}.setAvailableAuthorizedPrefs"
+                    success: "{that}.events.onFetchAvailableAuthorizedPrefsSuccess.fire",
+                    error: "{that}.events.onFetchAvailableAuthorizedPrefsError.fire"
                 }]
             },
             setAvailableAuthorizedPrefs: {
-                changePath: "availableAuthorizedPrefs",
-                value: "{arguments}.0"
+                funcName: "gpii.oauth2.privacySettingsDialog.setAvailableAuthorizedPrefs",
+                args: ["{that}", "{arguments}.0"]
+            },
+            handleFetchPrefsError: {
+                funcName: "fluid.fail",
+                args: ["{arguments}.0.responseText"]
             },
             composeRequestURL: {
                 funcName: "fluid.stringTemplate",
@@ -169,13 +137,17 @@ var gpii = gpii || {};
                     authDecisionId: "{that}.model.clientData.authDecisionId"
                 }]
             },
-            setDecisionPrefs: {
-                changePath: "decisionPrefs",
-                value: "{arguments}.0"
+            setInitialSelectedPrefs: {
+                funcName: "gpii.oauth2.privacySettingsDialog.setInitialSelectedPrefs",
+                args: ["{that}", "{arguments}.0"]
             },
-            savePrefsAndExit: {
-                funcName: "gpii.oauth2.editPrivacySettings.savePrefsAndExit",
-                args: ["{that}"]
+            fireDone: {
+                "this": "{that}.events.onDone",
+                method: "fire"
+            },
+            dialogCloseHandler: {
+                funcName: "gpii.oauth2.privacySettingsDialog.dialogCloseHandler",
+                args: ["{that}.dialog", "{that}.events.onClose"]
             }
         },
         model: {
@@ -186,8 +158,8 @@ var gpii = gpii || {};
             //     oauth2ClientId: xx
             // }
             clientData: null,
-            afterAuthorizedPrefsSet: null,
-            decisionPrefs: null,
+            availableAuthorizedPrefs: null,
+            initialSelectedPrefs: null,
             doneButtonEnabled: false
         },
         modelListeners: {
@@ -195,8 +167,8 @@ var gpii = gpii || {};
                 listener: "{that}.events.afterAuthorizedPrefsSet",
                 excludeSource: "init"
             },
-            "decisionPrefs": {
-                listener: "{that}.events.afterDecisionPrefsSet",
+            "initialSelectedPrefs": {
+                listener: "{that}.events.afterInitialSelectedPrefsSet",
                 excludeSource: "init"
             },
             "doneButtonEnabled": {
@@ -207,21 +179,21 @@ var gpii = gpii || {};
         components: {
             selectionTree: {
                 type: "gpii.oauth2.preferencesSelectionTree",
-                container: "{that}.dom.selection",
+                container: "{privacySettingsDialog}.dom.selection",
                 createOnEvent: "onCreateSelectionTree",
                 options: {
-                    availablePrefs: "{editPrivacySettings}.model.availableAuthorizedPrefs",
+                    availablePrefs: "{privacySettingsDialog}.model.availableAuthorizedPrefs",
                     model: {
                         selections: {
                             expander: {
                                 funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
-                                args: ["{editPrivacySettings}.model.decisionPrefs", "{editPrivacySettings}.model.availableAuthorizedPrefs"]
+                                args: ["{privacySettingsDialog}.model.initialSelectedPrefs", "{privacySettingsDialog}.model.availableAuthorizedPrefs"]
                             }
                         }
                     },
                     modelRelay: {
                         source: "{selectionTree}.model.hasSelection",
-                        target: "{editPrivacySettings}.model.doneButtonEnabled",
+                        target: "{privacySettingsDialog}.model.doneButtonEnabled",
                         backward: "never",
                         singleTransform: {
                             type: "fluid.transforms.identity"
@@ -232,7 +204,7 @@ var gpii = gpii || {};
         }
     });
 
-    gpii.oauth2.editPrivacySettings.openDialog = function (that) {
+    gpii.oauth2.privacySettingsDialog.openDialog = function (that) {
         var dialogOptions = {
             dialogClass: that.options.styles.dialogCss
         };
@@ -241,9 +213,31 @@ var gpii = gpii || {};
         that.dialog.dialog("open");
     };
 
-    gpii.oauth2.editPrivacySettings.savePrefsAndExit = function (that) {
-        that.saveDecisionPrefs();
-        that.closeDialog();
+    gpii.oauth2.privacySettingsDialog.dialogCloseHandler = function (dialog, onCloseEvt) {
+        // To restore the dialog container to the initial state for the next rendering
+        dialog.dialog("destroy");
+        // And fire close event
+        onCloseEvt.fire();
+    };
+
+    gpii.oauth2.privacySettingsDialog.setAvailableAuthorizedPrefs = function (that, availablePrefs) {
+        // fluid.isDestroyed() is to work around the issue with the IoC testing framework
+        // when this function is called by the ajax call back to set the model value, due to
+        // the asynchronous nature of ajax calls, the component itself sometimes has been
+        // destroyed which then causes javascript errors.
+        if (!fluid.isDestroyed(that)) {
+            that.applier.change("availableAuthorizedPrefs", availablePrefs);
+        }
+    };
+
+    gpii.oauth2.privacySettingsDialog.setInitialSelectedPrefs = function (that, initialSelectedPrefs) {
+        // fluid.isDestroyed() is to work around the issue with the IoC testing framework
+        // when this function is called by the ajax call back to set the model value, due to
+        // the asynchronous nature of ajax calls, the component itself sometimes has been
+        // destroyed which then causes javascript errors.
+        if (!fluid.isDestroyed(that)) {
+            that.applier.change("initialSelectedPrefs", initialSelectedPrefs);
+        }
     };
 
 })(jQuery, fluid);

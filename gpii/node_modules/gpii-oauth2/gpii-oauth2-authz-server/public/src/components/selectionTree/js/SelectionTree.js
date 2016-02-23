@@ -172,6 +172,12 @@ var gpii = gpii || {};
             "afterTemplateLoaded.addKeyboardActivation": {
                 funcName: "fluid.activatable",
                 args: ["{that}.dom.prefereces", "{that}.relayClick"]
+            },
+            // Clean up the tree view for the next rendering, as it doen't automatically
+            // emptied at the component destroy: https://issues.gpii.net/browse/GPII-1523
+            "onDestroy.emptyContainer": {
+                "this": "{that}.container",
+                method: "empty"
             }
         }
     });

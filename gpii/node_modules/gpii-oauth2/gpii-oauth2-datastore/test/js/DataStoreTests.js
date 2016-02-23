@@ -126,6 +126,13 @@ var fluid = fluid || require("infusion");
         jqUnit.assertEquals("redirectUri", "http://example.com/callback_B", client.redirectUri);
     };
 
+    gpii.tests.oauth2.dataStore.verifyClientC = function (client) {
+        jqUnit.assertEquals("name", "Client C", client.name);
+        jqUnit.assertEquals("oauth2ClientId", "client_id_C", client.oauth2ClientId);
+        jqUnit.assertEquals("oauth2ClientSecret", "client_secret_C", client.oauth2ClientSecret);
+        jqUnit.assertEquals("redirectUri", "http://example.com/callback_C", client.redirectUri);
+    };
+
     gpii.tests.oauth2.dataStore.verifyClientD = function (client) {
         jqUnit.assertEquals("name", "Client D", client.name);
         jqUnit.assertEquals("oauth2ClientId", "client_id_D", client.oauth2ClientId);
@@ -495,6 +502,15 @@ var fluid = fluid || require("infusion");
             // verify undefined
             jqUnit.assertUndefined("undefined for client without allowDirectGpiiTokenAccess",
                 dataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken("client_id_C", "alice_gpii_token"));
+        });
+
+        jqUnit.test("findAllClients returns all clients", function () {
+            var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
+            var clients = dataStore.findAllClients();
+            jqUnit.assertEquals("Expect 4 clients", 4, clients.length);
+            gpii.tests.oauth2.dataStore.verifyClientA(clients[0]);
+            gpii.tests.oauth2.dataStore.verifyClientB(clients[1]);
+            gpii.tests.oauth2.dataStore.verifyClientC(clients[2]);
         });
 
         jqUnit.test("addClientCredentialsToken(), find added token by id and client id, revoke, then find revoked token by id and client id", function () {

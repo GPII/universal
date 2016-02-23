@@ -69,6 +69,10 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.clients", "{arguments}.0"]
                     // oauth2ClientId
             },
+            findAllClients: {
+                funcName: "gpii.oauth2.dataStore.findAllClients",
+                args: ["{that}.model.clients"]
+            },
             addAuthDecision: {
                 funcName: "gpii.oauth2.dataStore.addAuthDecision",
                 args: ["{that}.model", "{that}.applier", "{arguments}.0"]
@@ -191,6 +195,10 @@ var fluid = fluid || require("infusion");
 
     gpii.oauth2.dataStore.findClientByOauth2ClientId = function (clients, oauth2ClientId) {
         return fluid.find_if(clients, function (client) { return client.oauth2ClientId === oauth2ClientId; });
+    };
+
+    gpii.oauth2.dataStore.findAllClients = function (clients) {
+        return fluid.copy(clients);
     };
 
     // Authorization Decisions
