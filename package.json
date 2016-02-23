@@ -50,7 +50,6 @@
     },
     "scripts": {
         "test": "node tests/all-tests.js",
-        "dedupe-infusion": "node -e \"require('dedupe-infusion')()\"",
-        "start": "npm run dedupe-infusion && node gpii.js"
+        "start": "node gpii.js"
     }
 }

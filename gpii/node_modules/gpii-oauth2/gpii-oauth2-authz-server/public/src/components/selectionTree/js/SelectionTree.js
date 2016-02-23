@@ -163,7 +163,7 @@ var gpii = gpii || {};
                 listener: "{that}.updateDOMFromSelectionsModel",
                 args: ["{that}.model.selections"]
             },
-            //TODO: Modify keyboard a11y to use arrows instead of tabs.
+            // TODO: Modify keyboard a11y to use arrows instead of tabs.
             // http://oaa-accessibility.org/example/41/
             "afterTemplateLoaded.makeTabbable": {
                 listener: "fluid.tabbable",
@@ -173,8 +173,8 @@ var gpii = gpii || {};
                 funcName: "fluid.activatable",
                 args: ["{that}.dom.prefereces", "{that}.relayClick"]
             },
-            // Clean up the tree view for the next rendering, as it doen't automatically
-            // emptied at the component destroy: https://issues.gpii.net/browse/GPII-1523
+            // Clean up the tree view for the next rendering, as it isn't automatically
+            // emptied at component destroy: https://issues.gpii.net/browse/GPII-1523
             "onDestroy.emptyContainer": {
                 "this": "{that}.container",
                 method: "empty"
