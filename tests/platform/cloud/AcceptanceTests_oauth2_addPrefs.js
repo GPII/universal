@@ -242,14 +242,14 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting /add-preferences (with the non-existent access token)",
+            name: "Acceptance test for suppporting /add-preferences (with an non-existent access token)",
             accessToken: "false token"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting /add-preferences (with the access token whose owner client is non-existent)",
+            name: "Acceptance test for suppporting /add-preferences (with an access token whose owner client is non-existent)",
             accessToken: "non_existent_client"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient
