@@ -1,0 +1,5 @@
+{
+    "test_page": "tests/web/html/all-tests.html",
+    "reporter": "tap",
+    "report_file": "report.tap"
+}

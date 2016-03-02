@@ -2,14 +2,18 @@
     <link rel="stylesheet" type="text/css" href="lib/infusion/src/lib/jquery/ui/css/default-theme/jquery.ui.theme.css" />
     <link rel="stylesheet" type="text/css" href="src/components/selectionTree/css/SelectionTree.css" />
     <link rel="stylesheet" type="text/css" href="src/components/selectionTree/css/SelectionTreeFoundation.css" />
-    <link rel="stylesheet" type="text/css" href="src/components/privacySettings/css/PrivacySettingsWithPrefs.css" />
+    <link rel="stylesheet" type="text/css" href="src/components/privacySettings/css/PrivacySettings.css" />
     <script type="text/javascript" src="lib/infusion/infusion-tooltip.js"></script>
+    <script type="text/javascript" src="lib/jquery.ui.menu.js"></script>
     <script type="text/javascript" src="infusion/src/framework/core/js/jquery.keyboard-a11y.js"></script>
     <script type="text/javascript" src="src/core/js/GPIIOauth2.js"></script>
     <script type="text/javascript" src="src/components/selectionTree/js/SelectionTree.js"></script>
-    <script type="text/javascript" src="src/components/privacySettings/js/EditPrivacySettings.js"></script>
-    <script type="text/javascript" src="src/components/privacySettings/js/PrivacySettingsWithPrefs.js"></script>
+    <script type="text/javascript" src="src/components/privacySettings/js/PrivacySettingsDialog.js"></script>
+    <script type="text/javascript" src="src/components/privacySettings/js/EditPrivacySettingsDialog.js"></script>
+    <script type="text/javascript" src="src/components/privacySettings/js/ServicesMenu.js"></script>
+    <script type="text/javascript" src="src/components/privacySettings/js/AddAuthorizationDialog.js"></script>
     <script type="text/javascript" src="src/components/OKCancelDialog/js/OKCancelDialog.js"></script>
+    <script type="text/javascript" src="src/components/privacySettings/js/PrivacySettings.js"></script>
 
     <title>Privacy Settings</title>
 {{/section}}
@@ -29,7 +33,7 @@
 
             <div class="gpiic-oauth2-privacySettings-description">Description</div>
             <p><strong class="gpiic-oauth2-privacySettings-directions"></strong></p>
-            <div class="gpii-oauth2-privacySettings-serviceList">
+            <div class="gpii-oauth2-privacySettings-services">
                 <ul>
                     {{#each authorizedServices}}
                         <li class="gpii-oauth2-privacySettings-service gpii-ouath2-inset-horizontal">
@@ -41,12 +45,27 @@
                                 <span class="gpii-icon gpii-icon-x-small" aria-hidden="true"></span>
                             </button>
 
-                            <input type="hidden" id="gpiic-oauth2-privacySettings-serviceName" name="serviceName" value="{{serviceName}}" />
-                            <input type="hidden" id="gpiic-oauth2-privacySettings-authDecisionId" name="authDecisionId" value="{{authDecisionId}}" />
-                            <input type="hidden" id="gpiic-oauth2-privacySettings-oauth2ClientId" name="oauth2ClientId" value="{{oauth2ClientId}}" />
+                            <input type="hidden" class="gpiic-oauth2-privacySettings-serviceName" name="serviceName" value="{{serviceName}}" />
+                            <input type="hidden" class="gpiic-oauth2-privacySettings-authDecisionId" name="authDecisionId" value="{{authDecisionId}}" />
+                            <input type="hidden" class="gpiic-oauth2-privacySettings-oauth2ClientId" name="oauth2ClientId" value="{{oauth2ClientId}}" />
                         </li>
                     {{/each}}
                 </ul>
+
+                <div class="gpiic-oauth2-privacySettings-addService">
+                    <button class="gpiic-oauth2-privacySettings-addServiceButton gpii-oauth2-privacySettings-addServiceButton">
+                        <span class="gpii-icon gpii-icon-plus-small" aria-hidden="true"></span>
+                        <strong>Add service</strong>
+                    </button>
+                    <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
+                        {{#each unauthorizedServices}}
+                            <li>
+                                <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">{{serviceName}}</a>
+                                <input type="hidden" name="oauth2ClientId" value="{{oauth2ClientId}}" />
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
             </div>
 
             <div class="gpiic-oauth2-privacySettings-removeDecision-dialog gpii-oauth2-privacySettings-removeDecision-dialog">
@@ -64,11 +83,23 @@
                     <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editDecision-done"></button>
                 </div>
             </div>
+
+            <div class="gpiic-oauth2-privacySettings-addAuthorizationDialog gpii-oauth2-privacySettings-editDecision-dialog">
+                <h3 class="gpiic-oauth2-privacySettings-editDecision-title"></h3>
+                <p class="gpiic-oauth2-privacySettings-editDecision-description"></p>
+
+                <section class="gpiic-oauth2-privacySettings-editDecision-selection gpiic-oauth2-selectionTree gpii-oauth2-selectionTree gpii-oauth2-innerPanel gpii-oauth2-scrollPanel"></section>
+
+                <div class="gpii-oauth2-privacySettings-editDecision-buttonPane">
+                    <button class="gpiic-oauth2-privacySettings-editDecision-cancel gpii-oauth2-privacySettings-editDecision-cancel"></button>
+                    <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editDecision-done"></button>
+                </div>
+            </div>
         </div>
     </section>
 
     <script>
-        gpii.oauth2.privacySettingsWithPrefs(".gpiic-oauth2-privacySettings", {
+        gpii.oauth2.privacySettings(".gpiic-oauth2-privacySettings", {
             gradeNames: ["gpii.oauth2.selectionTreeTemplate"],
             model: {
                 user: "{{username}}"
