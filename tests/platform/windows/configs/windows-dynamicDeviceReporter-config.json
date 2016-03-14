@@ -1,0 +1,6 @@
+{
+    "typeName": "acceptanceTests.windows.dynamicDeviceReporter",
+    "includes": [
+        "${universal}/tests/configs/localInstallWithDynamicDeviceReporter.json"
+    ]
+}
