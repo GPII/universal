@@ -17,7 +17,7 @@
         }]
     },
     "includes": [
-        "../node_modules/deviceReporter/configs/development.json",
+        "../node_modules/deviceReporter/configs/production.json",
         "../node_modules/flowManager/configs/development.json",
         "../node_modules/preferencesServer/configs/development.json",
         "../node_modules/solutionsRegistry/configs/development.json",
