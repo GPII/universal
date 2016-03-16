@@ -1,11 +1,12 @@
 ## Preferences Server:
 
-The preferences server currently has two APIs: one for the new style preferences and one for the  old style preferences, used for backward compatibility. The URLS are as follows: 
+The preferences server currently has three APIs: one for the new style preferences, one for [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant) and one for the old style preferences, used for backward compatibility. The URLS are as follows: 
 
 * **URL: `/preferences`**: The main URL to be used for the preferences server. Any new development should be using this URL.
+* **URL: `/add-preferences`**: The implementation of [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant) that does the security verification before adding new preferenes.
 * **URL: `/oldPreferences`**: URL for serving preferences in the format the old preferences server did. This should *only* be used by existing services to ensure they do not break. All services currently using this style of preferences should be updated to use the `/preferences` URL instead.
 
-The `/preferences` API will be described immediately below here, while the old, backward compatible URL `/oldPreferences` will be described on the [Old Preferences Server API documentation](OldPreferencesServer.md).
+The `/preferences` and `/add-preferences` API will be described immediately below here, while the old, backward compatible URL `/oldPreferences` will be described on the [Old Preferences Server API documentation](OldPreferencesServer.md).
 
 ### Description
 
@@ -303,6 +304,36 @@ There are two important things to note here:
 1. As the PUT request was made in the flat format, all the existing preferences in the flat format were replaced by the ones in the body of the PUT request. This means that a setting like _cursorAcceleration_ is no longer present in the preference set.
 
 2. In the example, we consider the ISO-24751 setting "display.screenEnhancement.fontSize" to be ontologically equivalent to http://registry.gpii.net/common/fontSize. Since we do not allow the same setting to be present multiple times in the NP set, the fontSize has been stored in the flat ontology and removed from the ISO24751 block.
+
+#### POST /add-preferences/[?view=:view]
+
+This is used to post new preferences to the Preferences Server using the [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant). The use of this end point requires the collaboration of the Flow Manager and the Preferences Server. The Flow Manager is responsible of generating and returning the access token, while the Preference Server verifies the access token and add new preferences. See [Cloud Based Server Configuratoin](../gpii/configs/cloudBased.development.all.local.json) for how to config the Flow Manager and the Preferences Server.
+
+Before using this request, users needs to `POST` to `/access-token` end point to request an access token. The access token is then be provided in an "Authorization" header when sending a `POST` request to `/add-preferences`.
+
+`/add-preferences` first ensures the access token is valid and allowed to add preferences. Then it sends [a `POST` request to `/preferences/[?view=:view]`](#user-content-post-preferencesviewview) for adding new preferences to the Preferences Server.
+
+As with other request formats in the Preferences Server, this reqeust takes an optional `view` parameter denoting the ontology of the provided settings. If no `view` is provided, the preferences will be stored and interpreted as being in the `flat` format.
+
+##### Example POST /add-preferences/[?view=:view] query
+
+An example of steps taken:
+
+**Step 1:** Request an access token by sending a `POST` request to `/access-token`. 
+
+Below is an example for a post query to the following url (given that [a Cloud Based Flow Manager](FlowManager.md) is available at flowmanager.gpii.net):
+
+`http://flowmanager.gpii.net/access-token`
+
+**Note:** See [GPII OAuth2 Guide, `/access-token`](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Step_1:_Request_an_access_token) for the parameters to be sent in the post body and the response to be received.
+
+**Step 2:** Use the access token received at the step above to add preferences. 
+
+Below is an example for a post query to the following url (given that a Preferences Server is available at preferences.gpii.net):
+
+`http://preferences.gpii.net/add-preferences/?view=flat`
+
+**Note:** See [GPII OAuth2 Guide, `/add-preferences`](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Step_1:_Request_an_access_token) for the data to be sent in headers and the post body as well as the response to be received.
 
 ### Other relevant documentation:
 

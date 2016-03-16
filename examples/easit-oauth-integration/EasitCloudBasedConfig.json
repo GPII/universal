@@ -1,13 +1,13 @@
 {
-    "typeName": "cloudBased.flowManager.development.all.local.easitDemo",
+    "type": "cloudBased.flowManager.development.all.local.easitDemo",
     "options": {
-        "gradeNames": ["fluid.littleComponent", "autoInit"],
+        "gradeNames": ["fluid.component"],
         "distributeOptions": [{
             "record": "gpii.oauth2.easitSampleDataStore",
             "target": "{that gpii.oauth2.dataStore}.options.gradeNames"
         }]
     },
-    "includes": [
+    "mergeConfigs": [
         "../../gpii/configs/cloudBased.development.all.local.json"
      ],
     "modules": [

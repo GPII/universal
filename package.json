@@ -1,32 +1,32 @@
 {
     "name": "universal",
     "description": "Cross platform, core components of the GPII personalization infrastructure.",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "author": "GPII",
     "bugs": "http://issues.gpii.net/browse/GPII",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "git://github.com/fluid-project/infusion.git#df5f8cfabf815a4086b778e73125c3c952dda4ec",
+        "infusion": "2.0.0-dev.20151211T025229Z.eabb4fc",
         "dedupe-infusion": "1.0.0",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "~1.4.0",
         "semver": "~1.1.4",
         "xml-mapping": "~1.2.0",
-        "kettle": "git://github.com/fluid-project/kettle.git#ef796237b7b157df6837a970a8b798370ef14144",
+        "kettle": "git://github.com/amb26/kettle.git#ea93d243bba32a9f7a98de43dafa651a874ef57c",
 
-        "express": "~3.4.3",
-        "body-parser": "^1.9.2",
+        "express": "~4.13.3",
+        "body-parser": "~1.13.3",
         "connect-ensure-login": "^0.1.1",
         "express-handlebars": "^1.1.0",
-        "express-session": "^1.9.1",
+        "express-session": "~1.11.3",
         "oauth2orize": "^1.0.1",
         "passport": "^0.2.1",
         "passport-local": "^1.0.0",
         "passport-oauth2-client-password": "^0.1.2"
     },
     "devDependencies": {
-        "jqUnit": "git://github.com/fluid-project/node-jqUnit.git#e2083fba5404c8e7a474712102871150c037e20b",
-        "grunt": "~0.4.4",
+        "node-jqunit": "1.1.4",
+        "grunt": "~0.4.5",
         "grunt-shell": "0.6.4",
         "grunt-contrib-jshint": "~0.9.0",
         "grunt-jsonlint": "1.0.4",
@@ -46,11 +46,10 @@
     "repository": "git://github.com/GPII/universal.git",
     "main": "./index.js",
     "engines": {
-        "node": ">=0.8.0"
+        "node": ">=4.2.1"
     },
     "scripts": {
         "test": "node tests/all-tests.js",
-        "dedupe-infusion": "node -e \"require('dedupe-infusion')()\"",
-        "start": "npm run dedupe-infusion && node gpii.js"
+        "start": "node gpii.js"
     }
 }

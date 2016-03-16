@@ -1,0 +1,24 @@
+{
+    "type": "gpii.tests.acceptance.untrusted.browserChannel.config",
+    "options": {
+        "mainServerPort": 8081,
+        "distributeOptions": {
+            "browserChannel.tests.deviceReporter": {
+                "record": "%flowManager/test/data/browserChannel_deviceReporter.json",
+                "target": "{that localConfig deviceReporter installedSolutionsDataSource}.options.path",
+                "priority": "after:development.installedSolutionsPath"
+            },
+            "browserChannel.tests.solutions": {
+                "record": "%flowManager/test/data/browserChannel_solutionsRegistry.json",
+                "target": "{that flowManager solutionsRegistryDataSource}.options.path",
+                "priority": "after:flowManager.development.solutions"
+            },        
+            "browserChannel.tests.rawPreferences": {
+                "record": "%flowManager/test/data/%userToken.json",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
+                "priority": "after:development.rawPreferencesDataSource"
+            }
+        }            
+    },
+    "mergeConfigs": "%universal/gpii/configs/untrusted.development.all.local.json"
+}

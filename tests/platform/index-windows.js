@@ -24,6 +24,6 @@ module.exports = [
     "windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
     "windows/windows-maavis-testSpec.js",
-    "windows/windows-chrome-testSpec.js",
-    "windows/windows-dynamicDeviceReporter-testSpec.js"
+    "windows/windows-chrome-testSpec.js"
+//    "windows/windows-dynamicDeviceReporter-testSpec.js" // this is waiting for https://github.com/GPII/windows/pull/66/files to be finished
 ];

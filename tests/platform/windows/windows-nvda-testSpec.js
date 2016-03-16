@@ -138,7 +138,7 @@ gpii.tests.windows.nvda = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.nvda",
-    configName: "windows-nvda-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.windows.nvda.config",
+    configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

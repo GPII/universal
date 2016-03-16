@@ -22,7 +22,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.orca");
 
-gpii.tests.linux.orca = [
+gpii.tests.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
         userToken: "screenreader_common",
@@ -134,8 +134,8 @@ gpii.tests.linux.orca = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.linux.orca",
-    configName: "linux-orca-config",
-    configPath: "configs"
+    testDefs:  "gpii.tests.linux.orca.testDefs",
+    configName: "gpii.tests.acceptance.linux.orca.config",
+    configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);

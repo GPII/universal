@@ -17,30 +17,28 @@
 "use strict";
 
 var fluid = require("infusion"),
-    path = require("path"),
-    configPath = path.resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
-    $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
 
-require("../index.js");
-require("./UserLogonStateChangeTestDefs.js");
+fluid.require("%universal");
+
+require("./shared/UserLogonStateChangeTestDefs.js");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.userLogonStateChange");
 
-gpii.tests.untrusted.userLogonStateChange.testDefs = [];
-
-fluid.each(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
-    gpii.tests.untrusted.userLogonStateChange.testDefs.push($.extend(true, {}, testDef, {
-        config: {
-            configName: "untrusted.development.all.local",
-            configPath: configPath
-        },
-        gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
-        userToken: gpii.tests.userLogonStateChange.userToken
-    }));
-});
+gpii.tests.untrusted.userLogonStateChange.testDefs =
+    fluid.transform(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
+            return fluid.extend(true, {}, testDef, {
+                config: {
+                    configName: "untrusted.development.all.local",
+                    configPath: "%universal/gpii/configs"
+                },
+                gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
+                userToken: gpii.tests.userLogonStateChange.userToken
+            });
+        });
+    
 
 kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonStateChange.testDefs);

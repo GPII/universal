@@ -1,5 +1,5 @@
 /*
- * GPII Tests to ensure that failing device reporter is handled properly
+ * GPII Tests to ensure that failing preferences source is handled properly
  *
  * Copyright 2015 Raising the FLoor - International
  *
@@ -17,8 +17,6 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
-    configPath = require("path").resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
@@ -28,66 +26,64 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 
-gpii.tests.preferencesServerErrorTests.userToken = "testUser1";
-
-gpii.tests.preferencesServerErrorTests.testMalformedResponse = function (data) {
-    data = JSON.parse(data);
-    jqUnit.assertTrue("Received error as expected", data.isError);
-    jqUnit.assertEquals("Received error code 500", 500, data.statusCode);
-    jqUnit.assertEquals("Recieved proper error message", "Unable to retrieve preferences from raw preferences server.. Reason: SyntaxError: Unexpected string", data.message);
+gpii.tests.preferencesServerErrorTests.testDefCommon = {
+    config: {
+        configName: "development.all.local",
+        configPath: "%universal/gpii/configs"
+    },
+    gradeNames: "gpii.test.common.testCaseHolder"
 };
 
-gpii.tests.preferencesServerErrorTests.prefsNotFoundResponse = function (data) {
-    data = JSON.parse(data);
-    jqUnit.assertTrue("Received error as expected", data.isError);
-    jqUnit.assertEquals("Received error code 404", 404, data.statusCode);
-    jqUnit.assertEquals("Recieved correct error message", "Unable to retrieve raw preferences for user idontexist", data.message);
-};
 
-gpii.tests.preferencesServerErrorTests.buildTestDef = function () {
-    return [{
+gpii.tests.preferencesServerErrorTests.testDefs = [{
         name: "Login fails due to missing preference set and reports to login",
-        expect: 3,
-        config: {
-            configName: "development.all.local",
-            configPath: configPath
-        },
-        gradeNames: [ "gpii.test.common.testCaseHolder" ],
+        expect: 4,
         userToken: "idontexist",
 
         sequence: [{
             func: "{loginRequest}.send"
         }, {
             event: "{loginRequest}.events.onComplete",
-            listener: "gpii.tests.preferencesServerErrorTests.prefsNotFoundResponse"
+            listener: "kettle.test.assertErrorResponse",
+            args: {
+                message: "Received 404 error when logging in with missing preferences",
+                errorTexts: ["Error when retrieving preferences", "idontexist"],
+                statusCode: 404,
+                string: "{arguments}.0",
+                request: "{loginRequest}"
+            }
         }]
     }, {
         name: "Login fails due to malformed preference set and reports to login",
-        expect: 3,
-        config: {
-            configName: "development.all.local",
-            configPath: configPath
-        },
-        "rawPreferencesSourceUrl": "file://%root/../../../testData/preferences/acceptanceTests/%userToken.jsonx",
-        gradeNames: [ "gpii.test.common.testCaseHolder" ],
-        distributeOptions: [{
-            "source": "{that}.options.rawPreferencesSourceUrl",
-            "target": "{that rawPreferencesServer}.options.rawPreferencesSourceUrl"
-        }],
+        expect: 4,
         userToken: "malformed",
+        
+        "distributeOptions": {
+            "acceptance.rawPreferencesDataSource": {
+                "record": "%universal/testData/preferences/acceptanceTests/%userToken.jsonx",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
+                "priority": "after:development.rawPreferencesDataSource"
+            }
+        },
 
         sequence: [{
             func: "{loginRequest}.send"
         }, {
             event: "{loginRequest}.events.onComplete",
-            listener: "gpii.tests.preferencesServerErrorTests.testMalformedResponse"
+            listener: "kettle.test.assertErrorResponse",
+            args: {
+                message: "Received 500 error when logging in with corrupt preferences",
+                errorTexts: ["Error when retrieving preferences", "Parse error on line 5"],
+                string: "{arguments}.0",
+                request: "{loginRequest}"
+            }
         }]
     }];
-};
-
 
 gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {
-    return gpii.tests.preferencesServerErrorTests.buildTestDef();
+    return fluid.transform(gpii.tests.preferencesServerErrorTests.testDefs, function (testDef) {
+        return fluid.extend(true, {}, gpii.tests.preferencesServerErrorTests.testDefCommon, testDef);
+    });
 };
 
 kettle.test.bootstrapServer(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());
