@@ -15,10 +15,7 @@
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
-                "capabilities": [
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.id",
-                    "display.screenEnhancement.screenMagnification.applications.org\\.gnome\\.desktop\\.a11y\\.magnifier.name"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
                     "show-cross-hairs": "http://registry\\.gpii\\.net/common/showCrosshairs",
@@ -108,10 +105,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
-                "capabilities": [
-                    "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.interface.name",
-                    "applications.org\\.gnome\\.desktop\\.interface.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "transform": {
@@ -196,10 +190,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
-                "capabilities": [
-                    "applications.org\\.gnome\\.nautilus.id",
-                    "display.screenEnhancement.applications.org\\.gnome\\.nautilus.name"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "font": "http://registry\\.gpii\\.net/common/0"
                 },
@@ -234,9 +225,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "control.onscreenKeyboard",
-                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.name",
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.applications\\.onscreen-keyboard.id"
+                    "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
                 ]
             }
         },
@@ -271,11 +260,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
-                "capabilities": [
-                    "applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.id",
-                    "control.onscreenKeyboard.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name",
-                    "control.keyboardEnhancement.applications.org\\.gnome\\.desktop\\.a11y\\.keyboard.name"
-                 ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "stickykeys-enable": "http://registry\\.gpii\\.net/common/stickyKeys",
                     "slowkeys-enable": "http://registry\\.gpii\\.net/common/slowKeysEnable",
@@ -348,10 +333,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
-                "capabilities": [
-                    "applications.org\\.gnome\\.desktop\\.wm\\.preferences.id",
-                    "display.screenEnhancement.applications.org\\.gnome\\.desktop\\.wm\\.preferences.name"
-                ],
+                "capabilities": [],
                 "options": {
                     "schema": "org.gnome.desktop.wm.preferences"
                 }
@@ -384,8 +366,6 @@
             "configuration": {
                 "type": "gpii.gsettings",
                 "capabilities": [
-                    "applications.org\\.gnome\\.shell\\.overrides.id",
-                    "display.screenEnhancement.applications.org\\.gnome\\.shell\\.overrides.name"
                 ],
                 "options": {
                     "schema": "org.gnome.shell.overrides"
@@ -421,9 +401,7 @@
                     "user": "${{userToken}}"
                 },
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.org\\.gnome\\.orca.id",
-                    "display.screenReader.applications.org\\.gnome\\.orca.name"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ],
                 "capabilitiesTransformations": {
                     "enableTutorialMessages": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
@@ -1239,9 +1217,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.alsa",
-                "capabilities": [
-                    "applications.org\\.alsa-project.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "masterVolume": {
                         "transform": {
@@ -1288,9 +1264,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "content.simplification",
-                    "applications.trace\\.easyOne\\.communicator\\.linux.id",
-                    "content.simplification.applications.trace\\.easyOne\\.communicator\\.linux.name"
+                    "http://registry\\.gpii\\.net/common/simplification"
                 ]
             }
         },
@@ -1336,9 +1310,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "content.pictorialSimplification",
-                    "applications.trace\\.easyOne\\.sudan\\.linux.id",
-                    "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.linux.name"
+                    "http://registry\\.gpii\\.net/common/simplification"
                 ]
             }
         },
@@ -1384,9 +1356,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.webinsight\\.webAnywhere\\.linux.id",
-                    "display.screenReader.applications.webinsight\\.webAnywhere\\.linux.name"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
             }
         },
@@ -1429,10 +1399,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.xrandr",
-                "capabilities": [
-                    "display.screenEnhacements",
-                    "applications.org\\.freedesktop\\.xrandr.id"
-                ]
+                "capabilities": []
            }
         },
         "configure": [
@@ -1463,9 +1430,7 @@
                 "options": {
                     "path": "com.ilunion.cloud4chrome"
                 },
-                "capabilities": [
-                    "applications.com\\.ilunion\\.cloud4chrome.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {

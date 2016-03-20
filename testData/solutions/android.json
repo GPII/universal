@@ -11,9 +11,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.com\\.android\\.freespeech.id",
-                    "display.screenReader.applications.com\\.android\\.freespeech.name"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
             }
         },
@@ -36,10 +34,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.com\\.android\\.talkback.id",
-                    "display.screenReader.applications.com\\.android\\.talkback.name",
-                    "display.screenReader.-provisional-screenReaderTTSEnabled"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
             }
         },
@@ -68,9 +63,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidPersistentConfiguration",
-                "capabilities": [
-                    "applications.com\\.android\\.persistentConfiguration.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontScale": {
                         "transform": {
@@ -283,9 +276,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidAudioManager.volume",
-                "capabilities": [
-                    "applications.com\\.android\\.audioManager.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "STREAM_MUSIC": {
                         "transform": {
@@ -338,9 +329,7 @@
                 "options": {
                     "settingType": "System"
                 },
-                "capabilities": [
-                    "applications.com\\.android\\.settings\\.system.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "dim_screen": {
                         "transform": {
@@ -401,9 +390,7 @@
                 "options": {
                     "settingType": "Secure"
                 },
-                "capabilities": [
-                    "applications.com\\.android\\.settings\\.secure.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "tts_default_pitch": {
                         "transform": {
@@ -495,9 +482,7 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "applications.se\\.omnitor\\.ecmobile.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "map\\.string\\.fontsize\\.$t": {
                         "transform": {
@@ -554,9 +539,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.es\\.codefactory\\.android\\.app\\.ma.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {

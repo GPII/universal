@@ -11,9 +11,7 @@
         "settingsHandlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.org\\.chrome\\.cloud4chrome.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
@@ -74,9 +72,7 @@
         "settingsHandlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.com\\.bdigital\\.easit4all.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontSize": {
                         "transform":{
@@ -186,11 +182,10 @@
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.info\\.cloud4all\\.JME.id",
-                    "display.screenEnhancement.-provisional-highContrastTheme",
-                    "display.screenEnhancement.fontSize",
-                    "-provisional-general.-provisional-volume",
-                    "-provisional-general.-provisional-language"
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/volume",
+                    "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
                     "theme": {
@@ -288,12 +283,9 @@
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.net\\.gpii\\.smarthouses.id",
-                    "display.applications.net\\.gpii\\.smarthouses.name",
-                    "language",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.-provisional-highContrastTheme",
-                    "-provisional-general.-provisional-volume"
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/volume"
                 ],
                 "capabilitiesTransformations": {
                     "fontSize": {
@@ -356,9 +348,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.es\\.codefactory\\.android\\.app\\.ma.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {
@@ -418,11 +408,8 @@
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.de\\.fraunhofer\\.iao\\.C4A-TVM.id",
-                    "applications.de\\.fraunhofer\\.iao\\.gpii\\.C4A-TVM.name",
-                    "contrastTheme",
-                    "fontSize",
-                    "timeOut"
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/fontSize"
                 ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
@@ -492,22 +479,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.eu\\.gpii\\.olb.id",
-                    "display.applications.eu\\.gpii\\.olb.name",
-                    "language",
-                    "textSize",
-                    "toc",
-                    "links",
-                    "contrastTheme",
-                    "signLanguageEnabled",
-                    "signLanguage",
-                    "interpreterType",
-                    "pictogramEnabled",
-                    "pictogramMode",
-                    "pictogramSymbolSet",
-                    "simplifiedUiEnabled"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "textSize": {
