@@ -49,8 +49,24 @@
         ],
         "stop": [
             {
-                "type": "gpii.launch.exec",
-                "command": "START /WAIT Wscript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextScript.js restore & TASKKILL /F /IM ZT.exe"
+                  "type": "gpii.windows.killProcessByName",
+                  "filename": "zt.exe"
+            },
+            {
+                  "type": "gpii.windows.killProcessByName",
+                  "filename": "ProtectedUI64.exe"
+            },
+            {
+                  "type": "gpii.windows.killProcessByName",
+                  "filename": "ProtectedUI.exe"
+            },
+            {
+                  "type": "gpii.windows.killProcessByName",
+                  "filename": "AiSquared.Magnification.ZoomText.exe"
+            },
+            {
+                  "type": "gpii.windows.killProcessByName",
+                  "filename": "Ztoff.exe"
             }
         ],
         "isInstalled": [

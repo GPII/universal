@@ -53,6 +53,21 @@ gpii.tests.windows.zoomtext = [
                 "expectRestored": "0"
             },
             {
+              "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ProtectedUI64.exe\" | find /I \"ProtectedUI64.exe\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"  
+            },
+            {
+              "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ProtectedUI.exe\" | find /I \"ProtectedUI.exe\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"  
+            },
+            {
+              "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq AiSquared.Magnification.ZoomText.exe\" | find /I \"AiSquared.Magnification.Z\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"  
+            },
+            {
                 "command": "CScript ..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextTest.js //Nologo",
                 "expectConfigured": "1",
                 "expectRestored": "0"

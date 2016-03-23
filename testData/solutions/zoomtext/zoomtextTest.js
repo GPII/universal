@@ -1,4 +1,4 @@
-// Test script to test the solution for Zoomtext
+// Test script to test the solution for Zoomtext, only echo 1 if the settings are applied correctly
 var fs = new ActiveXObject("Scripting.FileSystemObject");
 var Wshell = WScript.CreateObject("WScript.Shell");
 var ZT;

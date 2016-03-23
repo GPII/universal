@@ -28,6 +28,7 @@ var settingsFile;
 
 // Open file for writing
 if(!restore){
+	// Store the settings that needs to be restored
 	var originalSettingsFile = fs.OpenTextFile("..\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtextOriginalSettings.ini", 2);
 }
 
