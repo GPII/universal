@@ -9,3 +9,8 @@
 
 npm-debug.log
 *.bak
+
+Vagrantfile.local
+.vagrant/
+
+report.tap
