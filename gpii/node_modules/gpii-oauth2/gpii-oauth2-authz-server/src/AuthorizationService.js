@@ -21,9 +21,23 @@ fluid.registerNamespace("gpii.oauth2");
 
 fluid.defaults("gpii.oauth2.authorizationService", {
     gradeNames: ["fluid.eventedComponent", "autoInit"],
+    urls: {
+        preferencesPost: ""
+    },
     components: {
         dataStore: {
             type: "gpii.oauth2.dataStore"
+        },
+        preferencesDataSource: {
+            type: "kettle.dataSource.URL",
+            options: {
+                url: "{authorizationService}.options.urls.preferencesPost",
+                termMap: {
+                    view: "%view"
+                },
+                writable: true,
+                writeMethod: "POST"
+            }
         }
     },
     invokers: {
@@ -67,6 +81,24 @@ fluid.defaults("gpii.oauth2.authorizationService", {
         getAuthForAccessToken: {
             func: "{dataStore}.findAuthByAccessToken"
                 // accessToken
+        },
+        getClientByClientCredentialsAccessToken: {
+            func: "{dataStore}.findClientByClientCredentialsAccessToken"
+                // accessToken
+        },
+        getClientCredentialsTokenPrivs: {
+            func: "{dataStore}.findClientCredentialsTokenPrivs"
+                // accessToken
+        },
+        grantClientCredentialsAccessToken: {
+            funcName: "gpii.oauth2.authorizationService.grantClientCredentialsAccessToken",
+            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+                // clientId, scope
+        },
+        savePrefs: {
+            funcName: "gpii.oauth2.authorizationService.savePrefs",
+            args: ["{preferencesDataSource}", "{arguments}.0", "{arguments}.1"]
+                // preferences, view
         }
     }
 });
@@ -136,4 +168,29 @@ gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, u
         dataStore.updateAuthDecision(userId, authDecision);
     }
     // TODO else communicate not found?
+};
+
+gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, clientId, scope) {
+    // Record the credential client access token if we haven't already
+    var client = dataStore.findClientById(clientId);
+    if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
+        return false;
+    }
+
+    var clientCredentialsToken = dataStore.findClientCredentialsTokenByClientId(clientId);
+    if (!clientCredentialsToken) {
+        var accessToken = gpii.oauth2.authorizationService.generateAccessToken();
+        clientCredentialsToken = dataStore.addClientCredentialsToken({
+            clientId: clientId,
+            accessToken: accessToken,
+            allowAddPrefs: true
+        });
+    }
+
+    return clientCredentialsToken.accessToken;
+};
+
+gpii.oauth2.authorizationService.savePrefs = function (preferencesDataSource, preferences, view) {
+    view = view || "";
+    return preferencesDataSource.set({"view": view}, preferences);
 };
