@@ -51,6 +51,15 @@ From the root of the `universal` folder, run the following command:
 
     npm test
 
+#### Running tests using a VM
+A VM can be automatically created using tools provided by the [Prosperity4All Quality Infrastructure](https://github.com/GPII/qi-development-environments/). Please ensure the [requirements](https://github.com/GPII/qi-development-environments/#requirements) have been met. The ``vagrant up`` command can then be used to provision a new VM.
+
+Following provisioning, tests can be run in the VM from the host system as follows:
+
+- node-based tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && npm test'`
+- browser-based tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && DISPLAY=:0 testem ci --file tests/web/testem_qi.json'`
+- production tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && node tests/ProductionConfigTests.js'`
+
 Usage
 -----
 
@@ -76,25 +85,25 @@ The tests are run using the following command:
     node tests/ProductionConfigTests.js
 
 
-Deploying with Docker
----------------------
+Building Docker Images
+----------------------
 
-The [Docker Hub Automated Build service](http://docs.docker.com/docker-hub/builds/) is used to automatically build a [GPII Universal Docker image](https://registry.hub.docker.com/u/gpii/universal/). The Docker client can then be used to download updated images and launch containers.
+The Dockerfile can be used to build a containerized version of GPII Universal, at this time primarily for use by downstream containers running components such the Preferences Server and Flow Manager in standalone cloud configuration.
 
 The following command can be used to build an image locally as long as it is run relative to the repository's Dockerfile:
 
-    docker build --rm -t gpii/universal:$(git rev-parse --short HEAD) .
+`docker build --rm -t gpii/universal:$(git rev-parse --short HEAD) .`
 
-That will use the Git repository's current abbreviated commit hash as a [Docker tag](https://docs.docker.com/reference/commandline/cli/#tag). If you would like to download the latest public Universal image you can use this command:
+That will use the Git repository's current abbreviated commit hash as a [Docker tag](https://docs.docker.com/reference/commandline/cli/#tag). If you would like to download the latest public Universal image you can use this command:    
 
-    docker pull gpii/universal
+`docker pull gpii/universal`
 
 Or use the following command to download a particular image identified using a Git commit hash:
 
-    docker pull gpii/universal:<first seven characters of a git commit hash>
+`docker pull gpii/universal:<first seven characters of a git commit hash>`
 
-GPII component images can then be built using the Universal image. Here are two examples:
+Additional notes:
 
-* https://github.com/gpii-ops/docker-preferences-server/
-* https://github.com/gpii-ops/docker-flow-manager/
-
+* The Docker image is built within the container using the [same Ansible role](https://github.com/idi-ops/ansible-nodejs) used to provision VMs, to simplify the management of different environments.
+* Universal is installed to /opt/gpii/node_modules/universal to allow the node-based test cases to resolve. Regarding the tests:
+  * Currently, the node-based tests are always run when this container is built. If you would like to turn this off for local debugging or faster building, remove the `npm test` item in the `nodejs_app_commands` list in `provisioning/docker-vars.yml`
