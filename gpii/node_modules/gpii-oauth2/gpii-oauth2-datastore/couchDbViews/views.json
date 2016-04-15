@@ -1,0 +1,13 @@
+{
+	"views": {
+		"findUserByName": {
+		    "map": "function(doc) {if (doc.type === 'user') emit(doc.username, null)}"
+		},
+		"findByDecisonIdAndUserId": {
+		    "map": "function(doc) {if (doc.type === 'authDecision') emit([doc._id, doc.userId], null)}"
+		},
+		"findAuthClientsByDecisionId": {
+		    "map": "function(doc) {if (doc.type === 'authDecision') {emit(doc._id, {'_id': doc.clientId});}}"
+		}
+	}
+}
