@@ -22,11 +22,6 @@ var fluid = fluid || require("infusion");
     var gpii = fluid.registerNamespace("gpii");
     fluid.registerNamespace("gpii.oauth2");
 
-    // TODO where should this grade live?
-    fluid.defaults("gpii.oauth2.dataStore", {
-        gradeNames: "fluid.component"
-    });
-
     fluid.defaults("gpii.oauth2.inMemoryDataStore", {
         gradeNames: ["gpii.oauth2.dataStore", "fluid.modelComponent"],
         // We are using a model but we don't expect to share the model or to
