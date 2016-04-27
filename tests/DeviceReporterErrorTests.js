@@ -47,7 +47,7 @@ gpii.tests.deviceReporterErrorTests.userToken = "testUser1";
 
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
-        configName: "development.all.local",
+        configName: "gpii.config.development.all.local",
         configPath: "%universal/gpii/configs"
     },
     gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
@@ -73,7 +73,7 @@ gpii.tests.deviceReporterErrorTests.testDefs = [{
         name: "Device Reporter fails on corrupt JSON file",
         expect: 4,
         config: {
-            configName: "development.all.local",
+            configName: "gpii.config.development.all.local",
             configPath: "%universal/gpii/configs"
         },
         gradeNames: [ "gpii.tests.deviceReporterErrorTests.testCaseHolder" ],

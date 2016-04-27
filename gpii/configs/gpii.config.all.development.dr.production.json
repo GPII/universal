@@ -1,5 +1,5 @@
 {
-    "type": "all.development.dr.production",
+    "type": "gpii.config.all.development.dr.production",
     "options": {
         "distributeOptions": {
             "gpii.config.deviceReporter.flowManager": {

@@ -43,7 +43,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         };
 
-        gpii.tests.requestInfos = $.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.additionalRequestInfos);
+        gpii.tests.requestInfos = fluid.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.additionalRequestInfos);
 
         fluid.defaults("gpii.tests.oauth2.editPrivacySettingsDialog", {
             gradeNames: ["gpii.oauth2.editPrivacySettingsDialog", "gpii.tests.oauth2.privacySettingsConfig"],
