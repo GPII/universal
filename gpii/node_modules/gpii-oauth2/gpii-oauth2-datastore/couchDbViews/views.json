@@ -1,7 +1,19 @@
 {
 	"views": {
 		"findUserByName": {
-		    "map": "function(doc) {if (doc.type === 'user') emit(doc.username, null)}"
+		    "map": "function(doc) {if (doc.type === 'user') emit(doc.name, null)}"
+		},
+		"findUserByGpiiToken": {
+		    "map": "function(doc) {if (doc.type === 'user') emit(doc.gpiiToken, null)}"
+		},
+		"findClientByOauth2ClientId": {
+		    "map": "function(doc) {if (doc.type === 'client') emit(doc.oauth2ClientId, null)}"
+		},
+		"findAllClients": {
+		    "map": "function(doc) {if (doc.type === 'client') emit(doc._id, null)}"
+		},
+		"findAuthByGpiiToken": {
+			"map": "function (doc) {if (doc.type === 'authDecision') {emit(doc.gpiiToken, null)}}"
 		},
 		"findByDecisonIdAndUserId": {
 		    "map": "function(doc) {if (doc.type === 'authDecision') emit([doc._id, doc.userId], null)}"
