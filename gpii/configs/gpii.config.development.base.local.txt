@@ -1,0 +1,6 @@
+gpii.config.development.base.local.json
+=======================================
+
+This config acts as a base for `gpii.config.development.all.local` and `gpii.config.all.development.dr.production`.
+It includes configs to locate the flow manager, preferences server and matchmaker all locally. The extra
+work required is to arrange to cross-inject the ontology handler between the matchmaker and preferences server.
