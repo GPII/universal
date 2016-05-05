@@ -255,6 +255,7 @@ var fluid = fluid || require("infusion");
         return userAuthDecisions;
     };
 
+    // TODO: the input parameter "userId" should be replaced by "gpiiToken"
     gpii.oauth2.dataStore.findAuthDecision = function (authDecisions, userId, clientId, redirectUri) {
         return fluid.find_if(authDecisions, function (ad) {
             return ad.userId === userId &&
@@ -301,6 +302,7 @@ var fluid = fluid || require("infusion");
     // Authorization Decision join Client
     // ----------------------------------
 
+    // TODO: replace "userId" with "gpiiToken"
     gpii.oauth2.dataStore.findAuthorizedClientsByUserId = function (authDecisions, clients, userId) {
         var userAuthDecisions = gpii.oauth2.dataStore.findAuthDecisionsByUserId(authDecisions, userId);
         // TODO when move to CouchDB, do join there, rather than by hand
