@@ -65,15 +65,17 @@ var fluid = fluid || require("infusion");
             },
             getUnauthorizedClientsForUser: {
                 funcName: "gpii.oauth2.authorizationService.getUnauthorizedClientsForUser",
-                args: ["{dataStore}", "{arguments}.0"]
+                args: ["{that}", "{dataStore}", "{arguments}.0"]
                     // userId
             },
             getAuthorizedClientsForUser: {
-                func: "{dataStore}.findAuthorizedClientsByUserId"
+                funcName: "gpii.oauth2.authorizationService.getAuthorizedClientsForUser",
+                args: ["{dataStore}", "{arguments}.0"]
                     // userId
             },
             revokeAuthorization: {
-                func: "{dataStore}.revokeAuthDecision"
+                funcName: "gpii.oauth2.authorizationService.revokeAuthorization",
+                args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
                     // userId, authDecisionId
             },
             getAccessTokenForOAuth2ClientIdAndGpiiToken: {
@@ -100,13 +102,13 @@ var fluid = fluid || require("infusion");
         }
     });
 
-    gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, codeGenerator, userId, clientId, redirectUri, selectedPreferences) {
+    gpii.oauth2.authorizationService.grantAuthorizationCode = function (dataStore, codeGenerator, gpiiToken, clientId, redirectUri, selectedPreferences) {
         // Record the authorization decision if we haven't already
-        var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
+        var authDecision = dataStore.findAuthDecision(gpiiToken, clientId, redirectUri);
         if (!authDecision) {
             var accessToken = codeGenerator.generateAccessToken();
             authDecision = dataStore.addAuthDecision({
-                userId: userId,
+                gpiiToken: gpiiToken,
                 clientId: clientId,
                 redirectUri: redirectUri,
                 accessToken: accessToken,
@@ -120,17 +122,18 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.authorizationService.addAuthorization = function (dataStore, codeGenerator, userId, oauth2ClientId, selectedPreferences) {
+        var user = dataStore.findUserById(userId);
         var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-        if (client) {
+        if (user && client) {
             var clientId = client.id;
             var redirectUri = client.redirectUri;
             // Check to see if we have an existing authorization
-            var authDecision = dataStore.findAuthDecision(userId, clientId, redirectUri);
+            var authDecision = dataStore.findAuthDecision(user.gpiiToken, clientId, redirectUri);
             if (!authDecision) {
                 // If not, add one
                 var accessToken = codeGenerator.generateAccessToken();
                 dataStore.addAuthDecision({
-                    userId: userId,
+                    gpiiToken: user.gpiiToken,
                     clientId: clientId,
                     redirectUri: redirectUri,
                     accessToken: accessToken,
@@ -141,7 +144,8 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.authorizationService.userHasAuthorized = function (dataStore, userId, clientId, redirectUri) {
-        return dataStore.findAuthDecision(userId, clientId, redirectUri) ? true : false;
+        var user = dataStore.findUserById(userId);
+        return user && dataStore.findAuthDecision(user.gpiiToken, clientId, redirectUri) ? true : false;
     };
 
     gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStore, code, clientId, redirectUri) {
@@ -165,20 +169,17 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.authorizationService.setSelectedPreferences = function (dataStore, userId, authDecisionId, selectedPreferences) {
+        var user = dataStore.findUserById(userId);
         var authDecision = dataStore.findAuthDecisionById(authDecisionId);
-        if (authDecision && authDecision.userId === userId) {
+        if (user && authDecision && authDecision.gpiiToken === user.gpiiToken) {
             authDecision.selectedPreferences = selectedPreferences;
             dataStore.updateAuthDecision(userId, authDecision);
         }
         // TODO else communicate not found?
     };
 
-    gpii.oauth2.authorizationService.getUnauthorizedClientsForUser = function (dataStore, userId) {
-        if (!dataStore.findUserById(userId)) {
-            return undefined;
-        }
-
-        var authorizations = dataStore.findAuthDecisionsByUserId(userId);
+    gpii.oauth2.authorizationService.getUnauthorizedClientsForUser = function (that, dataStore, userId) {
+        var authorizations = that.getAuthorizedClientsForUser(userId);
         var authorizedClientIds = {};
         fluid.each(authorizations, function (authorization) {
             authorizedClientIds[authorization.clientId] = true;
@@ -196,6 +197,24 @@ var fluid = fluid || require("infusion");
         });
 
         return unauthorizedClients;
+    };
+
+    gpii.oauth2.authorizationService.revokeAuthorization = function (dataStore, userId, authDecisionId) {
+        var user = dataStore.findUserById(userId);
+        if (!user) {
+            return undefined;
+        }
+
+        return dataStore.revokeAuthDecision(user.gpiiToken, authDecisionId);
+    };
+
+    gpii.oauth2.authorizationService.getAuthorizedClientsForUser = function (dataStore, userId) {
+        var user = dataStore.findUserById(userId);
+        if (!user) {
+            return undefined;
+        }
+
+        return dataStore.findAuthDecisionsByGpiiToken(user.gpiiToken);
     };
 
     gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, codeGenerator, clientId, scope) {

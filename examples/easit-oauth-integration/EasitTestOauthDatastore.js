@@ -91,7 +91,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
         authDecisions: [
             {
                 id: 1,
-                userId: 7,
+                gpiiToken: "review3_chrome_high_contrast",
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "ma1_access_token",
@@ -100,7 +100,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             },
             {
                 id: 2,
-                userId: 8,
+                gpiiToken: "review3_ma2",
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "ma2_access_token",
@@ -109,7 +109,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             },
             {
                 id: 3,
-                userId: 9,
+                gpiiToken: "chris",
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "ma_chris_access_token",
@@ -118,7 +118,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             },
             {
                 id: 4,
-                userId: 10,
+                gpiiToken: "li",
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "ma_li_access_token",
@@ -127,7 +127,7 @@ fluid.defaults("gpii.oauth2.easitSampleDataStore", {
             },
             {
                 id: 5,
-                userId: 10,
+                gpiiToken: "li",
                 clientId: 5,
                 redirectUri: false,
                 accessToken: "li_magnifier_access_token",

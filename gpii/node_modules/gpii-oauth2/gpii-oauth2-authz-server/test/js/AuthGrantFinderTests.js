@@ -84,7 +84,7 @@ var fluid = fluid || require("infusion");
             authDecisions: [
                 {
                     id: 1,
-                    userId: 2,
+                    gpiiToken: "bob_gpii_token",
                     clientId: 1,
                     redirectUri: false,
                     accessToken: "bob_A_access_token",
@@ -93,7 +93,7 @@ var fluid = fluid || require("infusion");
                 },
                 {
                     id: 2,
-                    userId: 3,
+                    gpiiToken: "carol_gpii_token",
                     clientId: 1,
                     redirectUri: false,
                     accessToken: "carol_A_access_token",
@@ -102,7 +102,7 @@ var fluid = fluid || require("infusion");
                 },
                 {
                     id: 3,
-                    userId: 3,
+                    gpiiToken: "carol_gpii_token",
                     clientId: 2,
                     redirectUri: false,
                     accessToken: "carol_B_access_token",

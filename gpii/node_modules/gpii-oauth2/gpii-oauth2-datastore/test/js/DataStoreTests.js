@@ -305,6 +305,7 @@ var fluid = fluid || require("infusion");
                 dataStore.findAuthDecisionById(-1));
         });
 
+        // TODO findAuthDecisionsByUserId() has been renamed to findAuthDecisionsByGpiiToken()
         jqUnit.test("findAuthDecisionsByUserId() finds non-revoked", function () {
             var dataStore = gpii.tests.oauth2.dataStore.dataStoreWithTestData();
             var userId = gpii.tests.oauth2.dataStore.testdata.userId1;

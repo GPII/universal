@@ -77,7 +77,7 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
         authDecisions: [
             {
                 id: 1,
-                userId: 2,
+                gpiiToken: "alice_gpii_token",
                 clientId: 2,
                 redirectUri: false,
                 accessToken: "alice_easit_access_token",
