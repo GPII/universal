@@ -312,7 +312,7 @@ var fluid = fluid || require("infusion");
     };
 
     // Join clientCredentialsTokens and clients
-    gpii.oauth2.couchDBDataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
+    gpii.oauth2.couchDBDataStore.findAuthByClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.couchDBDataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
         if (!clientCredentialsToken) {
             return undefined;

@@ -41,7 +41,7 @@ var fluid = fluid || require("infusion");
     // can be returned based on the grant type.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
         var authCodeResult = authorizationService.getAuthForAccessToken(accessToken);
-        var clientCredentialsResult = authorizationService.getAuthForClientCredentialsAccessToken(accessToken);
+        var clientCredentialsResult = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
         return authCodeResult ? authCodeResult : clientCredentialsResult;
     };
 

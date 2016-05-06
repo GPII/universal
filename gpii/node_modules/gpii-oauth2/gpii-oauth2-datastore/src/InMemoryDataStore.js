@@ -153,8 +153,8 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.clientCredentialsTokens", "{that}.applier", "{arguments}.0"]
                     // clientCredentialsTokenId
             },
-            findAuthForClientCredentialsAccessToken: {
-                funcName: "gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken",
+            findAuthByClientCredentialsAccessToken: {
+                funcName: "gpii.oauth2.dataStore.findAuthByClientCredentialsAccessToken",
                 args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0"]
                     // accessToken
             }
@@ -422,7 +422,7 @@ var fluid = fluid || require("infusion");
     };
 
     // Join clientCredentialsTokens and clients
-    gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
+    gpii.oauth2.dataStore.findAuthByClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
         if (!clientCredentialsToken) {
             return undefined;

@@ -155,7 +155,7 @@ client.
 
 ###APIs for [Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
 
-#### getAuthForClientCredentialsAccessToken(accessToken)
+#### getAuthByClientCredentialsAccessToken(accessToken)
 * **description**: Get the authorization information using the access token.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
