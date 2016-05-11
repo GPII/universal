@@ -41,7 +41,7 @@
                     "cloud4allVoiceProfile-GlobalContext\\.Speed": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
                             "factor": 0.125,
                             "offset": -12.125
                         }
@@ -180,7 +180,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "http://registry\\.gpii\\.net/common/magnification",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                                     "factor": 100
                                 }
                             }
@@ -319,14 +319,14 @@
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/pitch",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "factor": 100
                         }
                     },
                     "speech\\.espeak\\.volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
@@ -355,12 +355,12 @@
                                         "transform": [
                                             {
                                                 "type": "fluid.transforms.literalValue",
-                                                "value": "silence",
+                                                "input": "silence",
                                                 "outputPath": "speech\\.synth"
                                             },
                                             {
                                                 "type": "fluid.transforms.literalValue",
-                                                "value": "Microsoft Sound Mapper",
+                                                "input": "Microsoft Sound Mapper",
                                                 "outputPath": "speech\\.outputDevice"
                                             }
                                         ]
@@ -815,61 +815,26 @@
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                             "outputPath": "speakOnActivate",
-                            "true": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "yes"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "no"
-                                }
-                            }
+                            "true": "yes",
+                            "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                             "outputPath": "speakTitles",
-                            "true": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "yes"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "no"
-                                }
-                            }
+                            "true": "yes",
+                            "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                             "outputPath": "speakLabels",
-                            "true": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "yes"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "no"
-                                }
-                            }
+                            "true": "yes",
+                            "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                             "condition": false,
                             "outputPath": "theme",
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "colour"
-                                }
-                            },
+                            "false": "colour",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -958,7 +923,7 @@
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                                "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                             }
                         }
                     }
@@ -1014,7 +979,7 @@
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
-                                "value": {
+                                "input": {
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 }
