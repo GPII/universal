@@ -12,7 +12,7 @@
         "node-uuid": "1.4.0",
         "semver": "1.1.4",
         "xml-mapping": "1.2.0",
-        "kettle": "git://github.com/amb26/kettle.git#9ab7a9e08931dcf7eafaa84c326a986ef296c402",
+        "kettle": "git://github.com/amb26/kettle.git#387654d8dfeb1fc175c7ba23d065d708cbee61b0",
 
         "express": "4.13.3",
         "body-parser": "1.13.3",
