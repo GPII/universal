@@ -42,7 +42,7 @@ gpii.loadTestingSupport = function () {
 
 gpii.start = function () {
     kettle.config.loadConfig({
-        configName: kettle.config.getNodeEnv("gpii.config.development.all.local"),
+        configName: kettle.config.getConfigName("gpii.config.development.all.local"),
         configPath: kettle.config.getConfigPath(__dirname + "/gpii/configs") 
     });
 };
