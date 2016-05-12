@@ -24,10 +24,10 @@ Also, this component create notifications for every connected client at any time
 This small and documented client illustrates the workflow.
 
 ```javascript
-var io = require("ws");
+var ws = require("ws");
 
 // The client starts the communication
-//
+
 var socket = new ws("ws://localhost:8081/browserChannel");
 
 // When the connection is done, the client tells to the flow manager its id
@@ -77,6 +77,13 @@ The workflow between the client and server can be summarised as follows:
 ```
 * When a client disconnects, it'll be removed from the list of registered clients
 
-## Testing
+### Running the sample client
 
-This new feature has been tested with [this version of the Cloud4Chrome extension](https://github.com/GutiX/chrome4cloud/commit/3d064bb7efc93bf90fde90b0192c273fb76817e5).
+The client has been checked in to [../examples/browserChannelClient](../examples/browserChannelClient). To try it out, first
+start the GPII in the CloudBased browserChannel test configuration from the root of universal with
+
+    node gpii.js gpii/node_modules/flowManager/test/configs gpii.flowManager.tests.browserChannel.config
+
+Then start the client from [../examples/browserChannelClient](../examples/browserChannelClient) with
+
+    node browserChannelClient.js
