@@ -33,7 +33,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
-    gpii.tests.requestInfos = $.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.additionalRequestInfos);
+    gpii.tests.requestInfos = fluid.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.additionalRequestInfos);
 
     gpii.tests.oauth2.addAuthorizationDialog.registerMockjax = function () {
         fluid.each(gpii.tests.requestInfos, function (options) {

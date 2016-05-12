@@ -17,7 +17,7 @@ var uuid = 0,
 // $.ui might exist from components with no dependencies, e.g., $.ui.position
 $.ui = $.ui || {};
 
-$.extend( $.ui, {
+fluid.extend( $.ui, {
 	version: "1.10.4",
 
 	keyCode: {
@@ -154,7 +154,7 @@ function visible( element ) {
 		}).length;
 }
 
-$.extend( $.expr[ ":" ], {
+fluid.extend( $.expr[ ":" ], {
 	data: $.expr.createPseudo ?
 		$.expr.createPseudo(function( dataName ) {
 			return function( elem ) {
@@ -267,7 +267,7 @@ $.fn.extend({
 	}
 });
 
-$.extend( $.ui, {
+fluid.extend( $.ui, {
 	// $.ui.plugin is deprecated. Use $.widget() extensions instead.
 	plugin: {
 		add: function( module, option, set ) {
@@ -379,11 +379,11 @@ $.widget = function( name, base, prototype ) {
 		}
 	};
 	// extend with the existing constructor to carry over any static properties
-	$.extend( constructor, existingConstructor, {
+	fluid.extend( constructor, existingConstructor, {
 		version: prototype.version,
 		// copy the object used to create the prototype in case we need to
 		// redefine the widget later
-		_proto: $.extend( {}, prototype ),
+		_proto: fluid.extend( {}, prototype ),
 		// track widgets that inherit from this widget in case this widget is
 		// redefined after a widget inherits from it
 		_childConstructors: []
@@ -1135,7 +1135,7 @@ $.fn.position = function( options ) {
 	}
 
 	// make a copy, we don't want to modify arguments
-	options = $.extend( {}, options );
+	options = fluid.extend( {}, options );
 
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
 		target = $( options.of ),
@@ -1153,7 +1153,7 @@ $.fn.position = function( options ) {
 	targetHeight = dimensions.height;
 	targetOffset = dimensions.offset;
 	// clone to reuse original targetOffset later
-	basePosition = $.extend( {}, targetOffset );
+	basePosition = fluid.extend( {}, targetOffset );
 
 	// force my and at to have valid horizontal and vertical positions
 	// if a value is missing or invalid, it will be converted to center
@@ -1217,7 +1217,7 @@ $.fn.position = function( options ) {
 			marginTop = parseCss( this, "marginTop" ),
 			collisionWidth = elemWidth + marginLeft + parseCss( this, "marginRight" ) + scrollInfo.width,
 			collisionHeight = elemHeight + marginTop + parseCss( this, "marginBottom" ) + scrollInfo.height,
-			position = $.extend( {}, basePosition ),
+			position = fluid.extend( {}, basePosition ),
 			myOffset = getOffsets( offsets.my, elem.outerWidth(), elem.outerHeight() );
 
 		if ( options.my[ 0 ] === "right" ) {
@@ -1305,7 +1305,7 @@ $.fn.position = function( options ) {
 			};
 		}
 
-		elem.offset( $.extend( position, { using: using } ) );
+		elem.offset( fluid.extend( position, { using: using } ) );
 	});
 };
 
@@ -1487,7 +1487,7 @@ $.ui.position = {
 		background: "none"
 	};
 	if ( body ) {
-		$.extend( testElementStyle, {
+		fluid.extend( testElementStyle, {
 			position: "absolute",
 			left: "-1000px",
 			top: "-1000px"
@@ -1652,7 +1652,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		//Reset scroll cache
 		this.offset.scroll = false;
 
-		$.extend(this.offset, {
+		fluid.extend(this.offset, {
 			click: { //Where the click happened, relative to the element
 				left: event.pageX - this.offset.left,
 				top: event.pageY - this.offset.top
@@ -2097,7 +2097,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 	start: function(event, ui) {
 
 		var inst = $(this).data("ui-draggable"), o = inst.options,
-			uiSortable = $.extend({}, ui, { item: inst.element });
+			uiSortable = fluid.extend({}, ui, { item: inst.element });
 		inst.sortables = [];
 		$(o.connectToSortable).each(function() {
 			var sortable = $.data(this, "ui-sortable");
@@ -2116,7 +2116,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 
 		//If we are still over the sortable, we fake the stop event of the sortable, but also remove helper
 		var inst = $(this).data("ui-draggable"),
-			uiSortable = $.extend({}, ui, { item: inst.element });
+			uiSortable = fluid.extend({}, ui, { item: inst.element });
 
 		$.each(inst.sortables, function() {
 			if(this.instance.isOver) {
@@ -2377,7 +2377,7 @@ $.ui.plugin.add("draggable", "snap", {
 
 			if ( x2 < l - d || x1 > r + d || y2 < t - d || y1 > b + d || !$.contains( inst.snapElements[ i ].item.ownerDocument, inst.snapElements[ i ].item ) ) {
 				if(inst.snapElements[i].snapping) {
-					(inst.options.snap.release && inst.options.snap.release.call(inst.element, event, $.extend(inst._uiHash(), { snapItem: inst.snapElements[i].item })));
+					(inst.options.snap.release && inst.options.snap.release.call(inst.element, event, fluid.extend(inst._uiHash(), { snapItem: inst.snapElements[i].item })));
 				}
 				inst.snapElements[i].snapping = false;
 				continue;
@@ -2424,7 +2424,7 @@ $.ui.plugin.add("draggable", "snap", {
 			}
 
 			if(!inst.snapElements[i].snapping && (ts || bs || ls || rs || first)) {
-				(inst.options.snap.snap && inst.options.snap.snap.call(inst.element, event, $.extend(inst._uiHash(), { snapItem: inst.snapElements[i].item })));
+				(inst.options.snap.snap && inst.options.snap.snap.call(inst.element, event, fluid.extend(inst._uiHash(), { snapItem: inst.snapElements[i].item })));
 			}
 			inst.snapElements[i].snapping = (ts || bs || ls || rs || first);
 
@@ -2527,7 +2527,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			o = this.options;
 		this.element.addClass("ui-resizable");
 
-		$.extend(this, {
+		fluid.extend(this, {
 			_aspectRatio: !!(o.aspectRatio),
 			aspectRatio: o.aspectRatio,
 			originalElement: this.element,
@@ -2859,7 +2859,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			top = (parseInt(that.element.css("top"), 10) + (that.position.top - that.originalPosition.top)) || null;
 
 			if (!o.animate) {
-				this.element.css($.extend(s, { top: top, left: left }));
+				this.element.css(fluid.extend(s, { top: top, left: left }));
 			}
 
 			that.helper.height(that.size.height);
@@ -3080,16 +3080,16 @@ $.widget("ui.resizable", $.ui.mouse, {
 			return { height: this.originalSize.height + dy };
 		},
 		se: function(event, dx, dy) {
-			return $.extend(this._change.s.apply(this, arguments), this._change.e.apply(this, [event, dx, dy]));
+			return fluid.extend(this._change.s.apply(this, arguments), this._change.e.apply(this, [event, dx, dy]));
 		},
 		sw: function(event, dx, dy) {
-			return $.extend(this._change.s.apply(this, arguments), this._change.w.apply(this, [event, dx, dy]));
+			return fluid.extend(this._change.s.apply(this, arguments), this._change.w.apply(this, [event, dx, dy]));
 		},
 		ne: function(event, dx, dy) {
-			return $.extend(this._change.n.apply(this, arguments), this._change.e.apply(this, [event, dx, dy]));
+			return fluid.extend(this._change.n.apply(this, arguments), this._change.e.apply(this, [event, dx, dy]));
 		},
 		nw: function(event, dx, dy) {
-			return $.extend(this._change.n.apply(this, arguments), this._change.w.apply(this, [event, dx, dy]));
+			return fluid.extend(this._change.n.apply(this, arguments), this._change.w.apply(this, [event, dx, dy]));
 		}
 	},
 
@@ -3132,7 +3132,7 @@ $.ui.plugin.add("resizable", "animate", {
 			top = (parseInt(that.element.css("top"), 10) + (that.position.top - that.originalPosition.top)) || null;
 
 		that.element.animate(
-			$.extend(style, top && left ? { top: top, left: left } : {}), {
+			fluid.extend(style, top && left ? { top: top, left: left } : {}), {
 				duration: o.animateDuration,
 				easing: o.animateEasing,
 				step: function() {
@@ -4266,7 +4266,7 @@ $.widget( "ui.dialog", {
 				{ click: props, text: name } :
 				props;
 			// Default to a non-submitting button
-			props = $.extend( { type: "button" }, props );
+			props = fluid.extend( { type: "button" }, props );
 			// Change the context for the click callback to be the main element
 			click = props.click;
 			props.click = function() {
@@ -4645,7 +4645,7 @@ if ( $.uiBackCompat !== false ) {
 					};
 				}
 
-				position = $.extend( {}, $.ui.dialog.prototype.options.position, position );
+				position = fluid.extend( {}, $.ui.dialog.prototype.options.position, position );
 			} else {
 				position = $.ui.dialog.prototype.options.position;
 			}
@@ -6177,7 +6177,7 @@ $.widget( "ui.tabs", {
 			url: anchor.attr( "href" ),
 			beforeSend: function( jqXHR, settings ) {
 				return that._trigger( "beforeLoad", event,
-					$.extend( { jqXHR : jqXHR, ajaxSettings: settings }, eventData ) );
+					fluid.extend( { jqXHR : jqXHR, ajaxSettings: settings }, eventData ) );
 			}
 		};
 	},
@@ -6404,7 +6404,7 @@ $.widget( "ui.tooltip", {
 
 	_open: function( event, target, content ) {
 		var tooltip, events, delayedShow,
-			positionOption = $.extend( {}, this.options.position );
+			positionOption = fluid.extend( {}, this.options.position );
 
 		if ( !content ) {
 			return;
@@ -6451,7 +6451,7 @@ $.widget( "ui.tooltip", {
 			// trigger once to override element-relative positioning
 			position( event );
 		} else {
-			tooltip.position( $.extend({
+			tooltip.position( fluid.extend({
 				of: target
 			}, this.options.position ) );
 		}
@@ -6706,7 +6706,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
             open: fluid.tooltip.makeOpenHandler(that),
             close: fluid.tooltip.makeCloseHandler(that)
         };
-        var fullOptions = $.extend(true, directOptions, that.options.widgetOptions);
+        var fullOptions = fluid.extend(true, directOptions, that.options.widgetOptions);
         that.container.tooltip(fullOptions);
         that.initialised = true;
     };

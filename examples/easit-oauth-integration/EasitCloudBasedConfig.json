@@ -8,7 +8,7 @@
         }]
     },
     "mergeConfigs": [
-        "../../gpii/configs/cloudBased.development.all.local.json"
+        "../../gpii/configs/gpii.config.cloudBased.development.all.local.json"
      ],
     "modules": [
         "./EasitTestOauthDatastore.js"

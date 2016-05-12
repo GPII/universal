@@ -1,5 +1,5 @@
 {
-    "type": "cloudBased.development.all.local",
+    "type": "gpii.config.cloudBased.development.all.local",
     "options": {
         "components": {
             "oauth2DataStore": {
@@ -8,11 +8,11 @@
         },
         "distributeOptions": {
             "flowManager.dispatchDataStore": {
-                "record": "{cloudBased.development.all.local}.oauth2DataStore",
+                "record": "{gpii.config.cloudBased.development.all.local}.oauth2DataStore",
                 "target": "{that flowManager}.options.components.oauth2DataStore"
             },
             "preferencesServer.dispatchDataStore": {
-                "record": "{cloudBased.development.all.local}.oauth2DataStore",
+                "record": "{gpii.config.cloudBased.development.all.local}.oauth2DataStore",
                 "target": "{that preferencesServer}.options.components.dataStore"
             }
         }

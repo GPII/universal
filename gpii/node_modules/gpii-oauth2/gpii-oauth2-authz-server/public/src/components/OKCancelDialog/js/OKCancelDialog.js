@@ -112,7 +112,7 @@ var gpii = gpii || {};
     });
 
     gpii.OKCancelDialog.initDialog = function (container, dialogClass, dialogOptions) {
-        container.dialog($.extend(true, {}, {dialogClass: dialogClass}, dialogOptions));
+        container.dialog(fluid.extend(true, {}, {dialogClass: dialogClass}, dialogOptions));
     };
 
     gpii.OKCancelDialog.fireCreateDialogWidget = function (that) {
