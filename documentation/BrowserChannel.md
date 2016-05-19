@@ -4,7 +4,7 @@ This document describes how the __Browser Channel__ and the __WebSockets__ setti
 
 This feature consists on:
 * A route in the Flow Manager that serves as the entry point for clients: `/browserChannel`
-* The component behind this new route is the _gpii.settingsHandlers.webSockets.component_
+* The component behind this route is the _gpii.settingsHandlers.webSockets.component_
 
 ### The browser channel
 This handler processes every request to `http://localhost:8081/browserChannel` and is responsible for:
@@ -37,7 +37,7 @@ socket.on("open", function () {
     socket.send(JSON.stringify({
         type: "connect",
         payload: {
-            solutionId: "org.chrome.cloud4chrome"
+            solutionId: "com.ilunion.cloud4chrome"
         }
     }));
 });
@@ -60,7 +60,7 @@ socket.on("message", function (data) {
 
 The workflow between the client and server can be summarised as follows:
 
-* After connecting to the flow manager, the client sends a socket message to the channel, which is basically a string containing the *id* of the client. ie: _org.chrome.cloud4chrome_
+* After connecting to the flow manager, the client sends a socket message to the channel, which is a payload containing the *id* of the client, in this instance `com.ilunion.cloud4chrome`. 
 * The client will be registered if the solution's id can be found of the solutions registry, otherwise, the registration will be rejected and the system will emit en error, and the client will disconnect.
 * When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available settings for the client in the following way:
 ```
@@ -82,7 +82,7 @@ The workflow between the client and server can be summarised as follows:
 The client has been checked in to [../examples/browserChannelClient](../examples/browserChannelClient). To try it out, first
 start the GPII in the CloudBased browserChannel test configuration from the root of universal with
 
-    node gpii.js gpii/node_modules/flowManager/test/configs gpii.flowManager.tests.browserChannel.config
+    node gpii.js gpii/configs gpii.config.cloudBased.production
 
 Then start the client from [../examples/browserChannelClient](../examples/browserChannelClient) with
 

@@ -14,7 +14,7 @@ This mean that:
 ** solutionsRegistry (reading registry from file)
 ** deviceReporter (using a dynamic device reporter)
 ** matchMakerFramework
-** flatMatchMaker
+** canopyMatchMaker
 ** lifecycleManager
 
 Notes on testing:

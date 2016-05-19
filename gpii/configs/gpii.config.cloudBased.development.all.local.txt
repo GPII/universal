@@ -11,7 +11,7 @@ This mean that:
 ** OntologyHandler
 ** rawPreferencesServer (reading preferences from file)
 ** solutionsRegistry (reading registry from file)
-** flatMatchMaker
+** defaultMatchMaker
 ** matchMakerFramework
 ** lifecycleManager
 
@@ -19,3 +19,7 @@ Notes on testing:
 This setup is used by the acceptance tests in universal testing the cloudBased applications. Each individual acceptance test may override some elements
 of this config, e.g. the folder to be used for reading prefs and solutionsRegistry).
 For more details, see the txt files describing the configs in the acceptance tests folder.
+
+Note that this config incorrectly derives from the deviceReporter development config. This is because of 
+a dependency error in the system design where the cloudBased flowManager still attempts to query the
+platform deviceReporter rather than recognising that it is on platform "web" - e.g. within BrowserChannel.js

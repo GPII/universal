@@ -24,7 +24,7 @@
             },
             "untrusted.development.matchMakers": {
                 "record": "http://localhost:8084",
-                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.flat.url",
+                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
             }
         }
