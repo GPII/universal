@@ -23,7 +23,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.builtIn");
 
-gpii.tests.linux.builtIn.testDefs = [
+gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     {
         name: "Testing os_common using Flat matchmaker",
         userToken: "os_common",
@@ -154,7 +154,7 @@ gpii.tests.linux.builtIn.testDefs = [
             }
         ]
     }
-];
+]);
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.builtIn.testDefs",
