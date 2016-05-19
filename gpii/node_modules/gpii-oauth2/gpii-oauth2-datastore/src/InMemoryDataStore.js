@@ -55,6 +55,11 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.users", "{that}.model.gpiiTokens", "{arguments}.0"]
                     // gpiiToken
             },
+            findGpiiToken: {
+                funcName: "gpii.oauth2.dataStore.findGpiiToken",
+                args: ["{that}.model.gpiiTokens", "{arguments}.0"]
+                    // gpiiToken
+            },
             findClientById: {
                 funcName: "gpii.oauth2.dataStore.findClientById",
                 args: ["{that}.model.clients", "{arguments}.0"]
