@@ -1,0 +1,25 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 9,
+                    "http://registry.gpii.net/applications/com.sublimetext": {
+                        "caret_extra_bottom": 1,
+                        "caret_extra_top": 1,
+                        "caret_extra_width": 2,
+                        "caret_style": "blink",
+                        "color_scheme": "Packages/Color Scheme - Default/Eiffel.tmTheme",
+                        "fade_fold_buttons": false,
+                        "show_encoding": true,
+                        "show_line_endings": true,
+                        "spell_check": true,
+                        "dictionary": "Packages/User/English (British).dic",
+                        "translate_tabs_to_spaces": false
+                    }
+                }
+            }
+        }
+    }
+}
