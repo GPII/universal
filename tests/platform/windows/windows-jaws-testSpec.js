@@ -33,7 +33,7 @@ gpii.tests.windows.jaws = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.TypingEcho" : 1,
+                            "options.TypingEcho" : 2,
                             "ENU-Global.Punctuation" : 2,
                             "ENU-Global.Pitch" : 75,
                             "ENU-Global.Rate" : 100
@@ -46,7 +46,7 @@ gpii.tests.windows.jaws = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.TypingEcho" : 1,
+                            "options.TypingEcho" : 2,
                             "ENU-Global.Punctuation" : 2,
                             "ENU-Global.Pitch" : 75,
                             "ENU-Global.Rate" : 100
@@ -76,8 +76,8 @@ gpii.tests.windows.jaws = [
                     {
                         "settings": {
                             "ENU-Global.Punctuation" : 2,
-                            "ENU-Global.Pitch" : 125,
-                            "ENU-Global.Rate" : 12.875
+                            "ENU-Global.Pitch" : 75,
+                            "ENU-Global.Rate" : 100
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"

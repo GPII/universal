@@ -18,27 +18,68 @@
                     "applications.com\\.freedomscientific\\.jaws.id"
                 ],
                 "capabilitiesTransformations": {
-                    "Voice Profiles\\.ActiveVoiceProfileName": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "inputPath": "http://registry\\.gpii\\.net/common/voiceProfile",
-                            "value": "GPII"
-                        }
-                    },
-                    "options\\.TypingEcho": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/typingEcho",
-                            "options": {
-                                "on": {
-                                    "outputValue": 1
-                                },
-                                "off": {
-                                    "outputValue": 0
-                                }
-                            }
-                        }
-                    }
+                    "Voice Profiles\\.ActiveVoiceProfileName": "http://registry\\.gpii\\.net/common/voiceProfile",
+                    "options\\.SkimReadingIndication": "http://registry\\.gpii\\.net/common/skimReadingIndication",
+                    "options\\.IndicateNewlinesAndParagraphs": "http://registry\\.gpii\\.net/common/indicateNewlinesAndParagraphs",
+                    "options\\.ProgressBarUpdateInterval": "http://registry\\.gpii\\.net/common/progressBarUpdateInterval",
+                    "options\\.TreeViewCheckBoxes": "http://registry\\.gpii\\.net/common/treeViewCheckBoxes",
+                    "options\\.ListBoxCheckBoxes": "http://registry\\.gpii\\.net/common/listBoxCheckBoxes",
+                    "options\\.CustomPageSummary": "http://registry\\.gpii\\.net/common/customPageSummary",
+                    "options\\.Scheme": "http://registry\\.gpii\\.net/common/Scheme",
+                    "options\\.LanguageDetection": "http://registry\\.gpii\\.net/common/languageDetection",
+                    "options\\.UseVirtualInfoInFormsMode": "http://registry\\.gpii\\.net/common/useVirtualInfoInFormsMode",
+                    "options\\.QuickKeyNavigationMode": "http://registry\\.gpii\\.net/common/quickKeyNavigationMode",
+                    "options\\.SpellPhonetic": "http://registry\\.gpii\\.net/common/spellPhonetic",
+                    "options\\.CapIndicator": "http://registry\\.gpii\\.net/common/capIndicator",
+                    "options\\.AllCapsIndicator": "http://registry\\.gpii\\.net/common/allCapsIndicator",
+                    "options\\.IndicateCaps": "http://registry\\.gpii\\.net/common/indicateCaps",
+                    "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/sayAllIndicateCaps",
+                    "options\\.ProcessToolTipEvent": "http://registry\\.gpii\\.net/common/processToolTipEvent",
+                    "options\\.VIRTUALMSAAREFRESH": "http://registry\\.gpii\\.net/common/virtualMSAAREFRESH",
+                    "options\\.TetherJawsToPC": "http://registry\\.gpii\\.net/common/tetherJawsToPC",
+                    "options\\.SayAllMode": "http://registry\\.gpii\\.net/common/sayAllMode",
+                    "options\\.IndicateAttributesInDialogsAndMenus": "http://registry\\.gpii\\.net/common/indicateAttributesInDialogsAndMenus",
+                    "options\\.Repetitions": "http://registry\\.gpii\\.net/common/repetitions",
+                    "options\\.Indentation": "http://registry\\.gpii\\.net/common/indentation",
+                    "options\\.TypingEcho": "http://registry\\.gpii\\.net/common/typingEcho",
+                    "options\\.TypingInterrupt": "http://registry\\.gpii\\.net/common/typingInterrupt",
+                    "options\\.KeyRepeat": "http://registry\\.gpii\\.net/common/keyRepeat",
+                    "options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/sayAllIgnoreShiftKeys",
+                    "options\\.LeftShiftSkipBack": "http://registry\\.gpii\\.net/common/leftShiftSkipBack",
+                    "options\\.ScreenEcho": "http://registry\\.gpii\\.net/common/screenEcho",
+                    "options\\.ReadingInterrupt": "http://registry\\.gpii\\.net/common/readingInterrupt",
+                    "options\\.LinePauses": "http://registry\\.gpii\\.net/common/linePauses",
+                    "options\\.Dictionary": "http://registry\\.gpii\\.net/common/dictionary",
+                    "options\\.Numbers": "http://registry\\.gpii\\.net/common/numbers",
+                    "options\\.Case": "http://registry\\.gpii\\.net/common/case",
+                    "options\\.Filter": "http://registry\\.gpii\\.net/common/filter",
+                    "options\\.MixedCase": "http://registry\\.gpii\\.net/common/mixedCase",
+                    "options\\.Verbosity": "http://registry\\.gpii\\.net/common/verbosity",
+                    "options\\.JAWSPunctuationEnabled": "http://registry\\.gpii\\.net/common/jawsPunctuationEnabled",
+                    "options\\.SayWindowTypeFirst": "http://registry\\.gpii\\.net/common/sayWindowTypeFirst",
+                    "options\\.SayStateFirst": "http://registry\\.gpii\\.net/common/sayStateFirst",
+                    "options\\.InsertKeyMode": "http://registry\\.gpii\\.net/common/insertKeyMode",
+                    "options\\.CaretDetect": "http://registry\\.gpii\\.net/common/caretDetect",
+                    "options\\.CaretDetectTimeOut": "http://registry\\.gpii\\.net/common/caretDetectTimeOut",
+                    "options\\.CaretBlinkRate": "http://registry\\.gpii\\.net/common/caretBlinkRate",
+                    "options\\.SpeakANSIChars": "http://registry\\.gpii\\.net/common/speakANSIChars",
+                    "options\\.IndicateSelected": "http://registry\\.gpii\\.net/common/indicateSelected",
+                    "options\\.SaySelectedFirst": "http://registry\\.gpii\\.net/common/saySelectedFirst",
+                    "options\\.JAWSInsertKey": "http://registry\\.gpii\\.net/common/jawsInsertKey",
+                    "options\\.KeyboardType": "http://registry\\.gpii\\.net/common/keyboardType",
+                    "options\\.UseExtendedKeys": "http://registry\\.gpii\\.net/common/useExtendedKeys",
+                    "options\\.Acronyms": "http://registry\\.gpii\\.net/common/acronyms",
+                    "options\\.Synthesizer": "http://registry\\.gpii\\.net/common/synthesizer",
+                    "options\\.SleepMode": "http://registry\\.gpii\\.net/common/sleepMode",
+                    "options\\.SynthesizerResetFrequency": "http://registry\\.gpii\\.net/common/synthesizerResetFrequency",
+                    "options\\.SimultaneousSynthAndWave": "http://registry\\.gpii\\.net/common/simultaneousSynthAndWave",
+                    "options\\.BrailleDisplay": "http://registry\\.gpii\\.net/common/brailleDisplay",
+                    "options\\.DosScreenReader": "http://registry\\.gpii\\.net/common/dosScreenReader",
+                    "options\\.SayBlankLineCount": "http://registry\\.gpii\\.net/common/sayBlankLineCount",
+                    "options\\.UseWindowsKeyboardHook": "http://registry\\.gpii\\.net/common/useWindowsKeyboardHook",
+                    "options\\.SayCursorShapeChange": "http://registry\\.gpii\\.net/common/sayCursorShapeChange",
+                    "options\\.SayNumericDates": "http://registry\\.gpii\\.net/common/sayNumericDates",
+                    "options\\.SayDollars": "http://registry\\.gpii\\.net/common/sayDollars"
                 }
             },
             "configuration2": {
@@ -53,6 +94,28 @@
                     "display.textReadingHighlight.pitch"
                 ],
                 "capabilitiesTransformations": {
+                    "ENU-Global\\.DisplayName": "http://registry\\.gpii\\.net/common/displayName",
+                    "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Global\\.Pitch":{
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "valuePath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Volume":{
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "valuePath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
                     "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -73,31 +136,8 @@
                             }
                         }
                     },
-                    "ENU-Global\\.Pitch":{
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
-                            "options": {
-                                "low": {
-                                    "outputValue": 25
-                                },
-                                "medium": {
-                                    "outputValue": 75
-                                },
-                                "high": {
-                                    "outputValue": 125
-                                }
-                            }
-                        }
-                    },
-                    "ENU-Global\\.Rate": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
-                            "factor": 0.125,
-                            "offset": -12.125
-                        }
-                    }
+                    "ENU-Global\\.SpellRateDelta": "http://registry\\.gpii\\.net/common/spellRateDelta",
+                    "ENU-Global\\.UpperCasePitchDelta": "http://registry\\.gpii\\.net/common/upperCasePitchDelta"
                 }
             }
         },

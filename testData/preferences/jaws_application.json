@@ -6,7 +6,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
                         "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                        "options.TypingEcho" : 1,
+                        "options.TypingEcho" : 2,
                         "ENU-Global.Punctuation" : 2,
                         "ENU-Global.Pitch" : 75,
                         "ENU-Global.Rate" : 100
