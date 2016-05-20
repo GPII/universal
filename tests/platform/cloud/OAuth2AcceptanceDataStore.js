@@ -20,8 +20,14 @@ fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
     gradeNames: ["gpii.oauth2.inMemoryDataStore"],
     model: {
         users: [ // this model is rewritten on startup to hold the token of the fixture's current user
-            { id: 1, username: "bob", password: "b", gpiiToken: "placeholder_token" },
-            { id: 2, username: "alice", password: "a", gpiiToken: "alice_gpii_token" }
+            { id: 1, username: "bob", password: "b", defaultGpiiToken: "placeholder_token" },
+            { id: 2, username: "alice", password: "a", defaultGpiiToken: "alice_gpii_token" }
+        ],
+        gpiiTokens: [
+            {
+                gpiiToken: "alice_gpii_token",
+                userId: 2
+            }
         ],
         clients: [
             {

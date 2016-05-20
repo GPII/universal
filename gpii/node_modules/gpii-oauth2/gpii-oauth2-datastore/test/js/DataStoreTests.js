@@ -29,8 +29,8 @@ var fluid = fluid || require("infusion");
         gradeNames: ["gpii.oauth2.inMemoryDataStore"],
         model: {
             users: [
-                { id: 1, username: "alice", password: "a" },
-                { id: 2, username: "bob", password: "b" }
+                { id: 1, username: "alice", password: "a", defaultGpiiToken: "alice_gpii_token" },
+                { id: 2, username: "bob", password: "b", defaultGpiiToken: "bob_gpii_token" }
             ],
             gpiiTokens: [
                 {

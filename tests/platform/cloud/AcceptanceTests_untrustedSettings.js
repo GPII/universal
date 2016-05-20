@@ -50,7 +50,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         userToken: "os_gnome",
         authDecisions: [
             {
-                userId: 1,   // TODO: need to be replaced by gpiiToken
+                gpiiToken: "os_gnome",
                 clientId: 3,
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
@@ -79,7 +79,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         userToken: "os_gnome",
         authDecisions: [
             {
-                userId: 1,   // TODO: need to be replaced by gpiiToken
+                gpiiToken: "os_gnome",
                 clientId: 3,
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
@@ -87,7 +87,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                 revoked: false
             },
             {
-                userId: 1,   // TODO: need to be replaced by gpiiToken
+                gpiiToken: "os_gnome",
                 clientId: 4,
                 redirectUri: false,
                 accessToken: "os_gnome_desktop_access_token",

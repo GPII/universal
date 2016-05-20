@@ -86,7 +86,7 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true }
         },
         expectedAuthDecision: {
-            userId: 2,
+            gpiiToken: "alice_gpii_token",
             clientId: 1,
             redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true },
