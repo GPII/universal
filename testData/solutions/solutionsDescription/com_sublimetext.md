@@ -48,3 +48,39 @@ Using this NP set in Sublime Text should have the following effects:
 
 * font size increases to 32.
 
+
+## Additional Info
+
+### Themes
+Sublime Text comes with a large set of themes. 
+Many of these themes use a dark background; others use white or light-coloured background.
+The following lists divide the themes into two categories. 
+The additional information (in parentheses) refers to colours in plain text files
+but the themes also cover code colouring, which is not covered here.
+Many themes are low-contrast themes; the identification of low-contrast themes below is only a quick-and-dirty classification.
+
+The following themes have a white (or light) background:
+* "Packages/Color Scheme - Default/Dawn.tmTheme" (black on white)
+* "Packages/Color Scheme - Default/Eiffel.tmTheme" (black on white)
+* "Packages/Color Scheme - Default/IDLE.tmTheme" (black on white)
+* "Packages/Color Scheme - Default/iPlastic.tmTheme" (black on light grey #EEEEEE)
+* "Packages/Color Scheme - Default/LAZY.tmTheme" (black on white)
+* "Packages/Color Scheme - Default/Mac Classic.tmTheme" (black on white)
+* "Packages/Color Scheme - Default/MagicWB (Amiga).tmTheme" (black on grey #969696; some code colouring is white on a non-grey background; low contrast)
+* "Packages/Color Scheme - Default/Slush & Poppies.tmTheme" (black on light grey #F1F1F1)
+* "Packages/Color Scheme - Default/Solarized (Light).tmTheme" (grey #586E75 on off-white #FDF6E3; low contrast)
+
+The following themes have a black or dark background:
+* "Packages/Color Scheme - Default/All Hallow's Eve.tmTheme" (white #FFFFFF on black #000000)
+* "Packages/Color Scheme - Default/Amy.tmTheme" (very pale blue #D0D0DD on dark #200020 background; low contrast)
+* "Packages/Color Scheme - Default/Blackboard.tmTheme" (white #F8F8F8 on almost black #0C1021) 
+* "Packages/Color Scheme - Default/Cobalt.tmTheme" (white #FFFFFF on blue #002240; rather low contrast)
+* "Packages/Color Scheme - Default/Espresso Libre.tmTheme" (some pale colour #BDAE9D on someting brownish #2A211C; low contrast)
+* "Packages/Color Scheme - Default/Monokai Bright.tmTheme" (white #F8F8F2 on on brownish black #272822)
+* "Packages/Color Scheme - Default/Monokai.tmTheme" (white #F8F8F2 on on brownish black #272822)
+* "Packages/Color Scheme - Default/Pastels on Dark.tmTheme" (pale greyish blue #DADADA on dark grey #211E1E; low contrast)
+* "Packages/Color Scheme - Default/Solarized (Dark).tmTheme" (grey #839496 on dark blueish grey #042029; low contrast)
+* "Packages/Color Scheme - Default/SpaceCadet.tmTheme" (blueish off-white #DDE6CF on almost black #0D0D0D; low contrast)
+* "Packages/Color Scheme - Default/Sunburst.tmTheme" (off-white #F8F8F8 on black #000000)
+* "Packages/Color Scheme - Default/Twilight.tmTheme" (off-white #F8F8F8 on dark grey #141414; low contrast)
+* "Packages/Color Scheme - Default/Zenburnesque.tmTheme" (light grey #DEDEDE on grey #404040; low contrast)
