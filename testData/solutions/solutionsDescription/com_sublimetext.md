@@ -38,6 +38,11 @@ Note, however, that most of the application-specific terms for Sublime Text cann
 
 The acceptance tests will be expanded when all application-specific terms can be mapped to common terms. 
 
+**Note**: The path to Sublime Text's settings file in `win32.json` 
+(`"${{environment}.APPDATA}\\Sublime Text 3\\Packages\\User\\Preferences.sublime-settings"`)
+is the path on the 32-bit version of Windows 7. 
+This path is not the same on the 64-bit version of Windows 7. Windows 8.x and Windows 10 have not been tested yet.
+
 
 ## Testing
 When using a NP set with settings for Sublime Text, the editor's should responded immediately to the settings included in that NP set.
