@@ -183,6 +183,7 @@
                     "transform": [{
                         "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "outputPath": "",
                         "presentValue": 1,
                         "missingValue": 0,
                         "options": {
@@ -327,6 +328,7 @@
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
                             "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "outputPath": "",
                             "presentValue": true,
                             "missingValue": false,
                             "options": {
@@ -1021,7 +1023,7 @@
                 "capabilitiesTransformations": {
                     "Arrow": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1038,7 +1040,7 @@
                     },
                     "Hand": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1055,7 +1057,7 @@
                     },
                     "Help": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1072,7 +1074,7 @@
                     },
                     "AppStarting": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1089,7 +1091,7 @@
                     },
                     "No": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1106,7 +1108,7 @@
                     },
                     "NWPen": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1123,7 +1125,7 @@
                     },
                     "SizeAll": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1140,7 +1142,7 @@
                     },
                     "SizeNESW": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1157,7 +1159,7 @@
                     },
                     "SizeNS": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1174,7 +1176,7 @@
                     },
                     "SizeNWSE": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1191,7 +1193,7 @@
                     },
                     "SizeWE": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1208,7 +1210,7 @@
                     },
                     "UpArrow": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1225,7 +1227,7 @@
                     },
                     "Wait": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1304,7 +1306,7 @@
                      "fontSize": {
                         "value": {
                             "transform": {
-                                "type": "gpii.transformer.quantize",
+                                "type": "fluid.transforms.quantize",
                                 "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                                 "ranges": [{
                                     "upperBound": 14,
@@ -1357,7 +1359,7 @@
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "input": 9,
                             "ranges": [
@@ -1378,7 +1380,7 @@
                     "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "magnification": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                             "input": 1,
                             "ranges": [
