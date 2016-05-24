@@ -33,6 +33,7 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
  * gpii.config.trusted-flowmanager.production
  * ================================
  */
+
 gpii.tests.productionConfigTesting = [
     {
         name: "Production config test with os_common using Flat matchmaker",
@@ -66,7 +67,7 @@ gpii.tests.productionConfigTesting = [
     }
 ];
 
-module.exports = gpii.test.bootstrap({
+gpii.test.bootstrap({
     testDefs:  "gpii.tests.productionConfigTesting",
     configName: "gpii.config.trusted-flowmanager.production",
     configPath: "%universal/gpii/configs"
@@ -105,4 +106,4 @@ var testDefs = [
     }
 ];
 
-module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);
+gpii.test.cloudBased.bootstrap(testDefs, __dirname);
