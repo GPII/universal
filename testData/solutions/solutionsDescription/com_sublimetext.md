@@ -71,7 +71,7 @@ The following themes have a white (or light) background:
 * "Packages/Color Scheme - Default/Solarized (Light).tmTheme" (grey #586E75 on off-white #FDF6E3; low contrast)
 
 The following themes have a black or dark background:
-* "Packages/Color Scheme - Default/All Hallow's Eve.tmTheme" (white #FFFFFF on black #000000)
+* "Packages/Color Scheme - Default/All Hallow's Eve.tmTheme" (white #FFFFFF on black #000000; HTML code has grey background #434242)
 * "Packages/Color Scheme - Default/Amy.tmTheme" (very pale blue #D0D0DD on dark #200020 background; low contrast)
 * "Packages/Color Scheme - Default/Blackboard.tmTheme" (white #F8F8F8 on almost black #0C1021) 
 * "Packages/Color Scheme - Default/Cobalt.tmTheme" (white #FFFFFF on blue #002240; rather low contrast)
