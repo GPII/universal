@@ -2,4 +2,6 @@
 
 Locally running system in production mode
 
-**WARNING: This config is UNTESTED and likely broken**
+Tested via ProductionConfigTests.js
+
+NOTE: duplicates solutionsRegistryDataSource options distribution from gpii.config.all.development.dr.production.json

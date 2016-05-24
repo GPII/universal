@@ -224,7 +224,7 @@
   // Construct a mocked XHR Object
   function xhr(mockHandler, requestSettings, origSettings, origHandler) {
     // Extend with our default mockjax settings
-    mockHandler = fluid.extend(true, {}, $.mockjaxSettings, mockHandler);
+    mockHandler = $.extend(true, {}, $.mockjaxSettings, mockHandler);
 
     if (typeof mockHandler.headers === 'undefined') {
       mockHandler.headers = {};
@@ -432,7 +432,7 @@
     }
 
     // Extend the original settings for the request
-    requestSettings = fluid.extend(true, {}, $.ajaxSettings, origSettings);
+    requestSettings = $.extend(true, {}, $.ajaxSettings, origSettings);
 
     // Iterate over our mock handlers (in registration order) until we find
     // one that is willing to intercept the request
@@ -471,7 +471,7 @@
       copyUrlParameters(mockHandler, origSettings);
 
       (function(mockHandler, requestSettings, origSettings, origHandler) {
-        mockRequest = _ajax.call($, fluid.extend(true, {}, origSettings, {
+        mockRequest = _ajax.call($, $.extend(true, {}, origSettings, {
           // Mock the XHR object
           xhr: function() { return xhr( mockHandler, requestSettings, origSettings, origHandler ); }
         }));
@@ -526,7 +526,7 @@
 
   // Public
 
-  fluid.extend({
+  $.extend({
     ajax: handleAjax
   });
 

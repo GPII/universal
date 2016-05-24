@@ -22,6 +22,7 @@
                     "transform": {
                         "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "outputPath": "",
                         "presentValue": "proportional",
                         "missingValue": "none",
                         "options": {
@@ -116,7 +117,7 @@
                     },
                     "cursor-size": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1122,7 +1123,7 @@
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "input": 9,
                             "ranges": [
@@ -1143,7 +1144,7 @@
                     "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "magnification": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                             "input": 1,
                             "ranges": [
