@@ -11,12 +11,14 @@
                         "caret_extra_width": 2,
                         "caret_style": "blink",
                         "color_scheme": "Packages/Color Scheme - Default/Eiffel.tmTheme",
+                        "dictionary": "Packages/Language - English/en_GB.dic",
                         "fade_fold_buttons": false,
+                        "highlight_line": true,
+                        "highlight_modified_tabs": true,
                         "show_encoding": true,
                         "show_line_endings": true,
                         "spell_check": true,
-                        "dictionary": "Packages/User/English (British).dic",
-                        "translate_tabs_to_spaces": false
+                        "translate_tabs_to_spaces": true
                     }
                 }
             }
