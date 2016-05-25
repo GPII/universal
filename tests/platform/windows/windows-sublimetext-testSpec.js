@@ -1,13 +1,16 @@
 /*
-GPII Integration and Acceptance Testing
+    GPII Integration and Acceptance Testing
 
-Copyright 2016 Hochschule der Medien (HdM)
+    Copyright 2016 Hochschule der Medien (HdM)
 
-Licensed under the New BSD license. You may not use this file except in
-compliance with this License.
+    The research leading to these results has received funding from the European Union's
+    Horizon 2020 research and innovation programme under grant agreement No. 645215 (NOLB: No One Left Behind).
+    
+    Licensed under the New BSD license. You may not use this file except in
+    compliance with this License.
 
-You may obtain a copy of the License at
-https://github.com/GPII/universal/blob/master/LICENSE.txt
+    You may obtain a copy of the License at
+    https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 "use strict";
