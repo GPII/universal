@@ -47,8 +47,10 @@ The acceptance tests will be expanded when more of the application-specific term
 
 **Note**: The path to Sublime Text's settings file in `win32.json` 
 (`"${{environment}.APPDATA}\\Sublime Text 3\\Packages\\User\\Preferences.sublime-settings"`)
-is the path on the 32-bit version of Windows 7. 
-This path is not the same on the 64-bit version of Windows 7. Windows 8.x and Windows 10 have not been tested yet.
+is the path on the 32-bit version of Windows 7, 
+where it will typically expand to `"C:\Users\<user>\AppData\Roaming\Sublime Text 3\Packages\User\Preferences.sublime-settings"`. 
+It should expand to the same path on the 64-bit version of Windows 7. 
+Windows 8.x and Windows 10 have not been tested yet.
 
 
 ## Testing
