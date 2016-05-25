@@ -1499,19 +1499,23 @@
                 },
                 "capabilities": [
                     "applications.com\\.sublimetext\\.id",
+                    "caret_extra_bottom",
+                    "caret_extra_top",
+                    "caret_extra_width",
+                    "caret_style",
                     "color_scheme",
+                    "dictionary",
+                    "fade_fold_buttons",
                     "font_face",
                     "font_size",
-                    "line_numbers",
                     "gutter",
-                    "spell_check",
-                    "dictionary",
-                    "caret_style",
-                    "caret_extra_top",
-                    "caret_extra_bottom",
-                    "caret_extra_width",
+                    "highlight_line",
+                    "highlight_modified_tabs",
+                    "line_numbers",
                     "show_encoding",
-                    "show_line_endings"
+                    "show_line_endings",
+                    "spell_check",
+                    "translate_tabs_to_spaces"
                 ],
                 "capabilitiesTransformations": {
                     "font_size": {

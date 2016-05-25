@@ -9,34 +9,41 @@
 
 
 ## Description
-__[# Sublime Text](http://www.sublimetext.com/)__ is a programming editor.
+__[Sublime Text](http://www.sublimetext.com/)__ is a programming editor.
 Some of its settings are relevant to accessibility.
 Unlike many other applications, Sublime Text immediately responds to changes in the settings while it is running.
 
 
 ## Integration
-Several settings in Sublime Text are available via the GPII personalization framework.
+When using application-specific terms, all settings in Sublime Text are available via the GPII personalization framework.
 They can be adapted using the generic JSON settings handler. 
 
-Settings:
-* `color_scheme` (closest common terms: `highContrastEnabled` and `highContrastTheme`)
-* `font_face` 
-* `font_size` (pixels; common term `fontSize` uses points) 
-* `line_numbers` 
-* `gutter` 
-* `spell_check` 
-* `caret_style` 
+When using "Cloud4all common terms", only font size can be modified via the GPII personalization framework.
+
+Selected settings (in alphabetical order):
 * `caret_extra_top` 
 * `caret_extra_bottom` 
 * `caret_extra_width` 
+* `caret_style` 
+* `color_scheme` (closest common terms: `highContrastEnabled` and `highContrastTheme`)
+* `dictionary` (for spellchecking; only relevant when `spell_check` is set to `true`; reference to file on local file systems)
+* `font_face` 
+* `font_size` (font size in pixels; maps to the common term `fontSize`, which uses points) 
+* `gutter` 
+* `highlight_line`
+* `highlight_modified_tabs` 
+* `line_numbers` 
 * `show_encoding` 
 * `show_line_endings` 
+* `spell_check` 
+* `translate_tabs_to_spaces` 
 
 Information about value ranges and some mappings to common terms can be found [in the spreadsheet "SP3 Settings for 2nd pilots"](https://docs.google.com/spreadsheets/d/1uaZV4mBze4udTlEikT30ApmE7CaO46eM0GLT0HVUESg/edit#gid=372151024).
 (Find the tab "SublimeText3".)
+
 Note, however, that most of the application-specific terms for Sublime Text cannot yet be mapped to common terms, since the corresponding common terms still need to be defined.
 
-The acceptance tests will be expanded when all application-specific terms can be mapped to common terms. 
+The acceptance tests will be expanded when more of the application-specific terms can be mapped to common terms. 
 
 **Note**: The path to Sublime Text's settings file in `win32.json` 
 (`"${{environment}.APPDATA}\\Sublime Text 3\\Packages\\User\\Preferences.sublime-settings"`)
@@ -45,7 +52,7 @@ This path is not the same on the 64-bit version of Windows 7. Windows 8.x and Wi
 
 
 ## Testing
-When using a NP set with settings for Sublime Text, the editor's should responded immediately to the settings included in that NP set.
+When using a NP set with settings for Sublime Text, the editor's should respond immediately to the settings included in that NP set.
 
 ### sublime_gert
 
@@ -89,3 +96,4 @@ The following themes have a black or dark background:
 * "Packages/Color Scheme - Default/Sunburst.tmTheme" (off-white #F8F8F8 on black #000000)
 * "Packages/Color Scheme - Default/Twilight.tmTheme" (off-white #F8F8F8 on dark grey #141414; low contrast)
 * "Packages/Color Scheme - Default/Zenburnesque.tmTheme" (light grey #DEDEDE on grey #404040; low contrast)
+
