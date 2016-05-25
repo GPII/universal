@@ -1,5 +1,0 @@
-This configuration file is used by the for acceptance test: windows-sublimetext-testSpec.js.
-
-It includes to the basic localInstall setup for acceptance tests (modifying the preferences folder used), which in turn includes the standard development config file (running GPII locally, using development setup).
-
-This config sets the device reporter file to be 'sublimetext.json', which will report Sublime Text as being installed on the system.
