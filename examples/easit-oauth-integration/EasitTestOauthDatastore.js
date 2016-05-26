@@ -20,7 +20,7 @@ var fluid = require("infusion"),
 fluid.registerNamespace("gpii.oauth2");
 
 fluid.defaults("gpii.oauth2.easitSampleDataStore", {
-    gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
+    gradeNames: ["gpii.oauth2.inMemoryDataStore"],
     listeners: {
         onCreate: "gpii.oauth2.logEasitStartup"
     },

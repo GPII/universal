@@ -20,6 +20,6 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-require("./UserLogonStateChangeTestDefs.js");
+require("./shared/UserLogonStateChangeTestDefs.js");
 
 kettle.test.bootstrapServer(gpii.tests.userLogonStateChange.buildTestDefs(gpii.tests.userLogonStateChange.testDefs));

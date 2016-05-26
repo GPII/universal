@@ -57,9 +57,9 @@ gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles = function () {
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: "fluid.component",
     listeners: {
-        "onDestroy.cleanupTmpFiles": gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles
+        "onDestroy.cleanupTmpFiles": "gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles"
     }
 });
 
@@ -93,12 +93,12 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     },
     { // 6
         funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
-        args: ["{getPrefsRequest}", "{addPrefsRequest}"]
+        args: ["{getPrefsRequest2}", "{addPrefsRequest}"]
     },
     { // 7
-        event: "{getPrefsRequest}.events.onComplete",
+        event: "{getPrefsRequest2}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyGetPrefsResponse",
-        args: ["{arguments}.0", "{getPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.transformedPrefs]
+        args: ["{arguments}.0", "{getPrefsRequest2}", gpii.tests.cloud.oauth2.addPrefs.transformedPrefs]
     }
 ];
 
@@ -242,21 +242,21 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting /add-preferences (with false access token)",
+            name: "Acceptance test for suppporting /add-preferences (with an non-existent access token)",
             accessToken: "false token"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting /add-preferences (with false access token)",
+            name: "Acceptance test for suppporting /add-preferences (with an access token whose owner client is non-existent)",
             accessToken: "non_existent_client"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting /add-preferences (with false access token)",
+            name: "Acceptance test for suppporting /add-preferences (with access token that is not allowed to add prefs)",
             accessToken: "not_allowed_to_add_prefs"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs

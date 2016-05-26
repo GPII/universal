@@ -14,29 +14,24 @@
 "use strict";
 
 var fluid = require("infusion"),
-    path = require("path"),
-    configPath = path.resolve(__dirname, "./configs"),
     gpii = fluid.registerNamespace("gpii"),
-    $ = fluid.registerNamespace("jQuery"),
     kettle = fluid.registerNamespace("kettle");
 
-require("../index.js");
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
-require("../gpii/node_modules/flowManager/test/BrowserChannelTestDefs.js");
+fluid.require("%flowManager/test/shared/BrowserChannelTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.untrusted.flowManager.browserChannel");
 
-gpii.tests.untrusted.flowManager.browserChannel.testDefs = [];
-
-fluid.each(gpii.tests.flowManager.browserChannel.testDefs, function (testDef) {
-    gpii.tests.untrusted.flowManager.browserChannel.testDefs.push($.extend(true, {}, testDef, {
+gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.tests.flowManager.browserChannel.testDefs, function (testDef) {
+    return fluid.extend(true, {}, testDef, {
         config: {
-            configName: "untrustedBrowserChannelTests",
-            configPath: configPath
+            configName: "gpii.tests.acceptance.untrusted.browserChannel.config",
+            configPath: "%universal/tests/configs"
         }
-    }));
+    });
 });
 
 kettle.test.bootstrapServer(gpii.tests.untrusted.flowManager.browserChannel.testDefs);

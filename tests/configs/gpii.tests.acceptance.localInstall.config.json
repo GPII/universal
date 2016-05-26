@@ -1,0 +1,13 @@
+{
+    "type": "gpii.tests.acceptance.localInstall.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.rawPreferencesDataSource": {
+                "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
+                "priority": "after:development.rawPreferencesDataSource"
+            }
+        }
+    },
+    "mergeConfigs": "%universal/gpii/configs/gpii.config.development.all.local.json"
+}

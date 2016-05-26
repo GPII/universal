@@ -19,7 +19,7 @@ var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.oauth2");
 
 fluid.defaults("gpii.oauth2.clientService", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     components: {
         dataStore: {
             type: "gpii.oauth2.dataStore"

@@ -21,7 +21,7 @@ var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle");
 
 require("../index.js");
-require("./DevelopmentTestDefs.js");
+require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 

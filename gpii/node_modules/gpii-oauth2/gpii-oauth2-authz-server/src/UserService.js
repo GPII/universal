@@ -21,7 +21,7 @@ var fluid = fluid || require("infusion");
     fluid.registerNamespace("gpii.oauth2");
 
     fluid.defaults("gpii.oauth2.userService", {
-        gradeNames: ["fluid.eventedComponent", "autoInit"],
+        gradeNames: "fluid.component",
         components: {
             dataStore: {
                 type: "gpii.oauth2.dataStore"
