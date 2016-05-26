@@ -1,5 +1,5 @@
 /*!
- * Test client for BrowserChannel WebSockets 
+ * Test client for BrowserChannel WebSockets
  *
  * Copyright 2016 Raising the Floor - International
  *
