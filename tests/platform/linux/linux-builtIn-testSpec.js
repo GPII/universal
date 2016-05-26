@@ -117,42 +117,6 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectRestored": "false"
             }
         ]
-    },
-    {
-        name: "Testing os_win7 using Flat matchmaker",
-        userToken: "os_win7",
-        settingsHandlers: {
-            "gpii.gsettings": {
-                "some.app.id": [{
-                    "settings": {
-                        "mag-factor": 1.5,
-                        "screen-position": "full-screen",
-                        "mouse-tracking": "proportional",
-                        "caret-tracking": "proportional",
-                        "focus-tracking": "none"
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.a11y.magnifier"
-                    }
-                }, {
-                    "settings": {
-                        "gtk-theme": "HighContrast",
-                        "icon-theme": "HighContrast",
-                        "cursor-size": 41
-                    },
-                    "options": {
-                        "schema": "org.gnome.desktop.interface"
-                    }
-                }]
-            }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
     }
 ]);
 

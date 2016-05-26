@@ -121,17 +121,6 @@ The input for these POST requests will be in the following format. Note that it 
         "gpii-default",
         "nighttime-at-home"
     ],
-    inverseCapabilities: { 
-        "com.microsoft.windows.cursors": {
-            "http://registry.gpii.net/common/mouseTrailing": 0.8,
-            (...),
-            "http://registry.gpii.net/common/cursorSize": 0.60
-        },
-        (...),
-        "org.nvda-project": {
-            (...)
-        }
-    },
     rematch: { //out of scope for review - it would be useful to allow a MM specific block in the MM output,
     //which can then be sent back in the rematch section to make the MM more informed
         // [ ?

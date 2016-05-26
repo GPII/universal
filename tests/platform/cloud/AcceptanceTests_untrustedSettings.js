@@ -33,10 +33,11 @@ gpii.tests.cloud.untrustedSettings.sequence = [
     }
 ];
 
+fluid.logObjectRenderChars = 1000000;
 gpii.tests.cloud.untrustedSettings.testDefs = [
     {
         name: "No authorized solutions",
-        userToken: "os_gnome",
+        userToken: "os_common",
         expectedMatchMakerOutput: {
             "inferredConfiguration": {
                 "gpii-default": {
@@ -47,7 +48,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
     },
     {
         name: "Authorize magnifier (share magnifier settings)",
-        userToken: "os_gnome",
+        userToken: "os_common",
         authDecisions: [
             {
                 userId: 1,
@@ -66,7 +67,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                             "active": true,
                             "settings": {
                                 "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
+                                "http://registry.gpii.net/common/magnifierPosition": "Lens"
                             }
                         }
                     }
@@ -76,7 +77,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
     },
     {
         name: "Authorize magnifier (share all) and desktop (share text size)",
-        userToken: "os_gnome",
+        userToken: "os_common",
         authDecisions: [
             {
                 userId: 1,
@@ -105,7 +106,9 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                                 "http://registry.gpii.net/common/fontSize": 9,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
+                                "http://registry.gpii.net/common/invertColours": true,
+                                "http://registry.gpii.net/common/magnifierPosition": "Lens",
+                                "http://registry.gpii.net/common/highContrastEnabled": true
                             }
                         },
                         "org.gnome.desktop.interface": {
@@ -121,7 +124,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
     },
     {
         name: "Anonymous token (token without a user account)",
-        userToken: "os_gnome",
+        userToken: "os_common",
         isAnonymousToken: true,
         expectedMatchMakerOutput: {
             "inferredConfiguration": {
@@ -130,61 +133,27 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.a11y.magnifier": {
                             "active": true,
                             "settings": {
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
+                                "http://registry.gpii.net/common/magnifierPosition": "Lens",
                                 "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                                "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                    "mag-factor": 1.5,
-                                    "screen-position": "full-screen"
-                                },
-                                "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                    "cursor-size": 90,
-                                    "text-scaling-factor": 0.75
-                                },
-                                "http://registry.gpii.net/applications/org.alsa-project": {
-                                    "masterVolume": 50
-                                }
+                                "http://registry.gpii.net/common/tracking": [ "mouse", "caret" ],
+                                "http://registry.gpii.net/common/invertColours": true,
+                                "http://registry.gpii.net/common/cursorSize": 0.9,
+                                "http://registry.gpii.net/common/fontSize": 9,
+                                "http://registry.gpii.net/common/mouseTrailing": 10,
+                                "http://registry.gpii.net/common/highContrastEnabled": true
                             }
                         },
                         "org.gnome.desktop.interface": {
                             "active": true,
                             "settings": {
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
+                                "http://registry.gpii.net/common/magnifierPosition": "Lens",
                                 "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                                "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                    "mag-factor": 1.5,
-                                    "screen-position": "full-screen"
-                                },
-                                "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                    "cursor-size": 90,
-                                    "text-scaling-factor": 0.75
-                                },
-                                "http://registry.gpii.net/applications/org.alsa-project": {
-                                    "masterVolume": 50
-                                }
-                            }
-                        },
-                        "org.alsa-project": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/fontSize": 9,
+                                "http://registry.gpii.net/common/tracking": [ "mouse", "caret" ],
+                                "http://registry.gpii.net/common/invertColours": true,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                                "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                    "mag-factor": 1.5,
-                                    "screen-position": "full-screen"
-                                },
-                                "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                    "cursor-size": 90,
-                                    "text-scaling-factor": 0.75
-                                },
-                                "http://registry.gpii.net/applications/org.alsa-project": {
-                                    "masterVolume": 50
-                                }
+                                "http://registry.gpii.net/common/fontSize": 9,
+                                "http://registry.gpii.net/common/mouseTrailing": 10,
+                                "http://registry.gpii.net/common/highContrastEnabled": true
                             }
                         }
                     }
