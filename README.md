@@ -52,9 +52,11 @@ A VM can be automatically created using tools provided by the [Prosperity4All Qu
 
 Following provisioning, tests can be run in the VM from the host system as follows:
 
-- node-based tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && npm test'`
-- browser-based tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && DISPLAY=:0 testem ci --file tests/web/testem_qi.json'`
-- production tests: `vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal && node tests/ProductionConfigTests.js'`
+- node-based tests: `grunt node-tests`
+- browser-based tests: `grunt browser-tests`
+- production tests: `grunt node-production-tests`
+
+The ``grunt tests`` command will run the browser and Node based tests.
 
 Usage
 -----
