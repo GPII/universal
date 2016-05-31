@@ -1,14 +1,14 @@
 {
-    "type": "untrusted.development.all.local",
+    "type": "gpii.config.untrusted.development.all.local",
     "options": {
         "gradeNames": ["kettle.multiConfig.config"],
         "configs": {
             "localConfig": {
-                "configName": "untrusted.development",
+                "configName": "gpii.config.untrusted.development",
                 "configPath": "%universal/gpii/configs"
             },
             "cloudBasedConfig": {
-                "configName": "cloudBased.development.all.local",
+                "configName": "gpii.config.cloudBased.development.all.local",
                 "configPath": "%universal/gpii/configs"
             }
         },

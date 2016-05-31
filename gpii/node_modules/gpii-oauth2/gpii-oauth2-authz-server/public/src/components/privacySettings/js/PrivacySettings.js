@@ -251,8 +251,8 @@ var gpii = gpii || {};
         var editButtons = that.locate("editButton");
         var removeButtons = that.locate("removeButton");
 
-        var tooltipOptionsForEdit = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.editLabel});
-        var tooltipOptionsForRemove = $.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.removeLabel});
+        var tooltipOptionsForEdit = fluid.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.editLabel});
+        var tooltipOptionsForRemove = fluid.extend(true, {}, that.options.tooltipOptions, {content: that.options.strings.removeLabel});
 
         fluid.each(editButtons, function (thisEditButton) {
             fluid.tooltip(thisEditButton, tooltipOptionsForEdit);

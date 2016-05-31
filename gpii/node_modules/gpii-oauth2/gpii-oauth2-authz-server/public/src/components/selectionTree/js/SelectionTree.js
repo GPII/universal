@@ -47,7 +47,6 @@ var gpii = gpii || {};
             hasSelection: false
         },
         modelRelay: {
-            source: "{that}.model.selections.value",
             target: "{that}.model.hasSelection",
             singleTransform: {
                 type: "fluid.transforms.free",

@@ -14,7 +14,7 @@
 $.fn.extend({
 	simulate: function(type, options) {
 		return this.each(function() {
-			var opt = $.extend({}, $.simulate.defaults, options || {});
+			var opt = fluid.extend({}, $.simulate.defaults, options || {});
 			new $.simulate(this, type, opt);
 		});
 	}
@@ -31,7 +31,7 @@ $.simulate = function(el, type, options) {
 	}
 }
 
-$.extend($.simulate.prototype, {
+fluid.extend($.simulate.prototype, {
 	simulateEvent: function(el, type, options) {
 		var evt = this.createEvent(type, options);
 		this.dispatchEvent(el, type, evt, options);
@@ -46,7 +46,7 @@ $.extend($.simulate.prototype, {
 	},
 	mouseEvent: function(type, options) {
 		var evt;
-		var e = $.extend({
+		var e = fluid.extend({
 			bubbles: true, cancelable: (type != "mousemove"), view: window, detail: 0,
 			screenX: 0, screenY: 0, clientX: 0, clientY: 0,
 			ctrlKey: false, altKey: false, shiftKey: false, metaKey: false,
@@ -63,7 +63,7 @@ $.extend($.simulate.prototype, {
 				e.button, e.relatedTarget || document.body.parentNode);
 		} else if (document.createEventObject) {
 			evt = document.createEventObject();
-			$.extend(evt, e);
+			fluid.extend(evt, e);
 			evt.button = { 0:1, 1:4, 2:2 }[evt.button] || evt.button;
 		}
 		return evt;
@@ -71,7 +71,7 @@ $.extend($.simulate.prototype, {
 	keyboardEvent: function(type, options) {
 		var evt;
 		
-		var e = $.extend({ bubbles: true, cancelable: true, view: window,
+		var e = fluid.extend({ bubbles: true, cancelable: true, view: window,
 			ctrlKey: false, altKey: false, shiftKey: false, metaKey: false,
 			keyCode: 0, charCode: 0
 		}, options);
@@ -85,14 +85,14 @@ $.extend($.simulate.prototype, {
 			} catch(err) {
 				evt = document.createEvent("Events");
 				evt.initEvent(type, e.bubbles, e.cancelable);
-				$.extend(evt, { view: e.view,
+				fluid.extend(evt, { view: e.view,
 					ctrlKey: e.ctrlKey, altKey: e.altKey, shiftKey: e.shiftKey, metaKey: e.metaKey,
 					keyCode: e.keyCode, charCode: e.charCode
 				});
 			}
 		} else if (document.createEventObject) {
 			evt = document.createEventObject();
-			$.extend(evt, e);
+			fluid.extend(evt, e);
 		}
 		if ($.browser.msie || $.browser.opera) {
 			evt.keyCode = (e.charCode > 0) ? e.charCode : e.keyCode;
@@ -132,7 +132,7 @@ $.extend($.simulate.prototype, {
 	}
 });
 
-$.extend($.simulate, {
+fluid.extend($.simulate, {
 	defaults: {
 		speed: 'sync'
 	},

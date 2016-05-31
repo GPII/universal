@@ -56,7 +56,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
-    gpii.tests.oauth2.privacySettings.requestInfos = $.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.oauth2.privacySettings.additionalRequestInfos);
+    gpii.tests.oauth2.privacySettings.requestInfos = fluid.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.oauth2.privacySettings.additionalRequestInfos);
 
     gpii.tests.oauth2.privacySettings.registerMockjax = function () {
         fluid.each(gpii.tests.oauth2.privacySettings.requestInfos, function (options) {
@@ -297,7 +297,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     gpii.tests.oauth2.privacySettings.addAuthorizationDialogClosed = function (that) {
-        jqUnit.assertDeepEq("The focus returns back to the add service button", that.locate("addServiceButton").is(":focus"));
+        jqUnit.assertTrue("The focus returns back to the add service button", that.locate("addServiceButton").is(":focus"));
     };
 
     gpii.tests.oauth2.privacySettings.triggerButtonEvt = function (that, buttonSelector, index, evtName) {

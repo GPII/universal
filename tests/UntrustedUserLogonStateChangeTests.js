@@ -32,7 +32,7 @@ gpii.tests.untrusted.userLogonStateChange.testDefs =
     fluid.transform(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
             return fluid.extend(true, {}, testDef, {
                 config: {
-                    configName: "untrusted.development.all.local",
+                    configName: "gpii.config.untrusted.development.all.local",
                     configPath: "%universal/gpii/configs"
                 },
                 gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",

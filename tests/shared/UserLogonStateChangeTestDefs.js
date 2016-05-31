@@ -105,7 +105,7 @@ gpii.tests.userLogonStateChange.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             config: {
-                configName: "development.all.local",
+                configName: "gpii.config.development.all.local",
                 configPath: "%universal/gpii/configs"
             },
             gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",

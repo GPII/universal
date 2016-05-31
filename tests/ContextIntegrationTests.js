@@ -42,6 +42,8 @@ fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
     method: "PUT"
 });
 
+// NOTE: This inherits from from "gpii.test.common.testCaseHolder" via "gpii.test.integration.testCaseHolder.linux" 
+// from which it gets loginRequest, logoutRequest and other standard events
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
     events: {
         refreshEnvironmentChangedRequest: null
@@ -73,6 +75,8 @@ gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, 
         lifecycleManager.activeSessions[token].activeContextName);
 };
 
+
+// TODO: Remove the abominable duplication between these definitions and those in Testing.js by means of a FLUID-5903 scheme
 gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
     return [
         {
@@ -84,14 +88,16 @@ gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName)
             event: "{environmentChangedRequest}.events.onComplete"
         }, {
             func: "gpii.test.checkConfiguration",
-            args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}"]
+            args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}",  "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+        }, {
+            event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+            listener: "fluid.identity"
         }, {
             func: "gpii.tests.contextIntegration.checkCurrentContext",
             args: ["{lifecycleManager}", "context1", contextName]
         }
     ];
 };
-
 
 gpii.tests.contextIntegration.data = {
     userToken: "context1",
@@ -231,7 +237,10 @@ gpii.tests.contextIntegration.fixtures = [
                     args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -239,7 +248,10 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
                 }, {
                     func: "gpii.tests.contextIntegration.checkCurrentContext",
                     args: ["{lifecycleManager}", "context1", "gpii-default"]
@@ -259,7 +271,10 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
                 }
             ]
         ]
@@ -274,7 +289,10 @@ gpii.tests.contextIntegration.fixtures = [
                     args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}",  "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
                 }, {
                     func: "{environmentChangedRequest2}.send",
                     args: {
@@ -289,7 +307,10 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}"]
+                    args: ["{tests}.contexts.onlyBright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
                 }, {
                     func: "gpii.tests.contextIntegration.checkCurrentContext",
                     args: ["{lifecycleManager}", "context1", "bright"]
@@ -304,7 +325,10 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
                 }
             ]
         ]
@@ -318,7 +342,10 @@ gpii.tests.contextIntegration.fixtures = [
                     args: [ "{tests}", [ "contexts" ]]
                 }, {
                     func: "gpii.test.snapshotSettings",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
                 }, {
                     func: "{loginRequest}.send"
                 }, {
@@ -326,7 +353,10 @@ gpii.tests.contextIntegration.fixtures = [
                     listener: "gpii.test.loginRequestListen"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
                 }, {
                     func: "gpii.tests.contextIntegration.checkCurrentContext",
                     args: ["{lifecycleManager}", "context1", "gpii-default"]
@@ -349,7 +379,10 @@ gpii.tests.contextIntegration.fixtures = [
             [
                 {
                     func: "gpii.test.checkRestoredConfiguration",
-                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}"]
+                    args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
                 }
             ]
         ]

@@ -307,7 +307,8 @@ There are two important things to note here:
 
 #### POST /add-preferences/[?view=:view]
 
-This is used to post new preferences to the Preferences Server using the [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant). The use of this end point requires the collaboration of the Flow Manager and the Preferences Server. The Flow Manager is responsible of generating and returning the access token, while the Preference Server verifies the access token and add new preferences. See [Cloud Based Server Configuratoin](../gpii/configs/cloudBased.development.all.local.json) for how to config the Flow Manager and the Preferences Server.
+This is used to post new preferences to the Preferences Server using the [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant). The use of this end point requires the collaboration of the Flow Manager and the Preferences Server. The Flow Manager is responsible of generating and returning the access token, while the Preference Server verifies the access token and add new preferences. 
+See [Cloud Based Server Configuratoin](../gpii/configs/gpii.config.cloudBased.development.all.local.json) for how to config the Flow Manager and the Preferences Server.
 
 Before using this request, users needs to `POST` to `/access-token` end point to request an access token. The access token is then be provided in an "Authorization" header when sending a `POST` request to `/add-preferences`.
 

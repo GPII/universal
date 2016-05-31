@@ -9,5 +9,5 @@
             }
         }
     },
-    "mergeConfigs": "%universal/gpii/configs/development.all.local.json"
+    "mergeConfigs": "%universal/gpii/configs/gpii.config.development.all.local.json"
 }

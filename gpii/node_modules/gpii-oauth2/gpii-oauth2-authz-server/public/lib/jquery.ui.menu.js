@@ -446,7 +446,7 @@ $.widget( "ui.menu", {
 	},
 
 	_open: function( submenu ) {
-		var position = $.extend({
+		var position = fluid.extend({
 			of: this.active
 		}, this.options.position );
 
