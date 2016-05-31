@@ -3,8 +3,11 @@
         "findUserByName": {
             "map": "function(doc) {if (doc.type === 'user') emit(doc.name, doc)}"
         },
+        "findGpiiToken": {
+            "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, doc)}"
+        },
         "findUserByGpiiToken": {
-            "map": "function(doc) {if (doc.type === 'user') emit(doc.gpiiToken, doc)}"
+            "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, {'_id': doc.userId})}"
         },
         "findClientByOauth2ClientId": {
             "map": "function(doc) {if (doc.type === 'client') emit(doc.oauth2ClientId, doc)}"
