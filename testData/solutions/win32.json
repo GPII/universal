@@ -1511,6 +1511,7 @@
                     "highlight_line",
                     "highlight_modified_tabs",
                     "line_numbers",
+                    "margin",
                     "show_encoding",
                     "show_line_endings",
                     "spell_check",
