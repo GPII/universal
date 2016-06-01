@@ -11,9 +11,6 @@
     "mergeConfigs": [
         "%processReporter/configs/gpii.processReporter.config.production.json",
         "%deviceReporter/configs/gpii.deviceReporter.config.production.json",
-        "%flowManager/configs/gpii.flowManager.config.development.json",
-        "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
-        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json"
+        "%universal/gpii/configs/gpii.config.development.base.local.json"
     ]
 }
