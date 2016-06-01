@@ -33,6 +33,7 @@ Selected settings (in alphabetical order):
 * `highlight_line`
 * `highlight_modified_tabs` 
 * `line_numbers` 
+* `margin` 
 * `show_encoding` 
 * `show_line_endings` 
 * `spell_check` 
@@ -55,6 +56,12 @@ Windows 8.x and Windows 10 have not been tested yet.
 
 ## Testing
 When using a NP set with settings for Sublime Text, the editor's should respond immediately to the settings included in that NP set.
+
+### sublime_font8
+
+Using this NP set in Sublime Text should have the following effects:
+
+* font size increases to 11.
 
 ### sublime_gert
 

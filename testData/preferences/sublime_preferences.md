@@ -27,6 +27,9 @@ The following preference sets are used for testing and demonstrating the integra
 * `sublime_font16.json`: preference set with one application-specific term for the following settings:
 ** set the font size to 16 pixels.
 
+* `sublime_font8.json`: preference set with one common term for the following settings:
+** set the font size to 8 points (or 11 pixels).
+
 * `sublime_gert.json`: preference set with one common term for the following settings:
 ** set the font size to 24 points (or 32 pixels).
 
