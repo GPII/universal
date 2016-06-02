@@ -195,7 +195,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
 ];
 
 fluid.defaults("gpii.tests.cloud.untrustedSettingsRequests", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: "fluid.component",
     components: {
         untrustedSettingsRequest: {
             type: "kettle.test.request.http",

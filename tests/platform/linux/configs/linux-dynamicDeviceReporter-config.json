@@ -1,6 +1,0 @@
-{
-    "typeName": "acceptanceTests.linux.dynamicDeviceReporter",
-    "includes": [
-        "${universal}/tests/configs/localInstallWithDynamicDeviceReporter.json"
-    ]
-}

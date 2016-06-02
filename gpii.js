@@ -14,8 +14,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 
-// A simple boostrap file which allows a default configuration of the GPII to be
-// simply started from the command line from universal
+// A simple bootstrap file which allows a configuration of the GPII to be
+// started from the command line from universal
 
 var fluid = require("./index.js")
      gpii = fluid.registerNamespace("gpii");

@@ -31,12 +31,12 @@ The reason for continuing to support the specific /login and /logout, instead of
 
 The core part of the flow is defined in two files:
 
-* `UserLogonStateChange.js` contains the handling of the logon related endpoints kicks off the related process. It contains individual handlers for the `login`, `logout` and `logonChange` URLs. These handlers all have the `gpii.request.flowManager.userLogonStateChange.stateChangeHandler` grade, which is the component that contains the functionality for the actual logging in and logging off.
+* `UserLogonStateChange.js` contains the handling of the logon related endpoints kicks off the related process. It contains individual handlers for the `login`, `logout` and `logonChange` URLs. These handlers all have the `gpii.flowManager.userLogonStateChange.stateChangeHandler` grade, which is the component that contains the functionality for the actual logging in and logging off.
 * `FlowManagerUtitilities.js` which describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
 
 The user login process is as follows:
 
-1. a GET request is sent to either `/user/:token/login` or `/user/:token/logonChange`. This is retrieved by the relevant handler in `UserLogonStateChange`, and if it is found that the token needs to be logged in, the `onUserToken` event is fired (via the `gpii.request.flowManager.userLogonStateChange.loginUser` function)
+1. a GET request is sent to either `/user/:token/login` or `/user/:token/logonChange`. This is retrieved by the relevant handler in `UserLogonStateChange`, and if it is found that the token needs to be logged in, the `onUserToken` event is fired (via the `gpii.flowManager.userLogonStateChange.loginUser` function)
 1. the `onUserToken` event has three listeners:
  * UserLogonStateChange's `getDeviceContext`, which fetches the device reporter data. When this has been fetched an `onDeviceContext` event is fired.
  * `getPreferences` (flowManagerUtilities), which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.

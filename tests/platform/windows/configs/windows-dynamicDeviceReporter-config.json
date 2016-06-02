@@ -1,6 +1,6 @@
 {
-    "typeName": "acceptanceTests.windows.dynamicDeviceReporter",
-    "includes": [
-        "${universal}/tests/configs/localInstallWithDynamicDeviceReporter.json"
+    "type": "acceptanceTests.windows.dynamicDeviceReporter",
+    "mergeConfigs": [
+        "%universal/tests/configs/gpii.tests.acceptance.localInstall.dynamicDeviceReporter.config.json"
     ]
 }

@@ -1,0 +1,18 @@
+{
+    "type": "gpii.config.cloudBased.flowManager.production",
+    "options": {
+        "cloudBasedUrls": {
+            "preferences": "http://preferences.gpii.net/preferences/%userToken",
+            "deviceReporter": "",
+            "solutionsRegistry": "%universal/testData/solutions/%os.json"
+        },
+        "matchMakers": {
+            "flat": {
+                "url": "http://localhost:8081"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%universal/gpii/configs/gpii.config.cloudBased.development.all.local.json"
+    ]
+}

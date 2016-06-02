@@ -1,0 +1,6 @@
+{
+    "type": "gpii.config.preferencesServer.standalone.production",
+    "mergeConfigs": [
+        "%preferencesServer/configs/gpii.preferencesServer.config.production.json"
+    ]
+}

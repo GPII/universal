@@ -22,7 +22,7 @@ If you have installed GPII in the folder <GPII-install>:
 
 Then run the command: `node gpii.js`
 
-By default this will start up the system with everything running locally, using the `development.all.local.json` configuration file of universal repository (see the `universal/gpii/configs` folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
+By default this will start up the system with everything running locally, using the `gpii.config.development.all.local.json` configuration file of universal repository (see the `universal/gpii/configs` folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
 * in Microsoft Windows: `SET NODE_ENV=dev.remote.prefs`
 * in GNU/Linux and other Unix-like systems: `export NODE_ENV=dev.remote.prefs`
 
@@ -34,8 +34,8 @@ Followed by the `node gpii.js` command.
 Since the Cloud-Based Flowmanager does not require any platform-specific bindings (it only returns a modified set of settings - but does not configure anything), you can run it from universal. Given that you have installed GPII in the folder <GPII-install>, go to: `<GPII-install>/node_modules/universal`.
 
 Change the NODE_ENV environment variable to the cloudbased config file:
-* in Microsoft Windows: `SET NODE_ENV=cloudBased.development.all.local`
-* in GNU/Linux and other Unix-like systems: `export NODE_ENV=cloudBased.development.all.local`
+* in Microsoft Windows: `SET NODE_ENV=gpii.config.cloudBased.development.all.local`
+* in GNU/Linux and other Unix-like systems: `export NODE_ENV=gpii.config.cloudBased.development.all.local`
 
 Then start up the server by running the following command from the universal folder:
 `node gpii.js`

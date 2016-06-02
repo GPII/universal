@@ -1,0 +1,15 @@
+{
+    "type": "gpii.config.all.development.dr.production",
+    "options": {
+        "distributeOptions": {
+            "gpii.config.deviceReporter.flowManager": {
+                "record": "{flowManager}.solutionsRegistryDataSource",
+                "target": "{that gpii.deviceReporter.live}.options.components.solutionsRegistryDataSource"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%deviceReporter/configs/gpii.deviceReporter.config.production.json",
+        "%universal/gpii/configs/gpii.config.development.base.local.json"
+    ]
+}

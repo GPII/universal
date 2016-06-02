@@ -20,7 +20,7 @@ var fluid = require("infusion"),
 fluid.registerNamespace("gpii.oauth2");
 
 fluid.defaults("gpii.oauth2.testDataStore", {
-    gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
+    gradeNames: "gpii.oauth2.inMemoryDataStore",
     listeners: {
         onCreate: "gpii.oauth2.logTestDataStoreStartup"
     },
@@ -32,7 +32,8 @@ fluid.defaults("gpii.oauth2.testDataStore", {
             { id: 4, username: "review3_user_1", password: "test1234", gpiiToken: "review3_user_1" },
             { id: 5, username: "review3_user_2", password: "test1234", gpiiToken: "review3_user_2" },
             { id: 6, username: "review3_user_3", password: "test1234", gpiiToken: "review3_user_3" },
-            { id: 7, username: "review3_user_4", password: "test1234", gpiiToken: "review3_user_4" }
+            { id: 7, username: "review3_user_4", password: "test1234", gpiiToken: "review3_user_4" },
+            { id: 8, username: "li", password: "li", gpiiToken: "li" }
         ],
         clients: [
             {
