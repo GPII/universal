@@ -1,4 +1,4 @@
-# Sublime Text vesion 3: Preference Sets
+# Sublime Text version 3: Preference Sets
 
 The following preference sets are used for testing and demonstrating the integration of Sublime Text (version 3):
 
