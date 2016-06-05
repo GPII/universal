@@ -55,7 +55,7 @@ Windows 8.x and Windows 10 have not been tested yet.
 
 
 ## Testing
-When using a NP set with settings for Sublime Text, the editor's should respond immediately to the settings included in that NP set.
+When using a NP set with settings for Sublime Text, the editor should respond immediately to the settings included in that NP set.
 
 ### sublime_font8
 
