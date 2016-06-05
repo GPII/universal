@@ -70,7 +70,11 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     });
 
     oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
-        return done(null, authorizationService.grantAuthorizationCode(user.id, client.id, redirectUri, ares.selectedPreferences));
+        // TODO: Update the user interface to support multiple tokens
+        // per user rather than using a single default
+        var gpiiToken = user.defaultGpiiToken;
+
+        return done(null, authorizationService.grantAuthorizationCode(gpiiToken, client.id, redirectUri, ares.selectedPreferences));
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
@@ -324,8 +328,12 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
 };
 
 gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
-    var authorizedClients = authorizationService.getAuthorizedClientsForUser(user.id);
-    var unauthorizedClients = authorizationService.getUnauthorizedClientsForUser(user.id);
+    // TODO: Update the user interface to support multiple tokens per
+    // user rather than using a single default
+    var gpiiToken = user.defaultGpiiToken;
+
+    var authorizedClients = authorizationService.getAuthorizedClientsForGpiiToken(gpiiToken);
+    var unauthorizedClients = authorizationService.getUnauthorizedClientsForGpiiToken(gpiiToken);
     // Build view objects
     var authorizedServices = fluid.transform(authorizedClients, function (client) {
         return {
@@ -382,10 +390,13 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             done(null, that.clientService.checkClientRedirectUri(oauth2ClientId, redirectUri), redirectUri);
         }),
         function (req, res, next) {
-            var userId = req.user.id;
+            // TODO: Update the user interface to support multiple
+            // tokens per user rather than using a single default
+            var gpiiToken = req.user.defaultGpiiToken;
+
             var clientId = req.oauth2.client.id;
             var redirectUri = req.oauth2.redirectURI;
-            if (that.authorizationService.userHasAuthorized(userId, clientId, redirectUri)) {
+            if (that.authorizationService.userHasAuthorized(gpiiToken, clientId, redirectUri)) {
                 // The user has previously authorized so we can grant a code without asking them
                 req.query.transaction_id = req.oauth2.transactionID;
                 // TODO we can cache the oauth2orizeServer.decision middleware as it doesn't change for each request
@@ -475,11 +486,14 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         login.ensureLoggedIn("/login"),
         function (req, res) {
             if (req.is("application/json")) {
-                var userId = req.user.id;
+                // TODO: Update the user interface to support multiple
+                // tokens per user rather than using a single default
+                var gpiiToken = req.user.defaultGpiiToken;
+
                 var oauth2ClientId = req.body.oauth2ClientId;
                 var selectedPreferences = req.body.selectedPreferences;
                 // TODO validate selectedPreferences?
-                that.authorizationService.addAuthorization(userId, oauth2ClientId, selectedPreferences);
+                that.authorizationService.addAuthorization(gpiiToken, oauth2ClientId, selectedPreferences);
                 res.sendStatus(200);
             } else {
                 res.sendStatus(400);

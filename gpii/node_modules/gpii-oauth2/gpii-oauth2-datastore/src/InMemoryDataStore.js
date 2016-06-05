@@ -31,6 +31,7 @@ var fluid = fluid || require("infusion");
         // use of the change applier.
         model: {
             users: [],
+            gpiiTokens: [],
             clients: [],
             authDecisionsIdSeq: 1,
             authDecisions: [],
@@ -51,7 +52,12 @@ var fluid = fluid || require("infusion");
             },
             findUserByGpiiToken: {
                 funcName: "gpii.oauth2.dataStore.findUserByGpiiToken",
-                args: ["{that}.model.users", "{arguments}.0"]
+                args: ["{that}.model.users", "{that}.model.gpiiTokens", "{arguments}.0"]
+                    // gpiiToken
+            },
+            findGpiiToken: {
+                funcName: "gpii.oauth2.dataStore.findGpiiToken",
+                args: ["{that}.model.gpiiTokens", "{arguments}.0"]
                     // gpiiToken
             },
             findClientById: {
@@ -75,28 +81,40 @@ var fluid = fluid || require("infusion");
             },
             updateAuthDecision: {
                 funcName: "gpii.oauth2.dataStore.updateAuthDecision",
-                args: ["{that}.model.authDecisions", "{that}.applier", "{arguments}.0", "{arguments}.1"]
-                    // userId, authDecision
+                args: [
+                    "{that}.model.authDecisions",
+                    "{that}.model.gpiiTokens",
+                    "{that}.applier",
+                    "{arguments}.0",
+                    "{arguments}.1"
+                ]
+                // userId, authDecision
             },
             revokeAuthDecision: {
                 funcName: "gpii.oauth2.dataStore.revokeAuthDecision",
-                args: ["{that}.model.authDecisions", "{that}.applier", "{arguments}.0", "{arguments}.1"]
-                    // userId, authDecisionId
+                args: [
+                    "{that}.model.authDecisions",
+                    "{that}.model.gpiiTokens",
+                    "{that}.applier",
+                    "{arguments}.0",
+                    "{arguments}.1"
+                ]
+                // userId, authDecisionId
             },
             findAuthDecisionById: {
                 funcName: "gpii.oauth2.dataStore.findAuthDecisionById",
                 args: ["{that}.model.authDecisions", "{arguments}.0"]
                     // id
             },
-            findAuthDecisionsByUserId: {
-                funcName: "gpii.oauth2.dataStore.findAuthDecisionsByUserId",
+            findAuthDecisionsByGpiiToken: {
+                funcName: "gpii.oauth2.dataStore.findAuthDecisionsByGpiiToken",
                 args: ["{that}.model.authDecisions", "{arguments}.0"]
-                    // userId
+                    // gpiiToken
             },
             findAuthDecision: {
                 funcName: "gpii.oauth2.dataStore.findAuthDecision",
                 args: ["{that}.model.authDecisions", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                    // userId, clientId, redirectUri
+                    // gpiiToken, clientId, redirectUri
             },
             saveAuthCode: {
                 funcName: "gpii.oauth2.dataStore.saveAuthCode",
@@ -108,14 +126,9 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.authCodes", "{that}.model.authDecisions", "{arguments}.0"]
                     // code
             },
-            findAuthorizedClientsByUserId: {
-                funcName: "gpii.oauth2.dataStore.findAuthorizedClientsByUserId",
-                args: ["{that}.model.authDecisions", "{that}.model.clients", "{arguments}.0"]
-                    // userId
-            },
             findAuthorizedClientsByGpiiToken: {
                 funcName: "gpii.oauth2.dataStore.findAuthorizedClientsByGpiiToken",
-                args: ["{that}.model.authDecisions", "{that}.model.users", "{that}.model.clients", "{arguments}.0"]
+                args: ["{that}.model.authDecisions", "{that}.model.clients", "{arguments}.0"]
                     // gpiiToken
             },
             findAuthByAccessToken: {
@@ -153,8 +166,8 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.model.clientCredentialsTokens", "{that}.applier", "{arguments}.0"]
                     // clientCredentialsTokenId
             },
-            findAuthForClientCredentialsAccessToken: {
-                funcName: "gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken",
+            findAuthByClientCredentialsAccessToken: {
+                funcName: "gpii.oauth2.dataStore.findAuthByClientCredentialsAccessToken",
                 args: ["{that}.model.clientCredentialsTokens", "{that}.model.clients", "{arguments}.0"]
                     // accessToken
             }
@@ -172,8 +185,20 @@ var fluid = fluid || require("infusion");
         return fluid.find_if(users, function (user) { return user.username === username; });
     };
 
-    gpii.oauth2.dataStore.findUserByGpiiToken = function (users, gpiiToken) {
-        return fluid.find_if(users, function (user) { return user.gpiiToken === gpiiToken; });
+    gpii.oauth2.dataStore.findUserByGpiiToken = function (users, gpiiTokens, gpiiToken) {
+        var tokenFound = gpii.oauth2.dataStore.findGpiiToken(gpiiTokens, gpiiToken);
+        if (tokenFound) {
+            return fluid.find_if(users, function (user) { return user.id === tokenFound.userId; });
+        } else {
+            return undefined;
+        }
+    };
+
+    // Gpii Tokens
+    // -----------
+
+    gpii.oauth2.dataStore.findGpiiToken = function (gpiiTokens, gpiiToken) {
+        return fluid.find_if(gpiiTokens, function (token) { return token.gpiiToken === gpiiToken; });
     };
 
     // Clients
@@ -203,7 +228,7 @@ var fluid = fluid || require("infusion");
         applier.change("authDecisionsIdSeq", model.authDecisionsIdSeq + 1);
         var authDecision = {
             id: authDecisionId, // primary key
-            userId: authDecisionData.userId, // foreign key
+            gpiiToken: authDecisionData.gpiiToken, // foreign key
             clientId: authDecisionData.clientId, // foreign key
             redirectUri: authDecisionData.redirectUri,
             accessToken: authDecisionData.accessToken,
@@ -215,29 +240,37 @@ var fluid = fluid || require("infusion");
         return authDecision;
     };
 
-    gpii.oauth2.dataStore.updateAuthDecision = function (authDecisions, applier, userId, authDecisionData) {
+    gpii.oauth2.dataStore.updateAuthDecision = function (authDecisions, gpiiTokens, applier, userId, authDecisionData) {
         // Only update the authDecision if it is owned by userId so that
         // users cannot update authorizations owned by others
         var authDecision = gpii.oauth2.dataStore.findAuthDecisionById(authDecisions, authDecisionData.id);
-        if (authDecision && authDecision.userId === userId) {
-            authDecision.selectedPreferences = fluid.copy(authDecisionData.selectedPreferences);
-            // We are changing one of the authDecision items in the collection but
-            // notifying on the collection (it's not worth it to extend the query api
-            // to allow a more fine grained update)
-            applier.change("authDecisions", authDecisions);
+        if (authDecision) {
+            var gpiiToken = gpii.oauth2.dataStore.findGpiiToken(gpiiTokens, authDecision.gpiiToken);
+            if (gpiiToken && gpiiToken.userId === userId) {
+                authDecision.selectedPreferences = fluid.copy(authDecisionData.selectedPreferences);
+                // We are changing one of the authDecision items in
+                // the collection but notifying on the collection
+                // (it's not worth it to extend the query api to allow
+                // a more fine grained update)
+                applier.change("authDecisions", authDecisions);
+            }
         }
     };
 
-    gpii.oauth2.dataStore.revokeAuthDecision = function (authDecisions, applier, userId, authDecisionId) {
+    gpii.oauth2.dataStore.revokeAuthDecision = function (authDecisions, gpiiTokens, applier, userId, authDecisionId) {
         // Only revoke the authorization with authDecisionId if it is owned
         // by userId so that users cannot revoke authorizations owned by others
         var authDecision = gpii.oauth2.dataStore.findAuthDecisionById(authDecisions, authDecisionId);
-        if (authDecision && authDecision.userId === userId) {
-            authDecision.revoked = true;
-            // We are changing one of the authDecision items in the collection but
-            // notifying on the collection (it's not worth it to extend the query api
-            // to allow a more fine grained update)
-            applier.change("authDecisions", authDecisions);
+        if (authDecision) {
+            var gpiiToken = gpii.oauth2.dataStore.findGpiiToken(gpiiTokens, authDecision.gpiiToken);
+            if (gpiiToken && gpiiToken.userId === userId) {
+                authDecision.revoked = true;
+                // We are changing one of the authDecision items in
+                // the collection but notifying on the collection
+                // (it's not worth it to extend the query api to allow
+                // a more fine grained update)
+                applier.change("authDecisions", authDecisions);
+            }
         }
     };
 
@@ -247,17 +280,17 @@ var fluid = fluid || require("infusion");
         });
     };
 
-    gpii.oauth2.dataStore.findAuthDecisionsByUserId = function (authDecisions, userId) {
-        var userAuthDecisions = fluid.copy(authDecisions);
-        fluid.remove_if(userAuthDecisions, function (ad) {
-            return ad.userId !== userId || ad.revoked !== false;
+    gpii.oauth2.dataStore.findAuthDecisionsByGpiiToken = function (authDecisions, gpiiToken) {
+        var selectedAuthDecisions = fluid.copy(authDecisions);
+        fluid.remove_if(selectedAuthDecisions, function (ad) {
+            return ad.gpiiToken !== gpiiToken || ad.revoked !== false;
         });
-        return userAuthDecisions;
+        return selectedAuthDecisions;
     };
 
-    gpii.oauth2.dataStore.findAuthDecision = function (authDecisions, userId, clientId, redirectUri) {
+    gpii.oauth2.dataStore.findAuthDecision = function (authDecisions, gpiiToken, clientId, redirectUri) {
         return fluid.find_if(authDecisions, function (ad) {
-            return ad.userId === userId &&
+            return ad.gpiiToken === gpiiToken &&
                 ad.clientId === clientId &&
                 ad.redirectUri === redirectUri &&
                 ad.revoked === false;
@@ -301,8 +334,8 @@ var fluid = fluid || require("infusion");
     // Authorization Decision join Client
     // ----------------------------------
 
-    gpii.oauth2.dataStore.findAuthorizedClientsByUserId = function (authDecisions, clients, userId) {
-        var userAuthDecisions = gpii.oauth2.dataStore.findAuthDecisionsByUserId(authDecisions, userId);
+    gpii.oauth2.dataStore.findAuthorizedClientsByGpiiToken = function (authDecisions, clients, gpiiToken) {
+        var userAuthDecisions = gpii.oauth2.dataStore.findAuthDecisionsByGpiiToken(authDecisions, gpiiToken);
         // TODO when move to CouchDB, do join there, rather than by hand
         var authorizedClients = [];
         fluid.each(userAuthDecisions, function (ad) {
@@ -319,14 +352,6 @@ var fluid = fluid || require("infusion");
         return authorizedClients;
     };
 
-    gpii.oauth2.dataStore.findAuthorizedClientsByGpiiToken = function (authDecisions, users, clients, gpiiToken) {
-        var user = gpii.oauth2.dataStore.findUserByGpiiToken(users, gpiiToken);
-        if (!user) {
-            return undefined;
-        }
-        return gpii.oauth2.dataStore.findAuthorizedClientsByUserId(authDecisions, clients, user.id);
-    };
-
     // Authorization Decision join User and Client
     // -------------------------------------------
 
@@ -336,16 +361,12 @@ var fluid = fluid || require("infusion");
             return undefined;
         }
         // TODO when move to CouchDB, do joins there, rather than by hand
-        var user = gpii.oauth2.dataStore.findUserById(users, authDecision.userId);
-        if (!user) {
-            return undefined;
-        }
         var client = gpii.oauth2.dataStore.findClientById(clients, authDecision.clientId);
         if (!client) {
             return undefined;
         }
         return {
-            userGpiiToken: user.gpiiToken,
+            userGpiiToken: authDecision.gpiiToken,
             oauth2ClientId: client.oauth2ClientId,
             selectedPreferences: authDecision.selectedPreferences
         };
@@ -360,12 +381,8 @@ var fluid = fluid || require("infusion");
         if (!client || client.allowDirectGpiiTokenAccess !== true) {
             return undefined;
         }
-        var user = fluid.find_if(users, function (u) { return u.gpiiToken === gpiiToken; });
-        if (!user) {
-            return undefined;
-        }
         var authDecision = fluid.find_if(authDecisions, function (ad) {
-            return ad.clientId === client.id && ad.userId === user.id && ad.revoked === false;
+            return ad.clientId === client.id && ad.gpiiToken === gpiiToken && ad.revoked === false;
         });
         if (authDecision) {
             return {
@@ -420,7 +437,7 @@ var fluid = fluid || require("infusion");
     };
 
     // Join clientCredentialsTokens and clients
-    gpii.oauth2.dataStore.findAuthForClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
+    gpii.oauth2.dataStore.findAuthByClientCredentialsAccessToken = function (clientCredentialsTokens, clients, accessToken) {
         var clientCredentialsToken = gpii.oauth2.dataStore.findClientCredentialsTokenByAccessToken(clientCredentialsTokens, accessToken);
         if (!clientCredentialsToken) {
             return undefined;

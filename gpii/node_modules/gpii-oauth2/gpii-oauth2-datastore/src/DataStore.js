@@ -19,7 +19,6 @@ var fluid = fluid || require("infusion");
 
     "use strict";
 
-    var gpii = fluid.registerNamespace("gpii");
     fluid.registerNamespace("gpii.oauth2");
 
     fluid.defaults("gpii.oauth2.dataStore", {
