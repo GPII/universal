@@ -75,7 +75,6 @@ var fluid = fluid || require("infusion");
     // -----
 
     gpii.oauth2.dbDataStore.findUserById = function (findUserByIdDataSource, id) {
-        return fluid.find_if(users, function (user) { return user.id === id; });
     };
 
 })();
