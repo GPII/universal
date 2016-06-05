@@ -95,41 +95,6 @@ gpii.tests.linux.orca.testDefs = [
                 "expectRestored": "false"
             }
         ]
-    },
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
-        settingsHandlers: {
-            "gpii.orca": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "sayAllStyle": 1,
-                            "enableSpeech": true,
-                            "enableEchoByWord": true,
-                            "enableEchoByCharacter": false,
-                            "voices.default.rate": 101.84090909090908,
-                            "enableTutorialMessages": false,
-                            "voices.default.family": {
-                                "locale": "en",
-                                "name": "en-westindies"
-                            },
-                            "verbalizePunctuationStyle": 0
-                        },
-                        "options": {
-                            "user": "screenreader_nvda"
-                        }
-                    }
-                ]
-            }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
     }
 ];
 

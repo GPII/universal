@@ -100,38 +100,6 @@ gpii.tests.windows.nvda = [
                 "expectRestored": "0"
             }
         ]
-    }, {
-        name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
-                    {
-                        "settings": {
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "keyboard.speakTypedWords": true,
-                            "speech.espeak.rateBoost": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
-                        }
-                    }
-                ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
     }
 ];
 
