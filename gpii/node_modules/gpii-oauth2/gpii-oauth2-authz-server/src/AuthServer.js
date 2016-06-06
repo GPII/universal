@@ -214,7 +214,7 @@ fluid.defaults("gpii.oauth2.authServer", {
             args: ["{that}", "{that}.oauth2orizeServer.oauth2orizeServer",
                 "{that}.passport.passport"]
         },
-        onCreate: "gpii.oauth2.authServer.registerBodyParser"
+        "onCreate.registerBodyParser": "gpii.oauth2.authServer.registerBodyParser"
     }
 });
 
@@ -240,11 +240,14 @@ gpii.oauth2.authServer.registerBodyParser = function (that) {
 fluid.defaults("gpii.oauth2.authServer.standalone", {
     gradeNames: ["gpii.oauth2.authServer"],
     listeners: {
-        onCreate: [
-            "gpii.oauth2.authServer.registerBodyParser",
-            "{that}.events.onContributeMiddleware.fire",
-            "{that}.events.onContributeRouteHandlers.fire"
-        ]
+        "onCreate.onContributeMiddleware": {
+            priority: "after:registerBodyParser",
+            func: "{that}.events.onContributeMiddleware.fire"
+        },
+        "onCreate.onContributeRouteHandlers": {
+            priority: "after:onContributeMiddleware",
+            func: "{that}.events.onContributeRouteHandlers.fire"
+        }
     }
 });
 

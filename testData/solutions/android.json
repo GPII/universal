@@ -293,7 +293,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                                     "factor": 15
                                 }
                             }
@@ -305,7 +305,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "http://registry\\.gpii\\.net/common/volume",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volume",
                                     "factor": 7
                                 }
                             }
@@ -370,7 +370,7 @@
                     "screen_off_timeout": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/screenOffTime",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenOffTime",
                             "factor": 1000
                         }
                     }
@@ -411,7 +411,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                                     "factor": 500
                                 }
                             }
@@ -502,7 +502,7 @@
                     "map\\.string\\.fontsize\\.$t": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "factor": 2
                         }
                     },

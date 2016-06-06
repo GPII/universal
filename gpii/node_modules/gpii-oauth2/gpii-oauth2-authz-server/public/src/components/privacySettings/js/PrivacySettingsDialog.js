@@ -208,7 +208,7 @@ var gpii = gpii || {};
         var dialogOptions = {
             dialogClass: that.options.styles.dialogCss
         };
-        var fullDialogOptions = $.extend(true, {}, dialogOptions, that.options.dialogOptions);
+        var fullDialogOptions = fluid.extend(true, {}, dialogOptions, that.options.dialogOptions);
         that.dialog = that.container.dialog(fullDialogOptions);
         that.dialog.dialog("open");
     };

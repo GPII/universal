@@ -28,7 +28,7 @@ fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 
 gpii.tests.preferencesServerErrorTests.testDefCommon = {
     config: {
-        configName: "development.all.local",
+        configName: "gpii.config.development.all.local",
         configPath: "%universal/gpii/configs"
     },
     gradeNames: "gpii.test.common.testCaseHolder"
