@@ -8,7 +8,6 @@
 * [Preferences Server Framework](PreferencesServerFramework.md)
     - [Preferences Server](PreferencesServer.md)
     - [Raw Preferences Server](RawPreferencesServer.md)
-    - [Old Preferences Server](OldPreferencesServer.md)
 * [MatchMakerFramework](MatchMakerFramework.md)
     - [Flat Match Maker](FlatMatchMaker.md) 
     - [Canopy Match Maker](CanopyMatchMaker.md)
