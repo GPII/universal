@@ -64,6 +64,44 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/magnification": "mag-factor",
+                    "http://registry\\.gpii\\.net/common/showCrosshairs": "show-cross-hairs",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "screen-position",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "options": {
+                                "full-screen": {
+                                    "outputValue": "FullScreen"
+                                },
+                                "left-half": {
+                                    "outputValue": "LeftHalf"
+                                },
+                                "right-half": {
+                                    "outputValue": "RightHalf"
+                                },
+                                "top-half": {
+                                    "outputValue": "TopHalf"
+                                },
+                                "bottom-half": {
+                                    "outputValue": "BottomHalf"
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/tracking",
+                            "inputPath": "mouse-tracking",
+                            "options": {
+                                "centered": {
+                                    "outputValue": "mouse"
+                                }
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -160,6 +198,44 @@
                 },
                 "options": {
                     "schema": "org.gnome.desktop.interface"
+                },
+                "inverseCapabilitiesTransformations": {
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.binaryOp",
+                            "right": 12,
+                            "operator": "*",
+                            "leftPath": "text-scaling-factor",
+                            "outputPath": "http://registry\\.gpii\\.net/common/fontSize"
+                        },
+                        {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "cursor-size",
+                            "outputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "factor": 0.01
+                        },
+                        {
+                            "type": "fluid.transforms.binaryOp",
+                            "outputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "gtk-theme",
+                                    "operator": "===",
+                                    "right": "HighContrast"
+                                }
+                            },
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "icon-theme",
+                                    "operator": "===",
+                                    "right": "HighContrast"
+                                }
+                            },
+                            "operator": "&&"
+                        }
+                    ]
                 }
             }
         },
@@ -885,6 +961,146 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speakTutorialMessages": "enableTutorialMessages",
+                    "http://registry\\.gpii\\.net/common/keyEcho": "enableEchoByCharacter",
+                    "http://registry\\.gpii\\.net/common/wordEcho": "enableEchoByWord",
+                    "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": "enableBraille",
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled": "enableSpeech",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "sayAllStyle",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "defaultInputValue": "1",
+                            "options": {
+                                "0": {
+                                    "outputValue": "line"
+                                },
+                                "1": {
+                                    "outputValue": "sentence"
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "verbalizePunctuationStyle",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "defaultInputValue": "1",
+                            "options": {
+                                "3": {
+                                    "outputValue": "none"
+                                },
+                                "2": {
+                                    "outputValue": "some"
+                                },
+                                "1": {
+                                    "outputValue": "most"
+                                },
+                                "0": {
+                                    "outputValue": "all"
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.binaryOp",
+                            "outputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "right": 170,
+                            "operator": "+",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "operator": "*",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "voices\\.default\\.rate",
+                                            "operator": "-",
+                                            "right": 50
+                                        }
+                                    },
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "condition": {
+                                                "transform" : {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "voices\\.default\\.rate",
+                                                    "operator": "<",
+                                                    "right": 50
+                                                }
+                                            },
+                                            "true": 1.8,
+                                            "false": 4.4
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "voices\\.default\\.family.name",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "defaultInputValue": "en",
+                            "options": {
+                                "english": { "outputValue": "en" },
+                                "english-us": { "outputValue": "en-US" },
+                                "en-scottish": { "outputValue": "en-scotland" },
+                                "en-westindies": { "outputValue": "en-BZ" },
+                                "afrikaans": { "outputValue": "af" },
+                                "bulgarian-test": { "outputValue": "bg" },
+                                "bosnian": { "outputValue": "bs" },
+                                "catalan": { "outputValue": "ca" },
+                                "czech": { "outputValue": "cs" },
+                                "welsh-test": { "outputValue": "cy" },
+                                "danish": { "outputValue": "da" },
+                                "german": { "outputValue": "de" },
+                                "greek": { "outputValue": "el" },
+                                "greek-ancient": { "outputValue": "grc" },
+                                "esperanto": { "outputValue": "eo" },
+                                "spanish": { "outputValue": "es" },
+                                "spanish-latin-american": { "outputValue": "es-419" },
+                                "estonian": { "outputValue": "et" },
+                                "finnish": { "outputValue": "fi" },
+                                "french": { "outputValue": "fr" },
+                                "hindi": { "outputValue": "hi" },
+                                "croatian": { "outputValue": "hr" },
+                                "hungarian": { "outputValue": "hu" },
+                                "armenian": { "outputValue": "hy" },
+                                "armenian-west": { "outputValue": "hy-arevmda" },
+                                "indonesian-test": { "outputValue": "id" },
+                                "icelandic-test": { "outputValue": "is" },
+                                "italian": { "outputValue": "it" },
+                                "lojban": { "outputValue": "jbo" },
+                                "georgian-test": { "outputValue": "ka" },
+                                "kannada": { "outputValue": "kn" },
+                                "kurdish": { "outputValue": "ku" },
+                                "latin": { "outputValue": "la" },
+                                "latvian": { "outputValue": "lv" },
+                                "macedonian-test": { "outputValue": "mk" },
+                                "malayalam": { "outputValue": "ml" },
+                                "dutch-test": { "outputValue": "nl" },
+                                "norwegian": { "outputValue": "no" },
+                                "papiamento-test": { "outputValue": "pap" },
+                                "polish": { "outputValue": "pl" },
+                                "brazil": { "outputValue": "pt-BR" },
+                                "portugal": { "outputValue": "pt-PT" },
+                                "romanian": { "outputValue": "ro" },
+                                "russian_test": { "outputValue": "ru" },
+                                "slovak": { "outputValue": "sk" },
+                                "albanian": { "outputValue": "sq" },
+                                "serbian": { "outputValue": "sr" },
+                                "swedish": { "outputValue": "sv" },
+                                "swahili-test": { "outputValue": "sw" },
+                                "tamil": { "outputValue": "ta" },
+                                "turkish": { "outputValue": "tr" },
+                                "vietnam": { "outputValue": "vi" },
+                                "Mandarin": { "outputValue": "zh-cmn" },
+                                "cantonese": { "outputValue": "zh-yue" }
+                            }
+                        }
+                    ]
                 }
             }
         },
