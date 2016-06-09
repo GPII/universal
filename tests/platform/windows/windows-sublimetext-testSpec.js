@@ -2,7 +2,7 @@
     GPII Integration and Acceptance Testing
 
     Copyright 2016 Hochschule der Medien (HdM)
-    
+
     Licensed under the New BSD license. You may not use this file except in
     compliance with this License.
 
@@ -12,16 +12,13 @@
     The research leading to these results has received funding from the European Union's
     Horizon 2020 research and innovation programme under grant agreement No. 645215 (NOLB: No One Left Behind).
 */
-
 "use strict";
 var fluid = require("universal"),
     gpii = fluid.registerNamespace("gpii");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows.sublimetext");
-
-
+fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.sublimetext = [
     {
@@ -66,7 +63,7 @@ gpii.tests.windows.sublimetext = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.sublimetext",
-    configName: "windows-sublimetext-config",
-    configPath: "configs"
+    configName: "gpii.tests.acceptance.windows.sublimetext.config",
+    configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);
