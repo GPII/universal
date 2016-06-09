@@ -20,7 +20,8 @@
         "oauth2orize": "1.0.1",
         "passport": "0.2.1",
         "passport-local": "1.0.0",
-        "passport-oauth2-client-password": "0.1.2"
+        "passport-oauth2-client-password": "0.1.2",
+        "gpii-pouchdb": "git://github.com/GPII/gpii-pouchdb#5e13a1b6556e70261b3dc204fde67743f1e3ebf1",
     },
     "devDependencies": {
         "node-jqunit": "1.1.4",

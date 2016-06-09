@@ -24,18 +24,9 @@ var fluid = fluid || require("infusion");
 
     fluid.defaults("gpii.oauth2.dbDataSource", {
         gradeNames: ["kettle.dataSource.URL"],
-        baseUrl: null,   // Supplied by integrators
-        dbName: null,    // Supplied by integrators
-        dbRequestURL: null,   // Supplied by integrators
-        url: {
-            expander: {
-                funcName: "fluid.stringTemplate",
-                args: ["%baseUrl/%dbName%dbRequestURL", {
-                    baseUrl: "{that}.options.baseUrl",
-                    dbName: "{that}.options.dbName",
-                    dbRequestURL: "{that}.options.dbRequestURL"
-                }]
-            }
+        termMap: {
+            baseUrl: null,   // Supplied by integrators
+            dbName: null    // Supplied by integrators
         }
     });
 
@@ -55,7 +46,7 @@ var fluid = fluid || require("infusion");
             findUserByIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    dbRequestURL: "/%userId",
+                    dbRequestURL: "%baseUrl/%dbName/%userId",
                     termMap: {
                         userId: "%userId"
                     }
@@ -75,6 +66,18 @@ var fluid = fluid || require("infusion");
     // -----
 
     gpii.oauth2.dbDataStore.findUserById = function (findUserByIdDataSource, id) {
+        var promiseTogo = fluid.promise();
+        if (id === undefined) {
+            promiseTogo.reject({message: "User ID for getting user record is undefined - aborting"});
+        } else {
+            var promise = findUserByIdDataSource.get({userId: userId});
+            promise.then(function (data) {
+                promiseTogo.resolve(data.value || data);
+            }, function (err) {
+                promiseTogo.reject(err);
+            });
+        }
+        return promiseTogo;
     };
 
 })();
