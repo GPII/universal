@@ -58,7 +58,8 @@
                     "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     },
@@ -127,38 +128,38 @@
                                 "default": {
                                     "undefinedOuputValue": true
                                 }
-                           }
-                      }
-                  },
-                  "backgroundColor": {
-                      "transform":{
-                          "type": "fluid.transforms.valueMapper",
-                          "inputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
-                          "defaultInputValue": "default",
-                          "options": {
-                              "black": {
-                                  "outputValue": "Black"
-                              },
-                              "yellow": {
-                                  "outputValue": "Yellow"
-                              },
-                              "white": {
-                                  "outputValue": "White"
-                              },
-                              "default": {
-                                  "undefinedOuputValue": true
-                              }
-                          }
-                      }
-                  },
-                  "lineSpacing": "http://registry\\.gpii\\.net/provisional-common/lineSpacing",
-                  "inputsLarger": "http://registry\\.gpii\\.net/provisional-common/inputsLarger",
-                  "toc": "http://registry\\.gpii\\.net/provisional-common/tableOfContents",
-                  "links": "http://registry\\.gpii\\.net/provisional-common/emphasizeLinks",
-                  "layout": "http://registry\\.gpii\\.net/provisional-common/simplifyLayout",
-                  "invertImages": "http://registry\\.gpii\\.net/common/invertColours",
-                  "tracking": "http://registry\\.gpii\\.net/provisional-common/magnifierFollows",
-                  "magnification": {
+                            }
+                        }
+                    },
+                    "backgroundColor": {
+                        "transform":{
+                            "type": "fluid.transforms.valueMapper",
+                            "inputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
+                            "defaultInputValue": "default",
+                            "options": {
+                                "black": {
+                                    "outputValue": "Black"
+                                },
+                                "yellow": {
+                                    "outputValue": "Yellow"
+                                },
+                                "white": {
+                                    "outputValue": "White"
+                                },
+                                "default": {
+                                    "undefinedOuputValue": true
+                                }
+                            }
+                        }
+                    },
+                    "lineSpacing": "http://registry\\.gpii\\.net/provisional-common/lineSpacing",
+                    "inputsLarger": "http://registry\\.gpii\\.net/provisional-common/inputsLarger",
+                    "toc": "http://registry\\.gpii\\.net/provisional-common/tableOfContents",
+                    "links": "http://registry\\.gpii\\.net/provisional-common/emphasizeLinks",
+                    "layout": "http://registry\\.gpii\\.net/provisional-common/simplifyLayout",
+                    "invertImages": "http://registry\\.gpii\\.net/common/invertColours",
+                    "tracking": "http://registry\\.gpii\\.net/provisional-common/magnifierFollows",
+                    "magnification": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
@@ -169,7 +170,8 @@
                             ]
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     },
@@ -270,7 +272,8 @@
                             }
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     },
@@ -340,7 +343,8 @@
                             ]
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     },
@@ -401,7 +405,8 @@
                     "access_commonprefs_punctuation": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
                     "access_commonprefs_capitalization": "http://registry\\.gpii\\.net/common/announceCapitals",
                     "access_commonprefs_c4a_enable_braille": "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     },
@@ -475,7 +480,8 @@
                             ]
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     },
@@ -605,7 +611,8 @@
                     },
                     "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled",
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     }

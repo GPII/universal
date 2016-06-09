@@ -274,7 +274,8 @@
                 },
                 "options": {
                     "schema": "org.gnome.nautilus.desktop"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -1416,7 +1417,8 @@
                     "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
