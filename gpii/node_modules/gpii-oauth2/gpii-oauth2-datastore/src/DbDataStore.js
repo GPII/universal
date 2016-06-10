@@ -23,7 +23,7 @@ var fluid = fluid || require("infusion");
     fluid.registerNamespace("gpii.oauth2");
 
     fluid.defaults("gpii.oauth2.dbDataSource", {
-        gradeNames: ["kettle.dataSource.URL"],
+        gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
         termMap: {
             baseUrl: null,   // Supplied by integrators
             dbName: null    // Supplied by integrators
@@ -34,19 +34,21 @@ var fluid = fluid || require("infusion");
         gradeNames: ["gpii.oauth2.dataStore"],
         // Supplied by GPII configuration to config gpii.oauth2.dbDataSource. It contains these elements:
         // 1. gradeNames: The database grade, for example, kettle.dataSource.CouchDB
-        // 2. baseUrl: The URL to the server where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
-        // 3. dbName: The database name
-        dbDataSourceOptions: {
+        // 2. termMap: {
+        //        baseUrl: The URL to the server where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
+        //        dbName: The database name
+        //    }
+        dataStoreConfigs: {
         },
         distributeOptions: [{
-            source: "{that}.options.dbDataSourceOptions",
+            source: "{that}.options.dataStoreConfigs",
             target: "{that > gpii.oauth2.dbDataSource}.options"
         }],
         components: {
             findUserByIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    dbRequestURL: "%baseUrl/%dbName/%userId",
+                    url: "%baseUrl/%dbName/%userId",
                     termMap: {
                         userId: "%userId"
                     }
@@ -57,7 +59,7 @@ var fluid = fluid || require("infusion");
             findUserById: {
                 funcName: "gpii.oauth2.dbDataStore.findUserById",
                 args: ["{that}.findUserByIdDataSource", "{arguments}.0"]
-                    // id
+                    // userId
             }
         }
     });
@@ -65,14 +67,16 @@ var fluid = fluid || require("infusion");
     // Users
     // -----
 
-    gpii.oauth2.dbDataStore.findUserById = function (findUserByIdDataSource, id) {
+    gpii.oauth2.dbDataStore.findUserById = function (findUserByIdDataSource, userId) {
         var promiseTogo = fluid.promise();
-        if (id === undefined) {
+        if (userId === undefined) {
             promiseTogo.reject({message: "User ID for getting user record is undefined - aborting"});
         } else {
+            console.log("=== in findUserById, ", userId);
             var promise = findUserByIdDataSource.get({userId: userId});
+            console.log("=== in findUserById, returned promise: ", promise);
             promise.then(function (data) {
-                promiseTogo.resolve(data.value || data);
+                promiseTogo.resolve(data);
             }, function (err) {
                 promiseTogo.reject(err);
             });
