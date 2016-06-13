@@ -50,11 +50,12 @@ fluid.defaults("gpii.tests.dbDataStore.environment", {
         dbDataStore: {
             type: "gpii.oauth2.dbDataStore",
             options: {
-                dataStoreConfigs: {
+                dataSourceConfig: {
                     termMap: {
                         baseUrl: "http://localhost:1234",
                         dbName: "gpiiOauth"
-                    }
+                    },
+                    protocol: "http:"
                 }
             }
         }

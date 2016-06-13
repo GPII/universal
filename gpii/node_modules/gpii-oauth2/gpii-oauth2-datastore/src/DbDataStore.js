@@ -38,10 +38,10 @@ var fluid = fluid || require("infusion");
         //        baseUrl: The URL to the server where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
         //        dbName: The database name
         //    }
-        dataStoreConfigs: {
+        dataSourceConfig: {
         },
         distributeOptions: [{
-            source: "{that}.options.dataStoreConfigs",
+            source: "{that}.options.dataSourceConfig",
             target: "{that > gpii.oauth2.dbDataSource}.options"
         }],
         components: {
@@ -72,9 +72,7 @@ var fluid = fluid || require("infusion");
         if (userId === undefined) {
             promiseTogo.reject({message: "User ID for getting user record is undefined - aborting"});
         } else {
-            console.log("=== in findUserById, ", userId);
             var promise = findUserByIdDataSource.get({userId: userId});
-            console.log("=== in findUserById, returned promise: ", promise);
             promise.then(function (data) {
                 promiseTogo.resolve(data);
             }, function (err) {

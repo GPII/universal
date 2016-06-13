@@ -63,13 +63,13 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", ["user-1"], "{that}"]
             }, {
-                // listener: "gpii.tests.dbDataStore.verifyResponse",
-                // args: ["The expected user data is received", "{arguments}.0", {
+                listener: "gpii.tests.dbDataStore.verifyResponse",
+                args: ["The expected user data is received", "{arguments}.0", {
 
-                // }],
-                listener: "fluid.log",
-                args: ["{arguments}.0"],
-                event: "{that}.events.onResponse"
+                }],
+                // listener: "fluid.log",
+                // args: ["{arguments}.0"],
+                event: "{that}.events.onError"
             }]
         }]
     }],
@@ -77,11 +77,12 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
         dbDataStore: {
             type: "gpii.oauth2.dbDataStore",
             options: {
-                dataStoreConfigs: {
+                dataSourceConfig: {
                     termMap: {
                         baseUrl: "http://localhost:1234",
                         dbName: "gpiiOauth"
-                    }
+                    },
+                    protocol: "http:"
                 }
             }
         }
@@ -89,9 +90,7 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
 });
 
 gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
-    console.log("in invokePromiseProducer 1");
     var promise = producerFunc.apply(null, args);
-    // console.log("======promise: ", promise);
     promise.then(function (response) {
         that.events.onResponse.fire(response);
     }, function (err) {
