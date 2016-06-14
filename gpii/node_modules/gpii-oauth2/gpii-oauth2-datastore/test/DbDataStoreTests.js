@@ -65,30 +65,29 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
             type: "gpii.oauth2.dbDataStore",
             options: {
                 dataSourceConfig: {
-                    termMap: {
-                        baseUrl: {
-                            expander: {
-                                funcName: "fluid.stringTemplate",
-                                args: ["http://localhost:%port", {
-                                    port: "{gpii.tests.dbDataStore.environment}.options.port"
-                                }]
-                            }
-                        },
-                        dbName: "gpiiOauth"
+                    baseUrl: {
+                        expander: {
+                            funcName: "fluid.stringTemplate",
+                            args: ["http://localhost:%port", {
+                                port: "{gpii.tests.dbDataStore.environment}.options.port"
+                            }]
+                        }
                     },
-                    protocol: "http:"
+                    termMap: {
+                        dbName: "gpiiOauth"
+                    }
                 }
             }
         },
         massiveRequest: {
             type: "gpii.test.pouch.basic.request",
             options: {
-                // path: "/gpiiOauth/user-1"  // findUserById
+                path: "/gpiiOauth/user-1"  // findUserById
                 // path: "/gpiiOauth/_design/views/_view/findUserByName?key=%22chromehc%22"  // findUserByUsername
                 // path: "/gpiiOauth/_design/views/_view/findUserByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findUserByGpiiToken
                 // path: "/gpiiOauth/_design/views/_view/findGpiiToken?key=%22chrome_high_contrast%22"  // findGpiiToken
                 // path: "/gpiiOauth/client-1"  // findClientById
-                path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
+                // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
             }
         }
     }

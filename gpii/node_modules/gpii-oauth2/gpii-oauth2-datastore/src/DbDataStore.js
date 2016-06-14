@@ -26,19 +26,31 @@ var fluid = fluid || require("infusion");
 
     fluid.defaults("gpii.oauth2.dbDataSource", {
         gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
+        baseUrl: null,   // Supplied by integrators
         termMap: {
-            baseUrl: null,   // Supplied by integrators
             dbName: null    // Supplied by integrators
         },
-        notFoundIsEmpty: true
+        notFoundIsEmpty: true,
+        // Add baseUrl value into url template since baseUrl (an example baseUrl value: http://localhost:5984/)
+        // should not be passed into the "termMap" option because those termMap values will be encoded to
+        // compose the url.
+        url: {
+            expander: {
+                funcName: "fluid.stringTemplate",
+                args: ["%baseUrl/%dbName%requestUrl", {
+                    baseUrl: "{that}.options.baseUrl",
+                    requestUrl: "{that}.options.requestUrl"
+                }]
+            }
+        }
     });
 
     fluid.defaults("gpii.oauth2.dbDataStore", {
         gradeNames: ["gpii.oauth2.dataStore"],
         // Supplied by GPII configuration to config gpii.oauth2.dbDataSource. It contains these elements:
         // 1. gradeNames: The database grade, for example, kettle.dataSource.CouchDB
-        // 2. termMap: {
-        //        baseUrl: The URL to the server where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
+        // 2. baseUrl: The URL to the server where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
+        // 3. termMap: {
         //        dbName: The database name
         //    }
         dataSourceConfig: {
@@ -51,7 +63,7 @@ var fluid = fluid || require("infusion");
             findUserByIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "%baseUrl/%dbName/%userId",
+                    requestUrl: "/%userId",
                     termMap: {
                         userId: "%userId"
                     }
@@ -60,7 +72,7 @@ var fluid = fluid || require("infusion");
             findUserByUsernameDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "%baseUrl/%dbName/_design/views/_view/findUserByName?key=%22%username%22",
+                    url: "/_design/views/_view/findUserByName?key=%22%username%22",
                     termMap: {
                         username: "%username"
                     }
@@ -69,7 +81,7 @@ var fluid = fluid || require("infusion");
             findUserByGpiiTokenDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "%baseUrl/%dbName/_design/views/_view/findUserByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
+                    url: "/_design/views/_view/findUserByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
                     termMap: {
                         gpiiToken: "%gpiiToken"
                     }
@@ -78,7 +90,7 @@ var fluid = fluid || require("infusion");
             findGpiiTokenDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "%baseUrl/%dbName/_design/views/_view/findGpiiToken?key=%22%gpiiToken%22",
+                    url: "/_design/views/_view/findGpiiToken?key=%22%gpiiToken%22",
                     termMap: {
                         gpiiToken: "%gpiiToken"
                     }
@@ -87,7 +99,7 @@ var fluid = fluid || require("infusion");
             findClientByIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "%baseUrl/%dbName/_design/views/_view/findClientById?key=%22%gpiiToken%22",
+                    url: "/_design/views/_view/findClientById?key=%22%gpiiToken%22",
                     termMap: {
                         clientId: "%clientId"
                     }
@@ -96,7 +108,7 @@ var fluid = fluid || require("infusion");
             findClientByOauth2ClientIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "%baseUrl/%dbName/_design/views/_view/findClientByOauth2ClientId?key=%22%oauth2ClientId%22",
+                    url: "/_design/views/_view/findClientByOauth2ClientId?key=%22%oauth2ClientId%22",
                     termMap: {
                         oauth2ClientId: "%oauth2ClientId"
                     }
@@ -142,6 +154,7 @@ var fluid = fluid || require("infusion");
 
     gpii.oauth2.dbDataStore.findUserById = function (findUserByIdDataSource, userId) {
         var processResponseFunc = function (data) {
+            console.log("findUserById", data);
             return !data ? data : {
                 name: data.name,
                 password: data.password,
