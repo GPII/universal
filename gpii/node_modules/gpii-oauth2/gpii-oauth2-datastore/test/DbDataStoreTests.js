@@ -16,123 +16,57 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
-    uuid = require("node-uuid"),
     gpii = fluid.registerNamespace("gpii");
 
 require("gpii-pouchdb");
 gpii.pouch.loadTestingSupport();
 
 require("gpii-oauth2");
+require("./DbDataStoreTestsUtils.js");
 
 fluid.logObjectRenderChars = 4096;
-
-fluid.defaults("gpii.tests.dbDataStore.environment", {
-    gradeNames: ["gpii.test.pouch.environment"],
-    port: 1234,
-    pouchConfig: {
-        databases: {
-            gpiiOauth: {
-                data: [
-                    "%gpiiOauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json",
-                    "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
-                ]
-            }
-        }
-    },
-    components: {
-        testCaseHolder: {
-            type: "gpii.tests.dbDataStore.baseTestCaseHolder"
-        }
-    },
-    distributeOptions: {
-        source: "{that}.options.rawModules",
-        target: "{that > testCaseHolder}.options.rawModules"
-    },
-    mergePolicy: {
-        rawModules: "noexpand"
-    }
-});
-
-fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
-    gradeNames: ["gpii.test.express.caseHolder"],
-    events: {
-        onResponse: null,
-        onError: null
-    },
-    components: {
-        dbDataStore: {
-            type: "gpii.oauth2.dbDataStore",
-            options: {
-                dataSourceConfig: {
-                    baseUrl: {
-                        expander: {
-                            funcName: "fluid.stringTemplate",
-                            args: ["http://localhost:%port", {
-                                port: "{gpii.tests.dbDataStore.environment}.options.port"
-                            }]
-                        }
-                    },
-                    termMap: {
-                        dbName: "gpiiOauth"
-                    }
-                }
-            }
-        },
-        massiveRequest: {
-            type: "gpii.test.pouch.basic.request",
-            options: {
-                path: "/gpiiOauth/user-1"  // findUserById
-                // path: "/gpiiOauth/_design/views/_view/findUserByName?key=%22chromehc%22"  // findUserByUsername
-                // path: "/gpiiOauth/_design/views/_view/findUserByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findUserByGpiiToken
-                // path: "/gpiiOauth/_design/views/_view/findGpiiToken?key=%22chrome_high_contrast%22"  // findGpiiToken
-                // path: "/gpiiOauth/client-1"  // findClientById
-                // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
-            }
-        }
-    }
-});
-
-fluid.defaults("gpii.test.pouch.basic.request", {
-    gradeNames: ["kettle.test.request.http"],
-    port:       "{gpii.tests.dbDataStore.environment}.options.port",
-    method:     "GET"
-});
 
 fluid.defaults("gpii.tests.dbDataStore.findUserById", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
         name: "Test findUserById()",
         tests: [{
-            name: "Test success and failed cases of findUserById()",
+            name: "Find an existing user",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", ["user-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.verifyResponse",
-                args: ["The expected user data is received", "{arguments}.0", {
-                    total_rows: 1
-                }],
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected user-1 data is received", gpii.tests.dbDataStore.expected.user1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding an non-existing user returns 404 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findUserById", ["user-0"], "{that}"]
+            }, {
+                listener: "jqUnit.assertLeftHand",
+                args: ["The expected error is received", gpii.tests.dbDataStore.expected.isMissingError, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }, {
+            name: "Not providing user ID returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findUserById", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertLeftHand",
+                args: ["The expected error is received", {
+                    msg: "User ID for getting user record is undefined - aborting",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
             }]
         }]
     }]
 });
-
-gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
-    var promise = producerFunc.apply(null, args);
-    promise.then(function (response) {
-        that.events.onResponse.fire(response);
-    }, function (err) {
-        that.events.onError.fire(err);
-    });
-};
-
-gpii.tests.dbDataStore.verifyResponse = function (msg, result, expected) {
-    console.log("verifyResponse, result", result);
-    jqUnit.assertTrue("a fake checking", true);
-    // jqUnit.assertDeepEq(msg, expected, result);
-};
 
 fluid.defaults("gpii.tests.dbDataStore.testDB", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
@@ -145,15 +79,15 @@ fluid.defaults("gpii.tests.dbDataStore.testDB", {
                 func: "{massiveRequest}.send"
             },
             {
-                listener: "gpii.tests.dbDataStore.verifyResponse",
+                listener: "console.log",
                 event:    "{massiveRequest}.events.onComplete",
-                args:     ["{massiveRequest}.nativeResponse", "{arguments}.0", { total_rows: 1 }]
+                args:     ["massiveRequest response", "{arguments}.0"]
             }]
         }]
     }]
 });
 
 fluid.test.runTests([
-    "gpii.tests.dbDataStore.findUserById",
+    "gpii.tests.dbDataStore.findUserById"
     // "gpii.tests.dbDataStore.testDB"
 ]);
