@@ -74,12 +74,12 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
         massiveRequest: {
             type: "gpii.test.pouch.basic.request",
             options: {
-                path: "/gpiiOauth/user-1"  // findUserById
+                // path: "/gpiiOauth/user-1"  // findUserById
                 // path: "/gpiiOauth/_design/views/_view/findUserByName?key=%22chromehc%22"  // findUserByUsername
                 // path: "/gpiiOauth/_design/views/_view/findUserByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findUserByGpiiToken
                 // path: "/gpiiOauth/_design/views/_view/findGpiiToken?key=%22chrome_high_contrast%22"  // findGpiiToken
                 // path: "/gpiiOauth/client-1"  // findClientById
-                // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
+                path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
             }
         }
     }
@@ -103,9 +103,20 @@ gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, tha
 
 gpii.tests.dbDataStore.expected = {
     user1: {
-        name: "chromehc",
-        password: "chromehc",
-        defaultGpiiToken: "chrome_high_contrast"
+        "name": "chromehc",
+        "password": "chromehc",
+        "defaultGpiiToken": "chrome_high_contrast"
+    },
+    tokenChromehcDefault: {
+        "userId": "user-1",
+        "gpiiToken": "chrome_high_contrast"
+    },
+    client1: {
+        "name": "Service A",
+        "oauth2ClientId": "org.chrome.cloud4chrome",
+        "oauth2ClientSecret": "client_secret_1",
+        "redirectUri": "http://localhost:3002/authorize_callback",
+        "allowDirectGpiiTokenAccess": false
     },
     isMissingError: {
         statusCode: 404,

@@ -19,7 +19,9 @@ var fluid = fluid || require("infusion");
 
     "use strict";
 
-    var gpii = fluid.registerNamespace("gpii");
+    var fluid = fluid || require("infusion"),
+        gpii = fluid.registerNamespace("gpii"),
+        $ = fluid.registerNamespace("jQuery");
 
     fluid.registerNamespace("gpii.oauth2");
 
@@ -29,6 +31,7 @@ var fluid = fluid || require("infusion");
         termMap: {
             dbName: null    // Supplied by integrators
         },
+        notFoundIsEmpty: true,
         // Add baseUrl value into url template since baseUrl (an example baseUrl value: http://localhost:5984/)
         // should not be passed into the "termMap" option because those termMap values will be encoded to
         // compose the url.
@@ -70,34 +73,49 @@ var fluid = fluid || require("infusion");
             findUserByUsernameDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "/_design/views/_view/findUserByName?key=%22%username%22",
+                    requestUrl: "/_design/views/_view/findUserByName?key=\"%username\"",
                     termMap: {
                         username: "%username"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value.value"
+                        }
                     }
                 }
             },
             findUserByGpiiTokenDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "/_design/views/_view/findUserByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
+                    requestUrl: "/_design/views/_view/findUserByGpiiToken?key=\"%gpiiToken\"&include_docs=true",
                     termMap: {
                         gpiiToken: "%gpiiToken"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.doc.value"
+                        }
                     }
                 }
             },
             findGpiiTokenDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "/_design/views/_view/findGpiiToken?key=%22%gpiiToken%22",
+                    requestUrl: "/_design/views/_view/findGpiiToken?key=\"%gpiiToken\"",
                     termMap: {
                         gpiiToken: "%gpiiToken"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value.value"
+                        }
                     }
                 }
             },
             findClientByIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "/_design/views/_view/findClientById?key=%22%gpiiToken%22",
+                    requestUrl: "/%clientId",
                     termMap: {
                         clientId: "%clientId"
                     }
@@ -106,145 +124,127 @@ var fluid = fluid || require("infusion");
             findClientByOauth2ClientIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    url: "/_design/views/_view/findClientByOauth2ClientId?key=%22%oauth2ClientId%22",
+                    requestUrl: "/_design/views/_view/findClientByOauth2ClientId?key=\"%oauth2ClientId\"",
                     termMap: {
                         oauth2ClientId: "%oauth2ClientId"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value.value"
+                        }
                     }
                 }
             }
         },
         invokers: {
             findUserById: {
-                funcName: "gpii.oauth2.dbDataStore.findUserById",
-                args: ["{that}.findUserByIdDataSource", "{arguments}.0"]
-                    // userId
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findUserByIdDataSource",
+                    {
+                        userId: "{arguments}.0"
+                    },
+                    "userId"
+                ]
+                // userId
             },
             findUserByUsername: {
-                funcName: "gpii.oauth2.dbDataStore.findUserByUsername",
-                args: ["{that}.findUserByUsernameDataSource", "{arguments}.0"]
-                    // userName
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findUserByUsernameDataSource",
+                    {
+                        username: "{arguments}.0"
+                    },
+                    "username"
+                ]
+                // userName
             },
             findUserByGpiiToken: {
-                funcName: "gpii.oauth2.dbDataStore.findUserByGpiiToken",
-                args: ["{that}.findUserByGpiiTokenDataSource", "{arguments}.0"]
-                    // gpiiToken
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findUserByGpiiTokenDataSource",
+                    {
+                        gpiiToken: "{arguments}.0"
+                    },
+                    "gpiiToken"
+                ]
+                // gpiiToken
             },
             findGpiiToken: {
-                funcName: "gpii.oauth2.dbDataStore.findGpiiToken",
-                args: ["{that}.findGpiiTokenDataSource", "{arguments}.0"]
-                    // gpiiToken
+                // funcName: "gpii.oauth2.dbDataStore.findGpiiToken",
+                // args: ["{that}.findGpiiTokenDataSource", "{arguments}.0"]
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findGpiiTokenDataSource",
+                    {
+                        gpiiToken: "{arguments}.0"
+                    },
+                    "gpiiToken"
+                ]
+                // gpiiToken
             },
             findClientById: {
-                funcName: "gpii.oauth2.dbDataStore.findClientById",
-                args: ["{that}.findClientByIdDataSource", "{arguments}.0"]
-                    // userId
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findClientByIdDataSource",
+                    {
+                        clientId: "{arguments}.0"
+                    },
+                    "clientId"
+                ]
+                // clientId
             },
             findClientByOauth2ClientId: {
-                funcName: "gpii.oauth2.dbDataStore.findClientByOauth2ClientId",
-                args: ["{that}.findClientByOauth2ClientIdDataSource", "{arguments}.0"]
-                    // oauth2ClientId
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findClientByOauth2ClientIdDataSource",
+                    {
+                        oauth2ClientId: "{arguments}.0"
+                    },
+                    "oauth2ClientId"
+                ]
+                // oauth2ClientId
             }
         }
     });
 
-    // Users
-    // -----
-
-    gpii.oauth2.dbDataStore.findUserById = function (findUserByIdDataSource, userId) {
-        return gpii.oauth2.dbDataStore.findRecord(findUserByIdDataSource, {userId: userId}, "userId");
-    };
-
-    gpii.oauth2.dbDataStore.findUserByUsername = function (findUserByUsernameDataSource, username) {
-        // var processResponseFunc = function (data) {
-        //     return !data ? data : {
-        //         name: data.rows[0].value.name,
-        //         password: data.rows[0].value.password,
-        //         defaultGpiiToken: data.rows[0].value.defaultGpiiToken
-        //     };
-        // };
-
-        return gpii.oauth2.dbDataStore.findRecord(findUserByUsernameDataSource, {username: username}, "username");
-    };
-
-    gpii.oauth2.dbDataStore.findUserByGpiiToken = function (findUserByGpiiTokenDataSource, gpiiToken) {
-        // var processResponseFunc = function (data) {
-        //     return !data ? data : {
-        //         name: data.rows[0].doc.name,
-        //         password: data.rows[0].doc.password,
-        //         defaultGpiiToken: data.rows[0].doc.defaultGpiiToken
-        //     };
-        // };
-
-        return gpii.oauth2.dbDataStore.findRecord(findUserByGpiiTokenDataSource, {gpiiToken: gpiiToken}, "gpiiToken");
-    };
-
-    gpii.oauth2.dbDataStore.findGpiiToken = function (findGpiiTokenDataSource, gpiiToken) {
-        // var processResponseFunc = function (data) {
-        //     return !data ? data : {
-        //         gpiiToken: data.rows[0].value.gpiiToken,
-        //         userId: data.rows[0].value.userId
-        //         // TODO: add "revoke" field when revoking GPII tokens is supported
-        //         // revoke: data.rows[0].value.revoke
-        //     };
-        // };
-
-        return gpii.oauth2.dbDataStore.findRecord(findGpiiTokenDataSource, {gpiiToken: gpiiToken}, "gpiiToken");
-    };
-
-    gpii.oauth2.dbDataStore.findClientById = function (findClientByIdDataSource, clientId) {
-        // var processResponseFunc = function (data) {
-        //     return !data ? data : {
-        //         name: data.name,
-        //         oauth2ClientId: data.oauth2ClientId,
-        //         oauth2ClientSecret: data.oauth2ClientSecret,
-        //         redirectUri: data.redirectUri,
-        //         allowDirectGpiiTokenAccess: data.allowDirectGpiiTokenAccess
-        //     };
-        // };
-
-        return gpii.oauth2.dbDataStore.findRecord(findClientByIdDataSource, {clientId: clientId}, "clientId");
-    };
-
-    gpii.oauth2.dbDataStore.findClientByOauth2ClientId = function (findClientByOauth2ClientIdDataSource, oauth2ClientId) {
-        // var processResponseFunc = function (data) {
-        //     return !data ? data : {
-        //         name: data.rows[0].value.name,
-        //         oauth2ClientId: data.rows[0].value.oauth2ClientId,
-        //         oauth2ClientSecret: data.rows[0].value.oauth2ClientSecret,
-        //         redirectUri: data.rows[0].value.redirectUri,
-        //         allowDirectGpiiTokenAccess: data.rows[0].value.allowDirectGpiiTokenAccess
-        //     };
-        // };
-
-        return gpii.oauth2.dbDataStore.findRecord(findClientByOauth2ClientIdDataSource, {oauth2ClientId: oauth2ClientId}, "oauth2ClientId");
-    };
-
     // Utils
     gpii.oauth2.dbDataStore.errors = {
         missingInput: {
-            msg: null,   // Supplied by integrators
+            msg: "The value of field \"%fieldName\" for getting document is undefined",   // Supplied by integrators
             statusCode: 400,
             isError: true
         }
     };
 
     gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty) {
+        console.log("in findRecord, valueNotEmpty", valueNotEmpty, "; termMap[valueNotEmpty]", termMap[valueNotEmpty]);
         var promiseTogo = fluid.promise();
 
         if (!termMap[valueNotEmpty]) {
-            var error = gpii.oauth2.dbDataStore.errors.missingInput;
-            error.msg = "User ID for getting user record is undefined - aborting";
+            var error = fluid.copy(gpii.oauth2.dbDataStore.errors.missingInput);
+            error.msg = fluid.stringTemplate(error.msg, {fieldName: valueNotEmpty});
             promiseTogo.reject(error);
         } else {
+            console.log("in findRecord, termMap", termMap);
             var promise = dataSource.get(termMap);
             promise.then(function (data) {
                 console.log("findRecord, initial received data", data);
-                if (data.type) {
+                if (data && data.type) {
                     delete data.type;
                 }
                 console.log("findRecord, after deleting type field", data);
 
-                promiseTogo.resolve(data);
+                // $.isEmptyObject() is to work around the issue when fetching data
+                // using pouch/couch DB views and records are not found, instead of
+                // returning a 404 status code, it returns this object:
+                // { total_rows: 1, offset: 0, rows: [] }
+                // Note the "rows" value is an empty array.
+                // This behavior prevents "kettle.dataSource.CouchDB" -> "notFoundIsEmpty"
+                // option from returning "undefined". Instead, an empty object {}
+                // is returned. This work around is to make sure "undefined" is returned
+                // when an empty object is received.
+                promiseTogo.resolve($.isEmptyObject(data) ? undefined : data);
             }, function (error) {
                 console.log("findRecord, error", error);
                 promiseTogo.reject(error);

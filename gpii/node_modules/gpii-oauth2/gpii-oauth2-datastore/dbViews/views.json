@@ -3,49 +3,49 @@
         "_id": "_design/views",
         "views": {
             "findUserByName": {
-                "map": "function(doc) {if (doc.type === 'user') emit(doc.name, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'user') emit(doc.value.name, doc)}"
             },
             "findGpiiToken": {
-                "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'gpiiToken') emit(doc.value.gpiiToken, doc)}"
             },
             "findUserByGpiiToken": {
-                "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, {'_id': doc.userId})}"
+                "map": "function(doc) {if (doc.value.type === 'gpiiToken') emit(doc.value.gpiiToken, {'_id': doc.value.userId})}"
             },
             "findClientByOauth2ClientId": {
-                "map": "function(doc) {if (doc.type === 'client') emit(doc.oauth2ClientId, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'client') emit(doc.value.oauth2ClientId, doc)}"
             },
             "findAllClients": {
-                "map": "function(doc) {if (doc.type === 'client') emit(doc._id, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'client') emit(doc._id, doc)}"
             },
             "findAuthByGpiiToken": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit(doc.gpiiToken, doc)}}"
+                "map": "function (doc) {if (doc.value.type === 'authDecision') {emit(doc.value.gpiiToken, doc)}}"
             },
             "findAuthDecision": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
+                "map": "function (doc) {if (doc.value.type === 'authDecision') {emit([doc.value.gpiiToken, doc.value.clientId, doc.value.redirectUri], doc)}}"
             },
             "findAuthDecisionByAuthCode": {
-                "map": "function (doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authDecisionId})}}"
+                "map": "function (doc) {if (doc.value.type === 'authCode') {emit(doc.value.code, {'_id': doc.value.authDecisionId})}}"
             },
             "findAuthorizedClientsByGpiiToken": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit(doc.gpiiToken, {'_id': doc.clientId})}}"
+                "map": "function (doc) {if (doc.value.type === 'authDecision') {emit(doc.value.gpiiToken, {'_id': doc.value.clientId})}}"
             },
             "findAuthByAccessToken": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit(doc.accessToken, doc)}}"
+                "map": "function (doc) {if (doc.value.type === 'authDecision') {emit(doc.value.accessToken, doc)}}"
             },
             "findAuthDecisionByGpiiTokenAndClientId": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit([doc.gpiiToken, doc.clientId], doc)}}"
+                "map": "function (doc) {if (doc.value.type === 'authDecision') {emit([doc.value.gpiiToken, doc.value.clientId], doc)}}"
             },
             "findClientCredentialsTokenById": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc._id, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'clientCredentialsToken') emit(doc._id, doc)}"
             },
             "findClientCredentialsTokenByClientId": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc.clientId, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'clientCredentialsToken') emit(doc.value.clientId, doc)}"
             },
             "findClientCredentialsTokenByAccessToken": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc.accessToken, doc)}"
+                "map": "function(doc) {if (doc.value.type === 'clientCredentialsToken') emit(doc.value.accessToken, doc)}"
             },
             "findAuthByClientCredentialsAccessToken": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') {emit(doc.accessToken, {'_id': doc.clientId, 'allowAddPrefs': doc.allowAddPrefs});}}"
+                "map": "function(doc) {if (doc.value.type === 'clientCredentialsToken') {emit(doc.valueaccessToken, {'_id': doc.value.clientId, 'allowAddPrefs': doc.value.allowAddPrefs});}}"
             }
         }
     }
