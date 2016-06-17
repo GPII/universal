@@ -21,9 +21,6 @@ var fluid = require("infusion"),
 require("gpii-pouchdb");
 gpii.pouch.loadTestingSupport();
 
-var kettle = require("kettle");
-kettle.loadTestingSupport();
-
 require("gpii-oauth2");
 require("./DbDataStoreTestsUtils.js");
 
