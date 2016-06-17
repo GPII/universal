@@ -11,6 +11,9 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
+/* eslint-env browser */
+/* eslint strict: ["error", "function"] */
+
 var fluid = fluid || require("infusion");
 
 (function () {

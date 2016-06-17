@@ -42,7 +42,7 @@ fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
     method: "PUT"
 });
 
-// NOTE: This inherits from from "gpii.test.common.testCaseHolder" via "gpii.test.integration.testCaseHolder.linux" 
+// NOTE: This inherits from from "gpii.test.common.testCaseHolder" via "gpii.test.integration.testCaseHolder.linux"
 // from which it gets loginRequest, logoutRequest and other standard events
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
     events: {
