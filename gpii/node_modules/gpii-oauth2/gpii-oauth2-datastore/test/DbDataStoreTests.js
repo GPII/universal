@@ -278,6 +278,24 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
     }]
 });
 
+fluid.defaults("gpii.tests.dbDataStore.findAllClients", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findAllClients()",
+        tests: [{
+            name: "Find all clients",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAllClients", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected all client data is received", gpii.tests.dbDataStore.expected.allClients, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }]
+    }]
+});
+
 fluid.defaults("gpii.tests.dbDataStore.testDB", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -303,6 +321,7 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findUserByGpiiToken",
     "gpii.tests.dbDataStore.findGpiiToken",
     "gpii.tests.dbDataStore.findClientById",
-    "gpii.tests.dbDataStore.findClientByOauth2ClientId"
+    "gpii.tests.dbDataStore.findClientByOauth2ClientId",
+    "gpii.tests.dbDataStore.findAllClients"
     // "gpii.tests.dbDataStore.testDB"
 ]);

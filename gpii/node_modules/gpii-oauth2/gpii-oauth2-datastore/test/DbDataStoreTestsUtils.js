@@ -79,7 +79,8 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 // path: "/gpiiOauth/_design/views/_view/findUserByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findUserByGpiiToken
                 // path: "/gpiiOauth/_design/views/_view/findGpiiToken?key=%22chrome_high_contrast%22"  // findGpiiToken
                 // path: "/gpiiOauth/client-1"  // findClientById
-                path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
+                // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
+                path: "/gpiiOauth/_design/views/_view/findAllClients"  // findAllClients
             }
         }
     }
@@ -118,9 +119,17 @@ gpii.tests.dbDataStore.expected = {
         "redirectUri": "http://localhost:3002/authorize_callback",
         "allowDirectGpiiTokenAccess": false
     },
-    isMissingError: {
-        statusCode: 404,
-        isError: true,
-        reason: "missing"
-    }
+    allClients: [{
+        "name": "Service A",
+        "oauth2ClientId": "org.chrome.cloud4chrome",
+        "oauth2ClientSecret": "client_secret_1",
+        "redirectUri": "http://localhost:3002/authorize_callback",
+        "allowDirectGpiiTokenAccess": false
+    }, {
+        "name": "First Discovery",
+        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
+        "oauth2ClientSecret": "client_secret_firstDiscovery",
+        "allowDirectGpiiTokenAccess": false,
+        "allowAddPrefs": true
+    }]
 };

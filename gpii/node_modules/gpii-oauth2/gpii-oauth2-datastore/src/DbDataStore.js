@@ -20,10 +20,9 @@ var fluid = fluid || require("infusion");
     "use strict";
 
     var fluid = fluid || require("infusion"),
-        gpii = fluid.registerNamespace("gpii"),
-        $ = fluid.registerNamespace("jQuery");
+        gpii = fluid.registerNamespace("gpii");
 
-    fluid.registerNamespace("gpii.oauth2");
+    require("./DbDataStoreUtils.js");
 
     fluid.defaults("gpii.oauth2.dbDataSource", {
         gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
@@ -48,9 +47,10 @@ var fluid = fluid || require("infusion");
 
     fluid.defaults("gpii.oauth2.dbDataStore", {
         gradeNames: ["gpii.oauth2.dataStore"],
-        // Supplied by GPII configuration to config gpii.oauth2.dbDataSource. It contains these elements:
-        // 1. gradeNames: The database grade, for example, kettle.dataSource.CouchDB
-        // 2. baseUrl: The URL to the server where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
+        // Supplied by GPII configuration to config all gpii.oauth2.dbDataSource instances.
+        // It contains these elements:
+        // 1. gradeNames: The mixin grade
+        // 2. baseUrl: The URL to where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
         // 3. termMap: {
         //        dbName: The database name
         //    }
@@ -134,6 +134,17 @@ var fluid = fluid || require("infusion");
                         }
                     }
                 }
+            },
+            findAllClientsDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAllClients",
+                    rules: {
+                        readPayload: {
+                            "": "rows"
+                        }
+                    }
+                }
             }
         },
         invokers: {
@@ -204,54 +215,17 @@ var fluid = fluid || require("infusion");
                     "oauth2ClientId"
                 ]
                 // oauth2ClientId
+            },
+            findAllClients: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAllClientsDataSource",
+                    {},
+                    null,
+                    gpii.oauth2.dbDataStore.findAllClients
+                ]
             }
         }
     });
-
-    // Utils
-    gpii.oauth2.dbDataStore.errors = {
-        missingInput: {
-            msg: "The value of field \"%fieldName\" for getting document is undefined",   // Supplied by integrators
-            statusCode: 400,
-            isError: true
-        }
-    };
-
-    gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty) {
-        console.log("in findRecord, valueNotEmpty", valueNotEmpty, "; termMap[valueNotEmpty]", termMap[valueNotEmpty]);
-        var promiseTogo = fluid.promise();
-
-        if (!termMap[valueNotEmpty]) {
-            var error = fluid.copy(gpii.oauth2.dbDataStore.errors.missingInput);
-            error.msg = fluid.stringTemplate(error.msg, {fieldName: valueNotEmpty});
-            promiseTogo.reject(error);
-        } else {
-            console.log("in findRecord, termMap", termMap);
-            var promise = dataSource.get(termMap);
-            promise.then(function (data) {
-                console.log("findRecord, initial received data", data);
-                if (data && data.type) {
-                    delete data.type;
-                }
-                console.log("findRecord, after deleting type field", data);
-
-                // $.isEmptyObject() is to work around the issue when fetching data
-                // using pouch/couch DB views and records are not found, instead of
-                // returning a 404 status code, it returns this object:
-                // { total_rows: 1, offset: 0, rows: [] }
-                // Note the "rows" value is an empty array.
-                // This behavior prevents "kettle.dataSource.CouchDB" -> "notFoundIsEmpty"
-                // option from returning "undefined". Instead, an empty object {}
-                // is returned. This work around is to make sure "undefined" is returned
-                // when an empty object is received.
-                promiseTogo.resolve($.isEmptyObject(data) ? undefined : data);
-            }, function (error) {
-                console.log("findRecord, error", error);
-                promiseTogo.reject(error);
-            });
-        }
-
-        return promiseTogo;
-    };
 
 })();
