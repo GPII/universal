@@ -257,6 +257,7 @@ var fluid = fluid || require("infusion");
                     gpii.oauth2.dbDataStore.findAllClients
                 ]
             },
+            // TODO: verify a record with the same gpii token doesn't exist
             addAuthDecision: {
                 funcName: "gpii.oauth2.dbDataStore.addRecord",
                 args: [

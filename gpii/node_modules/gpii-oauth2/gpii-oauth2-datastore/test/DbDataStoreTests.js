@@ -314,6 +314,20 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
                 args: ["{arguments}.0", gpii.tests.dbDataStore.expected.authDecisionToCreate],
                 event: "{that}.events.onResponse"
             }]
+        }, {
+            name: "Add an emty auth decision returns error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.addAuthDecision", [{}], "{that}"]
+            }, {
+                listener: "jqUnit.assertLeftHand",
+                args: ["The expected error is received", {
+                    msg: "The record of \"authDecision\" is not found",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
         }]
     }]
 });

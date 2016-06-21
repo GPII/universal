@@ -45,8 +45,7 @@ var fluid = fluid || require("infusion");
         var promiseTogo = fluid.promise();
 
         if (termMap && valueNotEmpty && !termMap[valueNotEmpty]) {
-            var error = fluid.copy(gpii.oauth2.dbDataStore.errors.missingInput);
-            error.msg = fluid.stringTemplate(error.msg, {fieldName: valueNotEmpty});
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: valueNotEmpty});
             promiseTogo.reject(error);
         } else {
             console.log("in findRecord, termMap", termMap);
@@ -73,6 +72,12 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
+    gpii.oauth2.dbDataStore.composeError = function (error, termMap) {
+        var error = fluid.copy(error);
+        error.msg = fluid.stringTemplate(error.msg, termMap);
+        return error;
+    };
+
     gpii.oauth2.dbDataStore.CleanUpDoc = function (data) {
         if (data) {
             data.id = data._id;
@@ -95,10 +100,16 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.dbDataStore.addRecord = function (dataSource, recordType, idName, data) {
-        var directModel = {};
-        fluid.set(directModel, idName, uuid.v4());
-        fluid.extend(data, {type: recordType});
-        var promise = dataSource.set(directModel, data);
+        if ($.isEmptyObject(data)) {
+            var promise = fluid.promise();
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: recordType});
+            promise.reject(error);
+        } else {
+            var directModel = {};
+            fluid.set(directModel, idName, uuid.v4());
+            fluid.extend(data, {type: recordType});
+            var promise = dataSource.set(directModel, data);
+        }
         return promise;
     };
 
