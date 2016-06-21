@@ -41,7 +41,7 @@ var fluid = fluid || require("infusion");
 
     gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty, dataProcessFunc) {
         console.log("in findRecord, valueNotEmpty", valueNotEmpty, "; termMap[valueNotEmpty]", termMap[valueNotEmpty], "; dataProcessFunc", dataProcessFunc);
-        dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.removeDocType;
+        dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.CleanUpDoc;
         var promiseTogo = fluid.promise();
 
         if (termMap && valueNotEmpty && !termMap[valueNotEmpty]) {
@@ -53,8 +53,6 @@ var fluid = fluid || require("infusion");
             var promise = dataSource.get(termMap);
             promise.then(function (data) {
                 console.log("findRecord, initial received data", data);
-                var processed = dataProcessFunc(data);
-                console.log("findRecord, after dataProcessFunc", data);
 
                 // $.isEmptyObject() is to work around the issue when fetching data
                 // using pouch/couch DB views and records are not found, instead of
@@ -65,7 +63,7 @@ var fluid = fluid || require("infusion");
                 // option from returning "undefined". Instead, an empty object {}
                 // is returned. This work around is to make sure "undefined" is returned
                 // when an empty object is received.
-                promiseTogo.resolve($.isEmptyObject(processed) ? undefined : processed);
+                promiseTogo.resolve($.isEmptyObject(data) ? undefined : dataProcessFunc(data));
             }, function (error) {
                 console.log("findRecord, error", error);
                 promiseTogo.reject(error);
@@ -75,8 +73,11 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
-    gpii.oauth2.dbDataStore.removeDocType = function (data) {
-        if (data && data.type) {
+    gpii.oauth2.dbDataStore.CleanUpDoc = function (data) {
+        if (data) {
+            data.id = data._id;
+            delete data._id;
+            delete data._rev;
             delete data.type;
         }
         return data;
@@ -85,9 +86,9 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.dbDataStore.findAllClients = function (data) {
         var clients = [];
         fluid.each(data, function (clientRow) {
-            var rule = {"": "value.value"};
+            var rule = {"": "value"};
             var client = fluid.model.transformWithRules(clientRow, rule);
-            client = gpii.oauth2.dbDataStore.removeDocType(client);
+            client = gpii.oauth2.dbDataStore.CleanUpDoc(client);
             clients.push(client);
         });
         return clients;

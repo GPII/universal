@@ -31,6 +31,14 @@ var fluid = fluid || require("infusion");
             dbName: null    // Supplied by integrators
         },
         notFoundIsEmpty: true,
+        rules: {
+            writePayload: {
+                "": ""
+            },
+            readPayload: {
+                "": ""
+            }
+        },
         // Add baseUrl value into url template since baseUrl (an example baseUrl value: http://localhost:5984/)
         // should not be passed into the "termMap" option because those termMap values will be encoded to
         // compose the url.
@@ -85,7 +93,7 @@ var fluid = fluid || require("infusion");
                     },
                     rules: {
                         readPayload: {
-                            "": "rows.0.value.value"
+                            "": "rows.0.value"
                         }
                     }
                 }
@@ -99,7 +107,7 @@ var fluid = fluid || require("infusion");
                     },
                     rules: {
                         readPayload: {
-                            "": "rows.0.doc.value"
+                            "": "rows.0.doc"
                         }
                     }
                 }
@@ -113,7 +121,7 @@ var fluid = fluid || require("infusion");
                     },
                     rules: {
                         readPayload: {
-                            "": "rows.0.value.value"
+                            "": "rows.0.value"
                         }
                     }
                 }
@@ -136,7 +144,7 @@ var fluid = fluid || require("infusion");
                     },
                     rules: {
                         readPayload: {
-                            "": "rows.0.value.value"
+                            "": "rows.0.value"
                         }
                     }
                 }

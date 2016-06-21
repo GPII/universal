@@ -16,7 +16,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.require("node-jqunit", require, "jqUnit");
 
 fluid.defaults("gpii.tests.dbDataStore.environment", {
     gradeNames: ["gpii.test.pouch.environment"],
@@ -102,17 +103,30 @@ gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, tha
     });
 };
 
+gpii.tests.dbDataStore.saveAndInvokeFetch = function (fetchDataSource, id, that) {
+    gpii.tests.dbDataStore.lastSavedId = id;
+    gpii.tests.dbDataStore.invokePromiseProducer(fetchDataSource, [id], that);
+};
+
+gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
+    jqUnit.assertEquals("The fetched document id matches the saved record", gpii.tests.dbDataStore.lastSavedId, response.id);
+    jqUnit.assertLeftHand("The data is saved successfully", expected, response);
+};
+
 gpii.tests.dbDataStore.expected = {
     user1: {
+        "id": "user-1",
         "name": "chromehc",
         "password": "chromehc",
         "defaultGpiiToken": "chrome_high_contrast"
     },
     tokenChromehcDefault: {
+        "id": "gpiiToken-1",
         "userId": "user-1",
         "gpiiToken": "chrome_high_contrast"
     },
     client1: {
+        "id": "client-1",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
@@ -120,12 +134,14 @@ gpii.tests.dbDataStore.expected = {
         "allowDirectGpiiTokenAccess": false
     },
     allClients: [{
+        "id": "client-1",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
         "redirectUri": "http://localhost:3002/authorize_callback",
         "allowDirectGpiiTokenAccess": false
     }, {
+        "id": "client-2",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
@@ -133,6 +149,7 @@ gpii.tests.dbDataStore.expected = {
         "allowAddPrefs": true
     }],
     authDecision1: {
+        "id": "authDecision-1",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": false,

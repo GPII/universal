@@ -16,8 +16,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    jqUnit = fluid.require("node-jqunit", require, "jqUnit");
+    gpii = fluid.registerNamespace("gpii");
 
 require("gpii-pouchdb");
 gpii.pouch.loadTestingSupport();
@@ -307,12 +306,12 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.expected.authDecisionToCreate], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionById", ["{arguments}.0.id"], "{that}"],
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findAuthDecisionById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The auth decision record has been created", gpii.tests.dbDataStore.expected.authDecisionToCreate, "{arguments}.0"],
+                listener: "gpii.tests.dbDataStore.verifyFetched",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.expected.authDecisionToCreate],
                 event: "{that}.events.onResponse"
             }]
         }]
