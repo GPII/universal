@@ -58,7 +58,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gnome-shell"]
+            }
+        }
     },
     {
         name: "Testing os_common2 using Flat matchmaker",
@@ -76,7 +81,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 }]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gsettings-desktop-schemas"]
+            }
+        }
     },
     {
         name: "Testing os_gnome using Flat matchmaker",
@@ -115,7 +125,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gnome-shell"]
+            }
+        }
     },
     {
         name: "Testing os_win7 using Flat matchmaker",
@@ -151,7 +166,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gnome-shell"]
+            }
+        }
     }
 ]);
 

@@ -58,7 +58,12 @@ gpii.tests.linux.orca.testDefs = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
@@ -94,7 +99,12 @@ gpii.tests.linux.orca.testDefs = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
@@ -129,7 +139,12 @@ gpii.tests.linux.orca.testDefs = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     }
 ];
 
