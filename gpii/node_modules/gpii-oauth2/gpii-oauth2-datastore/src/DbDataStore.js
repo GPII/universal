@@ -253,6 +253,7 @@ var fluid = fluid || require("infusion");
                 funcName: "gpii.oauth2.dbDataStore.addRecord",
                 args: [
                     "{that}.addAuthDecisionDataSource",
+                    "authDecision",
                     "authDecisionId",
                     "{arguments}.0"
                 ]

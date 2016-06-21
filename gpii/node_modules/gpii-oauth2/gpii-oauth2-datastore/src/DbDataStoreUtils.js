@@ -28,7 +28,12 @@ var fluid = fluid || require("infusion");
 
     gpii.oauth2.dbDataStore.errors = {
         missingInput: {
-            msg: "The value of field \"%fieldName\" for getting document is undefined",   // Supplied by integrators
+            msg: "The input field \"%fieldName\" is undefined",   // Supplied by integrators
+            statusCode: 400,
+            isError: true
+        },
+        missingDoc: {
+            msg: "The record of \"%docName\" is not found",   // Supplied by integrators
             statusCode: 400,
             isError: true
         }
@@ -88,9 +93,10 @@ var fluid = fluid || require("infusion");
         return clients;
     };
 
-    gpii.oauth2.dbDataStore.addRecord = function (dataSource, idName, data) {
+    gpii.oauth2.dbDataStore.addRecord = function (dataSource, recordType, idName, data) {
         var directModel = {};
         fluid.set(directModel, idName, uuid.v4());
+        fluid.extend(data, {type: recordType});
         var promise = dataSource.set(directModel, data);
         return promise;
     };

@@ -59,7 +59,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"userId\" for getting document is undefined",
+                    msg: "The input field \"userId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -101,7 +101,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"username\" for getting document is undefined",
+                    msg: "The input field \"username\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -143,7 +143,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"gpiiToken\" for getting document is undefined",
+                    msg: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -185,7 +185,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"gpiiToken\" for getting document is undefined",
+                    msg: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -227,7 +227,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"clientId\" for getting document is undefined",
+                    msg: "The input field \"clientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -269,7 +269,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"oauth2ClientId\" for getting document is undefined",
+                    msg: "The input field \"oauth2ClientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -297,10 +297,6 @@ fluid.defaults("gpii.tests.dbDataStore.findAllClients", {
     }]
 });
 
-gpii.tests.dbDataStore.authDecisionToPut = fluid.extend(fluid.copy(gpii.tests.dbDataStore.expected.authDecisionToCreate), {
-    "type": "authDecision"
-});
-
 fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -309,7 +305,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
             name: "Add an auth decision",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.authDecisionToPut], "{that}"]
+                args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.expected.authDecisionToCreate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionById", ["{arguments}.0.id"], "{that}"],
@@ -355,7 +351,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
             }, {
                 listener: "jqUnit.assertLeftHand",
                 args: ["The expected error is received", {
-                    msg: "The value of field \"authDecisionId\" for getting document is undefined",
+                    msg: "The input field \"authDecisionId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
