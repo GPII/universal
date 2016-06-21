@@ -21,7 +21,8 @@ var fluid = fluid || require("infusion");
 
     var fluid = fluid || require("infusion"),
         gpii = fluid.registerNamespace("gpii"),
-        $ = fluid.registerNamespace("jQuery");
+        $ = fluid.registerNamespace("jQuery"),
+        uuid = require("node-uuid");
 
     fluid.registerNamespace("gpii.oauth2.dbDataStore");
 
@@ -85,6 +86,13 @@ var fluid = fluid || require("infusion");
             clients.push(client);
         });
         return clients;
+    };
+
+    gpii.oauth2.dbDataStore.addRecord = function (dataSource, idName, data) {
+        var directModel = {};
+        fluid.set(directModel, idName, uuid.v4());
+        var promise = dataSource.set(directModel, data);
+        return promise;
     };
 
 })();

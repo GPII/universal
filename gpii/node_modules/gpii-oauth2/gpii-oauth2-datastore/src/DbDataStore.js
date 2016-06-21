@@ -45,6 +45,12 @@ var fluid = fluid || require("infusion");
         }
     });
 
+    fluid.defaults("gpii.oauth2.dbDataSource.writable", {
+        gradeNames: ["gpii.oauth2.dbDataSource", "kettle.dataSource.CouchDB.writable"],
+        writable: true,
+        writeMethod: "PUT"
+    });
+
     fluid.defaults("gpii.oauth2.dbDataStore", {
         gradeNames: ["gpii.oauth2.dataStore"],
         // Supplied by GPII configuration to config all gpii.oauth2.dbDataSource instances.
@@ -145,6 +151,24 @@ var fluid = fluid || require("infusion");
                         }
                     }
                 }
+            },
+            addAuthDecisionDataSource: {
+                type: "gpii.oauth2.dbDataSource.writable",
+                options: {
+                    requestUrl: "/%authDecisionId",
+                    termMap: {
+                        authDecisionId: "%authDecisionId"
+                    }
+                }
+            },
+            findAuthDecisionByIdDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/%authDecisionId",
+                    termMap: {
+                        authDecisionId: "%authDecisionId"
+                    }
+                }
             }
         },
         invokers: {
@@ -224,6 +248,26 @@ var fluid = fluid || require("infusion");
                     null,
                     gpii.oauth2.dbDataStore.findAllClients
                 ]
+            },
+            addAuthDecision: {
+                funcName: "gpii.oauth2.dbDataStore.addRecord",
+                args: [
+                    "{that}.addAuthDecisionDataSource",
+                    "authDecisionId",
+                    "{arguments}.0"
+                ]
+                // authDecision
+            },
+            findAuthDecisionById: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthDecisionByIdDataSource",
+                    {
+                        authDecisionId: "{arguments}.0"
+                    },
+                    "authDecisionId"
+                ]
+                // authDecisionId
             }
         }
     });

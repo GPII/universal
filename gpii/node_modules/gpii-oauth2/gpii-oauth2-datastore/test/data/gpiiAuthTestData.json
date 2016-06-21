@@ -42,7 +42,7 @@
         "_id": "authDecision-1",
         "value": {
             "type": "authDecision",
-            "gpiiToken": "review3_chrome_high_contrast",
+            "gpiiToken": "chrome_high_contrast",
             "clientId": "client-1",
             "redirectUri": false,
             "accessToken": "chrome_high_contrast_access_token",

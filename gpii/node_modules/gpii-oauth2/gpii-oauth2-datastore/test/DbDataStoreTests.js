@@ -16,7 +16,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.require("node-jqunit", require, "jqUnit");
 
 require("gpii-pouchdb");
 gpii.pouch.loadTestingSupport();
@@ -41,13 +42,13 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Finding an non-existing user by an user id returns undefined",
+            name: "Finding a non-existing user by an user id returns undefined",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", ["user-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
-                args: ["Finding an non-existing user returns undefined", "{arguments}.0"],
+                args: ["Finding a non-existing user returns undefined", "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -296,6 +297,74 @@ fluid.defaults("gpii.tests.dbDataStore.findAllClients", {
     }]
 });
 
+gpii.tests.dbDataStore.authDecisionToPut = fluid.extend(fluid.copy(gpii.tests.dbDataStore.expected.authDecisionToCreate), {
+    "type": "authDecision"
+});
+
+fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test addAuthDecision()",
+        tests: [{
+            name: "Add an auth decision",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.authDecisionToPut], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", ["{arguments}.0.id"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The auth decision record has been created", gpii.tests.dbDataStore.expected.authDecisionToCreate, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findAuthDecisionById()",
+        tests: [{
+            name: "Find an existing auth decisoin by an auth decisoin id",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected authDecision-1 data is received", gpii.tests.dbDataStore.expected.authDecision1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing auth decision by an auth decision id returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", ["auth decision-0"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing auth decision ID returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertLeftHand",
+                args: ["The expected error is received", {
+                    msg: "The value of field \"authDecisionId\" for getting document is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
 fluid.defaults("gpii.tests.dbDataStore.testDB", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -322,6 +391,8 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findGpiiToken",
     "gpii.tests.dbDataStore.findClientById",
     "gpii.tests.dbDataStore.findClientByOauth2ClientId",
-    "gpii.tests.dbDataStore.findAllClients"
+    "gpii.tests.dbDataStore.findAllClients",
+    "gpii.tests.dbDataStore.addAuthDecision",
+    "gpii.tests.dbDataStore.findAuthDecisionById"
     // "gpii.tests.dbDataStore.testDB"
 ]);

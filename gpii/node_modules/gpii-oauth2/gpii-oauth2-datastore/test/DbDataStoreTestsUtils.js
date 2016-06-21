@@ -131,5 +131,25 @@ gpii.tests.dbDataStore.expected = {
         "oauth2ClientSecret": "client_secret_firstDiscovery",
         "allowDirectGpiiTokenAccess": false,
         "allowAddPrefs": true
-    }]
+    }],
+    authDecision1: {
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-1",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    },
+    authDecisionToCreate: {
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "client2_new_access_token",
+        "selectedPreferences": {
+            "textFont": 2
+        },
+        "revoked": false
+    }
 };
