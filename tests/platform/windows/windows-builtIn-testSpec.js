@@ -132,7 +132,10 @@ gpii.tests.windows.builtIn = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.alwaysInstalled" : { }
+       }
     }, {
         name: "Testing os_common using Flat matchmaker",
         userToken: "os_common",
@@ -242,7 +245,10 @@ gpii.tests.windows.builtIn = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.alwaysInstalled" : { }
+        }
     }, {
         name: "Testing os_gnome using Flat matchmaker",
         userToken: "os_gnome",
@@ -309,7 +315,10 @@ gpii.tests.windows.builtIn = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.alwaysInstalled" : { }
+        }
     }
 ];
 

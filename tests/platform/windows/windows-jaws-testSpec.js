@@ -46,7 +46,16 @@ gpii.tests.windows.jaws = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }, {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
         userToken: "jaws_common",
@@ -71,7 +80,16 @@ gpii.tests.windows.jaws = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }
 ];
 
