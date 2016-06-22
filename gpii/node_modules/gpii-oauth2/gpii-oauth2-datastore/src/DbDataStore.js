@@ -160,7 +160,7 @@ var fluid = fluid || require("infusion");
                     }
                 }
             },
-            addAuthDecisionDataSource: {
+            addOrUpdateAuthDecisionDataSource: {
                 type: "gpii.oauth2.dbDataSource.writable",
                 options: {
                     requestUrl: "/%authDecisionId",
@@ -175,6 +175,20 @@ var fluid = fluid || require("infusion");
                     requestUrl: "/%authDecisionId",
                     termMap: {
                         authDecisionId: "%authDecisionId"
+                    }
+                }
+            },
+            findAuthDecisionsByGpiiTokenDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthByGpiiToken?key=\"%gpiiToken\"",
+                    termMap: {
+                        gpiiToken: "%gpiiToken"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows"
+                        }
                     }
                 }
             }
@@ -214,8 +228,6 @@ var fluid = fluid || require("infusion");
                 // gpiiToken
             },
             findGpiiToken: {
-                // funcName: "gpii.oauth2.dbDataStore.findGpiiToken",
-                // args: ["{that}.findGpiiTokenDataSource", "{arguments}.0"]
                 funcName: "gpii.oauth2.dbDataStore.findRecord",
                 args: [
                     "{that}.findGpiiTokenDataSource",
@@ -254,19 +266,31 @@ var fluid = fluid || require("infusion");
                     "{that}.findAllClientsDataSource",
                     {},
                     null,
-                    gpii.oauth2.dbDataStore.findAllClients
+                    gpii.oauth2.dbDataStore.handleMultipleRecords
                 ]
             },
             // TODO: verify a record with the same gpii token doesn't exist
             addAuthDecision: {
                 funcName: "gpii.oauth2.dbDataStore.addRecord",
                 args: [
-                    "{that}.addAuthDecisionDataSource",
-                    "authDecision",
+                    "{that}.addOrUpdateAuthDecisionDataSource",
+                    gpii.oauth2.dbDataStore.docTypes.authDecision,
                     "authDecisionId",
                     "{arguments}.0"
                 ]
                 // authDecision
+            },
+            updateAuthDecision: {
+                funcName: "gpii.oauth2.dbDataStore.updateAuthDecision",
+                args: [
+                    "{that}.addOrUpdateAuthDecisionDataSource",
+                    "{that}.findAuthDecisionById",
+                    "{that}.findGpiiToken",
+                    undefined,
+                    "{arguments}.0",
+                    "{arguments}.1"
+                ]
+                // userId, authDecisionData
             },
             findAuthDecisionById: {
                 funcName: "gpii.oauth2.dbDataStore.findRecord",
@@ -278,8 +302,28 @@ var fluid = fluid || require("infusion");
                     "authDecisionId"
                 ]
                 // authDecisionId
+            },
+            findAuthDecisionsByGpiiToken: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthDecisionsByGpiiTokenDataSource",
+                    {
+                        gpiiToken: "{arguments}.0"
+                    },
+                    "gpiiToken",
+                    gpii.oauth2.dbDataStore.handleMultipleRecords
+                ]
+                // gpiiToken
             }
-        }
+        },
+        events: {
+            onUpdateAuthDecision: null
+        }//,
+        // listeners: {
+        //     onUpdateAuthDecision: [{
+        //         listener: "{that}."
+        //     }]
+        // }
     });
 
 })();

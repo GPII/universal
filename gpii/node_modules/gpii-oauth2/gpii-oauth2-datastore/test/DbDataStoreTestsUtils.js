@@ -81,7 +81,8 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 // path: "/gpiiOauth/_design/views/_view/findGpiiToken?key=%22chrome_high_contrast%22"  // findGpiiToken
                 // path: "/gpiiOauth/client-1"  // findClientById
                 // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
-                path: "/gpiiOauth/_design/views/_view/findAllClients"  // findAllClients
+                // path: "/gpiiOauth/_design/views/_view/findAllClients"  // findAllClients
+                path: "/gpiiOauth/_design/views/_view/findAuthByGpiiToken?key=%22chrome_high_contrast%22"  // findAuthDecisionsByGpiiToken
             }
         }
     }
@@ -95,7 +96,9 @@ fluid.defaults("gpii.test.pouch.basic.request", {
 });
 
 gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
+    console.log("invokePromiseProducer", producerFunc, args);
     var promise = producerFunc.apply(null, args);
+    console.log("after invokePromiseProducer");
     promise.then(function (response) {
         that.events.onResponse.fire(response);
     }, function (err) {
@@ -113,7 +116,7 @@ gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
     jqUnit.assertLeftHand("The data is saved successfully", expected, response);
 };
 
-gpii.tests.dbDataStore.expected = {
+gpii.tests.dbDataStore.testData = {
     user1: {
         "id": "user-1",
         "name": "chromehc",
@@ -168,5 +171,38 @@ gpii.tests.dbDataStore.expected = {
             "textFont": 2
         },
         "revoked": false
-    }
+    },
+    authDecisionToUpdate: {
+        "id": "authDecision-1",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-1",
+        "redirectUri": "a test url",
+        "accessToken": "chrome_high_contrast_access_token",
+        "selectedPreferences": {
+            "contrast": "bw",
+            "toc": true
+        },
+        "revoked": false
+    },
+    AuthDecisionsByGpiiToken: [{
+        "id": "authDecision-1",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-1",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "id": "authDecision-2",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token_client_2",
+        "selectedPreferences": {
+            "textFont": "arial"
+        },
+        "revoked": false
+    }]
 };

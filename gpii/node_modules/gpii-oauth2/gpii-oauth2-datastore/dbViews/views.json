@@ -18,10 +18,10 @@
                 "map": "function(doc) {if (doc.type === 'client') emit(doc._id, doc)}"
             },
             "findAuthByGpiiToken": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit(doc.gpiiToken, doc)}}"
+                "map": "function (doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, doc)}}"
             },
             "findAuthDecision": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
+                "map": "function (doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
             },
             "findAuthDecisionByAuthCode": {
                 "map": "function (doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authDecisionId})}}"

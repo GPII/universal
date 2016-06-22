@@ -43,13 +43,25 @@
         "revoked": false
     },
     {
+        "_id": "authDecision-2",
+        "type": "authDecision",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token_client_2",
+        "selectedPreferences": {
+            "textFont": "arial"
+        },
+        "revoked": false
+    },
+    {
         "_id": "authCode-1",
         "type": "authCode",
         "authDecisionId": "authDecision-1",
         "code": "chrome_high_contrast_auth_token"
     },
     {
-        "_id": "authCode-1",
+        "_id": "clientCredentialsToken-1",
         "type": "clientCredentialsToken",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",

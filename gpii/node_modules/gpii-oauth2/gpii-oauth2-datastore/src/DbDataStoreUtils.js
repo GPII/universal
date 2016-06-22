@@ -28,15 +28,30 @@ var fluid = fluid || require("infusion");
 
     gpii.oauth2.dbDataStore.errors = {
         missingInput: {
-            msg: "The input field \"%fieldName\" is undefined",   // Supplied by integrators
+            msg: "The input field \"%fieldName\" is undefined",
             statusCode: 400,
             isError: true
         },
         missingDoc: {
-            msg: "The record of \"%docName\" is not found",   // Supplied by integrators
+            msg: "The record of \"%docName\" is not found",
             statusCode: 400,
             isError: true
+        },
+        unauthorizedUser: {
+            msg: "The user %userId is not authorized",
+            statusCode: 401,
+            isError: true
         }
+    };
+
+    // All doc types used for saving different records into CouchDB/PouchDB
+    gpii.oauth2.dbDataStore.docTypes = {
+        user: "user",
+        gpiiToken: "gpiiToken",
+        client: "client",
+        authDecision: "authDecision",
+        authCode: "authCode",
+        clientCredentialsToken: "clientCredentialsToken"
     };
 
     gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty, dataProcessFunc) {
@@ -73,9 +88,9 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.dbDataStore.composeError = function (error, termMap) {
-        var error = fluid.copy(error);
-        error.msg = fluid.stringTemplate(error.msg, termMap);
-        return error;
+        var err = fluid.copy(error);
+        err.msg = fluid.stringTemplate(err.msg, termMap);
+        return err;
     };
 
     gpii.oauth2.dbDataStore.CleanUpDoc = function (data) {
@@ -88,29 +103,63 @@ var fluid = fluid || require("infusion");
         return data;
     };
 
-    gpii.oauth2.dbDataStore.findAllClients = function (data) {
-        var clients = [];
-        fluid.each(data, function (clientRow) {
+    gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
+        var records = [];
+        fluid.each(data, function (row) {
             var rule = {"": "value"};
-            var client = fluid.model.transformWithRules(clientRow, rule);
-            client = gpii.oauth2.dbDataStore.CleanUpDoc(client);
-            clients.push(client);
+            var oneRecord = fluid.model.transformWithRules(row, rule);
+            oneRecord = gpii.oauth2.dbDataStore.CleanUpDoc(oneRecord);
+            records.push(oneRecord);
         });
-        return clients;
+        return records;
     };
 
-    gpii.oauth2.dbDataStore.addRecord = function (dataSource, recordType, idName, data) {
+    gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
+        var promise = fluid.promise();
         if ($.isEmptyObject(data)) {
-            var promise = fluid.promise();
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: recordType});
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: docType});
             promise.reject(error);
         } else {
             var directModel = {};
             fluid.set(directModel, idName, uuid.v4());
-            fluid.extend(data, {type: recordType});
-            var promise = dataSource.set(directModel, data);
+            fluid.extend(data, {type: docType});
+            promise = dataSource.set(directModel, data);
         }
         return promise;
+    };
+
+    gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, data) {
+        var directModel = {};
+        fluid.set(directModel, idName, data.id);
+        fluid.extend(data, {type: docType});
+        delete data.id;
+        var promise = dataSource.set(directModel, data);
+        return promise;
+    };
+
+    gpii.oauth2.dbDataStore.updateAuthDecision = function (dataSource, findAuthDecisionByIdFunc, findGpiiTokenFunc, dataProcessFunc, userId, authDecisionData) {
+        var promiseTogo = fluid.promise();
+        var authDecisionPromise = findAuthDecisionByIdFunc(authDecisionData.id);
+        dataProcessFunc = dataProcessFunc || fluid.identity;
+
+        authDecisionPromise.then(function (oldAuthDecisionRec) {
+            var gpiiTokenPromise = findGpiiTokenFunc([oldAuthDecisionRec.gpiiToken]);
+            gpiiTokenPromise.then(function (gpiiTokenRec) {
+                if (gpiiTokenRec && gpiiTokenRec.userId === userId) {
+                    var authDecision = dataProcessFunc(authDecisionData);
+                    promiseTogo = gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "authDecisionId", authDecision);
+                } else {
+                    var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedUser, {userId: userId});
+                    promiseTogo.reject(error);
+                }
+            }, function (err) {
+                promiseTogo.reject(err);
+            });
+        }, function (err) {
+            promiseTogo.reject(err);
+        });
+
+        return promiseTogo;
     };
 
 })();

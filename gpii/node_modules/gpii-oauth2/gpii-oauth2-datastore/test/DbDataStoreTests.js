@@ -16,7 +16,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.require("node-jqunit", require, "jqUnit");
 
 require("gpii-pouchdb");
 gpii.pouch.loadTestingSupport();
@@ -37,7 +38,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
                 args: ["{dbDataStore}.findUserById", ["user-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected user-1 data is received", gpii.tests.dbDataStore.expected.user1, "{arguments}.0"],
+                args: ["The expected user-1 data is received", gpii.tests.dbDataStore.testData.user1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -56,7 +57,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"userId\" is undefined",
                     statusCode: 400,
@@ -79,7 +80,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
                 args: ["{dbDataStore}.findUserByUsername", ["chromehc"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected user data is received", gpii.tests.dbDataStore.expected.user1, "{arguments}.0"],
+                args: ["The expected user data is received", gpii.tests.dbDataStore.testData.user1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -98,7 +99,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByUsername", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"username\" is undefined",
                     statusCode: 400,
@@ -121,7 +122,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
                 args: ["{dbDataStore}.findUserByGpiiToken", ["chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected user data is received", gpii.tests.dbDataStore.expected.user1, "{arguments}.0"],
+                args: ["The expected user data is received", gpii.tests.dbDataStore.testData.user1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -140,7 +141,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByGpiiToken", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
@@ -163,7 +164,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
                 args: ["{dbDataStore}.findGpiiToken", ["chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected token data is received", gpii.tests.dbDataStore.expected.tokenChromehcDefault, "{arguments}.0"],
+                args: ["The expected token data is received", gpii.tests.dbDataStore.testData.tokenChromehcDefault, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -182,7 +183,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiToken", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
@@ -205,7 +206,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
                 args: ["{dbDataStore}.findClientById", ["client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected client data is received", gpii.tests.dbDataStore.expected.client1, "{arguments}.0"],
+                args: ["The expected client data is received", gpii.tests.dbDataStore.testData.client1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -224,7 +225,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientById", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"clientId\" is undefined",
                     statusCode: 400,
@@ -247,7 +248,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
                 args: ["{dbDataStore}.findClientByOauth2ClientId", ["org.chrome.cloud4chrome"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected client data is received", gpii.tests.dbDataStore.expected.client1, "{arguments}.0"],
+                args: ["The expected client data is received", gpii.tests.dbDataStore.testData.client1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -266,7 +267,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientByOauth2ClientId", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"oauth2ClientId\" is undefined",
                     statusCode: 400,
@@ -289,7 +290,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAllClients", {
                 args: ["{dbDataStore}.findAllClients", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected all client data is received", gpii.tests.dbDataStore.expected.allClients, "{arguments}.0"],
+                args: ["The expected all client data is received", gpii.tests.dbDataStore.testData.allClients, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }]
@@ -304,14 +305,14 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
             name: "Add an auth decision",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.expected.authDecisionToCreate], "{that}"]
+                args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.testData.authDecisionToCreate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
                 args: ["{dbDataStore}.findAuthDecisionById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.expected.authDecisionToCreate],
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.authDecisionToCreate],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -320,7 +321,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.addAuthDecision", [{}], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The record of \"authDecision\" is not found",
                     statusCode: 400,
@@ -343,14 +344,14 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
                 args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected authDecision-1 data is received", gpii.tests.dbDataStore.expected.authDecision1, "{arguments}.0"],
+                args: ["The expected authDecision-1 data is received", gpii.tests.dbDataStore.testData.authDecision1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Finding a non-existing auth decision by an auth decision id returns undefined",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionById", ["auth decision-0"], "{that}"]
+                args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
@@ -362,7 +363,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionById", [], "{that}"]
             }, {
-                listener: "jqUnit.assertLeftHand",
+                listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"authDecisionId\" is undefined",
                     statusCode: 400,
@@ -373,6 +374,71 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
         }]
     }]
 });
+
+fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findAuthDecisionsByGpiiToken()",
+        tests: [{
+            name: "Find an existing auth decisoin by a gpii token",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.AuthDecisionsByGpiiToken, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing auth decision by a gpii token returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["non-existing-token"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing a gpii token returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"gpiiToken\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.updateAuthDecision", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test updateAuthDecision()",
+        tests: [{
+            name: "A typical flow of updating an auth decision",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.updateAuthDecision", ["user-1", gpii.tests.dbDataStore.testData.authDecisionToUpdate], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.verify",
+                args: ["{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }]
+    }]
+});
+
+gpii.tests.dbDataStore.verify = function (resp) {
+    console.log(resp);
+    jqUnit.assertTrue("a fake checking", true);
+};
 
 fluid.defaults("gpii.tests.dbDataStore.testDB", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
@@ -402,6 +468,8 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findClientByOauth2ClientId",
     "gpii.tests.dbDataStore.findAllClients",
     "gpii.tests.dbDataStore.addAuthDecision",
-    "gpii.tests.dbDataStore.findAuthDecisionById"
+    "gpii.tests.dbDataStore.findAuthDecisionById",
+    "gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken",
+    // "gpii.tests.dbDataStore.updateAuthDecision"
     // "gpii.tests.dbDataStore.testDB"
 ]);
