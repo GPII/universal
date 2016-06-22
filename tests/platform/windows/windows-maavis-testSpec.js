@@ -51,7 +51,7 @@ gpii.tests.windows.maavis = [
         ],
         deviceReporters: {
             "gpii.deviceReporter.alwaysInstalled" : { }
-       }
+        }
     }, {
         name: "Testing maavis_selfvoicing using Flat matchmaker",
         userToken: "maavis_selfvoicing",
@@ -81,7 +81,7 @@ gpii.tests.windows.maavis = [
         ],
         deviceReporters: {
             "gpii.deviceReporter.alwaysInstalled" : { }
-       }
+        }
     }
 ];
 

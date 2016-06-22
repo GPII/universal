@@ -135,7 +135,7 @@ gpii.tests.windows.builtIn = [
         ],
         deviceReporters: {
             "gpii.deviceReporter.alwaysInstalled" : { }
-       }
+        }
     }, {
         name: "Testing os_common using Flat matchmaker",
         userToken: "os_common",
