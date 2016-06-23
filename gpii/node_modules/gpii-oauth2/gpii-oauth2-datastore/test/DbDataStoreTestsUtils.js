@@ -184,6 +184,17 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
+    revokedAuthDecision1: {
+        "id": "authDecision-1",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-1",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": true
+    },
     AuthDecisionsByGpiiToken: [{
         "id": "authDecision-1",
         "gpiiToken": "chrome_high_contrast",

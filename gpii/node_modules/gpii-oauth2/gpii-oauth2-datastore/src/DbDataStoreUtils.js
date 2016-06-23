@@ -33,7 +33,7 @@ var fluid = fluid || require("infusion");
             isError: true
         },
         missingDoc: {
-            msg: "The record of \"%docName\" is not found",
+            msg: "The record of %docName is not found",
             statusCode: 400,
             isError: true
         },
@@ -137,29 +137,88 @@ var fluid = fluid || require("infusion");
         return promise;
     };
 
-    gpii.oauth2.dbDataStore.updateAuthDecision = function (dataSource, findAuthDecisionByIdFunc, findGpiiTokenFunc, dataProcessFunc, userId, authDecisionData) {
-        var promiseTogo = fluid.promise();
-        var authDecisionPromise = findAuthDecisionByIdFunc(authDecisionData.id);
-        dataProcessFunc = dataProcessFunc || fluid.identity;
+    // ==== UpdateAuthDecision
+    gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisionData) {
+        var input = {
+            userId: userId,
+            authDecisionData: authDecisionData
+        };
+        return fluid.promise.fireTransformEvent(that.events.onUpdateAuthDecision, input);
+    };
 
-        authDecisionPromise.then(function (oldAuthDecisionRec) {
-            var gpiiTokenPromise = findGpiiTokenFunc([oldAuthDecisionRec.gpiiToken]);
-            gpiiTokenPromise.then(function (gpiiTokenRec) {
-                if (gpiiTokenRec && gpiiTokenRec.userId === userId) {
-                    var authDecision = dataProcessFunc(authDecisionData);
-                    promiseTogo = gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "authDecisionId", authDecision);
-                } else {
-                    var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedUser, {userId: userId});
-                    promiseTogo.reject(error);
-                }
-            }, function (err) {
-                promiseTogo.reject(err);
-            });
+    gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, input) {
+        var promiseTogo = fluid.promise();
+        var authDecisionId = input.authDecisionId ? input.authDecisionId : input.authDecisionData.id;
+        var authDecisionPromise = findAuthDecisionById(authDecisionId);
+        authDecisionPromise.then(function (authDecision) {
+            // save the input parameter into response.inputArgs for furthur use in following processes
+            if (authDecision) {
+                var combined = {};
+                fluid.set(combined, "authDecision", authDecision);
+                fluid.set(combined, "inputArgs", input);
+                promiseTogo.resolve(combined);
+            } else {
+                var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.authDecision});
+                promiseTogo.reject(error);
+            }
         }, function (err) {
             promiseTogo.reject(err);
         });
-
         return promiseTogo;
     };
+
+    gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, authDecisionRecord) {
+        var promiseTogo = fluid.promise();
+        var gpiiTokenPromise = findGpiiToken(authDecisionRecord.authDecision.gpiiToken);
+        gpiiTokenPromise.then(function (gpiiToken) {
+            // save the input parameter into response.inputArgs for furthur use in following processes
+            if (gpiiToken) {
+                var combined = {};
+                fluid.set(combined, "gpiiToken", gpiiToken);
+                fluid.set(combined, "authDecision", authDecisionRecord.authDecision);
+                fluid.set(combined, "inputArgs", authDecisionRecord.inputArgs);
+                promiseTogo.resolve(combined);
+            } else {
+                var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.gpiiToken});
+                promiseTogo.reject(error);
+            }
+        }, function (err) {
+            promiseTogo.reject(err);
+        });
+        return promiseTogo;
+    };
+
+    gpii.oauth2.dbDataStore.doUpdate = function (dataSource, gpiiTokenRecord) {
+        var inputUserId = gpiiTokenRecord.inputArgs.userId;
+
+        if (gpiiTokenRecord.gpiiToken.userId === inputUserId) {
+            var authDecision = gpiiTokenRecord.inputArgs.authDecisionData ?
+                gpiiTokenRecord.inputArgs.authDecisionData :
+                gpiiTokenRecord.inputArgs.dataProcessFunc(gpiiTokenRecord.authDecision);
+            return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "authDecisionId", authDecision);
+        } else {
+            var promiseTogo = fluid.promise();
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedUser, {userId: inputUserId});
+            promiseTogo.reject(error);
+            return promiseTogo;
+        }
+    };
+    // ==== End of UpdateAuthDecision
+
+    // ==== revokeAuthDecision
+    gpii.oauth2.dbDataStore.revokeAuthDecision = function (that, revokeFunc, userId, authDecisionId) {
+        var input = {
+            userId: userId,
+            authDecisionId: authDecisionId,
+            dataProcessFunc: revokeFunc
+        };
+        return fluid.promise.fireTransformEvent(that.events.onRevokeAuthDecision, input);
+    };
+
+    gpii.oauth2.dbDataStore.setRevoke = function (data) {
+        data.revoked = true;
+        return data;
+    };
+    // ==== End of revokeAuthDecision
 
 })();

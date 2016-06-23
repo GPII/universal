@@ -283,14 +283,21 @@ var fluid = fluid || require("infusion");
             updateAuthDecision: {
                 funcName: "gpii.oauth2.dbDataStore.updateAuthDecision",
                 args: [
-                    "{that}.addOrUpdateAuthDecisionDataSource",
-                    "{that}.findAuthDecisionById",
-                    "{that}.findGpiiToken",
-                    undefined,
+                    "{that}",
                     "{arguments}.0",
                     "{arguments}.1"
                 ]
                 // userId, authDecisionData
+            },
+            revokeAuthDecision: {
+                funcName: "gpii.oauth2.dbDataStore.revokeAuthDecision",
+                args: [
+                    "{that}",
+                    gpii.oauth2.dbDataStore.setRevoke,
+                    "{arguments}.0",
+                    "{arguments}.1"
+                ]
+                // userId, authDecisionId
             },
             findAuthDecisionById: {
                 funcName: "gpii.oauth2.dbDataStore.findRecord",
@@ -317,13 +324,43 @@ var fluid = fluid || require("infusion");
             }
         },
         events: {
-            onUpdateAuthDecision: null
-        }//,
-        // listeners: {
-        //     onUpdateAuthDecision: [{
-        //         listener: "{that}."
-        //     }]
-        // }
+            onUpdateAuthDecision: null,
+            onRevokeAuthDecision: null
+        },
+        listeners: {
+            onUpdateAuthDecision: [{
+                listener: "gpii.oauth2.dbDataStore.authDecisionExists",
+                args: ["{that}.findAuthDecisionById", "{arguments}.0"],
+                namespace: "authDecisionExists",
+                priority: "first"
+            }, {
+                listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
+                args: ["{that}.findGpiiToken", "{arguments}.0"],
+                namespace: "validateGpiiToken",
+                priority: "after:authDecisionExists"
+            }, {
+                listener: "gpii.oauth2.dbDataStore.doUpdate",
+                args: ["{that}.addOrUpdateAuthDecisionDataSource", "{arguments}.0"],
+                namespace: "doUpdate",
+                priority: "after:validateGpiiToken"
+            }],
+            onRevokeAuthDecision: [{
+                listener: "gpii.oauth2.dbDataStore.authDecisionExists",
+                args: ["{that}.findAuthDecisionById", "{arguments}.0"],
+                namespace: "authDecisionExists",
+                priority: "first"
+            }, {
+                listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
+                args: ["{that}.findGpiiToken", "{arguments}.0"],
+                namespace: "validateGpiiToken",
+                priority: "after:authDecisionExists"
+            }, {
+                listener: "gpii.oauth2.dbDataStore.doUpdate",
+                args: ["{that}.addOrUpdateAuthDecisionDataSource", "{arguments}.0"],
+                namespace: "doUpdate",
+                priority: "after:validateGpiiToken"
+            }]
+        }
     });
 
 })();

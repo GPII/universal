@@ -323,7 +323,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The record of \"authDecision\" is not found",
+                    msg: "The record of authDecision is not found",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -427,16 +427,84 @@ fluid.defaults("gpii.tests.dbDataStore.updateAuthDecision", {
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.updateAuthDecision", ["user-1", gpii.tests.dbDataStore.testData.authDecisionToUpdate], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.verify",
-                args: ["{arguments}.0"],
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findAuthDecisionById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.verifyFetched",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.authDecisionToUpdate],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "An unmatched user id returns unauthorized error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.updateAuthDecision", ["user-0", gpii.tests.dbDataStore.testData.authDecisionToUpdate], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["An unmatched user id returns unauthorized error", {
+                    msg: "The user user-0 is not authorized",
+                    statusCode: 401,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test revokeAuthDecision()",
+        tests: [{
+            name: "A typical flow of updating an auth decision",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findAuthDecisionById", "{arguments}.0.id", "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.verifyFetched",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.revokedAuthDecision1],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "An unmatched user id returns unauthorized error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeAuthDecision", ["user-0", "authDecision-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["An unmatched user id returns unauthorized error", {
+                    msg: "The user user-0 is not authorized",
+                    statusCode: 401,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }, {
+            name: "A non-existing authDecisionId returns error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeAuthDecision", ["user-0", "authDecision-0"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["An non-existing authDecisionId returns missing record error", {
+                    msg: "The record of authDecision is not found",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
             }]
         }]
     }]
 });
 
 gpii.tests.dbDataStore.verify = function (resp) {
-    console.log(resp);
+    console.log("resp", resp);
     jqUnit.assertTrue("a fake checking", true);
 };
 
@@ -470,6 +538,7 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.addAuthDecision",
     "gpii.tests.dbDataStore.findAuthDecisionById",
     "gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken",
-    // "gpii.tests.dbDataStore.updateAuthDecision"
+    "gpii.tests.dbDataStore.updateAuthDecision",
+    "gpii.tests.dbDataStore.revokeAuthDecision"
     // "gpii.tests.dbDataStore.testDB"
 ]);
