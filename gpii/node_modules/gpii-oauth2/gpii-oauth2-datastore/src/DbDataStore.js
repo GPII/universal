@@ -191,6 +191,22 @@ var fluid = fluid || require("infusion");
                         }
                     }
                 }
+            },
+            findAuthDecisionDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthDecision?key=[\"%gpiiToken\",\"%clientId\",%redirectUri]",
+                    termMap: {
+                        gpiiToken: "%gpiiToken",
+                        clientId: "%clientId",
+                        redirectUri: "%redirectUri"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value"
+                        }
+                    }
+                }
             }
         },
         invokers: {
@@ -269,7 +285,7 @@ var fluid = fluid || require("infusion");
                     gpii.oauth2.dbDataStore.handleMultipleRecords
                 ]
             },
-            // TODO: verify a record with the same gpii token doesn't exist
+            // TODO: verify a record with the same "gpii token + client id" doesn't exist
             addAuthDecision: {
                 funcName: "gpii.oauth2.dbDataStore.addRecord",
                 args: [
@@ -321,6 +337,19 @@ var fluid = fluid || require("infusion");
                     gpii.oauth2.dbDataStore.handleMultipleRecords
                 ]
                 // gpiiToken
+            },
+            findAuthDecision: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthDecisionDataSource",
+                    {
+                        gpiiToken: "{arguments}.0",
+                        clientId: "{arguments}.1",
+                        redirectUri: "{arguments}.2"
+                    },
+                    ["gpiiToken", "clientId", "redirectUri"]
+                ]
+                // gpiiToken, clientId, redirectUri
             }
         },
         events: {

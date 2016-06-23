@@ -55,15 +55,17 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty, dataProcessFunc) {
-        console.log("in findRecord, valueNotEmpty", valueNotEmpty, "; termMap[valueNotEmpty]", termMap[valueNotEmpty], "; dataProcessFunc", dataProcessFunc);
+        console.log("in findRecord, valueNotEmpty", valueNotEmpty, "; termMap", termMap, "; dataProcessFunc", dataProcessFunc);
         dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.CleanUpDoc;
         var promiseTogo = fluid.promise();
 
-        if (termMap && valueNotEmpty && !termMap[valueNotEmpty]) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: valueNotEmpty});
+        // Verify required field values are provided instead of undefined
+        var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(termMap, valueNotEmpty);
+
+        if (emptyFields.length > 0) {
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: emptyFields});
             promiseTogo.reject(error);
         } else {
-            console.log("in findRecord, termMap", termMap);
             var promise = dataSource.get(termMap);
             promise.then(function (data) {
                 console.log("findRecord, initial received data", data);
@@ -87,12 +89,26 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
+    gpii.oauth2.dbDataStore.verifyEmptyFields = function (termMap, valueNotEmpty) {
+        var emptyFields = "",
+            count = 0;
+        valueNotEmpty = fluid.makeArray(valueNotEmpty);
+        fluid.each(valueNotEmpty, function (fieldName) {
+            if (termMap[fieldName] === undefined) {
+                emptyFields = count === 0 ? fieldName : emptyFields + " & " + fieldName;
+                count++;
+            }
+        });
+        return emptyFields;
+    };
+
     gpii.oauth2.dbDataStore.composeError = function (error, termMap) {
         var err = fluid.copy(error);
         err.msg = fluid.stringTemplate(err.msg, termMap);
         return err;
     };
 
+    // Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" filed value into "id" field.
     gpii.oauth2.dbDataStore.CleanUpDoc = function (data) {
         if (data) {
             data.id = data._id;
@@ -103,6 +119,7 @@ var fluid = fluid || require("infusion");
         return data;
     };
 
+    // Handle cases when multiple records to be returned in an array
     gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
         var records = [];
         fluid.each(data, function (row) {
@@ -114,6 +131,7 @@ var fluid = fluid || require("infusion");
         return records;
     };
 
+    // Create a new record
     gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
         var promise = fluid.promise();
         if ($.isEmptyObject(data)) {
@@ -128,6 +146,7 @@ var fluid = fluid || require("infusion");
         return promise;
     };
 
+    // Update an existing record
     gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, data) {
         var directModel = {};
         fluid.set(directModel, idName, data.id);
@@ -137,7 +156,7 @@ var fluid = fluid || require("infusion");
         return promise;
     };
 
-    // ==== UpdateAuthDecision
+    // ==== updateAuthDecision()
     gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisionData) {
         var input = {
             userId: userId,
@@ -192,6 +211,7 @@ var fluid = fluid || require("infusion");
         var inputUserId = gpiiTokenRecord.inputArgs.userId;
 
         if (gpiiTokenRecord.gpiiToken.userId === inputUserId) {
+            // updateAuthDecision() provides "authDecisionData" while revokeAuthDecision() provides "dataProcessFunc" to turn on "revoked"
             var authDecision = gpiiTokenRecord.inputArgs.authDecisionData ?
                 gpiiTokenRecord.inputArgs.authDecisionData :
                 gpiiTokenRecord.inputArgs.dataProcessFunc(gpiiTokenRecord.authDecision);
@@ -203,9 +223,9 @@ var fluid = fluid || require("infusion");
             return promiseTogo;
         }
     };
-    // ==== End of UpdateAuthDecision
+    // ==== End of updateAuthDecision()
 
-    // ==== revokeAuthDecision
+    // ==== revokeAuthDecision()
     gpii.oauth2.dbDataStore.revokeAuthDecision = function (that, revokeFunc, userId, authDecisionId) {
         var input = {
             userId: userId,
@@ -219,6 +239,6 @@ var fluid = fluid || require("infusion");
         data.revoked = true;
         return data;
     };
-    // ==== End of revokeAuthDecision
+    // ==== End of revokeAuthDecision()
 
 })();

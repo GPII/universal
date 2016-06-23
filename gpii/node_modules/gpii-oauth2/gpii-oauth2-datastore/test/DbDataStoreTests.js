@@ -333,90 +333,6 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
-    gradeNames: ["gpii.tests.dbDataStore.environment"],
-    rawModules: [{
-        name: "Test findAuthDecisionById()",
-        tests: [{
-            name: "Find an existing auth decisoin by an auth decisoin id",
-            sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-1"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected authDecision-1 data is received", gpii.tests.dbDataStore.testData.authDecision1, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Finding a non-existing auth decision by an auth decision id returns undefined",
-            sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-0"], "{that}"]
-            }, {
-                listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Not providing auth decision ID returns 401 status code and error message",
-            sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionById", [], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected error is received", {
-                    msg: "The input field \"authDecisionId\" is undefined",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }]
-    }]
-});
-
-fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
-    gradeNames: ["gpii.tests.dbDataStore.environment"],
-    rawModules: [{
-        name: "Test findAuthDecisionsByGpiiToken()",
-        tests: [{
-            name: "Find an existing auth decisoin by a gpii token",
-            sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.AuthDecisionsByGpiiToken, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Finding a non-existing auth decision by a gpii token returns undefined",
-            sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["non-existing-token"], "{that}"]
-            }, {
-                listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Not providing a gpii token returns 401 status code and error message",
-            sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", [], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken\" is undefined",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }]
-    }]
-});
-
 fluid.defaults("gpii.tests.dbDataStore.updateAuthDecision", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -503,8 +419,163 @@ fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
     }]
 });
 
+fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findAuthDecisionById()",
+        tests: [{
+            name: "Find an existing auth decisoin by an auth decisoin id",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected authDecision-1 data is received", gpii.tests.dbDataStore.testData.authDecision1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing auth decision by an auth decision id returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-0"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing auth decision ID returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionById", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"authDecisionId\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findAuthDecisionsByGpiiToken()",
+        tests: [{
+            name: "Find auth decisoins by a gpii token",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.AuthDecisionsByGpiiToken, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Revoked auth decisions are not returned",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["Revoked auth decisions are not returned", gpii.tests.dbDataStore.testData.AuthDecisionsByGpiiTokenAfterRevoke, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing auth decision by a gpii token returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["non-existing-token"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing a gpii token returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"gpiiToken\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findAuthDecision()",
+        tests: [{
+            name: "Find auth decisoins by a gpii token, a client id and a redirect uri",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecision", ["chrome_high_contrast", "client-1", false], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.authDecision1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing value returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecision", ["non-existing-token", "client-1", false], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing any input returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecision", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"gpiiToken & clientId & redirectUri\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }, {
+            name: "Not providing one input returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthDecision", ["chrome_high_contrast", false], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"redirectUri\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
 gpii.tests.dbDataStore.verify = function (resp) {
     console.log("resp", resp);
+    // jqUnit.assertDeepEq("aa", gpii.tests.dbDataStore.testData.authDecision1, resp);
     jqUnit.assertTrue("a fake checking", true);
 };
 
@@ -536,9 +607,10 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findClientByOauth2ClientId",
     "gpii.tests.dbDataStore.findAllClients",
     "gpii.tests.dbDataStore.addAuthDecision",
+    "gpii.tests.dbDataStore.updateAuthDecision",
+    "gpii.tests.dbDataStore.revokeAuthDecision",
     "gpii.tests.dbDataStore.findAuthDecisionById",
     "gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken",
-    "gpii.tests.dbDataStore.updateAuthDecision",
-    "gpii.tests.dbDataStore.revokeAuthDecision"
+    "gpii.tests.dbDataStore.findAuthDecision"
     // "gpii.tests.dbDataStore.testDB"
 ]);

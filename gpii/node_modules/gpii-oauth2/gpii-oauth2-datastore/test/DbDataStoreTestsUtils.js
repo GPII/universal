@@ -82,7 +82,8 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 // path: "/gpiiOauth/client-1"  // findClientById
                 // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
                 // path: "/gpiiOauth/_design/views/_view/findAllClients"  // findAllClients
-                path: "/gpiiOauth/_design/views/_view/findAuthByGpiiToken?key=%22chrome_high_contrast%22"  // findAuthDecisionsByGpiiToken
+                // path: "/gpiiOauth/_design/views/_view/findAuthByGpiiToken?key=%22chrome_high_contrast%22"  // findAuthDecisionsByGpiiToken
+                path: "/gpiiOauth/_design/views/_view/findAuthDecision?key=%5B%22chrome_high_contrast%22,%22client-1%22,false%5D"  // findAuthDecision
             }
         }
     }
@@ -206,6 +207,17 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     }, {
+        "id": "authDecision-2",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token_client_2",
+        "selectedPreferences": {
+            "textFont": "arial"
+        },
+        "revoked": false
+    }],
+    AuthDecisionsByGpiiTokenAfterRevoke: [{
         "id": "authDecision-2",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-2",
