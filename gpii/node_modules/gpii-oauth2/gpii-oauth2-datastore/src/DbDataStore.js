@@ -249,6 +249,21 @@ var fluid = fluid || require("infusion");
                         }
                     }
                 }
+            },
+            findAuthDecisionByGpiiTokenAndClientIdDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
+                    termMap: {
+                        gpiiToken: "%gpiiToken",
+                        clientId: "%clientId"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value"
+                        }
+                    }
+                }
             }
         },
         invokers: {
@@ -437,11 +452,17 @@ var fluid = fluid || require("infusion");
                     gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess
                 ]
                 // accessToken
+            },
+            findAccessTokenByOAuth2ClientIdAndGpiiToken: {
+                funcName: "gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
+                args: ["{that}", "{arguments}.0", "{arguments}.1"]
+                // oauth2ClientId, gpiiToken
             }
         },
         events: {
             onUpdateAuthDecision: null,
-            onRevokeAuthDecision: null
+            onRevokeAuthDecision: null,
+            onFindAccessTokenByOAuth2ClientIdAndGpiiToken: null
         },
         listeners: {
             onUpdateAuthDecision: [{
@@ -475,6 +496,17 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.saveDataSource", "{arguments}.0"],
                 namespace: "doUpdate",
                 priority: "after:validateGpiiToken"
+            }],
+            onFindAccessTokenByOAuth2ClientIdAndGpiiToken: [{
+                listener: "gpii.oauth2.dbDataStore.findClient",
+                args: ["{that}.findClientByOauth2ClientId", "{arguments}.0"],
+                namespace: "findClient",
+                priority: "first"
+            }, {
+                listener: "gpii.oauth2.dbDataStore.findAccessToken",
+                args: ["{that}.findAuthDecisionByGpiiTokenAndClientIdDataSource", "{arguments}.0"],
+                namespace: "findAccessToken",
+                priority: "after:findClient"
             }]
         }
     });

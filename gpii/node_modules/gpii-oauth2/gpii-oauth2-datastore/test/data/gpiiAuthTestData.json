@@ -13,6 +13,12 @@
         "userId": "user-1"
     },
     {
+        "_id": "gpiiToken-2",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome_high_contrast_dark",
+        "userId": "user-1"
+    },
+    {
         "_id": "client-1",
         "type": "client",
         "name": "Service A",
@@ -27,8 +33,15 @@
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "allowDirectGpiiTokenAccess": false,
+        "allowDirectGpiiTokenAccess": true,
         "allowAddPrefs": true
+    },
+    {
+        "_id": "client-3",
+        "type": "client",
+        "name": "Windows Magnifier",
+        "oauth2ClientId": "net.gpii.windows.magnifier",
+        "oauth2ClientSecret": "client_secret_windows_magnifier"
     },
     {
         "_id": "authDecision-1",
@@ -51,6 +64,19 @@
         "accessToken": "chrome_high_contrast_access_token_client_2",
         "selectedPreferences": {
             "textFont": "arial"
+        },
+        "revoked": false
+    },
+    {
+        "_id": "authDecision-3",
+        "type": "authDecision",
+        "gpiiToken": "chrome_high_contrast_dark",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "windows_magnifier_access_token",
+        "selectedPreferences": {
+            "textFont": "arial",
+            "contrast": "bw"
         },
         "revoked": false
     },

@@ -33,7 +33,7 @@
                 "map": "function (doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
             },
             "findAuthDecisionByGpiiTokenAndClientId": {
-                "map": "function (doc) {if (doc.type === 'authDecision') {emit([doc.gpiiToken, doc.clientId], doc)}}"
+                "map": "function (doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
             },
             "findClientCredentialsTokenById": {
                 "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc._id, doc)}"

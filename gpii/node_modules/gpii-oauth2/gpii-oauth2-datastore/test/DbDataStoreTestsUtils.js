@@ -86,7 +86,8 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 // path: "/gpiiOauth/_design/views/_view/findAuthDecision?key=%5B%22chrome_high_contrast%22,%22client-1%22,false%5D"  // findAuthDecision
                 // path: "/gpiiOauth/_design/views/_view/findAuthDecisionByAuthCode?key=%22chrome_high_contrast_auth_token%22&include_docs=true"  // findAuthDecision
                 // path: "/gpiiOauth/_design/views/_view/findAuthorizedClientsByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findAuthorizedClientsByGpiiToken
-                path: "/gpiiOauth/_design/views/_view/findAuthByAccessToken?key=%22chrome_high_contrast_access_token%22&include_docs=true"  // findAuthByAccessToken
+                // path: "/gpiiOauth/_design/views/_view/findAuthByAccessToken?key=%22chrome_high_contrast_access_token%22&include_docs=true"  // findAuthByAccessToken
+                path: "/gpiiOauth/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=%5B%22chrome_high_contrast%22,%22client-1%22%5D"  // findAccessTokenByOAuth2ClientIdAndGpiiToken
             }
         }
     }
@@ -152,8 +153,13 @@ gpii.tests.dbDataStore.testData = {
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "allowDirectGpiiTokenAccess": false,
+        "allowDirectGpiiTokenAccess": true,
         "allowAddPrefs": true
+    }, {
+        "name": "Windows Magnifier",
+        "oauth2ClientId": "net.gpii.windows.magnifier",
+        "oauth2ClientSecret": "client_secret_windows_magnifier",
+        "id": "client-3"
     }],
     authDecision1: {
         "id": "authDecision-1",
@@ -236,6 +242,11 @@ gpii.tests.dbDataStore.testData = {
         "redirectUri": false,
         "accessToken": "chrome_high_contrast_access_token"
     },
+    findAuthByCodeNew: {
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "client2_new_access_token"
+    },
     findAuthorizedClientsByGpiiToken: [{
         "authDecisionId": "authDecision-1",
         "oauth2ClientId": "org.chrome.cloud4chrome",
@@ -265,5 +276,8 @@ gpii.tests.dbDataStore.testData = {
         selectedPreferences: {
             "":true
         }
+    },
+    findAccessTokenByOAuth2ClientIdAndGpiiToken: {
+        accessToken: "chrome_high_contrast_access_token_client_2"
     }
 };

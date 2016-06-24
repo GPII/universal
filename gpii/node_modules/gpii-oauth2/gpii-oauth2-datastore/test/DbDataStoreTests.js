@@ -573,6 +573,61 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
     }]
 });
 
+// addAuthDecision() then saveAuthCode(), verify findAuthByCode()
+fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test saveAuthCode()",
+        tests: [{
+            name: "Add an auth code",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.testData.authDecisionToCreate], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.saveAuthCode", ["{arguments}.0.id", "test-auth-code"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findAuthByCode", ["test-auth-code"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The fetched data is expected", gpii.tests.dbDataStore.testData.findAuthByCodeNew, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing one input argument returns error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.saveAuthCode", [""], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"code\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }, {
+            name: "Not providing both input arguments returns error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.saveAuthCode", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"authDecisionId & code\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
 fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -588,7 +643,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing the input argument returns 401 status code and error message",
+            name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByCode", [], "{that}"]
@@ -670,7 +725,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing the input argument returns 401 status code and error message",
+            name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", [], "{that}"]
@@ -726,7 +781,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing the input argument returns 401 status code and error message",
+            name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByAccessToken", [], "{that}"]
@@ -753,39 +808,88 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
     }]
 });
 
-// saveAuthCode(), verify findAuthByCode(), revoke, and then verify no longer found
-fluid.defaults("gpii.tests.dbDataStore.authCode", {
+fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test saveAuthCode()",
+        name: "Test findAccessTokenByOAuth2ClientIdAndGpiiToken()",
         tests: [{
-            name: "Add an auth code",
+            name: "A client with allowDirectGpiiTokenAccess set to true receives the access token",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.saveAuthCode", ["test-auth-decision", "test-auth-code"], "{that}"]
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.prefsEditors.firstDiscovery", "chrome_high_contrast"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findAuthDecisionById", "{arguments}.0.id", "{that}"],
-                event: "{that}.events.onResponse"
-            }, {
-                listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.authDecisionToCreate],
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findAccessTokenByOAuth2ClientIdAndGpiiToken, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
-        // }, {
-        //     name: "Add an emty auth decision returns error",
-        //     sequence: [{
-        //         func: "gpii.tests.dbDataStore.invokePromiseProducer",
-        //         args: ["{dbDataStore}.saveAuthCode", [{}], "{that}"]
-        //     }, {
-        //         listener: "jqUnit.assertDeepEq",
-        //         args: ["The expected error is received", {
-        //             msg: "The record of authDecision is not found",
-        //             statusCode: 400,
-        //             isError: true
-        //         }, "{arguments}.0"],
-        //         event: "{that}.events.onError"
-        //     }]
+        }, {
+            name: "A client with allowDirectGpiiTokenAccess set to false returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["org.chrome.cloud4chrome", "chrome_high_contrast"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "A client without allowDirectGpiiTokenAccess field returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.windows.magnifier", "chrome_high_contrast_dark"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Returns undefined when the auth decision is revoked",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-2"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.prefsEditors.firstDiscovery", "chrome_high_contrast"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected undefined is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing an input argument returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"oauth2ClientId & gpiiToken\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }, {
+            name: "Find by a non-existing oauth2ClientId returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["non-existing", "chrome_high_contrast"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Find by a non-existing gpiiToken returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.prefsEditors.firstDiscovery", "non-existing"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
         }]
     }]
 });
@@ -829,8 +933,10 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findAuthDecisionById",
     "gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken",
     "gpii.tests.dbDataStore.findAuthDecision",
+    "gpii.tests.dbDataStore.saveAuthCode",
     "gpii.tests.dbDataStore.findAuthByCode",
     "gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken",
-    "gpii.tests.dbDataStore.findAuthByAccessToken"
+    "gpii.tests.dbDataStore.findAuthByAccessToken",
+    "gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken"
     // "gpii.tests.dbDataStore.testDB"
 ]);
