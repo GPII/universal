@@ -41,6 +41,11 @@ var fluid = fluid || require("infusion");
             msg: "The user %userId is not authorized",
             statusCode: 401,
             isError: true
+        },
+        unauthorizedAuthCode: {
+            msg: "The authorization code %code is not authorized",
+            statusCode: 401,
+            isError: true
         }
     };
 
@@ -79,7 +84,12 @@ var fluid = fluid || require("infusion");
                 // option from returning "undefined". Instead, an empty object {}
                 // is returned. This work around is to make sure "undefined" is returned
                 // when an empty object is received.
-                promiseTogo.resolve($.isEmptyObject(data) ? undefined : dataProcessFunc(data));
+                var result = $.isEmptyObject(data) ? undefined : dataProcessFunc(data);
+                if (result !== undefined && result.isError) {
+                    promiseTogo.reject(result);
+                } else {
+                    promiseTogo.resolve(result);
+                }
             }, function (error) {
                 console.log("findRecord, error", error);
                 promiseTogo.reject(error);
@@ -215,7 +225,7 @@ var fluid = fluid || require("infusion");
             var authDecision = gpiiTokenRecord.inputArgs.authDecisionData ?
                 gpiiTokenRecord.inputArgs.authDecisionData :
                 gpiiTokenRecord.inputArgs.dataProcessFunc(gpiiTokenRecord.authDecision);
-            return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "authDecisionId", authDecision);
+            return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "id", authDecision);
         } else {
             var promiseTogo = fluid.promise();
             var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedUser, {userId: inputUserId});
@@ -235,10 +245,65 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onRevokeAuthDecision, input);
     };
 
+    // Used in doUpdate() as the input argument of "dataProcessFunc"
     gpii.oauth2.dbDataStore.setRevoke = function (data) {
         data.revoked = true;
         return data;
     };
     // ==== End of revokeAuthDecision()
 
+    gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId, code) {
+        var promiseTogo = fluid.promise();
+        var data = {
+            authDecisionId: authDecisionId,
+            code: code
+        };
+
+        var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(data, ["authDecisionId", "code"]);
+
+        if (emptyFields.length > 0) {
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: emptyFields});
+            promiseTogo.reject(error);
+        } else {
+            promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.authCode, "id", data);
+        }
+
+        return promiseTogo;
+    };
+
+    // Used by gpii.oauth2.dbDataStore.findAuthByCode() to only return needed fields
+    gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
+        if (data.doc.revoked === false) {
+            var result = {};
+            console.log("in findAuthByCodePostProcess, data.doc", data.doc);
+            fluid.set(result, "clientId", data.doc.clientId);
+            fluid.set(result, "redirectUri", data.doc.redirectUri);
+            fluid.set(result, "accessToken", data.doc.accessToken);
+            return result;
+        } else {
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedAuthCode, {code: data.id});
+            return error;
+        }
+    };
+
+    gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (data) {
+        var records = [];
+        fluid.each(data, function (row) {
+            var oneResult = {};
+            fluid.set(oneResult, "authDecisionId", row.id);
+            fluid.set(oneResult, "oauth2ClientId", row.doc.oauth2ClientId);
+            fluid.set(oneResult, "clientName", row.doc.name);
+            fluid.set(oneResult, "selectedPreferences", row.value.selectedPreferences);
+            records.push(oneResult);
+        });
+        return records;
+    };
+
+    gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
+        var result = {};
+        fluid.set(result, "userGpiiToken", data.value.gpiiToken);
+        fluid.set(result, "selectedPreferences", data.value.selectedPreferences);
+        fluid.set(result, "oauth2ClientId", data.doc.oauth2ClientId);
+        return result;
+    };
 })();

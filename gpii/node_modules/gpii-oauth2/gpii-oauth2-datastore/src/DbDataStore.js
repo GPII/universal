@@ -160,12 +160,12 @@ var fluid = fluid || require("infusion");
                     }
                 }
             },
-            addOrUpdateAuthDecisionDataSource: {
+            saveDataSource: {
                 type: "gpii.oauth2.dbDataSource.writable",
                 options: {
-                    requestUrl: "/%authDecisionId",
+                    requestUrl: "/%id",
                     termMap: {
-                        authDecisionId: "%authDecisionId"
+                        id: "%id"
                     }
                 }
             },
@@ -204,6 +204,48 @@ var fluid = fluid || require("infusion");
                     rules: {
                         readPayload: {
                             "": "rows.0.value"
+                        }
+                    }
+                }
+            },
+            findAuthByCodeDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthDecisionByAuthCode?key=%22%code%22&include_docs=true",
+                    termMap: {
+                        code: "%code"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0"
+                        }
+                    }
+                }
+            },
+            findAuthorizedClientsByGpiiTokenDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthorizedClientsByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
+                    termMap: {
+                        gpiiToken: "%gpiiToken"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows"
+                        }
+                    }
+                }
+            },
+            findAuthByAccessTokenDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthByAccessToken?key=%22%accessToken%22&include_docs=true",
+                    termMap: {
+                        accessToken: "%accessToken"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0"
                         }
                     }
                 }
@@ -289,9 +331,9 @@ var fluid = fluid || require("infusion");
             addAuthDecision: {
                 funcName: "gpii.oauth2.dbDataStore.addRecord",
                 args: [
-                    "{that}.addOrUpdateAuthDecisionDataSource",
+                    "{that}.saveDataSource",
                     gpii.oauth2.dbDataStore.docTypes.authDecision,
-                    "authDecisionId",
+                    "id",
                     "{arguments}.0"
                 ]
                 // authDecision
@@ -350,6 +392,51 @@ var fluid = fluid || require("infusion");
                     ["gpiiToken", "clientId", "redirectUri"]
                 ]
                 // gpiiToken, clientId, redirectUri
+            },
+            saveAuthCode: {
+                funcName: "gpii.oauth2.dbDataStore.saveAuthCode",
+                args: [
+                    "{that}.saveDataSource",
+                    "{arguments}.0",
+                    "{arguments}.1"
+                ]
+                // authDecisionId, code
+            },
+            findAuthByCode: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthByCodeDataSource",
+                    {
+                        code: "{arguments}.0"
+                    },
+                    ["code"],
+                    gpii.oauth2.dbDataStore.findAuthByCodePostProcess
+                ]
+                // code
+            },
+            findAuthorizedClientsByGpiiToken: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthorizedClientsByGpiiTokenDataSource",
+                    {
+                        gpiiToken: "{arguments}.0"
+                    },
+                    ["gpiiToken"],
+                    gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess
+                ]
+                // gpiiToken
+            },
+            findAuthByAccessToken: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthByAccessTokenDataSource",
+                    {
+                        accessToken: "{arguments}.0"
+                    },
+                    ["accessToken"],
+                    gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess
+                ]
+                // accessToken
             }
         },
         events: {
@@ -369,7 +456,7 @@ var fluid = fluid || require("infusion");
                 priority: "after:authDecisionExists"
             }, {
                 listener: "gpii.oauth2.dbDataStore.doUpdate",
-                args: ["{that}.addOrUpdateAuthDecisionDataSource", "{arguments}.0"],
+                args: ["{that}.saveDataSource", "{arguments}.0"],
                 namespace: "doUpdate",
                 priority: "after:validateGpiiToken"
             }],
@@ -385,7 +472,7 @@ var fluid = fluid || require("infusion");
                 priority: "after:authDecisionExists"
             }, {
                 listener: "gpii.oauth2.dbDataStore.doUpdate",
-                args: ["{that}.addOrUpdateAuthDecisionDataSource", "{arguments}.0"],
+                args: ["{that}.saveDataSource", "{arguments}.0"],
                 namespace: "doUpdate",
                 priority: "after:validateGpiiToken"
             }]
