@@ -75,12 +75,12 @@ var fluid = fluid || require("infusion");
             target: "{that > gpii.oauth2.dbDataSource}.options"
         }],
         components: {
-            findUserByIdDataSource: {
+            findByIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    requestUrl: "/%userId",
+                    requestUrl: "/%id",
                     termMap: {
-                        userId: "%userId"
+                        id: "%id"
                     }
                 }
             },
@@ -126,15 +126,6 @@ var fluid = fluid || require("infusion");
                     }
                 }
             },
-            findClientByIdDataSource: {
-                type: "gpii.oauth2.dbDataSource",
-                options: {
-                    requestUrl: "/%clientId",
-                    termMap: {
-                        clientId: "%clientId"
-                    }
-                }
-            },
             findClientByOauth2ClientIdDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
@@ -166,15 +157,6 @@ var fluid = fluid || require("infusion");
                     requestUrl: "/%id",
                     termMap: {
                         id: "%id"
-                    }
-                }
-            },
-            findAuthDecisionByIdDataSource: {
-                type: "gpii.oauth2.dbDataSource",
-                options: {
-                    requestUrl: "/%authDecisionId",
-                    termMap: {
-                        authDecisionId: "%authDecisionId"
                     }
                 }
             },
@@ -264,18 +246,50 @@ var fluid = fluid || require("infusion");
                         }
                     }
                 }
+            },
+            findClientCredentialsTokenByClientIdDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findClientCredentialsTokenByClientId?key=\"%clientId\"",
+                    termMap: {
+                        clientId: "%clientId"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value"
+                        }
+                    }
+                }
+            },
+            findClientCredentialsTokenByAccessTokenDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findClientCredentialsTokenByAccessToken?key=\"%accessToken\"",
+                    termMap: {
+                        clientId: "%clientId"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0.value"
+                        }
+                    }
+                }
             }
         },
         invokers: {
-            findUserById: {
+            findById: {
                 funcName: "gpii.oauth2.dbDataStore.findRecord",
                 args: [
-                    "{that}.findUserByIdDataSource",
+                    "{that}.findByIdDataSource",
                     {
-                        userId: "{arguments}.0"
+                        id: "{arguments}.0"
                     },
-                    "userId"
+                    "id"
                 ]
+                // id
+            },
+            findUserById: {
+                func: "{that}.findById"
                 // userId
             },
             findUserByUsername: {
@@ -312,14 +326,7 @@ var fluid = fluid || require("infusion");
                 // gpiiToken
             },
             findClientById: {
-                funcName: "gpii.oauth2.dbDataStore.findRecord",
-                args: [
-                    "{that}.findClientByIdDataSource",
-                    {
-                        clientId: "{arguments}.0"
-                    },
-                    "clientId"
-                ]
+                func: "{that}.findById"
                 // clientId
             },
             findClientByOauth2ClientId: {
@@ -373,14 +380,7 @@ var fluid = fluid || require("infusion");
                 // userId, authDecisionId
             },
             findAuthDecisionById: {
-                funcName: "gpii.oauth2.dbDataStore.findRecord",
-                args: [
-                    "{that}.findAuthDecisionByIdDataSource",
-                    {
-                        authDecisionId: "{arguments}.0"
-                    },
-                    "authDecisionId"
-                ]
+                func: "{that}.findById"
                 // authDecisionId
             },
             findAuthDecisionsByGpiiToken: {
@@ -457,6 +457,32 @@ var fluid = fluid || require("infusion");
                 funcName: "gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
                 args: ["{that}", "{arguments}.0", "{arguments}.1"]
                 // oauth2ClientId, gpiiToken
+            },
+            findClientCredentialsTokenById: {
+                func: "{that}.findById"
+                // clientCredentialsTokenId
+            },
+            findClientCredentialsTokenByClientId: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findClientCredentialsTokenByClientIdDataSource",
+                    {
+                        clientId: "{arguments}.0"
+                    },
+                    "clientId"
+                ]
+                // clientId
+            },
+            findClientCredentialsTokenByAccessToken: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findClientCredentialsTokenByAccessTokenDataSource",
+                    {
+                        accessToken: "{arguments}.0"
+                    },
+                    "accessToken"
+                ]
+                // accessToken
             }
         },
         events: {

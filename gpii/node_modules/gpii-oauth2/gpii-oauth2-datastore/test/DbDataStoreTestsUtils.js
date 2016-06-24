@@ -87,7 +87,9 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 // path: "/gpiiOauth/_design/views/_view/findAuthDecisionByAuthCode?key=%22chrome_high_contrast_auth_token%22&include_docs=true"  // findAuthDecision
                 // path: "/gpiiOauth/_design/views/_view/findAuthorizedClientsByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findAuthorizedClientsByGpiiToken
                 // path: "/gpiiOauth/_design/views/_view/findAuthByAccessToken?key=%22chrome_high_contrast_access_token%22&include_docs=true"  // findAuthByAccessToken
-                path: "/gpiiOauth/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=%5B%22chrome_high_contrast%22,%22client-1%22%5D"  // findAccessTokenByOAuth2ClientIdAndGpiiToken
+                // path: "/gpiiOauth/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=%5B%22chrome_high_contrast%22,%22client-1%22%5D"  // findAccessTokenByOAuth2ClientIdAndGpiiToken
+                // path: "/gpiiOauth/_design/views/_view/findClientCredentialsTokenByClientId?key=%22client-2%22"  // findClientCredentialsTokenByClientId
+                path: "/gpiiOauth/_design/views/_view/findClientCredentialsTokenByAccessToken?key=%22firstDiscovery_access_token%22"  // findClientCredentialsTokenByAccessToken
             }
         }
     }
@@ -274,10 +276,17 @@ gpii.tests.dbDataStore.testData = {
         userGpiiToken: "chrome_high_contrast",
         oauth2ClientId: "org.chrome.cloud4chrome",
         selectedPreferences: {
-            "":true
+            "": true
         }
     },
     findAccessTokenByOAuth2ClientIdAndGpiiToken: {
         accessToken: "chrome_high_contrast_access_token_client_2"
+    },
+    clientCredentialsToken1: {
+        "id": "clientCredentialsToken-1",
+        "clientId": "client-2",
+        "accessToken": "firstDiscovery_access_token",
+        "allowAddPrefs": true,
+        "revoked": false
     }
 };

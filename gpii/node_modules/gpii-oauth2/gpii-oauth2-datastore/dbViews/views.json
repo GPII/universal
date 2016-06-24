@@ -35,14 +35,11 @@
             "findAuthDecisionByGpiiTokenAndClientId": {
                 "map": "function (doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
             },
-            "findClientCredentialsTokenById": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc._id, doc)}"
-            },
             "findClientCredentialsTokenByClientId": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc.clientId, doc)}"
+                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.clientId, doc)}"
             },
             "findClientCredentialsTokenByAccessToken": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken') emit(doc.accessToken, doc)}"
+                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.accessToken, doc)}"
             },
             "findAuthByClientCredentialsAccessToken": {
                 "map": "function(doc) {if (doc.type === 'clientCredentialsToken') {emit(doc.valueaccessToken, {'_id': doc.clientId, 'allowAddPrefs': doc.allowAddPrefs});}}"
