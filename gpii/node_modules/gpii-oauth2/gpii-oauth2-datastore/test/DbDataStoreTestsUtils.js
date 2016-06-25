@@ -288,5 +288,17 @@ gpii.tests.dbDataStore.testData = {
         "accessToken": "firstDiscovery_access_token",
         "allowAddPrefs": true,
         "revoked": false
+    },
+    clientCredentialsTokenAfterRevoke1: {
+        "id": "clientCredentialsToken-1",
+        "clientId": "client-2",
+        "accessToken": "firstDiscovery_access_token",
+        "allowAddPrefs": true,
+        "revoked": true
+    },
+    clientCredentialsTokenToCreate: {
+        "clientId": "client-1",
+        "accessToken": "chrome_client_credentials_access_token",
+        "allowAddPrefs": true
     }
 };

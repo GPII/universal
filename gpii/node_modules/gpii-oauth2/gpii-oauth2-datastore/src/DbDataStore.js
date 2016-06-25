@@ -266,7 +266,7 @@ var fluid = fluid || require("infusion");
                 options: {
                     requestUrl: "/_design/views/_view/findClientCredentialsTokenByAccessToken?key=\"%accessToken\"",
                     termMap: {
-                        clientId: "%clientId"
+                        accessToken: "%accessToken"
                     },
                     rules: {
                         readPayload: {
@@ -483,12 +483,29 @@ var fluid = fluid || require("infusion");
                     "accessToken"
                 ]
                 // accessToken
+            },
+            addClientCredentialsToken: {
+                funcName: "gpii.oauth2.dbDataStore.addClientCredentialsToken",
+                args: [
+                    "{that}.saveDataSource",
+                    "{arguments}.0"
+                ]
+                // clientCredentialsTokenData
+            },
+            revokeClientCredentialsToken: {
+                funcName: "gpii.oauth2.dbDataStore.revokeClientCredentialsToken",
+                args: [
+                    "{that}",
+                    "{arguments}.0"
+                ]
+                // clientCredentialsTokenId
             }
         },
         events: {
             onUpdateAuthDecision: null,
             onRevokeAuthDecision: null,
-            onFindAccessTokenByOAuth2ClientIdAndGpiiToken: null
+            onFindAccessTokenByOAuth2ClientIdAndGpiiToken: null,
+            onRevokeClientCredentialsToken: null
         },
         listeners: {
             onUpdateAuthDecision: [{
@@ -533,6 +550,17 @@ var fluid = fluid || require("infusion");
                 args: ["{that}.findAuthDecisionByGpiiTokenAndClientIdDataSource", "{arguments}.0"],
                 namespace: "findAccessToken",
                 priority: "after:findClient"
+            }],
+            onRevokeClientCredentialsToken: [{
+                listener: "{that}.findClientCredentialsTokenById",
+                arguments: ["{arguments}.0"],
+                namespace: "findClientCredentialsToken",
+                priority: "first"
+            }, {
+                listener: "gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken",
+                args: ["{that}.saveDataSource", "{arguments}.0"],
+                namespace: "doRevokeClientCredentialsToken",
+                priority: "after:findClientCredentialsToken"
             }]
         }
     });

@@ -843,7 +843,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Returns undefined when the auth decision is revoked",
+            name: "Revoked auth decisions returns undefined",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-2"], "{that}"]
@@ -909,6 +909,20 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
                 event: "{that}.events.onResponse"
             }]
         }, {
+            name: "Revoked client credentials token record is still returned",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findClientCredentialsTokenById", "{arguments}.0.id", "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsTokenAfterRevoke1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
             name: "Finding a non-existing client credentials token record by an id returns undefined",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
@@ -951,6 +965,20 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
                 event: "{that}.events.onResponse"
             }]
         }, {
+            name: "Revoked auth decisions returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["client-2"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected undefined is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
             name: "Finding a non-existing client credentials token record by a client id returns undefined",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
@@ -969,6 +997,98 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"clientId\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findClientCredentialsTokenByAccessToken()",
+        tests: [{
+            name: "Find a client credentials token record by an access token",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["firstDiscovery_access_token"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsToken1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Revoked auth decisions returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["firstDiscovery_access_token"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected undefined is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing client credentials token record by an access token returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["non-existing"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing client credentials token record returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing client ID returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", [], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"accessToken\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test addClientCredentialsToken()",
+        tests: [{
+            name: "Add a client credentials token",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.addClientCredentialsToken", [gpii.tests.dbDataStore.testData.clientCredentialsTokenToCreate], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findClientCredentialsTokenById", "{arguments}.0.id", "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.verifyFetched",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.clientCredentialsTokenToCreate],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Adding an empty object returns error",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.addClientCredentialsToken", [{}], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"clientCredentialsTokenData\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1023,6 +1143,8 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findAuthByAccessToken",
     "gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
     "gpii.tests.dbDataStore.findClientCredentialsTokenById",
-    "gpii.tests.dbDataStore.findClientCredentialsTokenByClientId"
+    "gpii.tests.dbDataStore.findClientCredentialsTokenByClientId",
+    "gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
+    "gpii.tests.dbDataStore.addClientCredentialsToken"
     // "gpii.tests.dbDataStore.testDB"
 ]);

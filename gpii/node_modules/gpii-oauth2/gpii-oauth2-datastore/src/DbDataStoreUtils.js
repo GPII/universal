@@ -149,7 +149,7 @@ var fluid = fluid || require("infusion");
             promise.reject(error);
         } else {
             var directModel = {};
-            fluid.set(directModel, idName, uuid.v4());
+            directModel[idName] = uuid.v4();
             fluid.extend(data, {type: docType});
             promise = dataSource.set(directModel, data);
         }
@@ -159,7 +159,7 @@ var fluid = fluid || require("infusion");
     // Update an existing record
     gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, data) {
         var directModel = {};
-        fluid.set(directModel, idName, data.id);
+        directModel[idName] = data.id;
         fluid.extend(data, {type: docType});
         delete data.id;
         var promise = dataSource.set(directModel, data);
@@ -182,9 +182,10 @@ var fluid = fluid || require("infusion");
         authDecisionPromise.then(function (authDecision) {
             // save the input parameter into response.inputArgs for furthur use in following processes
             if (authDecision) {
-                var combined = {};
-                fluid.set(combined, "authDecision", authDecision);
-                fluid.set(combined, "inputArgs", input);
+                var combined = {
+                    authDecision: authDecision,
+                    inputArgs: input
+                };
                 promiseTogo.resolve(combined);
             } else {
                 var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.authDecision});
@@ -202,10 +203,11 @@ var fluid = fluid || require("infusion");
         gpiiTokenPromise.then(function (gpiiToken) {
             // save the input parameter into response.inputArgs for furthur use in following processes
             if (gpiiToken) {
-                var combined = {};
-                fluid.set(combined, "gpiiToken", gpiiToken);
-                fluid.set(combined, "authDecision", authDecisionRecord.authDecision);
-                fluid.set(combined, "inputArgs", authDecisionRecord.inputArgs);
+                var combined = {
+                    gpiiToken: gpiiToken,
+                    authDecision: authDecisionRecord.authDecision,
+                    inputArgs: authDecisionRecord.inputArgs
+                };
                 promiseTogo.resolve(combined);
             } else {
                 var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.gpiiToken});
@@ -274,10 +276,11 @@ var fluid = fluid || require("infusion");
     // Used by gpii.oauth2.dbDataStore.findAuthByCode() to only return needed fields
     gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
         if (data.doc.revoked === false) {
-            var result = {};
-            fluid.set(result, "clientId", data.doc.clientId);
-            fluid.set(result, "redirectUri", data.doc.redirectUri);
-            fluid.set(result, "accessToken", data.doc.accessToken);
+            var result = {
+                clientId: data.doc.clientId,
+                redirectUri: data.doc.redirectUri,
+                accessToken: data.doc.accessToken
+            };
             return result;
         } else {
             var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedAuthCode, {code: data.id});
@@ -288,21 +291,23 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (data) {
         var records = [];
         fluid.each(data, function (row) {
-            var oneResult = {};
-            fluid.set(oneResult, "authDecisionId", row.id);
-            fluid.set(oneResult, "oauth2ClientId", row.doc.oauth2ClientId);
-            fluid.set(oneResult, "clientName", row.doc.name);
-            fluid.set(oneResult, "selectedPreferences", row.value.selectedPreferences);
+            var oneResult = {
+                authDecisionId: row.id,
+                oauth2ClientId: row.doc.oauth2ClientId,
+                clientName: row.doc.name,
+                selectedPreferences: row.value.selectedPreferences
+            };
             records.push(oneResult);
         });
         return records;
     };
 
     gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
-        var result = {};
-        fluid.set(result, "userGpiiToken", data.value.gpiiToken);
-        fluid.set(result, "selectedPreferences", data.value.selectedPreferences);
-        fluid.set(result, "oauth2ClientId", data.doc.oauth2ClientId);
+        var result = {
+            userGpiiToken: data.value.gpiiToken,
+            selectedPreferences: data.value.selectedPreferences,
+            oauth2ClientId: data.doc.oauth2ClientId
+        };
         return result;
     };
 
@@ -330,9 +335,10 @@ var fluid = fluid || require("infusion");
         clientPromise.then(function (client) {
             // save the input parameter into response.inputArgs for furthur use in following processes
             if (client || client === undefined) {
-                var combined = {};
-                fluid.set(combined, "client", client);
-                fluid.set(combined, "inputArgs", input);
+                var combined = {
+                    client: client,
+                    inputArgs: input
+                };
                 promiseTogo.resolve(combined);
             } else {
                 var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.client});
@@ -349,14 +355,16 @@ var fluid = fluid || require("infusion");
         if (clientRecord.client === undefined || clientRecord.client.allowDirectGpiiTokenAccess !== true) {
             promiseTogo.resolve(undefined);
         } else {
-            var directModel = {};
-            fluid.set(directModel, "gpiiToken", clientRecord.inputArgs.gpiiToken);
-            fluid.set(directModel, "clientId", clientRecord.client.id);
+            var directModel = {
+                gpiiToken: clientRecord.inputArgs.gpiiToken,
+                clientId: clientRecord.client.id
+            };
             var authDecisionPromise = gpii.oauth2.dbDataStore.findRecord(findAuthDecisionByGpiiTokenAndClientIdDataSource, directModel);
             authDecisionPromise.then(function (authDecision) {
                 if (authDecision) {
-                    var result = {};
-                    fluid.set(result, "accessToken", authDecision.accessToken);
+                    var result = {
+                        accessToken: authDecision.accessToken
+                    };
                     promiseTogo.resolve(result);
                 } else {
                     // Revoked auth decision returns undefined
@@ -371,4 +379,41 @@ var fluid = fluid || require("infusion");
     };
     // ==== End of findAccessTokenByOAuth2ClientIdAndGpiiToken()
 
+    gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, clientCredentialsTokenData) {
+        var promiseTogo = fluid.promise();
+
+        if (clientCredentialsTokenData === undefined || $.isEmptyObject(clientCredentialsTokenData)) {
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: "clientCredentialsTokenData"});
+            promiseTogo.reject(error);
+        } else {
+            var data = {
+                clientId: clientCredentialsTokenData.clientId, // foreign key
+                accessToken: clientCredentialsTokenData.accessToken,
+                allowAddPrefs: clientCredentialsTokenData.allowAddPrefs,
+                revoked: false
+            };
+
+            promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.clientCredentialsToken, "id", data);
+        }
+
+        return promiseTogo;
+    };
+
+    gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCredentialsTokenId) {
+        return fluid.promise.fireTransformEvent(that.events.onRevokeClientCredentialsToken, clientCredentialsTokenId);
+    };
+
+    gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSource, clientCredentialsTokenRecord) {
+        var promiseTogo = fluid.promise();
+
+        if (clientCredentialsTokenRecord === undefined) {
+            promiseTogo.resolve(undefined);
+        } else {
+            var data = fluid.copy(clientCredentialsTokenRecord);
+            data.revoked = true;
+            promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.clientCredentialsToken, "id", data);
+        }
+
+        return promiseTogo;
+    };
 })();
