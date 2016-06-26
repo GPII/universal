@@ -274,6 +274,20 @@ var fluid = fluid || require("infusion");
                         }
                     }
                 }
+            },
+            findAuthByClientCredentialsAccessTokenDataSource: {
+                type: "gpii.oauth2.dbDataSource",
+                options: {
+                    requestUrl: "/_design/views/_view/findAuthByClientCredentialsAccessToken?key=%22%accessToken%22&include_docs=true",
+                    termMap: {
+                        accessToken: "%accessToken"
+                    },
+                    rules: {
+                        readPayload: {
+                            "": "rows.0"
+                        }
+                    }
+                }
             }
         },
         invokers: {
@@ -349,7 +363,10 @@ var fluid = fluid || require("infusion");
                     gpii.oauth2.dbDataStore.handleMultipleRecords
                 ]
             },
-            // TODO: verify a record with the same "gpii token + client id" doesn't exist
+            // TODO in this implementation, there is a one-to-one correspondence between
+            // recorded user 'authorization decisions' and access tokens. We may want to
+            // rethink this and give them different lifetimes.
+            // TODO: make sure there's only one active access token for one client
             addAuthDecision: {
                 funcName: "gpii.oauth2.dbDataStore.addRecord",
                 args: [
@@ -408,6 +425,8 @@ var fluid = fluid || require("infusion");
                 ]
                 // gpiiToken, clientId, redirectUri
             },
+            // TODO make authCodes active only for a limited period of time
+            // TODO make authCodes single use
             saveAuthCode: {
                 funcName: "gpii.oauth2.dbDataStore.saveAuthCode",
                 args: [
@@ -424,7 +443,7 @@ var fluid = fluid || require("infusion");
                     {
                         code: "{arguments}.0"
                     },
-                    ["code"],
+                    "code",
                     gpii.oauth2.dbDataStore.findAuthByCodePostProcess
                 ]
                 // code
@@ -436,7 +455,7 @@ var fluid = fluid || require("infusion");
                     {
                         gpiiToken: "{arguments}.0"
                     },
-                    ["gpiiToken"],
+                    "gpiiToken",
                     gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess
                 ]
                 // gpiiToken
@@ -448,11 +467,13 @@ var fluid = fluid || require("infusion");
                     {
                         accessToken: "{arguments}.0"
                     },
-                    ["accessToken"],
+                    "accessToken",
                     gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess
                 ]
                 // accessToken
             },
+            // TODO: The concept of allowDirectGpiiTokenAccess flag was added to integrate Mobile Accessibility
+            // for the January 2015 review. It needs to be reassessed.
             findAccessTokenByOAuth2ClientIdAndGpiiToken: {
                 funcName: "gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
                 args: ["{that}", "{arguments}.0", "{arguments}.1"]
@@ -484,6 +505,7 @@ var fluid = fluid || require("infusion");
                 ]
                 // accessToken
             },
+            // TODO: make sure there's only one non-revoked client credentials token for the given client
             addClientCredentialsToken: {
                 funcName: "gpii.oauth2.dbDataStore.addClientCredentialsToken",
                 args: [
@@ -499,6 +521,18 @@ var fluid = fluid || require("infusion");
                     "{arguments}.0"
                 ]
                 // clientCredentialsTokenId
+            },
+            findAuthByClientCredentialsAccessToken: {
+                funcName: "gpii.oauth2.dbDataStore.findRecord",
+                args: [
+                    "{that}.findAuthByClientCredentialsAccessTokenDataSource",
+                    {
+                        accessToken: "{arguments}.0"
+                    },
+                    "accessToken",
+                    gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess
+                ]
+                // accessToken
             }
         },
         events: {
@@ -553,7 +587,6 @@ var fluid = fluid || require("infusion");
             }],
             onRevokeClientCredentialsToken: [{
                 listener: "{that}.findClientCredentialsTokenById",
-                arguments: ["{arguments}.0"],
                 namespace: "findClientCredentialsToken",
                 priority: "first"
             }, {

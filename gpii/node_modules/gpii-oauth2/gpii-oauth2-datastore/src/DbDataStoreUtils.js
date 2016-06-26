@@ -60,7 +60,6 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty, dataProcessFunc) {
-        console.log("in findRecord, valueNotEmpty", valueNotEmpty, "; termMap", termMap, "; dataProcessFunc", dataProcessFunc);
         dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.CleanUpDoc;
         var promiseTogo = fluid.promise();
 
@@ -73,8 +72,6 @@ var fluid = fluid || require("infusion");
         } else {
             var promise = dataSource.get(termMap);
             promise.then(function (data) {
-                console.log("findRecord, initial received data", data);
-
                 // $.isEmptyObject() is to work around the issue when fetching data
                 // using pouch/couch DB views and records are not found, instead of
                 // returning a 404 status code, it returns this object:
@@ -91,7 +88,6 @@ var fluid = fluid || require("infusion");
                     promiseTogo.resolve(result);
                 }
             }, function (error) {
-                console.log("findRecord, error", error);
                 promiseTogo.reject(error);
             });
         }
@@ -165,6 +161,9 @@ var fluid = fluid || require("infusion");
         var promise = dataSource.set(directModel, data);
         return promise;
     };
+
+    // Authorization Decisions
+    // -----------------------
 
     // ==== updateAuthDecision()
     gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisionData) {
@@ -254,62 +253,8 @@ var fluid = fluid || require("infusion");
     };
     // ==== End of revokeAuthDecision()
 
-    gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId, code) {
-        var promiseTogo = fluid.promise();
-        var data = {
-            authDecisionId: authDecisionId,
-            code: code
-        };
-
-        var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(data, ["authDecisionId", "code"]);
-
-        if (emptyFields.length > 0) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: emptyFields});
-            promiseTogo.reject(error);
-        } else {
-            promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.authCode, "id", data);
-        }
-
-        return promiseTogo;
-    };
-
-    // Used by gpii.oauth2.dbDataStore.findAuthByCode() to only return needed fields
-    gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
-        if (data.doc.revoked === false) {
-            var result = {
-                clientId: data.doc.clientId,
-                redirectUri: data.doc.redirectUri,
-                accessToken: data.doc.accessToken
-            };
-            return result;
-        } else {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedAuthCode, {code: data.id});
-            return error;
-        }
-    };
-
-    gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (data) {
-        var records = [];
-        fluid.each(data, function (row) {
-            var oneResult = {
-                authDecisionId: row.id,
-                oauth2ClientId: row.doc.oauth2ClientId,
-                clientName: row.doc.name,
-                selectedPreferences: row.value.selectedPreferences
-            };
-            records.push(oneResult);
-        });
-        return records;
-    };
-
-    gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
-        var result = {
-            userGpiiToken: data.value.gpiiToken,
-            selectedPreferences: data.value.selectedPreferences,
-            oauth2ClientId: data.doc.oauth2ClientId
-        };
-        return result;
-    };
+    // Access Token
+    // ------------
 
     // ==== findAccessTokenByOAuth2ClientIdAndGpiiToken()
     gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (that, oauth2ClientId, gpiiToken) {
@@ -379,6 +324,68 @@ var fluid = fluid || require("infusion");
     };
     // ==== End of findAccessTokenByOAuth2ClientIdAndGpiiToken()
 
+    gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (data) {
+        var records = [];
+        fluid.each(data, function (row) {
+            var oneResult = {
+                authDecisionId: row.id,
+                oauth2ClientId: row.doc.oauth2ClientId,
+                clientName: row.doc.name,
+                selectedPreferences: row.value.selectedPreferences
+            };
+            records.push(oneResult);
+        });
+        return records;
+    };
+
+    gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
+        var result = {
+            userGpiiToken: data.value.gpiiToken,
+            selectedPreferences: data.value.selectedPreferences,
+            oauth2ClientId: data.doc.oauth2ClientId
+        };
+        return result;
+    };
+
+    // Authorization Codes
+    // -------------------
+
+    gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId, code) {
+        var promiseTogo = fluid.promise();
+        var data = {
+            authDecisionId: authDecisionId,
+            code: code
+        };
+
+        var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(data, ["authDecisionId", "code"]);
+
+        if (emptyFields.length > 0) {
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.missingInput, {fieldName: emptyFields});
+            promiseTogo.reject(error);
+        } else {
+            promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.authCode, "id", data);
+        }
+
+        return promiseTogo;
+    };
+
+    gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
+        if (data.doc.revoked === false) {
+            var result = {
+                clientId: data.doc.clientId,
+                redirectUri: data.doc.redirectUri,
+                accessToken: data.doc.accessToken
+            };
+            return result;
+        } else {
+            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.dbDataStore.errors.unauthorizedAuthCode, {code: data.id});
+            return error;
+        }
+    };
+
+    // Client Credentials Tokens
+    // -------------------------
+
     gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, clientCredentialsTokenData) {
         var promiseTogo = fluid.promise();
 
@@ -399,6 +406,7 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
+    // ==== revokeClientCredentialsToken()
     gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCredentialsTokenId) {
         return fluid.promise.fireTransformEvent(that.events.onRevokeClientCredentialsToken, clientCredentialsTokenId);
     };
@@ -415,5 +423,14 @@ var fluid = fluid || require("infusion");
         }
 
         return promiseTogo;
+    };
+    // ==== End of revokeClientCredentialsToken()
+
+    gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess = function (data) {
+        var result = {
+            oauth2ClientId: data.doc.oauth2ClientId,
+            allowAddPrefs: data.value.allowAddPrefs
+        };
+        return result;
     };
 })();

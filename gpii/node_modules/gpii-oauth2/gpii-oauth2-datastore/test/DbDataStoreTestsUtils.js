@@ -70,42 +70,13 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                     }
                 }
             }
-        },
-        // TODO: remove when all API functions are tested
-        massiveRequest: {
-            type: "gpii.test.pouch.basic.request",
-            options: {
-                // path: "/gpiiOauth/user-1"  // findUserById
-                // path: "/gpiiOauth/_design/views/_view/findUserByName?key=%22chromehc%22"  // findUserByUsername
-                // path: "/gpiiOauth/_design/views/_view/findUserByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findUserByGpiiToken
-                // path: "/gpiiOauth/_design/views/_view/findGpiiToken?key=%22chrome_high_contrast%22"  // findGpiiToken
-                // path: "/gpiiOauth/client-1"  // findClientById
-                // path: "/gpiiOauth/_design/views/_view/findClientByOauth2ClientId?key=%22org.chrome.cloud4chrome%22"  // findClientByOauth2ClientId
-                // path: "/gpiiOauth/_design/views/_view/findAllClients"  // findAllClients
-                // path: "/gpiiOauth/_design/views/_view/findAuthByGpiiToken?key=%22chrome_high_contrast%22"  // findAuthDecisionsByGpiiToken
-                // path: "/gpiiOauth/_design/views/_view/findAuthDecision?key=%5B%22chrome_high_contrast%22,%22client-1%22,false%5D"  // findAuthDecision
-                // path: "/gpiiOauth/_design/views/_view/findAuthDecisionByAuthCode?key=%22chrome_high_contrast_auth_token%22&include_docs=true"  // findAuthDecision
-                // path: "/gpiiOauth/_design/views/_view/findAuthorizedClientsByGpiiToken?key=%22chrome_high_contrast%22&include_docs=true"  // findAuthorizedClientsByGpiiToken
-                // path: "/gpiiOauth/_design/views/_view/findAuthByAccessToken?key=%22chrome_high_contrast_access_token%22&include_docs=true"  // findAuthByAccessToken
-                // path: "/gpiiOauth/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=%5B%22chrome_high_contrast%22,%22client-1%22%5D"  // findAccessTokenByOAuth2ClientIdAndGpiiToken
-                // path: "/gpiiOauth/_design/views/_view/findClientCredentialsTokenByClientId?key=%22client-2%22"  // findClientCredentialsTokenByClientId
-                path: "/gpiiOauth/_design/views/_view/findClientCredentialsTokenByAccessToken?key=%22firstDiscovery_access_token%22"  // findClientCredentialsTokenByAccessToken
-            }
         }
     }
 });
 
-// TODO: remove when all API functions are tested
-fluid.defaults("gpii.test.pouch.basic.request", {
-    gradeNames: ["kettle.test.request.http"],
-    port:       "{gpii.tests.dbDataStore.environment}.options.port",
-    method:     "GET"
-});
-
 gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
-    console.log("invokePromiseProducer", producerFunc, args);
     var promise = producerFunc.apply(null, args);
-    console.log("after invokePromiseProducer");
+
     promise.then(function (response) {
         that.events.onResponse.fire(response);
     }, function (err) {
@@ -300,5 +271,9 @@ gpii.tests.dbDataStore.testData = {
         "clientId": "client-1",
         "accessToken": "chrome_client_credentials_access_token",
         "allowAddPrefs": true
+    },
+    findAuthByClientCredentialsAccessToken: {
+        oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
+        allowAddPrefs: true
     }
 };
