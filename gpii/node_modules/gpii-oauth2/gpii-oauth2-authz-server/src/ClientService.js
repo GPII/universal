@@ -42,18 +42,43 @@ fluid.defaults("gpii.oauth2.clientService", {
     }
 });
 
+// To verify a client information matches the expected value
+//
+// @dataStore (Object) - an instance of a data store component such as gpii.oauth2.dbDataStore
+// @oauth2ClientId (String) - an oAuth2 client id
+// @fieldToVerify (String) - A field of the client object to be verified
+// @expectedVerifiedValue (Any) - The expected verified value
+//
+// @return (Promise) - A promise object that contains either a client record or an error
+gpii.oauth2.clientService.processClient = function (dataStore, oauth2ClientId, fieldToVerify, expectedVerifiedValue) {
+    var promiseTogo = fluid.promise();
+    var clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
+    clientPromise.then(function (client) {
+        if (client && client[fieldToVerify] === expectedVerifiedValue) {
+            promiseTogo.resolve(client);
+        } else {
+            promiseTogo.reject(gpii.oauth2.errors.unauthorizedClient);
+        }
+    }, function (err) {
+        promiseTogo.reject(err);
+    })
+    return promiseTogo;
+};
+
 gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2ClientId, oauth2ClientSecret) {
-    var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-    if (client && client.oauth2ClientSecret === oauth2ClientSecret) {
-        return client;
-    }
-    return false;
+    return gpii.oauth2.clientService.processClient(
+        dataStore,
+        oauth2ClientId,
+        "oauth2ClientSecret",
+        oauth2ClientSecret
+    );
 };
 
 gpii.oauth2.clientService.checkClientRedirectUri = function (dataStore, oauth2ClientId, redirectUri) {
-    var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-    if (client && client.redirectUri === redirectUri) {
-        return client;
-    }
-    return false;
+    return gpii.oauth2.clientService.processClient(
+        dataStore,
+        oauth2ClientId,
+        "redirectUri",
+        redirectUri
+    );
 };
