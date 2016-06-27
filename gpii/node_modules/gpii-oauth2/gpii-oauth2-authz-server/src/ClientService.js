@@ -61,7 +61,7 @@ gpii.oauth2.clientService.processClient = function (dataStore, oauth2ClientId, f
         }
     }, function (err) {
         promiseTogo.reject(err);
-    })
+    });
     return promiseTogo;
 };
 

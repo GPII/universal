@@ -88,12 +88,6 @@ var fluid = fluid || require("infusion");
         return emptyFields;
     };
 
-    gpii.oauth2.dbDataStore.composeError = function (error, termMap) {
-        var err = fluid.copy(error);
-        err.msg = fluid.stringTemplate(err.msg, termMap);
-        return err;
-    };
-
     // Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" filed value into "id" field.
     gpii.oauth2.dbDataStore.CleanUpDoc = function (data) {
         if (data) {

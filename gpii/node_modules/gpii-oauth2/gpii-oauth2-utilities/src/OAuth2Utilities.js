@@ -33,6 +33,11 @@ gpii.oauth2.errors = {
         statusCode: 401,
         isError: true
     },
+    invalidUser: {
+        msg: "Invalid user name and password combination",
+        statusCode: 401,
+        isError: true
+    },
     unauthorizedAuthCode: {
         msg: "The authorization code %code is not authorized",
         statusCode: 401,
@@ -67,4 +72,10 @@ gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
             return gpii.oauth2.walkMiddleware(middleware, i + 1, req, res, next);
         });
     }
+};
+
+gpii.oauth2.dbDataStore.composeError = function (error, termMap) {
+    var err = fluid.copy(error);
+    err.msg = fluid.stringTemplate(err.msg, termMap);
+    return err;
 };
