@@ -47,6 +47,11 @@ gpii.oauth2.errors = {
         msg: "The client is not authorized",
         statusCode: 401,
         isError: true
+    },
+    unauthorizedAccessToken: {
+        msg: "The access token is not authorized",
+        statusCode: 401,
+        isError: true
     }
 };
 
@@ -74,7 +79,7 @@ gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
     }
 };
 
-gpii.oauth2.dbDataStore.composeError = function (error, termMap) {
+gpii.oauth2.composeError = function (error, termMap) {
     var err = fluid.copy(error);
     err.msg = fluid.stringTemplate(err.msg, termMap);
     return err;

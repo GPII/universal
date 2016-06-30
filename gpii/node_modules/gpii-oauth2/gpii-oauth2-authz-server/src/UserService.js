@@ -66,8 +66,13 @@ var fluid = fluid || require("infusion");
 
     gpii.oauth2.userService.gpiiTokenHasAssociatedUser = function (dataStore, gpiiToken) {
         var promiseTogo = fluid.promise();
-        var result = dataStore.findUserByGpiiToken(gpiiToken) ? true : false;
-        promiseTogo.resolve(result);
+        var tokenPromise = dataStore.findUserByGpiiToken(gpiiToken);
+        tokenPromise.then(function (user) {
+            var result = user ? true : false;
+            promiseTogo.resolve(result);
+        }, function (err) {
+            promiseTogo.reject(err);
+        });
 
         return promiseTogo;
     };

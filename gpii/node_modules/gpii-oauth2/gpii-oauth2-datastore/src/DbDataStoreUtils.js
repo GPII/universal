@@ -46,7 +46,7 @@ var fluid = fluid || require("infusion");
         var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(termMap, valueNotEmpty);
 
         if (emptyFields.length > 0) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
             promiseTogo.reject(error);
         } else {
             var promise = dataSource.get(termMap);
@@ -115,7 +115,7 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
         var promise = fluid.promise();
         if ($.isEmptyObject(data)) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
             promise.reject(error);
         } else {
             var directModel = {};
@@ -161,7 +161,7 @@ var fluid = fluid || require("infusion");
                 };
                 promiseTogo.resolve(combined);
             } else {
-                var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.authDecision});
+                var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.authDecision});
                 promiseTogo.reject(error);
             }
         }, function (err) {
@@ -183,7 +183,7 @@ var fluid = fluid || require("infusion");
                 };
                 promiseTogo.resolve(combined);
             } else {
-                var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.gpiiToken});
+                var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.gpiiToken});
                 promiseTogo.reject(error);
             }
         }, function (err) {
@@ -203,7 +203,7 @@ var fluid = fluid || require("infusion");
             return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "id", authDecision);
         } else {
             var promiseTogo = fluid.promise();
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.unauthorizedUser, {userId: inputUserId});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedUser, {userId: inputUserId});
             promiseTogo.reject(error);
             return promiseTogo;
         }
@@ -240,7 +240,7 @@ var fluid = fluid || require("infusion");
         var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(input, ["oauth2ClientId", "gpiiToken"]);
 
         if (emptyFields.length > 0) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
             promiseTogo.reject(error);
         } else {
             promiseTogo = fluid.promise.fireTransformEvent(that.events.onFindAccessTokenByOAuth2ClientIdAndGpiiToken, input);
@@ -260,7 +260,7 @@ var fluid = fluid || require("infusion");
                 };
                 promiseTogo.resolve(combined);
             } else {
-                var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.client});
+                var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.client});
                 promiseTogo.reject(error);
             }
         }, function (err) {
@@ -334,7 +334,7 @@ var fluid = fluid || require("infusion");
         var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(data, ["authDecisionId", "code"]);
 
         if (emptyFields.length > 0) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
             promiseTogo.reject(error);
         } else {
             promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.authCode, "id", data);
@@ -352,7 +352,7 @@ var fluid = fluid || require("infusion");
             };
             return result;
         } else {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.unauthorizedAuthCode, {code: data.id});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedAuthCode, {code: data.id});
             return error;
         }
     };
@@ -364,7 +364,7 @@ var fluid = fluid || require("infusion");
         var promiseTogo = fluid.promise();
 
         if (clientCredentialsTokenData === undefined || $.isEmptyObject(clientCredentialsTokenData)) {
-            var error = gpii.oauth2.dbDataStore.composeError(gpii.oauth2.errors.missingInput, {fieldName: "clientCredentialsTokenData"});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "clientCredentialsTokenData"});
             promiseTogo.reject(error);
         } else {
             var data = {
