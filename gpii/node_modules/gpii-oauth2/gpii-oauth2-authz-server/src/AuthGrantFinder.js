@@ -35,13 +35,20 @@ var fluid = fluid || require("infusion");
         }
     });
 
-    // Return the granted privilege for the access token.
+    // Return a promise object that contains the granted privilege for the access token.
     // This function looks up access tokens granted for both authorization code grant
     // and the client credentials grant to find the match. The different data structure
     // can be returned based on the grant type.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
-        var authCodeResult = authorizationService.getAuthForAccessToken(accessToken);
-        var clientCredentialsResult = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
+        var authCodePrmoise = authorizationService.getAuthForAccessToken(accessToken);
+        var clientCredentialsPromise = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
+
+        var sources = [authCodePrmoise, clientCredentialsPromise];
+        var response = fluid.promise.sequence(sources, accessToken);
+
+        var authCodeResult = response[0];
+        var clientCredentialsResult = response[1];
+
         return authCodeResult ? authCodeResult : clientCredentialsResult;
     };
 

@@ -448,6 +448,8 @@ var fluid = fluid || require("infusion");
                 ]
                 // code
             },
+            // Note: With the In Memory Data Store, this function returns an empty array when no clients are found.
+            // However, with the DB Data Store, "undefined" is returned.
             findAuthorizedClientsByGpiiToken: {
                 funcName: "gpii.oauth2.dbDataStore.findRecord",
                 args: [
