@@ -27,13 +27,13 @@ fluid.defaults("gpii.oauth2.clientService", {
     },
     invokers: {
         authenticateClient: {
-            funcName: "gpii.oauth2.clientService.authenticateClient",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+            funcName: "gpii.oauth2.clientService.processClient",
+            args: ["{dataStore}", "{arguments}.0", "oauth2ClientSecret", "{arguments}.1"]
                 // oauth2ClientId, oauth2ClientSecret
         },
         checkClientRedirectUri: {
-            funcName: "gpii.oauth2.clientService.checkClientRedirectUri",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+            funcName: "gpii.oauth2.clientService.processClient",
+            args: ["{dataStore}", "{arguments}.0", "redirectUri", "{arguments}.1"]
                 // oauth2ClientId, redirectUri
         },
         getClientById: {
@@ -63,22 +63,4 @@ gpii.oauth2.clientService.processClient = function (dataStore, oauth2ClientId, f
         promiseTogo.reject(err);
     });
     return promiseTogo;
-};
-
-gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2ClientId, oauth2ClientSecret) {
-    return gpii.oauth2.clientService.processClient(
-        dataStore,
-        oauth2ClientId,
-        "oauth2ClientSecret",
-        oauth2ClientSecret
-    );
-};
-
-gpii.oauth2.clientService.checkClientRedirectUri = function (dataStore, oauth2ClientId, redirectUri) {
-    return gpii.oauth2.clientService.processClient(
-        dataStore,
-        oauth2ClientId,
-        "redirectUri",
-        redirectUri
-    );
 };
