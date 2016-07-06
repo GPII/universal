@@ -57,14 +57,8 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
             type: "gpii.oauth2.dbDataStore",
             options: {
                 dataSourceConfig: {
-                    baseUrl: {
-                        expander: {
-                            funcName: "fluid.stringTemplate",
-                            args: ["http://localhost:%port", {
-                                port: "{gpii.tests.dbDataStore.environment}.options.port"
-                            }]
-                        }
-                    },
+                    baseUrl: "http://localhost",
+                    port: "{gpii.tests.dbDataStore.environment}.options.port",
                     termMap: {
                         dbName: "gpiiOauth"
                     }

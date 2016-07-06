@@ -45,8 +45,9 @@ var fluid = fluid || require("infusion");
         url: {
             expander: {
                 funcName: "fluid.stringTemplate",
-                args: ["%baseUrl/%dbName%requestUrl", {
+                args: ["%baseUrl:%port/%dbName%requestUrl", {
                     baseUrl: "{that}.options.baseUrl",
+                    port: "{that}.options.port",
                     requestUrl: "{that}.options.requestUrl"
                 }]
             }
@@ -64,8 +65,9 @@ var fluid = fluid || require("infusion");
         // Supplied by GPII configuration to config all gpii.oauth2.dbDataSource instances.
         // It contains these elements:
         // 1. gradeNames: The mixin grade
-        // 2. baseUrl: The URL to where the database is located. For example, the base URL for the local CouchDB using default port is http://localhost:5984/
-        // 3. termMap: {
+        // 2. baseUrl: The base URL to where the database is located. For example, a default locally installed CouchDB uses http://127.0.1.1
+        // 3. port: The port where the database is located. For example, a default locally installed CouchDB uses port 5984
+        // 4. termMap: {
         //        dbName: The database name
         //    }
         dataSourceConfig: {
