@@ -13,7 +13,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-
 /* global fluid, jQuery */
 
 var gpii = gpii || {};
