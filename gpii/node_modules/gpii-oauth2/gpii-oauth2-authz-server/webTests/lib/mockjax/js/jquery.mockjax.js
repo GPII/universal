@@ -540,7 +540,7 @@
       }
       if ( window.console && console.log ) {
         var message = 'MOCK ' + requestSettings.type.toUpperCase() + ': ' + requestSettings.url;
-        var request = $.extend({}, requestSettings);
+        var request = fluid.extend({}, requestSettings);
 
         if (typeof console.log === 'function') {
           console.log(message, request);

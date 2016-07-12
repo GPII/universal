@@ -1,9 +1,0 @@
-untrusted.development.json
-==========================
-
-This configuration runs the local Untrusted Flow Manager in development mode.
-
-The following components are running on the local machine:
-
-* flowManager (untrusted, browser channel)
-* deviceReporter

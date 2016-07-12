@@ -7,7 +7,10 @@ Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
 You may obtain a copy of the License at
-https://github.com/gpii/universal/LICENSE.txt
+https://github.com/GPII/universal/blob/master/LICENSE.txt
+
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 "use strict";
@@ -18,7 +21,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.deviceReporterAware.linux.orca");
 
-gpii.tests.deviceReporterAware.linux.orca = [
+gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
@@ -148,8 +151,8 @@ gpii.tests.deviceReporterAware.linux.orca = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.deviceReporterAware.linux.orca",
-    configName: "linux-dynamicDeviceReporter-config",
-    configPath: "configs"
+    testDefs:  "gpii.tests.deviceReporterAware.linux.orca.testDefs",
+    configName: "gpii.tests.acceptance.linux.dynamicDeviceReporter.config",
+    configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);

@@ -1,0 +1,13 @@
+{
+    "type": "gpii.tests.acceptance.windows.nvda.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.installedSolutionsPath": {
+                "record": "%universal/testData/deviceReporter/acceptanceTests/nvda.json",
+                "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
+                "priority": "after:development.installedSolutionsPath"
+            }
+        }
+    },      
+    "mergeConfigs": "%universal/tests/configs/gpii.tests.acceptance.localInstall.config.json"
+}

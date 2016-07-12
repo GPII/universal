@@ -20,7 +20,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.OKCancelDialog", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
+        gradeNames: ["fluid.viewComponent"],
         dialogOptions: {
             autoOpen: false,
             resizable: false,
@@ -112,7 +112,7 @@ var gpii = gpii || {};
     });
 
     gpii.OKCancelDialog.initDialog = function (container, dialogClass, dialogOptions) {
-        container.dialog($.extend(true, {}, {dialogClass: dialogClass}, dialogOptions));
+        container.dialog(fluid.extend(true, {}, {dialogClass: dialogClass}, dialogOptions));
     };
 
     gpii.OKCancelDialog.fireCreateDialogWidget = function (that) {
