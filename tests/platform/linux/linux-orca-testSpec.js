@@ -6,11 +6,11 @@ Copyright 2014 Emergya
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
-
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
+
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 
@@ -22,7 +22,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.orca");
 
-gpii.tests.linux.orca = [
+gpii.tests.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
         userToken: "screenreader_common",
@@ -134,8 +134,8 @@ gpii.tests.linux.orca = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.linux.orca",
-    configName: "linux-orca-config",
-    configPath: "configs"
+    testDefs:  "gpii.tests.linux.orca.testDefs",
+    configName: "gpii.tests.acceptance.linux.orca.config",
+    configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);

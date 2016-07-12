@@ -8,9 +8,10 @@ compliance with this License.
 
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
-*/
 
-/*global require*/
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+*/
 
 "use strict";
 var fluid = require("universal"),
@@ -106,7 +107,7 @@ var testDefs = [
             "eu.gpii.olb": {
                 "language": "en-GB",
                 "contrastTheme": "wb",
-                "signLanguage": "ils", // see https://issues.gpii.net/browse/GPII-1125 
+                "signLanguage": "ils", // see https://issues.gpii.net/browse/GPII-1125
                 "simplifiedUiEnabled": true
             }
         }

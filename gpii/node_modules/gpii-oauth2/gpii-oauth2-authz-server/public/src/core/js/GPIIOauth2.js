@@ -30,7 +30,7 @@ var gpii = gpii || {};
         var url = fluid.stringTemplate(urlTemplate, encodedValues);
 
         if (!options.error) {
-            options = $.extend({}, options, {
+            options = fluid.extend({}, options, {
                 error: function (jqXHR, textStatus, errorThrown) {
                     fluid.fail("AJAX ERROR" +
                         " url: " + url +

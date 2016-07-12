@@ -1,0 +1,7 @@
+{
+    "type": "gpii.config.untrusted.development",
+    "mergeConfigs": [
+        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.development.json",
+        "../node_modules/flowManager/configs/gpii.flowManager.untrusted.config.development.json"
+    ]
+}

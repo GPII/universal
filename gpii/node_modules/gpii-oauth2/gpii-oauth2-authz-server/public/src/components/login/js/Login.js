@@ -22,7 +22,7 @@ var gpii = gpii || {};
     "use strict";
 
     fluid.defaults("gpii.oauth2.login", {
-        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        gradeNames: ["fluid.rendererComponent"],
         selectors: {
             header: ".gpiic-oauth2-login-header",
             instructions: ".gpiic-oauth2-login-instructions",

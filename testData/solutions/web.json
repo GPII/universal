@@ -18,7 +18,7 @@
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "ranges": [
                                 {
@@ -38,7 +38,7 @@
                     "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "magnification": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                             "ranges": [
                                 {
@@ -81,7 +81,7 @@
                     "fontSize": {
                         "transform":{
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "factor": 10
                         }
                     },
@@ -160,7 +160,7 @@
                   "tracking": "http://registry\\.gpii\\.net/provisional-common/magnifierFollows",
                   "magnification": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                             "ranges": [
                                 {
@@ -216,7 +216,7 @@
                     },
                     "fontSize": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "ranges": [
                                 {
@@ -302,7 +302,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                                     "factor": 1.33
                                 }
                             }
@@ -312,7 +312,7 @@
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "volume": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "ranges": [
                                 {
@@ -327,7 +327,7 @@
                                             "input": {
                                                 "transform": {
                                                     "type": "fluid.transforms.linearScale",
-                                                    "valuePath": "http://registry\\.gpii\\.net/common/volume",
+                                                    "inputPath": "http://registry\\.gpii\\.net/common/volume",
                                                     "factor": 100
                                                 }
                                             }
@@ -449,8 +449,8 @@
                     },
                     "fontSize": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
-                            "valuePath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "ranges": [
                                 {
                                     "upperBound": 18,
@@ -463,7 +463,7 @@
                     },
                     "timeOut": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/sessionTimeout",
                             "ranges": [
                                 {

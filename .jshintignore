@@ -1,8 +1,0 @@
-/examples/gpii-oauth2-sample-client/node_modules/**
-/examples/gpii-oauth2-sample-client-passport/node_modules/**
-/examples/gpii-oauth2-single-process-auth-server/node_modules/**
-
-/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/node_modules/**
-/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/public/lib/**
-/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/webTests/lib/**
-/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/node_modules/**

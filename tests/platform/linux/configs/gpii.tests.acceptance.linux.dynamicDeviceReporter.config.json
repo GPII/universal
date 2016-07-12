@@ -1,0 +1,4 @@
+{
+    "type": "gpii.tests.acceptance.linux.dynamicDeviceReporter.config",
+    "mergeConfigs": "%universal/tests/configs/gpii.tests.acceptance.localInstall.dynamicDeviceReporter.config.json"
+}

@@ -4,11 +4,11 @@ Copyright 2014 OCAD University
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
-
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
+
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 
@@ -17,7 +17,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion");
 
 fluid.defaults("gpii.oauth2.dataStore.acceptanceData", {
-    gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
+    gradeNames: ["gpii.oauth2.inMemoryDataStore"],
     model: {
         users: [ // this model is rewritten on startup to hold the token of the fixture's current user
             { id: 1, username: "bob", password: "b", gpiiToken: "placeholder_token" },

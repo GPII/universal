@@ -22,7 +22,7 @@ require("../../gpii-oauth2-resource-server");
 var gpii = fluid.registerNamespace("gpii");
 
 fluid.defaults("gpii.oauth2.singleProcessAuthServerOptions", {
-    gradeNames: ["fluid.littleComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     members: {
         expressApp: "{gpii.oauth2.singleProcessAuthServer}.expressApp"
     },
@@ -32,7 +32,7 @@ fluid.defaults("gpii.oauth2.singleProcessAuthServerOptions", {
 });
 
 fluid.defaults("gpii.oauth2.singleProcessAuthServer", {
-    gradeNames: ["fluid.eventedComponent", "autoInit"],
+    gradeNames: ["fluid.component"],
     members: {
         expressApp: {
             expander: {
