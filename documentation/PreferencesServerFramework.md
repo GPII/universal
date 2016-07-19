@@ -7,15 +7,12 @@ Currently, the preferences server Framework consist of three components:
 * [The Raw Preferences Server](RawPreferencesServer.md)
 * The Ontology Handler (see below)
 * [The Preferences Server](PreferencesServer.md)
-* [The Old Preferences Server](OldPreferencesServer.md) _for backward compatibility only_
 
 _The raw preferences server_ is a very basic service, sitting in front of a database of records (eg. couchDB). It stores and serves the full, unmodified preferences sets, keyed by the ontology they are in. A raw preferences set can be stored in multiple ontologies (ie. one part can be in ISO-24751, another in the 'flat' format). The raw preferences document consist of containers with preferences, each keyed by the format in which they are in. Since the raw preferences server exposes _all_ the users needs and preferences, this should generally not be public fracing without a preferences server in front of it to filter the settings according to permissions and views. For a full description of the Raw Preferences server, see: [The Raw Preferences Server](RawPreferencesServer.md)
 
 _The Ontology Handler_ is the component containing the functionality for translating between one ontology (or 'view') and another. Certain consumers prefer viewing the preferences in one view more suitable for them (ie. ISO-24751) and the Ontology Handler is able to translate these settings (given that an ontology transformation has been provided) from one view to another.
 
 _The Preferences Server_ is the public facing component of the preferences server framework. It's a service, allowing requests for preferences sets in some desired view (via URL parameters), that only gives the consumer access to the relevant settings. It is responsible for (via the ontology handler) to translate the settings to the desired view, ensuring that no duplicate preferences are stored, etc. For a full description of the Preferences Server, see: [The Preferences Server](PreferencesServer.md).
-
-_The Old Preferences Server_ is set up for backward compatibility. It will serve and retrieve preferences in the format compatible with the original preferences server. This is _only_ for backwards compatibility and all new development should be done using the new [Preferences Server](PreferencesServer.md)'s API. Information about the old preferences server and its API can be found here: [The Old Preferences Server](OldPreferencesServer.md)
 
 ### Motivation and rules
 

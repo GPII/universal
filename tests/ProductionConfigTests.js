@@ -20,11 +20,8 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/*global require*/
-
 "use strict";
 var fluid = require("universal"),
-    path = require("path"),
     gpii = fluid.registerNamespace("gpii");
 
 gpii.loadTestingSupport();
@@ -33,12 +30,13 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 /*
  * ================================
- * production.with.logging
+ * gpii.config.trusted-flowmanager.production
  * ================================
  */
+
 gpii.tests.productionConfigTesting = [
     {
-        name: "Testing os_common using Flat matchmaker",
+        name: "Production config test with os_common using Flat matchmaker",
         userToken: "MikelVargas",
         settingsHandlers: {
             "gpii.gsettings": {
@@ -69,10 +67,10 @@ gpii.tests.productionConfigTesting = [
     }
 ];
 
-module.exports = gpii.test.bootstrap({
+gpii.test.bootstrap({
     testDefs:  "gpii.tests.productionConfigTesting",
-    configName: "production.with.logging",
-    configPath: path.resolve(__dirname, "../gpii/configs")
+    configName: "gpii.config.trusted-flowmanager.production",
+    configPath: "%universal/gpii/configs"
 }, ["gpii.test.integration.deviceReporterAware.linux", "gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);
 
@@ -89,8 +87,8 @@ var testDefs = [
         OSid: "linux",
         solutionId: "org.gnome.desktop.a11y.keyboard",
         config: {
-            configName: "cloudBased.production",
-            configPath: path.resolve(__dirname, "../gpii/configs")
+            configName: "gpii.config.cloudBased.production",
+            configPath: "%universal/gpii/configs"
         },
         expected: {
             "org.gnome.desktop.a11y.keyboard": {
@@ -108,4 +106,4 @@ var testDefs = [
     }
 ];
 
-module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);
+gpii.test.cloudBased.bootstrap(testDefs, __dirname);

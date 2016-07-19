@@ -1,0 +1,16 @@
+windows-dynamicDeviceReporter-testSpec.js
+
+Descriptions:
+
+This will run the acceptance tests with dynamic device reporting.
+It uses 2 NP sets: screenreader_nvda and readwritegold_application1.
+
+Due to some current limitations/issues with the current flat matchmaker, JAWS
+should not be installed, and sociable should not be listed as installed, because
+they will both attempt to launch with an NVDA NP.
+
+Requirements:
+* NVDA installed
+* Read and Write Gold not installed
+
+To run these tests, you need to have NVDA INSTALLED. NVDA is free and can be downloaded from: http://www.nvaccess.org/download/

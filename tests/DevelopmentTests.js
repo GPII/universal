@@ -17,56 +17,12 @@
 "use strict";
 
 var fluid = require("infusion"),
-    jqUnit = fluid.require("jqUnit"),
-    path = require("path"),
-    configPath = path.resolve(__dirname, "../gpii/configs"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
 require("../index.js");
+require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-// These tests simply execute the login and logout cycle for a user with some basic
-// dummy preference settings that will not attempt to configure any solutions. We
-// observe that the expected responses are received to login and logout and that no
-// errors are triggered
-
-fluid.registerNamespace("gpii.tests.development");
-
-gpii.tests.development.userToken = "testUser1";
-
-gpii.tests.development.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged in.", data);
-};
-
-gpii.tests.development.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged out.", data);
-};
-
-gpii.tests.development.testDefs = [{
-    name: "Flow Manager development tests",
-    expect: 2,
-    config: {
-        configName: "development.all.local",
-        configPath: configPath
-    },
-    gradeNames: "gpii.test.common.testCaseHolder",
-    userToken: gpii.tests.development.userToken,
-
-    sequence: [{
-        func: "{loginRequest}.send"
-    }, {
-        event: "{loginRequest}.events.onComplete",
-        listener: "gpii.tests.development.testLoginResponse"
-    }, {
-        func: "{logoutRequest}.send"
-    }, {
-        event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.development.testLogoutResponse"
-    }]
-}];
-
-kettle.test.bootstrapServer(gpii.tests.development.testDefs);
+kettle.test.bootstrapServer(fluid.copy(gpii.tests.development.testDefs));

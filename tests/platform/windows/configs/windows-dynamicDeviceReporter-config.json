@@ -1,0 +1,6 @@
+{
+    "type": "acceptanceTests.windows.dynamicDeviceReporter",
+    "mergeConfigs": [
+        "%universal/tests/configs/gpii.tests.acceptance.localInstall.dynamicDeviceReporter.config.json"
+    ]
+}

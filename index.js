@@ -17,8 +17,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-     kettle = fluid.registerNamespace("kettle"),
-     gpii = fluid.registerNamespace("gpii");
+    kettle = fluid.registerNamespace("kettle"),
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.module.register("universal", __dirname, require);
 
@@ -41,9 +41,9 @@ gpii.loadTestingSupport = function () {
 };
 
 gpii.start = function () {
-    kettle.config.makeConfigLoader({
-        configName: kettle.config.getNodeEnv("development.all.local"),
-        configPath: kettle.config.getConfigPath() || __dirname + "/gpii/configs"
+    kettle.config.loadConfig({
+        configName: kettle.config.getConfigName("gpii.config.development.all.local"),
+        configPath: kettle.config.getConfigPath(__dirname + "/gpii/configs")
     });
 };
 

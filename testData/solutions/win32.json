@@ -41,7 +41,7 @@
                     "cloud4allVoiceProfile-GlobalContext\\.Speed": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
                             "factor": 0.125,
                             "offset": -12.125
                         }
@@ -65,6 +65,15 @@
             {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "jfw.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
             }
         ]
     },
@@ -116,6 +125,15 @@
                 "type": "gpii.launch.exec",
                 "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_CURRENT_USER",
+                "path": "Software\\Texthelp\\Read&Write10\\InstallPath",
+                "subPath": "ReadAndWrite.exe",
+                "dataType": "REG_SZ"
+            }
         ]
     },
 
@@ -162,7 +180,7 @@
                             "input": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
-                                    "valuePath": "http://registry\\.gpii\\.net/common/magnification",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                                     "factor": 100
                                 }
                             }
@@ -171,6 +189,7 @@
                     "transform": [{
                         "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "outputPath": "",
                         "presentValue": 1,
                         "missingValue": 0,
                         "options": {
@@ -228,6 +247,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "Magnify.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -262,6 +286,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "osk.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -291,14 +320,14 @@
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/pitch",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
                             "factor": 100
                         }
                     },
                     "speech\\.espeak\\.volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "valuePath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
@@ -310,6 +339,7 @@
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
                             "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "outputPath": "",
                             "presentValue": true,
                             "missingValue": false,
                             "options": {
@@ -327,12 +357,12 @@
                                         "transform": [
                                             {
                                                 "type": "fluid.transforms.literalValue",
-                                                "value": "silence",
+                                                "input": "silence",
                                                 "outputPath": "speech\\.synth"
                                             },
                                             {
                                                 "type": "fluid.transforms.literalValue",
-                                                "value": "Microsoft Sound Mapper",
+                                                "input": "Microsoft Sound Mapper",
                                                 "outputPath": "speech\\.outputDevice"
                                             }
                                         ]
@@ -630,6 +660,15 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "nvda.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
         ]
     },
 
@@ -665,6 +704,11 @@
                     "type": "gpii.windows.killProcessByName",
                     "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -698,6 +742,11 @@
             {
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -733,6 +782,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -763,61 +817,26 @@
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                             "outputPath": "speakOnActivate",
-                            "true": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "yes"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "no"
-                                }
-                            }
+                            "true": "yes",
+                            "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                             "outputPath": "speakTitles",
-                            "true": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "yes"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "no"
-                                }
-                            }
+                            "true": "yes",
+                            "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                             "outputPath": "speakLabels",
-                            "true": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "yes"
-                                }
-                            },
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "no"
-                                }
-                            }
+                            "true": "yes",
+                            "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                             "condition": false,
                             "outputPath": "theme",
-                            "false": {
-                                "transform": {
-                                    "type": "literalValue",
-                                    "value": "colour"
-                                }
-                            },
+                            "false": "colour",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -861,6 +880,11 @@
                 "type": "gpii.windows.killProcessByName",
                 "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -901,7 +925,7 @@
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                                "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
                             }
                         }
                     }
@@ -913,6 +937,11 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -952,7 +981,7 @@
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
-                                "value": {
+                                "input": {
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 }
@@ -967,6 +996,11 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -1010,7 +1044,7 @@
                 "capabilitiesTransformations": {
                     "Arrow": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1027,7 +1061,7 @@
                     },
                     "Hand": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1044,7 +1078,7 @@
                     },
                     "Help": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1061,7 +1095,7 @@
                     },
                     "AppStarting": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1078,7 +1112,7 @@
                     },
                     "No": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1095,7 +1129,7 @@
                     },
                     "NWPen": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1112,7 +1146,7 @@
                     },
                     "SizeAll": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1129,7 +1163,7 @@
                     },
                     "SizeNESW": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1146,7 +1180,7 @@
                     },
                     "SizeNS": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1163,7 +1197,7 @@
                     },
                     "SizeNWSE": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1180,7 +1214,7 @@
                     },
                     "SizeWE": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1197,7 +1231,7 @@
                     },
                     "UpArrow": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1214,7 +1248,7 @@
                     },
                     "Wait": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
@@ -1246,6 +1280,11 @@
         "stop": [
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -1290,7 +1329,7 @@
                      "fontSize": {
                         "value": {
                             "transform": {
-                                "type": "gpii.transformer.quantize",
+                                "type": "fluid.transforms.quantize",
                                 "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                                 "ranges": [{
                                     "upperBound": 14,
@@ -1345,7 +1384,7 @@
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
                         "transform":{
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "input": 9,
                             "ranges": [
@@ -1366,7 +1405,7 @@
                     "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "magnification": {
                         "transform": {
-                            "type": "gpii.transformer.quantize",
+                            "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/magnification",
                             "input": 1,
                             "ranges": [

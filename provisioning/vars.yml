@@ -1,0 +1,22 @@
+---
+# Common variables for universal shared between both
+# Docker and Vagrant builds
+# Please refer to https://github.com/idi-ops/ansible-nodejs/blob/master/defaults/main.yml
+# for documentation related to these variables
+
+nodejs_app_name: universal
+
+nodejs_app_tcp_port: 8081
+
+# Currently Node.js LTS (4.x or "Argon") is required by Universal
+nodejs_branch: lts
+
+# If a specific Node.js version is needed, specify it here. If not defined, defaults to the latest within the branch.
+#nodejs_version: 4.x.y
+
+# If a specific npm version is needed, specify it here
+#nodejs_npm_version: 2.15.1
+
+nodejs_app_start_script: gpii.js
+
+nodejs_app_git_clone: false

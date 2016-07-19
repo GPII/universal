@@ -31,7 +31,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         gpii.tests.ajax.testdata.response = { test: "test" };
 
         fluid.defaults("gpii.tests.ajax.testCase", {
-            gradeNames: ["fluid.littleComponent", "autoInit"],
+            gradeNames: ["fluid.component"],
             mockResponse: gpii.tests.ajax.testdata.response,
             ajaxOptions: {
                 dataType: "json",

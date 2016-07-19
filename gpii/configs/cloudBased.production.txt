@@ -1,4 +1,0 @@
-== cloudBased.production ==
-
-Runs the entire system  in cloudBased flowmanager production mode. 
-This means that only the services relevant to the cloudBased flowmanager will be started up, EXCLUDING the preferences server, which is expected to be running on the `http://preferences.gpii.net` URL.

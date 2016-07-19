@@ -19,7 +19,7 @@ var util = require("util");
 var config = require("../../oauth2SamplesConfig");
 
 fluid.defaults("gpii.oauth2.dataStoreWithSampleData", {
-    gradeNames: ["gpii.oauth2.inMemoryDataStore", "autoInit"],
+    gradeNames: ["gpii.oauth2.inMemoryDataStore"],
     model: {
         users: [
             { id: 1, username: "alice", password: "a", gpiiToken: "alice_gpii_token" },
