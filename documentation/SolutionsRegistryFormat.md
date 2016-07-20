@@ -50,10 +50,13 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
             "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
         },
         "capabilities": [
-            "applications.com\\.texthelp\\.readWriteGold.id"
+            "http://registry.gpii.net/common/fontSize"
         ],
         "capabilitiesTransformations": {
-            "ApplicationSettings": "ApplicationSettings"
+            "ApplicationSettings.fontSize": "http://registry.gpii.net/common/fontSize"
+        },
+        "inverseCapabilitiesTransformations": {
+            "http://registry.gpii.net/common/fontSize": "ApplicationSettings.fontSize"
         }
     },
     "otherconf": {
@@ -61,14 +64,20 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.HOME}\\mySettings.ini"
         },
-        "capabilities": [
-            "applications.com\\.texthelp\\.readWriteGold.id"
-        ]
+        "capabilities": []
     }
 }
 ```
 
-The important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+An important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+
+Each settingsHandler block can contain the following information:
+* **type (mandatory):** the type of settingshandler
+* **options:** Any options that should be passed to the settingsHandler. This is specific to the type of settingshandler specified in the "type" block.
+* **capabilities:** Is used to specify the capabilities of the solution (ie. the settings/terms that the solution is capable of handling). Note that the framework can automatically deduce capabilities from the `capabilitiesTransformations` block, so if a setting is specified here, the system will automatically consider it a capability which means it does not need to specified in the `capabilities` block.
+* **capabilitiesTransformations**: Transformations from common terms to application specific settings can be defined here. These will enable the framework to automatically translate common terms from a users NP set into application settings. Any common terms listed here, will automatically be added to the `capabilities` of the solution.
+* **inverseCapabilitiesTransformations**: This block describes transformations from application settings to common terms. If this block is present, the transformations specified will be used by the framework to deduce common terms based on any application specific settings in the users NP set. If this key is not present, the framework will attempt to do the inversion itself, based on the `capabilitiesTransformations`. If this block is present, but empty, no attempt at inversing the `capabilitiesTransformations` automatically will happen.
+
 
 ### configure, restore, start and stop
 These four lifecycle blocks have different meanings to the system but has the same format. Their meanings are the following:
