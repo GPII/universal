@@ -3,7 +3,8 @@
     "options": {
         "cloudBasedUrls": {
             "preferences": "http://preferences.gpii.net/preferences/%userToken",
-            "deviceReporter": ""
+            "deviceReporter": "",
+            "solutionsRegistry": "%universal/testData/solutions/"
         },
         "matchMakers": {
             "flat": {
