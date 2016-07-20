@@ -8,7 +8,7 @@
  * compliance with this License.
  *
  * You may obtain a copy of the License at
- * https://github.com/GPII/kettle/LICENSE.txt
+ * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
 "use strict";

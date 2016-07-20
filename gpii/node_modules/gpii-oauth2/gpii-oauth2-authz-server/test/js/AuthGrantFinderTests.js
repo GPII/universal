@@ -11,9 +11,7 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit */
-
-var fluid = fluid || require("infusion");
+/* global jqUnit, fluid */
 
 (function () {
 

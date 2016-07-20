@@ -35,7 +35,8 @@ gpii.tests.preferencesServerErrorTests.testDefCommon = {
 };
 
 
-gpii.tests.preferencesServerErrorTests.testDefs = [{
+gpii.tests.preferencesServerErrorTests.testDefs = [
+    {
         name: "Login fails due to missing preference set and reports to login",
         expect: 4,
         userToken: "idontexist",
@@ -57,7 +58,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [{
         name: "Login fails due to malformed preference set and reports to login",
         expect: 4,
         userToken: "malformed",
-        
+
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
                 "record": "%universal/testData/preferences/acceptanceTests/%userToken.jsonx",
