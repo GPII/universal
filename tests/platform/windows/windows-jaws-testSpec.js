@@ -32,26 +32,30 @@ gpii.tests.windows.jaws = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.TypingEcho" : 2,
-                            "ENU-Global.Punctuation" : 2,
+                            "Options.PrimarySynthesizer" : "eloq",
+                            "ENU-Global.Rate" : 100,
                             "ENU-Global.Pitch" : 75,
-                            "ENU-Global.Rate" : 100
+                            "ENU-Global.Volume" : 100,
+                            "ENU-Global.Punctuation" : 2,
+                            "options.SayAllIndicateCaps" : 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.TypingEcho" : 2,
-                            "ENU-Global.Punctuation" : 2,
+                            "Options.PrimarySynthesizer" : "eloq",
+                            "ENU-Global.Rate" : 100,
                             "ENU-Global.Pitch" : 75,
-                            "ENU-Global.Rate" : 100
+                            "ENU-Global.Volume" : 100,
+                            "ENU-Global.Punctuation" : 2,
+                            "options.SayAllIndicateCaps" : 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -74,22 +78,54 @@ gpii.tests.windows.jaws = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "ENU-Global.Punctuation" : 2,
-                            "ENU-Global.Pitch" : 75,
-                            "ENU-Global.Rate" : 100
+                            "Options.PrimarySynthesizer": "eloq",
+                            "enu-Global.Rate": 40,
+                            "enu-Global.Punctuation": 2,
+                            "enu-Global.Pitch": 75,
+                            "enu-Global.Volume": 50,
+                            "enu-Global.SynthLangString": "French",
+                            "enu-Message.Rate": 40,
+                            "enu-Message.Punctuation": 2,
+                            "enu-Message.Pitch": 75,
+                            "enu-Message.Volume": 50,
+                            "enu-Message.SynthLangString": "French",
+                            "enu-Keyboard.Rate": 40,
+                            "enu-Keyboard.Punctuation": 2,
+                            "enu-Keyboard.Pitch": 75,
+                            "enu-Keyboard.Volume": 50,
+                            "enu-Keyboard.SynthLangString": "French",
+                            "enu-PCCursor.Rate": 40,
+                            "enu-PCCursor.Punctuation": 2,
+                            "enu-PCCursor.Pitch": 75,
+                            "enu-PCCursor.Volume": 50,
+                            "enu-PCCursor.SynthLangString": "French",
+                            "enu-JAWSCursor.Rate": 40,
+                            "enu-JAWSCursor.Punctuation": 2,
+                            "enu-JAWSCursor.Pitch": 75,
+                            "enu-JAWSCursor.Volume": 50,
+                            "enu-JAWSCursor.SynthLangString": "French",
+                            "enu-MenuAndDialog.Rate": 40,
+                            "enu-MenuAndDialog.Punctuation": 2,
+                            "enu-MenuAndDialog.Pitch": 75,
+                            "enu-MenuAndDialog.Volume": 50,
+                            "enu-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
                     {
                         "settings": {
-                            "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.TypingEcho" : 1
+                            "Voice Profiles.ActiveVoiceProfileName": "GPII",
+                            "Braille.BrailleMode": 1,
+                            "options.SayAllMode": 1,
+                            "options.SayAllIndicateCaps": false,
+                            "options.SayAllIgnoreShiftKeys": false,
+                            "options.TypingEcho": 3
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\16.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]

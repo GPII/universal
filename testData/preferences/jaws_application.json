@@ -6,10 +6,12 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
                         "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                        "options.TypingEcho" : 2,
-                        "ENU-Global.Punctuation" : 2,
+                        "Options.PrimarySynthesizer" : "eloq",
+                        "ENU-Global.Rate" : 100,
                         "ENU-Global.Pitch" : 75,
-                        "ENU-Global.Rate" : 100
+                        "ENU-Global.Volume" : 100,
+                        "ENU-Global.Punctuation" : 2,
+                        "options.SayAllIndicateCaps" : 1
                     }
                 }
             }
