@@ -57,7 +57,8 @@ function getPreferences(accessToken, callback) {
     req.end();
 }
 
-passport.use("gpii", new OAuth2Strategy({
+passport.use("gpii", new OAuth2Strategy(
+    {
         authorizationURL: authorizeUri,
         tokenURL: authorizeTokenUri,
         clientID: clientId,

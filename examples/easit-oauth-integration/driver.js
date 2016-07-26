@@ -17,7 +17,7 @@
 "use strict";
 
 var fluid = require("infusion"),
-     kettle = fluid.registerNamespace("kettle");
+    kettle = fluid.registerNamespace("kettle");
 
 require("kettle");
 require("../../index.js");
