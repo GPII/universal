@@ -132,7 +132,7 @@ gpii.tests.dbDataStore.testData = {
         "id": "authDecision-1",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
-        "redirectUri": false,
+        "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
         "accessToken": "chrome_high_contrast_access_token",
         "selectedPreferences": {
             "": true
@@ -165,7 +165,7 @@ gpii.tests.dbDataStore.testData = {
         "id": "authDecision-1",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
-        "redirectUri": false,
+        "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
         "accessToken": "chrome_high_contrast_access_token",
         "selectedPreferences": {
             "": true
@@ -176,7 +176,7 @@ gpii.tests.dbDataStore.testData = {
         "id": "authDecision-1",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
-        "redirectUri": false,
+        "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
         "accessToken": "chrome_high_contrast_access_token",
         "selectedPreferences": {
             "": true
@@ -206,7 +206,7 @@ gpii.tests.dbDataStore.testData = {
     }],
     findAuthByCode1: {
         "clientId": "client-1",
-        "redirectUri": false,
+        "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
         "accessToken": "chrome_high_contrast_access_token"
     },
     findAuthByCodeNew: {

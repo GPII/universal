@@ -179,7 +179,7 @@ var fluid = fluid || require("infusion");
             findAuthDecisionDataSource: {
                 type: "gpii.oauth2.dbDataSource",
                 options: {
-                    requestUrl: "/_design/views/_view/findAuthDecision?key=[\"%gpiiToken\",\"%clientId\",%redirectUri]",
+                    requestUrl: "/_design/views/_view/findAuthDecision?key=[\"%gpiiToken\",\"%clientId\",\"%redirectUri\"]",
                     termMap: {
                         gpiiToken: "%gpiiToken",
                         clientId: "%clientId",

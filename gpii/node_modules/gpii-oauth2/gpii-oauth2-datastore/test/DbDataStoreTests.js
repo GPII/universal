@@ -423,7 +423,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
     rawModules: [{
         name: "Test findAuthDecisionById()",
         tests: [{
-            name: "Find an existing auth decisoin by an auth decisoin id",
+            name: "Find an existing auth decision by an auth decision id",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-1"], "{that}"]
@@ -465,7 +465,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
     rawModules: [{
         name: "Test findAuthDecisionsByGpiiToken()",
         tests: [{
-            name: "Find auth decisoins by a gpii token",
+            name: "Find auth decisions by a gpii token",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"]
@@ -521,10 +521,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
     rawModules: [{
         name: "Test findAuthDecision()",
         tests: [{
-            name: "Find auth decisoins by a gpii token, a client id and a redirect uri",
+            name: "Find auth decisions by a gpii token, a client id and a redirect uri",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthDecision", ["chrome_high_contrast", "client-1", false], "{that}"]
+                args: ["{dbDataStore}.findAuthDecision", ["chrome_high_contrast", "client-1", "http://org.chrome.cloud4chrome/the-client%27s-uri/"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected data is received", gpii.tests.dbDataStore.testData.authDecision1, "{arguments}.0"],
@@ -632,7 +632,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
     rawModules: [{
         name: "Test findAuthByCode()",
         tests: [{
-            name: "Find an auth decisoin by an auth code",
+            name: "Find an auth decision by an auth code",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByCode", ["chrome_high_contrast_auth_token"], "{that}"]

@@ -7,10 +7,6 @@
             }
         },
         "distributeOptions": {
-            "flowManager.dispatchDataStore": {
-                "record": "{gpii.config.cloudBased.development.all.local}.oauth2DataStore",
-                "target": "{that flowManager}.options.components.oauth2DataStore"
-            },
             "preferencesServer.dispatchDataStore": {
                 "record": "{gpii.config.cloudBased.development.all.local}.oauth2DataStore",
                 "target": "{that preferencesServer}.options.components.dataStore"

@@ -67,12 +67,12 @@ var fluid = fluid || require("infusion");
                     // gpiiToken
             },
             getAuthorizedClientsForGpiiToken: {
-                funcName: "{dataStore}.findAuthorizedClientsByGpiiToken",
+                func: "{dataStore}.findAuthorizedClientsByGpiiToken",
                 args: ["{arguments}.0"]
                     // gpiiToken
             },
             revokeAuthorization: {
-                funcName: "{dataStore}.revokeAuthDecision",
+                func: "{dataStore}.revokeAuthDecision",
                 args: ["{arguments}.0", "{arguments}.1"]
                     // userId, authDecisionId
             },
@@ -348,13 +348,15 @@ var fluid = fluid || require("infusion");
                 if (!authDecision) {
                     // If not, add one
                     var accessToken = codeGenerator.generateAccessToken();
-                    promiseTogo = dataStore.addAuthDecision({
+                    var addAuthDecisionPromise = dataStore.addAuthDecision({
                         gpiiToken: record.inputArgs.gpiiToken,
                         clientId: clientId,
                         redirectUri: redirectUri,
                         accessToken: accessToken,
-                        selectedPreferences: record.inputArgs.selectedPreferences
+                        selectedPreferences: record.inputArgs.selectedPreferences,
+                        revoked: false
                     });
+                    fluid.promise.follow(addAuthDecisionPromise, promiseTogo);
                 } else {
                     // If the auth decision already exists, return its id
                     promiseTogo.resolve({id: authDecision.id});

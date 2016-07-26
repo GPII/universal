@@ -360,30 +360,39 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
     var unauthorizedClientsPromise = authorizationService.getUnauthorizedClientsForGpiiToken(gpiiToken);
 
     var sources = [authorizedClientsPromise, unauthorizedClientsPromise];
-    var response = fluid.promise.sequence(sources, gpiiToken);
+    var promisesSequence = fluid.promise.sequence(sources);
 
-    var authorizedClients = response[0];
-    var unauthorizedClients = response[1];
+    var authorizedServicesPromise = fluid.promise();
 
-    // Build view objects
-    var authorizedServices = fluid.transform(authorizedClients, function (client) {
-        return {
-            authDecisionId: client.authDecisionId,
-            oauth2ClientId: client.oauth2ClientId,
-            serviceName: client.clientName
-        };
+    promisesSequence.then(function (responses) {
+        var authorizedClients = responses[0];
+        var unauthorizedClients = responses[1];
+
+        // Build view objects
+        var authorizedServices = fluid.transform(authorizedClients, function (client) {
+            return {
+                authDecisionId: client.authDecisionId,
+                oauth2ClientId: client.oauth2ClientId,
+                serviceName: client.clientName
+            };
+        });
+        var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
+            return {
+                oauth2ClientId: client.oauth2ClientId,
+                serviceName: client.clientName
+            };
+        });
+
+        authorizedServicesPromise.resolve(
+            {
+                username: user.username,
+                authorizedServices: authorizedServices,
+                unauthorizedServices: unauthorizedServices
+            }
+        );
     });
-    var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
-        return {
-            oauth2ClientId: client.oauth2ClientId,
-            serviceName: client.clientName
-        };
-    });
-    return {
-        username: user.username,
-        authorizedServices: authorizedServices,
-        unauthorizedServices: unauthorizedServices
-    };
+
+    return authorizedServicesPromise;
 };
 
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
@@ -568,8 +577,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
-            var authorizedServicesPayload = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
-            res.json(authorizedServicesPayload);
+            var authorizedServicesPromise = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
+            authorizedServicesPromise.then(function (payload) {
+                res.json(payload);
+            });
         }
     );
 
@@ -578,8 +589,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
-            var authorizedServicesPayload = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
-            res.render("privacySettings", authorizedServicesPayload);
+            var authorizedServicesPromise = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
+            authorizedServicesPromise.then(function (payload) {
+                res.render("privacySettings", payload);
+            });
         }
     );
 
