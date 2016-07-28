@@ -87,6 +87,8 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         var authPromise = authorizationService.exchangeCodeForAccessToken(code, client.id, redirectUri);
         authPromise.then(function (code) {
             return done(null, code);
+        }, function () {
+            return done(null, false);
         });
     }));
 
@@ -478,7 +480,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
-            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO: Validate authDecisionId
+            var authDecisionId = req.params.authDecisionId;
             var revokePromise = that.authorizationService.revokeAuthorization(userId, authDecisionId);
             revokePromise.then(function () {
                 res.sendStatus(200);
@@ -495,7 +498,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
-            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO: Validate authDecisionId
+            var authDecisionId = req.params.authDecisionId;
             var selectedPreferencesPromise = that.authorizationService.getSelectedPreferences(userId, authDecisionId);
             selectedPreferencesPromise.then(function (selectedPreferences) {
                 if (selectedPreferences) {
@@ -518,7 +522,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
-            var authDecisionId = parseInt(req.params.authDecisionId, 10);
+            // TODO: Validate authDecisionId
+            var authDecisionId = req.params.authDecisionId;
             // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
             if (req.is("application/json")) {
                 var selectedPreferences = req.body;

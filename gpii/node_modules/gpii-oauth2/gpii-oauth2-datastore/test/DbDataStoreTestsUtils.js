@@ -92,7 +92,7 @@ gpii.tests.dbDataStore.testData = {
     user1: {
         "id": "user-1",
         "name": "chromehc",
-        "password": "chromehc",
+        "password": "chromehc_password",
         "defaultGpiiToken": "chrome_high_contrast"
     },
     tokenChromehcDefault: {

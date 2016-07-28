@@ -217,7 +217,8 @@ var fluid = fluid || require("infusion");
                     clientId: input.clientId,
                     redirectUri: input.redirectUri,
                     accessToken: accessToken,
-                    selectedPreferences: input.selectedPreferences
+                    selectedPreferences: input.selectedPreferences,
+                    revoked: false
                 });
                 addAuthDecisionPromise.then(function (addedAuthDecision) {
                     promiseTogo.resolve({
@@ -388,7 +389,7 @@ var fluid = fluid || require("infusion");
         authPromise.then(function (auth) {
             // TODO flag an authCode after it is found to make single use
             if (auth && auth.clientId === clientId && auth.redirectUri === redirectUri) {
-                return auth.accessToken;
+                promiseTogo.resolve(auth.accessToken);
             } else {
                 var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedAccessToken);
                 promiseTogo.reject(error);
@@ -504,7 +505,7 @@ var fluid = fluid || require("infusion");
         var promiseTogo = fluid.promise();
         if (record.gpiiToken && record.gpiiToken.userId === record.inputArgs.userId) {
             var authDecision = fluid.extend({}, record.authDecision, {selectedPreferences: record.inputArgs.selectedPreferences});
-            promiseTogo = dataStore.updateAuthDecision(record.inpurArgs.userId, authDecision);
+            promiseTogo = dataStore.updateAuthDecision(record.inputArgs.userId, authDecision);
         } else {
             var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedUser, {userId: record.inpurArgs.userId});
             promiseTogo.reject(error);

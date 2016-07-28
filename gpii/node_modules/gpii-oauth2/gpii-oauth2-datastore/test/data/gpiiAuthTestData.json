@@ -3,7 +3,7 @@
         "_id": "user-1",
         "type": "user",
         "name": "chromehc",
-        "password": "chromehc",
+        "password": "chromehc_password",
         "defaultGpiiToken": "chrome_high_contrast"
     },
     {

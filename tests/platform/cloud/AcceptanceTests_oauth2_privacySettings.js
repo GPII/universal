@@ -24,13 +24,6 @@ fluid.registerNamespace("gpii.tests.cloud.oauth2.privacySettings");
 
 gpii.tests.cloud.oauth2.privacySettings.sequence = [
     {
-        func: "{testCaseHolder}.events.constructFixtures.fire"
-    },
-    {
-        event: "{testCaseHolder}.events.onFixturesConstructed",
-        listener: "fluid.identity"
-    },
-    {
         func: "{privacySettingsRequest}.send"
     },
     {
