@@ -51,7 +51,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         authDecisions: [
             {
                 gpiiToken: "os_gnome",
-                clientId: 3,
+                clientId: "client-3",
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "increase-size.magnifier": true },
@@ -80,7 +80,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         authDecisions: [
             {
                 gpiiToken: "os_gnome",
-                clientId: 3,
+                clientId: "client-3",
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "": true },
@@ -88,7 +88,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
             },
             {
                 gpiiToken: "os_gnome",
-                clientId: 4,
+                clientId: "client-4",
                 redirectUri: false,
                 accessToken: "os_gnome_desktop_access_token",
                 selectedPreferences: { "increase-size.appearance.text-size": true },
