@@ -26,6 +26,49 @@ gpii.tests.journal.testSpec = fluid.require("%universal/tests/platform/windows/w
 
 gpii.tests.journal.testDef = gpii.tests.windows.builtIn[0]; // The os_win7 entry forms the spine of our test
 
+gpii.tests.journal.initialSettings = {
+    "gpii.windows.spiSettingsHandler": {
+        "some.app.id": [{
+            "settings": {
+                "MouseTrails": {
+                    "value": 20
+                }
+            },
+            "options": { // We use a lower-quality utility than gpii.settingsHandlers.invokeRetryingHandler in our test case setup
+                "mockSync": true,
+                "getAction": "SPI_GETMOUSETRAILS",
+                "setAction": "SPI_SETMOUSETRAILS"
+            }
+        }]
+    },
+    "gpii.windows.registrySettingsHandler": {
+        "some.app.id": [{ // magnifier stuff
+            "settings": {
+                "Invert": 1,
+                "Magnification": 200,
+                "MagnificationMode": 4,
+                "FollowFocus": 0,
+                "FollowCaret": 1,
+                "FollowMouse": 1
+            },
+            "options": {
+                "mockSync": true,
+                "hKey": "HKEY_CURRENT_USER",
+                "path": "Software\\Microsoft\\ScreenMagnifier",
+                "dataTypes": {
+                    "Magnification": "REG_DWORD",
+                    "Invert": "REG_DWORD",
+                    "FollowFocus": "REG_DWORD",
+                    "FollowCaret": "REG_DWORD",
+                    "FollowMouse": "REG_DWORD",
+                    "MagnificationMode": "REG_DWORD"
+                }
+            }
+        }
+    ]
+    }
+};
+
 gpii.loadTestingSupport();
 fluid.setLogging(true);
 
@@ -42,7 +85,8 @@ fluid.defaults("gpii.tests.journal.testCaseHolder", {
         }
     },
     events: {
-        FLUID5931wait: null
+        FLUID5931wait: null,
+        onInitialSettingsComplete: null
     },
     components: {
         mockSettingsHandlers: {
@@ -53,12 +97,18 @@ fluid.defaults("gpii.tests.journal.testCaseHolder", {
             options: {
                 path: "/journal/restore/%journalId",
             }
+        },
+        listJournalsRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/journal/journals.html"
+            }
         }
     }
 });
 
 gpii.tests.journal.solutionsRegistryOverlay = {
-    "com.microsoft.windows.magnifier": {
+    "com.microsoft.windows.cursors": {
         settingsHandlers: {
             explode: {
                 type: "gpii.tests.journal.explodingSettingsHandler"
@@ -102,7 +152,9 @@ fluid.defaults("gpii.tests.journal.explodingSettingsHandler", {
 
 // Reach upwards into the global configuration's server and destroy it
 gpii.tests.journal.settingsHandlerExplode = function (configuration, that, payload) {
-    console.log("EXPLODING SETTINGS HANDLER EXECUTING");
+    fluid.log("EXPLODING SETTINGS HANDLER EXECUTING with id " + that.id + " and payload ", payload);
+    // null out our payload, compensate for GPII-1223/GPII-1891
+    payload["com.microsoft.windows.cursors"][0].settings = {};
     // Beat jqUnit's failure handler to ignore the various errors falling out from this process
     // kettle.test.pushInstrumentedErrors(function () {
     //    fluid.log("Received expected failure from destroying active server: ", arguments);
@@ -127,30 +179,69 @@ gpii.tests.journal.logDestroyed = function (loginRequest, testCaseHolder) {
         fluid.log("Received expected hangup error from login request", err);
     });
     jqUnit.assert("Reached checkpoint for destruction of server");
+    var mocks = fluid.queryIoCSelector(fluid.rootComponent, "gpii.test.integration.mockSettingsHandler", true);
+    fluid.each(mocks, function (mock) {
+        mock.settingsStore = {};
+    });
+    fluid.log("CLEARED " + mocks.length + " mock settingsHandlers");
     // Arbitrarily wait as a result of FLUID5931 bug preventing immediate reconstruction of the server
     fluid.invokeLater(testCaseHolder.events.FLUID5931wait.fire);
 };
 
 gpii.tests.journal.stashJournalId = function (component) {
-    component.stashedJournalId = ">" + new Date().toISOString();
+    component.stashedStartTime = Date.now();
+    component.stashedJournalId = ">" + new Date(component.stashedStartTime).toISOString();
+};
+
+gpii.tests.journal.checkJournalsList = function (markup, component) {
+    var match = /a href=".*\/%3E(.*)"/.exec(markup);
+    var firstDate = decodeURIComponent(match[1]);
+    var firstTime = Date.parse(firstDate);
+    fluid.log("Parsed link date " + firstDate + " to time" + firstTime);
+    jqUnit.assertTrue("Received correct journal time in journal list markup", firstTime > component.stashedStartTime && firstTime < (component.stashedStartTime + 2000));
+};
+
+// Stashes the special members used by gpii.test.checkConfiguration into the testCaseHolder
+gpii.tests.journal.stashInitial = function (settingsHandlers, settingsStore, testCaseHolder) {
+    // Like the effect of gpii.test.snapshotSettings
+    settingsStore.orig = fluid.transform(settingsHandlers, gpii.settingsHandlers.extractSettingsBlocks);
+    // Like the effect of gpii.test.expandSettings with 2 blocks missing
+    var settingsHandlers = fluid.copy(testCaseHolder.options.settingsHandlers);
+    // We eliminate the last blocks since our initial settings state does not include them, and the blocks
+    // with values all `undefined` will confuse jqUnit.assertDeepEq in gpii.test.checkConfiguration
+    settingsHandlers["gpii.windows.spiSettingsHandler"]["some.app.id"].length = 1;
+    settingsHandlers["gpii.windows.registrySettingsHandler"]["some.app.id"].length = 1;
+    testCaseHolder.settingsHandlers = settingsHandlers;
 };
 
 gpii.tests.journal.fixtures = [
     {
         name: "Journal state and restoration",
-        expect: 2,
+        expect: 5,
         sequenceSegments: [
             {   func: "gpii.tests.journal.stashJournalId",
                 args: "{tests}"
             }, {
+                func: "gpii.test.setSettings",
+                args: [gpii.tests.journal.initialSettings, "{nameResolver}", "{tests}.events.onInitialSettingsComplete.fire"]
+            }, {
+                event: "{tests}.events.onInitialSettingsComplete",
+                listener: "fluid.identity"
+            },
+            // The following three steps *SHOULD* be equivalent to stashInitial, only we prefer to make a more reliable test by verifying that the settings
+            // really are identical to the initialSettings in our own records
+            /* {
                 func: "gpii.test.expandSettings",
-                args: ["{tests}", [ "contexts" ]]
+                args: [ "{tests}", "settingsHandlers" ]
             }, {
                 func: "gpii.test.snapshotSettings",
                 args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
             }, {
                 event: "{testCaseHolder}.events.onSnapshotComplete",
                 listener: "fluid.identity"
+            }, */ {
+                func: "gpii.tests.journal.stashInitial",
+                args: [gpii.tests.journal.initialSettings, "{tests}.settingsStore", "{tests}"]
             }, {
                 func: "{loginRequest}.send"
             }, { // As a result of the exploding settings handler, the attempt to login will destroy the server
@@ -161,7 +252,14 @@ gpii.tests.journal.fixtures = [
                 event: "{testCaseHolder}.events.FLUID5931wait",
                 listener: "fluid.identity"
             },
-            kettle.test.startServerSequence, {
+            kettle.test.startServerSequence,
+            {
+                func: "{listJournalsRequest}.send"
+            }, {
+                event: "{listJournalsRequest}.events.onComplete",
+                listener: "gpii.tests.journal.checkJournalsList",
+                args: ["{arguments}.0", "{tests}"]
+            }, {
                 func: "{restoreJournalRequest}.send",
                 args: [null, {
                     termMap: {
@@ -170,15 +268,16 @@ gpii.tests.journal.fixtures = [
                 }]
             }, {
                 event: "{restoreJournalRequest}.events.onComplete",
-                listener: "kettle.test.assertJSONResponse",
+                listener: "gpii.test.assertJSONResponseSubset",
                 args: {
                     message: "Successful response from journal restoration",
                     string: "{arguments}.0",
                     request: "{restoreJournalRequest}",
-                    expected: {}
+                    expected: {
+                        message: "The system's settings were restored from a snapshot"
+                    }
                 }
-            },
-            //gpii.test.checkSequence
+            }, gpii.test.checkSequence
         ]
     }
 ];
@@ -186,6 +285,7 @@ gpii.tests.journal.fixtures = [
 gpii.tests.journal.baseTestDef = {
     name: "Journal Restoration Tests",
     userToken: gpii.tests.journal.testDef.userToken,
+    settingsHandlers: gpii.tests.journal.testDef.settingsHandlers,
     gradeNames: "gpii.tests.journal.testCaseHolder",
     config: {
         configName: gpii.tests.journal.testSpec.configName,
