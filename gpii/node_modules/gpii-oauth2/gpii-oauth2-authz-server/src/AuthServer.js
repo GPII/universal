@@ -96,6 +96,8 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         var clientCredentialsPromise = authorizationService.grantClientCredentialsAccessToken(client.id, scope);
         clientCredentialsPromise.then(function (clientCredentials) {
             return done(null, clientCredentials);
+        }, function () {
+            return done(null, false);
         });
     }));
 

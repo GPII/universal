@@ -1,18 +1,5 @@
 {
     "type": "gpii.config.cloudBased.development.all.local",
-    "options": {
-        "components": {
-            "oauth2DataStore": {
-                "type": "gpii.oauth2.inMemoryDataStore"
-            }
-        },
-        "distributeOptions": {
-            "preferencesServer.dispatchDataStore": {
-                "record": "{gpii.config.cloudBased.development.all.local}.oauth2DataStore",
-                "target": "{that preferencesServer}.options.components.dataStore"
-            }
-        }
-    },
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
         "%preferencesServer/configs/gpii.preferencesServer.config.development.json",

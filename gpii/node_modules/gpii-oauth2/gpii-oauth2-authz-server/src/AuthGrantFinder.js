@@ -44,12 +44,18 @@ var fluid = fluid || require("infusion");
         var clientCredentialsPromise = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
 
         var sources = [authCodePrmoise, clientCredentialsPromise];
-        var response = fluid.promise.sequence(sources, accessToken);
+        var promisesSequence = fluid.promise.sequence(sources);
 
-        var authCodeResult = response[0];
-        var clientCredentialsResult = response[1];
+        var promiseTogo = fluid.promise();
 
-        return authCodeResult ? authCodeResult : clientCredentialsResult;
+        promisesSequence.then(function (responses) {
+            var authCodeResult = responses[0];
+            var clientCredentialsResult = responses[1];
+
+            promiseTogo.resolve(authCodeResult ? authCodeResult : clientCredentialsResult);
+        });
+
+        return promiseTogo;
     };
 
 })();

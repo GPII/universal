@@ -597,33 +597,36 @@ var fluid = fluid || require("infusion");
         var clientCredentialsTokenPromise = dataStore.findClientCredentialsTokenByClientId(clientId);
 
         var sources = [clientPromise, clientCredentialsTokenPromise];
-        var response = fluid.promise.sequence(sources, clientId);
-
-        var client = response[0];
-        var clientCredentialsToken = response[1];
+        var promisesSequence = fluid.promise.sequence(sources);
 
         var promiseTogo = fluid.promise();
-        if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
-            promiseTogo.reject(error);
-        } else if (!clientCredentialsToken) {
-            // Create a new token if one doesn't exist
-            var accessToken = codeGenerator.generateAccessToken();
-            var addClientCredentialsTokenPromise = dataStore.addClientCredentialsToken({
-                clientId: clientId,
-                accessToken: accessToken,
-                allowAddPrefs: true
-            });
-            addClientCredentialsTokenPromise.then(function () {
-                // Return the new token
-                promiseTogo.resolve(accessToken);
-            }, function (err) {
-                promiseTogo.reject(err);
-            });
-        } else {
-            // Return the existing token
-            promiseTogo.resolve(clientCredentialsToken.accessToken);
-        }
+
+        promisesSequence.then(function (responses) {
+            var client = responses[0];
+            var clientCredentialsToken = responses[1];
+
+            if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
+                var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
+                promiseTogo.reject(error);
+            } else if (!clientCredentialsToken) {
+                // Create a new token if one doesn't exist
+                var accessToken = codeGenerator.generateAccessToken();
+                var addClientCredentialsTokenPromise = dataStore.addClientCredentialsToken({
+                    clientId: clientId,
+                    accessToken: accessToken,
+                    allowAddPrefs: true
+                });
+                addClientCredentialsTokenPromise.then(function () {
+                    // Return the new token
+                    promiseTogo.resolve(accessToken);
+                }, function (err) {
+                    promiseTogo.reject(err);
+                });
+            } else {
+                // Return the existing token
+                promiseTogo.resolve(clientCredentialsToken.accessToken);
+            }
+        });
 
         return promiseTogo;
     };
