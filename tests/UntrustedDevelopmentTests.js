@@ -27,13 +27,18 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.development");
 
-gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDef) {
-    return fluid.extend(true, {}, testDef, {
+gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
+    var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.config.untrusted.development.all.local",
             configPath: "%universal/gpii/configs"
         }
     });
+
+    testDef.gradeNames.push("gpii.test.pouch.pouchTestCaseHolder");
+    gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
+
+    return testDef;
 });
 
 kettle.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
