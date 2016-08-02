@@ -93,5 +93,13 @@
         "accessToken": "firstDiscovery_access_token",
         "allowAddPrefs": true,
         "revoked": false
+    },
+    {
+        "_id": "clientCredentialsToken-2",
+        "type": "clientCredentialsToken",
+        "clientId": "non-existing-client",
+        "accessToken": "non-existing-client-token",
+        "allowAddPrefs": true,
+        "revoked": false
     }
 ]

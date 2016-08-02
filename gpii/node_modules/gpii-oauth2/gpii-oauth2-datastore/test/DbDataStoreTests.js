@@ -1149,6 +1149,16 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
                 }, "{arguments}.0"],
                 event: "{that}.events.onError"
             }]
+        }, {
+            name: "Finding by client credentials access token for non-existing client returns undefined",
+            sequence: [{
+                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", ["non-existing-client-token"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding client credentials token record for non-existing client returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
         }]
     }]
 });

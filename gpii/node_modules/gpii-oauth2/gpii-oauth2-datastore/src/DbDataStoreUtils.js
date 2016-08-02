@@ -401,9 +401,6 @@ var fluid = fluid || require("infusion");
     // ==== End of revokeClientCredentialsToken()
 
     gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess = function (data) {
-
-        // TODO: Add a unit test for the case when data is not found
-
         if (data.doc && data.value) {
             return {
                 oauth2ClientId: data.doc.oauth2ClientId,
