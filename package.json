@@ -43,7 +43,7 @@
     "repository": "git://github.com/GPII/universal.git",
     "main": "./index.js",
     "engines": {
-        "node": ">=4.2.1"
+        "node": ">=6.3.1"
     },
     "scripts": {
         "test": "node tests/all-tests.js",
