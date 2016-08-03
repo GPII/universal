@@ -10,4 +10,6 @@
  * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
+"use strict";
+
 require("./src/DataStoreWithSampleData.js");

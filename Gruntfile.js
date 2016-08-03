@@ -13,21 +13,16 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-
 "use strict";
 
 module.exports = function (grunt) {
 
     grunt.initConfig({
-        jshint: {
-            src: ["gpii/**/*.js", "tests/**/*.js", "examples/**/*.js"],
-            buildScripts: ["Gruntfile.js"],
-            options: {
-                jshintrc: true
-            }
+        eslint: {
+            src: ["gpii/**/*.js", "tests/**/*.js", "examples/**/*.js", "*.js"],
         },
         jsonlint: {
-            src: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json"]
+            src: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json", "*.json"]
         },
         shell: {
             options: {
@@ -50,10 +45,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("fluid-grunt-eslint");
     grunt.loadNpmTasks("grunt-jsonlint");
     grunt.loadNpmTasks("grunt-shell");
-    grunt.loadNpmTasks("grunt-gpii");
 
     grunt.registerTask("browser-tests", "Run browser tests in a VM", function () {
         grunt.task.run("shell:runBrowserTests");
@@ -71,4 +65,6 @@ module.exports = function (grunt) {
         grunt.task.run("shell:runBrowserTests");
         grunt.task.run("shell:runNodeTests");
     });
+
+    grunt.registerTask("lint", "Apply jshint and jsonlint", ["eslint", "jsonlint"]);
 };

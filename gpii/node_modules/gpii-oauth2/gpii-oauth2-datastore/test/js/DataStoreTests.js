@@ -13,6 +13,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 /* global jqUnit */
 
+/* eslint-env browser */
+/* eslint strict: ["error", "function"] */
+
 // TODO standardise on undefined rather than 'falsey'
 
 var fluid = fluid || require("infusion");

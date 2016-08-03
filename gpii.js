@@ -13,11 +13,12 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
+"use strict";
 
 // A simple bootstrap file which allows a configuration of the GPII to be
 // started from the command line from universal
 
-var fluid = require("./index.js")
-     gpii = fluid.registerNamespace("gpii");
+var fluid = require("./index.js"),
+    gpii = fluid.registerNamespace("gpii");
 
 gpii.start();

@@ -20,7 +20,7 @@ var ws = require("ws");
 
 // The client starts the communication
 
-var socket = new ws("ws://localhost:8081/browserChannel");
+var socket = new ws("ws://localhost:8081/browserChannel"); // eslint-disable-line new-cap
 
 // When the connection is done, the client tells to the flow manager its id
 
