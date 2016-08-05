@@ -124,6 +124,16 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }]
+            },
+            "gpii.windows.displaySettingsHandler": {
+                "some.app.id": [{
+                    "settings": {
+                        "screen-resolution": {
+                            "width": 800,
+                            "height": 600
+                        }
+                    }
+                }]
             }
         },
         processes: [
