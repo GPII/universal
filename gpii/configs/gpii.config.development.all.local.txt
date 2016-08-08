@@ -1,5 +1,5 @@
-development.all.local.json
-==========================
+gpii.config.development.all.local.json
+======================================
 
 This configuration runs the entire system locally and in development mode.
 

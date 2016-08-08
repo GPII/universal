@@ -1,4 +1,5 @@
-==gpii.config.preferencesServer.standalone.production.json==
+gpii.config.preferencesServer.standalone.production.json
+========================================================
 
 Preferences server running standalone on the server (incl. dependencies). It will expect a couchDB to be running on the local host using the default port.
 
