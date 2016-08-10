@@ -196,7 +196,7 @@ var fluid = fluid || require("infusion");
 
     // Shared by getSelectedPreferences() and setSelectedPreferences()
     // @dataStore (Object): a data store instance
-    // @input (Object): The structure is,
+    // @input (Object): Acceps this structure:
     // {
     //     gpiiToken: (String),
     //     clientId: (String),
@@ -215,8 +215,8 @@ var fluid = fluid || require("infusion");
         );
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @dataStore (Object): A data store instance
+    // @record (Object): Acceps this structure:
     // {
     //     gpiiToken: {Object},   // A GPII token record
     //     inputArgs: {
@@ -229,15 +229,12 @@ var fluid = fluid || require("infusion");
     // @return (Promise): a promise object with the value of the generated authorization code
     gpii.oauth2.authorizationService.doGrant = function (dataStore, codeGenerator, authDecisionInfo) {
         // Generate the authorization code and record it
-        var promiseTogo = fluid.promise();
         var code = codeGenerator.generateAuthCode();
         var savePromise = dataStore.saveAuthCode(authDecisionInfo.id, code);
-        savePromise.then(function () {
-            promiseTogo.resolve(code);
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-        return promiseTogo;
+        var mapper = function () {
+            return code;
+        };
+        return fluid.promise.map(savePromise, mapper);
     };
     // ==== End of grantAuthorizationCode()
 
@@ -253,7 +250,7 @@ var fluid = fluid || require("infusion");
 
     // Shared by getSelectedPreferences() and setSelectedPreferences()
     // @dataStore (Object): a data store instance
-    // @input (Object): The structure is,
+    // @input (Object): Acceps this structure:
     // {
     //     gpiiToken: (String),
     //     oauth2ClientId: (String),
@@ -261,23 +258,18 @@ var fluid = fluid || require("infusion");
     // }
     // @return (Promise): a promise object to be passed to the next processing function
     gpii.oauth2.authorizationService.findGpiiToken = function (dataStore, input) {
-        var promiseTogo = fluid.promise();
         var gpiiTokenPromise = dataStore.findGpiiToken(input.gpiiToken);
-
-        gpiiTokenPromise.then(function (gpiiToken) {
-            var combined = {
+        var mapper = function (gpiiToken) {
+            return {
                 gpiiToken: gpiiToken,
                 inputArgs: input
             };
-            promiseTogo.resolve(combined);
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-        return promiseTogo;
+        };
+        return fluid.promise.map(gpiiTokenPromise, mapper);
     };
 
     // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @record (Object): Acceps this structure:
     // {
     //     gpiiToken: {Object},   // A GPII token record
     //     inputArgs: {
@@ -288,19 +280,15 @@ var fluid = fluid || require("infusion");
     // }
     // @return (Promise): a promise object to be passed to the next processing function
     gpii.oauth2.authorizationService.findClient = function (dataStore, record) {
-        var promiseTogo = fluid.promise();
         var clientPromise = dataStore.findClientByOauth2ClientId(record.inputArgs.oauth2ClientId);
-        clientPromise.then(function (client) {
-            var combined = fluid.extend({}, record, {client: client});
-            promiseTogo.resolve(combined);
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-        return promiseTogo;
+        var mapper = function (client) {
+            return fluid.extend({}, record, {client: client});
+        };
+        return fluid.promise.map(clientPromise, mapper);
     };
 
     // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @record (Object): Acceps this structure:
     // {
     //     gpiiToken: {Object},   // A GPII token record
     //     client: {Object},    // A client record
@@ -333,16 +321,11 @@ var fluid = fluid || require("infusion");
     // ==== End of addAuthorization()
 
     gpii.oauth2.authorizationService.userHasAuthorized = function (dataStore, gpiiToken, clientId, redirectUri) {
-        var promiseTogo = fluid.promise();
         var authDecisionPromise = dataStore.findAuthDecision(gpiiToken, clientId, redirectUri);
-        authDecisionPromise.then(function (authDecision) {
-            var result = authDecision ? true : false;
-            promiseTogo.resolve(result);
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-
-        return promiseTogo;
+        var mapper = function (authDecision) {
+            return authDecision ? true : false;
+        };
+        return fluid.promise.map(authDecisionPromise, mapper);
     };
 
     gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStore, code, clientId, redirectUri) {
@@ -373,7 +356,7 @@ var fluid = fluid || require("infusion");
 
     // Shared by getSelectedPreferences() and setSelectedPreferences()
     // @dataStore (Object): a data store instance
-    // @input (Object): The structure is,
+    // @input (Object): Acceps this structure:
     // {
     //     userId: (String),
     //     authDecisionId: (String),
@@ -381,23 +364,19 @@ var fluid = fluid || require("infusion");
     // }
     // @return (Promise): a promise object to be passed to the next processing function
     gpii.oauth2.authorizationService.findAuthDecision = function (dataStore, input) {
-        var promiseTogo = fluid.promise();
         var authDecisionPromise = dataStore.findAuthDecisionById(input.authDecisionId);
-        authDecisionPromise.then(function (authDecision) {
-            var combined = {
+        var mapper = function (authDecision) {
+            return {
                 authDecision: authDecision,
                 inputArgs: input
             };
-            promiseTogo.resolve(combined);
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-        return promiseTogo;
+        };
+        return fluid.promise.map(authDecisionPromise, mapper);
     };
 
     // Shared by getSelectedPreferences() and setSelectedPreferences()
     // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @record (Object): Acceps this structure:
     // {
     //     authDecision: {Object}    // An object of authDecision record returned by the previous processing
     //     inputArgs: {
@@ -411,12 +390,10 @@ var fluid = fluid || require("infusion");
         var promiseTogo = fluid.promise();
         if (record.authDecision) {
             var tokenPromise = dataStore.findGpiiToken(record.authDecision.gpiiToken);
-            tokenPromise.then(function (gpiiToken) {
-                var combined = fluid.extend({}, record, {gpiiToken: gpiiToken});
-                promiseTogo.resolve(combined);
-            }, function (err) {
-                promiseTogo.reject(err);
-            });
+            var mapper = function (gpiiToken) {
+                return fluid.extend({}, record, {gpiiToken: gpiiToken});
+            };
+            promiseTogo = fluid.promise.map(tokenPromise, mapper);
         } else {
             var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {docName: "user's authorization decision"});
             promiseTogo.reject(error);
@@ -425,7 +402,7 @@ var fluid = fluid || require("infusion");
     };
 
     // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @record (Object): Acceps this structure:
     // {
     //     authDecision: {Object}    // An object of authDecision record returned by the previous processing
     //     inputArgs: {
@@ -485,7 +462,7 @@ var fluid = fluid || require("infusion");
     };
 
     // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @record (Object): Acceps this structure:
     // {
     //     gpiiToken: {},   // An object of gpiiToken record returned by the previous processing
     //     inputArgs: {
@@ -499,22 +476,20 @@ var fluid = fluid || require("infusion");
             promiseTogo.resolve(undefined);
         } else {
             var authDecisionsPromise = dataStore.findAuthDecisionsByGpiiToken(record.inputArgs.gpiiToken);
-            authDecisionsPromise.then(function (authorizations) {
+            var mapper = function (authorizations) {
                 var authorizedClientIds = {};
                 fluid.each(authorizations, function (authorization) {
                     authorizedClientIds[authorization.clientId] = true;
                 });
-                var combined = fluid.extend({}, record, {authorizedClientIds: authorizedClientIds});
-                promiseTogo.resolve(combined);
-            }, function (err) {
-                promiseTogo.reject(err);
-            });
+                return fluid.extend({}, record, {authorizedClientIds: authorizedClientIds});
+            };
+            promiseTogo = fluid.promise.map(authDecisionsPromise, mapper);
         }
         return promiseTogo;
     };
 
     // @dataStore (Object): a data store instance
-    // @record (Object): The structure is,
+    // @record (Object): Acceps this structure:
     // {
     //     gpiiToken: {},   // An object of gpiiToken record returned by the previous processing
     //     authorizedClientIds: {  // An object of all authorized client ids
@@ -535,7 +510,7 @@ var fluid = fluid || require("infusion");
             promiseTogo.resolve(undefined);
         } else {
             var allClientsPromise = dataStore.findAllClients();
-            allClientsPromise.then(function (allClients) {
+            var mapper = function (allClients) {
                 var unauthorizedClients = [];
                 fluid.each(allClients, function (client) {
                     if (!record.authorizedClientIds.hasOwnProperty(client.id)) {
@@ -545,10 +520,9 @@ var fluid = fluid || require("infusion");
                         });
                     }
                 });
-                promiseTogo.resolve(unauthorizedClients);
-            }, function (err) {
-                promiseTogo.reject(err);
-            });
+                return unauthorizedClients;
+            };
+            promiseTogo = fluid.promise.map(allClientsPromise, mapper);
         }
         return promiseTogo;
     };
@@ -579,6 +553,15 @@ var fluid = fluid || require("infusion");
                     accessToken: accessToken,
                     allowAddPrefs: true
                 });
+
+                // TODO: Running into issues with using the commented lines below to replace line 564-570 since the callback of the promiseTogo doesn't
+                // get resolved at AuthServer.js line 98 (in gpii.oauth2.oauth2orizeServer.promiseToDone())
+                // var mapper = function () {
+                //     // Return the new token
+                //     return accessToken;
+                // };
+                // promiseTogo = fluid.promise.map(addClientCredentialsTokenPromise, mapper);
+
                 addClientCredentialsTokenPromise.then(function () {
                     // Return the new token
                     promiseTogo.resolve(accessToken);

@@ -68,16 +68,11 @@ var fluid = fluid || require("infusion");
     };
 
     gpii.oauth2.userService.gpiiTokenHasAssociatedUser = function (dataStore, gpiiToken) {
-        var promiseTogo = fluid.promise();
         var tokenPromise = dataStore.findUserByGpiiToken(gpiiToken);
-        tokenPromise.then(function (user) {
-            var result = user ? true : false;
-            promiseTogo.resolve(result);
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-
-        return promiseTogo;
+        var mapper = function (user) {
+            return user ? true : false;
+        };
+        return fluid.promise.map(tokenPromise, mapper);
     };
 
 })();

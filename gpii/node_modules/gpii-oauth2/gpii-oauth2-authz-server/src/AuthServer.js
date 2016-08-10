@@ -485,11 +485,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             // TODO: Validate authDecisionId
             var authDecisionId = req.params.authDecisionId;
             var revokePromise = that.authorizationService.revokeAuthorization(userId, authDecisionId);
-            revokePromise.then(function () {
-                res.sendStatus(200);
-            }, function (err) {
-                res.sendStatus(err.statusCode);
-            });
+            gpii.oauth2.mapPromiseToResponse(revokePromise, res);
         }
     );
 
@@ -531,11 +527,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var selectedPreferences = req.body;
                 // TODO validate selectedPreferences?
                 var setPromise = that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
-                setPromise.then(function () {
-                    res.sendStatus(200);
-                }, function (err) {
-                    res.sendStatus(err.statusCode);
-                });
+                gpii.oauth2.mapPromiseToResponse(setPromise, res);
             } else {
                 res.sendStatus(400);
             }
@@ -558,11 +550,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var selectedPreferences = req.body.selectedPreferences;
                 // TODO validate selectedPreferences?
                 var addPromise = that.authorizationService.addAuthorization(gpiiToken, oauth2ClientId, selectedPreferences);
-                addPromise.then(function () {
-                    res.sendStatus(200);
-                }, function (err) {
-                    res.sendStatus(err.statusCode);
-                });
+                gpii.oauth2.mapPromiseToResponse(addPromise, res);
             } else {
                 res.sendStatus(400);
             }

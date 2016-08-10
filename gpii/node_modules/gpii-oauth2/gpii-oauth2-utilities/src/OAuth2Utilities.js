@@ -84,3 +84,12 @@ gpii.oauth2.composeError = function (error, termMap) {
     err.msg = fluid.stringTemplate(err.msg, termMap);
     return err;
 };
+
+gpii.oauth2.mapPromiseToResponse = function (promise, response) {
+    promise.then(function () {
+        response.sendStatus(200);
+    }, function (err) {
+        response.sendStatus(err.statusCode);
+    });
+};
+
