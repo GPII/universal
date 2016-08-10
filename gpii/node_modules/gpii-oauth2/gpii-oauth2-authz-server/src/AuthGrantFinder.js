@@ -46,6 +46,7 @@ var fluid = fluid || require("infusion");
         var authCodePrmoise = authorizationService.getAuthForAccessToken(accessToken);
         var clientCredentialsPromise = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
 
+        // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
         var sources = [authCodePrmoise, clientCredentialsPromise];
         var promisesSequence = fluid.promise.sequence(sources);
 

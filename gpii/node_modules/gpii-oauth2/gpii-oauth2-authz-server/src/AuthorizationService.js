@@ -112,8 +112,7 @@ var fluid = fluid || require("infusion");
             onGrantAuthorizationCode: [{
                 listener: "gpii.oauth2.authorizationService.checkAuthDecision",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0"],
-                namespace: "checkAuthDecision",
-                priority: "first"
+                namespace: "checkAuthDecision"
             }, {
                 listener: "gpii.oauth2.authorizationService.doGrant",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0"],
@@ -139,8 +138,7 @@ var fluid = fluid || require("infusion");
             onGetSelectedPreferences: [{
                 listener: "gpii.oauth2.authorizationService.findAuthDecision",
                 args: ["{dataStore}", "{arguments}.0"],
-                namespace: "findAuthDecision",
-                priority: "first"
+                namespace: "findAuthDecision"
             }, {
                 listener: "gpii.oauth2.authorizationService.findGpiiTokenForSelectedPrefs",
                 args: ["{dataStore}", "{arguments}.0"],
@@ -155,8 +153,7 @@ var fluid = fluid || require("infusion");
             onSetSelectedPreferences: [{
                 listener: "gpii.oauth2.authorizationService.findAuthDecision",
                 args: ["{dataStore}", "{arguments}.0"],
-                namespace: "findAuthDecision",
-                priority: "first"
+                namespace: "findAuthDecision"
             }, {
                 listener: "gpii.oauth2.authorizationService.findGpiiTokenForSelectedPrefs",
                 args: ["{dataStore}", "{arguments}.0"],
@@ -171,8 +168,7 @@ var fluid = fluid || require("infusion");
             onGetUnauthorizedClients: [{
                 listener: "gpii.oauth2.authorizationService.findGpiiToken",
                 args: ["{dataStore}", "{arguments}.0"],
-                namespace: "findGpiiToken",
-                priority: "first"
+                namespace: "findGpiiToken"
             }, {
                 listener: "gpii.oauth2.authorizationService.findAuthDecisionsByGpiiToken",
                 args: ["{dataStore}", "{arguments}.0"],
@@ -209,36 +205,14 @@ var fluid = fluid || require("infusion");
     // }
     // @return (Promise): a promise object to be passed to the next processing function
     gpii.oauth2.authorizationService.checkAuthDecision = function (dataStore, codeGenerator, input) {
-        var promiseTogo = fluid.promise();
-        var authDecisionPromise = dataStore.findAuthDecision(input.gpiiToken, input.clientId, input.redirectUri);
-        authDecisionPromise.then(function (authDecision) {
-            if (!authDecision) {
-                // Record the authorization decision if we haven't already
-                var accessToken = codeGenerator.generateAccessToken();
-                var addAuthDecisionPromise = dataStore.addAuthDecision({
-                    gpiiToken: input.gpiiToken,
-                    clientId: input.clientId,
-                    redirectUri: input.redirectUri,
-                    accessToken: accessToken,
-                    selectedPreferences: input.selectedPreferences,
-                    revoked: false
-                });
-                addAuthDecisionPromise.then(function (addedAuthDecision) {
-                    promiseTogo.resolve({
-                        authDecisionId: addedAuthDecision.id
-                    });
-                }, function (err) {
-                    promiseTogo.reject(err);
-                });
-            } else {
-                promiseTogo.resolve({
-                    authDecisionId: authDecision.id
-                });
-            }
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
-        return promiseTogo;
+        return gpii.oauth2.authorizationService.getAuthDecision(
+            dataStore,
+            codeGenerator,
+            input.gpiiToken,
+            input.clientId,
+            input.redirectUri,
+            input.selectedPreferences
+        );
     };
 
     // @dataStore (Object): a data store instance
@@ -257,7 +231,7 @@ var fluid = fluid || require("infusion");
         // Generate the authorization code and record it
         var promiseTogo = fluid.promise();
         var code = codeGenerator.generateAuthCode();
-        var savePromise = dataStore.saveAuthCode(authDecisionInfo.authDecisionId, code);
+        var savePromise = dataStore.saveAuthCode(authDecisionInfo.id, code);
         savePromise.then(function () {
             promiseTogo.resolve(code);
         }, function (err) {
@@ -344,30 +318,15 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.authorizationService.doAdd = function (dataStore, codeGenerator, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken && record.client) {
-            var clientId = record.client.id;
-            var redirectUri = record.client.redirectUri;
             // Check to see if we have an existing authorization
-            var authDecisionPromise = dataStore.findAuthDecision(record.inputArgs.gpiiToken, clientId, redirectUri);
-            authDecisionPromise.then(function (authDecision) {
-                if (!authDecision) {
-                    // If not, add one
-                    var accessToken = codeGenerator.generateAccessToken();
-                    var addAuthDecisionPromise = dataStore.addAuthDecision({
-                        gpiiToken: record.inputArgs.gpiiToken,
-                        clientId: clientId,
-                        redirectUri: redirectUri,
-                        accessToken: accessToken,
-                        selectedPreferences: record.inputArgs.selectedPreferences,
-                        revoked: false
-                    });
-                    fluid.promise.follow(addAuthDecisionPromise, promiseTogo);
-                } else {
-                    // If the auth decision already exists, return its id
-                    promiseTogo.resolve({id: authDecision.id});
-                }
-            }, function (err) {
-                promiseTogo.reject(err);
-            });
+            promiseTogo = gpii.oauth2.authorizationService.getAuthDecision(
+                dataStore,
+                codeGenerator,
+                record.inputArgs.gpiiToken,
+                record.client.id,
+                record.client.redirectUri,
+                record.inputArgs.selectedPreferences
+            );
         }
         return promiseTogo;
     };
@@ -599,6 +558,7 @@ var fluid = fluid || require("infusion");
         var clientPromise = dataStore.findClientById(clientId);
         var clientCredentialsTokenPromise = dataStore.findClientCredentialsTokenByClientId(clientId);
 
+        // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
         var sources = [clientPromise, clientCredentialsTokenPromise];
         var promisesSequence = fluid.promise.sequence(sources);
 
@@ -631,6 +591,33 @@ var fluid = fluid || require("infusion");
             }
         });
 
+        return promiseTogo;
+    };
+
+    // An utility function used by checkAuthDecision() and doAdd()
+    gpii.oauth2.authorizationService.getAuthDecision = function (dataStore, codeGenerator, gpiiToken, clientId, redirectUri, selectedPreferences) {
+        var promiseTogo = fluid.promise();
+        var authDecisionPromise = dataStore.findAuthDecision(gpiiToken, clientId, redirectUri);
+        authDecisionPromise.then(function (authDecision) {
+            if (authDecision) {
+                // If the auth decision already exists, return its id
+                promiseTogo.resolve({id: authDecision.id});
+            } else {
+                // If not, add one
+                var accessToken = codeGenerator.generateAccessToken();
+                var addAuthDecisionPromise = dataStore.addAuthDecision({
+                    gpiiToken: gpiiToken,
+                    clientId: clientId,
+                    redirectUri: redirectUri,
+                    accessToken: accessToken,
+                    selectedPreferences: selectedPreferences,
+                    revoked: false
+                });
+                fluid.promise.follow(addAuthDecisionPromise, promiseTogo);
+            }
+        }, function (err) {
+            promiseTogo.reject(err);
+        });
         return promiseTogo;
     };
 

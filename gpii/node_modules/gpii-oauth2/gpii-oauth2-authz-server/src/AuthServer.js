@@ -67,9 +67,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
 
     oauth2orizeServer.deserializeClient(function (id, done) {
         var clientPromise = clientService.getClientById(id);
-        clientPromise.then(function (client) {
-            return done(null, client);
-        });
+        gpii.oauth2.oauth2orizeServer.promiseToDone(clientPromise, done);
     });
 
     oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
@@ -78,29 +76,27 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         var gpiiToken = user.defaultGpiiToken;
         var authPromise = authorizationService.grantAuthorizationCode(gpiiToken, client.id, redirectUri, ares.selectedPreferences);
 
-        authPromise.then(function (auth) {
-            return done(null, auth);
-        });
+        gpii.oauth2.oauth2orizeServer.promiseToDone(authPromise, done);
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
         var authPromise = authorizationService.exchangeCodeForAccessToken(code, client.id, redirectUri);
-        authPromise.then(function (code) {
-            return done(null, code);
-        }, function () {
-            return done(null, false);
-        });
+        gpii.oauth2.oauth2orizeServer.promiseToDone(authPromise, done);
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
         var clientCredentialsPromise = authorizationService.grantClientCredentialsAccessToken(client.id, scope);
-        clientCredentialsPromise.then(function (clientCredentials) {
-            return done(null, clientCredentials);
-        }, function () {
-            return done(null, false);
-        });
+        gpii.oauth2.oauth2orizeServer.promiseToDone(clientCredentialsPromise, done);
     }));
 
+};
+
+gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done) {
+    promise.then(function (data) {
+        return done(null, data);
+    }, function () {
+        return done(null, false);
+    });
 };
 
 // gpii.oauth2.passport
@@ -355,6 +351,34 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
     app.set("view engine", "handlebars");
 };
 
+gpii.oauth2.authServer.resolveAuthorizedServices = function (promiseTogo, responseData, userData) {
+    var authorizedClients = responseData[0];
+    var unauthorizedClients = responseData[1];
+
+    // Build view objects
+    var authorizedServices = fluid.transform(authorizedClients, function (client) {
+        return {
+            authDecisionId: client.authDecisionId,
+            oauth2ClientId: client.oauth2ClientId,
+            serviceName: client.clientName
+        };
+    });
+    var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
+        return {
+            oauth2ClientId: client.oauth2ClientId,
+            serviceName: client.clientName
+        };
+    });
+
+    promiseTogo.resolve({
+        username: userData.username,
+        authorizedServices: authorizedServices,
+        unauthorizedServices: unauthorizedServices
+    });
+
+    return promiseTogo;
+};
+
 gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
     // TODO: Update the user interface to support multiple tokens per
     // user rather than using a single default
@@ -363,37 +387,13 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
     var authorizedClientsPromise = authorizationService.getAuthorizedClientsForGpiiToken(gpiiToken);
     var unauthorizedClientsPromise = authorizationService.getUnauthorizedClientsForGpiiToken(gpiiToken);
 
+    // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
     var sources = [authorizedClientsPromise, unauthorizedClientsPromise];
     var promisesSequence = fluid.promise.sequence(sources);
 
     var authorizedServicesPromise = fluid.promise();
-
     promisesSequence.then(function (responses) {
-        var authorizedClients = responses[0];
-        var unauthorizedClients = responses[1];
-
-        // Build view objects
-        var authorizedServices = fluid.transform(authorizedClients, function (client) {
-            return {
-                authDecisionId: client.authDecisionId,
-                oauth2ClientId: client.oauth2ClientId,
-                serviceName: client.clientName
-            };
-        });
-        var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
-            return {
-                oauth2ClientId: client.oauth2ClientId,
-                serviceName: client.clientName
-            };
-        });
-
-        authorizedServicesPromise.resolve(
-            {
-                username: user.username,
-                authorizedServices: authorizedServices,
-                unauthorizedServices: unauthorizedServices
-            }
-        );
+        gpii.oauth2.authServer.resolveAuthorizedServices(authorizedServicesPromise, responses, user);
     });
 
     return authorizedServicesPromise;
