@@ -1,0 +1,42 @@
+{
+    "type": "gpii.config.cloudBased.flowManager.production",
+    "options": {
+        "mainServerPort": 8082,
+        "matchMakers": {
+            "flat": {
+                "url": "http://localhost:8082"
+            }
+        },
+        "components": {
+            "oauth2DataStore": {
+                "type": "gpii.oauth2.inMemoryDataStore"
+            }
+        },
+        "distributeOptions": {
+            "flowManager.dispatchDataStore": {
+                "record": "{gpii.config.cloudBased.flowManager.production}.oauth2DataStore",
+                "target": "{that flowManager}.options.components.oauth2DataStore"
+            },
+            "preferencesServer.dispatchDataStore": {
+                "record": "{gpii.config.cloudBased.flowManager.production}.oauth2DataStore",
+                "target": "{that preferencesServer}.options.components.dataStore"
+            },
+            "preferencesServer.setUrl": {
+                "record": {
+                    "type": "kettle.dataSource.URL",
+                    "options": {
+                        "url": "http://preferences.gpii.net/preferences/%userToken",
+                        "port": "{kettle.config}.options.mainServerPort"
+                    }
+                 },
+                 "target": "{that flowManager preferencesDataSource}"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
+        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json"
+    ]
+}
+
