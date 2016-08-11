@@ -34,18 +34,19 @@ gpii.oauth2.dbDataStore.docTypes = {
     clientCredentialsToken: "clientCredentialsToken"
 };
 
-gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpty, dataProcessFunc) {
-    dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.CleanUpDoc;
+gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNotEmpty, dataProcessFunc) {
+    dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.cleanUpDoc;
     var promiseTogo = fluid.promise();
 
     // Verify required field values are provided instead of undefined
-    var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(termMap, valueNotEmpty);
+    var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(directModel, valueNotEmpty);
 
     if (emptyFields.length > 0) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields.join(" & ")});
         promiseTogo.reject(error);
     } else {
-        var promise = dataSource.get(termMap);
+        var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
+        var promise = dataSource.get(finalDirectModel);
         promise.then(function (data) {
             // $.isEmptyObject() is to work around the issue when fetching data
             // using pouch/couch DB views and records are not found, instead of
@@ -71,21 +72,19 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, termMap, valueNotEmpt
 };
 
 gpii.oauth2.dbDataStore.verifyEmptyFields = function (termMap, valueNotEmpty) {
-    var emptyFields = "",
-        count = 0;
+    var emptyFields = [];
 
     valueNotEmpty = fluid.makeArray(valueNotEmpty);
     fluid.each(valueNotEmpty, function (fieldName) {
         if (termMap[fieldName] === undefined) {
-            emptyFields = count === 0 ? fieldName : emptyFields + " & " + fieldName;
-            count++;
+            emptyFields.push(fieldName);
         }
     });
     return emptyFields;
 };
 
-// Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" filed value into "id" field.
-gpii.oauth2.dbDataStore.CleanUpDoc = function (data) {
+// Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" field value into "id" field.
+gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
     if (data) {
         data.id = data._id;
         delete data._id;
@@ -101,7 +100,7 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
     fluid.each(data, function (row) {
         var rule = {"": "value"};
         var oneRecord = fluid.model.transformWithRules(row, rule);
-        oneRecord = gpii.oauth2.dbDataStore.CleanUpDoc(oneRecord);
+        oneRecord = gpii.oauth2.dbDataStore.cleanUpDoc(oneRecord);
         records.push(oneRecord);
     });
     return records;
@@ -117,7 +116,8 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
         var directModel = {};
         directModel[idName] = uuid.v4();
         fluid.extend(data, {type: docType});
-        promise = dataSource.set(directModel, data);
+        var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
+        promise = dataSource.set(finalDirectModel, data);
     }
     return promise;
 };
@@ -128,7 +128,8 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
     directModel[idName] = data.id;
     fluid.extend(data, {type: docType});
     delete data.id;
-    var promise = dataSource.set(directModel, data);
+    var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
+    var promise = dataSource.set(finalDirectModel, data);
     return promise;
 };
 
@@ -236,7 +237,7 @@ gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (
     var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(input, ["oauth2ClientId", "gpiiToken"]);
 
     if (emptyFields.length > 0) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields.join(" & ")});
         promiseTogo.reject(error);
     } else {
         promiseTogo = fluid.promise.fireTransformEvent(that.events.onFindAccessTokenByOAuth2ClientIdAndGpiiToken, input);
@@ -330,7 +331,7 @@ gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId,
     var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(data, ["authDecisionId", "code"]);
 
     if (emptyFields.length > 0) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields});
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields.join(" & ")});
         promiseTogo.reject(error);
     } else {
         promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.authCode, "id", data);

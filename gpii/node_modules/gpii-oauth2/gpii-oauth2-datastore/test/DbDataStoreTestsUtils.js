@@ -59,9 +59,7 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 dataSourceConfig: {
                     baseUrl: "http://localhost",
                     port: "{gpii.tests.dbDataStore.environment}.options.port",
-                    termMap: {
-                        dbName: "gpiiOauth"
-                    }
+                    dbName: "gpiiOauth"
                 }
             }
         }

@@ -23,8 +23,18 @@ require("./DbDataStoreUtils.js");
 fluid.defaults("gpii.oauth2.dbDataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
     baseUrl: null,   // Supplied by integrators
+    port: null,   // Supplied by integrators
+    dbName: null,   // Supplied by integrators
+    requestUrl: null,   // Supplied by integrators
     termMap: {
-        dbName: null    // Supplied by integrators
+        baseUrl: "noencode:%baseUrl",
+        port: "%port",
+        dbName: "%dbName"
+    },
+    directModel: {
+        baseUrl: "{that}.options.baseUrl",
+        port: "{that}.options.port",
+        dbName: "{that}.options.dbName"
     },
     notFoundIsEmpty: true,
     rules: {
@@ -35,15 +45,13 @@ fluid.defaults("gpii.oauth2.dbDataSource", {
             "": ""
         }
     },
-    // Add baseUrl value into url template since baseUrl (an example baseUrl value: http://localhost:5984/)
-    // should not be passed into the "termMap" option because those termMap values will be encoded to
-    // compose the url.
+    // requestUrl needs to be resolved upfront since it contains actual string templates to compose data source url.
+    // An example of requestUrl is "/%id", in which case the expected url should be "%baseUrl:%port/%dbName/%id" instead
+    // of having "%requestUrl" embedded. The expander below is to prepare the url that's sensible to kettle.dataSource.
     url: {
         expander: {
             funcName: "fluid.stringTemplate",
             args: ["%baseUrl:%port/%dbName%requestUrl", {
-                baseUrl: "{that}.options.baseUrl",
-                port: "{that}.options.port",
                 requestUrl: "{that}.options.requestUrl"
             }]
         }
@@ -63,15 +71,15 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
     // 1. gradeNames: The mixin grade
     // 2. baseUrl: The base URL to where the database is located. For example, a default locally installed CouchDB uses http://127.0.1.1
     // 3. port: The port where the database is located. For example, a default locally installed CouchDB uses port 5984
-    // 4. termMap: {
-    //        dbName: The database name
-    //    }
+    // 4. dbName: The database name
     dataSourceConfig: {
     },
-    distributeOptions: [{
-        source: "{that}.options.dataSourceConfig",
-        target: "{that > gpii.oauth2.dbDataSource}.options"
-    }],
+    distributeOptions: {
+        "dbDataStore.dataSourceConfig": {
+            source: "{that}.options.dataSourceConfig",
+            target: "{that > gpii.oauth2.dbDataSource}.options"
+        }
+    },
     components: {
         findByIdDataSource: {
             type: "gpii.oauth2.dbDataSource",

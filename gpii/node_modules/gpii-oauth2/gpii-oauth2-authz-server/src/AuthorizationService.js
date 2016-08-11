@@ -528,6 +528,29 @@ var fluid = fluid || require("infusion");
     };
     // ==== End of getUnauthorizedClientsForGpiiToken()
 
+    /*
+     * @promiseTogo: Modified by the function with objects to be resolved or to fail
+     * @dataStore (Object): a data store instance
+     * @codeGenerator (Object): a code generator
+     * @clientId (String): an unique client id
+     * @return: none. The first argument of promiseTogo contains return values
+     */
+    gpii.oauth2.authorizationService.createClientCredentialsToken = function (promiseTogo, dataStore, codeGenerator, clientId) {
+        var accessToken = codeGenerator.generateAccessToken();
+        var addClientCredentialsTokenPromise = dataStore.addClientCredentialsToken({
+            clientId: clientId,
+            accessToken: accessToken,
+            allowAddPrefs: true
+        });
+
+        var mapper = function () {
+            // The created access token is resolved for promiseTogo eventually
+            return accessToken;
+        };
+        var accessTokenPromise = fluid.promise.map(addClientCredentialsTokenPromise, mapper);
+        fluid.promise.follow(accessTokenPromise, promiseTogo);
+    };
+
     gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, codeGenerator, clientId, scope) {
         var clientPromise = dataStore.findClientById(clientId);
         var clientCredentialsTokenPromise = dataStore.findClientCredentialsTokenByClientId(clientId);
@@ -546,28 +569,7 @@ var fluid = fluid || require("infusion");
                 var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
                 promiseTogo.reject(error);
             } else if (!clientCredentialsToken) {
-                // Create a new token if one doesn't exist
-                var accessToken = codeGenerator.generateAccessToken();
-                var addClientCredentialsTokenPromise = dataStore.addClientCredentialsToken({
-                    clientId: clientId,
-                    accessToken: accessToken,
-                    allowAddPrefs: true
-                });
-
-                // TODO: Running into issues with using the commented lines below to replace line 564-570 since the callback of the promiseTogo doesn't
-                // get resolved at AuthServer.js line 98 (in gpii.oauth2.oauth2orizeServer.promiseToDone())
-                // var mapper = function () {
-                //     // Return the new token
-                //     return accessToken;
-                // };
-                // promiseTogo = fluid.promise.map(addClientCredentialsTokenPromise, mapper);
-
-                addClientCredentialsTokenPromise.then(function () {
-                    // Return the new token
-                    promiseTogo.resolve(accessToken);
-                }, function (err) {
-                    promiseTogo.reject(err);
-                });
+                gpii.oauth2.authorizationService.createClientCredentialsToken(promiseTogo, dataStore, codeGenerator, clientId);
             } else {
                 // Return the existing token
                 promiseTogo.resolve(clientCredentialsToken.accessToken);
