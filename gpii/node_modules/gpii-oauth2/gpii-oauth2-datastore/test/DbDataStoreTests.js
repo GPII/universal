@@ -315,7 +315,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
             name: "Add an emty auth decision returns error",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.addAuthDecision", [{}], "{that}"]
+                args: ["{dbDataStore}.addAuthDecision", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -1080,7 +1080,7 @@ fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsToken", {
             name: "Adding an empty object returns error",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.addClientCredentialsToken", [{}], "{that}"]
+                args: ["{dbDataStore}.addClientCredentialsToken", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {

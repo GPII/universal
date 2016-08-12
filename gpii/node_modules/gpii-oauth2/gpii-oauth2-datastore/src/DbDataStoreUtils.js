@@ -45,15 +45,15 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
         var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
         var promise = dataSource.get(finalDirectModel);
         promise.then(function (data) {
-            // $.isEmptyObject() is to work around the issue when fetching data
-            // using pouch/couch DB views and records are not found, instead of
-            // returning a 404 status code, it returns this object:
+            // TODO: The line below that converts an empty object to undefined is to work around an issue with using the
+            // kettle notFoundIsEmpty option with fetching couchDB documents by views. The way that notFoundIsEmpty is
+            // implemented in kettle is that, it returns undefined when encountering a 404 response. However, when querying
+            // couchdb by views, the returned value would not be a 404 http status code even when the doc is not found.
+            // The response would still be an object but with an empty "rows" array. An example response is:
             // { total_rows: 1, offset: 0, rows: [] }
-            // Note the "rows" value is an empty array.
-            // This behavior prevents "kettle.dataSource.CouchDB" -> "notFoundIsEmpty"
-            // option from returning "undefined". Instead, an empty object {}
-            // is returned. This work around is to make sure "undefined" is returned
-            // when an empty object is received.
+            // So, the couchDB returned value needs to be further processed using kettle readPayload option, which eventually
+            // returns an empty object. Note that this issue only occurs when querying CouchDB by a view. when querying CouchDB
+            // directly by an id, 404 status is returned.
             var result = $.isEmptyObject(data) ? undefined : dataProcessFunc(data);
             if (result !== undefined && result.isError) {
                 promiseTogo.reject(result);
@@ -104,15 +104,16 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
 // Create a new record
 gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
     var promise = fluid.promise();
-    if ($.isEmptyObject(data)) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
-        promise.reject(error);
-    } else {
+    // TODO: Requires proper field validation on data instead of only checking against falsy data.
+    if (data) {
         var directModel = {};
         directModel[idName] = uuid.v4();
         fluid.extend(data, {type: docType});
         var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
         promise = dataSource.set(finalDirectModel, data);
+    } else {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
+        promise.reject(error);
     }
     return promise;
 };
