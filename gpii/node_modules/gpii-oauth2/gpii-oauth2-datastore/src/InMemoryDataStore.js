@@ -251,18 +251,15 @@ var fluid = fluid || require("infusion");
             var gpiiToken = gpii.oauth2.dataStore.findGpiiToken(gpiiTokens, authDecision.gpiiToken);
             if (gpiiToken && gpiiToken.userId === userId) {
                 authDecision.selectedPreferences = fluid.copy(authDecisionData.selectedPreferences);
-                // We are changing one of the authDecision items in
-                // the collection but notifying on the collection
-                // (it's not worth it to extend the query api to allow
-                // a more fine grained update)
+                // We are changing one of the authDecision items in the collection but notifying on the collection
+                // (it's not worth it to extend the query api to allow a more fine grained update)
                 applier.change("authDecisions", authDecisions);
             }
         }
     };
 
     gpii.oauth2.dataStore.revokeAuthDecision = function (authDecisions, gpiiTokens, applier, userId, authDecisionId) {
-        // Only revoke the authorization with authDecisionId if it is owned
-        // by userId so that users cannot revoke authorizations owned by others
+        // Only revoke the authorization with authDecisionId if it is owned by userId so that users cannot revoke authorizations owned by others
         var authDecision = gpii.oauth2.dataStore.findAuthDecisionById(authDecisions, authDecisionId);
         if (authDecision) {
             var gpiiToken = gpii.oauth2.dataStore.findGpiiToken(gpiiTokens, authDecision.gpiiToken);
