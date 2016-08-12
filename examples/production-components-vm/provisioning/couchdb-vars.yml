@@ -5,7 +5,7 @@
 
 couchdb_databases:
   - preferences
-  - gpiioauth
+  - auth
 
 couchdb_delete_existing_databases: true
 
