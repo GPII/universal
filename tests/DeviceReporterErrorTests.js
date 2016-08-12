@@ -53,7 +53,8 @@ gpii.tests.deviceReporterErrorTests.testDefCommon = {
     gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
 };
 
-gpii.tests.deviceReporterErrorTests.testDefs = [{
+gpii.tests.deviceReporterErrorTests.testDefs = [
+    {
         name: "Login fails on error in Device Reporter and reports to login",
         expect: 4,
         userToken: gpii.tests.deviceReporterErrorTests.userToken,

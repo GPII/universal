@@ -1,12 +1,9 @@
 ## Preferences Server:
 
-The preferences server currently has three APIs: one for the new style preferences, one for [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant) and one for the old style preferences, used for backward compatibility. The URLS are as follows: 
+The preferences server currently has two APIs: one for the new style preferences and one for [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant). The URLS are as follows: 
 
 * **URL: `/preferences`**: The main URL to be used for the preferences server. Any new development should be using this URL.
 * **URL: `/add-preferences`**: The implementation of [GPII OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant) that does the security verification before adding new preferenes.
-* **URL: `/oldPreferences`**: URL for serving preferences in the format the old preferences server did. This should *only* be used by existing services to ensure they do not break. All services currently using this style of preferences should be updated to use the `/preferences` URL instead.
-
-The `/preferences` and `/add-preferences` API will be described immediately below here, while the old, backward compatible URL `/oldPreferences` will be described on the [Old Preferences Server API documentation](OldPreferencesServer.md).
 
 ### Description
 
@@ -340,4 +337,3 @@ Below is an example for a post query to the following url (given that a Preferen
 
 * [The Preferences Server Framework](PreferencesServerFramework.md)
 * [The Raw Preferences Server](RawPreferencesServer.md)
-* [The Old Preferences Server](OldPreferencesServer.md) _for backward compatibility only_
