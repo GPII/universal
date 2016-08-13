@@ -81,6 +81,9 @@ gpii.oauth2.dbDataStore.verifyEmptyFields = function (termMap, valueNotEmpty) {
 };
 
 // Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" field value into "id" field.
+// The use of "id" instead of "_id" field name is to maintain the API backward compatibility as data store
+// API is expected to output the record identifier in "id" field instead of a couchdb/pouchdb specific name
+// of "_id".
 gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
     if (data) {
         data.id = data._id;
