@@ -6,9 +6,6 @@ Copyright 2016 OCAD university
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
-
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
@@ -48,15 +45,15 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
         var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
         var promise = dataSource.get(finalDirectModel);
         promise.then(function (data) {
-            // $.isEmptyObject() is to work around the issue when fetching data
-            // using pouch/couch DB views and records are not found, instead of
-            // returning a 404 status code, it returns this object:
+            // TODO: The line below that converts an empty object to undefined is to work around an issue with using the
+            // kettle notFoundIsEmpty option with fetching couchDB documents by views. The way that notFoundIsEmpty is
+            // implemented in kettle is that, it returns undefined when encountering a 404 response. However, when querying
+            // couchdb by views, the returned value would not be a 404 http status code even when the doc is not found.
+            // The response would still be an object but with an empty "rows" array. An example response is:
             // { total_rows: 1, offset: 0, rows: [] }
-            // Note the "rows" value is an empty array.
-            // This behavior prevents "kettle.dataSource.CouchDB" -> "notFoundIsEmpty"
-            // option from returning "undefined". Instead, an empty object {}
-            // is returned. This work around is to make sure "undefined" is returned
-            // when an empty object is received.
+            // So, the couchDB returned value needs to be further processed using kettle readPayload option, which eventually
+            // returns an empty object. Note that this issue only occurs when querying CouchDB by a view. when querying CouchDB
+            // directly by an id, 404 status is returned.
             var result = $.isEmptyObject(data) ? undefined : dataProcessFunc(data);
             if (result !== undefined && result.isError) {
                 promiseTogo.reject(result);
@@ -71,12 +68,21 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
     return promiseTogo;
 };
 
-gpii.oauth2.dbDataStore.verifyEmptyFields = function (termMap, valueNotEmpty) {
+/*
+ * Find elements in the valueNotEmpty array if that element matches a path of the give obj and its value
+ * is undefined.
+ * @obj (Object): The object whose values are checked against undefined.
+ * @valueNotEmpty (String or Array): The path name(s) to be used to locate value on the give obj.
+ * @return: An array of elements in the valueNotEmpty array provided: 1. the element matches a path name on obj;
+ * 2. the corresponding value of that path name is undefined.
+ * For example, gpii.oauth2.dbDataStore.verifyEmptyFields({"a": 1}, ["a", "b"]) returns ["b"].
+ */
+gpii.oauth2.dbDataStore.verifyEmptyFields = function (obj, valueNotEmpty) {
     var emptyFields = [];
 
     valueNotEmpty = fluid.makeArray(valueNotEmpty);
     fluid.each(valueNotEmpty, function (fieldName) {
-        if (termMap[fieldName] === undefined) {
+        if (obj[fieldName] === undefined) {
             emptyFields.push(fieldName);
         }
     });
@@ -84,6 +90,9 @@ gpii.oauth2.dbDataStore.verifyEmptyFields = function (termMap, valueNotEmpty) {
 };
 
 // Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" field value into "id" field.
+// The use of "id" instead of "_id" field name is to maintain the API backward compatibility as data store
+// API is expected to output the record identifier in "id" field instead of a couchdb/pouchdb specific name
+// of "_id".
 gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
     if (data) {
         data.id = data._id;
@@ -98,9 +107,7 @@ gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
 gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
     var records = [];
     fluid.each(data, function (row) {
-        var rule = {"": "value"};
-        var oneRecord = fluid.model.transformWithRules(row, rule);
-        oneRecord = gpii.oauth2.dbDataStore.cleanUpDoc(oneRecord);
+        var oneRecord = gpii.oauth2.dbDataStore.cleanUpDoc(row.value);
         records.push(oneRecord);
     });
     return records;
@@ -109,15 +116,16 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
 // Create a new record
 gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
     var promise = fluid.promise();
-    if ($.isEmptyObject(data)) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
-        promise.reject(error);
-    } else {
+    // TODO: Requires proper field validation on data instead of only checking against falsy data.
+    if (data) {
         var directModel = {};
         directModel[idName] = uuid.v4();
         fluid.extend(data, {type: docType});
         var finalDirectModel = $.extend(true, {}, dataSource.options.directModel, directModel);
         promise = dataSource.set(finalDirectModel, data);
+    } else {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
+        promise.reject(error);
     }
     return promise;
 };
@@ -142,51 +150,52 @@ gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisio
         userId: userId,
         authDecisionData: authDecisionData
     };
-    return fluid.promise.fireTransformEvent(that.events.onUpdateAuthDecision, input);
+    return fluid.promise.fireTransformEvent(that.events.onUpdateAuthDecision, {inputArgs: input});
+};
+
+/*
+ * Handles the case where the resolved value of the inputPromise needs to trigger an error of missing documents.
+ * When the resolved value exists, process the value with the dataProcessFunc argument and resolved the processed
+ * resolve with promiseTogo argument.
+ * @inputPromise (Promise object): The input promise object to be processed.
+ * @input: The input data.
+ * @docType (String): The document type to be reported when the resolved value of inputPromise is undefined.
+ * @allowUndefinedValue: Allows the value resolved from the inputPromise to be undefined
+ *
+ * @return (Promise object): A promise object that carries the result of this function. The result is either a value
+ * that gets resolved into the returned promise or a rejection with a missing doc error.
+ */
+gpii.oauth2.dbDataStore.handlePromiseWithMissingDoc = function (inputPromise, input, docType, allowUndefinedValue) {
+    allowUndefinedValue = allowUndefinedValue || false;
+    var promiseTogo = fluid.promise();
+    inputPromise.then(function (value) {
+        var isValueValid = allowUndefinedValue ? value || value === undefined : value;
+        if (isValueValid) {
+            // Save both the input parameter and the resolved value of the inputPromise for their furthur use in following processes
+            var valueObj = {};
+            valueObj[docType] = value;
+            var combined = $.extend({}, input, valueObj);
+            promiseTogo.resolve(combined);
+        } else {
+            // Throw error indicating which document type is missing
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes[docType]});
+            promiseTogo.reject(error);
+        }
+    }, function (err) {
+        promiseTogo.reject(err);
+    });
+    return promiseTogo;
 };
 
 gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, input) {
-    var promiseTogo = fluid.promise();
-    var authDecisionId = input.authDecisionId ? input.authDecisionId : input.authDecisionData.id;
+    var authDecisionId = input.inputArgs.authDecisionId ? input.inputArgs.authDecisionId : input.inputArgs.authDecisionData.id;
     var authDecisionPromise = findAuthDecisionById(authDecisionId);
-    authDecisionPromise.then(function (authDecision) {
-        // save the input parameter into response.inputArgs for furthur use in following processes
-        if (authDecision) {
-            var combined = {
-                authDecision: authDecision,
-                inputArgs: input
-            };
-            promiseTogo.resolve(combined);
-        } else {
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.authDecision});
-            promiseTogo.reject(error);
-        }
-    }, function (err) {
-        promiseTogo.reject(err);
-    });
-    return promiseTogo;
+    return gpii.oauth2.dbDataStore.handlePromiseWithMissingDoc(authDecisionPromise, input, "authDecision");
 };
 
 gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, authDecisionRecord) {
-    var promiseTogo = fluid.promise();
     var gpiiTokenPromise = findGpiiToken(authDecisionRecord.authDecision.gpiiToken);
-    gpiiTokenPromise.then(function (gpiiToken) {
-        // save the input parameter into response.inputArgs for furthur use in following processes
-        if (gpiiToken) {
-            var combined = {
-                gpiiToken: gpiiToken,
-                authDecision: authDecisionRecord.authDecision,
-                inputArgs: authDecisionRecord.inputArgs
-            };
-            promiseTogo.resolve(combined);
-        } else {
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.gpiiToken});
-            promiseTogo.reject(error);
-        }
-    }, function (err) {
-        promiseTogo.reject(err);
-    });
-    return promiseTogo;
+    return gpii.oauth2.dbDataStore.handlePromiseWithMissingDoc(gpiiTokenPromise, authDecisionRecord, "gpiiToken");
 };
 
 gpii.oauth2.dbDataStore.doUpdate = function (dataSource, gpiiTokenRecord) {
@@ -214,7 +223,7 @@ gpii.oauth2.dbDataStore.revokeAuthDecision = function (that, revokeFunc, userId,
         authDecisionId: authDecisionId,
         dataProcessFunc: revokeFunc
     };
-    return fluid.promise.fireTransformEvent(that.events.onRevokeAuthDecision, input);
+    return fluid.promise.fireTransformEvent(that.events.onRevokeAuthDecision, {inputArgs: input});
 };
 
 // Used in doUpdate() as the input argument of "dataProcessFunc"
@@ -240,30 +249,14 @@ gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields.join(" & ")});
         promiseTogo.reject(error);
     } else {
-        promiseTogo = fluid.promise.fireTransformEvent(that.events.onFindAccessTokenByOAuth2ClientIdAndGpiiToken, input);
+        promiseTogo = fluid.promise.fireTransformEvent(that.events.onFindAccessTokenByOAuth2ClientIdAndGpiiToken, {inputArgs: input});
     }
     return promiseTogo;
 };
 
 gpii.oauth2.dbDataStore.findClient = function (findClientByOauth2ClientIdDataSource, input) {
-    var promiseTogo = fluid.promise();
-    var clientPromise = findClientByOauth2ClientIdDataSource(input.oauth2ClientId);
-    clientPromise.then(function (client) {
-        // save the input parameter into response.inputArgs for furthur use in following processes
-        if (client || client === undefined) {
-            var combined = {
-                client: client,
-                inputArgs: input
-            };
-            promiseTogo.resolve(combined);
-        } else {
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes.client});
-            promiseTogo.reject(error);
-        }
-    }, function (err) {
-        promiseTogo.reject(err);
-    });
-    return promiseTogo;
+    var clientPromise = findClientByOauth2ClientIdDataSource(input.inputArgs.oauth2ClientId);
+    return gpii.oauth2.dbDataStore.handlePromiseWithMissingDoc(clientPromise, input, "client", true);
 };
 
 gpii.oauth2.dbDataStore.findAccessToken = function (findAuthDecisionByGpiiTokenAndClientIdDataSource, clientRecord) {
@@ -276,19 +269,14 @@ gpii.oauth2.dbDataStore.findAccessToken = function (findAuthDecisionByGpiiTokenA
             clientId: clientRecord.client.id
         };
         var authDecisionPromise = gpii.oauth2.dbDataStore.findRecord(findAuthDecisionByGpiiTokenAndClientIdDataSource, directModel);
-        authDecisionPromise.then(function (authDecision) {
-            if (authDecision) {
-                var result = {
-                    accessToken: authDecision.accessToken
-                };
-                promiseTogo.resolve(result);
-            } else {
-                // Revoked auth decision returns undefined
-                promiseTogo.resolve(undefined);
-            }
-        }, function (err) {
-            promiseTogo.reject(err);
-        });
+
+        var mapper = function (authDecision) {
+            return authDecision ? {
+                accessToken: authDecision.accessToken
+            } : undefined;
+        };
+        var mappedPromise = fluid.promise.map(authDecisionPromise, mapper);
+        fluid.promise.follow(mappedPromise, promiseTogo);
     }
     return promiseTogo;
 

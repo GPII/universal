@@ -6,9 +6,6 @@ Copyright 2016 OCAD University
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
-
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
@@ -318,7 +315,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
             name: "Add an emty auth decision returns error",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.addAuthDecision", [{}], "{that}"]
+                args: ["{dbDataStore}.addAuthDecision", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -1083,7 +1080,7 @@ fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsToken", {
             name: "Adding an empty object returns error",
             sequence: [{
                 func: "gpii.tests.dbDataStore.invokePromiseProducer",
-                args: ["{dbDataStore}.addClientCredentialsToken", [{}], "{that}"]
+                args: ["{dbDataStore}.addClientCredentialsToken", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {

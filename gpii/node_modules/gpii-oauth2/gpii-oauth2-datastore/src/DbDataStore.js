@@ -6,9 +6,6 @@ Copyright 2016 OCAD university
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
-
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
@@ -553,8 +550,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         onUpdateAuthDecision: [{
             listener: "gpii.oauth2.dbDataStore.authDecisionExists",
             args: ["{that}.findAuthDecisionById", "{arguments}.0"],
-            namespace: "authDecisionExists",
-            priority: "first"
+            namespace: "authDecisionExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
             args: ["{that}.findGpiiToken", "{arguments}.0"],
@@ -569,8 +565,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         onRevokeAuthDecision: [{
             listener: "gpii.oauth2.dbDataStore.authDecisionExists",
             args: ["{that}.findAuthDecisionById", "{arguments}.0"],
-            namespace: "authDecisionExists",
-            priority: "first"
+            namespace: "authDecisionExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
             args: ["{that}.findGpiiToken", "{arguments}.0"],
@@ -585,8 +580,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         onFindAccessTokenByOAuth2ClientIdAndGpiiToken: [{
             listener: "gpii.oauth2.dbDataStore.findClient",
             args: ["{that}.findClientByOauth2ClientId", "{arguments}.0"],
-            namespace: "findClient",
-            priority: "first"
+            namespace: "findClient"
         }, {
             listener: "gpii.oauth2.dbDataStore.findAccessToken",
             args: ["{that}.findAuthDecisionByGpiiTokenAndClientIdDataSource", "{arguments}.0"],
@@ -595,8 +589,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         }],
         onRevokeClientCredentialsToken: [{
             listener: "{that}.findClientCredentialsTokenById",
-            namespace: "findClientCredentialsToken",
-            priority: "first"
+            namespace: "findClientCredentialsToken"
         }, {
             listener: "gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken",
             args: ["{that}.saveDataSource", "{arguments}.0"],
