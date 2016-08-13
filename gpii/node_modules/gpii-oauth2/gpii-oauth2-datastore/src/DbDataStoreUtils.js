@@ -68,12 +68,21 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
     return promiseTogo;
 };
 
-gpii.oauth2.dbDataStore.verifyEmptyFields = function (termMap, valueNotEmpty) {
+/*
+ * Find elements in the valueNotEmpty array if that element matches a path of the give obj and its value
+ * is undefined.
+ * @obj (Object): The object whose values are checked against undefined.
+ * @valueNotEmpty (String or Array): The path name(s) to be used to locate value on the give obj.
+ * @return: An array of elements in the valueNotEmpty array provided: 1. the element matches a path name on obj;
+ * 2. the corresponding value of that path name is undefined.
+ * For example, gpii.oauth2.dbDataStore.verifyEmptyFields({"a": 1}, ["a", "b"]) returns ["b"].
+ */
+gpii.oauth2.dbDataStore.verifyEmptyFields = function (obj, valueNotEmpty) {
     var emptyFields = [];
 
     valueNotEmpty = fluid.makeArray(valueNotEmpty);
     fluid.each(valueNotEmpty, function (fieldName) {
-        if (termMap[fieldName] === undefined) {
+        if (obj[fieldName] === undefined) {
             emptyFields.push(fieldName);
         }
     });
