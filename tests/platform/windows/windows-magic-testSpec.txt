@@ -1,7 +1,7 @@
 windows-magic-testSpec.js
 
 Descriptions:
-This will run the acceptance tests for the Magic (Freedom Scientific). It uses 2 NP sets: magic_common.json and magic_application.json
+This will run the acceptance tests for the Magic (Freedom Scientific). It uses 2 NP sets: magic_common.json, magic_common2.json, magic_common3.json and magic_application.json
 
 Prerequisites:
 * Magic needs to be installed

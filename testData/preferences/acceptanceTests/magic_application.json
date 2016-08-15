@@ -6,12 +6,14 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.magic": {
                         "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                        "options.TypingEcho" : 1,
-                        "ENU-Global.Punctuation" : 2,
-                        "ENU-Global.Pitch" : 75,
+                        "Options.PrimarySynthesizer" : "eloq",
+                        "options.SayAllIndicateCaps" : 1,
                         "ENU-Global.Rate" : 100,
+                        "ENU-Global.Pitch" : 75,
+                        "ENU-Global.Volume" : 100,
+                        "ENU-Global.Punctuation" : 2,
                         "mag.startmagnified" : 1,
-                        "mag.Size" : 3
+                        "mag.Size" : 1
                     }
                 }
             }
