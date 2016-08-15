@@ -91,10 +91,7 @@
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "capabilities": [
-                    "applications.com\\.freedomscientific\\.jaws.id",
-                    "display.screenReader.-provisional-punctuationVerbosity",
-                    "display.screenReader.speechRate",
-                    "display.textReadingHighlight.pitch"
+                    "applications.com\\.freedomscientific\\.jaws.id"
                 ],
                 "capabilitiesTransformations": {
                     "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/primarySynthesizer",
