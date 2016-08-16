@@ -1,9 +1,21 @@
 {
     "http://registry\\.gpii\\.net/common/language": "gpii_firstDiscovery_language",
     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled": "gpii_firstDiscovery_speak",
-    "http://registry\\.gpii\\.net/common/speechRate": "gpii_firstDiscovery_speechRate",
+    "http://registry\\.gpii\\.net/common/speechRate": {
+        "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "gpii_firstDiscovery_speechRate",
+            "factor": 100
+        }
+    },
     "http://registry\\.gpii\\.net/common/highContrastTheme": "fluid_prefs_contrast",
-    "http://registry\\.gpii\\.net/common/fontSize": "fluid_prefs_textSize",
+    "http://registry\\.gpii\\.net/common/fontSize": {
+        "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "fluid_prefs_textSize",
+            "factor": 30
+        }
+    },
     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled": "gpii_firstDiscovery_onScreenKeyboard",
     "http://registry\\.gpii\\.net/common/captionsEnabled": "gpii_firstDiscovery_captions",
     "http://registry\\.gpii\\.net/common/trackingTTS": "gpii_firstDiscovery_showSounds",
