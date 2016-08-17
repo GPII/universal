@@ -46,7 +46,9 @@ fluid.defaults("gpii.oauth2.clientService", {
 //
 // @dataStore (Object) - an instance of a data store component such as gpii.oauth2.dbDataStore
 // @oauth2ClientId (String) - an oAuth2 client id
-// @fieldToVerify (String) - A field of the client object to be verified
+// @fieldToVerify (String) - A field of the client object to be verified:
+// in authenticateClient() API, this field is "oauth2ClientSecret"; in checkClientRedirectUri() API,
+// this field is "redirectUri"
 // @expectedVerifiedValue (Any) - The expected verified value
 //
 // @return (Promise) - A promise object that contains either a client record or an error
