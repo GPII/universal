@@ -371,7 +371,7 @@ gpii.oauth2.authServer.resolveAuthorizedServices = function (promiseTogo, respon
     });
 
     promiseTogo.resolve({
-        username: userData.username,
+        username: userData.name,
         authorizedServices: authorizedServices,
         unauthorizedServices: unauthorizedServices
     });
