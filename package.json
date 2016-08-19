@@ -24,7 +24,7 @@
         "passport-oauth2-client-password": "0.1.2"
     },
     "devDependencies": {
-        "gpii-pouchdb": "git://github.com/GPII/gpii-pouchdb#5e13a1b6556e70261b3dc204fde67743f1e3ebf1",
+        "gpii-pouchdb": "git://github.com/GPII/gpii-pouchdb#1c1af8b34c9f1eb8f379e7e32fe86f31287fcd95",
         "grunt": "1.0.1",
         "fluid-grunt-eslint": "18.1.1",
         "grunt-jsonlint": "1.0.4",
