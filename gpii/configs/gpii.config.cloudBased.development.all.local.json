@@ -1,5 +1,46 @@
 {
     "type": "gpii.config.cloudBased.development.all.local",
+    "options": {
+        "authDBServerPort": 8058,
+        "pouchConfig": {
+            "databases": {
+                "auth": {
+                    "data": [
+                        "%universal/tests/platform/cloud/OAuth2AcceptanceDataStore.json",
+                        "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
+                    ]
+                }
+            }
+        },
+        "components": {
+            "pouchHarness": {
+                "type": "gpii.pouch.harness",
+                "options": {
+                    "port": "{gpii.config.cloudBased.development.all.local}.options.authDBServerPort",
+                    "listeners": {
+                        "onReady": "{gpii.config.cloudBased.development.all.local}.events.onPouchHarnessReady"
+                    }
+                }
+            }
+        },
+        "events": {
+            "onPouchHarnessReady": null
+        },
+        "distributeOptions": {
+            "distributePouchConfig": {
+                "source": "{that}.options.pouchConfig",
+                "target": "{that gpii.pouch.express}.options"
+            },
+            "flowManager.development.createOnEvent": {
+                "record": "onPouchHarnessReady",
+                "target": "{that flowManager}.createOnEvent"
+            },
+            "preferencesServer.development.createOnEvent": {
+                "record": "onPouchHarnessReady",
+                "target": "{that preferencesServer}.createOnEvent"
+            }
+        }
+    },
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
         "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
