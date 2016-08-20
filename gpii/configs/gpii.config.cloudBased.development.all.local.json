@@ -6,7 +6,7 @@
             "databases": {
                 "auth": {
                     "data": [
-                        "%universal/tests/platform/cloud/OAuth2AcceptanceDataStore.json",
+                        "%universal/testData/security/TestOAuth2DataStore.json",
                         "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
                     ]
                 }

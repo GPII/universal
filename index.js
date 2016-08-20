@@ -35,6 +35,7 @@ require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
 require("./gpii/node_modules/contextManager");
+require("./node_modules/gpii-pouchdb");
 
 gpii.loadTestingSupport = function () {
     require("./gpii/node_modules/testing");
