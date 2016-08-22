@@ -13,12 +13,19 @@
             }
         },
         "components": {
+            "settingsDir": {
+                "type": "gpii.settingsDir"
+            },
             "pouchHarness": {
                 "type": "gpii.pouch.harness",
                 "options": {
                     "port": "{gpii.config.cloudBased.development.all.local}.options.authDBServerPort",
                     "listeners": {
-                        "onReady": "{gpii.config.cloudBased.development.all.local}.events.onPouchHarnessReady"
+                        "onReady.escalate": "{gpii.config.cloudBased.development.all.local}.events.onPouchHarnessReady"
+                    },
+                    "distributeOptions": {
+                        "record": "@expand:{settingsDir}.getSettingsDir()",
+                        "target": "{that gpii.pouch.express}.options.dbPath"
                     }
                 }
             }
