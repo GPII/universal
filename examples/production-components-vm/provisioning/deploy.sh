@@ -13,3 +13,7 @@ sudo PYTHONUNBUFFERED=1 ansible-playbook /home/vagrant/sync/examples/production-
 
 # Install Flow Manager
 sudo PYTHONUNBUFFERED=1 ansible-playbook /home/vagrant/sync/examples/production-components-vm/provisioning/flow-manager.yml --tags="install,configure,deploy"
+
+# Add additional CouchDB data
+
+

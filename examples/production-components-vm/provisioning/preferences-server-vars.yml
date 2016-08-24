@@ -8,6 +8,9 @@ nodejs_app_name: preferences-server
 nodejs_app_env_vars:
   - "NODE_ENV={{ preferences_server_environment }}"
 
+# Not removing kanso so that it can be used to add additional data in CouchDB
+preferences_server_data_loader_cleanup_after: false
+
 # For testing purposes
 # nodejs_app_host_address: 127.0.0.1
 
