@@ -15,5 +15,6 @@ sudo PYTHONUNBUFFERED=1 ansible-playbook /home/vagrant/sync/examples/production-
 sudo PYTHONUNBUFFERED=1 ansible-playbook /home/vagrant/sync/examples/production-components-vm/provisioning/flow-manager.yml --tags="install,configure,deploy"
 
 # Add additional CouchDB data
-
+kanso upload /home/vagrant/sync/testData/security/TestOAuth2DataStore.json http://localhost:5984/auth
+kanso upload /home/vagrant/sync/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json http://localhost:5984/auth
 
