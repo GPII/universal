@@ -4,51 +4,51 @@
         "type": "user",
         "name": "chromehc",
         "password": "chromehc",
-        "defaultGpiiToken": "chrome_high_contrast"
+        "defaultGpiiToken": "review3_chrome_high_contrast"
     },
     {
         "_id": "user-2",
         "type": "user",
         "name": "ma1",
         "password": "ma1",
-        "defaultGpiiToken": "ma1_token"
+        "defaultGpiiToken": "review3_ma1"
     },
     {
         "_id": "user-3",
         "type": "user",
         "name": "ma2",
         "password": "ma2",
-        "defaultGpiiToken": "ma2_token"
+        "defaultGpiiToken": "review3_ma2"
     },
     {
         "_id": "user-4",
         "type": "user",
         "name": "li",
         "password": "li",
-        "defaultGpiiToken": "li_token"
+        "defaultGpiiToken": "li"
     },
     {
         "_id": "gpiiToken-1",
         "type": "gpiiToken",
-        "gpiiToken": "chrome_high_contrast",
+        "gpiiToken": "review3_chrome_high_contrast",
         "userId": "user-1"
     },
     {
         "_id": "gpiiToken-2",
         "type": "gpiiToken",
-        "gpiiToken": "ma1_token",
+        "gpiiToken": "review3_ma1",
         "userId": "user-2"
     },
     {
         "_id": "gpiiToken-3",
         "type": "gpiiToken",
-        "gpiiToken": "ma2_token",
+        "gpiiToken": "review3_ma2",
         "userId": "user-3"
     },
     {
         "_id": "gpiiToken-4",
         "type": "gpiiToken",
-        "gpiiToken": "li_token",
+        "gpiiToken": "li",
         "userId": "user-4"
     },
     {
