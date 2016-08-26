@@ -2,6 +2,12 @@
     "type": "gpii.tests.acceptance.untrusted.browserChannel.config",
     "options": {
         "mainServerPort": 8081,
+        "configs": {
+            "cloudBasedConfig": {
+                "configName": "gpii.config.cloudBased.development",
+                "configPath": "%universal/gpii/configs"
+            }
+        },
         "distributeOptions": {
             "browserChannel.tests.deviceReporter": {
                 "record": "%flowManager/test/data/browserChannel_deviceReporter.json",
@@ -12,13 +18,13 @@
                 "record": "%flowManager/test/data/browserChannel_solutionsRegistry.json",
                 "target": "{that flowManager solutionsRegistryDataSource}.options.path",
                 "priority": "after:flowManager.development.solutions"
-            },        
+            },
             "browserChannel.tests.rawPreferences": {
                 "record": "%flowManager/test/data/%userToken.json",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }
-        }            
+        }
     },
     "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
 }

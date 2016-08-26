@@ -1,56 +1,7 @@
 {
     "type": "gpii.config.cloudBased.development.all.local",
-    "options": {
-        "authDBServerPort": 8058,
-        "pouchConfig": {
-            "databases": {
-                "auth": {
-                    "data": [
-                        "%universal/testData/security/TestOAuth2DataStore.json",
-                        "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
-                    ]
-                }
-            }
-        },
-        "components": {
-            "settingsDir": {
-                "type": "gpii.settingsDir"
-            },
-            "pouchHarness": {
-                "type": "gpii.pouch.harness.persistent",
-                "options": {
-                    "port": "{gpii.config.cloudBased.development.all.local}.options.authDBServerPort",
-                    "baseDir": "@expand:{settingsDir}.getSettingsDir()",
-                    "listeners": {
-                        "onReady.escalate": "{gpii.config.cloudBased.development.all.local}.events.onPouchHarnessReady"
-                    }
-                }
-            }
-        },
-        "events": {
-            "onPouchHarnessReady": null
-        },
-        "distributeOptions": {
-            "distributePouchConfig": {
-                "source": "{that}.options.pouchConfig",
-                "target": "{that gpii.pouch.express}.options"
-            },
-            "flowManager.development.createOnEvent": {
-                "record": "onPouchHarnessReady",
-                "target": "{that flowManager}.createOnEvent"
-            },
-            "preferencesServer.development.createOnEvent": {
-                "record": "onPouchHarnessReady",
-                "target": "{that preferencesServer}.createOnEvent"
-            }
-        }
-    },
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
-        "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
-        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json",
-        "%deviceReporter/configs/gpii.deviceReporter.config.development.json"
-    ],
-    "require": ["gpii-pouchdb"]
+        "%universal/gpii/configs/gpii.config.cloudBased.development.json",
+        "%universal/gpii/configs/gpii.config.cloudBased.pouch.development.json"
+    ]
 }
