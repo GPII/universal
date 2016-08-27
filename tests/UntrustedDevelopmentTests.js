@@ -36,8 +36,8 @@ gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.developme
     });
 
     testDef.gradeNames.push("gpii.test.pouch.pouchTestCaseHolder");
-    gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
 
+    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
     return testDef;
 });
 

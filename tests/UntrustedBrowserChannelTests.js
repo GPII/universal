@@ -34,8 +34,7 @@ gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.
         }
     });
 
-    gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
-
+    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
     return testDef;
 });
 

@@ -39,8 +39,7 @@ gpii.tests.untrusted.userLogonStateChange.testDefs =
             userToken: gpii.tests.userLogonStateChange.userToken
         });
 
-        gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
-
+        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return testDef;
     });
 
