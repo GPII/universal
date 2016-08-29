@@ -36,6 +36,7 @@ require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
 require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
+require("./gpii/node_modules/pouchManager");
 
 gpii.loadTestingSupport = function () {
     require("./gpii/node_modules/testing");

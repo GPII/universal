@@ -1,6 +1,7 @@
 {
     "type": "gpii.config.cloudBased.pouch.development",
     "options": {
+        "gradeNames": "gpii.pouchManager",
         "authDBServerPort": 8058,
         "pouchConfig": {
             "databases": {
@@ -11,25 +12,7 @@
                     ]
                 }
             }
-        },
-        "components": {
-            "settingsDir": {
-                "type": "gpii.settingsDir"
-            },
-            "pouchHarness": {
-                "type": "gpii.pouch.harness.persistent",
-                "options": {
-                    "port": "{gpii.config.cloudBased.development}.options.authDBServerPort",
-                    "baseDir": "@expand:{settingsDir}.getSettingsDir()"
-                }
-            }
-        },
-        "distributeOptions": {
-            "distributePouchConfig": {
-                "source": "{that}.options.pouchConfig",
-                "target": "{that gpii.pouch.express}.options"
-            }
         }
     },
-    "require": ["gpii-pouchdb"]
+    "require": ["gpii-pouchdb", "pouchManager"]
 }

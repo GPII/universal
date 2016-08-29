@@ -1,0 +1,35 @@
+{
+    "type": "gpii.config.cloudBased.pouch.development",
+    "options": {
+        "authDBServerPort": 8058,
+        "pouchConfig": {
+            "databases": {
+                "auth": {
+                    "data": [
+                        "%universal/testData/security/TestOAuth2DataStore.json",
+                        "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
+                    ]
+                }
+            }
+        },
+        "components": {
+            "settingsDir": {
+                "type": "gpii.settingsDir"
+            },
+            "pouchHarness": {
+                "type": "gpii.pouch.harness.persistent",
+                "options": {
+                    "port": "{gpii.config.cloudBased.development}.options.authDBServerPort",
+                    "baseDir": "@expand:{settingsDir}.getSettingsDir()"
+                }
+            }
+        },
+        "distributeOptions": {
+            "distributePouchConfig": {
+                "source": "{that}.options.pouchConfig",
+                "target": "{that gpii.pouch.express}.options"
+            }
+        }
+    },
+    "require": ["gpii-pouchdb"]
+}
