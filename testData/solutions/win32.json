@@ -278,7 +278,7 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\System32\\osk.exe"
+                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\osk.exe"
             }
         ],
         "stop": [
