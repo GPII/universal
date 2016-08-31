@@ -49,6 +49,12 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
         },
+        "supportedSettings": [
+            "appsetting1",
+            "appsetting2",
+            ...
+            "appsettingN"
+        ],
         "capabilities": [],
         "capabilitiesTransformations": {
             "ApplicationSettings": "ApplicationSettings"
@@ -59,12 +65,23 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.HOME}\\mySettings.ini"
         },
+        "supportedSettings": [
+            "appsettingA",
+            "appsettingB",
+            ...
+            "appsettingZ"
+        ],
         "capabilities": []
     }
 }
 ```
 
 The important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+
+Note also the `supportedSettings` option. If a solution only has a single settingsHandler block, all the settings will be passed to that handler by default. But in case there are multiple settingsHandlers, the system needs some way of determining which settings to apply to which handler. The `supportedSettings` directive is used for this:
+* If a `supportedSettings` option is supplied, only those settings listed there will be applied to the settingsHandler
+* If one or more settingsHandlers do not contain a `supportedSettings` directive, all settings will be applied to those handler
+
 
 ### configure, restore, start and stop
 These four lifecycle blocks have different meanings to the system but has the same format. Their meanings are the following:
