@@ -5,7 +5,6 @@ Flow Manager running on the server (incl. dependencies). It will expect a couchD
 
 * The following components are running on Flow Manager:
 ** flowManager
-** rawPreferencesServer (reading preferences from file)
 ** flatMatchMaker
 
 Note that this config expects Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.

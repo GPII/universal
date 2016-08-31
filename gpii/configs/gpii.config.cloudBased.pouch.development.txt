@@ -3,3 +3,5 @@ gpii.config.cloudBased.pouch.development.json
 
 This config acts as a base for `gpii.config.cloudBased.development.all.local`.
 It includes configs to instantiate a pouchDB server as a storage for the authentication server.
+
+The pouchDB is used as the data storage for the authorization server when GPII runs in the development mode.
