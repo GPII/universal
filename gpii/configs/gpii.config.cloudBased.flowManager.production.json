@@ -3,28 +3,21 @@
     "options": {
         "mainServerPort": 8082,
         "authDBServerPort": 5984,
-        "matchMakers": {
-            "flat": {
-                "url": "http://localhost:8082"
-            }
-        },
         "distributeOptions": {
-            "preferencesServer.setUrl": {
-                "record": {
-                    "type": "kettle.dataSource.URL",
-                    "options": {
-                        "url": "http://preferences.gpii.net/preferences/%userToken",
-                        "port": "{kettle.config}.options.mainServerPort"
-                    }
-                 },
-                 "target": "{that flowManager preferencesDataSource}"
+            "preferencesDataSource.production.setUrl": {
+                "record": "http://preferences.gpii.net/preferences/%userToken",
+                 "target": "{that flowManager preferencesDataSource}.options.url",
+                 "priority": "after:preferencesDataSource.setUrl"
+            },
+            "flowManager.production.matchMakers": {
+                "record": "http://localhost:8082",
+                "target": "{that flowManager}.options.matchMakers.flat.url",
+                "priority": "after:flowManager.development.matchMakers"
             }
         }
     },
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.cloudBased.config.production.json",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
-        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.production.config.json"
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json"
     ]
 }
-
