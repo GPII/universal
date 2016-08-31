@@ -22,9 +22,9 @@
         }
     },
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
+        "%flowManager/configs/gpii.flowManager.cloudBased.config.production.json",
         "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
-        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json"
+        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.production.config.json"
     ]
 }
 
