@@ -61,6 +61,7 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
+    "../gpii/node_modules/pouchManager/test/pouchManagerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
