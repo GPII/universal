@@ -15,9 +15,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     $ = fluid.registerNamespace("jQuery"),
-    uuid = require("node-uuid");
+    uuid = uuid || require("node-uuid");
 
-require("../../gpii-oauth2-utilities/src/OAuth2Utilities.js");
+if (!gpii.oauth2.errors) {
+    require("../../gpii-oauth2-utilities/src/OAuth2Utilities.js");
+}
 
 fluid.registerNamespace("gpii.oauth2.dbDataStore");
 

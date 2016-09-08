@@ -15,7 +15,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 
-require("./DbDataStoreUtils.js");
+if (!gpii.oauth2.dbDataStore.docTypes) {
+    require("./DbDataStoreUtils.js");
+}
 
 fluid.defaults("gpii.oauth2.dbDataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
@@ -42,7 +44,8 @@ fluid.defaults("gpii.oauth2.dbDataSource", {
             "": ""
         }
     },
-    // requestUrl needs to be resolved upfront since it contains actual string templates to compose data source url.
+    // requestUrl needs to be resolved upfront because it contains more string templates that need to be replaced at the
+    // next round when kettle.dataSource.URL kicks in to compose the actual URL.
     // An example of requestUrl is "/%id", in which case the expected url should be "%baseUrl:%port/%dbName/%id" instead
     // of having "%requestUrl" embedded. The expander below is to prepare the url that's sensible to kettle.dataSource.
     url: {
