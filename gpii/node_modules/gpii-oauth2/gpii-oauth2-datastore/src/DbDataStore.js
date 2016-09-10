@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 
-if (!gpii.oauth2.dbDataStore.docTypes) {
+if (!gpii.oauth2.dbDataStore) {
     require("./DbDataStoreUtils.js");
 }
 

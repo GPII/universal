@@ -122,8 +122,7 @@ var fluid = fluid || require("infusion");
             onAddAuthorization: [{
                 listener: "gpii.oauth2.authorizationService.findGpiiToken",
                 args: ["{dataStore}", "{arguments}.0"],
-                namespace: "findGpiiToken",
-                priority: "first"
+                namespace: "findGpiiToken"
             }, {
                 listener: "gpii.oauth2.authorizationService.findClient",
                 args: ["{dataStore}", "{arguments}.0"],

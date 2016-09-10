@@ -23,7 +23,9 @@ if (!gpii.oauth2.errors) {
 
 fluid.registerNamespace("gpii.oauth2.dbDataStore");
 
-// All doc types used for saving different records into CouchDB/PouchDB
+// All doc types used for saving different documents into CouchDB/PouchDB
+// See [the documentation of Authorization Server](../../../../../documentation/AuthServer.md)
+// for the field and details of each document type.
 gpii.oauth2.dbDataStore.docTypes = {
     user: "user",
     gpiiToken: "gpiiToken",
@@ -33,11 +35,25 @@ gpii.oauth2.dbDataStore.docTypes = {
     clientCredentialsToken: "clientCredentialsToken"
 };
 
+/*
+ * Operate the kettle dataSource `get` method to retrieve one record. This function provides extra
+ * verification on input required fields. It returns an empty object if the record is not found.
+ * This requires furthur processing besides using the kettle dataSource `notFoundIsEmpty` option because
+ * when retrieving CouchDB using views , an empty `rows` array rather than 404 (not found) http
+ * response code will be received when the record is not found.
+ * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
+ * @param directModel {Object} The direct model expressing the "coordinates" of the model to be fetched
+ * @param valueNotEmpty {String or Array} One or more required field(s)
+ * @param dataProcessFunc (Function) The function to further process the retrieved record when the returned
+ * record is empty
+ * @return {Promise} A promise for the retrieved record
+ */
 gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNotEmpty, dataProcessFunc) {
+    // Remove or rename CouchDB specific fields such as _id, _rev, type
     dataProcessFunc = dataProcessFunc || gpii.oauth2.dbDataStore.cleanUpDoc;
     var promiseTogo = fluid.promise();
 
-    // Verify required field values are provided instead of undefined
+    // Verify required field values. Make sure they are not undefined.
     var emptyFields = gpii.oauth2.dbDataStore.verifyEmptyFields(directModel, valueNotEmpty);
 
     if (emptyFields.length > 0) {
@@ -71,13 +87,14 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
 };
 
 /*
- * Find elements in the valueNotEmpty array if that element matches a path of the give obj and its value
- * is undefined.
- * @obj (Object): The object whose values are checked against undefined.
- * @valueNotEmpty (String or Array): The path name(s) to be used to locate value on the give obj.
- * @return: An array of elements in the valueNotEmpty array provided: 1. the element matches a path name on obj;
- * 2. the corresponding value of that path name is undefined.
- * For example, gpii.oauth2.dbDataStore.verifyEmptyFields({"a": 1}, ["a", "b"]) returns ["b"].
+ * Return a subset of a given array. The elements in the returned array satisfies:
+ * 1. the element isn't used as a path name in the object;
+ * 2. the element matches a path name in the object but the corresponding value is undefined.
+ * Note the given object can NOT be a nested object.
+ * @param obj (Object): The object used for path name check.
+ * @param valueNotEmpty (String or Array): One or a set of path name(s) to look up in the give obj.
+ * @return: An array of element(s) from valueNotEmpty. Those elements
+ * For example, gpii.oauth2.dbDataStore.verifyEmptyFields({"a": 1, "c": undefined}, ["a", "b", "c"]) returns ["b", "c"].
  */
 gpii.oauth2.dbDataStore.verifyEmptyFields = function (obj, valueNotEmpty) {
     var emptyFields = [];
@@ -105,7 +122,7 @@ gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
     return data;
 };
 
-// Handle cases when multiple records to be returned in an array
+// When multiple records are returned, clean them up and return an array with cleaned records.
 gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
     var records = [];
     fluid.each(data, function (row) {
@@ -115,7 +132,14 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
     return records;
 };
 
-// Create a new record
+/* Create a new record
+ * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
+ * @param docType {String} The document type. See gpii.oauth2.dbDataStore.docTypes defined at
+ *  the start of this file for accepted values
+ * @param idName {String} The name for the unique id field. Usually "id".
+ * @param data {Object} The data to be saved in the new record
+ * @return {Promise} A promise for the save response
+*/
 gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
     var promise = fluid.promise();
     // TODO: Requires proper field validation on data instead of only checking against falsy data.
@@ -132,7 +156,14 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
     return promise;
 };
 
-// Update an existing record
+/* Update an existing record
+ * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
+ * @param docType {String} The document type. See gpii.oauth2.dbDataStore.docTypes defined at
+ *  the start of this file for accepted values
+ * @param idName {String} The name for the unique id field. Usually "id".
+ * @param data {Object} The data to be updated
+ * @return {Promise} A promise for the update response
+*/
 gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, data) {
     var directModel = {};
     directModel[idName] = data.id;
@@ -143,28 +174,17 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
     return promise;
 };
 
-// Authorization Decisions
-// -----------------------
-
-// ==== updateAuthDecision()
-gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisionData) {
-    var input = {
-        userId: userId,
-        authDecisionData: authDecisionData
-    };
-    return fluid.promise.fireTransformEvent(that.events.onUpdateAuthDecision, {inputArgs: input});
-};
-
 /*
- * Handles the case where the resolved value of the inputPromise needs to trigger an error of missing documents.
- * When the resolved value exists, process the value with the dataProcessFunc argument and resolved the processed
- * resolve with promiseTogo argument.
- * @inputPromise (Promise object): The input promise object to be processed.
- * @input: The input data.
- * @docType (String): The document type to be reported when the resolved value of inputPromise is undefined.
- * @allowUndefinedValue: Allows the value resolved from the inputPromise to be undefined
+ * Transform a promise whose resolved value should not be empty. If the resoved value is empty (meaning `undefined`), reject
+ * with a missing document error in the returned promise. If the resolved value is not empty, extend it with an input object
+ * and resolve the extended result in the returned promise.
+ * @inputPromise {Promise} The input promise
+ * @input {Object} The input data to be extended
+ * @docType {String}: The document type. See gpii.oauth2.dbDataStore.docTypes defined at the start of this file for accepted
+ *  values. Only used when the resolved value is missing, meaning `undefined`
+ * @allowUndefinedValue: A flag indicating whether to check the resolved value of inputPromise is missing
  *
- * @return (Promise object): A promise object that carries the result of this function. The result is either a value
+ * @return {Promise} A promise object that carries the result of this function. The result is either a value
  * that gets resolved into the returned promise or a rejection with a missing doc error.
  */
 gpii.oauth2.dbDataStore.handlePromiseWithMissingDoc = function (inputPromise, input, docType, allowUndefinedValue) {
@@ -187,6 +207,19 @@ gpii.oauth2.dbDataStore.handlePromiseWithMissingDoc = function (inputPromise, in
         promiseTogo.reject(err);
     });
     return promiseTogo;
+};
+
+// Authorization Decisions
+// -----------------------
+
+// ==== updateAuthDecision()
+// Operate the transforming promise workflow triggered by onUpdateAuthDecision event.
+gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisionData) {
+    var input = {
+        userId: userId,
+        authDecisionData: authDecisionData
+    };
+    return fluid.promise.fireTransformEvent(that.events.onUpdateAuthDecision, {inputArgs: input});
 };
 
 gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, input) {
@@ -219,6 +252,7 @@ gpii.oauth2.dbDataStore.doUpdate = function (dataSource, gpiiTokenRecord) {
 // ==== End of updateAuthDecision()
 
 // ==== revokeAuthDecision()
+// Operate the transforming promise workflow triggered by onRevokeAuthDecision event.
 gpii.oauth2.dbDataStore.revokeAuthDecision = function (that, revokeFunc, userId, authDecisionId) {
     var input = {
         userId: userId,
@@ -239,6 +273,7 @@ gpii.oauth2.dbDataStore.setRevoke = function (data) {
 // ------------
 
 // ==== findAccessTokenByOAuth2ClientIdAndGpiiToken()
+// Operate the transforming promise workflow triggered by onFindAccessTokenByOAuth2ClientIdAndGpiiToken event.
 gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (that, oauth2ClientId, gpiiToken) {
     var input = {
         oauth2ClientId: oauth2ClientId,
@@ -368,6 +403,7 @@ gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, cl
 };
 
 // ==== revokeClientCredentialsToken()
+// Operate the transforming promise workflow triggered by onRevokeClientCredentialsToken event.
 gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCredentialsTokenId) {
     return fluid.promise.fireTransformEvent(that.events.onRevokeClientCredentialsToken, clientCredentialsTokenId);
 };
@@ -387,6 +423,7 @@ gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSourc
 };
 // ==== End of revokeClientCredentialsToken()
 
+// A post process function for API findAuthByClientCredentialsAccessToken().
 gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess = function (data) {
     if (data.doc && data.value) {
         return {
