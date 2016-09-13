@@ -63,7 +63,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "jfw.exe"
             }
         ],
@@ -244,7 +244,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "Magnify.exe"
             }
         ],
@@ -283,7 +283,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "osk.exe"
             }
         ],
@@ -654,10 +654,10 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "nvda_service.exe"
             },{
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "nvda.exe"
             }
         ],
@@ -701,7 +701,7 @@
         ],
         "stop": [
             {
-                    "type": "gpii.windows.killProcessByName",
+                    "type": "gpii.windows.closeProcessByName",
                     "filename": "firefox.exe"
             }
         ],
@@ -740,7 +740,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
             }
         ],
@@ -779,7 +779,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
             }
         ],
@@ -877,7 +877,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
             }
         ],
