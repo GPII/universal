@@ -96,7 +96,7 @@
                                 "verdana": "Verdana"
                             },
                             "noMatch": {
-                                "undefinedOuputValue": true
+                                "outputUndefinedValue": true
                             }
                         }
                     },
@@ -110,7 +110,7 @@
                                 "white": "White"
                             },
                             "noMatch": {
-                                "undefinedOuputValue": true
+                                "outputUndefinedValue": true
                             }
                         }
                     },
@@ -124,7 +124,7 @@
                                 "white": "White"
                             },
                             "noMatch": {
-                                "undefinedOuputValue": true
+                                "outputUndefinedValue": true
                             }
                         }
                   },
