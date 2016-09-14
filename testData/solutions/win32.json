@@ -946,7 +946,7 @@
     },
 
     "com.microsoft.windows.stickyKeys": {
-        "name": "Windows Keyboard - Sticky",
+        "name": "Windows StickyKeys",
         "contexts": {
             "OS": [
                 {
@@ -1002,7 +1002,7 @@
     },
 
     "com.microsoft.windows.filterKeys": {
-        "name": "Windows Keyboard - Filter Keys",
+        "name": "Windows FilterKeys",
         "contexts": {
             "OS": [
                 {
@@ -1100,6 +1100,106 @@
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
                                 "input": "pvParam.iBounceMSec"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.mouseKeys": {
+        "name": "Windows MouseKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETMOUSEKEYS",
+                    "setAction": "SPI_SETMOUSEKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "MOUSEKEYS"
+                    },
+                    "verifySettings": true
+                },
+                "capabilities": [
+                    "applications.com\\.microsoft\\.windows\\.mouseKeys\\.id"
+                ],
+                "capabilitiesTransformations": {
+                    "MouseKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
+                        }
+                    },
+                    "MaxSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
+                            "factor": 350,
+                            "offset": 10,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iMaxSpeed"
+                            }
+                        }
+                    },
+                    "Acceleration": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
+                                    "factor": 1000,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
+                                    "factor": 1000,
+                                    "offset": 1000,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "operator": "+"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iTimeToMaxSpeed"
                             }
                         }
                     }
