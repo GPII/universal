@@ -12,7 +12,7 @@
         "node-uuid": "1.4.7",
         "semver": "1.1.4",
         "xml-mapping": "1.2.0",
-        "kettle": "1.1.0",
+        "kettle": "git://github.com/cindyli/kettle.git#5f4dfaf45bce6d5c581f2dc44d6a7f45e80e625d",
         "express": "4.13.3",
         "body-parser": "1.13.3",
         "connect-ensure-login": "0.1.1",
@@ -30,7 +30,11 @@
         "grunt": "1.0.1",
         "fluid-grunt-eslint": "18.1.1",
         "grunt-jsonlint": "1.0.4",
-        "grunt-shell": "1.3.0"
+        "grunt-shell": "1.3.0",
+        "browserify": "13.1.0",
+        "http-browserify": "1.7.0",
+        "https-browserify": "0.0.1",
+        "url": "0.11.0"
     },
     "license" : "BSD-3-Clause",
     "keywords": [
@@ -50,6 +54,10 @@
     },
     "scripts": {
         "test": "node tests/all-tests.js",
-        "start": "node gpii.js"
+        "start": "node gpii.js",
+        "browserify": "mkdir browserify; npm run browserify:http; npm run browserify:https; npm run browserify:url",
+        "browserify:http": "node node_modules/browserify/bin/cmd.js -s http node_modules/http-browserify/index.js -o browserify/http.js ",
+        "browserify:https": "node node_modules/browserify/bin/cmd.js -s https node_modules/https-browserify/index.js -o browserify/https.js ",
+        "browserify:url": "node node_modules/browserify/bin/cmd.js -s urlModule node_modules/url/url.js -o browserify/urlModule.js "
     }
 }
