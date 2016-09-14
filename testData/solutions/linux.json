@@ -37,30 +37,17 @@
                     "screen-position": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
-                            "defaultInputValue": "Custom",
-                            "options": {
-                                "FullScreen": {
-                                    "outputValue": "full-screen"
-                                },
-                                "Lens": {
-                                    "outputValue": "full-screen"
-                                },
-                                "LeftHalf": {
-                                    "outputValue": "left-half"
-                                },
-                                "RightHalf": {
-                                    "outputValue": "right-half"
-                                },
-                                "TopHalf": {
-                                    "outputValue": "top-half"
-                                },
-                                "BottomHalf": {
-                                    "outputValue": "bottom-half"
-                                },
-                                "Custom": {
-                                    "outputValue": "full-screen"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "match": {
+                                "FullScreen": "full-screen",
+                                "Lens": "full-screen",
+                                "LeftHalf": "left-half",
+                                "RightHalf": "right-half",
+                                "TopHalf": "top-half",
+                                "BottomHalf": "bottom-half"
+                            },
+                            "noMatch": {
+                                "outputValue": "full-screen"
                             }
                         }
                     }
@@ -427,15 +414,13 @@
                     "sayAllStyle": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/readingUnit",
-                            "defaultInputValue": "sentence",
-                            "options": {
-                                "line": {
-                                    "outputValue": 0
-                                },
-                                "sentence": {
-                                    "outputValue": 1
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "match": {
+                                "line": 0,
+                                "sentence": 1
+                            },
+                            "noMatch": {
+                                "outputValue": 1
                             }
                         }
                     },
@@ -492,9 +477,14 @@
                     "voices\\.default\\.family": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
-                            "defaultInputValue": "en",
-                            "options": {
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "noMatch": {
+                                "outputValue": {
+                                    "locale": "en",
+                                    "name": "english"
+                                }
+                            },
+                            "match": {
                                 "en": {
                                     "outputValue": {
                                         "locale": "en",
@@ -867,21 +857,15 @@
                     "verbalizePunctuationStyle": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
-                            "defaultInputValue": "most",
-                            "options": {
-                                "none": {
-                                    "outputValue": 3
-                                },
-                                "some": {
-                                    "outputValue": 2
-                                },
-                                "most": {
-                                    "outputValue": 1
-                                },
-                                "all": {
-                                    "outputValue": 0
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 3,
+                                "some": 2,
+                                "most": 1,
+                                "all": 0
+                            },
+                            "noMatch": {
+                                "outputValue": 1
                             }
                         }
                     }
