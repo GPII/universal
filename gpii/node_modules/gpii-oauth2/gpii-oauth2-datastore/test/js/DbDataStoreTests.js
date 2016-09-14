@@ -8,12 +8,11 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit */
-
 /* eslint-env browser */
 /* eslint strict: ["error", "function"] */
 
-var fluid = fluid || require("infusion");
+var fluid = fluid || require("infusion"),
+    gpii = fluid.registerNamespace("gpii");;
 
 (function () {
 
@@ -34,17 +33,28 @@ var fluid = fluid || require("infusion");
     });
 
     fluid.defaults("gpii.tests.oauth2.dbDataStoreWithViews", {
-        gradeNames: ["fluid.components"],
+        gradeNames: ["fluid.component"],
         dbViewsLocation: null,   // provided by integrators
         components: {
             dbViewsLoader: {
-                type: "fluid.resouceLoader",
+                type: "fluid.component",
                 options: {
                     resources: {
-                        dbViews: "{dbDataStoreWithViews}.options.dbViewsLocation"
+                        dbViews: {
+                            href: "{dbDataStoreWithViews}.options.dbViewsLocation",
+                            options: {
+                                dataType: "json"
+                            }
+                        }
                     },
                     events: {
-                        onResourcesLoaded: "{dbDataStoreWithViews}.events.onDbViewsLoaded"
+                        onDbViewsLoaded: "{dbDataStoreWithViews}.events.onDbViewsLoaded"
+                    },
+                    listeners: {
+                        "onCreate.fetchDbViews": {
+                            listener: "gpii.tests.oauth2.dbDataStoreWithViews.fetchDbViews",
+                            args: ["{that}"]
+                        }
                     }
                 }
             },
@@ -52,12 +62,7 @@ var fluid = fluid || require("infusion");
                 type: "gpii.tests.oauth2.dbDataStore",
                 createOnEvent: "onDbViewsLoaded",
                 options: {
-                    listeners: {
-                        "onCreate.debug": {
-                            listener: "console.log",
-                            args: ["{that}"]
-                        }
-                    }
+                    dbViews: "{arguments}.0"
                 }
             }
         },
@@ -65,6 +70,12 @@ var fluid = fluid || require("infusion");
             onDbViewsLoaded: null
         }
     });
+
+    gpii.tests.oauth2.dbDataStoreWithViews.fetchDbViews = function (that) {
+        fluid.fetchResources(that.options.resources, function (resourceSpecs) {
+            that.events.onDbViewsLoaded.fire(resourceSpecs.dbViews.resourceText);
+        });
+    };
 
     var dbDataStore = gpii.tests.oauth2.dbDataStoreWithViews({
         dbViewsLocation: "../../dbViews/views.json",
