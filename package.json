@@ -6,7 +6,7 @@
     "bugs": "http://issues.gpii.net/browse/GPII",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "2.0.0-dev.20160519T222603Z.754d2c6",
+        "infusion": "2.0.0-dev.20160902T155354Z.b963420",
         "node-jqunit": "1.1.4",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "node-uuid": "1.4.0",
@@ -27,7 +27,7 @@
         "grunt": "1.0.1",
         "fluid-grunt-eslint": "18.1.1",
         "grunt-jsonlint": "1.0.4",
-        "grunt-shell": "1.3.0"        
+        "grunt-shell": "1.3.0"
     },
     "license" : "BSD-3-Clause",
     "keywords": [

@@ -37,30 +37,17 @@
                     "screen-position": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
-                            "defaultInputValue": "Custom",
-                            "options": {
-                                "FullScreen": {
-                                    "outputValue": "full-screen"
-                                },
-                                "Lens": {
-                                    "outputValue": "full-screen"
-                                },
-                                "LeftHalf": {
-                                    "outputValue": "left-half"
-                                },
-                                "RightHalf": {
-                                    "outputValue": "right-half"
-                                },
-                                "TopHalf": {
-                                    "outputValue": "top-half"
-                                },
-                                "BottomHalf": {
-                                    "outputValue": "bottom-half"
-                                },
-                                "Custom": {
-                                    "outputValue": "full-screen"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "match": {
+                                "FullScreen": "full-screen",
+                                "Lens": "full-screen",
+                                "LeftHalf": "left-half",
+                                "RightHalf": "right-half",
+                                "TopHalf": "top-half",
+                                "BottomHalf": "bottom-half"
+                            },
+                            "noMatch": {
+                                "outputValue": "full-screen"
                             }
                         }
                     }
@@ -71,34 +58,22 @@
                     "transform": [
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "screen-position",
+                            "defaultInputPath": "screen-position",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
-                            "options": {
-                                "full-screen": {
-                                    "outputValue": "FullScreen"
-                                },
-                                "left-half": {
-                                    "outputValue": "LeftHalf"
-                                },
-                                "right-half": {
-                                    "outputValue": "RightHalf"
-                                },
-                                "top-half": {
-                                    "outputValue": "TopHalf"
-                                },
-                                "bottom-half": {
-                                    "outputValue": "BottomHalf"
-                                }
+                            "match": {
+                                "full-screen": "FullScreen",
+                                "left-half": "LeftHalf",
+                                "right-half": "RightHalf",
+                                "top-half": "TopHalf",
+                                "bottom-half": "BottomHalf"
                             }
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/tracking",
-                            "inputPath": "mouse-tracking",
-                            "options": {
-                                "centered": {
-                                    "outputValue": "mouse"
-                                }
+                            "defaultInputPath": "mouse-tracking",
+                            "match": {
+                                "centered": "mouse"
                             }
                         }
                     ]
@@ -504,15 +479,13 @@
                     "sayAllStyle": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/readingUnit",
-                            "defaultInputValue": "sentence",
-                            "options": {
-                                "line": {
-                                    "outputValue": 0
-                                },
-                                "sentence": {
-                                    "outputValue": 1
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "match": {
+                                "line": 0,
+                                "sentence": 1
+                            },
+                            "noMatch": {
+                                "outputValue": 1
                             }
                         }
                     },
@@ -569,9 +542,14 @@
                     "voices\\.default\\.family": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
-                            "defaultInputValue": "en",
-                            "options": {
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "noMatch": {
+                                "outputValue": {
+                                    "locale": "en",
+                                    "name": "english"
+                                }
+                            },
+                            "match": {
                                 "en": {
                                     "outputValue": {
                                         "locale": "en",
@@ -944,21 +922,15 @@
                     "verbalizePunctuationStyle": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
-                            "defaultInputValue": "most",
-                            "options": {
-                                "none": {
-                                    "outputValue": 3
-                                },
-                                "some": {
-                                    "outputValue": 2
-                                },
-                                "most": {
-                                    "outputValue": 1
-                                },
-                                "all": {
-                                    "outputValue": 0
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 3,
+                                "some": 2,
+                                "most": 1,
+                                "all": 0
+                            },
+                            "noMatch": {
+                                "outputValue": 1
                             }
                         }
                     }
@@ -972,36 +944,26 @@
                     "transform": [
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "sayAllStyle",
+                            "defaultInputPath": "sayAllStyle",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/readingUnit",
-                            "defaultInputValue": "1",
-                            "options": {
-                                "0": {
-                                    "outputValue": "line"
-                                },
-                                "1": {
-                                    "outputValue": "sentence"
-                                }
+                            "match": {
+                                "0": "line",
+                                "1": "sentence"
+                            },
+                            "noMatch": {
+                                "outputValue": "sentence"
                             }
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "verbalizePunctuationStyle",
+                            "defaultInputPath": "verbalizePunctuationStyle",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
                             "defaultInputValue": "1",
-                            "options": {
-                                "3": {
-                                    "outputValue": "none"
-                                },
-                                "2": {
-                                    "outputValue": "some"
-                                },
-                                "1": {
-                                    "outputValue": "most"
-                                },
-                                "0": {
-                                    "outputValue": "all"
-                                }
+                            "match": {
+                                "3": "none",
+                                "2": "some",
+                                "1": "most",
+                                "0": "all"
                             }
                         },
                         {
@@ -1041,65 +1003,66 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "voices\\.default\\.family.name",
+                            "defaultInputPath": "voices\\.default\\.family.name",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
-                            "defaultInputValue": "en",
-                            "options": {
-                                "english": { "outputValue": "en" },
-                                "english-us": { "outputValue": "en-US" },
-                                "en-scottish": { "outputValue": "en-scotland" },
-                                "en-westindies": { "outputValue": "en-BZ" },
-                                "afrikaans": { "outputValue": "af" },
-                                "bulgarian-test": { "outputValue": "bg" },
-                                "bosnian": { "outputValue": "bs" },
-                                "catalan": { "outputValue": "ca" },
-                                "czech": { "outputValue": "cs" },
-                                "welsh-test": { "outputValue": "cy" },
-                                "danish": { "outputValue": "da" },
-                                "german": { "outputValue": "de" },
-                                "greek": { "outputValue": "el" },
-                                "greek-ancient": { "outputValue": "grc" },
-                                "esperanto": { "outputValue": "eo" },
-                                "spanish": { "outputValue": "es" },
-                                "spanish-latin-american": { "outputValue": "es-419" },
-                                "estonian": { "outputValue": "et" },
-                                "finnish": { "outputValue": "fi" },
-                                "french": { "outputValue": "fr" },
-                                "hindi": { "outputValue": "hi" },
-                                "croatian": { "outputValue": "hr" },
-                                "hungarian": { "outputValue": "hu" },
-                                "armenian": { "outputValue": "hy" },
-                                "armenian-west": { "outputValue": "hy-arevmda" },
-                                "indonesian-test": { "outputValue": "id" },
-                                "icelandic-test": { "outputValue": "is" },
-                                "italian": { "outputValue": "it" },
-                                "lojban": { "outputValue": "jbo" },
-                                "georgian-test": { "outputValue": "ka" },
-                                "kannada": { "outputValue": "kn" },
-                                "kurdish": { "outputValue": "ku" },
-                                "latin": { "outputValue": "la" },
-                                "latvian": { "outputValue": "lv" },
-                                "macedonian-test": { "outputValue": "mk" },
-                                "malayalam": { "outputValue": "ml" },
-                                "dutch-test": { "outputValue": "nl" },
-                                "norwegian": { "outputValue": "no" },
-                                "papiamento-test": { "outputValue": "pap" },
-                                "polish": { "outputValue": "pl" },
-                                "brazil": { "outputValue": "pt-BR" },
-                                "portugal": { "outputValue": "pt-PT" },
-                                "romanian": { "outputValue": "ro" },
-                                "russian_test": { "outputValue": "ru" },
-                                "slovak": { "outputValue": "sk" },
-                                "albanian": { "outputValue": "sq" },
-                                "serbian": { "outputValue": "sr" },
-                                "swedish": { "outputValue": "sv" },
-                                "swahili-test": { "outputValue": "sw" },
-                                "tamil": { "outputValue": "ta" },
-                                "turkish": { "outputValue": "tr" },
-                                "vietnam": { "outputValue": "vi" },
-                                "Mandarin": { "outputValue": "zh-cmn" },
-                                "cantonese": { "outputValue": "zh-yue" }
-                            }
+                            "noMatch": {
+                                "outputValue": "en"
+                            },
+                            "match": {
+                                "english": "en" ,
+                                "english-us": "en-US" ,
+                                "en-scottish": "en-scotland" ,
+                                "en-westindies": "en-BZ" ,
+                                "afrikaans": "af" ,
+                                "bulgarian-test": "bg" ,
+                                "bosnian": "bs" ,
+                                "catalan": "ca" ,
+                                "czech": "cs" ,
+                                "welsh-test": "cy" ,
+                                "danish": "da" ,
+                                "german": "de" ,
+                                "greek": "el" ,
+                                "greek-ancient": "grc" ,
+                                "esperanto": "eo" ,
+                                "spanish": "es" ,
+                                "spanish-latin-american": "es-419" ,
+                                "estonian": "et" ,
+                                "finnish": "fi" ,
+                                "french": "fr" ,
+                                "hindi": "hi" ,
+                                "croatian": "hr" ,
+                                "hungarian": "hu" ,
+                                "armenian": "hy" ,
+                                "armenian-west": "hy-arevmda" ,
+                                "indonesian-test": "id" ,
+                                "icelandic-test": "is" ,
+                                "italian": "it" ,
+                                "lojban": "jbo" ,
+                                "georgian-test": "ka" ,
+                                "kannada": "kn" ,
+                                "kurdish": "ku" ,
+                                "latin": "la" ,
+                                "latvian": "lv" ,
+                                "macedonian-test": "mk" ,
+                                "malayalam": "ml" ,
+                                "dutch-test": "nl" ,
+                                "norwegian": "no" ,
+                                "papiamento-test": "pap" ,
+                                "polish": "pl" ,
+                                "brazil": "pt-BR" ,
+                                "portugal": "pt-PT" ,
+                                "romanian": "ro" ,
+                                "russian_test": "ru" ,
+                                "slovak": "sk" ,
+                                "albanian": "sq" ,
+                                "serbian": "sr" ,
+                                "swedish": "sv" ,
+                                "swahili-test": "sw" ,
+                                "tamil": "ta" ,
+                                "turkish": "tr" ,
+                                "vietnam": "vi" ,
+                                "Mandarin": "zh-cmn" ,
+                                "cantonese": "zh-yue" }
                         }
                     ]
                 }
