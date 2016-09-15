@@ -23,6 +23,8 @@ More details are given below on solution types, as well as the two disposition m
 ## Solution Types:
 To ensure that several conflicting solutions (e.g. two screenreaders) are not launched, "Types" are calculated for each solution, based on the capabilities they have (and in the future, on their explicitly stated types). The inference of solution type based on capabilities is based on the "apptology" tranformation, from the "flat" format into a solution type ontology. In the matchmaking process, each time a solution is 'accepted', any other conflicting solutions (i.e. of the same type) will be rejected.
 
+The apptology is described in more details here: [Apptology.md](Apptology.md).
+
 ## Disposing from prioriy:
 Explicit priorities are declared in the NP sets metadata section and will always be a floating point value of 1024 or more. Implicit priorities are deduced from application specific settings. When a user has application specific settings for a solution a priority of 512 is set for that solution.
 
