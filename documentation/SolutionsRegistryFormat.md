@@ -144,9 +144,9 @@ This directive is used to detect whether a solution is installed. If any of thes
 ```
 
 ####isConfigurable
-This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where e.g. a configuration file needs to be present, a wizard needs to be run on the first launch, etc. Each of the blocks will be evaluated, if *any* of them evaluates to true, the solution is considered configurable. The absense of an `isConfigurable` block is also interpreted as the solution being configurable.
+This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where e.g. a configuration file needs to be present, a wizard needs to be run on the first launch, etc. Each of the blocks will be evaluated, if *any* of them evaluates to true, the solution is considered configurable. The absence of an `isConfigurable` block is also interpreted as the solution being configurable.
 
-If a solution is not configurable, the `makeConfigurable` block will be executed (see below).
+If a solution is not configurable, the `makeConfigurable` block will be executed immediately following the `isConfigurable` check (see below).
 
 **Example Entry**:
 ```
@@ -159,7 +159,7 @@ If a solution is not configurable, the `makeConfigurable` block will be executed
 ```
 
 ####makeConfigurable
-Is the actions that need to be taken to make the application configurable (such as running a wizard, creating a default configuration file, adding a new system user, etc).
+Is the actions that need to be taken to make the application configurable (such as running a wizard, creating a default configuration file, adding a new system user, etc). This will be triggered by the system if `isConfigurable` has evaluated to false and run immediately following the `isConfigurable` check.
 
 **Example Entry**:
 ```
