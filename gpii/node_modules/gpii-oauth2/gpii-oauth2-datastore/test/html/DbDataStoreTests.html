@@ -35,7 +35,7 @@
         <script src="../../../../../../node_modules/node-uuid/uuid.js"></script>
 
         <!-- The node jsonlint browser equivalent dependency -->
-        <script src="../../../../../../node_modules/jsonlint/web/jsonlint.js"></script>
+        <script src="../../../../../../node_modules/grunt-jsonlint/node_modules/jsonlint/web/jsonlint.js"></script>
 
         <!-- The browser equivalent for node modules required by kettle -->
         <script src="../../../../../../browserify/http.js"></script>
@@ -43,14 +43,15 @@
         <script src="../../../../../../browserify/urlModule.js"></script>
 
         <!-- The kettle browser equivalent dependency -->
+        <script src="../../../../../../node_modules/kettle/lib/kettleRequest.js"></script>
         <script src="../../../../../../node_modules/kettle/lib/dataSource-core.js"></script>
         <script src="../../../../../../node_modules/kettle/lib/dataSource-url.js"></script>
 
         <!-- The client-side PouchDB dependencies -->
-        <script src="../../../../../../node_modules/pouchdb/dist/pouchdb.js"></script>
+        <script src="../../../../../../node_modules/gpii-pouchdb/node_modules/pouchdb/dist/pouchdb.js"></script>
 
         <!-- The gpii-express dependency for test harness -->
-        <script src="../../../../../../node_modules/gpii-express/tests/js/lib/test-helpers.js"></script>
+        <script src="../../../../../../node_modules/gpii-pouchdb/node_modules/gpii-express/tests/js/lib/test-helpers.js"></script>
 
         <!-- Th gpii-pouchdb dependencies for gpii.pouchdb API -->
         <script src="../../../../../../node_modules/gpii-pouchdb/src/test/common-helpers.js"></script>
@@ -61,7 +62,7 @@
         <script src="../../src/DataStore.js"></script>
         <script src="../../src/DbDataStoreUtils.js"></script>
         <script src="../../src/DbDataStore.js"></script>
-        <script src="../js/DataSource-PouchDB.js"></script>
+        <script src="../js/DataSource-pouchDB.js"></script>
         <script src="../js/DbDataStoreTests.js"></script>
     </head>
 
