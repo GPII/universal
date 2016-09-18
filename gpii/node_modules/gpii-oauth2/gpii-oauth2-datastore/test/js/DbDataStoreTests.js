@@ -68,9 +68,13 @@ var fluid = fluid || require("infusion"),
                 options: {
                     dbViews: "{arguments}.0",
                     distributeOptions: {
-                        "pouchDBGrade": {
+                        "pouchDBReadGrade": {
                             record: "gpii.dataSource.pouchDB",
                             target: "{that gpii.oauth2.dbDataSource}.options.gradeNames"
+                        },
+                        "pouchDBWriteGrade": {
+                            record: "gpii.dataSource.pouchDB.writable",
+                            target: "{that gpii.oauth2.dbDataSource.writable}.options.gradeNames"
                         },
                         "dbViews": {
                             record: "{that}.options.dbViews",
@@ -132,6 +136,18 @@ var fluid = fluid || require("infusion"),
                 "allowAddPrefs": true
             },
             {
+                "_id": "authDecision-1",
+                "type": "authDecision",
+                "gpiiToken": "chrome_high_contrast",
+                "clientId": "client-1",
+                "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
+                "accessToken": "chrome_high_contrast_access_token",
+                "selectedPreferences": {
+                    "": true
+                },
+                "revoked": false
+            },
+            {
                 "_id": "clientCredentialsToken-1",
                 "type": "clientCredentialsToken",
                 "clientId": "client-2",
@@ -145,7 +161,9 @@ var fluid = fluid || require("infusion"),
 
     gpii.tests.oauth2.pouchBackedDataStore.test = function (that) {
         // var promiseTogo = that.findUserById("user-1");
-        var promiseTogo = that.findAuthByClientCredentialsAccessToken("firstDiscovery_access_token");
+        // var promiseTogo = that.findAuthDecisionById("authDecision-1");
+        var promiseTogo = that.saveAuthCode("authDecision-1", "aaa");
+        // var promiseTogo = that.findAuthByClientCredentialsAccessToken("firstDiscovery_access_token");
         promiseTogo.then(function (result) {
             console.log("result: ", result);
         }, function (err) {
