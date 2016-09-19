@@ -161,14 +161,23 @@ var fluid = fluid || require("infusion"),
 
     gpii.tests.oauth2.pouchBackedDataStore.test = function (that) {
         // var promiseTogo = that.findUserById("user-1");
-        // var promiseTogo = that.findAuthDecisionById("authDecision-1");
-        var promiseTogo = that.saveAuthCode("authDecision-1", "aaa");
         // var promiseTogo = that.findAuthByClientCredentialsAccessToken("firstDiscovery_access_token");
+        var promiseTogo = that.saveAuthCode("authDecision-1", "aaa");
         promiseTogo.then(function (result) {
+            console.log("saveResult: ", result);
+            var getPromise = that.findAuthDecisionById(result.id);
+            getPromise.then(function (getResult) {
+                console.log("getResult: ", getResult);
+            });
             console.log("result: ", result);
         }, function (err) {
             console.log("err: ", err);
         });
+        // promiseTogo.then(function (result) {
+        //     console.log("result: ", result);
+        // }, function (err) {
+        //     console.log("err: ", err);
+        // });
     };
 
 })();

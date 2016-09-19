@@ -20,7 +20,7 @@ var fluid = fluid || require("infusion");
     "use strict";
 
     fluid.defaults("gpii.dataSource.pouchDB", {
-        gradeNames: ["kettle.dataSource"],
+        gradeNames: ["kettle.dataSource.URL"],
         invokers: {
             getImpl: {
                 funcName: "gpii.dataSource.pouchDB.handle",
@@ -36,10 +36,10 @@ var fluid = fluid || require("infusion");
     });
 
     fluid.defaults("gpii.dataSource.pouchDB.writable", {
-        gradeNames: ["kettle.dataSource.writable"],
+        gradeNames: ["kettle.dataSource.URL.writable"],
         invokers: {
             setImpl: {
-                funcName: "kettle.dataSource.pouchDB.handle",
+                funcName: "gpii.dataSource.pouchDB.handle",
                 args: ["{that}", "{gpii.pouch}", "{arguments}.0", "{arguments}.1", "{arguments}.2"] // options, directModel, data
             }
         },
@@ -54,6 +54,7 @@ var fluid = fluid || require("infusion");
     fluid.makeGradeLinkage("gpii.dataSource.pouchDB.linkage", ["gpii.dataSource.writable", "gpii.dataSource.pouchDB"], "gpii.dataSource.pouchDB.writable");
 
     // Match the url with the _id field of the view list to determine if this url is to query by a view or an document id
+    // The string to match is "_design/views" in case of the views definition for the auth server
     gpii.dataSource.pouchDB.isQueryView = function (dbViews, url) {
         var viewIdentifier = dbViews[0]._id;
         return url.indexOf(viewIdentifier) !== -1;
@@ -77,20 +78,19 @@ var fluid = fluid || require("infusion");
     gpii.dataSource.pouchDB.decodeView = function (url) {
         var match = url.match(/(.*)\/(.*)\?(.*)/);
 
-        var params = decodeURI(match[3]).split("&");
-        var viewOptions = {};
-
-        fluid.each(params, function (param) {
-            var key, value;
-            [key, value] = param.split("=");
-            value = key === "include_docs" ? Boolean(value) : value.replace(/\"/g, "");
-            viewOptions[key] = value;
-        });
-
         return {
             viewName: match[2],
-            viewOptions: viewOptions
+            viewOptions: gpii.express.querystring.decode(match[3])
         };
+    };
+
+    /* Strip out the leading "/" to return the document id.
+     * @param url {String} An URL path.
+     * @return {String} A string with the leading "/" being stripped.
+     * In an example of the input "/user-1", returns "user-1".
+     */
+    gpii.dataSource.pouchDB.getDocId = function (url) {
+        return url.substring(1);
     };
 
     gpii.dataSource.pouchDB.handle.pouchDB = function (that, pouchDB, options, url, data) {
@@ -110,12 +110,12 @@ var fluid = fluid || require("infusion");
 
                 promiseQuery = pouchDB.query(viewFunc, decodedViewInfo.viewOptions);
             } else {
-                // A query by a direct document id
-                var id = url.substring(1);  // strip out the leading "/"
+                // A query by a document id
+                var id = gpii.dataSource.pouchDB.getDocId(url);
                 promiseQuery = pouchDB.get(id);
             }
 
-            // Handle the "notFoundIsEmpty" option to return undefined when no record found
+            // Handle the "notFoundIsEmpty" option to return undefined when no record is found
             promiseQuery.then(function (data) {
                 promiseTogo.resolve(data);
             }, function(err) {
@@ -128,6 +128,10 @@ var fluid = fluid || require("infusion");
         }
 
         if (options.operation === "set") {
+            var id = gpii.dataSource.pouchDB.getDocId(url);
+            if (!data._id) {
+                $.extend(data, {_id: id});
+            }
             promiseTogo = pouchDB.put(data);
         }
 
