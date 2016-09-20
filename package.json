@@ -27,7 +27,7 @@
     },
     "devDependencies": {
         "grunt": "1.0.1",
-        "fluid-grunt-eslint": "18.1.1",
+        "fluid-grunt-eslint": "18.1.2",
         "grunt-jsonlint": "1.0.4",
         "grunt-shell": "1.3.0"        
     },

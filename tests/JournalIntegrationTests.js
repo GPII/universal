@@ -95,7 +95,7 @@ fluid.defaults("gpii.tests.journal.testCaseHolder", {
         restoreJournalRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/journal/restore/%journalId",
+                path: "/journal/restore/%journalId"
             }
         },
         listJournalsRequest: {
@@ -202,9 +202,9 @@ gpii.tests.journal.checkJournalsList = function (markup, component) {
 };
 
 // Stashes the special members used by gpii.test.checkConfiguration into the testCaseHolder
-gpii.tests.journal.stashInitial = function (settingsHandlers, settingsStore, testCaseHolder) {
+gpii.tests.journal.stashInitial = function (settingsHandlersPayload, settingsStore, testCaseHolder) {
     // Like the effect of gpii.test.snapshotSettings
-    settingsStore.orig = fluid.transform(settingsHandlers, gpii.settingsHandlers.extractSettingsBlocks);
+    settingsStore.orig = fluid.transform(settingsHandlersPayload, gpii.settingsHandlers.extractSettingsBlocks);
     // Like the effect of gpii.test.expandSettings with 2 blocks missing
     var settingsHandlers = fluid.copy(testCaseHolder.options.settingsHandlers);
     // We eliminate the last blocks since our initial settings state does not include them, and the blocks
