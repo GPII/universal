@@ -8,17 +8,20 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit */
+/* global $ */
 
 /* eslint-env browser */
 /* eslint strict: ["error", "function"] */
 
 var fluid = fluid || require("infusion");
+var gpii = fluid.registerNamespace("gpii");
 
 (function () {
 
     "use strict";
 
+    // The data source is to support the in-browser testing using pouchDB as the backend data storage.
+    // It overrides default setImpl() and getImpl() provided by "kettle.dataSource.URL" with gpii.pouch API calls.
     fluid.defaults("gpii.dataSource.pouchDB", {
         gradeNames: ["kettle.dataSource.URL"],
         invokers: {
@@ -96,7 +99,9 @@ var fluid = fluid || require("infusion");
     gpii.dataSource.pouchDB.handle.pouchDB = function (that, pouchDB, options, url, data) {
         var dbViews = that.options.dbViews;
         var promiseTogo = fluid.promise();
+        var id;
 
+        // GET: Queries using a document id or view/map functions
         if (options.operation === "get") {
             var promiseQuery = fluid.promise();
 
@@ -111,14 +116,14 @@ var fluid = fluid || require("infusion");
                 promiseQuery = pouchDB.query(viewFunc, decodedViewInfo.viewOptions);
             } else {
                 // A query by a document id
-                var id = gpii.dataSource.pouchDB.getDocId(url);
+                id = gpii.dataSource.pouchDB.getDocId(url);
                 promiseQuery = pouchDB.get(id);
             }
 
             // Handle the "notFoundIsEmpty" option to return undefined when no record is found
             promiseQuery.then(function (data) {
                 promiseTogo.resolve(data);
-            }, function(err) {
+            }, function (err) {
                 if (options.notFoundIsEmpty && err.status === 404) {
                     promiseTogo.resolve(undefined);
                 } else {
@@ -127,8 +132,9 @@ var fluid = fluid || require("infusion");
             });
         }
 
+        // SET: save/update records
         if (options.operation === "set") {
-            var id = gpii.dataSource.pouchDB.getDocId(url);
+            id = gpii.dataSource.pouchDB.getDocId(url);
             if (!data._id) {
                 $.extend(data, {_id: id});
             }

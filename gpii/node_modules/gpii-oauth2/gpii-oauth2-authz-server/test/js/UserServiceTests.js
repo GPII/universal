@@ -11,66 +11,93 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit, fluid */
+/* global fluid */
 
 (function () {
 
     "use strict";
 
-    var gpii = fluid.registerNamespace("gpii");
-
-    fluid.defaults("gpii.tests.oauth2.userServiceWithEmptyDataStore", {
-        gradeNames: "gpii.oauth2.userService",
+    fluid.defaults("gpii.tests.oauth2.userService.testEnvironment", {
+        gradeNames: ["gpii.tests.oauth2.pouchBackedTestEnvironment"],
+        dbViewsLocation: "../../../gpii-oauth2-datastore/dbViews/views.json",
+        dbName: "auth",
         components: {
-            dataStore: {
-                type: "gpii.oauth2.inMemoryDataStore"
-            }
-        }
-    });
-
-    fluid.defaults("gpii.tests.oauth2.userService.dataStoreWithTestData", {
-        gradeNames: "gpii.oauth2.inMemoryDataStore",
-        model: {
-            users: [
-                { id: 1, username: "alice", password: "a" }
-            ],
-            gpiiTokens: [
-                {
-                    gpiiToken: "alice_gpii_token",
-                    userId: 1
+            userService: {
+                type: "gpii.oauth2.userService",
+                createOnEvent: "onFixturesConstructed",
+                options: {
+                    gradeNames: ["gpii.tests.oauth2.dbDataStore.base"],
+                    dbViews: "{arguments}.0",
+                    components: {
+                        dataStore: {
+                            type: "gpii.oauth2.dbDataStore"
+                        }
+                    }
                 }
-            ]
-        }
-    });
-
-    fluid.defaults("gpii.tests.oauth2.userServiceWithTestData", {
-        gradeNames: "gpii.oauth2.userService",
-        components: {
-            dataStore: {
-                type: "gpii.tests.oauth2.userService.dataStoreWithTestData"
+            },
+            caseHolder: {
+                type: "gpii.tests.oauth2.baseTestCaseHolder"
             }
         }
     });
 
-    gpii.tests.oauth2.runUserServiceTests = function () {
+    fluid.defaults("gpii.tests.oauth2.userService.emptyDataStore", {
+        gradeNames: ["gpii.tests.oauth2.userService.testEnvironment"],
+        rawModules: [{
+            name: "Test with an empty data store",
+            tests: [{
+                name: "gpiiTokenHasAssociatedUser() returns false for empty dataStore",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.gpiiTokenHasAssociatedUser", ["any-token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertFalse",
+                    args: ["false should be received", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }]
+    });
 
-        jqUnit.module("GPII OAuth2 User Service");
-
-        jqUnit.test("gpiiTokenHasAssociatedUser() returns false for empty dataStore", function () {
-            var userService = gpii.tests.oauth2.userServiceWithEmptyDataStore();
-            jqUnit.assertFalse("false for any-token", userService.gpiiTokenHasAssociatedUser("any-token"));
-        });
-
-        jqUnit.test("gpiiTokenHasAssociatedUser() returns false for token without user", function () {
-            var userService = gpii.tests.oauth2.userServiceWithTestData();
-            jqUnit.assertFalse("false for token-without-user", userService.gpiiTokenHasAssociatedUser("token-without-user"));
-        });
-
-        jqUnit.test("gpiiTokenHasAssociatedUser() returns true for token with user", function () {
-            var userService = gpii.tests.oauth2.userServiceWithTestData();
-            jqUnit.assertTrue("true for alice_gpii_token", userService.gpiiTokenHasAssociatedUser("alice_gpii_token"));
-        });
-
-    };
+    fluid.defaults("gpii.tests.oauth2.userService.withData", {
+        gradeNames: ["gpii.tests.oauth2.userService.testEnvironment"],
+        pouchData: [{
+            "_id": "user-1",
+            "type": "user",
+            "name": "alice",
+            "password": "a",
+            "defaultGpiiToken": "alice_gpii_token"
+        },
+        {
+            "_id": "gpiiToken-1",
+            "type": "gpiiToken",
+            "gpiiToken": "alice_gpii_token",
+            "userId": "user-1"
+        }],
+        rawModules: [{
+            name: "Test with test data",
+            tests: [{
+                name: "gpiiTokenHasAssociatedUser() returns false for token without user",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.gpiiTokenHasAssociatedUser", ["token-without-user"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertFalse",
+                    args: ["false should be received", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "gpiiTokenHasAssociatedUser() returns true for token with user",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.gpiiTokenHasAssociatedUser", ["alice_gpii_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertTrue",
+                    args: ["false should be received", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }]
+    });
 
 })();
