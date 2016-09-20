@@ -60,7 +60,14 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 }
             }
         }
-    }
+    },
+    sequenceEnd: [{
+        func: "{gpii.tests.dbDataStore.environment}.events.onCleanup.fire"
+    }, {
+        event:    "{gpii.tests.dbDataStore.environment}.events.onCleanupComplete",
+        listener: "fluid.log",
+        args:     ["Database cleanup complete"]
+    }]
 });
 
 gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
