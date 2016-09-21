@@ -13,9 +13,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 /* global fluid */
 
+"use strict";
+
+
 (function () {
 
-    "use strict";
+    var gpii = fluid.registerNamespace("gpii");
 
     fluid.defaults("gpii.tests.oauth2.userService.testEnvironment", {
         gradeNames: ["gpii.tests.oauth2.pouchBackedTestEnvironment"],

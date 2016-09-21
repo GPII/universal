@@ -8,12 +8,12 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-var fluid = fluid || require("infusion"),
-    gpii = fluid.registerNamespace("gpii");;
+"use strict";
 
 (function () {
 
-    "use strict";
+    var fluid = fluid || require("infusion"),
+        gpii = fluid.registerNamespace("gpii");;
 
     fluid.registerNamespace("gpii.tests.oauth2");
 

@@ -11,11 +11,11 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit, fluid */
+/* global fluid */
+
+"use strict";
 
 (function () {
-
-    "use strict";
 
     var gpii = fluid.registerNamespace("gpii");
 
