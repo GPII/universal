@@ -21,7 +21,6 @@ var fluid = fluid || require("infusion"),
         var promise = producerFunc.apply(null, args);
 
         promise.then(function (response) {
-            console.log("response", response);
             that.events.onResponse.fire(response);
         }, function (err) {
             that.events.onError.fire(err);
