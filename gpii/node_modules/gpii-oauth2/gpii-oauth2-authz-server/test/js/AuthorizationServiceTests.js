@@ -19,177 +19,251 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     var gpii = fluid.registerNamespace("gpii");
 
-    fluid.defaults("gpii.tests.oauth2.authorizationServiceWithEmptyDataStore", {
-        gradeNames: ["gpii.oauth2.authorizationService"],
+    fluid.defaults("gpii.tests.oauth2.authorizationService.testEnvironment", {
+        gradeNames: ["gpii.tests.oauth2.pouchBackedTestEnvironment"],
+        dbViewsLocation: "../../../gpii-oauth2-datastore/dbViews/views.json",
+        dbName: "auth",
         components: {
-            dataStore: {
-                type: "gpii.oauth2.inMemoryDataStore"
+            authorizationService: {
+                type: "gpii.oauth2.authorizationService",
+                createOnEvent: "onFixturesConstructed",
+                options: {
+                    gradeNames: ["gpii.tests.oauth2.dbDataStore.base"],
+                    dbViews: "{arguments}.0",
+                    components: {
+                        dataStore: {
+                            type: "gpii.oauth2.dbDataStore"
+                        },
+                        codeGenerator: {
+                            type: "fluid.component"
+                        }
+                    }
+                }
             },
-            codeGenerator: {
-                type: "fluid.component"
-            },
-            tempPreferencesDataSource: {
-                type: "fluid.emptySubcomponent"
+            caseHolder: {
+                type: "gpii.tests.oauth2.baseTestCaseHolder"
             }
         }
     });
 
-    fluid.defaults("gpii.tests.oauth2.authorizationService.dataStoreWithTestData", {
-        gradeNames: ["gpii.oauth2.inMemoryDataStore"],
-        model: {
-            users: [
-                { id: 1, username: "alice", password: "a" },
-                { id: 2, username: "bob",   password: "b" },
-                { id: 3, username: "carol", password: "c" },
-                { id: 4, username: "dave",  password: "d" }
-            ],
-            gpiiTokens: [
-                {
-                    gpiiToken: "alice_gpii_token",
-                    userId: 1
-                },
-                {
-                    gpiiToken: "bob_gpii_token",
-                    userId: 2
-                },
-                {
-                    gpiiToken: "carol_gpii_token",
-                    userId: 3
-                },
-                {
-                    gpiiToken: "dave_gpii_token",
-                    userId: 4
-                }
-            ],
-            authDecisions: [
-                {
-                    id: 1,
-                    gpiiToken: "bob_gpii_token",
-                    clientId: 1,
-                    redirectUri: false,
-                    accessToken: "bob_A_access_token",
-                    selectedPreferences: { "": true },
-                    revoked: false
-                },
-                {
-                    id: 2,
-                    gpiiToken: "carol_gpii_token",
-                    clientId: 1,
-                    redirectUri: false,
-                    accessToken: "carol_A_access_token",
-                    selectedPreferences: { "": true },
-                    revoked: false
-                },
-                {
-                    id: 3,
-                    gpiiToken: "carol_gpii_token",
-                    clientId: 2,
-                    redirectUri: false,
-                    accessToken: "carol_B_access_token",
-                    selectedPreferences: { "": true },
-                    revoked: false
-                },
-                {
-                    id: 4,
-                    gpiiToken: "dave_gpii_token",
-                    clientId: 1,
-                    redirectUri: false,
-                    accessToken: "dave_A_access_token",
-                    selectedPreferences: { "": true },
-                    revoked: true
-                },
-                {
-                    id: 5,
-                    gpiiToken: "dave_gpii_token",
-                    clientId: 2,
-                    redirectUri: false,
-                    accessToken: "dave_B_access_token",
-                    selectedPreferences: { "": true },
-                    revoked: false
-                }
-            ],
-            clients: [
-                {
-                    id: 1,
-                    name: "Client A",
-                    oauth2ClientId: "client_id_A",
-                    oauth2ClientSecret: "client_secret_A",
-                    redirectUri: "http://example.com/callback_A",
-                    allowDirectGpiiTokenAccess: false
-                },
-                {
-                    id: 2,
-                    name: "Client B",
-                    oauth2ClientId: "client_id_B",
-                    oauth2ClientSecret: "client_secret_B",
-                    redirectUri: "http://example.com/callback_B",
-                    allowDirectGpiiTokenAccess: true
-                }
-            ]
-        }
+    // Tests with an empty data store
+    fluid.defaults("gpii.tests.oauth2.authorizationService.emptyDataStore", {
+        gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
+        rawModules: [{
+            name: "Test getUnauthorizedClientsForGpiiToken()",
+            tests: [{
+                name: "getUnauthorizedClientsForGpiiToken() returns undefined with an empty dataStore",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertUndefined",
+                    args: ["undefined should be received with an empty data store", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }]
     });
 
-    fluid.defaults("gpii.tests.oauth2.authorizationServiceWithTestData", {
-        gradeNames: ["gpii.oauth2.authorizationService"],
-        components: {
-            dataStore: {
-                type: "gpii.tests.oauth2.authorizationService.dataStoreWithTestData"
-            },
-            codeGenerator: {
-                type: "fluid.component"
-            },
-            tempPreferencesDataSource: {
-                type: "fluid.emptySubcomponent"
-            }
-        }
-    });
+    // Tests with a data store having test data
+    gpii.tests.oauth2.authorizationService.testData = [{
+        "_id": "user-1",
+        "type": "user",
+        "name": "alice",
+        "password": "a",
+        "defaultGpiiToken": "alice_gpii_token"
+    }, {
+        "_id": "user-2",
+        "type": "user",
+        "name": "bob",
+        "password": "b",
+        "defaultGpiiToken": "bob_gpii_token"
+    }, {
+        "_id": "user-3",
+        "type": "user",
+        "name": "carol",
+        "password": "c",
+        "defaultGpiiToken": "carol_gpii_token"
+    }, {
+        "_id": "user-4",
+        "type": "user",
+        "name": "dave",
+        "password": "d",
+        "defaultGpiiToken": "dave_gpii_token"
+    }, {
+        "_id": "gpiiToken-1",
+        "type": "gpiiToken",
+        "gpiiToken": "alice_gpii_token",
+        "userId": "user-1"
+    }, {
+        "_id": "gpiiToken-2",
+        "type": "gpiiToken",
+        "gpiiToken": "bob_gpii_token",
+        "userId": "user-2"
+    }, {
+        "_id": "gpiiToken-3",
+        "type": "gpiiToken",
+        "gpiiToken": "carol_gpii_token",
+        "userId": "user-3"
+    }, {
+        "_id": "gpiiToken-4",
+        "type": "gpiiToken",
+        "gpiiToken": "dave_gpii_token",
+        "userId": "user-4"
+    }, {
+        "_id": "client-1",
+        "type": "client",
+        "name": "Client A",
+        "oauth2ClientId": "client_id_A",
+        "oauth2ClientSecret": "client_secret_A",
+        "redirectUri": "http://example.com/callback_A",
+        "allowDirectGpiiTokenAccess": false
+    }, {
+        "_id": "client-2",
+        "type": "client",
+        "name": "Client B",
+        "oauth2ClientId": "client_id_B",
+        "oauth2ClientSecret": "client_secret_B",
+        "redirectUri": "http://example.com/callback_B",
+        "allowDirectGpiiTokenAccess": true
+    }, {
+        "_id": "authDecision-1",
+        "type": "authDecision",
+        "gpiiToken": "bob_gpii_token",
+        "clientId": "client-1",
+        "redirectUri": "",
+        "accessToken": "bob_A_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "authDecision-2",
+        "type": "authDecision",
+        "gpiiToken": "carol_gpii_token",
+        "clientId": "client-1",
+        "redirectUri": "",
+        "accessToken": "carol_A_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "authDecision-3",
+        "type": "authDecision",
+        "gpiiToken": "carol_gpii_token",
+        "clientId": "client-2",
+        "redirectUri": "",
+        "accessToken": "carol_B_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "authDecision-4",
+        "type": "authDecision",
+        "gpiiToken": "dave_gpii_token",
+        "clientId": "client-1",
+        "redirectUri": "",
+        "accessToken": "dave_A_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": true
+    }, {
+        "_id": "authDecision-5",
+        "type": "authDecision",
+        "gpiiToken": "dave_gpii_token",
+        "clientId": "client-2",
+        "redirectUri": "",
+        "accessToken": "dave_B_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }];
 
-    gpii.tests.oauth2.runAuthorizationServiceTests = function () {
-
-        jqUnit.module("GPII OAuth2 Authorization Service");
-
-        jqUnit.test("getUnauthorizedClientsForGpiiToken() returns undefined for empty dataStore", function () {
-            var authorizationService = gpii.tests.oauth2.authorizationServiceWithEmptyDataStore();
-            jqUnit.assertUndefined("undefined for empty dataStore", authorizationService.getUnauthorizedClientsForGpiiToken("alice_gpii_token"));
-        });
-
-        jqUnit.test("getUnauthorizedClientsForGpiiToken() returns undefined for unknown token", function () {
-            var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
-            jqUnit.assertUndefined("undefined for unknown token", authorizationService.getUnauthorizedClientsForGpiiToken("UNKNOWN"));
-        });
-
-        jqUnit.test("getUnauthorizedClientsForGpiiToken() returns all clients for user with no authorizations", function () {
-            var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
-            var clients = authorizationService.getUnauthorizedClientsForGpiiToken("alice_gpii_token");
-            jqUnit.assertEquals("Expect 2 clients", 2, clients.length);
-            jqUnit.assertEquals("Client A", "Client A", clients[0].clientName);
-            jqUnit.assertEquals("client_id_A", "client_id_A", clients[0].oauth2ClientId);
-            jqUnit.assertEquals("Client B", "Client B", clients[1].clientName);
-            jqUnit.assertEquals("client_id_B", "client_id_B", clients[1].oauth2ClientId);
-        });
-
-        jqUnit.test("getUnauthorizedClientsForGpiiToken() returns unauthorized clients for user with authorization", function () {
-            var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
-            var clients = authorizationService.getUnauthorizedClientsForGpiiToken("bob_gpii_token");
-            jqUnit.assertEquals("Expect 1 client", 1, clients.length);
-            jqUnit.assertEquals("Client B", "Client B", clients[0].clientName);
-            jqUnit.assertEquals("client_id_B", "client_id_B", clients[0].oauth2ClientId);
-        });
-
-        jqUnit.test("getUnauthorizedClientsForGpiiToken() returns empty list for user with all clients authorized", function () {
-            var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
-            var clients = authorizationService.getUnauthorizedClientsForGpiiToken("carol_gpii_token");
-            jqUnit.assertEquals("Expect 0 clients", 0, clients.length);
-        });
-
-        jqUnit.test("getUnauthorizedClientsForGpiiToken() returns clients with revoked authorizations", function () {
-            var authorizationService = gpii.tests.oauth2.authorizationServiceWithTestData();
-            var clients = authorizationService.getUnauthorizedClientsForGpiiToken("dave_gpii_token");
-            jqUnit.assertEquals("Expect 1 client", 1, clients.length);
-            jqUnit.assertEquals("Client A", "Client A", clients[0].clientName);
-            jqUnit.assertEquals("client_id_A", "client_id_A", clients[0].oauth2ClientId);
-        });
-
+    // All expected results
+    gpii.tests.oauth2.authorizationService.expected = {
+        invalidUser: {
+            isError: true,
+            msg: "Invalid user name and password combination",
+            statusCode: 401
+        },
+        clientsForAlice: [{
+            "clientName": "Client A",
+            "oauth2ClientId": "client_id_A"
+        }, {
+            "clientName": "Client B",
+            "oauth2ClientId": "client_id_B"
+        }],
+        unauthorizedClientsForBob: [{
+            "clientName": "Client B",
+            "oauth2ClientId": "client_id_B"
+        }],
+        revokedClientsForDave: [{
+            "clientName": "Client A",
+            "oauth2ClientId": "client_id_A"
+        }]
     };
+
+    fluid.defaults("gpii.tests.oauth2.authorizationService.withData", {
+        gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
+        pouchData: gpii.tests.oauth2.authorizationService.testData,
+        rawModules: [{
+            name: "Test getUnauthorizedClientsForGpiiToken()",
+            tests: [{
+                name: "getUnauthorizedClientsForGpiiToken() returns undefined for unknown token",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["unknown"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertUndefined",
+                    args: ["undefined should be received with an empty data store", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "getUnauthorizedClientsForGpiiToken() returns all clients for user with no authorizations",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["2 client information should be received", gpii.tests.oauth2.authorizationService.expected.clientsForAlice, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "getUnauthorizedClientsForGpiiToken() returns unauthorized clients for user with authorization",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["bob_gpii_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The unauthorized client information should be received", gpii.tests.oauth2.authorizationService.expected.unauthorizedClientsForBob, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "getUnauthorizedClientsForGpiiToken() returns empty list for user with all clients authorized",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["carol_gpii_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["An empty array should be received", [], "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "getUnauthorizedClientsForGpiiToken() returns clients with revoked authorizations",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["dave_gpii_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The revoked client information should be received", gpii.tests.oauth2.authorizationService.expected.revokedClientsForDave, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }]
+    });
 
 })();

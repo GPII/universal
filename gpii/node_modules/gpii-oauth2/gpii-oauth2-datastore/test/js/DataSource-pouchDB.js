@@ -79,12 +79,20 @@ var gpii = fluid.registerNamespace("gpii");
     //     }
     // }
     gpii.dataSource.pouchDB.decodeView = function (url) {
-        var match = url.match(/(.*)\/(.*)\?(.*)/);
+        var match = url.match(/(.*)\/(.*)(\?(.*))?/);
+        var view = match[2];
+        var splitView = view.match(/(.*)\?(.*)/);
 
-        return {
-            viewName: match[2],
-            viewOptions: gpii.express.querystring.decode(match[3])
-        };
+        if (splitView) {
+            return {
+                viewName: splitView[1],
+                viewOptions: gpii.express.querystring.decode(splitView[2])
+            };
+        } else {
+            return {
+                viewName: view
+            };
+        }
     };
 
     /* Strip out the leading "/" to return the document id.
@@ -112,8 +120,9 @@ var gpii = fluid.registerNamespace("gpii");
                 var decodedViewInfo = gpii.dataSource.pouchDB.decodeView(url);
                 var viewList = dbViews[0].views;
                 var viewFunc = viewList[decodedViewInfo.viewName];
+                var viewOptions = decodedViewInfo.viewOptions || undefined;
 
-                promiseQuery = pouchDB.query(viewFunc, decodedViewInfo.viewOptions);
+                promiseQuery = pouchDB.query(viewFunc, viewOptions);
             } else {
                 // A query by a document id
                 id = gpii.dataSource.pouchDB.getDocId(url);

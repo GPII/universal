@@ -41,12 +41,41 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     });
 
+    // All expected results
+    gpii.tests.oauth2.userService.expected = {
+        invalidUser: {
+            isError: true,
+            msg: "Invalid user name and password combination",
+            statusCode: 401
+        },
+        user: {
+            "id": "user-1",
+            "name": "alice",
+            "password": "a",
+            "defaultGpiiToken": "alice_gpii_token"
+        }
+    };
+
+    // Tests with an empty data store
     fluid.defaults("gpii.tests.oauth2.userService.emptyDataStore", {
         gradeNames: ["gpii.tests.oauth2.userService.testEnvironment"],
         rawModules: [{
-            name: "Test with an empty data store",
+            name: "Test authenticateUser()",
             tests: [{
-                name: "gpiiTokenHasAssociatedUser() returns false for empty dataStore",
+                name: "authenticateUser() with an empty dataStore",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.authenticateUser", ["any-user", "any-password"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The invalid user error should be received", gpii.tests.oauth2.userService.expected.invalidUser, "{arguments}.0"],
+                    event: "{that}.events.onError"
+                }]
+            }]
+        }, {
+            name: "Test gpiiTokenHasAssociatedUser()",
+            tests: [{
+                name: "gpiiTokenHasAssociatedUser() returns false for an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
                     args: ["{userService}.gpiiTokenHasAssociatedUser", ["any-token"], "{that}"]
@@ -59,23 +88,58 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }]
     });
 
+    // Tests with a data store having test data
+    gpii.tests.oauth2.userService.testData = [{
+        "_id": "user-1",
+        "type": "user",
+        "name": "alice",
+        "password": "a",
+        "defaultGpiiToken": "alice_gpii_token"
+    }, {
+        "_id": "gpiiToken-1",
+        "type": "gpiiToken",
+        "gpiiToken": "alice_gpii_token",
+        "userId": "user-1"
+    }];
+
     fluid.defaults("gpii.tests.oauth2.userService.withData", {
         gradeNames: ["gpii.tests.oauth2.userService.testEnvironment"],
-        pouchData: [{
-            "_id": "user-1",
-            "type": "user",
-            "name": "alice",
-            "password": "a",
-            "defaultGpiiToken": "alice_gpii_token"
-        },
-        {
-            "_id": "gpiiToken-1",
-            "type": "gpiiToken",
-            "gpiiToken": "alice_gpii_token",
-            "userId": "user-1"
-        }],
+        pouchData: gpii.tests.oauth2.userService.testData,
         rawModules: [{
-            name: "Test with test data",
+            name: "Test authenticateUser()",
+            tests: [{
+                name: "authenticateUser() returns invalid user error with a non-existing user",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.authenticateUser", ["non-existing", "non-existing"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The invalid user error should be received", gpii.tests.oauth2.userService.expected.invalidUser, "{arguments}.0"],
+                    event: "{that}.events.onError"
+                }]
+            }, {
+                name: "authenticateUser() returns invalid user error with a wrong password",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.authenticateUser", ["alice", "wrong-password"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The invalid user error should be received", gpii.tests.oauth2.userService.expected.invalidUser, "{arguments}.0"],
+                    event: "{that}.events.onError"
+                }]
+            }, {
+                name: "authenticateUser() returns user information with correct user and password",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{userService}.authenticateUser", ["alice", "a"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The user information should be received", gpii.tests.oauth2.userService.expected.user, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }, {
+            name: "Test gpiiTokenHasAssociatedUser()",
             tests: [{
                 name: "gpiiTokenHasAssociatedUser() returns false for token without user",
                 sequence: [{

@@ -144,14 +144,4 @@ var fluid = fluid || require("infusion"),
         }
     });
 
-    gpii.tests.oauth2.invokePromiseProducer = function (producerFunc, args, that) {
-        var promise = producerFunc.apply(null, args);
-
-        promise.then(function (response) {
-            that.events.onResponse.fire(response);
-        }, function (err) {
-            that.events.onError.fire(err);
-        });
-    };
-
 })();

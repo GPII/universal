@@ -16,6 +16,8 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit");
 
+require("./js/DataStoreTestsUtils.js");
+
 fluid.defaults("gpii.tests.dbDataStore.environment", {
     gradeNames: ["gpii.test.pouch.environment"],
     port: 1234,
@@ -70,19 +72,9 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
     }]
 });
 
-gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
-    var promise = producerFunc.apply(null, args);
-
-    promise.then(function (response) {
-        that.events.onResponse.fire(response);
-    }, function (err) {
-        that.events.onError.fire(err);
-    });
-};
-
 gpii.tests.dbDataStore.saveAndInvokeFetch = function (fetchDataSource, id, that) {
     gpii.tests.dbDataStore.lastSavedId = id;
-    gpii.tests.dbDataStore.invokePromiseProducer(fetchDataSource, [id], that);
+    gpii.tests.oauth2.invokePromiseProducer(fetchDataSource, [id], that);
 };
 
 gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
