@@ -1,7 +1,7 @@
 ## FlowManager
 
-The flowmanager is central point of coordination in the system for managing flow between different architecture components. 
-For example, it coordinates the steps involved in logging in requires retrieving preferences, solutions, device data, etc. and passing this to the [MatchMaker Framework](MatchMakerFramework.md). 
+The flowmanager is the central point of coordination in the system for managing flow between different architecture components.
+For example, it coordinates the steps involved during logging in which require retrieving preferences, solutions, device data, etc. and passing these to the [MatchMaker Framework](MatchMakerFramework.md).
 Following those steps, the payload is sent via the [Context Manager](ContextManager.md) and then to the [Lifecycle Manager](LifecycleManager.md).
 
 ###Important flows
