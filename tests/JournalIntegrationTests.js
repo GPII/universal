@@ -18,9 +18,12 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.registerNamespace("gpii.tests.journal");
-
 require("../index.js");
+
+gpii.loadTestingSupport();
+fluid.setLogging(true);
+
+fluid.registerNamespace("gpii.tests.journal");
 
 gpii.tests.journal.testSpec = fluid.require("%universal/tests/platform/windows/windows-builtIn-testSpec.js");
 
@@ -72,9 +75,6 @@ gpii.tests.journal.initialSettings = {
     ]
     }
 };
-
-gpii.loadTestingSupport();
-fluid.setLogging(true);
 
 fluid.defaults("gpii.tests.journal.solutionsRegistryAdvisor", {
     gradeNames: "fluid.component",

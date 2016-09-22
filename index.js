@@ -38,6 +38,11 @@ require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
 
 gpii.loadTestingSupport = function () {
+    fluid.contextAware.makeChecks({
+        "gpii.contexts.test": {
+            value: true
+        }
+    });
     require("./gpii/node_modules/testing");
 };
 
