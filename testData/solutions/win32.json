@@ -14,27 +14,17 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
                 },
-                "capabilities": [
-                    "applications.com\\.freedomscientific\\.jaws.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
-                            "options": {
-                                "none": {
-                                    "outputValue": 0
-                                },
-                                "some": {
-                                    "outputValue": 1
-                                },
-                                "most": {
-                                    "outputValue": 2
-                                },
-                                "all": {
-                                    "outputValue": 3
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 1,
+                                "most": 2,
+                                "all": 3
                             }
                         }
                     },
@@ -63,7 +53,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "jfw.exe"
             }
         ],
@@ -97,8 +87,7 @@
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
                 "capabilities": [
-                    "applications.com\\.texthelp\\.readWriteGold.id",
-                    "languageAssistance"
+                    "http://registry\\.gpii\\.net/common/languageAssistance"
                 ],
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings"
@@ -163,10 +152,7 @@
                         "ZoomIncrement": "REG_DWORD"
                     }
                 },
-                "capabilities": [
-                    "applications.com\\.microsoft\\.windows\\.magnifier.id",
-                    "display.screenEnhancement.screenMagnification.applications.com\\.microsoft\\.windows\\.magnifier.name"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "Invert": {
                         "transform": {
@@ -201,29 +187,15 @@
                     "MagnificationMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
-                            "options": {
-                                "FullScreen": {
-                                    "outputValue": 2
-                                },
-                                "Lens": {
-                                    "outputValue": 3
-                                },
-                                "LeftHalf": {
-                                    "outputValue": 1
-                                },
-                                "RightHalf": {
-                                    "outputValue": 1
-                                },
-                                "TopHalf": {
-                                    "outputValue": 1
-                                },
-                                "BottomHalf": {
-                                    "outputValue": 1
-                                },
-                                "Custom": {
-                                    "outputValue": 2
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "match": {
+                                "FullScreen": 2,
+                                "Lens": 3,
+                                "LeftHalf": 1,
+                                "RightHalf": 1,
+                                "TopHalf": 1,
+                                "BottomHalf": 1,
+                                "Custom": 2
                             }
                         }
                     }
@@ -239,12 +211,12 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\System32\\Magnify.exe"
+                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\Magnify.exe"
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "Magnify.exe"
             }
         ],
@@ -269,21 +241,19 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "control.onscreenKeyboard",
-                    "applications.com\\.microsoft\\.windows\\.onscreenKeyboard.id",
-                    "control.onscreenKeyboard.applications.com\\.microsoft\\.windows\\.onscreenKeyboard.name"
+                    "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
                 ]
             }
         },
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\System32\\osk.exe"
+                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\osk.exe"
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "osk.exe"
             }
         ],
@@ -312,10 +282,7 @@
                     "allowNumberSignComments": true,
                     "allowSubSections": true
                 },
-                "capabilities": [
-                    "applications.org\\.nvda-project.id",
-                    "display.screenReader.applications.org\\.nvda-project.name"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "speech\\.espeak\\.pitch": {
                         "transform": {
@@ -350,8 +317,8 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
-                            "options": {
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "match": {
                                 "false": {
                                     "outputValue": {
                                         "transform": [
@@ -423,217 +390,83 @@
                     "speech\\.symbolLevel": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
-                            "options": {
-                                "none": {
-                                    "outputValue": 0
-                                },
-                                "some": {
-                                    "outputValue": 100
-                                },
-                                "most": {
-                                    "outputValue": 200
-                                },
-                                "all": {
-                                    "outputValue": 300
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 100,
+                                "most": 200,
+                                "all": 300
                             }
                         }
                     },
                     "speech\\.espeak\\.voice": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
-                            "options": {
-                                "en": {
-                                    "outputValue": "en\\en"
-                                },
-                                "en-GB": {
-                                    "outputValue": "en\\en"
-                                },
-                                "en-US": {
-                                    "outputValue": "en\\en-us"
-                                },
-                                "en-scotland": {
-                                    "outputValue": "en\\en-sc"
-                                },
-                                "en-BZ": {
-                                    "outputValue": "en\\en-wi"
-                                },
-                                "en-BS": {
-                                    "outputValue": "en\\en-wi"
-                                },
-                                "en-AG": {
-                                    "outputValue": "en\\en-wi"
-                                },
-                                "en-AI": {
-                                    "outputValue": "en\\en-wi"
-                                },
-                                "af": {
-                                    "outputValue": "af"
-                                },
-                                "bg": {
-                                    "outputValue": "bg"
-                                },
-                                "bs": {
-                                    "outputValue": "bs"
-                                },
-                                "ca": {
-                                    "outputValue": "ca"
-                                },
-                                "cs": {
-                                    "outputValue": "cs"
-                                },
-                                "cy": {
-                                    "outputValue": "cy"
-                                },
-                                "da": {
-                                    "outputValue": "da"
-                                },
-                                "de": {
-                                    "outputValue": "de"
-                                },
-                                "el": {
-                                    "outputValue": "el"
-                                },
-                                "grc": {
-                                    "outputValue": "test\\grc"
-                                },
-                                "eo": {
-                                    "outputValue": "eo"
-                                },
-                                "es": {
-                                    "outputValue": "es"
-                                },
-                                "es-ES": {
-                                    "outputValue": "es"
-                                },
-                                "es-419": {
-                                    "outputValue": "es-la"
-                                },
-                                "et": {
-                                    "outputValue": "et"
-                                },
-                                "fi": {
-                                    "outputValue": "fi"
-                                },
-                                "fr": {
-                                    "outputValue": "fr"
-                                },
-                                "fr-BE": {
-                                    "outputValue": "fr-be"
-                                },
-                                "hi": {
-                                    "outputValue": "hi"
-                                },
-                                "hr": {
-                                    "outputValue": "hr"
-                                },
-                                "hu": {
-                                    "outputValue": "hu"
-                                },
-                                "hy": {
-                                    "outputValue": "hy"
-                                },
-                                "hy-arevmda": {
-                                    "outputValue": "hy-west"
-                                },
-                                "id": {
-                                    "outputValue": "id"
-                                },
-                                "is": {
-                                    "outputValue": "is"
-                                },
-                                "it": {
-                                    "outputValue": "it"
-                                },
-                                "jbo": {
-                                    "outputValue": "test\\jbo"
-                                },
-                                "ka": {
-                                    "outputValue": "ka"
-                                },
-                                "kn": {
-                                    "outputValue": "kn"
-                                },
-                                "ku": {
-                                    "outputValue": "ku"
-                                },
-                                "la": {
-                                    "outputValue": "la"
-                                },
-                                "lv": {
-                                    "outputValue": "lv"
-                                },
-                                "mk": {
-                                    "outputValue": "mk"
-                                },
-                                "ml": {
-                                    "outputValue": "ml"
-                                },
-                                "nci": {
-                                    "outputValue": "test\\nci"
-                                },
-                                "nl": {
-                                    "outputValue": "nl"
-                                },
-                                "no": {
-                                    "outputValue": "no"
-                                },
-                                "pap": {
-                                    "outputValue": "test\\pap"
-                                },
-                                "pl": {
-                                    "outputValue": "pl"
-                                },
-                                "pt-BR": {
-                                    "outputValue": "pt"
-                                },
-                                "pt-PT": {
-                                    "outputValue": "pt-pt"
-                                },
-                                "ro": {
-                                    "outputValue": "ro"
-                                },
-                                "ru": {
-                                    "outputValue": "ru"
-                                },
-                                "sk": {
-                                    "outputValue": "sk"
-                                },
-                                "sq": {
-                                    "outputValue": "sq"
-                                },
-                                "sr": {
-                                    "outputValue": "sr"
-                                },
-                                "sv": {
-                                    "outputValue": "sv"
-                                },
-                                "sw": {
-                                    "outputValue": "sw"
-                                },
-                                "ta": {
-                                    "outputValue": "ta"
-                                },
-                                "tr": {
-                                    "outputValue": "tr"
-                                },
-                                "vi": {
-                                    "outputValue": "vi"
-                                },
-                                "zh-cmn": {
-                                    "outputValue": "zh"
-                                },
-                                "cmn": {
-                                    "outputValue": "zh"
-                                },
-                                "zh-yue": {
-                                    "outputValue": "zh-yue"
-                                },
-                                "zh-yue": {
-                                    "outputValue": "yue"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en": "en\\en",
+                                "en-GB": "en\\en",
+                                "en-US": "en\\en-us",
+                                "en-scotland": "en\\en-sc",
+                                "en-BZ": "en\\en-wi",
+                                "en-BS": "en\\en-wi",
+                                "en-AG": "en\\en-wi",
+                                "en-AI": "en\\en-wi",
+                                "af": "af",
+                                "bg": "bg",
+                                "bs": "bs",
+                                "ca": "ca",
+                                "cs": "cs",
+                                "cy": "cy",
+                                "da": "da",
+                                "de": "de",
+                                "el": "el",
+                                "grc": "test\\grc",
+                                "eo": "eo",
+                                "es": "es",
+                                "es-ES": "es",
+                                "es-419": "es-la",
+                                "et": "et",
+                                "fi": "fi",
+                                "fr": "fr",
+                                "fr-BE": "fr-be",
+                                "hi": "hi",
+                                "hr": "hr",
+                                "hu": "hu",
+                                "hy": "hy",
+                                "hy-arevmda": "hy-west",
+                                "id": "id",
+                                "is": "is",
+                                "it": "it",
+                                "jbo": "test\\jbo",
+                                "ka": "ka",
+                                "kn": "kn",
+                                "ku": "ku",
+                                "la": "la",
+                                "lv": "lv",
+                                "mk": "mk",
+                                "ml": "ml",
+                                "nci": "test\\nci",
+                                "nl": "nl",
+                                "no": "no",
+                                "pap": "test\\pap",
+                                "pl": "pl",
+                                "pt-BR": "pt",
+                                "pt-PT": "pt-pt",
+                                "ro": "ro",
+                                "ru": "ru",
+                                "sk": "sk",
+                                "sq": "sq",
+                                "sr": "sr",
+                                "sv": "sv",
+                                "sw": "sw",
+                                "ta": "ta",
+                                "tr": "tr",
+                                "vi": "vi",
+                                "zh-cmn": "zh",
+                                "cmn": "zh",
+                                "zh-yue": "zh-yue",
+                                "zh-yue": "yue"
                             }
                         }
                     }
@@ -654,10 +487,10 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "nvda_service.exe"
             },{
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "nvda.exe"
             }
         ],
@@ -687,9 +520,7 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "content.simplification",
-                    "applications.trace\\.easyOne\\.communicator\\.windows.id",
-                    "content.simplification.applications.trace\\.easyOne\\.communicator\\.windows.name"
+                    "http://registry\\.gpii\\.net/common/simplification"
                 ]
             }
         },
@@ -701,7 +532,7 @@
         ],
         "stop": [
             {
-                    "type": "gpii.windows.killProcessByName",
+                    "type": "gpii.windows.closeProcessByName",
                     "filename": "firefox.exe"
             }
         ],
@@ -726,9 +557,7 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "content.pictorialSimplification",
-                    "applications.trace\\.easyOne\\.sudan\\.windows.id",
-                    "content.pictorialSimplification.applications.trace\\.easyOne\\.sudan\\.windows.name"
+                    "http://registry\\.gpii\\.net/common/pictorialSimplification"
                 ]
             }
         },
@@ -740,7 +569,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
             }
         ],
@@ -765,9 +594,7 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.webinsight\\.webAnywhere\\.windows.id",
-                    "display.screenReader.applications.webinsight\\.webAnywhere\\.windows.name"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
             }
         },
@@ -779,7 +606,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
             }
         ],
@@ -808,8 +635,7 @@
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
                 "capabilities": [
-                    "applications.net\\.opendirective\\.maavis.id",
-                    "display.textReadingHighlight.-provisional-selfVoicingEnabled"
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled"
                 ],
                 "capabilitiesTransformations": {
                     "transform": [
@@ -840,21 +666,15 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "defaultOutputValue": "bw",
-                                    "options": {
-                                        "black-white": {
-                                            "outputValue": "bw"
-                                        },
-                                        "white-black": {
-                                            "outputValue": "bw"
-                                        },
-                                        "black-yellow": {
-                                            "outputValue": "hc"
-                                        },
-                                        "yellow-black": {
-                                            "outputValue": "hc"
-                                        }
+                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "match": {
+                                        "black-white": "bw",
+                                        "white-black": "bw",
+                                        "black-yellow": "hc",
+                                        "yellow-black": "hc"
+                                    },
+                                    "noMatch": {
+                                        "outputValue": "bw"
                                     }
                                 }
                             }
@@ -877,7 +697,7 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.killProcessByName",
+                "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
             }
         ],
@@ -912,8 +732,7 @@
                     "verifySettings": true
                 },
                 "capabilities": [
-                    "display.screenEnhancement.-provisional-highContrastEnabled",
-                    "applications.com\\.microsoft\\.windows\\.highContrast.id"
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
                 ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
@@ -968,8 +787,7 @@
                     "verifySettings": true
                 },
                 "capabilities": [
-                    "display.screenEnhancement.mouseTrailing",
-                    "applications.com\\.microsoft\\.windows\\.mouseTrailing.id"
+                    "http://registry\\.gpii\\.net/common/mouseTrailing"
                 ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
@@ -1038,8 +856,7 @@
                     "verifySettings": true
                 },
                 "capabilities": [
-                    "display.screenEnhancement.cursorSize",
-                    "applications.com\\.microsoft\\.windows\\.cursors.id"
+                    "http://registry\\.gpii\\.net/common/cursorSize"
                 ],
                 "capabilitiesTransformations": {
                     "Arrow": {
@@ -1307,9 +1124,7 @@
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
                 },
-                "capabilities": [
-                    "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
@@ -1377,9 +1192,7 @@
                 "options": {
                     "path": "com.ilunion.cloud4chrome"
                 },
-                "capabilities": [
-                    "applications.com\\.ilunion\\.cloud4chrome.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
