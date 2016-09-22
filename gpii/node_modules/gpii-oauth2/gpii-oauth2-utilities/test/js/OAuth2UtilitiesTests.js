@@ -11,9 +11,10 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit */
+/* eslint-env browser */
+/* eslint strict: ["error", "function"] */
 
-var fluid = fluid || require("infusion");
+/* global jqUnit, fluid */
 
 (function () {
 

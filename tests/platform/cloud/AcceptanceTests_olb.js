@@ -107,7 +107,7 @@ var testDefs = [
             "eu.gpii.olb": {
                 "language": "en-GB",
                 "contrastTheme": "wb",
-                "signLanguage": "ils", // see https://issues.gpii.net/browse/GPII-1125 
+                "signLanguage": "ils", // see https://issues.gpii.net/browse/GPII-1125
                 "simplifiedUiEnabled": true
             }
         }

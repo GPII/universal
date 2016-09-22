@@ -1,1 +1,118 @@
-[]
+{
+    "fakemag1": {
+        "name": "Fake Magnifier 1",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "darwin"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "/tmp/fakemag1.settings.json"
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "magnification": "http://registry\\.gpii\\.net/common/magnification"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [ ],
+        "stop": [ ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "fakemag2": {
+        "name": "Fake Magnifier 2 - fully featured",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "darwin"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "/tmp/fakemag2.settings.json"
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "magnification": "http://registry\\.gpii\\.net/common/magnification",
+                    "invert": "http://registry\\.gpii\\.net/common/invertColours"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [ ],
+        "stop": [ ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "fakescreenreader1": {
+        "name": "fake screenreader",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "darwin"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "/tmp/fakescreenreader1.json"
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "pitch": "http://registry\\.gpii\\.net/common/pitch",
+                    "volumeTTS": "http://registry\\.gpii\\.net/common/volumeTTS",
+                    "rate": "http://registry\\.gpii\\.net/common/speechRate"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [ ],
+        "stop": [ ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    }
+}

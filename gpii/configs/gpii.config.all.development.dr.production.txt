@@ -1,4 +1,4 @@
-all.development.dr.production.json
+gpii.config.all.development.dr.production.json
 ==================================
 
 This configuration runs the entire system locally and in development mode with the exception of the deviceReporter,
@@ -14,7 +14,7 @@ This mean that:
 ** solutionsRegistry (reading registry from file)
 ** deviceReporter (using a dynamic device reporter)
 ** matchMakerFramework
-** flatMatchMaker
+** canopyMatchMaker
 ** lifecycleManager
 
 Notes on testing:
