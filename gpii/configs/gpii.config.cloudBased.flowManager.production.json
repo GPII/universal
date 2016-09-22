@@ -11,13 +11,13 @@
             },
             "flowManager.production.matchMakers": {
                 "record": "http://localhost:8082",
-                "target": "{that flowManager}.options.matchMakers.flat.url",
+                "target": "{that flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
             }
         }
     },
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.cloudBased.config.production.json",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json"
+        "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json"
     ]
 }

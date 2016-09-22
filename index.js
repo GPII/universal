@@ -34,11 +34,17 @@ require("./gpii/node_modules/rawPreferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
+require("./gpii/node_modules/canopyMatchMaker");
 require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
 require("./gpii/node_modules/pouchManager");
 
 gpii.loadTestingSupport = function () {
+    fluid.contextAware.makeChecks({
+        "gpii.contexts.test": {
+            value: true
+        }
+    });
     require("./gpii/node_modules/testing");
 };
 
