@@ -102,6 +102,7 @@ var fluid = fluid || require("infusion");
             }
         },
         events: {
+            // All these events are pseudoevents rather than standard events. They are triggered by fluid.promise.fireTransformEvent().
             onGrantAuthorizationCode: null,
             onAddAuthorization: null,
             onGetSelectedPreferences: null,

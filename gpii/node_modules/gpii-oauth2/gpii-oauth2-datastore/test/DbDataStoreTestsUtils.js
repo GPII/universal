@@ -25,8 +25,8 @@ fluid.defaults("gpii.tests.dbDataStore.environment", {
         databases: {
             auth: {
                 data: [
-                    "%gpiiOauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json",
-                    "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
+                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json",
+                    "%gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
                 ]
             }
         }
