@@ -49,12 +49,12 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
         },
-        "supportedSettings": [
-            "appsetting1",
-            "appsetting2",
+        "supportedSettings": : {
+            "appsetting1": { ... appsetting1 metadata ... },
+            "appsetting2": { ... appsetting2 metadata ... },
             ...
-            "appsettingN"
-        ],
+            "appsettingN": { ... appsettingN metadata ... }
+        },
         "capabilities": [],
         "capabilitiesTransformations": {
             "ApplicationSettings": "ApplicationSettings"
@@ -65,12 +65,12 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.HOME}\\mySettings.ini"
         },
-        "supportedSettings": [
-            "appsettingA",
-            "appsettingB",
+        "supportedSettings": {
+            "appsettingA": { ... appsettingA metadata ... },
+            "appsettingB": { ... appsettingB metadata ... },
             ...
-            "appsettingZ"
-        ],
+            "appsettingZ": { ... appsettingZ metadata ... }
+        },
         "capabilities": []
     }
 }
@@ -78,9 +78,11 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
 
 The important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
 
-Note also the `supportedSettings` option. If a solution only has a single settingsHandler block, all the settings will be passed to that handler by default. But in case there are multiple settingsHandlers, the system needs some way of determining which settings to apply to which handler. The `supportedSettings` directive is used for this:
+Note also the `supportedSettings` option. This block is used to determine which application specific settings are relevant to the settingshandler, and also serves as location for providing metadata (such as default values, data type, validation information, etc) about the setting. If there are no relevant metadata related to the setting, the empty object (`{}`) should be used as value.
+
+If a solution only has a single settingsHandler block, all the settings will be passed to that handler by default. But in case there are multiple settingsHandlers, the system needs some way of determining which settings to apply to which handler. The `supportedSettings` directive is used for this:
 * If a `supportedSettings` option is supplied, only those settings listed there will be applied to the settingsHandler
-* If one or more settingsHandlers do not contain a `supportedSettings` directive, all settings will be applied to those handler
+* If a solution registry entry has multiple settings handlers, the `supportedSettings` entry is mandatory for each settingshandler.
 
 
 ### configure, restore, start and stop

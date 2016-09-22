@@ -14,11 +14,11 @@
                 "options": {
                     "filename": "/tmp/fakemag1.settings.json"
                 },
-                "supportedSettings": [
-                    "tilingMagnifiers",
-                    "magnification",
-                    "tracking"
-                ],
+                "supportedSettings": {
+                    "tilingMagnifiers": {},
+                    "magnification": {},
+                    "tracking": {}
+                },
                "capabilities": [
                     "http://registry\\.gpii\\.net/common/magnifierEnabled"
                 ],
@@ -32,10 +32,10 @@
                 "options": {
                     "filename": "/tmp/fakemag2.settings.json"
                 },
-                "supportedSettings": [
-                    "weirdSetting",
-                    "crazyColor"
-                ],
+                "supportedSettings": {
+                    "weirdSetting": {},
+                    "crazyColor": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "crazyColor": "http://registry\\.gpii\\.net/common/invertColours"
