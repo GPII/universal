@@ -1,4 +1,5 @@
 /node_modules/
+/browserify/
 
 /examples/gpii-oauth2-sample-client/node_modules/
 /examples/gpii-oauth2-sample-client-passport/node_modules/
