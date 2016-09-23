@@ -8,8 +8,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global $ */
-
 /* eslint-env browser */
 /* eslint strict: ["error", "function"] */
 
@@ -145,7 +143,7 @@ var gpii = fluid.registerNamespace("gpii");
         if (options.operation === "set") {
             id = gpii.dataSource.pouchDB.getDocId(url);
             if (!data._id) {
-                $.extend(data, {_id: id});
+                fluid.extend(data, {_id: id});
             }
             promiseTogo = pouchDB.put(data);
         }

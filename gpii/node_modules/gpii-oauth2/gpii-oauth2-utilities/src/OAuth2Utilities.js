@@ -17,7 +17,7 @@ var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.oauth2");
 
-gpii.oauth2.errors = {
+gpii.oauth2.errors = fluid.freezeRecursive({
     missingInput: {
         msg: "The input field \"%fieldName\" is undefined",
         statusCode: 400,
@@ -53,7 +53,7 @@ gpii.oauth2.errors = {
         statusCode: 401,
         isError: true
     }
-};
+});
 
 gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     if (req.headers && req.headers.authorization) {

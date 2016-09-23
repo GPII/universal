@@ -10,9 +10,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 "use strict";
 
-(function () {
+var fluid = fluid || require("infusion"),
+    gpii = fluid.registerNamespace("gpii");
 
-    var gpii = fluid.registerNamespace("gpii");;
+(function () {
 
     fluid.registerNamespace("gpii.tests.oauth2");
 
