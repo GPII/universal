@@ -12,7 +12,7 @@
         "node-uuid": "1.4.7",
         "semver": "1.1.4",
         "xml-mapping": "1.2.0",
-        "kettle": "git://github.com/cindyli/kettle.git#8f07e9c19ea5d0349e106dc32e5543c01dae7811",
+        "kettle": "git://github.com/fluid-project/kettle.git#b1a014cbaad59b1eb61e83fa90cf0ecd99191166",
         "express": "4.13.3",
         "body-parser": "1.13.3",
         "connect-ensure-login": "0.1.1",
