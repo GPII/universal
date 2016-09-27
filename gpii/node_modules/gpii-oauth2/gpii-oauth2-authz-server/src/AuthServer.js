@@ -337,33 +337,6 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
     app.set("view engine", "handlebars");
 };
 
-gpii.oauth2.authServer.resolveAuthorizedServices = function (promiseTogo, responseData, userData) {
-    var authorizedClients = responseData[0];
-    var unauthorizedClients = responseData[1];
-
-    var authorizedServices = fluid.transform(authorizedClients, function (client) {
-        return {
-            authDecisionId: client.authDecisionId,
-            oauth2ClientId: client.oauth2ClientId,
-            serviceName: client.clientName
-        };
-    });
-    var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
-        return {
-            oauth2ClientId: client.oauth2ClientId,
-            serviceName: client.clientName
-        };
-    });
-
-    promiseTogo.resolve({
-        username: userData.name,
-        authorizedServices: authorizedServices,
-        unauthorizedServices: unauthorizedServices
-    });
-
-    return promiseTogo;
-};
-
 gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
     // TODO: Update the user interface to support multiple tokens per
     // user rather than using a single default
@@ -379,7 +352,28 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
     var authorizedServicesPromise = fluid.promise();
     // TODO: Convert to use fluid.promise.map once https://issues.fluidproject.org/browse/FLUID-5968 is resolved
     promisesSequence.then(function (responses) {
-        gpii.oauth2.authServer.resolveAuthorizedServices(authorizedServicesPromise, responses, user);
+        var authorizedClients = responses[0];
+        var unauthorizedClients = responses[1];
+
+        var authorizedServices = fluid.transform(authorizedClients, function (client) {
+            return {
+                authDecisionId: client.authDecisionId,
+                oauth2ClientId: client.oauth2ClientId,
+                serviceName: client.clientName
+            };
+        });
+        var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
+            return {
+                oauth2ClientId: client.oauth2ClientId,
+                serviceName: client.clientName
+            };
+        });
+
+        authorizedServicesPromise.resolve({
+            username: user.name,
+            authorizedServices: authorizedServices,
+            unauthorizedServices: unauthorizedServices
+        });
     });
 
     return authorizedServicesPromise;
