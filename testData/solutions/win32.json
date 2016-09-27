@@ -980,10 +980,15 @@
                     },
                     "MaxSpeed": {
                         "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
-                            "factor": 350,
-                            "offset": 10,
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
+                                    "factor": 350,
+                                    "offset": 10
+                                }
+                            },
                             "outputPath": "value"
                         },
                         "path": {
