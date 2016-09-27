@@ -13,7 +13,7 @@ This mean that:
 ** solutionsRegistry (reading registry from file)
 ** deviceReporter (reading device context info from file)
 ** matchMakerFramework
-** flatMatchMaker
+** canopyMatchMaker
 ** lifecycleManager
 
 Notes on testing:

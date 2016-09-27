@@ -30,7 +30,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
         tests: [{
             name: "Find an existing user by an user id",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", ["user-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -40,7 +40,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
         }, {
             name: "Finding a non-existing user by an user id returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", ["user-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -50,7 +50,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
         }, {
             name: "Not providing user ID returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -72,7 +72,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
         tests: [{
             name: "Find an user record by a proper user name",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByUsername", ["chromehc"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -82,7 +82,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
         }, {
             name: "Finding an user record by a non-existing user name returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByUsername", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -92,7 +92,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
         }, {
             name: "Not providing user name returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByUsername", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -114,7 +114,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
         tests: [{
             name: "Find an user record by a proper GPII token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByGpiiToken", ["chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -124,7 +124,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
         }, {
             name: "Finding an user by a non-existing GPII token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByGpiiToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -134,7 +134,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
         }, {
             name: "Not providing a GPII token returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByGpiiToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -156,7 +156,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
         tests: [{
             name: "Find a GPII token record by a GPII token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiToken", ["chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -166,7 +166,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
         }, {
             name: "Finding a token record by a non-existing GPII token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -176,7 +176,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
         }, {
             name: "Not providing a GPII token returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -198,7 +198,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
         tests: [{
             name: "Find a client record by a proper client id",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientById", ["client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -208,7 +208,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
         }, {
             name: "Finding a client record by a non-existing client id returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientById", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -218,7 +218,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
         }, {
             name: "Not providing client id returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientById", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -240,7 +240,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
         tests: [{
             name: "Find a client record by a proper oauth2 client id",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientByOauth2ClientId", ["org.chrome.cloud4chrome"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -250,7 +250,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
         }, {
             name: "Finding a client record by a non-existing oauth2 client id returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientByOauth2ClientId", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -260,7 +260,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
         }, {
             name: "Not providing an oauth2 client id returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientByOauth2ClientId", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -282,7 +282,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAllClients", {
         tests: [{
             name: "Find all clients",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAllClients", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -300,7 +300,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
         tests: [{
             name: "Add an auth decision",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.testData.authDecisionToCreate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
@@ -314,7 +314,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthDecision", {
         }, {
             name: "Add an emty auth decision returns error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.addAuthDecision", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -336,7 +336,7 @@ fluid.defaults("gpii.tests.dbDataStore.updateAuthDecision", {
         tests: [{
             name: "A typical flow of updating an auth decision",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.updateAuthDecision", ["user-1", gpii.tests.dbDataStore.testData.authDecisionToUpdate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
@@ -350,7 +350,7 @@ fluid.defaults("gpii.tests.dbDataStore.updateAuthDecision", {
         }, {
             name: "An unmatched user id returns unauthorized error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.updateAuthDecision", ["user-0", gpii.tests.dbDataStore.testData.authDecisionToUpdate], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -372,7 +372,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
         tests: [{
             name: "A typical flow of updating an auth decision",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
@@ -386,7 +386,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
         }, {
             name: "An unmatched user id returns unauthorized error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-0", "authDecision-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -400,7 +400,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
         }, {
             name: "A non-existing authDecisionId returns error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-0", "authDecision-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -422,7 +422,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
         tests: [{
             name: "Find an existing auth decision by an auth decision id",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -432,7 +432,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
         }, {
             name: "Finding a non-existing auth decision by an auth decision id returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionById", ["authDecision-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -442,7 +442,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionById", {
         }, {
             name: "Not providing auth decision ID returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionById", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -464,7 +464,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
         tests: [{
             name: "Find auth decisions by a gpii token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -474,10 +474,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
         }, {
             name: "Revoked auth decisions are not returned",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -488,7 +488,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
         }, {
             name: "Finding a non-existing auth decision by a gpii token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["non-existing-token"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -498,7 +498,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
         }, {
             name: "Not providing a gpii token returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -520,7 +520,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
         tests: [{
             name: "Find auth decisions by a gpii token, a client id and a redirect uri",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecision", ["chrome_high_contrast", "client-1", "http://org.chrome.cloud4chrome/the-client%27s-uri/"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -530,7 +530,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
         }, {
             name: "Finding a non-existing value returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecision", ["non-existing-token", "client-1", false], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -540,7 +540,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
         }, {
             name: "Not providing any input returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecision", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -554,7 +554,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecision", {
         }, {
             name: "Not providing one input returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecision", ["chrome_high_contrast", false], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -577,10 +577,10 @@ fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
         tests: [{
             name: "Add an auth code",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.addAuthDecision", [gpii.tests.dbDataStore.testData.authDecisionToCreate], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.saveAuthCode", ["{arguments}.0.id", "test-auth-code"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -595,7 +595,7 @@ fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
         }, {
             name: "Not providing one input argument returns error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.saveAuthCode", [""], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -609,7 +609,7 @@ fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
         }, {
             name: "Not providing both input arguments returns error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.saveAuthCode", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -631,7 +631,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
         tests: [{
             name: "Find an auth decision by an auth code",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByCode", ["chrome_high_contrast_auth_token"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -641,7 +641,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
         }, {
             name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByCode", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -655,10 +655,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
         }, {
             name: "Revoked auth code receives unauthorized error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByCode", ["chrome_high_contrast_auth_token"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -681,7 +681,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
         tests: [{
             name: "Find authorized clients by a gpii token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", ["chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -691,10 +691,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
         }, {
             name: "Revoked auth decisions are not returned",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", ["chrome_high_contrast"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -705,14 +705,14 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
         }, {
             name: "Returns undefined when all auth decisions are revoked",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-2"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", ["chrome_high_contrast"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -723,7 +723,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
         }, {
             name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -737,7 +737,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
         }, {
             name: "Find by a non-existing gpii token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -755,7 +755,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
         tests: [{
             name: "Find auth information by an access token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByAccessToken", ["chrome_high_contrast_access_token"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -765,10 +765,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
         }, {
             name: "Returns undefined when the auth decision is revoked",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByAccessToken", ["chrome_high_contrast_access_token"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -779,7 +779,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
         }, {
             name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByAccessToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -793,7 +793,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
         }, {
             name: "Find by a non-existing gpii token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByAccessToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -811,7 +811,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         tests: [{
             name: "A client with allowDirectGpiiTokenAccess set to true receives the access token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.prefsEditors.firstDiscovery", "chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -821,7 +821,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         }, {
             name: "A client with allowDirectGpiiTokenAccess set to false returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["org.chrome.cloud4chrome", "chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -831,7 +831,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         }, {
             name: "A client without allowDirectGpiiTokenAccess field returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.windows.magnifier", "chrome_high_contrast_dark"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -841,10 +841,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         }, {
             name: "Revoked auth decisions returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-2"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.prefsEditors.firstDiscovery", "chrome_high_contrast"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -855,7 +855,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         }, {
             name: "Not providing an input argument returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -869,7 +869,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         }, {
             name: "Find by a non-existing oauth2ClientId returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["non-existing", "chrome_high_contrast"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -879,7 +879,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiTok
         }, {
             name: "Find by a non-existing gpiiToken returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken", ["net.gpii.prefsEditors.firstDiscovery", "non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -897,7 +897,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
         tests: [{
             name: "Find a client credentials token record by an id",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenById", ["clientCredentialsToken-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -907,7 +907,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
         }, {
             name: "Revoked client credentials token record is still returned",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
@@ -921,7 +921,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
         }, {
             name: "Finding a non-existing client credentials token record by an id returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenById", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -931,7 +931,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
         }, {
             name: "Not providing client credentials token ID returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenById", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -953,7 +953,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
         tests: [{
             name: "Find a client credentials token record by a client id",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["client-2"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -963,10 +963,10 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
         }, {
             name: "Revoked auth decisions returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["client-2"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -977,7 +977,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
         }, {
             name: "Finding a non-existing client credentials token record by a client id returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -987,7 +987,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
         }, {
             name: "Not providing client ID returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByClientId", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1009,7 +1009,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
         tests: [{
             name: "Find a client credentials token record by an access token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["firstDiscovery_access_token"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1019,10 +1019,10 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
         }, {
             name: "Revoked auth decisions returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["firstDiscovery_access_token"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -1033,7 +1033,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
         }, {
             name: "Finding a non-existing client credentials token record by an access token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -1043,7 +1043,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
         }, {
             name: "Not providing client ID returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1065,7 +1065,7 @@ fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsToken", {
         tests: [{
             name: "Add a client credentials token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.addClientCredentialsToken", [gpii.tests.dbDataStore.testData.clientCredentialsTokenToCreate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
@@ -1079,7 +1079,7 @@ fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsToken", {
         }, {
             name: "Adding an empty object returns error",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.addClientCredentialsToken", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1101,7 +1101,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
         tests: [{
             name: "Find an auth decision information by a client credentials access token",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", ["firstDiscovery_access_token"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1111,10 +1111,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
         }, {
             name: "Revoked client credentials access token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
             }, {
-                listener: "gpii.tests.dbDataStore.invokePromiseProducer",
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", ["firstDiscovery_access_token"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
@@ -1125,7 +1125,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
         }, {
             name: "Finding by a non-existing client credentials access token returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
@@ -1135,7 +1135,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
         }, {
             name: "Not providing client credentials access token returns 401 status code and error message",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1149,7 +1149,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
         }, {
             name: "Finding by client credentials access token for non-existing client returns undefined",
             sequence: [{
-                func: "gpii.tests.dbDataStore.invokePromiseProducer",
+                func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", ["non-existing-client-token"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",

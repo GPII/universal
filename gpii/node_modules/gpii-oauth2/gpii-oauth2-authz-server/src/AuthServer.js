@@ -91,14 +91,6 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
 
 };
 
-gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done) {
-    promise.then(function (data) {
-        return done(null, data);
-    }, function () {
-        return done(null, false);
-    });
-};
-
 // gpii.oauth2.passport
 // --------------------
 
@@ -131,17 +123,13 @@ gpii.oauth2.passport.listenPassport = function (passport, userService, clientSer
 
     passport.deserializeUser(function (id, done) {
         var userPromise = userService.getUserById(id);
-        userPromise.then(function (user) {
-            return done(null, user);
-        });
+        gpii.oauth2.oauth2orizeServer.promiseToDone(userPromise, done);
     });
 
     passport.use(new LocalStrategy(
         function (username, password, done) {
             var authenticateUserPromise = userService.authenticateUser(username, password);
-            authenticateUserPromise.then(function (user) {
-                return done(null, user);
-            });
+            gpii.oauth2.oauth2orizeServer.promiseToDone(authenticateUserPromise, done);
         }
     ));
 
@@ -150,9 +138,7 @@ gpii.oauth2.passport.listenPassport = function (passport, userService, clientSer
     passport.use(new ClientPasswordStrategy(
         function (oauth2ClientId, oauth2ClientSecret, done) {
             var clientPromise = clientService.authenticateClient(oauth2ClientId, oauth2ClientSecret);
-            clientPromise.then(function (client) {
-                return done(null, client);
-            });
+            gpii.oauth2.oauth2orizeServer.promiseToDone(clientPromise, done);
         }
     ));
 };
@@ -351,34 +337,6 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
     app.set("view engine", "handlebars");
 };
 
-gpii.oauth2.authServer.resolveAuthorizedServices = function (promiseTogo, responseData, userData) {
-    var authorizedClients = responseData[0];
-    var unauthorizedClients = responseData[1];
-
-    // Build view objects
-    var authorizedServices = fluid.transform(authorizedClients, function (client) {
-        return {
-            authDecisionId: client.authDecisionId,
-            oauth2ClientId: client.oauth2ClientId,
-            serviceName: client.clientName
-        };
-    });
-    var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
-        return {
-            oauth2ClientId: client.oauth2ClientId,
-            serviceName: client.clientName
-        };
-    });
-
-    promiseTogo.resolve({
-        username: userData.username,
-        authorizedServices: authorizedServices,
-        unauthorizedServices: unauthorizedServices
-    });
-
-    return promiseTogo;
-};
-
 gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
     // TODO: Update the user interface to support multiple tokens per
     // user rather than using a single default
@@ -392,8 +350,30 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
     var promisesSequence = fluid.promise.sequence(sources);
 
     var authorizedServicesPromise = fluid.promise();
+    // TODO: Convert to use fluid.promise.map once https://issues.fluidproject.org/browse/FLUID-5968 is resolved
     promisesSequence.then(function (responses) {
-        gpii.oauth2.authServer.resolveAuthorizedServices(authorizedServicesPromise, responses, user);
+        var authorizedClients = responses[0];
+        var unauthorizedClients = responses[1];
+
+        var authorizedServices = fluid.transform(authorizedClients, function (client) {
+            return {
+                authDecisionId: client.authDecisionId,
+                oauth2ClientId: client.oauth2ClientId,
+                serviceName: client.clientName
+            };
+        });
+        var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
+            return {
+                oauth2ClientId: client.oauth2ClientId,
+                serviceName: client.clientName
+            };
+        });
+
+        authorizedServicesPromise.resolve({
+            username: user.name,
+            authorizedServices: authorizedServices,
+            unauthorizedServices: unauthorizedServices
+        });
     });
 
     return authorizedServicesPromise;
@@ -624,4 +604,20 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             });
         }
     );
+};
+
+/*
+ * An utility function to parse a promise object to determine whether to grant or reject an authorization. The grant occurs in the promise resolve callback while
+ * the reject occurs in the promise reject callback.
+ * @param promise {Promise} The promise object to determine the grant or reject an authorization.
+ * @param done {Function} The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
+ *  See [oauth2rize in github](https://github.com/jaredhanson/oauth2orize) for more information
+ * @return The done() callback with an authorization result
+ */
+gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done) {
+    promise.then(function (data) {
+        return done(null, data);
+    }, function () {
+        return done(null, false);
+    });
 };

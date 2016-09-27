@@ -1,10 +1,7 @@
 {
     "type": "gpii.config.cloudBased.development.all.local",
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json",
-        "%preferencesServer/configs/gpii.preferencesServer.config.development.json",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
-        "%rawPreferencesServer/configs/gpii.rawPreferencesServer.config.development.json",
-        "%deviceReporter/configs/gpii.deviceReporter.config.development.json"
+        "%universal/gpii/configs/gpii.config.cloudBased.development.json",
+        "%pouchManager/configs/gpii.pouchManager.config.base.json"
     ]
 }

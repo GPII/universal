@@ -49,9 +49,7 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
         },
-        "capabilities": [
-            "applications.com\\.texthelp\\.readWriteGold.id"
-        ],
+        "capabilities": [],
         "capabilitiesTransformations": {
             "ApplicationSettings": "ApplicationSettings"
         }
@@ -61,9 +59,7 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
         "options": {
             "filename": "${{environment}.HOME}\\mySettings.ini"
         },
-        "capabilities": [
-            "applications.com\\.texthelp\\.readWriteGold.id"
-        ]
+        "capabilities": []
     }
 }
 ```

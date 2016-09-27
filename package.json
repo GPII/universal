@@ -6,29 +6,35 @@
     "bugs": "http://issues.gpii.net/browse/GPII",
     "homepage": "http://gpii.net/",
     "dependencies": {
-        "infusion": "2.0.0-dev.20160519T222603Z.754d2c6",
+        "infusion": "git://github.com/amb26/infusion.git#240c00be023732ac8dcc193a57bc1b46c58d2de7",
         "node-jqunit": "1.1.4",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
-        "node-uuid": "1.4.0",
+        "node-uuid": "1.4.7",
         "semver": "1.1.4",
         "xml-mapping": "1.2.0",
-        "kettle": "1.0.0",
+        "kettle": "git://github.com/fluid-project/kettle.git#b1a014cbaad59b1eb61e83fa90cf0ecd99191166",
         "express": "4.13.3",
         "body-parser": "1.13.3",
         "connect-ensure-login": "0.1.1",
         "express-handlebars": "3.0.0",
-        "express-session": "1.11.3",
+        "express-session": "1.14.0",
         "oauth2orize": "1.0.1",
         "passport": "0.2.1",
         "passport-local": "1.0.0",
-        "passport-oauth2-client-password": "0.1.2"
+        "passport-oauth2-client-password": "0.1.2",
+        "glob": "7.0.5",
+        "write-file-atomic": "1.1.4"
     },
     "devDependencies": {
-        "gpii-pouchdb": "git://github.com/GPII/gpii-pouchdb#5e13a1b6556e70261b3dc204fde67743f1e3ebf1",
+        "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb#7ccc5fba874ec525d781d977c8c3afbd857d7877",
         "grunt": "1.0.1",
-        "fluid-grunt-eslint": "18.1.1",
+        "fluid-grunt-eslint": "18.1.2",
         "grunt-jsonlint": "1.0.4",
-        "grunt-shell": "1.3.0"
+        "grunt-shell": "1.3.0",
+        "browserify": "13.1.0",
+        "http-browserify": "1.7.0",
+        "https-browserify": "0.0.1",
+        "url": "0.11.0"
     },
     "license" : "BSD-3-Clause",
     "keywords": [
@@ -48,6 +54,10 @@
     },
     "scripts": {
         "test": "node tests/all-tests.js",
-        "start": "node gpii.js"
+        "start": "node gpii.js",
+        "browserify:http": "node node_modules/browserify/bin/cmd.js -s http node_modules/http-browserify/index.js -o browserify/http.js ",
+        "browserify:https": "node node_modules/browserify/bin/cmd.js -s https node_modules/https-browserify/index.js -o browserify/https.js ",
+        "browserify:url": "node node_modules/browserify/bin/cmd.js -s urlModule node_modules/url/url.js -o browserify/urlModule.js ",
+        "postinstall": "mkdir browserify; npm run browserify:http; npm run browserify:https; npm run browserify:url"
     }
 }

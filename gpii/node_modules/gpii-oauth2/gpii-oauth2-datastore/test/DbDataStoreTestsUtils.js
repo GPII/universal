@@ -16,15 +16,17 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit");
 
+require("./js/DataStoreTestsUtils.js");
+
 fluid.defaults("gpii.tests.dbDataStore.environment", {
     gradeNames: ["gpii.test.pouch.environment"],
     port: 1234,
     pouchConfig: {
         databases: {
-            gpiiOauth: {
+            auth: {
                 data: [
-                    "%gpiiOauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json",
-                    "%gpiiOauth2/gpii-oauth2-datastore/dbViews/views.json"
+                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json",
+                    "%gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
                 ]
             }
         }
@@ -56,26 +58,23 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 dataSourceConfig: {
                     baseUrl: "http://localhost",
                     port: "{gpii.tests.dbDataStore.environment}.options.port",
-                    dbName: "gpiiOauth"
+                    dbName: "auth"
                 }
             }
         }
-    }
+    },
+    sequenceEnd: [{
+        func: "{gpii.tests.dbDataStore.environment}.events.onCleanup.fire"
+    }, {
+        event:    "{gpii.tests.dbDataStore.environment}.events.onCleanupComplete",
+        listener: "fluid.log",
+        args:     ["Database cleanup complete"]
+    }]
 });
-
-gpii.tests.dbDataStore.invokePromiseProducer = function (producerFunc, args, that) {
-    var promise = producerFunc.apply(null, args);
-
-    promise.then(function (response) {
-        that.events.onResponse.fire(response);
-    }, function (err) {
-        that.events.onError.fire(err);
-    });
-};
 
 gpii.tests.dbDataStore.saveAndInvokeFetch = function (fetchDataSource, id, that) {
     gpii.tests.dbDataStore.lastSavedId = id;
-    gpii.tests.dbDataStore.invokePromiseProducer(fetchDataSource, [id], that);
+    gpii.tests.oauth2.invokePromiseProducer(fetchDataSource, [id], that);
 };
 
 gpii.tests.dbDataStore.verifyFetched = function (response, expected) {

@@ -102,6 +102,7 @@ var fluid = fluid || require("infusion");
             }
         },
         events: {
+            // All these events are pseudoevents rather than standard events. They are triggered by fluid.promise.fireTransformEvent().
             onGrantAuthorizationCode: null,
             onAddAuthorization: null,
             onGetSelectedPreferences: null,
@@ -122,8 +123,7 @@ var fluid = fluid || require("infusion");
             onAddAuthorization: [{
                 listener: "gpii.oauth2.authorizationService.findGpiiToken",
                 args: ["{dataStore}", "{arguments}.0"],
-                namespace: "findGpiiToken",
-                priority: "first"
+                namespace: "findGpiiToken"
             }, {
                 listener: "gpii.oauth2.authorizationService.findClient",
                 args: ["{dataStore}", "{arguments}.0"],
@@ -194,16 +194,19 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onGrantAuthorizationCode, input);
     };
 
-    // Shared by getSelectedPreferences() and setSelectedPreferences()
-    // @dataStore (Object): a data store instance
-    // @input (Object): Acceps this structure:
-    // {
-    //     gpiiToken: (String),
-    //     clientId: (String),
-    //     redirectUri: (String),
-    //     selectedPreferences: (Object)
-    // }
-    // @return (Promise): a promise object to be passed to the next processing function
+    /*
+     * Shared by getSelectedPreferences() and setSelectedPreferences()
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {codeGenerator} An instance of gpii.oauth2.codeGenerator
+     * @param input {Object} The Accepted input structure:
+     * {
+     *     gpiiToken: {String},
+     *     clientId: {String},
+     *     redirectUri: {String},
+     *     selectedPreferences: {Object}
+     * }
+     * @return {Promise}: a promise object to be passed to the next processing function
+     */
     gpii.oauth2.authorizationService.checkAuthDecision = function (dataStore, codeGenerator, input) {
         return gpii.oauth2.authorizationService.getAuthDecision(
             dataStore,
@@ -565,7 +568,7 @@ var fluid = fluid || require("infusion");
             var client = responses[0];
             var clientCredentialsToken = responses[1];
 
-            if (!scope || scope.indexOf("add_preferences") === -1 || !client.allowAddPrefs) {
+            if (!scope || scope[0] !== "add_preferences" || !client.allowAddPrefs) {
                 var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
                 promiseTogo.reject(error);
             } else if (!clientCredentialsToken) {

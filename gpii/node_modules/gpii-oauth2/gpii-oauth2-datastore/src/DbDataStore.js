@@ -10,12 +10,25 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
+/*
+ * gpii.oauth2.dbDataStore provides APIs for the authorization server to communicate with the backend
+ * data storage using CouchDB/PouchDB. CouchDB is used when GPII runs in the production configuration
+ * and PouchDB is used for the development configuration.
+ *
+ * This DB data store is a re-writing of the initial synchronized in memory data store. It now uses
+ * async promise API to satisfy the async database operations. However, the in memory data store continues
+ * to serve as a good reference with an almost identical but much simpler logic. It can be found at:
+ * https://github.com/cindyli/universal/blob/820e4919907e56f6412b2e3bab18675d5388b00b/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/src/InMemoryDataStore.js
+ */
+
 "use strict";
 
 var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 
-require("./DbDataStoreUtils.js");
+if (!gpii.oauth2.dbDataStore) {
+    require("./DbDataStoreUtils.js");
+}
 
 fluid.defaults("gpii.oauth2.dbDataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
@@ -42,7 +55,8 @@ fluid.defaults("gpii.oauth2.dbDataSource", {
             "": ""
         }
     },
-    // requestUrl needs to be resolved upfront since it contains actual string templates to compose data source url.
+    // requestUrl needs to be resolved upfront because it contains more string templates that need to be replaced at the
+    // next round when kettle.dataSource.URL kicks in to compose the actual URL.
     // An example of requestUrl is "/%id", in which case the expected url should be "%baseUrl:%port/%dbName/%id" instead
     // of having "%requestUrl" embedded. The expander below is to prepare the url that's sensible to kettle.dataSource.
     url: {

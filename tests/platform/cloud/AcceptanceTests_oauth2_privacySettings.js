@@ -18,8 +18,6 @@ var gpii = fluid.registerNamespace("gpii");
 
 gpii.loadTestingSupport();
 
-require("./OAuth2AcceptanceDataStore.js");
-
 fluid.registerNamespace("gpii.tests.cloud.oauth2.privacySettings");
 
 gpii.tests.cloud.oauth2.privacySettings.sequence = [
