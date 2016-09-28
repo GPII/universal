@@ -1,12 +1,17 @@
 ## Introduction
 
-A virtual machine that starts GPII in production mode can be found at the directory ```examples/production-components-vm```. Once started, the VM runs
+GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```examples/production-components-vm``` directory. Once the VM is running the following services will be available in the VM:
 
-* *Preferences Server* as one node instance listening on port 8081
-* *Cloud Based Flow Manager* as another node instance listening on port 8082
-* *CouchDB* as the backend data storage for above two servers listening on port 5984
+* *Preferences Server* listening on port 8081
+* *Cloud Based Flow Manager* listening on port 8082
+* *CouchDB* as the backend data store for above two servers listening on port 5984
 
-**Note** that these ports are forwarded from the VM to your host machine to allow you to access them locally. Therefore, before starting the VM, please make sure these ports on your host machine are free of use.
+**Note:** 
+
+* The *Preferences Server* and *Cloud Based Flow Manager* will be managed by two separate Node.js processes
+* The above mentioned ports will be forwarded from your host machine to the VM allowing access to deployed services
+* Before starting the VM please make sure the ports in question are not being used on your host machine
+* All the Vagrant commands listed below should be run in the ```examples/production-components-vm``` directory.
 
 ## Requirements
 
@@ -14,36 +19,31 @@ In order to start the VM, make sure [all these requirements for setting up Quali
 
 ## Start the VM
 
-In the universal repository root directory, run the following commands:
+To start a VM run the following command in the ```examples/production-components-vm``` directory:
 
 ```
-cd examples/production-components-vm
 vagrant up
 ```
 
-Now the VM should be started.
-
 ## Test the VM
 
-### Test Preferences Server
+### Test the Preferences Server
 
-Open this link in a browser:
+Visiting the following link in a browser should return the [Carla](https://github.com/GPII/universal/blob/master/testData/preferences/carla.json) NP set:
 
 ```
 http://localhost:8081/preferences/carla
 ```
 
-should give you the content of the carla NP set.
+### Test the Cloud Based Flow Manager
 
-### Test Cloud Based Flow Manager
-
-Open this link in a browser:
+Visiting the following link in a browser:
 
 ```
 http://localhost:8082/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D
 ```
 
-should output:
+should return this result:
 
 ```
 {
@@ -62,24 +62,29 @@ should output:
 
 ### Test CouchDB
 
-Open this link in a browser:
+Opening this link in a browser:
 
 ```
 http://localhost:5984/_utils/
 ```
 
-should show [CouchDB Web GUI Administration Panel](http://docs.couchdb.org/en/1.6.1/intro/futon.html) that lists these databases:
+should show the [CouchDB Web GUI Administration Panel](http://docs.couchdb.org/en/1.6.1/intro/futon.html). The following databases should be present:
 
-* ```auth```: Contains all data for GPII Authorization Server that runs within Cloud Based Flow Manager
-* ```preferences```: Contains all data for Preferences Server
+* ```auth```: Contains all data for GPII Authorization Server that runs within the Cloud Based Flow Manager
+* ```preferences```: Contains all data for the Preferences Server
 
 ## Stop the VM
 
-In the universal repository root directory, run the following commands:
+To stop the VM run the following command:
 
 ```
-cd examples/production-components-vm
 vagrant halt
 ```
 
-Now the VM should be stopped.
+## Delete the VM
+
+Once you no longer need the VM you can reclaim storage resources using the following command:
+
+```
+vagrant destroy -f
+```
