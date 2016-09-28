@@ -1,10 +1,10 @@
 ## Introduction
 
-GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```examples/production-components-vm``` directory. Once the VM is running the following services will be available in the VM:
+GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```examples/production-components-vm``` directory. Once the VM is running, the following services will be available in the VM:
 
 * *Preferences Server* listening on port 8081
 * *Cloud Based Flow Manager* listening on port 8082
-* *CouchDB* as the backend data store for above two servers listening on port 5984
+* *CouchDB* as the backend database for the above two servers listening on port 5984
 
 **Note:** 
 
@@ -19,7 +19,7 @@ In order to start the VM, make sure [all these requirements for setting up Quali
 
 ## Start the VM
 
-To start a VM run the following command in the ```examples/production-components-vm``` directory:
+To start a VM, run the following command in the ```examples/production-components-vm``` directory:
 
 ```
 vagrant up
@@ -75,7 +75,7 @@ should show the [CouchDB Web GUI Administration Panel](http://docs.couchdb.org/e
 
 ## Stop the VM
 
-To stop the VM run the following command:
+To stop the VM, run the following command:
 
 ```
 vagrant halt
@@ -83,7 +83,7 @@ vagrant halt
 
 ## Delete the VM
 
-Once you no longer need the VM you can reclaim storage resources using the following command:
+Once you no longer need the VM, you can reclaim storage resources using the following command:
 
 ```
 vagrant destroy -f
