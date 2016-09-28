@@ -45,23 +45,39 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
 ```
 "settingsHandlers": {
     "myconf": {
-        "type": "gpii.settingsHandlers.XMLHandler",
+        "type": "gpii.settingsHandlers.INISettingsHandler",
         "options": {
-            "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
+            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+            "allowNumberSignComments": true,
+            "allowSubSections": true
         },
         "supportedSettings": : {
-            "appsetting1": { ... appsetting1 metadata ... },
-            "appsetting2": { ... appsetting2 metadata ... },
-            ...
-            "appsettingN": { ... appsettingN metadata ... }
+            "speech\\.espeak\\.pitch": { ... metadata for setting... },
+            "speech\\.espeak\\.volume": { ... metadata for setting ... },
+            "presentation\\.reportHelpBalloons": { ... metadata for setting ... },
+            "speech\\.nonTransformableSetting": { ... metadata for setting ... }
         },
         "capabilities": [],
         "capabilitiesTransformations": {
-            "ApplicationSettings": "ApplicationSettings"
+            "speech\\.espeak\\.pitch": {
+                "transform": {
+                    "type": "fluid.transforms.linearScale",
+                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                    "factor": 100
+                }
+            },
+            "speech\\.espeak\\.volume": {
+                "transform": {
+                    "type": "fluid.transforms.linearScale",
+                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                    "factor": 100
+                }
+            },
+            "presentation\\.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
         }
     },
     "otherconf": {
-        "type": "gpii.settingsHandlers.INIHandler",
+        "type": "gpii.settingsHandlers.XMLHandler",
         "options": {
             "filename": "${{environment}.HOME}\\mySettings.ini"
         },
@@ -76,9 +92,9 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
 }
 ```
 
-The important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+The important thing to notice here is that this solution example has two references to settingsHandler - one INIHandler which has been given a reference `myconf` and an XMLHandler referred to as `otherconf`.
 
-Note also the `supportedSettings` option. This block is used to determine which application specific settings are relevant to the settingshandler, and also serves as location for providing metadata (such as default values, data type, validation information, etc) about the setting. If there are no relevant metadata related to the setting, the empty object (`{}`) should be used as value.
+Note also the `supportedSettings` option. This block is used to determine which application specific settings are relevant to the settingshandler, and also serves as location for providing metadata (such as default values, data type, validation information, etc) about the setting. Currently no relevant metadata is supported, so the empty object (`{}`) should be used as value.
 
 If a solution only has a single settingsHandler block, all the settings will be passed to that handler by default. But in case there are multiple settingsHandlers, the system needs some way of determining which settings to apply to which handler. The `supportedSettings` directive is used for this:
 * If a `supportedSettings` option is supplied, only those settings listed there will be applied to the settingsHandler
