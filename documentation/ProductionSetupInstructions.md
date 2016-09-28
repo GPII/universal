@@ -1,6 +1,6 @@
 ## Introduction
 
-GPII components such as the Preferences Server and Cloud Based Flow Manager can be deployed in a VM using production configurations. Please refer to the ```examples/production-components-vm``` directory. Once the VM is running the following services will be available in the VM:
+GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```examples/production-components-vm``` directory. Once the VM is running the following services will be available in the VM:
 
 * *Preferences Server* listening on port 8081
 * *Cloud Based Flow Manager* listening on port 8082
@@ -11,6 +11,7 @@ GPII components such as the Preferences Server and Cloud Based Flow Manager can 
 * The *Preferences Server* and *Cloud Based Flow Manager* will be managed by two separate Node.js processes
 * The above mentioned ports will be forwarded from your host machine to the VM allowing access to deployed services
 * Before starting the VM please make sure the ports in question are not being used on your host machine
+* All the Vagrant commands listed below should be run in the ```examples/production-components-vm``` directory.
 
 ## Requirements
 
@@ -18,10 +19,9 @@ In order to start the VM, make sure [all these requirements for setting up Quali
 
 ## Start the VM
 
-Run the following commands in the Universal repository's root directory to start a VM:
+To start a VM run the following command in the ```examples/production-components-vm``` directory:
 
 ```
-cd examples/production-components-vm
 vagrant up
 ```
 
@@ -75,9 +75,16 @@ should show the [CouchDB Web GUI Administration Panel](http://docs.couchdb.org/e
 
 ## Stop the VM
 
-To stop the VM run the following commands in the Universal repository's root directory:
+To stop the VM run the following command:
 
 ```
-cd examples/production-components-vm
 vagrant halt
+```
+
+## Delete the VM
+
+Once you no longer need the VM you can reclaim storage resources using the following command:
+
+```
+vagrant destroy -f
 ```
