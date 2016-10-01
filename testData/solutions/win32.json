@@ -1098,9 +1098,6 @@
             }
         ],
         "stop": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.updateCursors"
-            }
         ],
         "isInstalled": [
             {
