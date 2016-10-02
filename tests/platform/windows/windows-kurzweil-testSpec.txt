@@ -1,0 +1,10 @@
+windows-kurzweil-testSpec.js
+
+Descriptions:
+This will run the acceptance tests for Kurzweil 3000 (KESI). It uses 2 NP sets: kurzweil_common.json and kurzweil_application.json
+
+Prerequisites:
+* Kurzweil 3000 needs to be installed
+* Need to set up username "gpii" for Kurzweil(incomplete)
+* The name "gpii" is required for Kurzweil's settings folder
+

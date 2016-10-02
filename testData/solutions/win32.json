@@ -1,4 +1,56 @@
 {
+    "com.kesi.kurzweil": {
+        "name": "Kurzweil 3000",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\KESI\\Kurzweil 3000\\gpii\\K3000Settings.k3s"
+                },
+                "capabilities": [
+                    "applications.com\\.kesi\\.kurzweil.id",
+                    "display.screenReader.speechRate",
+                    "display.screenEnhancement.magnification",
+                    "-provisional-general.-provisional-volume",
+                    "display.screenEnhancement.fontSize",
+                    "display.screenEnhancement.fontFaceFontName"
+                ],
+                "capabilitiesTransformations": {
+                    "View\\.MyZoomValue": "http://registry\\.gpii\\.net/common/magnification",
+                    "Speech\\.EnglishReadingSpeed": "http://registry\\.gpii\\.net/common/speechRate",
+                    "Speech\\.EnglishReadingVolume": "http://registry\\.gpii\\.net/common/volume",
+                    "Fonts\\.FontSize": "http://registry\\.gpii\\.net/common/fontSize",
+                    "Fonts\\.FontName": "http://registry\\.gpii\\.net/common/fontFaceFontName"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Kurzweil 3000.exe\\}\""
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.killProcessByName",
+                "filename": "Kurzweil 3000.exe"
+            }
+        ]
+    },
+
     "com.freedomscientific.jaws": {
         "name": "JAWS",
         "contexts": {
