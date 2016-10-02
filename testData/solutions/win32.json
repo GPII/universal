@@ -1087,7 +1087,10 @@
             "settings.configure"
         ],
         "restore": [
-            "settings.configure"
+            "settings.configure",
+            {
+                "type": "gpii.windows.spiSettingsHandler.updateCursors"
+            }
         ],
         "start": [
             {
@@ -1095,9 +1098,6 @@
             }
         ],
         "stop": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.updateCursors"
-            }
         ],
         "isInstalled": [
             {

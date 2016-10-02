@@ -1,4 +1,4 @@
-FROM inclusivedesign/nodejs:lts
+FROM inclusivedesign/nodejs:current
 
 WORKDIR /etc/ansible/playbooks
 
