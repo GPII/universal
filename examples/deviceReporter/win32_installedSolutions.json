@@ -5,6 +5,10 @@
     },
     "solutions": [
         {
+            "id": "com.gwmicro.windoweyes"
+        },
+
+        {
             "id": "com.microsoft.windows.magnifier"
         },
 
