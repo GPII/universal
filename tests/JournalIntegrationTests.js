@@ -153,7 +153,15 @@ gpii.tests.journal.solutionsRegistryOverlay = {
     "com.microsoft.windows.cursors": {
         settingsHandlers: {
             explode: {
-                type: "gpii.tests.journal.explodingSettingsHandler"
+                type: "gpii.tests.journal.explodingSettingsHandler",
+                supportedSettings: {
+                    cursorSize: {}
+                }
+            },
+            configure: {
+                supportedSettings: {
+                    cursorSize: {}
+                }
             }
         },
         configure: ["settings.configure", "settings.explode"]
