@@ -20,5 +20,3 @@ nodejs_branch: current
 nodejs_app_start_script: gpii.js
 
 nodejs_app_git_clone: false
-
-nodejs_npm_symlinks: true
