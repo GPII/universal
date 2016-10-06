@@ -31,6 +31,8 @@
         "fluid-grunt-eslint": "18.1.2",
         "grunt-jsonlint": "1.0.4",
         "grunt-shell": "1.3.0",
+        "grunt-contrib-clean": "1.0.0",
+        "grunt-mkdir": "1.0.0",
         "browserify": "13.1.0",
         "http-browserify": "1.7.0",
         "https-browserify": "0.0.1",
@@ -55,9 +57,6 @@
     "scripts": {
         "test": "node tests/all-tests.js",
         "start": "node gpii.js",
-        "browserify:http": "node node_modules/browserify/bin/cmd.js -s http node_modules/http-browserify/index.js -o browserify/http.js ",
-        "browserify:https": "node node_modules/browserify/bin/cmd.js -s https node_modules/https-browserify/index.js -o browserify/https.js ",
-        "browserify:url": "node node_modules/browserify/bin/cmd.js -s urlModule node_modules/url/url.js -o browserify/urlModule.js ",
-        "postinstall": "rm -rf browserify && mkdir browserify && npm run browserify:http && npm run browserify:https && npm run browserify:url"
+        "postinstall": "grunt browserify"
     }
 }

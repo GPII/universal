@@ -24,6 +24,16 @@ module.exports = function (grunt) {
         jsonlint: {
             src: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json", "*.json"]
         },
+        clean: {
+            browserify: "browserify"
+        },
+        mkdir: {
+            browserify: {
+                options: {
+                    create: ["browserify"]
+                }
+            }
+        },
         shell: {
             options: {
                 stdout: true,
@@ -41,6 +51,9 @@ module.exports = function (grunt) {
             },
             runNodeProductionTests: {
                 command: "vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal; node tests/ProductionConfigTests.js'"
+            },
+            browserify: {
+                command: "node node_modules/browserify/bin/cmd.js -s http node_modules/http-browserify/index.js -o browserify/http.js; node node_modules/browserify/bin/cmd.js -s https node_modules/https-browserify/index.js -o browserify/https.js; node node_modules/browserify/bin/cmd.js -s urlModule node_modules/url/url.js -o browserify/urlModule.js"
             }
         }
     });
@@ -48,6 +61,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("fluid-grunt-eslint");
     grunt.loadNpmTasks("grunt-jsonlint");
     grunt.loadNpmTasks("grunt-shell");
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-mkdir");
+
+    grunt.registerTask("browserify", "Browserify dependencies required by using the kettle URL data source in browsers", function () {
+        grunt.task.run(["clean:browserify", "mkdir:browserify"]);
+        grunt.task.run("shell:browserify");
+    });
 
     grunt.registerTask("browser-tests", "Run browser tests in a VM", function () {
         grunt.task.run("shell:runBrowserTests");
