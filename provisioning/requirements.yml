@@ -1,7 +1,11 @@
 - src: https://github.com/idi-ops/ansible-facts
   name: facts
 
-- src: git+https://github.com/gtirloni/ansible-role-nodejs.git
+# To work around an issue with running "npm install --no-bin-links" within the VirtualBox shared folder,
+# using Giovanni's fix for https://issues.gpii.net/browse/GPII-2060 that mounts the /node_modules
+# directory of the host machine to a different directory than the VirtualBox shared folder.
+# TODO: Once Giovanni's fix makes into the master, update the github URL
+- src: git://github.com/gtirloni/ansible-role-nodejs.git
   scm: git
   name: nodejs
-  version: npm3-stack-issue
+  version: GPII-2060
