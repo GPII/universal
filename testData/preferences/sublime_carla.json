@@ -1,0 +1,22 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/applications/com.sublimetext": {
+                      "caret_extra_bottom": 1,
+                      "caret_extra_top": 1,
+                      "caret_extra_width": 4,
+                      "color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+                      "dictionary": "Packages/Language - English/en_GB.dic",
+                      "highlight_line": true,
+                      "highlight_modified_tabs": true,
+                      "spell_check": true
+                    }
+                }
+            }
+        }
+    }
+}
