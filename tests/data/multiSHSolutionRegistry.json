@@ -1,0 +1,61 @@
+{
+    "fakemag1": {
+        "name": "Fake Magnifier 1",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "/tmp/fakemag1.settings.json"
+                },
+                "supportedSettings": {
+                    "tilingMagnifiers": {},
+                    "magnification": {},
+                    "tracking": {}
+                },
+               "capabilities": [
+                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "magnification": "http://registry\\.gpii\\.net/common/magnification",
+                    "tracking": "http://registry\\.gpii\\.net/common/tracking"
+                }
+            },
+            "configuration1": {
+                "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "options": {
+                    "filename": "/tmp/fakemag2.settings.json"
+                },
+                "supportedSettings": {
+                    "weirdSetting": {},
+                    "crazyColor": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "crazyColor": "http://registry\\.gpii\\.net/common/invertColours"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration",
+            "settings.configuration1"
+        ],
+        "restore": [
+            "settings.configuration",
+            "settings.configuration1"
+        ],
+        "start": [ ],
+        "stop": [ ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    }
+}

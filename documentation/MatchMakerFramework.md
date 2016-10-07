@@ -7,7 +7,7 @@ A locally running component, with the following responsiblities:
 
 ## Configuration
 
-Like all other Kettle apps, the Matchmaker Framework has a config file. Generally, the Matchmaker Framework configs are located in the `configs` folder of the matchMakerFramework component. The declaration of what matchmakers are available to the Matchmaker Framework, and where to find them should be set under the `matchMakers` option of the `gpii.matchMakerFramework`. Each entry should have the name of the mathcmaker as key, and then the value of an object which at least contains a `url`.  For example, in the following config file, two matchmakers are listed to be available. The "flat" matchmaker, located at the url http://localhost:8081 and the "RuleBased" one at the url http://localhost:8078.
+Like all other Kettle apps, the Matchmaker Framework is defined by a config file. Generally, the Matchmaker Framework configs are located in the `configs` folder of the matchMakerFramework component. The declaration of what matchmakers are available to the Matchmaker Framework, and where to find them should be set under the `matchMakers` option of the `gpii.matchMakerFramework`. Each entry should have the name of the matchmaker as key, and then the value of an object which at least contains a `url`.  For example, in the following config file, two matchmakers are listed to be available. The "default" matchmaker, located at the url http://localhost:8081 and the "RuleBased" one at the url http://localhost:8078.
 
 ```
 {
@@ -24,7 +24,7 @@ Like all other Kettle apps, the Matchmaker Framework has a config file. Generall
                             "type": "gpii.matchMakerFramework",
                             "options": {
                                 "matchMakers": {
-                                    "flat": {
+                                    "default": {
                                         "url": "http://localhost:8081"
                                     },
                                     "RuleBased": {
