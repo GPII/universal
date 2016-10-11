@@ -71,7 +71,8 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
             // { total_rows: 1, offset: 0, rows: [] }
             // This response is then further transformed using kettle readPayload option:
             // readPayload: { "": "rows.0.value" }
-            // After the transformation, an empty object is eventually received here and then converted into undefined.
+            // Due to an issue with the infusion model transformation described at https://issues.fluidproject.org/browse/FLUID-5969,
+            // after the transformation, an empty object is eventually received here and then converted into undefined.
             // Note that this issue only occurs when querying CouchDB by a view(map) function. when querying CouchDB directly
             // by a document id, 404 status is returned and this conversion is not needed.
             var result = $.isEmptyObject(data) ? undefined : dataProcessFunc(data);
@@ -153,7 +154,7 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
 gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data) {
     var promise = fluid.promise();
     // TODO: Requires proper field validation on data instead of only checking against falsy data.
-    if (data) {
+    if (data !== undefined) {
         var directModel = {};
         directModel[idName] = uuid.v4();
         fluid.extend(data, {type: docType});
@@ -206,7 +207,7 @@ gpii.oauth2.dbDataStore.verifyMissingDoc = function (inputPromise, input, docTyp
     inputPromise.then(function (value) {
         var isValueValid = allowUndefinedValue ? value || value === undefined : value;
         if (isValueValid) {
-            // Save both the input parameter and the resolved value of the inputPromise for their furthur use in following processes
+            // Save both the input parameter and the resolved value of the inputPromise for their further use in following processes
             var valueObj = {};
             valueObj[docType] = value;
             var combined = fluid.extend({}, input, valueObj);
@@ -445,7 +446,7 @@ gpii.oauth2.dbDataStore.findClient = function (findClientByOauth2ClientIdDataSou
 
 /*
  * The last step in the promise transforming chain for implementing findAccessTokenByOAuth2ClientIdAndGpiiToken() API.
- * It verifies the client previleges and the access token. If the auth decision is not found or the client is not allow
+ * It verifies the client privileges and the access token. If the auth decision is not found or the client is not allowed
  * to retrieve the access token by using gpii token, undefined is returned. The data is returned in a promise.
  * @param findAuthDecisionByGpiiTokenAndClientIdDataSource {Function} The findAuthDecisionByGpiiTokenAndClientIdDataSource() API provided by gpii.oauth2.dbDataStore
  * @param clientRecord {Object} The data passed on from last step. Its structure:

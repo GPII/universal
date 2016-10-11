@@ -20,8 +20,8 @@ var fluid = fluid || require("infusion"),
 
     fluid.defaults("gpii.tests.oauth2.pouchBackedTestEnvironment", {
         gradeNames: ["fluid.test.testEnvironment"],
-        dbViewsLocation: null,   // provided by integrators
-        pouchData: [],   // provided by integrators
+        dbViewsLocation: null,   // Must be provided by integrators without having a default value
+        pouchData: [],   // Configurable by integrators
         dbName: "auth",    // Configurable by integrators
         components: {
             dataLoader: {

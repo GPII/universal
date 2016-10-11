@@ -93,7 +93,8 @@ var gpii = fluid.registerNamespace("gpii");
         }
     };
 
-    /* Strip out the leading "/" to return the document id.
+    /*
+     * Strips out the leading "/" to return the document id.
      * @param url {String} An URL path.
      * @return {String} A string with the leading "/" being stripped.
      * In an example of the input "/user-1", returns "user-1".

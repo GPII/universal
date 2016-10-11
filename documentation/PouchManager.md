@@ -50,6 +50,6 @@ Success: Pouch has been restored with the initial data set.
 | Event | Description | Parameters | Parameters Description |
 | ----- | ----------- | ---------- | ---------------------- |
 | `onPouchHarnessReady` | Fires when the pouchDB express server is ready. | None |  |
-| `onExpressResetStarted` | Fires when the express server for restoring the pouchDB is ready. | None |  |
-| `onReady` | Fires when both the pouchDB express server and the express server for restoring are ready. At then, both `onPouchHarnessReady` and `onExpressResetStarted` events should have been fired. | None |  |
+| `onExpressResetServerStarted` | Fires when the express server for resetting the pouchDB is ready. | None |  |
+| `onReady` | Fires when both the pouchDB express server and the express server for restoring are ready. At then, both `onPouchHarnessReady` and `onExpressResetServerStarted` events should have been fired. | None |  |
 | `onCreatePouchHarness` | Fires to re-instantiate the pouchDB express server. | None |  |
