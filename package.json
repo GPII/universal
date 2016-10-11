@@ -57,6 +57,9 @@
     "scripts": {
         "test": "node tests/all-tests.js",
         "start": "node gpii.js",
-        "postinstall": "grunt browserify"
+        "browserify:http": "node node_modules/browserify/bin/cmd.js -s http node_modules/http-browserify/index.js -o browserify/http.js ",
+        "browserify:https": "node node_modules/browserify/bin/cmd.js -s https node_modules/https-browserify/index.js -o browserify/https.js ",
+        "browserify:url": "node node_modules/browserify/bin/cmd.js -s urlModule node_modules/url/url.js -o browserify/urlModule.js ",
+        "postinstall": "grunt browserifyPrep && npm run browserify:http && npm run browserify:https && npm run browserify:url"
     }
 }

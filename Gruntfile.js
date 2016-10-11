@@ -64,9 +64,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-mkdir");
 
-    grunt.registerTask("browserify", "Browserify dependencies required by using the kettle URL data source in browsers", function () {
+    grunt.registerTask("browserifyPrep", "Prepare a directory for holding the output of browserifying the kettle URL data source", function () {
         grunt.task.run(["clean:browserify", "mkdir:browserify"]);
-        grunt.task.run("shell:browserify");
     });
 
     grunt.registerTask("browser-tests", "Run browser tests in a VM", function () {
