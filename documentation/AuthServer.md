@@ -35,7 +35,6 @@ The document types used by the authorization server include:
 | `oauth2ClientId` | String | The unique identifier issued to a registered OAuth2 client by the authorization server. | None |
 | `oauth2ClientSecret` | String | Confidential shared secret between the client and the authorization server, used to verify the identity of the client. | None |
 | `redirectUri` | String | The URL on client's site where users will be sent after authorization. | None |
-| `allowDirectGpiiTokenAccess` | Boolean | A flag indicating whether the client is allowed to retrieve access token by only providing the GPII token. | true |
 
 #### GPII Tokens
 

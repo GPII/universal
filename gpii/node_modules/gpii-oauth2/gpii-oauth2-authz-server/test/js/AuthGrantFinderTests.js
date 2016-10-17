@@ -119,23 +119,20 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "name": "Client A",
         "oauth2ClientId": "client_id_A",
         "oauth2ClientSecret": "client_secret_A",
-        "redirectUri": "http://example.com/callback_A",
-        "allowDirectGpiiTokenAccess": false
+        "redirectUri": "http://example.com/callback_A"
     }, {
         "_id": "client-2",
         "type": "client",
         "name": "Client B",
         "oauth2ClientId": "client_id_B",
         "oauth2ClientSecret": "client_secret_B",
-        "redirectUri": "http://example.com/callback_B",
-        "allowDirectGpiiTokenAccess": true
+        "redirectUri": "http://example.com/callback_B"
     }, {
         "_id": "client-3",
         "type": "client",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "allowDirectGpiiTokenAccess": true
+        "oauth2ClientSecret": "client_secret_firstDiscovery"
     }, {
         "_id": "authDecision-1",
         "type": "authDecision",

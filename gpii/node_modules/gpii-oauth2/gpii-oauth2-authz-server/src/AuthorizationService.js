@@ -79,10 +79,6 @@ var fluid = fluid || require("infusion");
                 args: ["{arguments}.0", "{arguments}.1"]
                     // userId, authDecisionId
             },
-            getAccessTokenForOAuth2ClientIdAndGpiiToken: {
-                func: "{dataStore}.findAccessTokenByOAuth2ClientIdAndGpiiToken"
-                    // oauth2ClientId, gpiiToken
-            },
             getAuthForAccessToken: {
                 func: "{dataStore}.findAuthByAccessToken"
                     // accessToken

@@ -26,24 +26,6 @@ The authorization service provides API that allows users to add, retrieve, updat
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
 * **return:** The access token if the authorization code is valid. Otherwise, return `false`.
 
-#### getAccessTokenForOAuth2ClientIdAndGpiiToken(oauth2ClientId, gpiiToken)
-* **description**: Look for an access token by OAuth 2 client id and GPII token.
-* **parameters:** 
-    * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
-    * gpiiToken: String. A unique string that is used to retrieve user's preferences from the [GPII Preferences Server](PreferencesServer.md).
-* **return: (one of the below)** 
-    * An object. The object contains one element that has a key `accessToken` and the value is the access token. An example:
-    ```
-    {
-        accessToken: "carla_access_token"
-    }
-    ```
-    * `undefined`. `undefined` is returned in any of these cases:
-        - The user with the matched GPII token is not found;
-        - The client with the matched OAuth2 client id is not found;
-        - The client is not allowed to access the user information by directly using his(her) GPII token;
-        - The authorization decision is not found.
-
 #### getAuthForAccessToken(accessToken)
 * **description**: Get the authorization information using the access token.
 * **parameters:** 

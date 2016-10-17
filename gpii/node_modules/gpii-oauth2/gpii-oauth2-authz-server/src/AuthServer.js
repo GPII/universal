@@ -570,40 +570,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             });
         }
     );
-
-    // TODO the /access_token_for_gpii_token endpoint was added to integrate Mobile Accessibility for the January 2015 review
-    // TODO and it needs to be reassessed after the review GPII-1066
-    // TODO it does not provide for any authentication of the user beyond knowledge of the GPII token
-    // TODO and it does not provide for any authentication of the client beyond knowledge of the client_id
-    that.expressApp.post("/access_token_for_gpii_token",
-        function (req, res) {
-            var oauth2ClientId = req.body.client_id;
-            if (!oauth2ClientId) {
-                res.sendStatus(400);
-                return;
-            }
-            var gpiiToken = req.body.gpii_token;
-            if (!gpiiToken) {
-                res.sendStatus(400);
-                return;
-            }
-            var authPromise = that.authorizationService.getAccessTokenForOAuth2ClientIdAndGpiiToken(oauth2ClientId, gpiiToken);
-            authPromise.then(function (auth) {
-                if (!auth) {
-                    res.sendStatus(404);
-                    return;
-                } else {
-                    res.json({
-                        "access_token": auth.accessToken,
-                        "token_type": "Bearer"
-                    });
-                }
-            }, function (err) {
-                res.sendStatus(err.statusCode);
-                return;
-            });
-        }
-    );
 };
 
 /*

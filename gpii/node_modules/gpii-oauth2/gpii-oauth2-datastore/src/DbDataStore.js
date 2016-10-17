@@ -491,13 +491,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // accessToken
         },
-        // TODO: The concept of allowDirectGpiiTokenAccess flag was added to integrate Mobile Accessibility
-        // for the January 2015 review. It needs to be reassessed.
-        findAccessTokenByOAuth2ClientIdAndGpiiToken: {
-            funcName: "gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken",
-            args: ["{that}", "{arguments}.0", "{arguments}.1"]
-            // oauth2ClientId, gpiiToken
-        },
         findClientCredentialsTokenById: {
             func: "{that}.findById"
             // clientCredentialsTokenId
@@ -557,7 +550,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
     events: {
         onUpdateAuthDecision: null,
         onRevokeAuthDecision: null,
-        onFindAccessTokenByOAuth2ClientIdAndGpiiToken: null,
         onRevokeClientCredentialsToken: null
     },
     listeners: {
@@ -590,16 +582,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             args: ["{that}.saveDataSource", "{arguments}.0"],
             namespace: "doUpdate",
             priority: "after:validateGpiiToken"
-        }],
-        onFindAccessTokenByOAuth2ClientIdAndGpiiToken: [{
-            listener: "gpii.oauth2.dbDataStore.findClient",
-            args: ["{that}.findClientByOauth2ClientId", "{arguments}.0"],
-            namespace: "findClient"
-        }, {
-            listener: "gpii.oauth2.dbDataStore.findAccessToken",
-            args: ["{that}.findAuthDecisionByGpiiTokenAndClientIdDataSource", "{arguments}.0"],
-            namespace: "findAccessToken",
-            priority: "after:findClient"
         }],
         onRevokeClientCredentialsToken: [{
             listener: "{that}.findClientCredentialsTokenById",

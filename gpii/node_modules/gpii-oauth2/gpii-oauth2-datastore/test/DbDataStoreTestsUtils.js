@@ -99,22 +99,19 @@ gpii.tests.dbDataStore.testData = {
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
-        "redirectUri": "http://localhost:3002/authorize_callback",
-        "allowDirectGpiiTokenAccess": false
+        "redirectUri": "http://localhost:3002/authorize_callback"
     },
     allClients: [{
         "id": "client-1",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
-        "redirectUri": "http://localhost:3002/authorize_callback",
-        "allowDirectGpiiTokenAccess": false
+        "redirectUri": "http://localhost:3002/authorize_callback"
     }, {
         "id": "client-2",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "allowDirectGpiiTokenAccess": true,
         "allowAddPrefs": true
     }, {
         "name": "Windows Magnifier",
@@ -237,9 +234,6 @@ gpii.tests.dbDataStore.testData = {
         selectedPreferences: {
             "": true
         }
-    },
-    findAccessTokenByOAuth2ClientIdAndGpiiToken: {
-        accessToken: "chrome_high_contrast_access_token_client_2"
     },
     clientCredentialsToken1: {
         "id": "clientCredentialsToken-1",

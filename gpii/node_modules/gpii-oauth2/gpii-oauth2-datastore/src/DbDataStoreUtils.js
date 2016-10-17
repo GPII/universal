@@ -274,6 +274,7 @@ gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisio
  *          }
  *      }
  *  }
+ * @return {Promise} see gpii.oauth2.dbDataStore.verifyMissingDoc() for details
  */
 gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, input) {
     var authDecisionId = input.inputArgs.authDecisionId ? input.inputArgs.authDecisionId : input.inputArgs.authDecisionData.id;
@@ -313,6 +314,7 @@ gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, inp
  *          id: {String}
  *      }
  *  }
+ * @return {Promise} see gpii.oauth2.dbDataStore.verifyMissingDoc() for details
  */
 gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, authDecisionRecord) {
     var gpiiTokenPromise = findGpiiToken(authDecisionRecord.authDecision.gpiiToken);
@@ -357,6 +359,9 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, authDecisio
  *          id: {String}
  *      }
  *  }
+ * @return {Promise} An promise object with either the response from CouchDB/PouchDB for updating the authorization decision record (on promise resolve)
+ * or an unauthorized user error if the user requesting the update doesn't match the user that associates with the GPII token within the authorization
+ * decision record (on promise reject).
  */
 gpii.oauth2.dbDataStore.doUpdate = function (dataSource, gpiiTokenRecord) {
     var inputUserId = gpiiTokenRecord.inputArgs.userId;
@@ -396,100 +401,6 @@ gpii.oauth2.dbDataStore.setRevoke = function (data) {
 
 // Access Token
 // ------------
-
-// ==== findAccessTokenByOAuth2ClientIdAndGpiiToken()
-// Fires the transforming promise workflow by triggering onFindAccessTokenByOAuth2ClientIdAndGpiiToken event.
-
-/*
- * The entry function for implementing findAccessTokenByOAuth2ClientIdAndGpiiToken(). Verifies required inputs are not missing
- * then fires onFindAccessTokenByOAuth2ClientIdAndGpiiToken event to trigger the transforming promise workflow.
- * @param that {Component} An instance of gpii.oauth2.dbDataStore.
- * @param oauth2ClientId {String} An oauth2 client id
- * @param gpiiToken {String} A GPII token
- * @return {Promise} An promise object with either a missing input error or starts the transforming promise workflow with input
- *  data being passed to the next step.
- */
-gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken = function (that, oauth2ClientId, gpiiToken) {
-    var input = {
-        oauth2ClientId: oauth2ClientId,
-        gpiiToken: gpiiToken
-    };
-    var promiseTogo = fluid.promise();
-    var emptyFields = gpii.oauth2.dbDataStore.filterEmptyFields(input, ["oauth2ClientId", "gpiiToken"]);
-
-    if (emptyFields.length > 0) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields.join(" & ")});
-        promiseTogo.reject(error);
-    } else {
-        promiseTogo = fluid.promise.fireTransformEvent(that.events.onFindAccessTokenByOAuth2ClientIdAndGpiiToken, {inputArgs: input});
-    }
-    return promiseTogo;
-};
-
-/*
- * The first step in the promise transforming chain for implementing findAccessTokenByOAuth2ClientIdAndGpiiToken() API.
- * It retrieves the client info and passes it the the next step.
- * @param findClientByOauth2ClientIdDataSource {Function} The findClientByOauth2ClientIdDataSource() API provided by gpii.oauth2.dbDataStore
- * @param input {Object} The data passed on from the entry function gpii.oauth2.dbDataStore.findAccessTokenByOAuth2ClientIdAndGpiiToken(). Its structure:
- *  {
- *      inputArgs:
- *      {
- *          oauth2ClientId: {String},
- *          gpiiToken: {String}
- *      }
- *  }
- */
-gpii.oauth2.dbDataStore.findClient = function (findClientByOauth2ClientIdDataSource, input) {
-    var clientPromise = findClientByOauth2ClientIdDataSource(input.inputArgs.oauth2ClientId);
-    return gpii.oauth2.dbDataStore.verifyMissingDoc(clientPromise, input, "client", true);
-};
-
-/*
- * The last step in the promise transforming chain for implementing findAccessTokenByOAuth2ClientIdAndGpiiToken() API.
- * It verifies the client privileges and the access token. If the auth decision is not found or the client is not allowed
- * to retrieve the access token by using gpii token, undefined is returned. The data is returned in a promise.
- * @param findAuthDecisionByGpiiTokenAndClientIdDataSource {Function} The findAuthDecisionByGpiiTokenAndClientIdDataSource() API provided by gpii.oauth2.dbDataStore
- * @param clientRecord {Object} The data passed on from last step. Its structure:
- *  {
- *      inputArgs:
- *      {
- *          oauth2ClientId: {String},
- *          gpiiToken: {String}
- *      }
- *      client:
- *      {
- *          name: {String},
- *          oauth2ClientId: {String},
- *          oauth2ClientSecret: {String},
- *          allowDirectGpiiTokenAccess: {Boolean},
- *          allowAddPrefs: {Boolean},
- *          id: {String}
- *      }
- *  }
- */
-gpii.oauth2.dbDataStore.findAccessToken = function (findAuthDecisionByGpiiTokenAndClientIdDataSource, clientRecord) {
-    var promiseTogo = fluid.promise();
-    if (clientRecord.client === undefined || clientRecord.client.allowDirectGpiiTokenAccess !== true) {
-        promiseTogo.resolve(undefined);
-    } else {
-        var directModel = {
-            gpiiToken: clientRecord.inputArgs.gpiiToken,
-            clientId: clientRecord.client.id
-        };
-        var authDecisionPromise = gpii.oauth2.dbDataStore.findRecord(findAuthDecisionByGpiiTokenAndClientIdDataSource, directModel);
-
-        var mapper = function (authDecision) {
-            return authDecision ? {
-                accessToken: authDecision.accessToken
-            } : undefined;
-        };
-        var mappedPromise = fluid.promise.map(authDecisionPromise, mapper);
-        fluid.promise.follow(mappedPromise, promiseTogo);
-    }
-    return promiseTogo;
-
-};
-// ==== End of findAccessTokenByOAuth2ClientIdAndGpiiToken()
 
 // The post data process function for implementing findAuthorizedClientsByGpiiToken()
 gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (data) {
@@ -556,10 +467,22 @@ gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
 // Client Credentials Tokens
 // -------------------------
 
+/*
+ * Add client credentials tokens
+ * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
+ * @param clientCredentialsTokenData {Object} The data of the client credentials token. Its structure:
+ *  {
+ *      clientId: {String},
+ *      accessToken: {String},
+ *      allowAddPrefs: {Boolean}
+ *  }
+ * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
+ * token record of an "undefined" value if the token data is not given
+ */
 gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, clientCredentialsTokenData) {
     var promiseTogo = fluid.promise();
 
-    if (clientCredentialsTokenData === undefined || $.isEmptyObject(clientCredentialsTokenData)) {
+    if (clientCredentialsTokenData === undefined) {
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "clientCredentialsTokenData"});
         promiseTogo.reject(error);
     } else {
@@ -601,6 +524,8 @@ gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCre
  *      revoked: {Boolean},
  *      id: {String}  // The client credentials token id
  *  }
+ * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for updating the
+ * token record of an "undefined" value if the token data is not given
  */
 gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSource, clientCredentialsTokenRecord) {
     var promiseTogo = fluid.promise();
