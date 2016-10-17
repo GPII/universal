@@ -20,6 +20,8 @@ var gpii = fluid.registerNamespace("gpii");
 
     // The data source is to support the in-browser testing using pouchDB as the backend data storage.
     // It overrides default setImpl() and getImpl() provided by "kettle.dataSource.URL" with gpii.pouch API calls.
+    // Note: This component requires an instance of gpii.pouch (see https://github.com/the-t-in-rtf/gpii-pouchdb/blob/GPII-1897/docs/pouchdb.md)
+    // to be instantiated beforehand.
     fluid.defaults("gpii.dataSource.pouchDB", {
         gradeNames: ["kettle.dataSource.URL"],
         invokers: {
