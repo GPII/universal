@@ -24,6 +24,7 @@ var gpii = fluid.registerNamespace("gpii");
     // to be instantiated beforehand.
     fluid.defaults("gpii.dataSource.pouchDB", {
         gradeNames: ["kettle.dataSource.URL"],
+        dbViews: null,   // Supplied by integrators
         invokers: {
             getImpl: {
                 funcName: "gpii.dataSource.pouchDB.handle",

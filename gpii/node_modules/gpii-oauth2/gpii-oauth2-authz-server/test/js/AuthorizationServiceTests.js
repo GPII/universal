@@ -41,7 +41,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }
             },
             caseHolder: {
-                type: "gpii.tests.oauth2.baseTestCaseHolder"
+                type: "gpii.tests.inBrowserPouchDB.baseTestCaseHolder"
             }
         }
     });

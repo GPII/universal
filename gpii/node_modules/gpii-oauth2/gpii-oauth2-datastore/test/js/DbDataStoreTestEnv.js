@@ -19,7 +19,7 @@ var fluid = fluid || require("infusion"),
     "use strict";
 
     fluid.defaults("gpii.tests.oauth2.pouchBackedTestEnvironment", {
-        gradeNames: ["fluid.test.testEnvironment"],
+        gradeNames: ["gpii.tests.inBrowserPouchDB.testEnvironment"],
         dbViewsLocation: null,   // Must be provided by integrators without having a default value
         pouchData: [],   // Configurable by integrators
         dbName: "auth",    // Configurable by integrators
@@ -46,27 +46,7 @@ var fluid = fluid || require("infusion"),
                         }
                     }
                 }
-            },
-            pouchDb: {
-                type: "gpii.pouch",
-                createOnEvent: "constructFixtures",
-                options: {
-                    dbOptions: {
-                        name: "{pouchBackedTestEnvironment}.options.dbName"
-                    },
-                    data: "{pouchBackedTestEnvironment}.options.pouchData",
-                    listeners: {
-                        "onCreate.populateData": {
-                            listener: "{that}.bulkDocs",
-                            args: ["{that}.options.data"]
-                        },
-                        "onBulkDocsComplete.escalate": "{pouchBackedTestEnvironment}.events.onPouchReady"
-                    }
-                }
             }
-        },
-        mergePolicy: {
-            rawModules: "noexpand"
         },
         distributeOptions: {
             "pouchDBReadGrade": {
@@ -76,10 +56,6 @@ var fluid = fluid || require("infusion"),
             "pouchDBWriteGrade": {
                 record: "gpii.dataSource.pouchDB.writable",
                 target: "{that gpii.oauth2.dbDataSource.writable}.options.gradeNames"
-            },
-            "rawModules": {
-                source: "{that}.options.rawModules",
-                target: "{that > testCaseHolder}.options.rawModules"
             }
         },
         events: {
@@ -116,31 +92,6 @@ var fluid = fluid || require("infusion"),
                 record: "{that}.options.dbViews",
                 target: "{that gpii.oauth2.dbDataSource}.options.dbViews"
             }
-        }
-    });
-
-    // The base grade for the test case holder that starts tests when the testing fixtures are ready
-    // and also destroy the pouchDB after each test sequence so the next test sequence can start with
-    // a fresh data set.
-    fluid.defaults("gpii.tests.oauth2.baseTestCaseHolder", {
-        gradeNames: ["gpii.test.express.caseHolder.base"],
-        sequenceStart: [{
-            func: "{pouchBackedTestEnvironment}.events.constructFixtures.fire"
-        }, {
-            event: "{pouchBackedTestEnvironment}.events.onFixturesConstructed",
-            listener: "fluid.log",
-            args: ["Db views are loaded and pouchDB is ready"]
-        }],
-        sequenceEnd: [{
-            func: "{pouchBackedTestEnvironment}.pouchDb.destroyPouch"
-        }, {
-            event:    "{pouchBackedTestEnvironment}.pouchDb.events.onDestroyPouchComplete",
-            listener: "fluid.log",
-            args:     ["PouchDB cleanup complete"]
-        }],
-        events: {
-            onResponse: null,
-            onError: null
         }
     });
 
