@@ -36,8 +36,14 @@ require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
 require("./gpii/node_modules/canopyMatchMaker");
 require("./gpii/node_modules/contextManager");
+require("./gpii/node_modules/journal");
 
 gpii.loadTestingSupport = function () {
+    fluid.contextAware.makeChecks({
+        "gpii.contexts.test": {
+            value: true
+        }
+    });
     require("./gpii/node_modules/testing");
 };
 

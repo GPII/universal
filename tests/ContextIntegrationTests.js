@@ -34,8 +34,6 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.linux", {
     ]
 });
 
-// TODO: The potential for this type name to conflict with an member name is unfortunate!
-// Should always pick an member name if it matches first
 fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
     gradeNames: "kettle.test.request.http",
     path: "/environmentChanged",
@@ -45,6 +43,7 @@ fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
 // NOTE: This inherits from from "gpii.test.common.testCaseHolder" via "gpii.test.integration.testCaseHolder.linux"
 // from which it gets loginRequest, logoutRequest and other standard events
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
+    gradeNames: "gpii.test.common.lifecycleManagerReceiver",
     events: {
         refreshEnvironmentChangedRequest: null
     },
@@ -56,23 +55,13 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
         environmentChangedRequest2: {
             type: "gpii.tests.contextIntegration.environmentChangedRequestType"
         }
-    },
-    distributeOptions: {
-        record: {
-            funcName: "gpii.tests.contextIntegration.receiveLifecycleManager",
-            args: ["{testCaseHolder}", "{arguments}.0"]
-        },
-        target: "{that lifecycleManager}.options.listeners.onCreate"
     }
 });
 
-gpii.tests.contextIntegration.receiveLifecycleManager = function (testCaseHolder, flowManager) {
-    testCaseHolder.flowManager = flowManager;
-};
 
 gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, token, expected) {
-    jqUnit.assertEquals("Checking that the activeContextName matches: ", expected,
-        lifecycleManager.activeSessions[token].activeContextName);
+    var session = lifecycleManager.getSession(token);
+    jqUnit.assertEquals("Checking that the activeContextName matches: ", expected, session.model.activeContextName);
 };
 
 
@@ -159,7 +148,7 @@ gpii.tests.contextIntegration.data = {
                 }
             }
         },
-        "onlyBright": { // if user logs in when brightnes is active from the beginning - only expect mag
+        "onlyBright": { // if user logs in when brightness is active from the beginning - only expect mag
             "settingsHandlers": {
                 "gpii.gsettings": {
                     "data": [{
@@ -399,16 +388,5 @@ gpii.tests.contextIntegration.baseTestDef = {
     contexts: gpii.tests.contextIntegration.data.contexts
 };
 
-gpii.tests.contextIntegration.buildTestFixtures = function (fixtures) {
-    return fluid.transform(fixtures, function (fixture) {
-        var overlay = {
-            name: fixture.name,
-            expect: fixture.expect,
-            sequence: fluid.flatten(fixture.sequenceSegments)
-        };
-        return fluid.extend(true, {}, gpii.tests.contextIntegration.baseTestDef, overlay);
-    });
-};
-
-kettle.test.bootstrapServer(gpii.tests.contextIntegration.buildTestFixtures(
-        gpii.tests.contextIntegration.fixtures));
+kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+        gpii.tests.contextIntegration.fixtures, gpii.tests.contextIntegration.baseTestDef));
