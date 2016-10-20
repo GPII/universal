@@ -60,13 +60,17 @@ From the root of the `universal` folder, run the following command:
 #### Running tests using a VM
 A VM can be automatically created using tools provided by the [Prosperity4All Quality Infrastructure](https://github.com/GPII/qi-development-environments/). Please ensure the [requirements](https://github.com/GPII/qi-development-environments/#requirements) have been met. The ``vagrant up`` command can then be used to provision a new VM.
 
-Following provisioning, tests can be run in the VM from the host system as follows:
+Following the provisioning phase, tests can be run in the VM directly from the host system, without the need to log into the VM or interact with its console. 
+
+From your project's top-level directory (where the Vagrantfile and Gruntfile.js files reside), run:
 
 - node-based tests: `grunt node-tests`
 - browser-based tests: `grunt browser-tests`
 - production tests: `grunt node-production-tests`
 
 The ``grunt tests`` command will run the browser and Node based tests.
+
+These Grunt tasks will run the correct Vagrant commands to connect to the VM and run the tests within the isolated environment. You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop environment) and run the tests manually if you wish.
 
 Usage
 -----
