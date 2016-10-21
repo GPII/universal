@@ -82,7 +82,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
@@ -106,7 +106,7 @@
                 "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
             }, {
                 "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write10\\InstallPath}\\ReadAndWrite.exe\""
+                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
             }
         ],
         "stop": [
@@ -119,7 +119,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_CURRENT_USER",
-                "path": "Software\\Texthelp\\Read&Write10\\InstallPath",
+                "path": "Software\\Texthelp\\Read&Write11\\InstallPath",
                 "subPath": "ReadAndWrite.exe",
                 "dataType": "REG_SZ"
             }
