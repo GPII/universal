@@ -43,7 +43,7 @@ gpii.tests.multiSHSupport.testDefs = [
                         },
                         "options": {
                             "filename": "/tmp/fakemag1.settings.json"
-                        },
+                        }
                     }, { // high contrast settings
                         "settings": {
                             "crazyColor": true
