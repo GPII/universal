@@ -119,8 +119,8 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_CURRENT_USER",
-                "path": "Software\\Texthelp\\Read&Write11\\InstallPath",
-                "subPath": "ReadAndWrite.exe",
+                "path": "Software\\Texthelp\\Read&Write11",
+                "subPath": "InstallPath",
                 "dataType": "REG_SZ"
             }
         ]
