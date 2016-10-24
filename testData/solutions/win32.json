@@ -210,14 +210,16 @@
         ],
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\Magnify.exe"
+                "type": "gpii.windows.enableRegisteredAt",
+                "name": "magnifierpane",
+                "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "Magnify.exe"
+                "type": "gpii.windows.enableRegisteredAt",
+                "name": "magnifierpane",
+                "enable": false
             }
         ],
         "isInstalled": [
@@ -247,14 +249,16 @@
         },
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\osk.exe"
+                "type": "gpii.windows.enableRegisteredAt",
+                "name": "osk",
+                "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "osk.exe"
+                "type": "gpii.windows.enableRegisteredAt",
+                "name": "osk",
+                "enable": false
             }
         ],
         "isInstalled": [
