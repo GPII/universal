@@ -524,7 +524,7 @@
 
     "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
-        "co-ntexts": {
+        "contexts": {
             "OS": [
                 {
                     "id": "win32",
