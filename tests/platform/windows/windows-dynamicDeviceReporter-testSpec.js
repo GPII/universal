@@ -80,16 +80,16 @@ gpii.tests.deviceReporterAware.windows = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "0",
+                "expectConfigured": "1",
                 "expectRestored": "0"
             }
         ],
         deviceReporters: {
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{
-                    "hKey": "HKEY_LOCAL_MACHINE",
-                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
-                    "subPath": ""
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Texthelp\\Read&Write11",
+                    "subPath": "InstallPath"
                 }]
             }
         }
