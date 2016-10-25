@@ -4,9 +4,8 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/voiceProfile": "GPII",
                     "http://registry.gpii.net/common/auditoryOutLanguage": "it",
-                    "http://registry.gpii.net/common/primarySynthesizer": "eloq",
+                    "http://registry.gpii.net/common/speechSynthesizer": "eloq",
                     "http://registry.gpii.net/common/speechRate": 40,
                     "http://registry.gpii.net/common/pitch": 0.1,
                     "http://registry.gpii.net/common/volume": 0.1,

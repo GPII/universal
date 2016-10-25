@@ -22,9 +22,13 @@
                     "Braille.BrailleMode": {},
                     "options.SayAllIgnoreShiftKeys": {}
                 },
-                "capabilities": [],
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                ],
                 "capabilitiesTransformations": {
-                    "Voice Profiles\\.ActiveVoiceProfileName": "http://registry\\.gpii\\.net/common/voiceProfile",
+                    "Voice Profiles\\.ActiveVoiceProfileName": {
+                        "literalValue": "GPII"
+                    },
                     "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
                     "options\\.TypingEcho": {
                         "transform": {
@@ -66,9 +70,9 @@
                         }
                     },
                     "Braille\\.BrailleMode": {
-                        "defaultInputPath": {
+                        "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/brailleMode",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/brailleMode",
                             "match": {
                                 "line": 0,
                                 "structured": 1,
@@ -119,7 +123,7 @@
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                    "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/primarySynthesizer",
+                    "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
                     "enu-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "enu-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "enu-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",

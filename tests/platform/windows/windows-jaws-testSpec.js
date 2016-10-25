@@ -32,12 +32,11 @@ gpii.tests.windows.jaws = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "Options.PrimarySynthesizer" : "eloq",
-                            "ENU-Global.Rate" : 100,
-                            "ENU-Global.Pitch" : 75,
-                            "ENU-Global.Volume" : 100,
-                            "ENU-Global.Punctuation" : 2,
-                            "options.SayAllIndicateCaps" : 1
+                            "options.SayAllIndicateCaps" : false,
+                            "options.TypingEcho": 3,
+                            "options.SayAllMode": 0,
+                            "Braille.BrailleMode": 0,
+                            "options.SayAllIgnoreShiftKeys": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
@@ -46,13 +45,37 @@ gpii.tests.windows.jaws = [
 
                     {
                         "settings": {
-                            "Voice Profiles.ActiveVoiceProfileName" : "GPII",
                             "Options.PrimarySynthesizer" : "eloq",
-                            "ENU-Global.Rate" : 100,
-                            "ENU-Global.Pitch" : 75,
-                            "ENU-Global.Volume" : 100,
-                            "ENU-Global.Punctuation" : 2,
-                            "options.SayAllIndicateCaps" : 1
+                            "enu-Global.Rate": 100,
+                            "enu-JAWSCursor.Rate": 100,
+                            "enu-Keyboard.Rate": 100,
+                            "enu-MenuAndDialog.Rate": 100,
+                            "enu-Message.Rate": 100,
+                            "enu-PCCursor.Rate": 100,
+                            "enu-Global.Pitch": 75,
+                            "enu-JAWSCursor.Pitch": 75,
+                            "enu-Keyboard.Pitch": 75,
+                            "enu-MenuAndDialog.Pitch": 75,
+                            "enu-Message.Pitch": 75,
+                            "enu-PCCursor.Pitch": 75,
+                            "enu-Global.Volume": 100,
+                            "enu-JAWSCursor.Volume": 100,
+                            "enu-Keyboard.Volume": 100,
+                            "enu-MenuAndDialog.Volume": 100,
+                            "enu-Message.Volume": 100,
+                            "enu-PCCursor.Volume": 100,
+                            "enu-Global.Punctuation": 2,
+                            "enu-JAWSCursor.Punctuation": 2,
+                            "enu-Keyboard.Punctuation": 2,
+                            "enu-MenuAndDialog.Punctuation": 2,
+                            "enu-Message.Punctuation": 2,
+                            "enu-PCCursor.Punctuation": 2,
+                            "enu-Global.SynthLangString": "Italian",
+                            "enu-JAWSCursor.SynthLangString": "Italian",
+                            "enu-Keyboard.SynthLangString": "Italian",
+                            "enu-MenuAndDialog.SynthLangString": "Italian",
+                            "enu-Message.SynthLangString": "Italian",
+                            "enu-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
@@ -68,7 +91,7 @@ gpii.tests.windows.jaws = [
                 "expectRestored": "0"
             }
         ]
-    }, 
+    },
     {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
         userToken: "jaws_common",
