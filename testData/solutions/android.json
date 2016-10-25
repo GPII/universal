@@ -11,9 +11,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.com\\.android\\.freespeech.id",
-                    "display.screenReader.applications.com\\.android\\.freespeech.name"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
             }
         },
@@ -36,10 +34,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "display.screenReader",
-                    "applications.com\\.android\\.talkback.id",
-                    "display.screenReader.applications.com\\.android\\.talkback.name",
-                    "display.screenReader.-provisional-screenReaderTTSEnabled"
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
             }
         },
@@ -68,9 +63,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidPersistentConfiguration",
-                "capabilities": [
-                    "applications.com\\.android\\.persistentConfiguration.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontScale": {
                         "transform": {
@@ -83,179 +76,65 @@
                     "locale": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/language",
-                            "options": {
-                               "en": {
-                                    "outputValue": "en"
-                                },
-                                "en-GB": {
-                                    "outputValue": "en_GB"
-                                },
-                                "en-US": {
-                                    "outputValue": "en_US"
-                                },
-                                "en-BZ": {
-                                    "outputValue": "en_GB"
-                                },
-                                "en-BS": {
-                                    "outputValue": "en_GB"
-                                },
-                                "en-AG": {
-                                    "outputValue": "en_GB"
-                                },
-                                "en-AI": {
-                                    "outputValue": "en_GB"
-                                },
-                                "af": {
-                                    "outputValue": "af"
-                                },
-                                "bg": {
-                                    "outputValue": "bg_BG"
-                                },
-                                "bs": {
-                                    "outputValue": "bs"
-                                },
-                                "ca": {
-                                    "outputValue": "ca_ES"
-                                },
-                                "cs": {
-                                    "outputValue": "cs_CZ"
-                                },
-                                "cy": {
-                                    "outputValue": "cy"
-                                },
-                                "da": {
-                                    "outputValue": "da_DK"
-                                },
-                                "de": {
-                                    "outputValue": "de_DE"
-                                },
-                                "el": {
-                                    "outputValue": "el_GR"
-                                },
-                                "grc": {
-                                    "outputValue": "el_GR"
-                                },
-                                "eo": {
-                                    "outputValue": "eo"
-                                },
-                                "es": {
-                                    "outputValue": "es_ES"
-                                },
-                                "es-ES": {
-                                    "outputValue": "es_ES"
-                                },
-                                "es-419": {
-                                    "outputValue": "es_ES"
-                                },
-                                "et": {
-                                    "outputValue": "et"
-                                },
-                                "fi": {
-                                    "outputValue": "fi_FI"
-                                },
-                                "fr": {
-                                    "outputValue": "fr_FR"
-                                },
-                                "fr-BE": {
-                                    "outputValue": "fr_BE"
-                                },
-                                "hi": {
-                                    "outputValue": "hi_IN"
-                                },
-                                "hr": {
-                                    "outputValue": "hr_HR"
-                                },
-                                "hu": {
-                                    "outputValue": "hu_HU"
-                                },
-                                "hy": {
-                                    "outputValue": "hy"
-                                },
-                                "hy-arevmda": {
-                                    "outputValue": "hy"
-                                },
-                                "id": {
-                                    "outputValue": "id_ID"
-                                },
-                                "is": {
-                                    "outputValue": "is"
-                                },
-                                "it": {
-                                    "outputValue": "it_IT"
-                                },
-                                "ka": {
-                                    "outputValue": "ka"
-                                },
-                                "kn": {
-                                    "outputValue": "kn"
-                                },
-                                "ku": {
-                                    "outputValue": "ku"
-                                },
-                                "la": {
-                                    "outputValue": "la"
-                                },
-                                "lv": {
-                                    "outputValue": "lv_LV"
-                                },
-                                "mk": {
-                                    "outputValue": "mk"
-                                },
-                                "ml": {
-                                    "outputValue": "ml"
-                                },
-                                "nl": {
-                                    "outputValue": "nl_NL"
-                                },
-                                "no": {
-                                    "outputValue": "nb_NO"
-                                },
-                                "pl": {
-                                    "outputValue": "pl_PL"
-                                },
-                                "pt-BR": {
-                                    "outputValue": "pt_BR"
-                                },
-                                "pt-PT": {
-                                    "outputValue": "pt_PT"
-                                },
-                                "ro": {
-                                    "outputValue": "ro_RO"
-                                },
-                                "ru": {
-                                    "outputValue": "ru_RU"
-                                },
-                                "sk": {
-                                    "outputValue": "sk_SK"
-                                },
-                                "sq": {
-                                    "outputValue": "sq"
-                                },
-                                "sr": {
-                                    "outputValue": "sr_RS"
-                                },
-                                "sv": {
-                                    "outputValue": "sv_SE"
-                                },
-                                "sw": {
-                                    "outputValue": "ss"
-                                },
-                                "ta": {
-                                    "outputValue": "ta"
-                                },
-                                "tr": {
-                                    "outputValue": "tr_TR"
-                                },
-                                "vi": {
-                                    "outputValue": "vi_VN"
-                                },
-                                "zh-cmn": {
-                                    "outputValue": "zh_CN"
-                                },
-                                "cmn": {
-                                    "outputValue": "zh_CN"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/language",
+                            "match": {
+                                "en": "en",
+                                "en-GB": "en_GB",
+                                "en-US": "en_US",
+                                "en-BZ": "en_GB",
+                                "en-BS": "en_GB",
+                                "en-AG": "en_GB",
+                                "en-AI": "en_GB",
+                                "af": "af",
+                                "bg": "bg_BG",
+                                "bs": "bs",
+                                "ca": "ca_ES",
+                                "cs": "cs_CZ",
+                                "cy": "cy",
+                                "da": "da_DK",
+                                "de": "de_DE",
+                                "el": "el_GR",
+                                "grc": "el_GR",
+                                "eo": "eo",
+                                "es": "es_ES",
+                                "es-ES": "es_ES",
+                                "es-419": "es_ES",
+                                "et": "et",
+                                "fi": "fi_FI",
+                                "fr": "fr_FR",
+                                "fr-BE": "fr_BE",
+                                "hi": "hi_IN",
+                                "hr": "hr_HR",
+                                "hu": "hu_HU",
+                                "hy": "hy",
+                                "hy-arevmda": "hy",
+                                "id": "id_ID",
+                                "is": "is",
+                                "it": "it_IT",
+                                "ka": "ka",
+                                "kn": "kn",
+                                "ku": "ku",
+                                "la": "la",
+                                "lv": "lv_LV",
+                                "mk": "mk",
+                                "ml": "ml",
+                                "nl": "nl_NL",
+                                "no": "nb_NO",
+                                "pl": "pl_PL",
+                                "pt-BR": "pt_BR",
+                                "pt-PT": "pt_PT",
+                                "ro": "ro_RO",
+                                "ru": "ru_RU",
+                                "sk": "sk_SK",
+                                "sq": "sq",
+                                "sr": "sr_RS",
+                                "sv": "sv_SE",
+                                "sw": "ss",
+                                "ta": "ta",
+                                "tr": "tr_TR",
+                                "vi": "vi_VN",
+                                "zh-cmn": "zh_CN",
+                                "cmn": "zh_CN"
                             }
                         }
                     }
@@ -283,9 +162,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidAudioManager.volume",
-                "capabilities": [
-                    "applications.com\\.android\\.audioManager.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "STREAM_MUSIC": {
                         "transform": {
@@ -338,9 +215,7 @@
                 "options": {
                     "settingType": "System"
                 },
-                "capabilities": [
-                    "applications.com\\.android\\.settings\\.system.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "dim_screen": {
                         "transform": {
@@ -401,9 +276,7 @@
                 "options": {
                     "settingType": "Secure"
                 },
-                "capabilities": [
-                    "applications.com\\.android\\.settings\\.secure.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "tts_default_pitch": {
                         "transform": {
@@ -495,9 +368,7 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "applications.se\\.omnitor\\.ecmobile.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "map\\.string\\.fontsize\\.$t": {
                         "transform": {
@@ -554,9 +425,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.es\\.codefactory\\.android\\.app\\.ma.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {

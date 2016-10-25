@@ -30,6 +30,16 @@ If all is well, you will see a message like
 Note that this installation will not include any OS-specific features, but can be used to verify system function with
 basic preference sets which only start solutions which require filesystem-based configuration (XML, JSON or .INI files).
 
+Recovering From System Corruption Using the Journal
+---------------------------------------------------
+
+Either when operating the live GPII system or running test cases, you may end up corrupting your desktop settings in the
+case there is a system crash. In this case, you can navigate to 
+
+    http://localhost:8081/journal/journals.html
+    
+to browse a set of journal recovery snapshots. Clicking on the first link on this page will restore your system
+to the state it was in prior to the most recent GPII login.
 
 Testing
 -------

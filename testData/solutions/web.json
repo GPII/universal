@@ -11,9 +11,7 @@
         "settingsHandlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.org\\.chrome\\.cloud4chrome.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
@@ -74,9 +72,7 @@
         "settingsHandlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.com\\.bdigital\\.easit4all.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontSize": {
                         "transform":{
@@ -88,68 +84,45 @@
                     "fontFaceFontName": {
                         "transform":{
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/provisional-common/fontName",
-                            "defaultInputValue": "default",
-                            "options": {
-                                "times": {
-                                    "outputValue": "Times New Roman"
-                                },
-                                "comic": {
-                                    "outputValue": "Comic Sans"
-                                },
-                                "arial": {
-                                    "outputValue": "Arial"
-                                },
-                                "verdana": {
-                                    "outputValue": "Verdana"
-                                },
-                                "default": {
-                                    "undefinedOuputValue": true
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/fontName",
+                            "match": {
+                                "times": "Times New Roman",
+                                "comic": "Comic Sans",
+                                "arial": "Arial",
+                                "verdana": "Verdana"
+                            },
+                            "noMatch": {
+                                "outputUndefinedValue": true
                             }
                         }
                     },
                     "foregroundColor": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/provisional-common/foregroundColor",
-                            "defaultInputValue": "default",
-                            "options": {
-                                "black": {
-                                    "outputValue": "Black"
-                                },
-                                "yellow": {
-                                    "outputValue": "Yellow"
-                                },
-                                "white": {
-                                    "outputValue": "White"
-                                },
-                                "default": {
-                                    "undefinedOuputValue": true
-                                }
-                           }
-                      }
-                  },
-                  "backgroundColor": {
-                      "transform":{
-                          "type": "fluid.transforms.valueMapper",
-                          "inputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
-                          "defaultInputValue": "default",
-                          "options": {
-                              "black": {
-                                  "outputValue": "Black"
-                              },
-                              "yellow": {
-                                  "outputValue": "Yellow"
-                              },
-                              "white": {
-                                  "outputValue": "White"
-                              },
-                              "default": {
-                                  "undefinedOuputValue": true
-                              }
-                          }
-                      }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/foregroundColor",
+                            "match": {
+                                "black": "Black",
+                                "yellow": "Yellow",
+                                "white": "White"
+                            },
+                            "noMatch": {
+                                "outputUndefinedValue": true
+                            }
+                        }
+                    },
+                    "backgroundColor": {
+                        "transform":{
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
+                            "match": {
+                                "black": "Black",
+                                "yellow": "Yellow",
+                                "white": "White"
+                            },
+                            "noMatch": {
+                                "outputUndefinedValue": true
+                            }
+                        }
                   },
                   "lineSpacing": "http://registry\\.gpii\\.net/provisional-common/lineSpacing",
                   "inputsLarger": "http://registry\\.gpii\\.net/provisional-common/inputsLarger",
@@ -186,31 +159,24 @@
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.info\\.cloud4all\\.JME.id",
-                    "display.screenEnhancement.-provisional-highContrastTheme",
-                    "display.screenEnhancement.fontSize",
-                    "-provisional-general.-provisional-volume",
-                    "-provisional-general.-provisional-language"
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/volume",
+                    "http://registry\\.gpii\\.net/common/language"
                 ],
                 "capabilitiesTransformations": {
                     "theme": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                            "defaultInputValue": "leather",
-                            "options": {
-                                "black-white": {
-                                    "outputValue": "Black-White"
-                                },
-                                "white-black": {
-                                    "outputValue": "White-Black"
-                                },
-                                "yellow-black": {
-                                    "outputValue": "Yellow-Black"
-                                },
-                                "leather": {
-                                    "outputValue": "Leather"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "match": {
+                                "black-white": "Black-White",
+                                "white-black": "White-Black",
+                                "yellow-black": "Yellow-Black",
+                                "leather": "Leather"
+                            },
+                            "noMatch": {
+                                "outputValue": "Leather"
                             }
                         }
                     },
@@ -252,21 +218,15 @@
                     "language": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/language",
-                            "defaultInputValue": "en",
-                            "options": {
-                                "el": {
-                                    "outputValue": "Greek"
-                                },
-                                "en": {
-                                    "outputValue": "English"
-                                },
-                                "es": {
-                                    "outputValue": "Spanish"
-                                },
-                                "de": {
-                                    "outputValue": "German"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/language",
+                            "match": {
+                                "el": "Greek",
+                                "en": "English",
+                                "es": "Spanish",
+                                "de": "German"
+                            },
+                            "noMatch": {
+                                "outputValue": "German"
                             }
                         }
                     }
@@ -288,12 +248,9 @@
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.net\\.gpii\\.smarthouses.id",
-                    "display.applications.net\\.gpii\\.smarthouses.name",
-                    "language",
-                    "display.screenEnhancement.fontSize",
-                    "display.screenEnhancement.-provisional-highContrastTheme",
-                    "-provisional-general.-provisional-volume"
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/volume"
                 ],
                 "capabilitiesTransformations": {
                     "fontSize": {
@@ -356,9 +313,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.es\\.codefactory\\.android\\.app\\.ma.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {
@@ -418,11 +373,8 @@
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "applications.de\\.fraunhofer\\.iao\\.C4A-TVM.id",
-                    "applications.de\\.fraunhofer\\.iao\\.gpii\\.C4A-TVM.name",
-                    "contrastTheme",
-                    "fontSize",
-                    "timeOut"
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/fontSize"
                 ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
@@ -433,15 +385,10 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "defaultInputValue": "default",
-                                    "options": {
-                                        "white-black": {
-                                            "outputValue": "yellow-black"
-                                        },
-                                        "yellow-black": {
-                                            "outputValue": "yellow-black"
-                                        }
+                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "match": {
+                                        "white-black": "yellow-black",
+                                        "yellow-black": "yellow-black"
                                     }
                                 }
                             }
@@ -492,22 +439,7 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "applications.eu\\.gpii\\.olb.id",
-                    "display.applications.eu\\.gpii\\.olb.name",
-                    "language",
-                    "textSize",
-                    "toc",
-                    "links",
-                    "contrastTheme",
-                    "signLanguageEnabled",
-                    "signLanguage",
-                    "interpreterType",
-                    "pictogramEnabled",
-                    "pictogramMode",
-                    "pictogramSymbolSet",
-                    "simplifiedUiEnabled"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "textSize": {
@@ -521,25 +453,19 @@
                     "toc": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/navigationAdaptation",
-                            "options": {
-                                "showToC": {
-                                    "outputValue": true
-                                },
-                                "default": {
-                                    "outputValue": false
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/navigationAdaptation",
+                            "match": {
+                                "showToC": true,
+                                "default": false
                             }
                         }
                     },
                     "links": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/linkAdaptation",
-                            "options": {
-                                "emphasizeLinks": {
-                                    "outputValue": true
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/linkAdaptation",
+                            "match": {
+                                "emphasizeLinks": true
                             }
                         }
                     },
@@ -550,21 +476,12 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "defaultInputValue": "default",
-                                    "options": {
-                                        "black-white": {
-                                            "outputValue": "bw"
-                                        },
-                                        "white-black": {
-                                            "outputValue": "wb"
-                                        },
-                                        "black-yellow": {
-                                            "outputValue": "by"
-                                        },
-                                        "yellow-black": {
-                                            "outputValue": "yb"
-                                        }
+                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "match": {
+                                        "black-white": "bw",
+                                        "white-black": "wb",
+                                        "black-yellow": "by",
+                                        "yellow-black": "yb"
                                     }
                                 }
                             }
@@ -574,32 +491,24 @@
                     "signLanguage": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/signLanguage",
-                            "defaultInputValue": "ils",
-                            "options": {
-                                "ase": {
-                                    "outputValue": "ase"
-                                },
-                                "gsg": {
-                                    "outputValue": "gsg"
-                                },
-                                "ils": {
-                                    "outputValue": "ils"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/signLanguage",
+                            "match": {
+                                "ase": "ase",
+                                "gsg": "gsg",
+                                "ils": "ils"
+                            },
+                            "noMatch": {
+                                "outputValue": "ils"
                             }
                         }
                     },
                     "interpreterType": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "inputPath": "http://registry\\.gpii\\.net/common/signLanguageInterpreterType",
-                            "options": {
-                                "avatar": {
-                                    "outputValue": "avatar"
-                                },
-                                "human": {
-                                    "outputValue": "human"
-                                }
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/signLanguageInterpreterType",
+                            "match": {
+                                "avatar": "avatar",
+                                "human": "human"
                             }
                         }
                     },

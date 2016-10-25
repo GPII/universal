@@ -7,7 +7,7 @@
             "solutionsRegistry": "%universal/testData/solutions/%os.json"
         },
         "matchMakers": {
-            "flat": {
+            "default": {
                 "url": "http://localhost:8081"
             }
         }

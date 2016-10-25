@@ -1,9 +1,12 @@
 ## FlowManager
 
-The flowmanager is the component in the system that is largely responsible for managing the flow. For example, the steps involved in logging in requires retrieving preferences, solutions, device data, etc. and passing this to the [MatchMaker Framework](MatchMakerFramework.md). And following that sending this via the [Context Manager](ContextManager.md) and then to the [Lifecycle Manager](LifecycleManager.md).
+The flowmanager is the central point of coordination in the system for managing flow between different architecture components.
+For example, it coordinates the steps involved during logging in which require retrieving preferences, solutions, device data, etc. and passing these to the [MatchMaker Framework](MatchMakerFramework.md).
+Following those steps, the payload is sent via the [Context Manager](ContextManager.md) and then to the [Lifecycle Manager](LifecycleManager.md).
 
 ###Important flows
-Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different. Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerUtitilies.js`. The different kinds of flows are:
+Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different. 
+Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerUtitilies.js`. The different kinds of flows are:
 * **User Login** (`UserLogin.js`) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
 * **User Logout** (`UserLogout.js`) - the flow for a user keying out of the system
 * **Retrieving Settings** (`Settings.js`) - used to retrieve the settings when the system is running in cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details

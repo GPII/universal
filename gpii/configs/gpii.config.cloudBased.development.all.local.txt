@@ -1,4 +1,4 @@
-cloudBased.development.all.local.json
+gpii.config.cloudBased.development.all.local.json
 ==========================
 
 This configuration runs the entire system as a cloudBased flowmanager, but with everything locally and in development mode.
@@ -11,7 +11,7 @@ This mean that:
 ** OntologyHandler
 ** rawPreferencesServer (reading preferences from file)
 ** solutionsRegistry (reading registry from file)
-** flatMatchMaker
+** canopyMatchMaker
 ** matchMakerFramework
 ** lifecycleManager
 
