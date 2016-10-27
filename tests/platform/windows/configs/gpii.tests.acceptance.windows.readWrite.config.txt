@@ -1,0 +1,5 @@
+This configuration file is used by the acceptance tests for Read&Write Gold
+
+It includes the basic localInstall setup for acceptance tests (modifying the preferences folder used), which in turn includes the standard development config file (running GPII locally, using development setup).
+
+This config sets the device reporter file to be 'readWrite.json', which will report Read&Write Gold as being installed on the system.
