@@ -241,12 +241,30 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Osk",
+                    "dataTypes": {
+                        "NavigationMode": "REG_DWORD"
+                    }
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "NavigationMode": {
+                        "literalValue": 0
+                    }
+                }
             }
         },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
         "start": [
             {
                 "type": "gpii.windows.enableRegisteredAT",
