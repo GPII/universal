@@ -11,7 +11,7 @@
                         "magnificationEnabled": true,
                         "magnification": 2
                     },
-                    "http://registry.gpii.net/common/matchMakerType": "flat"
+                    "http://registry.gpii.net/common/matchMakerType": "default"
                 }
             },
             "dark": {
@@ -24,7 +24,7 @@
                         "magnificationEnabled": true,
                         "magnification": 1.7
                     },
-                    "http://registry.gpii.net/common/matchMakerType": "flat"
+                    "http://registry.gpii.net/common/matchMakerType": "default"
                 },
                 "conditions": [
                     {

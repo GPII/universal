@@ -24,7 +24,7 @@ fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.builtIn = [
     {
-        name: "Testing os_win7 using Flat matchmaker",
+        name: "Testing os_win7 using default matchmaker",
         userToken: "os_win7",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
@@ -45,6 +45,66 @@ gpii.tests.windows.builtIn = [
                             "uiParam": 0,
                             "pvParam": {
                                 "type": "BOOL"
+                            }
+                        }
+                    }, {
+                        "settings": {
+                            "MouseKeysOn": {
+                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
+                                "value": true
+                            },
+                            "MaxSpeed": {
+                                "path": "pvParam.iMaxSpeed",
+                                "value": 100
+                            },
+                            "Acceleration": {
+                                "path": "pvParam.iTimeToMaxSpeed",
+                                "value": 1000
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEKEYS",
+                            "setAction": "SPI_SETMOUSEKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "MOUSEKEYS"
+                            }
+                        }
+                    }, {
+                        "settings": {
+                            "StickyKeysOn": {
+                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETSTICKYKEYS",
+                            "setAction": "SPI_SETSTICKYKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "STICKYKEYS"
+                            }
+                        }
+                    }, {
+                        "settings": {
+                            "FilterKeysEnable": {
+                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
+                                "value": true
+                            },
+                            "BounceKeysInterval": {
+                                "path": "pvParam.iBounceMSec",
+                                "value": 1000
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETFILTERKEYS",
+                            "setAction": "SPI_SETFILTERKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "FILTERKEYS"
                             }
                         }
                     }, { // high contrast settings
@@ -144,7 +204,7 @@ gpii.tests.windows.builtIn = [
             }
         ]
     }, {
-        name: "Testing os_common using Flat matchmaker",
+        name: "Testing os_common using default matchmaker",
         userToken: "os_common",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
@@ -165,6 +225,58 @@ gpii.tests.windows.builtIn = [
                             "uiParam": 0,
                             "pvParam": {
                                 "type": "BOOL"
+                            }
+                        }
+                    }, {
+                        "settings": {
+                            "MouseKeysOn": {
+                                "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEKEYS",
+                            "setAction": "SPI_SETMOUSEKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "MOUSEKEYS"
+                            }
+                        }
+                    }, {
+                        "settings": {
+                            "StickyKeysOn": {
+                                "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETSTICKYKEYS",
+                            "setAction": "SPI_SETSTICKYKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "STICKYKEYS"
+                            }
+                        }
+                    }, {
+                        "settings": {
+                            "FilterKeysEnable": {
+                                "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
+                                "value": true
+                            },
+                            "BounceKeysInterval": {
+                                "path": "pvParam.iBounceMSec",
+                                "value": 1000
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETFILTERKEYS",
+                            "setAction": "SPI_SETFILTERKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "FILTERKEYS"
                             }
                         }
                     }, { // high contrast settings
@@ -254,7 +366,7 @@ gpii.tests.windows.builtIn = [
             }
         ]
     }, {
-        name: "Testing os_gnome using Flat matchmaker",
+        name: "Testing os_gnome using default matchmaker",
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.windows.registrySettingsHandler": {
