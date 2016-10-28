@@ -1123,9 +1123,6 @@
         "restore": [
             "settings.configuration"
         ],
-        "update": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
