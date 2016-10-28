@@ -210,14 +210,14 @@
         ],
         "start": [
             {
-                "type": "gpii.windows.enableRegisteredAt",
+                "type": "gpii.windows.enableRegisteredAT",
                 "name": "magnifierpane",
                 "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.enableRegisteredAt",
+                "type": "gpii.windows.enableRegisteredAT",
                 "name": "magnifierpane",
                 "enable": false
             }
@@ -249,14 +249,14 @@
         },
         "start": [
             {
-                "type": "gpii.windows.enableRegisteredAt",
+                "type": "gpii.windows.enableRegisteredAT",
                 "name": "osk",
                 "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.enableRegisteredAt",
+                "type": "gpii.windows.enableRegisteredAT",
                 "name": "osk",
                 "enable": false
             }
