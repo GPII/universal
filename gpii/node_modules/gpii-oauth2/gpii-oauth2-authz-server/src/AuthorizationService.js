@@ -180,6 +180,14 @@ var fluid = fluid || require("infusion");
     });
 
     // ==== grantAuthorizationCode()
+    /**
+     * The entry point of grantAuthorizationCode() API. Fires the transforming promise workflow by triggering onGrantAuthorizationCode event.
+     * @param that {Component} An instance of gpii.oauth2.authorizationService
+     * @param gpiiToken {String} A GPII token
+     * @param clientId {String} A client id
+     * @param redirectUri {String} A redirect URI
+     * @param selectedPreferences {Object} A preference set
+     */
     gpii.oauth2.authorizationService.grantAuthorizationCode = function (that, gpiiToken, clientId, redirectUri, selectedPreferences) {
         var input = {
             gpiiToken: gpiiToken,
@@ -190,10 +198,10 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onGrantAuthorizationCode, input);
     };
 
-    /*
+    /**
      * Shared by getSelectedPreferences() and setSelectedPreferences()
      * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {codeGenerator} An instance of gpii.oauth2.codeGenerator
+     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
      * @param input {Object} The Accepted input structure:
      * {
      *     gpiiToken: {String},
@@ -214,18 +222,22 @@ var fluid = fluid || require("infusion");
         );
     };
 
-    // @dataStore (Object): A data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     gpiiToken: {Object},   // A GPII token record
-    //     inputArgs: {
-    //         gpiiToken: (String),
-    //         clientId: (String),
-    //         redirectUri: (String),
-    //         selectedPreferences: (Object)
-    //     }
-    // }
-    // @return (Promise): a promise object with the value of the generated authorization code
+    /**
+     * The last step in the fireTransformEvent() chain for implementing grantAuthorizationCode()
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param authDecisionInfo {Object} Accepted structure:
+     * {
+     *     gpiiToken: {Object},    // A GPII token record
+     *     inputArgs: {
+     *         gpiiToken: {String},
+     *         clientId: {String},
+     *         redirectUri: {String},
+     *         selectedPreferences: {Object}
+     *     }
+     * }
+     * @return {Promise} a promise object with the value of the generated authorization code
+     */
     gpii.oauth2.authorizationService.doGrant = function (dataStore, codeGenerator, authDecisionInfo) {
         // Generate the authorization code and record it
         var code = codeGenerator.generateAuthCode();
@@ -238,6 +250,13 @@ var fluid = fluid || require("infusion");
     // ==== End of grantAuthorizationCode()
 
     // ==== addAuthorization()
+    /**
+     * The entry point of addAuthorization() API. Fires the transforming promise workflow by triggering onAddAuthorization event.
+     * @param that {Component} An instance of gpii.oauth2.authorizationService
+     * @param gpiiToken {String} A GPII token
+     * @param oauth2ClientId {String} A OAuth2 client id
+     * @param selectedPreferences {Object} A preference set
+     */
     gpii.oauth2.authorizationService.addAuthorization = function (that, gpiiToken, oauth2ClientId, selectedPreferences) {
         var input = {
             gpiiToken: gpiiToken,
@@ -247,15 +266,16 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onAddAuthorization, input);
     };
 
-    // Shared by getSelectedPreferences() and setSelectedPreferences()
-    // @dataStore (Object): a data store instance
-    // @input (Object): Acceps this structure:
-    // {
-    //     gpiiToken: (String),
-    //     oauth2ClientId: (String),
-    //     selectedPreferences: (Object)
-    // }
-    // @return (Promise): a promise object to be passed to the next processing function
+    /** Shared by getSelectedPreferences() and setSelectedPreferences()
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param input {Object} Accepted structure:
+     * {
+     *     gpiiToken: {String},
+     *     oauth2ClientId: {String},
+     *     selectedPreferences: {Object}
+     * }
+     * @return {Promise} a promise object to be passed to the next processing function
+     */
     gpii.oauth2.authorizationService.findGpiiToken = function (dataStore, input) {
         var gpiiTokenPromise = dataStore.findGpiiToken(input.gpiiToken);
         var mapper = function (gpiiToken) {
@@ -267,17 +287,19 @@ var fluid = fluid || require("infusion");
         return fluid.promise.map(gpiiTokenPromise, mapper);
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     gpiiToken: {Object},   // A GPII token record
-    //     inputArgs: {
-    //         gpiiToken: (String),
-    //         oauth2ClientId: (String),
-    //         selectedPreferences: (Object)
-    //     }
-    // }
-    // @return (Promise): a promise object to be passed to the next processing function
+    /**
+     * @dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @record {Object} Accepted structure:
+     * {
+     *     gpiiToken: {Object},    // A GPII token record
+     *     inputArgs: {
+     *         gpiiToken: {String},
+     *         oauth2ClientId: {String},
+     *         selectedPreferences: {Object}
+     *     }
+     * }
+     * @return {Promise} a promise object to be passed to the next processing function
+     */
     gpii.oauth2.authorizationService.findClient = function (dataStore, record) {
         var clientPromise = dataStore.findClientByOauth2ClientId(record.inputArgs.oauth2ClientId);
         var mapper = function (client) {
@@ -286,22 +308,24 @@ var fluid = fluid || require("infusion");
         return fluid.promise.map(clientPromise, mapper);
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     gpiiToken: {Object},   // A GPII token record
-    //     client: {Object},    // A client record
-    //     inputArgs: {
-    //         gpiiToken: (String),
-    //         oauth2ClientId: (String),
-    //         selectedPreferences: (Object)
-    //     }
-    // }
-    // @return (Promise): a promise object. At success, returns the promise object with value in this structure:
-    // {
-    //     id: (String)
-    // }
-    // The returned structure may contain more fields if the promise is returned by dataStore.addAuthDecision()
+    /**
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param record {Object} Accepted structure:
+     * {
+     *     gpiiToken: {Object},    // A GPII token record
+     *     client: {Object},     // A client record
+     *     inputArgs: {
+     *         gpiiToken: {String},
+     *         oauth2ClientId: {String},
+     *         selectedPreferences: {Object}
+     *     }
+     * }
+     * @return {Promise} a promise object. At success, returns the promise object with the resolved value in a structure of:
+     * {
+     *     id: {String}
+     * }
+     * The returned structure may contain more fields if the promise is returned by dataStore.addAuthDecision()
+     */
     gpii.oauth2.authorizationService.doAdd = function (dataStore, codeGenerator, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken && record.client) {
@@ -319,6 +343,15 @@ var fluid = fluid || require("infusion");
     };
     // ==== End of addAuthorization()
 
+    /**
+     * Verify if the given client has been authorized by the user that holds the given GPII token.
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param gpiiToken {String} A GPII token
+     * @param clientId {String} A client ID
+     * @param redirectUri {String} A redirect URL
+     * @return {Promise} A promise object whose resolved value is true if the client has been authorized by the user.
+     * Otherwise, the resolved value is false.
+     */
     gpii.oauth2.authorizationService.userHasAuthorized = function (dataStore, gpiiToken, clientId, redirectUri) {
         var authDecisionPromise = dataStore.findAuthDecision(gpiiToken, clientId, redirectUri);
         var mapper = function (authDecision) {
@@ -327,6 +360,15 @@ var fluid = fluid || require("infusion");
         return fluid.promise.map(authDecisionPromise, mapper);
     };
 
+    /**
+     * Exchange for the access token. The client will be verified before the access token is returned.
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param code {String} The code to be exchanged
+     * @param clientId {String} A client ID
+     * @param redirectUri {String} A redirect URL
+     * @return {Promise} A promise object whose resolved value is the access token. If the client fails at the verification,
+     * an unauthorized access token error will be returned.
+     */
     gpii.oauth2.authorizationService.exchangeCodeForAccessToken = function (dataStore, code, clientId, redirectUri) {
         var promiseTogo = fluid.promise();
         var authPromise = dataStore.findAuthByCode(code);
@@ -345,6 +387,12 @@ var fluid = fluid || require("infusion");
     };
 
     // ==== getSelectedPreferences()
+    /**
+     * The entry point of getSelectedPreferences() API. Fires the transforming promise workflow by triggering onGetSelectedPreferences event.
+     * @param that {Component} An instance of gpii.oauth2.authorizationService
+     * @param userId {String} A user id
+     * @param authDecisionId {String} An authorization decision id
+     */
     gpii.oauth2.authorizationService.getSelectedPreferences = function (that, userId, authDecisionId) {
         var input = {
             userId: userId,
@@ -353,15 +401,17 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onGetSelectedPreferences, input);
     };
 
-    // Shared by getSelectedPreferences() and setSelectedPreferences()
-    // @dataStore (Object): a data store instance
-    // @input (Object): Acceps this structure:
-    // {
-    //     userId: (String),
-    //     authDecisionId: (String),
-    //     selectedPreferences: (Object)    // Only provided at setSelectedPreferences()
-    // }
-    // @return (Promise): a promise object to be passed to the next processing function
+    /**
+     * Shared by getSelectedPreferences() and setSelectedPreferences()
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param input {Object} Accepted structure:
+     * {
+     *     userId: {String},
+     *     authDecisionId: {String},
+     *     selectedPreferences: {Object}     // Only provided at setSelectedPreferences()
+     * }
+     * @return {Promise} a promise object to be passed to the next processing function
+     */
     gpii.oauth2.authorizationService.findAuthDecision = function (dataStore, input) {
         var authDecisionPromise = dataStore.findAuthDecisionById(input.authDecisionId);
         var mapper = function (authDecision) {
@@ -373,18 +423,20 @@ var fluid = fluid || require("infusion");
         return fluid.promise.map(authDecisionPromise, mapper);
     };
 
-    // Shared by getSelectedPreferences() and setSelectedPreferences()
-    // @dataStore (Object): a data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     authDecision: {Object}    // An object of authDecision record returned by the previous processing
-    //     inputArgs: {
-    //         userId: (String),
-    //         authDecisionId: (String),
-    //        selectedPreferences: (Object)    // Only provided at setSelectedPreferences()
-    //     }
-    // }
-    // @return (Promise): a promise object to be passed to the next processing function
+    /**
+     * Shared by getSelectedPreferences() and setSelectedPreferences()
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param record {Object} Accepted structure:
+     * {
+     *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
+     *     inputArgs: {
+     *         userId: {String},
+     *         authDecisionId: {String},
+     *        selectedPreferences: {Object}     // Only provided at setSelectedPreferences()
+     *     }
+     * }
+     * @return {Promise} a promise object to be passed to the next processing function
+     */
     gpii.oauth2.authorizationService.findGpiiTokenForSelectedPrefs = function (dataStore, record) {
         var promiseTogo = fluid.promise();
         if (record.authDecision) {
@@ -400,18 +452,20 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     authDecision: {Object}    // An object of authDecision record returned by the previous processing
-    //     inputArgs: {
-    //         userId: (String),
-    //         authDecisionId: (String),
-    //        selectedPreferences: (Object)    // Only provided at setSelectedPreferences()
-    //     }
-    // }
-    // @return (Promise): a promise object with value either "undefined" when the record is not found,
-    // or an object with user selected preferences
+    /**
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param record {Object} Accepted structure:
+     * {
+     *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
+     *     inputArgs: {
+     *         userId: {String},
+     *         authDecisionId: {String},
+     *        selectedPreferences: {Object}     // Only provided at setSelectedPreferences()
+     *     }
+     * }
+     * @return {Promise} a promise object with value either "undefined" when the record is not found,
+     * or an object with user selected preferences
+     */
     gpii.oauth2.authorizationService.doGet = function (dataStore, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken && record.gpiiToken.userId === record.inputArgs.userId && !record.authDecision.revoked) {
@@ -425,6 +479,13 @@ var fluid = fluid || require("infusion");
     // ==== End of getSelectedPreferences();
 
     // ==== setSelectedPreferences()
+    /**
+     * The entry point of setSelectedPreferences() API. Fires the transforming promise workflow by triggering onSetSelectedPreferences event.
+     * @param that {Component} An instance of gpii.oauth2.authorizationService
+     * @param userId {String} A user id
+     * @param authDecisionId {String} An authorization decision id
+     * @param selectedPreferences {Object} A preference set
+     */
     gpii.oauth2.authorizationService.setSelectedPreferences = function (that, userId, authDecisionId, selectedPreferences) {
         var input = {
             userId: userId,
@@ -434,11 +495,13 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onSetSelectedPreferences, input);
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): The same structure as the "record" parameter of gpii.oauth2.authorizationService.doGet()
-    // @return (Promise): when success, returns a promise object returned by dataStore.updateAuthDecision(),
-    // otherwise, returns a promise object with error message
-    // or an object with user selected preferences
+    /**
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param record {Object} The same structure as the "record" parameter of gpii.oauth2.authorizationService.doGet()
+     * @return {Promise} when success, returns a promise object returned by dataStore.updateAuthDecision(),
+     * otherwise, returns a promise object with error message
+     * or an object with user selected preferences
+     */
     gpii.oauth2.authorizationService.doSet = function (dataStore, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken && record.gpiiToken.userId === record.inputArgs.userId) {
@@ -453,6 +516,11 @@ var fluid = fluid || require("infusion");
     // ==== End of setSelectedPreferences()
 
     // ==== getUnauthorizedClientsForGpiiToken()
+    /**
+     * The entry point of getUnauthorizedClientsForGpiiToken() API. Fires the transforming promise workflow by triggering onGetUnauthorizedClients event.
+     * @param that {Component} An instance of gpii.oauth2.authorizationService
+     * @param gpiiToken {String} A GPII token
+     */
     gpii.oauth2.authorizationService.getUnauthorizedClientsForGpiiToken = function (that, gpiiToken) {
         var input = {
             gpiiToken: gpiiToken
@@ -460,15 +528,17 @@ var fluid = fluid || require("infusion");
         return fluid.promise.fireTransformEvent(that.events.onGetUnauthorizedClients, input);
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     gpiiToken: {},   // An object of gpiiToken record returned by the previous processing
-    //     inputArgs: {
-    //         gpiiToken: gpiiToken   // The initial gpiiToken argument received at gpii.oauth2.authorizationService.getUnauthorizedClientsForGpiiToken()
-    //     }
-    // }
-    // @return (Promise): a promise object to be passed to the next processing function
+    /**
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param record {Object} Accepted structure:
+     * {
+     *     gpiiToken: {},    * An object of gpiiToken record returned by the previous processing
+     *     inputArgs: {
+     *         gpiiToken: gpiiToken    * The initial gpiiToken argument received at gpii.oauth2.authorizationService.getUnauthorizedClientsForGpiiToken()
+     *     }
+     * }
+     * @return {Promise} a promise object to be passed to the next processing function
+     */
     gpii.oauth2.authorizationService.findAuthDecisionsByGpiiToken = function (dataStore, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken === undefined) {
@@ -487,22 +557,24 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
-    // @dataStore (Object): a data store instance
-    // @record (Object): Acceps this structure:
-    // {
-    //     gpiiToken: {},   // An object of gpiiToken record returned by the previous processing
-    //     authorizedClientIds: {  // An object of all authorized client ids
-    //         {clientId}: true/false
-    //     },
-    //     inputArgs: {
-    //         gpiiToken: gpiiToken   // The initial gpiiToken argument received at gpii.oauth2.authorizationService.getUnauthorizedClientsForGpiiToken()
-    //     }
-    // }
-    // @return (Promise): a promise object with value in this structure:
-    // [{
-    //     clientName: (String),
-    //     oauth2ClientId: (String)
-    // }]
+    /**
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param record {Object} Accepted structure:
+     * {
+     *     gpiiToken: {},    // An object of gpiiToken record returned by the previous processing
+     *     authorizedClientIds: {   // An object of all authorized client ids
+     *         {clientId}: true/false
+     *     },
+     *     inputArgs: {
+     *         gpiiToken: gpiiToken    // The initial gpiiToken argument received at gpii.oauth2.authorizationService.getUnauthorizedClientsForGpiiToken()
+     *     }
+     * }
+     * @return {Promise} a promise object with value in this structure:
+     * [{
+     *     clientName: {String},
+     *     oauth2ClientId: {String}
+     * }]
+     */
     gpii.oauth2.authorizationService.findUnauthorizedClients = function (dataStore, record) {
         var promiseTogo = fluid.promise();
         if (record === undefined) {
@@ -527,11 +599,11 @@ var fluid = fluid || require("infusion");
     };
     // ==== End of getUnauthorizedClientsForGpiiToken()
 
-    /*
-     * @promiseTogo: Modified by the function with objects to be resolved or to fail
-     * @dataStore (Object): a data store instance
-     * @codeGenerator (Object): a code generator
-     * @clientId (String): an unique client id
+    /**
+     * @param promiseTogo {Object} Modified by the function with objects to be resolved or to fail
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {codeGenerator} An instance of gpii.oauth2.codeGenerator
+     * @param clientId {String} an unique client id
      * @return: none. The first argument of promiseTogo contains return values
      */
     gpii.oauth2.authorizationService.createClientCredentialsToken = function (promiseTogo, dataStore, codeGenerator, clientId) {
@@ -550,6 +622,17 @@ var fluid = fluid || require("infusion");
         fluid.promise.follow(accessTokenPromise, promiseTogo);
     };
 
+    /**
+     * Grant a client credentials access token. The client and the scope will be verified before the access token is returned.
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param clientId {String} An instance of gpii.oauth2.codeGenerator
+     * @param scope {Array} Must have the value ["add_preferences"]
+     * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if:
+     * 1. the client is not allowed to add preference sets
+     * 2. the scope doesn't match a value of ["add_preferences"]
+     * 3. the client credentials token is not found
+     */
     gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, codeGenerator, clientId, scope) {
         var clientPromise = dataStore.findClientById(clientId);
         var clientCredentialsTokenPromise = dataStore.findClientCredentialsTokenByClientId(clientId);
@@ -578,7 +661,20 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
-    // An utility function used by checkAuthDecision() and doAdd()
+    /**
+     * A common utility function shared by checkAuthDecision() and doAdd()
+     * This function retrieves and returns an authorization decision id that associates with the given gpii token and the client.
+     * If the authorization decision does not exist, this function will create one and return the created authorization decision id.
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param clientId {String} A client id
+     * @param redirectUri {String} A redirect URI
+     * @param selectedPreferences {Object} A preference set
+     * @return {Promise} The resolved promise value is in the structure of:
+     * {
+     *     id: [authDecisionId]
+     * }
+     */
     gpii.oauth2.authorizationService.getAuthDecision = function (dataStore, codeGenerator, gpiiToken, clientId, redirectUri, selectedPreferences) {
         var promiseTogo = fluid.promise();
         var authDecisionPromise = dataStore.findAuthDecision(gpiiToken, clientId, redirectUri);

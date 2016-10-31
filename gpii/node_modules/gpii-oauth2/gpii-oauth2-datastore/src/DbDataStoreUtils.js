@@ -35,7 +35,7 @@ gpii.oauth2.dbDataStore.docTypes = {
     clientCredentialsToken: "clientCredentialsToken"
 };
 
-/*
+/**
  * Use the kettle dataSource `get` method to retrieve one record. This function provides extra
  * verification on input required fields. It returns an empty object if the record is not found.
  * This requires furthur processing besides using the kettle dataSource `notFoundIsEmpty` option because
@@ -89,7 +89,7 @@ gpii.oauth2.dbDataStore.findRecord = function (dataSource, directModel, valueNot
     return promiseTogo;
 };
 
-/*
+/**
  * Filter the given array valueNotEmpty to return elements that satisfy:
  * 1. the element isn't used as a path name in the object;
  * 2. the element matches a path name in the object but the corresponding value is undefined.
@@ -111,7 +111,7 @@ gpii.oauth2.dbDataStore.filterEmptyFields = function (obj, valueNotEmpty) {
     return emptyFields;
 };
 
-/*
+/**
  * Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" field value into "id" field.
  * The use of "id" instead of "_id" field name is to maintain the API backward compatibility as data store
  * API is expected to output the record identifier in "id" field instead of a couchdb/pouchdb specific name
@@ -129,7 +129,7 @@ gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
     return data;
 };
 
-/*
+/**
  * When multiple records are returned, clean them up by transforming/removing Couch/Pouch specific internal fields
  * and return an array with cleaned records.
  */
@@ -142,7 +142,7 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
     return records;
 };
 
-/* Use the kettle dataSource `set` method to create a new record. Before sending the input data to
+/** Use the kettle dataSource `set` method to create a new record. Before sending the input data to
  * CouchDB/PouchDB, it is modified by adding an unique _id field and a proper document type.
  * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
  * @param docType {String} The document type. See gpii.oauth2.dbDataStore.docTypes defined at
@@ -167,7 +167,7 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
     return promise;
 };
 
-/* Use the kettle dataSource `set` method to update an existing record. Before sending the input data to
+/** Use the kettle dataSource `set` method to update an existing record. Before sending the input data to
  * CouchDB/PouchDB, it is modified by:
  * 1. transform the filed name "id" to a Couch/Pouch required name "_id";
  * 2. add a proper document type.
@@ -188,8 +188,8 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
     return promise;
 };
 
-/*
- * Verifies the data carried by the given promise:
+/**
+ * Verify the data carried by the given promise:
  * 1. if the data is undefined, reject in the returned promise with a missing document error;
  * 2. if the data is not undefined, combine it with the input object and resolve this combined result in the returned promise.
  * @param inputPromise {Promise} The input promise whose resolved data will be verified
@@ -229,7 +229,7 @@ gpii.oauth2.dbDataStore.verifyMissingDoc = function (inputPromise, input, docTyp
 // ==== updateAuthDecision()
 // Operate
 
-/*
+/**
  * The entry point of updateAuthDecision() API. Fires the transforming promise workflow by triggering onUpdateAuthDecision event.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore
  * @param userId {String} The user id
@@ -252,7 +252,7 @@ gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisio
     return fluid.promise.fireTransformEvent(that.events.onUpdateAuthDecision, {inputArgs: input});
 };
 
-/*
+/**
  * The first step in the promise transforming chain for implementing updateAuthDecision() API. Check if the auth decision
  * already exists by the auth decision id. If exists, pass the input data received from the entry function as
  * well as the existing auth decision record to the next step in the chain.
@@ -282,7 +282,7 @@ gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, inp
     return gpii.oauth2.dbDataStore.verifyMissingDoc(authDecisionPromise, input, "authDecision");
 };
 
-/*
+/**
  * The second step in the promise transforming chain for implementing updateAuthDecision() API. Find the gpii token information based on
  * the gpii token of the existing auth decision record. The user id in the token info is needed for the next step. If the record
  * is found, pass the input data + the gpii token info to the next step in the chain. Otherwise, return a promise with a missing
@@ -321,7 +321,7 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, authDecisio
     return gpii.oauth2.dbDataStore.verifyMissingDoc(gpiiTokenPromise, authDecisionRecord, "gpiiToken");
 };
 
-/*
+/**
  * The last step in the promise transforming chain for implementing updateAuthDecision() API.
  * This step verifies the user requested for the update matches the user that the updated auth decision
  * belongs to. If the verification passes, do the update. Otherwise, return a promise with an unauthorized
@@ -382,7 +382,13 @@ gpii.oauth2.dbDataStore.doUpdate = function (dataSource, gpiiTokenRecord) {
 // ==== End of updateAuthDecision()
 
 // ==== revokeAuthDecision()
-// Fires the transforming promise workflow by triggering onRevokeAuthDecision event.
+/**
+ * The entry point of revokeAuthDecision() API. Fires the transforming promise workflow by triggering onRevokeAuthDecision event.
+ * @param that {Component} An instance of gpii.oauth2.dbDataStore
+ * @param revokeFunc {Function} The function to be called by gpii.oauth2.dbDataStore.doUpdate() to perform the revoking of an authorization decision
+ * @param userId {String} An user id
+ * @param authDecisionId {String} An authorization decision id
+ */
 gpii.oauth2.dbDataStore.revokeAuthDecision = function (that, revokeFunc, userId, authDecisionId) {
     var input = {
         userId: userId,
@@ -392,7 +398,9 @@ gpii.oauth2.dbDataStore.revokeAuthDecision = function (that, revokeFunc, userId,
     return fluid.promise.fireTransformEvent(that.events.onRevokeAuthDecision, {inputArgs: input});
 };
 
-// Used in the implementation of revokeAuthDecision() API as the argument of "dataProcessFunc"
+/**
+ * Used for implementing revokeAuthDecision() API as the argument of "dataProcessFunc". It sets the `revoked` field in the given data to `true`.
+ */
 gpii.oauth2.dbDataStore.setRevoke = function (data) {
     data.revoked = true;
     return data;
@@ -402,7 +410,9 @@ gpii.oauth2.dbDataStore.setRevoke = function (data) {
 // Access Token
 // ------------
 
-// The post data process function for implementing findAuthorizedClientsByGpiiToken()
+/**
+ * The post data process function for implementing findAuthorizedClientsByGpiiToken()
+ */
 gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (data) {
     var records = [];
     fluid.each(data, function (row) {
@@ -417,7 +427,9 @@ gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess = function (
     return records;
 };
 
-// The post data process function for implementing findAuthByAccessToken()
+/**
+ * The post data process function for implementing findAuthByAccessToken()
+ */
 gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
     var result = {
         userGpiiToken: data.value.gpiiToken,
@@ -430,6 +442,14 @@ gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
 // Authorization Codes
 // -------------------
 
+/**
+ * Save an authorization code
+ * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
+ * @param authDecisionId {String} An authorization decisoin id
+ * @param code {String} An authorization code
+ * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
+ * authorization code record, or an error if `authDecisionId` or/and `code` parameter is not provided.
+ */
 gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId, code) {
     var promiseTogo = fluid.promise();
     var data = {
@@ -449,7 +469,9 @@ gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId,
     return promiseTogo;
 };
 
-// The post data process function for implementing findAuthByCode()
+/**
+ * The post process function for implementing findAuthByCode()
+ */
 gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
     if (data.doc.revoked === false) {
         var result = {
@@ -467,7 +489,7 @@ gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
 // Client Credentials Tokens
 // -------------------------
 
-/*
+/**
  * Add client credentials tokens
  * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
  * @param clientCredentialsTokenData {Object} The data of the client credentials token. Its structure:
@@ -477,7 +499,7 @@ gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
  *      allowAddPrefs: {Boolean}
  *  }
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
- * token record of an "undefined" value if the token data is not given
+ * token record, or an error if `clientCredentialsTokenData` parameter is not provided.
  */
 gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, clientCredentialsTokenData) {
     var promiseTogo = fluid.promise();
@@ -502,7 +524,7 @@ gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, cl
 // ==== revokeClientCredentialsToken()
 // Fires the transforming promise workflow by triggering onRevokeClientCredentialsToken event.
 
-/*
+/**
  * The entry function for implementing revokeClientCredentialsToken(). Fires onRevokeClientCredentialsToken event to trigger the transforming promise workflow.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore.
  * @param clientCredentialsTokenId {String} An client credentials token id
@@ -511,7 +533,7 @@ gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCre
     return fluid.promise.fireTransformEvent(that.events.onRevokeClientCredentialsToken, clientCredentialsTokenId);
 };
 
-/*
+/**
  * The last step in the promise transforming chain for implementing revokeClientCredentialsToken() API.
  * It updates the client credentials token record by setting the "revoked" flag to true.
  * The step before this function is findClientCredentialsTokenById() that finds the token info and passes into this function.
@@ -525,7 +547,7 @@ gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCre
  *      id: {String}  // The client credentials token id
  *  }
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for updating the
- * token record of an "undefined" value if the token data is not given
+ * token record, or `undefined` if the `clientCredentialsTokenRecord` parameter is not provided
  */
 gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSource, clientCredentialsTokenRecord) {
     var promiseTogo = fluid.promise();
@@ -542,7 +564,24 @@ gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSourc
 };
 // ==== End of revokeClientCredentialsToken()
 
-// A post process function for implementing findAuthByClientCredentialsAccessToken() API.
+/**
+ * A post process function for implementing findAuthByClientCredentialsAccessToken() API.
+ * @param data {Object} An object in a structure of:
+ * {
+ *     doc: {
+ *         oauth2ClientId: {String}
+ *     },
+ *     value: {
+ *         allowAddPrefs: {Boolean}
+ *     }
+ * }
+ * @return {Object} The object is in the structure of:
+ * {
+ *     oauth2ClientId: {String},
+ *     allowAddPrefs: {Boolean}
+ * }
+ * If the given parameter is not in an expected structure, `undefined` is returned.
+ */
 gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess = function (data) {
     if (data.doc && data.value) {
         return {

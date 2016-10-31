@@ -18,7 +18,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
  * This DB data store is a re-writing of the initial synchronized in memory data store. It now uses
  * async promise API to satisfy the async database operations. However, the in memory data store continues
  * to serve as a good reference with an almost identical but much simpler logic. It can be found at:
- * https://github.com/cindyli/universal/blob/820e4919907e56f6412b2e3bab18675d5388b00b/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/src/InMemoryDataStore.js
+ * https://github.com/GPII/universal/blob/820e4919907e56f6412b2e3bab18675d5388b00b/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/src/InMemoryDataStore.js
  */
 
 "use strict";
