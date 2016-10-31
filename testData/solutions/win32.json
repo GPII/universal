@@ -82,7 +82,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
@@ -103,24 +103,21 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
-            }, {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write10\\InstallPath}\\ReadAndWrite.exe\""
+                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
             }
         ],
         "stop": [
             {
-                "type": "gpii.launch.exec",
-                "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "ReadAndWrite.exe"
             }
         ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_CURRENT_USER",
-                "path": "Software\\Texthelp\\Read&Write10\\InstallPath",
-                "subPath": "ReadAndWrite.exe",
+                "path": "Software\\Texthelp\\Read&Write11",
+                "subPath": "InstallPath",
                 "dataType": "REG_SZ"
             }
         ]
@@ -764,6 +761,285 @@
         ]
     },
 
+    "com.microsoft.windows.stickyKeys": {
+        "name": "Windows StickyKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETSTICKYKEYS",
+                    "setAction": "SPI_SETSTICKYKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "STICKYKEYS"
+                    },
+                    "verifySettings": true
+                },
+                "capabilities": [
+                    "applications.com\\.microsoft\\.windows\\.stickyKeys\\.id"
+                ],
+                "capabilitiesTransformations": {
+                    "StickyKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.SKF_STICKYKEYSON"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.filterKeys": {
+        "name": "Windows FilterKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETFILTERKEYS",
+                    "setAction": "SPI_SETFILTERKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "FILTERKEYS"
+                    },
+                    "verifySettings": false
+                },
+                "capabilities": [
+                    "applications.com\\.microsoft\\.windows\\.filterKeys\\.id"
+                ],
+                "capabilitiesTransformations": {
+                    "FilterKeysEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                            "left": false,
+                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "right": false,
+                            "operator": "||",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            }
+                        }
+                    },
+                    "SlowKeysInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
+                                    "factor": 1000
+                                }
+                            },
+                            "false": 0,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iWaitMSec"
+                            }
+                        }
+                    },
+                    "BounceKeysInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                                    "left": false,
+                                    "right": false,
+                                    "operator": "==="
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                                    "true": {
+                                        "transform": {
+                                            "type": "fluid.transforms.linearScale",
+                                            "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
+                                            "factor": 1000
+                                        }
+                                    },
+                                    "false": 0,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "false": 0,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iBounceMSec"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.mouseKeys": {
+        "name": "Windows MouseKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETMOUSEKEYS",
+                    "setAction": "SPI_SETMOUSEKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "MOUSEKEYS"
+                    },
+                    "verifySettings": true
+                },
+                "capabilities": [
+                    "applications.com\\.microsoft\\.windows\\.mouseKeys\\.id"
+                ],
+                "capabilitiesTransformations": {
+                    "MouseKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
+                        }
+                    },
+                    "MaxSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
+                                    "factor": 350,
+                                    "offset": 10
+                                }
+                            },
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iMaxSpeed"
+                            }
+                        }
+                    },
+                    "Acceleration": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
+                                    "factor": 1000,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
+                                    "factor": 1000,
+                                    "offset": 1000,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "operator": "+"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iTimeToMaxSpeed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.mouseTrailing": {
         "name": "Windows Mouse Trailing",
         "contexts": {
@@ -814,6 +1090,38 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.screenResolution": {
+        "name": "Windows Screen Resolution",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.screenResolution",
+                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+                ]
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
         ],
         "isInstalled": [
             {
