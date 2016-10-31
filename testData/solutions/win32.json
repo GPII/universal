@@ -1098,6 +1098,38 @@
         ]
     },
 
+    "com.microsoft.windows.screenResolution": {
+        "name": "Windows Screen Resolution",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.screenResolution",
+                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+                ]
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
