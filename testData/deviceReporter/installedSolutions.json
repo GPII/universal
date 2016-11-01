@@ -52,6 +52,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenResolution"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 

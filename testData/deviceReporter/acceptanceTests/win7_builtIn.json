@@ -16,6 +16,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenResolution"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
     },
 

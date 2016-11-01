@@ -71,6 +71,12 @@
                         "Invert": 1,
                         "Magnification": 150,
                         "MagnificationMode": 3
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
+                        "screen-resolution": {
+                            "width": 800,
+                            "height": 600
+                        }
                     }
                 }
             }
