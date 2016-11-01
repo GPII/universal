@@ -44,18 +44,6 @@
     },
 
     {
-        "id": "com.microsoft.windows.stickyKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.filterKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.mouseKeys"
-    },
-
-    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
