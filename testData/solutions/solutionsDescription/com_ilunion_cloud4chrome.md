@@ -7,6 +7,11 @@
 * __Platform__: Tested on MS Windows and GNU/Linux (it should also work on Mac OSX)
 * __Contact__: José Antonio Gutiérrez Dueñas <jagutierrez@consultoria.ilunion.com>
 
+## Important Note
+As described in the JIRA [GPII-2109](https://issues.gpii.net/browse/GPII-2109), due to the limitation of the current matchmaker and the state of the this solution (which is outdated compared to the requirements of APCP), this solution has been set to report as never being installed in the `isInstalled` directive.
+
+Once [GPII-1998](https://issues.gpii.net/browse/GPII-1998) has been implemented and this solution (addon) has been updated, the `isInstalled` directive should be updated to properly report when this is installed.
+
 ## Description
 The cloud4chrome extension for Google Chrome is a component installable in the web browser. This extension establishes a connection with GPII to get the active preferences. These preferences are used, by the extension, to adapt the web browser content, I mean, the web site interfaces.
 The cloud4chrome extension can work autonomously, with cloud-based flowManager, or by local flowManager.
