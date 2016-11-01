@@ -377,9 +377,6 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.orca",
-                "options": {
-                    "user": "${{userToken}}"
-                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ],
