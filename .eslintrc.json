@@ -4,6 +4,10 @@
     },
     "rules": {
         "block-scoped-var": "error",
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
         "comma-style": [
             "error",
             "last"
@@ -24,6 +28,7 @@
             "allow-null"
         ],
         "indent": ["error", 4],
+        "keyword-spacing": "error",
         "new-cap": ["error", { "properties": false }],
         "no-caller": "error",
         "no-cond-assign": [
@@ -40,6 +45,7 @@
         "no-multi-str": "error",
         "no-new": "error",
         "no-proto": "error",
+        "no-redeclare": "error",
         "no-script-url": "error",
         "no-sequences": "error",
         "no-trailing-spaces": "error",

@@ -1,0 +1,23 @@
+{
+    "type": "gpii.tests.multiSH.config",
+    "options": {
+        "distributeOptions": {
+            "multiSH.rawPreferencesDataSource": {
+                "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
+                "priority": "after:development.rawPreferencesDataSource"
+            },
+            "multiSH.deviceReporter": {
+                "record": "%universal/tests/data/multiSHDeviceReporter.json",
+                "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
+                "priority": "after:development.installedSolutionsPath"
+            },
+            "multiSH.solutionRegistry": {
+                "record": "%universal/tests/data/multiSHSolutionRegistry.json",
+                "target": "{that flowManager solutionsRegistryDataSource}.options.path",
+                "priority": "after:flowManager.development.solutions"
+            }
+        }
+    },
+    "mergeConfigs": "%universal/gpii/configs/gpii.config.development.all.local.json"
+}

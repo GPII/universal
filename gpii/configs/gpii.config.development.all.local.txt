@@ -1,4 +1,4 @@
-development.all.local.json
+gpii.config.development.all.local.json
 ==========================
 
 This configuration runs the entire system locally and in development mode.
@@ -13,7 +13,7 @@ This mean that:
 ** solutionsRegistry (reading registry from file)
 ** deviceReporter (reading device context info from file)
 ** matchMakerFramework
-** flatMatchMaker
+** canopyMatchMaker
 ** lifecycleManager
 
 Notes on testing:

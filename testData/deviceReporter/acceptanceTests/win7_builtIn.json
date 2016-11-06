@@ -16,6 +16,23 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenResolution"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "com.microsoft.windows.stickyKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.filterKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.mouseKeys"
     }
+
 ]
