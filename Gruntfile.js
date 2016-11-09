@@ -48,8 +48,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("fluid-grunt-eslint");
     grunt.loadNpmTasks("grunt-jsonlint");
     grunt.loadNpmTasks("grunt-shell");
-    grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-mkdir");
 
     grunt.registerTask("browser-tests", "Run browser tests in a VM", function () {
         grunt.task.run("shell:runBrowserTests");
