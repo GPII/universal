@@ -1620,10 +1620,6 @@
         ],
         "stop": [
         ],
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
+        "isInstalled": []
     }
 }
