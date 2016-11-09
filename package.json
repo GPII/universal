@@ -23,7 +23,10 @@
         "passport-local": "1.0.0",
         "passport-oauth2-client-password": "0.1.2",
         "glob": "7.0.5",
-        "write-file-atomic": "1.1.4"
+        "write-file-atomic": "1.1.4",
+        "fluid-resolve": "1.2.0",
+        "rimraf": "2.5.4",
+        "mkdirp": "0.5.1"
     },
     "devDependencies": {
         "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb#7ccc5fba874ec525d781d977c8c3afbd857d7877",
@@ -57,9 +60,6 @@
     "scripts": {
         "test": "node tests/all-tests.js",
         "start": "node gpii.js",
-        "browserify:http": "node node_modules/browserify/bin/cmd.js -s http node_modules/http-browserify/index.js -o browserify/http.js ",
-        "browserify:https": "node node_modules/browserify/bin/cmd.js -s https node_modules/https-browserify/index.js -o browserify/https.js ",
-        "browserify:url": "node node_modules/browserify/bin/cmd.js -s urlModule node_modules/url/url.js -o browserify/urlModule.js ",
-        "postinstall": "grunt browserifyPrep && npm run browserify:http && npm run browserify:https && npm run browserify:url"
+        "postinstall": "node scripts/browserifyTestDependency.js"
     }
 }
