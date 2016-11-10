@@ -12,7 +12,7 @@
         "node-uuid": "1.4.7",
         "semver": "1.1.4",
         "xml-mapping": "1.2.0",
-        "kettle": "1.1.0",
+        "kettle": "1.2.0",
         "express": "4.13.3",
         "body-parser": "1.13.3",
         "connect-ensure-login": "0.1.1",
@@ -23,7 +23,8 @@
         "passport-local": "1.0.0",
         "passport-oauth2-client-password": "0.1.2",
         "glob": "7.0.5",
-        "write-file-atomic": "1.1.4"
+        "write-file-atomic": "1.1.4",
+        "json5": "0.5.0"
     },
     "devDependencies": {
         "grunt": "1.0.1",

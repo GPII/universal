@@ -1556,10 +1556,8 @@
         "restore": [
             "settings.chromeconf"
         ],
-        "start": [
-        ],
-        "stop": [
-        ],
-        "isInstalled": []
+        "start": [],
+        "stop": [],
+        "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
     }
 }
