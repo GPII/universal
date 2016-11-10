@@ -236,8 +236,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         distributeOptions: {
             "distributeWritable": {
-                record: "gpii.dataSource.pouchDB.writable",
-                target: "{that > dataSource}.options.gradeNames"
+                record: true,
+                target: "{that > dataSource}.options.writable"
             }
         },
         rawModules: [{

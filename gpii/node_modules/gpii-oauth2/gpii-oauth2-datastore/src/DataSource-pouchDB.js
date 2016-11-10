@@ -25,7 +25,7 @@ var gpii = fluid.registerNamespace("gpii");
     fluid.defaults("gpii.dataSource.pouchDB", {
         gradeNames: ["kettle.dataSource.URL"],
         dbViews: null,   // Supplied by integrators
-        readOnlyGrade: "kettle.dataSource.pouchDB",
+        readOnlyGrade: "gpii.dataSource.pouchDB",
         invokers: {
             getImpl: {
                 funcName: "gpii.dataSource.pouchDB.handle",
@@ -55,9 +55,6 @@ var gpii = fluid.registerNamespace("gpii");
             }]
         }
     });
-
-    // This implementation is copied from the implementation of "kettle.dataSource.CouchDB": https://github.com/fluid-project/kettle/blob/master/lib/dataSource-core.js#L289
-    fluid.makeGradeLinkage("gpii.dataSource.pouchDB.linkage", ["gpii.dataSource.writable", "gpii.dataSource.pouchDB"], "gpii.dataSource.pouchDB.writable");
 
     /**
      * Match the url with the _id field of the view list to determine if this url is to query by a view or an document id
