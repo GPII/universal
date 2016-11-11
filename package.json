@@ -24,12 +24,12 @@
         "passport-oauth2-client-password": "0.1.2",
         "glob": "7.0.5",
         "write-file-atomic": "1.1.4",
+        "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb#7ccc5fba874ec525d781d977c8c3afbd857d7877",
         "fluid-resolve": "1.2.0",
         "rimraf": "2.5.4",
         "mkdirp": "0.5.1"
     },
     "devDependencies": {
-        "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb#7ccc5fba874ec525d781d977c8c3afbd857d7877",
         "grunt": "1.0.1",
         "fluid-grunt-eslint": "18.1.2",
         "grunt-jsonlint": "1.0.4",
