@@ -64,6 +64,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenResolution"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
@@ -73,10 +77,6 @@
 
     {
         "id": "com.android.freespeech"
-    },
-
-    {
-        "id": "com.ilunion.cloud4chrome"
     },
 
     {
