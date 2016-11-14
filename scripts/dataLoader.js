@@ -17,24 +17,84 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 fluid.defaults("gpii.dataLoader", {
     gradeNames: ["fluid.component"],
+    // Accepted format:
+    // dbName1: {
+    //     data: ["pathToDataFile1", "pathToDataFile1"...]
+    // },
+    // dbName2: {
+    //     data: ["pathToDataFile1", "pathToDataFile1"...]
+    // }
     databases: {  // Supplied by integrators
-        // Accepted format:
-        // dbName: {
-        //     data: ["pathToDataFile1", "pathToDataFile1"...]
-        // }
     },
+    couchDbUrl: null,   // Supplied by integrators
     components: {
         dataSource: {
             type: "gpii.dataLoader.dataSource"
         }
+    },
+    invokers: {
+        load: {
+            funcName: "gpii.dataLoader.load",
+            args: ["{that}", "{that}.dataSource"]
+        }
+    },
+    events: {
+        onDataLoaded: null
+    },
+    distributeOptions: {
+        couchDbUrl: {
+            record: "{that}.options.couchDbUrl",
+            target: "{that > dataSource}.options.couchDbUrl"
+        }
     }
 });
 
+gpii.dataLoader.load = function (that, dataSource) {
+    var promises = [];
+
+    // Process databases one by one
+    fluid.each(that.options.databases, function (filePaths, dbName) {
+        filePaths = fluid.makeArray(filePaths);
+        fluid.each(filePaths, function (onePath) {
+            var actualPath = fluid.module.resolvePath(onePath);
+            var data = require(actualPath);
+            var directModel = {
+                couchDbUrl: dataSource.options.couchDbUrl,
+                dbName: dbName
+            };
+            var setPromise = dataSource.set(directModel, data);
+            promises.push(setPromise);
+        });
+    });
+
+    // An sequence with an empty array of promises will automatically be resolved, so we can safely use this construct.
+    var sequence = fluid.promise.sequence(promises);
+    sequence.then(function () {
+        that.events.onDataLoaded.fire(that);
+    });
+    return sequence;
+};
+
 fluid.defaults("gpii.dataLoader.dataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
+    writable: true,
+    writeMethod: "POST",
     couchDbUrl: null,   // Supplied by integrators
-    url: "%couchDbUrl/_bulk_docs"
+    url: "%couchDbUrl/%dbName/_bulk_docs"
     termMap: {
-        couchDbUrl: "noencode:%couchDbUrl"
+        couchDbUrl: "noencode:%couchDbUrl",
+        dbName: "%dbName"
     }
+});
+
+fluid.defaults("gpii.dataLoader.authDataLoader", {
+    gradeNames: ["gpii.dataLoader"],
+    databases: {
+        auth: {
+            data: [
+                "%universal/testData/security/TestOAuth2DataStore.json",
+                "%gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
+            ]
+        }
+    },
 });
