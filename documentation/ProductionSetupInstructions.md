@@ -1,6 +1,6 @@
 ## Introduction
 
-GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```examples/production-components-vm``` directory. Once the VM is running, the following services will be available in the VM:
+GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```vagrant-configs``` directory. Once the VM is running, the following services will be available in the VM:
 
 * *Preferences Server* listening on port 8081
 * *Cloud Based Flow Manager* listening on port 8082
@@ -11,7 +11,7 @@ GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* 
 * The *Preferences Server* and *Cloud Based Flow Manager* will be managed by two separate Node.js processes
 * The above mentioned ports will be forwarded from your host machine to the VM allowing access to deployed services
 * Before starting the VM please make sure the ports in question are not being used on your host machine
-* All the Vagrant commands listed below should be run in the ```examples/production-components-vm``` directory.
+* All the Vagrant commands listed below should be run in the ```vagrant-configs``` directory.
 
 ## Requirements
 
@@ -19,7 +19,7 @@ In order to start the VM, make sure [all these requirements for setting up Quali
 
 ## Start the VM
 
-To start a VM, run the following command in the ```examples/production-components-vm``` directory:
+To start a VM, run the following command in the ```vagrant-configs``` directory:
 
 ```
 vagrant up
