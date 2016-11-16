@@ -1,0 +1,9 @@
+windows-readWrite-testSpec.js
+
+Descriptions:
+This will run the acceptance tests for Read&Write Gold. It uses 2 NP sets: rwg1 and rwg2.
+
+Requirements:
+* Read&Write Gold installed
+
+Has been tested with Read&Write Gold 11 on Windows 10.

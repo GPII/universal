@@ -30,6 +30,16 @@ If all is well, you will see a message like
 Note that this installation will not include any OS-specific features, but can be used to verify system function with
 basic preference sets which only start solutions which require filesystem-based configuration (XML, JSON or .INI files).
 
+Recovering From System Corruption Using the Journal
+---------------------------------------------------
+
+Either when operating the live GPII system or running test cases, you may end up corrupting your desktop settings in the
+case there is a system crash. In this case, you can navigate to 
+
+    http://localhost:8081/journal/journals.html
+    
+to browse a set of journal recovery snapshots. Clicking on the first link on this page will restore your system
+to the state it was in prior to the most recent GPII login.
 
 Testing
 -------
@@ -50,13 +60,19 @@ From the root of the `universal` folder, run the following command:
 #### Running tests using a VM
 A VM can be automatically created using tools provided by the [Prosperity4All Quality Infrastructure](https://github.com/GPII/qi-development-environments/). Please ensure the [requirements](https://github.com/GPII/qi-development-environments/#requirements) have been met. The ``vagrant up`` command can then be used to provision a new VM.
 
-Following provisioning, tests can be run in the VM from the host system as follows:
+Within the VM, the application will be installed in the directory specified by the nodejs_app_install_dir variable, which is defined in the provisioning/vagrant-vars.yml configuration file in this repository. By default it is set to "/home/vagrant/sync/node_modules/universal".
+
+Following the provisioning phase, tests can be run in the VM directly from the host system, without the need to log into the VM or interact with its console. 
+
+From your project's top-level directory (where the Vagrantfile and Gruntfile.js files reside), run:
 
 - node-based tests: `grunt node-tests`
 - browser-based tests: `grunt browser-tests`
 - production tests: `grunt node-production-tests`
 
 The ``grunt tests`` command will run the browser and Node based tests.
+
+These Grunt tasks will run the correct Vagrant commands to connect to the VM and run the tests within the isolated environment. You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop environment) and run the tests manually if you wish.
 
 Usage
 -----
