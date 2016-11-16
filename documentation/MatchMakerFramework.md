@@ -115,7 +115,7 @@ The input for these POST requests will be in the following format. Note that it 
         "http://registry.gpii.net/terms/environment/timeOfDay": "18:29:00"
     },
     solutionsRegistry: {
-        //stuff from: https://github.com/GPII/universal/blob/master/testData/solutions/win32.json
+        //stuff from: https://github.com/GPII/universal/blob/master/testData/solutions/win32.json5
     },
     activeContexts: [
         "gpii-default",

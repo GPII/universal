@@ -24,6 +24,12 @@ module.exports = function (grunt) {
         jsonlint: {
             src: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json", "*.json"]
         },
+        json5lint: {
+            options: {
+                enableJSON5: true
+            },
+            src: ["gpii/**/*.json5", "tests/**/*.json5", "testData/**/*.json5", "*.json5"]
+        },
         shell: {
             options: {
                 stdout: true,
@@ -47,6 +53,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks("fluid-grunt-eslint");
     grunt.loadNpmTasks("grunt-jsonlint");
+    grunt.loadNpmTasks("fluid-grunt-json5lint");
     grunt.loadNpmTasks("grunt-shell");
 
     grunt.registerTask("browser-tests", "Run browser tests in a VM", function () {
@@ -66,5 +73,5 @@ module.exports = function (grunt) {
         grunt.task.run("shell:runNodeTests");
     });
 
-    grunt.registerTask("lint", "Apply jshint and jsonlint", ["eslint", "jsonlint"]);
+    grunt.registerTask("lint", "Apply jshint, jsonlint and json5lint", ["eslint", "jsonlint", "json5lint"]);
 };
