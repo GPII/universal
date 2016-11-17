@@ -1,5 +1,3 @@
-This configuration file is used by the for acceptance test: AcceptanceTests_nvda.js.
+This configuration file is used by the acceptance test: AcceptanceTests_nvda.js.
 
-It includes to the basic localInstall setup for acceptance tests (modifying the preferences folder used), which in turn includes the standard development config file (running GPII locally, using development setup).
-
-This config sets the device reporter file to be 'nvda.json', which will report nvda as being installed on the system.
+It makes use of dynamic device reporter:  It includes the basic local install setup in development mode (modifying the preferences folder used), but with the device reporter in production mode, merging in gpii's "all.development.dr.production" configuration.
