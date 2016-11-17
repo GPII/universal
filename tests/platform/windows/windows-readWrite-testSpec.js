@@ -61,7 +61,16 @@ gpii.tests.windows.readWrite = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Texthelp\\Read&Write11",
+                    "subPath": "InstallPath"
+                }]
+            }
+        }
     }, {
         name: "Testing rwg2",
         userToken: "rwg2",
@@ -106,13 +115,22 @@ gpii.tests.windows.readWrite = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Texthelp\\Read&Write11",
+                    "subPath": "InstallPath"
+                }]
+            }
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.readWrite",
-    configName: "gpii.tests.acceptance.windows.readWrite.config",
+    configName: "windows-dynamicDeviceReporter-config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

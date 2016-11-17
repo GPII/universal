@@ -95,7 +95,7 @@ gpii.tests.windows.jaws = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.jaws",
-    configName: "gpii.tests.acceptance.windows.jaws.config",
+    configName: "windows-dynamicDeviceReporter-config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

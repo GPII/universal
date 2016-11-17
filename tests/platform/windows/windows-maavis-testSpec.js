@@ -50,7 +50,9 @@ gpii.tests.windows.maavis = [
             }
         ],
         deviceReporters: {
-            "gpii.deviceReporter.alwaysInstalled" : { }
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
         }
     }, {
         name: "Testing maavis_selfvoicing using Flat matchmaker",
@@ -80,14 +82,16 @@ gpii.tests.windows.maavis = [
             }
         ],
         deviceReporters: {
-            "gpii.deviceReporter.alwaysInstalled" : { }
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
         }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.maavis",
-    configName: "gpii.tests.acceptance.windows.maavis.config",
+    configName: "windows-dynamicDeviceReporter-config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

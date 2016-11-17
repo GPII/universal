@@ -47,7 +47,12 @@ gpii.tests.windows.chrome = [
                 ]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
+        }
     },
     {
         name: "Acceptance test for font size transformation in Chrome",
@@ -71,7 +76,12 @@ gpii.tests.windows.chrome = [
                 ]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
+        }
     },
     {
         name: "Acceptance test for magnification transformation in Chrome",
@@ -95,13 +105,18 @@ gpii.tests.windows.chrome = [
                 ]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.chrome",
-    configName: "gpii.tests.acceptance.windows.chrome.config",
+    configName: "windows-dynamicDeviceReporter-config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

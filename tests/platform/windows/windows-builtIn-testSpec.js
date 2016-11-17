@@ -204,7 +204,9 @@ gpii.tests.windows.builtIn = [
             }
         ],
         deviceReporters: {
-            "gpii.deviceReporter.alwaysInstalled" : { }
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
         }
     }, {
         name: "Testing os_common using default matchmaker",
@@ -369,7 +371,9 @@ gpii.tests.windows.builtIn = [
             }
         ],
         deviceReporters: {
-            "gpii.deviceReporter.alwaysInstalled" : { }
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
         }
     }, {
         name: "Testing os_gnome using default matchmaker",
@@ -439,14 +443,16 @@ gpii.tests.windows.builtIn = [
             }
         ],
         deviceReporters: {
-            "gpii.deviceReporter.alwaysInstalled" : { }
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
         }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn",
-    configName: "gpii.tests.acceptance.windows.builtIn.config",
+    configName: "windows-dynamicDeviceReporter-config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

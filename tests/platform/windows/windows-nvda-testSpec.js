@@ -164,7 +164,7 @@ gpii.tests.windows.nvda = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.nvda",
-    configName: "gpii.tests.acceptance.windows.nvda.config",
+    configName: "windows-dynamicDeviceReporter-config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);
