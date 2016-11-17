@@ -45,7 +45,12 @@ gpii.tests.linux.chrome.testDefs = [
                 ]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": []
+            }
+        }
     },
     {
         name: "Acceptance test for font size transformation in Chrome",
@@ -69,7 +74,12 @@ gpii.tests.linux.chrome.testDefs = [
                 ]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": []
+            }
+        }
     },
     {
         name: "Acceptance test for magnification transformation in Chrome",
@@ -93,13 +103,18 @@ gpii.tests.linux.chrome.testDefs = [
                 ]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": []
+            }
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.chrome.testDefs",
-    configName: "gpii.tests.acceptance.linux.chrome.config",
+    configName: "gpii.tests.acceptance.linux.dynamicDeviceReporter.config",
     configPath: "%universal/tests/platform/linux/configs"
-}, ["gpii.test.integration.testCaseHolder.linux"],
+}, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);
