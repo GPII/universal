@@ -196,6 +196,39 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/invertColours": "Invert.value",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "Magnification",
+                            "outputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "factor": 0.01
+                        },
+                        {
+                            "type": "fluid.transforms.setMembershipToArray",
+                            "inputPath": "",
+                            "outputPath": "http://registry\\.gpii\\.net/common/tracking",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "FollowFocus": "focus",
+                                "FollowMouse": "mouse",
+                                "FollowCaret": "caret"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "MagnificationMode.value",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "match": {
+                                "2": "FullScreen",
+                                "3": "Lens",
+                                "1": "TopHalf"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -489,6 +522,174 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speakTutorialMessages": "presentation\\.reportHelpBalloons",
+                    "http://registry\\.gpii\\.net/common/keyEcho": "keyboard\\.speakTypedCharacters",
+                    "http://registry\\.gpii\\.net/common/wordEcho": "keyboard\\.speakTypedWords",
+                    "http://registry\\.gpii\\.net/common/announceCapitals": "speech\\.espeak\\.sayCapForCapitals",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "virtualBuffers\\.autoSayAllOnPageLoad.value",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "match": {
+                                "true": "all",
+                                "false": "sentence"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.setMembershipToArray",
+                            "inputPath": "",
+                            "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "reviewCursor\\.followFocus": "focus",
+                                "reviewCursor\\.followCaret": "caret",
+                                "reviewCursor\\.followMouse": "mouse"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "defaultInputPath": "speech\\.symbolLevel",
+                            "match": {
+                                "0": "none",
+                                "100": "some",
+                                "200": "most",
+                                "300": "all"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "false": true,
+                            "true": false,
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "speech\\.synth",
+                                            "operator": "===",
+                                            "right": "silence"
+                                        }
+                                    },
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "speech\\.outputDevice",
+                                            "operator": "===",
+                                            "right": "Microsoft Sound Mapper"
+                                        }
+                                    },
+                                    "operator": "&&"
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "right": true,
+                                    "operator": "===",
+                                    "leftPath": "speech\\.espeak\\.rateBoost"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "speech\\.espeak\\.rate",
+                                    "factor": 3.1,
+                                    "offset": 80
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.linearScale",
+                                            "inputPath": "speech\\.espeak\\.rate",
+                                            "factor": 3.1,
+                                            "offset": 80
+                                        }
+                                    },
+                                    "operator": "*",
+                                    "right": 3
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "speech\\.espeak\\.voice",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en\\en": "en",
+                                "en\\en-us": "en-US",
+                                "en\\en-sc": "en-scotland",
+                                "en\\en-wi": "en-BZ",
+                                "af": "af",
+                                "bg": "bg",
+                                "bs": "bs",
+                                "ca": "ca",
+                                "cs": "cs",
+                                "cy": "cy",
+                                "da": "da",
+                                "de": "de",
+                                "el": "el",
+                                "test\\grc": "grc",
+                                "eo": "eo",
+                                "es": "es",
+                                "es": "es-ES",
+                                "es-la": "es-419",
+                                "et": "et",
+                                "fi": "fi",
+                                "fr": "fr",
+                                "fr-be": "fr-BE",
+                                "hi": "hi",
+                                "hr": "hr",
+                                "hu": "hu",
+                                "hy": "hy",
+                                "hy-west": "hy-arevmda",
+                                "id": "id",
+                                "is": "is",
+                                "it": "it",
+                                "test\\jbo": "jbo",
+                                "ka": "ka",
+                                "kn": "kn",
+                                "ku": "ku",
+                                "la": "la",
+                                "lv": "lv",
+                                "mk": "mk",
+                                "ml": "ml",
+                                "test\\nci": "nci",
+                                "nl": "nl",
+                                "no": "no",
+                                "test\\pap": "pap",
+                                "pl": "pl",
+                                "pt": "pt-BR",
+                                "pt-pt": "pt-PT",
+                                "ro": "ro",
+                                "ru": "ru",
+                                "sk": "sk",
+                                "sq": "sq",
+                                "sr": "sr",
+                                "sv": "sv",
+                                "sw": "sw",
+                                "ta": "ta",
+                                "tr": "tr",
+                                "vi": "vi",
+                                "zh": "zh-cmn",
+                                "zh-yue": "zh-yue",
+                                "yue": "zh-yue"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -699,7 +900,8 @@
                             }
                         }
                     ]
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -767,6 +969,9 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled": "HighContrastOn.value"
                 }
             }
         },
@@ -806,9 +1011,7 @@
                     },
                     "verifySettings": true
                 },
-                "capabilities": [
-                    "applications.com\\.microsoft\\.windows\\.stickyKeys\\.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
                         "transform": {
@@ -862,9 +1065,7 @@
                     },
                     "verifySettings": false
                 },
-                "capabilities": [
-                    "applications.com\\.microsoft\\.windows\\.filterKeys\\.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "FilterKeysEnable": {
                         "transform": {
@@ -941,6 +1142,76 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/slowKeysEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "SlowKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "truePath": "FilterKeysEnable.value"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/slowKeysInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "SlowKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "SlowKeysInterval.value",
+                                    "factor": 0.001
+                                }
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/debounceEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "BounceKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "truePath": "FilterKeysEnable.value"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/debounceInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "BounceKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "BounceKeysInterval.value",
+                                    "factor": 0.001
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -980,9 +1251,7 @@
                     },
                     "verifySettings": true
                 },
-                "capabilities": [
-                    "applications.com\\.microsoft\\.windows\\.mouseKeys\\.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "MouseKeysOn": {
                         "transform": {
@@ -1044,6 +1313,18 @@
                                 "type": "fluid.transforms.literalValue",
                                 "input": "pvParam.iTimeToMaxSpeed"
                             }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/mouseEmulationEnabled": "MouseKeysOn.value",
+                    "http://registry\\.gpii\\.net/common/cursorSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "MaxSpeed.value",
+                            "factor": 0.00285714285714,
+                            "offset": -0.0285714285714
+
                         }
                     }
                 }
@@ -1410,6 +1691,20 @@
                             ]
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                     "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "Arrow",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "match": {
+                                "%SystemRoot%\\cursors\\aero_arrow.cur": 0.32,
+                                "%SystemRoot%\\cursors\\aero_arrow_l.cur": 0.65,
+                                "%SystemRoot%\\cursors\\aero_arrow_xl.cur": 1
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -1485,7 +1780,8 @@
                             }
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -1569,8 +1865,9 @@
                     "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
-                }
-           }
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
         },
         "configure": [
             "settings.chromeconf"
