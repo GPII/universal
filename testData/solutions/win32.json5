@@ -207,14 +207,16 @@
         ],
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\Magnify.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "magnifierpane",
+                "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "Magnify.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "magnifierpane",
+                "enable": false
             }
         ],
         "isInstalled": [
@@ -236,22 +238,42 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Osk",
+                    "dataTypes": {
+                        "NavigationMode": "REG_DWORD"
+                    }
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "NavigationMode": {
+                        "literalValue": 0
+                    }
+                }
             }
         },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\osk.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "osk",
+                "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "osk.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "osk",
+                "enable": false
             }
         ],
         "isInstalled": [
