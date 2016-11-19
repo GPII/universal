@@ -8,13 +8,12 @@ housed beneath http://wiki.gpii.net/w/Architecture .
 Installation
 ------------
 
-This repository should be installed using one of the top-level GPII architecture-specific repositories -
+In production, this repository should be installed using one of the top-level GPII architecture-specific repositories -
   * windows - https://github.com/GPII/windows
   * linux - https://github.com/GPII/linux
   * android - https://github.com/GPII/android
 
-For development purposes this repository could be cloned directly - however, please ensure that it is housed
-in a directory named `node_modules` otherwise its test cases will not be able to self-resolve.
+For development purposes this repository could be cloned directly.
 
 Quick Start
 -----------
