@@ -18,12 +18,12 @@
                 "target": "{that cloudBasedConfig}.options.mainServerPort"
             },
             "untrusted.development.prefs": {
-                "record": "http://localhost:8084/preferences/%userToken",
+                "record": "http://127.0.0.1:8084/preferences/%userToken",
                 "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
                 "priority": "after:flowManager.development.prefs"
             },
             "untrusted.development.matchMakers": {
-                "record": "http://localhost:8084",
+                "record": "http://127.0.0.1:8084",
                 "target": "{that cloudBasedConfig flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
             }
