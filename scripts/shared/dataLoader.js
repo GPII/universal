@@ -27,7 +27,6 @@ var fluid = require("infusion"),
 // Data Source used to interact with CouchDB
 fluid.defaults("gpii.dataLoader.dataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
-    url: "%couchDbUrl/%dbName/_bulk_docs",
     termMap: {
         couchDbUrl: "noencode:%couchDbUrl",
         dbName: "%dbName"
@@ -35,7 +34,7 @@ fluid.defaults("gpii.dataLoader.dataSource", {
 });
 
 fluid.defaults("gpii.dataLoader.dataSource.writable", {
-    gradeNames: ["gpii.dataLoader.dataSource", "kettle.dataSource.CouchDB.writable"],
+    gradeNames: ["gpii.dataLoader.dataSource", "kettle.dataSource.writable", "kettle.dataSource.CouchDB.writable"],
     writable: true
 });
 
@@ -90,10 +89,7 @@ fluid.defaults("gpii.dataLoader", {
 });
 
 gpii.dataLoader.load = function (that) {
-    var promises = [],
-        getDbDataSource = that.getDbDataSource,
-        deleteDbDataSource = that.deleteDbDataSource,
-        createDbDataSource = that.createDbDataSource;
+    var promises = [];
 
     // Process databases one by one
     fluid.each(that.options.databases, function (dbData, dbName) {
@@ -102,15 +98,15 @@ gpii.dataLoader.load = function (that) {
             dbName: dbName
         };
 
-        // check the existence of the database
-        var getDbPromise = that.getDbDataSource.get(directModel);
-        getDbPromise.then(function () {
-            // The database already exists, delete it
-            gpii.dataLoader.deleteDb(that);
-        });
+        // Delete the database if it already exists
+        promises.push(gpii.dataLoader.cleanUpDb(that, directModel));
+
+        // Create the database
+        var createDbPromise = that.createDbDataSource.set(directModel);
+        promises.push(createDbPromise);
+
         var dataPaths = fluid.makeArray(dbData.data);
         fluid.each(dataPaths, function (onePath) {
-            console.log("=== onePath: ", onePath);
             var actualPath = fluid.module.resolvePath(onePath);
             var data = require(actualPath);
             var setPromise = that.loadDataSource.set(directModel, data);
@@ -120,4 +116,15 @@ gpii.dataLoader.load = function (that) {
 
     // An sequence with an empty array of promises will automatically be resolved, so we can safely use this construct.
     return fluid.promise.sequence(promises);
+};
+
+// Delete the database if it already exists, otherwise, do nothing
+gpii.dataLoader.cleanUpDb = function (that, directModel) {
+    var promiseTogo = fluid.promise();
+    var getDbPromise = that.getDbDataSource.get(directModel);
+    getDbPromise.then(function () {
+        // The database already exists, delete it
+        promiseTogo = that.deleteDbDataSource.set(directModel);
+    });
+    return promiseTogo;
 };

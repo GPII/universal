@@ -15,6 +15,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 "use strict";
 
+var fluid = require("infusion"),
+    gpii = fluid.registerNamespace("gpii");
+
+fluid.setLogging(true);
+
 require("./shared/dataLoader.js");
 
 fluid.defaults("gpii.dataLoader.authDataLoader", {
@@ -27,13 +32,11 @@ fluid.defaults("gpii.dataLoader.authDataLoader", {
             ]
         }
     },
-    couchDbUrl: "http://localhost:5984",
+    couchDbUrl: "http://admin:admin@localhost:5984",
     listeners: {
-        listeners: {
-            "onCreate.load": {
-                listener: "gpii.dataLoader.authDataLoader.loadData",
-                args: ["{that}"]
-            }
+        "onCreate.load": {
+            listener: "gpii.dataLoader.authDataLoader.loadData",
+            args: ["{that}"]
         }
     }
 });
