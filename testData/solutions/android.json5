@@ -138,7 +138,8 @@
                             }
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -188,7 +189,8 @@
                             }
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -249,7 +251,8 @@
                             "factor": 1000
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -331,7 +334,8 @@
                             }
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -386,7 +390,8 @@
                             "false": "none"
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -467,7 +472,8 @@
                     },
                     "access_commonprefs_punctuation": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
                     "access_commonprefs_capitalization": "http://registry\\.gpii\\.net/common/announceCapitals"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         }
     }
