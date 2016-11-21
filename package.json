@@ -25,7 +25,7 @@
         "glob": "7.0.5",
         "write-file-atomic": "1.1.4",
         "json5": "0.5.0",
-        "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb#7ccc5fba874ec525d781d977c8c3afbd857d7877",
+        "gpii-pouchdb": "git://github.com/the-t-in-rtf/gpii-pouchdb#1e385e0a89e38185300fce113c9e107e90184c67",
         "fluid-resolve": "1.2.0",
         "rimraf": "2.5.4",
         "mkdirp": "0.5.1"
