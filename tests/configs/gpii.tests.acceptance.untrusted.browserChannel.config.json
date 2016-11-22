@@ -12,13 +12,19 @@
                 "record": "%flowManager/test/data/browserChannel_solutionsRegistry.json",
                 "target": "{that flowManager solutionsRegistryDataSource}.options.path",
                 "priority": "after:flowManager.development.solutions"
-            },        
+            },
             "browserChannel.tests.rawPreferences": {
                 "record": "%flowManager/test/data/%userToken.json",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
+            },
+            "browserChannel.tests.osReporting": {
+                "record": {
+                    "funcName": "gpii.tests.flowManager.browserChannel.reportPlatform"
+                },
+                "target": "{that localConfig deviceReporter platformReporter}.options.invokers.reportPlatform"
             }
-        }            
+        }
     },
     "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
 }
