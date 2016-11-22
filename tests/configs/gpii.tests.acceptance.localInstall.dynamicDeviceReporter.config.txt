@@ -1,9 +1,10 @@
 This configuration file is used for acceptance testing.
 
-It uses the basic (default) development setup of the system, but replaces the 
-folder with NP sets used to be (universal)/testData/preferences/acceptanceTests 
-as opposed to the normal preferences folder. 
-Besides that, everything will be based on the normal development mode setup.
+It uses the basic (default) development setup of the system, with a couple of
+modifications.  It replaces the folder with NP sets in (universal)/testData/preferences/acceptanceTests
+as opposed to the normal preferences folder.  It also uses the dynamic device
+reporter (the device reporter in production mode).  Otherwise, everything else
+is based on the normal development mode setup.
 
 The name "localInstall" refers to a setup where GPII is running as installed 
 locally on the machine (as opposed to eg. running the system as a cloudBased flowmanager).

@@ -61,7 +61,16 @@ gpii.tests.windows.nvda = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }, {
         name: "Testing screenreader_common using Flat matchmaker",
         userToken: "screenreader_common",
@@ -99,7 +108,16 @@ gpii.tests.windows.nvda = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }, {
         name: "Testing screenreader_orca using Flat matchmaker",
         userToken: "screenreader_orca",
@@ -131,7 +149,16 @@ gpii.tests.windows.nvda = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }
 ];
 
