@@ -102,6 +102,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.a11y.magnifier": {
                             "active": true,
                             "settings": {
+                                "http://registry.gpii.net/common/volume": 0.5,
                                 "http://registry.gpii.net/common/fontSize": 9,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
@@ -130,6 +131,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.a11y.magnifier": {
                             "active": true,
                             "settings": {
+                                "http://registry.gpii.net/common/volume": 0.5,
                                 "http://registry.gpii.net/common/fontSize": 9,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
@@ -150,6 +152,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.interface": {
                             "active": true,
                             "settings": {
+                                "http://registry.gpii.net/common/volume": 0.5,
                                 "http://registry.gpii.net/common/fontSize": 9,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
@@ -170,6 +173,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.alsa-project": {
                             "active": true,
                             "settings": {
+                                "http://registry.gpii.net/common/volume": 0.5,
                                 "http://registry.gpii.net/common/fontSize": 9,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
