@@ -56,6 +56,21 @@
                 "type": "gpii.windows.closeProcessByName",
                 "filename": "jfw.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "jaws"
+            }
         ]
     },
 
@@ -73,7 +88,7 @@
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Texthelp Systems\\ReadAndWrite\\10\\RWSettings10.xml",
+                    "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
@@ -94,16 +109,28 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
-            }, {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write10\\InstallPath}\\ReadAndWrite.exe\""
+                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
             }
         ],
         "stop": [
             {
-                "type": "gpii.launch.exec",
-                "command": "echo 'kill' > ${{environment}.TEMP}\\RW8Updates.dat"
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "ReadAndWrite.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_CURRENT_USER",
+                "path": "Software\\Texthelp\\Read&Write11",
+                "subPath": "InstallPath",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "readandwrite"
             }
         ]
     },
@@ -157,6 +184,7 @@
                     "transform": [{
                         "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                        "outputPath": "",
                         "presentValue": 1,
                         "missingValue": 0,
                         "options": {
@@ -180,6 +208,39 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/invertColours": "Invert.value",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "Magnification",
+                            "outputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "factor": 0.01
+                        },
+                        {
+                            "type": "fluid.transforms.setMembershipToArray",
+                            "inputPath": "",
+                            "outputPath": "http://registry\\.gpii\\.net/common/tracking",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "FollowFocus": "focus",
+                                "FollowMouse": "mouse",
+                                "FollowCaret": "caret"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "MagnificationMode.value",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "match": {
+                                "2": "FullScreen",
+                                "3": "Lens",
+                                "1": "TopHalf"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -191,14 +252,27 @@
         ],
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\Magnify.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "magnifierpane",
+                "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "Magnify.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "magnifierpane",
+                "enable": false
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "Magnify"
             }
         ]
     },
@@ -215,22 +289,53 @@
         },
         "settingsHandlers": {
             "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Osk",
+                    "dataTypes": {
+                        "NavigationMode": "REG_DWORD"
+                    }
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "NavigationMode": {
+                        "literalValue": 0
+                    }
+                }
             }
         },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.SystemRoot}\\explorer.exe ${{environment}.SystemRoot}\\System32\\osk.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "osk",
+                "enable": true
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "osk.exe"
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "osk",
+                "enable": false
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "osk"
             }
         ]
     },
@@ -277,6 +382,7 @@
                         {
                             "type": "fluid.transforms.arrayToSetMembership",
                             "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "outputPath": "",
                             "presentValue": true,
                             "missingValue": false,
                             "options": {
@@ -440,6 +546,174 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speakTutorialMessages": "presentation\\.reportHelpBalloons",
+                    "http://registry\\.gpii\\.net/common/keyEcho": "keyboard\\.speakTypedCharacters",
+                    "http://registry\\.gpii\\.net/common/wordEcho": "keyboard\\.speakTypedWords",
+                    "http://registry\\.gpii\\.net/common/announceCapitals": "speech\\.espeak\\.sayCapForCapitals",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "virtualBuffers\\.autoSayAllOnPageLoad.value",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "match": {
+                                "true": "all",
+                                "false": "sentence"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.setMembershipToArray",
+                            "inputPath": "",
+                            "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "reviewCursor\\.followFocus": "focus",
+                                "reviewCursor\\.followCaret": "caret",
+                                "reviewCursor\\.followMouse": "mouse"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "defaultInputPath": "speech\\.symbolLevel",
+                            "match": {
+                                "0": "none",
+                                "100": "some",
+                                "200": "most",
+                                "300": "all"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "false": true,
+                            "true": false,
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "speech\\.synth",
+                                            "operator": "===",
+                                            "right": "silence"
+                                        }
+                                    },
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "speech\\.outputDevice",
+                                            "operator": "===",
+                                            "right": "Microsoft Sound Mapper"
+                                        }
+                                    },
+                                    "operator": "&&"
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.condition",
+                            "outputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "right": true,
+                                    "operator": "===",
+                                    "leftPath": "speech\\.espeak\\.rateBoost"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "speech\\.espeak\\.rate",
+                                    "factor": 3.1,
+                                    "offset": 80
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.linearScale",
+                                            "inputPath": "speech\\.espeak\\.rate",
+                                            "factor": 3.1,
+                                            "offset": 80
+                                        }
+                                    },
+                                    "operator": "*",
+                                    "right": 3
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "speech\\.espeak\\.voice",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en\\en": "en",
+                                "en\\en-us": "en-US",
+                                "en\\en-sc": "en-scotland",
+                                "en\\en-wi": "en-BZ",
+                                "af": "af",
+                                "bg": "bg",
+                                "bs": "bs",
+                                "ca": "ca",
+                                "cs": "cs",
+                                "cy": "cy",
+                                "da": "da",
+                                "de": "de",
+                                "el": "el",
+                                "test\\grc": "grc",
+                                "eo": "eo",
+                                "es": "es",
+                                "es": "es-ES",
+                                "es-la": "es-419",
+                                "et": "et",
+                                "fi": "fi",
+                                "fr": "fr",
+                                "fr-be": "fr-BE",
+                                "hi": "hi",
+                                "hr": "hr",
+                                "hu": "hu",
+                                "hy": "hy",
+                                "hy-west": "hy-arevmda",
+                                "id": "id",
+                                "is": "is",
+                                "it": "it",
+                                "test\\jbo": "jbo",
+                                "ka": "ka",
+                                "kn": "kn",
+                                "ku": "ku",
+                                "la": "la",
+                                "lv": "lv",
+                                "mk": "mk",
+                                "ml": "ml",
+                                "test\\nci": "nci",
+                                "nl": "nl",
+                                "no": "no",
+                                "test\\pap": "pap",
+                                "pl": "pl",
+                                "pt": "pt-BR",
+                                "pt-pt": "pt-PT",
+                                "ro": "ro",
+                                "ru": "ru",
+                                "sk": "sk",
+                                "sq": "sq",
+                                "sr": "sr",
+                                "sv": "sv",
+                                "sw": "sw",
+                                "ta": "ta",
+                                "tr": "tr",
+                                "vi": "vi",
+                                "zh": "zh-cmn",
+                                "zh-yue": "zh-yue",
+                                "yue": "zh-yue"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -462,6 +736,21 @@
             },{
                 "type": "gpii.windows.closeProcessByName",
                 "filename": "nvda.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "nvda"
             }
         ]
     },
@@ -496,6 +785,17 @@
                     "type": "gpii.windows.closeProcessByName",
                     "filename": "firefox.exe"
             }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
+            }
         ]
     },
 
@@ -513,7 +813,7 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
-                    "http://registry\\.gpii\\.net/common/pictoralSimplification"
+                    "http://registry\\.gpii\\.net/common/pictorialSimplification"
                 ]
             }
         },
@@ -527,6 +827,17 @@
             {
                 "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
             }
         ]
     },
@@ -559,6 +870,17 @@
             {
                 "type": "gpii.windows.closeProcessByName",
                 "filename": "firefox.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
             }
         ]
     },
@@ -613,18 +935,21 @@
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
                                     "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "defaultOutputValue": "bw",
                                     "match": {
                                         "black-white": "bw",
                                         "white-black": "bw",
                                         "black-yellow": "hc",
                                         "yellow-black": "hc"
+                                    },
+                                    "noMatch": {
+                                        "outputValue": "bw"
                                     }
                                 }
                             }
                         }
                     ]
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -649,8 +974,15 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "MaavisPortable"
+            }
         ]
     },
+
     "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
         "contexts": {
@@ -687,7 +1019,64 @@
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
-                                "value": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                                "input": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled": "HighContrastOn.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.stickyKeys": {
+        "name": "Windows StickyKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETSTICKYKEYS",
+                    "setAction": "SPI_SETSTICKYKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "STICKYKEYS"
+                    },
+                    "verifySettings": true
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "StickyKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.SKF_STICKYKEYSON"
                             }
                         }
                     }
@@ -699,6 +1088,312 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.filterKeys": {
+        "name": "Windows FilterKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETFILTERKEYS",
+                    "setAction": "SPI_SETFILTERKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "FILTERKEYS"
+                    },
+                    "verifySettings": false
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "FilterKeysEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                            "left": false,
+                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "right": false,
+                            "operator": "||",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
+                            }
+                        }
+                    },
+                    "SlowKeysInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
+                                    "factor": 1000
+                                }
+                            },
+                            "false": 0,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iWaitMSec"
+                            }
+                        }
+                    },
+                    "BounceKeysInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                                    "left": false,
+                                    "right": false,
+                                    "operator": "==="
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                                    "true": {
+                                        "transform": {
+                                            "type": "fluid.transforms.linearScale",
+                                            "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
+                                            "factor": 1000
+                                        }
+                                    },
+                                    "false": 0,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "false": 0,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iBounceMSec"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/slowKeysEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "SlowKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "truePath": "FilterKeysEnable.value"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/slowKeysInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "SlowKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "SlowKeysInterval.value",
+                                    "factor": 0.001
+                                }
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/debounceEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "BounceKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "truePath": "FilterKeysEnable.value"
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/debounceInterval": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "BounceKeysInterval.value",
+                                    "right": 0,
+                                    "operator": ">"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "BounceKeysInterval.value",
+                                    "factor": 0.001
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.mouseKeys": {
+        "name": "Windows MouseKeys",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETMOUSEKEYS",
+                    "setAction": "SPI_SETMOUSEKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "MOUSEKEYS"
+                    },
+                    "verifySettings": true
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "MouseKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+                            }
+                        }
+                    },
+                    "MaxSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
+                                    "factor": 350,
+                                    "offset": 10
+                                }
+                            },
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iMaxSpeed"
+                            }
+                        }
+                    },
+                    "Acceleration": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
+                                    "factor": 1000,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
+                                    "factor": 1000,
+                                    "offset": 1000,
+                                    "outputPath": "value"
+                                }
+                            },
+                            "operator": "+"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.iTimeToMaxSpeed"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/mouseEmulationEnabled": "MouseKeysOn.value",
+                    "http://registry\\.gpii\\.net/common/cursorSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "MaxSpeed.value",
+                            "factor": 0.00285714285714,
+                            "offset": -0.0285714285714
+
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -725,8 +1420,7 @@
                     "verifySettings": true
                 },
                 "capabilities": [
-                    "display.screenEnhancement.mouseTrailing",
-                    "applications.com\\.microsoft\\.windows\\.mouseTrailing.id"
+                    "http://registry\\.gpii\\.net/common/mouseTrailing"
                 ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
@@ -738,7 +1432,7 @@
                         "path": {
                             "transform": {
                                 "type": "fluid.transforms.literalValue",
-                                "value": {
+                                "input": {
                                     "get": "pvParam",
                                     "set": "uiParam"
                                 }
@@ -753,6 +1447,43 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.screenResolution": {
+        "name": "Windows Screen Resolution",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.screenResolution",
+                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+                ]
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
         ]
     },
 
@@ -790,8 +1521,7 @@
                     "verifySettings": true
                 },
                 "capabilities": [
-                    "display.screenEnhancement.cursorSize",
-                    "applications.com\\.microsoft\\.windows\\.cursors.id"
+                    "http://registry\\.gpii\\.net/common/cursorSize"
                 ],
                 "capabilitiesTransformations": {
                     "Arrow": {
@@ -1015,6 +1745,20 @@
                             ]
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                     "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "Arrow",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "match": {
+                                "%SystemRoot%\\cursors\\aero_arrow.cur": 0.32,
+                                "%SystemRoot%\\cursors\\aero_arrow_l.cur": 0.65,
+                                "%SystemRoot%\\cursors\\aero_arrow_xl.cur": 1
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -1022,7 +1766,10 @@
             "settings.configure"
         ],
         "restore": [
-            "settings.configure"
+            "settings.configure",
+            {
+                "type": "gpii.windows.spiSettingsHandler.updateCursors"
+            }
         ],
         "start": [
             {
@@ -1030,8 +1777,10 @@
             }
         ],
         "stop": [
+        ],
+        "isInstalled": [
             {
-                "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -1054,9 +1803,7 @@
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
                 },
-                "capabilities": [
-                    "applications.eu\\.singularlogic\\.pixelsense\\.sociable.id"
-                ],
+                "capabilities": [],
                 "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
@@ -1087,7 +1834,8 @@
                             }
                         }
                     }
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -1107,6 +1855,88 @@
                 "type": "gpii.launch.exec",
                 "command": "C:\\Sociable\\Cloud4All.exe -stop"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "Cloud4Allcd "
+            }
         ]
+    },
+
+    "com.ilunion.cloud4chrome": {
+        "name": "Cloud4all Chrome extension",
+        "contexts": {
+            "OS": [{
+                    "id": "win32",
+                    "version": ">=5.0"
+            }]
+        },
+        "settingsHandlers": {
+            "chromeconf": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "com.ilunion.cloud4chrome"
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "fontSize": {
+                        "transform":{
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "input": 9,
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 18,
+                                    "output": "large"
+                                },
+                                {
+                                    "output": "x-large"
+                                }
+                            ]
+                        }
+                    },
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "magnification": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+                            "input": 1,
+                            "ranges": [
+                                {
+                                    "upperBound": 1.2,
+                                    "output": 1
+                                },
+                                {
+                                    "upperBound": 2.5,
+                                    "output": 2
+                                },
+                                {
+                                    "output": 3
+                                }
+                            ]
+                        }
+                    },
+                    "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.chromeconf"
+        ],
+        "restore": [
+            "settings.chromeconf"
+        ],
+        "start": [],
+        "stop": [],
+        "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
     }
 }

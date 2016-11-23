@@ -48,6 +48,32 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/magnification": "mag-factor",
+                    "http://registry\\.gpii\\.net/common/showCrosshairs": "show-cross-hairs",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "screen-position",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+                            "match": {
+                                "full-screen": "FullScreen",
+                                "left-half": "LeftHalf",
+                                "right-half": "RightHalf",
+                                "top-half": "TopHalf",
+                                "bottom-half": "BottomHalf"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/tracking",
+                            "defaultInputPath": "mouse-tracking",
+                            "match": {
+                                "centered": "mouse"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -149,6 +175,44 @@
                 },
                 "options": {
                     "schema": "org.gnome.desktop.interface"
+                },
+                "inverseCapabilitiesTransformations": {
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.binaryOp",
+                            "right": 12,
+                            "operator": "*",
+                            "leftPath": "text-scaling-factor",
+                            "outputPath": "http://registry\\.gpii\\.net/common/fontSize"
+                        },
+                        {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "cursor-size",
+                            "outputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "factor": 0.01
+                        },
+                        {
+                            "type": "fluid.transforms.binaryOp",
+                            "outputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "gtk-theme",
+                                    "operator": "===",
+                                    "right": "HighContrast"
+                                }
+                            },
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "icon-theme",
+                                    "operator": "===",
+                                    "right": "HighContrast"
+                                }
+                            },
+                            "operator": "&&"
+                        }
+                    ]
                 }
             }
         },
@@ -190,7 +254,8 @@
                 },
                 "options": {
                     "schema": "org.gnome.nautilus.desktop"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -879,6 +944,137 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speakTutorialMessages": "enableTutorialMessages",
+                    "http://registry\\.gpii\\.net/common/keyEcho": "enableEchoByCharacter",
+                    "http://registry\\.gpii\\.net/common/wordEcho": "enableEchoByWord",
+                    "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": "enableBraille",
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled": "enableSpeech",
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "sayAllStyle",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "match": {
+                                "0": "line",
+                                "1": "sentence"
+                            },
+                            "noMatch": {
+                                "outputValue": "sentence"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "verbalizePunctuationStyle",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "defaultInputValue": "1",
+                            "match": {
+                                "3": "none",
+                                "2": "some",
+                                "1": "most",
+                                "0": "all"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.binaryOp",
+                            "outputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "right": 170,
+                            "operator": "+",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "operator": "*",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "voices\\.default\\.rate",
+                                            "operator": "-",
+                                            "right": 50
+                                        }
+                                    },
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "condition": {
+                                                "transform" : {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "leftPath": "voices\\.default\\.rate",
+                                                    "operator": "<",
+                                                    "right": 50
+                                                }
+                                            },
+                                            "true": 1.8,
+                                            "false": 4.4
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "voices\\.default\\.family.name",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "noMatch": {
+                                "outputValue": "en"
+                            },
+                            "match": {
+                                "english": "en" ,
+                                "english-us": "en-US" ,
+                                "en-scottish": "en-scotland" ,
+                                "en-westindies": "en-BZ" ,
+                                "afrikaans": "af" ,
+                                "bulgarian-test": "bg" ,
+                                "bosnian": "bs" ,
+                                "catalan": "ca" ,
+                                "czech": "cs" ,
+                                "welsh-test": "cy" ,
+                                "danish": "da" ,
+                                "german": "de" ,
+                                "greek": "el" ,
+                                "greek-ancient": "grc" ,
+                                "esperanto": "eo" ,
+                                "spanish": "es" ,
+                                "spanish-latin-american": "es-419" ,
+                                "estonian": "et" ,
+                                "finnish": "fi" ,
+                                "french": "fr" ,
+                                "hindi": "hi" ,
+                                "croatian": "hr" ,
+                                "hungarian": "hu" ,
+                                "armenian": "hy" ,
+                                "armenian-west": "hy-arevmda" ,
+                                "indonesian-test": "id" ,
+                                "icelandic-test": "is" ,
+                                "italian": "it" ,
+                                "lojban": "jbo" ,
+                                "georgian-test": "ka" ,
+                                "kannada": "kn" ,
+                                "kurdish": "ku" ,
+                                "latin": "la" ,
+                                "latvian": "lv" ,
+                                "macedonian-test": "mk" ,
+                                "malayalam": "ml" ,
+                                "dutch-test": "nl" ,
+                                "norwegian": "no" ,
+                                "papiamento-test": "pap" ,
+                                "polish": "pl" ,
+                                "brazil": "pt-BR" ,
+                                "portugal": "pt-PT" ,
+                                "romanian": "ro" ,
+                                "russian_test": "ru" ,
+                                "slovak": "sk" ,
+                                "albanian": "sq" ,
+                                "serbian": "sr" ,
+                                "swedish": "sv" ,
+                                "swahili-test": "sw" ,
+                                "tamil": "ta" ,
+                                "turkish": "tr" ,
+                                "vietnam": "vi" ,
+                                "Mandarin": "zh-cmn" ,
+                                "cantonese": "zh-yue" }
+                        }
+                    ]
                 }
             }
         },
@@ -1211,7 +1407,8 @@
                     "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
-                }
+                },
+                "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
