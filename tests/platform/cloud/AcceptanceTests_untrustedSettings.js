@@ -18,8 +18,6 @@ var gpii = fluid.registerNamespace("gpii");
 
 gpii.loadTestingSupport();
 
-require("./OAuth2AcceptanceDataStore.js");
-
 fluid.registerNamespace("gpii.tests.cloud.untrustedSettings");
 
 gpii.tests.cloud.untrustedSettings.sequence = [
@@ -50,8 +48,8 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         userToken: "os_gnome",
         authDecisions: [
             {
-                userId: 1,
-                clientId: 3,
+                gpiiToken: "os_gnome",
+                clientId: "client-3",
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "increase-size.magnifier": true },
@@ -79,16 +77,16 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         userToken: "os_gnome",
         authDecisions: [
             {
-                userId: 1,
-                clientId: 3,
+                gpiiToken: "os_gnome",
+                clientId: "client-3",
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             },
             {
-                userId: 1,
-                clientId: 4,
+                gpiiToken: "os_gnome",
+                clientId: "client-4",
                 redirectUri: false,
                 accessToken: "os_gnome_desktop_access_token",
                 selectedPreferences: { "increase-size.appearance.text-size": true },
