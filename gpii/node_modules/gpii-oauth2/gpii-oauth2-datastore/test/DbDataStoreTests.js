@@ -21,8 +21,6 @@ gpii.pouch.loadTestingSupport();
 require("gpii-oauth2");
 require("./DbDataStoreTestsUtils.js");
 
-fluid.logObjectRenderChars = 4096;
-
 fluid.defaults("gpii.tests.dbDataStore.findUserById", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{

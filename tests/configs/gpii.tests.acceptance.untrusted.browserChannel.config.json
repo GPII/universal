@@ -23,6 +23,12 @@
                 "record": "%flowManager/test/data/%userToken.json",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
+            },
+            "browserChannel.tests.osReporting": {
+                "record": {
+                    "funcName": "gpii.tests.flowManager.browserChannel.reportPlatform"
+                },
+                "target": "{that localConfig deviceReporter platformReporter}.options.invokers.reportPlatform"
             }
         }
     },

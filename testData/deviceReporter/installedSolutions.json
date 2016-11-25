@@ -44,18 +44,6 @@
     },
 
     {
-        "id": "com.microsoft.windows.stickyKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.filterKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.mouseKeys"
-    },
-
-    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
@@ -77,10 +65,6 @@
 
     {
         "id": "com.android.freespeech"
-    },
-
-    {
-        "id": "com.ilunion.cloud4chrome"
     },
 
     {
