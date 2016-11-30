@@ -1,0 +1,55 @@
+/*
+User F - NP Set used for manual QA testing.
+
+Has common terms screen Reader settings (that matches NVDA better than jaws) and
+JAWS specific screen reader settings (at least one of them matching the common terms ones)
+
+Common settings:
+Equals JAWS settings:
+* options\\.SayAllIndicateCaps: false
+* speechrate: 0.375
+
+Equals NVDA settings:
+* speech.espeak.rate: 6.4 (100 - 80 / 3.10)
+* speech.espeak.sayCapForCapitals: true
+* keyboard.speakTypedCharacters: true
+* presentation.reportHelpBalloons: true
+*/
+
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "ENU-Global.Rate" : 100,
+                        "ENU-Global.Rate": 100,
+                        "ENU-JAWSCursor.Rate": 100,
+                        "ENU-Keyboard.Rate": 100,
+                        "ENU-MenuAndDialog.Rate": 100,
+                        "ENU-Message.Rate": 100,
+                        "ENU-PCCursor.Rate": 100,
+                        "ENU-Global.Pitch" : 75,
+                        "ENU-JAWSCursor.Pitch": 75,
+                        "ENU-Keyboard.Pitch": 75,
+                        "ENU-MenuAndDialog.Pitch": 75,
+                        "ENU-Message.Pitch": 75,
+                        "ENU-PCCursor.Pitch": 75,
+                        "options.TypingEcho": 3,
+                        "options.SayAllMode": 0
+                    }
+                },
+                "metadata": [
+                    {
+                        "type": "priority",
+                        "scope": [
+                            "http://registry.gpii.net/applications/org.nvda-project"
+                        ],
+                        "value": 1024
+                    }
+                ]
+            }
+        }
+    }
+}
