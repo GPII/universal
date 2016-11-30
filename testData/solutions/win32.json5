@@ -1130,6 +1130,49 @@
         ]
     },
 
+    "com.microsoft.windows.highDpi": {
+        "name": "Windows DPI",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    //"version": "5.2-5.3"
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/fontSize"
+                ],
+                "capabilitiesTransformations": {
+                    "screen-dpi": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "operator": "/",
+                            "right": 12
+                        }
+                    }
+                }
+
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
