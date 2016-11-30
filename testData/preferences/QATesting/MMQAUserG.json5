@@ -1,19 +1,8 @@
 /*
-User F - NP Set used for manual QA testing.
+User G - NP Set used for manual QA testing.
 
-Has common terms screen Reader settings (that matches NVDA better than jaws) and
-JAWS specific screen reader settings (at least one of them matching the common terms ones)
+With Jaws application settings only and explicit priority to use NVDA
 
-Common settings:
-Equals JAWS settings:
-* options\\.SayAllIndicateCaps: false
-* speechrate: 0.375
-
-Equals NVDA settings:
-* speech.espeak.rate: 6.4 (100 - 80 / 3.10)
-* speech.espeak.sayCapForCapitals: true
-* keyboard.speakTypedCharacters: true
-* presentation.reportHelpBalloons: true
 */
 
 {

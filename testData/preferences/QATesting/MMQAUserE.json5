@@ -1,7 +1,7 @@
 /*
 User E - NP Set used for manual QA testing.
 
-Has common terms for screen readers that matches JAWS and NVDA equally well
+User with common terms only, but some that are matching more transformations in NVDA than jaws
 
 Equals JAWS settings:
 * punctuation verbosity: 1

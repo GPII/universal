@@ -2,17 +2,6 @@
 User D - NP Set used for manual QA testing.
 
 User with only Windows Magnifier settings
-
-Common settings:
-Equals JAWS settings:
-* options\\.SayAllIndicateCaps: false
-* speechrate: 0.375
-
-Equals NVDA settings:
-* speech.espeak.rate: 6.4 (100 - 80 / 3.10)
-* speech.espeak.sayCapForCapitals: true
-* keyboard.speakTypedCharacters: true
-* presentation.reportHelpBalloons: true
 */
 
 {
