@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  user: root
+
+  vars_files:
+    - common-vars.yml
+    - flow-manager-vars.yml
+
+  roles:
+    - facts
+    - nodejs
+    - flow-manager

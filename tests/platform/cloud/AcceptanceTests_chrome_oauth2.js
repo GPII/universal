@@ -18,8 +18,6 @@ var fluid = require("universal"),
 fluid.registerNamespace("gpii.tests.cloud.oauth2.chrome");
 gpii.loadTestingSupport();
 
-require("./OAuth2AcceptanceDataStore.js");
-
 gpii.tests.cloud.oauth2.chrome.common = {
     client_id: "org.chrome.cloud4chrome",
     client_secret: "client_secret_chrome",

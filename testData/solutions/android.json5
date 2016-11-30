@@ -1,0 +1,480 @@
+{
+    "com.android.freespeech": {
+        "name": "FreeSpeech",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                ]
+            }
+        },
+        "start": [
+            {
+                "type": "gpii.androidActivityManager.startFreespeech"
+            }
+        ]
+    },
+
+    "com.android.talkback": {
+        "name": "TalkBack Screen Reader",
+        "contexts": {
+            "OS": [{
+                    "id": "android",
+                    "version": ">=0.1"
+                }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                ]
+            }
+        },
+        "start": [
+            {
+                "type": "gpii.androidActivityManager.startTalkback"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.androidActivityManager.stopTalkback"
+            }
+        ]
+    },
+
+    "com.android.persistentConfiguration": {
+        "name": "Android Configuration",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.androidPersistentConfiguration",
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "fontScale": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "operator": "/",
+                            "right": 12
+                        }
+                    },
+                    "locale": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/language",
+                            "match": {
+                                "en": "en",
+                                "en-GB": "en_GB",
+                                "en-US": "en_US",
+                                "en-BZ": "en_GB",
+                                "en-BS": "en_GB",
+                                "en-AG": "en_GB",
+                                "en-AI": "en_GB",
+                                "af": "af",
+                                "bg": "bg_BG",
+                                "bs": "bs",
+                                "ca": "ca_ES",
+                                "cs": "cs_CZ",
+                                "cy": "cy",
+                                "da": "da_DK",
+                                "de": "de_DE",
+                                "el": "el_GR",
+                                "grc": "el_GR",
+                                "eo": "eo",
+                                "es": "es_ES",
+                                "es-ES": "es_ES",
+                                "es-419": "es_ES",
+                                "et": "et",
+                                "fi": "fi_FI",
+                                "fr": "fr_FR",
+                                "fr-BE": "fr_BE",
+                                "hi": "hi_IN",
+                                "hr": "hr_HR",
+                                "hu": "hu_HU",
+                                "hy": "hy",
+                                "hy-arevmda": "hy",
+                                "id": "id_ID",
+                                "is": "is",
+                                "it": "it_IT",
+                                "ka": "ka",
+                                "kn": "kn",
+                                "ku": "ku",
+                                "la": "la",
+                                "lv": "lv_LV",
+                                "mk": "mk",
+                                "ml": "ml",
+                                "nl": "nl_NL",
+                                "no": "nb_NO",
+                                "pl": "pl_PL",
+                                "pt-BR": "pt_BR",
+                                "pt-PT": "pt_PT",
+                                "ro": "ro_RO",
+                                "ru": "ru_RU",
+                                "sk": "sk_SK",
+                                "sq": "sq",
+                                "sr": "sr_RS",
+                                "sv": "sv_SE",
+                                "sw": "ss",
+                                "ta": "ta",
+                                "tr": "tr_TR",
+                                "vi": "vi_VN",
+                                "zh-cmn": "zh_CN",
+                                "cmn": "zh_CN"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ]
+    },
+
+    "com.android.audioManager": {
+        "name": "Android Audio Manager",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.androidAudioManager.volume",
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "STREAM_MUSIC": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                                    "factor": 15
+                                }
+                            }
+                        }
+                    },
+                    "STREAM_SYSTEM": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                                    "factor": 7
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ]
+    },
+
+    "com.android.settings.system": {
+        "name": "Android UI Settings.System",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.androidSettings",
+                "options": {
+                    "settingType": "System"
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "dim_screen": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/screenDim",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "haptic_feedback_enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/hapticFeedback",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "accelerometer_rotation": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/screenRotation",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "user_rotation": "http://registry\\.gpii\\.net/common/screenDefaultRotation",
+                    "screen_off_timeout": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenOffTime",
+                            "factor": 1000
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ]
+    },
+
+    "com.android.settings.secure": {
+        "name": "Android UI Settings Secure",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.androidSettings",
+                "options": {
+                    "settingType": "Secure"
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "tts_default_pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 500
+                                }
+                            }
+                        }
+                    },
+                    "tts_default_rate": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": 21.753,
+                                    "operator": "-",
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "left": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "left": 0.0317,
+                                                    "operator": "*",
+                                                    "rightPath": "http://registry\\.gpii\\.net/common/speechRate"
+                                                }
+                                            },
+                                            "operator": "-",
+                                            "right": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "left": "0.0042",
+                                                    "operator": "*",
+                                                    "right": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "*",
+                                                            "rightPath": "http://registry\\.gpii\\.net/common/speechRate"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ]
+    },
+
+    "se.omnitor.ecmobile": {
+        "name": "Omnitor eCtouch/eCmobile",
+        "contexts": {
+        "OS": [{
+                "id": "android",
+                "version": ">=0.1"
+              }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "options": {
+                    "filename": "/sdcard/output.xml",
+                    "encoding": "utf-8",
+                    "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
+                    "rules": {
+                        "map": "map",
+                        "map.string": {
+                            "transform": {
+                                "type": "fluid.transforms.arrayToObject",
+                                "inputPath": "map.string",
+                                "key": "name"
+                            }
+                        }
+                    }
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "map\\.string\\.fontsize\\.$t": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "factor": 2
+                        }
+                    },
+                    "map\\.string\\.theme\\.$t": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": "yellow-black",
+                            "truePath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "false": "none"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [
+            {
+                "type": "gpii.androidActivityManager.startActivityByPackageName",
+                "packageName": "se.omnitor.ecmobile"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                "packageName": "se.omnitor.ecmobile"
+            },
+            {
+                "type": "gpii.androidActivityManager.goToHomeScreen"
+            }
+        ]
+    },
+
+    "es.codefactory.android.app.ma": {
+        "name": "Mobile Accessibility",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "android",
+                    "version": ">=0.1"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "access_commonprefs_speechrate": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "operator": "/",
+                            "right": 40
+                        }
+                    },
+                    "access_commonprefs_speechpitch": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "operator": "*",
+                            "right": 10
+                        }
+                    },
+                    "access_commonprefs_editingkeyboardecho": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                                    "true": "3",
+                                    "false": "1"
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                                    "true": "2",
+                                    "false": "0"
+                                }
+                            }
+                        }
+                    },
+                    "access_commonprefs_punctuation": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                    "access_commonprefs_capitalization": "http://registry\\.gpii\\.net/common/announceCapitals"
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        }
+    }
+}

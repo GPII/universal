@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  user: root
+
+  vars_files:
+    - common-vars.yml
+    - preferences-server-vars.yml
+
+  roles:
+    - facts
+    - nodejs
+    - preferences-server
+    - preferences-server-data-loader
+

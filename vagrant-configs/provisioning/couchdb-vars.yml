@@ -1,0 +1,20 @@
+---
+# If you would like to create a CouchDB admin account in your deveploment environment then you will
+# need to set 'couchdb_create_admin_user' to 'true' and provide values for 'couchdb_admin_username'
+# and 'couchdb_admin_password'
+
+couchdb_databases:
+  - preferences
+  - auth
+
+couchdb_delete_existing_databases: true
+
+couchdb_create_admin_user: false
+
+couchdb_admin_username:
+
+couchdb_admin_password:
+
+couchdb_port: '5984'
+
+couchdb_host_address: '0.0.0.0'

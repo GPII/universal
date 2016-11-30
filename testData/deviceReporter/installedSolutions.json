@@ -44,23 +44,15 @@
     },
 
     {
-        "id": "com.microsoft.windows.stickyKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.filterKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.mouseKeys"
-    },
-
-    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
     {
         "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "com.microsoft.windows.screenResolution"
     },
 
     {
@@ -73,10 +65,6 @@
 
     {
         "id": "com.android.freespeech"
-    },
-
-    {
-        "id": "com.ilunion.cloud4chrome"
     },
 
     {

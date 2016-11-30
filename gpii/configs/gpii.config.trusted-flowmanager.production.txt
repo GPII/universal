@@ -1,4 +1,5 @@
-==gpii.config.trusted-flowmanager.production.json==
+gpii.config.trusted-flowmanager.production.json
+===============================================
 
 Locally running system in production mode
 

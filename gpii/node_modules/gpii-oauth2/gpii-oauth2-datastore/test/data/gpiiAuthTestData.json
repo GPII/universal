@@ -1,0 +1,103 @@
+[
+    {
+        "_id": "user-1",
+        "type": "user",
+        "name": "chromehc",
+        "password": "chromehc_password",
+        "defaultGpiiToken": "chrome_high_contrast"
+    },
+    {
+        "_id": "gpiiToken-1",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome_high_contrast",
+        "userId": "user-1"
+    },
+    {
+        "_id": "gpiiToken-2",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome_high_contrast_dark",
+        "userId": "user-1"
+    },
+    {
+        "_id": "client-1",
+        "type": "client",
+        "name": "Service A",
+        "oauth2ClientId": "org.chrome.cloud4chrome",
+        "oauth2ClientSecret": "client_secret_1",
+        "redirectUri": "http://localhost:3002/authorize_callback"
+    },
+    {
+        "_id": "client-2",
+        "type": "client",
+        "name": "First Discovery",
+        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
+        "oauth2ClientSecret": "client_secret_firstDiscovery",
+        "allowAddPrefs": true
+    },
+    {
+        "_id": "client-3",
+        "type": "client",
+        "name": "Windows Magnifier",
+        "oauth2ClientId": "net.gpii.windows.magnifier",
+        "oauth2ClientSecret": "client_secret_windows_magnifier"
+    },
+    {
+        "_id": "authDecision-1",
+        "type": "authDecision",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-1",
+        "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
+        "accessToken": "chrome_high_contrast_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    },
+    {
+        "_id": "authDecision-2",
+        "type": "authDecision",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "chrome_high_contrast_access_token_client_2",
+        "selectedPreferences": {
+            "textFont": "arial"
+        },
+        "revoked": false
+    },
+    {
+        "_id": "authDecision-3",
+        "type": "authDecision",
+        "gpiiToken": "chrome_high_contrast_dark",
+        "clientId": "client-2",
+        "redirectUri": false,
+        "accessToken": "windows_magnifier_access_token",
+        "selectedPreferences": {
+            "textFont": "arial",
+            "contrast": "bw"
+        },
+        "revoked": false
+    },
+    {
+        "_id": "authCode-1",
+        "type": "authCode",
+        "authDecisionId": "authDecision-1",
+        "code": "chrome_high_contrast_auth_token"
+    },
+    {
+        "_id": "clientCredentialsToken-1",
+        "type": "clientCredentialsToken",
+        "clientId": "client-2",
+        "accessToken": "firstDiscovery_access_token",
+        "allowAddPrefs": true,
+        "revoked": false
+    },
+    {
+        "_id": "clientCredentialsToken-2",
+        "type": "clientCredentialsToken",
+        "clientId": "non-existing-client",
+        "accessToken": "non-existing-client-token",
+        "allowAddPrefs": true,
+        "revoked": false
+    }
+]
