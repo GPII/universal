@@ -90,47 +90,47 @@
                 },
                 "supportedSettings": {
                     "Options.PrimarySynthesizer": {},
-                    "enu-Global.Rate": {},
-                    "enu-JAWSCursor.Rate": {},
-                    "enu-Keyboard.Rate": {},
-                    "enu-MenuAndDialog.Rate": {},
-                    "enu-Message.Rate": {},
-                    "enu-PCCursor.Rate": {},
-                    "enu-Global.Pitch": {},
-                    "enu-JAWSCursor.Pitch": {},
-                    "enu-Keyboard.Pitch": {},
-                    "enu-MenuAndDialog.Pitch": {},
-                    "enu-Message.Pitch": {},
-                    "enu-PCCursor.Pitch": {},
-                    "enu-Global.Volume": {},
-                    "enu-JAWSCursor.Volume": {},
-                    "enu-Keyboard.Volume": {},
-                    "enu-MenuAndDialog.Volume": {},
-                    "enu-Message.Volume": {},
-                    "enu-PCCursor.Volume": {},
-                    "enu-Global.Punctuation": {},
-                    "enu-JAWSCursor.Punctuation": {},
-                    "enu-Keyboard.Punctuation": {},
-                    "enu-MenuAndDialog.Punctuation": {},
-                    "enu-Message.Punctuation": {},
-                    "enu-PCCursor.Punctuation": {},
-                    "enu-Global.SynthLangString": {},
-                    "enu-JAWSCursor.SynthLangString": {},
-                    "enu-Keyboard.SynthLangString": {},
-                    "enu-MenuAndDialog.SynthLangString": {},
-                    "enu-Message.SynthLangString": {},
-                    "enu-PCCursor.SynthLangString": {}
+                    "ENU-Global.Rate": {},
+                    "ENU-JAWSCursor.Rate": {},
+                    "ENU-Keyboard.Rate": {},
+                    "ENU-MenuAndDialog.Rate": {},
+                    "ENU-Message.Rate": {},
+                    "ENU-PCCursor.Rate": {},
+                    "ENU-Global.Pitch": {},
+                    "ENU-JAWSCursor.Pitch": {},
+                    "ENU-Keyboard.Pitch": {},
+                    "ENU-MenuAndDialog.Pitch": {},
+                    "ENU-Message.Pitch": {},
+                    "ENU-PCCursor.Pitch": {},
+                    "ENU-Global.Volume": {},
+                    "ENU-JAWSCursor.Volume": {},
+                    "ENU-Keyboard.Volume": {},
+                    "ENU-MenuAndDialog.Volume": {},
+                    "ENU-Message.Volume": {},
+                    "ENU-PCCursor.Volume": {},
+                    "ENU-Global.Punctuation": {},
+                    "ENU-JAWSCursor.Punctuation": {},
+                    "ENU-Keyboard.Punctuation": {},
+                    "ENU-MenuAndDialog.Punctuation": {},
+                    "ENU-Message.Punctuation": {},
+                    "ENU-PCCursor.Punctuation": {},
+                    "ENU-Global.SynthLangString": {},
+                    "ENU-JAWSCursor.SynthLangString": {},
+                    "ENU-Keyboard.SynthLangString": {},
+                    "ENU-MenuAndDialog.SynthLangString": {},
+                    "ENU-Message.SynthLangString": {},
+                    "ENU-PCCursor.SynthLangString": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
-                    "enu-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "enu-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "enu-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "enu-MenuAndDialog\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "enu-Message\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "enu-PCCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "enu-Global\\.Pitch":{
+                    "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-MenuAndDialog\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Message\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-PCCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Global\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -143,7 +143,7 @@
                             }
                         }
                     },
-                    "enu-JAWSCursor\\.Pitch":{
+                    "ENU-JAWSCursor\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -156,7 +156,7 @@
                             }
                         }
                     },
-                    "enu-Keyboard\\.Pitch":{
+                    "ENU-Keyboard\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -169,7 +169,7 @@
                             }
                         }
                     },
-                    "enu-MenuAndDialog\\.Pitch":{
+                    "ENU-MenuAndDialog\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -182,7 +182,7 @@
                             }
                         }
                     },
-                    "enu-Message\\.Pitch":{
+                    "ENU-Message\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -195,7 +195,7 @@
                             }
                         }
                     },
-                    "enu-PCCursor\\.Pitch":{
+                    "ENU-PCCursor\\.Pitch":{
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -208,49 +208,49 @@
                             }
                         }
                     },
-                    "enu-Global\\.Volume":{
+                    "ENU-Global\\.Volume":{
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "enu-JAWSCursor\\.Volume":{
+                    "ENU-JAWSCursor\\.Volume":{
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "enu-Keyboard\\.Volume":{
+                    "ENU-Keyboard\\.Volume":{
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "enu-MenuAndDialog\\.Volume":{
+                    "ENU-MenuAndDialog\\.Volume":{
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "enu-Message\\.Volume":{
+                    "ENU-Message\\.Volume":{
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "enu-PCCursor\\.Volume":{
+                    "ENU-PCCursor\\.Volume":{
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "enu-Global\\.Punctuation": {
+                    "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -262,7 +262,7 @@
                             }
                         }
                     },
-                    "enu-JAWSCursor\\.Punctuation": {
+                    "ENU-JAWSCursor\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -274,7 +274,7 @@
                             }
                         }
                     },
-                    "enu-Keyboard\\.Punctuation": {
+                    "ENU-Keyboard\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -286,7 +286,7 @@
                             }
                         }
                     },
-                    "enu-MenuAndDialog\\.Punctuation": {
+                    "ENU-MenuAndDialog\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -298,7 +298,7 @@
                             }
                         }
                     },
-                    "enu-Message\\.Punctuation": {
+                    "ENU-Message\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -310,7 +310,7 @@
                             }
                         }
                     },
-                    "enu-PCCursor\\.Punctuation": {
+                    "ENU-PCCursor\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -322,7 +322,7 @@
                             }
                         }
                     },
-                    "enu-Global\\.SynthLangString": {
+                    "ENU-Global\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
@@ -340,7 +340,7 @@
                             }
                         }
                     },
-                    "enu-JAWSCursor\\.SynthLangString": {
+                    "ENU-JAWSCursor\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
@@ -358,7 +358,7 @@
                             }
                         }
                     },
-                    "enu-Keyboard\\.SynthLangString": {
+                    "ENU-Keyboard\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
@@ -376,7 +376,7 @@
                             }
                         }
                     },
-                    "enu-MenuAndDialog\\.SynthLangString": {
+                    "ENU-MenuAndDialog\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
@@ -394,7 +394,7 @@
                             }
                         }
                     },
-                    "enu-Message\\.SynthLangString": {
+                    "ENU-Message\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
@@ -412,7 +412,7 @@
                             }
                         }
                     },
-                    "enu-PCCursor\\.SynthLangString": {
+                    "ENU-PCCursor\\.SynthLangString": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
@@ -521,7 +521,7 @@
 
     "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
-        "co-ntexts": {
+        "contexts": {
             "OS": [
                 {
                     "id": "win32",
