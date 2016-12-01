@@ -34,7 +34,7 @@
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
-                                "transform":{
+                                "transform": {
                                     "type": "fluid.transforms.binaryOp",
                                     "leftPath": "http://registry\\.gpii\\.net/common/keyEcho",
                                     "rightPath": "http://registry\\.gpii\\.net/common/wordEcho",
@@ -130,7 +130,7 @@
                     "ENU-MenuAndDialog\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-Message\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ENU-PCCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
-                    "ENU-Global\\.Pitch":{
+                    "ENU-Global\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -143,7 +143,7 @@
                             }
                         }
                     },
-                    "ENU-JAWSCursor\\.Pitch":{
+                    "ENU-JAWSCursor\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -156,7 +156,7 @@
                             }
                         }
                     },
-                    "ENU-Keyboard\\.Pitch":{
+                    "ENU-Keyboard\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -169,7 +169,7 @@
                             }
                         }
                     },
-                    "ENU-MenuAndDialog\\.Pitch":{
+                    "ENU-MenuAndDialog\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -182,7 +182,7 @@
                             }
                         }
                     },
-                    "ENU-Message\\.Pitch":{
+                    "ENU-Message\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -195,7 +195,7 @@
                             }
                         }
                     },
-                    "ENU-PCCursor\\.Pitch":{
+                    "ENU-PCCursor\\.Pitch": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "input": {
@@ -208,42 +208,42 @@
                             }
                         }
                     },
-                    "ENU-Global\\.Volume":{
+                    "ENU-Global\\.Volume": {
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "ENU-JAWSCursor\\.Volume":{
+                    "ENU-JAWSCursor\\.Volume": {
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "ENU-Keyboard\\.Volume":{
+                    "ENU-Keyboard\\.Volume": {
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "ENU-MenuAndDialog\\.Volume":{
+                    "ENU-MenuAndDialog\\.Volume": {
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "ENU-Message\\.Volume":{
+                    "ENU-Message\\.Volume": {
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
-                    "ENU-PCCursor\\.Volume":{
+                    "ENU-PCCursor\\.Volume": {
                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
@@ -2218,7 +2218,7 @@
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
-                        "transform":{
+                        "transform": {
                             "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "input": 9,

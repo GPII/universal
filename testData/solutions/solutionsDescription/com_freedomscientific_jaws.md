@@ -1,4 +1,4 @@
-# JAWSa
+# JAWS
 
 ## Details
 
@@ -14,4 +14,4 @@ You'll find more information at:
   * [JAWS website](http://www.freedomscientific.com/Products/Blindness/JAWS)
 
 ## Integration
-JAWS is integrated to support the most basic screenreader settings. This includes capabilities transformations to common terms and  acceptance tests
+JAWS is integrated to support the most basic screenreader settings. This includes capabilities transformations to common terms and acceptance tests
