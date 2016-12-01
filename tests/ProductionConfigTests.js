@@ -87,8 +87,8 @@ var testDefs = [
         OSid: "linux",
         solutionId: "org.gnome.desktop.a11y.keyboard",
         config: {
-            configName: "gpii.config.cloudBased.production",
-            configPath: "%universal/gpii/configs"
+            configName: "gpii.tests.acceptance.cloudBased.flowManager.production",
+            configPath: "%universal/tests/configs"
         },
         expected: {
             "org.gnome.desktop.a11y.keyboard": {

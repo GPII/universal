@@ -37,6 +37,7 @@ require("./gpii/node_modules/flatMatchMaker");
 require("./gpii/node_modules/canopyMatchMaker");
 require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
+require("./gpii/node_modules/pouchManager");
 require("./gpii/node_modules/processReporter");
 
 gpii.loadTestingSupport = function () {
