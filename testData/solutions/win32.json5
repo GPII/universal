@@ -30,7 +30,7 @@
                         "literalValue": "GPII"
                     },
                     "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "options\\.TypingEcho": {
+                    "options\\.TypingEcho": { // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -81,6 +81,73 @@
                         }
                     },
                     "options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/announceCapitals": "options\\.SayAllIndicateCaps",
+                    "http://registry\\.gpii\\.net/common/keyEcho": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "options\\.TypingEcho", // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                            "match": [{
+                                inputValue: 1,
+                                outputValue: true
+                            }, {
+                                inputValue: 3,
+                                outputValue: true
+                            }],
+                            "noMatch": {
+                                "outputValue": false
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/wordEcho": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "options\\.TypingEcho", // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                            "match": [{
+                                inputValue: 2,
+                                outputValue: true
+                            }, {
+                                inputValue: 3,
+                                outputValue: true
+                            }],
+                            "noMatch": {
+                                "outputValue": false
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/readingUnit": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "options\\.SayAllMode",
+                            "match": [{
+                                inputValue: 0,
+                                outputValue: "line"
+                            }, {
+                                inputValue: 1,
+                                outputValue: "sentence"
+                            }, {
+                                inputValue: 2,
+                                outputValue: "paragraph"
+                            }]
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/brailleMode": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "Braille\\.BrailleMode",
+                            "match": [{
+                                inputValue: 0,
+                                outputValue: "line"
+                            }, {
+                                inputValue: 1,
+                                outputValue: "structured"
+                            }, {
+                                inputValue: 2,
+                                outputValue: "speechHistory"
+                            }]
+                        }
+                    }
                 }
             },
             "configuration2": {
@@ -427,6 +494,67 @@
                                 "es-US": "Latin American Spanish",
                                 "es-ES": "Castilian Spanish",
                                 "fi": "Finnish"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speechSynthesizer": "Options\\.PrimarySynthesizer",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-JAWSCursor\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Keyboard\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-MenuAndDialog\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Message\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-PCCursor\\.Rate",
+                    "http://registry\\.gpii\\.net/common/pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "ENU-Global\\.Pitch",
+                            "factor": 0.010101,
+                            "offset": -0.010101
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "ENU-Global\\.Volume",
+                            "factor": 0.01
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/punctuationVerbosity": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "ENU-Global\\.Punctuation",
+                            "match": [{
+                                inputValue: 0,
+                                outputValue: "none"
+                            }, {
+                                inputValue: 1,
+                                outputValue: "some"
+                            }, {
+                                inputValue: 2,
+                                outputValue: "most"
+                            }, {
+                                inputValue: 3,
+                                outputValue: "all"
+                            }]
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/auditoryOutLanguage": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "ENU-Global\\.SynthLangString",
+                            "match": {
+                                "American English": "en-US",
+                                "British English": "en-GB",
+                                "French": "fr",
+                                "French Canadian": "fr-CA",
+                                "Italian": "it",
+                                "Brazilian Portuguese": "pt-BR",
+                                "German": "de",
+                                "Latin American Spanish": "es-US",
+                                "Castilian Spanish": "es-ES",
+                                "Finnish": "fi"
                             }
                         }
                     }
