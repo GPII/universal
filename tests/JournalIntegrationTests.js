@@ -160,30 +160,28 @@ fluid.defaults("gpii.tests.journal.baseTestCaseHolder", {
 });
 
 gpii.tests.journal.solutionsRegistryOverlay = {
-    "com.microsoft.windows.cursors": {
-        settingsHandlers: {
-            explode: {
-                type: "gpii.tests.journal.explodingSettingsHandler",
-                supportedSettings: {
-                    cursorSize: {}
+    win32: {
+        "com.microsoft.windows.cursors": {
+            settingsHandlers: {
+                explode: {
+                    type: "gpii.tests.journal.explodingSettingsHandler",
+                    supportedSettings: {
+                        cursorSize: {}
+                    }
+                },
+                configure: {
+                    supportedSettings: {
+                        cursorSize: {}
+                    }
                 }
             },
-            configure: {
-                supportedSettings: {
-                    cursorSize: {}
-                }
-            }
-        },
-        configure: ["settings.configure", "settings.explode"]
+            configure: ["settings.configure", "settings.explode"]
+        }
     }
 };
 
-gpii.tests.journal.solutionsRegistryFilter = function (payload, options) {
-    if (options.directModel.os === "win32") { // TODO: When GPII-1809 is merged in with whatever strategy it uses, this will need to be improved
-        return fluid.extend(true, {}, payload, gpii.tests.journal.solutionsRegistryOverlay);
-    } else {
-        return payload;
-    }
+gpii.tests.journal.solutionsRegistryFilter = function (payload) {
+    return fluid.extend(true, {}, payload, gpii.tests.journal.solutionsRegistryOverlay);
 };
 
 fluid.defaults("gpii.tests.integration.mockSettingsHandlerRegistry.journal", {

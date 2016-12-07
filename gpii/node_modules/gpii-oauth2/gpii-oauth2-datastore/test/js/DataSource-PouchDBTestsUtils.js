@@ -75,7 +75,7 @@ var fluid = fluid || require("infusion");
         sequenceEnd: [{
             func: "{gpii.tests.inBrowserPouchDB.testEnvironment}.pouchDb.destroyPouch"
         }, {
-            event:    "{gpii.tests.inBrowserPouchDB.testEnvironment}.pouchDb.events.onDestroyPouchComplete",
+            event:    "{gpii.tests.inBrowserPouchDB.testEnvironment}.pouchDb.events.onPouchDestroyComplete",
             listener: "fluid.log",
             args:     ["PouchDB cleanup complete"]
         }],
