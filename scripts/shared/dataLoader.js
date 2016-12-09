@@ -26,7 +26,8 @@ var fluid = require("infusion"),
 
 // Data Source used to interact with CouchDB
 fluid.defaults("gpii.dataLoader.dataSource", {
-    gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
+    gradeNames: ["kettle.dataSource.URL"],
+    readOnlyGrade: "gpii.dataLoader.dataSource",
     termMap: {
         couchDbUrl: "noencode:%couchDbUrl",
         dbName: "%dbName"
@@ -34,7 +35,7 @@ fluid.defaults("gpii.dataLoader.dataSource", {
 });
 
 fluid.defaults("gpii.dataLoader.dataSource.writable", {
-    gradeNames: ["gpii.dataLoader.dataSource", "kettle.dataSource.writable", "kettle.dataSource.CouchDB.writable"],
+    gradeNames: ["gpii.dataLoader.dataSource", "kettle.dataSource.writable"],
     writable: true
 });
 
@@ -66,12 +67,24 @@ fluid.defaults("gpii.dataLoader", {
             }
         },
         createDbDataSource: {
-            type: "gpii.dataLoader.dataSource.writable",
+            type: "gpii.dataLoader.dataSource",
             options: {
                 url: "%couchDbUrl/%dbName",
-                writeMethod: "PUT"
+                method: "PUT"
             }
         },
+        // createDbDataSource: {
+        //     type: "gpii.dataLoader.dataSource.writable",
+        //     options: {
+        //         url: "%couchDbUrl/%dbName",
+        //         writeMethod: "PUT",
+        //         components: {
+        //             encoding: {
+        //                 type: "kettle.dataSource.encoding.none"
+        //             }
+        //         }
+        //     }
+        // },
         loadDataSource: {
             type: "gpii.dataLoader.dataSource.writable",
             options: {
@@ -102,7 +115,7 @@ gpii.dataLoader.load = function (that) {
         promises.push(gpii.dataLoader.cleanUpDb(that, directModel));
 
         // Create the database
-        var createDbPromise = that.createDbDataSource.set(directModel);
+        var createDbPromise = that.createDbDataSource.get(directModel);
         promises.push(createDbPromise);
 
         var dataPaths = fluid.makeArray(dbData.data);
