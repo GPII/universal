@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // to load GPII test data into CouchDB.
 // Steps to load data:
 // 1. Check the existence of the database;
-// 2. If the database already exists, delete it to ensure a clean load; otherwise, create the database;
+// 2. If the database already exists, delete and recreate the database to ensure a clean data load; otherwise, create the database;
 // 3. Load data in bulk using CouchDB /_bulk_docs request - http://docs.couchdb.org/en/2.0.0/api/database/bulk-api.html#db-bulk-docs
 
 "use strict";
@@ -35,7 +35,7 @@ fluid.defaults("gpii.dataLoader.dataSource", {
 });
 
 fluid.defaults("gpii.dataLoader.dataSource.writable", {
-    gradeNames: ["gpii.dataLoader.dataSource", "kettle.dataSource.writable"],
+    gradeNames: ["gpii.dataLoader.dataSource", "kettle.dataSource.URL.writable"],
     writable: true
 });
 
@@ -60,10 +60,10 @@ fluid.defaults("gpii.dataLoader", {
             }
         },
         deleteDbDataSource: {
-            type: "gpii.dataLoader.dataSource.writable",
+            type: "gpii.dataLoader.dataSource",
             options: {
                 url: "%couchDbUrl/%dbName",
-                writeMethod: "DELETE"
+                method: "DELETE"
             }
         },
         createDbDataSource: {
@@ -73,18 +73,6 @@ fluid.defaults("gpii.dataLoader", {
                 method: "PUT"
             }
         },
-        // createDbDataSource: {
-        //     type: "gpii.dataLoader.dataSource.writable",
-        //     options: {
-        //         url: "%couchDbUrl/%dbName",
-        //         writeMethod: "PUT",
-        //         components: {
-        //             encoding: {
-        //                 type: "kettle.dataSource.encoding.none"
-        //             }
-        //         }
-        //     }
-        // },
         loadDataSource: {
             type: "gpii.dataLoader.dataSource.writable",
             options: {
@@ -102,6 +90,7 @@ fluid.defaults("gpii.dataLoader", {
 });
 
 gpii.dataLoader.load = function (that) {
+    var promiseTogo = fluid.promise();
     var promises = [];
 
     // Process databases one by one
@@ -112,32 +101,49 @@ gpii.dataLoader.load = function (that) {
         };
 
         // Delete the database if it already exists
-        promises.push(gpii.dataLoader.cleanUpDb(that, directModel));
+        var prepareDbPromise = gpii.dataLoader.prepareDB(that, directModel);
 
-        // Create the database
-        var createDbPromise = that.createDbDataSource.get(directModel);
-        promises.push(createDbPromise);
+        prepareDbPromise.then(function () {
+            var dataPaths = fluid.makeArray(dbData.data);
+            fluid.each(dataPaths, function (onePath) {
+                var actualPath = fluid.module.resolvePath(onePath);
 
-        var dataPaths = fluid.makeArray(dbData.data);
-        fluid.each(dataPaths, function (onePath) {
-            var actualPath = fluid.module.resolvePath(onePath);
-            var data = require(actualPath);
-            var setPromise = that.loadDataSource.set(directModel, data);
-            promises.push(setPromise);
+                // Convert the couchDB accepted doc format for using /_bulk_docs end point
+                var data = {
+                    docs: require(actualPath)
+                };
+                var setPromise = that.loadDataSource.set(directModel, data);
+                promises.push(setPromise);
+            });
+            var loadDataPromise = fluid.promise.sequence(promises);
+            fluid.promise.follow(loadDataPromise, promiseTogo);
         });
     });
 
-    // An sequence with an empty array of promises will automatically be resolved, so we can safely use this construct.
-    return fluid.promise.sequence(promises);
+    return promiseTogo;
 };
 
-// Delete the database if it already exists, otherwise, do nothing
-gpii.dataLoader.cleanUpDb = function (that, directModel) {
+gpii.dataLoader.createDb = function (that, directModel) {
+    return that.createDbDataSource.get(directModel);
+};
+
+// If the database already exists, delete and recreate; otherwise, create the database.
+gpii.dataLoader.prepareDB = function (that, directModel) {
     var promiseTogo = fluid.promise();
     var getDbPromise = that.getDbDataSource.get(directModel);
+
     getDbPromise.then(function () {
-        // The database already exists, delete it
-        promiseTogo = that.deleteDbDataSource.set(directModel);
+        // The database already exists, delete and recreate to ensure a clean database for loading data
+        var deleteDbPromise = that.deleteDbDataSource.get(directModel);
+        deleteDbPromise.then(function () {
+            var createDbPromise = gpii.dataLoader.createDb(that, directModel);
+            fluid.promise.follow(createDbPromise, promiseTogo);
+        });
+    }, function () {
+        // The database does not exist, create it
+        var createDbPromise = gpii.dataLoader.createDb(that, directModel);
+        fluid.promise.follow(createDbPromise, promiseTogo);
     });
+
     return promiseTogo;
 };

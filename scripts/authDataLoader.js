@@ -11,7 +11,11 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-// The data loader to load GPII authorization server data into CouchDB
+/**
+ * The data loader to load GPII authorization server data into CouchDB.
+ * Before running this script, make sure CouchDB is started and ready for handling
+ * database operation requests.
+ */
 
 "use strict";
 
@@ -46,7 +50,7 @@ gpii.dataLoader.authDataLoader.loadData = function (that) {
     promise.then(function () {
         console.log("The authorization data has been loaded successfully.");
     }, function (err) {
-        console.log("Error at loading the authorization data: ", err);
+        console.log("Error at loading the authorization data. Error details: ", err);
     });
 };
 
