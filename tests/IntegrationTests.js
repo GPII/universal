@@ -25,6 +25,6 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 
-gpii.test.runSuitesWithFiltering(require("./platform/index-windows.js"), __dirname, ["gpii.test.integration.testCaseHolder.windows"]);
-gpii.test.runSuitesWithFiltering(require("./platform/index-linux.js"), __dirname, ["gpii.test.integration.testCaseHolder.linux"]);
+gpii.test.runSuitesWithFiltering(require("./platform/index-windows.js"), __dirname, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"]);
+gpii.test.runSuitesWithFiltering(require("./platform/index-linux.js"), __dirname, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"]);
 gpii.test.runSuitesWithFiltering(require("./platform/index-android.js"), __dirname, ["gpii.test.integration.testCaseHolder.android"]);

@@ -91,7 +91,7 @@ gpii.tests.windows.maavis = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.maavis",
-    configName: "windows-dynamicDeviceReporter-config",
+    configName: "gpii.tests.acceptance.windows.config",
     configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

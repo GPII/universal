@@ -22,6 +22,5 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 module.exports = [
     "linux/linux-builtIn-testSpec.js",
-    "linux/linux-orca-testSpec.js",
-    "linux/linux-dynamicDeviceReporter-testSpec.js"
+    "linux/linux-orca-testSpec.js"
 ];

@@ -26,6 +26,5 @@ module.exports = [
     "windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
     "windows/windows-maavis-testSpec.js",
-    "windows/windows-readWrite-testSpec.js",
-    "windows/windows-dynamicDeviceReporter-testSpec.js"
+    "windows/windows-readWrite-testSpec.js"
 ];

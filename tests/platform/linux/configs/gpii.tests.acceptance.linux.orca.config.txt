@@ -1,6 +1,0 @@
-This configuration file is used by the acceptance test: AcceptanceTests_orca.js.
-
-It makes use of dynamic device reporter:  It includes the basic local install
-setup in development mode (modifying the preferences folder used), but with the
-device reporter in production mode, merging in gpii's
-"all.development.dr.production" configuration.

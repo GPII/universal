@@ -1,5 +1,0 @@
-This config file is used for integration and acceptance tests on Linux as well as the context integration tests
-
-It makes use of dynamic device reporter:  It includes the basic local install
-setup in development mode, but with the device reporter in production mode,
-merging in gpii's "all.development.dr.production" configuration.
