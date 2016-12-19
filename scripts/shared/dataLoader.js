@@ -105,13 +105,17 @@ gpii.dataLoader.load = function (that) {
 
         prepareDbPromise.then(function () {
             var dataPaths = fluid.makeArray(dbData.data);
-            fluid.each(dataPaths, function (onePath) {
-                var actualPath = fluid.module.resolvePath(onePath);
-
+            fluid.each(dataPaths, function (oneData) {
+                if (fluid.isPrimitive(oneData)) {
+                    // load data from a physical file
+                    var actualPath = fluid.module.resolvePath(oneData);
+                    oneData = require(actualPath);
+                }
                 // Convert the couchDB accepted doc format for using /_bulk_docs end point
                 var data = {
-                    docs: require(actualPath)
+                    docs: oneData
                 };
+
                 var setPromise = that.loadDataSource.set(directModel, data);
                 promises.push(setPromise);
             });
