@@ -1,0 +1,12 @@
+gpii.config.cloudBased.flowManager.production.json
+==================================================
+
+Flow Manager running on the server (incl. dependencies). It will expect a couchDB to be running on the local host using the default port.
+
+* The following components are running on Flow Manager:
+** flowManager
+** flatMatchMaker
+
+Note that this config expects Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.
+
+**WARNING: This config has been tested manually with the setup described in the production setup documentation (Sep. 5, 2016). It is NOT regularly tested by acceptance/integration or unit tests and therefore cannot be fully trusted.**

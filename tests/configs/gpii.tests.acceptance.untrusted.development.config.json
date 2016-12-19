@@ -1,0 +1,12 @@
+{
+    "type": "gpii.tests.acceptance.untrusted.development.config",
+    "options": {
+        "configs": {
+            "cloudBasedConfig": {
+                "configName": "gpii.config.cloudBased.development",
+                "configPath": "%universal/gpii/configs"
+            }
+        }
+    },
+    "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
+}
