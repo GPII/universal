@@ -30,8 +30,14 @@ gpii.loadTestingSupport();
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.linux", {
     gradeNames: [
         "gpii.test.integration.testCaseHolder.linux",
+        "gpii.test.integration.deviceReporterAware.linux",
         "gpii.tests.contextIntegration.testCaseHolder"
-    ]
+    ],
+    deviceReporters: {
+        "gpii.packageKit.find": {
+            "expectInstalled": ["gnome-shell", "gsettings-desktop-schemas", "alsa"]
+        }
+    }
 });
 
 fluid.defaults("gpii.tests.contextIntegration.environmentChangedRequestType", {
@@ -382,7 +388,7 @@ gpii.tests.contextIntegration.baseTestDef = {
     userToken: "context1",
     gradeNames: "gpii.tests.contextIntegration.testCaseHolder.linux",
     config: {
-        configName: "gpii.tests.acceptance.linux.builtIn.config",
+        configName: "gpii.tests.acceptance.linux.config",
         configPath: "%universal/tests/platform/linux/configs"
     },
     contexts: gpii.tests.contextIntegration.data.contexts
