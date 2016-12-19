@@ -1,7 +1,0 @@
-This configuration file is used for testing the chrome extension in Windows
-
-It uses the basic (default) development setup of the system, with a couple of
-modifications.  It replaces the folder with NP sets in (universal)/testData/preferences/acceptanceTests
-as opposed to the normal preferences folder.  It also uses the dynamic device
-reporter (the device reporter in production mode).  Otherwise, everything else
-is based on the normal development mode setup.
