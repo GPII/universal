@@ -1,5 +1,3 @@
-This configuration file is used by the for acceptance test: android-talkback-testSpec.js.
+This config file is used for integration and acceptance tests of Talkback on Android.
 
-It makes use of dynamic device reporter:  It includes the basic local install
-setup in development mode, but with the device reporter in production mode,
-merging in gpii's "all.development.dr.production" configuration.
+It uses the basic local install setup in development mode.

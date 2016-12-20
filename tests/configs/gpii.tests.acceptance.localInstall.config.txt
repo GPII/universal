@@ -1,4 +1,4 @@
-This configuration file is used for acceptance testing on Android.
+This configuration file is used for integration and acceptance testing on Android.
 
 It uses the basic (default) development setup of the system, but replaces the 
 folder with NP sets used to be (universal)/testData/preferences/acceptanceTests 

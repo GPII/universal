@@ -1,5 +1,3 @@
-This config file is used for integration and acceptance tests on Android.
+This config file is used for integration and acceptance tests on built-in Android solutions.
 
-It makes use of dynamic device reporter:  It uses the basic local install setup
-in development mode, but with the device reporter in production mode, merging in
-gpii's "all.development.dr.production" configuration.
+It uses the basic local install setup in development mode.
