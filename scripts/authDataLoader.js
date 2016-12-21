@@ -30,7 +30,7 @@ fluid.defaults("gpii.dataLoader.authDataLoader", {
     gradeNames: ["gpii.dataLoader"],
     databases: {
         auth: {
-            data: [
+            dataFile: [
                 "%universal/testData/security/TestOAuth2DataStore.json",
                 "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
             ]

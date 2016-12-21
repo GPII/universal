@@ -24,6 +24,8 @@ var fluid = require("infusion"),
     kettle = require("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
+var fs = require("fs");
+
 // Data Source used to interact with CouchDB
 fluid.defaults("gpii.dataLoader.dataSource", {
     gradeNames: ["kettle.dataSource.URL"],
@@ -91,7 +93,7 @@ fluid.defaults("gpii.dataLoader", {
 
 gpii.dataLoader.load = function (that) {
     var promiseTogo = fluid.promise();
-    var promises = [];
+    var loadDataPromises = [];
 
     // Process databases one by one
     fluid.each(that.options.databases, function (dbData, dbName) {
@@ -104,22 +106,16 @@ gpii.dataLoader.load = function (that) {
         var prepareDbPromise = gpii.dataLoader.prepareDB(that, directModel);
 
         prepareDbPromise.then(function () {
-            var dataPaths = fluid.makeArray(dbData.data);
-            fluid.each(dataPaths, function (oneData) {
-                if (fluid.isPrimitive(oneData)) {
-                    // load data from a physical file
-                    var actualPath = fluid.module.resolvePath(oneData);
-                    oneData = require(actualPath);
-                }
-                // Convert the couchDB accepted doc format for using /_bulk_docs end point
-                var data = {
-                    docs: oneData
-                };
-
-                var setPromise = that.loadDataSource.set(directModel, data);
-                promises.push(setPromise);
+            // load data files
+            var dataFilePaths = fluid.makeArray(dbData.dataFile);
+            fluid.each(dataFilePaths, function (oneDataFile) {
+                loadDataPromises.push(gpii.dataLoader.loadDataFile(that.loadDataSource, oneDataFile, directModel));
             });
-            var loadDataPromise = fluid.promise.sequence(promises);
+
+            // load direct data
+            loadDataPromises.push(gpii.dataLoader.loadData(that.loadDataSource, dbData.data, directModel));
+
+            var loadDataPromise = fluid.promise.sequence(loadDataPromises);
             fluid.promise.follow(loadDataPromise, promiseTogo);
         });
     });
@@ -150,4 +146,26 @@ gpii.dataLoader.prepareDB = function (that, directModel) {
     });
 
     return promiseTogo;
+};
+
+gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
+    if (!data) {
+        return fluid.promise();
+    }
+
+    // Convert to couchDB accepted doc format for using /_bulk_docs end point
+    var data = {
+        "docs": data
+    };
+
+    console.log("data: ", data.docs[0].condTest);
+    fs.writeFileSync(__dirname + "/debug.log", data, "utf-8");
+    return loadDataSource.set(directModel, data);
+};
+
+gpii.dataLoader.loadDataFile = function (loadDataSource, dataFile, directModel) {
+    var actualPath = fluid.module.resolvePath(dataFile);
+    var data = require(actualPath);
+
+    return gpii.dataLoader.loadData(loadDataSource, data, directModel);
 };
