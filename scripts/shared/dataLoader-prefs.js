@@ -115,11 +115,19 @@ gpii.dataLoader.prefsDataLoader.dataConverter.constructPrefsDataStructure = func
             var gpiiToken = filename.substring(0, filename.length - 5);
             var fullPath = actualDataPath + filename;
 
-            var data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
+            // var data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
+            var data = {
+                "a": "Gerät"
+            };
+
+            // The actual preferences data needs to be the value of a field named "value" when being imported into CouchDB
             var prefsData = {};
-            // fluid.set(prefsData, "a", data);
-            fluid.set(prefsData, gpiiToken, data);
-            prefsDataStructure.push(prefsData);
+            fluid.set(prefsData, "value", data);
+
+            var finalData = fluid.extend(prefsData, {
+                "_id": gpiiToken
+            });
+            prefsDataStructure.push(finalData);
         }
     });
 

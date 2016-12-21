@@ -24,8 +24,6 @@ var fluid = require("infusion"),
     kettle = require("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
-var fs = require("fs");
-
 // Data Source used to interact with CouchDB
 fluid.defaults("gpii.dataLoader.dataSource", {
     gradeNames: ["kettle.dataSource.URL"],
@@ -158,8 +156,7 @@ gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
         "docs": data
     };
 
-    console.log("data: ", data.docs[0].condTest);
-    fs.writeFileSync(__dirname + "/debug.log", data, "utf-8");
+    console.log("data: ", data);
     return loadDataSource.set(directModel, data);
 };
 
