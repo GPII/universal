@@ -42,12 +42,16 @@ fluid.defaults("gpii.dataLoader.dataSource.writable", {
 // Data loader
 fluid.defaults("gpii.dataLoader", {
     gradeNames: ["fluid.component"],
-    // Accepted format:
+    // Accepted formats:
     // dbName1: {
-    //     data: ["pathToDataFile1", "pathToDataFile1"...]
+    //     dataFile: ["pathToDataFile1", "pathToDataFile1"...]
     // },
     // dbName2: {
-    //     data: ["pathToDataFile1", "pathToDataFile1"...]
+    //     data: [{
+    //         ...
+    //     }, {
+    //         ...
+    //     }...]
     // }
     databases: {  // Supplied by integrators
     },
@@ -156,7 +160,6 @@ gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
         "docs": data
     };
 
-    console.log("data: ", data);
     return loadDataSource.set(directModel, data);
 };
 

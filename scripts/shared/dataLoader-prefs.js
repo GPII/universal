@@ -26,6 +26,13 @@ fluid.setLogging(true);
 
 require("./dataLoader.js");
 
+/**
+ * This component is composed by two sub-components:
+ * 1. dataConverter: to read thru the preferences data and construct the json file contents
+ * into the data structure that can be accepted by CouchDB /_bulk_docs API
+ * 2. loader: take the data structure created by dataConverter and load into CouchDB. Using
+ * "gpii.dataLoader" as the underlying grade for loading.
+ */
 fluid.defaults("gpii.dataLoader.prefsDataLoader", {
     gradeNames: ["fluid.component"],
     components: {
@@ -115,10 +122,7 @@ gpii.dataLoader.prefsDataLoader.dataConverter.constructPrefsDataStructure = func
             var gpiiToken = filename.substring(0, filename.length - 5);
             var fullPath = actualDataPath + filename;
 
-            // var data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
-            var data = {
-                "a": "Gerät"
-            };
+            var data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
 
             // The actual preferences data needs to be the value of a field named "value" when being imported into CouchDB
             var prefsData = {};
