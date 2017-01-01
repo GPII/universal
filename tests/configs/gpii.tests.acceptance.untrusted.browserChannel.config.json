@@ -2,6 +2,12 @@
     "type": "gpii.tests.acceptance.untrusted.browserChannel.config",
     "options": {
         "mainServerPort": 8081,
+        "configs": {
+            "cloudBasedConfig": {
+                "configName": "gpii.config.cloudBased.development",
+                "configPath": "%universal/gpii/configs"
+            }
+        },
         "distributeOptions": {
             "browserChannel.tests.deviceReporter": {
                 "record": "%flowManager/test/data/browserChannel_deviceReporter.json",

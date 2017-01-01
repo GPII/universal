@@ -38,14 +38,28 @@ var fluid = fluid || require("infusion");
         }
     });
 
-    // Return the granted privilege for the access token.
+    // Return a promise object that contains the granted privilege for the access token.
     // This function looks up access tokens granted for both authorization code grant
     // and the client credentials grant to find the match. The different data structure
     // can be returned based on the grant type.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
-        var authCodeResult = authorizationService.getAuthForAccessToken(accessToken);
-        var clientCredentialsResult = authorizationService.getAuthForClientCredentialsAccessToken(accessToken);
-        return authCodeResult ? authCodeResult : clientCredentialsResult;
+        var authCodePrmoise = authorizationService.getAuthForAccessToken(accessToken);
+        var clientCredentialsPromise = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
+
+        // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
+        var sources = [authCodePrmoise, clientCredentialsPromise];
+        var promisesSequence = fluid.promise.sequence(sources);
+
+        var promiseTogo = fluid.promise();
+
+        promisesSequence.then(function (responses) {
+            var authCodeResult = responses[0];
+            var clientCredentialsResult = responses[1];
+
+            promiseTogo.resolve(authCodeResult ? authCodeResult : clientCredentialsResult);
+        });
+
+        return promiseTogo;
     };
 
 })();

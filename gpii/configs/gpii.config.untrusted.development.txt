@@ -1,5 +1,5 @@
 gpii.config.untrusted.development.json
-==========================
+======================================
 
 This configuration runs the local Untrusted Flow Manager in development mode.
 

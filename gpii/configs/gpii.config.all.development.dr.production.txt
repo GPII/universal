@@ -1,5 +1,5 @@
 gpii.config.all.development.dr.production.json
-==================================
+==============================================
 
 This configuration runs the entire system locally and in development mode with the exception of the deviceReporter,
 which runs in production mode.

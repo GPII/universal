@@ -6,9 +6,12 @@ Sample OAuth 2.0 servers and web application clients can be found at: [/examples
 Tests
 -----
 
-- `<Authorization Server>/tests/all-tests.html` (the server must be running)
-- `gpii-oauth2-datastore/test/html/DataStoreTests.html`
+- `gpii-oauth2-authz-server/test/webTests/all-tests.html`
+- `gpii-oauth2-authz-server/test/html/AuthGrantFinderTests.html`
+- `gpii-oauth2-authz-server/test/html/AuthorizationServiceTests.html`
+- `gpii-oauth2-authz-server/test/html/UserServiceTests.html`
 - `gpii-oauth2-utilities/test/html/OAuth2UtilitiesTests.html`
+- `gpii-oauth2-datastore/test/DbDataStoreTests.js`
 - `/tests/platform/cloud/AcceptanceTests_chrome_oauth2.js`
 
 Passport and OAuth2orize
