@@ -1,5 +1,5 @@
 /*!
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -24,50 +24,7 @@ var fluid = require("infusion"),
 
 fluid.setLogging(true);
 
-require("./shared/dataLoader.js");
-
-fluid.defaults("gpii.dataLoader.authDataLoader", {
-    gradeNames: ["gpii.dataLoader"],
-    databases: {
-        expander: {
-            funcName: "gpii.dataLoader.authDataLoader.constructAuthData",
-            args: ["{that}.options.dbName", "{that}.options.dataFile"]
-        }
-    },
-    listeners: {
-        "onCreate.load": {
-            listener: "gpii.dataLoader.authDataLoader.loadData",
-            args: ["{that}"]
-        }
-    }
-});
-
-/**
- * Construct the value of `options.databases` that to be accepted by `gpii.dataLoader` (See dataLoader.js).
- *
- * @param dbName {String} The database name;
- * @param dataFile {Array} An array of data paths to files to be loaded into the database.
- */
-gpii.dataLoader.authDataLoader.constructAuthData = function (dbName, dataFile) {
-    var togo = {};
-    fluid.set(togo, dbName + ".dataFile", dataFile);
-
-    return togo;
-};
-
-/**
- * Triggers the loading function to load data.
- * @param that {Component} An instance of `gpii.dataLoader` (See dataLoader.js).
- * @return {None}
- */
-gpii.dataLoader.authDataLoader.loadData = function (that) {
-    var promise = that.load();
-    promise.then(function () {
-        console.log("The authorization data has been loaded successfully.");
-    }, function (err) {
-        console.log("Error at loading the authorization data. Error details: ", err);
-    });
-};
+require("./shared/dataLoader-auth.js");
 
 gpii.dataLoader.authDataLoader({
     dbName: "auth",

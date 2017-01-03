@@ -1,5 +1,5 @@
 /*!
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -48,7 +48,8 @@ fluid.defaults("gpii.dataLoader", {
     // },
     // dbName2: {
     //     data: [{
-    //         ...
+    //         "_id": {String},
+    //         [Other object key-value pairs]
     //     }, {
     //         ...
     //     }...]
@@ -212,4 +213,19 @@ gpii.dataLoader.loadDataFile = function (loadDataSource, dataFile, directModel) 
     var data = require(actualPath);
 
     return gpii.dataLoader.loadData(loadDataSource, data, directModel);
+};
+
+/**
+ * The utility function to trigger the loading function to load data.
+ * @param dbName {String} The database name;
+ * @param loadFunc {Function} The load() invoker defined for an instance of `gpii.dataLoader` component (See dataLoader.js);
+ * @return {None} The success or fail result of the loading is reported on the console.
+ */
+gpii.dataLoader.performLoad = function (dbName, loadFunc) {
+    var promise = loadFunc();
+    promise.then(function () {
+        console.log("The " + dbName + " data has been loaded successfully.");
+    }, function (err) {
+        console.log("Error at loading the " + dbName + " data. Error details: ", err);
+    });
 };

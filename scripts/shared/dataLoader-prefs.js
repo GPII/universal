@@ -1,5 +1,5 @@
 /*!
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -70,8 +70,8 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
     },
     listeners: {
         "onLoaderReady.load": {
-            listener: "gpii.dataLoader.prefsDataLoader.loadData",
-            args: ["{that}.loader"]
+            listener: "gpii.dataLoader.performLoad",
+            args: ["{that}.options.dbName", "{that}.loader.load"]
         }
     },
     distributeOptions: {
@@ -97,20 +97,6 @@ gpii.dataLoader.prefsDataLoader.constructDBOption = function (dbName, data) {
     fluid.set(togo, dbName + ".data", data);
 
     return togo;
-};
-
-/**
- * Triggers the loading function to load data.
- * @param loader {Component} An instance of `gpii.dataLoader` (See dataLoader.js).
- * @return {None}
- */
-gpii.dataLoader.prefsDataLoader.loadData = function (loader) {
-    var promise = loader.load();
-    promise.then(function () {
-        console.log("The preferences data has been loaded successfully.");
-    }, function (err) {
-        console.log("Error at loading the preferences data. Error details: ", err);
-    });
 };
 
 /*
