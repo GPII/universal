@@ -27,6 +27,7 @@ fluid.setLogging(true);
 require("./shared/dataLoader-prefs.js");
 
 gpii.dataLoader.prefsDataLoader({
+    dbName: "preferences",
     dataPath: "%universal/testData/preferences/",
     couchDbUrl: "http://admin:admin@localhost:5984"
 });

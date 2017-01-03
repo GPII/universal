@@ -29,14 +29,11 @@ require("./shared/dataLoader.js");
 fluid.defaults("gpii.dataLoader.authDataLoader", {
     gradeNames: ["gpii.dataLoader"],
     databases: {
-        auth: {
-            dataFile: [
-                "%universal/testData/security/TestOAuth2DataStore.json",
-                "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
-            ]
+        expander: {
+            funcName: "gpii.dataLoader.authDataLoader.constructAuthData",
+            args: ["{that}.options.dbName", "{that}.options.dataFile"]
         }
     },
-    couchDbUrl: "http://admin:admin@localhost:5984",
     listeners: {
         "onCreate.load": {
             listener: "gpii.dataLoader.authDataLoader.loadData",
@@ -45,6 +42,24 @@ fluid.defaults("gpii.dataLoader.authDataLoader", {
     }
 });
 
+/**
+ * Construct the value of `options.databases` that to be accepted by `gpii.dataLoader` (See dataLoader.js).
+ *
+ * @param dbName {String} The database name;
+ * @param dataFile {Array} An array of data paths to files to be loaded into the database.
+ */
+gpii.dataLoader.authDataLoader.constructAuthData = function (dbName, dataFile) {
+    var togo = {};
+    fluid.set(togo, dbName + ".dataFile", dataFile);
+
+    return togo;
+};
+
+/**
+ * Triggers the loading function to load data.
+ * @param that {Component} An instance of `gpii.dataLoader` (See dataLoader.js).
+ * @return {None}
+ */
 gpii.dataLoader.authDataLoader.loadData = function (that) {
     var promise = that.load();
     promise.then(function () {
@@ -54,4 +69,11 @@ gpii.dataLoader.authDataLoader.loadData = function (that) {
     });
 };
 
-gpii.dataLoader.authDataLoader();
+gpii.dataLoader.authDataLoader({
+    dbName: "auth",
+    dataFile: [
+        "%universal/testData/security/TestOAuth2DataStore.json",
+        "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
+    ],
+    couchDbUrl: "http://admin:admin@localhost:5984"
+});

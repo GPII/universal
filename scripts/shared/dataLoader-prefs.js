@@ -51,9 +51,11 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
             type: "gpii.dataLoader",
             createOnEvent: "onCreateLoader",
             options: {
+                data: "{arguments}.0",
                 databases: {
-                    preferences: {
-                        data: "{arguments}.0"
+                    expander: {
+                        funcName: "gpii.dataLoader.prefsDataLoader.constructDBOption",
+                        args: ["{prefsDataLoader}.options.dbName", "{that}.options.data"]
                     }
                 },
                 listeners: {
@@ -84,6 +86,24 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
     }
 });
 
+/**
+ * Construct the value of `options.databases` that to be accepted by `gpii.dataLoader` (See dataLoader.js).
+ *
+ * @param dbName {String} The database name;
+ * @param data {Object} The data to be loaded into the database.
+ */
+gpii.dataLoader.prefsDataLoader.constructDBOption = function (dbName, data) {
+    var togo = {};
+    fluid.set(togo, dbName + ".data", data);
+
+    return togo;
+};
+
+/**
+ * Triggers the loading function to load data.
+ * @param loader {Component} An instance of `gpii.dataLoader` (See dataLoader.js).
+ * @return {None}
+ */
 gpii.dataLoader.prefsDataLoader.loadData = function (loader) {
     var promise = loader.load();
     promise.then(function () {
@@ -94,7 +114,7 @@ gpii.dataLoader.prefsDataLoader.loadData = function (loader) {
 };
 
 /*
- * Converts the physical data files into the structure that can be imported into CouchDB
+ * Converts the physical preferences data files into the structure that can be imported into CouchDB
  */
 fluid.defaults("gpii.dataLoader.prefsDataLoader.dataConverter", {
     gradeNames: ["fluid.component"],
@@ -110,6 +130,15 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader.dataConverter", {
     }
  });
 
+/**
+ * Read each preferences data from physical json file and construct them into a data structure that is accepted by
+ * the CouchDB /_bulk_docs API (http://docs.couchdb.org/en/2.0.0/api/database/bulk-api.html#db-bulk-docs)
+ *
+ * @param dataPath {String} The data path to where the preferences files are located;
+ * @param onPrefsDataStructureConstructedEvent {Event} fires when the data structure is constructed. The event is fired with
+ * an argument that is the constructed data structure.
+ * @return {Event} fires the data ready event with an argument of the constructed data structure.
+ */
 gpii.dataLoader.prefsDataLoader.dataConverter.constructPrefsDataStructure = function (dataPath, onPrefsDataStructureConstructedEvent) {
     var prefsDataStructure = [];
     var actualDataPath = fluid.module.resolvePath(dataPath);

@@ -16,7 +16,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // Steps to load data:
 // 1. Check the existence of the database;
 // 2. If the database already exists, delete and recreate the database to ensure a clean data load; otherwise, create the database;
-// 3. Load data in bulk using CouchDB /_bulk_docs request - http://docs.couchdb.org/en/2.0.0/api/database/bulk-api.html#db-bulk-docs
+// 3. Load data in bulk using CouchDB /_bulk_docs API - http://docs.couchdb.org/en/2.0.0/api/database/bulk-api.html#db-bulk-docs
 
 "use strict";
 
@@ -93,6 +93,15 @@ fluid.defaults("gpii.dataLoader", {
     }
 });
 
+/**
+ * The main load function that processes the data loading for databases defined in `that.options.databases` one by one.
+ * The data can be provided in 2 forms as one or both listed sub-options into `that.options.databases`:
+ * 1. `dataFile` option: an array of paths to data files. For example: dataFile: ["pathA/a.json", "pathB/b.json"];
+ * 2. `data` option: the direct data in the structure that is allowed by CouchDB /_bulk_docs API (http://docs.couchdb.org/en/2.0.0/api/database/bulk-api.html#db-bulk-docs)
+ *
+ * @param that {Component} An instance of "gpii.dataLoader"
+ * @return {Promise} The promise of the data loading process.
+ */
 gpii.dataLoader.load = function (that) {
     var promiseTogo = fluid.promise();
     var loadDataPromises = [];
@@ -105,7 +114,7 @@ gpii.dataLoader.load = function (that) {
         };
 
         // Delete the database if it already exists
-        var prepareDbPromise = gpii.dataLoader.prepareDB(that, directModel);
+        var prepareDbPromise = gpii.dataLoader.prepareDB(that.getDbDataSource, that.createDbDataSource, that.deleteDbDataSource, directModel);
 
         prepareDbPromise.then(function () {
             // load data files
@@ -125,31 +134,57 @@ gpii.dataLoader.load = function (that) {
     return promiseTogo;
 };
 
-gpii.dataLoader.createDb = function (that, directModel) {
-    return that.createDbDataSource.get(directModel);
+/**
+ * To create a database.
+ *
+ * @param createDbDataSource {DataSource} The data source for creating a database;
+ * @param directModel {Object} The direct model expressing the "coordinates" of the model to be fetched
+ *
+ * @return {Promise} A promise with the response of creating the database.
+ */
+gpii.dataLoader.createDb = function (createDbDataSource, directModel) {
+    return createDbDataSource.get(directModel);
 };
 
-// If the database already exists, delete and recreate; otherwise, create the database.
-gpii.dataLoader.prepareDB = function (that, directModel) {
+/**
+ * Prepare the database before loading the data. If the database already exists, delete and recreate it; otherwise, create the database.
+ *
+ * @param getDbDataSource {DataSource} The data source for checking the existence of a database;
+ * @param createDbDataSource {DataSource} The data source for creating a database;
+ * @param deleteDbDataSource {DataSource} The data source for deleting a database;
+ * @param directModel {Object} The direct model expressing the "coordinates" of the model to be fetched
+ *
+ * @return {Promise} A promise with the response of preparing the database.
+ */
+gpii.dataLoader.prepareDB = function (getDbDataSource, createDbDataSource, deleteDbDataSource, directModel) {
     var promiseTogo = fluid.promise();
-    var getDbPromise = that.getDbDataSource.get(directModel);
+    var getDbPromise = getDbDataSource.get(directModel);
 
     getDbPromise.then(function () {
         // The database already exists, delete and recreate to ensure a clean database for loading data
-        var deleteDbPromise = that.deleteDbDataSource.get(directModel);
+        var deleteDbPromise = deleteDbDataSource.get(directModel);
         deleteDbPromise.then(function () {
-            var createDbPromise = gpii.dataLoader.createDb(that, directModel);
+            var createDbPromise = gpii.dataLoader.createDb(createDbDataSource, directModel);
             fluid.promise.follow(createDbPromise, promiseTogo);
         });
     }, function () {
         // The database does not exist, create it
-        var createDbPromise = gpii.dataLoader.createDb(that, directModel);
+        var createDbPromise = gpii.dataLoader.createDb(createDbDataSource, directModel);
         fluid.promise.follow(createDbPromise, promiseTogo);
     });
 
     return promiseTogo;
 };
 
+/**
+ * Load the data into a database.
+ *
+ * @param loadDataSource {DataSource} The data source for loading the data;
+ * @param data {DataSource} The data to be loaded;
+ * @param directModel {Object} The direct model expressing the "coordinates" of the model to be fetched
+ *
+ * @return {Promise} A promise with the response of loading the data.
+ */
 gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
     if (!data) {
         return fluid.promise();
@@ -163,6 +198,15 @@ gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
     return loadDataSource.set(directModel, data);
 };
 
+/**
+ * Load a data file into a database.
+ *
+ * @param loadDataSource {DataSource} The data source for loading the data;
+ * @param dataFile {String} The path to a data file;
+ * @param directModel {Object} The direct model expressing the "coordinates" of the model to be fetched
+ *
+ * @return {Promise} A promise with the response of loading the data file.
+ */
 gpii.dataLoader.loadDataFile = function (loadDataSource, dataFile, directModel) {
     var actualPath = fluid.module.resolvePath(dataFile);
     var data = require(actualPath);
