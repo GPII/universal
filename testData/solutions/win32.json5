@@ -316,6 +316,118 @@
         ]
     },
 
+
+    "com.microsoft.windows.narrator": {
+        "name": "Windows Built-in Narrator",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Narrator",
+                    "dataTypes": {
+                        "SpeechSpeed": "REG_DWORD"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "http://registry\\.gpii\\.net/common/speechRate"
+                ],
+                "capabilitiesTransformations": {
+                    "SpeechSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.quantize",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    "ranges": [
+                                        {
+                                            "upperBound": 50,
+                                            "output": 0
+                                        },
+                                        {
+                                            "upperBound": 150,
+                                            "output": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "left": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 10
+                                                        }
+                                                    },
+                                                    "operator": "-",
+                                                    "right": 5
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "upperBound": 450,
+                                            "output": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.binaryOp",
+                                                    "left": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 30
+                                                        }
+                                                    },
+                                                    "operator": "+",
+                                                    "right": 5
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "output": 20
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "start": [
+            {
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "Narrator",
+                "enable": true
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "Narrator",
+                "enable": false
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "org.nvda-project": {
         "name": "NVDA Screen Reader",
         "contexts": {
