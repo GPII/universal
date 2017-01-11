@@ -334,12 +334,16 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator",
                     "dataTypes": {
-                        "SpeechSpeed": "REG_DWORD"
+                        "SpeechSpeed": "REG_DWORD",
+                        "InteractionMouse": "REG_DWORD",
+                        "CoupleNarratorCursorKeyboard": "REG_DWORD",
+                        "FollowInsertion": "REG_DWORD"
                     }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
-                    "http://registry\\.gpii\\.net/common/speechRate"
+                    "http://registry\\.gpii\\.net/common/speechRate",
+                    "http://registry\\.gpii\\.net/common/trackingTTS"
                 ],
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
@@ -397,7 +401,19 @@
                                 }
                             }
                         }
-                    }
+                    },
+                    "transform": [{
+                        "type": "fluid.transforms.arrayToSetMembership",
+                        "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                        "outputPath": "",
+                        "presentValue": 1,
+                        "missingValue": 0,
+                        "options": {
+                            "focus": "CoupleNarratorCursorKeyboard",
+                            "caret": "FollowInsertion",
+                            "mouse": "InteractionMouse"
+                        }
+                    }]
                 }
             }
         },
