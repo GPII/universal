@@ -1,0 +1,20 @@
+---
+flow_manager_preferences_server_host_address: localhost:8081
+
+flow_manager_environment: gpii.config.cloudBased.flowManager.production
+
+nodejs_app_name: flow-manager
+
+nodejs_app_env_vars:
+  - "NODE_ENV={{ flow_manager_environment }}"
+
+# For testing purposes
+nodejs_app_host_address: 127.0.0.1
+
+nodejs_app_tcp_port: 8082
+
+nodejs_app_test_http_endpoint: /carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D
+
+nodejs_app_test_http_status_code: 200
+
+nodejs_app_test_string: org.gnome.desktop.a11y.magnifier

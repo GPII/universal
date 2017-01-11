@@ -7,7 +7,7 @@ The authorization grant finder provides API that allows users to use access toke
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
     client.
-* **return:** An object. This object contains the authorization information for the access token. The object can have a different data structure when the access token is requested via a different OAuth2 grant method. Return `undefined` when the access token is not found. 
+* **return:** A promise object. Once resolved, this object contains the authorization information for the access token. The object can have a different data structure when the access token is requested via a different OAuth2 grant method. Return `undefined` when the access token is not found. 
     * An example of the returned object when the access token is requested via [GPII OAuth2 authorization code grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant):
     ```
     {
