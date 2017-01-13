@@ -461,11 +461,15 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator\\NoRoam",
                     "dataTypes": {
-                        "SpeechVolume": "REG_DWORD"
+                        "SpeechVolume": "REG_DWORD",
+                        "ShowKeyboardIntroduction": "REG_DWORD",
+                        "ShowBrowserSelection": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
-                    "SpeechVolume": {}
+                    "SpeechVolume": {},
+                    "ShowKeyboardIntroduction": {},
+                    "ShowBrowserSelection": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/volumeTTS"
@@ -478,6 +482,20 @@
                             "factor": 100,
                             "offset": 0
                         }
+                    },
+                    "ShowKeyboardIntroduction": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
+                        }
+                    },
+                    "ShowBrowserSelection": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": 0
+                        }
                     }
                 }
             }
@@ -487,7 +505,6 @@
             "settings.configureNoRoam"
         ],
         "restore": [
-            "settings.configure",
             "settings.configure",
             "settings.configureNoRoam"
         ],
