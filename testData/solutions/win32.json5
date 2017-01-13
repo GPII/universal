@@ -335,15 +335,30 @@
                     "path": "Software\\Microsoft\\Narrator",
                     "dataTypes": {
                         "SpeechSpeed": "REG_DWORD",
+                        "SpeechPitch": "REG_DWORD",
                         "InteractionMouse": "REG_DWORD",
                         "CoupleNarratorCursorKeyboard": "REG_DWORD",
-                        "FollowInsertion": "REG_DWORD"
+                        "FollowInsertion": "REG_DWORD",
+                        "EchoChars": "REG_DWORD",
+                        "EchoWords": "REG_DWORD"
                     }
+                },
+                "supportedSettings": {
+                    "SpeechSpeed": {},
+                    "SpeechPitch": {},
+                    "CoupleNarratorCursorKeyboard": {},
+                    "FollowInsertion": {},
+                    "InteractionMouse": {},
+                    "EchoChars": {},
+                    "EchoWords": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "http://registry\\.gpii\\.net/common/speechRate",
-                    "http://registry\\.gpii\\.net/common/trackingTTS"
+                    "http://registry\\.gpii\\.net/common/trackingTTS",
+                    "http://registry\\.gpii\\.net/common/keyEcho",
+                    "http://registry\\.gpii\\.net/common/wordEcho",
+                    "http://registry\\.gpii\\.net/common/pitch"
                 ],
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
@@ -402,6 +417,14 @@
                             }
                         }
                     },
+                    "SpeechPitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "factor": 20,
+                            "offset": 0
+                        }
+                    },
                     "transform": [{
                         "type": "fluid.transforms.arrayToSetMembership",
                         "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
@@ -413,15 +436,60 @@
                             "caret": "FollowInsertion",
                             "mouse": "InteractionMouse"
                         }
-                    }]
+                    }],
+                    "EchoChars": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho"
+                        }
+                    },
+                    "EchoWords": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho"
+                        }
+                    }
+                }
+            },
+            "configureNoRoam": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Narrator\\NoRoam",
+                    "dataTypes": {
+                        "SpeechVolume": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "SpeechVolume": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/volumeTTS"
+                ],
+                "capabilitiesTransformations": {
+                    "SpeechVolume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "factor": 100,
+                            "offset": 0
+                        }
+                    }
                 }
             }
         },
         "configure": [
-            "settings.configure"
+            "settings.configure",
+            "settings.configureNoRoam"
         ],
         "restore": [
-            "settings.configure"
+            "settings.configure",
+            "settings.configure",
+            "settings.configureNoRoam"
         ],
         "start": [
             {
