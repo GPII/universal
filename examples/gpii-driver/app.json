@@ -1,0 +1,15 @@
+{
+    "type": "gpii.appDemo",
+    "options": {
+        "gradeNames": ["fluid.component"],
+        "distributeOptions": {
+            "distributeApp": {
+                "record": "gpii.app",
+                "target": "{that flowManager}.options.gradeNames"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "../../gpii/configs/gpii.config.cloudBased.development.all.local.json"
+     ]
+}
