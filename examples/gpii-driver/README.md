@@ -2,6 +2,6 @@ This directory contains an example that provides customisations to the GPII by m
 
 This example demonstrates how to inject a component named `gpii.app` as a subcomponent of the GPII flow manager. To start the customized GPII, simply type:
 
-    node deiver.js
+    node driver.js
 
 from this directory. The logging information output by `gpii.app` will appear on the GPII console.
