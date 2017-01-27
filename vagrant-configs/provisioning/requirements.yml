@@ -1,0 +1,17 @@
+- src: https://github.com/idi-ops/ansible-facts
+  name: facts
+
+- src: https://github.com/idi-ops/ansible-couchdb
+  name: couchdb
+
+- src: https://github.com/idi-ops/ansible-nodejs
+  name: nodejs
+
+- src: https://github.com/gpii-ops/ansible-preferences-server
+  name: preferences-server
+
+- src: https://github.com/gpii-ops/ansible-preferences-server-data-loader
+  name: preferences-server-data-loader
+
+- src: https://github.com/gpii-ops/ansible-flow-manager
+  name: flow-manager

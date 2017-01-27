@@ -27,13 +27,13 @@ fluid.defaults("gpii.oauth2.clientService", {
     },
     invokers: {
         authenticateClient: {
-            funcName: "gpii.oauth2.clientService.authenticateClient",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+            funcName: "gpii.oauth2.clientService.processClient",
+            args: ["{dataStore}", "{arguments}.0", "oauth2ClientSecret", "{arguments}.1"]
                 // oauth2ClientId, oauth2ClientSecret
         },
         checkClientRedirectUri: {
-            funcName: "gpii.oauth2.clientService.checkClientRedirectUri",
-            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+            funcName: "gpii.oauth2.clientService.processClient",
+            args: ["{dataStore}", "{arguments}.0", "redirectUri", "{arguments}.1"]
                 // oauth2ClientId, redirectUri
         },
         getClientById: {
@@ -42,18 +42,27 @@ fluid.defaults("gpii.oauth2.clientService", {
     }
 });
 
-gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2ClientId, oauth2ClientSecret) {
-    var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-    if (client && client.oauth2ClientSecret === oauth2ClientSecret) {
-        return client;
-    }
-    return false;
-};
-
-gpii.oauth2.clientService.checkClientRedirectUri = function (dataStore, oauth2ClientId, redirectUri) {
-    var client = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-    if (client && client.redirectUri === redirectUri) {
-        return client;
-    }
-    return false;
+// To verify a client information matches the expected value
+//
+// @dataStore (Object) - an instance of a data store component such as gpii.oauth2.dbDataStore
+// @oauth2ClientId (String) - an oAuth2 client id
+// @fieldToVerify (String) - A field of the client object to be verified:
+// in authenticateClient() API, this field is "oauth2ClientSecret"; in checkClientRedirectUri() API,
+// this field is "redirectUri"
+// @expectedVerifiedValue (Any) - The expected verified value
+//
+// @return (Promise) - A promise object that contains either a client record or an error
+gpii.oauth2.clientService.processClient = function (dataStore, oauth2ClientId, fieldToVerify, expectedVerifiedValue) {
+    var promiseTogo = fluid.promise();
+    var clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
+    clientPromise.then(function (client) {
+        if (client && client[fieldToVerify] === expectedVerifiedValue) {
+            promiseTogo.resolve(client);
+        } else {
+            promiseTogo.reject(gpii.oauth2.errors.unauthorizedClient);
+        }
+    }, function (err) {
+        promiseTogo.reject(err);
+    });
+    return promiseTogo;
 };

@@ -21,8 +21,6 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.easit4all");
 
-require("./OAuth2AcceptanceDataStore.js");
-
 gpii.tests.cloud.oauth2.easit4all.common = {
     client_id: "com.bdigital.easit4all",
     client_secret: "client_secret_easit4all",

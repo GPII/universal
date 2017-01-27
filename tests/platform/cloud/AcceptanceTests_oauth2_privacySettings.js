@@ -20,8 +20,6 @@ fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
-require("./OAuth2AcceptanceDataStore.js");
-
 fluid.registerNamespace("gpii.tests.cloud.oauth2.privacySettings");
 
 gpii.tests.cloud.oauth2.privacySettings.sequence = [
@@ -59,11 +57,22 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = [
     {
         event: "{postAuthorizationRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyDataStoreAuthorization",
-        args: ["{testCaseHolder}.configuration.server.flowManager.oauth2DataStore",
-              "{testCaseHolder}.options.expectedAuthDecision"]
+        args: [
+            "{testCaseHolder}.configuration.server.flowManager.oauth2DataStore",
+            "{testCaseHolder}.options.expectedAuthDecision",
+            "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone"
+        ]
+    },
+    {
+        event: "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone",
+        listener: fluid.identity
     },
     {
         func: "{logoutRequest}.send"
+    },
+    {
+        event: "{logoutRequest}.events.onComplete",
+        listener: "fluid.identity"
     },
     {
         func: "{privacySettingsRequest3}.send"
@@ -88,11 +97,14 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true }
         },
         expectedAuthDecision: {
-            userId: 2,
-            clientId: 1,
+            gpiiToken: "alice_gpii_token",
+            clientId: "client-1",
             redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true },
             revoked: false
+        },
+        events: {
+            dataStoreAuthorizationVerificationDone: null
         }
     }
 ];

@@ -22,8 +22,6 @@ fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
-require("./OAuth2AcceptanceDataStore.js");
-
 fluid.registerNamespace("gpii.tests.cloud.oauth2.addPrefs");
 
 gpii.tests.cloud.oauth2.addPrefs.prefsData = {
