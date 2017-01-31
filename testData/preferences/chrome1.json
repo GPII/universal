@@ -4,9 +4,8 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.ilunion.cloud4chrome": {
-                        "screenReaderTTSEnabled": true,
-                        "simplifier": true
+                    "http://registry.gpii.net/applications/net.gpii.chromeExtension": {
+                        "screenReaderTTSEnabled": true
                     }
                 }
             }
