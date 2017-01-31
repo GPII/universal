@@ -58,6 +58,10 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
                         args: ["{prefsDataLoader}.options.dbName", "{that}.options.data"]
                     }
                 },
+                events: {
+                    onDataLoaded: "{prefsDataLoader}.events.onDataLoaded",
+                    onDataLoadedError: "{prefsDataLoader}.events.onDataLoadedError"
+                },
                 listeners: {
                     "onCreate.escalate": "{prefsDataLoader}.events.onLoaderReady.fire"
                 }
@@ -66,12 +70,14 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
     },
     events: {
         onCreateLoader: null,
-        onLoaderReady: null
+        onLoaderReady: null,
+        onDataLoaded: null,
+        onDataLoadedError: null
     },
     listeners: {
         "onLoaderReady.load": {
             listener: "gpii.dataLoader.performLoad",
-            args: ["{that}.options.dbName", "{that}.loader.load"]
+            args: ["{that}.options.dbName", "{that}.loader"]
         }
     },
     distributeOptions: {

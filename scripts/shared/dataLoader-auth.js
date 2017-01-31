@@ -29,7 +29,7 @@ fluid.defaults("gpii.dataLoader.authDataLoader", {
     listeners: {
         "onCreate.load": {
             listener: "gpii.dataLoader.performLoad",
-            args: ["{that}.options.dbName", "{that}.load"]
+            args: ["{that}.options.dbName", "{that}"]
         }
     }
 });

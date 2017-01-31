@@ -22,7 +22,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 var fluid = require("infusion"),
     kettle = require("kettle"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    fs = require("fs");
 
 // Data Source used to interact with CouchDB
 fluid.defaults("gpii.dataLoader.dataSource", {
@@ -91,6 +92,10 @@ fluid.defaults("gpii.dataLoader", {
             funcName: "gpii.dataLoader.load",
             args: ["{that}"]
         }
+    },
+    events: {
+        onDataLoaded: null,
+        onDataLoadedError: null
     }
 });
 
@@ -120,12 +125,12 @@ gpii.dataLoader.load = function (that) {
         prepareDbPromise.then(function () {
             // load data files
             var dataFilePaths = fluid.makeArray(dbData.dataFile);
-            fluid.each(dataFilePaths, function (oneDataFile) {
-                loadDataPromises.push(gpii.dataLoader.loadDataFile(that.loadDataSource, oneDataFile, directModel));
-            });
+            loadDataPromises = gpii.dataLoader.loadDataFiles(that.loadDataSource, dataFilePaths, directModel);
 
             // load direct data
-            loadDataPromises.push(gpii.dataLoader.loadData(that.loadDataSource, dbData.data, directModel));
+            if (dbData.data) {
+                loadDataPromises.push(gpii.dataLoader.loadData(that.loadDataSource, dbData.data, directModel));
+            }
 
             var loadDataPromise = fluid.promise.sequence(loadDataPromises);
             fluid.promise.follow(loadDataPromise, promiseTogo);
@@ -208,24 +213,58 @@ gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
  *
  * @return {Promise} A promise with the response of loading the data file.
  */
+gpii.dataLoader.loadDataFiles = function (loadDataSource, dataFilePaths, directModel) {
+    // Capture non-found file paths
+    var unfoundFiles = [];
+    // Capture data from files if files exist.
+    var dataContents = [];
+    var loadDataPromises = [];
+
+    fluid.each(dataFilePaths, function (oneDataFile) {
+        var actualPath = fluid.module.resolvePath(oneDataFile);
+        if (!fs.existsSync(actualPath)) {
+            unfoundFiles.push(actualPath);
+        } else {
+            dataContents.push(require(actualPath));
+        }
+    });
+
+    if (unfoundFiles.length > 0) {
+        var errorPromise = fluid.promise().reject("Data file(s) not found in the file system: " + unfoundFiles.join());
+        loadDataPromises.push(errorPromise);
+    } else {
+        fluid.each(dataContents, function (data) {
+            loadDataPromises.push(gpii.dataLoader.loadData(loadDataSource, data, directModel));
+        });
+    }
+    return loadDataPromises;
+};
+
 gpii.dataLoader.loadDataFile = function (loadDataSource, dataFile, directModel) {
     var actualPath = fluid.module.resolvePath(dataFile);
-    var data = require(actualPath);
+    if (!fs.existsSync(actualPath)) {
+        return fluid.promise().reject("Data file is not found in the file system: " + actualPath);
+    } else {
+        var data = require(actualPath);
+        var promiseTogo = gpii.dataLoader.loadData(loadDataSource, data, directModel);
 
-    return gpii.dataLoader.loadData(loadDataSource, data, directModel);
+        return promiseTogo;
+    }
 };
 
 /**
- * The utility function to trigger the loading function to load data.
+ * The API function to trigger the loading function to load data.
  * @param dbName {String} The database name;
  * @param loadFunc {Function} The load() invoker defined for an instance of `gpii.dataLoader` component (See dataLoader.js);
  * @return {None} The success or fail result of the loading is reported on the console.
  */
-gpii.dataLoader.performLoad = function (dbName, loadFunc) {
-    var promise = loadFunc();
+gpii.dataLoader.performLoad = function (dbName, loaderComponent) {
+    var promise = loaderComponent.load();
     promise.then(function () {
         console.log("The " + dbName + " data has been loaded successfully.");
+        loaderComponent.events.onDataLoaded.fire();
     }, function (err) {
         console.log("Error at loading the " + dbName + " data. Error details: ", err);
+        loaderComponent.events.onDataLoadedError.fire(err);
     });
 };

@@ -1,5 +1,5 @@
 /*!
- * GPII Settings Transformer Tests
+ * GPII Preferences Data Loader Tests
  *
  * Copyright 2016 OCAD University
  *
