@@ -188,8 +188,8 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                 }
             },
             restore: ["settings.maybeThrow", "settings.configure"],
-            // It's necessary to execute settings.maybeThrow otherwise its entry does not appear in the snapshotted solutions registry block
-            // entered into the journal, and hence it cannot be found on the next turn
+            // It's necessary to execute settings.maybeThrow otherwise its entry does not appear in the snapshotted solutions
+            // registry block entered into the journal, and hence it cannot be found on the next turn
             configure: ["settings.configure", "settings.maybeThrow", "settings.explode"]
         }
     }
@@ -267,8 +267,10 @@ gpii.tests.journal.settingsHandlerThrow = function (advisor, that, payload) {
 };
 
 gpii.tests.journal.populateMockSettingsHandlers = function (that) {
-    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.explodingSettingsHandler, "gpii.tests.journal.explodingSettingsHandler");
-    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.throwingSettingsHandler, "gpii.tests.journal.throwingSettingsHandler");
+    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.explodingSettingsHandler,
+        "gpii.tests.journal.explodingSettingsHandler");
+    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.throwingSettingsHandler,
+        "gpii.tests.journal.throwingSettingsHandler");
 };
 
 gpii.tests.journal.logDestroyed = function (loginRequest, testCaseHolder) {
@@ -300,7 +302,8 @@ gpii.tests.journal.checkJournalsList = function (markup, component, expectCrashe
     var firstDate = decodeURIComponent(match[1]);
     var firstTime = Date.parse(firstDate);
     fluid.log("Parsed link date " + firstDate + " to time " + firstTime);
-    jqUnit.assertTrue("Received correct journal time in journal list markup", firstTime > component.stashedStartTime && firstTime < (component.stashedStartTime + 2000));
+    jqUnit.assertTrue("Received correct journal time in journal list markup",
+        firstTime > component.stashedStartTime && firstTime < (component.stashedStartTime + 2000));
     // See: http://stackoverflow.com/questions/1979884/how-to-use-javascript-regex-over-multiple-lines
     var snapshots = markup.match(/<p class="fl-snapshot">([\s\S]*?)<\/p>/g);
     fluid.log("Acquired " + snapshots.length + " snapshots");
