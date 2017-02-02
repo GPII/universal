@@ -112,32 +112,81 @@ gpii.dataLoader.load = function (that) {
     var promiseTogo = fluid.promise();
     var loadDataPromises = [];
 
-    // Process databases one by one
-    fluid.each(that.options.databases, function (dbData, dbName) {
-        var directModel = {
-            couchDbUrl: that.options.couchDbUrl,
-            dbName: dbName
-        };
+    // Validate and extract data from data files
+    var dataFileResults = gpii.dataLoader.processDataFiles(that.options.databases);
 
-        // Delete the database if it already exists
-        var prepareDbPromise = gpii.dataLoader.prepareDB(that.getDbDataSource, that.createDbDataSource, that.deleteDbDataSource, directModel);
+    if (dataFileResults.errors.length > 0) {
+        promiseTogo.reject("Data file(s) not found in the file system: " + errors.join());
+    } else {
+        var databases = dataFileResults.databases;
+        // Process databases one by one
+        fluid.each(databases, function (dbData, dbName) {
+            var directModel = {
+                couchDbUrl: that.options.couchDbUrl,
+                dbName: dbName
+            };
 
-        prepareDbPromise.then(function () {
-            // load data files
-            var dataFilePaths = fluid.makeArray(dbData.dataFile);
-            loadDataPromises = gpii.dataLoader.loadDataFiles(that.loadDataSource, dataFilePaths, directModel);
+            // Delete the database if it already exists
+            var prepareDbPromise = gpii.dataLoader.prepareDB(that.getDbDataSource, that.createDbDataSource, that.deleteDbDataSource, directModel);
 
-            // load direct data
-            if (dbData.data) {
-                loadDataPromises.push(gpii.dataLoader.loadData(that.loadDataSource, dbData.data, directModel));
-            }
+            prepareDbPromise.then(function () {
+                // load data
+                if (dbData) {
+                    loadDataPromises.push(gpii.dataLoader.loadData(that.loadDataSource, dbData, directModel));
+                }
 
-            var loadDataPromise = fluid.promise.sequence(loadDataPromises);
-            fluid.promise.follow(loadDataPromise, promiseTogo);
+                var loadDataPromise = fluid.promise.sequence(loadDataPromises);
+                fluid.promise.follow(loadDataPromise, promiseTogo);
+            });
         });
-    });
+    }
 
     return promiseTogo;
+};
+
+/**
+ * Loop thru each database, to ensure the existence of data files in database.dataFile option. If files exist,
+ * extract data from data files, concat with data from database.data, and return the concatenated data for each database.
+ * Otherwise, report errors on non-existent files.
+ *
+ * @param databases {Object} The same structure as options.databases of the "gpii.dataLoader" component;
+ *
+ * @return {Object} In a structure of {errors: [{String}, ...], databases: [{dbName1: [{data}]}, ...]}.
+ */
+gpii.dataLoader.processDataFiles = function (databases) {
+    var errors = [];
+    // Structure: {database1: {data: []}, ...}
+    var allData = {};
+
+    fluid.each(databases, function (database, dbName) {
+        var data = [];
+        if (database.dataFile) {
+            // Loop thru data files to check their existence.
+            // If doesn't exist, report error. Otherwise, extract the data
+            fluid.each(database.dataFile, function (oneDataFile) {
+                var actualPath = fluid.module.resolvePath(oneDataFile);
+                if (!fs.existsSync(actualPath)) {
+                    errors.push(actualPath);
+                } else {
+                    data = data.concat(fluid.makeArray(require(actualPath)));
+                }
+            });
+        }
+
+        // Concat the extracted data from data files with the provided input at database.data
+        if (database.data) {
+            data = data.concat(fluid.makeArray(database.data));
+        }
+
+        if (data.length > 0) {
+            fluid.set(allData, [dbName], data);
+        }
+    });
+
+    return {
+        errors: errors,
+        databases: allData
+    };
 };
 
 /**
@@ -202,54 +251,6 @@ gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
     };
 
     return loadDataSource.set(directModel, data);
-};
-
-/**
- * Load a data file into a database.
- *
- * @param loadDataSource {DataSource} The data source for loading the data;
- * @param dataFile {String} The path to a data file;
- * @param directModel {Object} The direct model expressing the "coordinates" of the model to be fetched
- *
- * @return {Promise} A promise with the response of loading the data file.
- */
-gpii.dataLoader.loadDataFiles = function (loadDataSource, dataFilePaths, directModel) {
-    // Capture non-found file paths
-    var unfoundFiles = [];
-    // Capture data from files if files exist.
-    var dataContents = [];
-    var loadDataPromises = [];
-
-    fluid.each(dataFilePaths, function (oneDataFile) {
-        var actualPath = fluid.module.resolvePath(oneDataFile);
-        if (!fs.existsSync(actualPath)) {
-            unfoundFiles.push(actualPath);
-        } else {
-            dataContents.push(require(actualPath));
-        }
-    });
-
-    if (unfoundFiles.length > 0) {
-        var errorPromise = fluid.promise().reject("Data file(s) not found in the file system: " + unfoundFiles.join());
-        loadDataPromises.push(errorPromise);
-    } else {
-        fluid.each(dataContents, function (data) {
-            loadDataPromises.push(gpii.dataLoader.loadData(loadDataSource, data, directModel));
-        });
-    }
-    return loadDataPromises;
-};
-
-gpii.dataLoader.loadDataFile = function (loadDataSource, dataFile, directModel) {
-    var actualPath = fluid.module.resolvePath(dataFile);
-    if (!fs.existsSync(actualPath)) {
-        return fluid.promise().reject("Data file is not found in the file system: " + actualPath);
-    } else {
-        var data = require(actualPath);
-        var promiseTogo = gpii.dataLoader.loadData(loadDataSource, data, directModel);
-
-        return promiseTogo;
-    }
 };
 
 /**
