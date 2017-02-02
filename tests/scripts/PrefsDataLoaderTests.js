@@ -1,7 +1,7 @@
 /*!
  * GPII Preferences Data Loader Tests
  *
- * Copyright 2016 OCAD University
+ * Copyright 2016-2017 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -16,16 +16,17 @@ var fluid = fluid || require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-require("../../scripts/prefsDataLoader.js");
+require("../../scripts/shared/prefsDataLoader.js");
 
 (function () {
     fluid.registerNamespace("gpii.tests.prefsDataLoader");
 
     fluid.defaults("gpii.tests.prefsDataLoader.dataConverter", {
         gradeNames: ["gpii.dataLoader.prefsDataLoader.dataConverter"],
-        dataPath: "data/",
+        dataPath: "data/prefs/",
         expected: [{
-            carla: {
+            "_id": "carla",
+            "value": {
                 "flat": {
                     "contexts": {
                         "gpii-default": {
@@ -42,7 +43,8 @@ require("../../scripts/prefsDataLoader.js");
                 }
             }
         }, {
-            sammy: {
+            "_id": "sammy",
+            "value": {
                 "flat": {
                     "contexts": {
                         "gpii-default": {

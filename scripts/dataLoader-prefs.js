@@ -24,7 +24,7 @@ var fluid = require("infusion"),
 
 fluid.setLogging(true);
 
-require("./shared/dataLoader-prefs.js");
+require("./shared/prefsDataLoader.js");
 
 gpii.dataLoader.prefsDataLoader({
     dbName: "preferences",

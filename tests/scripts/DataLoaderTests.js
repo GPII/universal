@@ -1,7 +1,7 @@
 /*!
  * GPII Preferences Data Loader Tests
  *
- * Copyright 2016 OCAD University
+ * Copyright 2016-2017 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -71,7 +71,7 @@ fluid.logObjectRenderChars = 10240;
             case1: {
                 db1: {
                     dataFile: [
-                        "%universal/tests/scripts/data/carla.json",
+                        "%universal/tests/scripts/data/prefs/carla.json",
                         "%universal/tests/scripts/data/views-test.json"
                     ],
                     data: {
@@ -88,7 +88,7 @@ fluid.logObjectRenderChars = 10240;
                 db1: {
                     dataFile: [
                         "%universal/tests/scripts/data/nonExistent1.json",
-                        "%universal/tests/scripts/data/sammy.json"
+                        "%universal/tests/scripts/data/prefs/sammy.json"
                     ],
                     data: {
                         "test1": "test1"

@@ -19,7 +19,7 @@ var fluid = fluid || require("infusion"),
 require("gpii-pouchdb");
 gpii.pouch.loadTestingSupport();
 
-require("../../scripts/shared/dataLoader-auth.js");
+require("../../scripts/shared/authDataLoader.js");
 require("./DataLoaderTestsUtils.js");
 
 fluid.defaults("gpii.tests.authDataLoader", {
@@ -82,6 +82,9 @@ gpii.tests.authDataLoader.checkResponse = function (msg, response, body, expecte
     }
 };
 
+// This component must be name as "testEnvironment" because its base grade "gpii.test.pouch.environment"
+// looks up this compnent name for port and events.
+// See: https://github.com/GPII/gpii-pouchdb/blob/master/src/test/environment.js#L55
 fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
     gradeNames: ["gpii.test.pouch.environment"],
     port: 1234,

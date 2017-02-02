@@ -24,7 +24,7 @@ var fluid = require("infusion"),
 
 fluid.setLogging(true);
 
-require("./shared/dataLoader-auth.js");
+require("./shared/authDataLoader.js");
 
 gpii.dataLoader.authDataLoader({
     dbName: "auth",
