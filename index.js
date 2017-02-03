@@ -62,7 +62,7 @@ gpii.loadTestingSupport = function () {
  */
 gpii.queryConfigs = function () {
     return fluid.queryIoCSelector(fluid.rootComponent, "kettle.config");
-}
+};
 
 /**
  * Starts the GPII using the default development configuration
