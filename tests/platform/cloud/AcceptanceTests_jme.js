@@ -15,8 +15,11 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 "use strict";
-var fluid = require("universal"),
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 

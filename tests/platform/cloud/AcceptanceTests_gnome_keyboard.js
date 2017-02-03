@@ -15,8 +15,10 @@
  */
 
 "use strict";
-var fluid = require("universal"),
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 

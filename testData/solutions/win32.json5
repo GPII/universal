@@ -9,14 +9,315 @@
             ]
         },
         "settingsHandlers": {
-            "configuration": {
+            "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\15.0\\Settings\\VoiceProfiles.ini"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                },
+                "supportedSettings": {
+                    "Voice Profiles.ActiveVoiceProfileName": {},
+                    "options.SayAllIndicateCaps": {},
+                    "options.TypingEcho": {},
+                    "options.SayAllMode": {},
+                    "Braille.BrailleMode": {},
+                    "options.SayAllIgnoreShiftKeys": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "Voice Profiles\\.ActiveVoiceProfileName": {
+                        "literalValue": "GPII"
+                    },
+                    "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "options\\.TypingEcho": { // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/keyEcho",
+                                    "rightPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                                    "operator": "&&"
+                                }
+                            },
+                            "true": 3,
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.condition",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho",
+                                    "true": 1,
+                                    "false": {
+                                        "transform": {
+                                            "type": "fluid.transforms.condition",
+                                            "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho",
+                                            "true": 2
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "options\\.SayAllMode": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/readingUnit",
+                            "match": {
+                                "line": 0,
+                                "sentence": 1,
+                                "paragraph": 2
+                            }
+                        }
+                    },
+                    "Braille\\.BrailleMode": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/brailleMode",
+                            "match": {
+                                "line": 0,
+                                "structured": 1,
+                                "speechHistory": 2
+                            }
+                        }
+                    },
+                    "options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/announceCapitals": "options\\.SayAllIndicateCaps",
+                    "http://registry\\.gpii\\.net/common/keyEcho": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "options\\.TypingEcho", // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                            "match": [{
+                                inputValue: 1,
+                                outputValue: true
+                            }, {
+                                inputValue: 3,
+                                outputValue: true
+                            }],
+                            "noMatch": {
+                                "outputValue": false
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/wordEcho": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "options\\.TypingEcho", // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                            "match": [{
+                                inputValue: 2,
+                                outputValue: true
+                            }, {
+                                inputValue: 3,
+                                outputValue: true
+                            }],
+                            "noMatch": {
+                                "outputValue": false
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/readingUnit": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "options\\.SayAllMode",
+                            "match": [{
+                                inputValue: 0,
+                                outputValue: "line"
+                            }, {
+                                inputValue: 1,
+                                outputValue: "sentence"
+                            }, {
+                                inputValue: 2,
+                                outputValue: "paragraph"
+                            }]
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/brailleMode": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "Braille\\.BrailleMode",
+                            "match": [{
+                                inputValue: 0,
+                                outputValue: "line"
+                            }, {
+                                inputValue: 1,
+                                outputValue: "structured"
+                            }, {
+                                inputValue: 2,
+                                outputValue: "speechHistory"
+                            }]
+                        }
+                    }
+                }
+            },
+            "configuration2": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                },
+                "supportedSettings": {
+                    "Options.PrimarySynthesizer": {},
+                    "ENU-Global.Rate": {},
+                    "ENU-JAWSCursor.Rate": {},
+                    "ENU-Keyboard.Rate": {},
+                    "ENU-MenuAndDialog.Rate": {},
+                    "ENU-Message.Rate": {},
+                    "ENU-PCCursor.Rate": {},
+                    "ENU-Global.Pitch": {},
+                    "ENU-JAWSCursor.Pitch": {},
+                    "ENU-Keyboard.Pitch": {},
+                    "ENU-MenuAndDialog.Pitch": {},
+                    "ENU-Message.Pitch": {},
+                    "ENU-PCCursor.Pitch": {},
+                    "ENU-Global.Volume": {},
+                    "ENU-JAWSCursor.Volume": {},
+                    "ENU-Keyboard.Volume": {},
+                    "ENU-MenuAndDialog.Volume": {},
+                    "ENU-Message.Volume": {},
+                    "ENU-PCCursor.Volume": {},
+                    "ENU-Global.Punctuation": {},
+                    "ENU-JAWSCursor.Punctuation": {},
+                    "ENU-Keyboard.Punctuation": {},
+                    "ENU-MenuAndDialog.Punctuation": {},
+                    "ENU-Message.Punctuation": {},
+                    "ENU-PCCursor.Punctuation": {},
+                    "ENU-Global.SynthLangString": {},
+                    "ENU-JAWSCursor.SynthLangString": {},
+                    "ENU-Keyboard.SynthLangString": {},
+                    "ENU-MenuAndDialog.SynthLangString": {},
+                    "ENU-Message.SynthLangString": {},
+                    "ENU-PCCursor.SynthLangString": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                    "cloud4allVoiceProfile-GlobalContext\\.Punctuation": {
+                    "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
+                    "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-JAWSCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Keyboard\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-MenuAndDialog\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Message\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-PCCursor\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ENU-Global\\.Pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-JAWSCursor\\.Pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Keyboard\\.Pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-MenuAndDialog\\.Pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Message\\.Pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-PCCursor\\.Pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                                    "factor": 99,
+                                    "offset": 1
+                                }
+                            }
+                        }
+                    },
+                    "ENU-Global\\.Volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
+                    "ENU-JAWSCursor\\.Volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
+                    "ENU-Keyboard\\.Volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
+                    "ENU-MenuAndDialog\\.Volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
+                    "ENU-Message\\.Volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
+                    "ENU-PCCursor\\.Volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "factor": 100
+                        }
+                    },
+                    "ENU-Global\\.Punctuation": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
@@ -28,27 +329,250 @@
                             }
                         }
                     },
-                    "cloud4allVoiceProfile-GlobalContext\\.Speed": {
+                    "ENU-JAWSCursor\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 1,
+                                "most": 2,
+                                "all": 3
+                            }
+                        }
+                    },
+                    "ENU-Keyboard\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 1,
+                                "most": 2,
+                                "all": 3
+                            }
+                        }
+                    },
+                    "ENU-MenuAndDialog\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 1,
+                                "most": 2,
+                                "all": 3
+                            }
+                        }
+                    },
+                    "ENU-Message\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 1,
+                                "most": 2,
+                                "all": 3
+                            }
+                        }
+                    },
+                    "ENU-PCCursor\\.Punctuation": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 1,
+                                "most": 2,
+                                "all": 3
+                            }
+                        }
+                    },
+                    "ENU-Global\\.SynthLangString": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en-US": "American English",
+                                "en-GB": "British English",
+                                "fr": "French",
+                                "fr-CA": "French Canadian",
+                                "it": "Italian",
+                                "pt-BR": "Brazilian Portuguese",
+                                "de": "German",
+                                "es-US": "Latin American Spanish",
+                                "es-ES": "Castilian Spanish",
+                                "fi": "Finnish"
+                            }
+                        }
+                    },
+                    "ENU-JAWSCursor\\.SynthLangString": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en-US": "American English",
+                                "en-GB": "British English",
+                                "fr": "French",
+                                "fr-CA": "French Canadian",
+                                "it": "Italian",
+                                "pt-BR": "Brazilian Portuguese",
+                                "de": "German",
+                                "es-US": "Latin American Spanish",
+                                "es-ES": "Castilian Spanish",
+                                "fi": "Finnish"
+                            }
+                        }
+                    },
+                    "ENU-Keyboard\\.SynthLangString": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en-US": "American English",
+                                "en-GB": "British English",
+                                "fr": "French",
+                                "fr-CA": "French Canadian",
+                                "it": "Italian",
+                                "pt-BR": "Brazilian Portuguese",
+                                "de": "German",
+                                "es-US": "Latin American Spanish",
+                                "es-ES": "Castilian Spanish",
+                                "fi": "Finnish"
+                            }
+                        }
+                    },
+                    "ENU-MenuAndDialog\\.SynthLangString": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en-US": "American English",
+                                "en-GB": "British English",
+                                "fr": "French",
+                                "fr-CA": "French Canadian",
+                                "it": "Italian",
+                                "pt-BR": "Brazilian Portuguese",
+                                "de": "German",
+                                "es-US": "Latin American Spanish",
+                                "es-ES": "Castilian Spanish",
+                                "fi": "Finnish"
+                            }
+                        }
+                    },
+                    "ENU-Message\\.SynthLangString": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en-US": "American English",
+                                "en-GB": "British English",
+                                "fr": "French",
+                                "fr-CA": "French Canadian",
+                                "it": "Italian",
+                                "pt-BR": "Brazilian Portuguese",
+                                "de": "German",
+                                "es-US": "Latin American Spanish",
+                                "es-ES": "Castilian Spanish",
+                                "fi": "Finnish"
+                            }
+                        }
+                    },
+                    "ENU-PCCursor\\.SynthLangString": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/auditoryOutLanguage",
+                            "match": {
+                                "en-US": "American English",
+                                "en-GB": "British English",
+                                "fr": "French",
+                                "fr-CA": "French Canadian",
+                                "it": "Italian",
+                                "pt-BR": "Brazilian Portuguese",
+                                "de": "German",
+                                "es-US": "Latin American Spanish",
+                                "es-ES": "Castilian Spanish",
+                                "fi": "Finnish"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speechSynthesizer": "Options\\.PrimarySynthesizer",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-JAWSCursor\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Keyboard\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-MenuAndDialog\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Message\\.Rate",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-PCCursor\\.Rate",
+                    "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
-                            "factor": 0.125,
-                            "offset": -12.125
+                            "inputPath": "ENU-Global\\.Pitch",
+                            "factor": 0.010101,
+                            "offset": -0.010101
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/volume": {
+                       "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "ENU-Global\\.Volume",
+                            "factor": 0.01
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/punctuationVerbosity": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "ENU-Global\\.Punctuation",
+                            "match": [{
+                                inputValue: 0,
+                                outputValue: "none"
+                            }, {
+                                inputValue: 1,
+                                outputValue: "some"
+                            }, {
+                                inputValue: 2,
+                                outputValue: "most"
+                            }, {
+                                inputValue: 3,
+                                outputValue: "all"
+                            }]
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/auditoryOutLanguage": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "ENU-Global\\.SynthLangString",
+                            "match": {
+                                "American English": "en-US",
+                                "British English": "en-GB",
+                                "French": "fr",
+                                "French Canadian": "fr-CA",
+                                "Italian": "it",
+                                "Brazilian Portuguese": "pt-BR",
+                                "German": "de",
+                                "Latin American Spanish": "es-US",
+                                "Castilian Spanish": "es-ES",
+                                "Finnish": "fi"
+                            }
                         }
                     }
                 }
             }
         },
         "configure": [
-            "settings.configuration"
+            "settings.configuration1",
+            "settings.configuration2"
         ],
         "restore": [
-            "settings.configuration"
+            "settings.configuration1",
+            "settings.configuration2"
         ],
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe\\}\""
+                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
             }
         ],
         "stop": [
@@ -61,7 +585,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS15.exe",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
@@ -952,6 +1476,9 @@
                     },
                     "verifySettings": true
                 },
+                "supportedSettings": {
+                    "HighContrastOn": {}
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastEnabled"
                 ],
@@ -973,12 +1500,45 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/highContrastEnabled": "HighContrastOn.value"
                 }
+            },
+            "configureTheme": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                    "dataTypes": {
+                        "LastHighContrastTheme": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "LastHighContrastTheme": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
+                ],
+                "capabilitiesTransformations": {
+                    "LastHighContrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "match": {
+                                "black-white": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "white-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "black-yellow": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "yellow-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "lime-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme"
+                            }
+                        }
+                    }
+                }
             }
         },
         "configure": [
+            "settings.configureTheme",
             "settings.configure"
         ],
         "restore": [
+            "settings.configureTheme",
             "settings.configure"
         ],
         "isInstalled": [
@@ -1822,7 +2382,7 @@
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
-                        "transform":{
+                        "transform": {
                             "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "input": 9,
