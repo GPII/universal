@@ -32,7 +32,7 @@ fluid.defaults("gpii.tests.authDataLoader", {
     couchDbUrl: "http://localhost:1234"
 });
 
-fluid.defaults("gpii.tests.authTestCaseHolder", {
+fluid.defaults("gpii.tests.authTestCaseHolder.success", {
     gradeNames: ["gpii.tests.dataLoader.baseTestCaseHolder"],
     expected: {
         total: {
@@ -85,7 +85,7 @@ gpii.tests.authDataLoader.checkResponse = function (msg, response, body, expecte
 // This component must be name as "testEnvironment" because its base grade "gpii.test.pouch.environment"
 // looks up this compnent name for port and events.
 // See: https://github.com/GPII/gpii-pouchdb/blob/master/src/test/environment.js#L55
-fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
+fluid.defaults("gpii.tests.authDataLoader.success.testEnvironment", {
     gradeNames: ["gpii.test.pouch.environment"],
     port: 1234,
     components: {
@@ -94,7 +94,7 @@ fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
             createOnEvent: "onHarnessReady",
             options: {
                 listeners: {
-                    "onDataLoaded.escalate": "{authDataLoaderTests}.events.onAuthDataLoaded.fire",
+                    "onDataLoaded.escalate": "{testEnvironment}.events.onAuthDataLoaded.fire",
                     "onDataLoaded.debug": {
                         listener: "console.log",
                         args: ["authDataLoader onDataLoaded fired"]
@@ -114,13 +114,13 @@ fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
 });
 
 //*********** Combine Test Environment and Test Case Holder ***********//
-fluid.defaults("gpii.tests.authDataLoaderTests", {
-    gradeNames: ["gpii.tests.authDataLoader.testEnvironment"],
+fluid.defaults("gpii.tests.authDataLoaderTests.success", {
+    gradeNames: ["gpii.tests.authDataLoader.success.testEnvironment"],
     components: {
         testCaseHolder: {
-            type: "gpii.tests.authTestCaseHolder"
+            type: "gpii.tests.authTestCaseHolder.success"
         }
     }
 });
 
-fluid.test.runTests("gpii.tests.authDataLoaderTests");
+fluid.test.runTests("gpii.tests.authDataLoaderTests.success");
