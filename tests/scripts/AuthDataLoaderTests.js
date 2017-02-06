@@ -22,7 +22,43 @@ gpii.pouch.loadTestingSupport();
 require("../../scripts/shared/authDataLoader.js");
 require("./DataLoaderTestsUtils.js");
 
-fluid.defaults("gpii.tests.authDataLoader", {
+// The base testEnvironment grade used by all successful and failed test cases.
+// This component must be name as "testEnvironment" because its base grade "gpii.test.pouch.environment"
+// looks up this compnent name for port and events.
+// See: https://github.com/GPII/gpii-pouchdb/blob/master/src/test/environment.js#L55
+fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
+    gradeNames: ["gpii.test.pouch.environment"],
+    port: 1234,
+    // Must be supplied with a "gpii.dataLoader.authDataLoader" grade to ensure what's defined in "authDataLoader" sub-component makes sense
+    authDataLoaderGrade: null,
+    distributeOptions: {
+        source: "{that}.options.authDataLoaderGrade",
+        target: "{that > authDataLoader}.options.gradeNames"
+    },
+    components: {
+        authDataLoader: {
+            type: "fluid.component",
+            createOnEvent: "onHarnessReady",
+            options: {
+                listeners: {
+                    "onDataLoaded.escalate": "{testEnvironment}.events.onAuthDataLoaded.fire",
+                    "onDataLoadedError.escalate": "{testEnvironment}.events.onAuthDataLoadedError.fire",
+                    "onCreate.debug": {
+                        listener: "console.log",
+                        args: ["============= ", "{that}.options.gradeNames"]
+                    }
+                }
+            }
+        }
+    },
+    events: {
+        onAuthDataLoaded: null,
+        onAuthDataLoadedError: null
+    }
+});
+
+//*********** The successful data loading case ***********//
+fluid.defaults("gpii.tests.authDataLoader.success", {
     gradeNames: ["gpii.dataLoader.authDataLoader"],
     dbName: "auth",
     dataFile: [
@@ -30,6 +66,19 @@ fluid.defaults("gpii.tests.authDataLoader", {
         "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
     ],
     couchDbUrl: "http://localhost:1234"
+});
+
+// This component must be name as "testEnvironment" because of the reason described at line 25
+fluid.defaults("gpii.tests.authDataLoader.success.testEnvironment", {
+    gradeNames: ["gpii.tests.authDataLoader.testEnvironment"],
+    authDataLoaderGrade: "gpii.tests.authDataLoader.success",
+    events: {
+        onFixturesConstructed: {
+            events: {
+                onAuthDataLoaded: "onAuthDataLoaded"
+            }
+        }
+    }
 });
 
 fluid.defaults("gpii.tests.authTestCaseHolder.success", {
@@ -65,6 +114,15 @@ fluid.defaults("gpii.tests.authTestCaseHolder.success", {
     }
 });
 
+fluid.defaults("gpii.tests.authDataLoaderTests.success", {
+    gradeNames: ["gpii.tests.authDataLoader.success.testEnvironment"],
+    components: {
+        testCaseHolder: {
+            type: "gpii.tests.authTestCaseHolder.success"
+        }
+    }
+});
+
 gpii.tests.authDataLoader.checkResponse = function (msg, response, body, expectedStatus, expected, bodyPath) {
     expectedStatus = expectedStatus ? expectedStatus : 200;
 
@@ -81,46 +139,5 @@ gpii.tests.authDataLoader.checkResponse = function (msg, response, body, expecte
         jqUnit.assertLeftHand(msg, expected, bodyData);
     }
 };
-
-// This component must be name as "testEnvironment" because its base grade "gpii.test.pouch.environment"
-// looks up this compnent name for port and events.
-// See: https://github.com/GPII/gpii-pouchdb/blob/master/src/test/environment.js#L55
-fluid.defaults("gpii.tests.authDataLoader.success.testEnvironment", {
-    gradeNames: ["gpii.test.pouch.environment"],
-    port: 1234,
-    components: {
-        authDataLoader: {
-            type: "gpii.tests.authDataLoader",
-            createOnEvent: "onHarnessReady",
-            options: {
-                listeners: {
-                    "onDataLoaded.escalate": "{testEnvironment}.events.onAuthDataLoaded.fire",
-                    "onDataLoaded.debug": {
-                        listener: "console.log",
-                        args: ["authDataLoader onDataLoaded fired"]
-                    }
-                }
-            }
-        }
-    },
-    events: {
-        onAuthDataLoaded: null,
-        onFixturesConstructed: {
-            events: {
-                onAuthDataLoaded: "onAuthDataLoaded"
-            }
-        }
-    }
-});
-
-//*********** Combine Test Environment and Test Case Holder ***********//
-fluid.defaults("gpii.tests.authDataLoaderTests.success", {
-    gradeNames: ["gpii.tests.authDataLoader.success.testEnvironment"],
-    components: {
-        testCaseHolder: {
-            type: "gpii.tests.authTestCaseHolder.success"
-        }
-    }
-});
 
 fluid.test.runTests("gpii.tests.authDataLoaderTests.success");
