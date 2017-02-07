@@ -116,7 +116,7 @@ gpii.dataLoader.load = function (that) {
     var dataFileResults = gpii.dataLoader.processDataFiles(that.options.databases);
 
     if (dataFileResults.errors.length > 0) {
-        promiseTogo.reject("Data file(s) not found in the file system: " + errors.join());
+        promiseTogo.reject("Data file(s) not found in the file system: " + dataFileResults.errors.join());
     } else {
         var databases = dataFileResults.databases;
         // Process databases one by one

@@ -17,6 +17,7 @@ var fluid = fluid || require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
 require("../../scripts/shared/dataLoader.js");
+require("./DataLoaderTestsUtils.js");
 
 fluid.logObjectRenderChars = 10240;
 
@@ -176,8 +177,6 @@ fluid.logObjectRenderChars = 10240;
             }
         };
 
-        var matchedErrors = [];
-
         fluid.each(testData, function (data, caseName) {
             var result = gpii.dataLoader.processDataFiles(data);
 
@@ -185,16 +184,8 @@ fluid.logObjectRenderChars = 10240;
             jqUnit.assertDeepEq("The returned result is expected", expected[caseName].databases, result.databases);
 
             // Verify result.errors
-            fluid.each(result.errors, function (error, i) {
-                var matchResult = fluid.find_if(expected[caseName].errors, function (errorPattern) {
-                    var matchResult = error.match(errorPattern);
-                    return matchResult && matchResult.length > 0;
-                });
-                if (matchResult) {
-                    matchedErrors.push(error);
-                }
-            });
-            jqUnit.assertDeepEq("All errors are reported", result.errors, matchedErrors);
+            var isErrorMatch = gpii.tests.dataLoader.verifyMatches(result.errors, expected[caseName].errors);
+            jqUnit.assertTrue("All expected errors are reported", isErrorMatch);
         });
     });
 })();

@@ -42,11 +42,7 @@ fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
             options: {
                 listeners: {
                     "onDataLoaded.escalate": "{testEnvironment}.events.onAuthDataLoaded.fire",
-                    "onDataLoadedError.escalate": "{testEnvironment}.events.onAuthDataLoadedError.fire",
-                    "onCreate.debug": {
-                        listener: "console.log",
-                        args: ["============= ", "{that}.options.gradeNames"]
-                    }
+                    "onDataLoadedError.escalate": "{testEnvironment}.events.onAuthDataLoadedError.fire"
                 }
             }
         }
@@ -57,7 +53,7 @@ fluid.defaults("gpii.tests.authDataLoader.testEnvironment", {
     }
 });
 
-//*********** The successful data loading case ***********//
+//*********** The successful data loading test case ***********//
 fluid.defaults("gpii.tests.authDataLoader.success", {
     gradeNames: ["gpii.dataLoader.authDataLoader"],
     dbName: "auth",
@@ -123,21 +119,78 @@ fluid.defaults("gpii.tests.authDataLoaderTests.success", {
     }
 });
 
-gpii.tests.authDataLoader.checkResponse = function (msg, response, body, expectedStatus, expected, bodyPath) {
-    expectedStatus = expectedStatus ? expectedStatus : 200;
+//*********** The error data loading test case ***********//
+fluid.defaults("gpii.tests.authDataLoader.error", {
+    gradeNames: ["gpii.dataLoader.authDataLoader"],
+    dbName: "auth",
+    dataFile: [
+        "%universal/nonExistent.json",
+        "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
+    ],
+    couchDbUrl: "http://localhost:1234"
+});
 
-    var bodyData = JSON.parse(body);
+// This component must be name as "testEnvironment" because of the reason described at line 25
+fluid.defaults("gpii.tests.authDataLoader.error.testEnvironment", {
+    gradeNames: ["gpii.tests.authDataLoader.testEnvironment"],
+    authDataLoaderGrade: "gpii.tests.authDataLoader.error"
+});
 
-    if (bodyPath) {
-        bodyData = fluid.get(bodyData, bodyPath);
+fluid.defaults("gpii.tests.authTestCaseHolder.error", {
+    gradeNames: ["gpii.tests.dataLoader.baseTestCaseHolder"],
+    rawModules: [{
+        name: "Testing Auth Data Loader",
+        tests: [{
+            name: "Testing the load results",
+            type: "test",
+            sequence: [{
+                event: "{testEnvironment}.events.onAuthDataLoadedError",
+                listener: "gpii.tests.authTestCaseHolder.error.verifyError",
+                args: ["{arguments}.0", "Data file\\(s\\) not found in the file system\:.*nonExistent.json"]
+            }, {
+                func: "{verifyDbRequest}.send"
+            }, {
+                listener: "jqUnit.assertEquals",
+                event:    "{verifyDbRequest}.events.onComplete",
+                args:     ["The total number of records should be as expected", "{verifyDbRequest}.nativeResponse.statusCode", 404]
+            }]
+        }]
+    }],
+    components: {
+        verifyDbRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/auth",
+                port: 1234,
+                method: "GET"
+            }
+        }
     }
-    gpii.test.express.helpers.isSaneResponse(response, body, expectedStatus);
+});
 
-    if (expected === undefined) {
-        jqUnit.assertUndefined(msg, bodyData);
-    } else {
-        jqUnit.assertLeftHand(msg, expected, bodyData);
+fluid.defaults("gpii.tests.authDataLoaderTests.error", {
+    gradeNames: ["gpii.tests.authDataLoader.error.testEnvironment"],
+    components: {
+        testCaseHolder: {
+            type: "gpii.tests.authTestCaseHolder.error"
+        }
     }
+});
+
+gpii.tests.authTestCaseHolder.error.verifyError = function (msg, expectedMatchedError) {
+    var isErrorMatch = gpii.tests.dataLoader.verifyMatches(msg, expectedMatchedError);
+    jqUnit.assertTrue("The expected error is reported", isErrorMatch);
 };
 
-fluid.test.runTests("gpii.tests.authDataLoaderTests.success");
+gpii.tests.authDataLoader.checkResponse = function (msg, response, body, expectedStatus, expected) {
+    expectedStatus = expectedStatus ? expectedStatus : 200;
+    var bodyData = JSON.parse(body);
+
+    gpii.test.express.helpers.isSaneResponse(response, body, expectedStatus);
+    jqUnit.assertLeftHand(msg, expected, bodyData);
+};
+
+fluid.test.runTests([
+    "gpii.tests.authDataLoaderTests.success",
+    "gpii.tests.authDataLoaderTests.error"
+]);
