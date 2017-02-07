@@ -19,7 +19,7 @@ var fluid = require("infusion"),
 require("./dataLoader.js");
 
 fluid.defaults("gpii.dataLoader.authDataLoader", {
-    gradeNames: ["gpii.dataLoader"],
+    gradeNames: ["gpii.dataLoader", "gpii.dataLoader.reporter"],
     databases: {
         expander: {
             funcName: "gpii.dataLoader.authDataLoader.constructAuthData",

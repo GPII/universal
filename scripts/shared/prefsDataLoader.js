@@ -34,7 +34,7 @@ require("./dataLoader.js");
  * "gpii.dataLoader" as the underlying grade for loading.
  */
 fluid.defaults("gpii.dataLoader.prefsDataLoader", {
-    gradeNames: ["fluid.component"],
+    gradeNames: ["gpii.dataLoader.reporter"],
     components: {
         dataConverter: {
             type: "gpii.dataLoader.prefsDataLoader.dataConverter",

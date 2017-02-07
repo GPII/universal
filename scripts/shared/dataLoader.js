@@ -262,10 +262,45 @@ gpii.dataLoader.loadData = function (loadDataSource, data, directModel) {
 gpii.dataLoader.performLoad = function (dbName, loaderComponent) {
     var promise = loaderComponent.load();
     promise.then(function () {
-        console.log("The " + dbName + " data has been loaded successfully.");
         loaderComponent.events.onDataLoaded.fire();
     }, function (err) {
-        console.log("Error at loading the " + dbName + " data. Error details: ", err);
         loaderComponent.events.onDataLoadedError.fire(err);
     });
 };
+
+// A base grade to report the data loading results to the console.
+// This grade should be used as a base grade for auth and prefs data loaders
+// where the db name is defined as well as proper events.
+fluid.defaults("gpii.dataLoader.reporter", {
+    gradeNames: ["fluid.component"],
+    dbName: "dbName",   // Must be provided
+    events: {
+        onDataLoaded: null,
+        onDataLoadedError: null
+    },
+    listeners: {
+        "onDataLoaded.report": {
+            listener: "console.log",
+            args: {
+                expander: {
+                    funcName: "fluid.stringTemplate",
+                    args: ["The %dbName data has been loaded successfully.", {
+                        dbName: "{that}.options.dbName"
+                    }]
+                }
+            }
+        },
+        "onDataLoadedError.report": {
+            listener: "console.log",
+            args: {
+                expander: {
+                    funcName: "fluid.stringTemplate",
+                    args: ["Error at loading the %dbName data. Error details: %err", {
+                        dbName: "{that}.options.dbName",
+                        err: "{arguments}.0"
+                    }]
+                }
+            }
+        }
+    }
+});
