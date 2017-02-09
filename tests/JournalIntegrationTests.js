@@ -22,6 +22,7 @@ require("../index.js");
 
 gpii.loadTestingSupport();
 fluid.setLogging(true);
+fluid.logObjectRenderChars = 10240;
 
 fluid.registerNamespace("gpii.tests.journal");
 
@@ -87,7 +88,11 @@ gpii.tests.journal.initialSettings = {
 };
 
 fluid.defaults("gpii.tests.journal.solutionsRegistryAdvisor", {
-    gradeNames: "fluid.component",
+    gradeNames: "fluid.modelComponent",
+    model: {
+        throwOnNext: false,
+        explodeOnNext: true
+    },
     distributeOptions: {
         "tests.journal.solutionsRegistry": {
             record: {
@@ -159,6 +164,7 @@ fluid.defaults("gpii.tests.journal.baseTestCaseHolder", {
     }
 });
 
+// Used on the first run where the settings handler crashes the whole system
 gpii.tests.journal.solutionsRegistryOverlay = {
     win32: {
         "com.microsoft.windows.cursors": {
@@ -169,13 +175,22 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                         cursorSize: {}
                     }
                 },
+                maybeThrow: {
+                    type: "gpii.tests.journal.throwingSettingsHandler",
+                    supportedSettings: {
+                        cursorSize: {}
+                    }
+                },
                 configure: {
                     supportedSettings: {
                         cursorSize: {}
                     }
                 }
             },
-            configure: ["settings.configure", "settings.explode"]
+            restore: ["settings.maybeThrow", "settings.configure"],
+            // It's necessary to execute settings.maybeThrow otherwise its entry does not appear in the snapshotted solutions
+            // registry block entered into the journal, and hence it cannot be found on the next turn
+            configure: ["settings.configure", "settings.maybeThrow", "settings.explode"]
         }
     }
 };
@@ -189,10 +204,13 @@ fluid.defaults("gpii.tests.integration.mockSettingsHandlerRegistry.journal", {
     components: {
         explodingSettingsHandler: {
             type: "gpii.tests.journal.explodingSettingsHandler"
+        },
+        throwingSettingsHandler: {
+            type: "gpii.tests.journal.throwingSettingsHandler"
         }
     },
     listeners: {
-        "onCreate.populateExploding": "gpii.tests.journal.populateExplodingSettingsHandler"
+        "onCreate.populateMocks": "gpii.tests.journal.populateMockSettingsHandlers"
     }
 });
 
@@ -203,30 +221,56 @@ fluid.defaults("gpii.tests.journal.explodingSettingsHandler", {
     invokers: {
         set: {
             funcName: "gpii.tests.journal.settingsHandlerExplode",
-            args: ["{kettle.test.configuration}", "{that}", "{arguments}.0"]
+            args: ["{kettle.test.configuration}", "{gpii.tests.journal.solutionsRegistryAdvisor}", "{that}", "{arguments}.0"]
+        }
+    }
+});
+
+// A settings handler which synchronously throws an Error during its "set" action
+fluid.defaults("gpii.tests.journal.throwingSettingsHandler", {
+    gradeNames: "gpii.test.integration.mockSettingsHandler",
+    invokers: {
+        set: {
+            funcName: "gpii.tests.journal.settingsHandlerThrow",
+            args: ["{gpii.tests.journal.solutionsRegistryAdvisor}", "{that}", "{arguments}.0"]
         }
     }
 });
 
 // Reach upwards into the global configuration's server and destroy it
-gpii.tests.journal.settingsHandlerExplode = function (configuration, that, payload) {
+gpii.tests.journal.settingsHandlerExplode = function (configuration, advisor, that, payload) {
     fluid.log("EXPLODING SETTINGS HANDLER EXECUTING with id " + that.id + " and payload ", payload);
+    if (advisor.model.explodeOnNext) {
+        fluid.invokeLater(function () { // invoke later so that we do not race with construction - TODO: framework bug
+            configuration.server.destroy();
+            fluid.log("Server destroyed");
+        });
+        advisor.applier.change("explodeOnNext", false);
+    }
     // null out our payload, compensate for GPII-1223/GPII-1891
     payload["com.microsoft.windows.cursors"][0].settings = {};
     // Beat jqUnit's failure handler to ignore the various errors falling out from this process
     // kettle.test.pushInstrumentedErrors(function () {
     //    fluid.log("Received expected failure from destroying active server: ", arguments);
     //});
-    fluid.invokeLater(function () { // invoke later so that we do not race with construction - TODO: framework bug
-        configuration.server.destroy();
-        fluid.log("Server destroyed");
-    });
     // TODO: failure of Ungarism here - invokers need to be eliminated from the framework
     return gpii.settingsHandlers.invokeSettingsHandler(that.setImpl, payload);
 };
 
-gpii.tests.journal.populateExplodingSettingsHandler = function (that) {
-    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.explodingSettingsHandler, "gpii.tests.journal.explodingSettingsHandler");
+gpii.tests.journal.settingsHandlerThrow = function (advisor, that, payload) {
+    if (advisor.model.throwOnNext) {
+        advisor.applier.change("throwOnNext", false);
+        throw new Error("Failure triggered during settings handler action");
+    };
+    payload["com.microsoft.windows.cursors"][0].settings = {};
+    return gpii.settingsHandlers.invokeSettingsHandler(that.setImpl, payload);
+};
+
+gpii.tests.journal.populateMockSettingsHandlers = function (that) {
+    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.explodingSettingsHandler,
+        "gpii.tests.journal.explodingSettingsHandler");
+    gpii.test.integration.mockSettingsHandlerRegistry.populateOne(that, that.throwingSettingsHandler,
+        "gpii.tests.journal.throwingSettingsHandler");
 };
 
 gpii.tests.journal.logDestroyed = function (loginRequest, testCaseHolder) {
@@ -258,7 +302,8 @@ gpii.tests.journal.checkJournalsList = function (markup, component, expectCrashe
     var firstDate = decodeURIComponent(match[1]);
     var firstTime = Date.parse(firstDate);
     fluid.log("Parsed link date " + firstDate + " to time " + firstTime);
-    jqUnit.assertTrue("Received correct journal time in journal list markup", firstTime > component.stashedStartTime && firstTime < (component.stashedStartTime + 2000));
+    jqUnit.assertTrue("Received correct journal time in journal list markup",
+        firstTime > component.stashedStartTime && firstTime < (component.stashedStartTime + 2000));
     // See: http://stackoverflow.com/questions/1979884/how-to-use-javascript-regex-over-multiple-lines
     var snapshots = markup.match(/<p class="fl-snapshot">([\s\S]*?)<\/p>/g);
     fluid.log("Acquired " + snapshots.length + " snapshots");
@@ -314,8 +359,6 @@ gpii.tests.journal.fixtures = [
             }, {
                 event: "{tests}.events.onInitialSettingsComplete",
                 listener: "fluid.identity"
-            }, { // Destroy this advisor after first successful startup so that when we recreate the FlowManager, the exploding listener is gone
-                func: "{testCaseHolder}.solutionsRegistryAdvisor.destroy"
             },
             // The following three steps intentionally commented out - they are here to exhibit what *SHOULD* be equivalent to the call to gpii.tests.journal.stashInitial,
             // only we prefer to make a more reliable test by verifying that the settings really are identical to the initialSettings in our own records
@@ -348,6 +391,9 @@ gpii.tests.journal.fixtures = [
                 event: "{listJournalsRequest}.events.onComplete",
                 listener: "gpii.tests.journal.checkJournalsList",
                 args: ["{arguments}.0", "{testCaseHolder}", true]
+            }, {
+                func: "{gpii.tests.journal.solutionsRegistryAdvisor}.applier.change",
+                args: ["throwOnNext", true]
             }, {
                 func: "{restoreJournalRequest}.send",
                 args: [null, {
