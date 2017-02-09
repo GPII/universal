@@ -27,6 +27,7 @@ fluid.setLogging(true);
 require("./dataLoader.js");
 
 /**
+ * Preferences Data Loader: to load the preferences (json files) from a specific path into CouchDB
  * This component is composed by two sub-components:
  * 1. dataConverter: to read thru the preferences data and construct the json file contents
  * into the data structure that can be accepted by CouchDB /_bulk_docs API
@@ -35,9 +36,16 @@ require("./dataLoader.js");
  */
 fluid.defaults("gpii.dataLoader.prefsDataLoader", {
     gradeNames: ["gpii.dataLoader.reporter"],
+
+    // Below is the list of options for configing the preferences data loader
+    dbName: "preferences",
+    dataPath: "%universal/testData/preferences/",
+    couchDbUrl: "http://localhost:5984",
+
     components: {
         dataConverter: {
             type: "gpii.dataLoader.prefsDataLoader.dataConverter",
+            createOnEvent: "onConvertData",
             options: {
                 listeners: {
                     "onPrefsDataStructureConstructed.escalate": {
@@ -69,12 +77,22 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
         }
     },
     events: {
+        // fired to create the subcomponent "dataConverter" after ensuring the given options are valid
+        onConvertData: null,
+        // fired to create the subcomponent "loader" once the data is converted and ready to load
         onCreateLoader: null,
+        // fired to trigger the load process when "loader" is ready
         onLoaderReady: null,
+        // fired after the data is successfully loaded
         onDataLoaded: null,
+        // fired with an error message if the load fails
         onDataLoadedError: null
     },
     listeners: {
+        "onCreate.validateInputs": {
+            listener: "gpii.dataLoader.prefsDataLoader.validateInputs",
+            args: ["{that}.options.dataPath", "{that}.events.onConvertData", "{that}.events.onDataLoadedError"]
+        },
         "onLoaderReady.load": {
             listener: "gpii.dataLoader.performLoad",
             args: ["{that}.options.dbName", "{that}.loader"]
@@ -91,6 +109,21 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader", {
         }
     }
 });
+
+/**
+ * Construct the value of `options.databases` that to be accepted by `gpii.dataLoader` (See dataLoader.js).
+ *
+ * @param dbName {String} The database name;
+ * @param data {Object} The data to be loaded into the database.
+ */
+gpii.dataLoader.prefsDataLoader.validateInputs = function (dataPath, successEvt, errorEvt) {
+    var actualPath = fluid.module.resolvePath(dataPath);
+    if (fs.existsSync(actualPath)) {
+        successEvt.fire();
+    } else {
+        errorEvt.fire("The provided data path does not exist: " + actualPath);
+    }
+};
 
 /**
  * Construct the value of `options.databases` that to be accepted by `gpii.dataLoader` (See dataLoader.js).
@@ -132,6 +165,9 @@ fluid.defaults("gpii.dataLoader.prefsDataLoader.dataConverter", {
  * @return {Event} fires the data ready event with an argument of the constructed data structure.
  */
 gpii.dataLoader.prefsDataLoader.dataConverter.constructPrefsDataStructure = function (dataPath, onPrefsDataStructureConstructedEvent) {
+    // Pad the dataPath with an ending "/"
+    dataPath = dataPath.substr(dataPath.length - 1) === "/" ? dataPath : dataPath + "/";
+
     var prefsDataStructure = [];
     var actualDataPath = fluid.module.resolvePath(dataPath);
     var prefsDataList = fs.readdirSync(actualDataPath);

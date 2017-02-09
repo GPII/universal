@@ -13,7 +13,39 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = fluid || require("infusion"),
+    jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
+
+// The base testEnvironment grade used by all successful and failed test cases.
+// This component must be name as "testEnvironment" because its base grade "gpii.test.pouch.environment"
+// looks up this compnent name for port and events.
+// See: https://github.com/GPII/gpii-pouchdb/blob/master/src/test/environment.js#L55
+fluid.defaults("gpii.tests.dataLoader.testEnvironment", {
+    gradeNames: ["gpii.test.pouch.environment"],
+    port: 1234,
+    // Must be supplied with a "gpii.dataLoader.dataLoader" grade to ensure what's defined in "dataLoader" sub-component makes sense
+    dataLoaderGrade: null,
+    distributeOptions: {
+        source: "{that}.options.dataLoaderGrade",
+        target: "{that > dataLoader}.options.gradeNames"
+    },
+    components: {
+        dataLoader: {
+            type: "fluid.component",
+            createOnEvent: "onHarnessReady",
+            options: {
+                listeners: {
+                    "onDataLoaded.escalate": "{testEnvironment}.events.onDataLoaded.fire",
+                    "onDataLoadedError.escalate": "{testEnvironment}.events.onDataLoadedError.fire"
+                }
+            }
+        }
+    },
+    events: {
+        onDataLoaded: null,
+        onDataLoadedError: null
+    }
+});
 
 fluid.defaults("gpii.tests.dataLoader.baseTestCaseHolder", {
     gradeNames: ["gpii.test.express.caseHolder"],
@@ -46,4 +78,33 @@ gpii.tests.dataLoader.verifyMatches = function (toCompare, expectedMatches) {
     });
 
     return toCompare.length === matched.length;
+};
+
+/**
+ * The kettle testing assert function to verify the response of a kettle request
+ * @param msg {String} A message to be displayed by jqUnit assertion
+ * @param response {Object} A http response
+ * @param body {Object} The response carried by the `onComplete` event of a kettle request
+ * @param expectedStatus {Number} The expected http status code
+ * @param expected {Object} The expected response data
+ * @return None
+ */
+gpii.tests.dataLoader.checkResponse = function (msg, response, body, expectedStatus, expected) {
+    expectedStatus = expectedStatus ? expectedStatus : 200;
+    var bodyData = JSON.parse(body);
+
+    gpii.test.express.helpers.isSaneResponse(response, body, expectedStatus);
+    jqUnit.assertLeftHand(msg, expected, bodyData);
+};
+
+/**
+ * The testing assert function to verify an error message
+ * @param msg {String} A message to verify
+ * @param expectedMatchedError {String} A regex match pattern to match the msg against. Using regex
+ * is to avoid the verification of the real machine path that is different when a test runs on different machines.
+ * @return None
+ */
+gpii.tests.dataLoader.checkError = function (msg, expectedMatchedError) {
+    var isErrorMatch = gpii.tests.dataLoader.verifyMatches(msg, expectedMatchedError);
+    jqUnit.assertTrue("The expected error is reported", isErrorMatch);
 };
