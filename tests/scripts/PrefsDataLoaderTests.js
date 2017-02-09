@@ -164,7 +164,7 @@ fluid.defaults("gpii.tests.prefsDataLoader.error.testEnvironment", {
     dataLoaderGrade: "gpii.tests.prefsDataLoader.error"
 });
 
-fluid.defaults("gpii.tests.authTestCaseHolder.error", {
+fluid.defaults("gpii.tests.prefsTestCaseHolder.error", {
     gradeNames: ["gpii.tests.dataLoader.baseTestCaseHolder"],
     rawModules: [{
         name: "Testing Preferences Data Loader - error",
@@ -200,7 +200,7 @@ fluid.defaults("gpii.tests.prefsDataLoaderTests.error", {
     gradeNames: ["gpii.tests.prefsDataLoader.error.testEnvironment"],
     components: {
         testCaseHolder: {
-            type: "gpii.tests.authTestCaseHolder.error"
+            type: "gpii.tests.prefsTestCaseHolder.error"
         }
     }
 });
