@@ -32,5 +32,5 @@ gpii.dataLoader.authDataLoader({
         "%universal/testData/security/TestOAuth2DataStore.json",
         "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
     ],
-    couchDbUrl: "http://admin:admin@localhost:5984"
+    couchDbUrl: "http://localhost:5984"
 });
