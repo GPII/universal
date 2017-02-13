@@ -4,8 +4,6 @@
 # and 'couchdb_admin_password'
 
 couchdb_databases:
-  - preferences
-  - auth
 
 couchdb_delete_existing_databases: true
 
