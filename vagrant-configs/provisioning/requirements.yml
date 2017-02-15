@@ -7,7 +7,8 @@
 - src: https://github.com/idi-ops/ansible-nodejs
   name: nodejs
 
-- src: https://github.com/gpii-ops/ansible-preferences-server
+- src: https://github.com/avtar/ansible-preferences-server
+  version: remotes/origin/GPII-1884
   name: preferences-server
 
 - src: https://github.com/gpii-ops/ansible-flow-manager

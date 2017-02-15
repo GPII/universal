@@ -19,7 +19,3 @@ node /home/vagrant/sync/scripts/dataLoader-prefs.js
 
 # Load Authorization Test Data into CouchDB
 node /home/vagrant/sync/scripts/dataLoader-auth.js
-
-# kanso upload /home/vagrant/sync/testData/security/TestOAuth2DataStore.json http://localhost:5984/auth
-# kanso upload /home/vagrant/sync/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json http://localhost:5984/auth
-
