@@ -194,7 +194,7 @@ gpii.tests.windows.builtIn = [
                             "width": 800,
                             "height": 600
                         },
-                        "screen-DPI": {
+                        "screen-dpi": {
                             "configured": 1,
                             "maximum": 1,
                             "actual": 1
