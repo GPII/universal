@@ -1,0 +1,54 @@
+{
+    "http://registry.gpii.org/applications/eu.gpii.olb/textSize": "2",
+    "http://registry.gpii.org/applications/eu.gpii.olb/lineSpacing": "2",
+    "http://registry.gpii.org/applications/eu.gpii.olb/links": true,
+    "http://registry.gpii.org/applications/eu.gpii.olb/inputsLarger": true,
+    "http://registry.gpii.org/applications/eu.gpii.olb/contrastTheme": "wb",
+    "http://registry.gpii.org/applications/eu.gpii.olb/toc": false,
+    "http://registry.gpii.org/applications/org.gnome.desktop.a11y.magnifier": [{ 
+        "value": {
+            "show-cross-hairs": true,
+            "lens-mode": false,
+            "mag-factor": 2,
+            "mouse-tracking": "proportional",
+            "screen-position": "top-half",
+            "scroll-at-edges": true
+        }
+    }],
+    "http://registry.gpii.org/applications/com.microsoft.windows.magnifier": [{ 
+        "value": {
+            "Magnification": {
+                "value": 200,
+                "dataType": "REG_DWORD"
+            },
+            "ZoomIncrement": {
+                "value": 50,
+                "dataType": "REG_DWORD"
+            },
+            "Invert": {
+                "value": 0,
+                "dataType": "REG_DWORD"
+            },
+            "FollowMouse": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "FollowFocus": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "FollowCaret": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            },
+            "MagnificationModel": {
+                "value": 1,
+                "dataType": "REG_DWORD"
+            }
+        }
+    }],
+    "http://registry.gpii.org/common/-provisional-general.-provisional-language": [{ "value": "en-GB" }],
+    "http://registry.gpii.org/common/display.screenEnhancement.fontSize": [{ "value": 24 }],
+    "http://registry.gpii.org/common/display.screenEnhancement.magnification": [{ "value": 2.0 }],
+    "http://registry.gpii.org/common/display.screenEnhancement.tracking": [{ "value": "mouse" }]
+}
