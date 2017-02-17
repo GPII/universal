@@ -22,9 +22,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.setLogging(true);
-
-require("./shared/prefsDataLoader.js");
+require("../gpii/node_modules/dataLoader/index.js");
 
 gpii.dataLoader.prefsDataLoader({
     dbName: "preferences",
