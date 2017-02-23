@@ -54,8 +54,25 @@ node scripts/dataLoader-auth.js
 | Option            | Type       | Description | Default |
 | ----------------- | ---------- | ----------- | ------- |
 | `dbName` | String | Required. The name of the CouchDB database to be created for loading authorization data. If the database already exists, delete it and recreate. | auth |
-| `dataFile` | Array | Required. An array of data files to be loaded. | ["%universal/testData/security/TestOAuth2DataStore.json", "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"] |
+| `dataFile` | Array | Required. An array of JSON data files to be loaded. See the section below for an example of a JSON data file.| ["%universal/testData/security/TestOAuth2DataStore.json", "%universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"] |
 | `couchDbUrl` | String | Required. The URL to the CouchDB. | `http://localhost:5984` |
+
+**Example of A JSON Data File**
+```
+[
+    {
+        "_id": "user-1",
+        "type": "user",
+        "name": "chromehc",
+        "defaultGpiiToken": "review3_chrome_high_contrast"
+    }, {
+        "_id": "user-2",
+        "type": "user",
+        "name": "ma1",
+        "defaultGpiiToken": "review3_ma1"
+    }
+]
+```
 
 #### Supported Events
 
