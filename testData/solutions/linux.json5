@@ -303,10 +303,15 @@
                         "type": "gpii.launch.exec",
                         "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
                     },
-                    "isRunning": {
-                       "type": "gpii.processReporter.find",
-                        "command": "caribou"
-                   } // TODO KASPER: add gsettings check as well
+                    "isRunning": [{
+                        "type": "gpii.processReporter.find",
+                        "command": "caribou",
+                    }, {
+                        "type": "gpii.processReporter.checkSetting",
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "setting": "screen-keyboard-enabled",
+                        "value": true
+                    }]
                 }
             }
         },
@@ -1078,6 +1083,11 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        retryInterval: 200
+                    },
                     "start": {
                         "type": "gpii.launch.exec",
                         "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
@@ -1086,10 +1096,12 @@
                         "type": "gpii.launch.exec",
                         "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
                     },
-                    "isRunning": {
-                        "type": "gpii.processReporter.find",
-                        "command": "orca"
-                    }
+                    "isRunning": [{ // GPII-2306: Add check for Orca process
+                        "type": "gpii.processReporter.checkSetting",
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "setting": "screen-reader-enabled",
+                        "value": true
+                    }]
                 }
             }
         },
@@ -1175,19 +1187,29 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "google-chrome http://easy123.org/user/${{userToken}}"
+                    },
+                    "stop": {
+                        "type": "gpii.launch.exec",
+                        "command": "pkill -2 chrome"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome http://easy123.org/user/${{userToken}}"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -1221,19 +1243,29 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "google-chrome http://easy123.org/sudan"
+                    },
+                    "stop": {
+                        "type": "gpii.launch.exec",
+                        "command": "pkill -2 chrome"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome http://easy123.org/sudan"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -1267,19 +1299,29 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
+                    },
+                    "stop": {
+                        "type": "gpii.launch.exec",
+                        "command": "pkill -2 chrome"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -1389,10 +1431,6 @@
         ],
         "restore": [
             "settings.chromeconf"
-        ],
-        "start": [
-        ],
-        "stop": [
         ],
         "isInstalled": [
             {

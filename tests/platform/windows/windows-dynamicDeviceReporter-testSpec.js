@@ -24,6 +24,15 @@ gpii.tests.deviceReporterAware.windows = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
@@ -53,6 +62,20 @@ gpii.tests.deviceReporterAware.windows = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -76,7 +99,31 @@ gpii.tests.deviceReporterAware.windows = [
         name: "Testing readwritegold_application1 using Flat matchmaker",
         userToken: "readwritegold_application1",
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
-        settingsHandlers: {},
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "readandwrite"
+                        }]
+                    }
+                }]
+            }
+        },
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",

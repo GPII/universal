@@ -25,9 +25,18 @@ gpii.tests.windows.maavis = [
     {
         name: "Testing maavis_highcontrast using Flat matchmaker",
         userToken: "maavis_highcontrast",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "net.opendirective.maavis": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.JSONSettingsHandler": {
-                "data": [
+                "net.opendirective.maavis": [
                     {
                         "settings": {
                             "theme": "hc",
@@ -40,6 +49,20 @@ gpii.tests.windows.maavis = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "net.opendirective.maavis": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "MaavisPortable"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -52,9 +75,18 @@ gpii.tests.windows.maavis = [
     }, {
         name: "Testing maavis_selfvoicing using Flat matchmaker",
         userToken: "maavis_selfvoicing",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "net.opendirective.maavis": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.JSONSettingsHandler": {
-                "data": [
+                "net.opendirective.maavis": [
                     {
                         "settings": {
                             "theme": "colour",
@@ -67,6 +99,20 @@ gpii.tests.windows.maavis = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "net.opendirective.maavis": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "MaavisPortable"
+                        }]
+                    }
+                }]
             }
         },
         processes: [

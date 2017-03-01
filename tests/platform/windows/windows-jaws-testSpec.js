@@ -26,9 +26,18 @@ gpii.tests.windows.jaws = [
     {
         name: "Testing NP set \"jaws_application\" using Flat matchmaker",
         userToken: "jaws_application",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
@@ -82,6 +91,20 @@ gpii.tests.windows.jaws = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -96,9 +119,18 @@ gpii.tests.windows.jaws = [
     {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
         userToken: "jaws_common",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
@@ -152,6 +184,20 @@ gpii.tests.windows.jaws = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -166,9 +212,18 @@ gpii.tests.windows.jaws = [
     {
         name: "Testing NP set \"jaws_common2\" using Flat matchmaker",
         userToken: "jaws_common2",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
@@ -221,6 +276,20 @@ gpii.tests.windows.jaws = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -235,9 +304,18 @@ gpii.tests.windows.jaws = [
     {
         name: "Testing NP set \"jaws_common3\" using Flat matchmaker",
         userToken: "jaws_common3",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
@@ -291,6 +369,20 @@ gpii.tests.windows.jaws = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.freedomscientific.jaws": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
+                    }
+                }]
             }
         },
         processes: [

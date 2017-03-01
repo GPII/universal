@@ -26,9 +26,18 @@ gpii.tests.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
         userToken: "screenreader_common",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.orca": {
-                "some.app.id": [
+                "org.gnome.orca": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -50,6 +59,22 @@ gpii.tests.linux.orca.testDefs = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.checkSetting",
+                            "schema": "org.gnome.desktop.a11y.applications",
+                            "setting": "screen-reader-enabled",
+                            "value": true
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -63,9 +88,18 @@ gpii.tests.linux.orca.testDefs = [
     {
         name: "Testing screenreader_orca using Flat matchmaker",
         userToken: "screenreader_orca",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.orca": {
-                "some.app.id": [
+                "org.gnome.orca": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -86,6 +120,22 @@ gpii.tests.linux.orca.testDefs = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.checkSetting",
+                            "schema": "org.gnome.desktop.a11y.applications",
+                            "setting": "screen-reader-enabled",
+                            "value": true
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -99,9 +149,18 @@ gpii.tests.linux.orca.testDefs = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.orca": {
-                "some.app.id": [
+                "org.gnome.orca": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -121,6 +180,22 @@ gpii.tests.linux.orca.testDefs = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.checkSetting",
+                            "schema": "org.gnome.desktop.a11y.applications",
+                            "setting": "screen-reader-enabled",
+                            "value": true
+                        }]
+                    }
+                }]
             }
         },
         processes: [

@@ -559,6 +559,29 @@
                         }
                     }
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }
+                    ],
+                    "start": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jfw.exe"
+                        }
+                    ]
+                }
             }
         },
         "configure": [
@@ -570,16 +593,10 @@
             "settings.configuration2"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "jfw.exe"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -588,12 +605,6 @@
                 "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "jaws"
             }
         ]
     },
@@ -622,6 +633,29 @@
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings"
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ReadAndWrite.exe"
+                        }
+                    ],
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "readandwrite"
+                        }
+                    ]
+                }
             }
         },
         "configure": [
@@ -631,16 +665,10 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "ReadAndWrite.exe"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -649,12 +677,6 @@
                 "path": "Software\\Texthelp\\Read&Write11",
                 "subPath": "InstallPath",
                 "dataType": "REG_SZ"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "readandwrite"
             }
         ]
     },
@@ -766,37 +788,48 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": [
+                        {
+                            "type": "gpii.windows.enableRegisteredAT",
+                            "name": "magnifierpane",
+                            "enable": true
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.windows.enableRegisteredAT",
+                            "name": "magnifierpane",
+                            "enable": false
+                        }
+                    ],
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "Magnify"
+                        }
+                    ]
+                }
             }
         },
+        "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configure"
         ],
         "restore": [
             "settings.configure"
         ],
-        "start": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "magnifierpane",
-                "enable": true
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "magnifierpane",
-                "enable": false
-            }
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "Magnify"
             }
         ]
     },
@@ -829,37 +862,48 @@
                         "literalValue": 0
                     }
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": [
+                        {
+                            "type": "gpii.windows.enableRegisteredAT",
+                            "name": "osk",
+                            "enable": true
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.windows.enableRegisteredAT",
+                            "name": "osk",
+                            "enable": false
+                        }
+                    ],
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "osk"
+                        }
+                    ]
+                }
             }
         },
+        "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configure"
         ],
         "restore": [
             "settings.configure"
         ],
-        "start": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "osk",
-                "enable": true
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "osk",
-                "enable": false
-            }
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "osk"
             }
         ]
     },
@@ -1239,28 +1283,45 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }
+                    ],
+                    "start": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "nvda_service.exe"
+                        },{
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "nvda.exe"
+                        }
+                    ],
+                }
             }
         },
+        "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configs"
         ],
         "restore": [
             "settings.configs"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "nvda_service.exe"
-            },{
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "nvda.exe"
-            }
         ],
         "isInstalled": [
             {
@@ -1269,12 +1330,6 @@
                 "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "nvda"
             }
         ]
     },
@@ -1296,29 +1351,33 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/user/${{userToken}}"
+                    },
+                    "stop": {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "firefox.exe"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/user/${{userToken}}"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                    "type": "gpii.windows.closeProcessByName",
-                    "filename": "firefox.exe"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "firefox"
             }
         ]
     },
@@ -1339,29 +1398,33 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/pictorialSimplification"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/sudan"
+                    },
+                    "stop": {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "firefox.exe"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/sudan"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "firefox"
             }
         ]
     },
@@ -1382,29 +1445,33 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
+                    },
+                    "stop": {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "firefox.exe"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
-         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
-            }
+        "start": [
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "firefox"
             }
         ]
     },
@@ -1474,6 +1541,29 @@
                     ]
                 },
                 "inverseCapabilitiesTransformations": {}
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "firefox.exe"
+                        }
+                    ],
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "MaavisPortable"
+                        }
+                    ]
+                }
             }
         },
         "configure": [
@@ -1483,26 +1573,14 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "MaavisPortable"
             }
         ]
     },
@@ -2284,8 +2362,23 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": [{
+                        "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                    }],
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
+        "start": [
+            "settings.launcher"
+        ],
+        "stop": [],
         "configure": [
             "settings.configure"
         ],
@@ -2294,13 +2387,6 @@
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
-        ],
-        "start": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.updateCursors"
-            }
-        ],
-        "stop": [
         ],
         "isInstalled": [
             {
@@ -2360,6 +2446,29 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {}
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "C:\\Sociable\\Cloud4All.exe"
+                        }
+                    ],
+                    "stop": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "C:\\Sociable\\Cloud4All.exe -stop"
+                        }
+                    ],
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "Cloud4Allcd "
+                        }
+                    ]
+                }
             }
         },
         "configure": [
@@ -2369,22 +2478,10 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "C:\\Sociable\\Cloud4All.exe"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "C:\\Sociable\\Cloud4All.exe -stop"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "Cloud4Allcd "
-            }
+            "settings.launcher"
         ]
     },
 
@@ -2459,8 +2556,6 @@
         "restore": [
             "settings.chromeconf"
         ],
-        "start": [],
-        "stop": [],
         "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
     }
 }

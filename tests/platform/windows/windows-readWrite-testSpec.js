@@ -22,9 +22,18 @@ gpii.tests.windows.readWrite = [
     {
         name: "Testing rwg1",
         userToken: "rwg1",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
-                "some.app.id": [
+                "com.texthelp.readWriteGold": [
                     {
                         "settings": {
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
@@ -53,6 +62,20 @@ gpii.tests.windows.readWrite = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "readandwrite"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -65,9 +88,18 @@ gpii.tests.windows.readWrite = [
     }, {
         name: "Testing rwg2",
         userToken: "rwg2",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
-                "some.app.id": [
+                "com.texthelp.readWriteGold": [
                     {
                         "settings": {
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
@@ -98,6 +130,20 @@ gpii.tests.windows.readWrite = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "readandwrite"
+                        }]
+                    }
+                }]
             }
         },
         processes: [

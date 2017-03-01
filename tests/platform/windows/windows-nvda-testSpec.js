@@ -25,9 +25,18 @@ gpii.tests.windows.nvda = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "org.nvda-project": [
                     {
                         "settings": {
                             "speech.espeak.rate": 17,
@@ -53,6 +62,20 @@ gpii.tests.windows.nvda = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -65,9 +88,18 @@ gpii.tests.windows.nvda = [
     }, {
         name: "Testing screenreader_common using Flat matchmaker",
         userToken: "screenreader_common",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "org.nvda-project": [
                     {
                         "settings": {
                             "speech.espeak.rate": 17,
@@ -91,6 +123,20 @@ gpii.tests.windows.nvda = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
@@ -103,9 +149,18 @@ gpii.tests.windows.nvda = [
     }, {
         name: "Testing screenreader_orca using Flat matchmaker",
         userToken: "screenreader_orca",
+        integrationPrepopulation: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": false
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "org.nvda-project": [
                     {
                         "settings": {
                             "speech.symbolLevel": 300,
@@ -123,6 +178,20 @@ gpii.tests.windows.nvda = [
                         }
                     }
                 ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "org.nvda-project": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "isRunning": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
+                    }
+                }]
             }
         },
         processes: [
