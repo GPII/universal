@@ -13,7 +13,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-// Declare dependencies
 /* global fluid, gpii, jQuery, jqUnit */
 
 (function ($) {
@@ -79,7 +78,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         if (dialog.hasClass("ui-dialog-content")) {
             dialog.dialog("close");
         }
-        $.mockjaxClear();
+        $.mockjax.clear();
     };
 
 })(jQuery);
