@@ -75,6 +75,31 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
+                    },
+                    "stop": {
+                        "type": "gpii.launch.exec",
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
+                    },
+                    "isRunning": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "gnome-shell"
+                        },
+                        {
+                            "type": "gpii.processReporter.checkSetting",
+                            "schema": "org.gnome.desktop.a11y.applications",
+                            "setting": "screen-magnifier-enabled",
+                            "value": true
+                        }
+                    ]
+                }
             }
         },
         "update": [
@@ -87,33 +112,15 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "gnome-shell"
-            },
-            {
-                "type": "gpii.processReporter.checkSetting",
-                "schema": "org.gnome.desktop.a11y.applications",
-                "setting": "screen-magnifier-enabled",
-                "value": true
             }
         ]
     },
@@ -231,12 +238,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "dunno"
-            }
         ]
     },
 
@@ -273,12 +274,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "nautilus"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "nautilus"
-            }
         ]
     },
 
@@ -296,31 +291,36 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
                 ]
+            },
+            "launching": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
+                    },
+                    "stop": {
+                        "type": "gpii.launch.exec",
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
+                    },
+                    "isRunning": {
+                       "type": "gpii.processReporter.find",
+                        "command": "caribou"
+                   } // TODO KASPER: add gsettings check as well
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
-            }
+            "settings.launching"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
-            }
+            "settings.launching"
         ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
             }
-        ],
-        "isRunning": [
-           {
-               "type": "gpii.processReporter.find",
-                "command": "caribou"
-           }
         ]
     },
 
@@ -392,12 +392,6 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "gnome-settings-daemon"
             }
         ]
     },
@@ -1080,6 +1074,23 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.launch.exec",
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
+                    },
+                    "stop": {
+                        "type": "gpii.launch.exec",
+                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
+                    },
+                    "isRunning": {
+                        "type": "gpii.processReporter.find",
+                        "command": "orca"
+                    }
+                }
             }
         },
         "configure": [
@@ -1089,27 +1100,15 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
-            }
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
                 "name": "orca"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "orca"
             }
         ]
     },
@@ -1157,12 +1156,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "alsa-lib"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "alsactl"
-            }
         ]
     },
 
@@ -1208,12 +1201,6 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "chrome"
             }
         ]
     },
@@ -1261,12 +1248,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "chrome"
-            }
         ]
     },
 
@@ -1313,12 +1294,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "chrome"
-            }
         ]
     },
 
@@ -1339,14 +1314,8 @@
         "configure": [
             "settings.configuration"
         ],
-        "stop": [
+        "restore": [
             "settings.configuration"
-        ],
-        "isInstalled": [
-            {
-                "type": "gpii.packageKit.find",
-                "name": "libXrandr"
-            }
         ]
     },
 
