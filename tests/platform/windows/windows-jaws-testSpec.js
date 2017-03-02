@@ -108,15 +108,7 @@ gpii.tests.windows.jaws = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+        }
     },
     {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
@@ -201,15 +193,7 @@ gpii.tests.windows.jaws = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+        }
     },
     {
         name: "Testing NP set \"jaws_common2\" using Flat matchmaker",
@@ -293,15 +277,7 @@ gpii.tests.windows.jaws = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+        }
     },
     {
         name: "Testing NP set \"jaws_common3\" using Flat matchmaker",
@@ -386,15 +362,7 @@ gpii.tests.windows.jaws = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+        }
     }
 ];
 

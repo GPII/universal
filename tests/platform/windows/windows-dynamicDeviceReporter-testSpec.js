@@ -82,13 +82,6 @@ gpii.tests.deviceReporterAware.windows = [
                 }]
             }
         },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ],
         deviceReporters: {
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{
@@ -128,13 +121,6 @@ gpii.tests.deviceReporterAware.windows = [
                 }]
             }
         },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ],
         deviceReporters: {
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{

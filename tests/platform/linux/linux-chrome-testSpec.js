@@ -47,8 +47,7 @@ gpii.tests.linux.chrome.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for font size transformation in Chrome",
@@ -71,8 +70,7 @@ gpii.tests.linux.chrome.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for magnification transformation in Chrome",
@@ -95,8 +93,7 @@ gpii.tests.linux.chrome.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     }
 ];
 

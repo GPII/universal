@@ -67,14 +67,7 @@ gpii.tests.windows.maavis = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq MaavisPortable.exe\" | find /I \"MaavisPortable.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }, {
         name: "Testing maavis_selfvoicing using Flat matchmaker",
         userToken: "maavis_selfvoicing",
@@ -117,14 +110,7 @@ gpii.tests.windows.maavis = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq MaavisPortable.exe\" | find /I \"MaavisPortable.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }
 ];
 

@@ -9,7 +9,6 @@
         }
     },
     "mergeConfigs": [
-        "%processReporter/configs/gpii.processReporter.config.production.json",
         "%deviceReporter/configs/gpii.deviceReporter.config.production.json",
         "%universal/gpii/configs/gpii.config.development.base.local.json"
     ]

@@ -80,13 +80,6 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 }]
             }
         },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ],
         deviceReporters: {
             "gpii.packageKit.find": {
                 "expectInstalled": ["orca"]
@@ -147,13 +140,6 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 }]
             }
         },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ],
         deviceReporters: {
             "gpii.packageKit.find": {
                 "expectInstalled": ["orca"]
@@ -213,13 +199,6 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 }]
             }
         },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ],
         deviceReporters: {
             "gpii.packageKit.find": {
                 "expectInstalled": ["orca"]

@@ -80,14 +80,7 @@ gpii.tests.windows.readWrite = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }, {
         name: "Testing rwg2",
         userToken: "rwg2",
@@ -148,14 +141,7 @@ gpii.tests.windows.readWrite = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }
 ];
 

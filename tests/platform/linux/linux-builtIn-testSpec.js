@@ -104,16 +104,8 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                         }]
                     }
                 }]
-
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     },
     {
         name: "Testing os_common2 using default matchmaker",
@@ -130,8 +122,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                     }
                 }]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Testing os_gnome using default matchmaker",
@@ -193,14 +184,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     },
     {
         name: "Testing os_win7 using default matchmaker",
@@ -259,14 +243,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 }]
             }
 
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     }
 ]);
 

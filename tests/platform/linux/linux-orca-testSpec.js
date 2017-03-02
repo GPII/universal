@@ -78,14 +78,7 @@ gpii.tests.linux.orca.testDefs = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
@@ -139,14 +132,7 @@ gpii.tests.linux.orca.testDefs = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
@@ -199,14 +185,7 @@ gpii.tests.linux.orca.testDefs = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     }
 ];
 

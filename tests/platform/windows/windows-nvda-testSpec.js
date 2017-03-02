@@ -80,14 +80,7 @@ gpii.tests.windows.nvda = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }, {
         name: "Testing screenreader_common using Flat matchmaker",
         userToken: "screenreader_common",
@@ -141,14 +134,7 @@ gpii.tests.windows.nvda = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }, {
         name: "Testing screenreader_orca using Flat matchmaker",
         userToken: "screenreader_orca",
@@ -196,14 +182,7 @@ gpii.tests.windows.nvda = [
                     }
                 }]
             }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        }
     }
 ];
 

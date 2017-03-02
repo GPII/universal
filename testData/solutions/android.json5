@@ -13,12 +13,21 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.androidActivityManager.startFreespeech"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.androidActivityManager.startFreespeech"
-            }
+            "settings.launcher"
         ]
     },
 
@@ -36,17 +45,24 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.androidActivityManager.startTalkback"
+                    },
+                    "stop": {
+                        "type": "gpii.androidActivityManager.stopTalkback"
+                    },
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.androidActivityManager.startTalkback"
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.androidActivityManager.stopTalkback"
-            }
+            "settings.launcher"
         ]
     },
 
@@ -392,28 +408,37 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {}
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "start": {
+                        "type": "gpii.androidActivityManager.startActivityByPackageName",
+                        "packageName": "se.omnitor.ecmobile"
+                    },
+                    "stop": [
+                        {
+                            "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                            "packageName": "se.omnitor.ecmobile"
+                        },
+                        {
+                            "type": "gpii.androidActivityManager.goToHomeScreen"
+                        }
+                    ],
+                    "isRunning": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
+        "start": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configuration"
         ],
         "restore": [
             "settings.configuration"
-        ],
-        "start": [
-            {
-                "type": "gpii.androidActivityManager.startActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.androidActivityManager.stopActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            },
-            {
-                "type": "gpii.androidActivityManager.goToHomeScreen"
-            }
         ]
     },
 
