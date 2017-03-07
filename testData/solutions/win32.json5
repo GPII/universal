@@ -563,19 +563,19 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "jaws"
                         }
                     ],
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.launch.exec",
                             "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "jfw.exe"
@@ -637,19 +637,19 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.launch.exec",
                             "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "ReadAndWrite.exe"
                         }
                     ],
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
@@ -792,21 +792,21 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.windows.enableRegisteredAT",
                             "name": "magnifierpane",
                             "enable": true
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.windows.enableRegisteredAT",
                             "name": "magnifierpane",
                             "enable": false
                         }
                     ],
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
@@ -866,21 +866,21 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.windows.enableRegisteredAT",
                             "name": "osk",
                             "enable": true
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.windows.enableRegisteredAT",
                             "name": "osk",
                             "enable": false
                         }
                     ],
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "osk"
@@ -1287,19 +1287,19 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
                         }
                     ],
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.launch.exec",
                             "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "nvda_service.exe"
@@ -1355,15 +1355,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.launch.exec",
                         "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/user/${{userToken}}"
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -1402,15 +1402,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.launch.exec",
                         "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/sudan"
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -1449,15 +1449,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.launch.exec",
                         "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -1545,19 +1545,19 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.launch.exec",
                             "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "firefox.exe"
                         }
                     ],
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"
@@ -2402,10 +2402,10 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": [{
+                    "setTrue": [{
                         "type": "gpii.windows.spiSettingsHandler.updateCursors"
                     }],
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -2486,19 +2486,19 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": [
+                    "setTrue": [
                         {
                             "type": "gpii.launch.exec",
                             "command": "C:\\Sociable\\Cloud4All.exe"
                         }
                     ],
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.launch.exec",
                             "command": "C:\\Sociable\\Cloud4All.exe -stop"
                         }
                     ],
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "Cloud4Allcd "

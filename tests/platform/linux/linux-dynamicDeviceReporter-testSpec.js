@@ -30,7 +30,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
         userToken: "screenreader_common",
         integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
@@ -63,19 +63,14 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-reader-enabled",
-                            "value": true
-                        }]
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }
@@ -91,7 +86,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
         userToken: "screenreader_orca",
         integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
@@ -123,19 +118,14 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-reader-enabled",
-                            "value": true
-                        }]
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }
@@ -151,7 +141,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
         userToken: "screenreader_nvda",
         integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
@@ -182,19 +172,14 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-reader-enabled",
-                            "value": true
-                        }]
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }

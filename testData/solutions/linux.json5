@@ -77,28 +77,10 @@
                 }
             },
             "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
+                "type": "gpii.gsettings.launch",
                 "options": {
-                    "start": {
-                        "type": "gpii.launch.exec",
-                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
-                    },
-                    "stop": {
-                        "type": "gpii.launch.exec",
-                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
-                    },
-                    "isRunning": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "gnome-shell"
-                        },
-                        {
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-magnifier-enabled",
-                            "value": true
-                        }
-                    ]
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-magnifier-enabled"
                 }
             }
         },
@@ -115,6 +97,12 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -293,25 +281,10 @@
                 ]
             },
             "launching": {
-                "type": "gpii.launchHandlers.flexibleHandler",
+                "type": "gpii.gsettings.launch",
                 "options": {
-                    "start": {
-                        "type": "gpii.launch.exec",
-                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
-                    },
-                    "stop": {
-                        "type": "gpii.launch.exec",
-                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
-                    },
-                    "isRunning": [{
-                        "type": "gpii.processReporter.find",
-                        "command": "caribou",
-                    }, {
-                        "type": "gpii.processReporter.checkSetting",
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "setting": "screen-keyboard-enabled",
-                        "value": true
-                    }]
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-keyboard-enabled"
                 }
             }
         },
@@ -319,6 +292,9 @@
             "settings.launching"
         ],
         "stop": [
+            "settings.launching"
+        ],
+        "isRunning": [
             "settings.launching"
         ],
         "isInstalled": [
@@ -1081,27 +1057,10 @@
                 }
             },
             "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
+                "type": "gpii.gsettings.launch",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        retryInterval: 200
-                    },
-                    "start": {
-                        "type": "gpii.launch.exec",
-                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
-                    },
-                    "stop": {
-                        "type": "gpii.launch.exec",
-                        "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
-                    },
-                    "isRunning": [{ // GPII-2306: Add check for Orca process
-                        "type": "gpii.processReporter.checkSetting",
-                        "schema": "org.gnome.desktop.a11y.applications",
-                        "setting": "screen-reader-enabled",
-                        "value": true
-                    }]
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-reader-enabled"
                 }
             }
         },
@@ -1115,6 +1074,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -1191,15 +1153,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.launch.exec",
                         "command": "google-chrome http://easy123.org/user/${{userToken}}"
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -1209,6 +1171,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -1247,15 +1212,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.launch.exec",
                         "command": "google-chrome http://easy123.org/sudan"
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -1265,6 +1230,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -1303,15 +1271,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.launch.exec",
                         "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -1321,6 +1289,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [

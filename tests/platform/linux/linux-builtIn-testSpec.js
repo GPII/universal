@@ -15,8 +15,11 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 
 "use strict";
 
+
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.logObjectRenderChars = 2048
 
 fluid.require("%universal");
 
@@ -29,7 +32,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         name: "Testing os_common using default matchmaker",
         userToken: "os_common",
         integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": false
@@ -68,40 +71,23 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                     }
                 }]
             },
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.gnome.desktop.a11y.applications.onscreen-keyboard": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "caribou"
-                        }, {
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-keyboard-enabled",
-                            "value": true
-                        }]
-                    }
-                }],
+            "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "gnome-shell"
-                        },
-                        {
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-magnifier-enabled",
-                            "value": true
-                        }]
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
+                    }
+                }],
+                "org.gnome.desktop.a11y.applications.onscreen-keyboard": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-keyboard-enabled"
                     }
                 }]
             }
@@ -128,7 +114,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         name: "Testing os_gnome using default matchmaker",
         userToken: "os_gnome",
         integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": false
@@ -164,23 +150,14 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                     }
                 }]
             },
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "gnome-shell"
-                        },
-                        {
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-magnifier-enabled",
-                            "value": true
-                        }]
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
                     }
                 }]
             }
@@ -190,7 +167,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         name: "Testing os_win7 using default matchmaker",
         userToken: "os_win7",
         integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": false
@@ -222,27 +199,17 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                     }
                 }]
             },
-            "gpii.launchHandlers.flexibleHandler": {
+            "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "gnome-shell"
-                        },
-                        {
-                            "type": "gpii.processReporter.checkSetting",
-                            "schema": "org.gnome.desktop.a11y.applications",
-                            "setting": "screen-magnifier-enabled",
-                            "value": true
-                        }]
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
                     }
                 }]
             }
-
         }
     }
 ]);

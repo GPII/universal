@@ -17,10 +17,10 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.androidActivityManager.startFreespeech"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -49,13 +49,13 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.androidActivityManager.startTalkback"
                     },
-                    "stop": {
+                    "setFalse": {
                         "type": "gpii.androidActivityManager.stopTalkback"
                     },
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
@@ -412,11 +412,11 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "start": {
+                    "setTrue": {
                         "type": "gpii.androidActivityManager.startActivityByPackageName",
                         "packageName": "se.omnitor.ecmobile"
                     },
-                    "stop": [
+                    "setFalse": [
                         {
                             "type": "gpii.androidActivityManager.stopActivityByPackageName",
                             "packageName": "se.omnitor.ecmobile"
@@ -425,7 +425,7 @@
                             "type": "gpii.androidActivityManager.goToHomeScreen"
                         }
                     ],
-                    "isRunning": [{
+                    "getState": [{
                         "type": "gpii.processReporter.neverRunning"
                     }]
                 }
