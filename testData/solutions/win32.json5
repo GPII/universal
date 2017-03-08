@@ -1548,6 +1548,164 @@
         ]
     },
 
+    "com.microsoft.windows.fontSize": {
+        "name": "Windows Font Size",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure.NonClientMetrics": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETNONCLIENTMETRICS",
+                    "setAction": "SPI_SETNONCLIENTMETRICS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "NONCLIENTMETRICS"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE", // It won't update if these flags aren't set.
+                    "verifySettings": false // The next GET will be different to the last SET
+                },
+                "supportedSettings": {
+                    "CaptionFont": {},
+                    "SmallCaptionFont": {},
+                    "MenuFont": {},
+                    "StatusFont": {},
+                    "MessageFont": {},
+                    "CaptionHeight": {},
+                    "SmCaptionHeight": {},
+                    "MenuHeight": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/fontSize"
+                ],
+                "capabilitiesTransformations": {
+                    "CaptionFont": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.lfCaptionFont.lfHeight"
+                        }
+                    },
+                    "SmallCaptionFont": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.lfSmCaptionFont.lfHeight"
+                        }
+                    },
+                    "MenuFont": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.lfMenuFont.lfHeight"
+                        }
+                    },
+                    "StatusFont": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.lfStatusFont.lfHeight"
+                        }
+                    },
+                    "MessageFont": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.lfMessageFont.lfHeight"
+                        }
+                    },
+                    /* Set the pixel heights to 0 so they are calculated based on the font height */
+                    "CaptionHeight": {
+                        "literalValue": {
+                            "path": "pvParam.iCaptionHeight",
+                            "value": 0
+                        }
+                    },
+                    "SmCaptionHeight": {
+                        "literalValue": {
+                            "path": "pvParam.iSmCaptionHeight",
+                            "value": 0
+                        }
+                    },
+                    "MenuHeight": {
+                        "literalValue": {
+                            "path": "pvParam.iMenuHeight",
+                            "value": 0
+                        }
+                    }
+                }
+            },
+            "configure.IconTitle": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETICONTITLELOGFONT",
+                    "setAction": "SPI_SETICONTITLELOGFONT",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "LOGFONT"
+                    },
+                    // If configure.NonClientMetrics is called after this one, then fWinIni doesn't need to be set.
+                    //"fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE", // It won't update if these flags aren't set.
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "IconTitleFont": {},
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/fontSize"
+                ],
+                "capabilitiesTransformations": {
+                    "IconTitleFont": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.lfHeight"
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure.IconTitle",
+            "settings.configure.NonClientMetrics"
+        ],
+        "restore": [
+            "settings.configure.IconTitle",
+            "settings.configure.NonClientMetrics"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.stickyKeys": {
         "name": "Windows StickyKeys",
         "contexts": {

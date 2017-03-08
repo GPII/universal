@@ -48,6 +48,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.fontSize"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
