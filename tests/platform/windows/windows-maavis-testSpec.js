@@ -33,6 +33,13 @@ gpii.tests.windows.maavis = [
                 "net.opendirective.maavis": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "MaavisPortable"
+                        }]
                     }
                 }]
             }
@@ -60,7 +67,7 @@ gpii.tests.windows.maavis = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"
                         }]
@@ -76,6 +83,13 @@ gpii.tests.windows.maavis = [
                 "net.opendirective.maavis": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "MaavisPortable"
+                        }]
                     }
                 }]
             }
@@ -103,7 +117,7 @@ gpii.tests.windows.maavis = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"
                         }]

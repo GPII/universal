@@ -33,6 +33,13 @@ gpii.tests.windows.jaws = [
                 "com.freedomscientific.jaws": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
                     }
                 }]
             }
@@ -101,7 +108,7 @@ gpii.tests.windows.jaws = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "jaws"
                         }]
@@ -118,6 +125,13 @@ gpii.tests.windows.jaws = [
                 "com.freedomscientific.jaws": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
                     }
                 }]
             }
@@ -186,7 +200,7 @@ gpii.tests.windows.jaws = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "jaws"
                         }]
@@ -203,6 +217,13 @@ gpii.tests.windows.jaws = [
                 "com.freedomscientific.jaws": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
                     }
                 }]
             }
@@ -270,7 +291,7 @@ gpii.tests.windows.jaws = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "jaws"
                         }]
@@ -287,6 +308,13 @@ gpii.tests.windows.jaws = [
                 "com.freedomscientific.jaws": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "jaws"
+                        }]
                     }
                 }]
             }
@@ -355,7 +383,7 @@ gpii.tests.windows.jaws = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "jaws"
                         }]

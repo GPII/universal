@@ -33,6 +33,12 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.magnifier": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "Magnify"
+                        }]
                     }
                 }]
             }
@@ -226,7 +232,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
                         }]
@@ -242,11 +248,25 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.magnifier": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "Magnify"
+                        }]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "osk"
+                        }]
                     }
                 }]
             }
@@ -422,7 +442,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
                         }]
@@ -434,7 +454,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "osk"
                         }]
@@ -450,6 +470,13 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.magnifier": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "Magnify"
+                        }]
                     }
                 }]
             }
@@ -518,7 +545,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
                         }]

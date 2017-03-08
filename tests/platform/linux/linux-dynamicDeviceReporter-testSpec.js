@@ -34,6 +34,10 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }
@@ -90,6 +94,10 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }
@@ -145,6 +153,10 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }

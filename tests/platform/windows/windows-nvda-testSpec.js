@@ -33,6 +33,13 @@ gpii.tests.windows.nvda = [
                 "org.nvda-project": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
                     }
                 }]
             }
@@ -73,7 +80,7 @@ gpii.tests.windows.nvda = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
                         }]
@@ -89,6 +96,13 @@ gpii.tests.windows.nvda = [
                 "org.nvda-project": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
                     }
                 }]
             }
@@ -127,7 +141,7 @@ gpii.tests.windows.nvda = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
                         }]
@@ -143,6 +157,13 @@ gpii.tests.windows.nvda = [
                 "org.nvda-project": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
                     }
                 }]
             }
@@ -175,7 +196,7 @@ gpii.tests.windows.nvda = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
                         }]

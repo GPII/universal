@@ -35,6 +35,10 @@ gpii.tests.linux.orca.testDefs = [
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }
@@ -85,6 +89,10 @@ gpii.tests.linux.orca.testDefs = [
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }
@@ -134,6 +142,10 @@ gpii.tests.linux.orca.testDefs = [
                 "org.gnome.orca": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
                     }
                 }]
             }

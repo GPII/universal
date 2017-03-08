@@ -33,6 +33,13 @@ gpii.tests.deviceReporterAware.windows = [
                 "org.nvda-project": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }]
                     }
                 }]
             }
@@ -74,7 +81,7 @@ gpii.tests.deviceReporterAware.windows = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
                         }]
@@ -101,6 +108,13 @@ gpii.tests.deviceReporterAware.windows = [
                 "com.texthelp.readWriteGold": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        // start and stop blocks omitted for size/clarity
+                        "getState": [{
+                            "type": "gpii.processReporter.find",
+                            "command": "readandwrite"
+                        }]
                     }
                 }]
             }
@@ -113,7 +127,7 @@ gpii.tests.deviceReporterAware.windows = [
                     },
                     "options": {
                         // start and stop blocks omitted for size/clarity
-                        "isRunning": [{
+                        "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
                         }]

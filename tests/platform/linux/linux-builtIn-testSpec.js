@@ -36,11 +36,19 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
                     }
                 }],
                 "org.gnome.desktop.a11y.applications.onscreen-keyboard": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-keyboard-enabled"
                     }
                 }]
             }
@@ -118,6 +126,10 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
                     }
                 }]
             }
@@ -171,6 +183,10 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "org.gnome.desktop.a11y.magnifier": [{
                     "settings": {
                         "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-magnifier-enabled"
                     }
                 }]
             }
