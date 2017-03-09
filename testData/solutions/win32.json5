@@ -1570,7 +1570,7 @@
                         "name": "NONCLIENTMETRICS"
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE", // It won't update if these flags aren't set.
-                    "verifySettings": false // The next GET will be different to the last SET
+                    "verifySettings": false // The next GET will be different to the last SET.
                 },
                 "supportedSettings": {
                     "CaptionFont": {},
@@ -1588,7 +1588,8 @@
                 "capabilitiesTransformations": {
                     "CaptionFont": {
                         "transform": {
-                            "type": "fluid.transforms.value",
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "outputPath": "value"
                         },
@@ -1598,7 +1599,8 @@
                     },
                     "SmallCaptionFont": {
                         "transform": {
-                            "type": "fluid.transforms.value",
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "outputPath": "value"
                         },
@@ -1608,7 +1610,8 @@
                     },
                     "MenuFont": {
                         "transform": {
-                            "type": "fluid.transforms.value",
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "outputPath": "value"
                         },
@@ -1618,7 +1621,8 @@
                     },
                     "StatusFont": {
                         "transform": {
-                            "type": "fluid.transforms.value",
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "outputPath": "value"
                         },
@@ -1628,7 +1632,8 @@
                     },
                     "MessageFont": {
                         "transform": {
-                            "type": "fluid.transforms.value",
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "outputPath": "value"
                         },
@@ -1636,23 +1641,36 @@
                             "literalValue": "pvParam.lfMessageFont.lfHeight"
                         }
                     },
-                    /* Set the pixel heights to 0 so they are calculated based on the font height */
+                    // The pixel heights will grow, but will not shrink back, so set the value to something so it will
+                    // be restored.
                     "CaptionHeight": {
-                        "literalValue": {
-                            "path": "pvParam.iCaptionHeight",
-                            "value": 0
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "pvParam.iCaptionHeight",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.iCaptionHeight"
                         }
                     },
                     "SmCaptionHeight": {
-                        "literalValue": {
-                            "path": "pvParam.iSmCaptionHeight",
-                            "value": 0
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "pvParam.iSmCaptionHeight",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.iSmCaptionHeight"
                         }
                     },
                     "MenuHeight": {
-                        "literalValue": {
-                            "path": "pvParam.iMenuHeight",
-                            "value": 0
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "inputPath": "pvParam.iMenuHeight",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam.iMenuHeight"
                         }
                     }
                 }
@@ -1672,7 +1690,7 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "IconTitleFont": {},
+                    "IconTitleFont": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/fontSize"
@@ -1680,7 +1698,8 @@
                 "capabilitiesTransformations": {
                     "IconTitleFont": {
                         "transform": {
-                            "type": "fluid.transforms.value",
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
                             "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
                             "outputPath": "value"
                         },
