@@ -231,7 +231,7 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
@@ -250,7 +250,7 @@ gpii.tests.windows.builtIn = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
@@ -262,7 +262,7 @@ gpii.tests.windows.builtIn = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "osk"
@@ -441,7 +441,7 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
@@ -453,7 +453,7 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "osk"
@@ -472,7 +472,7 @@ gpii.tests.windows.builtIn = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"
@@ -544,7 +544,7 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "Magnify"

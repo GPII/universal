@@ -35,10 +35,10 @@ gpii.tests.windows.jaws = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]
@@ -107,10 +107,10 @@ gpii.tests.windows.jaws = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]
@@ -127,10 +127,10 @@ gpii.tests.windows.jaws = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]
@@ -199,10 +199,10 @@ gpii.tests.windows.jaws = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]
@@ -219,10 +219,10 @@ gpii.tests.windows.jaws = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]
@@ -290,10 +290,10 @@ gpii.tests.windows.jaws = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]
@@ -310,7 +310,7 @@ gpii.tests.windows.jaws = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "jaws"
@@ -382,10 +382,10 @@ gpii.tests.windows.jaws = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }]
                     }
                 }]

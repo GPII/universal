@@ -32,7 +32,7 @@ gpii.tests.windows.readWrite = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
@@ -79,7 +79,7 @@ gpii.tests.windows.readWrite = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
@@ -98,7 +98,7 @@ gpii.tests.windows.readWrite = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
@@ -147,7 +147,7 @@ gpii.tests.windows.readWrite = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"

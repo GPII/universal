@@ -35,7 +35,7 @@ gpii.tests.deviceReporterAware.windows = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
@@ -80,7 +80,7 @@ gpii.tests.deviceReporterAware.windows = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "nvda"
@@ -110,7 +110,7 @@ gpii.tests.deviceReporterAware.windows = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
@@ -126,7 +126,7 @@ gpii.tests.deviceReporterAware.windows = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"

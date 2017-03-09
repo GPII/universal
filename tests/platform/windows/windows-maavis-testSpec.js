@@ -35,7 +35,7 @@ gpii.tests.windows.maavis = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"
@@ -66,7 +66,7 @@ gpii.tests.windows.maavis = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"
@@ -85,7 +85,7 @@ gpii.tests.windows.maavis = [
                         "running": false
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"
@@ -116,7 +116,7 @@ gpii.tests.windows.maavis = [
                         "running": true
                     },
                     "options": {
-                        // start and stop blocks omitted for size/clarity
+                        // setTrue and setFalse blocks omitted for size/clarity
                         "getState": [{
                             "type": "gpii.processReporter.find",
                             "command": "MaavisPortable"

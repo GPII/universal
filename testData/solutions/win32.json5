@@ -563,10 +563,15 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
-                            "command": "jaws"
+                            "command": "jfw"
                         }
                     ],
                     "setTrue": [
@@ -579,6 +584,14 @@
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "jfw.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "fsSynth32.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jhookldr.exe"
                         }
                     ]
                 }
@@ -596,6 +609,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -668,6 +684,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -790,28 +809,10 @@
                 }
             },
             "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
+                "type": "gpii.windows.enableRegisteredAT",
                 "options": {
-                    "setTrue": [
-                        {
-                            "type": "gpii.windows.enableRegisteredAT",
-                            "name": "magnifierpane",
-                            "enable": true
-                        }
-                    ],
-                    "setFalse": [
-                        {
-                            "type": "gpii.windows.enableRegisteredAT",
-                            "name": "magnifierpane",
-                            "enable": false
-                        }
-                    ],
-                    "getState": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "Magnify"
-                        }
-                    ]
+                    "registryName": "magnifierpane",
+                    "queryProcess": "Magnify"
                 }
             }
         },
@@ -819,6 +820,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "configure": [
@@ -864,28 +868,10 @@
                 }
             },
             "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
+                "type": "gpii.windows.enableRegisteredAT",
                 "options": {
-                    "setTrue": [
-                        {
-                            "type": "gpii.windows.enableRegisteredAT",
-                            "name": "osk",
-                            "enable": true
-                        }
-                    ],
-                    "setFalse": [
-                        {
-                            "type": "gpii.windows.enableRegisteredAT",
-                            "name": "osk",
-                            "enable": false
-                        }
-                    ],
-                    "getState": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "osk"
-                        }
-                    ]
+                    "registryName": "osk",
+                    "queryProcess": "osk"
                 }
             }
         },
@@ -893,6 +879,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "configure": [
@@ -1287,6 +1276,11 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -1317,12 +1311,16 @@
         "stop": [
             "settings.launcher"
         ],
+        "isRunning": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configs"
         ],
         "restore": [
             "settings.configs"
         ],
+
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -1375,6 +1373,9 @@
         "stop": [
             "settings.launcher"
         ],
+        "isRunning": [
+            "settings.launcher"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1422,6 +1423,9 @@
         "stop": [
             "settings.launcher"
         ],
+        "isRunning": [
+            "settings.launcher"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1467,6 +1471,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -1545,6 +1552,11 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
+                    },
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
@@ -1576,6 +1588,9 @@
             "settings.launcher"
         ],
         "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "isInstalled": [
@@ -2415,6 +2430,9 @@
             "settings.launcher"
         ],
         "stop": [],
+        "isRunning": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2512,6 +2530,9 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ],
         "start": [
             "settings.launcher"
