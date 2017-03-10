@@ -102,9 +102,6 @@
         "isRunning": [
             "settings.launcher"
         ],
-        "isRunning": [
-            "settings.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",

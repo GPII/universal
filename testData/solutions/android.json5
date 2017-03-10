@@ -28,6 +28,9 @@
         },
         "start": [
             "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ]
     },
 
@@ -62,6 +65,12 @@
             }
         },
         "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ]
     },
@@ -432,6 +441,12 @@
             }
         },
         "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
             "settings.launcher"
         ],
         "configure": [

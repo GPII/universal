@@ -28,7 +28,7 @@ gpii.tests.deviceReporterAware.windows = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.launchHandlers.flexibleHandler": {
                 "org.nvda-project": [{
                     "settings": {
@@ -103,7 +103,7 @@ gpii.tests.deviceReporterAware.windows = [
         name: "Testing readwritegold_application1 using Flat matchmaker",
         userToken: "readwritegold_application1",
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.launchHandlers.flexibleHandler": {
                 "com.texthelp.readWriteGold": [{
                     "settings": {

@@ -20,29 +20,60 @@ var fluid = require("infusion"),
 
 fluid.require("%universal");
 
+fluid.logObjectRenderChars = 80000
+
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows");
+fluid.registerNamespace("gpii.tests.windows.nvda");
 
-gpii.tests.windows.nvda = [
-    {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
-        integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.nvda-project": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "nvda"
-                        }]
+// To avoid duplicating this entire piece in each test. Given a true or false value
+// as input, this will return a settingshandler entry, containing all the options from
+// the solutions registry entry for NVDAs launchHandler, with a settings block with
+// running: X - where X is replaced with the input parameter
+gpii.tests.windows.nvda.flexibleHandlerEntry = function (running) {
+    return {
+        "org.nvda-project": [{
+            "settings": {
+                "running": running
+            },
+            "options": {
+                "verifySettings": true,
+                retryOptions: {
+                    rewriteEvery: 0,
+                    numRetries: 20
+                },
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "nvda"
                     }
-                }]
+                ],
+                "setTrue": [
+                    {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+                    }
+                ],
+                "setFalse": [
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "nvda_service.exe"
+                    },{
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "nvda.exe"
+                    }
+                ]
             }
+        }]
+    }
+};
+
+gpii.tests.windows.nvda.testDef = [
+    {
+        name: "Testing screenreader_nvda - When running on start",
+        userToken: "screenreader_nvda",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
         },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
@@ -73,142 +104,114 @@ gpii.tests.windows.nvda = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.nvda-project": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "nvda"
-                        }]
-                    }
-                }]
-            }
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
         }
-    }, {
-        name: "Testing screenreader_common using Flat matchmaker",
-        userToken: "screenreader_common",
-        integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.nvda-project": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "nvda"
-                        }]
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
-                            "speech.espeak.rateBoost": true,
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
-                        }
-                    }
-                ]
-            },
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.nvda-project": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "nvda"
-                        }]
-                    }
-                }]
-            }
-        }
-    }, {
-        name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
-        integrationPrepopulation: {
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.nvda-project": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "nvda"
-                        }]
-                    }
-                }]
-            }
-        },
-        settingsHandlers: {
-            "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "keyboard.speakTypedWords": true,
-                            "speech.espeak.rateBoost": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
-                        }
-                    }
-                ]
-            },
-            "gpii.launchHandlers.flexibleHandler": {
-                "org.nvda-project": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // start and stop blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "nvda"
-                        }]
-                    }
-                }]
-            }
-        }
+    // }, {
+    //     name: "Testing screenreader_nvda",
+    //     userToken: "screenreader_nvda",
+    //     initialState: {
+    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
+    //     },
+    //     settingsHandlers: {
+    //         "gpii.settingsHandlers.INISettingsHandler": {
+    //             "org.nvda-project": [
+    //                 {
+    //                     "settings": {
+    //                         "speech.espeak.rate": 17,
+    //                         "speech.espeak.volume": 80,
+    //                         "speech.espeak.pitch": 60,
+    //                         "speech.espeak.rateBoost": true,
+    //                         "speech.synth": "espeak",
+    //                         "speech.outputDevice": "Microsoft Sound Mapper",
+    //                         "speech.symbolLevel": 300,
+    //                         "speech.espeak.voice": "en\\en-wi",
+    //                         "reviewCursor.followFocus": false,
+    //                         "reviewCursor.followCaret": true,
+    //                         "reviewCursor.followMouse": true,
+    //                         "keyboard.speakTypedWords": true,
+    //                         "keyboard.speakTypedCharacters": false,
+    //                         "presentation.reportHelpBalloons": false,
+    //                         "speech.espeak.sayCapForCapitals": true
+    //                     },
+    //                     "options": {
+    //                         "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+    //                         "allowNumberSignComments": true,
+    //                         "allowSubSections": true
+    //                     }
+    //                 }
+    //             ]
+    //         },
+    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
+    //     }
+    // }, {
+    //     name: "Testing screenreader_common",
+    //     userToken: "screenreader_common",
+    //     initialState: {
+    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
+    //     },
+    //     settingsHandlers: {
+    //         "gpii.settingsHandlers.INISettingsHandler": {
+    //             "org.nvda-project": [
+    //                 {
+    //                     "settings": {
+    //                         "speech.espeak.rate": 17,
+    //                         "speech.espeak.volume": 75,
+    //                         "speech.espeak.pitch": 15,
+    //                         "speech.espeak.rateBoost": true,
+    //                         "speech.symbolLevel": 300,
+    //                         "speech.espeak.voice": "en\\en-wi",
+    //                         "reviewCursor.followFocus": false,
+    //                         "reviewCursor.followCaret": true,
+    //                         "reviewCursor.followMouse": true,
+    //                         "keyboard.speakTypedWords": true,
+    //                         "keyboard.speakTypedCharacters": false,
+    //                         "presentation.reportHelpBalloons": false,
+    //                         "speech.espeak.sayCapForCapitals": true
+    //                     },
+    //                     "options": {
+    //                         "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+    //                         "allowNumberSignComments": true,
+    //                         "allowSubSections": true
+    //                     }
+    //                 }
+    //             ]
+    //         },
+    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
+    //     }
+    // }, {
+    //     name: "Testing screenreader_orca",
+    //     userToken: "screenreader_orca",
+    //     initialState: {
+    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
+    //     },
+    //     settingsHandlers: {
+    //         "gpii.settingsHandlers.INISettingsHandler": {
+    //             "org.nvda-project": [
+    //                 {
+    //                     "settings": {
+    //                         "speech.symbolLevel": 300,
+    //                         "speech.espeak.rate": 17,
+    //                         "speech.espeak.voice": "en\\en-wi",
+    //                         "keyboard.speakTypedWords": true,
+    //                         "speech.espeak.rateBoost": true,
+    //                         "keyboard.speakTypedCharacters": false,
+    //                         "presentation.reportHelpBalloons": false
+    //                     },
+    //                     "options": {
+    //                         "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+    //                         "allowNumberSignComments": true,
+    //                         "allowSubSections": true
+    //                     }
+    //                 }
+    //             ]
+    //         },
+    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
+    //     }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.windows.nvda",
+    testDefs:  "gpii.tests.windows.nvda.testDef",
     configName: "gpii.tests.acceptance.windows.nvda.config",
     configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],

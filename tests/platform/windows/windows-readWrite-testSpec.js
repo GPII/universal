@@ -23,13 +23,73 @@ fluid.registerNamespace("gpii.tests.windows");
 
 gpii.tests.windows.readWrite = [
     {
-        name: "Testing rwg1",
+        name: "Testing rwg1 - running on login",
         userToken: "rwg1",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.launchHandlers.flexibleHandler": {
                 "com.texthelp.readWriteGold": [{
                     "settings": {
-                        "running": false
+                        "running": true
+                    },
+                    "options": {
+                        "setTrue": [
+                            {
+                                "type": "gpii.launch.exec",
+                                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                            }
+                        ],
+                        "setFalse": [
+                            {
+                                "type": "gpii.windows.closeProcessByName",
+                                "filename": "ReadAndWrite.exe"
+                            }
+                        ],
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "readandwrite"
+                            }
+                        ]
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.settingsHandlers.XMLHandler": {
+                "com.texthelp.readWriteGold": [
+                    {
+                        "settings": {
+                            "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
+                            "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
+                            "ApplicationSettings.AppBar.DocType.$t": "1",
+                            "ApplicationSettings.AppBar.ShowText.$t": "true",
+                            "ApplicationSettings.AppBar.optToolbarShowText.$t": "true",
+                            "ApplicationSettings.AppBar.LargeIcons.$t": "true",
+                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": "true",
+                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": "36",
+                            "ApplicationSettings.Speech.optSAPI5Speed.$t": "38",
+                            "ApplicationSettings.Speech.optSAPI5Volume.$t": "72",
+                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": "0",
+                            "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
+                            "ApplicationSettings.Speech.WebHighlighting.$t": "false",
+                            "ApplicationSettings.Translation.ToLanguage.$t": "fr",
+                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": "2",
+                            "ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
+                            "ApplicationSettings.Scanning.ScanToFile.$t": "false",
+                            "ApplicationSettings.Spelling.SpellAsIType.$t": "true"
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
+                            "encoding": "utf-8",
+                            "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": true
                     },
                     "options": {
                         // setTrue and setFalse blocks omitted for size/clarity
@@ -37,6 +97,38 @@ gpii.tests.windows.readWrite = [
                             "type": "gpii.processReporter.find",
                             "command": "readandwrite"
                         }]
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing rwg1",
+        userToken: "rwg1",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": {
+                "com.texthelp.readWriteGold": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "setTrue": [
+                            {
+                                "type": "gpii.launch.exec",
+                                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                            }
+                        ],
+                        "setFalse": [
+                            {
+                                "type": "gpii.windows.closeProcessByName",
+                                "filename": "ReadAndWrite.exe"
+                            }
+                        ],
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "readandwrite"
+                            }
+                        ]
                     }
                 }]
             }
@@ -91,18 +183,31 @@ gpii.tests.windows.readWrite = [
     }, {
         name: "Testing rwg2",
         userToken: "rwg2",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.launchHandlers.flexibleHandler": {
                 "com.texthelp.readWriteGold": [{
                     "settings": {
                         "running": false
                     },
                     "options": {
-                        // setTrue and setFalse blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "readandwrite"
-                        }]
+                        "setTrue": [
+                            {
+                                "type": "gpii.launch.exec",
+                                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                            }
+                        ],
+                        "setFalse": [
+                            {
+                                "type": "gpii.windows.closeProcessByName",
+                                "filename": "ReadAndWrite.exe"
+                            }
+                        ],
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "readandwrite"
+                            }
+                        ]
                     }
                 }]
             }

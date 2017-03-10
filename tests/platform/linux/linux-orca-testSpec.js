@@ -28,9 +28,9 @@ fluid.registerNamespace("gpii.tests.linux.orca");
 
 gpii.tests.linux.orca.testDefs = [
     {
-        name: "Testing screenreader_common using Flat matchmaker",
+        name: "Testing screenreader_common",
         userToken: "screenreader_common",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
@@ -80,11 +80,64 @@ gpii.tests.linux.orca.testDefs = [
                 }]
             }
         }
+    }, {
+        name: "Testing screenreader_common with orca running on login",
+        userToken: "screenreader_common",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.orca": {
+                "org.gnome.orca": [
+                    {
+                        "settings": {
+                            "sayAllStyle": 1,
+                            "enableSpeech": true,
+                            "enableEchoByWord": true,
+                            "enableEchoByCharacter": false,
+                            "voices.default.rate": 102.27272727272727,
+                            "voices.default.gain": 7.5,
+                            "enableTutorialMessages": false,
+                            "voices.default.family": {
+                                "locale": "en",
+                                "name": "en-westindies"
+                            },
+                            "verbalizePunctuationStyle": 0,
+                            "voices.default.average-pitch": 1.5
+                        },
+                        "options": {
+                            "user": "screenreader_common"
+                        }
+                    }
+                ]
+            },
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        }
     },
     {
-        name: "Testing screenreader_orca using Flat matchmaker",
+        name: "Testing screenreader_orca",
         userToken: "screenreader_orca",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
@@ -135,9 +188,9 @@ gpii.tests.linux.orca.testDefs = [
         }
     },
     {
-        name: "Testing screenreader_nvda using Flat matchmaker",
+        name: "Testing screenreader_nvda",
         userToken: "screenreader_nvda",
-        integrationPrepopulation: {
+        initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
                     "settings": {
