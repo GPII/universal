@@ -26,7 +26,6 @@ fluid.logObjectRenderChars = 10240;
 
 fluid.registerNamespace("gpii.tests.journal");
 
-fluid.logObjectRenderChars = 10000
 gpii.tests.journal.testSpec = fluid.require("%universal/tests/platform/windows/windows-builtIn-testSpec.js");
 
 // The os_win7 entry forms the spine of our test. This user has 4 application-specific preferences encoded

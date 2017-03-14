@@ -60,7 +60,7 @@ gpii.tests.windows.maavis.flexibleHandlerEntry = function (running) {
                 ]
             }
         }]
-    }
+    };
 };
 
 gpii.tests.windows.maavis.testDefs = [

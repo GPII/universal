@@ -68,8 +68,9 @@ gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
                 ]
             }
         }]
-    }
+    };
 };
+
 gpii.tests.windows.jaws.testDefs = [
     {
         name: "Testing NP set \"jaws_application\"",

@@ -22,8 +22,6 @@ fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
-fluid.logObjectRenderChars = 8000
-
 fluid.registerNamespace("gpii.tests.linux.orca");
 
 gpii.tests.linux.orca.testDefs = [

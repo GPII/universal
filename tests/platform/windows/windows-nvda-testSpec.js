@@ -65,7 +65,7 @@ gpii.tests.windows.nvda.flexibleHandlerEntry = function (running) {
                 ]
             }
         }]
-    }
+    };
 };
 
 gpii.tests.windows.nvda.testDef = [
