@@ -85,14 +85,16 @@ gpii.tests.journal.initialSettings = {
             }
         }]
     },
-    "gpii.launchHandlers.flexibleHandler": {
-        "com.microsoft.windows.magnifier": [
-            {
-                "settings": {
-                    "running": false
-                }
+    "gpii.windows.enableRegisteredAT": {
+        "com.microsoft.windows.magnifier": [{
+            "settings": {
+                "running": false
+            },
+            "options": {
+                "registryName": "magnifierpane",
+                "queryProcess": "Magnify"
             }
-        ]
+        }]
     }
 };
 
