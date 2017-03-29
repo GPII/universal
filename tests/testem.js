@@ -33,7 +33,27 @@ gpii.tests.universal.testem.getOneOffChromeDir = function (that) {
 
 fluid.defaults("gpii.tests.universal.testem", {
     gradeNames: ["gpii.testem.coverageDataOnly"],
-    testPages:  "tests/web/html/all-tests.html",
+    // testPages:  "tests/web/html/all-tests.html",
+    testPages: [
+        "gpii/node_modules/canopyMatchMaker/test/web/html/CanopyMatchMakerUtilitiesTests.html",
+        "gpii/node_modules/matchMakerFramework/test/html/MatchMakerUtilitiesTest.html",
+        "gpii/node_modules/matchMakerFramework/test/html/InverseCapabilitiesTest.html",
+        "gpii/node_modules/transformer/test/html/TransformerTests.html",
+        "gpii/node_modules/journal/test/html/JournalIdParserTests.html",
+        "gpii/node_modules/lifecycleManager/test/html/LifecycleManagerTest.html",
+        "gpii/node_modules/lifecycleManager/test/html/DynamicComponentIndexerTest.html",
+        "gpii/node_modules/ontologyHandler/test/html/OntologyHandlerUtilitiesTest.html",
+        "gpii/node_modules/settingsHandlers/test/web/html/SettingsHandlerUtilitiesTest.html",
+        "gpii/node_modules/contextManager/test/html/ContextManagerUtilitiesTests.html",
+        "gpii/node_modules/flowManager/test/html/PrivacyFilterTests.html",
+        "gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthGrantFinderTests.html",
+        "gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthorizationServiceTests.html",
+        "gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/UserServiceTests.html",
+        "gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/test/html/DataSource-PouchDBTests.html",
+        "gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/test/html/OAuth2UtilitiesTests.html",
+        "gpii/node_modules/canopyMatchMaker/test/web/html/CanopyMatchMakerUtilitiesTests.html",
+        "gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/webTests/all-tests.html"
+    ],
     sourceDirs: [],
     coverageDir: "coverage",
     chromeSubdir: "chrome-data-dir",
