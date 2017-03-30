@@ -4,42 +4,26 @@
     <meta charset="UTF-8" />
     <title>GPII Universal framework complete tests runner</title>
 
-    <link rel="stylesheet" href="/node_modules/infusion/tests/lib/qunit/css/qunit.css" />
-    <script src="/node_modules/infusion/tests/lib/qunit/js/qunit.js"></script>
-    <link rel="stylesheet" href="/node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.css">
-    <script src="/testem.js"></script>
-    <script src="/node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.js"></script>
-    <script>
-    QUnit.testSuites([
-        "../../../gpii/node_modules/canopyMatchMaker/test/web/html/CanopyMatchMakerUtilitiesTests.html",
-        "../../../gpii/node_modules/matchMakerFramework/test/html/MatchMakerUtilitiesTest.html",
-        "../../../gpii/node_modules/matchMakerFramework/test/html/InverseCapabilitiesTest.html",
-        "../../../gpii/node_modules/transformer/test/html/TransformerTests.html",
-        "../../../gpii/node_modules/journal/test/html/JournalIdParserTests.html",
-        "../../../gpii/node_modules/lifecycleManager/test/html/LifecycleManagerTest.html",
-        "../../../gpii/node_modules/lifecycleManager/test/html/DynamicComponentIndexerTest.html",
-        "../../../gpii/node_modules/ontologyHandler/test/html/OntologyHandlerUtilitiesTest.html",
-        "../../../gpii/node_modules/settingsHandlers/test/web/html/SettingsHandlerUtilitiesTest.html",
-        "../../../gpii/node_modules/contextManager/test/html/ContextManagerUtilitiesTests.html",
-        "../../../gpii/node_modules/flowManager/test/html/PrivacyFilterTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthGrantFinderTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthorizationServiceTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/UserServiceTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/test/html/DataSource-PouchDBTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/test/html/OAuth2UtilitiesTests.html"
-    ]);
-    QUnit.testSuites([
-        "/gpii/node_modules/canopyMatchMaker/test/web/html/CanopyMatchMakerUtilitiesTests.html"
-    ]);
+    <!-- Fluid dependencies, needed for the utility we use to retrieve and then run our test definitions. -->
+    <script src="../../../node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
+    <script src="../../../node_modules/infusion/src/framework/core/js/Fluid.js"></script>
+    <script src="../../../node_modules/infusion/src/framework/core/js/FluidDocument.js"></script>
+    <script src="../../../node_modules/infusion/src/framework/core/js/DataBinding.js"></script>
+    <script src="../../../node_modules/infusion/src/framework/core/js/FluidIoC.js"></script>
 
-    QUnit.testSuites("GPII OAuth2 Component Tests", [
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/webTests/all-tests.html"
-    ]);
-    </script>
+    <link rel="stylesheet" href="../../../node_modules/infusion/tests/lib/qunit/css/qunit.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="../../../node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.css">
+    <script src="../../../node_modules/infusion/tests/lib/qunit/js/qunit.js"></script>
+
+    <script src="../../../node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.js"></script>
+    <script src="../../../node_modules/infusion/tests/test-core/utils/js/QUnitCompositeUtils.js"></script>
 </head>
 <body>
     <div id="qunit"></div>
     <div id="qunit-fixture">
 </div>
+    <script type="text/javascript">
+        fluid.test.qunitCompositeUtils.client({ basePath: "../../.." })
+    </script>
 </body>
 </html>

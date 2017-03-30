@@ -64,6 +64,12 @@ root of the `universal` folder, run the following command:
 You can also run (and debug) the tests manually by running `testem --file tests/testem.js` from the root of the
 repository.  The required test fixtures and testem will start, and Testem will provide a URL you can open in a browser.
 
+If you would like to debug individual tests or view the test summary in a browser without using Testem, you can:
+
+1. Host the working directory, for example, using a command like the following from the root of the repository: `python -m SimpleHTTPServer 4103`
+2. Open the "rollup" file `tests/all-tests.html` that runs all tests in a browser.  Continuing the above example, you would load the URL `http://localhost:4103/tests/web/html/all-tests.html`.
+
+
 #### Running node-based tests
 
 From the root of the `universal` folder, run the following command:
