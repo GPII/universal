@@ -8,6 +8,6 @@
                 "priority": "after:development.installedSolutionsPath"
             }
         }
-    },     
+    },
     "mergeConfigs": "%universal/tests/configs/gpii.tests.acceptance.localInstall.config.json"
 }
