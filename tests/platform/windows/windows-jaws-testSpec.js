@@ -38,7 +38,8 @@ gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
                 "verifySettings": true,
                 retryOptions: {
                     rewriteEvery: 0,
-                    numRetries: 20
+                    numRetries: 20,
+                    retryInterval: 1000
                 },
                 "getState": [
                     {

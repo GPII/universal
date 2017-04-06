@@ -38,7 +38,8 @@ gpii.tests.windows.nvda.flexibleHandlerEntry = function (running) {
                 "verifySettings": true,
                 retryOptions: {
                     rewriteEvery: 0,
-                    numRetries: 20
+                    numRetries: 20,
+                    retryInterval: 1000
                 },
                 "getState": [
                     {
@@ -104,107 +105,107 @@ gpii.tests.windows.nvda.testDef = [
             },
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
         }
-    // }, {
-    //     name: "Testing screenreader_nvda",
-    //     userToken: "screenreader_nvda",
-    //     initialState: {
-    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
-    //     },
-    //     settingsHandlers: {
-    //         "gpii.settingsHandlers.INISettingsHandler": {
-    //             "org.nvda-project": [
-    //                 {
-    //                     "settings": {
-    //                         "speech.espeak.rate": 17,
-    //                         "speech.espeak.volume": 80,
-    //                         "speech.espeak.pitch": 60,
-    //                         "speech.espeak.rateBoost": true,
-    //                         "speech.synth": "espeak",
-    //                         "speech.outputDevice": "Microsoft Sound Mapper",
-    //                         "speech.symbolLevel": 300,
-    //                         "speech.espeak.voice": "en\\en-wi",
-    //                         "reviewCursor.followFocus": false,
-    //                         "reviewCursor.followCaret": true,
-    //                         "reviewCursor.followMouse": true,
-    //                         "keyboard.speakTypedWords": true,
-    //                         "keyboard.speakTypedCharacters": false,
-    //                         "presentation.reportHelpBalloons": false,
-    //                         "speech.espeak.sayCapForCapitals": true
-    //                     },
-    //                     "options": {
-    //                         "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-    //                         "allowNumberSignComments": true,
-    //                         "allowSubSections": true
-    //                     }
-    //                 }
-    //             ]
-    //         },
-    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
-    //     }
-    // }, {
-    //     name: "Testing screenreader_common",
-    //     userToken: "screenreader_common",
-    //     initialState: {
-    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
-    //     },
-    //     settingsHandlers: {
-    //         "gpii.settingsHandlers.INISettingsHandler": {
-    //             "org.nvda-project": [
-    //                 {
-    //                     "settings": {
-    //                         "speech.espeak.rate": 17,
-    //                         "speech.espeak.volume": 75,
-    //                         "speech.espeak.pitch": 15,
-    //                         "speech.espeak.rateBoost": true,
-    //                         "speech.symbolLevel": 300,
-    //                         "speech.espeak.voice": "en\\en-wi",
-    //                         "reviewCursor.followFocus": false,
-    //                         "reviewCursor.followCaret": true,
-    //                         "reviewCursor.followMouse": true,
-    //                         "keyboard.speakTypedWords": true,
-    //                         "keyboard.speakTypedCharacters": false,
-    //                         "presentation.reportHelpBalloons": false,
-    //                         "speech.espeak.sayCapForCapitals": true
-    //                     },
-    //                     "options": {
-    //                         "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-    //                         "allowNumberSignComments": true,
-    //                         "allowSubSections": true
-    //                     }
-    //                 }
-    //             ]
-    //         },
-    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
-    //     }
-    // }, {
-    //     name: "Testing screenreader_orca",
-    //     userToken: "screenreader_orca",
-    //     initialState: {
-    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
-    //     },
-    //     settingsHandlers: {
-    //         "gpii.settingsHandlers.INISettingsHandler": {
-    //             "org.nvda-project": [
-    //                 {
-    //                     "settings": {
-    //                         "speech.symbolLevel": 300,
-    //                         "speech.espeak.rate": 17,
-    //                         "speech.espeak.voice": "en\\en-wi",
-    //                         "keyboard.speakTypedWords": true,
-    //                         "speech.espeak.rateBoost": true,
-    //                         "keyboard.speakTypedCharacters": false,
-    //                         "presentation.reportHelpBalloons": false
-    //                     },
-    //                     "options": {
-    //                         "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-    //                         "allowNumberSignComments": true,
-    //                         "allowSubSections": true
-    //                     }
-    //                 }
-    //             ]
-    //         },
-    //         "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
-    //     }
+    }, {
+        name: "Testing screenreader_nvda",
+        userToken: "screenreader_nvda",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
+        },
+        settingsHandlers: {
+            "gpii.settingsHandlers.INISettingsHandler": {
+                "org.nvda-project": [
+                    {
+                        "settings": {
+                            "speech.espeak.rate": 17,
+                            "speech.espeak.volume": 80,
+                            "speech.espeak.pitch": 60,
+                            "speech.espeak.rateBoost": true,
+                            "speech.synth": "espeak",
+                            "speech.outputDevice": "Microsoft Sound Mapper",
+                            "speech.symbolLevel": 300,
+                            "speech.espeak.voice": "en\\en-wi",
+                            "reviewCursor.followFocus": false,
+                            "reviewCursor.followCaret": true,
+                            "reviewCursor.followMouse": true,
+                            "keyboard.speakTypedWords": true,
+                            "keyboard.speakTypedCharacters": false,
+                            "presentation.reportHelpBalloons": false,
+                            "speech.espeak.sayCapForCapitals": true
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                            "allowNumberSignComments": true,
+                            "allowSubSections": true
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
+        }
+    }, {
+        name: "Testing screenreader_common",
+        userToken: "screenreader_common",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
+        },
+        settingsHandlers: {
+            "gpii.settingsHandlers.INISettingsHandler": {
+                "org.nvda-project": [
+                    {
+                        "settings": {
+                            "speech.espeak.rate": 17,
+                            "speech.espeak.volume": 75,
+                            "speech.espeak.pitch": 15,
+                            "speech.espeak.rateBoost": true,
+                            "speech.symbolLevel": 300,
+                            "speech.espeak.voice": "en\\en-wi",
+                            "reviewCursor.followFocus": false,
+                            "reviewCursor.followCaret": true,
+                            "reviewCursor.followMouse": true,
+                            "keyboard.speakTypedWords": true,
+                            "keyboard.speakTypedCharacters": false,
+                            "presentation.reportHelpBalloons": false,
+                            "speech.espeak.sayCapForCapitals": true
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                            "allowNumberSignComments": true,
+                            "allowSubSections": true
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
+        }
+    }, {
+        name: "Testing screenreader_orca",
+        userToken: "screenreader_orca",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
+        },
+        settingsHandlers: {
+            "gpii.settingsHandlers.INISettingsHandler": {
+                "org.nvda-project": [
+                    {
+                        "settings": {
+                            "speech.symbolLevel": 300,
+                            "speech.espeak.rate": 17,
+                            "speech.espeak.voice": "en\\en-wi",
+                            "keyboard.speakTypedWords": true,
+                            "speech.espeak.rateBoost": true,
+                            "keyboard.speakTypedCharacters": false,
+                            "presentation.reportHelpBalloons": false
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                            "allowNumberSignComments": true,
+                            "allowSubSections": true
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
+        }
     }
 ];
 

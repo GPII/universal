@@ -19,40 +19,55 @@ fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows");
+fluid.registerNamespace("gpii.tests.windows.readwrite");
 
-gpii.tests.windows.readWrite = [
+// To avoid duplicating this entire piece in each test. Given a true or false value
+// as input, this will return a settingshandler entry, containing all the options from
+// the solutions registry entry for NVDAs launchHandler, with a settings block with
+// running: X - where X is replaced with the input parameter
+gpii.tests.windows.readwrite.flexibleHandlerEntry = function (running) {
+    return {
+        "com.texthelp.readWriteGold": [{
+            "settings": {
+                "running": running
+            },
+            "options": {
+                "verifySettings": true,
+                retryOptions: {
+                    rewriteEvery: 0,
+                    numRetries: 40,
+                    retryInterval: 1000
+                },
+                "setTrue": [
+                    {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                    }
+                ],
+                "setFalse": [
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "ReadAndWrite.exe"
+                    }
+                ],
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "ReadAndWrite"
+                    }
+                ]
+            }
+        }]
+    };
+};
+
+
+gpii.tests.windows.readwrite.testDefs = [
     {
         name: "Testing rwg1 - running on login",
         userToken: "rwg1",
         initialState: {
-            "gpii.launchHandlers.flexibleHandler": {
-                "com.texthelp.readWriteGold": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        "setTrue": [
-                            {
-                                "type": "gpii.launch.exec",
-                                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
-                            }
-                        ],
-                        "setFalse": [
-                            {
-                                "type": "gpii.windows.closeProcessByName",
-                                "filename": "ReadAndWrite.exe"
-                            }
-                        ],
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "readandwrite"
-                            }
-                        ]
-                    }
-                }]
-            }
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
@@ -86,52 +101,13 @@ gpii.tests.windows.readWrite = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
-                "com.texthelp.readWriteGold": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // setTrue and setFalse blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "readandwrite"
-                        }]
-                    }
-                }]
-            }
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         }
     }, {
         name: "Testing rwg1",
         userToken: "rwg1",
         initialState: {
-            "gpii.launchHandlers.flexibleHandler": {
-                "com.texthelp.readWriteGold": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "setTrue": [
-                            {
-                                "type": "gpii.launch.exec",
-                                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
-                            }
-                        ],
-                        "setFalse": [
-                            {
-                                "type": "gpii.windows.closeProcessByName",
-                                "filename": "ReadAndWrite.exe"
-                            }
-                        ],
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "readandwrite"
-                            }
-                        ]
-                    }
-                }]
-            }
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
@@ -165,52 +141,13 @@ gpii.tests.windows.readWrite = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
-                "com.texthelp.readWriteGold": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // setTrue and setFalse blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "readandwrite"
-                        }]
-                    }
-                }]
-            }
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         }
     }, {
         name: "Testing rwg2",
         userToken: "rwg2",
         initialState: {
-            "gpii.launchHandlers.flexibleHandler": {
-                "com.texthelp.readWriteGold": [{
-                    "settings": {
-                        "running": false
-                    },
-                    "options": {
-                        "setTrue": [
-                            {
-                                "type": "gpii.launch.exec",
-                                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
-                            }
-                        ],
-                        "setFalse": [
-                            {
-                                "type": "gpii.windows.closeProcessByName",
-                                "filename": "ReadAndWrite.exe"
-                            }
-                        ],
-                        "getState": [
-                            {
-                                "type": "gpii.processReporter.find",
-                                "command": "readandwrite"
-                            }
-                        ]
-                    }
-                }]
-            }
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
@@ -246,26 +183,13 @@ gpii.tests.windows.readWrite = [
                     }
                 ]
             },
-            "gpii.launchHandlers.flexibleHandler": {
-                "com.texthelp.readWriteGold": [{
-                    "settings": {
-                        "running": true
-                    },
-                    "options": {
-                        // setTrue and setFalse blocks omitted for size/clarity
-                        "getState": [{
-                            "type": "gpii.processReporter.find",
-                            "command": "readandwrite"
-                        }]
-                    }
-                }]
-            }
+           "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.windows.readWrite",
+    testDefs:  "gpii.tests.windows.readwrite.testDefs",
     configName: "gpii.tests.acceptance.windows.readWrite.config",
     configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],

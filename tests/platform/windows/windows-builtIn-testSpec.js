@@ -35,6 +35,12 @@ gpii.tests.windows.builtIn = [
                         "running": false
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -229,6 +235,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -245,6 +257,12 @@ gpii.tests.windows.builtIn = [
                         "running": false
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -430,6 +448,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -455,6 +479,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -640,6 +670,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -656,7 +692,7 @@ gpii.tests.windows.builtIn = [
             }
         }
     }, {
-        name: "Testing os_common - magnifier running on startup and keyboard both running on startup",
+        name: "Testing os_common - magnifier and keyboard both running on startup",
         userToken: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
@@ -665,6 +701,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -850,6 +892,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
@@ -875,8 +923,23 @@ gpii.tests.windows.builtIn = [
                         "running": false
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
+                    }
+                }],
+                "com.microsoft.windows.onscreenKeyboard": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "registryName": "osk",
+                        "queryProcess": "osk"
                     }
                 }]
             }
@@ -944,6 +1007,12 @@ gpii.tests.windows.builtIn = [
                         "running": true
                     },
                     "options": {
+                        "verifySettings": true,
+                        retryOptions: {
+                            rewriteEvery: 0,
+                            numRetries: 20,
+                            retryInterval: 1000
+                        },
                         "registryName": "magnifierpane",
                         "queryProcess": "Magnify"
                     }
