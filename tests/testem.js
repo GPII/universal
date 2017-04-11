@@ -52,6 +52,13 @@ fluid.defaults("gpii.tests.universal.testem", {
             "/gpii": "instrumented/universal/gpii"
         },
         "framework": "qunit",
+        browser_disconnect_timeout: 300, // Five minutes
+        browser_start_timeout:300,
+        timeout: 300,
+        // https://github.com/testem/testem/issues/777
+        "browser_args": {
+            "Chrome": ["--memory-pressure-threshholds 1 --disk-cache-dir ", "{that}.options.diskCacheDir"]
+        },
         "parallel":  1
     }
 });
