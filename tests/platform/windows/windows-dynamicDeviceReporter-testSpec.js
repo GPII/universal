@@ -12,9 +12,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 The research leading to these results has received funding from the European Union's
 Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
+
 "use strict";
-var fluid = require("universal"),
+
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
@@ -80,16 +84,16 @@ gpii.tests.deviceReporterAware.windows = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "0",
+                "expectConfigured": "1",
                 "expectRestored": "0"
             }
         ],
         deviceReporters: {
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{
-                    "hKey": "HKEY_LOCAL_MACHINE",
-                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
-                    "subPath": ""
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Texthelp\\Read&Write11",
+                    "subPath": "InstallPath"
                 }]
             }
         }

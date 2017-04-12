@@ -4,10 +4,10 @@
         "cloudBasedUrls": {
             "preferences": "http://preferences.gpii.net/preferences/%userToken",
             "deviceReporter": "",
-            "solutionsRegistry": "%universal/testData/solutions/%os.json"
+            "solutionsRegistry": "%universal/testData/solutions/"
         },
         "matchMakers": {
-            "flat": {
+            "default": {
                 "url": "http://localhost:8081"
             }
         }

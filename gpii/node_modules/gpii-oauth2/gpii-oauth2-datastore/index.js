@@ -1,3 +1,4 @@
 "use strict";
 
-require("./src/InMemoryDataStore.js");
+require("./src/DataStore.js");
+require("./src/DbDataStore.js");

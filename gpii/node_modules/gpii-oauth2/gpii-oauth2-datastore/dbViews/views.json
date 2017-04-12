@@ -1,0 +1,49 @@
+[
+    {
+        "_id": "_design/views",
+        "views": {
+            "findUserByName": {
+                "map": "function(doc) {if (doc.type === 'user') emit(doc.name, doc)}"
+            },
+            "findGpiiToken": {
+                "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, doc)}"
+            },
+            "findUserByGpiiToken": {
+                "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, {'_id': doc.userId})}"
+            },
+            "findClientByOauth2ClientId": {
+                "map": "function(doc) {if (doc.type === 'client') emit(doc.oauth2ClientId, doc)}"
+            },
+            "findAllClients": {
+                "map": "function(doc) {if (doc.type === 'client') emit(doc._id, doc)}"
+            },
+            "findAuthByGpiiToken": {
+                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, doc)}}"
+            },
+            "findAuthDecision": {
+                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
+            },
+            "findAuthDecisionByAuthCode": {
+                "map": "function(doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authDecisionId})}}"
+            },
+            "findAuthorizedClientsByGpiiToken": {
+                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"
+            },
+            "findAuthByAccessToken": {
+                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
+            },
+            "findAuthDecisionByGpiiTokenAndClientId": {
+                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
+            },
+            "findClientCredentialsTokenByClientId": {
+                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.clientId, doc)}"
+            },
+            "findClientCredentialsTokenByAccessToken": {
+                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.accessToken, doc)}"
+            },
+            "findAuthByClientCredentialsAccessToken": {
+                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'allowAddPrefs': doc.allowAddPrefs});}}"
+            }
+        }
+    }
+]

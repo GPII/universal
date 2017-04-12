@@ -1,0 +1,19 @@
+gpii.config.cloudBased.development.json
+=======================================
+
+This config acts as a base for `gpii.config.cloudBased.development.all.local`.
+It includes configs to locate these items all locally:
+
+** flowManager
+** preferencesServer
+** OntologyHandler
+** rawPreferencesServer (reading preferences from file)
+** solutionsRegistry (reading registry from file)
+** flatMatchMaker
+** matchMakerFramework
+** lifecycleManager
+
+Notes on testing:
+This setup is used by the acceptance tests in universal testing the cloudBased applications. Each individual acceptance test may override some elements
+of this config, e.g. the folder to be used for reading prefs and solutionsRegistry).
+For more details, see the txt files describing the configs in the acceptance tests folder.

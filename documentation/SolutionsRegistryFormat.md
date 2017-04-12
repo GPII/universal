@@ -45,30 +45,68 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
 ```
 "settingsHandlers": {
     "myconf": {
-        "type": "gpii.settingsHandlers.XMLHandler",
+        "type": "gpii.settingsHandlers.INISettingsHandler",
         "options": {
-            "filename": "${{environment}.APPDATA}\\Texthelp Systems\\RWSettings10.xml"
+            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+            "allowNumberSignComments": true,
+            "allowSubSections": true
         },
-        "capabilities": [
-            "applications.com\\.texthelp\\.readWriteGold.id"
-        ],
+        "supportedSettings": : {
+            "speech.espeak.pitch": { ... metadata for setting... },
+            "presentation.reportHelpBalloons": { ... metadata for setting ... },
+            "speech.nonTransformableSetting": { ... metadata for setting ... }
+        },
+        "capabilities": [],
         "capabilitiesTransformations": {
-            "ApplicationSettings": "ApplicationSettings"
+            "speech.espeak.pitch": {
+                "transform": {
+                    "type": "fluid.transforms.linearScale",
+                    "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                    "factor": 100
+                }
+            },
+            "presentation.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
+        }
+        "inverseCapabilitiesTransformations": {
+            "http://registry\\.gpii\\.net/common/pitch": {
+                "transform": {
+                        "type": "fluid.transforms.linearScale",
+                        "inputPath": "speech.espeak.pitch",
+                        "factor": 0.01
+                    }
+                }
+            },
+            "http://registry\\.gpii\\.net/common/speakTutorialMessages":  "presentation.reportHelpBalloons"
         }
     },
     "otherconf": {
-        "type": "gpii.settingsHandlers.INIHandler",
+        "type": "gpii.settingsHandlers.XMLHandler",
         "options": {
             "filename": "${{environment}.HOME}\\mySettings.ini"
         },
-        "capabilities": [
-            "applications.com\\.texthelp\\.readWriteGold.id"
-        ]
+        "supportedSettings": {
+            "appsettingA": { ... appsettingA metadata ... },
+            "appsettingB": { ... appsettingB metadata ... },
+            ...
+            "appsettingZ": { ... appsettingZ metadata ... }
+        }
     }
 }
 ```
 
-The important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+An important thing to notice here is that this solution example has two references to settingsHandler - one XMLHandler which has been given a reference `myconf` and an INIHandler referred to as `otherconf`.
+
+Each settingsHandler block can contain the following information:
+* **type (mandatory):** the type of settingshandler
+* **options:** Any options that should be passed to the settingsHandler. This is specific to the type of settingshandler specified in the "type" block.
+* **capabilities:** Is used to specify the capabilities of the solution (i.e. the settings/terms that the solution is capable of handling). Note that the framework can automatically deduce capabilities from the `capabilitiesTransformations` block, so if a setting is specified here, the system will automatically consider it a capability which means it does not need to specified in the `capabilities` block.
+* **capabilitiesTransformations**: Transformations from common terms to application specific settings can be defined here. These will enable the framework to automatically translate common terms from a user's NP set into application settings. Any common terms listed here, will automatically be added to the `capabilities` of the solution.
+* **inverseCapabilitiesTransformations**: This block describes transformations from application settings to common terms. If this block is present, the transformations specified will be used by the framework to deduce common terms based on any application specific settings in the users NP set. If this key is not present, the framework will attempt to do the inversion itself, based on the `capabilitiesTransformations`. If this block is present, but empty, the system will make no attempt to automatically invert the `capabilitiesTransformations`.
+* **supportedSettings (mandatory when multiple settingsHandlers)**: This block is used to determine which application specific settings are relevant to the settingshandler, and also serves as location for providing metadata (such as default values, data type, validation information, etc) about the setting. Currently no relevant metadata is supported, so the empty object (`{}`) should be used as value. If a solution only has a single settingsHandler block, all the settings will be passed to that handler by default. But in case there are multiple settingsHandlers, the system needs some way of determining which settings to apply to which handler. The `supportedSettings` directive is used for this:
+  * If a `supportedSettings` option is supplied, only those settings listed there will be applied to the settingsHandler
+  * If a solution registry entry has multiple settings handlers, the `supportedSettings` entry is mandatory for each settingshandler.
+
+
 
 ### configure, restore, start and stop
 These four lifecycle blocks have different meanings to the system but has the same format. Their meanings are the following:

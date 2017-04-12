@@ -21,7 +21,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-require("universal");
+fluid.require("%universal");
 
 kettle.loadTestingSupport();
 
@@ -41,10 +41,13 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_untrustedSettings.js",
     "./DevelopmentTests.js",
     "./UserLogonStateChangeTests.js",
+    "./MultiSettingsHandlerTests.js",
     "./IntegrationTests.js",
     "./ContextIntegrationTests.js",
+    "./JournalIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
     "./PreferencesServerErrorTests.js",
+    "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedDevelopmentTests.js",
     "./UntrustedUserLogonStateChangeTests.js",
@@ -52,17 +55,21 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
     "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
-    "../gpii/node_modules/matchMakerFramework/test/InverseCapabilitiesTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/test/DbDataStoreTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
+    "../gpii/node_modules/canopyMatchMaker/test/CanopyMatchMakerTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/settingsHandlerUtilitiesTests.js",
+    "../gpii/node_modules/pouchManager/test/pouchManagerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    "../gpii/node_modules/contextManager/test/ContextManagerTests.js"
+    "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
+    "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

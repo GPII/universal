@@ -13,10 +13,12 @@ The research leading to these results has received funding from the European Uni
 Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
-
 "use strict";
-var fluid = require("universal"),
+
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
@@ -24,7 +26,7 @@ fluid.registerNamespace("gpii.tests.linux.builtIn");
 
 gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     {
-        name: "Testing os_common using Flat matchmaker",
+        name: "Testing os_common using default matchmaker",
         userToken: "os_common",
         settingsHandlers: {
             "gpii.gsettings": {
@@ -61,7 +63,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         ]
     },
     {
-        name: "Testing os_common2 using Flat matchmaker",
+        name: "Testing os_common2 using default matchmaker",
         userToken: "os_common2",
         settingsHandlers: {
             "gpii.gsettings": {
@@ -79,7 +81,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         processes: []
     },
     {
-        name: "Testing os_gnome using Flat matchmaker",
+        name: "Testing os_gnome using default matchmaker",
         userToken: "os_gnome",
         settingsHandlers: {
             "gpii.gsettings": {
@@ -118,7 +120,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         ]
     },
     {
-        name: "Testing os_win7 using Flat matchmaker",
+        name: "Testing os_win7 using default matchmaker",
         userToken: "os_win7",
         settingsHandlers: {
             "gpii.gsettings": {

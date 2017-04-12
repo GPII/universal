@@ -8,7 +8,7 @@ nodejs_app_name: universal
 
 nodejs_app_tcp_port: 8081
 
-# Currently Node.js LTS (4.x or "Argon") is required by Universal
+# Currently Node.js 6.x LTS is required by Universal
 nodejs_branch: lts
 
 # If a specific Node.js version is needed, specify it here. If not defined, defaults to the latest within the branch.

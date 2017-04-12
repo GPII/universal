@@ -48,11 +48,19 @@
     },
 
     {
+        "id": "com.microsoft.windows.highContrastTheme"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
     {
         "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "com.microsoft.windows.screenResolution"
     },
 
     {
@@ -65,10 +73,6 @@
 
     {
         "id": "com.android.freespeech"
-    },
-
-    {
-        "id": "com.ilunion.cloud4chrome"
     },
 
     {

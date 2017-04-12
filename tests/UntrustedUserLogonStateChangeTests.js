@@ -29,15 +29,18 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.untrusted.userLogonStateChange");
 
 gpii.tests.untrusted.userLogonStateChange.testDefs =
-    fluid.transform(gpii.tests.userLogonStateChange.testDefs, function (testDef) {
-        return fluid.extend(true, {}, testDef, {
+    fluid.transform(gpii.tests.userLogonStateChange.testDefs, function (testDefIn) {
+        var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
-                configName: "gpii.config.untrusted.development.all.local",
-                configPath: "%universal/gpii/configs"
+                configName: "gpii.tests.acceptance.untrusted.development.config",
+                configPath: "%universal/tests/configs"
             },
-            gradeNames: "gpii.tests.userLogonStateChange.testCaseHolder",
+            gradeNames: ["gpii.tests.userLogonStateChange.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
             userToken: gpii.tests.userLogonStateChange.userToken
         });
+
+        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
+        return testDef;
     });
 
 kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonStateChange.testDefs);

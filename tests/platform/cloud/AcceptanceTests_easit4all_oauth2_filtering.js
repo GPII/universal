@@ -12,14 +12,14 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 "use strict";
-var fluid = require("universal"),
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.easit4all");
-
-require("./OAuth2AcceptanceDataStore.js");
 
 gpii.tests.cloud.oauth2.easit4all.common = {
     client_id: "com.bdigital.easit4all",
