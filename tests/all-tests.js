@@ -21,7 +21,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-require("universal");
+fluid.require("%universal");
 
 kettle.loadTestingSupport();
 
@@ -47,6 +47,7 @@ var testIncludes = [
     "./JournalIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
     "./PreferencesServerErrorTests.js",
+    "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedDevelopmentTests.js",
     "./UntrustedUserLogonStateChangeTests.js",

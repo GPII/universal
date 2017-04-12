@@ -48,10 +48,50 @@ gpii.loadTestingSupport = function () {
     require("./gpii/node_modules/testing");
 };
 
-gpii.start = function () {
+/**
+ * Query and fetch the array of configs for this GPII Kettle Server.
+ * These are the configuration that allow to see if the current running
+ * GPII is in local, cloud, development, production, or any of our
+ * other useful configurations.
+ *
+ * Our underlying implementation of this may be changed or streamlined
+ * in future Kettle releases.
+ *
+ * @return {Array} The array of Kettle config instances. In most situations
+ *     there is only one.
+ */
+gpii.queryConfigs = function () {
+    return fluid.queryIoCSelector(fluid.rootComponent, "kettle.config");
+};
+
+/**
+ * Starts the GPII using the default development configuration
+ * or if provided a custom config. Accepts an options block
+ * that allows specifying the configuration name and directory
+ * of configurations.
+ *
+ * @param options {Object} Accepts the following options:
+ *   - configName {String} Name of a configuration to use, specified by the name
+ *     of the file without the .json extension.
+ *   - configPath {String} Directory of the configuration json files.
+ */
+gpii.start = function (options) {
+    options = options || {};
+    var configName = options.configName || "gpii.config.development.all.local";
+    var configPath = options.configPath || __dirname + "/gpii/configs";
     kettle.config.loadConfig({
-        configName: kettle.config.getConfigName("gpii.config.development.all.local"),
-        configPath: kettle.config.getConfigPath(__dirname + "/gpii/configs")
+        configName: kettle.config.getConfigName(configName),
+        configPath: kettle.config.getConfigPath(configPath)
+    });
+};
+
+/**
+ * Stops the GPII instance that was started with gpii.start()
+ */
+gpii.stop = function () {
+    var configs = gpii.queryConfigs();
+    fluid.each(configs, function (config) {
+        config.destroy();
     });
 };
 

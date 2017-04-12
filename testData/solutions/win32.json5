@@ -1476,6 +1476,9 @@
                     },
                     "verifySettings": true
                 },
+                "supportedSettings": {
+                    "HighContrastOn": {}
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastEnabled"
                 ],
@@ -1497,12 +1500,45 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/highContrastEnabled": "HighContrastOn.value"
                 }
+            },
+            "configureTheme": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                    "dataTypes": {
+                        "LastHighContrastTheme": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "LastHighContrastTheme": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
+                ],
+                "capabilitiesTransformations": {
+                    "LastHighContrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                            "match": {
+                                "black-white": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "white-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "black-yellow": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "yellow-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "lime-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme"
+                            }
+                        }
+                    }
+                }
             }
         },
         "configure": [
+            "settings.configureTheme",
             "settings.configure"
         ],
         "restore": [
+            "settings.configureTheme",
             "settings.configure"
         ],
         "isInstalled": [
