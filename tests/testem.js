@@ -13,7 +13,6 @@
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
 
-var os = require("os");
 require("../");
 
 fluid.require("%gpii-testem");
@@ -26,17 +25,11 @@ gpii.tests.universal.testem.getTestemOptions = function (that) {
     return that.options.testemOptions;
 };
 
-// We need a separate chrome data dir.  We put this under our testemDir so that it'll be cleaned up after our run.
-gpii.tests.universal.testem.getOneOffChromeDir = function (that) {
-    return path.resolve(that.options.testemDir, "chrome-disk-cache-" + that.id + "-" + Math.random() * 100000);
-};
-
 fluid.defaults("gpii.tests.universal.testem", {
-    gradeNames: ["gpii.testem.commonTestDefs", "gpii.testem.coverageDataOnly"],
-    testDefFile: "%universal/testDefs.json",
+    gradeNames: ["gpii.testem.coverageDataOnly"],
+    testPages:  "tests/web/html/all-tests.html",
     sourceDirs: [],
     coverageDir: "coverage",
-    chromeSubdir: "chrome-data-dir",
     generateCoverageReport: false,
     instrumentSource: false,
     serveDirs:  ["node_modules", "browserify"],
@@ -50,16 +43,7 @@ fluid.defaults("gpii.tests.universal.testem", {
         "cwd": universalRoot,
         "routes": {
             "/gpii": "instrumented/universal/gpii"
-        },
-        "framework": "qunit",
-        browser_disconnect_timeout: 300, // Five minutes
-        browser_start_timeout:300,
-        timeout: 300,
-        // https://github.com/testem/testem/issues/777
-        "browser_args": {
-            "Chrome": ["--memory-pressure-threshholds 1 --disk-cache-dir ", "{that}.options.diskCacheDir"]
-        },
-        "parallel":  1
+        }
     }
 });
 
