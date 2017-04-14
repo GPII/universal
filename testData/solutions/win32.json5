@@ -2862,7 +2862,7 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "taskkill /f /im explorer.exe & \
-                            timeout /t 1 /noblock & \
+                            waitfor nothing /t 1 2> NUL & \
                             %systemroot%\\sysnative\\cmd.exe /c start /B explorer.exe"
             }
         ],
@@ -2870,14 +2870,15 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "taskkill /f /im explorer.exe & \
-                            waitfor nothing /t 10 2> NUL & \
+                            waitfor nothing /t 1 2> NUL & \
                             %systemroot%\\sysnative\\cmd.exe /c start /B explorer.exe"
             },
+            // This command could be a possible implementation if current one behaviour is inconsistent.
+            // "command": "Powershell.exe -executionpolicy remotesigned -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
             {
                "type": "gpii.launch.exec",
-               "command": "waitfor nothing /t 10 2> NUL & \
+               "command": "waitfor nothing /t 2 2> NUL & \
                            START \"\" \"C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe\" \"-exit\""
-            //  "command": "Powershell.exe -executionpolicy remotesigned -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
             }
         ],
         "isInstalled": [
