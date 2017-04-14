@@ -2742,5 +2742,148 @@
         "start": [],
         "stop": [],
         "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
+    },
+
+    "com.microsoft.windows.W10ToW7LookAndFeel": {
+        "name": "Windows 7 look and feel for Windows 10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configClassicShell": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\IvoSoft\\ClassicStartMenu\\Settings",
+                    "dataTypes": {
+                        "MenuStyle": "REG_SZ",
+                        "SkipMetro": "REG_DWORD",
+                        "SkinW7": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "MenuStyle" : {},
+                    "SkipMetro" : {},
+                    "SkinW7" : {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "MenuStyle": {
+                        "literalValue": "Win7"
+                    },
+                    "SkinW7": {
+                        "literalValue": "Windows Aero"
+                    },
+                    "SkipMetro": {
+                        "literalValue": 1
+                    }
+                }
+            },
+            "configTaskbar": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                    "dataTypes": {
+                        "SearchboxTaskbarMode": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "SearchboxTaskbarMode": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "SearchboxTaskbarMode": {
+                        "literalValue": 0
+                    }
+                }
+            },
+            "configTaskView": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                    "dataTypes": {
+                        "ShowTaskViewButton": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "ShowTaskViewButton": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "ShowTaskViewButton": {
+                        "literalValue": 0
+                    }
+                }
+            },
+            "configLockScreen": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Policies\\Microsoft\\Windows\\Personalization",
+                    "dataTypes": {
+                        "NoLockScreen": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "NoLockScreen": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "NoLockScreen": {
+                        "literalValue": 1
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configClassicShell",
+            "settings.configTaskbar",
+            "settings.configTaskView",
+            "settings.configLockScreen"
+        ],
+        "restore": [
+            "settings.configClassicShell",
+            "settings.configTaskbar",
+            "settings.configTaskView",
+            "settings.configLockScreen"
+        ],
+        "start": [
+            {
+               "type": "gpii.launch.exec",
+               "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe"
+            },
+            {
+                "type": "gpii.launch.exec",
+                "command": "taskkill /f /im explorer.exe & \
+                            timeout /t 1 /noblock & \
+                            %systemroot%\\sysnative\\cmd.exe /c start /B explorer.exe"
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "taskkill /f /im explorer.exe & \
+                            waitfor nothing /t 10 2> NUL & \
+                            %systemroot%\\sysnative\\cmd.exe /c start /B explorer.exe"
+            },
+            {
+               "type": "gpii.launch.exec",
+               "command": "waitfor nothing /t 10 2> NUL & \
+                           START \"\" \"C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe\" \"-exit\""
+            //  "command": "Powershell.exe -executionpolicy remotesigned -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }
