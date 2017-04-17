@@ -84,6 +84,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.W10Simplification"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
