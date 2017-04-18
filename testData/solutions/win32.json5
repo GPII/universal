@@ -2840,45 +2840,86 @@
                         "literalValue": 1
                     }
                 }
+            },
+            "configTitleBarColor": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\DWM",
+                    "dataTypes": {
+                        "ColorPrevalence": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "ColorPrevalence": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "ColorPrevalence": {
+                        "literalValue": 1
+                    }
+                }
+            },
+            "configTaskBarColor": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                    "dataTypes": {
+                        "ColorPrevalence": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "ColorPrevalence": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "ColorPrevalence": {
+                        "literalValue": 1
+                    }
+                }
             }
         },
         "configure": [
             "settings.configClassicShell",
             "settings.configTaskbar",
             "settings.configTaskView",
-            "settings.configLockScreen"
+            "settings.configLockScreen",
+            "settings.configTitleBarColor",
+            "settings.configTaskBarColor"
         ],
         "restore": [
             "settings.configClassicShell",
             "settings.configTaskbar",
             "settings.configTaskView",
-            "settings.configLockScreen"
+            "settings.configLockScreen",
+            "settings.configTitleBarColor",
+            "settings.configTaskBarColor"
         ],
         "start": [
             {
-               "type": "gpii.launch.exec",
-               "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe"
+                "type": "gpii.launch.exec",
+                "command": "Powershell.exe -noexit \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherSetter.ps1\""
             },
             {
-                "type": "gpii.launch.exec",
-                "command": "taskkill /f /im explorer.exe & \
-                            waitfor nothing /t 1 2> NUL & \
-                            %systemroot%\\sysnative\\cmd.exe /c start /B explorer.exe"
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -executionpolicy remotesigned \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperSetter.ps1\""
             }
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "taskkill /f /im explorer.exe & \
-                            waitfor nothing /t 1 2> NUL & \
-                            %systemroot%\\sysnative\\cmd.exe /c start /B explorer.exe"
-            },
             // This command could be a possible implementation if current one behaviour is inconsistent.
             // "command": "Powershell.exe -executionpolicy remotesigned -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
             {
-               "type": "gpii.launch.exec",
-               "command": "waitfor nothing /t 2 2> NUL & \
-                           START \"\" \"C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe\" \"-exit\""
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -noexit \
+                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherRecover.ps1\""
+            },
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -executionpolicy remotesigned \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperRecover.ps1\""
             }
         ],
         "isInstalled": [
