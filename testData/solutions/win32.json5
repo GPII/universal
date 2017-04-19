@@ -2962,10 +2962,10 @@
                         "literalValue": 1
                     },
                     "SignInMode": {
-                        "literalValue": 2
+                        "literalValue": 0
                     },
                     "ConvertibleSlateModePromptPreference": {
-                        "literalValue": 0
+                        "literalValue": 2
                     }
                 }
             },
