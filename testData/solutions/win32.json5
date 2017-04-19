@@ -2927,5 +2927,142 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+
+    "com.microsoft.windows.W10Simplification": {
+        "name": "Windows 10 Simplification",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configImmersiveShell": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+                    "dataTypes": {
+                        "TabletMode": "REG_DWORD",
+                        "SignInMode": "REG_DWORD",
+                        "ConvertibleSlateModePromptPreference": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "TabletMode" : {},
+                    "SignInMode" : {},
+                    "ConvertibleSlateModePromptPreference" : {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "TabletMode": {
+                        "literalValue": 1
+                    },
+                    "SignInMode": {
+                        "literalValue": 2
+                    },
+                    "ConvertibleSlateModePromptPreference": {
+                        "literalValue": 0
+                    }
+                }
+            },
+            "configStartMenu": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+                    "dataTypes": {
+                        "StartLayoutFile": "REG_SZ",
+                        "LockedStartLayout": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "StartLayoutFile": {},
+                    "LockedStartLayout": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "StartLayoutFile": {
+                        "literalValue": ""
+                    },
+                    "LockedStartLayout": {
+                        "literalValue": 0
+                    }
+                }
+            },
+            "configFullscreen": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+                    "dataTypes": {
+                        "ForceStartSize": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "ForceStartSize": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "ForceStartSize": {
+                        "literalValue": 2
+                    }
+                }
+            },
+        },
+        "configure": [
+            "settings.configImmersiveShell",
+            "settings.configStartMenu",
+            "settings.configFullscreen"
+        ],
+        "restore": [
+            "settings.configImmersiveShell",
+            "settings.configStartMenu",
+            "settings.configFullscreen"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "Powershell.exe -noexit \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellSetter.ps1\""
+            },
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -executionpolicy remotesigned \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuSetter.ps1\""
+            },
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -executionpolicy remotesigned \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\FullScreenSetter.ps1\""
+            }
+        ],
+        "stop": [
+            // This command could be a possible implementation if current one behaviour is inconsistent.
+            // See same case in Win10Morpher settings handler.
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -noexit \
+                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellRecover.ps1\""
+            },
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -executionpolicy remotesigned \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuRecover.ps1\""
+            },
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -executionpolicy remotesigned \
+                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\FullScreenRecover.ps1\""
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }
