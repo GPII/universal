@@ -3012,16 +3012,37 @@
                     }
                 }
             },
+            "taskBarAutoHideTabletMode": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                    "dataTypes": {
+                        "TaskbarAutoHideInTabletMode": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "TaskbarAutoHideInTabletMode": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "TaskbarAutoHideInTabletMode": {
+                        "literalValue": 1
+                    }
+                }
+            }
         },
         "configure": [
             "settings.configImmersiveShell",
             "settings.configStartMenu",
-            "settings.configFullscreen"
+            "settings.configFullscreen",
+            "settings.taskBarAutoHideTabletMode"
         ],
         "restore": [
             "settings.configImmersiveShell",
             "settings.configStartMenu",
-            "settings.configFullscreen"
+            "settings.configFullscreen",
+            "settings.taskBarAutoHideTabletMode"
         ],
         "start": [
             {
