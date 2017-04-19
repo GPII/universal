@@ -46,7 +46,7 @@ Like all other Kettle apps, the Matchmaker Framework is defined by a config file
 
 ## API:
 
-The matchmakers that can be called from the Matchmaker Framework need to adhere to the following API. 
+The matchmakers that can be called from the Matchmaker Framework need to adhere to the following API.
 
 ### URL: `/match`
 
@@ -109,7 +109,7 @@ The input for these POST requests will be in the following format. Note that it 
             }
         ]
     },
-    environmentReporter: { 
+    environmentReporter: {
         "http://registry.gpii.net/terms/environment/brightness": 60,
         "http://registry.gpii.net/terms/environment/sound": -6
         "http://registry.gpii.net/terms/environment/timeOfDay": "18:29:00"
@@ -121,7 +121,7 @@ The input for these POST requests will be in the following format. Note that it 
         "gpii-default",
         "nighttime-at-home"
     ],
-    inverseCapabilities: { 
+    inverseCapabilities: {
         "com.microsoft.windows.cursors": {
             "http://registry.gpii.net/common/mouseTrailing": 0.8,
             (...),
@@ -148,7 +148,7 @@ The input for these POST requests will be in the following format. Note that it 
 
 ### Return payload
 
-The return payload from at call to `/match` should be in the following format:
+The return payload from at call to `/match` should be in the following format. The "active" key expresses whether the application should be set to running. A `true` value means that it should be running, `undefined` means we leave it in its current run state and `false` mean we should actively ensure that it is not running.
 
 ```
 {

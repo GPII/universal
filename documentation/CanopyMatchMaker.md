@@ -25,13 +25,16 @@ To ensure that several conflicting solutions (e.g. two screenreaders) are not la
 
 The apptology is described in more details here: [Apptology.md](Apptology.md).
 
+## Dispositions
+As described below, the matchmaker will assign a disposition to each solution based on priority and canopy matching. There are three dispositions available: "accept", "reject" and "deactivate". "accept" means that the solution will be accepted (and started, if relevant for that solution). "reject" means we do not do anything to the solution. "deactivate" means that we ensure that the solution is not running (i.e. running stop if required). The latter case is relevant for solutions that are conflicting with other solutions that the user might need.
+
 ## Disposing from prioriy:
 Explicit priorities are declared in the NP sets metadata section and will always be a floating point value of 1024 or more. Implicit priorities are deduced from application specific settings. When a user has application specific settings for a solution a priority of 512 is set for that solution.
 
 Goes through all solutions from high priority to low. If a solution already has a disposition, it is ignored. Else it will be selected (accepted). Any solution with the same type, but a lower priority (or no priority) will be rejected. If there are two or more solutions of the same priority _and_ the same type (even partly), these will be considered a "tie". All lower-priority solutions of this type will still be rejected. The tied solutions will have their current disposition and priority removed and left to be disposed by some other disposal algorithm.
 
 ## Disposing from Canopy
-The Canopy matching strategy is used for deciding how to dispose solutions in case no priorities are available or there is a priority-tie between two applications of the same type. 
+The Canopy matching strategy is used for deciding how to dispose solutions in case no priorities are available or there is a priority-tie between two applications of the same type.
 
 * The canopy approach is based on a vectorial "fitness measure" of a solution plus a lexicographical ordering
 * It is similar to the strategy used in resolving CSS rules.
@@ -45,7 +48,7 @@ The Canopy matching strategy is used for deciding how to dispose solutions in ca
 * Compute capabilities of solution
 * Compute vector of prefix depths for each leaf el path from NP set
 * Sort vector in descending order of fitness ("fitness vector")
-* Rank solutions by fitness using lexicographic ordering 
+* Rank solutions by fitness using lexicographic ordering
 
 *The canopy matching*
 * Compute fitness vectors for each solution and sort in rank order

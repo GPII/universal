@@ -183,7 +183,7 @@ gpii.tests.windows.readwrite.testDefs = [
                     }
                 ]
             },
-           "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         }
     }
 ];

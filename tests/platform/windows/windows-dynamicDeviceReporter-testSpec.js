@@ -96,7 +96,7 @@ gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries = {
                     ]
                 }
             }]
-        }
+        };
     }
 };
 
