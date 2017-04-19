@@ -2973,7 +2973,7 @@
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
                     "dataTypes": {
                         "StartLayoutFile": "REG_SZ",
                         "LockedStartLayout": "REG_DWORD"
@@ -2997,7 +2997,7 @@
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
                     "dataTypes": {
                         "ForceStartSize": "REG_DWORD",
                     }
