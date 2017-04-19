@@ -3033,11 +3033,6 @@
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -executionpolicy remotesigned \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuSetter.ps1\""
-            },
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -executionpolicy remotesigned \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\FullScreenSetter.ps1\""
             }
         ],
         "stop": [
@@ -3052,11 +3047,6 @@
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -executionpolicy remotesigned \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuRecover.ps1\""
-            },
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -executionpolicy remotesigned \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\FullScreenRecover.ps1\""
             }
         ],
         "isInstalled": [
