@@ -2976,12 +2976,14 @@
                     "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
                     "dataTypes": {
                         "StartLayoutFile": "REG_SZ",
-                        "LockedStartLayout": "REG_DWORD"
+                        "LockedStartLayout": "REG_DWORD",
+                        "ForceStartSize": "REG_DWORD",
                     }
                 },
                 "supportedSettings": {
                     "StartLayoutFile": {},
-                    "LockedStartLayout": {}
+                    "LockedStartLayout": {},
+                    "ForceStartSize": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2990,6 +2992,9 @@
                     },
                     "LockedStartLayout": {
                         "literalValue": 0
+                    },
+                    "ForceStartSize": {
+                        "literalValue": 1
                     }
                 }
             },
@@ -2997,19 +3002,24 @@
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                     "dataTypes": {
-                        "ForceStartSize": "REG_DWORD",
+                        "TaskbarAppsVisibleInTabletMode": "REG_DWORD",
+                        "TaskbarAutoHideInTabletMode": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
-                    "ForceStartSize": {}
+                    "TaskbarAppsVisibleInTabletMode": {},
+                    "TaskbarAutoHideInTabletMode": {},
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                    "ForceStartSize": {
-                        "literalValue": 2
-                    }
+                    "TaskbarAppsVisibleInTabletMode": {
+                        "literalValue": 0
+                    },
+                    "TaskbarAutoHideInTabletMode": {
+                        "literalValue": 0
+                    },
                 }
             },
             "taskBarAutoHideTabletMode": {
