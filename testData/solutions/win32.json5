@@ -2899,26 +2899,26 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "Powershell.exe -noexit \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherSetter.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -executionpolicy remotesigned \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperSetter.ps1\""
             }
         ],
         "stop": [
             // This command could be a possible implementation if current one behaviour is inconsistent.
-            // "command": "Powershell.exe -executionpolicy remotesigned -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
+            // "command": "Powershell.exe -ExecutionPolicy Bypass -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
             {
                 "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -noexit \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                             -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherRecover.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -executionpolicy remotesigned \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperRecover.ps1\""
             }
         ],
@@ -3057,12 +3057,12 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "Powershell.exe -noexit \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellSetter.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -executionpolicy remotesigned \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuSetter.ps1\""
             }
         ],
@@ -3071,12 +3071,12 @@
             // See same case in Win10Morpher settings handler.
             {
                 "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -noexit \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                             -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellRecover.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -executionpolicy remotesigned \
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuRecover.ps1\""
             }
         ],
