@@ -2975,24 +2975,14 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
                     "dataTypes": {
-                        "StartLayoutFile": "REG_SZ",
-                        "LockedStartLayout": "REG_DWORD",
-                        "ForceStartSize": "REG_DWORD",
+                        "ForceStartSize": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
-                    "StartLayoutFile": {},
-                    "LockedStartLayout": {},
                     "ForceStartSize": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                    "StartLayoutFile": {
-                        "literalValue": ""
-                    },
-                    "LockedStartLayout": {
-                        "literalValue": 0
-                    },
                     "ForceStartSize": {
                         "literalValue": 1
                     }
