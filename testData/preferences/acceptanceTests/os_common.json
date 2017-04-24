@@ -18,7 +18,16 @@
                     "http://registry.gpii.net/common/stickyKeys": true,
                     "http://registry.gpii.net/common/debounceEnable": true,
                     "http://registry.gpii.net/common/debounceInterval": 1
-                }
+                },
+                "metadata": [
+                    {
+                        "type": "priority",
+                        "scope": [
+                            "http://registry.gpii.net/applications/com.microsoft.windows.highContrast"
+                        ],
+                        "value": 1024
+                    }
+                ]
             }
         }
     }
