@@ -2019,7 +2019,7 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/user/${{userToken}}"
+                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/user/${{userToken}}"
             }
         ],
         "stop": [
@@ -2056,7 +2056,7 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/sudan"
+                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/sudan"
             }
         ],
         "stop": [
