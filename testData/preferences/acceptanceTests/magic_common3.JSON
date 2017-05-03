@@ -5,7 +5,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/auditoryOutLanguage": "fr-CA",
-                    "http://registry.gpii.net/common/primarySynthesizer": "eloq",
+                    "http://registry.gpii.net/common/speechSynthesizer": "eloq",
                     "http://registry.gpii.net/common/speechRate": 100,
                     "http://registry.gpii.net/common/pitch": 1,
                     "http://registry.gpii.net/common/volume": 1,

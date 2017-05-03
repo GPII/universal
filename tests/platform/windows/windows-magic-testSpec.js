@@ -48,7 +48,7 @@ gpii.tests.windows.magic = [
                             "mag.startmagnified": 1,
                             "mag.Size": 1.5,
                             "mag.TextViewerFontSize": 14,
-                            "mag.TextViwerFontFaceName": "Helvetica",
+                            "mag.TextViewerFontFaceName": "Arial",
                             "mag.ActiveTracking": 1,
                             "mag.MouseDoubleSize": 1,
                             "mag.UnmagnifiedMouseDoubleSize": 1,
@@ -105,7 +105,8 @@ gpii.tests.windows.magic = [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magic.exe\" | find /I \"Magic.exe\" /C",
                 "expectConfigured": "1",
-                "expectRestored": "0"
+                "expectRestored": "0",
+                "maxTimeouts": "40"
             }
         ]
     }, 
@@ -132,8 +133,8 @@ gpii.tests.windows.magic = [
                         "settings": {
                             "mag.startmagnified": 1,
                             "mag.Size": 1.5,
-                            "mag.TextViewerFontSize": 14,
-                            "mag.TextViwerFontFaceName": "Helvetica",
+                            "mag.TextViewerFontSize": 40,
+                            "mag.TextViewerFontFaceName": "Arial",
                             "mag.ActiveTracking": 1,
                             "mag.MouseDoubleSize": 1,
                             "mag.UnmagnifiedMouseDoubleSize": 1,
@@ -190,7 +191,8 @@ gpii.tests.windows.magic = [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magic.exe\" | find /I \"Magic.exe\" /C",
                 "expectConfigured": "1",
-                "expectRestored": "0"
+                "expectRestored": "0",
+                "maxTimeouts": "40"
             }
         ]
     },
@@ -217,7 +219,7 @@ gpii.tests.windows.magic = [
                             "mag.startmagnified" : 1,
                             "mag.Size" : 2,
                             "mag.TextViewerFontSize": 30,
-                            "mag.TextViwerFontFaceName": "Arial",
+                            "mag.TextViewerFontFaceName": "Arial",
                             "mag.ActiveTracking": 1,
                             "mag.MouseDoubleSize": 1,
                             "mag.UnmagnifiedMouseDoubleSize": 1,
@@ -232,36 +234,36 @@ gpii.tests.windows.magic = [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
-                            "enu-Global.Rate": 40,
-                            "enu-Global.Punctuation": 0,
-                            "enu-Global.Pitch": 11,
-                            "enu-Global.Volume": 10,
-                            "enu-Global.SynthLangString": "Italian",
-                            "enu-Message.Rate": 40,
-                            "enu-Message.Punctuation": 0,
-                            "enu-Message.Pitch": 11,
-                            "enu-Message.Volume": 10,
-                            "enu-Message.SynthLangString": "Italian",
-                            "enu-Keyboard.Rate": 40,
-                            "enu-Keyboard.Punctuation": 0,
-                            "enu-Keyboard.Pitch": 11,
-                            "enu-Keyboard.Volume": 10,
-                            "enu-Keyboard.SynthLangString": "Italian",
-                            "enu-PCCursor.Rate": 40,
-                            "enu-PCCursor.Punctuation": 0,
-                            "enu-PCCursor.Pitch": 11,
-                            "enu-PCCursor.Volume": 10,
-                            "enu-PCCursor.SynthLangString": "Italian",
-                            "enu-JAWSCursor.Rate": 40,
-                            "enu-JAWSCursor.Punctuation": 0,
-                            "enu-JAWSCursor.Pitch": 11,
-                            "enu-JAWSCursor.Volume": 10,
-                            "enu-JAWSCursor.SynthLangString": "Italian",
-                            "enu-MenuAndDialog.Rate": 40,
-                            "enu-MenuAndDialog.Punctuation": 0,
-                            "enu-MenuAndDialog.Pitch": 11,
-                            "enu-MenuAndDialog.Volume": 10,
-                            "enu-MenuAndDialog.SynthLangString": "Italian"
+                            "ENU-Global.Rate": 40,
+                            "ENU-Global.Punctuation": 0,
+                            "ENU-Global.Pitch": 11,
+                            "ENU-Global.Volume": 10,
+                            "ENU-Global.SynthLangString": "Italian",
+                            "ENU-Message.Rate": 40,
+                            "ENU-Message.Punctuation": 0,
+                            "ENU-Message.Pitch": 11,
+                            "ENU-Message.Volume": 10,
+                            "ENU-Message.SynthLangString": "Italian",
+                            "ENU-Keyboard.Rate": 40,
+                            "ENU-Keyboard.Punctuation": 0,
+                            "ENU-Keyboard.Pitch": 11,
+                            "ENU-Keyboard.Volume": 10,
+                            "ENU-Keyboard.SynthLangString": "Italian",
+                            "ENU-PCCursor.Rate": 40,
+                            "ENU-PCCursor.Punctuation": 0,
+                            "ENU-PCCursor.Pitch": 11,
+                            "ENU-PCCursor.Volume": 10,
+                            "ENU-PCCursor.SynthLangString": "Italian",
+                            "ENU-JAWSCursor.Rate": 40,
+                            "ENU-JAWSCursor.Punctuation": 0,
+                            "ENU-JAWSCursor.Pitch": 11,
+                            "ENU-JAWSCursor.Volume": 10,
+                            "ENU-JAWSCursor.SynthLangString": "Italian",
+                            "ENU-MenuAndDialog.Rate": 40,
+                            "ENU-MenuAndDialog.Punctuation": 0,
+                            "ENU-MenuAndDialog.Pitch": 11,
+                            "ENU-MenuAndDialog.Volume": 10,
+                            "ENU-MenuAndDialog.SynthLangString": "Italian"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.1\\Settings\\VoiceProfiles\\GPII.VPF"
@@ -274,7 +276,8 @@ gpii.tests.windows.magic = [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magic.exe\" | find /I \"Magic.exe\" /C",
                 "expectConfigured": "1",
-                "expectRestored": "0"
+                "expectRestored": "0",
+                "maxTimeouts": "40"
             }
         ]
     },
@@ -302,7 +305,7 @@ gpii.tests.windows.magic = [
                             "mag.startmagnified" : 0,
                             "mag.Size" : 1,
                             "mag.TextViewerFontSize": 22,
-                            "mag.TextViwerFontFaceName": "Arial",
+                            "mag.TextViewerFontFaceName": "Arial",
                             "mag.MouseDoubleSize": 0,
                             "mag.UnmagnifiedMouseDoubleSize": 0,
                             "mag.MouseCrossHair": 0,
@@ -316,36 +319,36 @@ gpii.tests.windows.magic = [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
-                            "enu-Global.Rate": 100,
-                            "enu-Global.Punctuation": 2,
-                            "enu-Global.Pitch": 100,
-                            "enu-Global.Volume": 100,
-                            "enu-Global.SynthLangString": "French Canadian",
-                            "enu-Message.Rate": 100,
-                            "enu-Message.Punctuation": 2,
-                            "enu-Message.Pitch": 100,
-                            "enu-Message.Volume": 100,
-                            "enu-Message.SynthLangString": "French Canadian",
-                            "enu-Keyboard.Rate": 100,
-                            "enu-Keyboard.Punctuation": 2,
-                            "enu-Keyboard.Pitch": 100,
-                            "enu-Keyboard.Volume": 100,
-                            "enu-Keyboard.SynthLangString": "French Canadian",
-                            "enu-PCCursor.Rate": 100,
-                            "enu-PCCursor.Punctuation": 2,
-                            "enu-PCCursor.Pitch": 100,
-                            "enu-PCCursor.Volume": 100,
-                            "enu-PCCursor.SynthLangString": "French Canadian",
-                            "enu-JAWSCursor.Rate": 100,
-                            "enu-JAWSCursor.Punctuation": 2,
-                            "enu-JAWSCursor.Pitch": 100,
-                            "enu-JAWSCursor.Volume": 100,
-                            "enu-JAWSCursor.SynthLangString": "French Canadian",
-                            "enu-MenuAndDialog.Rate": 100,
-                            "enu-MenuAndDialog.Punctuation": 2,
-                            "enu-MenuAndDialog.Pitch": 100,
-                            "enu-MenuAndDialog.Volume": 100,
-                            "enu-MenuAndDialog.SynthLangString": "French Canadian"
+                            "ENU-Global.Rate": 100,
+                            "ENU-Global.Punctuation": 2,
+                            "ENU-Global.Pitch": 100,
+                            "ENU-Global.Volume": 100,
+                            "ENU-Global.SynthLangString": "French Canadian",
+                            "ENU-Message.Rate": 100,
+                            "ENU-Message.Punctuation": 2,
+                            "ENU-Message.Pitch": 100,
+                            "ENU-Message.Volume": 100,
+                            "ENU-Message.SynthLangString": "French Canadian",
+                            "ENU-Keyboard.Rate": 100,
+                            "ENU-Keyboard.Punctuation": 2,
+                            "ENU-Keyboard.Pitch": 100,
+                            "ENU-Keyboard.Volume": 100,
+                            "ENU-Keyboard.SynthLangString": "French Canadian",
+                            "ENU-PCCursor.Rate": 100,
+                            "ENU-PCCursor.Punctuation": 2,
+                            "ENU-PCCursor.Pitch": 100,
+                            "ENU-PCCursor.Volume": 100,
+                            "ENU-PCCursor.SynthLangString": "French Canadian",
+                            "ENU-JAWSCursor.Rate": 100,
+                            "ENU-JAWSCursor.Punctuation": 2,
+                            "ENU-JAWSCursor.Pitch": 100,
+                            "ENU-JAWSCursor.Volume": 100,
+                            "ENU-JAWSCursor.SynthLangString": "French Canadian",
+                            "ENU-MenuAndDialog.Rate": 100,
+                            "ENU-MenuAndDialog.Punctuation": 2,
+                            "ENU-MenuAndDialog.Pitch": 100,
+                            "ENU-MenuAndDialog.Volume": 100,
+                            "ENU-MenuAndDialog.SynthLangString": "French Canadian"
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\13.1\\Settings\\VoiceProfiles\\GPII.VPF"
@@ -358,7 +361,8 @@ gpii.tests.windows.magic = [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magic.exe\" | find /I \"Magic.exe\" /C",
                 "expectConfigured": "1",
-                "expectRestored": "0"
+                "expectRestored": "0",
+                "maxTimeouts": "40"
             }
         ]
     }

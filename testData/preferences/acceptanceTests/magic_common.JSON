@@ -18,7 +18,7 @@
                     "http://registry.gpii.net/common/magnifierEnabled": true,
                     "http://registry.gpii.net/common/magnification": 1.5,
                     "http://registry.gpii.net/common/fontSize": 40,
-                    "http://registry.gpii.net/common/fontFaceFontName": "Helvetica",
+                    "http://registry.gpii.net/common/fontFaceFontName": "Arial",
                     "http://registry.gpii.net/common/tracking": "mouse",
                     "http://registry.gpii.net/common/cursorSize": 1,
                     "http://registry.gpii.net/common/showCrosshairs": true

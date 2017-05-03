@@ -551,7 +551,7 @@
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                	"mag\\.Size": "http://registry\\.gpii\\.net/common/magnification",
+                    "mag\\.Size": "http://registry\\.gpii\\.net/common/magnification",
                     "mag\\.TextViewerFontSize": "http://registry\\.gpii\\.net/common/fontSize",
                     "mag\\.TextViewerFontFaceName": "http://registry\\.gpii\\.net/common/fontFaceFontName",
                     "mag\\.startmagnified": {
@@ -621,7 +621,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                	"http://registry\\.gpii\\.net/common/magnification": "mag\\.Size",
+                    "http://registry\\.gpii\\.net/common/magnification": "mag\\.Size",
                     "http://registry\\.gpii\\.net/common/fontSize": "mag\\.TextViewerFontSize",
                     "http://registry\\.gpii\\.net/common/fontFaceFontName": "mag\\.TextViwerFontFaceName",
                     "http://registry\\.gpii\\.net/common/magnifierEnabled": {
@@ -629,11 +629,11 @@
                             "type": "valueMapper",
                             "defaultInputPath": "mag\\.startmagnified",
                             "match": [{
-                            	inputValue: 1,
-                            	outputValue: true
+                                inputValue: 1,
+                                outputValue: true
                             }, {
-                            	inputValue: 0,
-                            	outputValue: false
+                                inputValue: 0,
+                                outputValue: false
                             }]
                         }
                     },
@@ -642,8 +642,8 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "mag\\.ActiveTracking",
                             "match": [{
-                            	inputValue: 1,
-                            	outputValue: "mouse"
+                                inputValue: 1,
+                                outputValue: "mouse"
                             }]
                         }
                     },
@@ -652,11 +652,11 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "mag\\.MouseDoubleSize",
                             "match": [{
-                            	inputValue: 1,
-                            	outputValue: 1
+                                inputValue: 1,
+                                outputValue: 1
                             }, {
-                            	inputValue: 0,
-                            	outputValue: 0.5
+                                inputValue: 0,
+                                outputValue: 0.5
                             }]
                         }
                     },
@@ -665,11 +665,11 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "mag\\.UnmagnifiedMouseDoubleSize",
                             "match": [{
-                            	inputValue: 1,
-                            	outputValue: 1
+                                inputValue: 1,
+                                outputValue: 1
                             }, {
-                            	inputValue: 0,
-                            	outputValue: 0.5
+                                inputValue: 0,
+                                outputValue: 0.5
                             }]
                         }
                     },
@@ -678,11 +678,11 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "mag\\.MouseCrossHair",
                             "match": [{
-                            	inputValue: 1,
-                            	outputValue: true
+                                inputValue: 1,
+                                outputValue: true
                             }, {
-                            	inputValue: 0,
-                            	outputValue: false
+                                inputValue: 0,
+                                outputValue: false
                             }]
                         }
                     },
@@ -691,11 +691,11 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "mag\\.UnmagnifiedMouseCrossHair",
                             "match": [{
-                            	inputValue: 1,
-                            	outputValue: true
+                                inputValue: 1,
+                                outputValue: true
                             }, {
-                            	inputValue: 0,
-                            	outputValue: false
+                                inputValue: 0,
+                                outputValue: false
                             }]
                         }
                     }
@@ -722,6 +722,18 @@
             {
                 "type": "gpii.windows.closeProcessByName",
                 "filename": "Magic.exe"
+            },
+            {
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "MagHook32.exe"  
+            },
+            {
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "fsATProxy.exe"
+            },
+            {
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "fsWow64Proxy.exe"
             },
             {
                 "type": "gpii.windows.closeProcessByName",
