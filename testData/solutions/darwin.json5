@@ -15,6 +15,7 @@
                     "filename": "/tmp/fakemag1.settings.json"
                 },
                 "capabilities": [
+                    "applications.fakemag1.id",
                     "http://registry\\.gpii\\.net/common/magnifierEnabled"
                 ],
                 "capabilitiesTransformations": {
@@ -53,6 +54,7 @@
                     "filename": "/tmp/fakemag2.settings.json"
                 },
                 "capabilities": [
+                    "applications.fakemag1.id",
                     "http://registry\\.gpii\\.net/common/magnifierEnabled"
                 ],
                 "capabilitiesTransformations": {
@@ -86,12 +88,13 @@
             ]
         },
         "settingsHandlers": {
-            "configuration": {
+            "configs": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "/tmp/fakescreenreader1.json"
                 },
                 "capabilities": [
+                    "applications.fakescreenreader1.id",
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ],
                 "capabilitiesTransformations": {

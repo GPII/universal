@@ -5,19 +5,29 @@ For example, it coordinates the steps involved during logging in which require r
 Following those steps, the payload is sent via the [Context Manager](ContextManager.md) and then to the [Lifecycle Manager](LifecycleManager.md).
 
 ###Important flows
-Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different. 
+Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different.
 Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerUtitilies.js`. The different kinds of flows are:
 * **User Login** (`UserLogin.js`) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
 * **User Logout** (`UserLogout.js`) - the flow for a user keying out of the system
 * **Retrieving Settings** (`Settings.js`) - used to retrieve the settings when the system is running in cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 * **Get User Token** (`GetUserToken.js`) - retrieval of the token of the currently logged in user.
 
+### Important events:
+
+There are a few notification events on the flowmanager related to the key-in and key-out process.
+* userLoginInitiated: fired when the process of keying in a user (ie. configuring the system) starts,
+* userLogoutInitiated: fired when the process of keying out a user (ie. restoring the system) has started,
+* userLoginComplete: fired when the process of keying in a user (ie. configuring the system) has completed,
+* userLogoutComplete: fired when the process of keying out a user (ie. restoring the system) has completed,
 
 ###APIs
 
-#### User Logon state change (GET /user/:token/logonChange)
-* **description**: Change the logon state for the user with the given `:token`. If that user is already logged into the system, he/she will be logged out. If he/she is not logged into the system already, a login will be made.
-* **route:** `/user/:token/logonChange` where `:token` should be the token of the user for which to change the logon state
+#### User Logon state change (GET /user/:token/proximityTriggered)
+* **description**: Change the logon state for the user with the given `:token`. Note that there is a debounce functionality
+implemented following these rules: any RFID actions is ignored for <mytoken> if a login/logout for <mytoken> is in progress
+OR if the last login/logout process for <mytoken> finished less than 5 seconds ago. For more details for rules on keying and out, see [KeyInAndOutRules](KeyInAndOutRules.md)
+
+* **route:** `/user/:token/proximityTriggered` where `:token` should be the token of the user for which to change the logon state
 * **return:** Message on success or failure of the login/logout
 
 #### User Login (GET /user/:token/login)
