@@ -34,7 +34,7 @@
         "browserify": "14.0.0",
         "fluid-grunt-eslint": "18.1.2",
         "fluid-grunt-json5lint": "1.0.0",
-        "gpii-testem": "1.0.0-dev.20170411T125618Z.4ec8037",
+        "gpii-testem": "1.0.0-dev.20170426T161352Z.8a06597",
         "grunt": "1.0.1",
         "grunt-jsonlint": "1.1.0",
         "http-browserify": "1.7.0",
@@ -42,7 +42,7 @@
         "istanbul": "git://github.com/the-t-in-rtf/istanbul#828eb930add7bd663ca20649a917f3f3829e48c5",
         "nyc": "10.1.2",
         "recursive-copy": "2.0.6",
-        "testem": "1.13.0"
+        "testem": "1.16.1"
     },
     "license": "BSD-3-Clause",
     "keywords": [

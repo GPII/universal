@@ -2278,7 +2278,7 @@ gpii-pouchdb@1.0.1-dev.20170208T180039Z.83f5aca:
     testem "1.14.3"
     underscore-node "0.1.2"
 
-gpii-testem@^1.0.0-dev.20170426T161352Z.8a06597:
+gpii-testem@1.0.0-dev.20170426T161352Z.8a06597:
   version "1.0.0-dev.20170426T161352Z.8a06597"
   resolved "https://registry.yarnpkg.com/gpii-testem/-/gpii-testem-1.0.0-dev.20170426T161352Z.8a06597.tgz#b71c39ab5ca388cdee1f92852779d3f6e0f05741"
   dependencies:
@@ -5323,7 +5323,7 @@ testem@1.14.3:
     tap-parser "^5.1.0"
     xmldom "^0.1.19"
 
-testem@^1.16.1:
+testem@1.16.1:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/testem/-/testem-1.16.1.tgz#ef8b2c793a47082ca1791e2a49d3f22bf1d4ca28"
   dependencies:
