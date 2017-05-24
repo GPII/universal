@@ -24,6 +24,8 @@ fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
+fluid.registerNamespace("gpii.tests.userLogonHandling");
+
 fluid.defaults("gpii.tests.userLogonHandling.proximityTriggered", {
     gradeNames: "kettle.test.request.http",
     path: "/user/%userToken/proximityTriggered",
@@ -33,7 +35,7 @@ fluid.defaults("gpii.tests.userLogonHandling.proximityTriggered", {
 });
 
 fluid.defaults("gpii.tests.userLogonHandling.testCaseHolder", {
-    gradeNames: [ "gpii.test.common.flowManagerReceiver", "gpii.test.common.testCaseHolder" ],
+    gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder" ],
     components: {
         resetRequest: {
             type: "kettle.test.request.http",

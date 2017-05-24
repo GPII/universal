@@ -18,28 +18,38 @@
 
 var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    kettle = fluid.registerNamespace("kettle");
+
 
 fluid.require("%universal");
 
 require("./shared/UserLogonStateChangeTestDefs.js");
 fluid.registerNamespace("gpii.tests.userLogonEvents");
 
-gpii.tests.userLogonEvents.expectedEvent = function () {
-    jqUnit.assertTrue("Expected event fired", true);
+gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, userToken) {
+    return function (changePayload) {
+        jqUnit.assertEquals("Checking type of model change", type, changePayload.type);
+        jqUnit.assertEquals("Checking inProgress of model change", inProgress, changePayload.inProgress);
+        jqUnit.assertEquals("Checking userToken of model change", userToken, changePayload.userToken);
+    };
 };
 
 gpii.tests.userLogonEvents.testDefs = [{
-    name: "Testing events related to login and logout",
-    expect: 6,
+    name: "Testing events related to login and logout via proximityTriggered endpoint",
+    expect: 14,
     sequence: [{ // standard login
         func: "{proximityTriggeredRequest}.send"
     }, {
-        event: "{flowManager}.events.userLoginInitiated",
-        listener: "gpii.tests.userLogonEvents.expectedEvent"
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
+        makerArgs: [ "login", true, "testUser1" ]
     }, {
-        event: "{flowManager}.events.userLoginComplete",
-        listener: "gpii.tests.userLogonEvents.expectedEvent"
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
+        makerArgs: [ "login", false, "testUser1" ]
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandling.testLoginResponse"
@@ -53,13 +63,19 @@ gpii.tests.userLogonEvents.testDefs = [{
     }, { // standard logout
         func: "{proximityTriggeredRequest2}.send"
     }, {
-        event: "{flowManager}.events.userLogoutInitiated",
-        listener: "gpii.tests.userLogonEvents.expectedEvent"
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
+        makerArgs: [ "logout", true, "testUser1" ]
     }, {
-        event: "{flowManager}.events.userLogoutComplete",
-        listener: "gpii.tests.userLogonEvents.expectedEvent"
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
+        makerArgs: [ "logout", false, "testUser1" ]
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonHandling.testLogoutResponse"
     }]
 }];
+
+kettle.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
