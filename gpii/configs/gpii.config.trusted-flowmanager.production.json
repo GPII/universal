@@ -10,7 +10,7 @@
     },
     "mergeConfigs": [
         "%deviceReporter/configs/gpii.deviceReporter.config.production.json",
-        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.development.json",
+        "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json",
         "%flowManager/configs/gpii.flowManager.config.production.json"
     ]
 }

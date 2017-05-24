@@ -1,5 +1,5 @@
 gpii.config.untrusted.development.all.local.json
-====================================
+================================================
 
 This configuration runs the entire system locally under the hybrid Flow Manager architecture and in development mode.
 
