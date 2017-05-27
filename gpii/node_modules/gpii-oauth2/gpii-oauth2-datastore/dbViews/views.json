@@ -32,9 +32,6 @@
             "findAuthByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
             },
-            "findAuthDecisionByGpiiTokenAndClientId": {
-                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
-            },
             "findClientCredentialsTokenByClientId": {
                 "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.clientId, doc)}"
             },
@@ -43,6 +40,9 @@
             },
             "findAuthByClientCredentialsAccessToken": {
                 "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'allowAddPrefs': doc.allowAddPrefs});}}"
+            },
+            "findResourceOwnerTokenByGpiiTokenAndClientId": {
+                "map": "function(doc) {if (doc.type === 'resourceOwnerToken' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
             }
         }
     }

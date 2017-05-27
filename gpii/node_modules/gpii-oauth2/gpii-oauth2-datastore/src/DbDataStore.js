@@ -249,21 +249,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthDecisionByGpiiTokenAndClientIdDataSource: {
-            type: "gpii.oauth2.dbDataSource",
-            options: {
-                requestUrl: "/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
-                termMap: {
-                    gpiiToken: "%gpiiToken",
-                    clientId: "%clientId"
-                },
-                rules: {
-                    readPayload: {
-                        "": "rows.0.value"
-                    }
-                }
-            }
-        },
         findClientCredentialsTokenByClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
@@ -302,6 +287,21 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 rules: {
                     readPayload: {
                         "": "rows.0"
+                    }
+                }
+            }
+        },
+        findResourceOwnerTokenByGpiiTokenAndClientIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findResourceOwnerTokenByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
+                termMap: {
+                    gpiiToken: "%gpiiToken",
+                    clientId: "%clientId"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
                     }
                 }
             }
@@ -388,7 +388,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             funcName: "gpii.oauth2.dbDataStore.addRecord",
             args: [
                 "{that}.saveDataSource",
-                gpii.oauth2.dbDataStore.docTypes.authDecision,
+                gpii.oauth2.docTypes.authDecision,
                 "id",
                 "{arguments}.0"
             ]
@@ -545,6 +545,18 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess
             ]
             // accessToken
+        },
+        findResourceOwnerTokenByGpiiTokenAndClientId: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findResourceOwnerTokenByGpiiTokenAndClientIdDataSource",
+                {
+                    gpiiToken: "{arguments}.0",
+                    clientId: "{arguments}.1"
+                },
+                ["gpiiToken", "clientId"]
+            ]
+            // gpiiToken, clientId
         }
     },
     events: {

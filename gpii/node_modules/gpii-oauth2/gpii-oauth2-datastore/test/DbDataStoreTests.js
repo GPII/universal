@@ -1072,6 +1072,48 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
     }]
 });
 
+fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test findResourceOwnerTokenByGpiiTokenAndClientId()",
+        tests: [{
+            name: "Find resource owner token by a gpii token and a client id",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.AuthDecisionsByGpiiToken, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        // }, {
+        //     name: "Finding a non-existing auth decision by a gpii token returns undefined",
+        //     sequence: [{
+        //         func: "gpii.tests.oauth2.invokePromiseProducer",
+        //         args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["non-existing-token"], "{that}"]
+        //     }, {
+        //         listener: "jqUnit.assertUndefined",
+        //         args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+        //         event: "{that}.events.onResponse"
+        //     }]
+        // }, {
+        //     name: "Not providing a gpii token returns 401 status code and error message",
+        //     sequence: [{
+        //         func: "gpii.tests.oauth2.invokePromiseProducer",
+        //         args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", [], "{that}"]
+        //     }, {
+        //         listener: "jqUnit.assertDeepEq",
+        //         args: ["The expected error is received", {
+        //             msg: "The input field \"gpiiToken\" is undefined",
+        //             statusCode: 400,
+        //             isError: true
+        //         }, "{arguments}.0"],
+        //         event: "{that}.events.onError"
+        //     }]
+        }]
+    }]
+});
+
 fluid.test.runTests([
     "gpii.tests.dbDataStore.findUserById",
     "gpii.tests.dbDataStore.findUserByUsername",
@@ -1094,5 +1136,6 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findClientCredentialsTokenByClientId",
     "gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
     "gpii.tests.dbDataStore.addClientCredentialsToken",
-    "gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken"
+    "gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken",
+    // "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId"
 ]);

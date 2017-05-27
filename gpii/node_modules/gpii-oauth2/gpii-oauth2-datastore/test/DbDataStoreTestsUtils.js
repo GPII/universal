@@ -257,5 +257,13 @@ gpii.tests.dbDataStore.testData = {
     findAuthByClientCredentialsAccessToken: {
         oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
         allowAddPrefs: true
-    }
+    },
+    ResourceOwnerTokenByGpiiTokenAndClientId: [{
+        "id": "resourceOwnerToken-1",
+        "type": "resourceOwnerToken",
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token",
+        "revoked": false
+    }]
 };

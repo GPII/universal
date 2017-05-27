@@ -92,6 +92,11 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // clientId, scope
             },
+            grantResourceOwnerAccessToken: {
+                funcName: "gpii.oauth2.authorizationService.grantResourceOwnerAccessToken",
+                args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
+                    // clientId, gpiiToken
+            },
             revokeClientCredentialsToken: {
                 func: "{dataStore}.revokeClientCredentialsToken"
                     // clientCredentialsTokenId
@@ -446,7 +451,7 @@ var fluid = fluid || require("infusion");
             };
             promiseTogo = fluid.promise.map(tokenPromise, mapper);
         } else {
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {docName: "user's authorization decision"});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "user's authorization decision"});
             promiseTogo.reject(error);
         }
         return promiseTogo;
@@ -657,6 +662,44 @@ var fluid = fluid || require("infusion");
                 promiseTogo.resolve(clientCredentialsToken.accessToken);
             }
         });
+
+        return promiseTogo;
+    };
+
+    /**
+     * Grant a resource owner password credential access token. The gpii token will be verified before the access token is returned.
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param clientId {String} A client id
+     * @param gpiiToken {String} A GPII token
+     * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the gpii token is not found.
+     */
+    gpii.oauth2.authorizationService.grantResourceOwnerAccessToken = function (dataStore, codeGenerator, clientId, gpiiToken) {
+        var promiseTogo = fluid.promise();
+
+        if (!gpiiToken || !clientId) {
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "GPII token or client ID"});
+            promiseTogo.reject(error);
+        } else {
+            var gpiiTokenPromise = dataStore.findGpiiToken(gpiiToken);
+            var tokenPromise = dataStore.findResourceOwnerTokenByGpiiTokenAndClientId(gpiiToken, clientId);
+
+            gpiiTokenPromise.then(function (responses) {
+                console.log("==== responses", responses);
+                // var client = responses[0];
+                // var clientCredentialsToken = responses[1];
+
+                // if (!scope || scope[0] !== "add_preferences" || !client.allowAddPrefs) {
+                //     var error = gpii.oauth2.composeError(gpii.oauth2.errors.invalidGpiiToken);
+                //     promiseTogo.reject(error);
+                // } else if (!clientCredentialsToken) {
+                //     gpii.oauth2.authorizationService.createClientCredentialsToken(promiseTogo, dataStore, codeGenerator, clientId);
+                // } else {
+                //     // Return the existing token
+                //     promiseTogo.resolve(clientCredentialsToken.accessToken);
+                // }
+            });
+        }
 
         return promiseTogo;
     };

@@ -17,23 +17,11 @@ var fluid = fluid || require("infusion"),
     $ = fluid.registerNamespace("jQuery"),
     uuid = uuid || require("node-uuid");
 
-if (!gpii.oauth2.errors) {
+if (!gpii.oauth2.parseBearerAuthorizationHeader) {
     require("../../gpii-oauth2-utilities/src/OAuth2Utilities.js");
 }
 
 fluid.registerNamespace("gpii.oauth2.dbDataStore");
-
-// All doc types used for saving different documents into CouchDB/PouchDB
-// See [the documentation of Authorization Server](../../../../../documentation/AuthServer.md)
-// regarding accepted fields for each document type.
-gpii.oauth2.dbDataStore.docTypes = {
-    user: "user",
-    gpiiToken: "gpiiToken",
-    client: "client",
-    authDecision: "authDecision",
-    authCode: "authCode",
-    clientCredentialsToken: "clientCredentialsToken"
-};
 
 /**
  * Use the kettle dataSource `get` method to retrieve one record. This function provides extra
@@ -145,8 +133,8 @@ gpii.oauth2.dbDataStore.handleMultipleRecords = function (data) {
 /** Use the kettle dataSource `set` method to create a new record. Before sending the input data to
  * CouchDB/PouchDB, it is modified by adding an unique _id field and a proper document type.
  * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
- * @param docType {String} The document type. See gpii.oauth2.dbDataStore.docTypes defined at
- *  the start of this file for accepted values
+ * @param docType {String} The document type. See gpii.oauth2.docTypes defined in
+ * %universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/src/OAuth2Const.js
  * @param idName {String} The name for the unique id field. Usually "id".
  * @param data {Object} The data to be saved in the new record
  * @return {Promise} A promise for the save response
@@ -172,8 +160,8 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
  * 1. transform the filed name "id" to a Couch/Pouch required name "_id";
  * 2. add a proper document type.
  * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
- * @param docType {String} The document type. See gpii.oauth2.dbDataStore.docTypes defined at
- *  the start of this file for accepted values
+ * @param docType {String} The document type. See gpii.oauth2.docTypes defined in
+ * %universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/src/OAuth2Const.js
  * @param idName {String} The name for the unique id field. Usually "id".
  * @param data {Object} The data to be updated
  * @return {Promise} A promise for the update response
@@ -194,8 +182,8 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
  * 2. if the data is not undefined, combine it with the input object and resolve this combined result in the returned promise.
  * @param inputPromise {Promise} The input promise whose resolved data will be verified
  * @param input {Object} The input data to be combined with the data carried by the inputPromise
- * @param docType {String} The document type used to compose the missing document error. See gpii.oauth2.dbDataStore.docTypes
- *  defined at the start of this file for possible values.
+ * @param docType {String} The document type used to compose the missing document error. See gpii.oauth2.docTypes defined in
+ * %universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/src/OAuth2Const.js
  * @param allowUndefinedValue {Boolean} A flag indicating whether allow the data carried by the inputPromise be undefined
  *
  * @return {Promise} A promise object that carries the result of either a missing document error (on promise reject) or the combined
@@ -214,7 +202,7 @@ gpii.oauth2.dbDataStore.verifyMissingDoc = function (inputPromise, input, docTyp
             promiseTogo.resolve(combined);
         } else {
             // Throw error indicating which document type is missing
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.dbDataStore.docTypes[docType]});
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes[docType]});
             promiseTogo.reject(error);
         }
     }, function (err) {
@@ -279,7 +267,7 @@ gpii.oauth2.dbDataStore.updateAuthDecision = function (that, userId, authDecisio
 gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, input) {
     var authDecisionId = input.inputArgs.authDecisionId ? input.inputArgs.authDecisionId : input.inputArgs.authDecisionData.id;
     var authDecisionPromise = findAuthDecisionById(authDecisionId);
-    return gpii.oauth2.dbDataStore.verifyMissingDoc(authDecisionPromise, input, "authDecision");
+    return gpii.oauth2.dbDataStore.verifyMissingDoc(authDecisionPromise, input, gpii.oauth2.docTypes.authDecision);
 };
 
 /**
@@ -318,7 +306,7 @@ gpii.oauth2.dbDataStore.authDecisionExists = function (findAuthDecisionById, inp
  */
 gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, authDecisionRecord) {
     var gpiiTokenPromise = findGpiiToken(authDecisionRecord.authDecision.gpiiToken);
-    return gpii.oauth2.dbDataStore.verifyMissingDoc(gpiiTokenPromise, authDecisionRecord, "gpiiToken");
+    return gpii.oauth2.dbDataStore.verifyMissingDoc(gpiiTokenPromise, authDecisionRecord, gpii.oauth2.docTypes.gpiiToken);
 };
 
 /**
@@ -371,7 +359,7 @@ gpii.oauth2.dbDataStore.doUpdate = function (dataSource, gpiiTokenRecord) {
         var authDecision = gpiiTokenRecord.inputArgs.authDecisionData ?
             gpiiTokenRecord.inputArgs.authDecisionData :
             gpiiTokenRecord.inputArgs.dataProcessFunc(gpiiTokenRecord.authDecision);
-        return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.dbDataStore.docTypes.authDecision, "id", authDecision);
+        return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.docTypes.authDecision, "id", authDecision);
     } else {
         var promiseTogo = fluid.promise();
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedUser, {userId: inputUserId});
@@ -463,7 +451,7 @@ gpii.oauth2.dbDataStore.saveAuthCode = function (saveDataSource, authDecisionId,
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: emptyFields.join(" & ")});
         promiseTogo.reject(error);
     } else {
-        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.authCode, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.authCode, "id", data);
     }
 
     return promiseTogo;
@@ -515,7 +503,7 @@ gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, cl
             revoked: false
         };
 
-        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.clientCredentialsToken, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.clientCredentialsToken, "id", data);
     }
 
     return promiseTogo;
@@ -557,7 +545,7 @@ gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSourc
     } else {
         var data = fluid.copy(clientCredentialsTokenRecord);
         data.revoked = true;
-        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.dbDataStore.docTypes.clientCredentialsToken, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.docTypes.clientCredentialsToken, "id", data);
     }
 
     return promiseTogo;

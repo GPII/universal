@@ -34,7 +34,9 @@ The document types used by the authorization server include:
 | `name` | String | The client name. | None |
 | `oauth2ClientId` | String | The unique identifier issued to a registered OAuth2 client by the authorization server. | None |
 | `oauth2ClientSecret` | String | Confidential shared secret between the client and the authorization server, used to verify the identity of the client. | None |
-| `redirectUri` | String | The URL on client's site where users will be sent after authorization. | None |
+| `oauth2ClientType` | String | The type of clients that use different OAuth2 grant type. GPII supports 4 type of clients: <br>`nativeApp`: native GPII apps that use OAuth2 resource owner password credentials grant.<br>`webApp`: web applications.<br>`thirdPartyApp`: third party applications that GPII users can define privacy settings for. <br>`clientCredentialsApp`: applications that use OAuth2 client credentials grant to add new preferences on behalf of users, such as First Discovery Tool.| Must be one of these values: nativeApp, webApp, thirdPartyApp, clientCredentialsApp.|
+| `redirectUri` | String | The URL on client's site where users will be sent after authorization. This field is only required for clients whose `oauth2ClientType` is "webApp".| None |
+| `allowAddPrefs` | Boolean | Whether the client is allowed to add new preferences. This field is only required for clients whose `oauth2ClientType` is "clientCredentialsApp".| true |
 
 #### GPII Tokens
 
@@ -78,3 +80,16 @@ The document types used by the authorization server include:
 | `allowAddPrefs` | Boolean | Whether the client is allowed to add new preferences. | true |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
 
+#### Resource Owner Password Credentials Tokens
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The resource owner password credentials token id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing resource owner password credentials tokens. | The value must be set to "resourceOwnerToken". |
+| `clientId` | String | The client id that this token is assigned to. | None |
+| `gpiiToken` | String | The GPII token that this token record is associated with. | None |
+| `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
+| `expiresIn` | Number | The number of seconds left before the access token becomes invalid. The default value is 3600. | 3600 |
+| `revoked` | Boolean | Whether this token has been revoked. | false |
+| `timestampCreated` | Date | The timestamp when the token is created. | now() |
+| `timestampRevoked` | Date | The timestamp when the token is revoked. | None |
