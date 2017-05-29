@@ -580,3 +580,26 @@ gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess = func
         return undefined;
     }
 };
+
+// Resource Owner Password Credentials Tokens
+// ------------------------------------------
+
+/**
+ * The post data process function for implementing findResourceOwnerTokenByGpiiTokenAndClientId()
+ */
+gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess = function (data) {
+    var records = [];
+    fluid.each(data, function (row) {
+        var oneResult = {
+            id: row.value._id,
+            accessToken: row.value.accessToken,
+            expiresIn: row.value.expiresIn,
+            revoked: row.value.revoked,
+            expired: row.value.expired,
+            timestampCreated: row.value.timestampCreated,
+            timestampRevoked: row.value.timestampRevoked
+        };
+        records.push(oneResult);
+    });
+    return records;
+};

@@ -91,5 +91,6 @@ The document types used by the authorization server include:
 | `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
 | `expiresIn` | Number | The number of seconds left before the access token becomes invalid. The default value is 3600. | 3600 |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
+| `expired` | Boolean | Whether this token has expired, meaning `timestampCreated` + `expiresIn` < now(). | false |
 | `timestampCreated` | Date | The timestamp when the token is created. | now() |
 | `timestampRevoked` | Date | The timestamp when the token is revoked. | None |

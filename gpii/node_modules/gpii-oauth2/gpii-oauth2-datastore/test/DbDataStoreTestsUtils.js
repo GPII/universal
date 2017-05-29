@@ -258,12 +258,22 @@ gpii.tests.dbDataStore.testData = {
         oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
         allowAddPrefs: true
     },
-    ResourceOwnerTokenByGpiiTokenAndClientId: [{
+    findResourceOwnerTokenByGpiiTokenAndClientId: [{
         "id": "resourceOwnerToken-1",
-        "type": "resourceOwnerToken",
-        "clientId": "client-1",
-        "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token",
-        "revoked": false
+        "accessToken": "native-gpii-app-token-1",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
+    },
+    {
+        "id": "resourceOwnerToken-2",
+        "accessToken": "native-gpii-app-token-2",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2020 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
     }]
 };

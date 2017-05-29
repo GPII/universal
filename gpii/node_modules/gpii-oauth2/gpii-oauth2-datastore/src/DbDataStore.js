@@ -301,7 +301,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 },
                 rules: {
                     readPayload: {
-                        "": "rows.0.value"
+                        "": "rows"
                     }
                 }
             }
@@ -554,7 +554,8 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                     gpiiToken: "{arguments}.0",
                     clientId: "{arguments}.1"
                 },
-                ["gpiiToken", "clientId"]
+                ["gpiiToken", "clientId"],
+                gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess
             ]
             // gpiiToken, clientId
         }

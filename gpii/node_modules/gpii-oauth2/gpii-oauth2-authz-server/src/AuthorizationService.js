@@ -682,9 +682,13 @@ var fluid = fluid || require("infusion");
             promiseTogo.reject(error);
         } else {
             var gpiiTokenPromise = dataStore.findGpiiToken(gpiiToken);
-            var tokenPromise = dataStore.findResourceOwnerTokenByGpiiTokenAndClientId(gpiiToken, clientId);
+            var resourceOwnerTokenPromise = gpii.oauth2.authorizationService.findValidResourceOwnerToken(gpiiToken, clientId);
 
-            gpiiTokenPromise.then(function (responses) {
+            // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
+            var sources = [gpiiTokenPromise, resourceOwnerTokenPromise];
+            var promisesSequence = fluid.promise.sequence(sources);
+
+            promisesSequence.then(function (responses) {
                 console.log("==== responses", responses);
                 // var client = responses[0];
                 // var clientCredentialsToken = responses[1];

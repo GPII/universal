@@ -1083,33 +1083,57 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
                 args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.AuthDecisionsByGpiiToken, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findResourceOwnerTokenByGpiiTokenAndClientId, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
-        // }, {
-        //     name: "Finding a non-existing auth decision by a gpii token returns undefined",
-        //     sequence: [{
-        //         func: "gpii.tests.oauth2.invokePromiseProducer",
-        //         args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["non-existing-token"], "{that}"]
-        //     }, {
-        //         listener: "jqUnit.assertUndefined",
-        //         args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
-        //         event: "{that}.events.onResponse"
-        //     }]
-        // }, {
-        //     name: "Not providing a gpii token returns 401 status code and error message",
-        //     sequence: [{
-        //         func: "gpii.tests.oauth2.invokePromiseProducer",
-        //         args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", [], "{that}"]
-        //     }, {
-        //         listener: "jqUnit.assertDeepEq",
-        //         args: ["The expected error is received", {
-        //             msg: "The input field \"gpiiToken\" is undefined",
-        //             statusCode: 400,
-        //             isError: true
-        //         }, "{arguments}.0"],
-        //         event: "{that}.events.onError"
-        //     }]
+        }, {
+            name: "Finding a non-existing resource owner token by a non-existing gpii token returns undefined",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["non-existing-token", "client-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing resource owner token returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Finding a non-existing resource owner token by a non-existing client id returns undefined",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "non-existing-client"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding a non-existing resource owner token returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Not providing a gpii token returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", [undefined, "client-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"gpiiToken\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }, {
+            name: "Not providing a client id returns 401 status code and error message",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", undefined], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"clientId\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
         }]
     }]
 });
@@ -1137,5 +1161,5 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
     "gpii.tests.dbDataStore.addClientCredentialsToken",
     "gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken",
-    // "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId"
+    "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId"
 ]);
