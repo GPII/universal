@@ -69,6 +69,9 @@ If you would like to debug individual tests or view the test summary in a browse
 1. Host the working directory, for example, using a command like the following from the root of the repository: `python -m SimpleHTTPServer 4103`
 2. Open the "rollup" file `tests/all-tests.html` that runs all tests in a browser.  Continuing the above example, you would load the URL `http://localhost:4103/tests/web/html/all-tests.html`.
 
+Please note, when hosting the tests yourself, you may see multiple 404 errors related to the `/testem.js` and
+`/coverage/client/coverageSender.js` files which are provided by Testem and the `gpii.testem` harness respectively.
+These 404 errors will not cause any tests to fail and can be safely ignored.
 
 #### Running node-based tests
 
