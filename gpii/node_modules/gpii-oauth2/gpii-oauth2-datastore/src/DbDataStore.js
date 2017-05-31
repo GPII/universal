@@ -546,6 +546,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // accessToken
         },
+        findResourceOwnerTokenById: {
+            func: "{that}.findById"
+            // resourceOwnerTokenId
+        },
         findResourceOwnerTokenByGpiiTokenAndClientId: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
@@ -558,12 +562,30 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess
             ]
             // gpiiToken, clientId
+        },
+        expireResourceOwnerToken: {
+            funcName: "gpii.oauth2.dbDataStore.expireResourceOwnerToken",
+            args: [
+                "{that}",
+                "{arguments}.0"
+            ]
+            // resourceOwnerTokenId
+        },
+        revokeResourceOwnerToken: {
+            funcName: "gpii.oauth2.dbDataStore.revokeResourceOwnerToken",
+            args: [
+                "{that}",
+                "{arguments}.0"
+            ]
+            // resourceOwnerTokenId
         }
     },
     events: {
         onUpdateAuthDecision: null,
         onRevokeAuthDecision: null,
-        onRevokeClientCredentialsToken: null
+        onRevokeClientCredentialsToken: null,
+        onExpireResourceOwnerToken: null,
+        onRevokeResourceOwnerToken: null
     },
     listeners: {
         onUpdateAuthDecision: [{
@@ -576,9 +598,9 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             namespace: "validateGpiiToken",
             priority: "after:authDecisionExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdate",
+            listener: "gpii.oauth2.dbDataStore.doUpdateAuthDecision",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdate",
+            namespace: "doUpdateAuthDecision",
             priority: "after:validateGpiiToken"
         }],
         onRevokeAuthDecision: [{
@@ -591,9 +613,9 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             namespace: "validateGpiiToken",
             priority: "after:authDecisionExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdate",
+            listener: "gpii.oauth2.dbDataStore.doUpdateAuthDecision",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdate",
+            namespace: "doUpdateAuthDecision",
             priority: "after:validateGpiiToken"
         }],
         onRevokeClientCredentialsToken: [{
@@ -604,6 +626,24 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             args: ["{that}.saveDataSource", "{arguments}.0"],
             namespace: "doRevokeClientCredentialsToken",
             priority: "after:findClientCredentialsToken"
+        }],
+        onExpireResourceOwnerToken: [{
+            listener: "{that}.findResourceOwnerTokenById",
+            namespace: "findResourceOwnerToken"
+        }, {
+            listener: "gpii.oauth2.dbDataStore.doUpdateResourceOwnerToken",
+            args: ["{that}.saveDataSource", "expired", "{arguments}.0"],
+            namespace: "doUpdateResourceOwnerToken",
+            priority: "after:findResourceOwnerToken"
+        }],
+        onRevokeResourceOwnerToken: [{
+            listener: "{that}.findResourceOwnerTokenById",
+            namespace: "findResourceOwnerToken"
+        }, {
+            listener: "gpii.oauth2.dbDataStore.doUpdateResourceOwnerToken",
+            args: ["{that}.saveDataSource", "revoked", "{arguments}.0"],
+            namespace: "doUpdateResourceOwnerToken",
+            priority: "after:findResourceOwnerToken"
         }]
     }
 });

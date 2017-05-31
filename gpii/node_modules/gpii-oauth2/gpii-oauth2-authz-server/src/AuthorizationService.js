@@ -666,6 +666,10 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
+    // gpii.oauth2.authorizationService.findValidResourceOwnerToken = function (dataStore, gpiiToken, clientId) {
+    //     var promiseTogo = fluid.promise();
+    // };
+
     /**
      * Grant a resource owner password credential access token. The gpii token will be verified before the access token is returned.
      * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
@@ -682,7 +686,7 @@ var fluid = fluid || require("infusion");
             promiseTogo.reject(error);
         } else {
             var gpiiTokenPromise = dataStore.findGpiiToken(gpiiToken);
-            var resourceOwnerTokenPromise = gpii.oauth2.authorizationService.findValidResourceOwnerToken(gpiiToken, clientId);
+            var resourceOwnerTokenPromise = gpii.oauth2.authorizationService.findValidResourceOwnerToken(dataStore, gpiiToken, clientId);
 
             // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
             var sources = [gpiiTokenPromise, resourceOwnerTokenPromise];

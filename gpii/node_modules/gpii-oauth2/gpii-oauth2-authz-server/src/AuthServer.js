@@ -89,7 +89,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         gpii.oauth2.oauth2orizeServer.promiseToDone(clientCredentialsPromise, done);
     }));
 
-    oauth2orizeServer.exchange(oauth2orize.exchange.password(function(client, username, password, scope, done) {
+    oauth2orizeServer.exchange(oauth2orize.exchange.password(function (client, username, password, scope, done) {
         var passwordPromise = authorizationService.grantResourceOwnerAccessToken(client.id, username);
         gpii.oauth2.oauth2orizeServer.promiseToDone(passwordPromise, done);
     }));

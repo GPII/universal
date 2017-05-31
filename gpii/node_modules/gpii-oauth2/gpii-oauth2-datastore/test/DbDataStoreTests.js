@@ -1087,6 +1087,32 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
                 event: "{that}.events.onResponse"
             }]
         }, {
+            name: "Expired and revoked resource owner token record is no longer returned",
+            sequence: [{
+                // Test an expired token record
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.expireResourceOwnerToken", ["resourceOwnerToken-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.resourceOwnerTokenAfterExpire, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }, {
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeResourceOwnerToken", ["resourceOwnerToken-2"], "{that}"]
+            }, {
+                listener: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", undefined, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
             name: "Finding a non-existing resource owner token by a non-existing gpii token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
