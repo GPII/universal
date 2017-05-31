@@ -68,7 +68,7 @@
         "pretest:instrumentConfigs": "node node_modules/istanbul/lib/cli.js instrument --complete-copy -o instrumented/universal/gpii/configs gpii/configs",
         "pretest:copyUninstrumentedCode": "node scripts/copyUninstrumentedCode.js",
         "test": "npm run test:node && npm run test:browser",
-        "test:browser": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && node node_modules/testem/testem.js ci --file tests/testem.js --skip 'PhantomJS,Opera,Safari'",
+        "test:browser": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && node node_modules/testem/testem.js ci --file tests/testem.js --skip PhantomJS",
         "test:node": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && node_modules/.bin/nyc --reporter=json node tests/all-tests.js",
         "test:production": "node tests/ProductionConfigTests.js",
         "test:vagrant": "vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal; DISPLAY=:0; npm test'",
