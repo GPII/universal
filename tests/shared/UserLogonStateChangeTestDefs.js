@@ -116,7 +116,7 @@ gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
                 configName: "gpii.config.development.all.local",
                 configPath: "%universal/gpii/configs"
             },
-            gradeNames: "gpii.tests.userLogonHandling.testCaseHolder",
+            gradeNames: [ "gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux" ],
             userToken: gpii.tests.userLogonHandling.userToken
         }, testDef);
     });

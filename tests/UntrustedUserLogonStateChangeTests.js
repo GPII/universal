@@ -35,7 +35,7 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
                 configName: "gpii.tests.acceptance.untrusted.development.config",
                 configPath: "%universal/tests/configs"
             },
-            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
+            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
             userToken: gpii.tests.userLogonHandling.userToken
         });
 
