@@ -61,8 +61,19 @@ root of the `universal` folder, run the following command:
 
 `npm run test:browser`
 
-You can also run (and debug) the tests manually by running `testem --file tests/testem.js` from the root of the
-repository.  The required test fixtures and testem will start, and Testem will provide a URL you can open in a browser.
+Please note, when running the browser tests locally using this command, the tests will fail on some browsers 
+(notably Firefox, Safari, and Opera) unless the browser has focus.  You can manually click the browser when it launches
+to give it focus.  You should not give another window focus until the tests complete.  This is not a problem when
+running the browser tests in Vagrant (see below).  It's also not a problem when running the tests in Chrome, which you
+can do using a command like:
+
+`npm run test:browser -- --launch Chrome`
+
+You can also run (and debug) the tests manually from the root of the repository using a command like:
+
+`node node_modules/testem/testem.js --file tests/testem.js` 
+
+The required test fixtures and testem will start, and Testem will provide a URL you can open in a browser.
 
 If you would like to debug individual tests or view the test summary in a browser without using Testem, you can:
 
