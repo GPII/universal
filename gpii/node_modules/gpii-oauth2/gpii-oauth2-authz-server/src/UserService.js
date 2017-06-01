@@ -51,16 +51,28 @@ var fluid = fluid || require("infusion");
     });
 
     gpii.oauth2.userService.authenticateUser = function (dataStore, username, password) {
-        var user = dataStore.findUserByUsername(username);
-        // TODO store passwords securely
-        if (user && user.password === password) {
-            return user;
-        }
-        return false;
+        var promiseTogo = fluid.promise();
+        var userPromise = dataStore.findUserByUsername(username);
+        userPromise.then(function (user) {
+            // TODO store passwords securely
+            if (user && user.password === password) {
+                promiseTogo.resolve(user);
+            } else {
+                promiseTogo.reject(gpii.oauth2.errors.invalidUser);
+            }
+        }, function (err) {
+            promiseTogo.reject(err);
+        });
+
+        return promiseTogo;
     };
 
     gpii.oauth2.userService.gpiiTokenHasAssociatedUser = function (dataStore, gpiiToken) {
-        return dataStore.findUserByGpiiToken(gpiiToken) ? true : false;
+        var tokenPromise = dataStore.findUserByGpiiToken(gpiiToken);
+        var mapper = function (user) {
+            return user ? true : false;
+        };
+        return fluid.promise.map(tokenPromise, mapper);
     };
 
 })();

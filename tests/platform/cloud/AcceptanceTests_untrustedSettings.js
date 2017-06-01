@@ -13,12 +13,12 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 
 "use strict";
 
-var fluid = require("universal");
+var fluid = require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 
-gpii.loadTestingSupport();
+fluid.require("%universal");
 
-require("./OAuth2AcceptanceDataStore.js");
+gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.untrustedSettings");
 
@@ -50,8 +50,8 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         userToken: "os_gnome",
         authDecisions: [
             {
-                userId: 1,
-                clientId: 3,
+                gpiiToken: "os_gnome",
+                clientId: "client-3",
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "increase-size.magnifier": true },
@@ -79,16 +79,16 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         userToken: "os_gnome",
         authDecisions: [
             {
-                userId: 1,
-                clientId: 3,
+                gpiiToken: "os_gnome",
+                clientId: "client-3",
                 redirectUri: false,
                 accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             },
             {
-                userId: 1,
-                clientId: 4,
+                gpiiToken: "os_gnome",
+                clientId: "client-4",
                 redirectUri: false,
                 accessToken: "os_gnome_desktop_access_token",
                 selectedPreferences: { "increase-size.appearance.text-size": true },

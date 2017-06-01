@@ -1,0 +1,23 @@
+---
+preferences_server_couchdb_host_address: localhost:5984
+
+preferences_server_environment: gpii.config.preferencesServer.standalone.production
+
+nodejs_app_name: preferences-server
+
+nodejs_app_env_vars:
+  - "NODE_ENV={{ preferences_server_environment }}"
+
+# Not removing kanso so that it can be used to add additional data in CouchDB
+preferences_server_data_loader_cleanup_after: false
+
+# For testing purposes
+nodejs_app_host_address: 127.0.0.1
+
+nodejs_app_tcp_port: 8081
+
+nodejs_app_test_http_endpoint: /preferences/carla
+
+nodejs_app_test_http_status_code: 200
+
+nodejs_app_test_string: registry.gpii.net
