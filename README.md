@@ -155,8 +155,8 @@ you will need to ensure that browsers receive focus when they are launched (see 
 The `npm test` command has [two additional associated scripts](https://docs.npmjs.com/misc/scripts).  The `pretest`
 script runs before the command defined for the `test` script.  The `posttest` script runs after.  In our case
 we use a `pretest` script to clean up previous coverage data before we run the tests, and a `posttest` script to 
-compile the actual report.  You should not need to run the pretest scripts manually before running either the node or
-browser tests.
+compile the actual report.  You should not need to run the `pretest` scripts manually before running either the node or
+browser tests, or to run the `posttest` scripts afterward.
 
 Building Docker Images
 ----------------------
