@@ -1,5 +1,12 @@
-// We exclude libraries and other content from our instrumentation approach.  This script copies that content in
-// uninstrumented form to the target directory, so that the uninstrumented code can be succesfully required.
+/*
+
+    When running our tests with an eye towards preparing code coverage reports, we instrument our unique code,
+    but do not instrument libraries (like jQuery) or non-code content.
+
+    This script copies the remaining content in uninstrumented form to the target directory, so that all required
+    content is available when running the tests.
+
+ */
 "use strict";
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
