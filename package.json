@@ -62,7 +62,7 @@
     },
     "scripts": {
         "pretest": "npm run pretest:clean && npm run pretest:instrument && npm run pretest:copyUninstrumentedCode",
-        "pretest:clean": "node node_modules/rimraf/bin.js reports/* coverage/* instrumented/*",
+        "pretest:clean": "node node_modules/rimraf/bin.js reports/* coverage/* instrumented/* .nyc_output/*",
         "pretest:instrument": "npm run pretest:instrumentNodeModules && npm run pretest:instrumentConfigs",
         "pretest:instrumentNodeModules": "node node_modules/istanbul/lib/cli.js instrument --complete-copy -o instrumented/universal/gpii/node_modules gpii/node_modules -x '**/lib/**' -x 'testing/**' -x 'tests/**'",
         "pretest:instrumentConfigs": "node node_modules/istanbul/lib/cli.js instrument --complete-copy -o instrumented/universal/gpii/configs gpii/configs",
