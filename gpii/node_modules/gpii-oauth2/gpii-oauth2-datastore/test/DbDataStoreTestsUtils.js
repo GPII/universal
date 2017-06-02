@@ -258,6 +258,17 @@ gpii.tests.dbDataStore.testData = {
         oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
         allowAddPrefs: true
     },
+    resourceOwnerToken1: {
+        "id": "resourceOwnerToken-1",
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-1",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
+    },
     findResourceOwnerTokenByGpiiTokenAndClientId: [{
         "id": "resourceOwnerToken-1",
         "accessToken": "native-gpii-app-token-1",
@@ -276,7 +287,7 @@ gpii.tests.dbDataStore.testData = {
         "timestampCreated": "Mon May 29 2020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }],
-    resourceOwnerTokenAfterExpire: [{
+    findResourceOwnerTokenByGpiiTokenAndClientIdAfterExpire: [{
         "id": "resourceOwnerToken-2",
         "accessToken": "native-gpii-app-token-2",
         "expiresIn": 360000000000,
@@ -284,5 +295,27 @@ gpii.tests.dbDataStore.testData = {
         "expired": false,
         "timestampCreated": "Mon May 29 2020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
-    }]
+    }],
+    resourceOwnerToken1AfterExpired: {
+        "id": "resourceOwnerToken-1",
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-1",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": true,
+        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
+    },
+    resourceOwnerToken1AfterRevoked: {
+        "id": "resourceOwnerToken-1",
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-1",
+        "expiresIn": 3600,
+        "revoked": true,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
+    }
 };

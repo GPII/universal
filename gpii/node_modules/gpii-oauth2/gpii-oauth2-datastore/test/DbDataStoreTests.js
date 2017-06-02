@@ -1098,7 +1098,7 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.resourceOwnerTokenAfterExpire, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findResourceOwnerTokenByGpiiTokenAndClientIdAfterExpire, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }, {
                 func: "gpii.tests.oauth2.invokePromiseProducer",
@@ -1164,6 +1164,92 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
     }]
 });
 
+fluid.defaults("gpii.tests.dbDataStore.expireResourceOwnerToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test expireResourceOwnerToken()",
+        tests: [{
+            name: "A typical flow of expiring a resource owner token",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenById", ["resourceOwnerToken-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected resource owner token data is received", gpii.tests.dbDataStore.testData.resourceOwnerToken1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }, {
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.expireResourceOwnerToken", ["resourceOwnerToken-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findResourceOwnerTokenById", "{arguments}.0.id", "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.verifyFetched",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerToken1AfterExpired],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Expire by a non-existing resource owner token id returns error",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.expireResourceOwnerToken", ["non-existing-token-id"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["Expire by a non-existing resource owner token id returns missing record error", {
+                    msg: "The record of resourceOwnerToken is not found",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
+fluid.defaults("gpii.tests.dbDataStore.revokeResourceOwnerToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test revokeResourceOwnerToken()",
+        tests: [{
+            name: "A typical flow of expiring a resource owner token",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findResourceOwnerTokenById", ["resourceOwnerToken-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected resource owner token data is received", gpii.tests.dbDataStore.testData.resourceOwnerToken1, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }, {
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeResourceOwnerToken", ["resourceOwnerToken-1"], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findResourceOwnerTokenById", "{arguments}.0.id", "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.verifyFetched",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerToken1AfterRevoked],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Revoke by a non-existing resource owner token id returns error",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.revokeResourceOwnerToken", ["non-existing-token-id"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["Revoke by a non-existing resource owner token id returns missing record error", {
+                    msg: "The record of resourceOwnerToken is not found",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
 fluid.test.runTests([
     "gpii.tests.dbDataStore.findUserById",
     "gpii.tests.dbDataStore.findUserByUsername",
@@ -1187,5 +1273,7 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
     "gpii.tests.dbDataStore.addClientCredentialsToken",
     "gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken",
-    "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId"
+    "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId",
+    "gpii.tests.dbDataStore.expireResourceOwnerToken",
+    "gpii.tests.dbDataStore.revokeResourceOwnerToken"
 ]);

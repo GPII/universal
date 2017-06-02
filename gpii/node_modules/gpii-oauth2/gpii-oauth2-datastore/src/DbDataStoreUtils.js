@@ -1,7 +1,7 @@
 /*!
 GPII CouchDB OAuth 2 Data Store
 
-Copyright 2016 OCAD university
+Copyright 2016-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -541,7 +541,8 @@ gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSourc
     var promiseTogo = fluid.promise();
 
     if (clientCredentialsTokenRecord === undefined) {
-        promiseTogo.resolve(undefined);
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.clientCredentialsToken});
+        promiseTogo.reject(error);
     } else {
         var data = fluid.copy(clientCredentialsTokenRecord);
         data.revoked = true;
@@ -655,7 +656,8 @@ gpii.oauth2.dbDataStore.doUpdateResourceOwnerToken = function (saveDataSource, f
     var promiseTogo = fluid.promise();
 
     if (resourceOwnerTokenRecord === undefined) {
-        promiseTogo.resolve(undefined);
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.resourceOwnerToken});
+        promiseTogo.reject(error);
     } else {
         var data = fluid.copy(resourceOwnerTokenRecord);
         fluid.set(data, fieldName, true);
