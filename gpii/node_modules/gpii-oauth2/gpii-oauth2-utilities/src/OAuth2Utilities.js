@@ -59,3 +59,26 @@ gpii.oauth2.mapPromiseToResponse = function (promise, response) {
     });
 };
 
+/**
+ * Compare a given timestamp with the current time to find out if it has expired.
+ * If timestampCreated + expiresIn < currentTimestamp, expired; else, not expired.
+ * @param timestampCreated {String} A date string
+ * @param expiresIn {Number} The number of seconds that the timestampCreated will expire.
+ * @return {Boolean} return true if expired; otherwise, return false.
+ */
+gpii.oauth2.isExpired = function (timestampCreated, expiresIn) {
+    expiresIn = parseInt(expiresIn);
+
+    if (!timestampCreated || !expiresIn) {
+        return false;
+    }
+
+    var createdTime = new Date(timestampCreated).getTime();
+
+    // expiresIn is in the number of seconds but getTime() returns in millisecond.
+    var expiredTime = createdTime + expiresIn * 1000;
+
+    var currentTime = new Date().getTime;
+
+    return currentTime > expiredTime;
+};

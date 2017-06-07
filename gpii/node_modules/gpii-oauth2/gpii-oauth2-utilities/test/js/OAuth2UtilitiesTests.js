@@ -128,5 +128,24 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             gpii.oauth2.walkMiddleware(middleware1, 0, "request", "response", check);
         });
 
+        jqUnit.test("isExpired() checks if a given timestamp is expired", function () {
+            // jqUnit.expect(3);
+            var testCases = [{
+                timestampCreated: "Wed Jun 07 2017 14:20:09 GMT-0400 (EDT)",
+                expected: false
+            }, {
+                expiresIn: 60,
+                expected: false
+            }];
+
+            fluid.each(testCases, function (testCase) {
+                var assertion = testCase.expected ? "assertTrue" : "assertFalse";
+                var result = gpii.oauth2.isExpired(testCase.timestampCreated, testCase.expiresIn);
+                var msg = testCase.timestampCreated + " has " + testCase.expected ? "" : "not" + " expired ";
+                console.log(msg);
+                jqUnit[assertion](msg, result);
+            });
+        });
+
     };
 })();

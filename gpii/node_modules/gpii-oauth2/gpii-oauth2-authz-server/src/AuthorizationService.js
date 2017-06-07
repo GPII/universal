@@ -666,9 +666,39 @@ var fluid = fluid || require("infusion");
         return promiseTogo;
     };
 
-    // gpii.oauth2.authorizationService.findValidResourceOwnerToken = function (dataStore, gpiiToken, clientId) {
-    //     var promiseTogo = fluid.promise();
-    // };
+    /**
+     * Find an unexpired resource owner password credential access token. If not found, returns undefined.
+     * If an access token is expired but its "expired" field has not been set, set that field to true.
+     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param clientId {String} A client id
+     * @param gpiiToken {String} A GPII token
+     * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the gpii token is not found.
+     */
+    gpii.oauth2.authorizationService.findValidResourceOwnerToken = function (dataStore, gpiiToken, clientId) {
+        var promiseTogo = fluid.promise();
+
+        var tokenPromise = dataStore.findResourceOwnerTokenByGpiiTokenAndClientId(gpiiToken, clientId);
+
+        tokenPromise.then(function (tokens) {
+            var setExpiredPromises = [];
+
+            fluid.each(tokens, function (token) {
+                if (gpii.oauth2.isExpired(token.timestampCreated, token.expiresIn) {
+                    setExpiredPromises.push(dataStore.expireResourceOwnerToken(token.id));
+                }) {
+
+                } else {
+                    promiseTogo.resolve(token.accessToken);
+                }
+            });
+            var promisesSequence = fluid.promise.sequence(setExpiredPromises);
+
+        }, function () {
+            promiseTogo.resolve(undefined);
+        });
+
+        return promiseTogo;
+    };
 
     /**
      * Grant a resource owner password credential access token. The gpii token will be verified before the access token is returned.
