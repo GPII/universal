@@ -284,7 +284,7 @@ gpii.tests.dbDataStore.testData = {
         "expiresIn": 360000000000,
         "revoked": false,
         "expired": false,
-        "timestampCreated": "Mon May 29 2020 13:54:00 GMT-0400 (EDT)",
+        "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }],
     findResourceOwnerTokenByGpiiTokenAndClientIdAfterExpire: [{
@@ -293,7 +293,7 @@ gpii.tests.dbDataStore.testData = {
         "expiresIn": 360000000000,
         "revoked": false,
         "expired": false,
-        "timestampCreated": "Mon May 29 2020 13:54:00 GMT-0400 (EDT)",
+        "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }],
     resourceOwnerToken1AfterExpired: {

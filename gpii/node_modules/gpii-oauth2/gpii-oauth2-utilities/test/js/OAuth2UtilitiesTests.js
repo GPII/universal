@@ -129,20 +129,31 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
 
         jqUnit.test("isExpired() checks if a given timestamp is expired", function () {
-            // jqUnit.expect(3);
+            jqUnit.expect(4);
+
             var testCases = [{
                 timestampCreated: "Wed Jun 07 2017 14:20:09 GMT-0400 (EDT)",
                 expected: false
             }, {
                 expiresIn: 60,
                 expected: false
+            }, {
+                timestampCreated: "Fri Jun 09 2016 10:59:09 GMT-0400 (EDT)",
+                expiresIn: 60,
+                expected: true
+            }, {
+                // timestampCreated: currentTime - 60 seconds; expiresIn: 120 seconds
+                timestampCreated: new Date(new Date().getTime() - 60 * 1000).toString(),
+                expiresIn: 120,
+                expected: false
             }];
 
             fluid.each(testCases, function (testCase) {
                 var assertion = testCase.expected ? "assertTrue" : "assertFalse";
                 var result = gpii.oauth2.isExpired(testCase.timestampCreated, testCase.expiresIn);
-                var msg = testCase.timestampCreated + " has " + testCase.expected ? "" : "not" + " expired ";
-                console.log(msg);
+                var yesNoMsg = testCase.expected ? "" : "not";
+                var msg = "The timestamp \"" + testCase.timestampCreated + "\" has " + yesNoMsg + " expired within " + testCase.expiresIn + " seconds";
+
                 jqUnit[assertion](msg, result);
             });
         });

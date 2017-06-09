@@ -668,7 +668,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * Find an unexpired resource owner password credential access token. If not found, returns undefined.
-     * If an access token is expired but its "expired" field has not been set, set that field to true.
+     * This function also set the "expired" field of all expired tokens to true so they won't be returned
+     * next time at finding an unexpired access token.
      * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
      * @param clientId {String} A client id
      * @param gpiiToken {String} A GPII token
@@ -681,20 +682,20 @@ var fluid = fluid || require("infusion");
 
         tokenPromise.then(function (tokens) {
             var setExpiredPromises = [];
+            var accessToken;
 
             fluid.each(tokens, function (token) {
-                if (gpii.oauth2.isExpired(token.timestampCreated, token.expiresIn) {
+                if (gpii.oauth2.isExpired(token.timestampCreated, token.expiresIn)) {
                     setExpiredPromises.push(dataStore.expireResourceOwnerToken(token.id));
-                }) {
-
                 } else {
-                    promiseTogo.resolve(token.accessToken);
+                    accessToken = token.accessToken;
                 }
             });
-            var promisesSequence = fluid.promise.sequence(setExpiredPromises);
+            var setExpiredSequence = fluid.promise.sequence(setExpiredPromises);
 
-        }, function () {
-            promiseTogo.resolve(undefined);
+            setExpiredSequence.then(function () {
+                promiseTogo.resolve(accessToken);
+            });
         });
 
         return promiseTogo;

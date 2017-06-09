@@ -61,6 +61,16 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
+            }, {
+                name: "findValidResourceOwnerToken() returns undefined with an empty dataStore",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerToken, ["{authorizationService}.dataStore", "alice_gpii_token", "client-1"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertUndefined",
+                    args: ["undefined should be received with an empty data store", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
             }]
         }]
     });
@@ -179,6 +189,39 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             "": true
         },
         "revoked": false
+    }, {
+        "_id": "resourceOwnerToken-1",
+        "type": "resourceOwnerToken",
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-1",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
+    }, {
+        "_id": "resourceOwnerToken-2",
+        "type": "resourceOwnerToken",
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-2",
+        "expiresIn": 120,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toString(),
+        "timestampRevoked": null
+    }, {
+        "_id": "resourceOwnerToken-3",
+        "type": "resourceOwnerToken",
+        "clientId": "client-2",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-3",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2016 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": "Mon May 29 2016 15:54:00 GMT-0400 (EDT)"
     }];
 
     // All expected results
@@ -202,7 +245,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         revokedClientsForDave: [{
             "clientName": "Client A",
             "oauth2ClientId": "client_id_A"
-        }]
+        }],
+        findValidResourceOwnerToken: {
+            "id": "resourceOwnerToken-1",
+            "clientId": "client-1",
+            "gpiiToken": "gpiiToken-1",
+            "accessToken": "native-gpii-app-token-1",
+            "expiresIn": 3600,
+            "revoked": false,
+            "expired": true,
+            "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+            "timestampRevoked": null
+        }
     };
 
     fluid.defaults("gpii.tests.oauth2.authorizationService.withData", {
@@ -258,6 +312,46 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The revoked client information should be received", gpii.tests.oauth2.authorizationService.expected.revokedClientsForDave, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }, {
+            name: "Test gpii.oauth2.authorizationService.findValidResourceOwnerToken()",
+            tests: [{
+                name: "findValidResourceOwnerToken() sets expired for expired access tokens and returns unexpired access token",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerToken, ["{authorizationService}.dataStore", "gpiiToken-1", "client-1"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertEquals",
+                    args: ["unexpired access token should be returned", "native-gpii-app-token-2", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }, {
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authorizationService}.dataStore.findResourceOwnerTokenById", ["resourceOwnerToken-1"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidResourceOwnerToken, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "findValidResourceOwnerToken() returns undefined for nonexistent record",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerToken, ["{authorizationService}.dataStore", "nonexistent-token", "nonexistent-client"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertUndefined",
+                    args: ["undefined should be received for nonexistent record", "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }, {
+                name: "findValidResourceOwnerToken() returns undefined when all existing access tokens have expired",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerToken, ["{authorizationService}.dataStore", "gpiiToken-1", "client-2"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertUndefined",
+                    args: ["undefined should be received when all existing access tokens have expired", "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }]

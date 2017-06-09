@@ -78,7 +78,7 @@ gpii.oauth2.isExpired = function (timestampCreated, expiresIn) {
     // expiresIn is in the number of seconds but getTime() returns in millisecond.
     var expiredTime = createdTime + expiresIn * 1000;
 
-    var currentTime = new Date().getTime;
-
+    var currentTime = new Date().getTime();
+// console.log("currentTime", currentTime, "expiredTime", expiredTime);
     return currentTime > expiredTime;
 };
