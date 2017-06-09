@@ -1,0 +1,19 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
+                        "ZT\\.Enabled": true,
+                        "ZT\\.Speech\\.CurrentVoice\\.Rate": 22,
+                        "ZT\\.Speech\\.CurrentVoice\\.Volume": 64,
+                        "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": 1,
+                        "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": true,
+                        "ZT\\.GPII\\.CenterMouse": true
+                    }
+                }
+            }
+        }
+    }
+}

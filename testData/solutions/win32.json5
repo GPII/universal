@@ -1,4 +1,107 @@
 {
+    "com.aisquared.zoomtext": {
+        "name": "ZoomText",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration1": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "options": {
+                    "filename": ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini"
+                },
+                "supportedSettings": {
+                    "ZT\\.Enabled": {},
+                    "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": {},
+                    "ZT\\.Speech\\.CurrentVoice\\.Rate": {},
+                    "ZT\\.Speech\\.CurrentVoice\\.Volume": {},
+                    "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": {},
+                    "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Decrease": {},
+                    "ZT\\.Mouse\\.Location\\.X": {},
+                    "ZT\\.Mouse\\.Location\\.Y": {},
+                    "ZT\\.Mouse\\.Location\\.XY": {},
+                    "ZT\\.GPII\\.CenterMouse": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "ZT\\\\\\.Enabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Level": "http://registry\\.gpii\\.net/common/magnification",
+                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
+                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume": "http://registry\\.gpii\\.net/common/volume",
+                    "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Increase": "http://registry\\.gpii\\.net/common/increaseMagnification",
+                    "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Decrease": "http://registry\\.gpii\\.net/common/decreaseMagnification",
+                    "ZT\\\\\\.Mouse\\\\\\.Location\\\\\\.X": "http://registry\\.gpii\\.net/common/mouseLocationX",
+                    "ZT\\\\\\.Mouse\\\\\\.Location\\\\\\.Y": "http://registry\\.gpii\\.net/common/mouseLocationY",
+                    "ZT\\\\\\.Mouse\\\\\\.Location\\\\\\.XY": "http://registry\\.gpii\\.net/common/mouseLocationXY",
+                    "ZT\\\\\\.GPII\\\\\\.CenterMouse": "http://registry\\.gpii\\.net/common/centerMouse"
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/magnifierEnabled": "ZT\\.Enabled",
+                    "http://registry\\.gpii\\.net/common/magnification": "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Level",
+                    "http://registry\\.gpii\\.net/common/speechRate": "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Rate",
+                    "http://registry\\.gpii\\.net/common/volume": "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume",
+                    "http://registry\\.gpii\\.net/common/increaseMagnification": "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Increase",
+                    "http://registry\\.gpii\\.net/common/decreaseMagnification": "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Decrease",
+                    "http://registry\\.gpii\\.net/common/mouseLocationX": "ZT\\\\\\.Mouse\\\\\\.Location\\\\\\.X",
+                    "http://registry\\.gpii\\.net/common/mouseLocationY": "ZT\\\\\\.Mouse\\\\\\.Location\\\\\\.Y",
+                    "http://registry\\.gpii\\.net/common/mouseLocationXY": "ZT\\\\\\.Mouse\\\\\\.Location\\\\\\.XY",
+                    "http://registry\\.gpii\\.net/common/centerMouse": "ZT\\\\\\.GPII\\\\\\.CenterMouse"
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration1"
+        ],
+        "restore": [
+            "settings.configuration1"
+        ],
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v10.1\\StartExe}\""
+            },
+            {
+                "type": "gpii.launch.exec",
+                "command": "CScript .\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_api.js 20"
+            }
+        ],
+        "stop": [
+            {
+                  "type": "gpii.windows.closeProcessByName",
+                  "filename": "zt.exe"
+            },
+            {
+                  "type": "gpii.windows.closeProcessByName",
+                  "filename": "ProtectedUI64.exe"
+            },
+            {
+                  "type": "gpii.windows.closeProcessByName",
+                  "filename": "ProtectedUI.exe"
+            },
+            {
+                  "type": "gpii.windows.closeProcessByName",
+                  "filename": "AiSquared.Magnification.ZoomText.exe"
+            },
+            {
+                  "type": "gpii.windows.closeProcessByName",
+                  "filename": "Ztoff.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v10.1\\StartExe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
+        ]
+    },
+
     "com.freedomscientific.jaws": {
         "name": "JAWS",
         "contexts": {
