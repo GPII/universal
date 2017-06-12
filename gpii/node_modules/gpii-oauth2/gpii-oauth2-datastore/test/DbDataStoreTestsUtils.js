@@ -82,6 +82,14 @@ gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
     jqUnit.assertLeftHand("The data is saved successfully", expected, response);
 };
 
+gpii.tests.dbDataStore.verifyFetchedResourceOwnerToken = function (response, dataToSave) {
+    gpii.tests.dbDataStore.verifyFetched(response, dataToSave);
+    jqUnit.assertFalse("The \"expired\" value has been set to false", response.expired);
+    jqUnit.assertFalse("The \"revoked\" value has been set to false", response.revoked);
+    jqUnit.assertNotUndefined("The \"timestampCreated\" value has been created", response.timestampCreated);
+    jqUnit.assertNull("The \"timestampRevoked\" value has been set to null", response.timestampRevoked);
+};
+
 gpii.tests.dbDataStore.testData = {
     user1: {
         "id": "user-1",
@@ -99,6 +107,7 @@ gpii.tests.dbDataStore.testData = {
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
+        "oauth2ClientType": "webApp",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
     allClients: [{
@@ -106,18 +115,21 @@ gpii.tests.dbDataStore.testData = {
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
+        "oauth2ClientType": "webApp",
         "redirectUri": "http://localhost:3002/authorize_callback"
     }, {
         "id": "client-2",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
+        "oauth2ClientType": "clientCredentialsApp",
         "allowAddPrefs": true
     }, {
+        "id": "client-3",
         "name": "Windows Magnifier",
         "oauth2ClientId": "net.gpii.windows.magnifier",
         "oauth2ClientSecret": "client_secret_windows_magnifier",
-        "id": "client-3"
+        "oauth2ClientType": "thirdPartyApp"
     }],
     authDecision1: {
         "id": "authDecision-1",
@@ -296,6 +308,12 @@ gpii.tests.dbDataStore.testData = {
         "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }],
+    resourceOwnerTokenToCreate: {
+        "clientId": "client-1",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "native-gpii-app-token-1",
+        "expiresIn": 3600
+    },
     resourceOwnerToken1AfterExpired: {
         "id": "resourceOwnerToken-1",
         "clientId": "client-1",

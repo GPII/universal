@@ -1164,6 +1164,42 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
     }]
 });
 
+fluid.defaults("gpii.tests.dbDataStore.addResourceOwnerToken", {
+    gradeNames: ["gpii.tests.dbDataStore.environment"],
+    rawModules: [{
+        name: "Test addResourceOwnerToken()",
+        tests: [{
+            name: "Add a resource owner password credentials token",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.addResourceOwnerToken", [gpii.tests.dbDataStore.testData.resourceOwnerTokenToCreate], "{that}"]
+            }, {
+                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
+                args: ["{dbDataStore}.findResourceOwnerTokenById", "{arguments}.0.id", "{that}"],
+                event: "{that}.events.onResponse"
+            }, {
+                listener: "gpii.tests.dbDataStore.verifyFetchedResourceOwnerToken",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerTokenToCreate],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
+            name: "Adding an empty object returns error",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.addResourceOwnerToken", [undefined], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected error is received", {
+                    msg: "The input field \"resourceOwnerTokenData\" is undefined",
+                    statusCode: 400,
+                    isError: true
+                }, "{arguments}.0"],
+                event: "{that}.events.onError"
+            }]
+        }]
+    }]
+});
+
 fluid.defaults("gpii.tests.dbDataStore.expireResourceOwnerToken", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -1274,6 +1310,7 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.addClientCredentialsToken",
     "gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken",
     "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId",
+    "gpii.tests.dbDataStore.addResourceOwnerToken",
     "gpii.tests.dbDataStore.expireResourceOwnerToken",
     "gpii.tests.dbDataStore.revokeResourceOwnerToken"
 ]);
