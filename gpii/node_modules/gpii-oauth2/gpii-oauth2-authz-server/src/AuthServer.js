@@ -90,7 +90,14 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (client, username, password, scope, done) {
-        var passwordPromise = authorizationService.grantResourceOwnerAccessToken(client.id, username);
+        var promiseTogo = fluid.promise();
+        var params;  // extra parameters to be included in the response
+
+        var passwordPromise = authorizationService.grantResourceOwnerAccessToken(username, client.id);
+
+        passwordPromise.then(function (response) {
+
+        })
         gpii.oauth2.oauth2orizeServer.promiseToDone(passwordPromise, done);
     }));
 
@@ -582,14 +589,15 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
  * the reject occurs in the promise reject callback.
  * @param promise {Promise} The promise object to determine the grant or reject an authorization.
  * @param done {Function} The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
+ * @param params {Object} The additional parameters included in the response.
  *  See [oauth2orize in github](https://github.com/jaredhanson/oauth2orize) for more information
  * @return The result of invoking done() within the promise callback. At the promise onResolve, done() is called with the resolved value as its parameter.
  * At the promise onReject, `false` is used as the done() parameter to indicate an error occurs.
  */
-gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done) {
+gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done, params) {
     promise.then(function (data) {
-        return done(null, data);
+        return params ? done(null, data, null, params) : done(null, data);
     }, function () {
-        return done(null, false);
+        done(null, false);
     });
 };

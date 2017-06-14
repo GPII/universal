@@ -563,6 +563,17 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // gpiiToken, clientId
         },
+        // Note: Before adding a new resource owner access token: authorizationService.findValidResourceOwnerToken()
+        // should have been called to ensure there is NOT any non-revoked or unexpired existing access tokens for
+        // the given GPII token and the client ID. See authorizationService.js
+        addResourceOwnerToken: {
+            funcName: "gpii.oauth2.dbDataStore.addResourceOwnerToken",
+            args: [
+                "{that}.saveDataSource",
+                "{arguments}.0"
+            ]
+            // resourceOwnerTokenData
+        },
         expireResourceOwnerToken: {
             funcName: "gpii.oauth2.dbDataStore.expireResourceOwnerToken",
             args: [

@@ -35,6 +35,7 @@ gpii.oauth2.docTypes = fluid.freezeRecursive({
 // regarding accepted fields for each document type.
 gpii.oauth2.oauth2ClientTypes = fluid.freezeRecursive({
     nativeApp: "nativeApp",
+    webApp: "webApp",
     thirdPartyApp: "thirdPartyApp",
     clientCredentialsApp: "clientCredentialsApp"
 });

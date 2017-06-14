@@ -126,6 +126,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "name": "Client A",
         "oauth2ClientId": "client_id_A",
         "oauth2ClientSecret": "client_secret_A",
+        "oauth2ClientType": "webApp",
         "redirectUri": "http://example.com/callback_A"
     }, {
         "_id": "client-2",
@@ -133,6 +134,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "name": "Client B",
         "oauth2ClientId": "client_id_B",
         "oauth2ClientSecret": "client_secret_B",
+        "oauth2ClientType": "webApp",
         "redirectUri": "http://example.com/callback_B"
     }, {
         "_id": "authDecision-1",
@@ -246,7 +248,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             "clientName": "Client A",
             "oauth2ClientId": "client_id_A"
         }],
-        findValidResourceOwnerToken: {
+        findValidResourceOwnerTokenSetExpired: {
             "id": "resourceOwnerToken-1",
             "clientId": "client-1",
             "gpiiToken": "gpiiToken-1",
@@ -256,6 +258,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             "expired": true,
             "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
             "timestampRevoked": null
+        },
+        findValidResourceOwnerToken: {
+            "accessToken": "native-gpii-app-token-2",
+            "expiresIn": 120
         }
     };
 
@@ -323,15 +329,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     func: "gpii.tests.oauth2.invokePromiseProducer",
                     args: [gpii.oauth2.authorizationService.findValidResourceOwnerToken, ["{authorizationService}.dataStore", "gpiiToken-1", "client-1"], "{that}"]
                 }, {
-                    listener: "jqUnit.assertEquals",
-                    args: ["unexpired access token should be returned", "native-gpii-app-token-2", "{arguments}.0"],
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["unexpired access token should be returned", gpii.tests.oauth2.authorizationService.expected.findValidResourceOwnerToken, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }, {
                     func: "gpii.tests.oauth2.invokePromiseProducer",
                     args: ["{authorizationService}.dataStore.findResourceOwnerTokenById", ["resourceOwnerToken-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
-                    args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidResourceOwnerToken, "{arguments}.0"],
+                    args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidResourceOwnerTokenSetExpired, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {

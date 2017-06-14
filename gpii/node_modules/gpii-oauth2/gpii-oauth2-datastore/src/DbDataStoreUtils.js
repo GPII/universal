@@ -606,6 +606,43 @@ gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess 
     return records;
 };
 
+/**
+ * Add resource owner password credentials tokens
+ * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
+ * @param clientCredentialsTokenData {Object} The data of the resource owner password credentials token. Its structure:
+ *  {
+ *      clientId: {String},
+ *      gpiiToken: {String},
+ *      accessToken: {String},
+ *      expiresIn: {Number}
+ *  }
+ * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
+ * token record, or an error if `resourceOwnerTokenData` parameter is not provided.
+ */
+gpii.oauth2.dbDataStore.addResourceOwnerToken = function (saveDataSource, resourceOwnerTokenData) {
+    var promiseTogo = fluid.promise();
+
+    if (resourceOwnerTokenData === undefined) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "resourceOwnerTokenData"});
+        promiseTogo.reject(error);
+    } else {
+        var data = {
+            clientId: resourceOwnerTokenData.clientId,
+            gpiiToken: resourceOwnerTokenData.gpiiToken,
+            accessToken: resourceOwnerTokenData.accessToken,
+            expiresIn: resourceOwnerTokenData.expiresIn,
+            expired: false,
+            revoked: false,
+            timestampCreated: new Date().toString(),
+            timestampRevoked: null
+        };
+
+        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.resourceOwnerToken, "id", data);
+    }
+
+    return promiseTogo;
+};
+
 // ==== expireResourceOwnerToken() & revokeResourceOwnerToken()
 
 // ==== expireResourceOwnerToken()

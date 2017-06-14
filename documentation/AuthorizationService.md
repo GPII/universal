@@ -154,9 +154,10 @@ client.
 * **description**: Get the access token that is assigned to the client. If this client hasn't been assigned an access token, the function will generate and return one.
 * **parameters:** 
     * clientId: Number. A system generated unique number that identifies the client.
+        - Notes: "clientCredentialsApp" is the only OAuth2 client type that is allowed to request client credentials access tokens.
     * scope: String. Must be "add_preferences".
         - Notes: "add_preferences" is the only scope currently supported in the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
-* **return:** An access token. Return `false` if the scope is wrong or the client is not allowed to add preferences.
+* **return:** An access token. Return `false` if the scope is wrong, or the client is not allowed to add preferences, or the client's OAuth2 client type is not "clientCredentialsApp".
 
 #### revokeClientCredentialsToken(accessToken)
 * **description**: Revoke the access token.
