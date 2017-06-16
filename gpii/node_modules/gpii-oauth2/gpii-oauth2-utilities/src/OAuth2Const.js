@@ -1,5 +1,5 @@
 /*!
-Copyright 2014 OCAD university
+Copyright 2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -41,7 +41,7 @@ gpii.oauth2.oauth2ClientTypes = fluid.freezeRecursive({
 });
 
 // The default value of the number of seconds that access tokens become invalid.
-gpii.oauth2.tokenExpiresIn = 3600;
+gpii.oauth2.defaultTokenExpiresIn = 3600;
 
 // All error details that the gpii-oauth2 module reports.
 gpii.oauth2.errors = fluid.freezeRecursive({

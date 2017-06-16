@@ -1,5 +1,5 @@
 /*!
-Copyright 2014 OCAD university
+Copyright 2014-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -757,11 +757,11 @@ var fluid = fluid || require("infusion");
      * @param codeGenerator {codeGenerator} An instance of gpii.oauth2.codeGenerator
      * @param gpiiToken {String} a GPII token
      * @param clientId {String} an unique client id
+     * @param expiresIn {String} the number of seconds that this token will expire
      * @return: none. The first argument of promiseTogo contains returned values
      */
-    gpii.oauth2.authorizationService.createResourceOwnerToken = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId) {
+    gpii.oauth2.authorizationService.createResourceOwnerToken = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
-        var expiresIn = gpii.oauth2.tokenExpiresIn;
 
         var addResourceOwnerTokenPromise = dataStore.addResourceOwnerToken({
             clientId: clientId,
@@ -805,23 +805,23 @@ var fluid = fluid || require("infusion");
             var promisesSequence = fluid.promise.sequence(sources);
 
             promisesSequence.then(function (responses) {
-                var gpiiToken = responses[0];
-                var client = responses[1];
-                var resourceOwnerToken = responses[2];
-console.log("=== responses", responses);
+                var gpiiTokenRec = responses[0];
+                var clientRec = responses[1];
+                var resourceOwnerTokenRec = responses[2];
+
                 var error;
 
-                if (!gpiiToken) {
+                if (!gpiiTokenRec) {
                     error = gpii.oauth2.composeError(gpii.oauth2.errors.invalidGpiiToken);
                     promiseTogo.reject(error);
-                } else if (client.oauth2ClientType !== gpii.oauth2.oauth2ClientTypes.nativeApp) {
+                } else if (clientRec.oauth2ClientType !== gpii.oauth2.oauth2ClientTypes.nativeApp) {
                     error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
                     promiseTogo.reject(error);
-                } else if (!resourceOwnerToken) {
-                    gpii.oauth2.authorizationService.createResourceOwnerToken(promiseTogo, dataStore, codeGenerator, gpiiToken, clientId);
+                } else if (!resourceOwnerTokenRec) {
+                    gpii.oauth2.authorizationService.createResourceOwnerToken(promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, gpii.oauth2.defaultTokenExpiresIn);
                 } else {
                     // Return the existing token
-                    promiseTogo.resolve(resourceOwnerToken);
+                    promiseTogo.resolve(resourceOwnerTokenRec);
                 }
             });
         }

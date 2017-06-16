@@ -75,7 +75,7 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     },
     { // 2
         funcName: "gpii.test.cloudBased.oauth2.sendAddPrefsRequest",
-        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{accessTokenRequest}.accessToken", "firstDiscovery"]
+        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{accessTokenRequest}.access_token", "firstDiscovery"]
     },
     { // 3
         event: "{addPrefsRequest}.events.onComplete",
@@ -168,7 +168,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [
             path: "scope",
             type: "DELETE"
         },
-        expectedStatusCode: 403
+        expectedStatusCode: 401
     },
     {
         name: "Attempt to get access token without sending grant_type",
@@ -184,13 +184,13 @@ gpii.tests.cloud.oauth2.addPrefs.disruptions = [
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongClient = [{
     name: "Attempt to get access token with sending a wrong client",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
-    expectedStatusCode: 403
+    expectedStatusCode: 401
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithWrongScope = [{
     name: "Attempt to get access token with sending a wrong scope",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.accessToken",
-    expectedStatusCode: 403
+    expectedStatusCode: 401
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken = [{

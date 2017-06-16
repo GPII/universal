@@ -1,7 +1,7 @@
 /**
 GPII DB Data Store Tests
 
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.

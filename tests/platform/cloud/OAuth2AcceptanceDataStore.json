@@ -74,6 +74,14 @@
         "allowAddPrefs": true
     },
     {
+        "_id": "client-7",
+        "type": "client",
+        "name": "Bakersfield AJC - PC1",
+        "oauth2ClientId": "Bakersfield-AJC-client-id",
+        "oauth2ClientSecret": "Bakersfield-AJC-client-secret",
+        "oauth2ClientType": "nativeApp"
+    },
+    {
         "_id": "authDecision-1",
         "type": "authDecision",
         "gpiiToken": "alice_gpii_token",

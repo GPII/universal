@@ -252,7 +252,7 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
         path: "redirect_uri",
         type: "DELETE"
     },
-    expectedStatusCode: 403 // TODO: actually returns "invalid access token"
+    expectedStatusCode: 401
 }, {
     name: "Attempt to get access token without sending client_id",
     gradeName: "gpii.tests.cloud.oauth2.disruptAccessToken",
