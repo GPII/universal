@@ -69,7 +69,7 @@
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
                         "min": 400,
-                        "inputPath": "http://registry\\.gpii\\.net/common/environment/visual\\.luminance"
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
                     }
                 ]
             }
