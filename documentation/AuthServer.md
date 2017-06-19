@@ -14,6 +14,7 @@ The document types used by the authorization server include:
 * [Authorization decisions](./AuthServer.md#authorization-decisions)
 * [Authorization codes](./AuthServer.md#authorization-codes)
 * [Client credentials tokens](./AuthServer.md#client-credentials-tokens)
+* [Resource Owner Password Credentials Tokens](./AuthServer.md#resource-owner-password-credentials-tokens)
 
 #### User
 
@@ -34,7 +35,7 @@ The document types used by the authorization server include:
 | `name` | String | The client name. | None |
 | `oauth2ClientId` | String | The unique identifier issued to a registered OAuth2 client by the authorization server. | None |
 | `oauth2ClientSecret` | String | Confidential shared secret between the client and the authorization server, used to verify the identity of the client. | None |
-| `oauth2ClientType` | String | The type of clients that use different OAuth2 grant type. GPII supports 4 type of clients: <br>`nativeApp`: native GPII apps that use OAuth2 resource owner password credentials grant.<br>`webApp`: web applications.<br>`thirdPartyApp`: third party applications that GPII users can define privacy settings for. <br>`clientCredentialsApp`: applications that use OAuth2 client credentials grant to add new preferences on behalf of users, such as First Discovery Tool.| Must be one of these values: nativeApp, webApp, thirdPartyApp, clientCredentialsApp.|
+| `oauth2ClientType` | String | The type of clients that use different OAuth2 grant type. GPII supports 4 type of clients: <br>`nativeApp`: native GPII apps that use OAuth2 resource owner password credentials grant.<br>`webApp`: web applications.<br>`thirdPartyApp`: third party applications that GPII users can define privacy settings for. <br>`clientCredentialsApp`: applications that use OAuth2 client credentials grant to add new preferences on behalf of users, such as First Discovery Tool.| Must be one of these values: "nativeApp", "webApp", "thirdPartyApp", "clientCredentialsApp".|
 | `redirectUri` | String | The URL on client's site where users will be sent after authorization. This field is only required for clients whose `oauth2ClientType` is "webApp".| None |
 | `allowAddPrefs` | Boolean | Whether the client is allowed to add new preferences. This field is only required for clients whose `oauth2ClientType` is "clientCredentialsApp".| true |
 

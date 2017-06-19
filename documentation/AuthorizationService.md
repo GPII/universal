@@ -2,7 +2,7 @@
 
 The authorization service provides API that allows users to add, retrieve, update the data used by the [GPII OAuth2 security server](https://wiki.gpii.net/w/GPII_OAuth_2_Guide). These data include OAuth clients, users, users' authorization decisions and access tokens used by client credentials grant.
 
-###APIs for [Authorization Code Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant)
+### APIs for [Authorization Code Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant)
 
 #### addAuthorization(userId, oauth2ClientId, selectedPreferences)
 * **description**: Add the authorization decision. Check if the user authorization decision already exists based on the user id and OAuth2 client id. If it doesn't exist, generate an access token and add the authorization decision. If it does exist, do nothing. 
@@ -135,7 +135,7 @@ client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
 * **return:** `True` or `false`.
 
-###APIs for [Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
+### APIs for [Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
 
 #### getAuthByClientCredentialsAccessToken(accessToken)
 * **description**: Get the authorization information using the access token.
@@ -151,17 +151,42 @@ client.
 ```
 
 #### grantClientCredentialsAccessToken(clientId, scope)
-* **description**: Get the access token that is assigned to the client. If this client hasn't been assigned an access token, the function will generate and return one.
+* **description**: Get the client credentials access token that is assigned to the client. If this client hasn't been assigned an access token, the function will generate and return one.
 * **parameters:** 
     * clientId: Number. A system generated unique number that identifies the client.
-        - Notes: "clientCredentialsApp" is the only OAuth2 client type that is allowed to request client credentials access tokens.
+        - Notes: "clientCredentialsApp" is the only OAuth2 client type that is allowed to request client credentials access tokens. See [the `Client` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#client)
     * scope: String. Must be "add_preferences".
         - Notes: "add_preferences" is the only scope currently supported in the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
-* **return:** An access token. Return `false` if the scope is wrong, or the client is not allowed to add preferences, or the client's OAuth2 client type is not "clientCredentialsApp".
+* **return:** String. A client credentials access token. Return an object that contains the error message and http status code if the scope is wrong, or the client is not allowed to add preferences, or the client's OAuth2 client type is not "clientCredentialsApp".
 
-#### revokeClientCredentialsToken(accessToken)
-* **description**: Revoke the access token.
+#### revokeClientCredentialsToken(accessTokenId)
+* **description**: Revoke the client credentials access token.
 * **parameters:** 
-    * accessToken: String. A string representing an authorization issued to the
-   client.
+    * accessTokenId: String. A string representing the id of the client credential access token record.
+* **return:** None.
+
+### APIs for [Resource Owner Password Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_Password_Credentials_Grant)
+
+#### grantResourceOwnerAccessToken(gpiiToken, clientId)
+* **description**: Get the resource owner password credentials access token that is assigned to a client to access user settings associated with a specific GPII token. The use cases handled by this function: 
+    * If the client has never been assigned an access token for the given GPII token, the function will generate and return one.
+    * If the client has been assigned an access token before for the given GPII token, and this token has not expired, the function will return this existing access token;
+    * If the client has been assigned an access token before for the given GPII token, but this token has already expired, the fuction will generate and return a new one.
+* **parameters:** 
+    * gpiiToken: String. A GPII token that associates with user preferences.
+    * clientId: Number. A system generated unique number that identifies the client.
+        - Notes: "nativeApp" is the only OAuth2 client type that is allowed to request resource owner password credentials access tokens. See [the `Client` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#client)
+* **return:** Object. Contains an access token and the number of seconds that the access token will expire. For example:
+```
+{
+    "accessToken": "8ea3457bf283db5d34ea5a4079fa36b2",
+    "expiresIn": 3600
+}
+```
+Return an object that contains the error message and http status code if the GPII token is wrong, or the client's OAuth2 client type is not "nativeApp".
+
+#### revokeResourceOwnerToken(accessTokenId)
+* **description**: Revoke the resource owner password credentials access token.
+* **parameters:** 
+    * accessTokenId: String. A string representing the id of the resource owner password credentials access token record.
 * **return:** None.

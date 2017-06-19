@@ -92,14 +92,18 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // clientId, scope
             },
+            revokeClientCredentialsToken: {
+                func: "{dataStore}.revokeClientCredentialsToken"
+                    // clientCredentialsTokenId
+            },
             grantResourceOwnerAccessToken: {
                 funcName: "gpii.oauth2.authorizationService.grantResourceOwnerAccessToken",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // gpiiToken, clientId
             },
-            revokeClientCredentialsToken: {
-                func: "{dataStore}.revokeClientCredentialsToken"
-                    // clientCredentialsTokenId
+            revokeResourceOwnerToken: {
+                func: "{dataStore}.revokeResourceOwnerToken"
+                    // resourceOwnerTokenId
             }
         },
         events: {
