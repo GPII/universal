@@ -596,10 +596,11 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
  * the reject occurs in the promise reject callback.
  * @param promise {Promise} The promise object to determine the grant or reject an authorization.
  * @param done {Function} The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
- * @param paramsPromise {Object} Contains additional parameters to be included in the response.
+ * @param paramsPromise {Object} Contains additional parameters to be included in the success response.
  *  See [oauth2orize in github](https://github.com/jaredhanson/oauth2orize) for more information
- * @return The result of invoking done() within the promise callback. At the promise onResolve, done() is called with the resolved value as its parameter.
- * At the promise onReject, done() is called with the error message and associated status code.
+ * @return The result of invoking done() within the promise callback. At the promise onResolve, done() is called with the resolved value as its parameter,
+ * and the resolved value of paramsPromise as the additional parameter.
+ * At the promise onReject, done() is called with the error.
  */
 gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done, paramsPromise) {
     promise.then(function (data) {
