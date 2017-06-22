@@ -606,8 +606,8 @@ gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done, paramsPro
     promise.then(function (data) {
         if (paramsPromise) {
             paramsPromise.then(function (params) {
-                done(null, data, null, params)
-            })
+                done(null, data, null, params);
+            });
         } else {
             done(null, data);
         }

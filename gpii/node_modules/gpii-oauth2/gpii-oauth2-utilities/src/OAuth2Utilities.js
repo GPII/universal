@@ -79,6 +79,6 @@ gpii.oauth2.isExpired = function (timestampCreated, expiresIn) {
     var expiredTime = createdTime + expiresIn * 1000;
 
     var currentTime = new Date().getTime();
-// console.log("currentTime", currentTime, "expiredTime", expiredTime);
+
     return currentTime > expiredTime;
 };

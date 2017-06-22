@@ -15,8 +15,6 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
-    path = require("path"),
-    fs = require("fs"),
     jqUnit = fluid.registerNamespace("jqUnit");
 
 fluid.require("%universal");

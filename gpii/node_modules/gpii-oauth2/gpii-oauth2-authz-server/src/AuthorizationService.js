@@ -209,8 +209,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * Shared by getSelectedPreferences() and setSelectedPreferences()
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param input {Object} The Accepted input structure:
      * {
      *     gpiiToken: {String},
@@ -233,8 +233,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * The last step in the fireTransformEvent() chain for implementing grantAuthorizationCode()
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param authDecisionInfo {Object} Accepted structure:
      * {
      *     gpiiToken: {Object},    // A GPII token record
@@ -276,7 +276,7 @@ var fluid = fluid || require("infusion");
     };
 
     /** Shared by getSelectedPreferences() and setSelectedPreferences()
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param input {Object} Accepted structure:
      * {
      *     gpiiToken: {String},
@@ -318,7 +318,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
      *     gpiiToken: {Object},    // A GPII token record
@@ -354,16 +354,17 @@ var fluid = fluid || require("infusion");
 
     /**
      * A common utility function shared by checkAuthDecision() and doAdd()
-     * This function retrieves and returns an authorization decision id that associates with the given gpii token and the client.
+     * This function retrieves and returns an id of an authorization decision record that defines the privacy policy of what
+     * preferences associated with the GPII token are allowed to be accessed by the client.
      * If the authorization decision does not exist, this function will create one and return the created authorization decision id.
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param clientId {String} A client id
      * @param redirectUri {String} A redirect URI
      * @param selectedPreferences {Object} A preference set
      * @return {Promise} The resolved promise value is in the structure of:
      * {
-     *     id: [authDecisionId]
+     *     id: {String}
      * }
      */
     gpii.oauth2.authorizationService.getAuthDecision = function (dataStore, codeGenerator, gpiiToken, clientId, redirectUri, selectedPreferences) {
@@ -394,7 +395,7 @@ var fluid = fluid || require("infusion");
 
     /**
      * Verify if the given client has been authorized by the user that holds the given GPII token.
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param gpiiToken {String} A GPII token
      * @param clientId {String} A client ID
      * @param redirectUri {String} A redirect URL
@@ -411,7 +412,7 @@ var fluid = fluid || require("infusion");
 
     /**
      * Exchange for the access token. The client will be verified before the access token is returned.
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param code {String} The code to be exchanged
      * @param clientId {String} A client ID
      * @param redirectUri {String} A redirect URL
@@ -452,7 +453,7 @@ var fluid = fluid || require("infusion");
 
     /**
      * Shared by getSelectedPreferences() and setSelectedPreferences()
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param input {Object} Accepted structure:
      * {
      *     userId: {String},
@@ -474,7 +475,7 @@ var fluid = fluid || require("infusion");
 
     /**
      * Shared by getSelectedPreferences() and setSelectedPreferences()
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
      *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
@@ -502,7 +503,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
      *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
@@ -545,7 +546,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} The same structure as the "record" parameter of gpii.oauth2.authorizationService.doGet()
      * @return {Promise} when success, returns a promise object returned by dataStore.updateAuthDecision(),
      * otherwise, returns a promise object with error message
@@ -578,7 +579,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
      *     gpiiToken: {},    * An object of gpiiToken record returned by the previous processing
@@ -607,7 +608,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
      *     gpiiToken: {},    // An object of gpiiToken record returned by the previous processing
@@ -650,8 +651,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * @param promiseTogo {Object} Modified by the function with objects to be resolved or to fail
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {codeGenerator} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param clientId {String} an unique client id
      * @return: none. The first argument of promiseTogo contains returned values
      */
@@ -673,8 +674,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * Grant a client credentials access token. The client and the scope will be verified before the access token is returned.
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param clientId {String} An instance of gpii.oauth2.codeGenerator
      * @param scope {Array} Must have the value ["add_preferences"]
      * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if:
@@ -714,7 +715,7 @@ var fluid = fluid || require("infusion");
      * Find an unexpired resource owner password credential access token. If not found, returns undefined.
      * This function also set the "expired" field of all expired tokens to true so they won't be returned
      * next time at finding an unexpired access token.
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param clientId {String} A client id
      * @param gpiiToken {String} A GPII token
      * @return {Promise} A promise object whose resolved value is an object that contains the access token and its expiresIn value, such as:
@@ -757,8 +758,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * @param promiseTogo {Object} Modified by the function with objects to be resolved or to fail
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {codeGenerator} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiToken {String} a GPII token
      * @param clientId {String} an unique client id
      * @param expiresIn {String} the number of seconds that this token will expire
@@ -787,8 +788,8 @@ var fluid = fluid || require("infusion");
 
     /**
      * Grant a resource owner password credential access token. The gpii token will be verified before the access token is returned.
-     * @param dataStore {Object} An instance of gpii.oauth2.dbDataStore
-     * @param codeGenerator {Object} An instance of gpii.oauth2.codeGenerator
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param clientId {String} A client id
      * @param gpiiToken {String} A GPII token
      * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the gpii token is not found.
