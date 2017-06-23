@@ -1570,7 +1570,9 @@
                         "name": "NONCLIENTMETRICS"
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE", // It won't update if these flags aren't set.
-                    "verifySettings": false // The next GET will be different to the last SET.
+                    // The next GET will be different to the last SET, because the value of lfHeight sets the character
+                    // height (negated), but receives it as the cell height.
+                    "verifySettings": false
                 },
                 "supportedSettings": {
                     "CaptionFont": {},
@@ -1685,8 +1687,7 @@
                         "type": "struct",
                         "name": "LOGFONT"
                     },
-                    // If configure.NonClientMetrics is called after this one, then fWinIni doesn't need to be set.
-                    //"fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE", // It won't update if these flags aren't set.
+                    // Because configure.NonClientMetrics is called after this one, fWinIni doesn't need to be set here.
                     "verifySettings": true
                 },
                 "supportedSettings": {
