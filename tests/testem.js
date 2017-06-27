@@ -17,8 +17,6 @@ require("../");
 
 fluid.require("%gpii-testem");
 
-var universalRoot = fluid.module.resolvePath("%universal");
-
 fluid.registerNamespace("gpii.tests.universal.testem");
 
 gpii.tests.universal.testem.getTestemOptions = function (that) {
@@ -40,8 +38,6 @@ fluid.defaults("gpii.tests.universal.testem", {
         }
     },
     testemOptions: {
-        "cwd": universalRoot,
-        "unsafe_file_serving": true, // Required to allow browser tests to pass in Windows.
         "routes": {
             "/gpii": "instrumented/universal/gpii"
         }
