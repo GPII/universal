@@ -4,7 +4,8 @@ The Lifecycle Manager is responsible for actually configuring the users system v
 
 #### LifecycleManager Queue
 
-The lifecycleManager queue is used to hold the high-level action that needs to happen, such as starting the login process, starting logout process, starting the update process. Since the steps of these processes are asynchronous, the queue was implemented to avoid racing issues between these processes (e.g. if a logout attempt is started before login is complete, etc).
+The lifecycleManager queue is used to hold the high-level action that needs to happen: starting the login process, starting logout process, starting the update process. Since the steps of these processes are asynchronous, the queue was implemented to avoid racing issues between these processes (e.g. if a logout attempt is started before login is complete, etc).
 
-Each item in the queue should have the format: `{ func: <functionToCall>, args: <Arguments> }` where `<functionToCall>` is a function that returns a promise for when it's complete (including side-effects) and the `<Arguments>` are the arguments that should be passed to the function. The queue is run sequentially, and an item is considered "done" once the promise returned by its
-function is resolved.
+Each item in the queue should have the format: `{ func: <functionToCall>, arg: <argument> }` where `<functionToCall>` is a single-argument function that returns a promise. The promise should be resolved when the function is complete (including side-effects). `<arguments>` is the argument to pass to the function
+
+The queue is run sequentially, and an item is considered "done" once the promise returned by its function is resolved.
