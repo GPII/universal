@@ -480,53 +480,53 @@ gpii.oauth2.dbDataStore.findAuthByCodePostProcess = function (data) {
 /**
  * Add client credentials tokens
  * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param clientCredentialsTokenData {Object} The data of the client credentials token. Its structure:
+ * @param clientCredentialsAuthorizationData {Object} The data of the client credentials token. Its structure:
  *  {
  *      clientId: {String},
  *      accessToken: {String},
  *      allowAddPrefs: {Boolean}
  *  }
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
- * token record, or an error if `clientCredentialsTokenData` parameter is not provided.
+ * token record, or an error if `clientCredentialsAuthorizationData` parameter is not provided.
  */
-gpii.oauth2.dbDataStore.addClientCredentialsToken = function (saveDataSource, clientCredentialsTokenData) {
+gpii.oauth2.dbDataStore.addClientCredentialsAuthorization = function (saveDataSource, clientCredentialsAuthorizationData) {
     var promiseTogo = fluid.promise();
 
-    if (clientCredentialsTokenData === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "clientCredentialsTokenData"});
+    if (clientCredentialsAuthorizationData === undefined) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "clientCredentialsAuthorizationData"});
         promiseTogo.reject(error);
     } else {
         var data = {
-            clientId: clientCredentialsTokenData.clientId, // foreign key
-            accessToken: clientCredentialsTokenData.accessToken,
-            allowAddPrefs: clientCredentialsTokenData.allowAddPrefs,
+            clientId: clientCredentialsAuthorizationData.clientId, // foreign key
+            accessToken: clientCredentialsAuthorizationData.accessToken,
+            allowAddPrefs: clientCredentialsAuthorizationData.allowAddPrefs,
             revoked: false
         };
 
-        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.clientCredentialsToken, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.clientCredentialsAuthorization, "id", data);
     }
 
     return promiseTogo;
 };
 
-// ==== revokeClientCredentialsToken()
-// Fires the transforming promise workflow by triggering onRevokeClientCredentialsToken event.
+// ==== revokeClientCredentialsAuthorization()
+// Fires the transforming promise workflow by triggering onRevokeClientCredentialsAuthorization event.
 
 /**
- * The entry function for implementing revokeClientCredentialsToken(). Fires onRevokeClientCredentialsToken event to trigger the transforming promise workflow.
+ * The entry function for implementing revokeClientCredentialsAuthorization(). Fires onRevokeClientCredentialsAuthorization event to trigger the transforming promise workflow.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore.
- * @param clientCredentialsTokenId {String} An client credentials token id
+ * @param clientCredentialsAuthorizationId {String} An client credentials token id
  */
-gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCredentialsTokenId) {
-    return fluid.promise.fireTransformEvent(that.events.onRevokeClientCredentialsToken, clientCredentialsTokenId);
+gpii.oauth2.dbDataStore.revokeClientCredentialsAuthorization = function (that, clientCredentialsAuthorizationId) {
+    return fluid.promise.fireTransformEvent(that.events.onRevokeClientCredentialsAuthorization, clientCredentialsAuthorizationId);
 };
 
 /**
- * The last step in the promise transforming chain for implementing revokeClientCredentialsToken() API.
+ * The last step in the promise transforming chain for implementing revokeClientCredentialsAuthorization() API.
  * It updates the client credentials token record by setting the "revoked" flag to true.
- * The step before this function is findClientCredentialsTokenById() that finds the token info and passes into this function.
+ * The step before this function is findClientCredentialsAuthorizationById() that finds the token info and passes into this function.
  * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param clientCredentialsTokenRecord {Object} The data passed on from last step. Its structure:
+ * @param clientCredentialsAuthorizationRecord {Object} The data passed on from last step. Its structure:
  *  {
  *      clientId: {String},
  *      accessToken: {String},
@@ -535,23 +535,23 @@ gpii.oauth2.dbDataStore.revokeClientCredentialsToken = function (that, clientCre
  *      id: {String}  // The client credentials token id
  *  }
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for updating the
- * token record, or `undefined` if the `clientCredentialsTokenRecord` parameter is not provided
+ * token record, or `undefined` if the `clientCredentialsAuthorizationRecord` parameter is not provided
  */
-gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken = function (saveDataSource, clientCredentialsTokenRecord) {
+gpii.oauth2.dbDataStore.doRevokeClientCredentialsAuthorization = function (saveDataSource, clientCredentialsAuthorizationRecord) {
     var promiseTogo = fluid.promise();
 
-    if (clientCredentialsTokenRecord === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.clientCredentialsToken});
+    if (clientCredentialsAuthorizationRecord === undefined) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.clientCredentialsAuthorization});
         promiseTogo.reject(error);
     } else {
-        var data = fluid.copy(clientCredentialsTokenRecord);
+        var data = fluid.copy(clientCredentialsAuthorizationRecord);
         data.revoked = true;
-        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.docTypes.clientCredentialsToken, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.docTypes.clientCredentialsAuthorization, "id", data);
     }
 
     return promiseTogo;
 };
-// ==== End of revokeClientCredentialsToken()
+// ==== End of revokeClientCredentialsAuthorization()
 
 /**
  * A post process function for implementing findAuthByClientCredentialsAccessToken() API.
@@ -582,13 +582,13 @@ gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess = func
     }
 };
 
-// Resource Owner Password Credentials Tokens
-// ------------------------------------------
+// Resource Owner Gpii Token Authorizations
+// ----------------------------------------
 
 /**
- * The post data process function for implementing findResourceOwnerTokenByGpiiTokenAndClientId()
+ * The post data process function for implementing findResourceOwnerAuthorizationByGpiiTokenAndClientId()
  */
-gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess = function (data) {
+gpii.oauth2.dbDataStore.findResourceOwnerAuthorizationByGpiiTokenAndClientIdPostProcess = function (data) {
     var records = [];
     fluid.each(data, function (row) {
         var record = row.value;
@@ -607,9 +607,9 @@ gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess 
 };
 
 /**
- * Add resource owner password credentials tokens
+ * Add resource owner gpii token authorizations
  * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param clientCredentialsTokenData {Object} The data of the resource owner password credentials token. Its structure:
+ * @param clientCredentialsAuthorizationData {Object} The data of the resource owner gpii token authorization. Its structure:
  *  {
  *      clientId: {String},
  *      gpiiToken: {String},
@@ -617,64 +617,64 @@ gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess 
  *      expiresIn: {Number}
  *  }
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
- * token record, or an error if `resourceOwnerTokenData` parameter is not provided.
+ * token record, or an error if `resourceOwnerAuthorizationData` parameter is not provided.
  */
-gpii.oauth2.dbDataStore.addResourceOwnerToken = function (saveDataSource, resourceOwnerTokenData) {
+gpii.oauth2.dbDataStore.addResourceOwnerAuthorization = function (saveDataSource, resourceOwnerAuthorizationData) {
     var promiseTogo = fluid.promise();
 
-    if (resourceOwnerTokenData === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "resourceOwnerTokenData"});
+    if (resourceOwnerAuthorizationData === undefined) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "resourceOwnerAuthorizationData"});
         promiseTogo.reject(error);
     } else {
         var data = {
-            clientId: resourceOwnerTokenData.clientId,
-            gpiiToken: resourceOwnerTokenData.gpiiToken,
-            accessToken: resourceOwnerTokenData.accessToken,
-            expiresIn: resourceOwnerTokenData.expiresIn,
+            clientId: resourceOwnerAuthorizationData.clientId,
+            gpiiToken: resourceOwnerAuthorizationData.gpiiToken,
+            accessToken: resourceOwnerAuthorizationData.accessToken,
+            expiresIn: resourceOwnerAuthorizationData.expiresIn,
             expired: false,
             revoked: false,
             timestampCreated: new Date().toString(),
             timestampRevoked: null
         };
 
-        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.resourceOwnerToken, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.resourceOwnerAuthorization, "id", data);
     }
 
     return promiseTogo;
 };
 
-// ==== expireResourceOwnerToken() & revokeResourceOwnerToken()
+// ==== expireResourceOwnerAuthorization() & revokeResourceOwnerAuthorization()
 
-// ==== expireResourceOwnerToken()
-// Fires the transforming promise workflow by triggering onExpireResourceOwnerToken event.
+// ==== expireResourceOwnerAuthorization()
+// Fires the transforming promise workflow by triggering onExpireResourceOwnerAuthorization event.
 
 /**
- * The entry function for implementing expireResourceOwnerToken(). Fires onExpireResourceOwnerToken event to trigger the transforming promise workflow.
+ * The entry function for implementing expireResourceOwnerAuthorization(). Fires onExpireResourceOwnerAuthorization event to trigger the transforming promise workflow.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore.
- * @param resourceOwnerTokenId {String} An resource owner token id
+ * @param resourceOwnerAuthorizationId {String} An resource owner token id
  */
-gpii.oauth2.dbDataStore.expireResourceOwnerToken = function (that, resourceOwnerTokenId) {
-    return fluid.promise.fireTransformEvent(that.events.onExpireResourceOwnerToken, resourceOwnerTokenId);
+gpii.oauth2.dbDataStore.expireResourceOwnerAuthorization = function (that, resourceOwnerAuthorizationId) {
+    return fluid.promise.fireTransformEvent(that.events.onExpireResourceOwnerAuthorization, resourceOwnerAuthorizationId);
 };
 
-// ==== revokeResourceOwnerToken()
-// Fires the transforming promise workflow by triggering onRevokeResourceOwnerToken event.
+// ==== revokeResourceOwnerAuthorization()
+// Fires the transforming promise workflow by triggering onRevokeResourceOwnerAuthorization event.
 
 /**
- * The entry function for implementing revokeResourceOwnerToken(). Fires onRevokeResourceOwnerToken event to trigger the transforming promise workflow.
+ * The entry function for implementing revokeResourceOwnerAuthorization(). Fires onRevokeResourceOwnerAuthorization event to trigger the transforming promise workflow.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore.
- * @param resourceOwnerTokenId {String} An resource owner token id
+ * @param resourceOwnerAuthorizationId {String} An resource owner token id
  */
-gpii.oauth2.dbDataStore.revokeResourceOwnerToken = function (that, resourceOwnerTokenId) {
-    return fluid.promise.fireTransformEvent(that.events.onRevokeResourceOwnerToken, resourceOwnerTokenId);
+gpii.oauth2.dbDataStore.revokeResourceOwnerAuthorization = function (that, resourceOwnerAuthorizationId) {
+    return fluid.promise.fireTransformEvent(that.events.onRevokeResourceOwnerAuthorization, resourceOwnerAuthorizationId);
 };
 
 /**
- * The last step in the promise transforming chain for implementing expireResourceOwnerToken() and revokeResourceOwnerToken() API.
+ * The last step in the promise transforming chain for implementing expireResourceOwnerAuthorization() and revokeResourceOwnerAuthorization() API.
  * It updates the resource owner token record by setting a "revoked" or "expired" flag to true.
- * The step before this function is findResourceOwnerTokenById() that finds the token info and passes into this function.
+ * The step before this function is findResourceOwnerAuthorizationById() that finds the token info and passes into this function.
  * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param resourceOwnerTokenRecord {Object} The data passed on from last step. Its structure:
+ * @param resourceOwnerAuthorizationRecord {Object} The data passed on from last step. Its structure:
  *  {
  *      clientId: {String},
  *      gpiiToken: {String},
@@ -687,21 +687,21 @@ gpii.oauth2.dbDataStore.revokeResourceOwnerToken = function (that, resourceOwner
  *      id: {String}  // The resource owner token id
  *  }
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for updating the
- * token record, or `undefined` if the `resourceOwnerTokenRecord` parameter is not provided
+ * token record, or `undefined` if the `resourceOwnerAuthorizationRecord` parameter is not provided
  */
-gpii.oauth2.dbDataStore.doUpdateResourceOwnerToken = function (saveDataSource, fieldName, resourceOwnerTokenRecord) {
+gpii.oauth2.dbDataStore.doUpdateResourceOwnerAuthorization = function (saveDataSource, fieldName, resourceOwnerAuthorizationRecord) {
     var promiseTogo = fluid.promise();
 
-    if (resourceOwnerTokenRecord === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.resourceOwnerToken});
+    if (resourceOwnerAuthorizationRecord === undefined) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.resourceOwnerAuthorization});
         promiseTogo.reject(error);
     } else {
-        var data = fluid.copy(resourceOwnerTokenRecord);
+        var data = fluid.copy(resourceOwnerAuthorizationRecord);
         fluid.set(data, fieldName, true);
-        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.docTypes.resourceOwnerToken, "id", data);
+        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.docTypes.resourceOwnerAuthorization, "id", data);
     }
 
     return promiseTogo;
 };
-// ==== End of expireResourceOwnerToken()
+// ==== End of expireResourceOwnerAuthorization()
 

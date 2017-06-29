@@ -82,7 +82,7 @@ gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
     jqUnit.assertLeftHand("The data is saved successfully", expected, response);
 };
 
-gpii.tests.dbDataStore.verifyFetchedResourceOwnerToken = function (response, dataToSave) {
+gpii.tests.dbDataStore.verifyFetchedResourceOwnerAuthorization = function (response, dataToSave) {
     gpii.tests.dbDataStore.verifyFetched(response, dataToSave);
     jqUnit.assertFalse("The \"expired\" value has been set to false", response.expired);
     jqUnit.assertFalse("The \"revoked\" value has been set to false", response.revoked);
@@ -107,7 +107,7 @@ gpii.tests.dbDataStore.testData = {
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
-        "oauth2ClientType": "webApp",
+        "clientType": "oauth2AuthCode",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
     allClients: [{
@@ -115,21 +115,21 @@ gpii.tests.dbDataStore.testData = {
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
-        "oauth2ClientType": "webApp",
+        "clientType": "oauth2AuthCode",
         "redirectUri": "http://localhost:3002/authorize_callback"
     }, {
         "id": "client-2",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "oauth2ClientType": "clientCredentialsApp",
+        "clientType": "oauth2ClientCredentials",
         "allowAddPrefs": true
     }, {
         "id": "client-3",
         "name": "Windows Magnifier",
         "oauth2ClientId": "net.gpii.windows.magnifier",
         "oauth2ClientSecret": "client_secret_windows_magnifier",
-        "oauth2ClientType": "thirdPartyApp"
+        "clientType": "onboardedSolution"
     }],
     authDecision1: {
         "id": "authDecision-1",
@@ -247,21 +247,21 @@ gpii.tests.dbDataStore.testData = {
             "": true
         }
     },
-    clientCredentialsToken1: {
-        "id": "clientCredentialsToken-1",
+    clientCredentialsAuthorization1: {
+        "id": "clientCredentialsAuthorization-1",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",
         "allowAddPrefs": true,
         "revoked": false
     },
-    clientCredentialsTokenAfterRevoke1: {
-        "id": "clientCredentialsToken-1",
+    clientCredentialsAuthorizationAfterRevoke1: {
+        "id": "clientCredentialsAuthorization-1",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",
         "allowAddPrefs": true,
         "revoked": true
     },
-    clientCredentialsTokenToCreate: {
+    clientCredentialsAuthorizationToCreate: {
         "clientId": "client-1",
         "accessToken": "chrome_client_credentials_access_token",
         "allowAddPrefs": true
@@ -270,8 +270,8 @@ gpii.tests.dbDataStore.testData = {
         oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
         allowAddPrefs: true
     },
-    resourceOwnerToken1: {
-        "id": "resourceOwnerToken-1",
+    resourceOwnerAuthorization1: {
+        "id": "resourceOwnerAuthorization-1",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-1",
@@ -281,8 +281,8 @@ gpii.tests.dbDataStore.testData = {
         "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     },
-    findResourceOwnerTokenByGpiiTokenAndClientId: [{
-        "id": "resourceOwnerToken-1",
+    findResourceOwnerAuthorizationByGpiiTokenAndClientId: [{
+        "id": "resourceOwnerAuthorization-1",
         "accessToken": "native-gpii-app-token-1",
         "expiresIn": 3600,
         "revoked": false,
@@ -291,7 +291,7 @@ gpii.tests.dbDataStore.testData = {
         "timestampRevoked": null
     },
     {
-        "id": "resourceOwnerToken-2",
+        "id": "resourceOwnerAuthorization-2",
         "accessToken": "native-gpii-app-token-2",
         "expiresIn": 360000000000,
         "revoked": false,
@@ -299,8 +299,8 @@ gpii.tests.dbDataStore.testData = {
         "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }],
-    findResourceOwnerTokenByGpiiTokenAndClientIdAfterExpire: [{
-        "id": "resourceOwnerToken-2",
+    findResourceOwnerAuthorizationByGpiiTokenAndClientIdAfterExpire: [{
+        "id": "resourceOwnerAuthorization-2",
         "accessToken": "native-gpii-app-token-2",
         "expiresIn": 360000000000,
         "revoked": false,
@@ -308,14 +308,14 @@ gpii.tests.dbDataStore.testData = {
         "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }],
-    resourceOwnerTokenToCreate: {
+    resourceOwnerAuthorizationToCreate: {
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-1",
         "expiresIn": 3600
     },
-    resourceOwnerToken1AfterExpired: {
-        "id": "resourceOwnerToken-1",
+    resourceOwnerAuthorization1AfterExpired: {
+        "id": "resourceOwnerAuthorization-1",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-1",
@@ -325,8 +325,8 @@ gpii.tests.dbDataStore.testData = {
         "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     },
-    resourceOwnerToken1AfterRevoked: {
-        "id": "resourceOwnerToken-1",
+    resourceOwnerAuthorization1AfterRevoked: {
+        "id": "resourceOwnerAuthorization-1",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-1",

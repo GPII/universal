@@ -76,7 +76,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode", {
 
 gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
     {
-        name: "A success access token request using the resource owner password credentials grant type",
+        name: "A success access token request using the resource owner gpii token grant type",
         gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.mainSequence"
     },
     {
@@ -127,7 +127,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
 ];
 
 gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithWrongClient = [{
-    name: "Attempt to get access token with sending a wrong client (oauth2 client type is not \"nativeApps\")",
+    name: "Attempt to get access token with sending a wrong client (oauth2 client type is not \"oauth2ResourceOwners\")",
     gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
     expectedStatusCode: 401
 }];
@@ -157,7 +157,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting resource owner password credentials grant type (oauth2 client type is not \"nativeApps\")",
+            name: "Acceptance test for suppporting resource owner gpii token grant type (oauth2 client type is not \"oauth2ResourceOwners\")",
             client_id: "com.bdigital.easit4all",
             client_secret: "client_secret_easit4all",
             username: "alice_gpii_token",
@@ -167,7 +167,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting resource owner password credentials grant type (with nonexistent client)",
+            name: "Acceptance test for suppporting resource owner gpii token grant type (with nonexistent client)",
             client_id: "nonexistent-client",
             client_secret: "client_secret_easit4all",
             username: "alice_gpii_token",
@@ -177,7 +177,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting resource owner password credentials grant type (with nonexistent GPII token)",
+            name: "Acceptance test for suppporting resource owner gpii token grant type (with nonexistent GPII token)",
             client_id: "Bakersfield-AJC-client-id",
             client_secret: "Bakersfield-AJC-client-secret",
             username: "nonexistent_gpii_token",

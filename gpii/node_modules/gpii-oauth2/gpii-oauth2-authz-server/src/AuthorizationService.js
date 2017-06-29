@@ -87,23 +87,23 @@ var fluid = fluid || require("infusion");
                 func: "{dataStore}.findAuthByClientCredentialsAccessToken"
                     // accessToken
             },
-            grantClientCredentialsAccessToken: {
-                funcName: "gpii.oauth2.authorizationService.grantClientCredentialsAccessToken",
+            grantClientCredentialsAuthorization: {
+                funcName: "gpii.oauth2.authorizationService.grantClientCredentialsAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // clientId, scope
             },
-            revokeClientCredentialsToken: {
-                func: "{dataStore}.revokeClientCredentialsToken"
-                    // clientCredentialsTokenId
+            revokeClientCredentialsAuthorization: {
+                func: "{dataStore}.revokeClientCredentialsAuthorization"
+                    // clientCredentialsAuthorizationId
             },
-            grantResourceOwnerAccessToken: {
-                funcName: "gpii.oauth2.authorizationService.grantResourceOwnerAccessToken",
+            grantResourceOwnerAuthorization: {
+                funcName: "gpii.oauth2.authorizationService.grantResourceOwnerAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // gpiiToken, clientId
             },
-            revokeResourceOwnerToken: {
-                func: "{dataStore}.revokeResourceOwnerToken"
-                    // resourceOwnerTokenId
+            revokeResourceOwnerAuthorization: {
+                func: "{dataStore}.revokeResourceOwnerAuthorization"
+                    // resourceOwnerAuthorizationId
             }
         },
         events: {
@@ -359,6 +359,7 @@ var fluid = fluid || require("infusion");
      * If the authorization decision does not exist, this function will create one and return the created authorization decision id.
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
+     * @param gpiiToken {String} A GPII token
      * @param clientId {String} A client id
      * @param redirectUri {String} A redirect URI
      * @param selectedPreferences {Object} A preference set
@@ -656,9 +657,9 @@ var fluid = fluid || require("infusion");
      * @param clientId {String} an unique client id
      * @return: none. The first argument of promiseTogo contains returned values
      */
-    gpii.oauth2.authorizationService.createClientCredentialsToken = function (promiseTogo, dataStore, codeGenerator, clientId) {
+    gpii.oauth2.authorizationService.createClientCredentialsAuthorization = function (promiseTogo, dataStore, codeGenerator, clientId) {
         var accessToken = codeGenerator.generateAccessToken();
-        var addClientCredentialsTokenPromise = dataStore.addClientCredentialsToken({
+        var addClientCredentialsAuthorizationPromise = dataStore.addClientCredentialsAuthorization({
             clientId: clientId,
             accessToken: accessToken,
             allowAddPrefs: true
@@ -668,7 +669,7 @@ var fluid = fluid || require("infusion");
             // The created access token is resolved for promiseTogo eventually
             return accessToken;
         };
-        var accessTokenPromise = fluid.promise.map(addClientCredentialsTokenPromise, mapper);
+        var accessTokenPromise = fluid.promise.map(addClientCredentialsAuthorizationPromise, mapper);
         fluid.promise.follow(accessTokenPromise, promiseTogo);
     };
 
@@ -683,28 +684,29 @@ var fluid = fluid || require("infusion");
      * 2. the scope doesn't match a value of ["add_preferences"]
      * 3. the client credentials token is not found
      */
-    gpii.oauth2.authorizationService.grantClientCredentialsAccessToken = function (dataStore, codeGenerator, clientId, scope) {
+    gpii.oauth2.authorizationService.grantClientCredentialsAuthorization = function (dataStore, codeGenerator, clientId, scope) {
         var clientPromise = dataStore.findClientById(clientId);
-        var clientCredentialsTokenPromise = dataStore.findClientCredentialsTokenByClientId(clientId);
+        var clientCredentialsAuthorizationPromise = dataStore.findClientCredentialsAuthorizationByClientId(clientId);
 
         // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-        var sources = [clientPromise, clientCredentialsTokenPromise];
+        var sources = [clientPromise, clientCredentialsAuthorizationPromise];
         var promisesSequence = fluid.promise.sequence(sources);
 
         var promiseTogo = fluid.promise();
 
         promisesSequence.then(function (responses) {
             var client = responses[0];
-            var clientCredentialsToken = responses[1];
+            var clientCredentialsAuthorization = responses[1];
 
-            if (!scope || scope[0] !== "add_preferences" || !client.allowAddPrefs || client.oauth2ClientType !== gpii.oauth2.oauth2ClientTypes.clientCredentialsApp) {
-                var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
+            if (!scope || scope[0] !== "add_preferences" || !client.allowAddPrefs || client.clientType !== gpii.oauth2.clientTypes.oauth2ClientCredentials) {
+                fluid.log("authorizationService granting client credentials access token: invalid client ID - ", clientId);
+                var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
                 promiseTogo.reject(error);
-            } else if (!clientCredentialsToken) {
-                gpii.oauth2.authorizationService.createClientCredentialsToken(promiseTogo, dataStore, codeGenerator, clientId);
+            } else if (!clientCredentialsAuthorization) {
+                gpii.oauth2.authorizationService.createClientCredentialsAuthorization(promiseTogo, dataStore, codeGenerator, clientId);
             } else {
                 // Return the existing token
-                promiseTogo.resolve(clientCredentialsToken.accessToken);
+                promiseTogo.resolve(clientCredentialsAuthorization.accessToken);
             }
         });
 
@@ -712,7 +714,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * Find an unexpired resource owner password credential access token. If not found, returns undefined.
+     * Find an unexpired resource owner gpii token authorization. If not found, returns undefined.
      * This function also set the "expired" field of all expired tokens to true so they won't be returned
      * next time at finding an unexpired access token.
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
@@ -725,28 +727,28 @@ var fluid = fluid || require("infusion");
      * }
      * An error will be returned if the gpii token is not found.
      */
-    gpii.oauth2.authorizationService.findValidResourceOwnerToken = function (dataStore, gpiiToken, clientId) {
+    gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization = function (dataStore, gpiiToken, clientId) {
         var promiseTogo = fluid.promise();
 
-        var tokenPromise = dataStore.findResourceOwnerTokenByGpiiTokenAndClientId(gpiiToken, clientId);
+        var authorizationPromise = dataStore.findResourceOwnerAuthorizationByGpiiTokenAndClientId(gpiiToken, clientId);
 
-        tokenPromise.then(function (tokens) {
+        authorizationPromise.then(function (authorizations) {
             var setExpiredPromises = [];
-            var tokenObj;
+            var authorizationObj;
 
-            fluid.each(tokens, function (token) {
-                if (gpii.oauth2.isExpired(token.timestampCreated, token.expiresIn)) {
-                    setExpiredPromises.push(dataStore.expireResourceOwnerToken(token.id));
+            fluid.each(authorizations, function (authorization) {
+                if (gpii.oauth2.isExpired(authorization.timestampCreated, authorization.expiresIn)) {
+                    setExpiredPromises.push(dataStore.expireResourceOwnerAuthorization(authorization.id));
                 } else {
-                    tokenObj = token;
+                    authorizationObj = authorization;
                 }
             });
             var setExpiredSequence = fluid.promise.sequence(setExpiredPromises);
 
             setExpiredSequence.then(function () {
-                var result = tokenObj ? {
-                    accessToken: tokenObj.accessToken,
-                    expiresIn: tokenObj.expiresIn
+                var result = authorizationObj ? {
+                    accessToken: authorizationObj.accessToken,
+                    expiresIn: authorizationObj.expiresIn
                 } : undefined;
 
                 promiseTogo.resolve(result);
@@ -765,10 +767,10 @@ var fluid = fluid || require("infusion");
      * @param expiresIn {String} the number of seconds that this token will expire
      * @return: none. The first argument of promiseTogo contains returned values
      */
-    gpii.oauth2.authorizationService.createResourceOwnerToken = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, expiresIn) {
+    gpii.oauth2.authorizationService.createResourceOwnerAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
 
-        var addResourceOwnerTokenPromise = dataStore.addResourceOwnerToken({
+        var addResourceOwnerAuthorizationPromise = dataStore.addResourceOwnerAuthorization({
             clientId: clientId,
             gpiiToken: gpiiToken,
             accessToken: accessToken,
@@ -782,19 +784,19 @@ var fluid = fluid || require("infusion");
                 expiresIn: expiresIn
             };
         };
-        var accessTokenPromise = fluid.promise.map(addResourceOwnerTokenPromise, mapper);
-        fluid.promise.follow(accessTokenPromise, promiseTogo);
+        var authorizationPromise = fluid.promise.map(addResourceOwnerAuthorizationPromise, mapper);
+        fluid.promise.follow(authorizationPromise, promiseTogo);
     };
 
     /**
-     * Grant a resource owner password credential access token. The gpii token will be verified before the access token is returned.
+     * Grant a resource owner gpii token authorization. The gpii token will be verified before the access token is returned.
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
-     * @param clientId {String} A client id
      * @param gpiiToken {String} A GPII token
+     * @param clientId {String} A client id
      * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the gpii token is not found.
      */
-    gpii.oauth2.authorizationService.grantResourceOwnerAccessToken = function (dataStore, codeGenerator, gpiiToken, clientId) {
+    gpii.oauth2.authorizationService.grantResourceOwnerAuthorization = function (dataStore, codeGenerator, gpiiToken, clientId) {
         var promiseTogo = fluid.promise();
 
         if (!gpiiToken || !clientId) {
@@ -803,30 +805,32 @@ var fluid = fluid || require("infusion");
         } else {
             var gpiiTokenPromise = dataStore.findGpiiToken(gpiiToken);
             var clientPromise = dataStore.findClientById(clientId);
-            var resourceOwnerTokenPromise = gpii.oauth2.authorizationService.findValidResourceOwnerToken(dataStore, gpiiToken, clientId);
+            var resourceOwnerAuthorizationPromise = gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization(dataStore, gpiiToken, clientId);
 
             // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-            var sources = [gpiiTokenPromise, clientPromise, resourceOwnerTokenPromise];
+            var sources = [gpiiTokenPromise, clientPromise, resourceOwnerAuthorizationPromise];
             var promisesSequence = fluid.promise.sequence(sources);
 
             promisesSequence.then(function (responses) {
                 var gpiiTokenRec = responses[0];
                 var clientRec = responses[1];
-                var resourceOwnerTokenRec = responses[2];
+                var resourceOwnerAuthorizationRec = responses[2];
 
                 var error;
 
                 if (!gpiiTokenRec) {
-                    error = gpii.oauth2.composeError(gpii.oauth2.errors.invalidGpiiToken);
+                    fluid.log("authorizationService granting resource owner access token: invalid GPII token - ", gpiiToken);
+                    error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
                     promiseTogo.reject(error);
-                } else if (clientRec.oauth2ClientType !== gpii.oauth2.oauth2ClientTypes.nativeApp) {
-                    error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedClient);
+                } else if (clientRec.clientType !== gpii.oauth2.clientTypes.oauth2ResourceOwner) {
+                    fluid.log("authorizationService granting resource owner access token: the type of the client id (" + clientId + ") is not \"" + gpii.oauth2.clientTypes.oauth2ResourceOwner + "\"");
+                    error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
                     promiseTogo.reject(error);
-                } else if (!resourceOwnerTokenRec) {
-                    gpii.oauth2.authorizationService.createResourceOwnerToken(promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, gpii.oauth2.defaultTokenExpiresIn);
+                } else if (!resourceOwnerAuthorizationRec) {
+                    gpii.oauth2.authorizationService.createResourceOwnerAuthorization(promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, gpii.oauth2.defaultTokenExpiresIn);
                 } else {
                     // Return the existing token
-                    promiseTogo.resolve(resourceOwnerTokenRec);
+                    promiseTogo.resolve(resourceOwnerAuthorizationRec);
                 }
             });
         }

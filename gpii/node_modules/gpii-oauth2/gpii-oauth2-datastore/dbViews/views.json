@@ -32,17 +32,17 @@
             "findAuthByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
             },
-            "findClientCredentialsTokenByClientId": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.clientId, doc)}"
+            "findClientCredentialsAuthorizationByClientId": {
+                "map": "function(doc) {if (doc.type === 'clientCredentialsAuthorization' && doc.revoked === false) emit(doc.clientId, doc)}"
             },
-            "findClientCredentialsTokenByAccessToken": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) emit(doc.accessToken, doc)}"
+            "findClientCredentialsAuthorizationByAccessToken": {
+                "map": "function(doc) {if (doc.type === 'clientCredentialsAuthorization' && doc.revoked === false) emit(doc.accessToken, doc)}"
             },
             "findAuthByClientCredentialsAccessToken": {
-                "map": "function(doc) {if (doc.type === 'clientCredentialsToken' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'allowAddPrefs': doc.allowAddPrefs});}}"
+                "map": "function(doc) {if (doc.type === 'clientCredentialsAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'allowAddPrefs': doc.allowAddPrefs});}}"
             },
-            "findResourceOwnerTokenByGpiiTokenAndClientId": {
-                "map": "function(doc) {if (doc.type === 'resourceOwnerToken' && doc.revoked === false && doc.expired === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
+            "findResourceOwnerAuthorizationByGpiiTokenAndClientId": {
+                "map": "function(doc) {if (doc.type === 'resourceOwnerAuthorization' && doc.revoked === false && doc.expired === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
             }
         }
     }

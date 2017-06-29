@@ -249,10 +249,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findClientCredentialsTokenByClientIdDataSource: {
+        findClientCredentialsAuthorizationByClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findClientCredentialsTokenByClientId?key=\"%clientId\"",
+                requestUrl: "/_design/views/_view/findClientCredentialsAuthorizationByClientId?key=\"%clientId\"",
                 termMap: {
                     clientId: "%clientId"
                 },
@@ -263,10 +263,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findClientCredentialsTokenByAccessTokenDataSource: {
+        findClientCredentialsAuthorizationByAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findClientCredentialsTokenByAccessToken?key=\"%accessToken\"",
+                requestUrl: "/_design/views/_view/findClientCredentialsAuthorizationByAccessToken?key=\"%accessToken\"",
                 termMap: {
                     accessToken: "%accessToken"
                 },
@@ -291,10 +291,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findResourceOwnerTokenByGpiiTokenAndClientIdDataSource: {
+        findResourceOwnerAuthorizationByGpiiTokenAndClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findResourceOwnerTokenByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
+                requestUrl: "/_design/views/_view/findResourceOwnerAuthorizationByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
                 termMap: {
                     gpiiToken: "%gpiiToken",
                     clientId: "%clientId"
@@ -491,14 +491,14 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // accessToken
         },
-        findClientCredentialsTokenById: {
+        findClientCredentialsAuthorizationById: {
             func: "{that}.findById"
-            // clientCredentialsTokenId
+            // clientCredentialsAuthorizationId
         },
-        findClientCredentialsTokenByClientId: {
+        findClientCredentialsAuthorizationByClientId: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findClientCredentialsTokenByClientIdDataSource",
+                "{that}.findClientCredentialsAuthorizationByClientIdDataSource",
                 {
                     clientId: "{arguments}.0"
                 },
@@ -506,10 +506,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // clientId
         },
-        findClientCredentialsTokenByAccessToken: {
+        findClientCredentialsAuthorizationByAccessToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findClientCredentialsTokenByAccessTokenDataSource",
+                "{that}.findClientCredentialsAuthorizationByAccessTokenDataSource",
                 {
                     accessToken: "{arguments}.0"
                 },
@@ -518,21 +518,21 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // accessToken
         },
         // TODO: make sure there's only one non-revoked client credentials token for the given client
-        addClientCredentialsToken: {
-            funcName: "gpii.oauth2.dbDataStore.addClientCredentialsToken",
+        addClientCredentialsAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.addClientCredentialsAuthorization",
             args: [
                 "{that}.saveDataSource",
                 "{arguments}.0"
             ]
-            // clientCredentialsTokenData
+            // clientCredentialsAuthorizationData
         },
-        revokeClientCredentialsToken: {
-            funcName: "gpii.oauth2.dbDataStore.revokeClientCredentialsToken",
+        revokeClientCredentialsAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.revokeClientCredentialsAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0"
             ]
-            // clientCredentialsTokenId
+            // clientCredentialsAuthorizationId
         },
         findAuthByClientCredentialsAccessToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
@@ -546,57 +546,57 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // accessToken
         },
-        findResourceOwnerTokenById: {
+        findResourceOwnerAuthorizationById: {
             func: "{that}.findById"
-            // resourceOwnerTokenId
+            // resourceOwnerAuthorizationId
         },
-        findResourceOwnerTokenByGpiiTokenAndClientId: {
+        findResourceOwnerAuthorizationByGpiiTokenAndClientId: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findResourceOwnerTokenByGpiiTokenAndClientIdDataSource",
+                "{that}.findResourceOwnerAuthorizationByGpiiTokenAndClientIdDataSource",
                 {
                     gpiiToken: "{arguments}.0",
                     clientId: "{arguments}.1"
                 },
                 ["gpiiToken", "clientId"],
-                gpii.oauth2.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientIdPostProcess
+                gpii.oauth2.dbDataStore.findResourceOwnerAuthorizationByGpiiTokenAndClientIdPostProcess
             ]
             // gpiiToken, clientId
         },
-        // Note: Before adding a new resource owner access token: authorizationService.findValidResourceOwnerToken()
+        // Note: Before adding a new resource owner access token: authorizationService.findValidResourceOwnerAuthorization()
         // should have been called to ensure there is NOT any non-revoked or unexpired existing access tokens for
         // the given GPII token and the client ID. See authorizationService.js
-        addResourceOwnerToken: {
-            funcName: "gpii.oauth2.dbDataStore.addResourceOwnerToken",
+        addResourceOwnerAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.addResourceOwnerAuthorization",
             args: [
                 "{that}.saveDataSource",
                 "{arguments}.0"
             ]
-            // resourceOwnerTokenData
+            // resourceOwnerAuthorizationData
         },
-        expireResourceOwnerToken: {
-            funcName: "gpii.oauth2.dbDataStore.expireResourceOwnerToken",
+        expireResourceOwnerAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.expireResourceOwnerAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0"
             ]
-            // resourceOwnerTokenId
+            // resourceOwnerAuthorizationId
         },
-        revokeResourceOwnerToken: {
-            funcName: "gpii.oauth2.dbDataStore.revokeResourceOwnerToken",
+        revokeResourceOwnerAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.revokeResourceOwnerAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0"
             ]
-            // resourceOwnerTokenId
+            // resourceOwnerAuthorizationId
         }
     },
     events: {
         onUpdateAuthDecision: null,
         onRevokeAuthDecision: null,
-        onRevokeClientCredentialsToken: null,
-        onExpireResourceOwnerToken: null,
-        onRevokeResourceOwnerToken: null
+        onRevokeClientCredentialsAuthorization: null,
+        onExpireResourceOwnerAuthorization: null,
+        onRevokeResourceOwnerAuthorization: null
     },
     listeners: {
         onUpdateAuthDecision: [{
@@ -629,32 +629,32 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             namespace: "doUpdateAuthDecision",
             priority: "after:validateGpiiToken"
         }],
-        onRevokeClientCredentialsToken: [{
-            listener: "{that}.findClientCredentialsTokenById",
-            namespace: "findClientCredentialsToken"
+        onRevokeClientCredentialsAuthorization: [{
+            listener: "{that}.findClientCredentialsAuthorizationById",
+            namespace: "findClientCredentialsAuthorization"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken",
+            listener: "gpii.oauth2.dbDataStore.doRevokeClientCredentialsAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doRevokeClientCredentialsToken",
-            priority: "after:findClientCredentialsToken"
+            namespace: "doRevokeClientCredentialsAuthorization",
+            priority: "after:findClientCredentialsAuthorization"
         }],
-        onExpireResourceOwnerToken: [{
-            listener: "{that}.findResourceOwnerTokenById",
-            namespace: "findResourceOwnerToken"
+        onExpireResourceOwnerAuthorization: [{
+            listener: "{that}.findResourceOwnerAuthorizationById",
+            namespace: "findResourceOwnerAuthorization"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateResourceOwnerToken",
+            listener: "gpii.oauth2.dbDataStore.doUpdateResourceOwnerAuthorization",
             args: ["{that}.saveDataSource", "expired", "{arguments}.0"],
-            namespace: "doUpdateResourceOwnerToken",
-            priority: "after:findResourceOwnerToken"
+            namespace: "doUpdateResourceOwnerAuthorization",
+            priority: "after:findResourceOwnerAuthorization"
         }],
-        onRevokeResourceOwnerToken: [{
-            listener: "{that}.findResourceOwnerTokenById",
-            namespace: "findResourceOwnerToken"
+        onRevokeResourceOwnerAuthorization: [{
+            listener: "{that}.findResourceOwnerAuthorizationById",
+            namespace: "findResourceOwnerAuthorization"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateResourceOwnerToken",
+            listener: "gpii.oauth2.dbDataStore.doUpdateResourceOwnerAuthorization",
             args: ["{that}.saveDataSource", "revoked", "{arguments}.0"],
-            namespace: "doUpdateResourceOwnerToken",
-            priority: "after:findResourceOwnerToken"
+            namespace: "doUpdateResourceOwnerAuthorization",
+            priority: "after:findResourceOwnerAuthorization"
         }]
     }
 });

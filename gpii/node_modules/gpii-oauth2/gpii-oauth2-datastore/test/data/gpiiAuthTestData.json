@@ -24,7 +24,7 @@
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
-        "oauth2ClientType": "webApp",
+        "clientType": "oauth2AuthCode",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
     {
@@ -33,7 +33,7 @@
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "oauth2ClientType": "clientCredentialsApp",
+        "clientType": "oauth2ClientCredentials",
         "allowAddPrefs": true
     },
     {
@@ -42,7 +42,7 @@
         "name": "Windows Magnifier",
         "oauth2ClientId": "net.gpii.windows.magnifier",
         "oauth2ClientSecret": "client_secret_windows_magnifier",
-        "oauth2ClientType": "thirdPartyApp"
+        "clientType": "onboardedSolution"
     },
     {
         "_id": "authDecision-1",
@@ -88,24 +88,24 @@
         "code": "chrome_high_contrast_auth_token"
     },
     {
-        "_id": "clientCredentialsToken-1",
-        "type": "clientCredentialsToken",
+        "_id": "clientCredentialsAuthorization-1",
+        "type": "clientCredentialsAuthorization",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",
         "allowAddPrefs": true,
         "revoked": false
     },
     {
-        "_id": "clientCredentialsToken-2",
-        "type": "clientCredentialsToken",
+        "_id": "clientCredentialsAuthorization-2",
+        "type": "clientCredentialsAuthorization",
         "clientId": "non-existing-client",
         "accessToken": "non-existing-client-token",
         "allowAddPrefs": true,
         "revoked": false
     },
     {
-        "_id": "resourceOwnerToken-1",
-        "type": "resourceOwnerToken",
+        "_id": "resourceOwnerAuthorization-1",
+        "type": "resourceOwnerAuthorization",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-1",
@@ -116,8 +116,8 @@
         "timestampRevoked": null
     },
     {
-        "_id": "resourceOwnerToken-2",
-        "type": "resourceOwnerToken",
+        "_id": "resourceOwnerAuthorization-2",
+        "type": "resourceOwnerAuthorization",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-2",
@@ -128,8 +128,8 @@
         "timestampRevoked": null
     },
     {
-        "_id": "resourceOwnerToken-3",
-        "type": "resourceOwnerToken",
+        "_id": "resourceOwnerAuthorization-3",
+        "type": "resourceOwnerAuthorization",
         "clientId": "client-2",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "native-gpii-app-token-3",

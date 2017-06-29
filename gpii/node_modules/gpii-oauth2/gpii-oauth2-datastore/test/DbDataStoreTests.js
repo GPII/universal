@@ -802,39 +802,39 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
+fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsAuthorizationById", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test findClientCredentialsTokenById()",
+        name: "Test findClientCredentialsAuthorizationById()",
         tests: [{
             name: "Find a client credentials token record by an id",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenById", ["clientCredentialsToken-1"], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationById", ["clientCredentialsAuthorization-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsToken1, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsAuthorization1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Revoked client credentials token record is still returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+                args: ["{dbDataStore}.revokeClientCredentialsAuthorization", ["clientCredentialsAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findClientCredentialsTokenById", "{arguments}.0.id", "{that}"],
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsTokenAfterRevoke1, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsAuthorizationAfterRevoke1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Finding a non-existing client credentials token record by an id returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenById", ["non-existing"], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationById", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding a non-existing client credentials token record returns undefined", "{arguments}.0"],
@@ -844,7 +844,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
             name: "Not providing client credentials token ID returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenById", [], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationById", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -858,28 +858,28 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenById", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
+fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsAuthorizationByClientId", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test findClientCredentialsTokenByClientId()",
+        name: "Test findClientCredentialsAuthorizationByClientId()",
         tests: [{
             name: "Find a client credentials token record by a client id",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["client-2"], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByClientId", ["client-2"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsToken1, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsAuthorization1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Revoked auth decisions returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+                args: ["{dbDataStore}.revokeClientCredentialsAuthorization", ["clientCredentialsAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["client-2"], "{that}"],
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByClientId", ["client-2"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -890,7 +890,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
             name: "Finding a non-existing client credentials token record by a client id returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByClientId", ["non-existing"], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByClientId", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding a non-existing client credentials token record returns undefined", "{arguments}.0"],
@@ -900,7 +900,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
             name: "Not providing client ID returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByClientId", [], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByClientId", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -914,28 +914,28 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByClientId", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken", {
+fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsAuthorizationByAccessToken", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test findClientCredentialsTokenByAccessToken()",
+        name: "Test findClientCredentialsAuthorizationByAccessToken()",
         tests: [{
             name: "Find a client credentials token record by an access token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["firstDiscovery_access_token"], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByAccessToken", ["firstDiscovery_access_token"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsToken1, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.clientCredentialsAuthorization1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Revoked auth decisions returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+                args: ["{dbDataStore}.revokeClientCredentialsAuthorization", ["clientCredentialsAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["firstDiscovery_access_token"], "{that}"],
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByAccessToken", ["firstDiscovery_access_token"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -946,7 +946,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
             name: "Finding a non-existing client credentials token record by an access token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", ["non-existing"], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByAccessToken", ["non-existing"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding a non-existing client credentials token record returns undefined", "{arguments}.0"],
@@ -956,7 +956,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
             name: "Not providing client ID returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientCredentialsTokenByAccessToken", [], "{that}"]
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationByAccessToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -970,33 +970,33 @@ fluid.defaults("gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsToken", {
+fluid.defaults("gpii.tests.dbDataStore.addClientCredentialsAuthorization", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test addClientCredentialsToken()",
+        name: "Test addClientCredentialsAuthorization()",
         tests: [{
             name: "Add a client credentials token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.addClientCredentialsToken", [gpii.tests.dbDataStore.testData.clientCredentialsTokenToCreate], "{that}"]
+                args: ["{dbDataStore}.addClientCredentialsAuthorization", [gpii.tests.dbDataStore.testData.clientCredentialsAuthorizationToCreate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findClientCredentialsTokenById", "{arguments}.0.id", "{that}"],
+                args: ["{dbDataStore}.findClientCredentialsAuthorizationById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.clientCredentialsTokenToCreate],
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.clientCredentialsAuthorizationToCreate],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Adding an empty object returns error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.addClientCredentialsToken", [undefined], "{that}"]
+                args: ["{dbDataStore}.addClientCredentialsAuthorization", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"clientCredentialsTokenData\" is undefined",
+                    msg: "The input field \"clientCredentialsAuthorizationData\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1024,7 +1024,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
             name: "Revoked client credentials access token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeClientCredentialsToken", ["clientCredentialsToken-1"], "{that}"]
+                args: ["{dbDataStore}.revokeClientCredentialsAuthorization", ["clientCredentialsAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByClientCredentialsAccessToken", ["firstDiscovery_access_token"], "{that}"],
@@ -1072,18 +1072,18 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken", 
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId", {
+fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerAuthorizationByGpiiTokenAndClientId", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test findResourceOwnerTokenByGpiiTokenAndClientId()",
+        name: "Test findResourceOwnerAuthorizationByGpiiTokenAndClientId()",
         tests: [{
             name: "Find resource owner token by a gpii token and a client id",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findResourceOwnerTokenByGpiiTokenAndClientId, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findResourceOwnerAuthorizationByGpiiTokenAndClientId, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -1091,21 +1091,21 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
             sequence: [{
                 // Test an expired token record
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.expireResourceOwnerToken", ["resourceOwnerToken-1"], "{that}"]
+                args: ["{dbDataStore}.expireResourceOwnerAuthorization", ["resourceOwnerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findResourceOwnerTokenByGpiiTokenAndClientIdAfterExpire, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findResourceOwnerAuthorizationByGpiiTokenAndClientIdAfterExpire, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }, {
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeResourceOwnerToken", ["resourceOwnerToken-2"], "{that}"]
+                args: ["{dbDataStore}.revokeResourceOwnerAuthorization", ["resourceOwnerAuthorization-2"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
@@ -1116,7 +1116,7 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
             name: "Finding a non-existing resource owner token by a non-existing gpii token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["non-existing-token", "client-1"], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", ["non-existing-token", "client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding a non-existing resource owner token returns undefined", "{arguments}.0"],
@@ -1126,7 +1126,7 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
             name: "Finding a non-existing resource owner token by a non-existing client id returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", "non-existing-client"], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "non-existing-client"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding a non-existing resource owner token returns undefined", "{arguments}.0"],
@@ -1136,7 +1136,7 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
             name: "Not providing a gpii token returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", [undefined, "client-1"], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", [undefined, "client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -1150,7 +1150,7 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
             name: "Not providing a client id returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenByGpiiTokenAndClientId", ["gpiiToken-1", undefined], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -1164,33 +1164,33 @@ fluid.defaults("gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClien
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.addResourceOwnerToken", {
+fluid.defaults("gpii.tests.dbDataStore.addResourceOwnerAuthorization", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test addResourceOwnerToken()",
+        name: "Test addResourceOwnerAuthorization()",
         tests: [{
-            name: "Add a resource owner password credentials token",
+            name: "Add a resource owner gpii token authorization",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.addResourceOwnerToken", [gpii.tests.dbDataStore.testData.resourceOwnerTokenToCreate], "{that}"]
+                args: ["{dbDataStore}.addResourceOwnerAuthorization", [gpii.tests.dbDataStore.testData.resourceOwnerAuthorizationToCreate], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findResourceOwnerTokenById", "{arguments}.0.id", "{that}"],
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
-                listener: "gpii.tests.dbDataStore.verifyFetchedResourceOwnerToken",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerTokenToCreate],
+                listener: "gpii.tests.dbDataStore.verifyFetchedResourceOwnerAuthorization",
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerAuthorizationToCreate],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Adding an empty object returns error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.addResourceOwnerToken", [undefined], "{that}"]
+                args: ["{dbDataStore}.addResourceOwnerAuthorization", [undefined], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"resourceOwnerTokenData\" is undefined",
+                    msg: "The input field \"resourceOwnerAuthorizationData\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1200,40 +1200,40 @@ fluid.defaults("gpii.tests.dbDataStore.addResourceOwnerToken", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.expireResourceOwnerToken", {
+fluid.defaults("gpii.tests.dbDataStore.expireResourceOwnerAuthorization", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test expireResourceOwnerToken()",
+        name: "Test expireResourceOwnerAuthorization()",
         tests: [{
             name: "A typical flow of expiring a resource owner token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenById", ["resourceOwnerToken-1"], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationById", ["resourceOwnerAuthorization-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected resource owner token data is received", gpii.tests.dbDataStore.testData.resourceOwnerToken1, "{arguments}.0"],
+                args: ["The expected resource owner token data is received", gpii.tests.dbDataStore.testData.resourceOwnerAuthorization1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }, {
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.expireResourceOwnerToken", ["resourceOwnerToken-1"], "{that}"]
+                args: ["{dbDataStore}.expireResourceOwnerAuthorization", ["resourceOwnerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findResourceOwnerTokenById", "{arguments}.0.id", "{that}"],
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerToken1AfterExpired],
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerAuthorization1AfterExpired],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Expire by a non-existing resource owner token id returns error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.expireResourceOwnerToken", ["non-existing-token-id"], "{that}"]
+                args: ["{dbDataStore}.expireResourceOwnerAuthorization", ["non-existing-token-id"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["Expire by a non-existing resource owner token id returns missing record error", {
-                    msg: "The record of resourceOwnerToken is not found",
+                    msg: "The record of resourceOwnerAuthorization is not found",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1243,40 +1243,40 @@ fluid.defaults("gpii.tests.dbDataStore.expireResourceOwnerToken", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.revokeResourceOwnerToken", {
+fluid.defaults("gpii.tests.dbDataStore.revokeResourceOwnerAuthorization", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test revokeResourceOwnerToken()",
+        name: "Test revokeResourceOwnerAuthorization()",
         tests: [{
             name: "A typical flow of expiring a resource owner token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findResourceOwnerTokenById", ["resourceOwnerToken-1"], "{that}"]
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationById", ["resourceOwnerAuthorization-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected resource owner token data is received", gpii.tests.dbDataStore.testData.resourceOwnerToken1, "{arguments}.0"],
+                args: ["The expected resource owner token data is received", gpii.tests.dbDataStore.testData.resourceOwnerAuthorization1, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }, {
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeResourceOwnerToken", ["resourceOwnerToken-1"], "{that}"]
+                args: ["{dbDataStore}.revokeResourceOwnerAuthorization", ["resourceOwnerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findResourceOwnerTokenById", "{arguments}.0.id", "{that}"],
+                args: ["{dbDataStore}.findResourceOwnerAuthorizationById", "{arguments}.0.id", "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerToken1AfterRevoked],
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.resourceOwnerAuthorization1AfterRevoked],
                 event: "{that}.events.onResponse"
             }]
         }, {
             name: "Revoke by a non-existing resource owner token id returns error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeResourceOwnerToken", ["non-existing-token-id"], "{that}"]
+                args: ["{dbDataStore}.revokeResourceOwnerAuthorization", ["non-existing-token-id"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["Revoke by a non-existing resource owner token id returns missing record error", {
-                    msg: "The record of resourceOwnerToken is not found",
+                    msg: "The record of resourceOwnerAuthorization is not found",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1304,13 +1304,13 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findAuthByCode",
     "gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken",
     "gpii.tests.dbDataStore.findAuthByAccessToken",
-    "gpii.tests.dbDataStore.findClientCredentialsTokenById",
-    "gpii.tests.dbDataStore.findClientCredentialsTokenByClientId",
-    "gpii.tests.dbDataStore.findClientCredentialsTokenByAccessToken",
-    "gpii.tests.dbDataStore.addClientCredentialsToken",
+    "gpii.tests.dbDataStore.findClientCredentialsAuthorizationById",
+    "gpii.tests.dbDataStore.findClientCredentialsAuthorizationByClientId",
+    "gpii.tests.dbDataStore.findClientCredentialsAuthorizationByAccessToken",
+    "gpii.tests.dbDataStore.addClientCredentialsAuthorization",
     "gpii.tests.dbDataStore.findAuthByClientCredentialsAccessToken",
-    "gpii.tests.dbDataStore.findResourceOwnerTokenByGpiiTokenAndClientId",
-    "gpii.tests.dbDataStore.addResourceOwnerToken",
-    "gpii.tests.dbDataStore.expireResourceOwnerToken",
-    "gpii.tests.dbDataStore.revokeResourceOwnerToken"
+    "gpii.tests.dbDataStore.findResourceOwnerAuthorizationByGpiiTokenAndClientId",
+    "gpii.tests.dbDataStore.addResourceOwnerAuthorization",
+    "gpii.tests.dbDataStore.expireResourceOwnerAuthorization",
+    "gpii.tests.dbDataStore.revokeResourceOwnerAuthorization"
 ]);

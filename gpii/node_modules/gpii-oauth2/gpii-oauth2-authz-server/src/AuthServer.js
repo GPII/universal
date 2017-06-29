@@ -85,27 +85,27 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
-        var clientCredentialsPromise = authorizationService.grantClientCredentialsAccessToken(client.id, scope);
+        var clientCredentialsPromise = authorizationService.grantClientCredentialsAuthorization(client.id, scope);
         gpii.oauth2.oauth2orizeServer.promiseToDone(clientCredentialsPromise, done);
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (client, username, password, scope, done) {
-        var passwordPromise = authorizationService.grantResourceOwnerAccessToken(username, client.id);
+        var passwordPromise = authorizationService.grantResourceOwnerAuthorization(username, client.id);
 
-        var tokenMapper = function (token) {
-            return token.accessToken;
+        var authorizationMapper = function (authorization) {
+            return authorization.accessToken;
         };
 
-        var paramsMapper = function (token) {
+        var paramsMapper = function (params) {
             // extra parameters to be included in the `oauth2orizeServer` response except `accessToken`
-            delete token.accessToken;
-            return token;
+            delete params.accessToken;
+            return params;
         };
 
-        var tokenPromise = fluid.promise.map(passwordPromise, tokenMapper);
+        var authorizationPromise = fluid.promise.map(passwordPromise, authorizationMapper);
         var paramsPromise = fluid.promise.map(passwordPromise, paramsMapper);
 
-        gpii.oauth2.oauth2orizeServer.promiseToDone(tokenPromise, done, paramsPromise);
+        gpii.oauth2.oauth2orizeServer.promiseToDone(authorizationPromise, done, paramsPromise);
     }));
 
 };

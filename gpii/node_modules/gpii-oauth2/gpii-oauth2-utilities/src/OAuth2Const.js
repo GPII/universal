@@ -26,18 +26,18 @@ gpii.oauth2.docTypes = fluid.freezeRecursive({
     gpiiToken: "gpiiToken",
     authDecision: "authDecision",
     authCode: "authCode",
-    clientCredentialsToken: "clientCredentialsToken",
-    resourceOwnerToken: "resourceOwnerToken"
+    clientCredentialsAuthorization: "clientCredentialsAuthorization",
+    resourceOwnerAuthorization: "resourceOwnerAuthorization"
 });
 
 // All OAuth2 client types used for saving different documents into CouchDB/PouchDB
 // See [the documentation of Authorization Server](../../../../../documentation/AuthServer.md)
 // regarding accepted fields for each document type.
-gpii.oauth2.oauth2ClientTypes = fluid.freezeRecursive({
-    nativeApp: "nativeApp",
-    webApp: "webApp",
-    thirdPartyApp: "thirdPartyApp",
-    clientCredentialsApp: "clientCredentialsApp"
+gpii.oauth2.clientTypes = fluid.freezeRecursive({
+    oauth2ResourceOwner: "oauth2ResourceOwner",
+    oauth2AuthCode: "oauth2AuthCode",
+    onboardedSolution: "onboardedSolution",
+    oauth2ClientCredentials: "oauth2ClientCredentials"
 });
 
 // The default value of the number of seconds that access tokens become invalid.
@@ -65,11 +65,6 @@ gpii.oauth2.errors = fluid.freezeRecursive({
         statusCode: 401,
         isError: true
     },
-    invalidGpiiToken: {
-        msg: "Invalid GPII token",
-        statusCode: 401,
-        isError: true
-    },
     unauthorizedAuthCode: {
         msg: "The authorization code %code is not authorized",
         statusCode: 401,
@@ -82,6 +77,11 @@ gpii.oauth2.errors = fluid.freezeRecursive({
     },
     unauthorizedAccessToken: {
         msg: "The access token is not authorized",
+        statusCode: 401,
+        isError: true
+    },
+    unauthorized: {
+        msg: "Unauthorized",
         statusCode: 401,
         isError: true
     }
