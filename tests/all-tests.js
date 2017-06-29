@@ -21,7 +21,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-require("universal");
+fluid.require("%universal");
 
 kettle.loadTestingSupport();
 
@@ -47,6 +47,7 @@ var testIncludes = [
     "./JournalIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
     "./PreferencesServerErrorTests.js",
+    "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedDevelopmentTests.js",
     "./UntrustedUserLogonStateChangeTests.js",
@@ -67,7 +68,8 @@ var testIncludes = [
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/rawPreferencesServer/test/RawPreferencesTest.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    "../gpii/node_modules/contextManager/test/ContextManagerTests.js"
+    "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
+    "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

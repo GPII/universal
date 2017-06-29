@@ -48,6 +48,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.highContrastTheme"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
