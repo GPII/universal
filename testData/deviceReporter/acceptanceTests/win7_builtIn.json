@@ -37,6 +37,10 @@
 
     {
         "id": "com.microsoft.windows.mouseKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.narrator"
     }
 
 ]

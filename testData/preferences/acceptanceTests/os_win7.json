@@ -84,6 +84,15 @@
                             "maximum": 1,
                             "actual": 1
                         }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
+                        "SpeechSpeed": 11,
+                        "SpeechPitch": 4,
+                        "CoupleNarratorCursorKeyboard": 1,
+                        "FollowInsertion": 0,
+                        "InteractionMouse": 1,
+                        "EchoWords": 1,
+                        "EchoChars": 0
                     }
                 }
             }
