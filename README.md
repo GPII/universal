@@ -181,6 +181,4 @@ Or use the following command to download a particular image identified using a G
 
 Additional notes:
 
-* The Docker image is built within the container using the [same Ansible role](https://github.com/idi-ops/ansible-nodejs) used to provision VMs, to simplify the management of different environments.
-* Universal is installed to /opt/gpii/node_modules/universal to allow the node-based test cases to resolve. Regarding the tests:
-  * Currently, the node-based tests are always run when this container is built. If you would like to turn this off for local debugging or faster building, remove the `npm test` item in the `nodejs_app_commands` list in `provisioning/docker-vars.yml`
+* Universal is installed to /home/node/node_modules/universal to allow the node-based test cases to resolve. Regarding the tests:
