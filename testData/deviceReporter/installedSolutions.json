@@ -40,6 +40,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.narrator"
+    },
+
+    {
         "id": "com.microsoft.windows.highContrast"
     },
 
