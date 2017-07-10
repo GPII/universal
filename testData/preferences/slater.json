@@ -1,0 +1,17 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/speechRate": 140,
+                    "http://registry.gpii.net/common/trackingTTS": ["focus"],
+                    "http://registry.gpii.net/common/keyEcho": true,
+                    "http://registry.gpii.net/common/wordEcho": true,
+                    "http://registry.gpii.net/common/pitch": 0.6
+                }
+            }
+        }
+    }
+}
