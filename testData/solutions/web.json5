@@ -85,7 +85,7 @@
                     "fontFaceFontName": {
                         "transform":{
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/fontName",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/fontName",
                             "match": {
                                 "times": "Times New Roman",
                                 "comic": "Comic Sans",
@@ -100,7 +100,7 @@
                     "foregroundColor": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/foregroundColor",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/foregroundColor",
                             "match": {
                                 "black": "Black",
                                 "yellow": "Yellow",
@@ -114,7 +114,7 @@
                     "backgroundColor": {
                         "transform":{
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/backgroundColor",
                             "defaultInputValue": "default",
                             "match": {
                                 "black": {
@@ -132,13 +132,13 @@
                             }
                         }
                     },
-                    "lineSpacing": "http://registry\\.gpii\\.net/provisional-common/lineSpacing",
-                    "inputsLarger": "http://registry\\.gpii\\.net/provisional-common/inputsLarger",
-                    "toc": "http://registry\\.gpii\\.net/provisional-common/tableOfContents",
-                    "links": "http://registry\\.gpii\\.net/provisional-common/emphasizeLinks",
-                    "layout": "http://registry\\.gpii\\.net/provisional-common/simplifyLayout",
+                    "lineSpacing": "http://registry\\.gpii\\.net/common/lineSpacing",
+                    "inputsLarger": "http://registry\\.gpii\\.net/common/inputsLarger",
+                    "toc": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "links": "http://registry\\.gpii\\.net/common/emphasizeLinks",
+                    "layout": "http://registry\\.gpii\\.net/common/simplifyLayout",
                     "invertImages": "http://registry\\.gpii\\.net/common/invertColours",
-                    "tracking": "http://registry\\.gpii\\.net/provisional-common/magnifierFollows",
+                    "tracking": "http://registry\\.gpii\\.net/common/magnifierFollows",
                     "magnification": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
