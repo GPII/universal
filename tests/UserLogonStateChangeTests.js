@@ -22,4 +22,5 @@ var fluid = require("infusion"),
 
 require("./shared/UserLogonStateChangeTestDefs.js");
 
-kettle.test.bootstrapServer(gpii.tests.userLogonStateChange.buildTestDefs(gpii.tests.userLogonStateChange.testDefs));
+
+kettle.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonHandling.testDefs));
