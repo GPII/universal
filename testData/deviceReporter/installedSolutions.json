@@ -40,11 +40,27 @@
     },
 
     {
+        "id": "com.microsoft.windows.narrator"
+    },
+
+    {
         "id": "com.microsoft.windows.highContrast"
     },
 
     {
         "id": "com.microsoft.windows.highContrastTheme"
+    },
+
+    {
+        "id": "com.microsoft.windows.stickyKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.filterKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.mouseKeys"
     },
 
     {
