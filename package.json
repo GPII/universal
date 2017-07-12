@@ -17,7 +17,7 @@
         "infusion": "3.0.0-dev.20170322T234120Z.278de35",
         "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "json5": "0.5.1",
-        "kettle": "1.6.0",
+        "kettle": "javihernandez/kettle#GPII-2483",
         "node-jqunit": "1.1.4",
         "node-uuid": "1.4.8",
         "mkdirp": "0.5.1",
