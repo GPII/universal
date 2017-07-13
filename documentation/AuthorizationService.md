@@ -1,6 +1,6 @@
 ## Authorization Service
 
-The authorization service provides API that allows users to add, retrieve, update the data used by the [GPII OAuth2 security server](https://wiki.gpii.net/w/GPII_OAuth_2_Guide). These data include OAuth clients, users, authorizations used by various OAuth2 grant.
+The authorization service provides API that allows users to add, retrieve, update the data used by the [GPII OAuth2 authorization server](https://wiki.gpii.net/w/GPII_OAuth_2_Guide). These data include OAuth clients, users, authorizations used by various OAuth2 grants.
 
 ### APIs for [Authorization Code Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant)
 

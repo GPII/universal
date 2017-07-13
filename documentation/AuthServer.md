@@ -2,22 +2,48 @@
 
 The authorization server adds access control to the cloud-based flow manger to secure access to user preferences. We are implementing the authorization server using the [OAuth 2.0 Authorization Framework](http://oauth.net/2/). See [GPII OAuth 2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide) for the implementation of GPII supported OAuth 2.0 grant types.
 
+### Supported GPII Clients
+The authorization server authorizes 4 type of GPII clients:
+
+* GPII App installations
+    * For this client type, the local flow manager is the GPII component within a GPII App installation to communicate with GPII Cloud.
+    * **Used OAuth2 grant**: [Resource Owner GPII Token Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant).
+    * **Capabilities**: GPII App installations can retrieve untrusted settings from GPII Cloud.
+
+* Onboarded solutions
+    * **Example**: Windows managnifier
+    * **Used OAuth2 grant**: No OAuth2 involved.
+    * **Capabilities**: Onboarded solutions receives filtered matchmaking results. The privacy filtering process is performed based on the privacy policy defined by the user for that solution.
+
+* Priviledged preferences creators
+    * **Example**: First Discovery Tool
+    * **Used OAuth2 grant**: [Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant).
+    * **Capabilities**: Priviledged preferences creators can add new preferences sets.
+
+* Web preferences consumers
+    * **Example**: Easit4All website
+    * **Used OAuth2 grant**: [Authorization Code Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant).
+    * **Capabilities**: Web preferences consumers receives filtered user preferences. The privacy filtering process is performed based on the privacy policy defined by the user for that solution.
+
 ### Document Structure
 
 The authorization server uses CouchDB to store data in JSON documents when GPII runs in the production configuration. In development configuration, CouchDB-compatible PouchDB is used for the data storage. 
 
 The document types used by the authorization server include:
 
-* [User](#user)
-* [Client](#client)
-* [GPII tokens](#gpii-tokens)
-* [Auth code authorizations](#auth-code-authorizations)
+* [Users](#users)
+* [GPII App Installation Clients](#gpii-app-installation-clients)
+* [Onboarded Solution Clients](#onboarded-solution-clients)
+* [Privileged Prefs Creator Clients](#privileged-prefs-creator-clients)
+* [Web Prefs Consumer Clients](#web-prefs-consumer-clients)
+* [GPII Tokens](#gpii-tokens)
+* [GPII App Installation Authorizations](#gpii-app-installation-authorizations)
+* [Onboarded Solution Authorizations](#onboarded-solution-authorizations)
+* [Privileged Prefs Creator Authorizations](#privileged-prefs-creator-authorizations)
+* [Web Prefs Consumer Authorizations](#web-prefs-consumer-authorizations)
 * [Authorization codes](#authorization-codes)
-* [Onboarded solution authorizations](#onboarded-solution-authorizations)
-* [Client credentials authorizations](#client-credentials-authorizations)
-* [Resource owner gpii token authorizations](#resource-owner-gpii-token-authorizations)
 
-#### User
+#### Users
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
@@ -27,18 +53,46 @@ The document types used by the authorization server include:
 | `password` | String | The user password. | None |
 | `defaultGpiiToken` | String | The default GPII token to be used when a user logs in. | None |
 
-#### Client
+#### GPII App Installation Clients
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
 | `id` | String | The client id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing client information. | The value must be set to "client". |
+| `type` | String | The document type for storing the client type information. | The value must be set to "gpiiAppInstallationClient". |
 | `name` | String | The client name. | None |
 | `oauth2ClientId` | String | The unique identifier issued to a registered OAuth2 client by the authorization server. | None |
 | `oauth2ClientSecret` | String | Confidential shared secret between the client and the authorization server, used to verify the identity of the client. | None |
-| `clientType` | String | The type of clients that use different OAuth2 grant type. GPII supports 4 type of clients: <br>`oauth2ResourceOwner`: native GPII apps that use OAuth2 resource owner gpii token grant.<br>`oauth2AuthCode`: web applications.<br>`onboardedSolution`: third party applications that GPII users can define privacy settings for. <br>`clientCredentialsApp`: applications that use OAuth2 client credentials grant to add new preferences on behalf of users, such as First Discovery Tool.| Must be one of these values: "oauth2ResourceOwner", "oauth2AuthCode", "onboardedSolution", "clientCredentialsApp".|
+| `userId` | Boolean | The id of the user who creates this client.| None |
+
+#### Onboarded Solution Clients
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The client id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing the client type information. | The value must be set to "onboardedSolutionClient". |
+| `name` | String | The client name. | None |
+| `solutionId` | String | The unique identifier issued to an onboarded solution. | None |
+
+#### Privileged Prefs Creator Clients
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The client id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing the client type information. | The value must be set to "privilegedPrefsCreatorClient". |
+| `name` | String | The client name. | None |
+| `oauth2ClientId` | String | The unique identifier issued to a registered OAuth2 client by the authorization server. | None |
+| `oauth2ClientSecret` | String | Confidential shared secret between the client and the authorization server, used to verify the identity of the client. | None |
+
+#### Web Prefs Consumer Clients
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The client id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing client information. | The value must be set to "webPrefsConsumerClient". |
+| `name` | String | The client name. | None |
+| `oauth2ClientId` | String | The unique identifier issued to a registered OAuth2 client by the authorization server. | None |
+| `oauth2ClientSecret` | String | Confidential shared secret between the client and the authorization server, used to verify the identity of the client. | None |
 | `redirectUri` | String | The URL on client's site where users will be sent after authorization. This field is only required for clients whose `clientType` is "oauth2AuthCode".| None |
-| `allowAddPrefs` | Boolean | Whether the client is allowed to add new preferences. This field is only required for clients whose `clientType` is "clientCredentialsApp".| true |
 
 #### GPII Tokens
 
@@ -49,12 +103,48 @@ The document types used by the authorization server include:
 | `gpiiToken` | String | The GPII token. | None |
 | `userId` | String | The user id that this GPII token belongs to. | None |
 
-#### Auth Code Authorizations
+#### GPII App Installation Authorizations
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The resource owner gpii token authorization id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing resource owner gpii token authorizations. | The value must be set to "gpiiAppInstallationAuthorization". |
+| `clientId` | String | The client id that this token is assigned to. | None |
+| `gpiiToken` | String | The GPII token that this token record is associated with. | None |
+| `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
+| `expiresIn` | Number | The number of seconds left before the access token becomes invalid. The default value is 3600. | 3600 |
+| `revoked` | Boolean | Whether this token has been revoked. | false |
+| `expired` | Boolean | Whether this token has expired, meaning `timestampCreated` + `expiresIn` < now(). | false |
+| `timestampCreated` | Date | The timestamp when the token is created. | now() |
+| `timestampRevoked` | Date | The timestamp when the token is revoked. | None |
+
+#### Onboarded Solution Authorizations
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The onboarded solution authorization id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing GPII tokens. | The value must be set to "onboardedSolutionAuthorization". |
+| `gpiiToken` | String | The GPII token that the authorization is associated with. | None |
+| `clientId` | String | The client id that the authorization is associated with. | None |
+| `selectedPreferences` | Object | The preferences that the user has granted permissions to the client to retrieve. | None |
+| `revoked` | Boolean | Whether this decision has been revoked. | false |
+
+#### Privileged Prefs Creator Authorizations
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| `id` | String | The client credentials token id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing client credentials tokens. | The value must be set to "privilegedPrefsCreatorAuthorization". |
+| `clientId` | String | The client id that this token is assigned to. | None |
+| `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
+| `revoked` | Boolean | Whether this token has been revoked. | false |
+
+#### Web Prefs Consumer Authorizations
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
 | `id` | String | The auth code authorization id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing GPII tokens. | The value must be set to "authCodeAuthorization". |
+| `type` | String | The document type for storing GPII tokens. | The value must be set to "webPrefsConsumerAuthorization". |
 | `gpiiToken` | String | The GPII token that the authorization is associated with. | None |
 | `clientId` | String | The client id that the authorization is associated with. | None |
 | `redirectUri` | String | The URL on client's site where users will be sent after authorization. | None |
@@ -70,40 +160,3 @@ The document types used by the authorization server include:
 | `type` | String | The document type for storing GPII tokens. | The value must be set to "authCode". |
 | `authCodeAuthorizationId` | String | The auth code authorization that this code is associated with. | None |
 | `code` | String | The intermediary code granted by the authorization server to identify the client. See [The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749#section-1.3.1) for details. | None |
-
-#### Onboarded solution authorizations
-
-| Option | Type | Description | Default |
-| ------ | ---- | ----------- | ------- |
-| `id` | String | The onboarded solution authorization id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing GPII tokens. | The value must be set to "onboardedSolutionAuthorization". |
-| `gpiiToken` | String | The GPII token that the authorization is associated with. | None |
-| `clientId` | String | The client id that the authorization is associated with. | None |
-| `selectedPreferences` | Object | The preferences that the user has granted permissions to the client to retrieve. | None |
-| `revoked` | Boolean | Whether this decision has been revoked. | false |
-
-#### Client Credentials Authorizations
-
-| Option | Type | Description | Default |
-| ------ | ---- | ----------- | ------- |
-| `id` | String | The client credentials token id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing client credentials tokens. | The value must be set to "clientCredentialsAuthorization". |
-| `clientId` | String | The client id that this token is assigned to. | None |
-| `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
-| `allowAddPrefs` | Boolean | Whether the client is allowed to add new preferences. | true |
-| `revoked` | Boolean | Whether this token has been revoked. | false |
-
-#### Resource Owner Gpii Token Authorizations
-
-| Option | Type | Description | Default |
-| ------ | ---- | ----------- | ------- |
-| `id` | String | The resource owner gpii token authorization id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing resource owner gpii token authorizations. | The value must be set to "ResourceOwnerAuthorization". |
-| `clientId` | String | The client id that this token is assigned to. | None |
-| `gpiiToken` | String | The GPII token that this token record is associated with. | None |
-| `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
-| `expiresIn` | Number | The number of seconds left before the access token becomes invalid. The default value is 3600. | 3600 |
-| `revoked` | Boolean | Whether this token has been revoked. | false |
-| `expired` | Boolean | Whether this token has expired, meaning `timestampCreated` + `expiresIn` < now(). | false |
-| `timestampCreated` | Date | The timestamp when the token is created. | now() |
-| `timestampRevoked` | Date | The timestamp when the token is revoked. | None |
