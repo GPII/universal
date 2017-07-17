@@ -2,7 +2,7 @@
 
 A locally running component, with the following responsiblities:
 * Doing the preprocessing - that is, preparing the input payload for the matchmakers
-* Making the decision of which MM to call (ie. hybrid matchmaking), and then call that MM
+* Making the decision of which MM to call (i.e. hybrid matchmaking), and then call that MM
 * Doing the post-processing - that is, taking the return payload from the matchmakers and transformat
 
 ## Configuration
@@ -46,7 +46,7 @@ Like all other Kettle apps, the Matchmaker Framework is defined by a config file
 
 ## API:
 
-The matchmakers that can be called from the Matchmaker Framework need to adhere to the following API. 
+The matchmakers that can be called from the Matchmaker Framework need to adhere to the following API.
 
 ### URL: `/match`
 
@@ -109,7 +109,7 @@ The input for these POST requests will be in the following format. Note that it 
             }
         ]
     },
-    environmentReporter: { 
+    environmentReporter: {
         "http://registry.gpii.net/terms/environment/brightness": 60,
         "http://registry.gpii.net/terms/environment/sound": -6
         "http://registry.gpii.net/terms/environment/timeOfDay": "18:29:00"
@@ -121,7 +121,7 @@ The input for these POST requests will be in the following format. Note that it 
         "gpii-default",
         "nighttime-at-home"
     ],
-    inverseCapabilities: { 
+    inverseCapabilities: {
         "com.microsoft.windows.cursors": {
             "http://registry.gpii.net/common/mouseTrailing": 0.8,
             (...),
