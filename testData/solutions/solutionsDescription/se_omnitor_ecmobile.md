@@ -9,7 +9,7 @@
 * __Contact__ (project lead): Christer Ulfsparre (christer.ulfsparre@omnitor.se)
 
 ## Description
-__eCmobile__ and __eCtouch__ are two Android applications for real-time communication using simultaneous video, audio and text. They use [SIP (Session Initiation Protocol)](https://www.ietf.org/rfc/rfc3261.txt) to negotiate and control calls and are fully compatible with other standards compliant SIP clients. 
+__eCmobile__ and __eCtouch__ are two Android applications for real-time communication using simultaneous video, audio and text. They use [SIP (Session Initiation Protocol)](https://www.ietf.org/rfc/rfc3261.txt) to negotiate and control calls and are fully compatible with other standards compliant SIP clients.
 Both applications are closed-source and proprietary. They are mostly sold via various  municipal or county aid offices to aid users either in the workplace or in their private life.
 The two applications are very similar in operation and implementation, which is why they're treated as a single solution in the GPII. The difference between the two lies in the targeted range of devices. eCtouch is tailored towards tablet devices (7 inches and larger), whereas eCmobile is meant for use in smartphones. Currently we primarily use the Samsung Galaxy Note 10.1 (2014 edition) tablet and the Samsung Galaxy S5 smartphone when selling pre-installed units to end-users.
 
@@ -17,7 +17,7 @@ You'll find more information at [our website](http://www.omnitor.com), primarily
 Installation instructions can be found in [this](https://docs.google.com/document/d/1McMtIfCVSSHe9acMLgIMpqFr-psYBuYRzePzobafIW4) document.
 
 ## Integration
-eCtouch and eCmobile are partially integrated with the GPII, limited primarily by the Android operating system. On a non-rooted device, a regular application (ie. the GPII app) may not be able to shut down another application (eCtouch/eCmobile). This means that the GPII cannot fully control the life cycle of the applications, so upon logging out from the GPII, although the home screen is shown, the application can still be running in background.
+eCtouch and eCmobile are partially integrated with the GPII, limited primarily by the Android operating system. On a non-rooted device, a regular application (i.e. the GPII app) may not be able to shut down another application (eCtouch/eCmobile). This means that the GPII cannot fully control the life cycle of the applications, so upon logging out from the GPII, although the home screen is shown, the application can still be running in background.
 
 
 Information about value ranges and mappings to common terms can be found [here](https://docs.google.com/spreadsheet/ccc?key=0AppduB_JZh5EdDRYT1pmOTc5eUpNbkpMckhacUVxWXc&usp=sharing#gid=27). If the link doesn't take you to the "eCtouch/eCmobile" page, select it in the bottom row.

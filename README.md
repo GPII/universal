@@ -30,6 +30,42 @@ If all is well, you will see a message like
 Note that this installation will not include any OS-specific features, but can be used to verify system function with
 basic preference sets which only start solutions which require filesystem-based configuration (XML, JSON or .INI files).
 
+Environment Variables
+---------------------
+
+Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/blob/master/docs/ConfigsAndApplications.md#referring-to-external-data-via-resolvers), some pre-defined configuration files offer the ability to read environment variables to change commonly used settings.
+
+#### Preferences Server
+
+The Preferences Server with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
+
+  * `GPII_PREFERENCES_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `GPII_PREFERENCES_DATASOURCE_URL`: Location of CouchDB database (default: http://localhost:5984/preferences/%userToken)
+
+Example:
+
+```
+GPII_PREFERENCES_LISTEN_PORT=9090 \
+GPII_PREFERENCES_DATASOURCE_URL=https://localhost:5984/%userToken \
+NODE_ENV=gpii.config.cloudBased.flowManager.production \
+npm start
+```
+#### Flow Manager
+
+The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
+
+  * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `GPII_FLOWMANAGER_PREFERENCES_URL`: Location of the Preferences Server (default: https://preferences.gpii.net/preferences/%userToken)
+
+Example:
+
+```
+GPII_FLOWMANAGER_LISTEN_PORT=9091 \
+GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9090/preferences/%userToken \
+NODE_ENV=gpii.config.cloudBased.flowManager.production \
+npm start
+```
+
 Recovering From System Corruption Using the Journal
 ---------------------------------------------------
 
@@ -124,8 +160,10 @@ To use any of the gpii components or functionality in Node.js, use the
 following statements to get access to fluid and/or gpii objects.
 
 ```
-var fluid = require("universal"),
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 // Now you will have access to both fluid and gpii namespaces.
 ```
 
