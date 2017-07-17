@@ -115,30 +115,27 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "userId": "user-3"
     }, {
         "_id": "client-1",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client A",
         "oauth2ClientId": "client_id_A",
         "oauth2ClientSecret": "client_secret_A",
-        "clientType": "oauth2AuthCode",
         "redirectUri": "http://example.com/callback_A"
     }, {
         "_id": "client-2",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client B",
         "oauth2ClientId": "client_id_B",
         "oauth2ClientSecret": "client_secret_B",
-        "clientType": "oauth2AuthCode",
         "redirectUri": "http://example.com/callback_B"
     }, {
         "_id": "client-3",
-        "type": "client",
+        "type": "privilegedPrefsCreatorClient",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "clientType": "oauth2ClientCredentials"
+        "oauth2ClientSecret": "client_secret_firstDiscovery"
     }, {
         "_id": "authDecision-1",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -149,7 +146,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "revoked": false
     }, {
         "_id": "authDecision-2",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -160,7 +157,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "revoked": false
     }, {
         "_id": "authDecision-3",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-2",
         "redirectUri": "",
@@ -170,11 +167,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "clientCredentialsAuthorization-1",
-        "type": "clientCredentialsAuthorization",
+        "_id": "privilegedPrefsCreatorAuthorization-1",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-3",
         "accessToken": "firstDiscovery_access_token",
-        "allowAddPrefs": true,
         "revoked": false
     }];
 

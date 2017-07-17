@@ -62,10 +62,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "findValidResourceOwnerAuthorization() returns undefined with an empty dataStore",
+                name: "findValidGpiiAppInstallationAuthorization() returns undefined with an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-1"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
@@ -122,23 +122,28 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "userId": "user-4"
     }, {
         "_id": "client-1",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client A",
         "oauth2ClientId": "client_id_A",
         "oauth2ClientSecret": "client_secret_A",
-        "clientType": "oauth2AuthCode",
         "redirectUri": "http://example.com/callback_A"
     }, {
         "_id": "client-2",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client B",
         "oauth2ClientId": "client_id_B",
         "oauth2ClientSecret": "client_secret_B",
-        "clientType": "oauth2AuthCode",
         "redirectUri": "http://example.com/callback_B"
     }, {
+        "_id": "client-3",
+        "type": "gpiiAppInstallationClient",
+        "name": "AJC1",
+        "oauth2ClientId": "client_id_AJC1",
+        "oauth2ClientSecret": "client_secret_AJC1",
+        "userId": "user-1"
+    }, {
         "_id": "authDecision-1",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -149,7 +154,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "revoked": false
     }, {
         "_id": "authDecision-2",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -160,7 +165,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "revoked": false
     }, {
         "_id": "authDecision-3",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-2",
         "redirectUri": "",
@@ -171,7 +176,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "revoked": false
     }, {
         "_id": "authDecision-4",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "dave_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -182,7 +187,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "revoked": true
     }, {
         "_id": "authDecision-5",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "dave_gpii_token",
         "clientId": "client-2",
         "redirectUri": "",
@@ -192,33 +197,33 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "resourceOwnerAuthorization-1",
-        "type": "resourceOwnerAuthorization",
-        "clientId": "client-1",
+        "_id": "gpiiAppInstallationAuthorization-1",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token-1",
+        "accessToken": "gpii-app-installation-token-1",
         "expiresIn": 3600,
         "revoked": false,
         "expired": false,
         "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": null
     }, {
-        "_id": "resourceOwnerAuthorization-2",
-        "type": "resourceOwnerAuthorization",
-        "clientId": "client-1",
+        "_id": "gpiiAppInstallationAuthorization-2",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token-2",
+        "accessToken": "gpii-app-installation-token-2",
         "expiresIn": 120,
         "revoked": false,
         "expired": false,
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toString(),
         "timestampRevoked": null
     }, {
-        "_id": "resourceOwnerAuthorization-3",
-        "type": "resourceOwnerAuthorization",
-        "clientId": "client-2",
+        "_id": "gpiiAppInstallationAuthorization-3",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token-3",
+        "accessToken": "gpii-app-installation-token-3",
         "expiresIn": 3600,
         "revoked": false,
         "expired": false,
@@ -248,19 +253,19 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             "clientName": "Client A",
             "oauth2ClientId": "client_id_A"
         }],
-        findValidResourceOwnerAuthorizationSetExpired: {
-            "id": "resourceOwnerAuthorization-1",
-            "clientId": "client-1",
+        findValidGpiiAppInstallationAuthorizationSetExpired: {
+            "id": "gpiiAppInstallationAuthorization-1",
+            "clientId": "client-3",
             "gpiiToken": "gpiiToken-1",
-            "accessToken": "native-gpii-app-token-1",
+            "accessToken": "gpii-app-installation-token-1",
             "expiresIn": 3600,
             "revoked": false,
             "expired": true,
             "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
             "timestampRevoked": null
         },
-        findValidResourceOwnerAuthorization: {
-            "accessToken": "native-gpii-app-token-2",
+        findValidGpiiAppInstallationAuthorization: {
+            "accessToken": "gpii-app-installation-token-2",
             "expiresIn": 120
         }
     };
@@ -322,39 +327,39 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }]
             }]
         }, {
-            name: "Test gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization()",
+            name: "Test gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization()",
             tests: [{
-                name: "findValidResourceOwnerAuthorization() sets expired for expired access tokens and returns unexpired access token",
+                name: "findValidGpiiAppInstallationAuthorization() sets expired for expired access tokens and returns unexpired access token",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-1"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
-                    args: ["unexpired access token should be returned", gpii.tests.oauth2.authorizationService.expected.findValidResourceOwnerAuthorization, "{arguments}.0"],
+                    args: ["unexpired access token should be returned", gpii.tests.oauth2.authorizationService.expected.findValidGpiiAppInstallationAuthorization, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }, {
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.dataStore.findResourceOwnerAuthorizationById", ["resourceOwnerAuthorization-1"], "{that}"]
+                    args: ["{authorizationService}.dataStore.findGpiiAppInstallationAuthorizationById", ["gpiiAppInstallationAuthorization-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
-                    args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidResourceOwnerAuthorizationSetExpired, "{arguments}.0"],
+                    args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidGpiiAppInstallationAuthorizationSetExpired, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "findValidResourceOwnerAuthorization() returns undefined for nonexistent record",
+                name: "findValidGpiiAppInstallationAuthorization() returns undefined for nonexistent record",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization, ["{authorizationService}.dataStore", "nonexistent-token", "nonexistent-client"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "nonexistent-token", "nonexistent-client"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received for nonexistent record", "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "findValidResourceOwnerAuthorization() returns undefined when all existing access tokens have expired",
+                name: "findValidGpiiAppInstallationAuthorization() returns undefined when all existing access tokens have expired",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidResourceOwnerAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-2"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-2"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received when all existing access tokens have expired", "{arguments}.0"],

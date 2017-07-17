@@ -21,49 +21,49 @@ fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.cloud.oauth2.resourceOwner");
+fluid.registerNamespace("gpii.tests.cloud.oauth2.gpiiAppInstallation");
 
 var initialTokenResponse;
 
-gpii.tests.cloud.oauth2.resourceOwner.verifyInitialAccessToken = function (body, accessTokenRequest) {
-    gpii.test.cloudBased.oauth2.verifyResourceOwnerAccessTokenInResponse(body, accessTokenRequest);
+gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken = function (body, accessTokenRequest) {
+    gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
     initialTokenResponse = body;
 };
 
-gpii.tests.cloud.oauth2.resourceOwner.verifyRefetchedAccessToken = function (body, accessTokenRequest) {
-    gpii.test.cloudBased.oauth2.verifyResourceOwnerAccessTokenInResponse(body, accessTokenRequest);
+gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken = function (body, accessTokenRequest) {
+    gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
     jqUnit.assertEquals("The previously set unexpired access token is returned", initialTokenResponse, body);
 };
 
-gpii.tests.cloud.oauth2.resourceOwner.mainSequence = [
+gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInResourceOwner",
+        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInGpiiAppInstallation",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     { // 1
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.tests.cloud.oauth2.resourceOwner.verifyInitialAccessToken",
+        listener: "gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2
-        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInResourceOwner",
+        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInGpiiAppInstallation",
         args: ["{accessTokenRequest2}", "{testCaseHolder}.options"]
     },
     { // 3
         event: "{accessTokenRequest2}.events.onComplete",
-        listener: "gpii.tests.cloud.oauth2.resourceOwner.verifyRefetchedAccessToken",
+        listener: "gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken",
         args: ["{arguments}.0", "{accessTokenRequest2}"]
     }
 ];
 
-fluid.defaults("gpii.tests.cloud.oauth2.resourceOwner.disruption.mainSequence", {
+fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.mainSequence", {
     gradeNames: ["gpii.test.disruption"],
-    sequenceName: "gpii.tests.cloud.oauth2.resourceOwner.mainSequence"
+    sequenceName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence"
 });
 
 // Verify status code
-fluid.defaults("gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode", {
-    gradeNames: ["gpii.tests.cloud.oauth2.resourceOwner.disruption.mainSequence"],
+fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode", {
+    gradeNames: ["gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.mainSequence"],
     truncateAt: 1,
     expect: 1,
     recordName: "accessTokenForm",
@@ -74,14 +74,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode", {
     }
 });
 
-gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
+gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptions = [
     {
         name: "A success access token request using the resource owner gpii token grant type",
-        gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.mainSequence"
+        gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.mainSequence"
     },
     {
         name: "Attempt to get access token without sending client_id",
-        gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
         changes: {
             path: "client_id",
             type: "DELETE"
@@ -90,7 +90,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
     },
     {
         name: "Attempt to get access token without sending client_secret",
-        gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
         changes: {
             path: "client_secret",
             type: "DELETE"
@@ -99,7 +99,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
     },
     {
         name: "Attempt to get access token without sending client_secret",
-        gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
         changes: {
             path: "username",
             type: "DELETE"
@@ -108,7 +108,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
     },
     {
         name: "Attempt to get access token without sending client_secret",
-        gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
         changes: {
             path: "password",
             type: "DELETE"
@@ -117,7 +117,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
     },
     {
         name: "Attempt to get access token without sending grant_type",
-        gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
         changes: {
             path: "grant_type",
             type: "DELETE"
@@ -126,25 +126,25 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptions = [
     }
 ];
 
-gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithWrongClient = [{
-    name: "Attempt to get access token with sending a wrong client (oauth2 client type is not \"oauth2ResourceOwners\")",
-    gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithWrongClient = [{
+    name: "Attempt to get access token with sending a wrong client (oauth2 client type is not \"gpiiAppInstallationClient\")",
+    gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
     expectedStatusCode: 401
 }];
 
-gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithNonexistentClient = [{
+gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithNonexistentClient = [{
     name: "Attempt to get access token with sending an nonexistent client",
-    gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+    gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
     expectedStatusCode: 401
 }];
 
-gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithNonexistentGpiiToken = [{
+gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithNonexistentGpiiToken = [{
     name: "Attempt to get access token with sending a wrong GPII token",
-    gradeName: "gpii.tests.cloud.oauth2.resourceOwner.disruption.statusCode",
+    gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.statusCode",
     expectedStatusCode: 401
 }];
 
-gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
+gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests = [
     {
         testDef: {
             name: "Acceptance test for verifying GPII apps - a successful entire work flow",
@@ -153,17 +153,17 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
             username: "alice_gpii_token",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.resourceOwner.disruptions
+        disruptions: gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptions
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting resource owner gpii token grant type (oauth2 client type is not \"oauth2ResourceOwners\")",
+            name: "Acceptance test for suppporting resource owner gpii token grant type (oauth2 client type is not \"gpiiAppInstallationClient\")",
             client_id: "com.bdigital.easit4all",
             client_secret: "client_secret_easit4all",
             username: "alice_gpii_token",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithWrongClient
+        disruptions: gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithWrongClient
     },
     {
         testDef: {
@@ -173,7 +173,7 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
             username: "alice_gpii_token",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithNonexistentClient
+        disruptions: gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithNonexistentClient
     },
     {
         testDef: {
@@ -183,11 +183,11 @@ gpii.tests.cloud.oauth2.resourceOwner.disruptedTests = [
             username: "nonexistent_gpii_token",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.resourceOwner.disruptionsWithNonexistentGpiiToken
+        disruptions: gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithNonexistentGpiiToken
     }
 ];
 
-fluid.each(gpii.tests.cloud.oauth2.resourceOwner.disruptedTests, function (oneTest) {
+fluid.each(gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests, function (oneTest) {
     gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,
         {},

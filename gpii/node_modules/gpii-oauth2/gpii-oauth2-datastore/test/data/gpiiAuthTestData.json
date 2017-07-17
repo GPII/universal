@@ -20,33 +20,29 @@
     },
     {
         "_id": "client-1",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
-        "clientType": "oauth2AuthCode",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
     {
         "_id": "client-2",
-        "type": "client",
+        "type": "privilegedPrefsCreatorClient",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "clientType": "oauth2ClientCredentials",
-        "allowAddPrefs": true
+        "oauth2ClientSecret": "client_secret_firstDiscovery"
     },
     {
         "_id": "client-3",
-        "type": "client",
+        "type": "onboardedSolutionClient",
         "name": "Windows Magnifier",
         "oauth2ClientId": "net.gpii.windows.magnifier",
-        "oauth2ClientSecret": "client_secret_windows_magnifier",
-        "clientType": "onboardedSolution"
+        "oauth2ClientSecret": "client_secret_windows_magnifier"
     },
     {
         "_id": "authDecision-1",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -58,9 +54,9 @@
     },
     {
         "_id": "authDecision-2",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
-        "clientId": "client-2",
+        "clientId": "client-1",
         "redirectUri": false,
         "accessToken": "chrome_high_contrast_access_token_client_2",
         "selectedPreferences": {
@@ -70,9 +66,9 @@
     },
     {
         "_id": "authDecision-3",
-        "type": "authDecision",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast_dark",
-        "clientId": "client-2",
+        "clientId": "client-1",
         "redirectUri": false,
         "accessToken": "windows_magnifier_access_token",
         "selectedPreferences": {
@@ -88,27 +84,25 @@
         "code": "chrome_high_contrast_auth_token"
     },
     {
-        "_id": "clientCredentialsAuthorization-1",
-        "type": "clientCredentialsAuthorization",
+        "_id": "privilegedPrefsCreatorAuthorization-1",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",
-        "allowAddPrefs": true,
         "revoked": false
     },
     {
-        "_id": "clientCredentialsAuthorization-2",
-        "type": "clientCredentialsAuthorization",
+        "_id": "privilegedPrefsCreatorAuthorization-2",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "non-existing-client",
         "accessToken": "non-existing-client-token",
-        "allowAddPrefs": true,
         "revoked": false
     },
     {
-        "_id": "resourceOwnerAuthorization-1",
-        "type": "resourceOwnerAuthorization",
+        "_id": "gpiiAppInstallationAuthorization-1",
+        "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token-1",
+        "accessToken": "gpii-app-installation-token-1",
         "expiresIn": 3600,
         "revoked": false,
         "expired": false,
@@ -116,11 +110,11 @@
         "timestampRevoked": null
     },
     {
-        "_id": "resourceOwnerAuthorization-2",
-        "type": "resourceOwnerAuthorization",
+        "_id": "gpiiAppInstallationAuthorization-2",
+        "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token-2",
+        "accessToken": "gpii-app-installation-token-2",
         "expiresIn": 360000000000,
         "revoked": false,
         "expired": false,
@@ -128,11 +122,11 @@
         "timestampRevoked": null
     },
     {
-        "_id": "resourceOwnerAuthorization-3",
-        "type": "resourceOwnerAuthorization",
+        "_id": "gpiiAppInstallationAuthorization-3",
+        "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-2",
         "gpiiToken": "gpiiToken-1",
-        "accessToken": "native-gpii-app-token-3",
+        "accessToken": "gpii-app-installation-token-3",
         "expiresIn": 3600,
         "revoked": true,
         "expired": false,

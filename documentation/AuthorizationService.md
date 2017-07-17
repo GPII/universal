@@ -135,13 +135,15 @@ client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
 * **return:** `True` or `false`.
 
-### APIs for [Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
+### APIs for Privileged Preferences Creator Clients
 
-#### getAuthByClientCredentialsAccessToken(accessToken)
-* **description**: Get the authorization information using the client credentials access token.
+**Note**: Privileged Preferences Creator Clients are authorized using [OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
+
+#### getAuthByPrivilegedPrefsCreatorAccessToken(accessToken)
+* **description**: Get the authorization information using the privileged prefs creator access token.
 * **parameters:** 
     * accessToken: String. An access token representing an authorization issued to the client.
-* **return:** An object. This object contains the authorization information for the client. Return `undefined` when the client is not found. An example of a return:
+* **return:** An object. This object contains the authorization information for the client. Return `undefined` when the access token or the client associated with this access token is not found. An example of a return:
 ```
 {
     oauth2ClientId: "client_id_A",
@@ -149,34 +151,35 @@ client.
 }
 ```
 
-#### grantClientCredentialsAuthorization(clientId, scope)
-* **description**: Get the client credentials authorization that is assigned to the client. If this client hasn't been assigned an authorization, the function will generate and return one.
+#### grantPrivilegedPrefsCreatorAuthorization(clientId, scope)
+* **description**: Grant an authorization to a privileged preferences creator. This authorization allows a privileged preferences creator to add new preferences sets. The scenarios handled by this function: 
+    * If the given privileged preferences creator has never been assigned an authorization, the function will generate and return one.
+    * If the given privileged preferences creator has already been assigned an authorization,the function will return this existing authorization.
 * **parameters:** 
     * clientId: Number. A system generated unique number that identifies the client.
-        - Notes: "oauth2ClientCredentials" is the only OAuth2 client type that is allowed to request client credentials authorizations. See [the `Client` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#client)
+        - Notes: "oauth2ClientCredentials" is the only OAuth2 client type that is allowed to request privileged prefs creator authorizations. See [the `Client` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#client)
     * scope: String. Must be "add_preferences".
-        - Notes: "add_preferences" is the only scope currently supported in the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
-* **return:** String. A client credentials access token. Return an object that contains the error message and http status code if the scope is wrong, or the client is not allowed to add preferences, or the client's OAuth2 client type is not "oauth2ClientCredentials".
+        - Notes: "add_preferences" is the only scope currently supported by the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
+* **return:** String. A privileged prefs creator access token. Return an object that contains the error message and http status code if the scope is wrong, or the client is not allowed to add preferences, or the client's OAuth2 client type is not "oauth2ClientCredentials".
 
-#### revokeClientCredentialsAuthorization(authorizationId)
-* **description**: Revoke the client credentials authorization.
+#### revokePrivilegedPrefsCreatorAuthorization(authorizationId)
+* **description**: Revoke an authorization granted to a privileged preferences creator.
 * **parameters:** 
     * authorizationId: String. A string representing the id of the client credential authorization record.
 * **return:** None.
 
-### APIs for Resource Owner Gpii Token Grant
+### APIs for GPII App Installation Clients
 
-**Note**: Resource owner gpii token grant is a custom GPII grant type with reference to [OAuth2 Resource Owner Password Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_Password_Credentials_Grant).
+**Note**: GPII App Installation Clients are authorized using [Resource Owner GPII Token Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant).
 
-#### grantResourceOwnerAuthorization(gpiiToken, clientId)
-* **description**: Get the resource owner gpii token authorization that is assigned to a client to access user settings associated with a specific GPII token. The use cases handled by this function: 
-    * If the client has never been assigned an authorization for the given GPII token, the function will generate and return one.
-    * If the client has been assigned an authorization before for the given GPII token, and this token has not expired, the function will return this existing authorization;
-    * If the client has been assigned an authorization before for the given GPII token, but this token has already expired, the fuction will generate and return a new one.
+#### grantGpiiAppInstallationAuthorization(gpiiToken, clientId)
+* **description**: Grant an authorization to a GPII app installation. This authorization allows a GPII app installation to access user settings associated with the given GPII token. The scenarios handled by this function: 
+    * If the given GPII app installation has never been assigned an authorization for the given GPII token, the function will generate and return one.
+    * If the given GPII app installation has already been assigned an authorization for the given GPII token, and this token has not expired, the function will return this existing authorization;
+    * If the given GPII app installation has already been assigned an authorization for the given GPII token, but this token has already expired, the fuction will generate and return a new one.
 * **parameters:** 
     * gpiiToken: String. A GPII token that associates with user preferences.
     * clientId: Number. A system generated unique number that identifies the client.
-        - Notes: "oauth2ResourceOwner" is the only OAuth2 client type that is allowed to request resource owner gpii token authorizations. See [the `Client` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#client)
 * **return:** Object. Contains an access token and the number of seconds that the access token will expire. For example:
 ```
 {
@@ -184,10 +187,10 @@ client.
     "expiresIn": 3600
 }
 ```
-Return an object that contains the error message and http status code if the GPII token is wrong, or the client's OAuth2 client type is not "oauth2ResourceOwner".
+Return an object that contains the error message and http status code if the GPII token is wrong, or the client's OAuth2 client type is not "gpiiAppInstallationClient".
 
-#### revokeResourceOwnerAuthorization(authorizationId)
-* **description**: Revoke the resource owner gpii token authorization.
+#### revokeGpiiAppInstallationAuthorization(authorizationId)
+* **description**: Revoke an authorization granted to a GPII app installation.
 * **parameters:** 
-    * authorizationId: String. A string representing the id of the resource owner gpii token authorization record.
+    * authorizationId: String. A string representing the id of an authorization record.
 * **return:** None.

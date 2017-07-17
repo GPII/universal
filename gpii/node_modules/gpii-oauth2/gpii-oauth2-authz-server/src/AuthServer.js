@@ -85,12 +85,12 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
-        var clientCredentialsPromise = authorizationService.grantClientCredentialsAuthorization(client.id, scope);
+        var clientCredentialsPromise = authorizationService.grantPrivilegedPrefsCreatorAuthorization(client.id, scope);
         gpii.oauth2.oauth2orizeServer.promiseToDone(clientCredentialsPromise, done);
     }));
 
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (client, username, password, scope, done) {
-        var passwordPromise = authorizationService.grantResourceOwnerAuthorization(username, client.id);
+        var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, client.id);
 
         var authorizationMapper = function (authorization) {
             return authorization.accessToken;
