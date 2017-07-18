@@ -9,8 +9,11 @@ compliance with this License.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+The R&D leading to these results received funding from the
+Department of Education - Grant H421A150005 (GPII-APCP). However,
+these results do not necessarily represent the policy of the
+Department of Education, and you should not assume endorsement by the
+Federal Government.
 */
 
 "use strict";
