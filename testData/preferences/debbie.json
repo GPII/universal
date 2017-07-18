@@ -1,0 +1,13 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/debounceEnable": true,
+                    "http://registry.gpii.net/common/debounceInterval": 0.20
+                }
+            }
+        }
+    }
+}

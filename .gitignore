@@ -13,3 +13,8 @@ Vagrantfile.local
 .vagrant/
 
 report.tap
+coverage
+.nyc_output
+instrumented
+reports
+.idea/

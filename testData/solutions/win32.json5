@@ -957,6 +957,278 @@
         ]
     },
 
+
+    "com.microsoft.windows.narrator": {
+        "name": "Windows Built-in Narrator",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Narrator",
+                    "dataTypes": {
+                        "SpeechSpeed": "REG_DWORD",
+                        "SpeechPitch": "REG_DWORD",
+                        "InteractionMouse": "REG_DWORD",
+                        "CoupleNarratorCursorKeyboard": "REG_DWORD",
+                        "FollowInsertion": "REG_DWORD",
+                        "EchoChars": "REG_DWORD",
+                        "EchoWords": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "SpeechSpeed": {},
+                    "SpeechPitch": {},
+                    "CoupleNarratorCursorKeyboard": {},
+                    "FollowInsertion": {},
+                    "InteractionMouse": {},
+                    "EchoChars": {},
+                    "EchoWords": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "http://registry\\.gpii\\.net/common/speechRate",
+                    "http://registry\\.gpii\\.net/common/trackingTTS",
+                    "http://registry\\.gpii\\.net/common/keyEcho",
+                    "http://registry\\.gpii\\.net/common/wordEcho",
+                    "http://registry\\.gpii\\.net/common/pitch"
+                ],
+                "capabilitiesTransformations": {
+                    "SpeechSpeed": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.quantize",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                    /* https://msdn.microsoft.com/library/ee431826
+                                     * The speed range is -10 to +10. 0 being normal, -10 is a third of normal and +10
+                                     * is three times normal. The registry value is actually 0 to 20.
+                                     * So this maps values between (default-speechRate / 3) and (default-speechRage * 3)
+                                     * into values between 0 and 20.
+                                     */
+                                    "ranges": [
+                                        {
+                                            "upperBound": 50,
+                                            "output": 0
+                                        },
+                                        {
+                                            "upperBound": 150,
+                                            "output": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.linearScale",
+                                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "factor": 0.1,
+                                                    "offset": -5
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "upperBound": 450,
+                                            "output": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.linearScale",
+                                                    "inputPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "factor": 0.033333333333,
+                                                    "offset": -5
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "output": 20
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "SpeechPitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "factor": 20,
+                            "offset": 0
+                        }
+                    },
+                    "transform": [{
+                        "type": "fluid.transforms.arrayToSetMembership",
+                        "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                        "outputPath": "",
+                        "presentValue": 1,
+                        "missingValue": 0,
+                        "options": {
+                            "focus": "CoupleNarratorCursorKeyboard",
+                            "caret": "FollowInsertion",
+                            "mouse": "InteractionMouse"
+                        }
+                    }],
+                    "EchoChars": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyEcho"
+                        }
+                    },
+                    "EchoWords": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/speechRate": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "SpeechSpeed",
+                                    "right": 10,
+                                    "operator": "<"
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "SpeechSpeed",
+                                    "factor": 10,
+                                    "offset": 50
+                                }
+                            },
+                            "false": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "inputPath": "SpeechSpeed",
+                                    "factor": 30,
+                                    "offset": -150
+                                }
+                            }
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "SpeechPitch",
+                            "factor": 0.05,
+                            "offset": 0
+                        }
+                    },
+                    "transform": [{
+                        "type": "fluid.transforms.setMembershipToArray",
+                        "inputPath": "",
+                        "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                        "presentValue": 1,
+                        "missingValue": 0,
+                        "options": {
+                            "CoupleNarratorCursorKeyboard": "focus",
+                            "FollowInsertion": "caret",
+                            "InteractionMouse": "mouse"
+                        }
+                    }],
+                    "http://registry\\.gpii\\.net/common/keyEcho": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EchoChars",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/wordEcho": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EchoWords",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    }
+                }
+            },
+            "configureNoRoam": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Narrator\\NoRoam",
+                    "dataTypes": {
+                        "SpeechVolume": "REG_DWORD",
+                        "ShowKeyboardIntroduction": "REG_DWORD",
+                        "ShowBrowserSelection": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "SpeechVolume": {},
+                    "ShowKeyboardIntroduction": {},
+                    "ShowBrowserSelection": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/volumeTTS"
+                ],
+                "capabilitiesTransformations": {
+                    "SpeechVolume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "factor": 100,
+                            "offset": 0
+                        }
+                    },
+                    "ShowKeyboardIntroduction": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/speakTutorialMessages"
+                        }
+                    },
+                    "ShowBrowserSelection": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": 0
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure",
+            "settings.configureNoRoam"
+        ],
+        "restore": [
+            "settings.configure",
+            "settings.configureNoRoam"
+        ],
+        "start": [
+            {
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "Narrator",
+                "enable": true
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.enableRegisteredAT",
+                "name": "Narrator",
+                "enable": false
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "org.nvda-project": {
         "name": "NVDA Screen Reader",
         "contexts": {
