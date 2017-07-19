@@ -41,7 +41,6 @@ gpii.oauth2.createOauth2orizeServer = function () {
     return oauth2orize.createServer();
 };
 
-// Unbound references: {clientService} and {authorizationService}
 fluid.defaults("gpii.oauth2.oauth2orizeServer", {
     gradeNames: ["fluid.component"],
     members: {
@@ -59,7 +58,6 @@ fluid.defaults("gpii.oauth2.oauth2orizeServer", {
     }
 });
 
-// TODO what name here?
 gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, clientService, authorizationService) {
     oauth2orizeServer.serializeClient(function (client, done) {
         return done(null, client.id);
@@ -71,10 +69,9 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     });
 
     oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
-        // TODO: Update the user interface to support multiple tokens
-        // per user rather than using a single default
+        // TODO: Update the user interface to support multiple tokens per user rather than using a single default
         var gpiiToken = user.defaultGpiiToken;
-        var authPromise = authorizationService.grantAuthorizationCode(gpiiToken, client.id, redirectUri, ares.selectedPreferences);
+        var authPromise = authorizationService.grantWebPrefsConsumerAuthorization(gpiiToken, client.id, redirectUri, ares.selectedPreferences);
 
         gpii.oauth2.oauth2orizeServer.promiseToDone(authPromise, done);
     }));
@@ -376,7 +373,7 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
 
         var authorizedServices = fluid.transform(authorizedClients, function (client) {
             return {
-                authDecisionId: client.authDecisionId,
+                authorizationId: client.authorizationId,
                 oauth2ClientId: client.oauth2ClientId,
                 serviceName: client.clientName
             };
@@ -475,29 +472,29 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         })
     );
 
-    that.expressApp["delete"]("/authorizations/:authDecisionId",
+    that.expressApp["delete"]("/authorizations/:authorizationId",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
-            // TODO: Validate authDecisionId
-            var authDecisionId = req.params.authDecisionId;
-            var revokePromise = that.authorizationService.revokeAuthorization(userId, authDecisionId);
+            // TODO: Validate authorizationId
+            var authorizationId = req.params.authorizationId;
+            var revokePromise = that.authorizationService.revokeAuthorization(userId, authorizationId);
             gpii.oauth2.mapPromiseToResponse(revokePromise, res);
         }
     );
 
-    // TODO: Perhaps a better URL would be /authorization/:authDecisionId/selectedPreferences
-    that.expressApp.get("/authorizations/:authDecisionId/preferences",
+    // TODO: Perhaps a better URL would be /authorization/:authorizationId/selectedPreferences
+    that.expressApp.get("/authorizations/:authorizationId/preferences",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
-            // TODO: Validate authDecisionId
-            var authDecisionId = req.params.authDecisionId;
-            var selectedPreferencesPromise = that.authorizationService.getSelectedPreferences(userId, authDecisionId);
+            // TODO: Validate authorizationId
+            var authorizationId = req.params.authorizationId;
+            var selectedPreferencesPromise = that.authorizationService.getSelectedPreferences(userId, authorizationId);
             selectedPreferencesPromise.then(function (selectedPreferences) {
                 if (selectedPreferences) {
                     res.type("application/json");
@@ -513,19 +510,19 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
 
     // TODO CSRF Prevention mechanism
     // TODO https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet
-    that.expressApp.put("/authorizations/:authDecisionId/preferences",
+    that.expressApp.put("/authorizations/:authorizationId/preferences",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         function (req, res) {
             var userId = req.user.id;
-            // TODO: Validate authDecisionId
-            var authDecisionId = req.params.authDecisionId;
-            // TODO communicate bad authDecisionId or an id for an authDecision that is not yours?
+            // TODO: Validate authorizationId
+            var authorizationId = req.params.authorizationId;
+            // TODO communicate bad authorizationId or an id for an authDecision that is not yours?
             if (req.is("application/json")) {
                 var selectedPreferences = req.body;
                 // TODO validate selectedPreferences?
-                var setPromise = that.authorizationService.setSelectedPreferences(userId, authDecisionId, selectedPreferences);
+                var setPromise = that.authorizationService.setSelectedPreferences(userId, authorizationId, selectedPreferences);
                 gpii.oauth2.mapPromiseToResponse(setPromise, res);
             } else {
                 res.sendStatus(400);

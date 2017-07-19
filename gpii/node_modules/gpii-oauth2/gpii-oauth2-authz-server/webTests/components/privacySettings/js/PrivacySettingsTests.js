@@ -36,7 +36,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             status: 200
         },
         fetchDecisionPrefs: {
-            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authorizationId + "/preferences",
             type: "get",
             dataType: "json",
             status: 200,
@@ -45,7 +45,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         },
         saveDecisionPrefs: {
-            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authorizationId + "/preferences",
             type: "put",
             data: "{\"\":true}",
             status: 200,
@@ -307,7 +307,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.privacySettings.verifyClientData = function (msg, data, elements, expected) {
         fluid.each(elements, function (elm) {
             var value = data[elm];
-            if (elm === "authDecisionId" || elm === "oauth2ClientId") {
+            if (elm === "authorizationId" || elm === "oauth2ClientId") {
                 value = value.toString();
             }
             jqUnit.assertEquals(msg + "aaThe value of " + elm + " is expected", expected[elm], value);
@@ -315,8 +315,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog = function (that) {
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.model.currentClientData);
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.editPrivacySettingsDialog.model.clientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "oauth2ClientId"], that.model.currentClientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "oauth2ClientId"], that.editPrivacySettingsDialog.model.clientData);
 
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog", "editPrivacySettingsDialog"]);
         gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettingsDialog, "opened");
@@ -324,7 +324,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.tests.oauth2.privacySettings.verifyDialogForRemoval = function (that) {
         var expectedDialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: gpii.tests.oauth2.privacySettings.clientData.serviceName});
-        jqUnit.assertEquals("The authDecisionId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authDecisionId, parseInt(that.dialogForRemoval.model.authDecisionId, 10));
+        jqUnit.assertEquals("The authorizationId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authorizationId, parseInt(that.dialogForRemoval.model.authorizationId, 10));
         jqUnit.assertEquals("The dialogContent has been set correctly in dialogForRemoval subcomponent", expectedDialogContent, that.dialogForRemoval.model.dialogContent);
         jqUnit.isVisible("The dialog for removing the decision is visible", that.dialogForRemoval.container);
         jqUnit.assertTrue("The dialogForRemoval container should have been instantiated as a jQuery dialog", that.dialogForRemoval.container.hasClass("ui-dialog-content"));

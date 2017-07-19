@@ -22,7 +22,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.tests.oauth2.privacySettings.clientData = {
         serviceName: "A Test Service",
-        authDecisionId: 10,
+        authorizationId: 10,
         oauth2ClientId: 1
     };
 

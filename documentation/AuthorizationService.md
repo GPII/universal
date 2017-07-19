@@ -57,7 +57,7 @@ client.
 ```
 [
     {
-        authDecisionId: 1,
+        authorizationId: 1,
         oauth2ClientId: "client_A",
         clientName: "Client A",
         selectedPreferences: {
@@ -69,11 +69,11 @@ client.
 ]
 ```
 
-#### getSelectedPreferences(userId, authDecisionId)
+#### getSelectedPreferences(userId, authorizationId)
 * **description**: Get the user selected preferences that is saved within the authorization decision. The function verifies the authorization decision is made by the user and not revoked.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * authDecisionId: Number. A system generated unique number that identifies the authorization decision.
+    * authorizationId: Number. A system generated unique number that identifies the authorization decision.
 * **return:** The user selected preferences if the authorization decision id is valid. Otherwise, return `unknown`.
 
 #### getUnauthorizedClientsForUser(userId)
@@ -91,7 +91,7 @@ client.
 ]
 ```
 
-#### grantAuthorizationCode(userId, clientId, redirectUri, selectedPreferences)
+#### grantWebPrefsConsumerAuthorization(userId, clientId, redirectUri, selectedPreferences)
 * **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization decision for the user, client, and redirect URI. If we do, we issue a new code for that decision. Otherwise we create a new authorization decision record and a new code.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
@@ -106,18 +106,18 @@ client.
     ```
 * **return:** An authorization code.
 
-#### revokeAuthorization(userId, authDecisionId)
+#### revokeAuthorization(userId, authorizationId)
 * **description**: Revoke an authorization decision. Before the revoke, the function ensures the authorization decision was made by the user.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * authDecisionId: Number. A system generated unique number that identifies the authorization decision.
+    * authorizationId: Number. A system generated unique number that identifies the authorization decision.
 * **return:** None.
 
-#### setSelectedPreferences(userId, authDecisionId, selectedPreferences)
+#### setSelectedPreferences(userId, authorizationId, selectedPreferences)
 * **description**: Update the user selected preferences that is saved within the authorization decision. The function verifies the authorization decision is made by the user.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * authDecisionId: Number. A system generated unique number that identifies the authorization decision.
+    * authorizationId: Number. A system generated unique number that identifies the authorization decision.
     * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
@@ -189,8 +189,8 @@ client.
 ```
 Return an object that contains the error message and http status code if the GPII token is wrong, or the client's OAuth2 client type is not "gpiiAppInstallationClient".
 
-#### revokeGpiiAppInstallationAuthorization(authorizationId)
-* **description**: Revoke an authorization granted to a GPII app installation.
+#### expireGpiiAppInstallationAuthorization(authorizationId)
+* **description**: Expire a GPII app installation authorization.
 * **parameters:** 
     * authorizationId: String. A string representing the id of an authorization record.
 * **return:** None.

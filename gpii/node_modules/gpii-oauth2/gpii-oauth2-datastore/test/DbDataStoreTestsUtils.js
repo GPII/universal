@@ -216,14 +216,14 @@ gpii.tests.dbDataStore.testData = {
         "accessToken": "client2_new_access_token"
     },
     findAuthorizedClientsByGpiiToken: [{
-        "authDecisionId": "authDecision-1",
+        "authorizationId": "authDecision-1",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "clientName": "Service A",
         "selectedPreferences": {
             "": true
         }
     }, {
-        "authDecisionId": "authDecision-2",
+        "authorizationId": "authDecision-2",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "clientName": "First Discovery",
         "selectedPreferences": {
@@ -231,7 +231,7 @@ gpii.tests.dbDataStore.testData = {
         }
     }],
     findAuthorizedClientsByGpiiTokenAfterRevoke: [{
-        "authDecisionId": "authDecision-2",
+        "authorizationId": "authDecision-2",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "clientName": "First Discovery",
         "selectedPreferences": {

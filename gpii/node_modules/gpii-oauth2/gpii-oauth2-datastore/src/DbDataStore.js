@@ -403,19 +403,19 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // userId, authDecisionData
         },
-        revokeAuthDecision: {
-            funcName: "gpii.oauth2.dbDataStore.revokeAuthDecision",
+        revokeAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.revokeAuthorization",
             args: [
                 "{that}",
                 gpii.oauth2.dbDataStore.setRevoke,
                 "{arguments}.0",
                 "{arguments}.1"
             ]
-            // userId, authDecisionId
+            // userId, authorizationId
         },
         findAuthDecisionById: {
             func: "{that}.findById"
-            // authDecisionId
+            // authorizationId
         },
         findAuthDecisionsByGpiiToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
@@ -451,7 +451,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 "{arguments}.0",
                 "{arguments}.1"
             ]
-            // authDecisionId, code
+            // authorizationId, code
         },
         findAuthByCode: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
@@ -581,52 +581,43 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 "{arguments}.0"
             ]
             // gpiiAppInstallationAuthorizationId
-        },
-        revokeGpiiAppInstallationAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.revokeGpiiAppInstallationAuthorization",
-            args: [
-                "{that}",
-                "{arguments}.0"
-            ]
-            // gpiiAppInstallationAuthorizationId
         }
     },
     events: {
-        onUpdateAuthDecision: null,
-        onRevokeAuthDecision: null,
+        onUpdateAuthorization: null,
+        onRevokeAuthorization: null,
         onRevokePrivilegedPrefsCreatorAuthorization: null,
-        onExpireGpiiAppInstallationAuthorization: null,
-        onRevokeGpiiAppInstallationAuthorization: null
+        onExpireGpiiAppInstallationAuthorization: null
     },
     listeners: {
-        onUpdateAuthDecision: [{
-            listener: "gpii.oauth2.dbDataStore.authDecisionExists",
+        onUpdateAuthorization: [{
+            listener: "gpii.oauth2.dbDataStore.authorizationExists",
             args: ["{that}.findAuthDecisionById", "{arguments}.0"],
-            namespace: "authDecisionExists"
+            namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
             args: ["{that}.findGpiiToken", "{arguments}.0"],
             namespace: "validateGpiiToken",
-            priority: "after:authDecisionExists"
+            priority: "after:authorizationExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateAuthDecision",
+            listener: "gpii.oauth2.dbDataStore.doUpdateAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdateAuthDecision",
+            namespace: "doUpdateAuthorization",
             priority: "after:validateGpiiToken"
         }],
-        onRevokeAuthDecision: [{
-            listener: "gpii.oauth2.dbDataStore.authDecisionExists",
+        onRevokeAuthorization: [{
+            listener: "gpii.oauth2.dbDataStore.authorizationExists",
             args: ["{that}.findAuthDecisionById", "{arguments}.0"],
-            namespace: "authDecisionExists"
+            namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
             args: ["{that}.findGpiiToken", "{arguments}.0"],
             namespace: "validateGpiiToken",
-            priority: "after:authDecisionExists"
+            priority: "after:authorizationExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateAuthDecision",
+            listener: "gpii.oauth2.dbDataStore.doUpdateAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdateAuthDecision",
+            namespace: "doUpdateAuthorization",
             priority: "after:validateGpiiToken"
         }],
         onRevokePrivilegedPrefsCreatorAuthorization: [{
@@ -644,15 +635,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         }, {
             listener: "gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization",
             args: ["{that}.saveDataSource", "expired", "{arguments}.0"],
-            namespace: "doUpdateGpiiAppInstallationAuthorization",
-            priority: "after:findGpiiAppInstallationAuthorization"
-        }],
-        onRevokeGpiiAppInstallationAuthorization: [{
-            listener: "{that}.findGpiiAppInstallationAuthorizationById",
-            namespace: "findGpiiAppInstallationAuthorization"
-        }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization",
-            args: ["{that}.saveDataSource", "revoked", "{arguments}.0"],
             namespace: "doUpdateGpiiAppInstallationAuthorization",
             priority: "after:findGpiiAppInstallationAuthorization"
         }]

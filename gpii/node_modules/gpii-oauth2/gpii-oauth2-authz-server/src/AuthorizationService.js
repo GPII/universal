@@ -33,8 +33,8 @@ var fluid = fluid || require("infusion");
             }
         },
         invokers: {
-            grantAuthorizationCode: {
-                funcName: "gpii.oauth2.authorizationService.grantAuthorizationCode",
+            grantWebPrefsConsumerAuthorization: {
+                funcName: "gpii.oauth2.authorizationService.grantWebPrefsConsumerAuthorization",
                 args: ["{that}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
                 // args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
                     // gpiiToken, clientId, redirectUri, selectedPreferences
@@ -57,12 +57,12 @@ var fluid = fluid || require("infusion");
             getSelectedPreferences: {
                 funcName: "gpii.oauth2.authorizationService.getSelectedPreferences",
                 args: ["{that}", "{arguments}.0", "{arguments}.1"]
-                    // userId, authDecisionId
+                    // userId, authorizationId
             },
             setSelectedPreferences: {
                 funcName: "gpii.oauth2.authorizationService.setSelectedPreferences",
                 args: ["{that}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                    // userId, authDecisionId, selectedPreferences
+                    // userId, authorizationId, selectedPreferences
             },
             getUnauthorizedClientsForGpiiToken: {
                 funcName: "gpii.oauth2.authorizationService.getUnauthorizedClientsForGpiiToken",
@@ -75,9 +75,9 @@ var fluid = fluid || require("infusion");
                     // gpiiToken
             },
             revokeAuthorization: {
-                func: "{dataStore}.revokeAuthDecision",
+                func: "{dataStore}.revokeAuthorization",
                 args: ["{arguments}.0", "{arguments}.1"]
-                    // userId, authDecisionId
+                    // userId, authorizationId
             },
             getAuthForAccessToken: {
                 func: "{dataStore}.findAuthByAccessToken"
@@ -100,22 +100,18 @@ var fluid = fluid || require("infusion");
                 funcName: "gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // gpiiToken, clientId
-            },
-            revokeGpiiAppInstallationAuthorization: {
-                func: "{dataStore}.revokeGpiiAppInstallationAuthorization"
-                    // gpiiAppInstallationAuthorizationId
             }
         },
         events: {
             // All these events are pseudoevents rather than standard events. They are triggered by fluid.promise.fireTransformEvent().
-            onGrantAuthorizationCode: null,
+            onGrantWebPrefsConsumerAuthorization: null,
             onAddAuthorization: null,
             onGetSelectedPreferences: null,
             onSetSelectedPreferences: null,
             onGetUnauthorizedClients: null
         },
         listeners: {
-            onGrantAuthorizationCode: [{
+            onGrantWebPrefsConsumerAuthorization: [{
                 listener: "gpii.oauth2.authorizationService.checkAuthDecision",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0"],
                 namespace: "checkAuthDecision"
@@ -188,23 +184,23 @@ var fluid = fluid || require("infusion");
         }
     });
 
-    // ==== grantAuthorizationCode()
+    // ==== grantWebPrefsConsumerAuthorization()
     /**
-     * The entry point of grantAuthorizationCode() API. Fires the transforming promise workflow by triggering onGrantAuthorizationCode event.
+     * The entry point of grantWebPrefsConsumerAuthorization() API. Fires the transforming promise workflow by triggering onGrantWebPrefsConsumerAuthorization event.
      * @param that {Component} An instance of gpii.oauth2.authorizationService
      * @param gpiiToken {String} A GPII token
      * @param clientId {String} A client id
      * @param redirectUri {String} A redirect URI
      * @param selectedPreferences {Object} A preference set
      */
-    gpii.oauth2.authorizationService.grantAuthorizationCode = function (that, gpiiToken, clientId, redirectUri, selectedPreferences) {
+    gpii.oauth2.authorizationService.grantWebPrefsConsumerAuthorization = function (that, gpiiToken, clientId, redirectUri, selectedPreferences) {
         var input = {
             gpiiToken: gpiiToken,
             clientId: clientId,
             redirectUri: redirectUri,
             selectedPreferences: selectedPreferences
         };
-        return fluid.promise.fireTransformEvent(that.events.onGrantAuthorizationCode, input);
+        return fluid.promise.fireTransformEvent(that.events.onGrantWebPrefsConsumerAuthorization, input);
     };
 
     /**
@@ -232,7 +228,7 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * The last step in the fireTransformEvent() chain for implementing grantAuthorizationCode()
+     * The last step in the fireTransformEvent() chain for implementing grantWebPrefsConsumerAuthorization()
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param authDecisionInfo {Object} Accepted structure:
@@ -256,7 +252,7 @@ var fluid = fluid || require("infusion");
         };
         return fluid.promise.map(savePromise, mapper);
     };
-    // ==== End of grantAuthorizationCode()
+    // ==== End of grantWebPrefsConsumerAuthorization()
 
     // ==== addAuthorization()
     /**
@@ -442,12 +438,12 @@ var fluid = fluid || require("infusion");
      * The entry point of getSelectedPreferences() API. Fires the transforming promise workflow by triggering onGetSelectedPreferences event.
      * @param that {Component} An instance of gpii.oauth2.authorizationService
      * @param userId {String} A user id
-     * @param authDecisionId {String} An authorization decision id
+     * @param authorizationId {String} An authorization decision id
      */
-    gpii.oauth2.authorizationService.getSelectedPreferences = function (that, userId, authDecisionId) {
+    gpii.oauth2.authorizationService.getSelectedPreferences = function (that, userId, authorizationId) {
         var input = {
             userId: userId,
-            authDecisionId: authDecisionId
+            authorizationId: authorizationId
         };
         return fluid.promise.fireTransformEvent(that.events.onGetSelectedPreferences, input);
     };
@@ -458,13 +454,13 @@ var fluid = fluid || require("infusion");
      * @param input {Object} Accepted structure:
      * {
      *     userId: {String},
-     *     authDecisionId: {String},
+     *     authorizationId: {String},
      *     selectedPreferences: {Object}     // Only provided at setSelectedPreferences()
      * }
      * @return {Promise} a promise object to be passed to the next processing function
      */
     gpii.oauth2.authorizationService.findAuthDecision = function (dataStore, input) {
-        var authDecisionPromise = dataStore.findAuthDecisionById(input.authDecisionId);
+        var authDecisionPromise = dataStore.findAuthDecisionById(input.authorizationId);
         var mapper = function (authDecision) {
             return {
                 authDecision: authDecision,
@@ -482,7 +478,7 @@ var fluid = fluid || require("infusion");
      *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
      *     inputArgs: {
      *         userId: {String},
-     *         authDecisionId: {String},
+     *         authorizationId: {String},
      *        selectedPreferences: {Object}     // Only provided at setSelectedPreferences()
      *     }
      * }
@@ -510,7 +506,7 @@ var fluid = fluid || require("infusion");
      *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
      *     inputArgs: {
      *         userId: {String},
-     *         authDecisionId: {String},
+     *         authorizationId: {String},
      *        selectedPreferences: {Object}     // Only provided at setSelectedPreferences()
      *     }
      * }
@@ -534,13 +530,13 @@ var fluid = fluid || require("infusion");
      * The entry point of setSelectedPreferences() API. Fires the transforming promise workflow by triggering onSetSelectedPreferences event.
      * @param that {Component} An instance of gpii.oauth2.authorizationService
      * @param userId {String} A user id
-     * @param authDecisionId {String} An authorization decision id
+     * @param authorizationId {String} An authorization decision id
      * @param selectedPreferences {Object} A preference set
      */
-    gpii.oauth2.authorizationService.setSelectedPreferences = function (that, userId, authDecisionId, selectedPreferences) {
+    gpii.oauth2.authorizationService.setSelectedPreferences = function (that, userId, authorizationId, selectedPreferences) {
         var input = {
             userId: userId,
-            authDecisionId: authDecisionId,
+            authorizationId: authorizationId,
             selectedPreferences: selectedPreferences
         };
         return fluid.promise.fireTransformEvent(that.events.onSetSelectedPreferences, input);

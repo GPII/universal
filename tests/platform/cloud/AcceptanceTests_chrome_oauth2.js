@@ -148,14 +148,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
     expect: 22,
     insertRecords: [{
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{putAuthorizationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
+        args: ["{putAuthorizationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
             "/preferences", "{testCaseHolder}.options.updatedSelectedPreferences"]
     }, {
         event: "{putAuthorizationRequest}.events.onComplete",
         listener: "fluid.identity"
     }, {
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
             "/preferences"]
     }, {
         event: "{getAuthorizationRequest2}.events.onComplete",
@@ -173,14 +173,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithRevocation", {
     expect: 20,
     insertRecords: [{
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{revocationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
+        args: ["{revocationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
             null, "{testCaseHolder}.options.updatedSelectedPreferences"]
     }, {
         event: "{revocationRequest}.events.onComplete",
         listener: "fluid.identity"
     }, {
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
             "/preferences"]
     }, {
         event: "{getAuthorizationRequest2}.events.onComplete",

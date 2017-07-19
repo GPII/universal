@@ -24,7 +24,7 @@
                 "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
             },
             "findAuthDecisionByAuthCode": {
-                "map": "function(doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authDecisionId})}}"
+                "map": "function(doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authorizationId})}}"
             },
             "findAuthorizedClientsByGpiiToken": {
                 "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"

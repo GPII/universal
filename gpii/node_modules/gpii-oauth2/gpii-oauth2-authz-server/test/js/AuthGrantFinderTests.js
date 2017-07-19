@@ -134,7 +134,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery"
     }, {
-        "_id": "authDecision-1",
+        "_id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
         "clientId": "client-1",
@@ -145,7 +145,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-2",
+        "_id": "webPrefsConsumerAuthorization-2",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-1",
@@ -156,7 +156,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-3",
+        "_id": "webPrefsConsumerAuthorization-3",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-2",

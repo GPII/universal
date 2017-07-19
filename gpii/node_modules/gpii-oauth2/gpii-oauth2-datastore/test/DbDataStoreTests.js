@@ -363,15 +363,15 @@ fluid.defaults("gpii.tests.dbDataStore.updateAuthDecision", {
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
+fluid.defaults("gpii.tests.dbDataStore.revokeAuthorization", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
-        name: "Test revokeAuthDecision()",
+        name: "Test revokeAuthorization()",
         tests: [{
             name: "A typical flow of updating an auth decision",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
                 args: ["{dbDataStore}.findAuthDecisionById", "{arguments}.0.id", "{that}"],
@@ -385,7 +385,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
             name: "An unmatched user id returns unauthorized error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-0", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-0", "authDecision-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["An unmatched user id returns unauthorized error", {
@@ -396,13 +396,13 @@ fluid.defaults("gpii.tests.dbDataStore.revokeAuthDecision", {
                 event: "{that}.events.onError"
             }]
         }, {
-            name: "A non-existing authDecisionId returns error",
+            name: "A non-existing authorizationId returns error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-0", "authDecision-0"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-0", "authDecision-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["An non-existing authDecisionId returns missing record error", {
+                args: ["An non-existing authorizationId returns missing record error", {
                     msg: "The record of authDecision is not found",
                     statusCode: 400,
                     isError: true
@@ -473,7 +473,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken", {
             name: "Revoked auth decisions are not returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthDecisionsByGpiiToken", ["chrome_high_contrast"], "{that}"],
@@ -612,7 +612,7 @@ fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"authDecisionId & code\" is undefined",
+                    msg: "The input field \"authorizationId & code\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -654,7 +654,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByCode", {
             name: "Revoked auth code receives unauthorized error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByCode", ["chrome_high_contrast_auth_token"], "{that}"],
@@ -690,7 +690,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
             name: "Revoked auth decisions are not returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizedClientsByGpiiToken", ["chrome_high_contrast"], "{that}"],
@@ -704,10 +704,10 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizedClientsByGpiiToken", {
             name: "Returns undefined when all auth decisions are revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-2"], "{that}"],
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-2"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
@@ -764,7 +764,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthByAccessToken", {
             name: "Returns undefined when the auth decision is revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeAuthDecision", ["user-1", "authDecision-1"], "{that}"]
+                args: ["{dbDataStore}.revokeAuthorization", ["user-1", "authDecision-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthByAccessToken", ["chrome_high_contrast_access_token"], "{that}"],
@@ -1087,7 +1087,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Expired and revoked GPII app installation authorization record is no longer returned",
+            name: "Expired GPII app installation authorization record is no longer returned by the search function",
             sequence: [{
                 // Test an expired token record
                 func: "gpii.tests.oauth2.invokePromiseProducer",
@@ -1099,17 +1099,6 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected data is received", gpii.tests.dbDataStore.testData.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdAfterExpire, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }, {
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeGpiiAppInstallationAuthorization", ["gpiiAppInstallationAuthorization-2"], "{that}"]
-            }, {
-                listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "client-1"], "{that}"],
-                event: "{that}.events.onResponse"
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", undefined, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -1243,49 +1232,6 @@ fluid.defaults("gpii.tests.dbDataStore.expireGpiiAppInstallationAuthorization", 
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.revokeGpiiAppInstallationAuthorization", {
-    gradeNames: ["gpii.tests.dbDataStore.environment"],
-    rawModules: [{
-        name: "Test revokeGpiiAppInstallationAuthorization()",
-        tests: [{
-            name: "A typical flow of expiring a GPII app installation authorization",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationById", ["gpiiAppInstallationAuthorization-1"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected GPII app installation authorization data is received", gpii.tests.dbDataStore.testData.gpiiAppInstallationAuthorization1, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }, {
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeGpiiAppInstallationAuthorization", ["gpiiAppInstallationAuthorization-1"], "{that}"]
-            }, {
-                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationById", "{arguments}.0.id", "{that}"],
-                event: "{that}.events.onResponse"
-            }, {
-                listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.gpiiAppInstallationAuthorization1AfterRevoked],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Revoke by a non-existing GPII app installation authorization id returns error",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeGpiiAppInstallationAuthorization", ["non-existing-token-id"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["Revoke by a non-existing GPII app installation authorization id returns missing record error", {
-                    msg: "The record of gpiiAppInstallationAuthorization is not found",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }]
-    }]
-});
-
 fluid.test.runTests([
     "gpii.tests.dbDataStore.findUserById",
     "gpii.tests.dbDataStore.findUserByUsername",
@@ -1296,7 +1242,7 @@ fluid.test.runTests([
     // "gpii.tests.dbDataStore.findAllClients",
     // "gpii.tests.dbDataStore.addAuthDecision",
     // "gpii.tests.dbDataStore.updateAuthDecision",
-    // "gpii.tests.dbDataStore.revokeAuthDecision",
+    // "gpii.tests.dbDataStore.revokeAuthorization",
     // "gpii.tests.dbDataStore.findAuthDecisionById",
     // "gpii.tests.dbDataStore.findAuthDecisionsByGpiiToken",
     // "gpii.tests.dbDataStore.findAuthDecision",
@@ -1311,6 +1257,5 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findAuthByPrivilegedPrefsCreatorAccessToken",
     "gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId",
     "gpii.tests.dbDataStore.addGpiiAppInstallationAuthorization",
-    "gpii.tests.dbDataStore.expireGpiiAppInstallationAuthorization",
-    "gpii.tests.dbDataStore.revokeGpiiAppInstallationAuthorization"
+    "gpii.tests.dbDataStore.expireGpiiAppInstallationAuthorization"
 ]);

@@ -80,7 +80,7 @@
     {
         "_id": "authCode-1",
         "type": "authCode",
-        "authDecisionId": "authDecision-1",
+        "authorizationId": "authDecision-1",
         "code": "chrome_high_contrast_auth_token"
     },
     {

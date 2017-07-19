@@ -134,7 +134,7 @@ var gpii = gpii || {};
             composeRequestURL: {
                 funcName: "fluid.stringTemplate",
                 args: ["{arguments}.0", {
-                    authDecisionId: "{that}.model.clientData.authDecisionId"
+                    authorizationId: "{that}.model.clientData.authorizationId"
                 }]
             },
             setInitialSelectedPrefs: {
@@ -154,7 +154,7 @@ var gpii = gpii || {};
             // clientData is in a structure of:
             // {
             //     serviceName: xx,
-            //     authDecisionId: xx,
+            //     authorizationId: xx,
             //     oauth2ClientId: xx
             // }
             clientData: null,
