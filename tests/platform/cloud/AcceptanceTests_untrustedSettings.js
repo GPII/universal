@@ -1,3 +1,4 @@
+
 /*!
 Copyright 2015 OCAD university
 
@@ -29,7 +30,7 @@ gpii.tests.cloud.untrustedSettings.sequence = [
     {
         event: "{untrustedSettingsRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.verifyPayloadMatchMakerOutput",
-        args: ["{arguments}.0", "{testCaseHolder}.options.expectedMatchMakerOutput"]
+        args: ["{arguments}.0", "{testCaseHolder}.options.expectedSettings"]
     }
 ];
 
@@ -37,13 +38,7 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
     {
         name: "No authorized solutions",
         userToken: "os_gnome",
-        expectedMatchMakerOutput: {
-            "inferredConfiguration": {
-                "gpii-default": {
-                    "applications": { }
-                }
-            }
-        }
+        expectedSettings: {}
     },
     {
         name: "Authorize magnifier (share magnifier settings)",
@@ -58,17 +53,17 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                 revoked: false
             }
         ],
-        expectedMatchMakerOutput: {
-            "inferredConfiguration": {
-                "gpii-default": {
-                    "applications": {
-                        "org.gnome.desktop.a11y.magnifier": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
-                            }
+        expectedSettings: {
+            "org.gnome.desktop.a11y.magnifier": {
+                "settingsHandlers": {
+                    "configuration": {
+                        "settings": {
+                            "mag-factor": 1.5,
+                            "screen-position": "full-screen"
                         }
+                    },
+                    "launcher": {
+                        "settings": {}
                     }
                 }
             }
@@ -95,25 +90,27 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                 revoked: false
             }
         ],
-        expectedMatchMakerOutput: {
-            "inferredConfiguration": {
-                "gpii-default": {
-                    "applications": {
-                        "org.gnome.desktop.a11y.magnifier": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
-                            }
-                        },
-                        "org.gnome.desktop.interface": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/fontSize": 9
-                            }
+        expectedSettings: {
+            "org.gnome.desktop.a11y.magnifier": {
+                "settingsHandlers": {
+                    "configuration": {
+                        "settings": {
+                            "mag-factor": 1.5,
+                            "screen-position": "full-screen"
+                        }
+                    },
+                    "launcher": {
+                        "settings": {}
+                    }
+                }
+            },
+            "org.gnome.desktop.interface": {
+                "settingsHandlers": {
+                    "configuration": {
+                        "settings": {
+                            "gtk-theme": "Adwaita", // added by default if high contrast isn't on
+                            "icon-theme": "gnome", // added by default if high contrast isn't on
+                            "text-scaling-factor": 0.75
                         }
                     }
                 }
@@ -124,72 +121,37 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
         name: "Anonymous token (token without a user account)",
         userToken: "os_gnome",
         isAnonymousToken: true,
-        expectedMatchMakerOutput: {
-            "inferredConfiguration": {
-                "gpii-default": {
-                    "applications": {
-                        "org.gnome.desktop.a11y.magnifier": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                                "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                    "mag-factor": 1.5,
-                                    "screen-position": "full-screen"
-                                },
-                                "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                    "cursor-size": 90,
-                                    "text-scaling-factor": 0.75
-                                },
-                                "http://registry.gpii.net/applications/org.alsa-project": {
-                                    "masterVolume": 50
-                                }
-                            }
-                        },
-                        "org.gnome.desktop.interface": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                                "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                    "mag-factor": 1.5,
-                                    "screen-position": "full-screen"
-                                },
-                                "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                    "cursor-size": 90,
-                                    "text-scaling-factor": 0.75
-                                },
-                                "http://registry.gpii.net/applications/org.alsa-project": {
-                                    "masterVolume": 50
-                                }
-                            }
-                        },
-                        "org.alsa-project": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                                "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                    "mag-factor": 1.5,
-                                    "screen-position": "full-screen"
-                                },
-                                "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                    "cursor-size": 90,
-                                    "text-scaling-factor": 0.75
-                                },
-                                "http://registry.gpii.net/applications/org.alsa-project": {
-                                    "masterVolume": 50
-                                }
-                            }
+        expectedSettings: {
+            "org.gnome.desktop.a11y.magnifier": {
+                "settingsHandlers": {
+                    "configuration": {
+                        "settings": {
+                            "mag-factor": 1.5,
+                            "screen-position": "full-screen"
+                        }
+                    },
+                    "launcher": {
+                        "settings": {}
+                    }
+                }
+            },
+            "org.gnome.desktop.interface": {
+                "settingsHandlers": {
+                    "configuration": {
+                        "settings": {
+                            "text-scaling-factor": 0.75,
+                            "cursor-size": 90,
+                            "gtk-theme": "Adwaita", // added by default if high contrast isn't on
+                            "icon-theme": "gnome" // added by default if high contrast isn't on
+                        }
+                    }
+                }
+            },
+            "org.alsa-project": {
+                "settingsHandlers": {
+                    "configuration": {
+                        "settings": {
+                            "masterVolume": 50
                         }
                     }
                 }

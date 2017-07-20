@@ -2,7 +2,7 @@
 
 A locally running component, with the following responsiblities:
 * Doing the preprocessing - that is, preparing the input payload for the matchmakers
-* Making the decision of which MM to call (ie. hybrid matchmaking), and then call that MM
+* Making the decision of which MM to call (i.e. hybrid matchmaking), and then call that MM
 * Doing the post-processing - that is, taking the return payload from the matchmakers and transformat
 
 ## Configuration

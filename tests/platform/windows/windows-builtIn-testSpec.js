@@ -217,6 +217,29 @@ gpii.tests.windows.builtIn = [
                             "Wait": "REG_SZ"
                         }
                     }
+                }, { // Narrator
+                    "settings": {
+                        "SpeechSpeed": 11,
+                        "SpeechPitch": 4,
+                        "InteractionMouse": 1,
+                        "CoupleNarratorCursorKeyboard": 1,
+                        "FollowInsertion": 0,
+                        "EchoChars": 0,
+                        "EchoWords": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Narrator",
+                        "dataTypes": {
+                            "SpeechSpeed": "REG_DWORD",
+                            "SpeechPitch": "REG_DWORD",
+                            "InteractionMouse": "REG_DWORD",
+                            "CoupleNarratorCursorKeyboard": "REG_DWORD",
+                            "FollowInsertion": "REG_DWORD",
+                            "EchoChars": "REG_DWORD",
+                            "EchoWords": "REG_DWORD"
+                        }
+                    }
                 }]
             },
             "gpii.windows.displaySettingsHandler": {
