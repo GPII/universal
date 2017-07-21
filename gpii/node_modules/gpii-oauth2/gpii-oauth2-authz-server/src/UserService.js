@@ -37,7 +37,7 @@ var fluid = fluid || require("infusion");
                     // username, password
             },
             getAuthorizedClientsByGpiiToken: {
-                func: "{dataStore}.findAuthorizedClientsByGpiiToken"
+                func: "{dataStore}.findUserAuthorizedClientsByGpiiToken"
             },
             getUserById: {
                 func: "{dataStore}.findUserById"

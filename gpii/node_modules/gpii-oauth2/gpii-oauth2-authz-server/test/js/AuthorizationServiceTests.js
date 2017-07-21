@@ -50,12 +50,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.tests.oauth2.authorizationService.emptyDataStore", {
         gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
         rawModules: [{
-            name: "Test getUnauthorizedClientsForGpiiToken()",
+            name: "Test getUserUnauthorizedClientsForGpiiToken()",
             tests: [{
-                name: "getUnauthorizedClientsForGpiiToken() returns undefined with an empty dataStore",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns undefined with an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
@@ -274,52 +274,52 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
         pouchData: gpii.tests.oauth2.authorizationService.testData,
         rawModules: [{
-            name: "Test getUnauthorizedClientsForGpiiToken()",
+            name: "Test getUserUnauthorizedClientsForGpiiToken()",
             tests: [{
-                name: "getUnauthorizedClientsForGpiiToken() returns undefined for unknown token",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns undefined for unknown token",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["unknown"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["unknown"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns all clients for user with no authorizations",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns all clients for user with no authorizations",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["2 client information should be received", gpii.tests.oauth2.authorizationService.expected.clientsForAlice, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns unauthorized clients for user with authorization",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns unauthorized clients for user with authorization",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["bob_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["bob_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The unauthorized client information should be received", gpii.tests.oauth2.authorizationService.expected.unauthorizedClientsForBob, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns empty list for user with all clients authorized",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns empty list for user with all clients authorized",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["carol_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["carol_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["An empty array should be received", [], "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns clients with revoked authorizations",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns clients with revoked authorizations",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["dave_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["dave_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The revoked client information should be received", gpii.tests.oauth2.authorizationService.expected.revokedClientsForDave, "{arguments}.0"],

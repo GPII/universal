@@ -14,20 +14,20 @@
             "findClientByOauth2ClientId": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationClient' || doc.type === 'privilegedPrefsCreatorClient' || doc.type === 'webPrefsConsumerClient') emit(doc.oauth2ClientId, doc)}"
             },
-            "findAllClients": {
-                "map": "function(doc) {if (doc.type === 'client') emit(doc._id, doc)}"
+            "findUserAuthorizableClients": {
+                "map": "function(doc) {if (doc.type === 'onboardedSolutionClient' || doc.type === 'webPrefsConsumerClient') emit(doc._id, doc)}"
             },
             "findAuthByGpiiToken": {
                 "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, doc)}}"
             },
-            "findAuthDecision": {
-                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
+            "findWebPrefsConsumerAuthorization": {
+                "map": "function(doc) {if (doc.type === 'webPrefsConsumerAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
             },
-            "findAuthDecisionByAuthCode": {
+            "findWebPrefsConsumerAuthorizationByAuthCode": {
                 "map": "function(doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authorizationId})}}"
             },
-            "findAuthorizedClientsByGpiiToken": {
-                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"
+            "findUserAuthorizedClientsByGpiiToken": {
+                "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"
             },
             "findAuthByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"

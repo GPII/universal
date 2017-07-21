@@ -114,23 +114,20 @@ gpii.tests.dbDataStore.testData = {
     },
     allClients: [{
         "id": "client-1",
+        "type": "webPrefsConsumerClient",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
         "redirectUri": "http://localhost:3002/authorize_callback"
     }, {
-        "id": "client-2",
-        "name": "First Discovery",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery"
-    }, {
         "id": "client-3",
+        "type": "onboardedSolutionClient",
         "name": "Windows Magnifier",
-        "oauth2ClientId": "net.gpii.windows.magnifier",
-        "oauth2ClientSecret": "client_secret_windows_magnifier"
+        "solutionId": "net.gpii.windows.magnifier"
     }],
     authDecision1: {
-        "id": "authDecision-1",
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -150,8 +147,9 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
-    authDecisionToUpdate: {
-        "id": "authDecision-1",
+    authorizationToUpdate: {
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "a test url",
@@ -163,7 +161,8 @@ gpii.tests.dbDataStore.testData = {
         "revoked": false
     },
     revokedAuthDecision1: {
-        "id": "authDecision-1",
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -174,7 +173,8 @@ gpii.tests.dbDataStore.testData = {
         "revoked": true
     },
     AuthDecisionsByGpiiToken: [{
-        "id": "authDecision-1",
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -184,7 +184,8 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     }, {
-        "id": "authDecision-2",
+        "id": "webPrefsConsumerAuthorization-2",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-2",
         "redirectUri": false,
@@ -195,7 +196,8 @@ gpii.tests.dbDataStore.testData = {
         "revoked": false
     }],
     AuthDecisionsByGpiiTokenAfterRevoke: [{
-        "id": "authDecision-2",
+        "id": "webPrefsConsumerAuthorization-2",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-2",
         "redirectUri": false,
@@ -205,39 +207,44 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     }],
-    findAuthByCode1: {
+    findWebPrefsConsumerAuthorizationByAuthCode1: {
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
         "accessToken": "chrome_high_contrast_access_token"
     },
-    findAuthByCodeNew: {
+    findWebPrefsConsumerAuthorizationByAuthCodeNew: {
         "clientId": "client-2",
         "redirectUri": false,
         "accessToken": "client2_new_access_token"
     },
-    findAuthorizedClientsByGpiiToken: [{
-        "authorizationId": "authDecision-1",
-        "oauth2ClientId": "org.chrome.cloud4chrome",
-        "clientName": "Service A",
-        "selectedPreferences": {
-            "": true
-        }
-    }, {
-        "authorizationId": "authDecision-2",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "clientName": "First Discovery",
-        "selectedPreferences": {
-            "textFont": "arial"
-        }
-    }],
-    findAuthorizedClientsByGpiiTokenAfterRevoke: [{
-        "authorizationId": "authDecision-2",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "clientName": "First Discovery",
-        "selectedPreferences": {
-            "textFont": "arial"
-        }
-    }],
+    findUserAuthorizedClientsByGpiiToken: {
+        "webPrefsConsumerClient": [{
+            "authorizationId": "webPrefsConsumerAuthorization-1",
+            "oauth2ClientId": "org.chrome.cloud4chrome",
+            "clientName": "Service A",
+            "selectedPreferences": {
+                "": true
+            }
+        }],
+        "onboardedSolutionClient": [{
+            "authorizationId": "onboardedSolutionAuthorization-1",
+            "solutionId": "net.gpii.windows.magnifier",
+            "clientName": "Windows Magnifier",
+            "selectedPreferences": {
+                "": true
+            }
+        }]
+    },
+    findUserAuthorizedClientsByGpiiTokenAfterRevoke: {
+        "onboardedSolutionClient": [{
+            "authorizationId": "onboardedSolutionAuthorization-1",
+            "solutionId": "net.gpii.windows.magnifier",
+            "clientName": "Windows Magnifier",
+            "selectedPreferences": {
+                "": true
+            }
+        }]
+    },
     findAuthByAccessToken: {
         userGpiiToken: "chrome_high_contrast",
         oauth2ClientId: "org.chrome.cloud4chrome",
@@ -260,7 +267,7 @@ gpii.tests.dbDataStore.testData = {
         "revoked": true
     },
     privilegedPrefsCreatorAuthorizationToCreate: {
-        "clientId": "client-1",
+        "clientId": "client-5",
         "accessToken": "chrome_client_credentials_access_token"
     },
     findAuthByPrivilegedPrefsCreatorAccessToken: {
@@ -270,7 +277,7 @@ gpii.tests.dbDataStore.testData = {
     gpiiAppInstallationAuthorization1: {
         "id": "gpiiAppInstallationAuthorization-1",
         "type": "gpiiAppInstallationAuthorization",
-        "clientId": "client-1",
+        "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
         "expiresIn": 3600,
@@ -314,7 +321,7 @@ gpii.tests.dbDataStore.testData = {
     },
     gpiiAppInstallationAuthorization1AfterExpired: {
         "id": "gpiiAppInstallationAuthorization-1",
-        "clientId": "client-1",
+        "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
         "expiresIn": 3600,
@@ -325,7 +332,7 @@ gpii.tests.dbDataStore.testData = {
     },
     gpiiAppInstallationAuthorization1AfterRevoked: {
         "id": "gpiiAppInstallationAuthorization-1",
-        "clientId": "client-1",
+        "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
         "expiresIn": 3600,

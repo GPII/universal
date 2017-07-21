@@ -358,8 +358,8 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
     // user rather than using a single default
     var gpiiToken = user.defaultGpiiToken;
 
-    var authorizedClientsPromise = authorizationService.getAuthorizedClientsForGpiiToken(gpiiToken);
-    var unauthorizedClientsPromise = authorizationService.getUnauthorizedClientsForGpiiToken(gpiiToken);
+    var authorizedClientsPromise = authorizationService.getUserAuthorizedClientsForGpiiToken(gpiiToken);
+    var unauthorizedClientsPromise = authorizationService.getUserUnauthorizedClientsForGpiiToken(gpiiToken);
 
     // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
     var sources = [authorizedClientsPromise, unauthorizedClientsPromise];
@@ -422,12 +422,13 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // Then entry endpoint for OAuth2 authorization code grant
     that.expressApp.get("/authorize",
         that.sessionMiddleware,
         that.passportMiddleware,
         login.ensureLoggedIn("/login"),
         oauth2orizeServer.authorize(function (oauth2ClientId, redirectUri, done) {
-            var clientPromise = that.clientService.checkClientRedirectUri(oauth2ClientId, redirectUri);
+            var clientPromise = that.clientService.checkWebPrefsConsumerRedirectUri(oauth2ClientId, redirectUri);
             clientPromise.then(function (client) {
                 done(null, client, redirectUri);
             });
@@ -439,7 +440,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
 
             var clientId = req.oauth2.client.id;
             var redirectUri = req.oauth2.redirectURI;
-            var isUserAuthorizedPromise = that.authorizationService.userHasAuthorized(gpiiToken, clientId, redirectUri);
+            var isUserAuthorizedPromise = that.authorizationService.userHasAuthorizedWebPrefsConsumer(gpiiToken, clientId, redirectUri);
             isUserAuthorizedPromise.then(function (isUserAuthorized) {
                 if (isUserAuthorized) {
                     // The user has previously authorized so we can grant a code without asking them
@@ -455,6 +456,8 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
+    // Used by UI for users to define the selected preferences set that the web preferences consumer
+    // is authorized to access.
     that.expressApp.post("/authorize_decision",
         that.sessionMiddleware,
         that.passportMiddleware,

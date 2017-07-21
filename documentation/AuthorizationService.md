@@ -19,7 +19,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **return:** None.
 
 #### exchangeCodeForAccessToken(code, clientId, redirectUri)
-* **description**: Exchange the authorization code for an access token. Before the exchange, the function verifies the authorization code has been issued for the client.
+* **description**: Used by web preferences consumers to exchange the authorization code for an access token. Before the exchange, the function verifies the authorization code has been issued for the client.
 * **parameters:** 
     * code: String. An authorization code that is previously granted.
     * clientId: Number. A system generated unique number that identifies the client.
@@ -49,24 +49,49 @@ client.
         - The user specified in the authorization decision is not found;
         - The client specified in the authorization decision is not found.
 
-#### getAuthorizedClientsForUser(userId)
-* **description**: Get all authorized clients for the user.
+#### getUserAuthorizedClientsForUser(userId)
+* **description**: Get all authorized clients for the user. At the moment, the client types that user can authorize are onboarded solution clients and web preferences consumers clients.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-* **return:** An array of objects. Each object contains these information of an authorized client: the authorization decision id, the OAuth2 client id, the client name and user selected preferences. An example:
+* **return:** An object. This object contains arrays of authorized client information. Each array is keyed by the corresponding client type. 
+
+For onboarded solution clients, the client information contains: 
+* The authorization decision id
+* The solution id
+* The client name
+* user selected preferences 
+
+For onboarded solution clients, the client information contains: 
+* The authorization decision id
+* The OAuth2 client id
+* The client name
+* user selected preferences 
+ 
+An example:
 ```
-[
-    {
-        authorizationId: 1,
-        oauth2ClientId: "client_A",
-        clientName: "Client A",
-        selectedPreferences: {
+{
+    "webPrefsConsumerClient": [{
+        "authorizationId": 1,
+        "oauth2ClientId": "org.chrome.cloud4chrome",
+        "clientName": "Service A",
+        "selectedPreferences": {
             "visual-alternatives.speak-text.rate": true,
             "increase-size.appearance.text-size": true
         }
     },
     ...
-]
+    ],
+    "onboardedSolutionClient": [{
+        "authorizationId": 2,
+        "solutionId": "net.gpii.windows.magnifier",
+        "clientName": "Windows Magnifier",
+        "selectedPreferences": {
+            "": true
+        }
+    },
+    ...
+    ]
+}
 ```
 
 #### getSelectedPreferences(userId, authorizationId)
@@ -76,7 +101,7 @@ client.
     * authorizationId: Number. A system generated unique number that identifies the authorization decision.
 * **return:** The user selected preferences if the authorization decision id is valid. Otherwise, return `unknown`.
 
-#### getUnauthorizedClientsForUser(userId)
+#### getUserUnauthorizedClientsForUser(userId)
 * **description**: Get a list of all the clients that haven't been authorized by the user.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
@@ -106,11 +131,12 @@ client.
     ```
 * **return:** An authorization code.
 
-#### revokeAuthorization(userId, authorizationId)
-* **description**: Revoke an authorization decision. Before the revoke, the function ensures the authorization decision was made by the user.
+#### revokeAuthorization(userId, authorizationId, authorizationType)
+* **description**: Revoke an authorization. This API is used to revoke these authorization types: GPII app installation authorizations, onboarded solution authorizations, web preferences consumer authorizations. Before the revoke, the function ensures the authorization type matches and the authorization was made by the user.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * authorizationId: Number. A system generated unique number that identifies the authorization decision.
+    * authorizationType: String. The authorization type. It must be one of these values: "gpiiAppInstallationAuthorization", "onboardedSolutionAuthorization", "webPrefsConsumerAuthorization"
 * **return:** None.
 
 #### setSelectedPreferences(userId, authorizationId, selectedPreferences)
@@ -127,11 +153,11 @@ client.
     ```
 * **return:** None.
 
-#### userHasAuthorized(userId, clientId, redirectUri)
-* **description**: Check if the user has an authorization decision for the client. Return true if has, otherwise, return false.
+#### userHasAuthorizedWebPrefsConsumer(userId, clientId, redirectUri)
+* **description**: Check if the user has an authorization for the web preferences consumer client. Return true if has, otherwise, return false.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * clientId: Number. A system generated unique number that identifies the client.
+    * clientId: Number. A system generated unique number that identifies the web preferences consumer client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
 * **return:** `True` or `false`.
 

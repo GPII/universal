@@ -157,10 +157,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAllClientsDataSource: {
+        findUserAuthorizableClientsDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAllClients",
+                requestUrl: "/_design/views/_view/findUserAuthorizableClients",
                 rules: {
                     readPayload: {
                         "": "rows"
@@ -177,7 +177,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthDecisionsByGpiiTokenDataSource: {
+        findWebPrefsConsumerAuthorizationsByGpiiTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
                 requestUrl: "/_design/views/_view/findAuthByGpiiToken?key=\"%gpiiToken\"",
@@ -191,10 +191,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthDecisionDataSource: {
+        findWebPrefsConsumerAuthorizationDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthDecision?key=[\"%gpiiToken\",\"%clientId\",\"%redirectUri\"]",
+                requestUrl: "/_design/views/_view/findWebPrefsConsumerAuthorization?key=[\"%gpiiToken\",\"%clientId\",\"%redirectUri\"]",
                 termMap: {
                     gpiiToken: "%gpiiToken",
                     clientId: "%clientId",
@@ -207,10 +207,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthByCodeDataSource: {
+        findWebPrefsConsumerAuthorizationByAuthCodeDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthDecisionByAuthCode?key=%22%code%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findWebPrefsConsumerAuthorizationByAuthCode?key=%22%code%22&include_docs=true",
                 termMap: {
                     code: "%code"
                 },
@@ -221,10 +221,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthorizedClientsByGpiiTokenDataSource: {
+        findUserAuthorizedClientsByGpiiTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthorizedClientsByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findUserAuthorizedClientsByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
                 termMap: {
                     gpiiToken: "%gpiiToken"
                 },
@@ -371,10 +371,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // oauth2ClientId
         },
-        findAllClients: {
+        findUserAuthorizableClients: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAllClientsDataSource",
+                "{that}.findUserAuthorizableClientsDataSource",
                 {},
                 null,
                 gpii.oauth2.dbDataStore.handleMultipleRecords
@@ -384,24 +384,25 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         // recorded user 'authorization decisions' and access tokens. We may want to
         // rethink this and give them different lifetimes.
         // TODO: make sure there's only one active access token for one client
-        addAuthDecision: {
+        addWebPrefsConsumerAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.addRecord",
             args: [
                 "{that}.saveDataSource",
-                gpii.oauth2.docTypes.authDecision,
+                gpii.oauth2.docTypes.webPrefsConsumerAuthorization,
                 "id",
                 "{arguments}.0"
             ]
-            // authDecision
+            // webPrefsConsumerAuthorization
         },
-        updateAuthDecision: {
-            funcName: "gpii.oauth2.dbDataStore.updateAuthDecision",
+        updateAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.updateAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0",
-                "{arguments}.1"
+                "{arguments}.1",
+                "{arguments}.2"
             ]
-            // userId, authDecisionData
+            // userId, authorizationData, authorizationType
         },
         revokeAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.revokeAuthorization",
@@ -409,18 +410,19 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 "{that}",
                 gpii.oauth2.dbDataStore.setRevoke,
                 "{arguments}.0",
-                "{arguments}.1"
+                "{arguments}.1",
+                "{arguments}.2"
             ]
-            // userId, authorizationId
+            // userId, authorizationId, authorizationType
         },
-        findAuthDecisionById: {
+        findAuthorizationById: {
             func: "{that}.findById"
             // authorizationId
         },
-        findAuthDecisionsByGpiiToken: {
+        findWebPrefsConsumerAuthorizationsByGpiiToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthDecisionsByGpiiTokenDataSource",
+                "{that}.findWebPrefsConsumerAuthorizationsByGpiiTokenDataSource",
                 {
                     gpiiToken: "{arguments}.0"
                 },
@@ -429,10 +431,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // gpiiToken
         },
-        findAuthDecision: {
+        findWebPrefsConsumerAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthDecisionDataSource",
+                "{that}.findWebPrefsConsumerAuthorizationDataSource",
                 {
                     gpiiToken: "{arguments}.0",
                     clientId: "{arguments}.1",
@@ -453,29 +455,29 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // authorizationId, code
         },
-        findAuthByCode: {
+        findWebPrefsConsumerAuthorizationByAuthCode: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthByCodeDataSource",
+                "{that}.findWebPrefsConsumerAuthorizationByAuthCodeDataSource",
                 {
                     code: "{arguments}.0"
                 },
                 "code",
-                gpii.oauth2.dbDataStore.findAuthByCodePostProcess
+                gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCodePostProcess
             ]
             // code
         },
         // Note: With the In Memory Data Store, this function returns an empty array when no clients are found.
         // However, with the DB Data Store, "undefined" is returned.
-        findAuthorizedClientsByGpiiToken: {
+        findUserAuthorizedClientsByGpiiToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthorizedClientsByGpiiTokenDataSource",
+                "{that}.findUserAuthorizedClientsByGpiiTokenDataSource",
                 {
                     gpiiToken: "{arguments}.0"
                 },
                 "gpiiToken",
-                gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess
+                gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess
             ]
             // gpiiToken
         },
@@ -592,7 +594,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
     listeners: {
         onUpdateAuthorization: [{
             listener: "gpii.oauth2.dbDataStore.authorizationExists",
-            args: ["{that}.findAuthDecisionById", "{arguments}.0"],
+            args: ["{that}.findAuthorizationById", "{arguments}.0"],
             namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
@@ -607,7 +609,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         }],
         onRevokeAuthorization: [{
             listener: "gpii.oauth2.dbDataStore.authorizationExists",
-            args: ["{that}.findAuthDecisionById", "{arguments}.0"],
+            args: ["{that}.findAuthorizationById", "{arguments}.0"],
             namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",

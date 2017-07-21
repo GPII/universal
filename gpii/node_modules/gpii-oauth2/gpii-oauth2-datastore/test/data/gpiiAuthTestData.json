@@ -37,11 +37,26 @@
         "_id": "client-3",
         "type": "onboardedSolutionClient",
         "name": "Windows Magnifier",
-        "oauth2ClientId": "net.gpii.windows.magnifier",
-        "oauth2ClientSecret": "client_secret_windows_magnifier"
+        "solutionId": "net.gpii.windows.magnifier"
     },
     {
-        "_id": "authDecision-1",
+        "_id": "client-4",
+        "type": "gpiiAppInstallationClient",
+        "name": "AJC-Bakersfield",
+        "oauth2ClientId": "net.gpii.ajc.bakersfield",
+        "oauth2ClientSecret": "client_secret_ajc_bakersfield",
+        "userId": "user-1"
+    },
+    {
+        "_id": "client-5",
+        "type": "gpiiAppInstallationClient",
+        "name": "AJC-Richmond",
+        "oauth2ClientId": "net.gpii.ajc.richmond",
+        "oauth2ClientSecret": "client_secret_ajc_richmond",
+        "userId": "user-1"
+    },
+    {
+        "_id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
@@ -53,19 +68,7 @@
         "revoked": false
     },
     {
-        "_id": "authDecision-2",
-        "type": "webPrefsConsumerAuthorization",
-        "gpiiToken": "chrome_high_contrast",
-        "clientId": "client-1",
-        "redirectUri": false,
-        "accessToken": "chrome_high_contrast_access_token_client_2",
-        "selectedPreferences": {
-            "textFont": "arial"
-        },
-        "revoked": false
-    },
-    {
-        "_id": "authDecision-3",
+        "_id": "webPrefsConsumerAuthorization-2",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast_dark",
         "clientId": "client-1",
@@ -80,8 +83,19 @@
     {
         "_id": "authCode-1",
         "type": "authCode",
-        "authorizationId": "authDecision-1",
-        "code": "chrome_high_contrast_auth_token"
+        "authorizationId": "webPrefsConsumerAuthorization-1",
+        "code": "chrome_high_contrast_auth_code"
+    },
+    {
+        "_id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-3",
+        "accessToken": "chrome_high_contrast_access_token_for_onboarded_solution",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
     },
     {
         "_id": "privilegedPrefsCreatorAuthorization-1",
@@ -100,7 +114,7 @@
     {
         "_id": "gpiiAppInstallationAuthorization-1",
         "type": "gpiiAppInstallationAuthorization",
-        "clientId": "client-1",
+        "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
         "expiresIn": 3600,
@@ -112,7 +126,7 @@
     {
         "_id": "gpiiAppInstallationAuthorization-2",
         "type": "gpiiAppInstallationAuthorization",
-        "clientId": "client-1",
+        "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-2",
         "expiresIn": 360000000000,
@@ -124,7 +138,7 @@
     {
         "_id": "gpiiAppInstallationAuthorization-3",
         "type": "gpiiAppInstallationAuthorization",
-        "clientId": "client-2",
+        "clientId": "client-5",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-3",
         "expiresIn": 3600,
