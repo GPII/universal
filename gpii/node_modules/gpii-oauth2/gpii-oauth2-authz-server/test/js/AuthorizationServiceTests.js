@@ -142,7 +142,19 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "oauth2ClientSecret": "client_secret_AJC1",
         "userId": "user-1"
     }, {
-        "_id": "webPrefsConsumerAuthorization-1",
+    }, {
+        "_id": "client-4",
+        "type": "onboardedSolutionClient",
+        "name": "Windows Magnifier",
+        "solutionId": "net.gpii.windows.magnifier"
+    }, {
+    }, {
+        "_id": "client-5",
+        "type": "onboardedSolutionClient",
+        "name": "Jaws",
+        "solutionId": "net.gpii.jaws"
+    }, {
+        "_id": "auth-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
         "clientId": "client-1",
@@ -153,7 +165,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "webPrefsConsumerAuthorization-2",
+        "_id": "auth-2",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-1",
@@ -164,7 +176,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "webPrefsConsumerAuthorization-3",
+        "_id": "auth-3",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-2",
@@ -175,7 +187,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "webPrefsConsumerAuthorization-4",
+        "_id": "auth-4",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "dave_gpii_token",
         "clientId": "client-1",
@@ -186,7 +198,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": true
     }, {
-        "_id": "webPrefsConsumerAuthorization-5",
+        "_id": "auth-5",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "dave_gpii_token",
         "clientId": "client-2",
@@ -197,18 +209,47 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "gpiiAppInstallationAuthorization-1",
-        "type": "gpiiAppInstallationAuthorization",
-        "clientId": "client-3",
-        "gpiiToken": "gpiiToken-1",
-        "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
-        "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "_id": "auth-6",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "carol_gpii_token",
+        "clientId": "client-4",
+        "redirectUri": "",
+        "accessToken": "carol_C_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
     }, {
-        "_id": "gpiiAppInstallationAuthorization-2",
+        "_id": "auth-7",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "carol_gpii_token",
+        "clientId": "client-5",
+        "redirectUri": "",
+        "accessToken": "carol_D_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "auth-8",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "bob_gpii_token",
+        "clientId": "client-4",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "auth-9",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "dave_gpii_token",
+        "clientId": "client-5",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": true
+    }, {
+        "_id": "auth-10",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
@@ -219,7 +260,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toString(),
         "timestampRevoked": null
     }, {
-        "_id": "gpiiAppInstallationAuthorization-3",
+        "_id": "auth-11",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
@@ -229,6 +270,17 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "expired": false,
         "timestampCreated": "Mon May 29 2016 13:54:00 GMT-0400 (EDT)",
         "timestampRevoked": "Mon May 29 2016 15:54:00 GMT-0400 (EDT)"
+    }, {
+        "_id": "auth-12",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "gpii-app-installation-token-1",
+        "expiresIn": 3600,
+        "revoked": false,
+        "expired": false,
+        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
+        "timestampRevoked": null
     }];
 
     // All expected results
@@ -238,23 +290,48 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             msg: "Invalid user name and password combination",
             statusCode: 401
         },
-        clientsForAlice: [{
-            "clientName": "Client A",
-            "oauth2ClientId": "client_id_A"
-        }, {
-            "clientName": "Client B",
-            "oauth2ClientId": "client_id_B"
-        }],
-        unauthorizedClientsForBob: [{
-            "clientName": "Client B",
-            "oauth2ClientId": "client_id_B"
-        }],
-        revokedClientsForDave: [{
-            "clientName": "Client A",
-            "oauth2ClientId": "client_id_A"
-        }],
+        clientsForAlice: {
+            "webPrefsConsumerClient": [{
+                "clientName": "Client A",
+                "oauth2ClientId": "client_id_A"
+            }, {
+                "clientName": "Client B",
+                "oauth2ClientId": "client_id_B"
+            }],
+            "onboardedSolutionClient": [{
+                "clientName": "Windows Magnifier",
+                "solutionId": "net.gpii.windows.magnifier"
+            }, {
+                "clientName": "Jaws",
+                "solutionId": "net.gpii.jaws"
+            }]
+        },
+        unauthorizedClientsForBob: {
+            "webPrefsConsumerClient": [{
+                "clientName": "Client B",
+                "oauth2ClientId": "client_id_B"
+            }],
+            "onboardedSolutionClient": [{
+                "clientName": "Jaws",
+                "solutionId": "net.gpii.jaws"
+            }]
+        },
+        revokedClientsForDave: {
+            "webPrefsConsumerClient": [{
+                "clientName": "Client A",
+                "oauth2ClientId": "client_id_A"
+            }],
+            "onboardedSolutionClient": [{
+                "clientName": "Windows Magnifier",
+                "solutionId": "net.gpii.windows.magnifier"
+            }, {
+                "clientName": "Jaws",
+                "solutionId": "net.gpii.jaws"
+            }]
+        },
         findValidGpiiAppInstallationAuthorizationSetExpired: {
-            "id": "gpiiAppInstallationAuthorization-1",
+            "id": "auth-12",
+            "type": "gpiiAppInstallationAuthorization",
             "clientId": "client-3",
             "gpiiToken": "gpiiToken-1",
             "accessToken": "gpii-app-installation-token-1",
@@ -312,7 +389,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["carol_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
-                    args: ["An empty array should be received", [], "{arguments}.0"],
+                    args: ["An empty object should be received", {}, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
@@ -332,14 +409,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "findValidGpiiAppInstallationAuthorization() sets expired for expired access tokens and returns unexpired access token",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-1"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-3"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["unexpired access token should be returned", gpii.tests.oauth2.authorizationService.expected.findValidGpiiAppInstallationAuthorization, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }, {
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.dataStore.findGpiiAppInstallationAuthorizationById", ["gpiiAppInstallationAuthorization-1"], "{that}"]
+                    args: ["{authorizationService}.dataStore.findGpiiAppInstallationAuthorizationById", ["auth-12"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidGpiiAppInstallationAuthorizationSetExpired, "{arguments}.0"],

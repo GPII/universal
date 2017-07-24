@@ -172,7 +172,17 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": true
     },
-    AuthDecisionsByGpiiToken: [{
+    UserAuthorizationsByGpiiToken: [{
+        "id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-3",
+        "accessToken": "chrome_high_contrast_access_token_for_onboarded_solution",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
         "id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
@@ -183,27 +193,15 @@ gpii.tests.dbDataStore.testData = {
             "": true
         },
         "revoked": false
-    }, {
-        "id": "webPrefsConsumerAuthorization-2",
-        "type": "webPrefsConsumerAuthorization",
-        "gpiiToken": "chrome_high_contrast",
-        "clientId": "client-2",
-        "redirectUri": false,
-        "accessToken": "chrome_high_contrast_access_token_client_2",
-        "selectedPreferences": {
-            "textFont": "arial"
-        },
-        "revoked": false
     }],
-    AuthDecisionsByGpiiTokenAfterRevoke: [{
-        "id": "webPrefsConsumerAuthorization-2",
-        "type": "webPrefsConsumerAuthorization",
+    UserAuthorizationsByGpiiTokenAfterRevoke: [{
+        "id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
         "gpiiToken": "chrome_high_contrast",
-        "clientId": "client-2",
-        "redirectUri": false,
-        "accessToken": "chrome_high_contrast_access_token_client_2",
+        "clientId": "client-3",
+        "accessToken": "chrome_high_contrast_access_token_for_onboarded_solution",
         "selectedPreferences": {
-            "textFont": "arial"
+            "": true
         },
         "revoked": false
     }],

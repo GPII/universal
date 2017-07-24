@@ -61,7 +61,7 @@ For onboarded solution clients, the client information contains:
 * The client name
 * user selected preferences 
 
-For onboarded solution clients, the client information contains: 
+For web preferences consumer clients, the client information contains: 
 * The authorization decision id
 * The OAuth2 client id
 * The client name
@@ -70,6 +70,16 @@ For onboarded solution clients, the client information contains:
 An example:
 ```
 {
+    "onboardedSolutionClient": [{
+        "authorizationId": 2,
+        "solutionId": "net.gpii.windows.magnifier",
+        "clientName": "Windows Magnifier",
+        "selectedPreferences": {
+            "": true
+        }
+    },
+    ...
+    ],
     "webPrefsConsumerClient": [{
         "authorizationId": 1,
         "oauth2ClientId": "org.chrome.cloud4chrome",
@@ -77,16 +87,6 @@ An example:
         "selectedPreferences": {
             "visual-alternatives.speak-text.rate": true,
             "increase-size.appearance.text-size": true
-        }
-    },
-    ...
-    ],
-    "onboardedSolutionClient": [{
-        "authorizationId": 2,
-        "solutionId": "net.gpii.windows.magnifier",
-        "clientName": "Windows Magnifier",
-        "selectedPreferences": {
-            "": true
         }
     },
     ...
@@ -102,18 +102,35 @@ An example:
 * **return:** The user selected preferences if the authorization decision id is valid. Otherwise, return `unknown`.
 
 #### getUserUnauthorizedClientsForUser(userId)
-* **description**: Get a list of all the clients that haven't been authorized by the user.
+* **description**: Get a list of all the clients that haven't been authorized by the user. At the moment, the client types that user can authorize are onboarded solution clients and web preferences consumers clients.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-* **return:** An array of objects. Each object contains these information of an unauthorized client: the client name, the OAuth2 client id. An example:
++ **return:** An object. This object contains arrays of unauthorized client information. Each array is keyed by the corresponding client type. 
+
+For onboarded solution clients, the client information contains: 
++ The client name
++ The solution id
+
+For web preferences consumer clients, the client information contains: 
++ The client name
++ The OAuth2 client id
+ 
+An example:
 ```
-[
-    {
-        clientName: "Client A",
-        oauth2ClientId: "client_A"
+{
+    "onboardedSolutionClient": [{
+        "clientName": "Windows Magnifier",
+        "solutionId": "net.gpii.windows.magnifier"
     },
     ...
-]
+    ],
+    "webPrefsConsumerClient": [{
+        "clientName": "Service A",
+        "oauth2ClientId": "org.chrome.cloud4chrome"
+    },
+    ...
+    ]
+}
 ```
 
 #### grantWebPrefsConsumerAuthorization(userId, clientId, redirectUri, selectedPreferences)

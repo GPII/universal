@@ -17,8 +17,8 @@
             "findUserAuthorizableClients": {
                 "map": "function(doc) {if (doc.type === 'onboardedSolutionClient' || doc.type === 'webPrefsConsumerClient') emit(doc._id, doc)}"
             },
-            "findAuthByGpiiToken": {
-                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.gpiiToken, doc)}}"
+            "findUserAuthorizationsByGpiiToken": {
+                "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.gpiiToken, doc)}}"
             },
             "findWebPrefsConsumerAuthorization": {
                 "map": "function(doc) {if (doc.type === 'webPrefsConsumerAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"

@@ -177,10 +177,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findWebPrefsConsumerAuthorizationsByGpiiTokenDataSource: {
+        findUserAuthorizationsByGpiiTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthByGpiiToken?key=\"%gpiiToken\"",
+                requestUrl: "/_design/views/_view/findUserAuthorizationsByGpiiToken?key=\"%gpiiToken\"",
                 termMap: {
                     gpiiToken: "%gpiiToken"
                 },
@@ -419,10 +419,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             func: "{that}.findById"
             // authorizationId
         },
-        findWebPrefsConsumerAuthorizationsByGpiiToken: {
+        findUserAuthorizationsByGpiiToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findWebPrefsConsumerAuthorizationsByGpiiTokenDataSource",
+                "{that}.findUserAuthorizationsByGpiiTokenDataSource",
                 {
                     gpiiToken: "{arguments}.0"
                 },

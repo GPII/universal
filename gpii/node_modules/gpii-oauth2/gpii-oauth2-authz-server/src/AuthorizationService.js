@@ -171,15 +171,15 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{arguments}.0"],
                 namespace: "findGpiiToken"
             }, {
-                listener: "gpii.oauth2.authorizationService.findWebPrefsConsumerAuthorizationsByGpiiToken",
+                listener: "gpii.oauth2.authorizationService.findUserAuthorizationsByGpiiToken",
                 args: ["{dataStore}", "{arguments}.0"],
-                namespace: "findWebPrefsConsumerAuthorizationsByGpiiToken",
+                namespace: "findUserAuthorizationsByGpiiToken",
                 priority: "after:findGpiiToken"
             }, {
                 listener: "gpii.oauth2.authorizationService.findUnauthorizedClients",
                 args: ["{dataStore}", "{arguments}.0"],
                 namespace: "findUnauthorizedClients",
-                priority: "after:findWebPrefsConsumerAuthorizationsByGpiiToken"
+                priority: "after:findUserAuthorizationsByGpiiToken"
             }]
         }
     });
@@ -586,12 +586,12 @@ var fluid = fluid || require("infusion");
      * }
      * @return {Promise} a promise object to be passed to the next processing function
      */
-    gpii.oauth2.authorizationService.findWebPrefsConsumerAuthorizationsByGpiiToken = function (dataStore, record) {
+    gpii.oauth2.authorizationService.findUserAuthorizationsByGpiiToken = function (dataStore, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken === undefined) {
             promiseTogo.resolve(undefined);
         } else {
-            var authDecisionsPromise = dataStore.findWebPrefsConsumerAuthorizationsByGpiiToken(record.inputArgs.gpiiToken);
+            var authorizationsPromise = dataStore.findUserAuthorizationsByGpiiToken(record.inputArgs.gpiiToken);
             var mapper = function (authorizations) {
                 var authorizedClientIds = {};
                 fluid.each(authorizations, function (authorization) {
@@ -599,7 +599,7 @@ var fluid = fluid || require("infusion");
                 });
                 return fluid.extend({}, record, {authorizedClientIds: authorizedClientIds});
             };
-            promiseTogo = fluid.promise.map(authDecisionsPromise, mapper);
+            promiseTogo = fluid.promise.map(authorizationsPromise, mapper);
         }
         return promiseTogo;
     };
@@ -616,11 +616,19 @@ var fluid = fluid || require("infusion");
      *         gpiiToken: gpiiToken    // The initial gpiiToken argument received at gpii.oauth2.authorizationService.getUserUnauthorizedClientsForGpiiToken()
      *     }
      * }
-     * @return {Promise} a promise object with value in this structure:
-     * [{
-     *     clientName: {String},
-     *     oauth2ClientId: {String}
-     * }]
+     * @return {Promise} a promise object with a value in this structure:
+     * {
+     *     "webPrefsConsumerClient": [{
+     *         clientName: {String},
+     *         oauth2ClientId: {String}
+     *     },
+     *     ...],
+     *     "onboardedSolutionClient": [{
+     *         clientName: {String},
+     *         solutionId: {String}
+     *     },
+     *     ...]
+     * }
      */
     gpii.oauth2.authorizationService.findUnauthorizedClients = function (dataStore, record) {
         var promiseTogo = fluid.promise();
@@ -629,15 +637,30 @@ var fluid = fluid || require("infusion");
         } else {
             var allClientsPromise = dataStore.findUserAuthorizableClients();
             var mapper = function (allClients) {
-                var unauthorizedClients = [];
+                var unauthorizedClients = {};
+
                 fluid.each(allClients, function (client) {
                     if (!record.authorizedClientIds.hasOwnProperty(client.id)) {
-                        unauthorizedClients.push({
-                            clientName: client.name,
-                            oauth2ClientId: client.oauth2ClientId
-                        });
+                        var unauthorizedClientInfo;
+
+                        if (client.type === gpii.oauth2.docTypes.onboardedSolutionClient) {
+                            unauthorizedClientInfo = {
+                                clientName: client.name,
+                                solutionId: client.solutionId
+                            };
+                        } else if (client.type === gpii.oauth2.docTypes.webPrefsConsumerClient) {
+                            unauthorizedClientInfo = {
+                                clientName: client.name,
+                                oauth2ClientId: client.oauth2ClientId
+                            };
+                        }
+                        if (!unauthorizedClients[client.type]) {
+                            fluid.set(unauthorizedClients, client.type, []);
+                        }
+                        unauthorizedClients[client.type].push(unauthorizedClientInfo);
                     }
                 });
+
                 return unauthorizedClients;
             };
             promiseTogo = fluid.promise.map(allClientsPromise, mapper);

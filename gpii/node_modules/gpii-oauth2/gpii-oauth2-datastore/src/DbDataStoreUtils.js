@@ -414,6 +414,7 @@ gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess = functi
         var docType = row.doc.type;
         var eachResult;
 
+        // Group each result by the client type
         if (docType === gpii.oauth2.docTypes.onboardedSolutionClient) {
             eachResult = {
                 authorizationId: row.id,
