@@ -43,12 +43,11 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
     {
         name: "Authorize magnifier (share magnifier settings)",
         userToken: "os_gnome",
-        authDecisions: [
+        authorizations: [
             {
+                type: "onboardedSolutionAuthorization",
                 gpiiToken: "os_gnome",
                 clientId: "client-3",
-                redirectUri: false,
-                accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "increase-size.magnifier": true },
                 revoked: false
             }
@@ -69,20 +68,18 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
     {
         name: "Authorize magnifier (share all) and desktop (share text size)",
         userToken: "os_gnome",
-        authDecisions: [
+        authorizations: [
             {
+                type: "onboardedSolutionAuthorization",
                 gpiiToken: "os_gnome",
                 clientId: "client-3",
-                redirectUri: false,
-                accessToken: "os_gnome_magnifier_access_token",
                 selectedPreferences: { "": true },
                 revoked: false
             },
             {
+                type: "onboardedSolutionAuthorization",
                 gpiiToken: "os_gnome",
                 clientId: "client-4",
-                redirectUri: false,
-                accessToken: "os_gnome_desktop_access_token",
                 selectedPreferences: { "increase-size.appearance.text-size": true },
                 revoked: false
             }

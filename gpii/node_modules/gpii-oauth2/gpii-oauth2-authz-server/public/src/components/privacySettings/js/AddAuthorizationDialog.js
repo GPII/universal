@@ -19,10 +19,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 (function ($, fluid) {
     "use strict";
 
-    fluid.defaults("gpii.oauth2.addAuthorizationDialog", {
+    fluid.defaults("gpii.oauth2.addUserAuthorizedAuthorizationDialog", {
         gradeNames: ["gpii.oauth2.privacySettingsDialog"],
         requestInfos: {
-            addAuthorization: {
+            addUserAuthorizedAuthorization: {
                 url: "/authorizations",
                 type: "post"
             }
@@ -35,21 +35,21 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 listener: "{that}.setInitialSelectedPrefs",
                 args: [ {} ]
             },
-            "onDone.sendAddAuthorization": {
-                listener: "{that}.sendAddAuthorization"
+            "onDone.sendAddUserAuthorizedAuthorization": {
+                listener: "{that}.sendAddUserAuthorizedAuthorization"
             }
         },
         invokers: {
-            sendAddAuthorization: {
-                funcName: "gpii.oauth2.addAuthorizationDialog.sendAddAuthorization",
+            sendAddUserAuthorizedAuthorization: {
+                funcName: "gpii.oauth2.addUserAuthorizedAuthorizationDialog.sendAddUserAuthorizedAuthorization",
                 args: ["{that}"]
             }
         }
     });
 
     // TODO: update to use the dataSource system once it is migrated out of Kettle up into Infusion
-    gpii.oauth2.addAuthorizationDialog.sendAddAuthorization = function (that) {
-        var url = that.options.requestInfos.addAuthorization.url,
+    gpii.oauth2.addUserAuthorizedAuthorizationDialog.sendAddUserAuthorizedAuthorization = function (that) {
+        var url = that.options.requestInfos.addUserAuthorizedAuthorization.url,
             selectionTree = that.selectionTree,
             selectedPreferences, data;
 
@@ -63,7 +63,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         });
 
         gpii.oauth2.ajax(url, {}, {
-            type: that.options.requestInfos.addAuthorization.type,
+            type: that.options.requestInfos.addUserAuthorizedAuthorization.type,
             contentType: "application/json",
             data: data,
             success: that.events.authorizationAdded.fire

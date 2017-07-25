@@ -157,6 +157,20 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
+        findClientBySolutionIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findClientBySolutionId?key=\"%solutionId\"",
+                termMap: {
+                    solutionId: "%solutionId"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
+                    }
+                }
+            }
+        },
         findUserAuthorizableClientsDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
@@ -235,10 +249,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthByAccessTokenDataSource: {
+        findWebPrefsConsumerAuthorizationByAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthByAccessToken?key=%22%accessToken%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findWebPrefsConsumerAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
                 termMap: {
                     accessToken: "%accessToken"
                 },
@@ -371,6 +385,17 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // oauth2ClientId
         },
+        findClientBySolutionId: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findClientBySolutionIdDataSource",
+                {
+                    SolutionId: "{arguments}.0"
+                },
+                "SolutionId"
+            ]
+            // SolutionId
+        },
         findUserAuthorizableClients: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
@@ -380,40 +405,24 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 gpii.oauth2.dbDataStore.handleMultipleRecords
             ]
         },
-        // TODO in this implementation, there is a one-to-one correspondence between
-        // recorded user 'authorization decisions' and access tokens. We may want to
-        // rethink this and give them different lifetimes.
-        // TODO: make sure there's only one active access token for one client
-        addWebPrefsConsumerAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.addRecord",
-            args: [
-                "{that}.saveDataSource",
-                gpii.oauth2.docTypes.webPrefsConsumerAuthorization,
-                "id",
-                "{arguments}.0"
-            ]
-            // webPrefsConsumerAuthorization
-        },
-        updateAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.updateAuthorization",
+        updateUserAuthorizedAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0",
-                "{arguments}.1",
-                "{arguments}.2"
+                "{arguments}.1"
             ]
-            // userId, authorizationData, authorizationType
+            // userId, authorizationData
         },
-        revokeAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.revokeAuthorization",
+        revokeUserAuthorizedAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.revokeUserAuthorizedAuthorization",
             args: [
                 "{that}",
                 gpii.oauth2.dbDataStore.setRevoke,
                 "{arguments}.0",
-                "{arguments}.1",
-                "{arguments}.2"
+                "{arguments}.1"
             ]
-            // userId, authorizationId, authorizationType
+            // userId, authorizationId
         },
         findAuthorizationById: {
             func: "{that}.findById"
@@ -481,17 +490,40 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // gpiiToken
         },
-        findAuthByAccessToken: {
+        findWebPrefsConsumerAuthorizationByAccessToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthByAccessTokenDataSource",
+                "{that}.findWebPrefsConsumerAuthorizationByAccessTokenDataSource",
                 {
                     accessToken: "{arguments}.0"
                 },
                 "accessToken",
-                gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess
+                gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAccessTokenPostProcess
             ]
             // accessToken
+        },
+        // TODO in this implementation, there is a one-to-one correspondence between
+        // recorded user 'authorizations' and access tokens. We may want to
+        // rethink this and give them different lifetimes.
+        // TODO: make sure there's only one active access token for one client
+        // addWebPrefsConsumerAuthorization: {
+        //     funcName: "gpii.oauth2.dbDataStore.addRecord",
+        //     args: [
+        //         "{that}.saveDataSource",
+        //         gpii.oauth2.docTypes.webPrefsConsumerAuthorization,
+        //         "id",
+        //         "{arguments}.0"
+        //     ]
+        //     // webPrefsConsumerAuthorization
+        // },
+        addAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.addAuthorization",
+            args: [
+                "{that}.saveDataSource",
+                "{arguments}.0",
+                "{arguments}.1"
+            ]
+            // authorizationType, authorizationData
         },
         findPrivilegedPrefsCreatorAuthorizationById: {
             func: "{that}.findById"
@@ -520,14 +552,14 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // accessToken
         },
         // TODO: make sure there's only one non-revoked privileged prefs creator for the given client
-        addPrivilegedPrefsCreatorAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.addPrivilegedPrefsCreatorAuthorization",
-            args: [
-                "{that}.saveDataSource",
-                "{arguments}.0"
-            ]
-            // privilegedPrefsCreatorAuthorizationData
-        },
+        // addPrivilegedPrefsCreatorAuthorization: {
+        //     funcName: "gpii.oauth2.dbDataStore.addPrivilegedPrefsCreatorAuthorization",
+        //     args: [
+        //         "{that}.saveDataSource",
+        //         "{arguments}.0"
+        //     ]
+        //     // privilegedPrefsCreatorAuthorizationData
+        // },
         revokePrivilegedPrefsCreatorAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.revokePrivilegedPrefsCreatorAuthorization",
             args: [
@@ -568,14 +600,14 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         // Note: Before adding a new GPII app installation authroization: authorizationService.findValidGpiiAppInstallationAuthorization()
         // should have been called to ensure there is NOT any non-revoked or unexpired existing access tokens for the given
         // GPII token and the client ID. See authorizationService.js
-        addGpiiAppInstallationAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.addGpiiAppInstallationAuthorization",
-            args: [
-                "{that}.saveDataSource",
-                "{arguments}.0"
-            ]
-            // gpiiAppInstallationAuthorizationData
-        },
+        // addGpiiAppInstallationAuthorization: {
+        //     funcName: "gpii.oauth2.dbDataStore.addGpiiAppInstallationAuthorization",
+        //     args: [
+        //         "{that}.saveDataSource",
+        //         "{arguments}.0"
+        //     ]
+        //     // gpiiAppInstallationAuthorizationData
+        // },
         expireGpiiAppInstallationAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.expireGpiiAppInstallationAuthorization",
             args: [
@@ -586,13 +618,13 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         }
     },
     events: {
-        onUpdateAuthorization: null,
-        onRevokeAuthorization: null,
+        onUpdateUserAuthorizedAuthorization: null,
+        onRevokeUserAuthorizedAuthorization: null,
         onRevokePrivilegedPrefsCreatorAuthorization: null,
         onExpireGpiiAppInstallationAuthorization: null
     },
     listeners: {
-        onUpdateAuthorization: [{
+        onUpdateUserAuthorizedAuthorization: [{
             listener: "gpii.oauth2.dbDataStore.authorizationExists",
             args: ["{that}.findAuthorizationById", "{arguments}.0"],
             namespace: "authorizationExists"
@@ -602,12 +634,12 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             namespace: "validateGpiiToken",
             priority: "after:authorizationExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateAuthorization",
+            listener: "gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdateAuthorization",
+            namespace: "doUpdateUserAuthorizedAuthorization",
             priority: "after:validateGpiiToken"
         }],
-        onRevokeAuthorization: [{
+        onRevokeUserAuthorizedAuthorization: [{
             listener: "gpii.oauth2.dbDataStore.authorizationExists",
             args: ["{that}.findAuthorizationById", "{arguments}.0"],
             namespace: "authorizationExists"
@@ -617,9 +649,9 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             namespace: "validateGpiiToken",
             priority: "after:authorizationExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateAuthorization",
+            listener: "gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdateAuthorization",
+            namespace: "doUpdateUserAuthorizedAuthorization",
             priority: "after:validateGpiiToken"
         }],
         onRevokePrivilegedPrefsCreatorAuthorization: [{

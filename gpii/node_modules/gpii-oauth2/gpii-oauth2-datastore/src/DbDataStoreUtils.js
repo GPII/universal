@@ -178,11 +178,11 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
 // Authorizations
 // --------------
 
-// ==== updateAuthorization()
+// ==== updateUserAuthorizedAuthorization()
 // Operate
 
 /**
- * The entry point of updateAuthorization() API. Fires the transforming promise workflow by triggering onUpdateAuthorization event.
+ * The entry point of updateUserAuthorizedAuthorization() API. Fires the transforming promise workflow by triggering onUpdateUserAuthorizedAuthorization event.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore
  * @param userId {String} The user id
  * @param authorizationData {Object} The authorization decision data to update. Its structure:
@@ -196,22 +196,21 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
  *     revoked: {Boolean}
  * }
  */
-gpii.oauth2.dbDataStore.updateAuthorization = function (that, userId, authorizationData, authorizationType) {
+gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization = function (that, userId, authorizationData) {
     var input = {
         userId: userId,
-        authorizationType: authorizationType,
         authorizationData: authorizationData
     };
-    return fluid.promise.fireTransformEvent(that.events.onUpdateAuthorization, {inputArgs: input});
+    return fluid.promise.fireTransformEvent(that.events.onUpdateUserAuthorizedAuthorization, {inputArgs: input});
 };
 
 /**
- * The first step in the promise transforming chain for implementing updateAuthorization() API. Check if the auth decision
+ * The first step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API. Check if the auth decision
  * already exists by the auth decision id. If exists, pass the input data received from the entry function as
  * well as the existing auth decision record to the next step in the chain.
  * Otherwise, return a promise with a missing document error.
  * @param findAuthorizationById {Function} The findAuthorizationById() API provided by gpii.oauth2.dbDataStore
- * @param input {Object} The data passed on from the entry function gpii.oauth2.dbDataStore.updateAuthorization(). Its structure:
+ * @param input {Object} The data passed on from the entry function gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization(). Its structure:
  *  {
  *      inputArgs:
  *      {
@@ -238,17 +237,13 @@ gpii.oauth2.dbDataStore.authorizationExists = function (findAuthorizationById, i
         var error;
         if (!authorization) {
             // Authorization is not found
-            error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes[input.inputArgs.authorizationType]});
+            error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
             promiseTogo.reject(error);
-        } else if (authorization.type === authorizationType) {
+        } else {
             var valueObj = {};
             fluid.set(valueObj, "authorization", authorization);
             var combined = fluid.extend({}, input, valueObj);
             promiseTogo.resolve(combined);
-        } else {
-            // Unauthorized
-            error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
-            promiseTogo.reject(error);
         }
     }, function (err) {
         promiseTogo.reject(err);
@@ -258,7 +253,7 @@ gpii.oauth2.dbDataStore.authorizationExists = function (findAuthorizationById, i
 };
 
 /**
- * The second step in the promise transforming chain for implementing updateAuthorization() API. Find the gpii token information based on
+ * The second step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API. Find the gpii token information based on
  * the gpii token of the existing auth decision record. The user id in the token info is needed for the next step. If the record
  * is found, pass the input data + the gpii token info to the next step in the chain. Otherwise, return a promise with a missing
  * document error.
@@ -268,7 +263,6 @@ gpii.oauth2.dbDataStore.authorizationExists = function (findAuthorizationById, i
  *      inputArgs:
  *      {
  *          userId: {String},
- *          authorizationType: {String},
  *          authorizationData: {  // The auth decision to update
  *              id: {String},
  *              gpiiToken: {String},
@@ -312,7 +306,7 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
 };
 
 /**
- * The last step in the promise transforming chain for implementing updateAuthorization() API.
+ * The last step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API.
  * This step verifies the user requested for the update matches the user that the updated auth decision
  * belongs to. If the verification passes, do the update. Otherwise, return a promise with an unauthorized
  * user error.
@@ -333,7 +327,7 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
  *              revoked: {Boolean}
  *          }
  *      },
- *      authDecision:  // Existing auth decision
+ *      authorization:  // Existing auth decision
  *      {
  *          gpiiToken: {String},
  *          clientId: {String},
@@ -341,7 +335,8 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
  *          accessToken: {String},
  *          selectedPreferences: {Object},
  *          revoked: {Boolean},
- *          id: {String}
+ *          id: {String},
+ *          type: {String}
  *      },
  *      gpiiToken:
  *      {
@@ -354,15 +349,15 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
  * or an unauthorized user error if the user requesting the update doesn't match the user that associates with the GPII token within the authorization
  * decision record (on promise reject).
  */
-gpii.oauth2.dbDataStore.doUpdateAuthorization = function (dataSource, input) {
+gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization = function (dataSource, input) {
     var inputUserId = input.inputArgs.userId;
 
     if (input.gpiiToken.userId === inputUserId) {
-        // updateAuthorization() provides "authorizationData" while revokeAuthorization() provides "dataProcessFunc" that turns on "revoked"
+        // updateUserAuthorizedAuthorization() provides "authorizationData" while revokeUserAuthorizedAuthorization() provides "dataProcessFunc" that turns on "revoked"
         var authorization = input.inputArgs.authorizationData ?
             input.inputArgs.authorizationData :
             input.inputArgs.dataProcessFunc(input.authorization);
-        return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.docTypes[input.inputArgs.authorizationType], "id", authorization);
+        return gpii.oauth2.dbDataStore.updateRecord(dataSource, gpii.oauth2.docTypes[input.authorization.type], "id", authorization);
     } else {
         var promiseTogo = fluid.promise();
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorizedUser, {userId: inputUserId});
@@ -370,36 +365,35 @@ gpii.oauth2.dbDataStore.doUpdateAuthorization = function (dataSource, input) {
         return promiseTogo;
     }
 };
-// ==== End of updateAuthorization()
+// ==== End of updateUserAuthorizedAuthorization()
 
-// ==== revokeAuthorization()
+// ==== revokeUserAuthorizedAuthorization()
 /**
- * The entry point of revokeAuthorization() API. Fires the transforming promise workflow by triggering onRevokeAuthorization event.
+ * The entry point of revokeUserAuthorizedAuthorization() API. Fires the transforming promise workflow by triggering onRevokeUserAuthorizedAuthorization event.
  * Shared to revoke authorizations in these types: gpii app installstion authorizations, web prefs consumer authorizations and onboarded solution authorizations
  * since these authorization types are all associated with certain users.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore
- * @param revokeFunc {Function} The function to be called by gpii.oauth2.dbDataStore.doUpdateAuthorization() to perform the revoking of an authorization decision
+ * @param revokeFunc {Function} The function to be called by gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization() to perform the revoking of an authorization decision
  * @param userId {String} An user id
  * @param authorizationId {String} An authorization decision id
  */
-gpii.oauth2.dbDataStore.revokeAuthorization = function (that, revokeFunc, userId, authorizationId, authorizationType) {
+gpii.oauth2.dbDataStore.revokeUserAuthorizedAuthorization = function (that, revokeFunc, userId, authorizationId) {
     var input = {
         userId: userId,
         authorizationId: authorizationId,
-        authorizationType: authorizationType,
         dataProcessFunc: revokeFunc
     };
-    return fluid.promise.fireTransformEvent(that.events.onRevokeAuthorization, {inputArgs: input});
+    return fluid.promise.fireTransformEvent(that.events.onRevokeUserAuthorizedAuthorization, {inputArgs: input});
 };
 
 /**
- * Used for implementing revokeAuthorization() API as the argument of "dataProcessFunc". It sets the `revoked` field in the given data to `true`.
+ * Used for implementing revokeUserAuthorizedAuthorization() API as the argument of "dataProcessFunc". It sets the `revoked` field in the given data to `true`.
  */
 gpii.oauth2.dbDataStore.setRevoke = function (data) {
     data.revoked = true;
     return data;
 };
-// ==== End of revokeAuthorization()
+// ==== End of revokeUserAuthorizedAuthorization()
 
 // Access Token
 // ------------
@@ -441,9 +435,9 @@ gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess = functi
 };
 
 /**
- * The post data process function for implementing findAuthByAccessToken()
+ * The post data process function for implementing findWebPrefsConsumerAuthorizationByAccessToken()
  */
-gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess = function (data) {
+gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAccessTokenPostProcess = function (data) {
     var result = {
         userGpiiToken: data.value.gpiiToken,
         selectedPreferences: data.value.selectedPreferences,
@@ -515,19 +509,16 @@ gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCodePostProcess =
  */
 gpii.oauth2.dbDataStore.addPrivilegedPrefsCreatorAuthorization = function (saveDataSource, privilegedPrefsCreatorAuthorizationData) {
     var promiseTogo = fluid.promise();
+    var data;
 
-    if (privilegedPrefsCreatorAuthorizationData === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "privilegedPrefsCreatorAuthorizationData"});
-        promiseTogo.reject(error);
-    } else {
-        var data = {
+    if (privilegedPrefsCreatorAuthorizationData) {
+        data = {
             clientId: privilegedPrefsCreatorAuthorizationData.clientId, // foreign key
             accessToken: privilegedPrefsCreatorAuthorizationData.accessToken,
             revoked: false
         };
-
-        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization, "id", data);
     }
+    promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization, "id", data);
 
     return promiseTogo;
 };
@@ -647,29 +638,26 @@ gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClient
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
  * token record, or an error if `gpiiAppInstallationAuthorizationData` parameter is not provided.
  */
-gpii.oauth2.dbDataStore.addGpiiAppInstallationAuthorization = function (saveDataSource, gpiiAppInstallationAuthorizationData) {
-    var promiseTogo = fluid.promise();
+// gpii.oauth2.dbDataStore.addGpiiAppInstallationAuthorization = function (saveDataSource, gpiiAppInstallationAuthorizationData) {
+//     var promiseTogo = fluid.promise();
+//     var data;
 
-    if (gpiiAppInstallationAuthorizationData === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "gpiiAppInstallationAuthorizationData"});
-        promiseTogo.reject(error);
-    } else {
-        var data = {
-            clientId: gpiiAppInstallationAuthorizationData.clientId,
-            gpiiToken: gpiiAppInstallationAuthorizationData.gpiiToken,
-            accessToken: gpiiAppInstallationAuthorizationData.accessToken,
-            expiresIn: gpiiAppInstallationAuthorizationData.expiresIn,
-            expired: false,
-            revoked: false,
-            timestampCreated: new Date().toString(),
-            timestampRevoked: null
-        };
+//     if (gpiiAppInstallationAuthorizationData) {
+//         data = {
+//             clientId: gpiiAppInstallationAuthorizationData.clientId,
+//             gpiiToken: gpiiAppInstallationAuthorizationData.gpiiToken,
+//             accessToken: gpiiAppInstallationAuthorizationData.accessToken,
+//             expiresIn: gpiiAppInstallationAuthorizationData.expiresIn,
+//             expired: false,
+//             revoked: false,
+//             timestampCreated: new Date().toString(),
+//             timestampRevoked: null
+//         };
+//     }
+//     promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.gpiiAppInstallationAuthorization, "id", data);
 
-        promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.gpiiAppInstallationAuthorization, "id", data);
-    }
-
-    return promiseTogo;
-};
+//     return promiseTogo;
+// };
 
 // ==== expireGpiiAppInstallationAuthorization()
 // Fires the transforming promise workflow by triggering onExpireGpiiAppInstallationAuthorization event.
@@ -719,3 +707,74 @@ gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization = function (sav
 };
 // ==== End of expireGpiiAppInstallationAuthorization()
 
+/**
+ * Add an authorization
+ * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
+ * @param authorizationType {String} The authorization type
+ * @param authorizationData {Object} The authorization data. Different authorization type provides different data structure.
+ *  {
+ *      clientId: {String},
+ *      gpiiToken: {String},
+ *      accessToken: {String},
+ *      expiresIn: {Number}
+ *  }
+ * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
+ * token record, or an error if `gpiiAppInstallationAuthorizationData` parameter is not provided.
+ */
+gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizationType, authorizationData) {
+    var promiseTogo = fluid.promise();
+    var data;
+
+    // Verify the authorization type
+    if (authorizationType !== gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
+        authorizationType !== gpii.oauth2.docTypes.onboardedSolutionAuthorization &&
+        authorizationType !== gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization &&
+        authorizationType !== gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized, {docName: authorizationType});
+        promiseTogo.reject(error);
+        return promiseTogo;
+    }
+
+    // The authorization data must exist
+    if (!authorizationData) {
+        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: authorizationType});
+        promiseTogo.reject(error);
+        return promiseTogo;
+    }
+
+    // Construct the authorization data structure based on the authorization type
+    if (authorizationType === gpii.oauth2.docTypes.gpiiAppInstallationAuthorization) {
+        data = {
+            clientId: authorizationData.clientId,
+            gpiiToken: authorizationData.gpiiToken,
+            accessToken: authorizationData.accessToken,
+            expiresIn: authorizationData.expiresIn,
+            expired: false,
+            revoked: false,
+            timestampCreated: new Date().toString(),
+            timestampRevoked: null
+        };
+    }
+
+    if (authorizationType === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
+        data = {
+            clientId: authorizationData.clientId,
+            accessToken: authorizationData.accessToken,
+            revoked: false
+        };
+    }
+
+    if (authorizationType === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
+        data = {
+            gpiiToken: authorizationData.gpiiToken,
+            clientId: authorizationData.clientId,
+            redirectUri: authorizationData.redirectUri,
+            accessToken: authorizationData.accessToken,
+            selectedPreferences: authorizationData.selectedPreferences,
+            revoked: false
+        };
+    }
+    promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
+
+    return promiseTogo;
+};

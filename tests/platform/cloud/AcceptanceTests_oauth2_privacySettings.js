@@ -59,7 +59,7 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = fluid.freezeRecursive([
         listener: "gpii.test.cloudBased.oauth2.verifyDataStoreAuthorization",
         args: [
             "{testCaseHolder}.configuration.server.flowManager.oauth2DataStore",
-            "{testCaseHolder}.options.expectedAuthDecision",
+            "{testCaseHolder}.options.expectedAuthorization",
             "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone"
         ]
     },
@@ -96,7 +96,8 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
             oauth2ClientId: "org.chrome.cloud4chrome",
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true }
         },
-        expectedAuthDecision: {
+        expectedAuthorization: {
+            type: "webPrefsConsumerAuthorization",
             gpiiToken: "alice_gpii_token",
             clientId: "client-1",
             redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",

@@ -4,11 +4,12 @@ The authorization service provides API that allows users to add, retrieve, updat
 
 ### APIs for [Authorization Code Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant)
 
-#### addAuthorization(userId, oauth2ClientId, selectedPreferences)
-* **description**: Add the authorization. Check if the user authorization decision already exists based on the user id and OAuth2 client id. If it doesn't exist, generate an access token and add the authorization. If it does exist, do nothing. This function allow to add 2 type of authorizations: "authCodeAuthorization" and "onboardedSolutionAuthorization"
+#### addUserAuthorizedAuthorization(userId, solutionId, oauth2ClientId, selectedPreferences)
+* **description**: Add the authorization. Check if the user authorization already exists based on the user id and OAuth2 client id/solution id. If it doesn't exist, generate an access token and add the authorization. If it does exist, do nothing. This function can be used to add 2 type of authorizations: onboarded solution authorizations and web preferences consumer authorizations. When adding onboarded solution authorizations, the 2rd argument `solutionId` must be provided and the 3rd argument `oauth2ClientId` should be empty. Vice versa when adding web preferences consumer authorizations.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * oauth2ClientId: String. A unique string that represents the registration information provided by the client.
+    * solutionId: String. A unique string that represents the registration information of the onboarded solution.
+    * oauth2ClientId: String. A unique string that represents the registration information of the OAuth2 client.
     * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
@@ -148,12 +149,11 @@ An example:
     ```
 * **return:** An authorization code.
 
-#### revokeAuthorization(userId, authorizationId, authorizationType)
-* **description**: Revoke an authorization. This API is used to revoke these authorization types: GPII app installation authorizations, onboarded solution authorizations, web preferences consumer authorizations. Before the revoke, the function ensures the authorization type matches and the authorization was made by the user.
+#### revokeUserAuthorizedAuthorization(userId, authorizationId)
+* **description**: Revoke an authorization. This API is used to revoke these authorization types: GPII app installation authorizations, onboarded solution authorizations, web preferences consumer authorizations.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * authorizationId: Number. A system generated unique number that identifies the authorization decision.
-    * authorizationType: String. The authorization type. It must be one of these values: "gpiiAppInstallationAuthorization", "onboardedSolutionAuthorization", "webPrefsConsumerAuthorization"
 * **return:** None.
 
 #### setSelectedPreferences(userId, authorizationId, selectedPreferences)

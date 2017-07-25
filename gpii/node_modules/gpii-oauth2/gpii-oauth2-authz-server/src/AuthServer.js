@@ -353,6 +353,10 @@ gpii.oauth2.authServer.contributeMiddleware = function (app) {
     app.set("view engine", "handlebars");
 };
 
+gpii.oauth2.authServer.getIdFieldByClientType = function (clientType) {
+    return clientType === gpii.oauth2.docTypes.onboardedSolutionClient ? "solutionId" : "oauth2ClientId";
+};
+
 gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
     // TODO: Update the user interface to support multiple tokens per
     // user rather than using a single default
@@ -371,18 +375,30 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
         var authorizedClients = responses[0];
         var unauthorizedClients = responses[1];
 
-        var authorizedServices = fluid.transform(authorizedClients, function (client) {
-            return {
-                authorizationId: client.authorizationId,
-                oauth2ClientId: client.oauth2ClientId,
-                serviceName: client.clientName
-            };
+        var authorizedServices = [],
+            unauthorizedServices = [];
+
+        fluid.each(authorizedClients, function (clients, clientType) {
+            var authorizedServicesForOneType = fluid.transform(clients, function (client) {
+                return {
+                    authorizationId: client.authorizationId,
+                    serviceName: client.clientName,
+                    oauth2ClientId: client.oauth2ClientId,
+                    solutionId: client.solutionId
+                };
+            });
+            authorizedServices = authorizedServices.concat(authorizedServicesForOneType);
         });
-        var unauthorizedServices = fluid.transform(unauthorizedClients, function (client) {
-            return {
-                oauth2ClientId: client.oauth2ClientId,
-                serviceName: client.clientName
-            };
+
+        fluid.each(unauthorizedClients, function (clients, clientType) {
+            var unauthorizedServicesForOneType = fluid.transform(clients, function (client) {
+                return {
+                    serviceName: client.clientName,
+                    oauth2ClientId: client.oauth2ClientId,
+                    solutionId: client.solutionId
+                };
+            });
+            unauthorizedServices = unauthorizedServices.concat(unauthorizedServicesForOneType);
         });
 
         authorizedServicesPromise.resolve({
@@ -483,7 +499,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var userId = req.user.id;
             // TODO: Validate authorizationId
             var authorizationId = req.params.authorizationId;
-            var revokePromise = that.authorizationService.revokeAuthorization(userId, authorizationId);
+            var revokePromise = that.authorizationService.revokeUserAuthorizedAuthorization(userId, authorizationId);
             gpii.oauth2.mapPromiseToResponse(revokePromise, res);
         }
     );
@@ -546,9 +562,10 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var gpiiToken = req.user.defaultGpiiToken;
 
                 var oauth2ClientId = req.body.oauth2ClientId;
+                var solutionId = req.body.solutionId;
                 var selectedPreferences = req.body.selectedPreferences;
                 // TODO validate selectedPreferences?
-                var addPromise = that.authorizationService.addAuthorization(gpiiToken, oauth2ClientId, selectedPreferences);
+                var addPromise = that.authorizationService.addUserAuthorizedAuthorization(gpiiToken, oauth2ClientId, solutionId, selectedPreferences);
                 gpii.oauth2.mapPromiseToResponse(addPromise, res);
             } else {
                 res.sendStatus(400);
@@ -585,6 +602,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         function (req, res) {
             var authorizedServicesPromise = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
             authorizedServicesPromise.then(function (payload) {
+                console.log("==== payload", payload);
                 res.render("privacySettings", payload);
             });
         }

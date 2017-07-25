@@ -268,13 +268,13 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
         type: "DELETE"
     }
 }, {
-    name: "Test ability to update selectedPreferences in auth decision",
+    name: "Test ability to update selectedPreferences in authorization",
     gradeName: "gpii.tests.cloud.oauth2.disruptWithUpdatedDecision",
     expected: {
         "org.chrome.cloud4chrome": {}
     }
 }, {
-    name: "Test ability to revoke an authorization decision",
+    name: "Test ability to revoke an authorization",
     gradeName: "gpii.tests.cloud.oauth2.disruptWithRevocation"
 }
 ];

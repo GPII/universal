@@ -18,10 +18,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 (function ($) {
     "use strict";
 
-    fluid.registerNamespace("gpii.tests.oauth2.addAuthorizationDialog");
+    fluid.registerNamespace("gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog");
 
     gpii.tests.additionalRequestInfos = {
-        addAuthorization: {
+        addUserAuthorizedAuthorization: {
             url: "/authorizations",
             type: "post",
             data: "{\"oauth2ClientId\":1,\"selectedPreferences\":{\"\":true}}",
@@ -34,17 +34,17 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.tests.requestInfos = fluid.extend(true, {}, gpii.tests.oauth2.privacySettings.basicRequestInfos, gpii.tests.additionalRequestInfos);
 
-    gpii.tests.oauth2.addAuthorizationDialog.registerMockjax = function () {
+    gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog.registerMockjax = function () {
         fluid.each(gpii.tests.requestInfos, function (options) {
             $.mockjax(options);
         });
     };
 
-    fluid.defaults("gpii.tests.oauth2.addAuthorizationDialog", {
-        gradeNames: ["gpii.oauth2.addAuthorizationDialog", "gpii.tests.oauth2.privacySettingsConfig"],
+    fluid.defaults("gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog", {
+        gradeNames: ["gpii.oauth2.addUserAuthorizedAuthorizationDialog", "gpii.tests.oauth2.privacySettingsConfig"],
         // Using "gpii.tests.oauth2.privacySettings.basicRequestInfos" without including
         // "gpii.tests.additionalRequestInfos" is because otherwise the component instantiation
-        // would try to resolve "data" value defined for "addAuthorization" request as this value
+        // would try to resolve "data" value defined for "addUserAuthorizedAuthorization" request as this value
         // has curly brackets "{...}" in it
         requestInfos: gpii.tests.oauth2.privacySettings.basicRequestInfos,
         model: {
@@ -52,26 +52,26 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         listeners: {
             "onCreate.registerMockjax": {
-                listener: "gpii.tests.oauth2.addAuthorizationDialog.registerMockjax",
+                listener: "gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog.registerMockjax",
                 priority: "first"
             }
         }
     });
 
-    fluid.defaults("gpii.tests.oauth2.addAuthorizationDialogTest", {
+    fluid.defaults("gpii.tests.oauth2.addUserAuthorizedAuthorizationDialogTest", {
         gradeNames: ["fluid.test.testEnvironment"],
         components: {
-            addAuthorizationDialog: {
-                type: "gpii.tests.oauth2.addAuthorizationDialog",
-                container: ".gpiic-oauth2-privacySettings-addAuthorizationDialog"
+            addUserAuthorizedAuthorizationDialog: {
+                type: "gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog",
+                container: ".gpiic-oauth2-privacySettings-addUserAuthorizedAuthorizationDialog"
             },
             dialogTester: {
-                type: "gpii.tests.oauth2.addAuthorizationDialogTester"
+                type: "gpii.tests.oauth2.addUserAuthorizedAuthorizationDialogTester"
             }
         }
     });
 
-    fluid.defaults("gpii.tests.oauth2.addAuthorizationDialogTester", {
+    fluid.defaults("gpii.tests.oauth2.addUserAuthorizedAuthorizationDialogTester", {
         gradeNames: ["fluid.test.testCaseHolder"],
         modules: [ {
             name: "Add authorizations dialog tests",
@@ -80,8 +80,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     name: "Initial dialog state",
                     expect: 3,
                     sequence: [{
-                        listener: "gpii.tests.oauth2.addAuthorizationDialog.assertInit",
-                        event: "{addAuthorizationDialog}.events.onCreateSelectionTree",
+                        listener: "gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog.assertInit",
+                        event: "{addUserAuthorizedAuthorizationDialog}.events.onCreateSelectionTree",
                         priority: "last"
                     }]
                 },
@@ -89,7 +89,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     name: "Cancel button",
                     expect: 1,
                     sequence: [{
-                        element: "{addAuthorizationDialog}.dom.cancel",
+                        element: "{addUserAuthorizedAuthorizationDialog}.dom.cancel",
                         jQueryTrigger: "click"
                     }, {
                         func: "gpii.tests.oauth2.privacySettings.assertAjaxCalls",
@@ -100,28 +100,28 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     name: "Done button",
                     expect: 3,
                     sequence: [{
-                        func: "{addAuthorizationDialog}.selectionTree.applier.change",
+                        func: "{addUserAuthorizedAuthorizationDialog}.selectionTree.applier.change",
                         args: ["selections.value", "checked"]
                     }, {
                         func: "gpii.tests.oauth2.privacySettings.assertSelectedPreferences",
-                        args: ["{addAuthorizationDialog}", {"": true}]
+                        args: ["{addUserAuthorizedAuthorizationDialog}", {"": true}]
                     }, {
-                        element: "{addAuthorizationDialog}.dom.done",
+                        element: "{addUserAuthorizedAuthorizationDialog}.dom.done",
                         jQueryTrigger: "click"
                     }, {
                         func: "gpii.tests.oauth2.privacySettings.assertAjaxCalls",
                         args: [2]
                     }, {
                         listener: "jqUnit.assertTrue",
-                        args: ["The event authorizationAdded is fired when the addAuthorization request is successful.", true],
-                        event: "{addAuthorizationDialog}.events.authorizationAdded"
+                        args: ["The event authorizationAdded is fired when the addUserAuthorizedAuthorization request is successful.", true],
+                        event: "{addUserAuthorizedAuthorizationDialog}.events.authorizationAdded"
                     }]
                 }
             ]
         }]
     });
 
-    gpii.tests.oauth2.addAuthorizationDialog.assertInit = function (that) {
+    gpii.tests.oauth2.addUserAuthorizedAuthorizationDialog.assertInit = function (that) {
         gpii.tests.oauth2.privacySettings.assertSelectedPreferences(that, {});
         gpii.tests.oauth2.privacySettings.assertAjaxCalls(1);
         jqUnit.assertDeepEq("The model value for initialSelectedPrefs has been set to empty", {}, that.model.initialSelectedPrefs);
@@ -129,7 +129,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     $(document).ready(function () {
         fluid.test.runTests([
-            "gpii.tests.oauth2.addAuthorizationDialogTest"
+            "gpii.tests.oauth2.addUserAuthorizedAuthorizationDialogTest"
         ]);
     });
 

@@ -112,6 +112,12 @@ gpii.tests.dbDataStore.testData = {
         "oauth2ClientSecret": "client_secret_1",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
+    client1: {
+        "id": "client-3",
+        "type": "onboardedSolutionClient",
+        "name": "Windows Magnifier",
+        "solutionId": "net.gpii.windows.magnifier"
+    },
     allClients: [{
         "id": "client-1",
         "type": "webPrefsConsumerClient",
@@ -243,7 +249,7 @@ gpii.tests.dbDataStore.testData = {
             }
         }]
     },
-    findAuthByAccessToken: {
+    findWebPrefsConsumerAuthorizationByAccessToken: {
         userGpiiToken: "chrome_high_contrast",
         oauth2ClientId: "org.chrome.cloud4chrome",
         selectedPreferences: {

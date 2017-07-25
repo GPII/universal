@@ -14,6 +14,9 @@
             "findClientByOauth2ClientId": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationClient' || doc.type === 'privilegedPrefsCreatorClient' || doc.type === 'webPrefsConsumerClient') emit(doc.oauth2ClientId, doc)}"
             },
+            "findClientBySolutionId": {
+                "map": "function(doc) {if (doc.type === 'onboardedSolutionClient') emit(doc.solutionId, doc)}"
+            },
             "findUserAuthorizableClients": {
                 "map": "function(doc) {if (doc.type === 'onboardedSolutionClient' || doc.type === 'webPrefsConsumerClient') emit(doc._id, doc)}"
             },
@@ -29,8 +32,8 @@
             "findUserAuthorizedClientsByGpiiToken": {
                 "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"
             },
-            "findAuthByAccessToken": {
-                "map": "function(doc) {if (doc.type === 'authDecision' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
+            "findWebPrefsConsumerAuthorizationByAccessToken": {
+                "map": "function(doc) {if (doc.type === 'webPrefsConsumerAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
             },
             "findPrivilegedPrefsCreatorAuthorizationByClientId": {
                 "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.clientId, doc)}"

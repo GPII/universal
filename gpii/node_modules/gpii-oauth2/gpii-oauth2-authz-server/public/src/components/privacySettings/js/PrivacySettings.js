@@ -53,10 +53,10 @@ var gpii = gpii || {};
                     }
                 }
             },
-            addAuthorizationDialog: {
-                type: "gpii.oauth2.addAuthorizationDialog",
-                container: "{privacySettings}.dom.addAuthorizationDialog",
-                createOnEvent: "onRenderAddAuthorizationDialog",
+            addUserAuthorizedAuthorizationDialog: {
+                type: "gpii.oauth2.addUserAuthorizedAuthorizationDialog",
+                container: "{privacySettings}.dom.addUserAuthorizedAuthorizationDialog",
+                createOnEvent: "onRenderAddUserAuthorizedAuthorizationDialog",
                 options: {
                     requestInfos: "{privacySettings}.options.requestInfos",
                     model: {
@@ -143,7 +143,7 @@ var gpii = gpii || {};
             addService: ".gpiic-oauth2-privacySettings-addService",
             addServiceButton: ".gpiic-oauth2-privacySettings-addServiceButton",
             addServiceMenu: ".gpiic-oauth2-privacySettings-addServiceMenu",
-            addAuthorizationDialog: ".gpiic-oauth2-privacySettings-addAuthorizationDialog"
+            addUserAuthorizedAuthorizationDialog: ".gpiic-oauth2-privacySettings-addUserAuthorizedAuthorizationDialog"
         },
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
@@ -151,7 +151,7 @@ var gpii = gpii || {};
             cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel",
             addServiceSelected: "gpii-oauth2-privacySettings-addService-selected"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authorizationId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addService", "addServiceButton", "addServiceMenu", "addAuthorizationDialog"],
+        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authorizationId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addService", "addServiceButton", "addServiceMenu", "addUserAuthorizedAuthorizationDialog"],
         strings: {
             logout: "Log Out",
             header: "Privacy",
@@ -193,7 +193,7 @@ var gpii = gpii || {};
         },
         events: {
             onRenderEditDialog: null,
-            onRenderAddAuthorizationDialog: null,
+            onRenderAddUserAuthorizedAuthorizationDialog: null,
             onRemovalSuccess: null    // fired with an argument: authorizationId
         },
         listeners: {
@@ -305,7 +305,7 @@ var gpii = gpii || {};
         };
         // that.applier.fireChangeRequest({path: "currentClientData.authorizationId", type: "DELETE"});
         that.applier.change("currentClientData", clientDataForAdd);
-        that.events.onRenderAddAuthorizationDialog.fire();
+        that.events.onRenderAddUserAuthorizedAuthorizationDialog.fire();
     };
 
     // The use of this function is not made declaratively on the component tree is to work around
