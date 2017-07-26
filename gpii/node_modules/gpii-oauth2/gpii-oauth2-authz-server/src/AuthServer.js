@@ -71,7 +71,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
     oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
         // TODO: Update the user interface to support multiple tokens per user rather than using a single default
         var gpiiToken = user.defaultGpiiToken;
-        var authPromise = authorizationService.grantWebPrefsConsumerAuthorization(gpiiToken, client.id, redirectUri, ares.selectedPreferences);
+        var authPromise = authorizationService.grantWebPrefsConsumerAuthCode(gpiiToken, client.id, redirectUri, ares.selectedPreferences);
 
         gpii.oauth2.oauth2orizeServer.promiseToDone(authPromise, done);
     }));
@@ -560,11 +560,12 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 // tokens per user rather than using a single default
                 var gpiiToken = req.user.defaultGpiiToken;
 
-                var oauth2ClientId = req.body.oauth2ClientId;
                 var solutionId = req.body.solutionId;
+                var oauth2ClientId = req.body.oauth2ClientId;
                 var selectedPreferences = req.body.selectedPreferences;
+
                 // TODO validate selectedPreferences?
-                var addPromise = that.authorizationService.addUserAuthorizedAuthorization(gpiiToken, oauth2ClientId, solutionId, selectedPreferences);
+                var addPromise = that.authorizationService.addUserAuthorizedAuthorization(gpiiToken, solutionId, oauth2ClientId, selectedPreferences);
                 gpii.oauth2.mapPromiseToResponse(addPromise, res);
             } else {
                 res.sendStatus(400);

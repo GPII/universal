@@ -347,7 +347,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
-    fluid.defaults("gpii.tests.oauth2.authorizationService.withData", {
+    fluid.defaults("gpii.tests.oauth2.authorizationService.withData.getUserUnauthorizedClientsForGpiiToken", {
         gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
         pouchData: gpii.tests.oauth2.authorizationService.testData,
         rawModules: [{
@@ -403,7 +403,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     event: "{that}.events.onResponse"
                 }]
             }]
-        }, {
+        }]
+    });
+
+    fluid.defaults("gpii.tests.oauth2.authorizationService.withData.findValidGpiiAppInstallationAuthorization", {
+        gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
+        pouchData: gpii.tests.oauth2.authorizationService.testData,
+        rawModules: [{
             name: "Test gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization()",
             tests: [{
                 name: "findValidGpiiAppInstallationAuthorization() sets expired for expired access tokens and returns unexpired access token",

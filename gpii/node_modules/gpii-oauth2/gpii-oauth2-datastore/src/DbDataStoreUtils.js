@@ -146,6 +146,7 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
         directModel[idName] = uuid.v4();
         fluid.extend(data, {type: docType});
         var finalDirectModel = fluid.extend(true, {}, dataSource.options.directModel, directModel);
+        console.log("==== id", directModel[idName], "docType", docType, "data", data);
         promise = dataSource.set(finalDirectModel, data);
     } else {
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
@@ -807,6 +808,7 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             selectedPreferences: authorizationData.selectedPreferences,
             revoked: false
         };
+        console.log("=== adding", data);
     }
     promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
 

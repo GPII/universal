@@ -134,7 +134,7 @@ An example:
 }
 ```
 
-#### grantWebPrefsConsumerAuthorization(userId, clientId, redirectUri, selectedPreferences)
+#### grantWebPrefsConsumerAuthCode(userId, clientId, redirectUri, selectedPreferences)
 * **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization decision for the user, client, and redirect URI. If we do, we issue a new code for that decision. Otherwise we create a new authorization decision record and a new code.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.

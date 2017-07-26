@@ -34,16 +34,6 @@ gpii.oauth2.docTypes = fluid.freezeRecursive({
     authCode: "authCode"
 });
 
-// All OAuth2 client types used for saving different documents into CouchDB/PouchDB
-// See [the documentation of Authorization Server](../../../../../documentation/AuthServer.md)
-// regarding accepted fields for each document type.
-// gpii.oauth2.clientTypes = fluid.freezeRecursive({
-//     oauth2ResourceOwner: "oauth2ResourceOwner",
-//     oauth2AuthCode: "oauth2AuthCode",
-//     onboardedSolution: "onboardedSolution",
-//     oauth2ClientCredentials: "oauth2ClientCredentials"
-// });
-
 // The default value of the number of seconds that access tokens become invalid.
 gpii.oauth2.defaultTokenExpiresIn = 3600;
 
