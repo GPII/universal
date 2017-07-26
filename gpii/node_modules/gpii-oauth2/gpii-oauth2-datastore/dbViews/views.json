@@ -26,8 +26,14 @@
             "findWebPrefsConsumerAuthorization": {
                 "map": "function(doc) {if (doc.type === 'webPrefsConsumerAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
             },
+            "findOnboardedSolutionAuthorization": {
+                "map": "function(doc) {if (doc.type === 'onboardedSolutionAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
+            },
             "findWebPrefsConsumerAuthorizationByAuthCode": {
                 "map": "function(doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authorizationId})}}"
+            },
+            "findUserAuthorizedAuthorizationById": {
+                "map": "function(doc) {if (doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') emit(doc._id, doc)}"
             },
             "findUserAuthorizedClientsByGpiiToken": {
                 "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"
@@ -35,13 +41,16 @@
             "findWebPrefsConsumerAuthorizationByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'webPrefsConsumerAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'gpiiToken': doc.gpiiToken, 'selectedPreferences': doc.selectedPreferences})}}"
             },
+            "findPrivilegedPrefsCreatorAuthorizationById": {
+                "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization') emit(doc._id, doc)}"
+            },
             "findPrivilegedPrefsCreatorAuthorizationByClientId": {
                 "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.clientId, doc)}"
             },
             "findPrivilegedPrefsCreatorAuthorizationByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.accessToken, doc)}"
             },
-            "findAuthByPrivilegedPrefsCreatorAccessToken": {
+            "findAuthorizationByPrivilegedPrefsCreatorAccessToken": {
                 "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId});}}"
             },
             "findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId": {

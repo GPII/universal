@@ -95,8 +95,7 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
 
         var paramsMapper = function (params) {
             // extra parameters to be included in the `oauth2orizeServer` response except `accessToken`
-            delete params.accessToken;
-            return params;
+            return fluid.censorKeys(params, "accessToken");
         };
 
         var authorizationPromise = fluid.promise.map(passwordPromise, authorizationMapper);

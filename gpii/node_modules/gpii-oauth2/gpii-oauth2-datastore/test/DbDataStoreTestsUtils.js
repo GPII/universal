@@ -112,7 +112,7 @@ gpii.tests.dbDataStore.testData = {
         "oauth2ClientSecret": "client_secret_1",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
-    client1: {
+    client3: {
         "id": "client-3",
         "type": "onboardedSolutionClient",
         "name": "Windows Magnifier",
@@ -131,7 +131,7 @@ gpii.tests.dbDataStore.testData = {
         "name": "Windows Magnifier",
         "solutionId": "net.gpii.windows.magnifier"
     }],
-    authDecision1: {
+    authorization1: {
         "id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
@@ -143,7 +143,17 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
-    authDecisionToCreate: {
+    authorization2: {
+        "id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-3",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    },
+    webPrefsConsumerAuthorizationToCreate: {
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-2",
         "redirectUri": false,
@@ -153,7 +163,7 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
-    authorizationToUpdate: {
+    webPrefsConsumerAuthorizationToUpdate: {
         "id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
@@ -165,6 +175,13 @@ gpii.tests.dbDataStore.testData = {
             "toc": true
         },
         "revoked": false
+    },
+    onboardedSolutionAuthorizationToCreate: {
+        "gpiiToken": "chrome_high_contrast_dark",
+        "clientId": "client-3",
+        "selectedPreferences": {
+            "": true
+        }
     },
     revokedAuthDecision1: {
         "id": "webPrefsConsumerAuthorization-1",
@@ -183,7 +200,6 @@ gpii.tests.dbDataStore.testData = {
         "type": "onboardedSolutionAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-3",
-        "accessToken": "chrome_high_contrast_access_token_for_onboarded_solution",
         "selectedPreferences": {
             "": true
         },
@@ -205,7 +221,6 @@ gpii.tests.dbDataStore.testData = {
         "type": "onboardedSolutionAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-3",
-        "accessToken": "chrome_high_contrast_access_token_for_onboarded_solution",
         "selectedPreferences": {
             "": true
         },
@@ -274,7 +289,7 @@ gpii.tests.dbDataStore.testData = {
         "clientId": "client-5",
         "accessToken": "chrome_client_credentials_access_token"
     },
-    findAuthByPrivilegedPrefsCreatorAccessToken: {
+    findAuthorizationByPrivilegedPrefsCreatorAccessToken: {
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "allowAddPrefs": true
     },

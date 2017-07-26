@@ -221,6 +221,21 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
+        findOnboardedSolutionAuthorizationDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findOnboardedSolutionAuthorization?key=[\"%gpiiToken\",\"%clientId\"]",
+                termMap: {
+                    gpiiToken: "%gpiiToken",
+                    clientId: "%clientId"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
+                    }
+                }
+            }
+        },
         findWebPrefsConsumerAuthorizationByAuthCodeDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
@@ -231,6 +246,20 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 rules: {
                     readPayload: {
                         "": "rows.0"
+                    }
+                }
+            }
+        },
+        findUserAuthorizedAuthorizationByIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findUserAuthorizedAuthorizationById?key=%22%id%22",
+                termMap: {
+                    id: "%id"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
                     }
                 }
             }
@@ -263,6 +292,20 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
+        findPrivilegedPrefsCreatorAuthorizationByIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findPrivilegedPrefsCreatorAuthorizationById?key=%22%id%22",
+                termMap: {
+                    id: "%id"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
+                    }
+                }
+            }
+        },
         findPrivilegedPrefsCreatorAuthorizationByClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
@@ -291,10 +334,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthByPrivilegedPrefsCreatorAccessTokenDataSource: {
+        findAuthorizationByPrivilegedPrefsCreatorAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthByPrivilegedPrefsCreatorAccessToken?key=%22%accessToken%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findAuthorizationByPrivilegedPrefsCreatorAccessToken?key=%22%accessToken%22&include_docs=true",
                 termMap: {
                     accessToken: "%accessToken"
                 },
@@ -390,9 +433,9 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             args: [
                 "{that}.findClientBySolutionIdDataSource",
                 {
-                    SolutionId: "{arguments}.0"
+                    solutionId: "{arguments}.0"
                 },
-                "SolutionId"
+                "solutionId"
             ]
             // SolutionId
         },
@@ -424,9 +467,16 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // userId, authorizationId
         },
-        findAuthorizationById: {
-            func: "{that}.findById"
-            // authorizationId
+        findUserAuthorizedAuthorizationById: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findUserAuthorizedAuthorizationByIdDataSource",
+                {
+                    id: "{arguments}.0"
+                },
+                "id"
+            ]
+            // onboardedSolutionAuthorizationId or webPrefsConsumerAuthorizationId
         },
         findUserAuthorizationsByGpiiToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
@@ -452,6 +502,18 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 ["gpiiToken", "clientId", "redirectUri"]
             ]
             // gpiiToken, clientId, redirectUri
+        },
+        findOnboardedSolutionAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findOnboardedSolutionAuthorizationDataSource",
+                {
+                    gpiiToken: "{arguments}.0",
+                    clientId: "{arguments}.1"
+                },
+                ["gpiiToken", "clientId"]
+            ]
+            // gpiiToken, clientId
         },
         // TODO make authCodes active only for a limited period of time
         // TODO make authCodes single use
@@ -526,7 +588,14 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // authorizationType, authorizationData
         },
         findPrivilegedPrefsCreatorAuthorizationById: {
-            func: "{that}.findById"
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findPrivilegedPrefsCreatorAuthorizationByIdDataSource",
+                {
+                    id: "{arguments}.0"
+                },
+                "id"
+            ]
             // privilegedPrefsCreatorAuthorizationId
         },
         findPrivilegedPrefsCreatorAuthorizationByClientId: {
@@ -568,15 +637,15 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // privilegedPrefsCreatorAuthorizationId
         },
-        findAuthByPrivilegedPrefsCreatorAccessToken: {
+        findAuthorizationByPrivilegedPrefsCreatorAccessToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthByPrivilegedPrefsCreatorAccessTokenDataSource",
+                "{that}.findAuthorizationByPrivilegedPrefsCreatorAccessTokenDataSource",
                 {
                     accessToken: "{arguments}.0"
                 },
                 "accessToken",
-                gpii.oauth2.dbDataStore.findAuthByPrivilegedPrefsCreatorAccessTokenPostProcess
+                gpii.oauth2.dbDataStore.findAuthorizationByPrivilegedPrefsCreatorAccessTokenPostProcess
             ]
             // accessToken
         },
@@ -626,7 +695,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
     listeners: {
         onUpdateUserAuthorizedAuthorization: [{
             listener: "gpii.oauth2.dbDataStore.authorizationExists",
-            args: ["{that}.findAuthorizationById", "{arguments}.0"],
+            args: ["{that}.findUserAuthorizedAuthorizationById", "{arguments}.0"],
             namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
@@ -641,7 +710,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         }],
         onRevokeUserAuthorizedAuthorization: [{
             listener: "gpii.oauth2.dbDataStore.authorizationExists",
-            args: ["{that}.findAuthorizationById", "{arguments}.0"],
+            args: ["{that}.findUserAuthorizedAuthorizationById", "{arguments}.0"],
             namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",

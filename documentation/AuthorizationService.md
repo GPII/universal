@@ -182,7 +182,7 @@ An example:
 
 **Note**: Privileged Preferences Creator Clients are authorized using [OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
 
-#### getAuthByPrivilegedPrefsCreatorAccessToken(accessToken)
+#### getAuthorizationByPrivilegedPrefsCreatorAccessToken(accessToken)
 * **description**: Get the authorization information using the privileged prefs creator access token.
 * **parameters:** 
     * accessToken: String. An access token representing an authorization issued to the client.

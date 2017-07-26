@@ -91,7 +91,6 @@
         "type": "onboardedSolutionAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-3",
-        "accessToken": "chrome_high_contrast_access_token_for_onboarded_solution",
         "selectedPreferences": {
             "": true
         },

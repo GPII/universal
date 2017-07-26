@@ -83,8 +83,8 @@ var fluid = fluid || require("infusion");
                 func: "{dataStore}.findWebPrefsConsumerAuthorizationByAccessToken"
                     // accessToken
             },
-            getAuthByPrivilegedPrefsCreatorAccessToken: {
-                func: "{dataStore}.findAuthByPrivilegedPrefsCreatorAccessToken"
+            getAuthorizationByPrivilegedPrefsCreatorAccessToken: {
+                func: "{dataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken"
                     // accessToken
             },
             grantPrivilegedPrefsCreatorAuthorization: {
@@ -319,6 +319,8 @@ var fluid = fluid || require("infusion");
             clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
         } else {
             // error handling
+            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {"fieldName": "solutionId or oauth2ClientId"});
+            promiseTogo.reject(error);
         }
         var mapper = function (client) {
             return fluid.extend({}, record, {client: client});
@@ -335,6 +337,7 @@ var fluid = fluid || require("infusion");
      *     inputArgs: {
      *         gpiiToken: {String},
      *         oauth2ClientId: {String},
+     *         solutionId: {String},
      *         selectedPreferences: {Object}
      *     }
      * }
@@ -347,19 +350,63 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.authorizationService.doAdd = function (dataStore, codeGenerator, record) {
         var promiseTogo = fluid.promise();
         if (record.gpiiToken && record.client) {
-            // Check to see if we have an existing authorization
-            promiseTogo = gpii.oauth2.authorizationService.getWebPrefsConsumerAuthorization(
-                dataStore,
-                codeGenerator,
-                record.inputArgs.gpiiToken,
-                record.client.id,
-                record.client.redirectUri,
-                record.inputArgs.selectedPreferences
-            );
+            // Check to find if there is an existing authorization. If not, add a new one.
+            if (record.client.type === gpii.oauth2.docTypes.webPrefsConsumerClient) {
+                promiseTogo = gpii.oauth2.authorizationService.getWebPrefsConsumerAuthorization(
+                    dataStore,
+                    codeGenerator,
+                    record.inputArgs.gpiiToken,
+                    record.client.id,
+                    record.client.redirectUri,
+                    record.inputArgs.selectedPreferences
+                );
+            } else if (record.client.type === gpii.oauth2.docTypes.onboardedSolutionClient) {
+                promiseTogo = gpii.oauth2.authorizationService.getOnboardedSolutionAuthorization(
+                    dataStore,
+                    record.inputArgs.gpiiToken,
+                    record.client.id,
+                    record.inputArgs.selectedPreferences
+                );
+            }
         }
         return promiseTogo;
     };
     // ==== End of addUserAuthorizedAuthorization()
+
+    /**
+     * A utility function used by doAdd()
+     * This function retrieves and returns an id of an onboarded solution authorization record.
+     * If the authorization does not exist, this function will create one and return the created authorization id.
+     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param gpiiToken {String} A GPII token
+     * @param clientId {String} A client id
+     * @param selectedPreferences {Object} A preference set
+     * @return {Promise} The resolved promise value is in the structure of:
+     * {
+     *     id: {String}
+     * }
+     */
+    gpii.oauth2.authorizationService.getOnboardedSolutionAuthorization = function (dataStore, gpiiToken, clientId, selectedPreferences) {
+        var promiseTogo = fluid.promise();
+        var authorizationPromise = dataStore.findOnboardedSolutionAuthorization(gpiiToken, clientId);
+        authorizationPromise.then(function (authorization) {
+            if (authorization) {
+                // If the auth decision already exists, return its id
+                promiseTogo.resolve({id: authorization.id});
+            } else {
+                // If not, add one
+                var addOnboardedSolutionAuthorizationPromise = dataStore.addAuthorization(gpii.oauth2.docTypes.onboardedSolutionAuthorization, {
+                    gpiiToken: gpiiToken,
+                    clientId: clientId,
+                    selectedPreferences: selectedPreferences
+                });
+                fluid.promise.follow(addOnboardedSolutionAuthorizationPromise, promiseTogo);
+            }
+        }, function (err) {
+            promiseTogo.reject(err);
+        });
+        return promiseTogo;
+    };
 
     /**
      * A common utility function shared by checkWebPrefsConsumerAuthorization() and doAdd()
@@ -387,7 +434,7 @@ var fluid = fluid || require("infusion");
             } else {
                 // If not, add one
                 var accessToken = codeGenerator.generateAccessToken();
-                var addWebPrefsConsumerAuthorizationPromise = dataStore.addAuthorization(gpii.oauth2.docTypes.getWebPrefsConsumerAuthorization, {
+                var addWebPrefsConsumerAuthorizationPromise = dataStore.addAuthorization(gpii.oauth2.docTypes.webPrefsConsumerAuthorization, {
                     gpiiToken: gpiiToken,
                     clientId: clientId,
                     redirectUri: redirectUri,
@@ -472,7 +519,7 @@ var fluid = fluid || require("infusion");
      * @return {Promise} a promise object to be passed to the next processing function
      */
     gpii.oauth2.authorizationService.findAuthorization = function (dataStore, input) {
-        var authorizationPromise = dataStore.findAuthorizationById(input.authorizationId);
+        var authorizationPromise = dataStore.findUserAuthorizedAuthorizationById(input.authorizationId);
         var mapper = function (authorization) {
             return {
                 authorization: authorization,
@@ -690,7 +737,7 @@ var fluid = fluid || require("infusion");
      */
     gpii.oauth2.authorizationService.createPrivilegedPrefsCreatorAuthorization = function (promiseTogo, dataStore, codeGenerator, clientId) {
         var accessToken = codeGenerator.generateAccessToken();
-        var addPrivilegedPrefsCreatorAuthorizationPromise = dataStore.addPrivilegedPrefsCreatorAuthorization({
+        var addPrivilegedPrefsCreatorAuthorizationPromise = dataStore.addAuthorization(gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization, {
             clientId: clientId,
             accessToken: accessToken
         });
@@ -800,7 +847,7 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
 
-        var addGpiiAppInstallationAuthorizationPromise = dataStore.addGpiiAppInstallationAuthorization({
+        var addGpiiAppInstallationAuthorizationPromise = dataStore.addAuthorization(gpii.oauth2.docTypes.gpiiAppInstallationAuthorization, {
             clientId: clientId,
             gpiiToken: gpiiToken,
             accessToken: accessToken,

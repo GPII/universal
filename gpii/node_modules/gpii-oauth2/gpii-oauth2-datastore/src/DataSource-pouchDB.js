@@ -90,10 +90,10 @@ var gpii = fluid.registerNamespace("gpii");
      *     viewName: {String},
      *     viewOptions: {Object}
      * }
-     * Example: Decoding an URL: /_design/views/_view/findAuthByPrivilegedPrefsCreatorAccessToken?key=%22firstDiscovery_access_token%22&include_docs=true
+     * Example: Decoding an URL: /_design/views/_view/findAuthorizationByPrivilegedPrefsCreatorAccessToken?key=%22firstDiscovery_access_token%22&include_docs=true
      * outputs an object:
      * {
-     *     viewName: "findAuthByPrivilegedPrefsCreatorAccessToken",
+     *     viewName: "findAuthorizationByPrivilegedPrefsCreatorAccessToken",
      *     viewOptions: {
      *         key: "firstDiscovery_access_token",
      *         include_docs: true
