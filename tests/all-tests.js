@@ -50,6 +50,7 @@ var testIncludes = [
     "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedDevelopmentTests.js",
+    "./PayloadSizeTest.js",
     "./UntrustedUserLogonStateChangeTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/UpdateTests.js",
