@@ -24,7 +24,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         addUserAuthorizedAuthorization: {
             url: "/authorizations",
             type: "post",
-            data: "{\"oauth2ClientId\":1,\"selectedPreferences\":{\"\":true}}",
+            data: "{\"clientId\":1,\"selectedPreferences\":{\"\":true}}",
             status: 200,
             responseText: {
                 isError: false

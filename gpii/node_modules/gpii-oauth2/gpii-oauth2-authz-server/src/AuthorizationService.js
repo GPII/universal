@@ -262,14 +262,13 @@ var fluid = fluid || require("infusion");
      * The entry point of addUserAuthorizedAuthorization() API. Fires the transforming promise workflow by triggering onAddUserAuthorizedAuthorization event.
      * @param that {Component} An instance of gpii.oauth2.authorizationService
      * @param gpiiToken {String} A GPII token
-     * @param oauth2ClientId {String} A OAuth2 client id
+     * @param clientId {String} means "solutionId" for onboarded solution clients and "oauth2ClientId" for web preferences consumer clients
      * @param selectedPreferences {Object} A preference set
      */
-    gpii.oauth2.authorizationService.addUserAuthorizedAuthorization = function (that, gpiiToken, solutionId, oauth2ClientId, selectedPreferences) {
+    gpii.oauth2.authorizationService.addUserAuthorizedAuthorization = function (that, gpiiToken, clientId, selectedPreferences) {
         var input = {
             gpiiToken: gpiiToken,
-            solutionId: solutionId,
-            oauth2ClientId: oauth2ClientId,
+            clientId: clientId,
             selectedPreferences: selectedPreferences
         };
         return fluid.promise.fireTransformEvent(that.events.onAddUserAuthorizedAuthorization, input);
@@ -280,8 +279,7 @@ var fluid = fluid || require("infusion");
      * @param input {Object} Accepted structure:
      * {
      *     gpiiToken: {String},
-     *     solutionId: {String},
-     *     oauth2ClientId: {String},
+     *     clientId: {String},
      *     selectedPreferences: {Object}
      * }
      * @return {Promise} a promise object to be passed to the next processing function
@@ -304,8 +302,7 @@ var fluid = fluid || require("infusion");
      *     gpiiToken: {Object},    // A GPII token record
      *     inputArgs: {
      *         gpiiToken: {String},
-     *         solutionId: {String},
-     *         oauth2ClientId: {String},
+     *         clientId: {String},
      *         selectedPreferences: {Object}
      *     }
      * }
@@ -313,23 +310,25 @@ var fluid = fluid || require("infusion");
      */
     gpii.oauth2.authorizationService.findClient = function (dataStore, record) {
         var solutionId = record.inputArgs.solutionId;
-        var oauth2ClientId = record.inputArgs.oauth2ClientId;
-        var clientPromise = fluid.promise();
+        var clientId = record.inputArgs.clientId;
 
-        if (solutionId) {
-            clientPromise = dataStore.findClientBySolutionId(solutionId);
-        } else if (oauth2ClientId) {
-            clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-        } else {
-            // error handling
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {"fieldName": "solutionId or oauth2ClientId"});
-            promiseTogo.reject(error);
-        }
+        var onboardedSolutionPromise = dataStore.findClientBySolutionId(clientId);
+        var webPrefsConsumerPromise = dataStore.findClientByOauth2ClientId(clientId);
 
-        var mapper = function (client) {
-            return fluid.extend({}, record, {client: client});
-        };
-        return fluid.promise.map(clientPromise, mapper);
+        var sources = [onboardedSolutionPromise, webPrefsConsumerPromise];
+        var promisesSequence = fluid.promise.sequence(sources);
+
+        var promiseTogo = fluid.promise();
+
+        promisesSequence.then(function (responses) {
+            var onboardedSolution = responses[0];
+            var webPrefsConsumer = responses[1];
+
+            var result = fluid.extend({}, record, {client: onboardedSolution ? onboardedSolution : webPrefsConsumer});
+            promiseTogo.resolve(result);
+        });
+
+        return promiseTogo;
     };
 
     /**
@@ -340,8 +339,7 @@ var fluid = fluid || require("infusion");
      *     client: {Object},     // A client record
      *     inputArgs: {
      *         gpiiToken: {String},
-     *         oauth2ClientId: {String},
-     *         solutionId: {String},
+     *         clientId: {String},
      *         selectedPreferences: {Object}
      *     }
      * }

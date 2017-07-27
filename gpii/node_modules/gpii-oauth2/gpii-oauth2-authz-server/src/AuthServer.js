@@ -382,8 +382,7 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
                 return {
                     authorizationId: client.authorizationId,
                     serviceName: client.clientName,
-                    oauth2ClientId: client.oauth2ClientId,
-                    solutionId: client.solutionId
+                    clientId: client.oauth2ClientId ? client.oauth2ClientId : client.solutionId
                 };
             });
             authorizedServices = authorizedServices.concat(authorizedServicesForOneType);
@@ -393,8 +392,7 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
             var unauthorizedServicesForOneType = fluid.transform(clients, function (client) {
                 return {
                     serviceName: client.clientName,
-                    oauth2ClientId: client.oauth2ClientId,
-                    solutionId: client.solutionId
+                    clientId: client.oauth2ClientId ? client.oauth2ClientId : client.solutionId
                 };
             });
             unauthorizedServices = unauthorizedServices.concat(unauthorizedServicesForOneType);
@@ -437,7 +435,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         }
     );
 
-    // Then entry endpoint for OAuth2 authorization code grant
+    // The entry endpoint for OAuth2 authorization code grant, to request the auth code
     that.expressApp.get("/authorize",
         that.sessionMiddleware,
         that.passportMiddleware,
@@ -561,11 +559,14 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 var gpiiToken = req.user.defaultGpiiToken;
 
                 var solutionId = req.body.solutionId;
-                var oauth2ClientId = req.body.oauth2ClientId;
+                // "clientId" received in the request body maps to:
+                // 1. "solutionId" for onboarded solution clients;
+                // 2. "oauth2ClientId" for web preferences consumer clients.
+                var clientId = req.body.clientId;
                 var selectedPreferences = req.body.selectedPreferences;
 
                 // TODO validate selectedPreferences?
-                var addPromise = that.authorizationService.addUserAuthorizedAuthorization(gpiiToken, solutionId, oauth2ClientId, selectedPreferences);
+                var addPromise = that.authorizationService.addUserAuthorizedAuthorization(gpiiToken, clientId, selectedPreferences);
                 gpii.oauth2.mapPromiseToResponse(addPromise, res);
             } else {
                 res.sendStatus(400);

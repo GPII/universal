@@ -116,7 +116,7 @@ var gpii = gpii || {};
             fetchAvailableAuthorizedPrefs: {
                 funcName: "gpii.oauth2.ajax",
                 args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
-                    clientID: "{that}.model.clientData.oauth2ClientId"
+                    clientID: "{that}.model.clientData.clientId"
                 }, {
                     dataType: "json",
                     success: "{that}.events.onFetchAvailableAuthorizedPrefsSuccess.fire",
@@ -155,7 +155,7 @@ var gpii = gpii || {};
             // {
             //     serviceName: xx,
             //     authorizationId: xx,
-            //     oauth2ClientId: xx
+            //     clientId: xx
             // }
             clientData: null,
             availableAuthorizedPrefs: null,

@@ -24,7 +24,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         addUserAuthorizedAuthorization: {
             url: "/authorizations",
             type: "post",
-            data: "{\"oauth2ClientId\":1,\"selectedPreferences\":{\"\":true}}",
+            data: "{\"clientId\":1,\"selectedPreferences\":{\"\":true}}",
             status: 200,
             responseText: {
                 isError: false
@@ -288,7 +288,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
         var expectedClientData = {
             serviceName: "Service 1",
-            oauth2ClientId: "2"
+            clientId: "2"
         };
 
         jqUnit.assertDeepEq("The model value of currentClientData has been set correctly", expectedClientData, that.model.currentClientData);
@@ -307,7 +307,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.privacySettings.verifyClientData = function (msg, data, elements, expected) {
         fluid.each(elements, function (elm) {
             var value = data[elm];
-            if (elm === "authorizationId" || elm === "oauth2ClientId") {
+            if (elm === "authorizationId" || elm === "clientId") {
                 value = value.toString();
             }
             jqUnit.assertEquals(msg + "aaThe value of " + elm + " is expected", expected[elm], value);
@@ -315,8 +315,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog = function (that) {
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "oauth2ClientId"], that.model.currentClientData);
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "oauth2ClientId"], that.editPrivacySettingsDialog.model.clientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "clientId"], that.model.currentClientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "clientId"], that.editPrivacySettingsDialog.model.clientData);
 
         gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addUserAuthorizedAuthorizationDialog", "editPrivacySettingsDialog"]);
         gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettingsDialog, "opened");

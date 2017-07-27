@@ -136,7 +136,7 @@ var gpii = gpii || {};
             removeButton: ".gpiic-oauth2-privacySettings-removeService",
             serviceName: ".gpiic-oauth2-privacySettings-serviceName",
             authorizationId: ".gpiic-oauth2-privacySettings-authorizationId",
-            oauth2ClientId: ".gpiic-oauth2-privacySettings-oauth2ClientId",
+            clientId: ".gpiic-oauth2-privacySettings-clientId",
             removeDecisionDialog: ".gpiic-oauth2-privacySettings-removeDecision-dialog",
             removeDecisionContent: ".gpiic-oauth2-privacySettings-removeDecision-content",
             editDecisionDialog: ".gpiic-oauth2-privacySettings-editDecision-dialog",
@@ -151,7 +151,7 @@ var gpii = gpii || {};
             cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel",
             addServiceSelected: "gpii-oauth2-privacySettings-addService-selected"
         },
-        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authorizationId", "oauth2ClientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addService", "addServiceButton", "addServiceMenu", "addUserAuthorizedAuthorizationDialog"],
+        selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authorizationId", "clientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addService", "addServiceButton", "addServiceMenu", "addUserAuthorizedAuthorizationDialog"],
         strings: {
             logout: "Log Out",
             header: "Privacy",
@@ -221,7 +221,7 @@ var gpii = gpii || {};
         invokers: {
             getClientData: {
                 funcName: "gpii.oauth2.privacySettings.getClientData",
-                args: ["{arguments}.0", "{arguments}.1", "{that}.options.selectors.serviceName", "{that}.options.selectors.authorizationId", "{that}.options.selectors.oauth2ClientId"]
+                args: ["{arguments}.0", "{arguments}.1", "{that}.options.selectors.serviceName", "{that}.options.selectors.authorizationId", "{that}.options.selectors.clientId"]
             },
             popupDialogForRemoval: {
                 funcName: "gpii.oauth2.privacySettings.popupDialogForRemoval",
@@ -238,12 +238,12 @@ var gpii = gpii || {};
         }
     });
 
-    gpii.oauth2.privacySettings.getClientData = function (element, buttonSelector, serviceNameSelector, authorizationIdSelector, oauth2ClientIdSelector) {
+    gpii.oauth2.privacySettings.getClientData = function (element, buttonSelector, serviceNameSelector, authorizationIdSelector, clientIdSelector) {
         element = $(element).closest(buttonSelector);
         return {
             serviceName: element.siblings(serviceNameSelector).attr("value"),
             authorizationId: element.siblings(authorizationIdSelector).attr("value"),
-            oauth2ClientId: element.siblings(oauth2ClientIdSelector).attr("value")
+            clientId: element.siblings(clientIdSelector).attr("value")
         };
     };
 
@@ -293,11 +293,11 @@ var gpii = gpii || {};
         menu.open();
     };
 
-    gpii.oauth2.privacySettings.addService = function (that, menu, serviceName, oauth2ClientId) {
+    gpii.oauth2.privacySettings.addService = function (that, menu, serviceName, clientId) {
         menu.keepOpen();
         var clientDataForAdd = {
             serviceName: serviceName,
-            oauth2ClientId: oauth2ClientId,
+            clientId: clientId,
             // TODO: The line below can be removed by uncommenting line 307
             // when the infusion used by GPII is upgraded, which currently is in
             // this pull request: https://github.com/GPII/universal/pull/425
