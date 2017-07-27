@@ -603,7 +603,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
         function (req, res) {
             var authorizedServicesPromise = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
             authorizedServicesPromise.then(function (payload) {
-                console.log("==== payload", payload);
                 res.render("privacySettings", payload);
             });
         }
