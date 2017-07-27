@@ -29,49 +29,12 @@ module.exports = function (grunt) {
                 enableJSON5: true
             },
             src: ["gpii/**/*.json5", "tests/**/*.json5", "testData/**/*.json5", "*.json5"]
-        },
-        shell: {
-            options: {
-                stdout: true,
-                stderr: true,
-                failOnError: true,
-                execOptions: {
-                    maxBuffer: Infinity
-                }
-            },
-            runBrowserTests: {
-                command: "vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal; DISPLAY=:0 testem ci --file tests/web/testem_qi.json'"
-            },
-            runNodeTests: {
-                command: "vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal; npm test'"
-            },
-            runNodeProductionTests: {
-                command: "vagrant ssh -c 'cd /home/vagrant/sync/node_modules/universal; node tests/ProductionConfigTests.js'"
-            }
         }
     });
 
     grunt.loadNpmTasks("fluid-grunt-eslint");
     grunt.loadNpmTasks("grunt-jsonlint");
     grunt.loadNpmTasks("fluid-grunt-json5lint");
-    grunt.loadNpmTasks("grunt-shell");
-
-    grunt.registerTask("browser-tests", "Run browser tests in a VM", function () {
-        grunt.task.run("shell:runBrowserTests");
-    });
-
-    grunt.registerTask("node-tests", "Run Node tests in a VM", function () {
-        grunt.task.run("shell:runNodeTests");
-    });
-
-    grunt.registerTask("node-production-tests", "Run Node production tests in a VM", function () {
-        grunt.task.run("shell:runNodeProductionTests");
-    });
-
-    grunt.registerTask("tests", "Run browser and node tests in a VM", function () {
-        grunt.task.run("shell:runBrowserTests");
-        grunt.task.run("shell:runNodeTests");
-    });
 
     grunt.registerTask("lint", "Apply jshint, jsonlint and json5lint", ["eslint", "jsonlint", "json5lint"]);
 };

@@ -13,10 +13,12 @@ The research leading to these results has received funding from the European Uni
 Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
-
 "use strict";
-var fluid = require("universal"),
+
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
@@ -181,6 +183,29 @@ gpii.tests.windows.builtIn = [
                             "SizeWE": "REG_SZ",
                             "UpArrow": "REG_SZ",
                             "Wait": "REG_SZ"
+                        }
+                    }
+                }, { // Narrator
+                    "settings": {
+                        "SpeechSpeed": 11,
+                        "SpeechPitch": 4,
+                        "InteractionMouse": 1,
+                        "CoupleNarratorCursorKeyboard": 1,
+                        "FollowInsertion": 0,
+                        "EchoChars": 0,
+                        "EchoWords": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Narrator",
+                        "dataTypes": {
+                            "SpeechSpeed": "REG_DWORD",
+                            "SpeechPitch": "REG_DWORD",
+                            "InteractionMouse": "REG_DWORD",
+                            "CoupleNarratorCursorKeyboard": "REG_DWORD",
+                            "FollowInsertion": "REG_DWORD",
+                            "EchoChars": "REG_DWORD",
+                            "EchoWords": "REG_DWORD"
                         }
                     }
                 }]

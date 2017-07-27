@@ -1,0 +1,13 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/slowKeysEnable": true,
+                    "http://registry.gpii.net/common/slowKeysInterval": 0.4
+                }
+            }
+        }
+    }
+}

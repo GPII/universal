@@ -13,14 +13,16 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 
 "use strict";
 
-var fluid = require("universal");
+var fluid = require("infusion");
 var gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.privacySettings");
 
-gpii.tests.cloud.oauth2.privacySettings.sequence = [
+gpii.tests.cloud.oauth2.privacySettings.sequence = fluid.freezeRecursive([
     {
         func: "{privacySettingsRequest}.send"
     },
@@ -63,7 +65,7 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = [
     },
     {
         event: "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone",
-        listener: fluid.identity
+        listener: "fluid.identity"
     },
     {
         func: "{logoutRequest}.send"
@@ -80,7 +82,7 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = [
         listener: "gpii.test.cloudBased.oauth2.verifyLoginRedirect",
         args: ["{privacySettingsRequest3}", "{cookieJar}"]
     }
-];
+]);
 
 gpii.tests.cloud.oauth2.privacySettings.testDefs = [
     {
