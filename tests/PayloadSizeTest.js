@@ -17,7 +17,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-require("../index.js");
+fluid.require("%universal")
 
 gpii.loadTestingSupport();
 
@@ -34,11 +34,11 @@ gpii.tests.payloadSize.testLogoutResponse = function (data) {
 };
 
 gpii.tests.payloadSize.testDefs = [{
-    name: "Flow Manager development tests",
+    name: "Payload size limit tests > 100kb",
     expect: 2,
     config: {
         configName: "gpii.tests.acceptance.localInstall.config",
-        configPath: __dirname + "/configs"
+        configPath: "%universal/tests/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
     userToken: "giant",

@@ -21,7 +21,7 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.test.integration");
 
-require("../index.js");
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
