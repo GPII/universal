@@ -196,11 +196,14 @@ we use a `pretest` script to clean up previous coverage data before we run the t
 compile the actual report.  You should not need to run the `pretest` scripts manually before running either the node or
 browser tests, or to run the `posttest` scripts afterward.
 
-Building Docker Images
-----------------------
+Docker Containers
+-----------------
 
-The Dockerfile can be used to build a containerized version of GPII Universal, at this time primarily for use by
-downstream containers running components such the Preferences Server and Flow Manager in standalone cloud configuration.
+The provided Dockerfile can be used to run GPII Universal directly.
+
+#### Build image
+
+To build a Docker image simply run: `docker build -t my-universal .`
 
 The following command can be used to build an image locally as long as it is run relative to the repository's
 `Dockerfile`:
@@ -216,9 +219,3 @@ Universal image you can use this command:
 Or use the following command to download a particular image identified using a Git commit hash:
 
 `docker pull gpii/universal:<first seven characters of a git commit hash>`
-
-Additional notes:
-
-* The Docker image is built within the container using the [same Ansible role](https://github.com/idi-ops/ansible-nodejs) used to provision VMs, to simplify the management of different environments.
-* Universal is installed to /opt/gpii/node_modules/universal to allow the node-based test cases to resolve. Regarding the tests:
-  * Currently, the node-based tests are always run when this container is built. If you would like to turn this off for local debugging or faster building, remove the `npm test` item in the `nodejs_app_commands` list in `provisioning/docker-vars.yml`
