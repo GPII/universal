@@ -60,8 +60,7 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = fluid.freezeRecursive([
         args: [
             "{testCaseHolder}.configuration.server.flowManager.oauth2DataStore",
             "{testCaseHolder}.options.expectedAuthorization",
-            "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone",
-            "{arguments}.0"
+            "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone"
         ]
     // },
     // {

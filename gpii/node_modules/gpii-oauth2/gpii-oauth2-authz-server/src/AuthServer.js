@@ -377,7 +377,7 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
         var authorizedServices = [],
             unauthorizedServices = [];
 
-        fluid.each(authorizedClients, function (clients, clientType) {
+        fluid.each(authorizedClients, function (clients) {
             var authorizedServicesForOneType = fluid.transform(clients, function (client) {
                 return {
                     authorizationId: client.authorizationId,
@@ -388,7 +388,7 @@ gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationS
             authorizedServices = authorizedServices.concat(authorizedServicesForOneType);
         });
 
-        fluid.each(unauthorizedClients, function (clients, clientType) {
+        fluid.each(unauthorizedClients, function (clients) {
             var unauthorizedServicesForOneType = fluid.transform(clients, function (client) {
                 return {
                     serviceName: client.clientName,
@@ -558,7 +558,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
                 // tokens per user rather than using a single default
                 var gpiiToken = req.user.defaultGpiiToken;
 
-                var solutionId = req.body.solutionId;
                 // "clientId" received in the request body maps to:
                 // 1. "solutionId" for onboarded solution clients;
                 // 2. "oauth2ClientId" for web preferences consumer clients.

@@ -309,7 +309,6 @@ var fluid = fluid || require("infusion");
      * @return {Promise} a promise object to be passed to the next processing function
      */
     gpii.oauth2.authorizationService.findClient = function (dataStore, record) {
-        var solutionId = record.inputArgs.solutionId;
         var clientId = record.inputArgs.clientId;
 
         var onboardedSolutionPromise = dataStore.findClientBySolutionId(clientId);

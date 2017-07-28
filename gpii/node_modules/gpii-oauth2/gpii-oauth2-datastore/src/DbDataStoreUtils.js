@@ -146,7 +146,6 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
         directModel[idName] = uuid.v4();
         fluid.extend(data, {type: docType});
         var finalDirectModel = fluid.extend(true, {}, dataSource.options.directModel, directModel);
-        console.log("==== id", directModel[idName], "docType", docType, "data", data);
         promise = dataSource.set(finalDirectModel, data);
     } else {
         var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: docType});
@@ -231,7 +230,6 @@ gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization = function (that, user
 gpii.oauth2.dbDataStore.authorizationExists = function (findUserAuthorizedAuthorizationById, input) {
     var authorizationId = input.inputArgs.authorizationId ? input.inputArgs.authorizationId : input.inputArgs.authorizationData.id;
     var authorizationPromise = findUserAuthorizedAuthorizationById(authorizationId);
-    var authorizationType = gpii.oauth2.docTypes[input.inputArgs.authorizationType];
     var promiseTogo = fluid.promise();
 
     authorizationPromise.then(function (authorization) {
@@ -749,21 +747,21 @@ gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization = function (sav
  */
 gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizationType, authorizationData) {
     var promiseTogo = fluid.promise();
-    var data;
+    var data, error;
 
     // Verify the authorization type
     if (authorizationType !== gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
         authorizationType !== gpii.oauth2.docTypes.onboardedSolutionAuthorization &&
         authorizationType !== gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization &&
         authorizationType !== gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized, {docName: authorizationType});
+        error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized, {docName: authorizationType});
         promiseTogo.reject(error);
         return promiseTogo;
     }
 
     // The authorization data must exist
     if (!authorizationData) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: authorizationType});
+        error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: authorizationType});
         promiseTogo.reject(error);
         return promiseTogo;
     }
@@ -808,7 +806,6 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             selectedPreferences: authorizationData.selectedPreferences,
             revoked: false
         };
-        console.log("=== adding", data);
     }
     promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
 
