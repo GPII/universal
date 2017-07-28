@@ -1,4 +1,19 @@
 #!/bin/sh -ex
+#
+# This scripts deploys an environment for end-to-end tests based on Docker
+# containers. It was initially developed to support CI.
+#
+# It builds a Docker image for GPII/universal and uses it to start two 
+# components: the Preferences Server and the Flow Manager.
+#
+# It also starts a CouchDB container and loads the Preferences data into
+# it, so tests running against the GPII components will have access to the
+# latest test data.
+#
+# This script can be executed multiple times to create a new Docker image
+# and deploy fresh containers every time.
+# 
+# https://issues.gpii.net/browse/GPII-2470
 
 UNIVERSAL_IMAGE=vagrant-universal
 
