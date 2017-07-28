@@ -437,12 +437,11 @@ gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess = functi
  * The post data process function for implementing findWebPrefsConsumerAuthorizationByAccessToken()
  */
 gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAccessTokenPostProcess = function (data) {
-    var result = {
-        userGpiiToken: data.value.gpiiToken,
-        selectedPreferences: data.value.selectedPreferences,
+    return data.value.doc.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization ? {
+        userGpiiToken: data.value.doc.gpiiToken,
+        selectedPreferences: data.value.doc.selectedPreferences,
         oauth2ClientId: data.doc.oauth2ClientId
-    };
-    return result;
+    } : undefined;
 };
 
 // Authorization Codes
@@ -495,33 +494,6 @@ gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCodePostProcess =
 // Privileged Prefs Creator Tokens
 // -------------------------------
 
-/**
- * Add privileged prefs creators
- * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param privilegedPrefsCreatorAuthorizationData {Object} The data of the privileged prefs creator. Its structure:
- *  {
- *      clientId: {String},
- *      accessToken: {String}
- *  }
- * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
- * token record, or an error if `privilegedPrefsCreatorAuthorizationData` parameter is not provided.
- */
-// gpii.oauth2.dbDataStore.addPrivilegedPrefsCreatorAuthorization = function (saveDataSource, privilegedPrefsCreatorAuthorizationData) {
-//     var promiseTogo = fluid.promise();
-//     var data;
-
-//     if (privilegedPrefsCreatorAuthorizationData) {
-//         data = {
-//             clientId: privilegedPrefsCreatorAuthorizationData.clientId, // foreign key
-//             accessToken: privilegedPrefsCreatorAuthorizationData.accessToken,
-//             revoked: false
-//         };
-//     }
-//     promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization, "id", data);
-
-//     return promiseTogo;
-// };
-
 // ==== revokePrivilegedPrefsCreatorAuthorization()
 // Fires the transforming promise workflow by triggering onRevokePrivilegedPrefsCreatorAuthorization event.
 
@@ -566,6 +538,16 @@ gpii.oauth2.dbDataStore.doRevokePrivilegedPrefsCreatorAuthorization = function (
 // ==== End of revokePrivilegedPrefsCreatorAuthorization()
 
 /**
+ * A post process function for implementing findPrivilegedPrefsCreatorAuthorizationByAccessToken() API.
+ * @param data {Object} An authorization record. See documentation/AuthServer.md of various authorization structures.
+ * @return {Object} The input authorization record if the authorization type is privileged prefs creator authorization,
+ * otherwise, return `undefined`.
+ */
+gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPostProcess = function (data) {
+    return data.type === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization ? gpii.oauth2.dbDataStore.cleanUpDoc(data) : undefined;
+};
+
+/**
  * A post process function for implementing findAuthorizationByPrivilegedPrefsCreatorAccessToken() API.
  * @param data {Object} An object in a structure of:
  * {
@@ -590,14 +572,10 @@ gpii.oauth2.dbDataStore.doRevokePrivilegedPrefsCreatorAuthorization = function (
  * If the given parameter is not in an expected structure, `undefined` is returned.
  */
 gpii.oauth2.dbDataStore.findAuthorizationByPrivilegedPrefsCreatorAccessTokenPostProcess = function (data) {
-    if (data.doc && data.value) {
-        return {
-            oauth2ClientId: data.doc.oauth2ClientId,
-            allowAddPrefs: data.doc.type === gpii.oauth2.docTypes.privilegedPrefsCreatorClient ? true : false
-        };
-    } else {
-        return undefined;
-    }
+    return data.doc && data.value ? {
+        oauth2ClientId: data.doc.oauth2ClientId,
+        allowAddPrefs: data.doc.type === gpii.oauth2.docTypes.privilegedPrefsCreatorClient ? true : false
+    } : undefined;
 };
 
 // GPII App Installation Authorizations
@@ -623,40 +601,6 @@ gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClient
     });
     return records;
 };
-
-/**
- * Add GPII app installation authorizations
- * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param privilegedPrefsCreatorAuthorizationData {Object} The data of the GPII app installation authorizations. Its structure:
- *  {
- *      clientId: {String},
- *      gpiiToken: {String},
- *      accessToken: {String},
- *      expiresIn: {Number}
- *  }
- * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
- * token record, or an error if `gpiiAppInstallationAuthorizationData` parameter is not provided.
- */
-// gpii.oauth2.dbDataStore.addGpiiAppInstallationAuthorization = function (saveDataSource, gpiiAppInstallationAuthorizationData) {
-//     var promiseTogo = fluid.promise();
-//     var data;
-
-//     if (gpiiAppInstallationAuthorizationData) {
-//         data = {
-//             clientId: gpiiAppInstallationAuthorizationData.clientId,
-//             gpiiToken: gpiiAppInstallationAuthorizationData.gpiiToken,
-//             accessToken: gpiiAppInstallationAuthorizationData.accessToken,
-//             expiresIn: gpiiAppInstallationAuthorizationData.expiresIn,
-//             expired: false,
-//             revoked: false,
-//             timestampCreated: new Date().toString(),
-//             timestampRevoked: null
-//         };
-//     }
-//     promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, gpii.oauth2.docTypes.gpiiAppInstallationAuthorization, "id", data);
-
-//     return promiseTogo;
-// };
 
 // ==== expireGpiiAppInstallationAuthorization()
 // Fires the transforming promise workflow by triggering onExpireGpiiAppInstallationAuthorization event.

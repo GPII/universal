@@ -479,7 +479,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizationsByGpiiToken", {
             name: "Revoked auth decisions are not returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1", "webPrefsConsumerAuthorization"], "{that}"]
+                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizationsByGpiiToken", ["chrome_high_contrast"], "{that}"],
@@ -716,7 +716,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCo
             name: "Revoked auth code receives unauthorized error",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1", "webPrefsConsumerAuthorization"], "{that}"]
+                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorizationByAuthCode", ["chrome_high_contrast_auth_code"], "{that}"],
@@ -752,7 +752,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedClientsByGpiiToken", {
             name: "Revoked auth decisions are not returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1", "webPrefsConsumerAuthorization"], "{that}"]
+                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizedClientsByGpiiToken", ["chrome_high_contrast"], "{that}"],
@@ -766,10 +766,10 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedClientsByGpiiToken", {
             name: "Returns undefined when all auth decisions are revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1", "webPrefsConsumerAuthorization"], "{that}"]
+                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "onboardedSolutionAuthorization-1", "onboardedSolutionAuthorization"], "{that}"],
+                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "onboardedSolutionAuthorization-1"], "{that}"],
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
@@ -826,7 +826,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAccess
             name: "Returns undefined when the auth decision is revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1", "webPrefsConsumerAuthorization"], "{that}"]
+                args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
             }, {
                 listener: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorizationByAccessToken", ["chrome_high_contrast_access_token"], "{that}"],

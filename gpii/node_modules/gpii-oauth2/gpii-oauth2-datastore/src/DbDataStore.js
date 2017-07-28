@@ -281,7 +281,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         findWebPrefsConsumerAuthorizationByAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findWebPrefsConsumerAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
                 termMap: {
                     accessToken: "%accessToken"
                 },
@@ -323,13 +323,13 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         findPrivilegedPrefsCreatorAuthorizationByAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findPrivilegedPrefsCreatorAuthorizationByAccessToken?key=\"%accessToken\"",
+                requestUrl: "/_design/views/_view/findAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
                 termMap: {
                     accessToken: "%accessToken"
                 },
                 rules: {
                     readPayload: {
-                        "": "rows.0.value"
+                        "": "rows.0.value.doc"
                     }
                 }
             }
@@ -337,7 +337,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         findAuthorizationByPrivilegedPrefsCreatorAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthorizationByPrivilegedPrefsCreatorAccessToken?key=%22%accessToken%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
                 termMap: {
                     accessToken: "%accessToken"
                 },
@@ -564,20 +564,9 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // accessToken
         },
-        // TODO in this implementation, there is a one-to-one correspondence between
-        // recorded user 'authorizations' and access tokens. We may want to
-        // rethink this and give them different lifetimes.
-        // TODO: make sure there's only one active access token for one client
-        // addWebPrefsConsumerAuthorization: {
-        //     funcName: "gpii.oauth2.dbDataStore.addRecord",
-        //     args: [
-        //         "{that}.saveDataSource",
-        //         gpii.oauth2.docTypes.webPrefsConsumerAuthorization,
-        //         "id",
-        //         "{arguments}.0"
-        //     ]
-        //     // webPrefsConsumerAuthorization
-        // },
+        // TODO in this implementation, only GPII app installation authorizations have access token
+        // lifetime control and there's only one active access token for each "client-gpiiToken"
+        // correspondence. Should add the same functionality for other authorization types.
         addAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.addAuthorization",
             args: [
@@ -616,19 +605,11 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 {
                     accessToken: "{arguments}.0"
                 },
-                "accessToken"
+                "accessToken",
+                gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPostProcess
             ]
             // accessToken
         },
-        // TODO: make sure there's only one non-revoked privileged prefs creator for the given client
-        // addPrivilegedPrefsCreatorAuthorization: {
-        //     funcName: "gpii.oauth2.dbDataStore.addPrivilegedPrefsCreatorAuthorization",
-        //     args: [
-        //         "{that}.saveDataSource",
-        //         "{arguments}.0"
-        //     ]
-        //     // privilegedPrefsCreatorAuthorizationData
-        // },
         revokePrivilegedPrefsCreatorAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.revokePrivilegedPrefsCreatorAuthorization",
             args: [
@@ -666,17 +647,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // gpiiToken, clientId
         },
-        // Note: Before adding a new GPII app installation authroization: authorizationService.findValidGpiiAppInstallationAuthorization()
-        // should have been called to ensure there is NOT any non-revoked or unexpired existing access tokens for the given
-        // GPII token and the client ID. See authorizationService.js
-        // addGpiiAppInstallationAuthorization: {
-        //     funcName: "gpii.oauth2.dbDataStore.addGpiiAppInstallationAuthorization",
-        //     args: [
-        //         "{that}.saveDataSource",
-        //         "{arguments}.0"
-        //     ]
-        //     // gpiiAppInstallationAuthorizationData
-        // },
         expireGpiiAppInstallationAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.expireGpiiAppInstallationAuthorization",
             args: [
