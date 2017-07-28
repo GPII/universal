@@ -62,25 +62,25 @@ gpii.tests.cloud.oauth2.privacySettings.sequence = fluid.freezeRecursive([
             "{testCaseHolder}.options.expectedAuthorization",
             "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone"
         ]
-    // },
-    // {
-    //     event: "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone",
-    //     listener: "fluid.identity"
-    // },
-    // {
-    //     func: "{logoutRequest}.send"
-    // },
-    // {
-    //     event: "{logoutRequest}.events.onComplete",
-    //     listener: "fluid.identity"
-    // },
-    // {
-    //     func: "{privacySettingsRequest3}.send"
-    // },
-    // {
-    //     event: "{privacySettingsRequest3}.events.onComplete",
-    //     listener: "gpii.test.cloudBased.oauth2.verifyLoginRedirect",
-    //     args: ["{privacySettingsRequest3}", "{cookieJar}"]
+    },
+    {
+        event: "{testCaseHolder}.events.dataStoreAuthorizationVerificationDone",
+        listener: "fluid.identity"
+    },
+    {
+        func: "{logoutRequest}.send"
+    },
+    {
+        event: "{logoutRequest}.events.onComplete",
+        listener: "fluid.identity"
+    },
+    {
+        func: "{privacySettingsRequest3}.send"
+    },
+    {
+        event: "{privacySettingsRequest3}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyLoginRedirect",
+        args: ["{privacySettingsRequest3}", "{cookieJar}"]
     }
 ]);
 
@@ -93,7 +93,7 @@ gpii.tests.cloud.oauth2.privacySettings.testDefs = [
             "Easit4all"
         ],
         newAuthorization: {
-            oauth2ClientId: "org.chrome.cloud4chrome",
+            clientId: "org.chrome.cloud4chrome",
             selectedPreferences: { "setByPrivacySettingsAcceptanceTests": true }
         },
         expectedAuthorization: {
