@@ -26,21 +26,21 @@ require("./shared/UserLogonStateChangeTestDefs.js");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.untrusted.userLogonStateChange");
+fluid.registerNamespace("gpii.tests.untrusted.userLogonHandling");
 
-gpii.tests.untrusted.userLogonStateChange.testDefs =
-    fluid.transform(gpii.tests.userLogonStateChange.testDefs, function (testDefIn) {
+gpii.tests.untrusted.userLogonHandling.testDefs =
+    fluid.transform(gpii.tests.userLogonHandling.testDefs, function (testDefIn) {
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
                 configName: "gpii.tests.acceptance.untrusted.development.config",
                 configPath: "%universal/tests/configs"
             },
-            gradeNames: ["gpii.tests.userLogonStateChange.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
-            userToken: gpii.tests.userLogonStateChange.userToken
+            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
+            userToken: gpii.tests.userLogonHandling.userToken
         });
 
         testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return testDef;
     });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonStateChange.testDefs);
+kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonHandling.testDefs);

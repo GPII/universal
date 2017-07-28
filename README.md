@@ -124,8 +124,10 @@ To use any of the gpii components or functionality in Node.js, use the
 following statements to get access to fluid and/or gpii objects.
 
 ```
-var fluid = require("universal"),
+var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
+
+fluid.require("%universal");
 // Now you will have access to both fluid and gpii namespaces.
 ```
 
