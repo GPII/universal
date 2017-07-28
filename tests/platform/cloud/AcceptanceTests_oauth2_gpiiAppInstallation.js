@@ -25,6 +25,18 @@ fluid.registerNamespace("gpii.tests.cloud.oauth2.gpiiAppInstallation");
 
 var initialTokenResponse;
 
+gpii.tests.cloud.oauth2.gpiiAppInstallation.sendAccessTokenRequest = function (accessTokenRequest, options) {
+    var formBody = {
+        grant_type: "password",
+        client_id: options.client_id,
+        client_secret: options.client_secret,
+        username: options.username,
+        password: options.password
+    };
+
+    gpii.test.cloudBased.oauth2.sendRequest(accessTokenRequest, options, formBody, "accessTokenForm");
+};
+
 gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken = function (body, accessTokenRequest) {
     gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
     initialTokenResponse = body;
@@ -35,9 +47,26 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken = functio
     jqUnit.assertEquals("The previously set unexpired access token is returned", initialTokenResponse, body);
 };
 
+fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.requests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        accessTokenRequest2: {
+            type: "kettle.test.request.http",
+            options: {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                path: "/access_token",
+                port: 8081,
+                method: "POST"
+            }
+        }
+    }
+});
+
 gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInGpiiAppInstallation",
+        funcName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.sendAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     { // 1
@@ -46,7 +75,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2
-        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInGpiiAppInstallation",
+        funcName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.sendAccessTokenRequest",
         args: ["{accessTokenRequest2}", "{testCaseHolder}.options"]
     },
     { // 3
@@ -58,6 +87,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
 
 fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.mainSequence", {
     gradeNames: ["gpii.test.disruption"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.gpiiAppInstallation.requests",
     sequenceName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence"
 });
 

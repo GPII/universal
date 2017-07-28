@@ -15,6 +15,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.registerNamespace("jqUnit"),
     path = require("path"),
     fs = require("fs");
 
@@ -56,6 +57,63 @@ gpii.tests.cloud.oauth2.addPrefs.cleanUpTmpFiles = function () {
     gpii.tests.cloud.oauth2.addPrefs.filesToDelete.length = 0;
 };
 
+gpii.tests.cloud.oauth2.addPrefs.sendAccessTokenRequest = function (accessTokenRequest, options) {
+    var formBody = {
+        grant_type: "client_credentials",
+        scope: options.scope,
+        client_id: options.client_id,
+        client_secret: options.client_secret
+    };
+
+    gpii.test.cloudBased.oauth2.sendRequest(accessTokenRequest, options, formBody, "accessTokenForm");
+};
+
+gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest = function (securedAddPrefsRequest, prefsData, secured, accessToken, view) {
+    view = view || "flat";
+    secured = secured || true;
+
+    var options = {
+        path: "/add-preferences?view=" + view
+    };
+
+    var securedHeader = {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "application/json"
+        }
+    };
+
+    var securedOptions = fluid.extend({}, options, securedHeader);
+
+    options = secured ? securedOptions : options;
+
+    securedAddPrefsRequest.send(prefsData, options);
+};
+
+gpii.tests.cloud.oauth2.addPrefs.verifyAddPrefsResponse = function (body, addPrefsRequest, expectedPrefs, prefsDir) {
+    var response = gpii.test.verifyJSONResponse(body, addPrefsRequest);
+    jqUnit.assertValue("Should have received a user token", response.userToken);
+    jqUnit.assertDeepEq("The received saved preferences data should be expect", expectedPrefs, response.preferences);
+    addPrefsRequest.userToken = response.userToken;
+
+    var filePath = path.resolve(prefsDir, response.userToken) + ".json";
+    gpii.tests.cloud.oauth2.addPrefs.filesToDelete.push(filePath);
+};
+
+gpii.tests.cloud.oauth2.addPrefs.sendGetPrefsRequest = function (getPrefsRequest, addPrefsRequest, view) {
+    view = view || "flat";
+    var options = {
+        path: "/preferences/" + addPrefsRequest.userToken + "?view=" + view
+    };
+
+    getPrefsRequest.send(null, options);
+};
+
+gpii.tests.cloud.oauth2.addPrefs.verifyGetPrefsResponse = function (body, getPrefsResponse, expectedPrefs) {
+    var response = gpii.test.verifyJSONResponse(body, getPrefsResponse);
+    jqUnit.assertDeepEq("The received saved preferences data should be expect", expectedPrefs, response);
+};
+
 fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles", {
     gradeNames: "fluid.component",
     listeners: {
@@ -63,9 +121,39 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.cleanupTmpFiles", {
     }
 });
 
+fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.requests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        addPrefsRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                // path: "/add-preferences?view=%view",  // Cannot dynamically config path
+                port: 8081,
+                method: "POST"
+            }
+        },
+        getPrefsRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                // path: "/preferences?view=%view",  // Cannot dynamically config path
+                port: 8081,
+                method: "GET"
+            }
+        },
+        getPrefsRequest2: {
+            type: "kettle.test.request.http",
+            options: {
+                // path: "/preferences?view=%view",  // Cannot dynamically config path
+                port: 8081,
+                method: "GET"
+            }
+        }
+    }
+});
+
 gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendAccessTokenRequestInClientCredentials",
+        funcName: "gpii.tests.cloud.oauth2.addPrefs.sendAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     { // 1
@@ -74,30 +162,30 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2
-        funcName: "gpii.test.cloudBased.oauth2.sendAddPrefsRequest",
+        funcName: "gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest",
         args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{accessTokenRequest}.access_token", "firstDiscovery"]
     },
     { // 3
         event: "{addPrefsRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyAddPrefsResponse",
+        listener: "gpii.tests.cloud.oauth2.addPrefs.verifyAddPrefsResponse",
         args: ["{arguments}.0", "{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, gpii.tests.cloud.oauth2.addPrefs.prefsDir]
     },
     { // 4
-        funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
+        funcName: "gpii.tests.cloud.oauth2.addPrefs.sendGetPrefsRequest",
         args: ["{getPrefsRequest}", "{addPrefsRequest}", "firstDiscovery"]
     },
     { // 5
         event: "{getPrefsRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyGetPrefsResponse",
+        listener: "gpii.tests.cloud.oauth2.addPrefs.verifyGetPrefsResponse",
         args: ["{arguments}.0", "{getPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData]
     },
     { // 6
-        funcName: "gpii.test.cloudBased.oauth2.sendGetPrefsRequest",
+        funcName: "gpii.tests.cloud.oauth2.addPrefs.sendGetPrefsRequest",
         args: ["{getPrefsRequest2}", "{addPrefsRequest}"]
     },
     { // 7
         event: "{getPrefsRequest2}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyGetPrefsResponse",
+        listener: "gpii.tests.cloud.oauth2.addPrefs.verifyGetPrefsResponse",
         args: ["{arguments}.0", "{getPrefsRequest2}", gpii.tests.cloud.oauth2.addPrefs.transformedPrefs]
     }
 ];
@@ -105,7 +193,7 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
 // To test invalid /add-preferences requests
 gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendAddPrefsRequest",
+        funcName: "gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest",
         args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{testCaseHolder}.options.accessToken"]
     },
     { // 1
@@ -118,11 +206,13 @@ gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence = [
 
 fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.mainSequence", {
     gradeNames: ["gpii.test.disruption"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.addPrefs.requests",
     sequenceName: "gpii.tests.cloud.oauth2.addPrefs.mainSequence"
 });
 
 fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence", {
     gradeNames: ["gpii.test.disruption"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.addPrefs.requests",
     sequenceName: "gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence"
 });
 
