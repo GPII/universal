@@ -183,7 +183,7 @@ gpii.tests.dbDataStore.testData = {
             "": true
         }
     },
-    revokedAuthDecision1: {
+    revokedAuthorization1: {
         "id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",

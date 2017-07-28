@@ -338,7 +338,7 @@ fluid.defaults("gpii.tests.dbDataStore.updateUserAuthorizedAuthorization", {
     rawModules: [{
         name: "Test updateUserAuthorizedAuthorization()",
         tests: [{
-            name: "A typical flow of updating an auth decision",
+            name: "A typical flow of updating an authorization",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.updateUserAuthorizedAuthorization", ["user-1", gpii.tests.dbDataStore.testData.webPrefsConsumerAuthorizationToUpdate], "{that}"]
@@ -374,7 +374,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeUserAuthorizedAuthorization", {
     rawModules: [{
         name: "Test revokeUserAuthorizedAuthorization()",
         tests: [{
-            name: "A typical flow of updating an auth decision",
+            name: "A typical flow of updating an authorization",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
@@ -384,7 +384,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeUserAuthorizedAuthorization", {
                 event: "{that}.events.onResponse"
             }, {
                 listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.revokedAuthDecision1],
+                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.revokedAuthorization1],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -424,7 +424,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedAuthorizationById", {
     rawModules: [{
         name: "Test findUserAuthorizedAuthorizationById()",
         tests: [{
-            name: "Find an existing auth decision by an auth decision id",
+            name: "Find an existing authorization by an authorization id",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizedAuthorizationById", ["webPrefsConsumerAuthorization-1"], "{that}"]
@@ -434,17 +434,17 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedAuthorizationById", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Finding a non-existing auth decision by an auth decision id returns undefined",
+            name: "Finding a non-existing authorization by an authorization id returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizedAuthorizationById", ["webPrefsConsumerAuthorization-0"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                args: ["Finding a non-existing authorization returns undefined", "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing auth decision ID returns 401 status code and error message",
+            name: "Not providing authorization ID returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizedAuthorizationById", [], "{that}"]
@@ -476,7 +476,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizationsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Revoked auth decisions are not returned",
+            name: "Revoked authorizations are not returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
@@ -486,17 +486,17 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizationsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["Revoked auth decisions are not returned", gpii.tests.dbDataStore.testData.UserAuthorizationsByGpiiTokenAfterRevoke, "{arguments}.0"],
+                args: ["Revoked authorizations are not returned", gpii.tests.dbDataStore.testData.UserAuthorizationsByGpiiTokenAfterRevoke, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Finding a non-existing auth decision by a gpii token returns undefined",
+            name: "Finding a non-existing authorization by a gpii token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizationsByGpiiToken", ["non-existing-token"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                args: ["Finding a non-existing authorization returns undefined", "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -538,7 +538,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorization", {
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorization", ["non-existing-token", "client-1", false], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                args: ["Finding a non-existing authorization returns undefined", "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -594,7 +594,7 @@ fluid.defaults("gpii.tests.dbDataStore.findOnboardedSolutionAuthorization", {
                 args: ["{dbDataStore}.findOnboardedSolutionAuthorization", ["non-existing-token", "client-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing auth decision returns undefined", "{arguments}.0"],
+                args: ["Finding a non-existing authorization returns undefined", "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -689,7 +689,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCo
     rawModules: [{
         name: "Test findWebPrefsConsumerAuthorizationByAuthCode()",
         tests: [{
-            name: "Find an auth decision by an auth code",
+            name: "Find an authorization by an auth code",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorizationByAuthCode", ["chrome_high_contrast_auth_code"], "{that}"]
@@ -749,7 +749,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedClientsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Revoked auth decisions are not returned",
+            name: "Revoked authorizations are not returned",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
@@ -763,7 +763,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedClientsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Returns undefined when all auth decisions are revoked",
+            name: "Returns undefined when all authorizations are revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
@@ -823,7 +823,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAccess
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Returns undefined when the auth decision is revoked",
+            name: "Returns undefined when the authorization is revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
@@ -935,7 +935,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Revoked auth decisions returns undefined",
+            name: "Revoked authorizations returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokePrivilegedPrefsCreatorAuthorization", ["privilegedPrefsCreatorAuthorization-1"], "{that}"]
@@ -991,7 +991,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Revoked auth decisions returns undefined",
+            name: "Revoked authorizations returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokePrivilegedPrefsCreatorAuthorization", ["privilegedPrefsCreatorAuthorization-1"], "{that}"]
@@ -1037,7 +1037,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByPrivilegedPrefsCreator
     rawModules: [{
         name: "Test findAuthorizationByPrivilegedPrefsCreatorAccessToken()",
         tests: [{
-            name: "Find an auth decision information by a privileged prefs creator access token",
+            name: "Find an authorization information by a privileged prefs creator access token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken", ["firstDiscovery_access_token"], "{that}"]

@@ -147,8 +147,8 @@ var gpii = gpii || {};
         },
         styles: {
             dialogForRemovalClass: "gpii-oauth2-privacySettings-dialogForRemoval",
-            okButtonClass: "gpii-oauth2-privacySettings-removeDecision-ok",
-            cancelButtonClass: "gpii-oauth2-privacySettings-removeDecision-cancel",
+            okButtonClass: "gpii-oauth2-privacySettings-removeAuthorization-ok",
+            cancelButtonClass: "gpii-oauth2-privacySettings-removeAuthorization-cancel",
             addServiceSelected: "gpii-oauth2-privacySettings-addService-selected"
         },
         selectorsToIgnore: ["editButton", "removeButton", "serviceName", "authorizationId", "clientId", "removeDecisionDialog", "removeDecisionContent", "editDecisionDialog", "addService", "addServiceButton", "addServiceMenu", "addUserAuthorizedAuthorizationDialog"],

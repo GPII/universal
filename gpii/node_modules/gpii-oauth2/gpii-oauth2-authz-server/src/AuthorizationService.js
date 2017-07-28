@@ -234,7 +234,7 @@ var fluid = fluid || require("infusion");
      * The last step in the fireTransformEvent() chain for implementing grantWebPrefsConsumerAuthCode()
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
-     * @param authDecisionInfo {Object} Accepted structure:
+     * @param authorizationInfo {Object} Accepted structure:
      * {
      *     gpiiToken: {Object},    // A GPII token record
      *     inputArgs: {
@@ -246,10 +246,10 @@ var fluid = fluid || require("infusion");
      * }
      * @return {Promise} a promise object with the value of the generated authorization code
      */
-    gpii.oauth2.authorizationService.doGrant = function (dataStore, codeGenerator, authDecisionInfo) {
+    gpii.oauth2.authorizationService.doGrant = function (dataStore, codeGenerator, authorizationInfo) {
         // Generate the authorization code and record it
         var code = codeGenerator.generateAuthCode();
-        var savePromise = dataStore.saveAuthCode(authDecisionInfo.id, code);
+        var savePromise = dataStore.saveAuthCode(authorizationInfo.id, code);
         var mapper = function () {
             return code;
         };
@@ -392,7 +392,7 @@ var fluid = fluid || require("infusion");
         var authorizationPromise = dataStore.findOnboardedSolutionAuthorization(gpiiToken, clientId);
         authorizationPromise.then(function (authorization) {
             if (authorization) {
-                // If the auth decision already exists, return its id
+                // If the authorization already exists, return its id
                 promiseTogo.resolve({id: authorization.id});
             } else {
                 // If not, add one
@@ -411,9 +411,9 @@ var fluid = fluid || require("infusion");
 
     /**
      * A common utility function shared by checkWebPrefsConsumerAuthorization() and doAdd()
-     * This function retrieves and returns an id of an authorization decision record that defines the selected preferences
+     * This function retrieves and returns an id of an authorization record that defines the selected preferences
      * that are allowed to be accessed by the client.
-     * If the authorization decision does not exist, this function will create one and return the created authorization decision id.
+     * If the authorization does not exist, this function will create one and return the created authorization id.
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiToken {String} A GPII token
@@ -431,7 +431,7 @@ var fluid = fluid || require("infusion");
 
         authorizationPromise.then(function (authorization) {
             if (authorization) {
-                // If the auth decision already exists, return its id
+                // If the authorization already exists, return its id
                 promiseTogo.resolve({id: authorization.id});
             } else {
                 // If not, add one
@@ -500,7 +500,7 @@ var fluid = fluid || require("infusion");
      * The entry point of getSelectedPreferences() API. Fires the transforming promise workflow by triggering onGetSelectedPreferences event.
      * @param that {Component} An instance of gpii.oauth2.authorizationService
      * @param userId {String} A user id
-     * @param authorizationId {String} An authorization decision id
+     * @param authorizationId {String} An authorization id
      */
     gpii.oauth2.authorizationService.getSelectedPreferences = function (that, userId, authorizationId) {
         var input = {
@@ -537,7 +537,7 @@ var fluid = fluid || require("infusion");
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
-     *     authorization: {Object}     // An object of authDecision record returned by the previous processing
+     *     authorization: {Object}     // An object of authorization record returned by the previous processing
      *     inputArgs: {
      *         userId: {String},
      *         authorizationId: {String},
@@ -565,7 +565,7 @@ var fluid = fluid || require("infusion");
      * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
      * @param record {Object} Accepted structure:
      * {
-     *     authDecision: {Object}     // An object of authDecision record returned by the previous processing
+     *     authorization: {Object}     // An object of authorization record returned by the previous processing
      *     inputArgs: {
      *         userId: {String},
      *         authorizationId: {String},
@@ -592,7 +592,7 @@ var fluid = fluid || require("infusion");
      * The entry point of setSelectedPreferences() API. Fires the transforming promise workflow by triggering onSetSelectedPreferences event.
      * @param that {Component} An instance of gpii.oauth2.authorizationService
      * @param userId {String} A user id
-     * @param authorizationId {String} An authorization decision id
+     * @param authorizationId {String} An authorization id
      * @param selectedPreferences {Object} A preference set
      */
     gpii.oauth2.authorizationService.setSelectedPreferences = function (that, userId, authorizationId, selectedPreferences) {

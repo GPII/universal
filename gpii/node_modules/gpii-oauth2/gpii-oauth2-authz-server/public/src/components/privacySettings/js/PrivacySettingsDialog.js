@@ -46,7 +46,7 @@ var gpii = gpii || {};
         },
         selectorsToIgnore: ["selection", "cancel", "done"],
         styles: {
-            dialogCss: "gpii-oauth2-privacySettings-editDecision-dialog"
+            dialogCss: "gpii-oauth2-privacySettings-editAuthorization-dialog"
         },
         strings: {
             description: "To allow access, please select one or more preferences to share:",

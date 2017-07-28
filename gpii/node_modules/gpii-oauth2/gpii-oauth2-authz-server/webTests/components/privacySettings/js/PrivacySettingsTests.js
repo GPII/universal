@@ -108,7 +108,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 listener: "gpii.tests.oauth2.privacySettings.registerMockjax",
                 priority: "first"
             },
-            // Override the page reload listener when a decision is successfully removed
+            // Override the page reload listener when an authorization is successfully removed
             "onRemovalSuccess.reload": "fluid.identity"
         },
         distributeOptions: [{
@@ -326,7 +326,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         var expectedDialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: gpii.tests.oauth2.privacySettings.clientData.serviceName});
         jqUnit.assertEquals("The authorizationId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authorizationId, parseInt(that.dialogForRemoval.model.authorizationId, 10));
         jqUnit.assertEquals("The dialogContent has been set correctly in dialogForRemoval subcomponent", expectedDialogContent, that.dialogForRemoval.model.dialogContent);
-        jqUnit.isVisible("The dialog for removing the decision is visible", that.dialogForRemoval.container);
+        jqUnit.isVisible("The dialog for removing the authorization is visible", that.dialogForRemoval.container);
         jqUnit.assertTrue("The dialogForRemoval container should have been instantiated as a jQuery dialog", that.dialogForRemoval.container.hasClass("ui-dialog-content"));
     };
 

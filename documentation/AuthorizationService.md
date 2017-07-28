@@ -24,7 +24,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **parameters:** 
     * code: String. An authorization code that is previously granted.
     * clientId: Number. A system generated unique number that identifies the client.
-    * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
+    * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** The access token if the authorization code is valid. Otherwise, return `false`.
 
 #### getAuthForAccessToken(accessToken)
@@ -45,10 +45,10 @@ client.
     }
     ```
     * `undefined`. `undefined` is returned in any of these cases:
-        - The authorization decision with the matched access token is not found;
-        - The authorization decision has been revoked;
-        - The user specified in the authorization decision is not found;
-        - The client specified in the authorization decision is not found.
+        - The authorization with the matched access token is not found;
+        - The authorization has been revoked;
+        - The user specified in the authorization is not found;
+        - The client specified in the authorization is not found.
 
 #### getUserAuthorizedClientsForUser(userId)
 * **description**: Get all authorized clients for the user. At the moment, the client types that user can authorize are onboarded solution clients and web preferences consumers clients.
@@ -57,13 +57,13 @@ client.
 * **return:** An object. This object contains arrays of authorized client information. Each array is keyed by the corresponding client type. 
 
 For onboarded solution clients, the client information contains: 
-* The authorization decision id
+* The authorization id
 * The solution id
 * The client name
 * user selected preferences 
 
 For web preferences consumer clients, the client information contains: 
-* The authorization decision id
+* The authorization id
 * The OAuth2 client id
 * The client name
 * user selected preferences 
@@ -96,11 +96,11 @@ An example:
 ```
 
 #### getSelectedPreferences(userId, authorizationId)
-* **description**: Get the user selected preferences that is saved within the authorization decision. The function verifies the authorization decision is made by the user and not revoked.
+* **description**: Get the user selected preferences that is saved within the authorization. The function verifies the authorization is made by the user and not revoked.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * authorizationId: Number. A system generated unique number that identifies the authorization decision.
-* **return:** The user selected preferences if the authorization decision id is valid. Otherwise, return `unknown`.
+    * authorizationId: Number. A system generated unique number that identifies the authorization.
+* **return:** The user selected preferences if the authorization id is valid. Otherwise, return `unknown`.
 
 #### getUserUnauthorizedClientsForUser(userId)
 * **description**: Get a list of all the clients that haven't been authorized by the user. At the moment, the client types that user can authorize are onboarded solution clients and web preferences consumers clients.
@@ -135,11 +135,11 @@ An example:
 ```
 
 #### grantWebPrefsConsumerAuthCode(userId, clientId, redirectUri, selectedPreferences)
-* **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization decision for the user, client, and redirect URI. If we do, we issue a new code for that decision. Otherwise we create a new authorization decision record and a new code.
+* **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization for the user, client, and redirect URI. If we do, we issue a new code for that authorization. Otherwise we create a new authorization record and a new code.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * clientId: Number. A system generated unique number that identifies the client.
-    * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
+    * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
     * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
@@ -153,14 +153,14 @@ An example:
 * **description**: Revoke an authorization. This API is used to revoke these authorization types: GPII app installation authorizations, onboarded solution authorizations, web preferences consumer authorizations.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * authorizationId: Number. A system generated unique number that identifies the authorization decision.
+    * authorizationId: Number. A system generated unique number that identifies the authorization.
 * **return:** None.
 
 #### setSelectedPreferences(userId, authorizationId, selectedPreferences)
-* **description**: Update the user selected preferences that is saved within the authorization decision. The function verifies the authorization decision is made by the user.
+* **description**: Update the user selected preferences that is saved within the authorization. The function verifies the authorization is made by the user.
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
-    * authorizationId: Number. A system generated unique number that identifies the authorization decision.
+    * authorizationId: Number. A system generated unique number that identifies the authorization.
     * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
@@ -175,7 +175,7 @@ An example:
 * **parameters:** 
     * userId: Number. A system generated unique number that identifies the user.
     * clientId: Number. A system generated unique number that identifies the web preferences consumer client.
-    * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization decision is established.
+    * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** `True` or `false`.
 
 ### APIs for Privileged Preferences Creator Clients

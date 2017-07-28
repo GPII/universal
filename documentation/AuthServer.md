@@ -106,7 +106,7 @@ The document types used by the authorization server include:
 | `gpiiToken` | String | The GPII token that the authorization is associated with. | None |
 | `clientId` | String | The client id that the authorization is associated with. | None |
 | `selectedPreferences` | Object | The preferences that the user has granted permissions to the client to retrieve. | None |
-| `revoked` | Boolean | Whether this decision has been revoked. | false |
+| `revoked` | Boolean | Whether this authorization has been revoked. | false |
 
 #### Privileged Prefs Creator Clients
 
@@ -150,7 +150,7 @@ The document types used by the authorization server include:
 | `redirectUri` | String | The URL on client's site where users will be sent after authorization. | None |
 | `accessToken` | String | The access token used to retrieve the protected user preferences. | None |
 | `selectedPreferences` | Object | The preferences that the user has granted permissions to the client to retrieve. | None |
-| `revoked` | Boolean | Whether this decision has been revoked. | false |
+| `revoked` | Boolean | Whether this authorization has been revoked. | false |
 
 #### Authorization Codes
 

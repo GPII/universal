@@ -185,9 +185,9 @@ gpii.oauth2.dbDataStore.updateRecord = function (dataSource, docType, idName, da
  * The entry point of updateUserAuthorizedAuthorization() API. Fires the transforming promise workflow by triggering onUpdateUserAuthorizedAuthorization event.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore
  * @param userId {String} The user id
- * @param authorizationData {Object} The authorization decision data to update. Its structure:
+ * @param authorizationData {Object} The authorization data to update. Its structure:
  * {
- *     id: {String},  // auth decision data identifier
+ *     id: {String},  // authorization data identifier
  *     gpiiToken: {String},
  *     clientId: {String},  // The client identifier
  *     redirectUri: {String},
@@ -205,9 +205,9 @@ gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization = function (that, user
 };
 
 /**
- * The first step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API. Check if the auth decision
- * already exists by the auth decision id. If exists, pass the input data received from the entry function as
- * well as the existing auth decision record to the next step in the chain.
+ * The first step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API. Check if the authorization
+ * already exists by the authorization id. If exists, pass the input data received from the entry function as
+ * well as the existing authorization record to the next step in the chain.
  * Otherwise, return a promise with a missing document error.
  * @param findUserAuthorizedAuthorizationById {Function} The findUserAuthorizedAuthorizationById() API provided by gpii.oauth2.dbDataStore
  * @param input {Object} The data passed on from the entry function gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization(). Its structure:
@@ -253,7 +253,7 @@ gpii.oauth2.dbDataStore.authorizationExists = function (findUserAuthorizedAuthor
 
 /**
  * The second step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API. Find the gpii token information based on
- * the gpii token of the existing auth decision record. The user id in the token info is needed for the next step. If the record
+ * the gpii token of the existing authorization record. The user id in the token info is needed for the next step. If the record
  * is found, pass the input data + the gpii token info to the next step in the chain. Otherwise, return a promise with a missing
  * document error.
  * @param findGpiiToken {Function} The findGpiiToken() API provided by gpii.oauth2.dbDataStore
@@ -262,7 +262,7 @@ gpii.oauth2.dbDataStore.authorizationExists = function (findUserAuthorizedAuthor
  *      inputArgs:
  *      {
  *          userId: {String},
- *          authorizationData: {  // The auth decision to update
+ *          authorizationData: {  // The authorization to update
  *              id: {String},
  *              gpiiToken: {String},
  *              clientId: {String},
@@ -306,7 +306,7 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
 
 /**
  * The last step in the promise transforming chain for implementing updateUserAuthorizedAuthorization() API.
- * This step verifies the user requested for the update matches the user that the updated auth decision
+ * This step verifies the user requested for the update matches the user that the updated authorization
  * belongs to. If the verification passes, do the update. Otherwise, return a promise with an unauthorized
  * user error.
  * @param dataSource {Component} saveDataSource() provided by gpii.oauth2.dbDataStore
@@ -316,7 +316,7 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
  *      {
  *          userId: {String},
  *          authorizationType: {String},
- *          authorizationData: {  // The auth decision to update
+ *          authorizationData: {  // The authorization to update
  *              id: {String},
  *              gpiiToken: {String},
  *              clientId: {String},
@@ -326,7 +326,7 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
  *              revoked: {Boolean}
  *          }
  *      },
- *      authorization:  // Existing auth decision
+ *      authorization:  // Existing authorization
  *      {
  *          gpiiToken: {String},
  *          clientId: {String},
@@ -344,9 +344,9 @@ gpii.oauth2.dbDataStore.validateGpiiToken = function (findGpiiToken, input) {
  *          id: {String}
  *      }
  *  }
- * @return {Promise} An promise object with either the response from CouchDB/PouchDB for updating the authorization decision record (on promise resolve)
+ * @return {Promise} An promise object with either the response from CouchDB/PouchDB for updating the authorization record (on promise resolve)
  * or an unauthorized user error if the user requesting the update doesn't match the user that associates with the GPII token within the authorization
- * decision record (on promise reject).
+ * record (on promise reject).
  */
 gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization = function (dataSource, input) {
     var inputUserId = input.inputArgs.userId;
@@ -372,9 +372,9 @@ gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization = function (dataSour
  * Shared to revoke authorizations in these types: gpii app installstion authorizations, web prefs consumer authorizations and onboarded solution authorizations
  * since these authorization types are all associated with certain users.
  * @param that {Component} An instance of gpii.oauth2.dbDataStore
- * @param revokeFunc {Function} The function to be called by gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization() to perform the revoking of an authorization decision
+ * @param revokeFunc {Function} The function to be called by gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization() to perform the revoking of an authorization
  * @param userId {String} An user id
- * @param authorizationId {String} An authorization decision id
+ * @param authorizationId {String} An authorization id
  */
 gpii.oauth2.dbDataStore.revokeUserAuthorizedAuthorization = function (that, revokeFunc, userId, authorizationId) {
     var input = {

@@ -70,7 +70,7 @@
         "userId": "user-1"
     },
     {
-        "_id": "authDecision-1",
+        "_id": "authorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "alice_gpii_token",
         "clientId": "client-2",

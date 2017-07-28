@@ -534,7 +534,7 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
             var userId = req.user.id;
             // TODO: Validate authorizationId
             var authorizationId = req.params.authorizationId;
-            // TODO communicate bad authorizationId or an id for an authDecision that is not yours?
+            // TODO communicate bad authorizationId or an id for an authorization that is not yours?
             if (req.is("application/json")) {
                 var selectedPreferences = req.body;
                 // TODO validate selectedPreferences?
