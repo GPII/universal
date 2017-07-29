@@ -2713,7 +2713,7 @@
     },
 
     "net.gpii.browserExtension": {
-        "name": "Cloud4all Chrome extension",
+        "name": "UIO+ Browser Extension",
         "contexts": {
             "OS": [{
                     "id": "win32",
@@ -2726,7 +2726,19 @@
                 "options": {
                     "path": "net.gpii.browserExtension"
                 },
-                "capabilities": [],
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/lineSpace",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/characterSpace",
+                    "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/highlightColor",
+                    "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "http://registry\\.gpii\\.net/common/supportTool",
+                    "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
+                ],
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
                     "fontSize": {
@@ -2771,7 +2783,7 @@
                     "dictionaryEnabled": {
                         "transform": {
                             type: "fluid.transforms.valueMapper",
-                            defaultOutputPath: false,
+                            defaultOutputValue: false,
                             match: [{
                                 inputValue: {
                                     "dictionaryEnabled": true
