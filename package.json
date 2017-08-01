@@ -34,7 +34,7 @@
         "browserify": "14.4.0",
         "fluid-grunt-eslint": "18.1.2",
         "fluid-grunt-json5lint": "1.0.0",
-        "gpii-testem": "1.0.0-dev.20170426T161352Z.8a06597",
+        "gpii-testem": "1.0.2-dev.20170725T121854Z.4aa6cc5",
         "grunt": "1.0.1",
         "grunt-jsonlint": "1.1.0",
         "http-browserify": "1.7.0",
