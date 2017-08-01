@@ -73,7 +73,7 @@ You can also run (and debug) the tests manually from the root of the repository 
 
 `node node_modules/testem/testem.js --file tests/testem.js` 
 
-The required test fixtures and testem will start, and Testem will provide a URL you can open in a browser.
+The required test fixtures and Testem will start, and Testem will provide a URL you can open in a browser.
 
 If you would like to debug individual tests or view the test summary in a browser without using Testem, you can:
 
@@ -149,7 +149,7 @@ The tests are run using the following command:
 
 #### Coverage Reporting
 
-The preferred way to consistentely generate a code coverage report is to use Vagrant as described above.  When you 
+The preferred way to consistently generate a code coverage report is to use Vagrant as described above.  When you 
 start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM,  and a coverage 
 report will be saved to the `reports` directory.  You can also run the `npm test` command on your local machine, but 
 you will need to ensure that browsers receive focus when they are launched (see above).
