@@ -1,15 +1,14 @@
-FROM inclusivedesign/nodejs:lts
+FROM node:8-alpine
 
-WORKDIR /etc/ansible/playbooks
+WORKDIR /app
+COPY . /app
 
-COPY provisioning/* /etc/ansible/playbooks/
+RUN apk add --no-cache --virtual build-dependencies python make git g++ && \
+    npm install && \
+    chown -R node:node . && \
+    npm cache clean --force && \
+    apk del build-dependencies
 
-ENV INSTALL_DIR=/opt/gpii/node_modules/universal
+USER node
 
-ENV UNIVERSAL_VARS_FILE=docker-vars.yml
-
-COPY . $INSTALL_DIR
-
-RUN ansible-playbook playbook.yml --tags "install,configure"
-
-CMD ["/bin/bash"]
+CMD ["npm","start"]

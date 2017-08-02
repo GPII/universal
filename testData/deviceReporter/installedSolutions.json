@@ -40,6 +40,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.narrator"
+    },
+
+    {
         "id": "com.microsoft.windows.highContrast"
     },
 
@@ -49,6 +53,18 @@
 
     {
         "id": "com.microsoft.windows.fontSize"
+    },
+
+    {
+        "id": "com.microsoft.windows.stickyKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.filterKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.mouseKeys"
     },
 
     {
