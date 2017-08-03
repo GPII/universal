@@ -82,11 +82,7 @@ gpii.tests.journal.initialSettings = {
                     "width": 800,
                     "height": 600
                 },
-                "screen-dpi": {
-                    "configured": 1,
-                    "maximum": 1,
-                    "actual": 1
-                }
+                "screen-dpi": 1
             }
         }]
     }
