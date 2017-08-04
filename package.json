@@ -65,23 +65,23 @@
     "node": ">=4.2.1"
   },
   "scripts": {
-    "pretest": "npm run pretest:clean && npm run pretest:instrument && npm run pretest:copyUninstrumentedCode",
+    "pretest": "npm run pretest:clean && npm run pretest:instrument",
     "pretest:clean": "node node_modules/rimraf/bin.js reports/* coverage/* instrumented/* .nyc_output/*",
-    "pretest:instrument": "npm run pretest:instrumentNodeModules && npm run pretest:instrumentConfigs",
+    "pretest:instrument": "npm run pretest:instrumentNodeModules && npm run pretest:instrumentConfigs && npm run pretest:copyUninstrumentedCode",
     "pretest:instrumentNodeModules": "node node_modules/istanbul/lib/cli.js instrument --complete-copy -o instrumented/universal/gpii/node_modules gpii/node_modules -x '**/lib/**' -x 'testing/**' -x 'tests/**'",
     "pretest:instrumentConfigs": "node node_modules/istanbul/lib/cli.js instrument --complete-copy -o instrumented/universal/gpii/configs gpii/configs",
     "pretest:copyUninstrumentedCode": "node scripts/copyUninstrumentedCode.js",
     "test": "npm run test:node-noprep && npm run test:browser-noprep",
     "test:browser-noprep": "node node_modules/testem/testem.js ci --file tests/testem.js --skip PhantomJS,IE",
-    "test:browser": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && npm run test:browser-noprep",
+    "test:browser": "npm run pretest:instrument && npm run test:browser-noprep",
     "test:node-noprep": "node_modules/.bin/nyc --reporter=json node tests/all-tests.js",
-    "test:node": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && npm run test:node-noprep",
+    "test:node": "npm run pretest:instrument && npm run test:node-noprep",
     "test:production": "node tests/ProductionConfigTests.js",
     "test:vagrant": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm test'",
     "test:vagrantBrowser": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm run test:browser'",
     "test:vagrantNode": "vagrant ssh -c 'cd /home/vagrant/sync/universal; npm run test:node'",
     "test:vagrantProduction": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; ./scripts/vagrantCloudBasedContainers.sh && GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9081/preferences/%userToken npm run test:production'",
-    "posttest": "node node_modules/istanbul/lib/cli.js report --root coverage --dir reports text-summary html",
+    "posttest": "node_modules/.bin/nyc report -r lcov -r text-summary",
     "start": "node gpii.js",
     "postinstall": "node scripts/browserifyTestDependency.js"
   }
