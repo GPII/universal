@@ -2909,8 +2909,6 @@
             }
         ],
         "stop": [
-            // This command could be a possible implementation if current one behaviour is inconsistent.
-            // "command": "Powershell.exe -ExecutionPolicy Bypass -File \"C:\\Program Files\\Classic Shell\\ClassicShellStop.ps1\""
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
@@ -3057,8 +3055,6 @@
             }
         ],
         "stop": [
-            // This command could be a possible implementation if current one behaviour is inconsistent.
-            // See same case in Win10Morpher settings handler.
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
