@@ -2900,24 +2900,24 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherSetter.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherSetter.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperSetter.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperSetter.ps1\""
             }
         ],
         "stop": [
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherRecover.ps1\""
+                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherRecover.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperRecover.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperRecover.ps1\""
             }
         ],
         "isInstalled": [
@@ -3046,24 +3046,24 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellSetter.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellSetter.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuSetter.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuSetter.ps1\""
             }
         ],
         "stop": [
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                            -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellRecover.ps1\""
+                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellRecover.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuRecover.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuRecover.ps1\""
             }
         ],
         "isInstalled": [
