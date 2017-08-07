@@ -149,6 +149,7 @@ From your project's top-level directory (where the `Vagrantfile` and `package.js
 - browser tests only: `npm run test:vagrantBrowser`
 - production tests: `npm run test:vagrantProduction`
 
+The `test:vagrantProduction` target will use the `vagrantCloudBasedContainers.sh` script to spin up container-based GPII components inside the VM.
 
 You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop
 environment) and run the tests manually if you wish.
