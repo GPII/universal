@@ -301,7 +301,8 @@ gpii.tests.journal.checkJournalsList = function (markup, component, expectCrashe
     var match = /a href=".*\/%3E(.*)"/.exec(markup);
     console.log("Got " + match.length + " matches");
     var firstDate = decodeURIComponent(match[1]);
-    var expectedStart = component.stashedStartTime, expectedEnd = expectedStart + 4000;
+    // Relaxed requirements on GPII-2522 due to lack of control over CI environment - see https://github.com/GPII/gpii-app/pull/19
+    var expectedStart = component.stashedStartTime, expectedEnd = Date.now();
     var firstTime = Date.parse(firstDate);
     // Add further diagnostics for GPII-2522
     fluid.log("Parsed link date " + firstDate + " to time " + firstTime + " expected to be in range ["
