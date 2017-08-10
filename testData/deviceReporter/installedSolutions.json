@@ -68,6 +68,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenDPI"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
     },
 
