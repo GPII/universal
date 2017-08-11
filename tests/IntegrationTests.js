@@ -19,7 +19,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.registerNamespace("gpii.test.integration");
+fluid.contextAware.makeChecks({
+    "gpii.contexts.test.integration": {
+        value: true
+    }
+});
 
 require("../index.js");
 
