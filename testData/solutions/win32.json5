@@ -2814,16 +2814,17 @@
                     "tableOfContents": "http://registry\\.gpii\\.net/common/tableOfContents",
                     "dictionaryEnabled": {
                         "transform": {
-                            type: "fluid.transforms.valueMapper",
-                            defaultOutputValue: false,
-                            match: [{
-                                inputValue: {
+                            "type": "fluid.transforms.valueMapper",
+                            "match": [{
+                                "inputValue": {
                                     "dictionaryEnabled": true
                                 },
-                                partialMatches: true,
-                                outputValue: true
+                                "outputValue": true
                             }],
-                            input: {
+                            "noMatch": {
+                                "outputValue": false
+                            },
+                            "defaultInput": {
                                 "transform": {
                                     "type": "fluid.transforms.arrayToSetMembership",
                                     "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
@@ -2834,8 +2835,8 @@
                             }
                         }
                     },
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
-
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabificationEnabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
