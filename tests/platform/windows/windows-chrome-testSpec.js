@@ -2,6 +2,7 @@
 GPII Integration and Acceptance Testing
 
 Copyright 2014 Emergya
+Copyright 2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -102,14 +103,23 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for background color change in Browser Extension",
-        userToken: "chrome_high_contrast",
+        userToken: "browser_extension_high_contrast",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
+                            "lineSpace": 1,
                             "fontSize": 1,
-                            "contrastTheme": "wb"
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "wb",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -122,7 +132,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for font size transformation in Browser Extension",
-        userToken: "chrome_font_size_double",
+        userToken: "browser_extension_font_size",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -132,12 +142,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 2,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
+                            "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -150,7 +161,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for line space transformation in Browser Extension",
-        userToken: "chrome_line_space",
+        userToken: "browser_extension_line_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -160,12 +171,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
+                            "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -178,7 +190,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for highlight color transformation in Browser Extension",
-        userToken: "chrome_highlight_color",
+        userToken: "browser_extension_highlight_colour",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -188,12 +200,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
+                            "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "yellow",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -206,7 +219,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for character space transformation in Browser Extension",
-        userToken: "chrome_character_space",
+        userToken: "browser_extension_character_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -216,12 +229,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 1,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
+                            "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -234,7 +248,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for inputs larger transformation in Browser Extension",
-        userToken: "chrome_inputs_larger",
+        userToken: "browser_extension_inputs_larger",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -244,12 +258,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": true,
-                            "contrastTheme": false,
+                            "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -262,7 +277,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for self voicing transformation in Browser Extension",
-        userToken: "chrome_self_voicing",
+        userToken: "browser_extension_self_voicing",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -272,12 +287,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
+                            "contrastTheme": "default",
                             "selfVoicingEnabled": true,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -290,7 +306,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for table of contents transformation in Browser Extension",
-        userToken: "chrome_toc",
+        userToken: "browser_extension_toc",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -300,12 +316,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
-                            "selfVoicingEnabled": true,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": true,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -318,7 +335,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for dictionary transformation in Browser Extension",
-        userToken: "chrome_dictionary",
+        userToken: "browser_extension_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -328,12 +345,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
-                            "selfVoicingEnabled": true,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": true,
-                            "simplifiedUiEnabled": false
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -346,7 +364,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for simplified UI transformation in Browser Extension",
-        userToken: "chrome_simplified",
+        userToken: "browser_extension_simplified",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -356,12 +374,13 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
-                            "selfVoicingEnabled": true,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": true
+                            "simplifiedUiEnabled": true,
+                            "syllabificationEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -374,7 +393,7 @@ gpii.tests.windows.chrome = [
     },
     {
         name: "Acceptance test for syllabification UI transformation in Browser Extension",
-        userToken: "chrome_syllabification",
+        userToken: "browser_extension_syllabification",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -384,12 +403,42 @@ gpii.tests.windows.chrome = [
                             "fontSize": 1,
                             "characterSpace": 0,
                             "inputsLargerEnabled": false,
-                            "contrastTheme": false,
-                            "selfVoicingEnabled": true,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
                             "selectionTheme": "default",
                             "tableOfContents": false,
                             "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": true
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": true
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for multiple transformations in Browser Extension",
+        userToken: "browser_extension_multiple_settings",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1.3,
+                            "fontSize": 1.3,
+                            "characterSpace": 2,
+                            "inputsLargerEnabled": true,
+                            "contrastTheme": "yb",
+                            "selfVoicingEnabled": true,
+                            "selectionTheme": "green",
+                            "tableOfContents": true,
+                            "dictionaryEnabled": true,
+                            "simplifiedUiEnabled": true,
+                            "syllabificationEnabled": true
                         },
                         "options": {
                             "path": "net.gpii.browserExtension"
@@ -401,7 +450,7 @@ gpii.tests.windows.chrome = [
         processes: []
     }
 ];
-
+fluid.logObjectRenderChars = 20480;
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.chrome",
     configName: "gpii.tests.acceptance.windows.chrome.config",

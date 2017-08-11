@@ -97,6 +97,354 @@ gpii.tests.linux.chrome.testDefs = [
             }
         },
         processes: []
+    },
+    {
+        name: "Acceptance test for background color change in Browser Extension",
+        userToken: "browser_extension_high_contrast",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "wb",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for font size transformation in Browser Extension",
+        userToken: "browser_extension_font_size",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 2,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for line space transformation in Browser Extension",
+        userToken: "browser_extension_line_space",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 2,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for highlight color transformation in Browser Extension",
+        userToken: "browser_extension_highlight_colour",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "yellow",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for character space transformation in Browser Extension",
+        userToken: "browser_extension_character_space",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 1,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for inputs larger transformation in Browser Extension",
+        userToken: "browser_extension_inputs_larger",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": true,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for self voicing transformation in Browser Extension",
+        userToken: "browser_extension_self_voicing",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": true,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for table of contents transformation in Browser Extension",
+        userToken: "browser_extension_toc",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": true,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for dictionary transformation in Browser Extension",
+        userToken: "browser_extension_support_tool",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": true,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for simplified UI transformation in Browser Extension",
+        userToken: "browser_extension_simplified",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": true,
+                            "syllabificationEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for syllabification UI transformation in Browser Extension",
+        userToken: "browser_extension_syllabification",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 0,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContents": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": true
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
+    },
+    {
+        name: "Acceptance test for multiple transformations in Browser Extension",
+        userToken: "browser_extension_multiple_settings",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1.3,
+                            "fontSize": 1.3,
+                            "characterSpace": 2,
+                            "inputsLargerEnabled": true,
+                            "contrastTheme": "yb",
+                            "selfVoicingEnabled": true,
+                            "selectionTheme": "green",
+                            "tableOfContents": true,
+                            "dictionaryEnabled": true,
+                            "simplifiedUiEnabled": true,
+                            "syllabificationEnabled": true
+                        },
+                        "options": {
+                            "path": "net.gpii.browserExtension"
+                        }
+                    }
+                ]
+            }
+        },
+        processes: []
     }
 ];
 

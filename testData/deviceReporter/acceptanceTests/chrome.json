@@ -1,5 +1,9 @@
 [
     {
         "id": "com.ilunion.cloud4chrome"
+    },
+
+    {
+        "id": "net.gpii.browserExtension"
     }
 ]
