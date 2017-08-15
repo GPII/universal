@@ -450,7 +450,7 @@ gpii.tests.windows.chrome = [
         processes: []
     }
 ];
-fluid.logObjectRenderChars = 20480;
+
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.chrome",
     configName: "gpii.tests.acceptance.windows.chrome.config",
