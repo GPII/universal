@@ -29,7 +29,7 @@ socket.on("open", function () {
     socket.send(JSON.stringify({
         type: "connect",
         payload: {
-            solutionId: "net.gpii.browserExtension" // must match the solution id in (every) solutions registry
+            solutionId: "net.gpii.uioPlus" // must match the solution id in (every) solutions registry
         }
     }));
 });

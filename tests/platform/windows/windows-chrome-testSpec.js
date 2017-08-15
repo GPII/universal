@@ -49,7 +49,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -78,7 +78,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -107,7 +107,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -136,7 +136,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -165,7 +165,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -194,7 +194,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -223,7 +223,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -252,7 +252,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -281,7 +281,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -310,7 +310,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -339,7 +339,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": true
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -368,7 +368,7 @@ gpii.tests.windows.chrome = [
                             "syllabificationEnabled": true
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]

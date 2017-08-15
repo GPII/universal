@@ -46,7 +46,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -75,7 +75,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -104,7 +104,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -133,7 +133,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -162,7 +162,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -191,7 +191,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -220,7 +220,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -249,7 +249,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -278,7 +278,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -307,7 +307,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": false
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -336,7 +336,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": true
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]
@@ -365,7 +365,7 @@ gpii.tests.linux.chrome.testDefs = [
                             "syllabificationEnabled": true
                         },
                         "options": {
-                            "path": "net.gpii.browserExtension"
+                            "path": "net.gpii.uioPlus"
                         }
                     }
                 ]

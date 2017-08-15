@@ -2668,7 +2668,7 @@
         ]
     },
 
-    "net.gpii.browserExtension": {
+    "net.gpii.uioPlus": {
         "name": "UIO+ Browser Extension",
         "contexts": {
             "OS": [{
@@ -2677,10 +2677,10 @@
             }]
         },
         "settingsHandlers": {
-            "chromeconf": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
-                    "path": "net.gpii.browserExtension"
+                    "path": "net.gpii.uioPlus"
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/lineSpace",
@@ -2766,10 +2766,10 @@
             }
         },
         "configure": [
-            "settings.chromeconf"
+            "settings.configuration"
         ],
         "restore": [
-            "settings.chromeconf"
+            "settings.configuration"
         ],
         "start": [],
         "stop": [],

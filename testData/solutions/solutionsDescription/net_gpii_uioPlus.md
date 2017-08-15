@@ -1,9 +1,9 @@
-# BrowserExtension
+# UIO Plus
 
 ## Details
 
 * __Name__: browserExtension
-* __Id__: net.gpii.browserExtension
+* __Id__: net.gpii.uioPlus
 * __Platform__: Tested on MS Windows and GNU/Linux (it should also work on Mac OSX)
 * __Contact__: Justin Obara <obara.justin@gmail.com>
 
