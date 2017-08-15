@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.linux.chrome");
 gpii.tests.linux.chrome.testDefs = [
     {
         name: "Acceptance test for background color change in Browser Extension",
-        userToken: "browser_extension_high_contrast",
+        userToken: "uioPlus_high_contrast",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -56,7 +56,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for font size transformation in Browser Extension",
-        userToken: "browser_extension_font_size",
+        userToken: "uioPlus_font_size",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -85,7 +85,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for line space transformation in Browser Extension",
-        userToken: "browser_extension_line_space",
+        userToken: "uioPlus_line_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -114,7 +114,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for highlight color transformation in Browser Extension",
-        userToken: "browser_extension_highlight_colour",
+        userToken: "uioPlus_highlight_colour",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -143,7 +143,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for character space transformation in Browser Extension",
-        userToken: "browser_extension_character_space",
+        userToken: "uioPlus_character_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -172,7 +172,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for inputs larger transformation in Browser Extension",
-        userToken: "browser_extension_inputs_larger",
+        userToken: "uioPlus_inputs_larger",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -201,7 +201,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for self voicing transformation in Browser Extension",
-        userToken: "browser_extension_self_voicing",
+        userToken: "uioPlus_self_voicing",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -230,7 +230,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for table of contents transformation in Browser Extension",
-        userToken: "browser_extension_toc",
+        userToken: "uioPlus_toc",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -259,7 +259,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for dictionary transformation in Browser Extension",
-        userToken: "browser_extension_support_tool",
+        userToken: "uioPlus_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -288,7 +288,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for simplified UI transformation in Browser Extension",
-        userToken: "browser_extension_simplified",
+        userToken: "uioPlus_simplified",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -317,7 +317,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for syllabification UI transformation in Browser Extension",
-        userToken: "browser_extension_syllabification",
+        userToken: "uioPlus_syllabification",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -346,7 +346,7 @@ gpii.tests.linux.chrome.testDefs = [
     },
     {
         name: "Acceptance test for multiple transformations in Browser Extension",
-        userToken: "browser_extension_multiple_settings",
+        userToken: "uioPlus_multiple_settings",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
