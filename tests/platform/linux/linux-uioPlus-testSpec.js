@@ -2,6 +2,7 @@
 GPII Integration and Acceptance Testing
 
 Copyright 2014 Emergya
+Copyright 2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -377,7 +378,7 @@ gpii.tests.linux.chrome.testDefs = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.chrome.testDefs",
-    configName: "gpii.tests.acceptance.linux.chrome.config",
+    configName: "gpii.tests.acceptance.linux.uioPlus.config",
     configPath: "%universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);

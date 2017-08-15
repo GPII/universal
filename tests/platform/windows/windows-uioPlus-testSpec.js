@@ -380,7 +380,7 @@ gpii.tests.windows.chrome = [
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.chrome",
-    configName: "gpii.tests.acceptance.windows.chrome.config",
+    configName: "gpii.tests.acceptance.windows.uioPlus.config",
     configPath: "%universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

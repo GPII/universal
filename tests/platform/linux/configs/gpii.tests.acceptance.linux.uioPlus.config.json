@@ -1,13 +1,13 @@
 {
-    "type": "gpii.tests.acceptance.linux.chrome.config",
+    "type": "gpii.tests.acceptance.linux.uioPlus.config",
     "options": {
         "distributeOptions": {
             "acceptance.installedSolutionsPath": {
-                "record": "%universal/testData/deviceReporter/acceptanceTests/chrome.json",
+                "record": "%universal/testData/deviceReporter/acceptanceTests/uioPlus.json",
                 "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
                 "priority": "after:development.installedSolutionsPath"
             }
         }
-    },    
+    },
     "mergeConfigs": "%universal/tests/configs/gpii.tests.acceptance.localInstall.config.json"
 }
