@@ -24,13 +24,11 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.payloadSize");
 
 gpii.tests.payloadSize.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged in.", data);
+    jqUnit.assertEquals("Response is correct", "User with token giant was successfully logged in.", data);
 };
 
 gpii.tests.payloadSize.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged out.", data);
+    jqUnit.assertEquals("Response is correct", "User with token giant was successfully logged out.", data);
 };
 
 gpii.tests.payloadSize.testDefs = [{
