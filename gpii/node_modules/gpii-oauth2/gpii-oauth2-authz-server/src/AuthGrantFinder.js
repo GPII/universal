@@ -43,8 +43,8 @@ var fluid = fluid || require("infusion");
     // and the client credentials grant to find the match. The different data structure
     // can be returned based on the grant type.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
-        var authCodePrmoise = authorizationService.getAuthForAccessToken(accessToken);
-        var clientCredentialsPromise = authorizationService.getAuthorizationByPrivilegedPrefsCreatorAccessToken(accessToken);
+        var authCodePrmoise = authorizationService.getWebPrefsConsumerAuthorizationByAccessToken(accessToken);
+        var clientCredentialsPromise = authorizationService.getPrivilegedPrefsCreatorAuthorizationByAccessToken(accessToken);
 
         // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
         var sources = [authCodePrmoise, clientCredentialsPromise];

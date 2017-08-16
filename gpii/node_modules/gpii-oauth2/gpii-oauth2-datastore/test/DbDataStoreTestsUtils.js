@@ -289,7 +289,7 @@ gpii.tests.dbDataStore.testData = {
         "clientId": "client-5",
         "accessToken": "chrome_client_credentials_access_token"
     },
-    findAuthorizationByPrivilegedPrefsCreatorAccessToken: {
+    findPrivilegedPrefsCreatorAuthorizationByAccessToken: {
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "allowAddPrefs": true
     },

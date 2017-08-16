@@ -27,7 +27,7 @@ The authorization service provides API that allows users to add, retrieve, updat
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** The access token if the authorization code is valid. Otherwise, return `false`.
 
-#### getAuthForAccessToken(accessToken)
+#### getWebPrefsConsumerAuthorizationByAccessToken(accessToken)
 * **description**: Get the authorization information using the access token.
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
@@ -182,7 +182,7 @@ An example:
 
 **Note**: Privileged Preferences Creator Clients are authorized using [OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant)
 
-#### getAuthorizationByPrivilegedPrefsCreatorAccessToken(accessToken)
+#### getPrivilegedPrefsCreatorAuthorizationByAccessToken(accessToken)
 * **description**: Get the authorization information using the privileged prefs creator access token.
 * **parameters:** 
     * accessToken: String. An access token representing an authorization issued to the client.

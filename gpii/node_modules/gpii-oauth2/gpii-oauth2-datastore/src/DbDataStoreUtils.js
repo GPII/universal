@@ -539,16 +539,6 @@ gpii.oauth2.dbDataStore.doRevokePrivilegedPrefsCreatorAuthorization = function (
 
 /**
  * A post process function for implementing findPrivilegedPrefsCreatorAuthorizationByAccessToken() API.
- * @param data {Object} An authorization record. See documentation/AuthServer.md of various authorization structures.
- * @return {Object} The input authorization record if the authorization type is privileged prefs creator authorization,
- * otherwise, return `undefined`.
- */
-gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPostProcess = function (data) {
-    return data.type === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization ? gpii.oauth2.dbDataStore.cleanUpDoc(data) : undefined;
-};
-
-/**
- * A post process function for implementing findAuthorizationByPrivilegedPrefsCreatorAccessToken() API.
  * @param data {Object} An object in a structure of:
  * {
  *     doc: {
@@ -571,7 +561,7 @@ gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPost
  * }
  * If the given parameter is not in an expected structure, `undefined` is returned.
  */
-gpii.oauth2.dbDataStore.findAuthorizationByPrivilegedPrefsCreatorAccessTokenPostProcess = function (data) {
+gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPostProcess = function (data) {
     return data.doc && data.value ? {
         oauth2ClientId: data.doc.oauth2ClientId,
         allowAddPrefs: data.doc.type === gpii.oauth2.docTypes.privilegedPrefsCreatorClient ? true : false

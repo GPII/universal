@@ -79,14 +79,6 @@ var fluid = fluid || require("infusion");
                 args: ["{arguments}.0", "{arguments}.1"]
                     // userId, authorizationId
             },
-            getAuthForAccessToken: {
-                func: "{dataStore}.findWebPrefsConsumerAuthorizationByAccessToken"
-                    // accessToken
-            },
-            getAuthorizationByPrivilegedPrefsCreatorAccessToken: {
-                func: "{dataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken"
-                    // accessToken
-            },
             grantPrivilegedPrefsCreatorAuthorization: {
                 funcName: "gpii.oauth2.authorizationService.grantPrivilegedPrefsCreatorAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
@@ -100,6 +92,14 @@ var fluid = fluid || require("infusion");
                 funcName: "gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
                     // gpiiToken, clientId
+            },
+            getWebPrefsConsumerAuthorizationByAccessToken: {
+                func: "{dataStore}.findWebPrefsConsumerAuthorizationByAccessToken"
+                    // accessToken
+            },
+            getPrivilegedPrefsCreatorAuthorizationByAccessToken: {
+                func: "{dataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken"
+                    // accessToken
             }
         },
         events: {

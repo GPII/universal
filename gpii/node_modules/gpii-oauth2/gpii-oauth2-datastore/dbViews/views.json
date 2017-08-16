@@ -44,9 +44,6 @@
             "findPrivilegedPrefsCreatorAuthorizationByClientId": {
                 "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.clientId, doc)}"
             },
-            "findPrivilegedPrefsCreatorAuthorizationByAccessToken": {
-                "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.accessToken, doc)}"
-            },
             "findAuthorizationByAccessToken": {
                 "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'privilegedPrefsCreatorAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, doc})}}"
             },

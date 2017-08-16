@@ -981,17 +981,17 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
     rawModules: [{
         name: "Test findPrivilegedPrefsCreatorAuthorizationByAccessToken()",
         tests: [{
-            name: "Find a privileged prefs creator record by an access token",
+            name: "Find an authorization information by a privileged prefs creator access token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken", ["firstDiscovery_access_token"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.privilegedPrefsCreatorAuthorization1, "{arguments}.0"],
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findPrivilegedPrefsCreatorAuthorizationByAccessToken, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Revoked authorizations returns undefined",
+            name: "Revoked privileged prefs creator access token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokePrivilegedPrefsCreatorAuthorization", ["privilegedPrefsCreatorAuthorization-1"], "{that}"]
@@ -1005,7 +1005,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Finding a non-existing privileged prefs creator record by an access token returns undefined",
+            name: "Finding by a non-existing privileged prefs creator access token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken", ["non-existing"], "{that}"]
@@ -1015,66 +1015,10 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing client ID returns 401 status code and error message",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken", [], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected error is received", {
-                    msg: "The input field \"accessToken\" is undefined",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }]
-    }]
-});
-
-fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByPrivilegedPrefsCreatorAccessToken", {
-    gradeNames: ["gpii.tests.dbDataStore.environment"],
-    rawModules: [{
-        name: "Test findAuthorizationByPrivilegedPrefsCreatorAccessToken()",
-        tests: [{
-            name: "Find an authorization information by a privileged prefs creator access token",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken", ["firstDiscovery_access_token"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findAuthorizationByPrivilegedPrefsCreatorAccessToken, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Revoked privileged prefs creator access token returns undefined",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.revokePrivilegedPrefsCreatorAuthorization", ["privilegedPrefsCreatorAuthorization-1"], "{that}"]
-            }, {
-                listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken", ["firstDiscovery_access_token"], "{that}"],
-                event: "{that}.events.onResponse"
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected undefined is received", undefined, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Finding by a non-existing privileged prefs creator access token returns undefined",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken", ["non-existing"], "{that}"]
-            }, {
-                listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing privileged prefs creator record returns undefined", "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
             name: "Not providing privileged prefs creator access token returns 401 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken", [], "{that}"]
+                args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken", [], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
@@ -1088,7 +1032,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByPrivilegedPrefsCreator
             name: "Finding by privileged prefs creator access token for non-existing client returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthorizationByPrivilegedPrefsCreatorAccessToken", ["non-existing-client-token"], "{that}"]
+                args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken", ["non-existing-client-token"], "{that}"]
             }, {
                 listener: "jqUnit.assertUndefined",
                 args: ["Finding privileged prefs creator record for non-existing client returns undefined", "{arguments}.0"],
@@ -1336,7 +1280,6 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationById",
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByClientId",
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessToken",
-    "gpii.tests.dbDataStore.findAuthorizationByPrivilegedPrefsCreatorAccessToken",
     "gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId",
     "gpii.tests.dbDataStore.expireGpiiAppInstallationAuthorization",
     "gpii.tests.dbDataStore.addAuthorization"
