@@ -20,6 +20,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenDPI"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
     },
 
@@ -33,6 +37,10 @@
 
     {
         "id": "com.microsoft.windows.mouseKeys"
+    },
+
+    {
+        "id": "com.microsoft.windows.narrator"
     }
 
 ]
