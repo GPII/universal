@@ -13,7 +13,7 @@
                     "http://registry.gpii.net/common/highContrastTheme": "yellow-black",
                     "http://registry.gpii.net/common/highlightColor": "green",
                     "http://registry.gpii.net/common/tableOfContents": true,
-                    "http://registry.gpii.net/common/supportTool": ["dictionary", "thesaurus"],
+                    "http://registry.gpii.net/common/supportTool": ["dictionary"],
                     "http://registry.gpii.net/common/simplifiedUiEnabled": true,
                     "http://registry.gpii.net/common/syllabificationEnabled": true
                 }
