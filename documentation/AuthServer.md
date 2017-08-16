@@ -6,14 +6,14 @@ The authorization server adds access control to the cloud-based flow manger to s
 The authorization server authorizes 4 type of GPII clients:
 
 * GPII App installations
-    * For this client type, the local flow manager is the GPII component within a GPII App installation to communicate with GPII Cloud.
+    * For this client type, the Local Flow Manger within the GPII App retrieves user settings from the GPII Cloud-Based Flow Manager..
     * **Used OAuth2 grant**: [Resource Owner GPII Token Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant).
     * **Capabilities**: GPII App installations can retrieve untrusted settings from GPII Cloud.
 
 * Onboarded solutions
-    * **Example**: Windows managnifier
+    * **Example**: Windows magnifier
     * **Used OAuth2 grant**: No OAuth2 involved.
-    * **Capabilities**: Onboarded solutions receives filtered matchmaking results. The privacy filtering process is performed based on the privacy policy defined by the user for that solution.
+    * **Capabilities**: Onboarded solutions receive filtered matchmaking results. The privacy filtering process is performed based on the privacy policy defined by the user for that solution.
 
 * Privileged preferences creators
     * **Example**: First Discovery Tool
@@ -23,7 +23,7 @@ The authorization server authorizes 4 type of GPII clients:
 * Web preferences consumers
     * **Example**: Easit4All website
     * **Used OAuth2 grant**: [Authorization Code Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant).
-    * **Capabilities**: Web preferences consumers receives filtered user preferences. The privacy filtering process is performed based on the privacy policy defined by the user for that solution.
+    * **Capabilities**: Web preferences consumers receive filtered user preferences. The privacy filtering process is performed based on the privacy policy defined by the user for that solution.
 
 ### Document Structure
 
@@ -82,7 +82,7 @@ The document types used by the authorization server include:
 | `clientId` | String | The client id that this token is assigned to. | None |
 | `gpiiToken` | String | The GPII token that this token record is associated with. | None |
 | `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
-| `expiresIn` | Number | The number of seconds left before the access token becomes invalid. The default value is 3600. | 3600 |
+| `expiresIn` | Number | The lifetime in seconds of the access token.  For example, the value "3600" denotes that the access token will expire in one hour from the time the response was generated. The default value is 3600. | 3600 |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
 | `expired` | Boolean | Whether this token has expired, meaning `timestampCreated` + `expiresIn` < now(). | false |
 | `timestampCreated` | Date | The timestamp when the token is created. | now() |

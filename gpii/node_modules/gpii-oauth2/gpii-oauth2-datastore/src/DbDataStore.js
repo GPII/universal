@@ -337,10 +337,11 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
+                requestUrl: "/_design/views/_view/findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId?startKey=[\"%gpiiToken\",\"%clientId\",\"%currentTime\"]&endkey=[\"%gpiiToken\",\"%clientId\",{}]",
                 termMap: {
                     gpiiToken: "%gpiiToken",
-                    clientId: "%clientId"
+                    clientId: "%clientId",
+                    currentTime: "%currentTime"
                 },
                 rules: {
                     readPayload: {
@@ -609,15 +610,11 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // gpiiAppInstallationAuthorizationId
         },
         findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            funcName: "gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId",
             args: [
                 "{that}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource",
-                {
-                    gpiiToken: "{arguments}.0",
-                    clientId: "{arguments}.1"
-                },
-                ["gpiiToken", "clientId"],
-                gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess
+                "{arguments}.0",
+                "{arguments}.1"
             ]
             // gpiiToken, clientId
         },

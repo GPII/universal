@@ -574,6 +574,19 @@ gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPost
 /**
  * The post data process function for implementing findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId()
  */
+gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId = function (findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource, gpiiToken, clientId) {
+    gpii.oauth2.dbDataStore.findRecord(
+        findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource,
+        {
+            gpiiToken: gpiiToken,
+            clientId: clientId,
+            currentTime: new Date().toISOString()
+        },
+        ["gpiiToken", "clientId", "currentTime"],
+        gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess
+    );
+};
+
 gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess = function (data) {
     var records = [];
     fluid.each(data, function (row) {

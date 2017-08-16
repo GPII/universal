@@ -803,7 +803,7 @@ var fluid = fluid || require("infusion");
      * @return {Promise} A promise object whose resolved value is an object that contains the access token and its expiresIn value, such as:
      * {
      *     accessToken: {String},
-     *     expiresIn: {Number},
+     *     expiredIn: {Number},
      * }
      * An error will be returned if the gpii token is not found.
      */
@@ -844,7 +844,7 @@ var fluid = fluid || require("infusion");
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiToken {String} a GPII token
      * @param clientId {String} an unique client id
-     * @param expiresIn {String} the number of seconds that this token will expire
+     * @param expiresIn {String} the lifetime in seconds of the access token
      * @return: none. The first argument of promiseTogo contains returned values
      */
     gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, expiresIn) {
