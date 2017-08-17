@@ -12,7 +12,7 @@ The authorization grant finder provides API that allows users to use access toke
     ```
     {
         oauth2ClientId: "client_id_A",
-        userGpiiToken: "bob_gpii_token",
+        gpiiToken: "bob_gpii_token",
         selectedPreferences: {
             "visual-alternatives.speak-text.rate": true,
             "increase-size.appearance.text-size": true

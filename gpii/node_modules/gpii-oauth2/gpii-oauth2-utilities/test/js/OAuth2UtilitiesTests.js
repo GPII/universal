@@ -128,33 +128,28 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             gpii.oauth2.walkMiddleware(middleware1, 0, "request", "response", check);
         });
 
-        jqUnit.test("isExpired() checks if a given timestamp is expired", function () {
+        jqUnit.test("Test gpii.oauth2.getExpiresIn()", function () {
             jqUnit.expect(4);
 
             var testCases = [{
-                timestampCreated: "Wed Jun 07 2017 14:20:09 GMT-0400 (EDT)",
-                expected: false
+                timestampExpires: "2017-05-29T17:54:00.000Z",
+                expected: 0
             }, {
-                expiresIn: 60,
-                expected: false
+                timestampExpires: null,
+                expected: undefined
             }, {
-                timestampCreated: "Fri Jun 09 2016 10:59:09 GMT-0400 (EDT)",
-                expiresIn: 60,
-                expected: true
+                timestampExpires: undefined,
+                expected: undefined
             }, {
-                // timestampCreated: currentTime - 60 seconds; expiresIn: 120 seconds
-                timestampCreated: new Date(new Date().getTime() - 60 * 1000).toString(),
-                expiresIn: 120,
-                expected: false
+                timestampExpires: new Date(new Date().getTime() + 60 * 1000).toISOString(),
+                expected: 60
             }];
 
             fluid.each(testCases, function (testCase) {
-                var assertion = testCase.expected ? "assertTrue" : "assertFalse";
-                var result = gpii.oauth2.isExpired(testCase.timestampCreated, testCase.expiresIn);
-                var yesNoMsg = testCase.expected ? "" : "not";
-                var msg = "The timestamp \"" + testCase.timestampCreated + "\" has " + yesNoMsg + " expired within " + testCase.expiresIn + " seconds";
+                var result = gpii.oauth2.getExpiresIn(testCase.timestampExpires);
+                var msg = "The timestamp \"" + testCase.timestampExpires + "\" will expire in " + testCase.expected + " seconds";
 
-                jqUnit[assertion](msg, result);
+                jqUnit.assertEquals(msg, testCase.expected, result);
             });
         });
 

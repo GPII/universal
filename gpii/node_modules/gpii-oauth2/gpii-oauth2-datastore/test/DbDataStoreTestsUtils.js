@@ -84,7 +84,6 @@ gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
 
 gpii.tests.dbDataStore.verifyFetchedGpiiAppInstallationAuthorization = function (response, dataToSave) {
     gpii.tests.dbDataStore.verifyFetched(response, dataToSave);
-    jqUnit.assertFalse("The \"expired\" value has been set to false", response.expired);
     jqUnit.assertFalse("The \"revoked\" value has been set to false", response.revoked);
     jqUnit.assertNotUndefined("The \"timestampCreated\" value has been created", response.timestampCreated);
     jqUnit.assertNull("The \"timestampRevoked\" value has been set to null", response.timestampRevoked);
@@ -265,7 +264,7 @@ gpii.tests.dbDataStore.testData = {
         }]
     },
     findWebPrefsConsumerAuthorizationByAccessToken: {
-        userGpiiToken: "chrome_high_contrast",
+        gpiiToken: "chrome_high_contrast",
         oauth2ClientId: "org.chrome.cloud4chrome",
         selectedPreferences: {
             "": true
@@ -299,65 +298,31 @@ gpii.tests.dbDataStore.testData = {
         "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
     },
     findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId: [{
         "id": "gpiiAppInstallationAuthorization-1",
         "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
     },
     {
         "id": "gpiiAppInstallationAuthorization-2",
         "accessToken": "gpii-app-installation-token-2",
-        "expiresIn": 360000000000,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
-    }],
-    findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdAfterExpire: [{
-        "id": "gpiiAppInstallationAuthorization-2",
-        "accessToken": "gpii-app-installation-token-2",
-        "expiresIn": 360000000000,
-        "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampCreated": "3020-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
     }],
     gpiiAppInstallationAuthorizationToCreate: {
         "clientId": "client-1",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600
-    },
-    gpiiAppInstallationAuthorization1AfterExpired: {
-        "id": "gpiiAppInstallationAuthorization-1",
-        "clientId": "client-4",
-        "gpiiToken": "gpiiToken-1",
-        "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
-        "revoked": false,
-        "expired": true,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
-    },
-    gpiiAppInstallationAuthorization1AfterRevoked: {
-        "id": "gpiiAppInstallationAuthorization-1",
-        "clientId": "client-4",
-        "gpiiToken": "gpiiToken-1",
-        "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
-        "revoked": true,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampExpires": "3020-05-29T17:54:00.000Z"
     }
 };

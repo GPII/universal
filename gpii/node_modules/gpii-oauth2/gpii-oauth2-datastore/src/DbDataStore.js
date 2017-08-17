@@ -337,7 +337,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
         findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId?startKey=[\"%gpiiToken\",\"%clientId\",\"%currentTime\"]&endkey=[\"%gpiiToken\",\"%clientId\",{}]",
+                requestUrl: "/_design/views/_view/findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId?startkey=[\"%gpiiToken\",\"%clientId\",\"%currentTime\"]&endkey=[\"%gpiiToken\",\"%clientId\",\{\}]",
                 termMap: {
                     gpiiToken: "%gpiiToken",
                     clientId: "%clientId",
@@ -617,21 +617,12 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 "{arguments}.1"
             ]
             // gpiiToken, clientId
-        },
-        expireGpiiAppInstallationAuthorization: {
-            funcName: "gpii.oauth2.dbDataStore.expireGpiiAppInstallationAuthorization",
-            args: [
-                "{that}",
-                "{arguments}.0"
-            ]
-            // gpiiAppInstallationAuthorizationId
         }
     },
     events: {
         onUpdateUserAuthorizedAuthorization: null,
         onRevokeUserAuthorizedAuthorization: null,
-        onRevokePrivilegedPrefsCreatorAuthorization: null,
-        onExpireGpiiAppInstallationAuthorization: null
+        onRevokePrivilegedPrefsCreatorAuthorization: null
     },
     listeners: {
         onUpdateUserAuthorizedAuthorization: [{
@@ -672,15 +663,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             args: ["{that}.saveDataSource", "{arguments}.0"],
             namespace: "doRevokePrivilegedPrefsCreatorAuthorization",
             priority: "after:findPrivilegedPrefsCreatorAuthorization"
-        }],
-        onExpireGpiiAppInstallationAuthorization: [{
-            listener: "{that}.findGpiiAppInstallationAuthorizationById",
-            namespace: "findGpiiAppInstallationAuthorization"
-        }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization",
-            args: ["{that}.saveDataSource", "expired", "{arguments}.0"],
-            namespace: "doUpdateGpiiAppInstallationAuthorization",
-            priority: "after:findGpiiAppInstallationAuthorization"
         }]
     }
 });

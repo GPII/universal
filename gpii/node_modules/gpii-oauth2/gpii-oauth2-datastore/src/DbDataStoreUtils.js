@@ -437,9 +437,9 @@ gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess = functi
  * The post data process function for implementing findWebPrefsConsumerAuthorizationByAccessToken()
  */
 gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAccessTokenPostProcess = function (data) {
-    return data.value.doc.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization ? {
-        userGpiiToken: data.value.doc.gpiiToken,
-        selectedPreferences: data.value.doc.selectedPreferences,
+    return data.value.authorization.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization ? {
+        gpiiToken: data.value.authorization.gpiiToken,
+        selectedPreferences: data.value.authorization.selectedPreferences,
         oauth2ClientId: data.doc.oauth2ClientId
     } : undefined;
 };
@@ -575,12 +575,14 @@ gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPost
  * The post data process function for implementing findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId()
  */
 gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId = function (findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource, gpiiToken, clientId) {
-    gpii.oauth2.dbDataStore.findRecord(
+    var currentTimestamp = gpii.oauth2.getCurrentTimestamp();
+
+    return gpii.oauth2.dbDataStore.findRecord(
         findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource,
         {
             gpiiToken: gpiiToken,
             clientId: clientId,
-            currentTime: new Date().toISOString()
+            currentTime: currentTimestamp
         },
         ["gpiiToken", "clientId", "currentTime"],
         gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess
@@ -594,64 +596,15 @@ gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClient
         var oneResult = {
             id: record._id,
             accessToken: record.accessToken,
-            expiresIn: record.expiresIn,
             revoked: record.revoked,
-            expired: record.expired,
             timestampCreated: record.timestampCreated,
-            timestampRevoked: record.timestampRevoked
+            timestampRevoked: record.timestampRevoked,
+            timestampExpires: record.timestampExpires
         };
         records.push(oneResult);
     });
     return records;
 };
-
-// ==== expireGpiiAppInstallationAuthorization()
-// Fires the transforming promise workflow by triggering onExpireGpiiAppInstallationAuthorization event.
-
-/**
- * The entry function for implementing expireGpiiAppInstallationAuthorization(). Fires onExpireGpiiAppInstallationAuthorization event to trigger the transforming promise workflow.
- * @param that {Component} An instance of gpii.oauth2.dbDataStore.
- * @param gpiiAppInstallationAuthorizationId {String} An GPII app installation authorization id
- */
-gpii.oauth2.dbDataStore.expireGpiiAppInstallationAuthorization = function (that, gpiiAppInstallationAuthorizationId) {
-    return fluid.promise.fireTransformEvent(that.events.onExpireGpiiAppInstallationAuthorization, gpiiAppInstallationAuthorizationId);
-};
-
-/**
- * The last step in the promise transforming chain for implementing expireGpiiAppInstallationAuthorization() API.
- * It updates the GPII app installation authorization record by setting a"expired" flag to true.
- * The step before this function is findGpiiAppInstallationAuthorizationById() that finds the token info and passes into this function.
- * @param saveDataSource {Component} The saveDataSource component provided by gpii.oauth2.dbDataStore
- * @param gpiiAppInstallationAuthorizationRecord {Object} The data passed on from the previous step. Its structure:
- *  {
- *      clientId: {String},
- *      gpiiToken: {String},
- *      accessToken: {string},
- *      expiresIn:  {Number},
- *      revoked: {Boolean},
- *      expired: {Boolean},
- *      timestampCreated: {Date},
- *      timestampRevoked:  {Date},
- *      id: {String}  // The GPII app installation authorization id
- *  }
- * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for updating the
- * token record, or `undefined` if the `gpiiAppInstallationAuthorizationRecord` parameter is not provided
- */
-gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization = function (saveDataSource, fieldName, gpiiAppInstallationAuthorizationRecord) {
-    var promiseTogo = fluid.promise();
-
-    if (gpiiAppInstallationAuthorizationRecord === undefined) {
-        var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingDoc, {docName: gpii.oauth2.docTypes.gpiiAppInstallationAuthorization});
-        promiseTogo.reject(error);
-    } else {
-        var data = fluid.copy(gpiiAppInstallationAuthorizationRecord);
-        fluid.set(data, fieldName, true);
-        promiseTogo = gpii.oauth2.dbDataStore.updateRecord(saveDataSource, gpii.oauth2.docTypes.gpiiAppInstallationAuthorization, "id", data);
-    }
-
-    return promiseTogo;
-};
-// ==== End of expireGpiiAppInstallationAuthorization()
 
 /**
  * Add an authorization
@@ -664,7 +617,7 @@ gpii.oauth2.dbDataStore.doUpdateGpiiAppInstallationAuthorization = function (sav
  *      clientId: {String},
  *      gpiiToken: {String},
  *      accessToken: {String},
- *      expiresIn: {Number}
+ *      timestampExpires: {String}
  *  }
  *
  * onboardedSolutionAuthorization:
@@ -719,11 +672,10 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             clientId: authorizationData.clientId,
             gpiiToken: authorizationData.gpiiToken,
             accessToken: authorizationData.accessToken,
-            expiresIn: authorizationData.expiresIn,
-            expired: false,
             revoked: false,
-            timestampCreated: new Date().toString(),
-            timestampRevoked: null
+            timestampCreated: gpii.oauth2.getCurrentTimestamp(),
+            timestampRevoked: null,
+            timestampExpires: authorizationData.timestampExpires
         };
     }
 

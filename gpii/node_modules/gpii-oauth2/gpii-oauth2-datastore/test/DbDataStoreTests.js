@@ -1057,21 +1057,6 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Expired GPII app installation authorization record is no longer returned by the search function",
-            sequence: [{
-                // Test an expired token record
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.expireGpiiAppInstallationAuthorization", ["gpiiAppInstallationAuthorization-1"], "{that}"]
-            }, {
-                listener: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "client-4"], "{that}"],
-                event: "{that}.events.onResponse"
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdAfterExpire, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
             name: "Finding a non-existing GPII app installation authorization by a non-existing gpii token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
@@ -1114,49 +1099,6 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
                     msg: "The input field \"clientId\" is undefined",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }]
-    }]
-});
-
-fluid.defaults("gpii.tests.dbDataStore.expireGpiiAppInstallationAuthorization", {
-    gradeNames: ["gpii.tests.dbDataStore.environment"],
-    rawModules: [{
-        name: "Test expireGpiiAppInstallationAuthorization()",
-        tests: [{
-            name: "A typical flow of expiring a GPII app installation authorization",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationById", ["gpiiAppInstallationAuthorization-1"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected GPII app installation authorization data is received", gpii.tests.dbDataStore.testData.gpiiAppInstallationAuthorization1, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }, {
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.expireGpiiAppInstallationAuthorization", ["gpiiAppInstallationAuthorization-1"], "{that}"]
-            }, {
-                listener: "gpii.tests.dbDataStore.saveAndInvokeFetch",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationById", "{arguments}.0.id", "{that}"],
-                event: "{that}.events.onResponse"
-            }, {
-                listener: "gpii.tests.dbDataStore.verifyFetched",
-                args: ["{arguments}.0", gpii.tests.dbDataStore.testData.gpiiAppInstallationAuthorization1AfterExpired],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Expire by a non-existing GPII app installation authorization id returns error",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.expireGpiiAppInstallationAuthorization", ["non-existing-token-id"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["Expire by a non-existing GPII app installation authorization id returns missing record error", {
-                    msg: "The record of gpiiAppInstallationAuthorization is not found",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1281,6 +1223,5 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByClientId",
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessToken",
     "gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId",
-    "gpii.tests.dbDataStore.expireGpiiAppInstallationAuthorization",
     "gpii.tests.dbDataStore.addAuthorization"
 ]);

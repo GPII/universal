@@ -11,7 +11,7 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global fluid */
+/* global jqUnit, fluid */
 
 "use strict";
 
@@ -254,33 +254,30 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-2",
-        "expiresIn": 120,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toString(),
-        "timestampRevoked": null
+        "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
+        "timestampRevoked": null,
+        "timestampExpires": new Date(new Date().getTime() + 40 * 1000).toISOString()
     }, {
         "_id": "auth-11",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-3",
-        "expiresIn": 3600,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2016 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": "Mon May 29 2016 15:54:00 GMT-0400 (EDT)"
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": "2017-05-29T19:54:00.000Z",
+        "timestampExpires": "2017-05-29T20:54:00.000Z"
     }, {
         "_id": "auth-12",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2017-05-30T17:54:00.000Z"
     }];
 
     // All expected results
@@ -328,22 +325,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 "clientName": "Jaws",
                 "solutionId": "net.gpii.jaws"
             }]
-        },
-        findValidGpiiAppInstallationAuthorizationSetExpired: {
-            "id": "auth-12",
-            "type": "gpiiAppInstallationAuthorization",
-            "clientId": "client-3",
-            "gpiiToken": "gpiiToken-1",
-            "accessToken": "gpii-app-installation-token-1",
-            "expiresIn": 3600,
-            "revoked": false,
-            "expired": true,
-            "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-            "timestampRevoked": null
-        },
-        findValidGpiiAppInstallationAuthorization: {
-            "accessToken": "gpii-app-installation-token-2",
-            "expiresIn": 120
         }
     };
 
@@ -412,20 +393,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         rawModules: [{
             name: "Test gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization()",
             tests: [{
-                name: "findValidGpiiAppInstallationAuthorization() sets expired for expired access tokens and returns unexpired access token",
+                name: "findValidGpiiAppInstallationAuthorization() returns the unrevoked and unexpired access token",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
                     args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-3"], "{that}"]
                 }, {
-                    listener: "jqUnit.assertDeepEq",
-                    args: ["unexpired access token should be returned", gpii.tests.oauth2.authorizationService.expected.findValidGpiiAppInstallationAuthorization, "{arguments}.0"],
-                    event: "{that}.events.onResponse"
-                }, {
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.dataStore.findGpiiAppInstallationAuthorizationById", ["auth-12"], "{that}"]
-                }, {
-                    listener: "jqUnit.assertDeepEq",
-                    args: ["expired access token should have been set to expired", gpii.tests.oauth2.authorizationService.expected.findValidGpiiAppInstallationAuthorizationSetExpired, "{arguments}.0"],
+                    listener: "gpii.tests.oauth2.authorizationService.verifyGpiiAppInstallationAccessToken",
+                    args: ["{arguments}.0", "gpii-app-installation-token-2"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
@@ -451,5 +425,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }]
         }]
     });
+
+    gpii.tests.oauth2.authorizationService.verifyGpiiAppInstallationAccessToken = function (result, expectedAccessToken) {
+        jqUnit.assertEquals("The returned access token is " + expectedAccessToken, expectedAccessToken, result.accessToken);
+        jqUnit.assertTrue("The expiresIn is returned and greater than 0", result.expiresIn > 0);
+    };
 
 })();

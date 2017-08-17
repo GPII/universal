@@ -45,7 +45,7 @@
                 "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.clientId, doc)}"
             },
             "findAuthorizationByAccessToken": {
-                "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'privilegedPrefsCreatorAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, doc})}}"
+                "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'privilegedPrefsCreatorAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"
             },
             "findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.timestampExpires], doc)}}"

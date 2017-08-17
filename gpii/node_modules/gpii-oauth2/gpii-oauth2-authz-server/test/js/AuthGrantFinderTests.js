@@ -178,7 +178,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.authGrantFinder.expected = {
         authCodeGrant: {
             oauth2ClientId: "client_id_A",
-            userGpiiToken: "bob_gpii_token",
+            gpiiToken: "bob_gpii_token",
             selectedPreferences: { "": true }
         },
         clientCredentialsGrant: {

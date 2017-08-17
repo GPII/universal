@@ -60,25 +60,34 @@ gpii.oauth2.mapPromiseToResponse = function (promise, response) {
 };
 
 /**
- * Compare a given timestamp with the current time to find out if it has expired.
- * If timestampCreated + expiresIn < currentTimestamp, expired; else, not expired.
- * @param timestampCreated {String} A date string
- * @param expiresIn {Number} The number of seconds that the timestampCreated will expire.
- * @return {Boolean} return true if expired; otherwise, return false.
+ * Returns the current time in a human readable string that also naturally sort in chronological order.
+ * See http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.5.43
+ * @return {String} The current time in ISO string format.
  */
-gpii.oauth2.isExpired = function (timestampCreated, expiresIn) {
-    expiresIn = parseInt(expiresIn);
+gpii.oauth2.getCurrentTimestamp = function () {
+    return new Date().toISOString();
+};
 
-    if (!timestampCreated || !expiresIn) {
-        return false;
+/**
+ * Calculate the timestamp of currentTime + expiresIn.
+ * @param expiresIn {Number} The number of seconds that the expiration will occur.
+ * @return {Number} The number of seconds that the expiration will occur.
+ */
+gpii.oauth2.getTimestampExpires = function (expiresIn) {
+    return new Date(new Date().getTime() + expiresIn * 1000).toISOString();
+};
+
+/**
+ * Compare the current time with the expiresIn time and return the number of seconds that the expiration will occur.
+ * @param timestampExpires {String} A string in the format returned by Date().toISOString()
+ * @return {Number} The number of seconds that the expiration will occur. Return 0 if the given timestampExpires < the current timestamp.
+ */
+gpii.oauth2.getExpiresIn = function (timestampExpires) {
+    if (!timestampExpires) {
+        return undefined;
     }
 
-    var createdTime = new Date(timestampCreated).getTime();
-
-    // expiresIn is in the number of seconds but getTime() returns in millisecond.
-    var expiredTime = createdTime + expiresIn * 1000;
-
-    var currentTime = new Date().getTime();
-
-    return currentTime > expiredTime;
+    var currentTimeInMsec = new Date().getTime();
+    var expiresTimeInMsec = new Date(timestampExpires).getTime();
+    return expiresTimeInMsec > currentTimeInMsec ? Math.round((expiresTimeInMsec - currentTimeInMsec) / 1000) : 0;
 };

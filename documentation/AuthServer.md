@@ -82,11 +82,10 @@ The document types used by the authorization server include:
 | `clientId` | String | The client id that this token is assigned to. | None |
 | `gpiiToken` | String | The GPII token that this token record is associated with. | None |
 | `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
-| `expiresIn` | Number | The lifetime in seconds of the access token.  For example, the value "3600" denotes that the access token will expire in one hour from the time the response was generated. The default value is 3600. | 3600 |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
-| `expired` | Boolean | Whether this token has expired, meaning `timestampCreated` + `expiresIn` < now(). | false |
 | `timestampCreated` | Date | The timestamp when the token is created. | now() |
 | `timestampRevoked` | Date | The timestamp when the token is revoked. | None |
+| `timestampExpires` | Date | The timestamp when the token expires. | None |
 
 #### Onboarded Solution Clients
 
@@ -125,7 +124,7 @@ The document types used by the authorization server include:
 | `id` | String | The privileged prefs creator id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
 | `type` | String | The document type for storing privileged prefs creators. | The value must be set to "privilegedPrefsCreatorAuthorization". |
 | `clientId` | String | The client id that this token is assigned to. | None |
-| `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
+| `accessToken` | String | The access token that indicates the client has privilege to add preferences. | None |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
 
 #### Web Prefs Consumer Clients

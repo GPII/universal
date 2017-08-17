@@ -116,11 +116,10 @@
         "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-1",
-        "expiresIn": 3600,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2017 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
     },
     {
         "_id": "gpiiAppInstallationAuthorization-2",
@@ -128,11 +127,21 @@
         "clientId": "client-4",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-2",
-        "expiresIn": 360000000000,
         "revoked": false,
-        "expired": false,
-        "timestampCreated": "Mon May 29 3020 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": null
+        "timestampCreated": "3020-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
+    },
+    {
+        "_id": "gpiiAppInstallationAuthorization-4",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-4",
+        "gpiiToken": "gpiiToken-1",
+        "accessToken": "gpii-app-installation-token-4",
+        "revoked": false,
+        "timestampCreated": "2017-05-29T12:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2017-05-30T13:54:00.000Z"
     },
     {
         "_id": "gpiiAppInstallationAuthorization-3",
@@ -140,10 +149,9 @@
         "clientId": "client-5",
         "gpiiToken": "gpiiToken-1",
         "accessToken": "gpii-app-installation-token-3",
-        "expiresIn": 3600,
         "revoked": true,
-        "expired": false,
-        "timestampCreated": "Mon May 29 2016 13:54:00 GMT-0400 (EDT)",
-        "timestampRevoked": "Mon May 29 2016 15:54:00 GMT-0400 (EDT)"
+        "timestampCreated": "2016-05-29T17:54:00.000Z",
+        "timestampRevoked": "2016-05-29T21:54:00.000Z",
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
     }
 ]

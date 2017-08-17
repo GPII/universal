@@ -35,7 +35,7 @@ gpii.oauth2.docTypes = fluid.freezeRecursive({
 });
 
 // The default value of the number of seconds that access tokens become invalid.
-gpii.oauth2.defaultTokenExpiresIn = 3600;
+gpii.oauth2.defaultTokenLifeTimeInSeconds = 3600;
 
 // All error details that the gpii-oauth2 module reports.
 gpii.oauth2.errors = fluid.freezeRecursive({
