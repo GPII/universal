@@ -292,13 +292,13 @@ gpii.tests.cloud.oauth2.addPrefs.disruptionsWithFalseToken = [{
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient = [{
     name: "Attempt to add preference sets with a non existent client",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence",
-    expectedStatusCode: 404
+    expectedStatusCode: 401
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs = [{
     name: "Attempt to add preference sets with no privilege to add prefs",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence",
-    expectedStatusCode: 404
+    expectedStatusCode: 401
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
