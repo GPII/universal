@@ -60,7 +60,7 @@ Return an object that contains the error message and http status code if,
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** `True` or `false`.
 
-### APIs for both Web Preferences Consumer Clients and Onboarded Solution Clients
+### APIs for Web Preferences Consumer Clients and Onboarded Solution Clients
 
 #### addUserAuthorizedAuthorization(userId, solutionId, oauth2ClientId, selectedPreferences)
 - **description**: Add an authorization for a web preferences consumer client or a onboarded solution client. This API checks if an user authorization already exists based on the user id and OAuth2 client id/solution id. If it doesn't exist, generate an access token and add the authorization. If it does exist, do nothing. This function adds 2 type of authorizations: onboarded solution authorizations and web preferences consumer authorizations. When adding onboarded solution authorizations, the 2rd argument `solutionId` must be provided and the 3rd argument `oauth2ClientId` should be empty. Vice versa when adding web preferences consumer authorizations.
