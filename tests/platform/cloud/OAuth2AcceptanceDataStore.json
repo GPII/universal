@@ -93,6 +93,6 @@
         "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-6",
         "accessToken": "not_allowed_to_add_prefs",
-        "revoked": false
+        "revoked": true
     }
 ]

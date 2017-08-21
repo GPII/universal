@@ -433,17 +433,6 @@ gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess = functi
     return records;
 };
 
-/**
- * The post data process function for implementing findWebPrefsConsumerAuthorizationByAccessToken()
- */
-gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAccessTokenPostProcess = function (data) {
-    return data.value.authorization.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization ? {
-        gpiiToken: data.value.authorization.gpiiToken,
-        selectedPreferences: data.value.authorization.selectedPreferences,
-        oauth2ClientId: data.doc.oauth2ClientId
-    } : undefined;
-};
-
 // Authorization Codes
 // -------------------
 
@@ -537,42 +526,15 @@ gpii.oauth2.dbDataStore.doRevokePrivilegedPrefsCreatorAuthorization = function (
 };
 // ==== End of revokePrivilegedPrefsCreatorAuthorization()
 
-/**
- * A post process function for implementing findPrivilegedPrefsCreatorAuthorizationByAccessToken() API.
- * @param data {Object} An object in a structure of:
- * {
- *     doc: {
- *         oauth2ClientId: {String}
- *         _id: {String},
- *         _rev: {String},
- *         type: {String},  // an example is 'privilegedPrefsCreatorClient'
- *         name: {String},
- *         oauth2ClientId: {String},
- *         oauth2ClientSecret: {String}
- *     },
- *     value: {
- *         _id: {String}  // The client ID
- *     }
- * }
- * @return {Object} The object is in the structure of:
- * {
- *     oauth2ClientId: {String},
- *     allowAddPrefs: {Boolean}
- * }
- * If the given parameter is not in an expected structure, `undefined` is returned.
- */
-gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPostProcess = function (data) {
-    return data.doc && data.value ? {
-        oauth2ClientId: data.doc.oauth2ClientId,
-        allowAddPrefs: data.doc.type === gpii.oauth2.docTypes.privilegedPrefsCreatorClient ? true : false
-    } : undefined;
-};
-
 // GPII App Installation Authorizations
 // ------------------------------------
 
 /**
- * The post data process function for implementing findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId()
+ * Find GPII app installation authroization by a GPII token and a client id.
+ * @param findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource {Component} An instance of gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource
+ * @param gpiiToken {String} The GPII token
+ * @param clientId {String} The Client id
+ * @return {Promise} A promise object whose resolved value is the authorization, or, `undefined` if the authorization is not found
  */
 gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId = function (findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource, gpiiToken, clientId) {
     var currentTimestamp = gpii.oauth2.getCurrentTimestamp();
@@ -589,6 +551,9 @@ gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClient
     );
 };
 
+/**
+ * The post data process function for implementing findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId()
+ */
 gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess = function (data) {
     var records = [];
     fluid.each(data, function (row) {
@@ -604,6 +569,52 @@ gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClient
         records.push(oneResult);
     });
     return records;
+};
+
+/**
+ * Find an authorization by an access token
+ * @param data {Component} Contains both client and authorization information associated with the given access token
+ * An input example of a web preferences consumer authorization:
+ * {
+ *     key: {String},   // access token
+ *     id: {String},    // authorization id
+ *     value: {
+ *         _id: {String},      // client id
+ *         authorization: {
+ *             type: {String}, // authorization type
+ *             gpiiToken: {String},
+ *             clientId: {String},
+ *             redirectUri: {String},
+ *             accessToken: {String},
+ *             selectedPreferences: {Object},
+ *             revoked: {Boolean},
+ *             _id: {String},
+ *             _rev: {String}
+ *         }
+ *     },
+ *     doc: {
+ *         type: {String},     // client type
+ *         name: {String},
+ *         oauth2ClientId: {String},
+ *         oauth2ClientSecret: {String},
+ *         redirectUri: {String},
+ *         _id: {String},
+ *         _rev: {String}
+ *     }
+ * }
+ * @return {Promise} A promise object that carries the client and authorization information associated with the access token.
+ */
+gpii.oauth2.dbDataStore.findAuthorizationByAccessTokenPostProcess = function (data) {
+    var result;
+
+    if (data.doc && data.value) {
+        result = {};
+        fluid.set(result, "accessToken", data.key);
+        fluid.set(result, "client", gpii.oauth2.dbDataStore.cleanUpDoc(data.doc));
+        fluid.set(result, "authorization", gpii.oauth2.dbDataStore.cleanUpDoc(data.value.authorization));
+    }
+
+    return result;
 };
 
 /**

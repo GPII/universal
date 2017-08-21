@@ -264,10 +264,24 @@ gpii.tests.dbDataStore.testData = {
         }]
     },
     findWebPrefsConsumerAuthorizationByAccessToken: {
-        gpiiToken: "chrome_high_contrast",
-        oauth2ClientId: "org.chrome.cloud4chrome",
-        selectedPreferences: {
-            "": true
+        accessToken: "chrome_high_contrast_access_token",
+        client: {
+            id: "client-1",
+            type: "webPrefsConsumerClient",
+            name: "Service A",
+            oauth2ClientId: "org.chrome.cloud4chrome",
+            oauth2ClientSecret: "client_secret_1",
+            redirectUri: "http://localhost:3002/authorize_callback"
+        },
+        authorization: {
+            id: "webPrefsConsumerAuthorization-1",
+            type: "webPrefsConsumerAuthorization",
+            gpiiToken: "chrome_high_contrast",
+            clientId: "client-1",
+            redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
+            accessToken: "chrome_high_contrast_access_token",
+            selectedPreferences: { "": true },
+            revoked: false
         }
     },
     privilegedPrefsCreatorAuthorization1: {
@@ -289,8 +303,21 @@ gpii.tests.dbDataStore.testData = {
         "accessToken": "chrome_client_credentials_access_token"
     },
     findPrivilegedPrefsCreatorAuthorizationByAccessToken: {
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "allowAddPrefs": true
+        "accessToken": "firstDiscovery_access_token",
+        "client": {
+            "id": "client-2",
+            "type": "privilegedPrefsCreatorClient",
+            "name": "First Discovery",
+            "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
+            "oauth2ClientSecret": "client_secret_firstDiscovery"
+        },
+        "authorization": {
+            "id": "privilegedPrefsCreatorAuthorization-1",
+            "type": "privilegedPrefsCreatorAuthorization",
+            "clientId": "client-2",
+            "accessToken": "firstDiscovery_access_token",
+            "revoked": false
+        }
     },
     gpiiAppInstallationAuthorization1: {
         "id": "gpiiAppInstallationAuthorization-1",

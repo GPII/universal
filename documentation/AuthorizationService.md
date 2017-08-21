@@ -37,29 +37,6 @@ Return an object that contains the error message and http status code if,
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** The access token if the authorization code is valid. Otherwise, return `false`.
 
-#### getWebPrefsConsumerAuthorizationByAccessToken(accessToken)
-* **description**: Get the authorization information that is associated with the access token.
-* **parameters:** 
-    * accessToken: String. A string representing an authorization issued to the
-client.
-* **return: (one of the below)** 
-    * An object. The object contains these authorization information: the user GPII token, the client id, the user selected preferences. An example:
-    ```
-    {
-        gpiiToken: "carla",
-        oauth2ClientId: 1,
-        selectedPreferences: {
-            "visual-alternatives.speak-text.rate": true,
-            "increase-size.appearance.text-size": true
-        }
-    }
-    ```
-    * `undefined`. `undefined` is returned in any of these cases:
-        - The authorization with the matched access token is not found;
-        - The authorization has been revoked;
-        - The user specified in the authorization is not found;
-        - The client specified in the authorization is not found.
-
 #### grantWebPrefsConsumerAuthCode(userId, clientId, redirectUri, selectedPreferences)
 - **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization for the user, client, and redirect URI. If we do, we issue a new code for that authorization. Otherwise we create a new authorization record and a new code.
 - **parameters:** 
@@ -209,18 +186,6 @@ An example:
 
 **Note**: Privileged Preferences Creator Clients are authorized using [OAuth2 Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant).
 
-#### getPrivilegedPrefsCreatorAuthorizationByAccessToken(accessToken)
-* **description**: Get the authorization information using the privileged prefs creator access token.
-* **parameters:** 
-    * accessToken: String. An access token representing an authorization issued to the client.
-* **return:** An object. This object contains the authorization information for the client. Return `undefined` when the access token or the client associated with this access token is not found. An example of a return:
-```
-{
-    oauth2ClientId: "client_id_A",
-    allowAddPrefs: true
-}
-```
-
 #### grantPrivilegedPrefsCreatorAuthorization(clientId, scope)
 * **description**: Grant an authorization to a privileged preferences creator. This authorization allows a privileged preferences creator to add new preferences sets. The scenarios handled by this function: 
     * If the given privileged preferences creator has never been assigned an authorization, the function will generate and return one.
@@ -237,3 +202,39 @@ An example:
 * **parameters:** 
     * authorizationId: String. A string representing the id of the client credential authorization record.
 * **return:** None.
+
+### APIs for Web Preferences Consumer Clients and Privileged Preferences Creator Clients
+
+#### getAuthorizationByAccessToken(accessToken)
+* **description**: Get the authorization information that is associated with the access token.
+* **parameters:** 
+    * accessToken: String. A string representing an authorization issued to the
+client.
+* **return: (one of the below)** 
+    * An object. For web preference consumer clients, the object contains: the access token that matches the given parameter, the user GPII token, the client id, the user selected preferences. An example:
+    ```
+    {
+        accessToken: "carla-accessToken",
+        gpiiToken: "carla",
+        oauth2ClientId: 1,
+        selectedPreferences: {
+            "visual-alternatives.speak-text.rate": true,
+            "increase-size.appearance.text-size": true
+        }
+    }
+    ```
+    
+    * An object. For privileged preferences creator clients, this object contains: the access token that matches the given parameter, the OAuth2 client id, the flag that allows the client to add preferences. An example:
+    ```
+    {
+        accessToken: "client_A_accessToken",
+        oauth2ClientId: "client_id_A",
+        allowAddPrefs: true
+    }
+    ```
+
+    * `undefined`. `undefined` is returned in any of these cases:
+        - The authorization with the matched access token is not found;
+        - The authorization has been revoked;
+        - The user specified in the authorization is not found;
+        - The client specified in the authorization is not found.

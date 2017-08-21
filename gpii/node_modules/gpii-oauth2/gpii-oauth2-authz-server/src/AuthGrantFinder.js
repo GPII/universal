@@ -43,20 +43,30 @@ var fluid = fluid || require("infusion");
     // and the client credentials grant to find the match. The different data structure
     // can be returned based on the grant type.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
-        var authCodePrmoise = authorizationService.getWebPrefsConsumerAuthorizationByAccessToken(accessToken);
-        var clientCredentialsPromise = authorizationService.getPrivilegedPrefsCreatorAuthorizationByAccessToken(accessToken);
-
-        // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-        var sources = [authCodePrmoise, clientCredentialsPromise];
-        var promisesSequence = fluid.promise.sequence(sources);
-
         var promiseTogo = fluid.promise();
+        var authorizationPromise = authorizationService.getAuthorizationByAccessToken(accessToken);
+        var grant;
 
-        promisesSequence.then(function (responses) {
-            var authCodeResult = responses[0];
-            var clientCredentialsResult = responses[1];
+        authorizationPromise.then(function (authRecord) {
+            if (authRecord) {
+                if (authRecord.authorization.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
+                    grant = {
+                        accessToken: accessToken,
+                        gpiiToken: authRecord.authorization.gpiiToken,
+                        selectedPreferences: authRecord.authorization.selectedPreferences,
+                        oauth2ClientId: authRecord.client.oauth2ClientId
+                    };
+                }
 
-            promiseTogo.resolve(authCodeResult ? authCodeResult : clientCredentialsResult);
+                if (authRecord.authorization.type === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
+                    grant = {
+                        accessToken: accessToken,
+                        oauth2ClientId: authRecord.client.oauth2ClientId,
+                        allowAddPrefs: true
+                    };
+                }
+            }
+            promiseTogo.resolve(grant);
         });
 
         return promiseTogo;

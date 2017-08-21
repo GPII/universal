@@ -278,7 +278,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findWebPrefsConsumerAuthorizationByAccessTokenDataSource: {
+        findAuthorizationByAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
                 requestUrl: "/_design/views/_view/findAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
@@ -316,20 +316,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 rules: {
                     readPayload: {
                         "": "rows.0.value"
-                    }
-                }
-            }
-        },
-        findPrivilegedPrefsCreatorAuthorizationByAccessTokenDataSource: {
-            type: "gpii.oauth2.dbDataSource",
-            options: {
-                requestUrl: "/_design/views/_view/findAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
-                termMap: {
-                    accessToken: "%accessToken"
-                },
-                rules: {
-                    readPayload: {
-                        "": "rows.0"
                     }
                 }
             }
@@ -539,15 +525,15 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // gpiiToken
         },
-        findWebPrefsConsumerAuthorizationByAccessToken: {
+        findAuthorizationByAccessToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findWebPrefsConsumerAuthorizationByAccessTokenDataSource",
+                "{that}.findAuthorizationByAccessTokenDataSource",
                 {
                     accessToken: "{arguments}.0"
                 },
                 "accessToken",
-                gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAccessTokenPostProcess
+                gpii.oauth2.dbDataStore.findAuthorizationByAccessTokenPostProcess
             ]
             // accessToken
         },
@@ -592,18 +578,6 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 "{arguments}.0"
             ]
             // privilegedPrefsCreatorAuthorizationId
-        },
-        findPrivilegedPrefsCreatorAuthorizationByAccessToken: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
-            args: [
-                "{that}.findPrivilegedPrefsCreatorAuthorizationByAccessTokenDataSource",
-                {
-                    accessToken: "{arguments}.0"
-                },
-                "accessToken",
-                gpii.oauth2.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByAccessTokenPostProcess
-            ]
-            // accessToken
         },
         findGpiiAppInstallationAuthorizationById: {
             func: "{that}.findById"

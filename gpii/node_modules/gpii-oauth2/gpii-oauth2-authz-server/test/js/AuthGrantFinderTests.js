@@ -177,11 +177,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     // All expected results
     gpii.tests.oauth2.authGrantFinder.expected = {
         authCodeGrant: {
+            accessToken: "bob_A_access_token",
             oauth2ClientId: "client_id_A",
             gpiiToken: "bob_gpii_token",
             selectedPreferences: { "": true }
         },
         clientCredentialsGrant: {
+            accessToken: "firstDiscovery_access_token",
             oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
             allowAddPrefs: true
         }

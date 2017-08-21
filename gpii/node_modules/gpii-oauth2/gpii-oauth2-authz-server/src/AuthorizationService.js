@@ -46,10 +46,6 @@ var fluid = fluid || require("infusion");
                 args: ["{dataStore}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                     // code, clientId, redirectUri
             },
-            getWebPrefsConsumerAuthorizationByAccessToken: {
-                func: "{dataStore}.findWebPrefsConsumerAuthorizationByAccessToken"
-                    // accessToken
-            },
             grantWebPrefsConsumerAuthCode: {
                 funcName: "gpii.oauth2.authorizationService.grantWebPrefsConsumerAuthCode",
                 args: ["{that}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
@@ -95,10 +91,6 @@ var fluid = fluid || require("infusion");
             },
 
             // APIs for Privileged Preferences Creator Clients
-            getPrivilegedPrefsCreatorAuthorizationByAccessToken: {
-                func: "{dataStore}.findPrivilegedPrefsCreatorAuthorizationByAccessToken"
-                    // accessToken
-            },
             grantPrivilegedPrefsCreatorAuthorization: {
                 funcName: "gpii.oauth2.authorizationService.grantPrivilegedPrefsCreatorAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
@@ -107,6 +99,12 @@ var fluid = fluid || require("infusion");
             revokePrivilegedPrefsCreatorAuthorization: {
                 func: "{dataStore}.revokePrivilegedPrefsCreatorAuthorization"
                     // privilegedPrefsCreatorAuthorizationId
+            },
+
+            // APIs for GPII App Installation Clients, Web Preferences Consumer Clients and Privileged Preferences Creator Clients
+            getAuthorizationByAccessToken: {
+                func: "{dataStore}.findAuthorizationByAccessToken"
+                    // accessToken
             }
         },
         events: {

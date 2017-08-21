@@ -298,7 +298,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNonExistentClient = [{
 gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs = [{
     name: "Attempt to add preference sets with no privilege to add prefs",
     gradeName: "gpii.tests.cloud.oauth2.addPrefs.disruption.addPrefsSequence",
-    expectedStatusCode: 401
+    expectedStatusCode: 404
 }];
 
 gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
@@ -346,7 +346,7 @@ gpii.tests.cloud.oauth2.addPrefs.disruptedTests = [
     },
     {
         testDef: {
-            name: "Acceptance test for suppporting /add-preferences (with access token that is not allowed to add prefs)",
+            name: "Acceptance test for suppporting /add-preferences (with access token that is revoked)",
             accessToken: "not_allowed_to_add_prefs"
         },
         disruptions: gpii.tests.cloud.oauth2.addPrefs.disruptionsWithNotAllowedAddPrefs
