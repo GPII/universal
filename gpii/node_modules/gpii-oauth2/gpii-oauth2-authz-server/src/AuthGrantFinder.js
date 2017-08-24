@@ -65,6 +65,17 @@ var fluid = fluid || require("infusion");
                         allowAddPrefs: true
                     };
                 }
+
+                if (authRecord.authorization.type === gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
+                    gpii.oauth2.getExpiresIn(authRecord.authorization.timestampExpires) > 0) {
+                    grant = {
+                        accessToken: accessToken,
+                        gpiiToken: authRecord.authorization.gpiiToken,
+                        oauth2ClientId: authRecord.client.oauth2ClientId,
+                        allowUntrustedSettings: true,
+                        allowUntrustedPreferences: true
+                    };
+                }
             }
             promiseTogo.resolve(grant);
         });

@@ -31,6 +31,18 @@ gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     return undefined;
 };
 
+gpii.oauth2.getAuthorization = function (req, authGrantFinder) {
+    var promiseTogo = fluid.promise();
+    var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+
+    if (!accessToken) {
+        promiseTogo.reject(gpii.oauth2.errors.unauthorized);
+    } else {
+        promiseTogo = authGrantFinder.getGrantForAccessToken(accessToken);
+    }
+    return promiseTogo;
+};
+
 gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
     // TODO best way to check if middleware is a single function?
     if (typeof middleware === "function") {
@@ -47,7 +59,7 @@ gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
 
 gpii.oauth2.composeError = function (error, termMap) {
     var err = fluid.copy(error);
-    err.msg = fluid.stringTemplate(err.msg, termMap);
+    err.message = fluid.stringTemplate(err.message, termMap);
     return err;
 };
 

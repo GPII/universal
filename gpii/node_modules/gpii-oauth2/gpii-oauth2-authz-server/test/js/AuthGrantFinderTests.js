@@ -134,6 +134,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery"
     }, {
+        "_id": "client-5",
+        "type": "gpiiAppInstallationClient",
+        "name": "Bakersfield AJC - PC1",
+        "oauth2ClientId": "Bakersfield-AJC-client-id",
+        "oauth2ClientSecret": "Bakersfield-AJC-client-secret",
+        "userId": "user-4"
+    }, {
         "_id": "webPrefsConsumerAuthorization-1",
         "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
@@ -172,6 +179,26 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "clientId": "client-3",
         "accessToken": "firstDiscovery_access_token",
         "revoked": false
+    }, {
+        "_id": "gpiiAppInstallationAuthorization-1",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-5",
+        "gpiiToken": "carol_gpii_token",
+        "accessToken": "Bakersfiled_AJC_access_token",
+        "revoked": false,
+        "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
+        "timestampRevoked": null,
+        "timestampExpires": new Date(new Date().getTime() + 40 * 1000).toISOString()
+    }, {
+        "_id": "gpiiAppInstallationAuthorization-expired",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-5",
+        "gpiiToken": "carol_gpii_token",
+        "accessToken": "Bakersfiled_AJC_access_token_expired",
+        "revoked": false,
+        "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
+        "timestampRevoked": null,
+        "timestampExpires": new Date(new Date().getTime() - 20 * 1000).toISOString()
     }];
 
     // All expected results
@@ -186,6 +213,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             accessToken: "firstDiscovery_access_token",
             oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
             allowAddPrefs: true
+        },
+        resourceOwnerGpiiTokenGrant: {
+            accessToken: "Bakersfiled_AJC_access_token",
+            gpiiToken: "carol_gpii_token",
+            oauth2ClientId: "Bakersfield-AJC-client-id",
+            allowUntrustedSettings: true,
+            allowUntrustedPreferences: true
         }
     };
 
@@ -228,6 +262,32 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The expected authorization info is returned", gpii.tests.oauth2.authGrantFinder.expected.clientCredentialsGrant, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }, {
+            name: "Test getGrantForAccessToken() with an access token for resource owner GPII token grant type",
+            tests: [{
+                name: "getGrantForAccessToken() returns the authorization info in the format for the resource owner GPII token grant type",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authGrantFinder}.getGrantForAccessToken", ["Bakersfiled_AJC_access_token"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertDeepEq",
+                    args: ["The expected authorization info is returned", gpii.tests.oauth2.authGrantFinder.expected.resourceOwnerGpiiTokenGrant, "{arguments}.0"],
+                    event: "{that}.events.onResponse"
+                }]
+            }]
+        }, {
+            name: "Test getGrantForAccessToken() returns undefined for an expired access token",
+            tests: [{
+                name: "getGrantForAccessToken() returns undefined for an expired access token",
+                sequence: [{
+                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    args: ["{authGrantFinder}.getGrantForAccessToken", ["Bakersfiled_AJC_access_token_expired"], "{that}"]
+                }, {
+                    listener: "jqUnit.assertUndefined",
+                    args: ["The expected authorization info is returned", "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }]

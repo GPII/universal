@@ -53,7 +53,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"id\" is undefined",
+                    message: "The input field \"id\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -95,7 +95,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"username\" is undefined",
+                    message: "The input field \"username\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -137,7 +137,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken\" is undefined",
+                    message: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -179,7 +179,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken\" is undefined",
+                    message: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -221,7 +221,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"id\" is undefined",
+                    message: "The input field \"id\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -263,7 +263,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"oauth2ClientId\" is undefined",
+                    message: "The input field \"oauth2ClientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -305,7 +305,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientBySolutionId", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"solutionId\" is undefined",
+                    message: "The input field \"solutionId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -359,7 +359,7 @@ fluid.defaults("gpii.tests.dbDataStore.updateUserAuthorizedAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["An unmatched user id returns unauthorized error", {
-                    msg: "The user user-0 is not authorized",
+                    message: "The user user-0 is not authorized",
                     statusCode: 401,
                     isError: true
                 }, "{arguments}.0"],
@@ -395,7 +395,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeUserAuthorizedAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["An unmatched user id returns unauthorized error", {
-                    msg: "The user user-0 is not authorized",
+                    message: "The user user-0 is not authorized",
                     statusCode: 401,
                     isError: true
                 }, "{arguments}.0"],
@@ -409,7 +409,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeUserAuthorizedAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["An non-existing authorizationId returns unauthorized error", {
-                    msg: "Unauthorized",
+                    message: "Unauthorized",
                     statusCode: 401,
                     isError: true
                 }, "{arguments}.0"],
@@ -451,7 +451,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedAuthorizationById", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"id\" is undefined",
+                    message: "The input field \"id\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -507,7 +507,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizationsByGpiiToken", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken\" is undefined",
+                    message: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -549,7 +549,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken & clientId & redirectUri\" is undefined",
+                    message: "The input field \"gpiiToken & clientId & redirectUri\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -563,7 +563,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"redirectUri\" is undefined",
+                    message: "The input field \"redirectUri\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -605,7 +605,7 @@ fluid.defaults("gpii.tests.dbDataStore.findOnboardedSolutionAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken & clientId\" is undefined",
+                    message: "The input field \"gpiiToken & clientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -619,7 +619,7 @@ fluid.defaults("gpii.tests.dbDataStore.findOnboardedSolutionAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"clientId\" is undefined",
+                    message: "The input field \"clientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -660,7 +660,7 @@ fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"code\" is undefined",
+                    message: "The input field \"code\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -674,7 +674,7 @@ fluid.defaults("gpii.tests.dbDataStore.saveAuthCode", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"authorizationId & code\" is undefined",
+                    message: "The input field \"authorizationId & code\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -706,7 +706,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCo
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"code\" is undefined",
+                    message: "The input field \"code\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -724,7 +724,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCo
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The authorization code authCode-1 is not authorized",
+                    message: "The authorization code authCode-1 is not authorized",
                     statusCode: 401,
                     isError: true
                 }, "{arguments}.0"],
@@ -788,7 +788,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedClientsByGpiiToken", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken\" is undefined",
+                    message: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -854,7 +854,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByAccessToken", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"accessToken\" is undefined",
+                    message: "The input field \"accessToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -920,7 +920,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"id\" is undefined",
+                    message: "The input field \"id\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -976,7 +976,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"clientId\" is undefined",
+                    message: "The input field \"clientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1028,7 +1028,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"gpiiToken\" is undefined",
+                    message: "The input field \"gpiiToken\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1042,7 +1042,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "The input field \"clientId\" is undefined",
+                    message: "The input field \"clientId\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -1120,7 +1120,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "Unauthorized",
+                    message: "Unauthorized",
                     statusCode: 401,
                     isError: true
                 }, "{arguments}.0"],
@@ -1134,7 +1134,7 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthorization", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    msg: "Unauthorized",
+                    message: "Unauthorized",
                     statusCode: 401,
                     isError: true
                 }, "{arguments}.0"],
