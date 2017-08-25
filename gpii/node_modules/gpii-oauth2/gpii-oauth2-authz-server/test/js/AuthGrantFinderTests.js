@@ -211,7 +211,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         clientCredentialsGrant: {
             accessToken: "firstDiscovery_access_token",
-            oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
             allowAddPrefs: true
         },
         resourceOwnerGpiiTokenGrant: {

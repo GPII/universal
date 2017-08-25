@@ -6,7 +6,7 @@ The authorization server adds access control to the cloud-based flow manger to s
 The authorization server authorizes 4 type of GPII clients:
 
 * GPII App installations
-    * For this client type, the Local Flow Manger within the GPII App retrieves user settings from the GPII Cloud-Based Flow Manager..
+    * For this client type, the Local Flow Manger within the GPII App retrieves user settings from the GPII Cloud-Based Flow Manager.
     * **Used OAuth2 grant**: [Resource Owner GPII Token Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant).
     * **Capabilities**: GPII App installations can retrieve untrusted settings from GPII Cloud.
 

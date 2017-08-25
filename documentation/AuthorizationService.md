@@ -193,8 +193,8 @@ An example:
 }
 ```
 Return an object that contains the error message and http status code if,
-    * The GPII token is wrong, or,
-    * The client is not a GPII App Installation Client.
++ The GPII token is wrong, or,
++ The client is not a GPII App Installation Client.
 
 #### grantPrivilegedPrefsCreatorAuthorization(clientId, scope)
 * **description**: Grant an authorization to a privileged preferences creator. This authorization allows a privileged preferences creator to add new preferences sets. The scenarios handled by this function: 
@@ -202,10 +202,10 @@ Return an object that contains the error message and http status code if,
     * If the given privileged preferences creator has already been assigned an authorization,the function will return this existing authorization.
 * **parameters:** 
     * clientId: String. A system generated unique number that identifies the client.
-        - Notes: "oauth2ClientCredentials" is the only OAuth2 client type that is allowed to request privileged prefs creator authorizations. See [the `Client` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#client).
+        - Notes: "privilegedPrefsCreatorClient" is the only GPII client type that is allowed to request privileged prefs creator authorizations. See [the `Privileged Prefs Creator Clients` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#privileged-prefs-creator-clients).
     * scope: String. Must be "add_preferences".
         - Notes: "add_preferences" is the only scope currently supported by the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant).
-* **return:** String. A privileged prefs creator access token. Return an object that contains the error message and http status code if the scope is wrong, or the client is not allowed to add preferences, or the client's OAuth2 client type is not "oauth2ClientCredentials".
+* **return:** String. A privileged prefs creator access token. Return an object that contains the error message and http status code if the scope is wrong, or the client is not allowed to add preferences, or the client type is not "privilegedPrefsCreatorClient".
 
 #### grantWebPrefsConsumerAuthCode(userId, clientId, redirectUri, selectedPreferences)
 - **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization for the user, client, and redirect URI. If we do, we issue a new code for that authorization. Otherwise we create a new authorization record and a new code.
@@ -229,7 +229,7 @@ Return an object that contains the error message and http status code if,
 * **return:** None.
 
 #### revokeUserAuthorizedAuthorization(userId, authorizationId)
-* **description**: Revoke an authorization. This API is used to revoke these authorization types: GPII app installation authorizations, onboarded solution authorizations, web preferences consumer authorizations.
+* **description**: Revoke an authorization. This API is used to revoke these authorization types: onboarded solution authorizations, web preferences consumer authorizations.
 * **parameters:** 
     * userId: String. A system generated unique number that identifies the user.
     * authorizationId: String. A system generated unique number that identifies the authorization.

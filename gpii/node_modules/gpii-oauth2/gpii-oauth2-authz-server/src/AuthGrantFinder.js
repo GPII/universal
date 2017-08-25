@@ -61,7 +61,6 @@ var fluid = fluid || require("infusion");
                 if (authRecord.authorization.type === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
                     grant = {
                         accessToken: accessToken,
-                        oauth2ClientId: authRecord.client.oauth2ClientId,
                         allowAddPrefs: true
                     };
                 }

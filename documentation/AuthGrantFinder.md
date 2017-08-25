@@ -11,6 +11,7 @@ The authorization grant finder provides API that allows users to use access toke
     * An example of the returned object when the access token is requested via [GPII OAuth2 authorization code grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant):
     ```
     {
+        accessToken: "the_input_accessToken",
         oauth2ClientId: "client_id_A",
         gpiiToken: "bob_gpii_token",
         selectedPreferences: {
@@ -22,7 +23,7 @@ The authorization grant finder provides API that allows users to use access toke
     * An example of the returned object when the access token is requested via [GPII OAuth2 client credentials grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant):
     ```
     {
-        oauth2ClientId: "client_id_A",
+        accessToken: "the_input_accessToken",
         allowAddPrefs: true
     }
     ```
