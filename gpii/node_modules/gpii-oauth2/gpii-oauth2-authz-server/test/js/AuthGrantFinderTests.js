@@ -217,7 +217,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         resourceOwnerGpiiTokenGrant: {
             accessToken: "Bakersfiled_AJC_access_token",
             gpiiToken: "carol_gpii_token",
-            oauth2ClientId: "Bakersfield-AJC-client-id",
             allowUntrustedSettings: true,
             allowUntrustedPreferences: true
         }

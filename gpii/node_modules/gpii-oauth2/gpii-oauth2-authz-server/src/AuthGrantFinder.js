@@ -71,7 +71,6 @@ var fluid = fluid || require("infusion");
                     grant = {
                         accessToken: accessToken,
                         gpiiToken: authRecord.authorization.gpiiToken,
-                        oauth2ClientId: authRecord.client.oauth2ClientId,
                         allowUntrustedSettings: true,
                         allowUntrustedPreferences: true
                     };
