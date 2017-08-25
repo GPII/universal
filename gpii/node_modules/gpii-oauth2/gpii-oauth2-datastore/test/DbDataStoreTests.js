@@ -994,7 +994,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
             name: "Find GPII app installation authorization by a gpii token and a client id",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "client-4"], "{that}"]
+                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["chrome_high_contrast", "client-4"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected data is received", gpii.tests.dbDataStore.testData.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId, "{arguments}.0"],

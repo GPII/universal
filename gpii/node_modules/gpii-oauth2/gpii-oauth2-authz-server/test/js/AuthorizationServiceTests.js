@@ -252,7 +252,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "auth-10",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
-        "gpiiToken": "gpiiToken-1",
+        "gpiiToken": "alice_gpii_token",
         "accessToken": "gpii-app-installation-token-2",
         "revoked": false,
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
@@ -262,7 +262,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "auth-11",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
-        "gpiiToken": "gpiiToken-1",
+        "gpiiToken": "alice_gpii_token",
         "accessToken": "gpii-app-installation-token-3",
         "revoked": false,
         "timestampCreated": "2017-05-29T17:54:00.000Z",
@@ -272,7 +272,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "auth-12",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-3",
-        "gpiiToken": "gpiiToken-1",
+        "gpiiToken": "alice_gpii_token",
         "accessToken": "gpii-app-installation-token-1",
         "revoked": false,
         "timestampCreated": "2017-05-29T17:54:00.000Z",
@@ -396,7 +396,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "findValidGpiiAppInstallationAuthorization() returns the unrevoked and unexpired access token",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-3"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-3"], "{that}"]
                 }, {
                     listener: "gpii.tests.oauth2.authorizationService.verifyGpiiAppInstallationAccessToken",
                     args: ["{arguments}.0", "gpii-app-installation-token-2"],
@@ -416,7 +416,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "findValidGpiiAppInstallationAuthorization() returns undefined when all existing access tokens have expired",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "gpiiToken-1", "client-2"], "{that}"]
+                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-2"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received when all existing access tokens have expired", "{arguments}.0"],

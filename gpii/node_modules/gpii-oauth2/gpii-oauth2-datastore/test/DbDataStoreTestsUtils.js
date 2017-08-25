@@ -323,7 +323,7 @@ gpii.tests.dbDataStore.testData = {
         "id": "gpiiAppInstallationAuthorization-1",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-4",
-        "gpiiToken": "gpiiToken-1",
+        "gpiiToken": "chrome_high_contrast",
         "accessToken": "gpii-app-installation-token-1",
         "revoked": false,
         "timestampCreated": "2017-05-29T17:54:00.000Z",
@@ -348,7 +348,7 @@ gpii.tests.dbDataStore.testData = {
     }],
     gpiiAppInstallationAuthorizationToCreate: {
         "clientId": "client-1",
-        "gpiiToken": "gpiiToken-1",
+        "gpiiToken": "chrome_high_contrast",
         "accessToken": "gpii-app-installation-token-1",
         "timestampExpires": "3020-05-29T17:54:00.000Z"
     }
