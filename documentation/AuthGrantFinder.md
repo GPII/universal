@@ -7,8 +7,15 @@ The authorization grant finder provides API that allows users to use access toke
 * **parameters:** 
     * accessToken: String. A string representing an authorization issued to the
     client.
-* **return:** A promise object. Once resolved, this object contains the authorization information for the access token. The object can have a different data structure when the access token is requested via a different OAuth2 grant method. Return `undefined` when the access token is not found. 
-    * An example of the returned object when the access token is requested via [GPII OAuth2 authorization code grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant):
+* **return:** A promise object. Once resolved, this object contains the authorization information for the access token. The object can have a different data structure when the access token is requested via different OAuth2 grant methods for different client types. Return `undefined` when the access token is not found. 
+    - An example of the returned object when the access token is granted to privileged preferences creators via [GPII OAuth2 client credentials grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant):
+    ```
+    {
+        accessToken: "the_input_accessToken",
+        allowAddPrefs: true
+    }
+    ```
+    - An example of the returned object when the access token is granted to web preferences consumers via [GPII OAuth2 authorization code grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Authorization_Code_Grant):
     ```
     {
         accessToken: "the_input_accessToken",
@@ -18,12 +25,5 @@ The authorization grant finder provides API that allows users to use access toke
             "visual-alternatives.speak-text.rate": true,
             "increase-size.appearance.text-size": true
         }
-    }
-    ```
-    * An example of the returned object when the access token is requested via [GPII OAuth2 client credentials grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant):
-    ```
-    {
-        accessToken: "the_input_accessToken",
-        allowAddPrefs: true
     }
     ```

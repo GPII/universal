@@ -202,7 +202,7 @@ Return an object that contains the error message and http status code if,
     * If the given privileged preferences creator has already been assigned an authorization,the function will return this existing authorization.
 * **parameters:** 
     * clientId: String. A system generated unique number that identifies the client.
-        - Notes: "privilegedPrefsCreatorClient" is the only GPII client type that is allowed to request privileged prefs creator authorizations. See [the `Privileged Prefs Creator Clients` document structure](https://github.com/GPII/universal/blob/master/documentation/AuthServer.md#privileged-prefs-creator-clients).
+        - Notes: "privilegedPrefsCreatorClient" is the only GPII client type that is allowed to request privileged prefs creator authorizations. See [the `Privileged Prefs Creator Clients` document structure](AuthServer.md#privileged-prefs-creator-clients).
     * scope: String. Must be "add_preferences".
         - Notes: "add_preferences" is the only scope currently supported by the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant).
 * **return:** String. A privileged prefs creator access token. Return an object that contains the error message and http status code if the scope is wrong, or the client is not allowed to add preferences, or the client type is not "privilegedPrefsCreatorClient".
