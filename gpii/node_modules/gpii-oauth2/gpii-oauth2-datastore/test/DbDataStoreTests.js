@@ -120,6 +120,16 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
+            name: "Finding by a anonymous GPII token that does not belong to any user returns undefined",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findUserByGpiiToken", ["gpiiToken-anonymous"], "{that}"]
+            }, {
+                listener: "jqUnit.assertUndefined",
+                args: ["Finding by a anonymous GPII token that does not belong to any user returns undefined", "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
             name: "Finding an user by a non-existing GPII token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",

@@ -49,12 +49,13 @@ var fluid = fluid || require("infusion");
 
         authorizationPromise.then(function (authRecord) {
             if (authRecord) {
-                if (authRecord.authorization.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
+                if (authRecord.authorization.type === gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
+                    gpii.oauth2.getExpiresIn(authRecord.authorization.timestampExpires) > 0) {
                     grant = {
                         accessToken: accessToken,
                         gpiiToken: authRecord.authorization.gpiiToken,
-                        selectedPreferences: authRecord.authorization.selectedPreferences,
-                        oauth2ClientId: authRecord.client.oauth2ClientId
+                        allowUntrustedSettings: true,
+                        allowUntrustedPreferences: true
                     };
                 }
 
@@ -65,13 +66,12 @@ var fluid = fluid || require("infusion");
                     };
                 }
 
-                if (authRecord.authorization.type === gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
-                    gpii.oauth2.getExpiresIn(authRecord.authorization.timestampExpires) > 0) {
+                if (authRecord.authorization.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
                     grant = {
                         accessToken: accessToken,
                         gpiiToken: authRecord.authorization.gpiiToken,
-                        allowUntrustedSettings: true,
-                        allowUntrustedPreferences: true
+                        selectedPreferences: authRecord.authorization.selectedPreferences,
+                        oauth2ClientId: authRecord.client.oauth2ClientId
                     };
                 }
             }

@@ -103,6 +103,12 @@ gpii.tests.dbDataStore.testData = {
         "userId": "user-1",
         "gpiiToken": "chrome_high_contrast"
     },
+    anonymousToken: {
+        "id": "gpiiToken-anonymous",
+        "type": "gpiiToken",
+        "userId": null,
+        "gpiiToken": "anonymous_gpii_token"
+    },
     client1: {
         "id": "client-1",
         "type": "webPrefsConsumerClient",

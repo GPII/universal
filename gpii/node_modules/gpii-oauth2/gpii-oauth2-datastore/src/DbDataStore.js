@@ -365,14 +365,8 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // userName
         },
         findUserByGpiiToken: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
-            args: [
-                "{that}.findUserByGpiiTokenDataSource",
-                {
-                    gpiiToken: "{arguments}.0"
-                },
-                "gpiiToken"
-            ]
+            funcName: "gpii.oauth2.dbDataStore.findUserByGpiiToken",
+            args: ["{that}.findUserByGpiiTokenDataSource", "{arguments}.0"]
             // gpiiToken
         },
         findGpiiToken: {
