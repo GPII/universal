@@ -2744,10 +2744,10 @@
         "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
     },
 
-    "com.microsoft.windows.W10ToW7LookAndFeel": {
-        "name": "Windows 7 look and feel for Windows 10",
+    "com.microsoft.windows.ClassicShell": {
+        "name": "ClassicShell start menu replacement",
         "contexts": {
-            "OS": [
+            "os": [
                 {
                     "id": "win32",
                     "version": ">=5.0"
@@ -2755,7 +2755,7 @@
             ]
         },
         "settingsHandlers": {
-            "configClassicShell": {
+            "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -2772,19 +2772,57 @@
                     "SkinW7" : {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                    "MenuStyle": {
-                        "literalValue": "Win7"
-                    },
-                    "SkinW7": {
-                        "literalValue": "Windows Aero"
-                    },
-                    "SkipMetro": {
-                        "literalValue": 1
-                    }
+                "capabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "start": [
+            {
+                "type": "gpii.windows.closeAfterOpenCommand",
+                "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe",
+                "processToWait": "ClassicStartMenu.exe",
+                "processToClose": "explorer.exe",
+                "options": {
+                    "restart": true
+                } 
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.closeAfterExitCommand",
+                "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe",
+                "args": ["-exit"],
+                "processToWait": "ClassicStartMenu.exe",
+                "processToClose": "explorer.exe",
+                "options": {
+                    "restart": true
                 }
-            },
-            "configTaskbar": {
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.Taskbar": {
+        "name": "Configure search field from Windows 10 Taskbar",
+        "contexts": {
+            "os": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration" : {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -2798,12 +2836,95 @@
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                    "SearchboxTaskbarMode": {
-                        "literalValue": 0
+                }
+            }
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.wallpaper": {
+        "name": "Set a new Windows wallpaper",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "options": {
+                    "getAction": "SPI_GETDESKWALLPAPER",
+                    "setAction": "SPI_SETDESKWALLPAPER",
+                    "uiParam": 260,
+                    "pvParam": {
+                        "type": "array",
+                        "valueType": "TCHAR",
+                        "length": 260
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "Wallpaper": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/wallpaper"
+                ],
+                "capabilitiesTransformations": {
+                    "Wallpaper": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/wallpaper",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
                     }
                 }
             },
-            "configTaskView": {
+        },
+        "configure": [
+            "settings.configure",
+        ],
+        "restore": [
+            "settings.configure",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.TaskView": {
+        "name": "Configures Windows 10 TaskView button",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -2818,11 +2939,35 @@
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "ShowTaskViewButton": {
-                        "literalValue": 0
                     }
                 }
-            },
-            "configLockScreen": {
+            }
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.LockScreen": {
+        "name": "Disables Windows 10 lockscreen",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers" : {
+            "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -2836,12 +2981,34 @@
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
-                    "NoLockScreen": {
-                        "literalValue": 1
-                    }
                 }
-            },
-            "configTitleBarColor": {
+            }
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.TitleBarColor": {
+        "name": "Change the Windows 10 native windows titlebar color",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -2854,13 +3021,34 @@
                     "ColorPrevalence": {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                    "ColorPrevalence": {
-                        "literalValue": 1
-                    }
+                "capabilitiesTransformations": {}
+            }
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.TaskBarColor": {
+        "name": "Windows 7 look and feel for Windows 10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
                 }
-            },
-            "configTaskBarColor": {
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -2873,52 +3061,18 @@
                     "ColorPrevalence": {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                    "ColorPrevalence": {
-                        "literalValue": 1
-                    }
-                }
+                "capabilitiesTransformations": {}
             }
         },
         "configure": [
-            "settings.configClassicShell",
-            "settings.configTaskbar",
-            "settings.configTaskView",
-            "settings.configLockScreen",
-            "settings.configTitleBarColor",
-            "settings.configTaskBarColor"
+            "settings.configuration",
         ],
         "restore": [
-            "settings.configClassicShell",
-            "settings.configTaskbar",
-            "settings.configTaskView",
-            "settings.configLockScreen",
-            "settings.configTitleBarColor",
-            "settings.configTaskBarColor"
+            "settings.configuration",
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherSetter.ps1\""
-            },
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperSetter.ps1\""
-            }
         ],
         "stop": [
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\MorpherRecover.ps1\""
-            },
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\WallPaperRecover.ps1\""
-            }
         ],
         "isInstalled": [
             {
