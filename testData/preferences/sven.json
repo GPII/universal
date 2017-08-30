@@ -4,7 +4,27 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.microsoft.windows.W10ToW7LookAndFeel": {}
+                    "http://registry.gpii.net/applications/com.microsoft.windows.ClassicShell": {
+                        "MenuStyle": "Win7",
+                        "SkipMetro": 1,
+                        "SkinW7": "Windows Aero"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.Taskbar": {
+                        "SearchboxTaskbarMode": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.TaskView": {
+                        "ShowTaskViewButton": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.LockScreen": {
+                        "NoLockScreen": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.TitleBarColor": {
+                        "ColorPrevalence": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.TaskBarColor": {
+                        "ColorPrevalence": 1
+                    },
+                    "http://registry.gpii.net/common/wallpaper": "${{environment}.HOMEDRIVE}${{environment}.HOMEPATH}\\AppData\\Local\\GPII-Demo\\wallpapers\\img0.jpg"
                 }
             }
         }
