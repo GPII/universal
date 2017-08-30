@@ -2265,6 +2265,38 @@
         ]
     },
 
+    "com.microsoft.windows.screenDPI": {
+        "name": "Windows DPI",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=6.2"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.screenScale",
+                    "applications.com\\.microsoft\\.windows\\.screenDPI.id"
+                ]
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
