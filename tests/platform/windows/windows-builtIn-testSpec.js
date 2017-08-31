@@ -248,7 +248,8 @@ gpii.tests.windows.builtIn = [
                         "screen-resolution": {
                             "width": 800,
                             "height": 600
-                        }
+                        },
+                        "screen-dpi": 1
                     }
                 }]
             },
