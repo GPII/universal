@@ -36,7 +36,6 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_oauth2_gpiiAppInstallation.js",
     "./platform/cloud/AcceptanceTests_oauth2_privilegedPrefsCreator.js",
     "./platform/cloud/AcceptanceTests_oauth2_webPrefsConsumer.js",
-    "./platform/cloud/AcceptanceTests_onboardedSolution.js",
     "./platform/cloud/AcceptanceTests_oauth2_privacySettings.js",
     "./platform/cloud/AcceptanceTests_olb.js",
     "./platform/cloud/AcceptanceTests_smarthouses.js",
