@@ -1,10 +1,12 @@
-# elmer.json
+# elmerv.json
 
 ## Demo Personas with User Stories
 
 This preference set is part of our set of personas used for the demo install,
 presentations, and in general conveying an array of compelling user stories for
 the GPII.
+
+elmerv is identical to elmer except that it sets the screen to 1250 x 720  (instead of  800 x 600 that ELMER does)
 
 ## Details
 
