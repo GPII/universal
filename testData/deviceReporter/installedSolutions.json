@@ -40,10 +40,6 @@
     },
 
     {
-        "id": "com.microsoft.windows.narrator"
-    },
-
-    {
         "id": "com.microsoft.windows.highContrast"
     },
 
@@ -52,19 +48,15 @@
     },
 
     {
-        "id": "com.microsoft.windows.stickyKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.filterKeys"
-    },
-
-    {
-        "id": "com.microsoft.windows.mouseKeys"
-    },
-
-    {
         "id": "com.microsoft.windows.mouseTrailing"
+    },
+
+    {
+        "id": "com.microsoft.windows.cursors"
+    },
+
+    {
+        "id": "com.microsoft.windows.screenResolution"
     },
 
     {
@@ -76,7 +68,35 @@
     },
 
     {
-        "id": "com.microsoft.windows.screenResolution"
+        "id": "com.microsoft.windows.ClassicShell"
+    },
+
+    {
+        "id": "com.microsoft.windows.Taskbar"
+    },
+
+    {
+        "id": "com.microsoft.windows.TaskView"
+    },
+
+    {
+        "id": "com.microsoft.windows.LockScreen"
+    },
+
+    {
+        "id": "com.microsoft.windows.TitleBarColor"
+    },
+
+    {
+        "id": "com.microsoft.windows.TaskBarColor"
+    },
+
+    {
+        "id": "com.microsoft.windows.wallpaper"
+    },
+
+    {
+        "id": "com.microsoft.windows.W10Simplification"
     },
 
     {
