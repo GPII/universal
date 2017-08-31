@@ -67,7 +67,6 @@
         "id": "com.microsoft.windows.cursors"
     },
 
-    // TODO: This is because device reporter not working with GPII-APP - CHECK 
     {
         "id": "com.microsoft.windows.ClassicShell"
     },
