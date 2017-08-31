@@ -2806,7 +2806,11 @@
         ],
         "isInstalled": [
             {
-                "type": "gpii.deviceReporter.alwaysInstalled"
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\IvoSoft\\ClassicShell",
+                "subPath": "Path",
+                "dataType": "REG_SZ"
             }
         ]
     },
