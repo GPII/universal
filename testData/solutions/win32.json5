@@ -589,6 +589,12 @@
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "jaws"
+            }
         ]
     },
 
@@ -643,6 +649,12 @@
                 "path": "Software\\Texthelp\\Read&Write11",
                 "subPath": "InstallPath",
                 "dataType": "REG_SZ"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "readandwrite"
             }
         ]
     },
@@ -780,6 +792,12 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "Magnify"
+            }
         ]
     },
 
@@ -836,6 +854,12 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "osk"
             }
         ]
     },
@@ -1518,6 +1542,12 @@
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "nvda"
+            }
         ]
     },
 
@@ -1556,6 +1586,12 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
+            }
         ]
     },
 
@@ -1593,6 +1629,12 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
+            }
         ]
     },
 
@@ -1629,6 +1671,12 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
             }
         ]
     },
@@ -1721,6 +1769,12 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "MaavisPortable"
             }
         ]
     },
@@ -2664,6 +2718,12 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "C:\\Sociable\\Cloud4All.exe -stop"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "Cloud4Allcd "
             }
         ]
     },
