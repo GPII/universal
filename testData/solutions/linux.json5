@@ -103,6 +103,18 @@
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "gnome-shell"
+            },
+            {
+                "type": "gpii.processReporter.checkSetting",
+                "schema": "org.gnome.desktop.a11y.applications",
+                "setting": "screen-magnifier-enabled",
+                "value": true
+            }
         ]
     },
 
@@ -219,6 +231,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "dunno"
+            }
         ]
     },
 
@@ -254,6 +272,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "nautilus"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "nautilus"
             }
         ]
     },
@@ -291,6 +315,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
             }
+        ],
+        "isRunning": [
+           {
+               "type": "gpii.processReporter.find",
+                "command": "caribou"
+           }
         ]
     },
 
@@ -308,7 +338,7 @@
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "stickykeys-enable": "http://registry\\.gpii\\.net/common/stickyKeys",
-                    "slowkeys-enable": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                    "slowkeys-enable": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                     "slowkeys-delay": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -316,7 +346,7 @@
                             "factor": 1000
                         }
                     },
-                    "bouncekeys-enable": "http://registry\\.gpii\\.net/common/debounceEnable",
+                    "bouncekeys-enable": "http://registry\\.gpii\\.net/common/debounceEnabled",
                     "bouncekeys-delay": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -362,6 +392,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "gnome-settings-daemon"
             }
         ]
     },
@@ -1069,6 +1105,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "orca"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "orca"
+            }
         ]
     },
 
@@ -1114,6 +1156,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "alsa-lib"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "alsactl"
             }
         ]
     },
@@ -1161,6 +1209,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "chrome"
+            }
         ]
     },
 
@@ -1207,6 +1261,12 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "chrome"
+            }
         ]
     },
 
@@ -1252,6 +1312,12 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "chrome"
             }
         ]
     },
