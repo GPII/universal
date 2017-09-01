@@ -113,6 +113,9 @@
 
     {
         "id": "com.android.settings.system"
-    }
+    },
 
+    {
+        "id": "net.gpii.chromeExtension"
+    }
 ]

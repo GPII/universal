@@ -1350,8 +1350,8 @@
         ]
     },
 
-    "com.ilunion.cloud4chrome": {
-        "name": "Cloud4all Chrome extension",
+    "net.gpii.chromeExtension": {
+        "name": "GPII Chrome extension",
         "contexts": {
             "OS": [{
                 "id": "linux",
@@ -1359,10 +1359,10 @@
             }]
         },
         "settingsHandlers": {
-            "chromeconf": {
+            "config": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
-                    "path": "com.ilunion.cloud4chrome"
+                    "path": "net.gpii.chromeExtension"
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -1416,19 +1416,13 @@
             }
         },
         "configure": [
-            "settings.chromeconf"
+            "settings.config"
         ],
         "restore": [
-            "settings.chromeconf"
+            "settings.config"
         ],
-        "start": [
-        ],
-        "stop": [
-        ],
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
+        "start": [],
+        "stop": [],
+        "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
     }
 }
