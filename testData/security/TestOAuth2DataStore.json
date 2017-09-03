@@ -103,9 +103,9 @@
     {
         "_id": "client-9",
         "type": "gpiiAppInstallationClient",
-        "name": "Bakersfield AJC - PC1",
-        "oauth2ClientId": "Bakersfield-AJC-client-id",
-        "oauth2ClientSecret": "Bakersfield-AJC-client-secret",
+        "name": "Pilot Computers",
+        "oauth2ClientId": "pilot-computer",
+        "oauth2ClientSecret": "pilot-computer-secret",
         "userId": "user-4"
     }
 ]
