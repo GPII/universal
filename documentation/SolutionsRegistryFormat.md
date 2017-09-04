@@ -1,4 +1,4 @@
-##Solutions Registry format
+## Solutions Registry format
 
 ### Overall format:
 Each entry in the solution registry should have a unique ID (`Solution.id` in the below example), as well as a name (`name`), and a description of which context it requires to run (`context`). Besides these, information can be provided describing different potential aspects of its lifecycle. This can for example be information about how to start and stop the solution, detect whether it is running, set its settings, etc. These will all be described in the below. The overall structure and allowed keys in a solution description can be seen here.
@@ -116,7 +116,7 @@ These four lifecycle blocks have different meanings to the system but has the sa
 * `start`: Launch/start the solution
 * `stop`: Stop/kill the solution
 
-Each of these lifecycle blocks allow the same content - which is an array with entries that are either references to settingsHandlers blocks or customized lifecycle blocks. To reference a settingsHandler block, the keywork `settings.<blockname>` is used, where `<blockname>` should be replaced with the name of a settingsHandler block. In the case of `configure` and `start`, a consequence of referencing a settingsHandler is that the settings given in the settingsHandler and users preferences set will be applied to that solution (and their original values will be saved to the system - if user just logged in). In the case of `restore` and `stop`, the settings that has previously been written using the settingshandler(s) in question will be restored. Alternative to referencings setting and restoring settings, arbitrary lifecycle actions are allowed - the syntax for this is an object that contains at least a `type` key for the function to call. None of these blocks are mandatory. 
+Each of these lifecycle blocks allow the same content - which is an array with entries that are either references to settingsHandlers blocks or customized lifecycle blocks. To reference a settingsHandler block, the keyword `settings.<blockname>` is used, where `<blockname>` should be replaced with the name of a settingsHandler block. In the case of `configure` and `start`, a consequence of referencing a settingsHandler is that the settings given in the settingsHandler and users preferences set will be applied to that solution (and their original values will be saved to the system - if the user just logged in). In the case of `restore` and `stop`, the settings that have previously been written using the settingshandler(s) in question will be restored. Alternative to referencings setting and restoring settings, arbitrary lifecycle actions are allowed - the syntax for this is an object that contains at least a `type` key for the function to call. None of these blocks are mandatory. 
 
 **Example blocks**:
 ```
@@ -199,7 +199,7 @@ To detect whether a solution is running - this is planned to be integrated in th
 ]
 ```
 
-####isConfigurable
+#### isConfigurable
 This is run before configuration to ensure that the application is actually ready to be configured. This is relevant for applications where e.g. a configuration file needs to be present, a tutorial needs to be run on the first launch, etc.
 
 **Example Entry**:
@@ -210,7 +210,7 @@ This is run before configuration to ensure that the application is actually read
 }]
 ```
 
-####makeConfigurable
+#### makeConfigurable
 Is the actions that need to be taken to make the application configurable (such as running a wizard, creating a default configuration file, adding a new system user, etc).
 
 **Example Entry**:
@@ -220,10 +220,10 @@ Is the actions that need to be taken to make the application configurable (such 
 }]
 ```
 
-####install:
+#### install:
 Used for describing the steps required for installing the application
 
-####uninstall:
+#### uninstall:
 Used for describing the steps required for uninstalling the application (i.e. completely removing it from the system)
 
 
