@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
@@ -31,7 +31,7 @@ gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.developme
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.tests.acceptance.untrusted.development.config",
-            configPath: "%universal/tests/configs"
+            configPath: "%gpii-universal/tests/configs"
         }
     });
 

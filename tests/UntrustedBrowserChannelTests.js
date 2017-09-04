@@ -17,7 +17,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -30,7 +30,7 @@ gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.
         gradeNames: ["gpii.test.pouch.pouchTestCaseHolder"],
         config: {
             configName: "gpii.tests.acceptance.untrusted.browserChannel.config",
-            configPath: "%universal/tests/configs"
+            configPath: "%gpii-universal/tests/configs"
         }
     });
 

@@ -23,7 +23,7 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.tests.contextIntegration");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -383,7 +383,7 @@ gpii.tests.contextIntegration.baseTestDef = {
     gradeNames: "gpii.tests.contextIntegration.testCaseHolder.linux",
     config: {
         configName: "gpii.tests.acceptance.linux.builtIn.config",
-        configPath: "%universal/tests/platform/linux/configs"
+        configPath: "%gpii-universal/tests/platform/linux/configs"
     },
     contexts: gpii.tests.contextIntegration.data.contexts
 };

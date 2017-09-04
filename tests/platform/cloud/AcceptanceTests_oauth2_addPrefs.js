@@ -18,7 +18,7 @@ var fluid = require("infusion"),
     path = require("path"),
     fs = require("fs");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 

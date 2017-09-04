@@ -21,7 +21,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 kettle.loadTestingSupport();
 
