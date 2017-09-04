@@ -1,4 +1,4 @@
-AcceptanceTests_builtIn.js
+linux-builtIn-testSpec.js
 
 Description:
 
@@ -8,4 +8,3 @@ onscreen keyboard, etc. It tests the system using four NP sets:
  (2) os_win7: application specific windows settings
  (3) os_gnome: application specific gnome settings
  (4) os_common2: this is only used to check when highContrastEnabled=false
-

@@ -1,4 +1,4 @@
-AcceptanceTests_talkback.js
+android-talkback-testSpec.js
 
 Description:
 
