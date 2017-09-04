@@ -3,7 +3,7 @@
 # This scripts deploys an environment for end-to-end tests based on Docker
 # containers. It was initially developed to support CI.
 #
-# It builds a Docker image for GPII/universal and uses it to start two 
+# It builds a Docker image for GPII/universal and uses it to start two
 # components: the Preferences Server and the Flow Manager.
 #
 # It also starts a CouchDB container and loads the Preferences data into
@@ -12,7 +12,7 @@
 #
 # This script can be executed multiple times to create a new Docker image
 # and deploy fresh containers every time.
-# 
+#
 # https://issues.gpii.net/browse/GPII-2470
 
 UNIVERSAL_IMAGE=vagrant-universal
@@ -57,4 +57,3 @@ curl --retry $COUCHDB_HEALTHCHECK_TIMEOUT --retry-delay 1 --retry-connrefused ht
 docker run -d -p $PREFERENCES_PORT:$PREFERENCES_PORT --name preferences --link couchdb -e NODE_ENV=$PREFERENCES_CONFIG -e GPII_PREFERENCES_DATASOURCE_URL=$PREFERENCES_DATASOURCE_URL -e GPII_PREFERENCES_LISTEN_PORT=$PREFERENCES_PORT $UNIVERSAL_IMAGE
 docker run -d -p $FLOWMANAGER_PORT:$FLOWMANAGER_PORT --name flowmanager --link preferences -e NODE_ENV=$FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_PREFERENCES_URL=$FLOWMANAGER_PREFERENCES_URL -e GPII_FLOWMANAGER_LISTEN_PORT=$FLOWMANAGER_PORT $UNIVERSAL_IMAGE
 docker run --rm --link couchdb -v $PREFERENCES_DIR:/data -e PREFERENCES_DIR=/data -e COUCHDB_URL=$DATALOADER_COUCHDB_URL -e CLEAR_INDEX=$DATALOADER_CLEAR_INDEX $DATALOADER_IMAGE
-

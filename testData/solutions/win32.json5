@@ -2080,9 +2080,9 @@
                     "FilterKeysEnable": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
                             "left": false,
-                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
@@ -2097,7 +2097,7 @@
                     "SlowKeysInterval": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
@@ -2121,7 +2121,7 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                                     "left": false,
                                     "right": false,
                                     "operator": "==="
@@ -2130,7 +2130,7 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.condition",
-                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
                                     "true": {
                                         "transform": {
                                             "type": "fluid.transforms.linearScale",
@@ -2154,7 +2154,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/slowKeysEnable": {
+                    "http://registry\\.gpii\\.net/common/slowKeysEnabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2188,7 +2188,7 @@
                             }
                         }
                     },
-                    "http://registry\\.gpii\\.net/common/debounceEnable": {
+                    "http://registry\\.gpii\\.net/common/debounceEnabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
