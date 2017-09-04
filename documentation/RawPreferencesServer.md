@@ -6,7 +6,7 @@ Is part of the [Preferences Server Framework](PreferencesServerFramework.md) and
 
 The exposed REST API for the Raw Preferences Server is described below
 
-###API
+### API
 
 #### GET /rawPreferences/:token
 
@@ -76,7 +76,7 @@ Example return payload:
 ```
 
 #### POST /rawPreferences
-Used for saving a new raw preferences set to the server. Generates a new UUID (as a token) and creates a new NP set on the server with the posted content. Note that the data part of the POST should be a raw preferences set. It is stored as is (ie. unmodified). The returned payload is an object containing two keys: 'preferences' key holds the the raw and unmodified preferences set, 'token' key holds a string with the token identifying the NP set
+Used for saving a new raw preferences set to the server. Generates a new UUID (as a token) and creates a new NP set on the server with the posted content. Note that the data part of the POST should be a raw preferences set. It is stored as is (i.e. unmodified). The returned payload is an object containing two keys: 'preferences' key holds the the raw and unmodified preferences set, 'token' key holds a string with the token identifying the NP set
 
 ##### Example of POST query
 
