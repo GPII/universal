@@ -1,14 +1,14 @@
 [
     {
-        "id": "org.gnome.desktop.interface"
+        "id": "fakemag1"
     },
 
     {
-        "id": "org.gnome.shell.overrides"
+        "id": "fakemag2"
     },
 
     {
-        "id": "org.gnome.desktop.wm.preferences"
+        "id": "fakescreenreader1"
     },
 
     {
