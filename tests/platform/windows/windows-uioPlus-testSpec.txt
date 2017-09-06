@@ -1,0 +1,19 @@
+windows-uioPlus-testSpec.txt
+
+Descriptions:
+
+* Solution: Browser extension (UIO Plus)
+* Device reporter file: uioPlus.json
+* NP sets:
+ * uioPlus_character_space
+ * uioPlus_font_size
+ * uioPlus_high_contrast
+ * uioPlus_highlight_colour
+ * uioPlus_inputs_larger
+ * uioPlus_line_space
+ * uioPlus_multiple_settings
+ * uioPlus_self_voicing
+ * uioPlus_simplified
+ * uioPlus_support_tool
+ * uioPlus_syllabification
+ * uioPlus_toc
