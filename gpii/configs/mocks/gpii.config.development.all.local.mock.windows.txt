@@ -1,0 +1,21 @@
+gpii.config.development.all.local.json
+======================================
+
+This configuration runs the entire system locally and in development mode.
+
+This mean that:
+* All storage is on the local filesystem (as opposed to couchDB servers/remote URLs)
+* The following components are running on the local machine:
+** flowManager
+** preferencesServer
+** OntologyHandler
+** rawPreferencesServer (reading preferences from file)
+** solutionsRegistry (reading registry from file)
+** deviceReporter (reading device context info from file)
+** matchMakerFramework
+** canopyMatchMaker
+** lifecycleManager
+
+Notes on testing:
+This setup is used as a basis for the platform specific acceptance tests. Since the acceptance tests might use slightly different paths for the tests (i.e. a special folder for reading prefs and solutionsRegistry),
+what is actually being used for testing is a slight variation of this config. For more details, see the txt files describing the configs in the acceptance tests folder of both universal and the platform specific repositories.
