@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                  "http://registry.gpii.net/common/magnifierEnabled": true,
+                  "http://registry.gpii.net/common/magnification": 4,
+                  "http://registry.gpii.net/common/magnifierPosition": "Lens"
+                }
+            }
+        }
+    }
+}
