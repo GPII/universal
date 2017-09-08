@@ -12,7 +12,7 @@
     ],
     "http://registry\\.gpii\\.net/common/screenReaderApplication": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
     "http://registry\\.gpii\\.net/common/stickyKeysApplication": "http://registry\\.gpii\\.net/common/stickyKeys",
-    "http://registry\\.gpii\\.net/common/slowKeysApplication": "http://registry\\.gpii\\.net/common/slowKeysEnable",
-    "http://registry\\.gpii\\.net/common/debounceKeysApplication": "http://registry\\.gpii\\.net/common/debounceEnable",
+    "http://registry\\.gpii\\.net/common/slowKeysApplication": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+    "http://registry\\.gpii\\.net/common/debounceKeysApplication": "http://registry\\.gpii\\.net/common/debounceEnabled",
     "http://registry\\.gpii\\.net/common/onScreenKeyboardApplication": "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
 }

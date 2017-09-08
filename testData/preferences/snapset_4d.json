@@ -1,0 +1,17 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                  "http://registry.gpii.net/common/magnifierEnabled": true,
+                  "http://registry.gpii.net/common/magnification": 2,
+                  "http://registry.gpii.net/common/magnifierPosition": "Lens",
+                  "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
+                      "screen-dpi": 1.75
+                  }
+                }
+            }
+        }
+    }
+}

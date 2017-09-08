@@ -29,7 +29,7 @@ socket.on("open", function () {
     socket.send(JSON.stringify({
         type: "connect",
         payload: {
-            solutionId: "com.ilunion.cloud4chrome" // must match the solution id in (every) solutions registry
+            solutionId: "net.gpii.uioPlus" // must match the solution id in (every) solutions registry
         }
     }));
 });
