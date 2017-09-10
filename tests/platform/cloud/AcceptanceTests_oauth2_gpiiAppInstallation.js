@@ -430,7 +430,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests = [
             client_id: "Bakersfield-AJC-client-id",
             client_secret: "Bakersfield-AJC-client-secret",
             username: "os_gnome",
-            password: "dummy",
+            password: "dummy"
         },
         disruptions: gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptionsWithMissingGrantArgs
     },
