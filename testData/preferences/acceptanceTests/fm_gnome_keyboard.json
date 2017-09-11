@@ -10,9 +10,9 @@
                     "http://registry.gpii.net/common/cursorAcceleration": 0.800,
                     "http://registry.gpii.net/common/mouseEmulationEnabled": true,
                     "http://registry.gpii.net/common/stickyKeys": true,
-                    "http://registry.gpii.net/common/slowKeysEnable": true,
+                    "http://registry.gpii.net/common/slowKeysEnabled": true,
                     "http://registry.gpii.net/common/slowKeysInterval": 0.4,
-                    "http://registry.gpii.net/common/debounceEnable": true,
+                    "http://registry.gpii.net/common/debounceEnabled": true,
                     "http://registry.gpii.net/common/debounceInterval": 0.20
                 }
             }
