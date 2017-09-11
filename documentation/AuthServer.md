@@ -27,7 +27,7 @@ The authorization server authorizes 4 type of GPII clients:
 
 ### Document Structure
 
-The authorization server uses CouchDB to store data in JSON documents when GPII runs in the production configuration. In development configuration, CouchDB-compatible PouchDB is used for the data storage. 
+The authorization server uses CouchDB to store data in JSON documents when GPII runs in the production configuration. In development configuration, CouchDB-compatible PouchDB is used for the data storage.
 
 The document types used by the authorization server include:
 
@@ -157,5 +157,5 @@ The document types used by the authorization server include:
 | ------ | ---- | ----------- | ------- |
 | `id` | String | The authorization code id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
 | `type` | String | The document type for storing GPII tokens. | The value must be set to "authCode". |
-| `authCodeAuthorizationId` | String | The auth code authorization that this code is associated with. | None |
+| `authorizationId` | String | The authorization that this code is associated with. | None |
 | `code` | String | The intermediary code granted by the authorization server to identify the client. See [The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749#section-1.3.1) for details. | None |

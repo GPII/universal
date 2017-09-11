@@ -688,26 +688,20 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             timestampRevoked: null,
             timestampExpires: authorizationData.timestampExpires
         };
-    }
-
-    if (authorizationType === gpii.oauth2.docTypes.onboardedSolutionAuthorization) {
+    } else if (authorizationType === gpii.oauth2.docTypes.onboardedSolutionAuthorization) {
         data = {
             clientId: authorizationData.clientId,
             gpiiToken: authorizationData.gpiiToken,
             selectedPreferences: authorizationData.selectedPreferences,
             revoked: false
         };
-    }
-
-    if (authorizationType === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
+    } else if (authorizationType === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
         data = {
             clientId: authorizationData.clientId,
             accessToken: authorizationData.accessToken,
             revoked: false
         };
-    }
-
-    if (authorizationType === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
+    } else if (authorizationType === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
         data = {
             gpiiToken: authorizationData.gpiiToken,
             clientId: authorizationData.clientId,
@@ -717,7 +711,7 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             revoked: false
         };
     }
-    promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
 
+    promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
     return promiseTogo;
 };
