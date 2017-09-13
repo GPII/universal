@@ -46,7 +46,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserById", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing user ID returns 401 status code and error message",
+            name: "Not providing user ID returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserById", [], "{that}"]
@@ -88,7 +88,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByUsername", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing user name returns 401 status code and error message",
+            name: "Not providing user name returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByUsername", [], "{that}"]
@@ -140,7 +140,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing a GPII token returns 401 status code and error message",
+            name: "Not providing a GPII token returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserByGpiiToken", [], "{that}"]
@@ -182,7 +182,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing a GPII token returns 401 status code and error message",
+            name: "Not providing a GPII token returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiToken", [], "{that}"]
@@ -224,7 +224,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing client id returns 401 status code and error message",
+            name: "Not providing client id returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientById", [], "{that}"]
@@ -266,7 +266,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing an oauth2 client id returns 401 status code and error message",
+            name: "Not providing an oauth2 client id returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientByOauth2ClientId", [], "{that}"]
@@ -308,7 +308,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientBySolutionId", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing a solution id returns 401 status code and error message",
+            name: "Not providing a solution id returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findClientBySolutionId", [], "{that}"]
@@ -454,7 +454,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedAuthorizationById", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing authorization ID returns 401 status code and error message",
+            name: "Not providing authorization ID returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizedAuthorizationById", [], "{that}"]
@@ -510,7 +510,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizationsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing a gpii token returns 401 status code and error message",
+            name: "Not providing a gpii token returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizationsByGpiiToken", [], "{that}"]
@@ -552,7 +552,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorization", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing any input returns 401 status code and error message",
+            name: "Not providing any input returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorization", [], "{that}"]
@@ -566,7 +566,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorization", {
                 event: "{that}.events.onError"
             }]
         }, {
-            name: "Not providing one input returns 401 status code and error message",
+            name: "Not providing one input returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorization", ["chrome_high_contrast", false], "{that}"]
@@ -608,7 +608,7 @@ fluid.defaults("gpii.tests.dbDataStore.findOnboardedSolutionAuthorization", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing any input returns 401 status code and error message",
+            name: "Not providing any input returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findOnboardedSolutionAuthorization", [], "{that}"]
@@ -622,7 +622,7 @@ fluid.defaults("gpii.tests.dbDataStore.findOnboardedSolutionAuthorization", {
                 event: "{that}.events.onError"
             }]
         }, {
-            name: "Not providing one input returns 401 status code and error message",
+            name: "Not providing one input returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findOnboardedSolutionAuthorization", ["chrome_high_contrast"], "{that}"]
@@ -709,7 +709,7 @@ fluid.defaults("gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCo
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing an input argument returns 401 status code and error message",
+            name: "Not providing an input argument returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findWebPrefsConsumerAuthorizationByAuthCode", [], "{that}"]
@@ -791,7 +791,7 @@ fluid.defaults("gpii.tests.dbDataStore.findUserAuthorizedClientsByGpiiToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing an input argument returns 401 status code and error message",
+            name: "Not providing an input argument returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findUserAuthorizedClientsByGpiiToken", [], "{that}"]
@@ -857,7 +857,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByAccessToken", {
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing an input argument returns 401 status code and error message",
+            name: "Not providing an input argument returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizationByAccessToken", [], "{that}"]
@@ -923,7 +923,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing privileged prefs creator ID returns 401 status code and error message",
+            name: "Not providing privileged prefs creator ID returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationById", [], "{that}"]
@@ -979,7 +979,7 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing client ID returns 401 status code and error message",
+            name: "Not providing client ID returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findPrivilegedPrefsCreatorAuthorizationByClientId", [], "{that}"]
@@ -1031,7 +1031,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
                 event: "{that}.events.onResponse"
             }]
         }, {
-            name: "Not providing a gpii token returns 401 status code and error message",
+            name: "Not providing a gpii token returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", [undefined, "client-1"], "{that}"]
@@ -1045,7 +1045,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpi
                 event: "{that}.events.onError"
             }]
         }, {
-            name: "Not providing a client id returns 401 status code and error message",
+            name: "Not providing a client id returns 400 status code and error message",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", undefined], "{that}"]

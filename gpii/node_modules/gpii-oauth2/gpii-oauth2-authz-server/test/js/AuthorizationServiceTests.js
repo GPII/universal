@@ -142,12 +142,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "oauth2ClientSecret": "client_secret_AJC1",
         "userId": "user-1"
     }, {
-    }, {
         "_id": "client-4",
         "type": "onboardedSolutionClient",
         "name": "Windows Magnifier",
         "solutionId": "net.gpii.windows.magnifier"
-    }, {
     }, {
         "_id": "client-5",
         "type": "onboardedSolutionClient",

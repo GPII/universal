@@ -100,7 +100,7 @@ gpii.oauth2.dbDataStore.filterEmptyFields = function (obj, valueNotEmpty) {
 };
 
 /**
- * Remove CouchDB/PouchDB internal fields: _id, _rev and type. Also save "_id" field value into "id" field.
+ * Remove CouchDB/PouchDB internal fields: _id and _rev. Also save "_id" field value into "id" field.
  * The use of "id" instead of "_id" field name is to maintain the API backward compatibility as data store
  * API is expected to output the record identifier in "id" field instead of a couchdb/pouchdb specific name
  * of "_id".
@@ -413,7 +413,8 @@ gpii.oauth2.dbDataStore.findUserByGpiiToken = function (findUserByGpiiTokenDataS
  * The post data process function for implementing findUserAuthorizedClientsByGpiiToken()
  */
 gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess = function (data) {
-    var records;
+    // If the input data is empty, return undefined
+    var records = undefined;
 
     fluid.each(data, function (row) {
         var docType = row.doc.type;
@@ -700,26 +701,20 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             timestampRevoked: null,
             timestampExpires: authorizationData.timestampExpires
         };
-    }
-
-    if (authorizationType === gpii.oauth2.docTypes.onboardedSolutionAuthorization) {
+    } else if (authorizationType === gpii.oauth2.docTypes.onboardedSolutionAuthorization) {
         data = {
             clientId: authorizationData.clientId,
             gpiiToken: authorizationData.gpiiToken,
             selectedPreferences: authorizationData.selectedPreferences,
             revoked: false
         };
-    }
-
-    if (authorizationType === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
+    } else if (authorizationType === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
         data = {
             clientId: authorizationData.clientId,
             accessToken: authorizationData.accessToken,
             revoked: false
         };
-    }
-
-    if (authorizationType === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
+    } else if (authorizationType === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
         data = {
             gpiiToken: authorizationData.gpiiToken,
             clientId: authorizationData.clientId,
@@ -729,7 +724,7 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
             revoked: false
         };
     }
-    promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
 
+    promiseTogo = gpii.oauth2.dbDataStore.addRecord(saveDataSource, authorizationType, "id", data);
     return promiseTogo;
 };
