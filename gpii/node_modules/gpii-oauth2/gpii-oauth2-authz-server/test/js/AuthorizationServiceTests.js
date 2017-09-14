@@ -11,7 +11,7 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-/* global jqUnit, fluid */
+/* global fluid */
 
 "use strict";
 
@@ -56,16 +56,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
                     args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
-                }, {
-                    listener: "jqUnit.assertUndefined",
-                    args: ["undefined should be received with an empty data store", "{arguments}.0"],
-                    event: "{that}.events.onResponse"
-                }]
-            }, {
-                name: "findValidGpiiAppInstallationAuthorization() returns undefined with an empty dataStore",
-                sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
@@ -384,49 +374,5 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }]
         }]
     });
-
-    fluid.defaults("gpii.tests.oauth2.authorizationService.withData.findValidGpiiAppInstallationAuthorization", {
-        gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
-        pouchData: gpii.tests.oauth2.authorizationService.testData,
-        rawModules: [{
-            name: "Test gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization()",
-            tests: [{
-                name: "findValidGpiiAppInstallationAuthorization() returns the unrevoked and unexpired access token",
-                sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-3"], "{that}"]
-                }, {
-                    listener: "gpii.tests.oauth2.authorizationService.verifyGpiiAppInstallationAccessToken",
-                    args: ["{arguments}.0", "gpii-app-installation-token-2"],
-                    event: "{that}.events.onResponse"
-                }]
-            }, {
-                name: "findValidGpiiAppInstallationAuthorization() returns undefined for nonexistent record",
-                sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "nonexistent-token", "nonexistent-client"], "{that}"]
-                }, {
-                    listener: "jqUnit.assertUndefined",
-                    args: ["undefined should be received for nonexistent record", "{arguments}.0"],
-                    event: "{that}.events.onResponse"
-                }]
-            }, {
-                name: "findValidGpiiAppInstallationAuthorization() returns undefined when all existing access tokens have expired",
-                sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: [gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization, ["{authorizationService}.dataStore", "alice_gpii_token", "client-2"], "{that}"]
-                }, {
-                    listener: "jqUnit.assertUndefined",
-                    args: ["undefined should be received when all existing access tokens have expired", "{arguments}.0"],
-                    event: "{that}.events.onResponse"
-                }]
-            }]
-        }]
-    });
-
-    gpii.tests.oauth2.authorizationService.verifyGpiiAppInstallationAccessToken = function (result, expectedAccessToken) {
-        jqUnit.assertEquals("The returned access token is " + expectedAccessToken, expectedAccessToken, result.accessToken);
-        jqUnit.assertTrue("The expiresIn is returned and greater than 0", result.expiresIn > 0);
-    };
 
 })();

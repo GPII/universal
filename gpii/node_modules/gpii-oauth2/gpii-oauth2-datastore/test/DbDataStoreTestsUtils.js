@@ -330,22 +330,6 @@ gpii.tests.dbDataStore.testData = {
         "timestampRevoked": null,
         "timestampExpires": "3020-05-30T17:54:00.000Z"
     },
-    findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId: [{
-        "id": "gpiiAppInstallationAuthorization-1",
-        "accessToken": "gpii-app-installation-token-1",
-        "revoked": false,
-        "timestampCreated": "2017-05-29T17:54:00.000Z",
-        "timestampRevoked": null,
-        "timestampExpires": "3020-05-30T17:54:00.000Z"
-    },
-    {
-        "id": "gpiiAppInstallationAuthorization-2",
-        "accessToken": "gpii-app-installation-token-2",
-        "revoked": false,
-        "timestampCreated": "3020-05-29T17:54:00.000Z",
-        "timestampRevoked": null,
-        "timestampExpires": "3020-05-30T17:54:00.000Z"
-    }],
     gpiiAppInstallationAuthorizationToCreate: {
         "clientId": "client-1",
         "gpiiToken": "chrome_high_contrast",

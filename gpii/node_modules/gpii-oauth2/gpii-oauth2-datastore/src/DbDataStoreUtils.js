@@ -527,50 +527,8 @@ gpii.oauth2.dbDataStore.doRevokePrivilegedPrefsCreatorAuthorization = function (
 };
 // ==== End of revokePrivilegedPrefsCreatorAuthorization()
 
-// GPII App Installation Authorizations
+// General Authorization Functions
 // ------------------------------------
-
-/**
- * Find GPII app installation authroization by a GPII token and a client id.
- * @param findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource {Component} An instance of gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource
- * @param gpiiToken {String} The GPII token
- * @param clientId {String} The Client id
- * @return {Promise} A promise object whose resolved value is the authorization, or, `undefined` if the authorization is not found
- */
-gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId = function (findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource, gpiiToken, clientId) {
-    var currentTimestamp = gpii.oauth2.getCurrentTimestamp();
-
-    return gpii.oauth2.dbDataStore.findRecord(
-        findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdDataSource,
-        {
-            gpiiToken: gpiiToken,
-            clientId: clientId,
-            currentTime: currentTimestamp
-        },
-        ["gpiiToken", "clientId", "currentTime"],
-        gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess
-    );
-};
-
-/**
- * The post data process function for implementing findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId()
- */
-gpii.oauth2.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientIdPostProcess = function (data) {
-    var records = [];
-    fluid.each(data, function (row) {
-        var record = row.value;
-        var oneResult = {
-            id: record._id,
-            accessToken: record.accessToken,
-            revoked: record.revoked,
-            timestampCreated: record.timestampCreated,
-            timestampRevoked: record.timestampRevoked,
-            timestampExpires: record.timestampExpires
-        };
-        records.push(oneResult);
-    });
-    return records;
-};
 
 /**
  * Find an authorization by an access token

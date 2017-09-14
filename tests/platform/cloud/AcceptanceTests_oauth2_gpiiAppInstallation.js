@@ -37,6 +37,12 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.sendAccessTokenRequest = function (a
     gpii.test.cloudBased.oauth2.sendRequest(accessTokenRequest, options, formBody, "accessTokenForm");
 };
 
+gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse = function (body, accessTokenRequest) {
+    var response = gpii.test.verifyJSONResponse(body, accessTokenRequest);
+    gpii.test.cloudBased.oauth2.verifyFieldInResponse(response, accessTokenRequest, "oauth2.verifyGpiiAppInstallationAccessTokenInResponse", "access_token");
+    gpii.test.cloudBased.oauth2.verifyFieldInResponse(response, accessTokenRequest, "oauth2.verifyGpiiAppInstallationAccessTokenInResponse", "expiresIn");
+};
+
 gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken = function (body, accessTokenRequest) {
     gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
     initialTokenResponse = body;
@@ -44,7 +50,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken = function 
 
 gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken = function (body, accessTokenRequest) {
     gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
-    jqUnit.assertEquals("The previously set unexpired access token is returned", initialTokenResponse, body);
+    jqUnit.assertNotEquals("A new access token is issued at the refetch", fluid.get(JSON.parse(initialTokenResponse), "access_token"), fluid.get(JSON.parse(body), "access_token"));
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.requests", {
