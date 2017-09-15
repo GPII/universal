@@ -4,7 +4,7 @@
         "gradeNames": ["kettle.multiConfig.config"],
         "configs": {
             "localConfig": {
-                "configName": "gpii.config.untrusted.development.mock.windows",
+                "configName": "gpii.config.untrusted.development",
                 "configPath": "%universal/gpii/configs"
             },
             "cloudBasedConfig": {

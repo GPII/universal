@@ -2464,7 +2464,7 @@
                     "applications.com\\.microsoft\\.windows\\.screenResolution.id"
                 ],
                 "supportedSettings": {
-                    "screenResolution": {
+                    "screen-resolution": {
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display",
@@ -2504,7 +2504,18 @@
                 "capabilities": [
                     "display.screenEnhancement.screenScale",
                     "applications.com\\.microsoft\\.windows\\.screenDPI.id"
-                ]
+                ],
+                "supportedSettings": {
+                    "screen-dpi": {
+                        "schema": {
+                            "title": "Screen DPI",
+                            "description": "Screen DPI of the default display",
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 5 // Taken from dpiWindows10.js, may not be appropriate
+                        }
+                    }
+                }
             }
         },
         "configure": [
@@ -2552,9 +2563,6 @@
                         "Wait": "REG_SZ"
                     },
                     "verifySettings": true
-                },
-                "supportedSettings": {
-                    // TODO: How can we deal with this particular set of settings, all related to cursorSize?
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/cursorSize"

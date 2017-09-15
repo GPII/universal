@@ -229,7 +229,7 @@ gpii.tests.windows.builtIn = [
                 "expectRestored": "0"
             }
         ]
-    }, {
+    }, /* {
         name: "Testing os_common using default matchmaker",
         userToken: "os_common",
         settingsHandlers: {
@@ -458,7 +458,7 @@ gpii.tests.windows.builtIn = [
                 "expectRestored": "0"
             }
         ]
-    }
+    } */
 ];
 
 module.exports = gpii.test.bootstrap({
