@@ -4,27 +4,26 @@ It can be tested by firing up any configuration of the GPII which includes a loc
 suitable are the mock configurations in %universal/gpii/configs/mocks - for example you can type
 
     node gpii.js gpii/configs/mocks gpii.config.development.all.local.mock.windows
-    
+
 or 
 
-    
+    node gpii.js gpii/configs/mocks gpii.config.untrusted.development.all.local.mock.windows
 
 from the root of this repository.
 
 After that, you can fire up the client at any time during the lifetime of the FlowManager by typing
 
     node pcpChannelClient.js
-    
+
 from this directory in another shell.
 
 Before or after that, you can experiment with logging in and out of the GPII using endpoints such as
 
     http://localhost:8081/user/sammy/login
-    
-and 
+
+and
 
     http://localhost:8081/user/sammy/logout
-    
 
 
 Here are some sample payloads collected from this client during such testing.
@@ -39,14 +38,9 @@ Firstly, connecting the client when no user is keyed into the system produces th
 }
 ```
 
-After logging in sammy, the client receives the following sequence of 2 updates as the login process completes:
+After logging in sammy, the client receives the following update:
 
 ```
-## Received the following message: {
-    "path": [],
-    "type": "ADD",
-    "value": {}
-}
 ## Received the following message: {
     "path": [],
     "type": "ADD",
@@ -206,56 +200,6 @@ After logging in sammy, the client receives the following sequence of 2 updates 
                                         2,
                                         3
                                     ]
-                                }
-                            }
-                        },
-                        "capabilities": [],
-                        "capabilitiesTransformations": {
-                            "Invert": {
-                                "transform": {
-                                    "type": "gpii.transformer.booleanToNumber",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/invertColours"
-                                }
-                            },
-                            "Magnification": {
-                                "transform": {
-                                    "type": "fluid.transforms.round",
-                                    "input": {
-                                        "transform": {
-                                            "type": "fluid.transforms.linearScale",
-                                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
-                                            "factor": 100
-                                        }
-                                    }
-                                }
-                            },
-                            "transform": [
-                                {
-                                    "type": "fluid.transforms.arrayToSetMembership",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/tracking",
-                                    "outputPath": "",
-                                    "presentValue": 1,
-                                    "missingValue": 0,
-                                    "options": {
-                                        "focus": "FollowFocus",
-                                        "caret": "FollowCaret",
-                                        "mouse": "FollowMouse"
-                                    }
-                                }
-                            ],
-                            "MagnificationMode": {
-                                "transform": {
-                                    "type": "fluid.transforms.valueMapper",
-                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
-                                    "match": {
-                                        "FullScreen": 2,
-                                        "Lens": 3,
-                                        "LeftHalf": 1,
-                                        "RightHalf": 1,
-                                        "TopHalf": 1,
-                                        "BottomHalf": 1,
-                                        "Custom": 2
-                                    }
                                 }
                             }
                         }

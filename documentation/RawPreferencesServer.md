@@ -6,7 +6,7 @@ Is part of the [Preferences Server Framework](PreferencesServerFramework.md) and
 
 The exposed REST API for the Raw Preferences Server is described below
 
-###API
+### API
 
 #### GET /rawPreferences/:token
 

@@ -1,0 +1,15 @@
+# elmerv.json
+
+## Demo Personas with User Stories
+
+This preference set is part of our set of personas used for the demo install,
+presentations, and in general conveying an array of compelling user stories for
+the GPII.
+
+elmerv is identical to elmer except that it sets the screen to 1280 x 720 (instead of  800 x 600 that ELMER does) which works very well for demoing on the Sony Vaio (which is also the reason for the "v" in elmerv)
+
+## Details
+
+Elmer  — Low Screen Resolution
+
+Elmer is older and his sight is failing — but magnifiers confuse him.  So he just uses a low screen resolution and everything is larger for him, but nothing moves offscreen like a magnifier would do.
