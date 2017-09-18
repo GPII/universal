@@ -996,72 +996,6 @@ fluid.defaults("gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationBy
     }]
 });
 
-fluid.defaults("gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", {
-    gradeNames: ["gpii.tests.dbDataStore.environment"],
-    rawModules: [{
-        name: "Test findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId()",
-        tests: [{
-            name: "Find GPII app installation authorization by a gpii token and a client id",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["chrome_high_contrast", "client-4"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId, "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Finding a non-existing GPII app installation authorization by a non-existing gpii token returns undefined",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["non-existing-token", "client-1"], "{that}"]
-            }, {
-                listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing GPII app installation authorization returns undefined", "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Finding a non-existing GPII app installation authorization by a non-existing client id returns undefined",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", "non-existing-client"], "{that}"]
-            }, {
-                listener: "jqUnit.assertUndefined",
-                args: ["Finding a non-existing GPII app installation authorization returns undefined", "{arguments}.0"],
-                event: "{that}.events.onResponse"
-            }]
-        }, {
-            name: "Not providing a gpii token returns 400 status code and error message",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", [undefined, "client-1"], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected error is received", {
-                    message: "The input field \"gpiiToken\" is undefined",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }, {
-            name: "Not providing a client id returns 400 status code and error message",
-            sequence: [{
-                func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId", ["gpiiToken-1", undefined], "{that}"]
-            }, {
-                listener: "jqUnit.assertDeepEq",
-                args: ["The expected error is received", {
-                    message: "The input field \"clientId\" is undefined",
-                    statusCode: 400,
-                    isError: true
-                }, "{arguments}.0"],
-                event: "{that}.events.onError"
-            }]
-        }]
-    }]
-});
-
 fluid.defaults("gpii.tests.dbDataStore.addAuthorization", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -1175,6 +1109,5 @@ fluid.test.runTests([
     "gpii.tests.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCode",
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationById",
     "gpii.tests.dbDataStore.findPrivilegedPrefsCreatorAuthorizationByClientId",
-    "gpii.tests.dbDataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId",
     "gpii.tests.dbDataStore.addAuthorization"
 ]);

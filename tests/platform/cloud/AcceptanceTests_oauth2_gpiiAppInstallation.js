@@ -43,7 +43,7 @@ gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse = fun
 
 gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
     gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, refetchAccessTokenRequest);
-    jqUnit.assertEquals("The previously set unexpired access token is returned", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
+    jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
 };
 
 gpii.tests.cloud.oauth2.gpiiAppInstallation.sendUntrustedSettingsRequest = function (untrustedSettingsRequest, accessToken) {

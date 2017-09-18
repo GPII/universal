@@ -208,16 +208,14 @@ var fluid = fluid || require("infusion");
         } else {
             var gpiiTokenPromise = dataStore.findGpiiToken(gpiiToken);
             var clientPromise = dataStore.findClientById(clientId);
-            var gpiiAppInstallationAuthorizationPromise = gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization(dataStore, gpiiToken, clientId);
 
             // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-            var sources = [gpiiTokenPromise, clientPromise, gpiiAppInstallationAuthorizationPromise];
+            var sources = [gpiiTokenPromise, clientPromise];
             var promisesSequence = fluid.promise.sequence(sources);
 
             promisesSequence.then(function (responses) {
                 var gpiiTokenRec = responses[0];
                 var clientRec = responses[1];
-                var gpiiAppInstallationAuthorizationRec = responses[2];
 
                 var error;
 
@@ -225,53 +223,18 @@ var fluid = fluid || require("infusion");
                     fluid.log("authorizationService, granting GPII app installation authorization: invalid GPII token - ", gpiiToken);
                     error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
                     promiseTogo.reject(error);
-                } else if (clientRec.type !== gpii.oauth2.docTypes.gpiiAppInstallationClient) {
-                    fluid.log("authorizationService, granting GPII app installation authorization: the type of the client id (" + clientId + ") is not \"" + gpii.oauth2.docTypes.gpiiAppInstallationClient + "\"");
+                } else if (!clientRec || clientRec.type !== gpii.oauth2.docTypes.gpiiAppInstallationClient) {
+                    fluid.log("authorizationService, granting GPII app installation authorization: invalid client or the type of the client with the client id (" + clientId + ") is not \"" + gpii.oauth2.docTypes.gpiiAppInstallationClient + "\"");
                     error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
                     promiseTogo.reject(error);
-                } else if (!gpiiAppInstallationAuthorizationRec) {
-                    gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization(promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, gpii.oauth2.defaultTokenLifeTimeInSeconds);
                 } else {
-                    // Return the existing token
-                    promiseTogo.resolve(gpiiAppInstallationAuthorizationRec);
+                    // Re-issue a new access token every time. In the case that multiple requests were made for the same "client credential + gpii token"
+                    // combination, the access token would be different for each request in the audit log. In the case that one request was detected to
+                    // be from an attacker, invoking the associating access token would not affect other access tokens or the real user.
+                    gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization(promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, gpii.oauth2.defaultTokenLifeTimeInSeconds);
                 }
             });
         }
-
-        return promiseTogo;
-    };
-
-    /**
-     * Find an unexpired authorization for the given GPII App installation client. If not found, returns undefined.
-     * This function also set the "expired" field of all expired tokens to true so they won't be returned
-     * next time at finding an unexpired access token.
-     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
-     * @param clientId {String} A client id
-     * @param gpiiToken {String} A GPII token
-     * @return {Promise} A promise object whose resolved value is an object that contains the access token and the number of seconds that the access token expires, such as:
-     * {
-     *     accessToken: {String},
-     *     expiresIn: {Number},
-     * }
-     * An error will be returned if the gpii token is not found.
-     */
-    gpii.oauth2.authorizationService.findValidGpiiAppInstallationAuthorization = function (dataStore, gpiiToken, clientId) {
-        var promiseTogo = fluid.promise();
-
-        var authorizationPromise = dataStore.findGpiiAppInstallationAuthorizationByGpiiTokenAndClientId(gpiiToken, clientId);
-
-        authorizationPromise.then(function (authorizations) {
-            var result;
-
-            if (authorizations) {
-                var authorization = authorizations[0];
-                result = {
-                    accessToken: authorization.accessToken,
-                    expiresIn: gpii.oauth2.getExpiresIn(authorization.timestampExpires)
-                };
-            }
-            promiseTogo.resolve(result);
-        });
 
         return promiseTogo;
     };
