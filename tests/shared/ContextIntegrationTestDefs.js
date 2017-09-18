@@ -1,7 +1,7 @@
 /**
-GPII Context Integration Tests
+Shared GPII Context Integration Test definitions
 
-Copyright 2014 Raising the Floor - International
+Copyright 2014, 2017 Raising the Floor - International
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
