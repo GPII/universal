@@ -102,9 +102,6 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.a11y.magnifier": {
                             "active": true,
                             "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
                                 "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
                             }
@@ -131,9 +128,6 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.a11y.magnifier": {
                             "active": true,
                             "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
                                 "http://registry.gpii.net/common/magnification": 1.5,
                                 "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                                 "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
@@ -145,11 +139,8 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                         "org.gnome.desktop.interface": {
                             "active": true,
                             "settings": {
-                                "http://registry.gpii.net/common/volume": 0.5,
                                 "http://registry.gpii.net/common/fontSize": 9,
                                 "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                                 "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
                                     "cursor-size": 90,
                                     "text-scaling-factor": 0.75
@@ -160,10 +151,6 @@ gpii.tests.cloud.untrustedSettings.testDefs = [
                             "active": true,
                             "settings": {
                                 "http://registry.gpii.net/common/volume": 0.5,
-                                "http://registry.gpii.net/common/fontSize": 9,
-                                "http://registry.gpii.net/common/cursorSize": 0.9,
-                                "http://registry.gpii.net/common/magnification": 1.5,
-                                "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
                                 "http://registry.gpii.net/applications/org.alsa-project": {
                                     "masterVolume": 50
                                 }
