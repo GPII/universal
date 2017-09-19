@@ -71,7 +71,7 @@ gpii.oauth2.getCurrentTimestamp = function () {
 /**
  * Calculate the timestamp of currentTime + expiresIn.
  * @param expiresIn {Number} The number of seconds that the expiration will occur.
- * @return {Number} The number of seconds that the expiration will occur.
+ * @return {String} A date in simpilified ISO string format.
  */
 gpii.oauth2.getTimestampExpires = function (expiresIn) {
     return new Date(new Date().getTime() + expiresIn * 1000).toISOString();

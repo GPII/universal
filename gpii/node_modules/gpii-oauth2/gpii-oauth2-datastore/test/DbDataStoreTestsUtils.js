@@ -82,8 +82,8 @@ gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
     jqUnit.assertLeftHand("The data is saved successfully", expected, response);
 };
 
-gpii.tests.dbDataStore.verifyFetchedGpiiAppInstallationAuthorization = function (response, dataToSave) {
-    gpii.tests.dbDataStore.verifyFetched(response, dataToSave);
+gpii.tests.dbDataStore.verifyFetchedGpiiAppInstallationAuthorization = function (response, expected) {
+    gpii.tests.dbDataStore.verifyFetched(response, expected);
     jqUnit.assertFalse("The \"revoked\" value has been set to false", response.revoked);
     jqUnit.assertNotUndefined("The \"timestampCreated\" value has been created", response.timestampCreated);
     jqUnit.assertNull("The \"timestampRevoked\" value has been set to null", response.timestampRevoked);
