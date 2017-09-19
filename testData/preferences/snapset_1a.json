@@ -7,7 +7,8 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
                         "screen-dpi": 1.25
                     },
-                    "http://registry.gpii.net/common/cursorSize": 1.0
+                    "http://registry.gpii.net/common/cursorSize": 1.0,
+                    "http://registry.gpii.net/common/supportTool": ["dictionary"]
                 }
             }
         }
