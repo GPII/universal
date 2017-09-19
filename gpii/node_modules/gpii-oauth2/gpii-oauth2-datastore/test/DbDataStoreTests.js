@@ -21,6 +21,7 @@ gpii.pouch.loadTestingSupport();
 require("gpii-oauth2");
 require("./DbDataStoreTestsUtils.js");
 
+// The test data is from %gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json
 fluid.defaults("gpii.tests.dbDataStore.findUserById", {
     gradeNames: ["gpii.tests.dbDataStore.environment"],
     rawModules: [{
@@ -384,7 +385,7 @@ fluid.defaults("gpii.tests.dbDataStore.revokeUserAuthorizedAuthorization", {
     rawModules: [{
         name: "Test revokeUserAuthorizedAuthorization()",
         tests: [{
-            name: "A typical flow of updating an authorization",
+            name: "A typical flow of revoking an authorization",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.revokeUserAuthorizedAuthorization", ["user-1", "webPrefsConsumerAuthorization-1"], "{that}"]
