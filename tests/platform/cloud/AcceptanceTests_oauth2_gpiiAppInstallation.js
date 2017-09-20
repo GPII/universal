@@ -23,8 +23,6 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.gpiiAppInstallation");
 
-var initialTokenResponse;
-
 gpii.tests.cloud.oauth2.gpiiAppInstallation.sendAccessTokenRequest = function (accessTokenRequest, options) {
     var formBody = {
         grant_type: "password",
@@ -43,14 +41,9 @@ gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse = fun
     gpii.test.cloudBased.oauth2.verifyFieldInResponse(response, accessTokenRequest, "oauth2.verifyGpiiAppInstallationAccessTokenInResponse", "expiresIn");
 };
 
-gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken = function (body, accessTokenRequest) {
-    gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
-    initialTokenResponse = body;
-};
-
-gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken = function (body, accessTokenRequest) {
-    gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, accessTokenRequest);
-    jqUnit.assertNotEquals("A new access token is issued at the refetch", fluid.get(JSON.parse(initialTokenResponse), "access_token"), fluid.get(JSON.parse(body), "access_token"));
+gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
+    gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse(body, refetchAccessTokenRequest);
+    jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.requests", {
@@ -77,7 +70,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
     },
     { // 1
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyInitialAccessToken",
+        listener: "gpii.test.cloudBased.oauth2.verifyGpiiAppInstallationAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2
@@ -87,7 +80,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
     { // 3
         event: "{accessTokenRequest2}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyRefetchedAccessToken",
-        args: ["{arguments}.0", "{accessTokenRequest2}"]
+        args: ["{arguments}.0", "{accessTokenRequest2}", "{accessTokenRequest}"]
     }
 ];
 
