@@ -17,10 +17,6 @@ var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.oauth2");
 
-if (!gpii.oauth2.errors) {
-    require("./OAuth2Const.js");
-}
-
 gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     if (req.headers && req.headers.authorization) {
         var parts = req.headers.authorization.split(/\s+/);
