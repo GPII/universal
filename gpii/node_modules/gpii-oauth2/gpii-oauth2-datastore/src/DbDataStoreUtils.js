@@ -17,10 +17,6 @@ var fluid = fluid || require("infusion"),
     $ = fluid.registerNamespace("jQuery"),
     uuid = uuid || require("node-uuid");
 
-if (!fluid.contextAware.isBrowser()) {
-    require("../../gpii-oauth2-utilities/src/OAuth2Utilities.js");
-}
-
 fluid.registerNamespace("gpii.oauth2.dbDataStore");
 
 /**
