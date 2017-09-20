@@ -26,10 +26,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 
-if (!gpii.oauth2.dbDataStore) {
-    require("./DbDataStoreUtils.js");
-}
-
 fluid.defaults("gpii.oauth2.dbDataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
     baseUrl: null,   // Supplied by integrators
