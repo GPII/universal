@@ -3296,24 +3296,24 @@
             {
                 "type": "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellSetter.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellSetter.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuSetter.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuSetter.ps1\""
             }
         ],
         "stop": [
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\ImmersiveShellRecover.ps1\""
+                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellRecover.ps1\""
             },
             {
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII-Demo\\scripts\\StartMenuRecover.ps1\""
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuRecover.ps1\""
             }
         ],
     }
