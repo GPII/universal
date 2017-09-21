@@ -3170,10 +3170,6 @@
         "restore": [
             "settings.configuration",
         ],
-        "start": [
-        ],
-        "stop": [
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
