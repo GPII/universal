@@ -824,6 +824,16 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByAccessToken", {
     rawModules: [{
         name: "Test findAuthorizationByAccessToken()",
         tests: [{
+            name: "Find an authorization information by a GPII app installation access token",
+            sequence: [{
+                func: "gpii.tests.oauth2.invokePromiseProducer",
+                args: ["{dbDataStore}.findAuthorizationByAccessToken", ["gpii-app-installation-token-1"], "{that}"]
+            }, {
+                listener: "jqUnit.assertDeepEq",
+                args: ["The expected data is received", gpii.tests.dbDataStore.testData.findGpiiAppInstallationAuthorizationByAccessToken, "{arguments}.0"],
+                event: "{that}.events.onResponse"
+            }]
+        }, {
             name: "Find an authorization information by a web preferences consumer access token",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
