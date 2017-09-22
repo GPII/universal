@@ -2935,8 +2935,7 @@
                     "SearchboxTaskbarMode": {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                }
+                "capabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -3037,10 +3036,7 @@
                     "ShowTaskViewButton": {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                    "ShowTaskViewButton": {
-                    }
-                }
+                "capabilitiesTransformations": {}
             }
         },
         "configure": [
@@ -3080,8 +3076,7 @@
                     "NoLockScreen": {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                }
+                "capabilitiesTransformations": {}
             }
         },
         "configure": [
