@@ -96,7 +96,19 @@
     },
 
     {
-        "id": "com.microsoft.windows.W10Simplification"
+        "id": "com.microsoft.windows.taskBarAppsVisibleInTabletMode"
+    },
+
+    {
+        "id": "com.microsoft.windows.taskBarAutoHideInTabletMode"
+    },
+
+    {
+        "id": "com.microsoft.windows.customStartMenu"
+    },
+
+    {
+        "id": "com.microsoft.windows.immersiveMode"
     },
 
     {

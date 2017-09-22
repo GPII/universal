@@ -3177,7 +3177,141 @@
         ]
     },
 
-    "com.microsoft.windows.W10Simplification": {
+    "com.microsoft.windows.taskBarAppsVisibleInTabletMode": {
+        "name": "Show or hide apps in taskbar inside tablet mode",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                    "dataTypes": {
+                        "TaskbarAppsVisibleInTabletMode": "REG_DWORD",
+                    }
+                },
+                "supportedSettings": {
+                    "TaskbarAppsVisibleInTabletMode": {},
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {}
+            },
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.taskBarAutoHideInTabletMode": {
+        "name": "Turn off or on taskbar autohide in tablet mode",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                    "dataTypes": {
+                        "TaskbarAutoHideInTabletMode": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "TaskbarAutoHideInTabletMode": {},
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {}
+            },
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.customStartMenu": {
+        "name": "Start menu for Windows 10 Simplification",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                    "dataTypes": {
+                        "ForceStartSize": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "ForceStartSize": {}
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {}
+            },
+        },
+        "configure": [
+            "settings.configuration",
+        ],
+        "restore": [
+            "settings.configuration",
+        ],
+        "start": [
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuSetter.ps1\""
+            }
+        ],
+        "stop": [
+            {
+                "type" : "gpii.launch.exec",
+                "command": "Powershell.exe -ExecutionPolicy Bypass \
+                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuRecover.ps1\""
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.immersiveMode": {
         "name": "Windows 10 Simplification",
         "contexts": {
             "OS": [
@@ -3188,7 +3322,7 @@
             ]
         },
         "settingsHandlers": {
-            "configImmersiveShell": {
+            "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -3205,103 +3339,20 @@
                     "ConvertibleSlateModePromptPreference" : {}
                 },
                 "capabilities": [],
-                "capabilitiesTransformations": {
-                    "TabletMode": {
-                        "literalValue": 1
-                    },
-                    "SignInMode": {
-                        "literalValue": 0
-                    },
-                    "ConvertibleSlateModePromptPreference": {
-                        "literalValue": 2
-                    }
-                }
+                "capabilitiesTransformations": {}
             },
-            "configStartMenu": {
-                "type": "gpii.windows.registrySettingsHandler",
-                "options": {
-                    "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
-                    "dataTypes": {
-                        "ForceStartSize": "REG_DWORD"
-                    }
-                },
-                "supportedSettings": {
-                    "ForceStartSize": {}
-                },
-                "capabilities": [],
-                "capabilitiesTransformations": {
-                    "ForceStartSize": {
-                        "literalValue": 1
-                    }
-                }
-            },
-            "configFullscreen": {
-                "type": "gpii.windows.registrySettingsHandler",
-                "options": {
-                    "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-                    "dataTypes": {
-                        "TaskbarAppsVisibleInTabletMode": "REG_DWORD",
-                        "TaskbarAutoHideInTabletMode": "REG_DWORD"
-                    }
-                },
-                "supportedSettings": {
-                    "TaskbarAppsVisibleInTabletMode": {},
-                    "TaskbarAutoHideInTabletMode": {},
-                },
-                "capabilities": [],
-                "capabilitiesTransformations": {
-                    "TaskbarAppsVisibleInTabletMode": {
-                        "literalValue": 0
-                    },
-                    "TaskbarAutoHideInTabletMode": {
-                        "literalValue": 0
-                    },
-                }
-            },
-            "taskBarAutoHideTabletMode": {
-                "type": "gpii.windows.registrySettingsHandler",
-                "options": {
-                    "hKey": "HKEY_CURRENT_USER",
-                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-                    "dataTypes": {
-                        "TaskbarAutoHideInTabletMode": "REG_DWORD",
-                    }
-                },
-                "supportedSettings": {
-                    "TaskbarAutoHideInTabletMode": {}
-                },
-                "capabilities": [],
-                "capabilitiesTransformations": {
-                    "TaskbarAutoHideInTabletMode": {
-                        "literalValue": 1
-                    }
-                }
-            }
         },
         "configure": [
-            "settings.configImmersiveShell",
-            "settings.configStartMenu",
-            "settings.configFullscreen",
-            "settings.taskBarAutoHideTabletMode"
+            "settings.configuration",
         ],
         "restore": [
-            "settings.configImmersiveShell",
-            "settings.configStartMenu",
-            "settings.configFullscreen",
-            "settings.taskBarAutoHideTabletMode"
+            "settings.configuration",
         ],
         "start": [
             {
                 "type": "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellSetter.ps1\""
-            },
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuSetter.ps1\""
             }
         ],
         "stop": [
@@ -3309,11 +3360,6 @@
                 "type" : "gpii.launch.exec",
                 "command": "Powershell.exe -ExecutionPolicy Bypass \
                             -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellRecover.ps1\""
-            },
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuRecover.ps1\""
             }
         ],
     }
