@@ -4,24 +4,24 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.microsoft.windows.ClassicShell": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.classicShell": {
                         "MenuStyle": "Win7",
                         "SkipMetro": 1,
                         "SkinW7": "Windows Aero"
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.Taskbar": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskbar": {
                         "SearchboxTaskbarMode": 0
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.TaskView": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskView": {
                         "ShowTaskViewButton": 0
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.LockScreen": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.lockScreen": {
                         "NoLockScreen": 1
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.TitleBarColor": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.titleBarColor": {
                         "ColorPrevalence": 1
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.TaskBarColor": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskBarColor": {
                         "ColorPrevalence": 1
                     },
                     "http://registry.gpii.net/common/wallpaper": "${{environment}.HOMEDRIVE}${{environment}.HOMEPATH}\\AppData\\Local\\GPII-Demo\\wallpapers\\img0.jpg"

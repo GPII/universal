@@ -2840,7 +2840,7 @@
         ]
     },
 
-    "com.microsoft.windows.ClassicShell": {
+    "com.microsoft.windows.classicShell": {
         "name": "ClassicShell start menu replacement",
         "contexts": {
             "os": [
@@ -2911,7 +2911,7 @@
         ]
     },
 
-    "com.microsoft.windows.Taskbar": {
+    "com.microsoft.windows.taskbar": {
         "name": "Configure search field from Windows 10 Taskbar",
         "contexts": {
             "os": [
@@ -3013,7 +3013,7 @@
         ]
     },
 
-    "com.microsoft.windows.TaskView": {
+    "com.microsoft.windows.taskView": {
         "name": "Configures Windows 10 TaskView button",
         "contexts": {
             "OS": [
@@ -3056,7 +3056,7 @@
         ]
     },
 
-    "com.microsoft.windows.LockScreen": {
+    "com.microsoft.windows.lockScreen": {
         "name": "Disables Windows 10 lockscreen",
         "contexts": {
             "OS": [
@@ -3097,7 +3097,7 @@
         ]
     },
 
-    "com.microsoft.windows.TitleBarColor": {
+    "com.microsoft.windows.titleBarColor": {
         "name": "Change the Windows 10 native windows titlebar color",
         "contexts": {
             "OS": [
@@ -3137,7 +3137,7 @@
         ]
     },
 
-    "com.microsoft.windows.TaskBarColor": {
+    "com.microsoft.windows.taskBarColor": {
         "name": "Windows 7 look and feel for Windows 10",
         "contexts": {
             "OS": [

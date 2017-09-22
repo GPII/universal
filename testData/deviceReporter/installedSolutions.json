@@ -68,27 +68,27 @@
     },
 
     {
-        "id": "com.microsoft.windows.ClassicShell"
+        "id": "com.microsoft.windows.classicShell"
     },
 
     {
-        "id": "com.microsoft.windows.Taskbar"
+        "id": "com.microsoft.windows.taskbar"
     },
 
     {
-        "id": "com.microsoft.windows.TaskView"
+        "id": "com.microsoft.windows.taskView"
     },
 
     {
-        "id": "com.microsoft.windows.LockScreen"
+        "id": "com.microsoft.windows.lockScreen"
     },
 
     {
-        "id": "com.microsoft.windows.TitleBarColor"
+        "id": "com.microsoft.windows.titleBarColor"
     },
 
     {
-        "id": "com.microsoft.windows.TaskBarColor"
+        "id": "com.microsoft.windows.taskBarColor"
     },
 
     {
