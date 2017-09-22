@@ -78,24 +78,29 @@ gpii.oauth2.getCurrentTimestamp = function () {
 
 /**
  * Calculate the timestamp of currentTime + expiresIn.
+ * @param timestampStarts {Date} A start timestamp in the format returned by Date()
  * @param expiresIn {Number} The number of seconds that the expiration will occur.
  * @return {String} A date in simpilified ISO string format.
  */
-gpii.oauth2.getTimestampExpires = function (expiresIn) {
-    return new Date(new Date().getTime() + expiresIn * 1000).toISOString();
+gpii.oauth2.getTimestampExpires = function (timestampStarts, expiresIn) {
+    if (!timestampStarts) {
+        return undefined;
+    }
+    return new Date(timestampStarts.getTime() + expiresIn * 1000).toISOString();
 };
 
 /**
  * Compare the current time with the expiresIn time and return the number of seconds that the expiration will occur.
+ * @param timestampStarts {Date} A start timestamp in the format returned by Date()
  * @param timestampExpires {String} A string in the format returned by Date().toISOString()
  * @return {Number} The number of seconds that the expiration will occur. Return 0 if the given timestampExpires < the current timestamp.
  */
-gpii.oauth2.getExpiresIn = function (timestampExpires) {
-    if (!timestampExpires) {
+gpii.oauth2.getExpiresIn = function (timestampStarts, timestampExpires) {
+    if (!timestampStarts || !timestampExpires) {
         return undefined;
     }
 
-    var currentTimeInMsec = new Date().getTime();
+    var startsTimeInMsec = timestampStarts.getTime();
     var expiresTimeInMsec = new Date(timestampExpires).getTime();
-    return expiresTimeInMsec > currentTimeInMsec ? Math.round((expiresTimeInMsec - currentTimeInMsec) / 1000) : 0;
+    return expiresTimeInMsec > startsTimeInMsec ? Math.round((expiresTimeInMsec - startsTimeInMsec) / 1000) : 0;
 };

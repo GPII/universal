@@ -255,7 +255,7 @@ var fluid = fluid || require("infusion");
             clientId: clientId,
             gpiiToken: gpiiToken,
             accessToken: accessToken,
-            timestampExpires: gpii.oauth2.getTimestampExpires(expiresIn)
+            timestampExpires: gpii.oauth2.getTimestampExpires(new Date(), expiresIn)
         });
 
         var mapper = function () {
