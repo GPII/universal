@@ -1,4 +1,4 @@
 {
-    "id": "pilot-computer",
-    "secret": "pilot-computer-secret"
+    "client_id": "pilot-computer",
+    "client_secret": "pilot-computer-secret"
 }
