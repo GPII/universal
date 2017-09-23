@@ -56,17 +56,11 @@ resolve("browserify", {basedir: universalPath}, function (err, res) {
                     moduleScript: "url/url.js",
                     outputFile: "urlModule.js"
                 });
-                var browserifyDataSourceUrlCommand = fluid.stringTemplate(browserifyCommandTemplate, {
-                    module: "dataSource-url",
-                    moduleScript: "kettle/lib/dataSource-url.js",
-                    outputFile: "dataSource-url.js"
-                });
 
                 // execute browserify commands
                 exec(browserifyHttpCommand);
                 exec(browserifyHttpsCommand);
                 exec(browserifyUrlModuleCommand);
-                exec(browserifyDataSourceUrlCommand);
             });
         });
     }
