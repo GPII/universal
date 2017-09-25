@@ -33,15 +33,15 @@ The reason for continuing to support the specific /login and /logout, instead of
 The core part of the flow is defined in two files:
 
 * `UserLogonStateChange.js` contains the handling of the logon related endpoints kicks off the related process. It contains individual handlers for the `login`, `logout` and `proximityTriggered` URLs. These handlers all have the `gpii.flowManager.userLogonHandling.stateChangeHandler` grade, which is the component that contains the functionality for the actual logging in and logging off.
-* `FlowManagerUtitilities.js` which describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
+* `FlowManagerRequests.js` which describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
 
 The user login process is as follows:
 
 1. a GET request is sent to either `/user/:token/login` or `/user/:token/proximityTriggered`. This is retrieved by the relevant handler in `UserLogonStateChange`, and if it is found that the token needs to be logged in, the `onUserToken` event is fired (via the `gpii.flowManager.userLogonHandling.loginUser` function)
 1. the `onUserToken` event has three listeners:
    1. UserLogonStateChange's `getDeviceContext`, which fetches the device reporter data. When this has been fetched an `onDeviceContext` event is fired.
-   2. `getPreferences` (flowManagerUtilities), which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
-   3. `setUserToken` (flowManagerUtilities) which sets the userToken property in the handler
+   2. `getPreferences` (flowManagerRequests), which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
+   3. `setUserToken` (flowManagerRequests) which sets the userToken property in the handler
 1. the `onDeviceContext` event has one listener:
    1. `getSolutions` (flowManagerUtitilies), which fetches the solutions registry and filters it based on the device reporter info. The `onSolutions` event is fired with the result.
 1. The `onReadyToMatch` event is listening to the three events described above: `onDeviceContext`, `onPreferences` and `onSolutions`. When these three events have been fired, the `onReadyToMatch` event will be triggered.

@@ -4,7 +4,7 @@ The flowmanager is the central point of coordination in the system for managing 
 For example, it coordinates the steps involved during logging in which require retrieving preferences, solutions, device data, etc. and passing these to the [MatchMaker Framework](MatchMakerFramework.md).
 Following those steps, the payload is sent via the [Context Manager](ContextManager.md) and then to the [Lifecycle Manager](LifecycleManager.md).
 
-###Important flows
+### Important flows
 Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different.
 Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerUtitilies.js`. The different kinds of flows are:
 * **User Login** (`UserLogin.js`) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
@@ -20,7 +20,7 @@ There are a few notification events on the flowmanager related to the key-in and
 * userLoginComplete: fired when the process of keying in a user (ie. configuring the system) has completed,
 * userLogoutComplete: fired when the process of keying out a user (ie. restoring the system) has completed,
 
-###APIs
+### APIs
 
 #### User Logon state change (GET /user/:token/proximityTriggered)
 * **description**: Change the logon state for the user with the given `:token`. Note that there is a debounce functionality
