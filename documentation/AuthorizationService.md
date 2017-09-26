@@ -39,7 +39,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 #### addUserAuthorizedAuthorization(userId, clientId, selectedPreferences)
 - **description**: Add an authorization for a web preferences consumer client or a onboarded solution client. This API checks if an user authorization already exists based on the user id and OAuth2 client id/solution id. If it doesn't exist, generate an access token and add the authorization. If it does exist, do nothing. This function adds 2 type of authorizations: onboarded solution authorizations and web preferences consumer authorizations. When adding onboarded solution authorizations, the 2rd argument `solutionId` must be provided and the 3rd argument `oauth2ClientId` should be empty. Vice versa when adding web preferences consumer authorizations.
 - **parameters:**
-    - userId: String. A system generated unique number that identifies the user.
+    - userId: String. A system generated unique id that identifies the user.
     - clientId: String. A unique string that represents the registration information of a GPII client.
         * If the client is one of these client types: GPII app installation, privileged preferences creator, web preferences consumer. The `clientId` is the `oauth2ClientId` field value in the corresponding document.
         * If the client type is onboarded solution, the `clientId` is the `solutionId` field value in the corresponding document.
@@ -56,7 +56,7 @@ The authorization service provides API that allows users to add, retrieve, updat
 * **description**: Used by web preferences consumers to exchange the authorization code for an access token. Before the exchange, the function verifies the authorization code has been issued for the client.
 * **parameters:**
     * code: String. An authorization code that is previously granted.
-    * clientId: String. A system generated unique number that identifies the client.
+    * clientId: String. A system generated unique id that identifies the client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** The access token if the authorization code is valid. Otherwise, return `false`.
 
@@ -97,14 +97,14 @@ client.
 #### getSelectedPreferences(userId, authorizationId)
 * **description**: Get the user selected preferences that is saved within the authorization. The function verifies the authorization is made by the user and not revoked.
 * **parameters:**
-    * userId: String. A system generated unique number that identifies the user.
-    * authorizationId: String. A system generated unique number that identifies the authorization.
+    * userId: String. A system generated unique id that identifies the user.
+    * authorizationId: String. A system generated unique id that identifies the authorization.
 * **return:** The user selected preferences if the authorization id is valid. Otherwise, return `unknown`.
 
 #### getUserAuthorizedClientsForUser(userId)
 * **description**: Get all authorized clients for the user. At the moment, the client types that user can authorize are onboarded solution clients and web preferences consumers clients.
 * **parameters:**
-    * userId: String. A system generated unique number that identifies the user.
+    * userId: String. A system generated unique id that identifies the user.
 * **return:** An object. This object contains arrays of authorized client information. Each array is keyed by the corresponding client type.
 
 For onboarded solution clients, the client information contains:
@@ -149,7 +149,7 @@ An example:
 #### getUserUnauthorizedClientsForUser(userId)
 * **description**: Get a list of all the clients that haven't been authorized by the user. At the moment, the client types that user can authorize are onboarded solution clients and web preferences consumers clients.
 * **parameters:**
-    * userId: String. A system generated unique number that identifies the user.
+    * userId: String. A system generated unique id that identifies the user.
 + **return:** An object. This object contains arrays of unauthorized client information. Each array is keyed by the corresponding client type.
 
 For onboarded solution clients, the client information contains:
@@ -194,7 +194,7 @@ An example:
 }
 ```
 Return an object that contains the error message and http status code if,
-+ The GPII token is wrong, or,
++ The GPII token is not found, or,
 + The client is not a GPII App Installation Client.
 
 #### grantPrivilegedPrefsCreatorAuthorization(clientId, scope)
@@ -202,7 +202,7 @@ Return an object that contains the error message and http status code if,
     * If the given privileged preferences creator has never been assigned an authorization, the function will generate and return one.
     * If the given privileged preferences creator has already been assigned an authorization, the function will return this existing authorization.
 * **parameters:**
-    * clientId: String. A system generated unique number that identifies the client.
+    * clientId: String. A system generated unique id that identifies the client.
         - Notes: "privilegedPrefsCreatorClient" is the only GPII client type that is allowed to request privileged prefs creator authorizations. See [the `Privileged Prefs Creator Clients` document structure](AuthServer.md#privileged-prefs-creator-clients).
     * scope: String. Must be "add_preferences".
         - Notes: "add_preferences" is the only scope currently supported by the [GPII Client Credentials Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Client_Credentials_Grant).
@@ -211,8 +211,8 @@ Return an object that contains the error message and http status code if,
 #### grantWebPrefsConsumerAuthCode(userId, clientId, redirectUri, selectedPreferences)
 - **description**: Grant an Authorization Code for the specified user, client, redirect URI and selected preferences. We first check to see if we have an existing authorization for the user, client, and redirect URI. If we do, we issue a new code for that authorization. Otherwise we create a new authorization record and a new code.
 - **parameters:**
-    - userId: String. A system generated unique number that identifies the user.
-    - clientId: String. A system generated unique number that identifies the client.
+    - userId: String. A system generated unique id that identifies the user.
+    - clientId: String. A system generated unique id that identifies the client.
     - redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
     - selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
@@ -232,15 +232,15 @@ Return an object that contains the error message and http status code if,
 #### revokeUserAuthorizedAuthorization(userId, authorizationId)
 * **description**: Revoke an authorization. This API is used to revoke these authorization types: onboarded solution authorizations, web preferences consumer authorizations.
 * **parameters:**
-    * userId: String. A system generated unique number that identifies the user.
-    * authorizationId: String. A system generated unique number that identifies the authorization.
+    * userId: String. A system generated unique id that identifies the user.
+    * authorizationId: String. A system generated unique id that identifies the authorization.
 * **return:** None.
 
 #### setSelectedPreferences(userId, authorizationId, selectedPreferences)
 * **description**: Update the user selected preferences that is saved within the authorization. The function verifies the authorization is made by the user.
 * **parameters:**
-    * userId: String. A system generated unique number that identifies the user.
-    * authorizationId: String. A system generated unique number that identifies the authorization.
+    * userId: String. A system generated unique id that identifies the user.
+    * authorizationId: String. A system generated unique id that identifies the authorization.
     * selectedPreferences: Object. An object specifying the preferences that the user has selected to share, in the privacy ontology. An example:
     ```
     {
@@ -253,7 +253,7 @@ Return an object that contains the error message and http status code if,
 #### userHasAuthorizedWebPrefsConsumer(userId, clientId, redirectUri)
 * **description**: Check if the user has an authorization for the web preferences consumer client. Return true if has, otherwise, return false.
 * **parameters:**
-    * userId: String. A system generated unique number that identifies the user.
-    * clientId: String. A system generated unique number that identifies the web preferences consumer client.
+    * userId: String. A system generated unique id that identifies the user.
+    * clientId: String. A system generated unique id that identifies the web preferences consumer client.
     * redirectUri: String. The client redirection URI that the authorization server directs the user-agent to when a authorization is established.
 * **return:** `True` or `false`.
