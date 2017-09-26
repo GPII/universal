@@ -1816,7 +1816,9 @@
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
                 "capabilities": [
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled"
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
                 ],
                 "capabilitiesTransformations": {
                     "transform": [
