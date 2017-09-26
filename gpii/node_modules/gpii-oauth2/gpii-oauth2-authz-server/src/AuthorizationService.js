@@ -61,8 +61,8 @@ var fluid = fluid || require("infusion");
             // APIs for both Web Preferences Consumer Clients and Onboarded Solution Clients
             addUserAuthorizedAuthorization: {
                 funcName: "gpii.oauth2.authorizationService.addUserAuthorizedAuthorization",
-                args: ["{that}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
-                    // gpiiToken, solutionId, oauth2ClientId, selectedPreferences
+                args: ["{that}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+                    // gpiiToken, clientId, selectedPreferences
             },
             getSelectedPreferences: {
                 funcName: "gpii.oauth2.authorizationService.getSelectedPreferences",
