@@ -621,6 +621,28 @@
                 ],
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings"
+                },
+                "supportedSettings": {
+                    "ApplicationSettings.AppBar.optToolbarIconSet.$t": {},
+                    "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": {},
+                    "ApplicationSettings.AppBar.DocType.$t": {},
+                    "ApplicationSettings.AppBar.Width.$t": {},
+                    "ApplicationSettings.AppBar.ShowText.$t": {},
+                    "ApplicationSettings.AppBar.optToolbarShowText.$t": {},
+                    "ApplicationSettings.AppBar.LargeIcons.$t": {},
+                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Pitch.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Speed.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Volume.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Voice.$t": {},
+                    "ApplicationSettings.Speech.WebHighlighting.$t": {},
+                    "ApplicationSettings.Translation.ToLanguage.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": {},
+                    "ApplicationSettings.Scanning.ScanDestination.$t": {},
+                    "ApplicationSettings.Scanning.ScanToFile.$t": {},
+                    "ApplicationSettings.Spelling.SpellAsIType.$t": {},
+                    "ApplicationSettings.Speech.optAutoUseScreenReading.$t": {}
                 }
             }
         },
@@ -684,6 +706,15 @@
                         "MagnificationMode": "REG_DWORD",
                         "ZoomIncrement": "REG_DWORD"
                     }
+                },
+                "supportedSettings": {
+                    "Magnification": {},
+                    "Invert": {},
+                    "FollowFocus": {},
+                    "FollowCaret": {},
+                    "FollowMouse": {},
+                    "MagnificationMode": {},
+                    "ZoomIncrement": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -820,6 +851,9 @@
                     "dataTypes": {
                         "NavigationMode": "REG_DWORD"
                     }
+                },
+                "supportedSettings": {
+                    "NavigationMode": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
@@ -1153,6 +1187,23 @@
                     "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
                     "allowSubSections": true
+                },
+                "supportedSettings": {
+                    "speech.espeak.pitch": {},
+                    "speech.espeak.volume": {},
+                    "presentation.reportHelpBalloons": {},
+                    "keyboard.speakTypedCharacters": {},
+                    "keyboard.speakTypedWords": {},
+                    "speech.espeak.sayCapForCapitals": {},
+                    "reviewCursor.followFocus": {},
+                    "reviewCursor.followCaret": {},
+                    "reviewCursor.followMouse": {},
+                    "speech.synth": {},
+                    "speech.outputDevice": {},
+                    "speech.espeak.rate": {},
+                    "speech.espeak.rateBoost": {},
+                    "speech.symbolLevel": {},
+                    "speech.espeak.voice": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -1698,6 +1749,12 @@
                 "options": {
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
+                "supportedSettings": {
+                    "speakOnActivate": {},
+                    "speakTitles": {},
+                    "speakLabels": {},
+                    "theme": {}
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                     "http://registry\\.gpii\\.net/common/highContrastEnabled",
@@ -1899,6 +1956,9 @@
                     },
                     "verifySettings": true
                 },
+                "supportedSettings": {
+                    "StickyKeysOn": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
@@ -1952,6 +2012,11 @@
                         "name": "FILTERKEYS"
                     },
                     "verifySettings": false
+                },
+                "supportedSettings": {
+                    "FilterKeysEnable": {},
+                    "FilterKeysEnable": {},
+                    "BounceKeysInterval": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2139,6 +2204,11 @@
                     },
                     "verifySettings": true
                 },
+                "supportedSettings": {
+                    "MouseKeysOn": {},
+                    "MaxSpeed": {},
+                    "Acceleration": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "MouseKeysOn": {
@@ -2253,6 +2323,9 @@
                     },
                     "verifySettings": true
                 },
+                "supportedSettings": {
+                    "MouseTrails": {}
+                },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/mouseTrailing"
                 ],
@@ -2334,10 +2407,16 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "supportedSettings": {
+                    "screen-dpi": {}
+                },
                 "capabilities": [
                     "display.screenEnhancement.screenScale",
                     "applications.com\\.microsoft\\.windows\\.screenDPI.id"
-                ]
+                ],
+                "capabilitiesTransformations": {
+                    "screen-dpi": "http://registry\\.gpii\\.net/common/screenDPI"
+                }
             }
         },
         "configure": [
@@ -2385,6 +2464,21 @@
                         "Wait": "REG_SZ"
                     },
                     "verifySettings": true
+                },
+                "supportedSettings": {
+                    "Arrow": {},
+                    "Hand": {},
+                    "Help": {},
+                    "AppStarting": {},
+                    "No": {},
+                    "NWPen": {},
+                    "SizeAll": {},
+                    "SizeNESW": {},
+                    "SizeNS": {},
+                    "SizeNWSE": {},
+                    "SizeWE": {},
+                    "UpArrow": {},
+                    "Wait": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/cursorSize"
@@ -2669,6 +2763,14 @@
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
                 },
+                "supportedSettings": {
+                    "user.$t": {},
+                    "expert.$t": {},
+                    "careCenter.$t": {},
+                    "screenReaderTTSEnabled": {},
+                    "highContrastEnabled": {},
+                    "fontSize": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "user.$t": {
@@ -2686,7 +2788,7 @@
                     "highContrastEnabled": {
                         "value": "http://registry\\.gpii\\.net/common/highContrastEnabled"
                     },
-                     "fontSize": {
+                    "fontSize": {
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.quantize",
@@ -2743,6 +2845,19 @@
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
                     "path": "net.gpii.uioPlus"
+                },
+                "supportedSettings": {
+                    "lineSpace": {},
+                    "fontSize": {},
+                    "characterSpace": {},
+                    "inputsLargerEnabled": {},
+                    "contrastTheme": {},
+                    "selfVoicingEnabled": {},
+                    "selectionTheme": {},
+                    "tableOfContents": {},
+                    "dictionaryEnabled": {},
+                    "simplifiedUiEnabled": {},
+                    "syllabificationEnabled": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/lineSpace",
