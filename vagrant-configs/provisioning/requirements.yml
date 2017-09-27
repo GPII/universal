@@ -10,7 +10,8 @@
 - src: https://github.com/gpii-ops/ansible-preferences-server
   name: preferences-server
 
-- src: https://github.com/gpii-ops/ansible-preferences-server-data-loader
+- src: https://github.com/cindyli/ansible-preferences-server-data-loader
+  version: remotes/origin/GPII-2620
   name: preferences-server-data-loader
 
 - src: https://github.com/gpii-ops/ansible-flow-manager
