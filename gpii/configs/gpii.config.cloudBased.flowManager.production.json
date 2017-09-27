@@ -1,13 +1,17 @@
 {
     "type": "gpii.config.cloudBased.flowManager.production",
     "options": {
-        "mainServerPort": 8082,
         "authDBServerPort": 5984,
         "distributeOptions": {
             "flowManager.production.matchMakers": {
                 "record": "http://localhost:8082",
                 "target": "{that flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
+            },
+            "distributePort.cloudBasedProductionPort": {
+                "record": 8082,
+                "target": "{that kettle.server}.options.port",
+                "priority": "after:distributePort.productionPort"
             }
         }
     },
