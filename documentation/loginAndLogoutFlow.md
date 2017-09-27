@@ -25,9 +25,6 @@ The reason for preferring the `/proximityTriggered` URL over the `/logout` and `
 
 The reason for continuing to support the specific /login and /logout, instead of only supporting the `/proximityTriggered` URL is that they make sense for some user listeners, for example when using the the USB listener, one wouldn't expect to log a user out when inserting the USB, or log a user in when pulling the USB out. So for that, it seems to make sense that it attempts to log in (i.e. call `/login`) or log out (i.e. call `/logout` when inserting/removing the USB, respectively
 
-
-
-
 ### Technical description
 
 The core part of the flow is defined in two files:
@@ -49,6 +46,9 @@ The user login process is as follows:
    1. Generally some prioritized steps: `preProcess`, `matchMakerDispatcher`, `runContextManager`, `privacyFilter` and `transform` will be run (in that order).
    1. The end result of this process is a description of the configuration to be applied to system (described per appplication, filtered according to users privacy settings, etc). The even `onMatchDone` signals that we have the lifecycle instructions ready. For more details on the match maker frameworks internal workings, see: [Match Maker Framework Documentation](MatchMakerFramework.md)
 1. `onMatchDone` is being listened to by the `startLifecycle` (UserLogonStateChange), which applies the settings to the system via the functionality in the LifecycleManager.
+
+**Note**:
+When GPII is deployed for [public work stations use case](https://wiki.gpii.net/w/GPII_Deployment_Structures#Public_work_stations), GPII apps are installed on user machines and request user settings from GPII Cloud. In this deployment, step 1, 2, 3, 6 described above are performed by GPII app and step 4, 5 are performed by GPII Cloud. GPII apps use Resource Owner GPII Token Grant and follow [these steps](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) to request user settings from GPII Cloud.
 
 ### Finally, there are some important events exposed on the `flowManager` component:
 
