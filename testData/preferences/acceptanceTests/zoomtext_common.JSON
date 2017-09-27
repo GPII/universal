@@ -1,0 +1,17 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/speechRate": 22,
+                    "http://registry.gpii.net/common/volume": 88,
+                    "http://registry.gpii.net/common/magnifierEnabled": true,
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry.gpii.net/common/increaseMagnification": true,
+                    "http://registry.gpii.net/common/centerMouse": true
+                }
+            }
+        }
+    }
+}
