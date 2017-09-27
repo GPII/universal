@@ -765,7 +765,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/invertColours": "Invert.value",
+                    "http://registry\\.gpii\\.net/common/invertColours": "Invert",
                     "transform": [
                         {
                             "type": "fluid.transforms.linearScale",
@@ -787,7 +787,7 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "MagnificationMode.value",
+                            "defaultInputPath": "MagnificationMode",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
                             "match": {
                                 "2": "FullScreen",
