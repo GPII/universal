@@ -4,7 +4,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/screenDPI": 1.75,
+                    "http://registry.gpii.net/common/screenDPI": 175,
                     "http://registry.gpii.net/common/cursorSize": 1.0,
                     "http://registry.gpii.net/common/supportTool": ["dictionary"]
                 }

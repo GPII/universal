@@ -2415,7 +2415,13 @@
                     "applications.com\\.microsoft\\.windows\\.screenDPI.id"
                 ],
                 "capabilitiesTransformations": {
-                    "screen-dpi": "http://registry\\.gpii\\.net/common/screenDPI"
+                    "screen-dpi": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/screenDPI",
+                            "factor": 100
+                        }
+                    }
                 }
             }
         },
