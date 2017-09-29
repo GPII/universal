@@ -292,13 +292,11 @@ fluid.defaults("gpii.oauth2.authServer.standalone", {
 gpii.oauth2.authServer.loginRouting = function (passport, options) {
     return function (req, res, next) {
         passport.authenticate("local", function (err, user) {
-            if (err) {
-                return next(err);
-            }
-
             if (!user) {
                 req.session.loginFailed = true;
                 return res.redirect(options.failureRedirect);
+            } else if (err) {
+                return next(err);
             }
 
             req.logIn(user, function (err) {
@@ -630,6 +628,6 @@ gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done, paramsPro
         }
     }, function (error) {
         var responseError = new oauth2orize.OAuth2Error(error.msg, null, null, error.statusCode);
-        done(responseError);
+        done(responseError, false);
     });
 };
