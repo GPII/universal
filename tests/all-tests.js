@@ -50,6 +50,7 @@ var testIncludes = [
     "./PreferencesServerErrorTests.js",
     "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
+    "./UntrustedContextIntegrationTests.js",
     "./UntrustedDevelopmentTests.js",
     "./PayloadSizeTest.js",
     "./UntrustedUserLogonStateChangeTests.js",

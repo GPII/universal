@@ -386,7 +386,8 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize"
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
                 ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
@@ -452,7 +453,10 @@
         "settingsHandlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [],
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
+                ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "textSize": {

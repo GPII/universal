@@ -56,22 +56,10 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.sendUntrustedSettingsRequest = funct
     untrustedSettingsRequest.send(null, securedHeader);
 };
 
-gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyPayloadMatchMakerOutput = function (body, expectedSettings) {
+gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
     var payload = JSON.parse(body);
-    var lifecycleInstructions = fluid.get(payload, [ "matchMakerOutput", "inferredConfiguration", "gpii-default", "lifecycleInstructions" ]);
-    // remove all irrelevant chunks of the payload (i.e. keep only structure into settings blocks)
-    var filteredInstructions = fluid.copy(lifecycleInstructions);
-    filteredInstructions = fluid.transform(filteredInstructions, function (solutionEntry) {
-        return {
-            settingsHandlers: fluid.transform(solutionEntry.settingsHandlers, function (settingsHandlerBlock) {
-                return {
-                    settings: settingsHandlerBlock.settings
-                };
-            })
-        };
-    });
-
-    jqUnit.assertDeepEq("Verifying settings from matchmaker output", expectedSettings, filteredInstructions);
+    console.log("=== expectedMatchMakerOutput", expectedMatchMakerOutput)
+     jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.requests", {
@@ -142,7 +130,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.mainSequence = [
     { // 5
         event: "{untrustedSettingsRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyPayloadMatchMakerOutput",
-        args: ["{arguments}.0", "{testCaseHolder}.options.expectedSettings"]
+        args: ["{arguments}.0", "{testCaseHolder}.options.expectedMatchMakerOutput"]
     }
 ];
 
@@ -271,7 +259,13 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests = [
 
             // The options below are required for sending /untrusted-settings
             userToken: "os_gnome",
-            expectedSettings: {}
+            expectedMatchMakerOutput: {
+                "inferredConfiguration": {
+                    "gpii-default": {
+                        "applications": { }
+                    }
+                }
+            }
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.gpiiAppInstallation.disruption.mainSequence"
@@ -298,13 +292,16 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests = [
                     revoked: false
                 }
             ],
-            expectedSettings: {
-                "org.gnome.desktop.a11y.magnifier": {
-                    "settingsHandlers": {
-                        "configuration": {
-                            "settings": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
+            expectedMatchMakerOutput: {
+                "inferredConfiguration": {
+                    "gpii-default": {
+                        "applications": {
+                            "org.gnome.desktop.a11y.magnifier": {
+                                "active": true,
+                                "settings": {
+                                    "http://registry.gpii.net/common/magnification": 1.5,
+                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
+                                }
                             }
                         }
                     }
@@ -343,24 +340,22 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests = [
                     revoked: false
                 }
             ],
-            expectedSettings: {
-                "org.gnome.desktop.a11y.magnifier": {
-                    "settingsHandlers": {
-                        "configuration": {
-                            "settings": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
-                            }
-                        }
-                    }
-                },
-                "org.gnome.desktop.interface": {
-                    "settingsHandlers": {
-                        "configuration": {
-                            "settings": {
-                                "text-scaling-factor": 0.75,
-                                "gtk-theme": "Adwaita", // added by default if high contrast isn't on
-                                "icon-theme": "gnome" // added by default if high contrast isn't on
+            expectedMatchMakerOutput: {
+                "inferredConfiguration": {
+                    "gpii-default": {
+                        "applications": {
+                            "org.gnome.desktop.a11y.magnifier": {
+                                "active": true,
+                                "settings": {
+                                    "http://registry.gpii.net/common/magnification": 1.5,
+                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
+                                }
+                            },
+                            "org.gnome.desktop.interface": {
+                                "active": true,
+                                "settings": {
+                                    "http://registry.gpii.net/common/fontSize": 9
+                                }
                             }
                         }
                     }
@@ -384,34 +379,40 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.disruptedTests = [
             // The options below are required for sending /untrusted-settings
             userToken: "os_gnome",
             isAnonymousToken: true,
-            expectedSettings: {
-                "org.gnome.desktop.a11y.magnifier": {
-                    "settingsHandlers": {
-                        "configuration": {
-                            "settings": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
-                            }
-                        }
-                    }
-                },
-                "org.gnome.desktop.interface": {
-                    "settingsHandlers": {
-                        "configuration": {
-                            "settings": {
-                                "text-scaling-factor": 0.75,
-                                "cursor-size": 90,
-                                "gtk-theme": "Adwaita", // added by default if high contrast isn't on
-                                "icon-theme": "gnome" // added by default if high contrast isn't on
-                            }
-                        }
-                    }
-                },
-                "org.alsa-project": {
-                    "settingsHandlers": {
-                        "configuration": {
-                            "settings": {
-                                "masterVolume": 50
+            expectedMatchMakerOutput: {
+                "inferredConfiguration": {
+                    "gpii-default": {
+                        "applications": {
+                            "org.gnome.desktop.a11y.magnifier": {
+                                "active": true,
+                                "settings": {
+                                    "http://registry.gpii.net/common/magnification": 1.5,
+                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
+                                    "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                                        "mag-factor": 1.5,
+                                        "screen-position": "full-screen"
+                                    }
+                                }
+                            },
+                            "org.gnome.desktop.interface": {
+                                "active": true,
+                                "settings": {
+                                    "http://registry.gpii.net/common/fontSize": 9,
+                                    "http://registry.gpii.net/common/cursorSize": 0.9,
+                                    "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
+                                        "cursor-size": 90,
+                                        "text-scaling-factor": 0.75
+                                    }
+                                }
+                            },
+                            "org.alsa-project": {
+                                "active": true,
+                                "settings": {
+                                    "http://registry.gpii.net/common/volume": 0.5,
+                                    "http://registry.gpii.net/applications/org.alsa-project": {
+                                        "masterVolume": 50
+                                    }
+                                }
                             }
                         }
                     }

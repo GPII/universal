@@ -44,6 +44,12 @@
         "userId": null
     },
     {
+        "_id": "gpiiToken-6",
+        "type": "gpiiToken",
+        "gpiiToken": "context1",
+        "userId": null
+    },
+    {
         "_id": "client-1",
         "type": "webPrefsConsumerClient",
         "name": "Cloud4Chrome",
