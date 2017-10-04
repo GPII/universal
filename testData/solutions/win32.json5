@@ -2840,5 +2840,49 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+
+    "info.wordweb": {
+        "name": "WordWeb",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.noSettings"
+            }
+        },
+        "start": [
+            {
+                "type": "gpii.launch.exec",
+                "command": "\"C:\\Program Files (x86)\\WordWeb\\wweb32.exe\""
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "wweb32.exe"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_CURRENT_USER",
+                "path": "Software\\WordWeb\\3",
+                "subPath": "Font Name",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "wweb32"
+            }
+        ]
     }
 }
