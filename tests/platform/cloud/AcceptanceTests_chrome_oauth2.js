@@ -55,13 +55,15 @@ fluid.defaults("gpii.tests.cloud.oauth2.authorizationRequests", {
         putAuthorizationRequest: {
             type: "kettle.test.request.httpCookie",
             options: {
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+                path: "/authorizations/%authorizationId",
                 method: "PUT"
             }
         },
         getAuthorizationRequest2: {
-            type: "kettle.test.request.httpCookie"
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+            type: "kettle.test.request.httpCookie",
+            options: {
+                path: "/authorizations/%authorizationId"
+            }
         }
     }
 });
@@ -73,13 +75,15 @@ fluid.defaults("gpii.tests.cloud.oauth2.revocationRequests", {
         revocationRequest: {
             type: "kettle.test.request.httpCookie",
             options: {
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+                path: "/authorizations/%authorizationId",
                 method: "DELETE"
             }
         },
         getAuthorizationRequest2: {
-            type: "kettle.test.request.httpCookie"
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+            type: "kettle.test.request.httpCookie",
+            options: {
+                path: "/authorizations/%authorizationId"
+            }
         }
     }
 });
@@ -149,14 +153,13 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
     insertRecords: [{
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
         args: ["{putAuthorizationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
-            "/preferences", "{testCaseHolder}.options.updatedSelectedPreferences"]
+            true, "{testCaseHolder}.options.updatedSelectedPreferences"]
     }, {
         event: "{putAuthorizationRequest}.events.onComplete",
         listener: "fluid.identity"
     }, {
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
-            "/preferences"]
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId", true]
     }, {
         event: "{getAuthorizationRequest2}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyGetAuthorization",
@@ -174,14 +177,13 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithRevocation", {
     insertRecords: [{
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
         args: ["{revocationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
-            null, "{testCaseHolder}.options.updatedSelectedPreferences"]
+            false, "{testCaseHolder}.options.updatedSelectedPreferences"]
     }, {
         event: "{revocationRequest}.events.onComplete",
         listener: "fluid.identity"
     }, {
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
-            "/preferences"]
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId", true]
     }, {
         event: "{getAuthorizationRequest2}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",

@@ -68,24 +68,18 @@ gpii.tests.cloud.oauth2.addPrefs.sendAccessTokenRequest = function (accessTokenR
     gpii.test.cloudBased.oauth2.sendRequest(accessTokenRequest, options, formBody, "accessTokenForm");
 };
 
-gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest = function (securedAddPrefsRequest, prefsData, secured, accessToken, view) {
+gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest = function (securedAddPrefsRequest, prefsData, accessToken, view) {
     view = view || "flat";
-    secured = secured || true;
 
     var options = {
-        path: "/add-preferences?view=" + view
-    };
-
-    var securedHeader = {
         headers: {
             Authorization: "Bearer " + accessToken,
             "Content-Type": "application/json"
+        },
+        termMap: {
+            view: view
         }
     };
-
-    var securedOptions = fluid.extend({}, options, securedHeader);
-
-    options = secured ? securedOptions : options;
 
     securedAddPrefsRequest.send(prefsData, options);
 };
@@ -102,8 +96,12 @@ gpii.tests.cloud.oauth2.addPrefs.verifyAddPrefsResponse = function (body, addPre
 
 gpii.tests.cloud.oauth2.addPrefs.sendGetPrefsRequest = function (getPrefsRequest, addPrefsRequest, view) {
     view = view || "flat";
+
     var options = {
-        path: "/preferences/" + addPrefsRequest.userToken + "?view=" + view
+        termMap: {
+            userToken: addPrefsRequest.userToken,
+            view: view
+        }
     };
 
     getPrefsRequest.send(null, options);
@@ -127,7 +125,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.requests", {
         addPrefsRequest: {
             type: "kettle.test.request.http",
             options: {
-                // path: "/add-preferences?view=%view",  // Cannot dynamically config path
+                path: "/add-preferences?view=%view",
                 port: 8081,
                 method: "POST"
             }
@@ -135,7 +133,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.requests", {
         getPrefsRequest: {
             type: "kettle.test.request.http",
             options: {
-                // path: "/preferences?view=%view",  // Cannot dynamically config path
+                path: "/preferences/%userToken?view=%view",
                 port: 8081,
                 method: "GET"
             }
@@ -143,7 +141,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.addPrefs.requests", {
         getPrefsRequest2: {
             type: "kettle.test.request.http",
             options: {
-                // path: "/preferences?view=%view",  // Cannot dynamically config path
+                path: "/preferences/%userToken?view=%view",
                 port: 8081,
                 method: "GET"
             }
@@ -163,7 +161,7 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
     },
     { // 2
         funcName: "gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest",
-        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{accessTokenRequest}.access_token", "firstDiscovery"]
+        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, "{accessTokenRequest}.access_token", "firstDiscovery"]
     },
     { // 3
         event: "{addPrefsRequest}.events.onComplete",
@@ -194,7 +192,7 @@ gpii.tests.cloud.oauth2.addPrefs.mainSequence = [
 gpii.tests.cloud.oauth2.addPrefs.addPrefsSequence = [
     { // 0
         funcName: "gpii.tests.cloud.oauth2.addPrefs.sendAddPrefsRequest",
-        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, true, "{testCaseHolder}.options.accessToken"]
+        args: ["{addPrefsRequest}", gpii.tests.cloud.oauth2.addPrefs.prefsData, "{testCaseHolder}.options.accessToken"]
     },
     { // 1
         event: "{addPrefsRequest}.events.onComplete",
