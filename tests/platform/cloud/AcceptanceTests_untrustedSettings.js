@@ -13,14 +13,20 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 
 "use strict";
 
-var fluid = require("infusion");
-var gpii = fluid.registerNamespace("gpii");
+var fluid = require("infusion"),
+    gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.registerNamespace("jqUnit");
 
 fluid.require("%universal");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.untrustedSettings");
+
+gpii.test.cloudBased.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
+    var payload = JSON.parse(body);
+    jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
+};
 
 gpii.tests.cloud.untrustedSettings.sequence = [
     {
