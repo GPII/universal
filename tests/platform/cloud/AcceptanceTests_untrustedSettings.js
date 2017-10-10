@@ -58,8 +58,7 @@ gpii.tests.cloud.oauth2.gpiiAppInstallation.sendUntrustedSettingsRequest = funct
 
 gpii.tests.cloud.oauth2.gpiiAppInstallation.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
     var payload = JSON.parse(body);
-    console.log("=== expectedMatchMakerOutput", expectedMatchMakerOutput)
-     jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
+    jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.gpiiAppInstallation.requests", {
