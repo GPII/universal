@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-require("../index.js");
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 

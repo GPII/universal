@@ -589,6 +589,12 @@
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "jaws"
+            }
         ]
     },
 
@@ -643,6 +649,12 @@
                 "path": "Software\\Texthelp\\Read&Write11",
                 "subPath": "InstallPath",
                 "dataType": "REG_SZ"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "readandwrite"
             }
         ]
     },
@@ -780,6 +792,12 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "Magnify"
+            }
         ]
     },
 
@@ -836,6 +854,12 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "osk"
             }
         ]
     },
@@ -1518,6 +1542,12 @@
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "nvda"
+            }
         ]
     },
 
@@ -1556,6 +1586,12 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
+            }
         ]
     },
 
@@ -1592,6 +1628,12 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
             }
         ]
     },
@@ -1630,6 +1672,12 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "firefox"
+            }
         ]
     },
 
@@ -1651,7 +1699,9 @@
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
                 "capabilities": [
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled"
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
                 ],
                 "capabilitiesTransformations": {
                     "transform": [
@@ -1721,6 +1771,12 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "MaavisPortable"
             }
         ]
     },
@@ -1902,9 +1958,9 @@
                     "FilterKeysEnable": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
                             "left": false,
-                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
@@ -1919,7 +1975,7 @@
                     "SlowKeysInterval": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
@@ -1943,7 +1999,7 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
                                     "left": false,
                                     "right": false,
                                     "operator": "==="
@@ -1952,7 +2008,7 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.condition",
-                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
                                     "true": {
                                         "transform": {
                                             "type": "fluid.transforms.linearScale",
@@ -1976,7 +2032,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/slowKeysEnable": {
+                    "http://registry\\.gpii\\.net/common/slowKeysEnabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2010,7 +2066,7 @@
                             }
                         }
                     },
-                    "http://registry\\.gpii\\.net/common/debounceEnable": {
+                    "http://registry\\.gpii\\.net/common/debounceEnabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2257,6 +2313,38 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.screenDPI": {
+        "name": "Windows DPI",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=6.2"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.screenScale",
+                    "applications.com\\.microsoft\\.windows\\.screenDPI.id"
+                ]
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
         ],
         "isInstalled": [
             {
@@ -2633,11 +2721,17 @@
                 "type": "gpii.launch.exec",
                 "command": "C:\\Sociable\\Cloud4All.exe -stop"
             }
+        ],
+        "isRunning": [
+            {
+                "type": "gpii.processReporter.find",
+                "command": "Cloud4Allcd "
+            }
         ]
     },
 
-    "com.ilunion.cloud4chrome": {
-        "name": "Cloud4all Chrome extension",
+    "net.gpii.uioPlus": {
+        "name": "UIO+ Browser Extension",
         "contexts": {
             "OS": [{
                     "id": "win32",
@@ -2645,70 +2739,106 @@
             }]
         },
         "settingsHandlers": {
-            "chromeconf": {
+            "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
-                    "path": "com.ilunion.cloud4chrome"
+                    "path": "net.gpii.uioPlus"
                 },
-                "capabilities": [],
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/lineSpace",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/characterSpace",
+                    "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/highlightColor",
+                    "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "http://registry\\.gpii\\.net/common/supportTool",
+                    "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
+                ],
                 "capabilitiesTransformations": {
-                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
                     "fontSize": {
                         "transform": {
-                            "type": "fluid.transforms.quantize",
-                            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
-                            "input": 9,
-                            "ranges": [
-                                {
-                                    "upperBound": 12,
-                                    "output": "medium"
-                                },
-                                {
-                                    "upperBound": 18,
-                                    "output": "large"
-                                },
-                                {
-                                    "output": "x-large"
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
+                                    "right": 12,
+                                    "operator": "/"
                                 }
-                            ]
+                            }
                         }
                     },
-                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
-                    "magnification": {
+                    "characterSpace": "http://registry\\.gpii\\.net/common/characterSpace",
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "contrastTheme": {
                         "transform": {
-                            "type": "fluid.transforms.quantize",
-                            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
-                            "input": 1,
-                            "ranges": [
-                                {
-                                    "upperBound": 1.2,
-                                    "output": 1
-                                },
-                                {
-                                    "upperBound": 2.5,
-                                    "output": 2
-                                },
-                                {
-                                    "output": 3
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "defaultOutputValue": "default",
+                                    "match": {
+                                        "black-white": "bw",
+                                        "white-black": "wb",
+                                        "black-yellow": "by",
+                                        "yellow-black": "yb"
+                                    }
                                 }
-                            ]
+                            },
+                            "false": "default"
                         }
                     },
-                    "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                    "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "dictionaryEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "match": [{
+                                "inputValue": {
+                                    "dictionaryEnabled": true
+                                },
+                                "outputValue": true
+                            }],
+                            "noMatch": {
+                                "outputValue": false
+                            },
+                            "defaultInput": {
+                                "transform": {
+                                    "type": "fluid.transforms.arrayToSetMembership",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
+                                    "options": {
+                                        "dictionary": "dictionaryEnabled"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabificationEnabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
         },
         "configure": [
-            "settings.chromeconf"
+            "settings.configuration"
         ],
         "restore": [
-            "settings.chromeconf"
+            "settings.configuration"
         ],
         "start": [],
         "stop": [],
-        "isInstalled": [] // always reported as not installed. Should be changed once GPII-1998 is fixed
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }

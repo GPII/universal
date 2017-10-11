@@ -18,7 +18,7 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-require("../index.js");
+fluid.require("%universal");
 
 gpii.loadTestingSupport();
 fluid.setLogging(true);
@@ -81,7 +81,8 @@ gpii.tests.journal.initialSettings = {
                 "screen-resolution": {
                     "width": 800,
                     "height": 600
-                }
+                },
+                "screen-dpi": 1
             }
         }]
     }
@@ -300,10 +301,14 @@ gpii.tests.journal.checkJournalsList = function (markup, component, expectCrashe
     var match = /a href=".*\/%3E(.*)"/.exec(markup);
     console.log("Got " + match.length + " matches");
     var firstDate = decodeURIComponent(match[1]);
+    // Relaxed requirements on GPII-2522 due to lack of control over CI environment - see https://github.com/GPII/gpii-app/pull/19
+    var expectedStart = component.stashedStartTime, expectedEnd = Date.now();
     var firstTime = Date.parse(firstDate);
-    fluid.log("Parsed link date " + firstDate + " to time " + firstTime);
+    // Add further diagnostics for GPII-2522
+    fluid.log("Parsed link date " + firstDate + " to time " + firstTime + " expected to be in range ["
+        + expectedStart + ", " + expectedEnd + "]");
     jqUnit.assertTrue("Received correct journal time in journal list markup",
-        firstTime > component.stashedStartTime && firstTime < (component.stashedStartTime + 2000));
+        firstTime >= expectedStart && firstTime <= expectedEnd);
     // See: http://stackoverflow.com/questions/1979884/how-to-use-javascript-regex-over-multiple-lines
     var snapshots = markup.match(/<p class="fl-snapshot">([\s\S]*?)<\/p>/g);
     fluid.log("Acquired " + snapshots.length + " snapshots");

@@ -68,6 +68,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.screenDPI"
+    },
+
+    {
         "id": "com.microsoft.windows.cursors"
     },
 
@@ -109,6 +113,10 @@
 
     {
         "id": "com.android.settings.system"
+    },
+
+    {
+        "id": "net.gpii.uioPlus"
     }
 
 ]
