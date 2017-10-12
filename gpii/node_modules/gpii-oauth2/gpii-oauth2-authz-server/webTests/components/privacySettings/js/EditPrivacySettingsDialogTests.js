@@ -24,7 +24,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
         gpii.tests.additionalRequestInfos = {
             fetchDecisionPrefs: {
-                url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+                url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authorizationId + "/preferences",
                 type: "get",
                 dataType: "json",
                 responseText: {
@@ -32,7 +32,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }
             },
             saveDecisionPrefs: {
-                url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+                url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authorizationId + "/preferences",
                 type: "put",
                 data: "{\"\":true}",
                 status: 200,
