@@ -24,7 +24,7 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.taskBarColor": {
                         "ColorPrevalence": 1
                     },
-                    "http://registry.gpii.net/common/wallpaper": "${{environment}.HOMEDRIVE}${{environment}.HOMEPATH}\\AppData\\Local\\GPII-Demo\\wallpapers\\img0.jpg"
+                    "http://registry.gpii.net/common/wallpaper": "${{environment}.HOMEDRIVE}${{environment}.HOMEPATH}\\AppData\\Local\\GPII\\wallpapers\\img0.jpg"
                 }
             }
         }
