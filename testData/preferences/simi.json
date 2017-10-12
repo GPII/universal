@@ -4,7 +4,20 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.microsoft.windows.W10Simplification": {}
+                    "http://registry.gpii.net/applications/com.microsoft.windows.customStartMenu": {
+                        "ForceStartSize": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.immersiveMode": {
+                        "TabletMode": 1,
+                        "SignInMode": 0,
+                        "ConvertibleSlateModePromptPreference": 2
+                    },
+                    "com.microsoft.windows.taskBarAppsVisibleInTabletMode": {
+                        "TaskbarAppsVisibleInTabletMode": 0
+                    },
+                    "com.microsoft.windows.taskBarAutoHideInTabletMode": {
+                        "TaskBarAutoHideInTabletMode": 1
+                    }
                 }
             }
         }
