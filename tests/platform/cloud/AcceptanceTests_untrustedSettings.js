@@ -23,37 +23,9 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.untrustedSettings");
 
-gpii.tests.cloud.oauth2.untrustedSettings.sendAccessTokenRequest = function (accessTokenRequest, options) {
-    var formBody = {
-        grant_type: "password",
-        client_id: options.client_id,
-        client_secret: options.client_secret,
-        username: options.username,
-        password: options.password
-    };
-
-    gpii.test.cloudBased.oauth2.sendRequest(accessTokenRequest, options, formBody, "accessTokenForm");
-};
-
-gpii.test.cloudBased.oauth2.verifyUntrustedSettingsAccessTokenInResponse = function (body, accessTokenRequest) {
-    var response = gpii.test.verifyJSONResponse(body, accessTokenRequest);
-    gpii.test.cloudBased.oauth2.verifyFieldInResponse(response, accessTokenRequest, "oauth2.verifyUntrustedSettingsAccessTokenInResponse", "access_token");
-    gpii.test.cloudBased.oauth2.verifyFieldInResponse(response, accessTokenRequest, "oauth2.verifyUntrustedSettingsAccessTokenInResponse", "expiresIn");
-};
-
 gpii.tests.cloud.oauth2.untrustedSettings.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
-    gpii.test.cloudBased.oauth2.verifyUntrustedSettingsAccessTokenInResponse(body, refetchAccessTokenRequest);
+    gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse(body, refetchAccessTokenRequest);
     jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
-};
-
-gpii.tests.cloud.oauth2.untrustedSettings.sendUntrustedSettingsRequest = function (untrustedSettingsRequest, accessToken) {
-    var securedHeader = {
-        headers: {
-            Authorization: "Bearer " + accessToken
-        }
-    };
-
-    untrustedSettingsRequest.send(null, securedHeader);
 };
 
 gpii.tests.cloud.oauth2.untrustedSettings.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
@@ -105,16 +77,16 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettings.requests", {
 // using access tokens granted by /access_token endpoint
 gpii.tests.cloud.oauth2.untrustedSettings.mainSequence = [
     { // 0
-        funcName: "gpii.tests.cloud.oauth2.untrustedSettings.sendAccessTokenRequest",
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     { // 1
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyUntrustedSettingsAccessTokenInResponse",
+        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2
-        funcName: "gpii.tests.cloud.oauth2.untrustedSettings.sendAccessTokenRequest",
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
         args: ["{accessTokenRequest_untrustedSettings}", "{testCaseHolder}.options"]
     },
     { // 3
@@ -123,7 +95,7 @@ gpii.tests.cloud.oauth2.untrustedSettings.mainSequence = [
         args: ["{arguments}.0", "{accessTokenRequest_untrustedSettings}", "{accessTokenRequest}"]
     },
     { // 4
-        funcName: "gpii.tests.cloud.oauth2.untrustedSettings.sendUntrustedSettingsRequest",
+        funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
         args: ["{untrustedSettingsRequest}", "{accessTokenRequest_untrustedSettings}.access_token"]
     },
     { // 5
@@ -227,7 +199,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettings.disruption.untrustedSe
 // 2. rejected when requesting /untrusted-settings by providing a wrong access token
 gpii.tests.cloud.oauth2.untrustedSettings.untrustedSettingsWrongAccessTokenSequence = [
     {
-        funcName: "gpii.tests.cloud.oauth2.untrustedSettings.sendUntrustedSettingsRequest",
+        funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
         args: ["{untrustedSettingsRequest}", "a_wrong_access_token"]
     },
     {
