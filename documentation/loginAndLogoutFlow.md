@@ -40,7 +40,7 @@ The user login process is as follows:
    2. `getPreferences` (FlowManagerRequests), which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
    3. `setUserToken` (FlowManagerRequests) which sets the userToken property in the handler
 1. the `onDeviceContext` event has one listener:
-   1. `getSolutions` (flowManagerUtilities), which fetches the solutions registry and filters it based on the device reporter info. The `onSolutions` event is fired with the result.
+   1. `getSolutions` (FlowManagerRequests), which fetches the solutions registry and filters it based on the device reporter info. The `onSolutions` event is fired with the result.
 1. The `onReadyToMatch` event is listening to the three events described above: `onDeviceContext`, `onPreferences` and `onSolutions`. When these three events have been fired, the `onReadyToMatch` event will be triggered.
 1. This event signal that all the resources has been fetched and the matchmaking related portion of the workflow starts. This is done via the `processMatch` pseudo event, which is listening to the `onReadyToMatch` event and triggered from it. The `processMatch` event kickes off a set of functions fired sequentially as dictated by the `flowManager.processMatch.priorities`. As with everything else in this flow, the sequence and ordering of the steps in the matchmaking process can be modified by the config/setup being used, and this document won't dive into the details of this flow except for some general observation:
    1. Generally some prioritized steps: `preProcess`, `matchMakerDispatcher`, `runContextManager`, `privacyFilter` and `transform` will be run (in that order).
