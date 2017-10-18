@@ -12,10 +12,10 @@
                         "SignInMode": 0,
                         "ConvertibleSlateModePromptPreference": 2
                     },
-                    "com.microsoft.windows.taskBarAppsVisibleInTabletMode": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskBarAppsVisibleInTabletMode": {
                         "TaskbarAppsVisibleInTabletMode": 0
                     },
-                    "com.microsoft.windows.taskBarAutoHideInTabletMode": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskBarAutoHideInTabletMode": {
                         "TaskBarAutoHideInTabletMode": 1
                     }
                 }
