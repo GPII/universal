@@ -3357,5 +3357,10 @@
                             -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellRecover.ps1\""
             }
         ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }
