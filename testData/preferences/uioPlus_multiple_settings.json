@@ -1,0 +1,23 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/lineSpace": 1.3,
+                    "http://registry.gpii.net/common/fontSize": 16,
+                    "http://registry.gpii.net/common/characterSpace": 2,
+                    "http://registry.gpii.net/common/selfVoicingEnabled": true,
+                    "http://registry.gpii.net/common/inputsLargerEnabled": true,
+                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "yellow-black",
+                    "http://registry.gpii.net/common/highlightColor": "green",
+                    "http://registry.gpii.net/common/tableOfContents": true,
+                    "http://registry.gpii.net/common/supportTool": ["dictionary"],
+                    "http://registry.gpii.net/common/simplifiedUiEnabled": true,
+                    "http://registry.gpii.net/common/syllabificationEnabled": true
+                }
+            }
+        }
+    }
+}

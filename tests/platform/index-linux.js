@@ -23,5 +23,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 module.exports = [
     "linux/linux-builtIn-testSpec.js",
     "linux/linux-orca-testSpec.js",
+    "linux/linux-uioPlus-testSpec.js",
     "linux/linux-xrandr-testSpec.js"
 ];
