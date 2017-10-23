@@ -24,9 +24,19 @@ require("../shared/uioPlusTestDefs.js");
 
 gpii.loadTestingSupport();
 
+var deviceReporterMock = {
+    "gpii.packageKit.find": {
+        "expectInstalled": []
+    }
+};
+
+fluid.transform(gpii.tests.uioPlus.testDefs, function (testDef) {
+    fluid.set(testDef, "deviceReporters", deviceReporterMock);
+});
+
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.uioPlus.testDefs",
-    configName: "gpii.tests.acceptance.linux.uioPlus.config",
+    testDefs: "gpii.tests.uioPlus.testDefs",
+    configName: "gpii.tests.acceptance.linux.config",
     configPath: "%universal/tests/platform/linux/configs"
-}, ["gpii.test.integration.testCaseHolder.linux"],
+}, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);

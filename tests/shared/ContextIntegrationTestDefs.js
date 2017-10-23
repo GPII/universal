@@ -370,8 +370,14 @@ gpii.tests.contextIntegration.fixtures = [
 fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.common.linux", {
     gradeNames: [
         "gpii.test.integration.testCaseHolder.linux",
+        "gpii.test.integration.deviceReporterAware.linux",
         "gpii.tests.contextIntegration.testCaseHolder"
     ],
+    deviceReporters: {
+        "gpii.packageKit.find": {
+            "expectInstalled": ["gnome-shell", "gsettings-desktop-schemas", "alsa"]
+        }
+    },
     userToken: "context1",
     contexts: gpii.tests.contextIntegration.data.contexts
 });

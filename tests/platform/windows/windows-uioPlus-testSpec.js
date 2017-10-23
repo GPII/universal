@@ -24,9 +24,19 @@ require("../shared/uioPlusTestDefs.js");
 
 gpii.loadTestingSupport();
 
+var deviceReporterMock = {
+    "gpii.deviceReporter.registryKeyExists": {
+        "expectInstalled": []
+    }
+};
+
+fluid.transform(gpii.tests.uioPlus.testDefs, function (testDef) {
+    fluid.set(testDef, "deviceReporters", deviceReporterMock);
+});
+
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.uioPlus.testDefs",
-    configName: "gpii.tests.acceptance.windows.uioPlus.config",
+    configName: "gpii.tests.acceptance.windows.config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);
