@@ -172,7 +172,7 @@ gpii.tests.cloud.oauth2.untrustedSettings.disruptionsWithMissingGrantArgs = [
         expectedStatusCode: 401
     },
     {
-        name: "Attempt to get access token without sending client_secret",
+        name: "Attempt to get access token without sending username",
         gradeName: "gpii.tests.cloud.oauth2.untrustedSettings.disruption.statusCode",
         changes: {
             path: "username",
@@ -181,7 +181,7 @@ gpii.tests.cloud.oauth2.untrustedSettings.disruptionsWithMissingGrantArgs = [
         expectedStatusCode: 400
     },
     {
-        name: "Attempt to get access token without sending client_secret",
+        name: "Attempt to get access token without sending password",
         gradeName: "gpii.tests.cloud.oauth2.untrustedSettings.disruption.statusCode",
         changes: {
             path: "password",
