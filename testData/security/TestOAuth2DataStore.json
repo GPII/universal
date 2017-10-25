@@ -1,55 +1,27 @@
 [
     {
-        "_id": "user-1",
-        "type": "user",
-        "name": "chromehc",
-        "password": "chromehc",
-        "defaultGpiiToken": "review3_chrome_high_contrast"
-    },
-    {
-        "_id": "user-2",
-        "type": "user",
-        "name": "ma1",
-        "password": "ma1",
-        "defaultGpiiToken": "review3_ma1"
-    },
-    {
-        "_id": "user-3",
-        "type": "user",
-        "name": "ma2",
-        "password": "ma2",
-        "defaultGpiiToken": "review3_ma2"
-    },
-    {
-        "_id": "user-4",
-        "type": "user",
-        "name": "li",
-        "password": "li",
-        "defaultGpiiToken": "li"
-    },
-    {
         "_id": "gpiiToken-1",
         "type": "gpiiToken",
         "gpiiToken": "review3_chrome_high_contrast",
-        "userId": "user-1"
+        "userId": null
     },
     {
         "_id": "gpiiToken-2",
         "type": "gpiiToken",
         "gpiiToken": "review3_ma1",
-        "userId": "user-2"
+        "userId": null
     },
     {
         "_id": "gpiiToken-3",
         "type": "gpiiToken",
         "gpiiToken": "review3_ma2",
-        "userId": "user-3"
+        "userId": null
     },
     {
         "_id": "gpiiToken-4",
         "type": "gpiiToken",
         "gpiiToken": "li",
-        "userId": "user-4"
+        "userId": null
     },
     {
         "_id": "client-1",
