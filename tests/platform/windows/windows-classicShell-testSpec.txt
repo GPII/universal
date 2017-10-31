@@ -1,0 +1,10 @@
+windows-classicShell-testSpec.js
+
+Description:
+This tests the functionality of the ClassicShell shell replacement for Windows.
+
+Requirements:
+* Basic Windows 10 install
+* ClassicShell installed
+
+Has been tested with ClassicShell on Windows 10.
