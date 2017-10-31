@@ -89,6 +89,38 @@
                         "InteractionMouse": 1,
                         "EchoWords": 1,
                         "EchoChars": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.wallpaper": {
+                        "Wallpaper": "C:\\Windows\\Web\\Wallpaper\\Theme1\\img1.jpg"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskbar": {
+                        "SearchboxTaskbarMode": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskView": {
+                        "ShowTaskViewButton": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.lockScreen": {
+                        "NoLockScreen": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.titleBarColor": {
+                        "ColorPrevalence": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskBarColor": {
+                        "ColorPrevalence": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.customStartMenu": {
+                        "ForceStartSize": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.immersiveMode": {
+                        "TabletMode": 1,
+                        "SignInMode": 0,
+                        "ConvertibleSlateModePromptPreference": 2
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskBarAppsVisibleInTabletMode": {
+                        "TaskbarAppsVisibleInTabletMode": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.taskBarAutoHideInTabletMode": {
+                        "TaskBarAutoHideInTabletMode": 1
                     }
                 }
             }
