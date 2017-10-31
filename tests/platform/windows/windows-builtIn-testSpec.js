@@ -141,7 +141,7 @@ gpii.tests.windows.builtIn = [
                                 "valueType": "TCHAR",
                                 "length": 260
                             },
-                            "fWinIni": "SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE",
+                            "fWinIni": "SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE"
                         }
                     }
                 ]
@@ -227,55 +227,60 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }, { // TaskView buttons
-                     "settings": {
-                         "ShowTaskViewButton": 0
-                     }, "options": {
-                         "hKey": "HKEY_CURRENT_USER",
-                         "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
-                         "dataTypes": {
-                             "ShowTaskViewButton": "REG_DWORD",
-                         }
-                     }
-                 }, { // Taskbar searchbox
-                     "settings": {
-                         "SearchboxTaskbarMode": 0
-                     }, "options": {
-                         "hKey": "HKEY_CURRENT_USER",
-                         "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
-                         "dataTypes": {
-                             "SearchboxTaskbarMode": "REG_DWORD",
-                         }
-                     }
-                 }, { // LockScreen
-                     "settings": {
-                         "NoLockScreen": 1
-                     }, "options": {
-                         "hKey": "HKEY_CURRENT_USER",
-                         "path": "Policies\\Microsoft\\Windows\\Personalization",
-                         "dataTypes": {
-                             "NoLockScreen": "REG_DWORD",
-                         }
-                     }
-                 }, { // TitleBarColor
-                     "settings": {
-                         "ColorPrevalence": 1
-                     }, "options": {
-                         "hKey": "HKEY_CURRENT_USER",
-                         "path": "SOFTWARE\\Microsoft\\Windows\\DWM",
-                         "dataTypes": {
-                              "ColorPrevalence": "REG_DWORD",
-                         }
-                     }
-                 }, { // TaskBarColor
-                     "settings": {
-                         "ColorPrevalence": 1
-                     }, "options": {
-                         "hKey": "HKEY_CURRENT_USER",
-                         "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                         "dataTypes": {
-                             "ColorPrevalence": "REG_DWORD",
-                         }
-                     }
+                    "settings": {
+                        "ShowTaskViewButton": 0
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "dataTypes": {
+                            "ShowTaskViewButton": "REG_DWORD"
+                        }
+                    }
+                }, { // Taskbar searchbox
+                    "settings": {
+                        "SearchboxTaskbarMode": 0
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                        "dataTypes": {
+                            "SearchboxTaskbarMode": "REG_DWORD"
+                        }
+                    }
+                }, { // LockScreen
+                    "settings": {
+                        "NoLockScreen": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Policies\\Microsoft\\Windows\\Personalization",
+                        "dataTypes": {
+                            "NoLockScreen": "REG_DWORD"
+                        }
+                    }
+                }, { // TitleBarColor
+                    "settings": {
+                        "ColorPrevalence": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "SOFTWARE\\Microsoft\\Windows\\DWM",
+                        "dataTypes": {
+                            "ColorPrevalence": "REG_DWORD"
+                        }
+                    }
+                }, { // TaskBarColor
+                    "settings": {
+                        "ColorPrevalence": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                        "dataTypes": {
+                            "ColorPrevalence": "REG_DWORD"
+                        }
+                    }
                 }, { // CustomStartMenu
                     "settings": {
                         "ForceStartSize": 1
