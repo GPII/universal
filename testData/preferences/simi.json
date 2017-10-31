@@ -16,7 +16,7 @@
                         "TaskbarAppsVisibleInTabletMode": 0
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.taskBarAutoHideInTabletMode": {
-                        "TaskBarAutoHideInTabletMode": 1
+                        "TaskbarAutoHideInTabletMode": 1
                     }
                 }
             }
