@@ -310,9 +310,9 @@ gpii.tests.windows.builtIn = [
                             "TaskbarAppsVisibleInTabletMode": "REG_DWORD"
                         }
                     }
-                }, { // TaskBarAutoHideInTabletMode
+                }, { // TaskbarAutoHideInTabletMode
                     "settings": {
-                        "TaskBarAutoHideInTabletMode": 1
+                        "TaskbarAutoHideInTabletMode": 1
                     }, "options": {
                         "hKey": "HKEY_CURRENT_USER",
                         "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
