@@ -21,7 +21,6 @@
         "mkdirp": "0.5.1",
         "oauth2orize": "1.8.0",
         "passport": "0.3.2",
-        "passport-local": "1.0.0",
         "passport-oauth2-client-password": "0.1.2",
         "rimraf": "2.6.1",
         "semver": "5.4.1",

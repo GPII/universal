@@ -19,7 +19,6 @@ var exphbs  = require("express-handlebars");
 var session = require("express-session");
 var oauth2orize = require("oauth2orize");
 var passportModule = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;
 
 var fluid = require("infusion");
@@ -114,22 +113,6 @@ fluid.defaults("gpii.oauth2.passport", {
 
 // TODO what name here?
 gpii.oauth2.passport.listenPassport = function (passport, userService, clientService) {
-    passport.serializeUser(function (user, done) {
-        return done(null, user.id);
-    });
-
-    passport.deserializeUser(function (id, done) {
-        var userPromise = userService.getUserById(id);
-        gpii.oauth2.oauth2orizeServer.promiseToDone(userPromise, done);
-    });
-
-    passport.use(new LocalStrategy(
-        function (username, password, done) {
-            var authenticateUserPromise = userService.authenticateUser(username, password);
-            gpii.oauth2.oauth2orizeServer.promiseToDone(authenticateUserPromise, done);
-        }
-    ));
-
     // ClientPasswordStrategy reads the client_id and client_secret from the
     // request body. Can also use a BasicStrategy for HTTP Basic authentication.
     passport.use(new ClientPasswordStrategy(
@@ -154,17 +137,6 @@ fluid.defaults("gpii.oauth2.authServer", {
         expressApp: {
             expander: {
                 func: "gpii.oauth2.createExpressApp"
-            }
-        },
-        sessionMiddleware: {
-            expander: {
-                func: "gpii.oauth2.authServer.createSessionMiddleware"
-            }
-        },
-        passportMiddleware: {
-            expander: {
-                func: "gpii.oauth2.authServer.createPassportMiddleware",
-                args: ["{that}.passport.passport"]
             }
         }
     },
@@ -215,20 +187,6 @@ fluid.defaults("gpii.oauth2.authServer", {
         "onCreate.registerBodyParser": "gpii.oauth2.authServer.registerBodyParser"
     }
 });
-
-gpii.oauth2.authServer.createSessionMiddleware = function () {
-    // TODO move the secret to configuration
-    return session({
-        name: "auth_server_connect.sid",
-        secret: "some secret",
-        resave: false,
-        saveUninitialized: false
-    });
-};
-
-gpii.oauth2.authServer.createPassportMiddleware = function (passport) {
-    return [ passport.initialize(), passport.session() ];
-};
 
 gpii.oauth2.authServer.registerBodyParser = function (that) {
     that.expressApp.use(gpii.oauth2.jsonBodyParser());
