@@ -233,126 +233,6 @@ gpii.tests.cloud.oauth2.untrustedSettings.disruptedTests = [
             expectedMatchMakerOutput: {
                 "inferredConfiguration": {
                     "gpii-default": {
-                        "applications": { }
-                    }
-                }
-            }
-        },
-        disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettings.disruption.mainSequence"
-        }]
-    },
-    {
-        testDef: {
-            name: "A successful workflow for authorizing magnifier (share magnifier settings)",
-
-            // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
-            username: "os_gnome",
-            password: "dummy",
-
-            // The options below are required for sending /untrusted-settings
-            userToken: "os_gnome",
-            authorizations: [
-                {
-                    type: "onboardedSolutionAuthorization",
-                    gpiiToken: "os_gnome",
-                    clientId: "client-3",
-                    selectedPreferences: { "increase-size.magnifier": true },
-                    revoked: false
-                }
-            ],
-            expectedMatchMakerOutput: {
-                "inferredConfiguration": {
-                    "gpii-default": {
-                        "applications": {
-                            "org.gnome.desktop.a11y.magnifier": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/common/magnification": 1.5,
-                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettings.disruption.mainSequence"
-        }]
-    },
-    {
-        testDef: {
-            name: "A successful workflow for authorizing magnifier (share all) and desktop (share text size)",
-
-            // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
-            username: "os_gnome",
-            password: "dummy",
-
-            // The options below are required for sending /untrusted-settings
-            userToken: "os_gnome",
-            authorizations: [
-                {
-                    type: "onboardedSolutionAuthorization",
-                    gpiiToken: "os_gnome",
-                    clientId: "client-3",
-                    selectedPreferences: { "": true },
-                    revoked: false
-                },
-                {
-                    type: "onboardedSolutionAuthorization",
-                    gpiiToken: "os_gnome",
-                    clientId: "client-4",
-                    selectedPreferences: { "increase-size.appearance.text-size": true },
-                    revoked: false
-                }
-            ],
-            expectedMatchMakerOutput: {
-                "inferredConfiguration": {
-                    "gpii-default": {
-                        "applications": {
-                            "org.gnome.desktop.a11y.magnifier": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/common/magnification": 1.5,
-                                    "http://registry.gpii.net/common/magnifierPosition": "FullScreen"
-                                }
-                            },
-                            "org.gnome.desktop.interface": {
-                                "active": true,
-                                "settings": {
-                                    "http://registry.gpii.net/common/fontSize": 9
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettings.disruption.mainSequence"
-        }]
-    },
-    {
-        testDef: {
-            name: "A successful workflow for an anonymous token (token without a user account)",
-
-            // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
-            username: "os_gnome",
-            password: "dummy",
-
-            // The options below are required for sending /untrusted-settings
-            userToken: "os_gnome",
-            isAnonymousToken: true,
-            expectedMatchMakerOutput: {
-                "inferredConfiguration": {
-                    "gpii-default": {
                         "applications": {
                             "org.gnome.desktop.a11y.magnifier": {
                                 "active": true,
@@ -389,6 +269,13 @@ gpii.tests.cloud.oauth2.untrustedSettings.disruptedTests = [
                     }
                 }
             }
+            // expectedMatchMakerOutput: {
+            //     "inferredConfiguration": {
+            //         "gpii-default": {
+            //             "applications": { }
+            //         }
+            //     }
+            // }
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.untrustedSettings.disruption.mainSequence"
