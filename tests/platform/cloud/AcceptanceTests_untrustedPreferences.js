@@ -67,7 +67,6 @@ gpii.tests.cloud.oauth2.untrustedPreferences.expectedPrefsSet = {
     }
 };
 
-
 gpii.tests.cloud.oauth2.untrustedPreferences.testFilePath = gpii.tests.cloud.oauth2.untrustedPreferences.prefsDir + gpii.tests.cloud.oauth2.untrustedPreferences.key + ".json";
 
 gpii.tests.cloud.oauth2.untrustedPreferences.createTestFile = function () {
@@ -79,10 +78,10 @@ gpii.tests.cloud.oauth2.untrustedPreferences.cleanUpTestFile = function () {
     fs.unlinkSync(gpii.tests.cloud.oauth2.untrustedPreferences.testFilePath);
 };
 
-gpii.tests.cloud.oauth2.untrustedPreferences.verifyUpdateResponse = function (responseText, expectedKey, expectedPrefsSet) {
+gpii.tests.cloud.oauth2.untrustedPreferences.verifyUpdateResponse = function (responseText, expectedKey, expectedMsg, expectedPrefsSet) {
     var response = JSON.parse(responseText);
     jqUnit.assertEquals("The returned key in the response is correct", expectedKey, response.userToken);
-    jqUnit.assertDeepEq("The returned preferences set in the response is correct", expectedPrefsSet, response.preferences);
+    jqUnit.assertDeepEq("The returned preferences set in the response is correct", expectedMsg, response.message);
 
     var filePath = gpii.tests.cloud.oauth2.untrustedPreferences.prefsDir + expectedKey + ".json";
     var savedPrefs = require(filePath);
@@ -125,7 +124,7 @@ gpii.tests.cloud.oauth2.untrustedPreferences.mainSequence = [
     { // 3
         event: "{untrustedPreferencesRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedPreferences.verifyUpdateResponse",
-        args: ["{arguments}.0", "{testCaseHolder}.options.key", "{testCaseHolder}.options.expectedPrefsSet"]
+        args: ["{arguments}.0", "{testCaseHolder}.options.key", "{testCaseHolder}.options.expectedMsg", "{testCaseHolder}.options.expectedPrefsSet"]
     },
     { // 4: clean up
         funcName: "gpii.tests.cloud.oauth2.untrustedPreferences.cleanUpTestFile"
@@ -203,6 +202,7 @@ gpii.tests.cloud.oauth2.untrustedPreferences.disruptedTests = [
             // The options below are required for sending /untrusted-preferences
             key: gpii.tests.cloud.oauth2.untrustedPreferences.key,
             updatedPrefsSet: gpii.tests.cloud.oauth2.untrustedPreferences.updatedPrefsSet,
+            expectedMsg: gpii.flowManager.cloudBased.untrustedPreferences.messages.success,
             expectedPrefsSet: gpii.tests.cloud.oauth2.untrustedPreferences.expectedPrefsSet
         },
         disruptions: [{
