@@ -25,7 +25,6 @@ var fluid = require("infusion");
 
 require("../../gpii-oauth2-datastore");
 require("../../gpii-oauth2-utilities");
-require("./UserService");
 require("./AuthorizationService");
 require("./AuthGrantFinder");
 require("./ClientService");
@@ -106,13 +105,13 @@ fluid.defaults("gpii.oauth2.passport", {
     listeners: {
         onCreate: {
             listener: "gpii.oauth2.passport.listenPassport",
-            args: ["{that}.passport", "{userService}", "{clientService}"]
+            args: ["{that}.passport", "{clientService}"]
         }
     }
 });
 
 // TODO what name here?
-gpii.oauth2.passport.listenPassport = function (passport, userService, clientService) {
+gpii.oauth2.passport.listenPassport = function (passport, clientService) {
     // ClientPasswordStrategy reads the client_id and client_secret from the
     // request body. Can also use a BasicStrategy for HTTP Basic authentication.
     passport.use(new ClientPasswordStrategy(
@@ -160,14 +159,6 @@ fluid.defaults("gpii.oauth2.authServer", {
         },
         clientService: {
             type: "gpii.oauth2.clientService",
-            options: {
-                components: {
-                    dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
-                }
-            }
-        },
-        userService: {
-            type: "gpii.oauth2.userService",
             options: {
                 components: {
                     dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
