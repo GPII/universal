@@ -90,3 +90,129 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
 }
 ```
 * **Notes:** Currently the payloads of the online flowmanager does **not** take contexts into account. The current payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want the context information.
+
+#### Get lifecycle instructions from Online Flowmanager (GET /:token/untrusted-settings/:device)
+* **description**: Get lifecycle instructions, instead of actual settings, from the online flowmanager
+* **Supported modes**: Cloud-based (online) flowmanager only
+* **route:** `/:token/untrusted-settings/:device` where:
+    - `:token` should be the token of the user for which the settings are requested
+    - `:device` should be a device reporter payload - for example: `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
+* **header:** Authorization: Bearer < access_token >
+    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to access settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
+* **method:** `GET`
+* **return:** An object, containing the user token and solution registry entries. Each block in the solution registry entries contains the relevant lifecycle instructions in a format understandable by the solution. For example:
+```
+{
+    "userToken": "li",
+    "solutionsRegistryEntries": {
+        "org.nvda-project": {
+            "name": "NVDA Screen Reader",
+            "contexts": {
+                "OS": [
+                    {
+                        "id": "win32",
+                        "version": ">=5.0"
+                    }
+                ]
+            },
+            "settingsHandlers": {
+                "configs": {
+                    "type": "gpii.settingsHandlers.INISettingsHandler",
+                    "options": {
+                        "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
+                        "allowNumberSignComments": true,
+                        "allowSubSections": true
+                    },
+                    ...
+                }
+            },
+            "configure": [
+                "settings.configs"
+            ],
+            "restore": [
+                "settings.configs"
+            ],
+            "start": [
+                {
+                    "type": "gpii.launch.exec",
+                    "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+                }
+            ],
+            "stop": [
+                {
+                    "type": "gpii.windows.closeProcessByName",
+                    "filename": "nvda_service.exe"
+                },
+                {
+                    "type": "gpii.windows.closeProcessByName",
+                    "filename": "nvda.exe"
+                }
+            ],
+            "isInstalled": [
+                {
+                    "type": "gpii.deviceReporter.registryKeyExists",
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
+                    "subPath": "",
+                    "dataType": "REG_SZ"
+                }
+            ],
+            "isRunning": [
+                {
+                    "type": "gpii.processReporter.find",
+                    "command": "nvda"
+                }
+            ]
+        }
+        ...
+    },
+    "matchMakerOutput": {
+        "inferredConfiguration": {
+            "gpii-default": {
+                "applications": {}
+            },
+            "turn-down-light": {
+                "applications": {},
+                "conditions": [
+                    {
+                        "type": "http://registry.gpii.net/conditions/inRange",
+                        "min": 400,
+                        "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+#### Update settings on Online Flowmanager (PUT /untrusted-preferences/:token)
+* **description**: Update settings on the online flowmanager
+* **Supported modes**: Cloud-based (online) flowmanager only
+* **route:** `/untrusted-preferences/:token` where:
+    - `:token` should be the token of the user for which the settings are updated
+* **header:** Authorization: Bearer < access_token >
+    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to update settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
+* **method:** `PUT`
+* **request body:** An object, containing a subset of to-be-updated settings. For example:
+```
+{
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/cursorSpeed": 0.850
+            }
+        }
+    }
+}
+```
+* **return:** An object, containing the user token and a status message. For example:
+```
+{
+    "userToken": "li",
+    "messgae": "Successfully updated."
+}
+```
