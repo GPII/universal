@@ -100,7 +100,7 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
 * **header:** Authorization: Bearer < access_token >
     - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to access settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
 * **method:** `GET`
-* **return:** An object, keyed by solution ID, with each block containing the relevant settings in a format understandable by the solution. For example:
+* **return:** An object, containing the user token and solution registry entries. Each block in the solution registry entries contains the relevant lifecycle instructions in a format understandable by the solution. For example:
 ```
 {
     "userToken": "li",
