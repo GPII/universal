@@ -918,6 +918,11 @@
                 "enable": false
             }
         ],
+        "update": [
+            "stop",
+            "configure",
+            "stop"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
