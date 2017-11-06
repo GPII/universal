@@ -166,7 +166,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByAccessToken", {
             name: "Returns undefined when the authorization is revoked",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findAuthorizationByAccessToken", ["gpii-app-installation-token-3"], "{that}"],
+                args: ["{dbDataStore}.findAuthorizationByAccessToken", ["gpii-app-installation-token-3"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected undefined is received", undefined, "{arguments}.0"],

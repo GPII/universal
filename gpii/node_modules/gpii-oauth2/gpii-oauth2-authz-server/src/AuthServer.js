@@ -14,9 +14,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var bodyParser = require("body-parser");
-var login = require("connect-ensure-login");
-var exphbs  = require("express-handlebars");
-var session = require("express-session");
 var oauth2orize = require("oauth2orize");
 var passportModule = require("passport");
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;

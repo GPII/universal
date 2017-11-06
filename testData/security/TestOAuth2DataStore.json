@@ -2,33 +2,28 @@
     {
         "_id": "gpiiToken-1",
         "type": "gpiiToken",
-        "gpiiToken": "review3_chrome_high_contrast",
-        "userId": null
+        "gpiiToken": "review3_chrome_high_contrast"
     },
     {
         "_id": "gpiiToken-2",
         "type": "gpiiToken",
-        "gpiiToken": "review3_ma1",
-        "userId": null
+        "gpiiToken": "review3_ma1"
     },
     {
         "_id": "gpiiToken-3",
         "type": "gpiiToken",
-        "gpiiToken": "review3_ma2",
-        "userId": null
+        "gpiiToken": "review3_ma2"
     },
     {
         "_id": "gpiiToken-4",
         "type": "gpiiToken",
-        "gpiiToken": "li",
-        "userId": null
+        "gpiiToken": "li"
     },
     {
         "_id": "client-1",
         "type": "gpiiAppInstallationClient",
         "name": "Pilot Computers",
         "oauth2ClientId": "pilot-computer",
-        "oauth2ClientSecret": "pilot-computer-secret",
-        "userId": "user-4"
+        "oauth2ClientSecret": "pilot-computer-secret"
     }
 ]

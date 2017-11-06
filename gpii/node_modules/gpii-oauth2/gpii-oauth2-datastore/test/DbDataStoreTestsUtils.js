@@ -93,7 +93,6 @@ gpii.tests.dbDataStore.testData = {
     tokenChromehcDefault: {
         "id": "gpiiToken-1",
         "type": "gpiiToken",
-        "userId": "user-1",
         "gpiiToken": "chrome_high_contrast"
     },
     client1: {
@@ -101,8 +100,7 @@ gpii.tests.dbDataStore.testData = {
         "type": "gpiiAppInstallationClient",
         "name": "AJC-Bakersfield",
         "oauth2ClientId": "net.gpii.ajc.bakersfield",
-        "oauth2ClientSecret": "client_secret_ajc_bakersfield",
-        "userId": "user-1"
+        "oauth2ClientSecret": "client_secret_ajc_bakersfield"
     },
     gpiiAppInstallationAuthorizationToCreate: {
         "clientId": "client-1",
@@ -117,8 +115,7 @@ gpii.tests.dbDataStore.testData = {
             "type": "gpiiAppInstallationClient",
             "name": "AJC-Bakersfield",
             "oauth2ClientId": "net.gpii.ajc.bakersfield",
-            "oauth2ClientSecret": "client_secret_ajc_bakersfield",
-            "userId": "user-1"
+            "oauth2ClientSecret": "client_secret_ajc_bakersfield"
         },
         "authorization": {
             "id": "gpiiAppInstallationAuthorization-1",
