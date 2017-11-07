@@ -53,6 +53,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         user: {
             "id": "user-1",
+            "type": "user",
             "name": "alice",
             "password": "a",
             "defaultGpiiToken": "alice_gpii_token"

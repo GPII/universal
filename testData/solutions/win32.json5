@@ -3114,7 +3114,7 @@
                     },
                     "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
-                    "tableOfContents": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
                     "dictionaryEnabled": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",

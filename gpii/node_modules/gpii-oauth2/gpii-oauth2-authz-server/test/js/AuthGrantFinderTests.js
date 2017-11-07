@@ -115,27 +115,27 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "userId": "user-3"
     }, {
         "_id": "client-1",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client A",
         "oauth2ClientId": "client_id_A",
         "oauth2ClientSecret": "client_secret_A",
         "redirectUri": "http://example.com/callback_A"
     }, {
         "_id": "client-2",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client B",
         "oauth2ClientId": "client_id_B",
         "oauth2ClientSecret": "client_secret_B",
         "redirectUri": "http://example.com/callback_B"
     }, {
         "_id": "client-3",
-        "type": "client",
+        "type": "privilegedPrefsCreatorClient",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
         "oauth2ClientSecret": "client_secret_firstDiscovery"
     }, {
-        "_id": "authDecision-1",
-        "type": "authDecision",
+        "_id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -145,8 +145,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-2",
-        "type": "authDecision",
+        "_id": "webPrefsConsumerAuthorization-2",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -156,8 +156,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-3",
-        "type": "authDecision",
+        "_id": "webPrefsConsumerAuthorization-3",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-2",
         "redirectUri": "",
@@ -167,23 +167,23 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "clientCredentialsToken-1",
-        "type": "clientCredentialsToken",
+        "_id": "privilegedPrefsCreatorAuthorization-1",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-3",
         "accessToken": "firstDiscovery_access_token",
-        "allowAddPrefs": true,
         "revoked": false
     }];
 
     // All expected results
     gpii.tests.oauth2.authGrantFinder.expected = {
         authCodeGrant: {
+            accessToken: "bob_A_access_token",
             oauth2ClientId: "client_id_A",
-            userGpiiToken: "bob_gpii_token",
+            gpiiToken: "bob_gpii_token",
             selectedPreferences: { "": true }
         },
         clientCredentialsGrant: {
-            oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
+            accessToken: "firstDiscovery_access_token",
             allowAddPrefs: true
         }
     };

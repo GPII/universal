@@ -26,11 +26,11 @@ var gpii = gpii || {};
         gradeNames: ["gpii.oauth2.privacySettingsDialog"],
         requestInfos: {
             fetchDecisionPrefs: {
-                url: "/authorizations/%authDecisionId/preferences",
+                url: "/authorizations/%authorizationId/preferences",
                 type: "get"
             },
             saveDecisionPrefs: {
-                url: "/authorizations/%authDecisionId/preferences",
+                url: "/authorizations/%authorizationId/preferences",
                 type: "put"
             }
         },
@@ -48,7 +48,7 @@ var gpii = gpii || {};
             fetchDecisionPrefs: {
                 funcName: "gpii.oauth2.ajax",
                 args: ["{that}.options.requestInfos.fetchDecisionPrefs.url", {
-                    authDecisionId: "{that}.model.clientData.authDecisionId"
+                    authorizationId: "{that}.model.clientData.authorizationId"
                 }, {
                     type: "{that}.options.requestInfos.fetchDecisionPrefs.type",
                     dataType: "json",
@@ -73,7 +73,7 @@ var gpii = gpii || {};
             data = JSON.stringify(selectedPreferences);
 
         gpii.oauth2.ajax(url, {
-            authDecisionId: that.model.clientData.authDecisionId
+            authorizationId: that.model.clientData.authorizationId
         }, {
             type: that.options.requestInfos.saveDecisionPrefs.type,
             contentType: "application/json",
