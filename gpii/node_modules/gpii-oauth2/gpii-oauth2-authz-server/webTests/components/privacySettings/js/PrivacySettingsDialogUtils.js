@@ -22,13 +22,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.tests.oauth2.privacySettings.clientData = {
         serviceName: "A Test Service",
-        authDecisionId: 10,
-        oauth2ClientId: 1
+        authorizationId: 10,
+        clientId: 1
     };
 
     gpii.tests.oauth2.privacySettings.basicRequestInfos = {
         fetchAvailableAuthorizedPrefs: {
-            url: "/available-authorized-preferences/" + gpii.tests.oauth2.privacySettings.clientData.oauth2ClientId,
+            url: "/available-authorized-preferences/" + gpii.tests.oauth2.privacySettings.clientData.clientId,
             dataType: "json",
             responseText: {
                 "increase-size": true,

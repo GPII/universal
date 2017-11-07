@@ -19,11 +19,11 @@ from this directory in another shell.
 
 Before or after that, you can experiment with logging in and out of the GPII using endpoints such as
 
-    http://localhost:8081/user/sammy/login
+    http://localhost:8081/user/snapset_1a/login
 
 and
 
-    http://localhost:8081/user/sammy/logout
+    http://localhost:8081/user/snapset_1a/logout
 
 
 Here are some sample payloads collected from this client during such testing.
@@ -38,172 +38,43 @@ Firstly, connecting the client when no user is keyed into the system produces th
 }
 ```
 
-After logging in sammy, the client receives the following update:
+After logging in snapset_1a, the client receives the following update:
 
 ```
 ## Received the following message: {
     "path": [],
     "type": "ADD",
     "value": {
-        "userToken": "sammy",
+        "userToken": "snapset_1a",
+        "activeContextName": "gpii-default",
+        "settingControls": {
+            "http://registry\\.gpii\\.net/common/DPIScale": {
+                "value": 1.25,
+                "schema": {
+                    "title": "DPI Scale",
+                    "description": "DPI scale factor on default monitor",
+                    "type": "number",
+                    "min": 1,
+                    "max": 2,
+                    "divisibleBy": 0.25
+                }
+            },
+            "http://registry\\.gpii\\.net/common/cursorSize": {
+                "value": 1,
+                "schema": {
+                    "title": "Cursor Size",
+                    "description": "Cursor size",
+                    "type": "number",
+                    "min": 0,
+                    "max": 1,
+                    "divisibleBy": 0.1
+                }
+            }
+        },
         "preferences": {
             "contexts": {
                 "gpii-default": {
-                    "name": "Default preferences",
-                    "preferences": {
-                        "http://registry.gpii.net/common/fontSize": 24,
-                        "http://registry.gpii.net/common/foregroundColor": "white",
-                        "http://registry.gpii.net/common/backgroundColor": "black",
-                        "http://registry.gpii.net/common/fontFaceFontName": [
-                            "Comic Sans"
-                        ],
-                        "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
-                        "http://registry.gpii.net/common/magnification": 2,
-                        "http://registry.gpii.net/common/tracking": [
-                            "mouse"
-                        ],
-                        "http://registry.gpii.net/common/invertColours": true
-                    }
-                }
-            }
-        },
-        "matchMakerOutput": {
-            "inferredConfiguration": {
-                "gpii-default": {
-                    "applications": {
-                        "com.microsoft.windows.magnifier": {
-                            "active": true,
-                            "settings": {
-                                "http://registry.gpii.net/common/fontSize": 24,
-                                "http://registry.gpii.net/common/foregroundColor": "white",
-                                "http://registry.gpii.net/common/backgroundColor": "black",
-                                "http://registry.gpii.net/common/fontFaceFontName": [
-                                    "Comic Sans"
-                                ],
-                                "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
-                                "http://registry.gpii.net/common/magnification": 2,
-                                "http://registry.gpii.net/common/tracking": [
-                                    "mouse"
-                                ],
-                                "http://registry.gpii.net/common/invertColours": true
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "activeContextName": "gpii-default",
-        "commonTermsMetadata": {
-            "http://registry.gpii.net/common/fontSize": {
-                "schema": {
-                    "title": "Font Size",
-                    "description": "Font size of the text",
-                    "type": "number",
-                    "default": 12,
-                    "min": 0.1,
-                    "divisibleBy": 0.1
-                }
-            },
-            "http://registry.gpii.net/common/foregroundColor": {},
-            "http://registry.gpii.net/common/backgroundColor": {},
-            "http://registry.gpii.net/common/fontFaceFontName": {},
-            "http://registry.gpii.net/common/fontFaceGenericFontFace": {},
-            "http://registry.gpii.net/common/magnification": {
-                "schema": {
-                    "title": "Magnification",
-                    "description": "Level of magnification",
-                    "type": "number",
-                    "default": 1,
-                    "min": 1,
-                    "divisibleBy": 0.1
-                }
-            },
-            "http://registry.gpii.net/common/tracking": {
-                "schema": {
-                    "title": "Tracking",
-                    "description": "Tracking mode of the screen magnifier",
-                    "type": "array",
-                    "default": "mouse",
-                    "enum": [
-                        "mouse",
-                        "caret",
-                        "focus"
-                    ]
-                }
-            },
-            "http://registry.gpii.net/common/invertColours": {
-                "schema": {
-                    "title": "Invert colours",
-                    "description": "Whether to invert colours",
-                    "type": "boolean",
-                    "default": false
-                }
-            }
-        },
-        "solutionsRegistryEntries": {
-            "com.microsoft.windows.magnifier": {
-                "name": "Windows Built-in Screen Magnifier",
-                "settingsHandlers": {
-                    "configure": {
-                        "supportedSettings": {
-                            "Invert": {
-                                "schema": {
-                                    "title": "Invert Colours",
-                                    "description": "Enable colour inversion for Magnifier",
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            },
-                            "Magnification": {
-                                "schema": {
-                                    "title": "Magnification",
-                                    "description": "Set up magnification level",
-                                    "type": "number",
-                                    "default": 200,
-                                    "min": 100,
-                                    "max": 1600,
-                                    "divisibleBy": 1
-                                }
-                            },
-                            "FollowFocus": {
-                                "schema": {
-                                    "title": "Magnifier follows focus",
-                                    "description": "Magnifier follows the keyboard focus",
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            },
-                            "FollowCaret": {
-                                "schema": {
-                                    "title": "Magnifier follows caret",
-                                    "description": "Magnifier follows the text insertion point",
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            },
-                            "FollowMouse": {
-                                "schema": {
-                                    "title": "Magnifier follows mouse",
-                                    "description": "Magnifier follows the mouse pointer",
-                                    "type": "boolean",
-                                    "default": false
-                                }
-                            },
-                            "MagnificationMode": {
-                                "schema": {
-                                    "title": "Magnifier position",
-                                    "description": "Position of the magnified area",
-                                    "type": "number",
-                                    "default": 2,
-                                    "enum": [
-                                        1,
-                                        2,
-                                        3
-                                    ]
-                                }
-                            }
-                        }
-                    }
+                    "name": "Default preferences"
                 }
             }
         }
@@ -211,7 +82,7 @@ After logging in sammy, the client receives the following update:
 }
 ```
 
-After logging out sammy, the client receives the following update:
+After logging out snapset_1a, the client receives the following update:
 
 ```
 ## Received the following message: {
