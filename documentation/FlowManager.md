@@ -92,7 +92,7 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
 * **Notes:** Currently the payloads of the online flowmanager does **not** take contexts into account. The current payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want the context information.
 
 #### Get lifecycle instructions from Online Flowmanager (GET /:token/untrusted-settings/:device)
-* **description**: Get lifecycle instructions, instead of actual settings, from the online flowmanager
+* **description**: Get settings in the ontology of preferences from the online flowmanager. These settings are untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
 * **Supported modes**: Cloud-based (online) flowmanager only
 * **route:** `/:token/untrusted-settings/:device` where:
     - `:token` should be the token of the user for which the settings are requested
