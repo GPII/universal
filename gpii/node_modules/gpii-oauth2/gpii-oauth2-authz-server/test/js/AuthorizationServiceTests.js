@@ -25,7 +25,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     gpii.tests.oauth2.mockCodeGenerator.generateAccessToken = function () {
-console.log("=== in generateAccessToken");
         return "test-access-token";
     };
 
@@ -112,10 +111,6 @@ console.log("=== in generateAccessToken");
         "oauth2ClientId": "client_id_test",
         "oauth2ClientSecret": "client_secret_test"
     }];
-
-    // listener: "console.log",
-    // args: ["received error", "{arguments}.0"],
-    // event: "{that}.events.onResponse"
 
     fluid.defaults("gpii.tests.oauth2.authorizationService.withData.grantGpiiAppInstallationAuthorization", {
         gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
