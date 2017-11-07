@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Larger 175%",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
