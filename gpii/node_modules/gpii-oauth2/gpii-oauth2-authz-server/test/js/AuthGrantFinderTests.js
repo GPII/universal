@@ -80,15 +80,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.authGrantFinder.testData = [{
         "_id": "gpiiToken-1",
         "type": "gpiiToken",
-        "gpiiToken": "carol_gpii_token",
-        "userId": null
+        "gpiiToken": "carol_gpii_token"
     }, {
         "_id": "client-1",
         "type": "gpiiAppInstallationClient",
         "name": "Bakersfield AJC - PC1",
         "oauth2ClientId": "Bakersfield-AJC-client-id",
-        "oauth2ClientSecret": "Bakersfield-AJC-client-secret",
-        "userId": "user-4"
+        "oauth2ClientSecret": "Bakersfield-AJC-client-secret"
     }, {
         "_id": "gpiiAppInstallationAuthorization-1",
         "type": "gpiiAppInstallationAuthorization",
