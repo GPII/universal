@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Dark & Larger 125%",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
