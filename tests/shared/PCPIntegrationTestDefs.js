@@ -23,11 +23,11 @@ fluid.require("%universal");
 gpii.loadTestingSupport();
 
 
-// fluid.defaults("gpii.tests.pcpIntegration.environmentChangedRequestType", {
-//     gradeNames: "kettle.test.request.http",
-//     path: "/environmentChanged",
-//     method: "PUT"
-// });
+fluid.defaults("gpii.tests.pcpIntegration.environmentChangedRequestType", {
+    gradeNames: "kettle.test.request.http",
+    path: "/environmentChanged",
+    method: "PUT"
+});
 
 fluid.defaults("gpii.tests.pcpIntegration.client", {
     gradeNames: "kettle.test.request.ws",
@@ -44,198 +44,25 @@ fluid.defaults("gpii.tests.pcpIntegration.client", {
     }
 });
 
-// // NOTE: This inherits from from "gpii.test.common.testCaseHolder" via "gpii.test.integration.testCaseHolder.linux"
-// // from which it gets loginRequest, logoutRequest and other standard events
-// fluid.defaults("gpii.tests.PCPIntegration.testCaseHolder", {
-//     events: {
-//         refreshEnvironmentChangedRequest: null
-//     },
-//     // components: {
-//     //     environmentChangedRequest: {
-//     //         createOnEvent: "refreshEnvironmentChangedRequest",
-//     //         type: "gpii.tests.contextIntegration.environmentChangedRequestType"
-//     //     },
-//     //     environmentChangedRequest2: {
-//     //         type: "gpii.tests.contextIntegration.environmentChangedRequestType"
-//     //     }
-//     // }
-// });
-
-// gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, token, expected) {
-//     var session = lifecycleManager.getSession(token);
-//     jqUnit.assertEquals("Checking that the activeContextName matches: ", expected, session.model.activeContextName);
-// };
-
-
-// // TODO: Remove the abominable duplication between these definitions and those in Testing.js by means of a FLUID-5903 scheme
-// gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName) {
-//     return [
-//         {
-//             func: "{testCaseHolder}.events.refreshEnvironmentChangedRequest.fire"
-//         }, {
-//             func: "{environmentChangedRequest}.send",
-//             args: gpii.tests.contextIntegration.data.contexts[contextName].environment
-//         }, {
-//             event: "{environmentChangedRequest}.events.onComplete"
-//         }, {
-//             func: "gpii.test.checkConfiguration",
-//             args: ["{tests}.contexts." + contextName + ".settingsHandlers", "{nameResolver}",  "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-//         }, {
-//             event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-//             listener: "fluid.identity"
-//         }, {
-//             func: "gpii.tests.contextIntegration.checkCurrentContext",
-//             args: ["{lifecycleManager}", "context1", contextName]
-//         }
-//     ];
-// };
-
-// gpii.tests.contextIntegration.data = {
-//     userToken: "context1",
-//     processes: [
-//         {
-//             "command": "gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled",
-//             "expectConfigured": "true",
-//             "expectRestored": "false"
-//         }
-//     ],
-//     contexts: {
-//         "gpii-default": {
-//             "environment": {
-//                 "http://registry.gpii.net/common/environment/illuminance": 200,
-//                 "http://registry.gpii.net/common/environment/auditory.noise": 10000
-//             },
-//             "settingsHandlers": {
-//                 "gpii.gsettings": {
-//                     "data": [{
-//                         "settings": {
-//                             "mag-factor": 1.5
-//                         },
-//                         "options": {
-//                             "schema": "org.gnome.desktop.a11y.magnifier"
-//                         }
-//                     }]
-//                 },
-//                 "gpii.alsa": {
-//                     "data": [{
-//                         "settings": {
-//                             "masterVolume": 50
-//                         }
-//                     }]
-//                 }
-//             }
-//         },
-//         "bright": {
-//             "environment": {
-//                 "http://registry.gpii.net/common/environment/illuminance": 500,
-//                 "http://registry.gpii.net/common/environment/auditory.noise": 10000
-//             },
-//             "settingsHandlers": {
-//                 "gpii.gsettings": {
-//                     "data": [{
-//                         "settings": {
-//                             "mag-factor": 2
-//                         },
-//                         "options": {
-//                             "schema": "org.gnome.desktop.a11y.magnifier"
-//                         }
-//                     }]
-//                 },
-//                 "gpii.alsa": {
-//                     "data": [{
-//                         "settings": {
-//                             "masterVolume": 50
-//                         }
-//                     }]
-//                 }
-//             }
-//         },
-//         "onlyBright": { // if user logs in when brightness is active from the beginning - only expect mag
-//             "settingsHandlers": {
-//                 "gpii.gsettings": {
-//                     "data": [{
-//                         "settings": {
-//                             "mag-factor": 2
-//                         },
-//                         "options": {
-//                             "schema": "org.gnome.desktop.a11y.magnifier"
-//                         }
-//                     }]
-//                 }
-//             }
-//         },
-//         "noise": {
-//             "environment": {
-//                 "http://registry.gpii.net/common/environment/illuminance": 200,
-//                 "http://registry.gpii.net/common/environment/auditory.noise": 30000
-//             },
-//             "settingsHandlers": {
-//                 "gpii.gsettings": {
-//                     "data": [{
-//                         "settings": {
-//                             "mag-factor": 1.5
-//                         },
-//                         "options": {
-//                             "schema": "org.gnome.desktop.a11y.magnifier"
-//                         }
-//                     }]
-//                 },
-//                 "gpii.alsa": {
-//                     "data": [{
-//                         "settings": {
-//                             "masterVolume": 100
-//                         }
-//                     }]
-//                 }
-//             }
-//         },
-//         "brightandnoise": {
-//             "environment": {
-//                 "http://registry.gpii.net/common/environment/illuminance": 500,
-//                 "http://registry.gpii.net/common/environment/auditory.noise": 30000
-//             },
-//             "settingsHandlers": {
-//                 "gpii.gsettings": {
-//                     "data": [{
-//                         "settings": {
-//                             "mag-factor": 2
-//                         },
-//                         "options": {
-//                             "schema": "org.gnome.desktop.a11y.magnifier"
-//                         }
-//                     }]
-//                 },
-//                 "gpii.alsa": {
-//                     "data": [{
-//                         "settings": {
-//                             "masterVolume": 100
-//                         }
-//                     }]
-//                 }
-//             }
-//         }
-//     }
-// };
-// {"path":["settingControls","http://registry\\.gpii\\.net/common/magnification"],"type":"ADD","value":3}
-gpii.tests.pcpIntegration.sendPreferenceChange = function (evt, client, path, value) {
-    console.log("\n\n\n\n\n\n\nSENDING PREFERENCES CHANGE\n\n\n\n\n\n\n\n\n");
+gpii.tests.pcpIntegration.sendMsg = function (evt, client, path, value) {
     client.send({
         path: path,
         value: value,
         type: "ADD"
     });
-    setTimeout(function () { // allow the changes to be applied to the system
-        evt.fire("aksperporke)");
-    }, 1000);
+    setTimeout(function () { // we need to wait for the changes to actually be applied to the system
+        evt.fire("");
+    }, 500);
+};
+
+gpii.tests.pcpIntegration.sendContextChange = function (evt, client, newContext) {
+    gpii.tests.pcpIntegration.sendMsg(evt, client, ["activeContextName"], newContext);
 };
 
 gpii.tests.pcpIntegration.connectionSucceeded = function (data) {
     jqUnit.assertValue("Connection between client and server can be established", data);
 };
 
-gpii.tests.pcpIntegration.onSettingsDelayedListener = function (bla) {
-    fluid.fail("KASPERKASPERKASPER");
-}
 gpii.tests.pcpIntegration.data = {
     initial: {
         "settingsHandlers": {
@@ -258,7 +85,7 @@ gpii.tests.pcpIntegration.data = {
             }
         }
     },
-    afterChange: {
+    afterChange1: {
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
@@ -278,7 +105,42 @@ gpii.tests.pcpIntegration.data = {
                 }]
             }
         }
-    }
+    },
+    afterChange2: {
+      "settingsHandlers": {
+          "gpii.gsettings": {
+              "data": [{
+                  "settings": {
+                      "mag-factor": 3
+                  },
+                  "options": {
+                      "schema": "org.gnome.desktop.a11y.magnifier"
+                  }
+              }]
+          },
+          "gpii.alsa": {
+              "data": [{
+                  "settings": {
+                      "masterVolume": 75
+                  }
+              }]
+          }
+      }
+    },
+    bright: {
+        "settingsHandlers": {
+            "gpii.gsettings": {
+                "data": [{
+                    "settings": {
+                        "mag-factor": 2
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.magnifier"
+                    }
+                }]
+            }
+        }
+    },
 };
 
 gpii.tests.pcpIntegration.fixtures = [
@@ -313,14 +175,287 @@ gpii.tests.pcpIntegration.fixtures = [
                     event: "{pcpClient}.events.onConnect",
                     listener: "gpii.tests.pcpIntegration.connectionSucceeded"
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendPreferenceChange",
+                    funcName: "gpii.tests.pcpIntegration.sendMsg",
                     args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
                 }, {
                     event: "{testCaseHolder}.events.onSettingsDelayed",
-                    listener: "fluid.identity" //"gpii.test.pcpIntegration.onSettingsDelayedListener"
+                    listener: "fluid.identity"
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{logoutRequest}.send"
+                }, {
+                    event: "{logoutRequest}.events.onComplete",
+                    listener: "gpii.test.logoutRequestListen"
+                }, {
+                    func: "gpii.test.checkRestoredConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
+                }
+            ]
+        ]
+    }, {
+        name: "Sequential setting changes by the PCP",
+        expect: 7,
+        sequenceSegments: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pcpClient}.connect"
+                }, {
+                    event: "{pcpClient}.events.onConnect",
+                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendMsg",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendMsg",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/volume"], 0.75]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterChange2.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{logoutRequest}.send"
+                }, {
+                    event: "{logoutRequest}.events.onComplete",
+                    listener: "gpii.test.logoutRequestListen"
+                }, {
+                    func: "gpii.test.checkRestoredConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
+                }
+            ]
+        ]
+    }, {
+        name: "Context change via the PCP",
+        expect: 6,
+        sequenceSegments: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pcpClient}.connect"
+                }, {
+                    event: "{pcpClient}.events.onConnect",
+                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendContextChange",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", "bright"]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{logoutRequest}.send"
+                }, {
+                    event: "{logoutRequest}.events.onComplete",
+                    listener: "gpii.test.logoutRequestListen"
+                }, {
+                    func: "gpii.test.checkRestoredConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
+                }
+            ]
+        ]
+    }, {
+        name: "Settings change from PCP followed by context change via the PCP (new context should be applied)",
+        expect: 7,
+        sequenceSegments: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pcpClient}.connect"
+                }, {
+                    event: "{pcpClient}.events.onConnect",
+                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendMsg",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendContextChange",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", "bright"]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{logoutRequest}.send"
+                }, {
+                    event: "{logoutRequest}.events.onComplete",
+                    listener: "gpii.test.logoutRequestListen"
+                }, {
+                    func: "gpii.test.checkRestoredConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
+                }
+            ]
+        ]
+    }, {
+      // This test checks that the manually changed context from the user is not overridden
+      // by a context change triggered by changes in the environment
+        name: "Manual context change via the PCP followed by a change in environment",
+        expect: 8,
+        sequenceSegments: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pcpClient}.connect"
+                }, {
+                    event: "{pcpClient}.events.onConnect",
+                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendMsg",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendContextChange",
+                    args: ["{testCaseHolder}.events.onSettingsDelayed", "{pcpClient}", "bright"]
+                }, {
+                    event: "{testCaseHolder}.events.onSettingsDelayed",
+                    listener: "fluid.identity"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{environmentChangedRequest}.send", // change the environment to match "noise context"
+                    args: { "http://registry.gpii.net/common/environment/auditory.noise": 30000 }
+                }, {
+                    event: "{environmentChangedRequest}.events.onComplete"
+                }, {
+                    func: "gpii.test.checkConfiguration", // should still be bright since manual overrides automatic context
+                    args: ["{tests}.options.data.bright.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -348,12 +483,14 @@ fluid.defaults("gpii.tests.pcpIntegration.testCaseHolder.common.linux", {
     components: {
         pcpClient: {
             type: "gpii.tests.pcpIntegration.client"
+        },
+         environmentChangedRequest: {
+            type: "gpii.tests.pcpIntegration.environmentChangedRequestType"
         }
     },
     events: {
         onSettingsDelayed: null
     },
-
     userToken: "context1",
     data: gpii.tests.pcpIntegration.data
 });
