@@ -15,13 +15,6 @@
                         "http://registry.gpii.net/common/highContrastTheme": "white-black"
                     }
                 }
-            },
-            "bright": {
-                "name": "Default preferences",
-                "preferences": {
-                    "http://registry.gpii.net/common/cursorSize": 1.0,
-                    "http://registry.gpii.net/common/DPIScale": 1.25
-                }
             }
         }
     }

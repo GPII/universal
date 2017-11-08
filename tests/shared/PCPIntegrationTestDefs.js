@@ -107,25 +107,25 @@ gpii.tests.pcpIntegration.data = {
         }
     },
     afterChange2: {
-      "settingsHandlers": {
-          "gpii.gsettings": {
-              "data": [{
-                  "settings": {
-                      "mag-factor": 3
-                  },
-                  "options": {
-                      "schema": "org.gnome.desktop.a11y.magnifier"
-                  }
-              }]
-          },
-          "gpii.alsa": {
-              "data": [{
-                  "settings": {
-                      "masterVolume": 75
-                  }
-              }]
-          }
-      }
+        "settingsHandlers": {
+            "gpii.gsettings": {
+                "data": [{
+                    "settings": {
+                        "mag-factor": 3
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.magnifier"
+                    }
+                }]
+            },
+            "gpii.alsa": {
+                "data": [{
+                    "settings": {
+                        "masterVolume": 75
+                    }
+                }]
+            }
+        }
     },
     bright: {
         "settingsHandlers": {
@@ -140,7 +140,7 @@ gpii.tests.pcpIntegration.data = {
                 }]
             }
         }
-    },
+    }
 };
 
 gpii.tests.pcpIntegration.fixtures = [
@@ -484,7 +484,7 @@ fluid.defaults("gpii.tests.pcpIntegration.testCaseHolder.common.linux", {
         pcpClient: {
             type: "gpii.tests.pcpIntegration.client"
         },
-         environmentChangedRequest: {
+        environmentChangedRequest: {
             type: "gpii.tests.pcpIntegration.environmentChangedRequestType"
         }
     },
