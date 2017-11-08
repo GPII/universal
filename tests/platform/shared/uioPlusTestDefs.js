@@ -36,7 +36,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -64,7 +64,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "wb",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -92,7 +92,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -120,7 +120,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -148,7 +148,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "yellow",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -176,7 +176,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -204,7 +204,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -232,7 +232,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": true,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -260,7 +260,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": true,
+                            "tableOfContentsEnabled": true,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -288,7 +288,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": true,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -316,7 +316,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": true,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -344,7 +344,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false
@@ -372,7 +372,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": true,
                             "syllabificationEnabled": false
@@ -400,7 +400,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
                             "selectionTheme": "default",
-                            "tableOfContents": false,
+                            "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": true
@@ -428,7 +428,7 @@ gpii.tests.uioPlus.testDefs = [
                             "contrastTheme": "yb",
                             "selfVoicingEnabled": true,
                             "selectionTheme": "green",
-                            "tableOfContents": true,
+                            "tableOfContentsEnabled": true,
                             "dictionaryEnabled": true,
                             "simplifiedUiEnabled": true,
                             "syllabificationEnabled": true

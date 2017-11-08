@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Larger 175%",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
@@ -7,7 +8,8 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
                         "screen-dpi": 1.75
                     },
-                    "http://registry.gpii.net/common/cursorSize": 1.0
+                    "http://registry.gpii.net/common/cursorSize": 1.0,
+                    "http://registry.gpii.net/common/supportTool": ["dictionary"]
                 }
             }
         }

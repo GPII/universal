@@ -46,7 +46,7 @@ var gpii = gpii || {};
         },
         selectorsToIgnore: ["selection", "cancel", "done"],
         styles: {
-            dialogCss: "gpii-oauth2-privacySettings-editDecision-dialog"
+            dialogCss: "gpii-oauth2-privacySettings-editAuthorization-dialog"
         },
         strings: {
             description: "To allow access, please select one or more preferences to share:",
@@ -116,7 +116,7 @@ var gpii = gpii || {};
             fetchAvailableAuthorizedPrefs: {
                 funcName: "gpii.oauth2.ajax",
                 args: ["{that}.options.requestInfos.fetchAvailableAuthorizedPrefs.url", {
-                    clientID: "{that}.model.clientData.oauth2ClientId"
+                    clientID: "{that}.model.clientData.clientId"
                 }, {
                     dataType: "json",
                     success: "{that}.events.onFetchAvailableAuthorizedPrefsSuccess.fire",
@@ -134,7 +134,7 @@ var gpii = gpii || {};
             composeRequestURL: {
                 funcName: "fluid.stringTemplate",
                 args: ["{arguments}.0", {
-                    authDecisionId: "{that}.model.clientData.authDecisionId"
+                    authorizationId: "{that}.model.clientData.authorizationId"
                 }]
             },
             setInitialSelectedPrefs: {
@@ -154,8 +154,8 @@ var gpii = gpii || {};
             // clientData is in a structure of:
             // {
             //     serviceName: xx,
-            //     authDecisionId: xx,
-            //     oauth2ClientId: xx
+            //     authorizationId: xx,
+            //     clientId: xx
             // }
             clientData: null,
             availableAuthorizedPrefs: null,

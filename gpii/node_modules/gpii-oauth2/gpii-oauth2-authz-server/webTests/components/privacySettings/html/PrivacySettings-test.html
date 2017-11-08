@@ -38,7 +38,7 @@
     <script src="../../../../public/src/components/privacySettings/js/PrivacySettingsDialog.js"></script>
     <script src="../../../../public/src/components/privacySettings/js/EditPrivacySettingsDialog.js"></script>
     <script src="../../../../public/src/components/privacySettings/js/ServicesMenu.js"></script>
-    <script src="../../../../public/src/components/privacySettings/js/AddAuthorizationDialog.js"></script>
+    <script src="../../../../public/src/components/privacySettings/js/AddUserAuthorizedAuthorizationDialog.js"></script>
     <script src="../../../../public/src/components/OKCancelDialog/js/OKCancelDialog.js"></script>
     <script src="../../../../public/src/components/privacySettings/js/PrivacySettings.js"></script>
 
@@ -93,8 +93,8 @@
                         </button>
 
                         <input type="hidden" class="gpiic-oauth2-privacySettings-serviceName" name="serviceName" value="A Test Service" />
-                        <input type="hidden" class="gpiic-oauth2-privacySettings-authDecisionId" name="authDecisionId" value="10" />
-                        <input type="hidden" class="gpiic-oauth2-privacySettings-oauth2ClientId" name="oauth2ClientId" value="1" />
+                        <input type="hidden" class="gpiic-oauth2-privacySettings-authorizationId" name="authorizationId" value="10" />
+                        <input type="hidden" class="gpiic-oauth2-privacySettings-clientId" name="clientId" value="1" />
                     </li>
                 </ul>
 
@@ -106,45 +106,45 @@
                     <ul class="gpiic-oauth2-privacySettings-addServiceMenu gpii-oauth2-privacySettings-addServiceMenu">
                         <li>
                             <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Service 1</a>
-                            <input type="hidden" name="oauth2ClientId" value="2" />
+                            <input type="hidden" name="clientId" value="2" />
                         </li>
                         <li>
                             <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Service 2</a>
-                            <input type="hidden" name="oauth2ClientId" value="3" />
+                            <input type="hidden" name="clientId" value="3" />
                         </li>
                         <li>
                             <a href="#" class="gpiic-oauth2-servicesMenu-serviceName">Service 3</a>
-                            <input type="hidden" name="oauth2ClientId" value="4" />
+                            <input type="hidden" name="clientId" value="4" />
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="gpiic-oauth2-privacySettings-removeDecision-dialog gpii-oauth2-privacySettings-removeDecision-dialog">
+            <div class="gpiic-oauth2-privacySettings-removeDecision-dialog gpii-oauth2-privacySettings-removeAuthorization-dialog">
                 <p class="gpiic-oauth2-privacySettings-removeDecision-content">The remove message</p>
             </div>
 
-            <div class="gpiic-oauth2-privacySettings-editDecision-dialog gpii-oauth2-privacySettings-editDecision-dialog">
+            <div class="gpiic-oauth2-privacySettings-editDecision-dialog gpii-oauth2-privacySettings-editAuthorization-dialog">
                 <h3 class="gpiic-oauth2-privacySettings-editDecision-title"></h3>
                 <p class="gpiic-oauth2-privacySettings-editDecision-description"></p>
 
                 <section class="gpiic-oauth2-privacySettings-editDecision-selection gpiic-oauth2-selectionTree gpii-oauth2-selectionTree gpii-oauth2-innerPanel gpii-oauth2-scrollPanel"></section>
 
                 <div class="gpii-oauth2-privacySettings-editDecision-buttonPane">
-                    <button class="gpiic-oauth2-privacySettings-editDecision-cancel gpii-oauth2-privacySettings-editDecision-cancel"></button>
-                    <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editDecision-done"></button>
+                    <button class="gpiic-oauth2-privacySettings-editDecision-cancel gpii-oauth2-privacySettings-editAuthorization-cancel"></button>
+                    <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editAuthorization-done"></button>
                 </div>
             </div>
 
-            <div class="gpiic-oauth2-privacySettings-addAuthorizationDialog gpii-oauth2-privacySettings-editDecision-dialog">
+            <div class="gpiic-oauth2-privacySettings-addUserAuthorizedAuthorizationDialog gpii-oauth2-privacySettings-editAuthorization-dialog">
                 <h3 class="gpiic-oauth2-privacySettings-editDecision-title"></h3>
                 <p class="gpiic-oauth2-privacySettings-editDecision-description"></p>
 
                 <section class="gpiic-oauth2-privacySettings-editDecision-selection gpiic-oauth2-selectionTree gpii-oauth2-selectionTree gpii-oauth2-innerPanel gpii-oauth2-scrollPanel"></section>
 
                 <div class="gpii-oauth2-privacySettings-editDecision-buttonPane">
-                    <button class="gpiic-oauth2-privacySettings-editDecision-cancel gpii-oauth2-privacySettings-editDecision-cancel"></button>
-                    <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editDecision-done"></button>
+                    <button class="gpiic-oauth2-privacySettings-editDecision-cancel gpii-oauth2-privacySettings-editAuthorization-cancel"></button>
+                    <button class="gpiic-oauth2-privacySettings-editDecision-done gpii-oauth2-privacySettings-editAuthorization-done"></button>
                 </div>
             </div>
         </div>

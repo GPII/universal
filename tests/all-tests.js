@@ -5,6 +5,7 @@ Copyright 2013 OCAD University
 Copyright 2014 Emergya
 Copyright 2014 Technosite
 Copyright 2014 Raising the Floor - International
+Copyright 2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -29,11 +30,12 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_chrome.js",
     "./platform/cloud/AcceptanceTests_chrome_oauth2.js",
     "./platform/cloud/AcceptanceTests_easit4all.js",
-    "./platform/cloud/AcceptanceTests_easit4all_oauth2_filtering.js",
     "./platform/cloud/AcceptanceTests_empty.js",
     "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
     "./platform/cloud/AcceptanceTests_jme.js",
-    "./platform/cloud/AcceptanceTests_oauth2_addPrefs.js",
+    "./platform/cloud/AcceptanceTests_oauth2_gpiiAppInstallation.js",
+    "./platform/cloud/AcceptanceTests_oauth2_privilegedPrefsCreator.js",
+    "./platform/cloud/AcceptanceTests_oauth2_webPrefsConsumer.js",
     "./platform/cloud/AcceptanceTests_oauth2_privacySettings.js",
     "./platform/cloud/AcceptanceTests_olb.js",
     "./platform/cloud/AcceptanceTests_smarthouses.js",
@@ -49,6 +51,7 @@ var testIncludes = [
     "./PreferencesServerErrorTests.js",
     "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
+    "./UntrustedContextIntegrationTests.js",
     "./UntrustedDevelopmentTests.js",
     "./PayloadSizeTest.js",
     "./UntrustedUserLogonStateChangeTests.js",
