@@ -187,7 +187,7 @@ fluid.defaults("gpii.tests.dbDataStore.findAuthorizationByAccessToken", {
                 event: "{that}.events.onError"
             }]
         }, {
-            name: "Find by a non-existing gpii token returns undefined",
+            name: "Find by a non-existing access token returns undefined",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
                 args: ["{dbDataStore}.findAuthorizationByAccessToken", ["non-existing"], "{that}"]

@@ -11,33 +11,34 @@ The authorization service provides API that allows to add and retrieve authoriza
     * accessToken: String. A string representing an authorization issued to the
 client.
 * **return: (one of the below)**
-    * An object. For web preference consumer clients, the object contains: the access token that matches the given parameter, the user GPII token, the client id, the user selected preferences. An example:
+    * An object. For GPII app installation clients, the object contains: the access token that matches the given parameter, the client and authorization data. An example:
     ```
     {
-        accessToken: "carla-accessToken",
-        gpiiToken: "carla",
-        oauth2ClientId: 1,
-        selectedPreferences: {
-            "visual-alternatives.speak-text.rate": true,
-            "increase-size.appearance.text-size": true
+        "accessToken": "gpii-app-installation-token-1",
+        "client": {
+            "id": "client-1",
+            "type": "gpiiAppInstallationClient",
+            "name": "AJC-Bakersfield",
+            "oauth2ClientId": "net.gpii.ajc.bakersfield",
+            "oauth2ClientSecret": "client_secret_ajc_bakersfield"
+        },
+        "authorization": {
+            "id": "gpiiAppInstallationAuthorization-1",
+            "type": "gpiiAppInstallationAuthorization",
+            "clientId": "client-1",
+            "gpiiToken": "chrome_high_contrast",
+            "accessToken": "gpii-app-installation-token-1",
+            "revoked": false,
+            "timestampCreated": "2017-05-29T17:54:00.000Z",
+            "timestampRevoked": null,
+            "timestampExpires": "2017-05-30T17:54:00.000Z"
         }
     }
     ```
 
-    * An object. For privileged preferences creator clients, this object contains: the access token that matches the given parameter, the OAuth2 client id, the flag that allows the client to add preferences. An example:
-    ```
-    {
-        accessToken: "client_A_accessToken",
-        oauth2ClientId: "client_id_A",
-        allowAddPrefs: true
-    }
-    ```
-
     * `undefined`. `undefined` is returned in any of these cases:
-        - The authorization with the matched access token is not found;
-        - The authorization has been revoked;
-        - The user specified in the authorization is not found;
-        - The client specified in the authorization is not found.
+        - The authorization that matches the given access token is not found;
+        - The authorization has been revoked.
 
 #### grantGpiiAppInstallationAuthorization(gpiiToken, clientId)
 * **description**: Grant an authorization to a GPII app installation. The authorization allows a GPII app installation to access user settings associated with the given GPII token. The scenarios are handled by this function:

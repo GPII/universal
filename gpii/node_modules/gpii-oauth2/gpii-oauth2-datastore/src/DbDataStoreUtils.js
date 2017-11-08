@@ -143,20 +143,21 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
 /**
  * Find an authorization by an access token
  * @param data {Component} Contains both client and authorization information associated with the given access token
- * An input example of a web preferences consumer authorization:
+ * An input example of a GPII app installation authorization:
  * {
  *     key: {String},   // access token
  *     id: {String},    // authorization id
  *     value: {
  *         _id: {String},      // client id
  *         authorization: {
- *             type: {String}, // authorization type
- *             gpiiToken: {String},
+ *             type: {String},
  *             clientId: {String},
- *             redirectUri: {String},
+ *             gpiiToken: {String},
  *             accessToken: {String},
- *             selectedPreferences: {Object},
  *             revoked: {Boolean},
+ *             timestampCreated: {Date},
+ *             timestampRevoked: {Date},
+ *             timestampExpires: {Date},
  *             _id: {String},
  *             _rev: {String}
  *         }
@@ -166,7 +167,6 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
  *         name: {String},
  *         oauth2ClientId: {String},
  *         oauth2ClientSecret: {String},
- *         redirectUri: {String},
  *         _id: {String},
  *         _rev: {String}
  *     }
@@ -198,28 +198,6 @@ gpii.oauth2.dbDataStore.findAuthorizationByAccessTokenPostProcess = function (da
  *      gpiiToken: {String},
  *      accessToken: {String},
  *      timestampExpires: {String}
- *  }
- *
- * onboardedSolutionAuthorization:
- *  {
- *      clientId: {String},
- *      gpiiToken: {String},
- *      selectedPreferences: {Object}
- *  }
- *
- * privilegedPrefsCreatorAuthorization:
- *  {
- *      clientId: {String},
- *      accessToken: {String}
- *  }
- *
- * webPrefsConsumerAuthorization:
- *  {
- *      clientId: {String},
- *      gpiiToken: {String},
- *      accessToken: {String},
- *      redirectUri: {String},
- *      selectedPreferences: {Object}
  *  }
  *
  * @return {Promise} A promise object that carries either a response returned from CouchDB/PouchDB for adding the
