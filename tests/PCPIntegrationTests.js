@@ -1,7 +1,7 @@
 /**
-GPII Context Integration Tests
+GPII PCP Integration Tests
 
-Copyright 2014 Raising the Floor - International
+Copyright 2017 Raising the Floor - International
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -21,17 +21,5 @@ var fluid = require("infusion"),
 fluid.require("%universal");
 require("./shared/PCPIntegrationTestDefs.js");
 
-gpii.tests.pcpIntegration.baseTestDef = {
-    gradeNames: [
-        "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
-        "gpii.test.common.lifecycleManagerReceiver"
-    ],
-    config: {
-        configName: "gpii.tests.acceptance.linux.builtIn.config",
-        configPath: "%universal/tests/platform/linux/configs"
-    }
-};
-
 kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.pcpIntegration.fixtures, gpii.tests.pcpIntegration.baseTestDef));
-

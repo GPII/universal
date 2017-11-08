@@ -22,6 +22,16 @@ fluid.registerNamespace("gpii.tests.pcpIntegration");
 fluid.require("%universal");
 gpii.loadTestingSupport();
 
+gpii.tests.pcpIntegration.baseTestDef = {
+    gradeNames: [
+        "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
+        "gpii.test.common.lifecycleManagerReceiver"
+    ],
+    config: {
+        configName: "gpii.tests.acceptance.linux.builtIn.config",
+        configPath: "%universal/tests/platform/linux/configs"
+    }
+};
 
 fluid.defaults("gpii.tests.pcpIntegration.environmentChangedRequestType", {
     gradeNames: "kettle.test.request.http",
