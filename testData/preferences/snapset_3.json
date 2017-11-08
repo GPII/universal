@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Read To Me",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

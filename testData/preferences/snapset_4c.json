@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Large + Magnifier 200%",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
