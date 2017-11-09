@@ -186,10 +186,10 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
 }
 ```
 
-#### Update settings on Online Flowmanager (PUT /untrusted-preferences/:token)
-* **description**: Update settings on the online flowmanager
+#### Update settings on Online Flowmanager (PUT /:token/untrusted-settings)
+* **description**: Update preferences on the online flowmanager
 * **Supported modes**: Cloud-based (online) flowmanager only
-* **route:** `/untrusted-preferences/:token` where:
+* **route:** `/:token/untrusted-settings` where:
     - `:token` should be the token of the user for which the settings are updated
 * **header:** Authorization: Bearer < access_token >
     - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to update settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
