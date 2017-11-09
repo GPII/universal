@@ -56,6 +56,7 @@
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
     "http://registry\\.gpii\\.net/common/language": "language",
     "http://registry\\.gpii\\.net/common/wallpaper": "display.screenEnhancement.wallpaper",
+    "http://registry\\.gpii\\.net/common/DPIScale": "display.screenEnhancement.-provisional-DPIScale",
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",
