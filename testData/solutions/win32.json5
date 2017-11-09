@@ -622,6 +622,11 @@
             "settings.configuration1",
             "settings.configuration2"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.launch.exec",
@@ -704,6 +709,11 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
         ],
         "start": [
             {
@@ -1262,6 +1272,11 @@
             "settings.configure",
             "settings.configureNoRoam"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -1682,6 +1697,11 @@
         ],
         "restore": [
             "settings.configs"
+        ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
         ],
         "start": [
             {
@@ -2109,6 +2129,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2326,6 +2349,9 @@
         "configure": [
             "settings.configure"
         ],
+        "update": [
+          "configure"
+        ],
         "restore": [
             "settings.configure"
         ],
@@ -2465,6 +2491,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2535,6 +2564,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2631,6 +2663,9 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "update": [
+          "configure"
         ],
         "isInstalled": [
             {
@@ -2938,6 +2973,9 @@
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
         ],
+        "update": [
+          "configure"
+        ],
         "start": [
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
@@ -3154,6 +3192,9 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "update": [
+          "configure"
         ],
         "start": [],
         "stop": [],

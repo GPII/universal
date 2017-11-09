@@ -21,5 +21,4 @@ var fluid = require("infusion"),
 fluid.require("%universal");
 require("./shared/PCPIntegrationTestDefs.js");
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
-        gpii.tests.pcpIntegration.fixtures, gpii.tests.pcpIntegration.baseTestDef));
+kettle.test.bootstrapServer(gpii.tests.pcpIntegration.buildTestDefs(gpii.tests.pcpIntegration.testDefs));

@@ -22,16 +22,6 @@ fluid.registerNamespace("gpii.tests.pcpIntegration");
 fluid.require("%universal");
 gpii.loadTestingSupport();
 
-gpii.tests.pcpIntegration.baseTestDef = {
-    gradeNames: [
-        "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
-        "gpii.test.common.lifecycleManagerReceiver"
-    ],
-    config: {
-        configName: "gpii.tests.acceptance.linux.builtIn.config",
-        configPath: "%universal/tests/platform/linux/configs"
-    }
-};
 
 fluid.defaults("gpii.tests.pcpIntegration.environmentChangedRequestType", {
     gradeNames: "kettle.test.request.http",
@@ -42,7 +32,7 @@ fluid.defaults("gpii.tests.pcpIntegration.environmentChangedRequestType", {
 fluid.defaults("gpii.tests.pcpIntegration.client", {
     gradeNames: "kettle.test.request.ws",
     path: "/pcpChannel",
-    port: "{configuration}.options.mainServerPort",
+    port: 8081,
     events: {
         connectionSucceeded: null
     },
@@ -153,11 +143,11 @@ gpii.tests.pcpIntegration.data = {
     }
 };
 
-gpii.tests.pcpIntegration.fixtures = [
+gpii.tests.pcpIntegration.testDefs = [
     {
         name: "Simple settings change by PCP",
         expect: 6,
-        sequenceSegments: [
+        sequence: [
             [
                 {
                     func: "gpii.test.expandSettings",
@@ -213,7 +203,7 @@ gpii.tests.pcpIntegration.fixtures = [
     }, {
         name: "Sequential setting changes by the PCP",
         expect: 7,
-        sequenceSegments: [
+        sequence: [
             [
                 {
                     func: "gpii.test.expandSettings",
@@ -281,7 +271,7 @@ gpii.tests.pcpIntegration.fixtures = [
     }, {
         name: "Context change via the PCP",
         expect: 6,
-        sequenceSegments: [
+        sequence: [
             [
                 {
                     func: "gpii.test.expandSettings",
@@ -337,7 +327,7 @@ gpii.tests.pcpIntegration.fixtures = [
     }, {
         name: "Settings change from PCP followed by context change via the PCP (new context should be applied)",
         expect: 7,
-        sequenceSegments: [
+        sequence: [
             [
                 {
                     func: "gpii.test.expandSettings",
@@ -407,7 +397,7 @@ gpii.tests.pcpIntegration.fixtures = [
       // by a context change triggered by changes in the environment
         name: "Manual context change via the PCP followed by a change in environment",
         expect: 8,
-        sequenceSegments: [
+        sequence: [
             [
                 {
                     func: "gpii.test.expandSettings",
@@ -504,3 +494,20 @@ fluid.defaults("gpii.tests.pcpIntegration.testCaseHolder.common.linux", {
     userToken: "context1",
     data: gpii.tests.pcpIntegration.data
 });
+
+
+
+gpii.tests.pcpIntegration.buildTestDefs = function (testDefs) {
+    return fluid.transform(testDefs, function (testDef) {
+        return fluid.extend(true, {
+            gradeNames: [
+                "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
+                "gpii.test.common.lifecycleManagerReceiver"
+            ],
+            config: {
+                configName: "gpii.tests.acceptance.linux.builtIn.config",
+                configPath: "%universal/tests/platform/linux/configs"
+            }
+        }, testDef);
+    });
+};
