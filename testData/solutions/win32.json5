@@ -14,13 +14,66 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": {
-                    "Voice Profiles.ActiveVoiceProfileName": {},
-                    "options.SayAllIndicateCaps": {},
-                    "options.TypingEcho": {},
-                    "options.SayAllMode": {},
-                    "Braille.BrailleMode": {},
-                    "options.SayAllIgnoreShiftKeys": {}
+                "supportedSettings": { // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
+                // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
+                // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
+                    "Voice Profiles.ActiveVoiceProfileName": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                        "schema": {
+                            "title": "Active Voice Profile Name",
+                            "description": "The active voice profile",
+                            "type": "string",
+                            "default": "GPII"
+                        }
+                    },
+                    "options.SayAllIndicateCaps": { // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
+                        "schema": {
+                            "title": "Announce capitals",
+                            "description": "During SayAll, indicate initial cap or capitalized word",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    },
+                    "options.TypingEcho": {
+                        "schema": {
+                            "title": "Typing echo",
+                            "description": "Typing echo mode, its value can be either character, word, char&Word or none",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3]
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "off", 1: "character", 2: "words", 3: "character and words"
+                        }
+                    },
+                    "options.SayAllMode": {
+                        "schema": {
+                            "title": "SayAllMode",
+                            "description": "Sets the amount of text which SayAll sends to the synthesizer as a single unit",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2]
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "line", 1: "sentence", 2: "paragraph"
+                        }
+                    },
+                    "Braille.BrailleMode": {
+                        "schema": {
+                            "title": "Braille mode",
+                            "description": "",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1, 2, 3]
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "line", 1: "structured", 2: "speech output", 3: "attribute indicators"
+                        }
+                    },
+                    "options.SayAllIgnoreShiftKeys": {
+                        "schema": {
+                            "title": "SayAll Ignore Shift Keys",
+                            "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
@@ -708,12 +761,60 @@
                     }
                 },
                 "supportedSettings": {
-                    "Magnification": {},
-                    "Invert": {},
-                    "FollowFocus": {},
-                    "FollowCaret": {},
-                    "FollowMouse": {},
-                    "MagnificationMode": {},
+                    "Invert": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                        "schema": {
+                            "title": "Invert Colours",
+                            "description": "Enable colour inversion for Magnifier",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "Magnification": {
+                        "schema": {
+                            "title": "Magnification",
+                            "description": "Set up magnification level",
+                            "type": "number",
+                            "default": 200,
+                            "min": 100,
+                            "max": 1600,
+                            "divisibleBy": 1
+                        }
+                    },
+                    "FollowFocus": {
+                        "schema": {
+                            "title": "Magnifier follows focus",
+                            "description": "Magnifier follows the keyboard focus",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "FollowCaret": {
+                        "schema": {
+                            "title": "Magnifier follows caret",
+                            "description": "Magnifier follows the text insertion point",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "FollowMouse": {
+                        "schema": {
+                            "title": "Magnifier follows mouse",
+                            "description": "Magnifier follows the mouse pointer",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "MagnificationMode": {
+                        "schema": {
+                            "title": "Magnifier position",
+                            "description": "Position of the magnified area",
+                            "type": "number",
+                            "default": 2,
+                            "enum": [1, 2, 3]
+                            // TODO: We must present these values in a human readable form
+                            // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
+                        }
+                    },
                     "ZoomIncrement": {}
                 },
                 "capabilities": [],
@@ -853,7 +954,14 @@
                     }
                 },
                 "supportedSettings": {
-                    "NavigationMode": {}
+                    "NavigationMode": { // TODO: Weird supported setting - How do we provide such use case?
+                        "schema": {
+                            "title": "On-Screen Keyboard",
+                            "description": "Enable/Disable On-Screen Keyboard",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
@@ -1862,7 +1970,14 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "HighContrastOn": {}
+                    "HighContrastOn": {
+                        "schema": {
+                            "title": "High Contrast",
+                            "description": "Whether to enable/disable High Contrast",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastEnabled"
@@ -1896,7 +2011,19 @@
                     }
                 },
                 "supportedSettings": {
-                    "LastHighContrastTheme": {}
+                    "LastHighContrastTheme": {
+                        "schema": {
+                            "title": "High Contrast theme",
+                            "description": "High Contrast Theme",
+                            "type": "string",
+                            "default": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                            "enum": [
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"]
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastTheme"
@@ -2014,9 +2141,32 @@
                     "verifySettings": false
                 },
                 "supportedSettings": {
-                    "FilterKeysEnable": {},
-                    "FilterKeysEnable": {},
-                    "BounceKeysInterval": {}
+                    "FilterKeysEnable": {
+                        "schema": {
+                            "title": "Filter keys",
+                            "description": "Enable/Disable filter keys",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "SlowKeysInterval": {
+                        "schema": {
+                            "title": "Slow keys interval",
+                            "description": "Slow keys interval time in milliseconds",
+                            "type": "number",
+                            "default": 0,  // 0 means no interval time
+                            "divisibleBy": 1
+                        }
+                    },
+                    "BounceKeysInterval": {
+                        "schema": {
+                            "title": "Bounce keys interval",
+                            "description": "Bounce keys interval time in milliseconds",
+                            "type": "number",
+                            "default": 0,
+                            "divisibleBy": 1
+                        }
+                    }
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2205,9 +2355,31 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "MouseKeysOn": {},
-                    "MaxSpeed": {},
-                    "Acceleration": {}
+                    "MouseKeysOn": {
+                        "schema": {
+                            "title": "Mouse keys",
+                            "description": "Enable/Disable mouse keys",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "MaxSpeed": {
+                        "schema": {
+                            "title": "Mouse keys speed",
+                            "description": "Speed of mouse keys",
+                            "type": "number",
+                            "divisibleBy": 10
+                        }
+                    },
+                    "Acceleration": {
+                        "schema": {
+                            "title": "Mouse keys acceleration",
+                            "description": "Acceleration of mouse keys",
+                            "type": "number",
+                            "min": -1000, // TODO: Not clear how to describe this setting
+                            "max": 1000
+                        }
+                    }
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2324,7 +2496,16 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "MouseTrails": {}
+                    "MouseTrails": {
+                        "schema": { // Exactly the same schema as mouseTrailing common term
+                            "title": "Mouse trails",
+                            "description": "Amount of mouse trailing",
+                            "type": "number",
+                            "min": 0,
+                            "max": 10,
+                            "divisibleBy": 1
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/mouseTrailing"
@@ -2378,7 +2559,17 @@
                 "capabilities": [
                     "display.screenEnhancement.screenResolution",
                     "applications.com\\.microsoft\\.windows\\.screenResolution.id"
-                ]
+                ],
+                "supportedSettings": {
+                    "screen-resolution": {
+                        "schema": {
+                            "title": "Screen resolution",
+                            "description": "Screen resolution of the default display",
+                            "type": "array", // TODO: Not sure about this type
+                            "enum": [] // TODO: This must be filled in on the fly with available screen resolutions
+                        }
+                    }
+                }
             }
         },
         "configure": [
@@ -2414,6 +2605,17 @@
                     "display.screenEnhancement.screenScale",
                     "applications.com\\.microsoft\\.windows\\.screenDPI.id"
                 ],
+                "supportedSettings": {
+                    "screen-dpi": {
+                        "schema": {
+                            "title": "Screen DPI",
+                            "description": "Screen DPI of the default display",
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 5 // Taken from dpiWindows10.js, may not be appropriate
+                        }
+                    }
+                },
                 "capabilitiesTransformations": {
                     "screen-dpi": "http://registry\\.gpii\\.net/common/DPIScale"
                 }
@@ -2854,7 +3056,7 @@
                     "contrastTheme": {},
                     "selfVoicingEnabled": {},
                     "selectionTheme": {},
-                    "tableOfContents": {},
+                    "tableOfContentsEnabled": {},
                     "dictionaryEnabled": {},
                     "simplifiedUiEnabled": {},
                     "syllabificationEnabled": {}
