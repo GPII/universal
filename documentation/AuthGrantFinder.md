@@ -13,7 +13,7 @@ The authorization grant finder provides API that allows users to use access toke
     {
         accessToken: "the_input_accessToken",
         gpiiToken: "bob_gpii_token",
-        allowUntrustedSettings: true,
-        allowUntrustedPreferences: true
+        allowUntrustedSettingsGet: true,
+        allowUntrustedSettingsPut: true
     }
     ```

@@ -63,6 +63,10 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidPersistentConfiguration",
+                "supportedSettings": {
+                    "fontScale": {},
+                    "locale": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontScale": {
@@ -163,6 +167,10 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidAudioManager.volume",
+                "supportedSettings": {
+                    "STREAM_MUSIC": {},
+                    "STREAM_SYSTEM": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "STREAM_MUSIC": {
@@ -216,6 +224,13 @@
                 "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "System"
+                },
+                "supportedSettings": {
+                    "dim_screen": {},
+                    "haptic_feedback_enabled": {},
+                    "accelerometer_rotation": {},
+                    "user_rotation": {},
+                    "screen_off_timeout": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -278,6 +293,10 @@
                 "type": "gpii.androidSettings",
                 "options": {
                     "settingType": "Secure"
+                },
+                "supportedSettings": {
+                    "tts_default_pitch": {},
+                    "tts_default_rate": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -357,6 +376,10 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "supportedSettings": {
+                    "map.string.fontsize.$t": {},
+                    "map.string.theme.$t": {}
+                },
                 "options": {
                     "filename": "/sdcard/output.xml",
                     "encoding": "utf-8",
@@ -430,6 +453,13 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
+                "supportedSettings": {
+                    "access_commonprefs_speechrate": {},
+                    "access_commonprefs_speechpitch": {},
+                    "access_commonprefs_editingkeyboardecho": {},
+                    "access_commonprefs_punctuation": {},
+                    "access_commonprefs_capitalization": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {

@@ -52,8 +52,8 @@ var fluid = fluid || require("infusion");
                     grant = {
                         accessToken: accessToken,
                         gpiiToken: authRecord.authorization.gpiiToken,
-                        allowUntrustedSettings: true,
-                        allowUntrustedPreferences: true
+                        allowUntrustedSettingsGet: true,
+                        allowUntrustedSettingsPut: true
                     };
                 }
             }
