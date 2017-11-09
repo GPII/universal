@@ -933,7 +933,7 @@
         "update": [
             "stop",
             "configure",
-            "stop"
+            "start"
         ],
         "isInstalled": [
             {
