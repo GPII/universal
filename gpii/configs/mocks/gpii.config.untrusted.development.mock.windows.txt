@@ -1,5 +1,9 @@
-gpii.config.cloudBased.development.all.local.json
+gpii.config.cloudBased.development.all.local.mock.windows.json
 =================================================
+
+A variant of gpii.cloudBased.development.all.local which includes mock definitions for all builtin settings handlers
+supported on the Windows platform. This allows any preference set to be logged in from a bare universal repo without
+crashing the system.
 
 This configuration runs the entire system as a cloudBased flowmanager, but with everything locally and in development mode.
 
