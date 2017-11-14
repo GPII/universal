@@ -3198,24 +3198,28 @@
         ],
         "start": [
             {
-                "type": "gpii.windows.closeAfterOpenCommand",
+                "type": "gpii.windows.closeAfterCommand",
                 "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe",
                 "processToWait": "ClassicStartMenu.exe",
                 "processToClose": "explorer.exe",
                 "options": {
-                    "restart": true
+                    "restart": true,
+                    "retries": 5,
+                    "commandType": "Open"
                 }
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeAfterExitCommand",
+                "type": "gpii.windows.closeAfterCommand",
                 "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe",
                 "args": ["-exit"],
                 "processToWait": "ClassicStartMenu.exe",
                 "processToClose": "explorer.exe",
                 "options": {
-                    "restart": true
+                    "restart": true,
+                    "retries": 20,
+                    "commandType": "Close"
                 }
             }
         ],
