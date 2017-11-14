@@ -19,6 +19,7 @@
         "node-jqunit": "1.1.7",
         "node-uuid": "1.4.8",
         "mkdirp": "0.5.1",
+        "nock": "9.1.0",
         "oauth2orize": "1.8.0",
         "passport": "0.3.2",
         "passport-oauth2-client-password": "0.1.2",
@@ -37,7 +38,6 @@
         "http-browserify": "1.7.0",
         "https-browserify": "1.0.0",
         "istanbul": "git://github.com/the-t-in-rtf/istanbul#828eb930add7bd663ca20649a917f3f3829e48c5",
-        "nock": "9.0.14",
         "nyc": "10.1.2",
         "recursive-copy": "2.0.6",
         "testem": "1.16.1"
