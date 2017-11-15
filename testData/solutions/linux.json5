@@ -15,6 +15,14 @@
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
+                "supportedSettings": {
+                    "mag-factor": {},
+                    "show-cross-hairs": {},
+                    "focus-tracking": {},
+                    "caret-tracking": {},
+                    "mouse-tracking": {},
+                    "screen-position": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
@@ -126,6 +134,12 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "supportedSettings": {
+                    "text-scaling-factor": {},
+                    "cursor-size": {},
+                    "gtk-theme": {},
+                    "icon-theme": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
@@ -241,6 +255,9 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "supportedSettings": {
+                    "font": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "font": "http://registry\\.gpii\\.net/common/0"
@@ -318,6 +335,17 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "supportedSettings": {
+                    "stickykeys-enable": {},
+                    "slowkeys-enable": {},
+                    "slowkeys-delay": {},
+                    "bouncekeys-enable": {},
+                    "bouncekeys-delay": {},
+                    "mousekeys-enable": {},
+                    "mousekeys-init-delay": {},
+                    "mousekeys-max-speed": {},
+                    "mousekeys-accel-time": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "stickykeys-enable": "http://registry\\.gpii\\.net/common/stickyKeys",
@@ -457,6 +485,19 @@
                 "type": "gpii.orca",
                 "options": {
                     "user": "${{userToken}}"
+                },
+                "supportedSettings": {
+                    "enableTutorialMessages": {},
+                    "enableEchoByCharacter": {},
+                    "enableEchoByWord": {},
+                    "enableBraille": {},
+                    "enableSpeech": {},
+                    "sayAllStyle": {},
+                    "voices.default.rate": {},
+                    "voices.default.average-pitch": {},
+                    "voices.default.gain": {},
+                    "voices.default.family": {},
+                    "verbalizePunctuationStyle": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
@@ -1107,6 +1148,9 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.alsa",
+                "supportedSettings": {
+                    "masterVolume": {}
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "masterVolume": {
@@ -1328,7 +1372,10 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.xrandr",
-                "capabilities": []
+                "capabilities": [],
+                "supportedSettings": {
+                    "screen-resolution": {}
+                }
            }
         },
         "configure": [
@@ -1352,6 +1399,19 @@
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
                     "path": "net.gpii.uioPlus"
+                },
+                "supportedSettings": {
+                    "lineSpace": {},
+                    "fontSize": {},
+                    "characterSpace": {},
+                    "inputsLargerEnabled": {},
+                    "contrastTheme": {},
+                    "selfVoicingEnabled": {},
+                    "selectionTheme": {},
+                    "tableOfContentsEnabled": {},
+                    "dictionaryEnabled": {},
+                    "simplifiedUiEnabled": {},
+                    "syllabificationEnabled": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/lineSpace",
