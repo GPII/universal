@@ -29,8 +29,6 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyRefetchedAccessToken = functi
 };
 
 gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
-console.log("=== expectedMatchMakerOutput", expectedMatchMakerOutput);
-console.log("=== body", body);
     var payload = JSON.parse(body);
     jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };
