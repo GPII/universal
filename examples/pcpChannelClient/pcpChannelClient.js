@@ -32,10 +32,11 @@ socket.on("message", function (data) {
     var message = JSON.parse(data);
     console.log("## Received the following message: " + JSON.stringify(message, null, 4));
     // socket.send(JSON.stringify({"path": ["activeContextName"], "value": "bright", type: "ADD"}));
-    socket.send(JSON.stringify({
-    	"path": [ "preferences", "http://registry\\.gpii\\.net/common/DPIScale" ],
-    	"type": "ADD",
-    	"value": 1.25
-    }));
+    socket.send(JSON.stringify(
+        {
+            "path": [ "preferences", "http://registry\\.gpii\\.net/common/DPIScale" ],
+            "type": "ADD",
+            "value": 1.25
+        }));
     socket.close();
 });
