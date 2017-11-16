@@ -933,7 +933,7 @@
         "update": [
             "stop",
             "configure",
-            "stop"
+            "start"
         ],
         "isInstalled": [
             {
@@ -2974,7 +2974,8 @@
             }
         ],
         "update": [
-          "configure"
+            "configure",
+            "start"
         ],
         "start": [
             {
