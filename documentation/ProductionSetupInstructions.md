@@ -6,7 +6,7 @@ GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* 
 * *Cloud Based Flow Manager* listening on port 8082
 * *CouchDB* as the backend database for the above two servers listening on port 5984
 
-**Note:** 
+**Note:**
 
 * The *Preferences Server* and *Cloud Based Flow Manager* will be managed by two separate Node.js processes
 * The above mentioned ports will be forwarded from your host machine to the VM allowing access to deployed services
@@ -68,10 +68,9 @@ Opening this link in a browser:
 http://localhost:5984/_utils/
 ```
 
-should show the [CouchDB Web GUI Administration Panel](http://docs.couchdb.org/en/1.6.1/intro/futon.html). The following databases should be present:
+should show the [CouchDB Web GUI Administration Panel](http://docs.couchdb.org/en/1.6.1/intro/futon.html). The following database should be present:
 
-* ```auth```: Contains all data for GPII Authorization Server that runs within the Cloud Based Flow Manager
-* ```preferences```: Contains all data for the Preferences Server
+* ```gpii```: Contains all data for GPII Server that runs within the Cloud Based Flow Manager, including GPII keys, prefs safes, gpii App installation clients, gpii App installation client authorizations and client credentials
 
 ## Stop the VM
 

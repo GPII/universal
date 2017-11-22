@@ -23,10 +23,13 @@ fluid.defaults("gpii.tests.dbDataStore.environment", {
     port: 1234,
     pouchConfig: {
         databases: {
-            auth: {
+            gpii: {
                 data: [
-                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiAuthTestData.json",
-                    "%gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json"
+                    "%universal/testData/dbData/clientCredentials.json",
+                    "%universal/testData/dbData/gpiiAppInstallationClients.json",
+                    "%universal/testData/dbData/gpiiKeys.json",
+                    "%universal/testData/dbData/prefsSafes.json",
+                    "%universal/testData/dbData/views.json"
                 ]
             }
         }
@@ -58,7 +61,7 @@ fluid.defaults("gpii.tests.dbDataStore.baseTestCaseHolder", {
                 dataSourceConfig: {
                     baseUrl: "http://localhost",
                     port: "{gpii.tests.dbDataStore.environment}.options.port",
-                    dbName: "auth"
+                    dbName: "gpii"
                 }
             }
         }

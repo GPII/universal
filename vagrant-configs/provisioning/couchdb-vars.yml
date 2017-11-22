@@ -4,8 +4,7 @@
 # and 'couchdb_admin_password'
 
 couchdb_databases:
-  - preferences
-  - auth
+  - gpii
 
 couchdb_delete_existing_databases: true
 

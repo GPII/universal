@@ -31,8 +31,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     // The base test enviornment without any pouch data being imported
     fluid.defaults("gpii.tests.oauth2.authorizationService.testEnvironment", {
         gradeNames: ["gpii.tests.oauth2.pouchBackedTestEnvironment"],
-        dbViewsLocation: "../../../gpii-oauth2-datastore/dbViews/views.json",
-        dbName: "auth",
+        dbViewsLocation: "../../../../../testData/dbData/views.json",
+        dbName: "gpii",
         components: {
             authorizationService: {
                 type: "gpii.oauth2.authorizationService",

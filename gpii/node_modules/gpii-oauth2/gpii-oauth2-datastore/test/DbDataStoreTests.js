@@ -252,8 +252,8 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthorization", {
 
 fluid.test.runTests([
     "gpii.tests.dbDataStore.findGpiiToken",
-    "gpii.tests.dbDataStore.findClientById",
-    "gpii.tests.dbDataStore.findClientByOauth2ClientId",
-    "gpii.tests.dbDataStore.findAuthorizationByAccessToken",
-    "gpii.tests.dbDataStore.addAuthorization"
+    // "gpii.tests.dbDataStore.findClientById",
+    // "gpii.tests.dbDataStore.findClientByOauth2ClientId",
+    // "gpii.tests.dbDataStore.findAuthorizationByAccessToken",
+    // "gpii.tests.dbDataStore.addAuthorization"
 ]);

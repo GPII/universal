@@ -36,8 +36,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     fluid.defaults("gpii.tests.oauth2.authGrantFinder.testEnvironment", {
         gradeNames: ["gpii.tests.oauth2.pouchBackedTestEnvironment"],
-        dbViewsLocation: "../../../gpii-oauth2-datastore/dbViews/views.json",
-        dbName: "auth",
+        dbViewsLocation: "../../../../../testData/dbData/views.json",
+        dbName: "gpii",
         components: {
             authGrantFinder: {
                 type: "gpii.tests.oauth2.authGrantFinder",

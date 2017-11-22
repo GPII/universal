@@ -8,16 +8,16 @@ Note that when GPII runs in the production configuration, the authorization serv
 
 ### API
 
-The pouchManager currently has two APIs: 
+The pouchManager currently has two APIs:
 
 #### The CouchDB compatible API
 The pouchdb-express server, listening on port 8058 by default, accepts the same data, design documents, and REST calls as you would with CouchDB. The API is described in details in [CouchDB API Reference](http://docs.couchdb.org/en/stable/api/index.html).
 
 ##### Example
 
-`http://localhost:8058/auth`
+`http://localhost:8058/gpii`
 
-This example returns a minimal amount of information about the database named `auth`.
+This example returns a minimal amount of information about the database named `gpii`.
 
 #### GET /reset-pouch
 
@@ -34,7 +34,7 @@ Success: Pouch has been restored with the initial data set.
 
 ### How to config Pouch Manager
 
-`gpii.pouchManager` is the Infusion component that implements the pouchManager. 
+`gpii.pouchManager` is the Infusion component that implements the pouchManager.
 
 #### Component Options
 

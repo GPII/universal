@@ -15,6 +15,14 @@ sudo PYTHONUNBUFFERED=1 ansible-playbook /home/vagrant/sync/vagrant-configs/prov
 sudo PYTHONUNBUFFERED=1 ansible-playbook /home/vagrant/sync/vagrant-configs/provisioning/flow-manager.yml --tags="install,configure,deploy"
 
 # Add additional CouchDB data
-kanso upload /home/vagrant/sync/testData/security/TestOAuth2DataStore.json http://localhost:5984/auth
-kanso upload /home/vagrant/sync/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/dbViews/views.json http://localhost:5984/auth
+"%universal/testData/dbData/clientCredentials.json",
+"%universal/testData/dbData/gpiiAppInstallationClients.json",
+"%universal/testData/dbData/gpiiKeys.json",
+"%universal/testData/dbData/prefsSafes.json",
+"%universal/testData/dbData/views.json"
 
+kanso upload /home/vagrant/sync/testData/dbData/clientCredentials.json http://localhost:5984/gpii
+kanso upload /home/vagrant/sync/testData/dbData/gpiiAppInstallationClients.json http://localhost:5984/gpii
+kanso upload /home/vagrant/sync/testData/dbData/gpiiKeys.json http://localhost:5984/gpii
+kanso upload /home/vagrant/sync/testData/dbData/prefsSafes.json http://localhost:5984/gpii
+kanso upload /home/vagrant/sync/testData/dbData/views.json http://localhost:5984/gpii

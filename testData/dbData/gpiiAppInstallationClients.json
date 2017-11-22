@@ -1,0 +1,11 @@
+[
+    {
+        "_id": "gpiiAppInstallationClient-1",
+        "type": "gpiiAppInstallationClient",
+        "schemaVersion": "0.1",
+        "name": "Pilot Computers",
+        "computerType": "public",
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    }
+]

@@ -58,7 +58,7 @@ var gpii = fluid.registerNamespace("gpii");
 
     /**
      * Match the url with the _id field of the view list to determine if this url is to query by a view or an document id
-     * The string to match is "_design/views" in case of the views definition for the auth server
+     * The string to match is "_design/views" in case of the views definition for the gpii server
      */
     gpii.dataSource.pouchDB.isQueryView = function (dbViews, url) {
         var viewIdentifier = dbViews[0]._id;

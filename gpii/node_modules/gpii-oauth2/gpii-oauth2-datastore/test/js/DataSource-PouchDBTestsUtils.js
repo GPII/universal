@@ -20,7 +20,7 @@ var fluid = fluid || require("infusion");
     fluid.defaults("gpii.tests.inBrowserPouchDB.testEnvironment", {
         gradeNames: ["fluid.test.testEnvironment"],
         pouchData: [],   // Configurable by integrators
-        dbName: "auth",    // Configurable by integrators
+        dbName: "gpii",    // Configurable by integrators
         components: {
             pouchDb: {
                 type: "gpii.pouch",
