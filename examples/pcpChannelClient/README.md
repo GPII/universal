@@ -79,6 +79,7 @@ After logging in snapset_1a, the client receives the following update:
             }
         },
         "preferences": {
+            "name": "Larger 125%",
             "contexts": {
                 "gpii-default": {
                     "name": "Default preferences"
