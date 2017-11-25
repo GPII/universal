@@ -97,40 +97,17 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findGpiiTokenDataSource: {
-            type: "gpii.oauth2.dbDataSource",
-            options: {
-                requestUrl: "/_design/views/_view/findGpiiToken?key=\"%gpiiToken\"",
-                termMap: {
-                    gpiiToken: "%gpiiToken"
-                },
-                rules: {
-                    readPayload: {
-                        "": "rows.0.value"
-                    }
-                }
-            }
-        },
         findClientByOauth2ClientIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findClientByOauth2ClientId?key=\"%oauth2ClientId\"",
+                requestUrl: "/_design/views/_view/findClientByOauth2ClientId?key=%22%oauth2ClientId%22&include_docs=true",
                 termMap: {
                     oauth2ClientId: "%oauth2ClientId"
                 },
                 rules: {
                     readPayload: {
-                        "": "rows.0.value"
+                        "": "rows.0"
                     }
-                }
-            }
-        },
-        saveDataSource: {
-            type: "gpii.oauth2.dbDataSource.writable",
-            options: {
-                requestUrl: "/%id",
-                termMap: {
-                    id: "%id"
                 }
             }
         },
@@ -145,6 +122,15 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                     readPayload: {
                         "": "rows.0"
                     }
+                }
+            }
+        },
+        saveDataSource: {
+            type: "gpii.oauth2.dbDataSource.writable",
+            options: {
+                requestUrl: "/%id",
+                termMap: {
+                    id: "%id"
                 }
             }
         }
@@ -162,14 +148,7 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // id
         },
         findGpiiToken: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
-            args: [
-                "{that}.findGpiiTokenDataSource",
-                {
-                    gpiiToken: "{arguments}.0"
-                },
-                "gpiiToken"
-            ]
+            func: "{that}.findById"
             // gpiiToken
         },
         findClientById: {
@@ -183,7 +162,8 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 {
                     oauth2ClientId: "{arguments}.0"
                 },
-                "oauth2ClientId"
+                "oauth2ClientId",
+                gpii.oauth2.dbDataStore.findClientByOauth2ClientIdPostProcess
             ]
             // oauth2ClientId
         },

@@ -45,8 +45,11 @@ fluid.defaults("gpii.oauth2.clientService", {
 gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2ClientId, expectedOauth2ClientSecret) {
     var promiseTogo = fluid.promise();
     var clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
-    clientPromise.then(function (client) {
-        if (client && fluid.get(client, ["oauth2ClientSecret"]) === expectedOauth2ClientSecret) {
+    clientPromise.then(function (record) {
+        var client = record.client;
+        var clientCredential = record.clientCredential;
+
+        if (client && clientCredential && fluid.get(clientCredential, ["oauth2ClientSecret"]) === expectedOauth2ClientSecret) {
             promiseTogo.resolve(client);
         } else {
             fluid.log("clientService: unauthorized client with oauth2ClientId - " + oauth2ClientId);

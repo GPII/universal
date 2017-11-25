@@ -1,0 +1,68 @@
+[
+    {
+        "_id": "alice_gpii_token",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "chrome2",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "chrome_and_firefox",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "testUser1",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "sammy",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "context1",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    }
+]

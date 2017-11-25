@@ -17,12 +17,17 @@ var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.oauth2");
 
+// The default value of the number of seconds that access tokens become invalid.
+gpii.oauth2.schemaVersion = "0.1";
+
 // All doc types used for saving different documents into CouchDB/PouchDB
 // See [the documentation of Authorization Server](../../../../../documentation/AuthServer.md)
 // regarding accepted fields for each document type.
 gpii.oauth2.docTypes = fluid.freezeRecursive({
+    gpiiKey: "gpiiKey",
+    prefsSafe: "prefsSafe",
+    clientCredential: "clientCredential",
     gpiiAppInstallationClient: "gpiiAppInstallationClient",
-    gpiiToken: "gpiiToken",
     gpiiAppInstallationAuthorization: "gpiiAppInstallationAuthorization"
 });
 

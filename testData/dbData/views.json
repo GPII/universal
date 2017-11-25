@@ -2,11 +2,8 @@
     {
         "_id": "_design/views",
         "views": {
-            "findGpiiToken": {
-                "map": "function(doc) {if (doc.type === 'gpiiKey') emit(doc.gpiiToken, doc)}"
-            },
             "findClientByOauth2ClientId": {
-                "map": "function(doc) {if (doc.type === 'gpiiAppInstallationClient') emit(doc.oauth2ClientId, doc)}"
+                "map": "function(doc) {if (doc.type === 'clientCredential' && doc.revoked === false) emit(doc.oauth2ClientId, {'_id': doc.clientId, 'clientCredential': doc})}"
             },
             "findAuthorizationByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"

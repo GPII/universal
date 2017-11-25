@@ -25,10 +25,10 @@ fluid.defaults("gpii.tests.dbDataStore.environment", {
         databases: {
             gpii: {
                 data: [
-                    "%universal/testData/dbData/clientCredentials.json",
-                    "%universal/testData/dbData/gpiiAppInstallationClients.json",
-                    "%universal/testData/dbData/gpiiKeys.json",
-                    "%universal/testData/dbData/prefsSafes.json",
+                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/clientCredentials.json",
+                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiAppInstallationAuthorizations.json",
+                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiAppInstallationClients.json",
+                    "%gpii-oauth2/gpii-oauth2-datastore/test/data/gpiiKeys.json",
                     "%universal/testData/dbData/views.json"
                 ]
             }
@@ -94,42 +94,78 @@ gpii.tests.dbDataStore.verifyFetchedGpiiAppInstallationAuthorization = function 
 
 gpii.tests.dbDataStore.testData = {
     tokenChromehcDefault: {
-        "id": "gpiiToken-1",
-        "type": "gpiiToken",
-        "gpiiToken": "chrome_high_contrast"
+        "id": "chrome_high_contrast",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-1",
+        "prefsSafeContext": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
     },
     client1: {
-        "id": "client-1",
+        "id": "gpiiAppInstallationClient-1",
         "type": "gpiiAppInstallationClient",
+        "schemaVersion": "0.1",
         "name": "AJC-Bakersfield",
+        "computerType": "public",
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    findClientByOauth2ClientId: {
         "oauth2ClientId": "net.gpii.ajc.bakersfield",
-        "oauth2ClientSecret": "client_secret_ajc_bakersfield"
+        "client": {
+            "type": "gpiiAppInstallationClient",
+            "schemaVersion": "0.1",
+            "name": "AJC-Bakersfield",
+            "computerType": "public",
+            "timestampCreated": "2017-11-21T18:11:22.101Z",
+            "timestampUpdated": null,
+            "id": "gpiiAppInstallationClient-1"
+        },
+        "clientCredential": {
+            "type": "clientCredential",
+            "schemaVersion": "0.1",
+            "clientId": "gpiiAppInstallationClient-1",
+            "oauth2ClientId": "net.gpii.ajc.bakersfield",
+            "oauth2ClientSecret": "client_secret_ajc_bakersfield",
+            "revoked": false,
+            "revokedReason": null,
+            "timestampCreated": "2017-11-21T18:11:22.101Z",
+            "timestampRevoked": null,
+            "id": "clientCredential-1"
+        }
     },
     gpiiAppInstallationAuthorizationToCreate: {
         "clientId": "client-1",
-        "gpiiToken": "chrome_high_contrast",
+        "gpiiKey": "chrome_high_contrast",
         "accessToken": "gpii-app-installation-token-1",
         "timestampExpires": "3020-05-29T17:54:00.000Z"
     },
     findGpiiAppInstallationAuthorizationByAccessToken: {
         "accessToken": "gpii-app-installation-token-1",
         "client": {
-            "id": "client-1",
             "type": "gpiiAppInstallationClient",
+            "schemaVersion": "0.1",
             "name": "AJC-Bakersfield",
-            "oauth2ClientId": "net.gpii.ajc.bakersfield",
-            "oauth2ClientSecret": "client_secret_ajc_bakersfield"
+            "computerType": "public",
+            "timestampCreated": "2017-11-21T18:11:22.101Z",
+            "timestampUpdated": null,
+            "id": "gpiiAppInstallationClient-1"
         },
         "authorization": {
-            "id": "gpiiAppInstallationAuthorization-1",
             "type": "gpiiAppInstallationAuthorization",
-            "clientId": "client-1",
-            "gpiiToken": "chrome_high_contrast",
+            "schemaVersion": "0.1",
+            "clientId": "gpiiAppInstallationClient-1",
+            "gpiiKey": "chrome_high_contrast",
             "accessToken": "gpii-app-installation-token-1",
             "revoked": false,
+            "revokedReason": null,
             "timestampCreated": "2017-05-29T17:54:00.000Z",
             "timestampRevoked": null,
-            "timestampExpires": "3020-05-30T17:54:00.000Z"
+            "timestampExpires": "3020-05-30T17:54:00.000Z",
+            "id": "gpiiAppInstallationAuthorization-1"
         }
     }
 };

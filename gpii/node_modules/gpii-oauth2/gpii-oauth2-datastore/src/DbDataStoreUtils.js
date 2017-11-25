@@ -137,6 +137,58 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
     return promise;
 };
 
+// General Client Functions
+// ------------------------
+
+/**
+ * Find a client by an OAuth2 client id
+ * @param data {Component} Contains both client and client credential information associated with the given oauth2 client id
+ * An input example:
+ * {
+ *     key: {String},   // access token
+ *     id: {String},    // authorization id
+ *     value: {
+ *         _id: {String},      // client id
+ *         clientCredential: {
+ *             type: {String},
+ *             schemaVersion: {String},
+ *             clientId: {String},
+ *             oauth2ClientId: {String},
+ *             oauth2ClientSecret: {String},
+ *             revoked: {Boolean},
+ *             revokedReason: {String},
+ *             timestampCreated: {Date},
+ *             timestampRevoked: {Date},
+ *             _id: {String},
+ *             _rev: {String}
+ *         }
+ *     },
+ *     doc: {
+ *         type: {String},     // client type
+ *         schemaVersion: {String},
+ *         name: {String},
+ *         computerType: {String},
+ *         timestampCreated: {Date},
+ *         timestampUpdated: {Date},
+ *         _id: {String},
+ *         _rev: {String}
+ *     }
+ * }
+ * @return {Promise} A promise object that carries the client and authorization information associated with the access token.
+ */
+gpii.oauth2.dbDataStore.findClientByOauth2ClientIdPostProcess = function (data) {
+    var result;
+
+    if (data.doc && data.value) {
+        result = {};
+        fluid.set(result, "oauth2ClientId", data.key);
+        fluid.set(result, "client", gpii.oauth2.dbDataStore.cleanUpDoc(data.doc));
+        fluid.set(result, "clientCredential", gpii.oauth2.dbDataStore.cleanUpDoc(data.value.clientCredential));
+    }
+
+    return result;
+};
+
 // General Authorization Functions
 // ------------------------------------
 
@@ -151,10 +203,12 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
  *         _id: {String},      // client id
  *         authorization: {
  *             type: {String},
+ *             schemaVersion: {String},
  *             clientId: {String},
- *             gpiiToken: {String},
+ *             gpiiKey: {String},
  *             accessToken: {String},
  *             revoked: {Boolean},
+ *             revokedReason: {String},
  *             timestampCreated: {Date},
  *             timestampRevoked: {Date},
  *             timestampExpires: {Date},
@@ -165,8 +219,9 @@ gpii.oauth2.dbDataStore.addRecord = function (dataSource, docType, idName, data)
  *     doc: {
  *         type: {String},     // client type
  *         name: {String},
- *         oauth2ClientId: {String},
- *         oauth2ClientSecret: {String},
+ *         computerType: {String},
+ *         timestampCreated: {Date},
+ *         timestampUpdated: {Date},
  *         _id: {String},
  *         _rev: {String}
  *     }
@@ -195,7 +250,7 @@ gpii.oauth2.dbDataStore.findAuthorizationByAccessTokenPostProcess = function (da
  * gpiiAppInstallationAuthorization:
  *  {
  *      clientId: {String},
- *      gpiiToken: {String},
+ *      gpiiKey: {String},
  *      accessToken: {String},
  *      timestampExpires: {String}
  *  }
@@ -222,10 +277,12 @@ gpii.oauth2.dbDataStore.addAuthorization = function (saveDataSource, authorizati
     }
 
     data = {
+        schemaVersion: gpii.oauth2.schemaVersion,
         clientId: authorizationData.clientId,
-        gpiiToken: authorizationData.gpiiToken,
+        gpiiKey: authorizationData.gpiiKey,
         accessToken: authorizationData.accessToken,
         revoked: false,
+        revokedReason: null,
         timestampCreated: gpii.oauth2.getCurrentTimestamp(),
         timestampRevoked: null,
         timestampExpires: authorizationData.timestampExpires

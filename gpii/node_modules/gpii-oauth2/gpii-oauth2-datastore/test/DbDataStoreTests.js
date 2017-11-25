@@ -54,7 +54,7 @@ fluid.defaults("gpii.tests.dbDataStore.findGpiiToken", {
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected error is received", {
-                    message: "The input field \"gpiiToken\" is undefined",
+                    message: "The input field \"id\" is undefined",
                     statusCode: 400,
                     isError: true
                 }, "{arguments}.0"],
@@ -72,7 +72,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientById", {
             name: "Find a client record by a proper client id",
             sequence: [{
                 func: "gpii.tests.oauth2.invokePromiseProducer",
-                args: ["{dbDataStore}.findClientById", ["client-1"], "{that}"]
+                args: ["{dbDataStore}.findClientById", ["gpiiAppInstallationClient-1"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
                 args: ["The expected client data is received", gpii.tests.dbDataStore.testData.client1, "{arguments}.0"],
@@ -117,7 +117,7 @@ fluid.defaults("gpii.tests.dbDataStore.findClientByOauth2ClientId", {
                 args: ["{dbDataStore}.findClientByOauth2ClientId", ["net.gpii.ajc.bakersfield"], "{that}"]
             }, {
                 listener: "jqUnit.assertDeepEq",
-                args: ["The expected client data is received", gpii.tests.dbDataStore.testData.client1, "{arguments}.0"],
+                args: ["The expected client data is received", gpii.tests.dbDataStore.testData.findClientByOauth2ClientId, "{arguments}.0"],
                 event: "{that}.events.onResponse"
             }]
         }, {
@@ -252,8 +252,8 @@ fluid.defaults("gpii.tests.dbDataStore.addAuthorization", {
 
 fluid.test.runTests([
     "gpii.tests.dbDataStore.findGpiiToken",
-    // "gpii.tests.dbDataStore.findClientById",
-    // "gpii.tests.dbDataStore.findClientByOauth2ClientId",
-    // "gpii.tests.dbDataStore.findAuthorizationByAccessToken",
-    // "gpii.tests.dbDataStore.addAuthorization"
+    "gpii.tests.dbDataStore.findClientById",
+    "gpii.tests.dbDataStore.findClientByOauth2ClientId",
+    "gpii.tests.dbDataStore.findAuthorizationByAccessToken",
+    "gpii.tests.dbDataStore.addAuthorization"
 ]);
