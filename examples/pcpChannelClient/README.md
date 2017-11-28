@@ -38,51 +38,56 @@ Here are some sample payloads collected from this client during such testing.
 Firstly, connecting the client when no user is keyed into the system produces the payload
 
 ```
-## Socket connected
-## Received the following message: {
-    "path": [],
-    "type": "ADD"
+{
+    "type": "modelChanged",
+    "payload": {
+        "path": [],
+        "type": "ADD"
+    }
 }
 ```
 
-After logging in snapset_1a, the client receives the following update:
+After logging in `snapset_1a`, the client receives the following update:
 
 ```
-## Received the following message: {
-    "path": [],
-    "type": "ADD",
-    "value": {
-        "userToken": "snapset_1a",
-        "activeContextName": "gpii-default",
-        "settingControls": {
-            "http://registry\\.gpii\\.net/common/DPIScale": {
-                "value": 1.25,
-                "schema": {
-                    "title": "DPI Scale",
-                    "description": "DPI scale factor on default monitor",
-                    "type": "number",
-                    "min": 1,
-                    "max": 2,
-                    "divisibleBy": 0.25
+{
+    "type": "modelChanged",
+    "payload": {
+        "path": [],
+        "type": "ADD",
+        "value": {
+            "userToken": "snapset_1a",
+            "activeContextName": "gpii-default",
+            "settingControls": {
+                "http://registry\\.gpii\\.net/common/DPIScale": {
+                    "value": 1.25,
+                    "schema": {
+                        "title": "DPI Scale",
+                        "description": "DPI scale factor on default monitor",
+                        "type": "number",
+                        "min": 1,
+                        "max": 2,
+                        "divisibleBy": 0.25
+                    }
+                },
+                "http://registry\\.gpii\\.net/common/cursorSize": {
+                    "value": 1,
+                    "schema": {
+                        "title": "Cursor Size",
+                        "description": "Cursor size",
+                        "type": "number",
+                        "min": 0,
+                        "max": 1,
+                        "divisibleBy": 0.1
+                    }
                 }
             },
-            "http://registry\\.gpii\\.net/common/cursorSize": {
-                "value": 1,
-                "schema": {
-                    "title": "Cursor Size",
-                    "description": "Cursor size",
-                    "type": "number",
-                    "min": 0,
-                    "max": 1,
-                    "divisibleBy": 0.1
-                }
-            }
-        },
-        "preferences": {
-            "name": "Larger 125%",
-            "contexts": {
-                "gpii-default": {
-                    "name": "Default preferences"
+            "preferences": {
+                "name": "Larger 125%",
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences"
+                    }
                 }
             }
         }
@@ -90,15 +95,27 @@ After logging in snapset_1a, the client receives the following update:
 }
 ```
 
-After logging out snapset_1a, the client receives the following update:
+After logging out `snapset_1a`, the client receives the following update:
 
 ```
-## Received the following message: {
-    "path": [],
-    "value": null,
-    "type": "DELETE"
+{
+    "type": "modelChanged",
+    "payload": {
+        "path": [],
+        "value": null,
+        "type": "DELETE"
+    }
 }
 ```
+
+When the PCP issues an update to the preferences (see below), a message will be sent to the PCP once the settings change has been applied to the system:
+
+```
+{
+    "type": "preferencesApplied"
+}
+```
+
 
 ## Example payloads sent by the PCP
 
