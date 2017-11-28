@@ -35,15 +35,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     });
 
     fluid.defaults("gpii.tests.oauth2.authGrantFinder.testEnvironment", {
-        gradeNames: ["gpii.tests.oauth2.pouchBackedTestEnvironment"],
-        dbViewsLocation: "../../../../../testData/dbData/views.json",
+        gradeNames: ["gpii.tests.dbOperation.pouchBackedTestEnvironment"],
+        dbViewsLocation: "../../../../../../testData/dbData/views.json",
         dbName: "gpii",
         components: {
             authGrantFinder: {
                 type: "gpii.tests.oauth2.authGrantFinder",
                 createOnEvent: "onFixturesConstructed",
                 options: {
-                    gradeNames: ["gpii.tests.oauth2.dbDataStore.base"],
+                    gradeNames: ["gpii.tests.dbOperation.dbDataStore.base"],
                     dbViews: "{arguments}.0"
                 }
             },
@@ -78,9 +78,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     // Tests with a data store having test data
     gpii.tests.oauth2.authGrantFinder.testData = [{
-        "_id": "gpiiToken-1",
-        "type": "gpiiToken",
-        "gpiiToken": "carol_gpii_token"
+        "_id": "gpiiKey-1",
+        "type": "gpiiKey",
+        "gpiiKey": "carol_gpii_token"
     }, {
         "_id": "client-1",
         "type": "gpiiAppInstallationClient",
@@ -91,7 +91,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "gpiiAppInstallationAuthorization-1",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-1",
-        "gpiiToken": "carol_gpii_token",
+        "gpiiKey": "carol_gpii_token",
         "accessToken": "Bakersfiled_AJC_access_token",
         "revoked": false,
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
@@ -101,7 +101,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "gpiiAppInstallationAuthorization-expired",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-1",
-        "gpiiToken": "carol_gpii_token",
+        "gpiiKey": "carol_gpii_token",
         "accessToken": "Bakersfiled_AJC_access_token_expired",
         "revoked": false,
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
@@ -112,7 +112,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     // All expected results
     gpii.tests.oauth2.authGrantFinder.expected = {
         accessToken: "Bakersfiled_AJC_access_token",
-        gpiiToken: "carol_gpii_token",
+        gpiiKey: "carol_gpii_token",
         allowUntrustedSettingsGet: true,
         allowUntrustedSettingsPut: true
     };

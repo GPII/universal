@@ -26,8 +26,8 @@ The document types used by the authorization server include:
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
 | `id` | String | The GPII token id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing GPII tokens. | The value must be set to "gpiiToken". |
-| `gpiiToken` | String | The GPII token. | None |
+| `type` | String | The document type for storing GPII tokens. | The value must be set to "gpiiKey". |
+| `gpiiKey` | String | The GPII token. | None |
 
 #### GPII App Installation Clients
 
@@ -46,7 +46,7 @@ The document types used by the authorization server include:
 | `id` | String | The GPII app installation authorizations id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
 | `type` | String | The document type for storing GPII app installation authorizationss. | The value must be set to "gpiiAppInstallationAuthorization". |
 | `clientId` | String | The client id that this token is assigned to. | None |
-| `gpiiToken` | String | The GPII token that this token record is associated with. | None |
+| `gpiiKey` | String | The GPII token that this token record is associated with. | None |
 | `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
 | `timestampCreated` | Date | The timestamp when the token is created. | now() |

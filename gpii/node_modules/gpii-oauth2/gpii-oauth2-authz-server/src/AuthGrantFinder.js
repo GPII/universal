@@ -51,7 +51,7 @@ var fluid = fluid || require("infusion");
                     gpii.oauth2.getExpiresIn(new Date(), authRecord.authorization.timestampExpires) > 0) {
                     grant = {
                         accessToken: accessToken,
-                        gpiiToken: authRecord.authorization.gpiiToken,
+                        gpiiKey: authRecord.authorization.gpiiKey,
                         allowUntrustedSettingsGet: true,
                         allowUntrustedSettingsPut: true
                     };

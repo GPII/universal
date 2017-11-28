@@ -57,7 +57,7 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
     "../gpii/node_modules/flowManager/test/PCPChannelTests.js",
     "../gpii/node_modules/flowManager/test/UntrustedSettingsDataSourceTests.js",
-    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/test/DbDataStoreTests.js",
+    "../gpii/node_modules/dbOperation/test/DbDataStoreTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/canopyMatchMaker/test/CanopyMatchMakerTests.js",

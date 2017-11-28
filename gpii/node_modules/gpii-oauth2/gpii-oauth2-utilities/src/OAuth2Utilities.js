@@ -53,27 +53,12 @@ gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
     }
 };
 
-gpii.oauth2.composeError = function (error, termMap) {
-    var err = fluid.copy(error);
-    err.message = fluid.stringTemplate(err.message, termMap);
-    return err;
-};
-
 gpii.oauth2.mapPromiseToResponse = function (promise, response) {
     promise.then(function () {
         response.sendStatus(200);
     }, function (err) {
         response.sendStatus(err.statusCode);
     });
-};
-
-/**
- * Returns the current time in a human readable string that also naturally sort in chronological order.
- * See http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.5.43
- * @return {String} The current time in ISO string format.
- */
-gpii.oauth2.getCurrentTimestamp = function () {
-    return new Date().toISOString();
 };
 
 /**
