@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Multiple Contexts",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
