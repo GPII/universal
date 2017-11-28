@@ -23,7 +23,7 @@ var fluid = fluid || require("infusion");
         gradeNames: ["fluid.component"],
         components: {
             dataStore: {
-                type: "gpii.oauth2.dataStore"
+                type: "gpii.dbOperation.dataStore"
             },
             codeGenerator: {
                 type: "gpii.oauth2.codeGenerator"
@@ -46,7 +46,7 @@ var fluid = fluid || require("infusion");
 
     /**
      * Grant an authorization for the give GPII app installation. The gpii token will be verified before the access token is returned.
-     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.dbOperation.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiToken {String} A GPII token
      * @param clientId {String} A client id
@@ -56,7 +56,7 @@ var fluid = fluid || require("infusion");
         var promiseTogo = fluid.promise();
 
         if (!gpiiToken || !clientId) {
-            var error = gpii.oauth2.composeError(gpii.oauth2.errors.missingInput, {fieldName: "GPII token or client ID"});
+            var error = gpii.oauth2.composeError(gpii.dbOperation.errors.missingInput, {fieldName: "GPII token or client ID"});
             promiseTogo.reject(error);
         } else {
             var gpiiTokenPromise = dataStore.findGpiiToken(gpiiToken);
@@ -74,11 +74,11 @@ var fluid = fluid || require("infusion");
 
                 if (!gpiiTokenRec) {
                     fluid.log("authorizationService, granting GPII app installation authorization: invalid GPII token - ", gpiiToken);
-                    error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
+                    error = gpii.oauth2.composeError(gpii.dbOperation.errors.unauthorized);
                     promiseTogo.reject(error);
-                } else if (!clientRec || clientRec.type !== gpii.oauth2.docTypes.gpiiAppInstallationClient) {
-                    fluid.log("authorizationService, granting GPII app installation authorization: invalid client or the type of the client with the client id (" + clientId + ") is not \"" + gpii.oauth2.docTypes.gpiiAppInstallationClient + "\"");
-                    error = gpii.oauth2.composeError(gpii.oauth2.errors.unauthorized);
+                } else if (!clientRec || clientRec.type !== gpii.dbOperation.docTypes.gpiiAppInstallationClient) {
+                    fluid.log("authorizationService, granting GPII app installation authorization: invalid client or the type of the client with the client id (" + clientId + ") is not \"" + gpii.dbOperation.docTypes.gpiiAppInstallationClient + "\"");
+                    error = gpii.oauth2.composeError(gpii.dbOperation.errors.unauthorized);
                     promiseTogo.reject(error);
                 } else {
                     // Re-issue a new access token every time. In the case that multiple requests were made for the same "client credential + gpii token"
@@ -94,7 +94,7 @@ var fluid = fluid || require("infusion");
 
     /**
      * @param promiseTogo {Object} Modified by the function with objects to be resolved or to fail
-     * @param dataStore {Component} An instance of gpii.oauth2.dbDataStore
+     * @param dataStore {Component} An instance of gpii.dbOperation.dbDataStore
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiToken {String} a GPII token
      * @param clientId {String} an unique client id
@@ -104,7 +104,7 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiToken, clientId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
 
-        var addGpiiAppInstallationAuthorizationPromise = dataStore.addAuthorization(gpii.oauth2.docTypes.gpiiAppInstallationAuthorization, {
+        var addGpiiAppInstallationAuthorizationPromise = dataStore.addAuthorization(gpii.dbOperation.docTypes.gpiiAppInstallationAuthorization, {
             clientId: clientId,
             gpiiToken: gpiiToken,
             accessToken: accessToken,

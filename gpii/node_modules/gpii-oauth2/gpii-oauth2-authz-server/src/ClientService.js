@@ -20,7 +20,7 @@ fluid.defaults("gpii.oauth2.clientService", {
     gradeNames: ["fluid.component"],
     components: {
         dataStore: {
-            type: "gpii.oauth2.dataStore"
+            type: "gpii.dbOperation.dataStore"
         }
     },
     invokers: {
@@ -37,7 +37,7 @@ fluid.defaults("gpii.oauth2.clientService", {
 
 // To verify a client information matches the expected value
 //
-// @dataStore (Object) - an instance of a data store component such as gpii.oauth2.dbDataStore
+// @dataStore (Object) - an instance of a data store component such as gpii.dbOperation.dbDataStore
 // @oauth2ClientId (String) - an OAuth2 client id
 // @expectedOauth2ClientSecret (String) - The expected OAuth2 client secret
 //
@@ -53,7 +53,7 @@ gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2Client
             promiseTogo.resolve(client);
         } else {
             fluid.log("clientService: unauthorized client with oauth2ClientId - " + oauth2ClientId);
-            promiseTogo.reject(gpii.oauth2.errors.unauthorized);
+            promiseTogo.reject(gpii.dbOperation.errors.unauthorized);
         }
     }, function (err) {
         promiseTogo.reject(err);

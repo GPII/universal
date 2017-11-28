@@ -119,7 +119,7 @@ gpii.oauth2.passport.listenPassport = function (passport, clientService) {
 // gpii.oauth2.authServer
 // ----------------------
 
-// An empty grade to guide resolution of IoC expressions onto a suitable gpii.oauth2.dataStore
+// An empty grade to guide resolution of IoC expressions onto a suitable gpii.dbOperation.dataStore
 fluid.defaults("gpii.oauth2.dataStoreHolder", {
     gradeNames: ["fluid.component"]
 });
@@ -141,7 +141,7 @@ fluid.defaults("gpii.oauth2.authServer", {
             type: "gpii.oauth2.passport"
         },
         dataStore: {
-            type: "gpii.oauth2.dataStore" // variants here
+            type: "gpii.dbOperation.dataStore" // variants here
         },
         authorizationService: {
             type: "gpii.oauth2.authorizationService",

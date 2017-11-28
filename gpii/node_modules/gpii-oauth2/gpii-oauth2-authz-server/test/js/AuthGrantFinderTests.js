@@ -52,7 +52,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         },
         distributeOptions: [{
-            record: "gpii.oauth2.dbDataStore",
+            record: "gpii.dbOperation.dbDataStore",
             target: "{that dataStore}.type"
         }]
     });
@@ -65,7 +65,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             tests: [{
                 name: "getGrantForAccessToken() should return undefined with an empty dataStore",
                 sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    func: "gpii.tests.dbOperation.invokePromiseProducer",
                     args: ["{authGrantFinder}.getGrantForAccessToken", ["any-token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
@@ -125,7 +125,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             tests: [{
                 name: "getGrantForAccessToken() returns undefined for an unknown access token",
                 sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    func: "gpii.tests.dbOperation.invokePromiseProducer",
                     args: ["{authGrantFinder}.getGrantForAccessToken", ["unknown"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
@@ -138,7 +138,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             tests: [{
                 name: "getGrantForAccessToken() returns the authorization info in the format for the resource owner GPII token grant type",
                 sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    func: "gpii.tests.dbOperation.invokePromiseProducer",
                     args: ["{authGrantFinder}.getGrantForAccessToken", ["Bakersfiled_AJC_access_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
@@ -151,7 +151,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             tests: [{
                 name: "getGrantForAccessToken() returns undefined for an expired access token",
                 sequence: [{
-                    func: "gpii.tests.oauth2.invokePromiseProducer",
+                    func: "gpii.tests.dbOperation.invokePromiseProducer",
                     args: ["{authGrantFinder}.getGrantForAccessToken", ["Bakersfiled_AJC_access_token_expired"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",

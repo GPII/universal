@@ -32,7 +32,7 @@ gpii.oauth2.getAuthorization = function (req, authGrantFinder) {
     var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
 
     if (!accessToken) {
-        promiseTogo.reject(gpii.oauth2.errors.unauthorized);
+        promiseTogo.reject(gpii.dbOperation.errors.unauthorized);
     } else {
         promiseTogo = authGrantFinder.getGrantForAccessToken(accessToken);
     }
