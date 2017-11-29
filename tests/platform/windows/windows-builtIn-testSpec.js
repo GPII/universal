@@ -20,6 +20,8 @@ var fluid = require("infusion"),
 
 fluid.require("%universal");
 
+fluid.logObjectRenderChars = 10024;
+
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.windows");
@@ -208,7 +210,37 @@ gpii.tests.windows.builtIn = [
                             "EchoWords": "REG_DWORD"
                         }
                     }
-                }]
+                }, { // TypingEnhancement
+                    "settings": {
+                        "EnableAutocorrection": 1,
+                        "EnableSpellchecking": 1,
+                        "EnableTextPrediction": 1,
+                        "EnablePredictionSpaceInsertion": 1,
+                        "EnableDoubleTapSpace": 1,
+                        "EnableKeyAudioFeedback": 1,
+                        "EnableAutoShiftEngage": 1,
+                        "EnableShiftLock": 1,
+                        "EnableCompatibilityKeyboard": 1,
+                        "EnableDesktopModeAutoInvoke": 1 
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\TabletTip\\1.7",
+                        "dataTypes": {
+                            "EnableAutocorrection": "REG_DWORD",
+                            "EnableSpellchecking": "REG_DWORD",
+                            "EnableTextPrediction": "REG_DWORD",
+                            "EnablePredictionSpaceInsertion": "REG_DWORD",
+                            "EnableDoubleTapSpace": "REG_DWORD",
+                            "EnableKeyAudioFeedback": "REG_DWORD",
+                            "EnableAutoShiftEngage": "REG_DWORD",
+                            "EnableShiftLock": "REG_DWORD",
+                            "EnableCompatibilityKeyboard": "REG_DWORD",
+                            "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                        }
+                    }
+                }
+            ]
             },
             "gpii.windows.displaySettingsHandler": {
                 "some.app.id": [{
