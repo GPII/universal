@@ -55,6 +55,16 @@
     "http://registry\\.gpii\\.net/common/syllabificationEnabled": "-provisional-cognitiveSupport.-provisional-syllabificationEnabled",
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
     "http://registry\\.gpii\\.net/common/language": "language",
+    "http://registry\\.gpii\\.net/common/autocorrectionEnabled": "keyboard.typingEnhancement.autocorrection",
+    "http://registry\\.gpii\\.net/common/spellCheckEnabled": "keyboard.typingEnhancement.spellCheck",
+    "http://registry\\.gpii\\.net/common/textPredictionEnabled": "keyboard.typingEnhancement.textPrediction",
+    "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled": "keyboard.typingEnhancement.textPredictionWithSpace",
+    "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled": "keyboard.typingEnhancement.doubleTabSpace",
+    "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled": "keyboard.typingEnhancement.keyAudioFeedback",
+    "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled": "keyboard.typingEnhancement.autoShiftEngage",
+    "http://registry\\.gpii\\.net/common/shiftLockEnabled": "keyboard.typingEnhancement.shiftLock",
+    "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled": "keyboard.typingEnhancement.compatibilityKeyboard",
+    "http://registry\\.gpii\\.net/common/autoScreenKeyboardEnabled": "keyboard.typingEnhancement.autoScreenKeyboard",
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",
