@@ -80,6 +80,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
