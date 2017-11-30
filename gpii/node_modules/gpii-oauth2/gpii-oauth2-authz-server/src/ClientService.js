@@ -47,8 +47,8 @@ gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2Client
     var clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
 
     clientPromise.then(function (record) {
-        var client = record.client;
-        var clientCredential = record.clientCredential;
+        var client = record ? record.client : undefined;
+        var clientCredential = record ? record.clientCredential : undefined;
 
         if (client && clientCredential && fluid.get(clientCredential, ["oauth2ClientSecret"]) === expectedOauth2ClientSecret) {
             promiseTogo.resolve(client);
