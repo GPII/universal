@@ -1496,6 +1496,9 @@
                 "inverseCapabilitiesTransformations": {}
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configuration"
         ],

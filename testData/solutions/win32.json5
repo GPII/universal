@@ -653,6 +653,11 @@
             "settings.configuration1",
             "settings.configuration2"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             "settings.launcher"
         ],
@@ -759,6 +764,11 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
         ],
         "start": [
             "settings.launcher"
@@ -1315,6 +1325,11 @@
         "restore": [
             "settings.configure",
             "settings.configureNoRoam"
+        ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
         ],
         "start": [
             {
@@ -2228,6 +2243,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2445,6 +2463,9 @@
         "configure": [
             "settings.configure"
         ],
+        "update": [
+          "configure"
+        ],
         "restore": [
             "settings.configure"
         ],
@@ -2584,6 +2605,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2654,6 +2678,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2750,6 +2777,9 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "update": [
+          "configure"
         ],
         "isInstalled": [
             {
@@ -3307,6 +3337,9 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "update": [
+          "configure"
         ],
         "isInstalled": [
             {
