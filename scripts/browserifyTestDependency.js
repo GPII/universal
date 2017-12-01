@@ -13,8 +13,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 // The creation of this script is to work around the issue of having to run a npm postinstall step
 // only within the context of a GPII development environment.
-// This script uses fluid-resolve npm package (https://www.npmjs.com/package/fluid-resolve) to detect
-// the existence of a resolvable browserify module which is ordinarily only pulled in as a devDependency.
+// This script detects the existence of a resolvable browserify module which is ordinarily only pulled in as a devDependency.
 // If the directory is present, this script browserifies some node js scripts that are used by some
 // in-browser tests, e.g. all tests located at %universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/.
 // Otherwise, skip the browserifying and exit quietly.

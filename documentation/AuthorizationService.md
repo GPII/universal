@@ -16,22 +16,26 @@ client.
     {
         "accessToken": "gpii-app-installation-token-1",
         "client": {
-            "id": "client-1",
             "type": "gpiiAppInstallationClient",
+            "schemaVersion": "0.1",
             "name": "AJC-Bakersfield",
-            "oauth2ClientId": "net.gpii.ajc.bakersfield",
-            "oauth2ClientSecret": "client_secret_ajc_bakersfield"
+            "computerType": "public",
+            "timestampCreated": "2017-11-21T18:11:22.101Z",
+            "timestampUpdated": null,
+            "id": "gpiiAppInstallationClient-1"
         },
         "authorization": {
-            "id": "gpiiAppInstallationAuthorization-1",
             "type": "gpiiAppInstallationAuthorization",
-            "clientId": "client-1",
+            "schemaVersion": "0.1",
+            "clientId": "gpiiAppInstallationClient-1",
             "gpiiKey": "chrome_high_contrast",
             "accessToken": "gpii-app-installation-token-1",
             "revoked": false,
+            "revokedReason": null,
             "timestampCreated": "2017-05-29T17:54:00.000Z",
             "timestampRevoked": null,
-            "timestampExpires": "2017-05-30T17:54:00.000Z"
+            "timestampExpires": "3020-05-30T17:54:00.000Z",
+            "id": "gpiiAppInstallationAuthorization-1"
         }
     }
     ```
@@ -41,12 +45,12 @@ client.
         - The authorization has been revoked.
 
 #### grantGpiiAppInstallationAuthorization(gpiiKey, clientId)
-* **description**: Grant an authorization to a GPII app installation. The authorization allows a GPII app installation to access user settings associated with the given GPII token. The scenarios are handled by this function:
-    * If the given GPII app installation has never been assigned an authorization for the given GPII token, the function will generate and return one.
-    * If the given GPII app installation has already been assigned an authorization for the given GPII token, and this token has not expired, the function will return this existing authorization;
-    * If the given GPII app installation has already been assigned an authorization for the given GPII token, but this token has already expired, the fuction will generate and return a new one.
+* **description**: Grant an authorization to a GPII app installation. The authorization allows a GPII app installation to access user settings associated with the given GPII key. The scenarios are handled by this function:
+    * If the given GPII app installation has never been assigned an authorization for the given GPII key, the function will generate and return one.
+    * If the given GPII app installation has already been assigned an authorization for the given GPII key, and this key has not expired, the function will return this existing authorization;
+    * If the given GPII app installation has already been assigned an authorization for the given GPII key, but this access token has already expired, the function will generate and return a new one.
 * **parameters:**
-    * gpiiKey: String. A GPII token that associates with user preferences.
+    * gpiiKey: String. A GPII key that associates with user preferences.
     * clientId: String. A system generated unique string that identifies the client.
 * **return:** Object. Contains an access token and the number of seconds that the access token will expire. For example:
 ```
@@ -56,5 +60,5 @@ client.
 }
 ```
 Return an object that contains the error message and http status code if,
-+ The GPII token is not found, or,
++ The GPII key is not found, or,
 + The client is not a GPII App Installation Client.
