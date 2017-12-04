@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.jaws = [
     {
         name: "Testing NP set \"jaws_application\" using Flat matchmaker",
-        userToken: "jaws_application",
+        gpiiKey: "jaws_application",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [
@@ -97,7 +97,7 @@ gpii.tests.windows.jaws = [
     },
     {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
-        userToken: "jaws_common",
+        gpiiKey: "jaws_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [
@@ -167,7 +167,7 @@ gpii.tests.windows.jaws = [
     },
     {
         name: "Testing NP set \"jaws_common2\" using Flat matchmaker",
-        userToken: "jaws_common2",
+        gpiiKey: "jaws_common2",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [
@@ -236,7 +236,7 @@ gpii.tests.windows.jaws = [
     },
     {
         name: "Testing NP set \"jaws_common3\" using Flat matchmaker",
-        userToken: "jaws_common3",
+        gpiiKey: "jaws_common3",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [

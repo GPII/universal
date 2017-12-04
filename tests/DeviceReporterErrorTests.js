@@ -43,7 +43,7 @@ fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
     }
 });
 
-gpii.tests.deviceReporterErrorTests.userToken = "testUser1";
+gpii.tests.deviceReporterErrorTests.gpiiKey = "testUser1";
 
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
@@ -57,7 +57,7 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
     {
         name: "Login fails on error in Device Reporter and reports to login",
         expect: 4,
-        userToken: gpii.tests.deviceReporterErrorTests.userToken,
+        gpiiKey: gpii.tests.deviceReporterErrorTests.gpiiKey,
         sequence: [{
             func: "{loginRequest}.send"
         }, {

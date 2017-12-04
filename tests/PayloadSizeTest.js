@@ -24,11 +24,11 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.payloadSize");
 
 gpii.tests.payloadSize.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token giant was successfully logged in.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key giant was successfully logged in.", data);
 };
 
 gpii.tests.payloadSize.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token giant was successfully logged out.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key giant was successfully logged out.", data);
 };
 
 gpii.tests.payloadSize.testDefs = [{
@@ -39,7 +39,7 @@ gpii.tests.payloadSize.testDefs = [{
         configPath: "%universal/tests/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
-    userToken: "giant",
+    gpiiKey: "giant",
 
     sequence: [{
         func: "{loginRequest}.send"

@@ -39,7 +39,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
     {
         name: "Login fails due to missing preference set and reports to login",
         expect: 4,
-        userToken: "idontexist",
+        gpiiKey: "idontexist",
 
         sequence: [{
             func: "{loginRequest}.send"
@@ -57,11 +57,11 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
     }, {
         name: "Login fails due to malformed preference set and reports to login",
         expect: 4,
-        userToken: "malformed",
+        gpiiKey: "malformed",
 
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%userToken.jsonx",
+                "record": "%universal/testData/preferences/acceptanceTests/%gpiiKey.jsonx",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }

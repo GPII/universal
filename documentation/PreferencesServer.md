@@ -16,9 +16,9 @@ The main types of filtering provided by the Preferences Server are the following
 
 ### API
 
-#### GET /preferences/:token[?view=:view]
+#### GET /preferences/:gpiiKey[?view=:view]
 
-Retrieves the preferences sets for the token (`:token`). The optional `view` parameter is to retrieve the preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
+Retrieves the preferences sets for the GPII key (`:gpiiKey`). The optional `view` parameter is to retrieve the preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
 
 ##### Example of GET request with no view provided
 
@@ -54,7 +54,7 @@ Return payload:
 
 An example of a GET request (given that the Preferences Server is located on preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/mytoken?view=ISO24751`
+`http://preferences.gpii.net/preferences/myGpiiKey?view=ISO24751`
 
 Return payload:
 
@@ -90,7 +90,7 @@ Return payload:
 
 #### POST /preferences/[?view=:view]
 
-This is used to post new preferences to the Preferences Server. A new token will automatically be generated and returned in the payload along with the saved preferences.
+This is used to post new preferences to the Preferences Server. A new GPII key will automatically be generated and returned in the payload along with the saved preferences.
 
 As with GET, this takes an optional `view` parameter denoting the ontology of the provided settings. If no `view` is provided, the preferences will be stored and interpreted as being in the `flat` format.
 
@@ -126,13 +126,13 @@ Example POST body:
 }
 ```
 
-The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated token (keyed by `token`) under which the preferences set is stored.
+The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated GPII key (keyed by `gpiiKey`) under which the preferences set is stored.
 
-Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-426655440000` the return payload would be:
+Given that the above payload was stored with the GPII key `123e4567-e89b-12d3-a456-426655440000` the return payload would be:
 
 ```
 {
-    "userToken": "123e4567-e89b-12d3-a456-426655440000",
+    "gpiiKey": "123e4567-e89b-12d3-a456-426655440000",
     "preferences": {
         "contexts": {
             "gpii-default": {
@@ -156,9 +156,9 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 ```
 
 
-#### PUT /preferences/:token[?view=:view]
+#### PUT /preferences/:gpiiKey[?view=:view]
 
-This is used to update an existing preferences set to the Preferences Server. In case no preferences set exists associated with that token, a new one will be created.
+This is used to update an existing preferences set to the Preferences Server. In case no preferences set exists associated with that GPII key, a new one will be created.
 
 As with GET and POST, this takes an optional `view` parameter denoting the ontology of the settings provided in the payload of the request body. If no `view` is provided, the preferences will be stored and interpreted as being in the `flat` format.
 
@@ -170,9 +170,9 @@ As described earlier in the introduction to the preferences framework, underlyin
 
 Below is an example of a put query to the following url (given that a Preferences Server is available at preferences.gpii.net):
 
-`http://preferences.gpii.net/preferences/mytoken?view=flat`
+`http://preferences.gpii.net/preferences/myGpiiKey?view=flat`
 
-Note that here, we store preferences to the token 'mytoken'. The body of the PUT should contain the preferences to be stored. They should be in the format specified by `view` or in the flat format if no `view` is provided.
+Note that here, we store preferences to the GPII key 'myGpiiKey'. The body of the PUT should contain the preferences to be stored. They should be in the format specified by `view` or in the flat format if no `view` is provided.
 
 putBody:
 
@@ -194,7 +194,7 @@ The return payload would then be the following:
 
 ```
 {
-    "userToken": "mytoken",
+    "gpiiKey": "myGpiiKey",
     "preferences": {
        "contexts": {
             "gpii-default": {

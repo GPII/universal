@@ -27,7 +27,7 @@ gpii.loadTestingSupport();
 var testDefs = [
     {
         name: "Test the Ticket Vending Machine with Online Flow Manager.",
-        userToken: "tvm_lara",
+        gpiiKey: "tvm_lara",
         solutionId: "de.fraunhofer.iao.C4A-TVM",
         expected: {
             "de.fraunhofer.iao.C4A-TVM": {
@@ -40,7 +40,7 @@ var testDefs = [
     },
     {
         name: "Test the Ticket Vending Machine with application-specific preferences.",
-        userToken: "tvm_applicationSpecific_01",
+        gpiiKey: "tvm_applicationSpecific_01",
         solutionId: "de.fraunhofer.iao.C4A-TVM",
         expected: {
             "de.fraunhofer.iao.C4A-TVM": {

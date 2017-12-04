@@ -83,7 +83,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "grantGpiiAppInstallationAuthorization() returns undefined with an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_token", "client-1"], "{that}"]
+                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_key", "client-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["Unauthorized error should be received with an empty data store", gpii.tests.oauth2.authorizationService.expected.unauthorized, "{arguments}.0"],
@@ -95,7 +95,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     // Tests with a data store having test data
     gpii.tests.oauth2.authorizationService.testData = [{
-        "_id": "alice_gpii_token",
+        "_id": "alice_gpii_key",
         "type": "gpiiKey",
         "schemaVersion": "0.1",
         "prefsSafeId": "prefsSafe-1",
@@ -153,7 +153,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "grantGpiiAppInstallationAuthorization() returns an access token",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_token", "gpiiAppInstallationClient-1"], "{that}"]
+                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_key", "gpiiAppInstallationClient-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The access token should be received in an expected format", gpii.tests.oauth2.authorizationService.expected.success, "{arguments}.0"],
@@ -173,7 +173,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "grantGpiiAppInstallationAuthorization() returns error when a client id is not provided in the argument list",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_token", undefined], "{that}"]
+                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_key", undefined], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The error is returned when a client id is missing", gpii.tests.oauth2.authorizationService.expected.missingInput, "{arguments}.0"],
@@ -183,7 +183,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "grantGpiiAppInstallationAuthorization() returns error when the gpii key record is not found in the database",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["non-existent-gpii-token", "gpiiAppInstallationClient-1"], "{that}"]
+                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["non-existent-gpii-key", "gpiiAppInstallationClient-1"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The error is returned when the gpii key record is not found in the database", gpii.tests.oauth2.authorizationService.expected.unauthorized, "{arguments}.0"],
@@ -193,7 +193,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "grantGpiiAppInstallationAuthorization() returns error when the client record is not found in the database",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_token", "non-existent-client-id"], "{that}"]
+                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_key", "non-existent-client-id"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The error is returned when the client record is not found in the database", gpii.tests.oauth2.authorizationService.expected.unauthorized, "{arguments}.0"],
@@ -203,7 +203,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "grantGpiiAppInstallationAuthorization() returns error when the client type is not \"gpiiAppInstallationClient\"",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_token", "gpiiAppInstallationClient-2"], "{that}"]
+                    args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_key", "gpiiAppInstallationClient-2"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The error is returned when the client type is not \"gpiiAppInstallationClient\"", gpii.tests.oauth2.authorizationService.expected.unauthorized, "{arguments}.0"],

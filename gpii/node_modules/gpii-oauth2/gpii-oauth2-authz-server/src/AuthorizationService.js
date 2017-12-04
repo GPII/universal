@@ -50,7 +50,7 @@ var fluid = fluid || require("infusion");
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiKey {String} A GPII key
      * @param clientId {String} A client id
-     * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the gpii token is not found.
+     * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the GPII key is not found.
      */
     gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization = function (dataStore, codeGenerator, gpiiKey, clientId) {
         var promiseTogo = fluid.promise();
@@ -59,7 +59,7 @@ var fluid = fluid || require("infusion");
             var error = gpii.dbOperation.composeError(gpii.dbOperation.errors.missingInput, {fieldName: "GPII key or client ID"});
             promiseTogo.reject(error);
         } else {
-            var gpiiKeyPromise = dataStore.findGpiiToken(gpiiKey);
+            var gpiiKeyPromise = dataStore.findGpiiKey(gpiiKey);
             var clientPromise = dataStore.findClientById(clientId);
 
             // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
@@ -81,7 +81,7 @@ var fluid = fluid || require("infusion");
                     error = gpii.dbOperation.composeError(gpii.dbOperation.errors.unauthorized);
                     promiseTogo.reject(error);
                 } else {
-                    // Re-issue a new access token every time. In the case that multiple requests were made for the same "client credential + gpii token"
+                    // Re-issue a new access token every time. In the case that multiple requests were made for the same "client credential + GPII key"
                     // combination, the access token would be different for each request in the audit log. In the case that one request was detected to
                     // be from an attacker, invoking the associating access token would not affect other access tokens or the real user.
 

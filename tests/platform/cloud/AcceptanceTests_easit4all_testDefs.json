@@ -1,7 +1,7 @@
 [
     {
         "name": "Acceptance test for font and background color transformation in Easit4all",
-        "userToken": "easit4all_color",
+        "gpiiKey": "easit4all_color",
         "solutionId": "com.bdigital.easit4all",
         "expected": {
             "com.bdigital.easit4all": {
@@ -14,7 +14,7 @@
     },
     {
         "name": "Acceptance test for font size transformation in Easit4all",
-        "userToken": "easit4all_font_size",
+        "gpiiKey": "easit4all_font_size",
         "solutionId": "com.bdigital.easit4all",
         "expected": {
             "com.bdigital.easit4all": {
@@ -25,7 +25,7 @@
     },
     {
         "name": "Acceptance test for magnification in Easit4all",
-        "userToken": "easit4all_magnification",
+        "gpiiKey": "easit4all_magnification",
         "solutionId": "com.bdigital.easit4all",
         "expected": {
             "com.bdigital.easit4all": {

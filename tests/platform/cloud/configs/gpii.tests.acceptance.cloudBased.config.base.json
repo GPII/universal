@@ -7,7 +7,7 @@
                     "type": "kettle.dataSource.file",
                     "options": {
                         "gradeNames": "kettle.dataSource.file.moduleTerms",
-                        "path": "%universal/testData/preferences/acceptanceTests/%userToken.json"
+                        "path": "%universal/testData/preferences/acceptanceTests/%gpiiKey.json"
                     }
                 },
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}",

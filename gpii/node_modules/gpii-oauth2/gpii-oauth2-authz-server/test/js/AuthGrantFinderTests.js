@@ -66,7 +66,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "getGrantForAccessToken() should return undefined with an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
-                    args: ["{authGrantFinder}.getGrantForAccessToken", ["any-token"], "{that}"]
+                    args: ["{authGrantFinder}.getGrantForAccessToken", ["any-accessToken"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received", "{arguments}.0"],
@@ -80,7 +80,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.authGrantFinder.testData = [{
         "_id": "gpiiKey-1",
         "type": "gpiiKey",
-        "gpiiKey": "carol_gpii_token"
+        "gpiiKey": "carol_gpii_key"
     }, {
         "_id": "client-1",
         "type": "gpiiAppInstallationClient",
@@ -91,7 +91,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "gpiiAppInstallationAuthorization-1",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-1",
-        "gpiiKey": "carol_gpii_token",
+        "gpiiKey": "carol_gpii_key",
         "accessToken": "Bakersfiled_AJC_access_token",
         "revoked": false,
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
@@ -101,7 +101,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "_id": "gpiiAppInstallationAuthorization-expired",
         "type": "gpiiAppInstallationAuthorization",
         "clientId": "client-1",
-        "gpiiKey": "carol_gpii_token",
+        "gpiiKey": "carol_gpii_key",
         "accessToken": "Bakersfiled_AJC_access_token_expired",
         "revoked": false,
         "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
@@ -112,7 +112,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     // All expected results
     gpii.tests.oauth2.authGrantFinder.expected = {
         accessToken: "Bakersfiled_AJC_access_token",
-        gpiiKey: "carol_gpii_token",
+        gpiiKey: "carol_gpii_key",
         allowUntrustedSettingsGet: true,
         allowUntrustedSettingsPut: true
     };
@@ -134,9 +134,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }]
             }]
         }, {
-            name: "Test getGrantForAccessToken() with an access token for resource owner GPII token grant type",
+            name: "Test getGrantForAccessToken() with an access token for resource owner GPII key grant type",
             tests: [{
-                name: "getGrantForAccessToken() returns the authorization info in the format for the resource owner GPII token grant type",
+                name: "getGrantForAccessToken() returns the authorization info in the format for the resource owner GPII key grant type",
                 sequence: [{
                     func: "gpii.tests.dbOperation.invokePromiseProducer",
                     args: ["{authGrantFinder}.getGrantForAccessToken", ["Bakersfiled_AJC_access_token"], "{that}"]

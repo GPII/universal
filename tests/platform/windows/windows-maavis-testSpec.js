@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.maavis = [
     {
         name: "Testing maavis_highcontrast using Flat matchmaker",
-        userToken: "maavis_highcontrast",
+        gpiiKey: "maavis_highcontrast",
         settingsHandlers: {
             "gpii.settingsHandlers.JSONSettingsHandler": {
                 "data": [
@@ -54,7 +54,7 @@ gpii.tests.windows.maavis = [
         ]
     }, {
         name: "Testing maavis_selfvoicing using Flat matchmaker",
-        userToken: "maavis_selfvoicing",
+        gpiiKey: "maavis_selfvoicing",
         settingsHandlers: {
             "gpii.settingsHandlers.JSONSettingsHandler": {
                 "data": [

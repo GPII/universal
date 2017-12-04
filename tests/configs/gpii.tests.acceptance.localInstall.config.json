@@ -3,7 +3,7 @@
     "options": {
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
+                "record": "%universal/testData/preferences/acceptanceTests/%gpiiKey.json",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }

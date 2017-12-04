@@ -18,7 +18,7 @@
                 "target": "{that cloudBasedConfig}.options.mainServerPort"
             },
             "untrusted.development.prefs": {
-                "record": "http://localhost:8084/preferences/%userToken",
+                "record": "http://localhost:8084/preferences/%gpiiKey",
                 "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
                 "priority": "after:flowManager.development.prefs"
             },

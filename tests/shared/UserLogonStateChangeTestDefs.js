@@ -28,9 +28,9 @@ fluid.registerNamespace("gpii.tests.userLogonHandling");
 
 fluid.defaults("gpii.tests.userLogonHandling.proximityTriggered", {
     gradeNames: "kettle.test.request.http",
-    path: "/user/%userToken/proximityTriggered",
+    path: "/user/%gpiiKey/proximityTriggered",
     termMap: {
-        userToken: "{tests}.options.userToken"
+        gpiiKey: "{tests}.options.gpiiKey"
     }
 });
 
@@ -88,16 +88,16 @@ fluid.defaults("gpii.tests.userLogonHandling.testCaseHolder", {
     }
 });
 
-gpii.tests.userLogonHandling.userToken = "testUser1";
+gpii.tests.userLogonHandling.gpiiKey = "testUser1";
 
 gpii.tests.userLogonHandling.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.userLogonHandling.userToken + " was successfully logged in.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key " +
+        gpii.tests.userLogonHandling.gpiiKey + " was successfully logged in.", data);
 };
 
 gpii.tests.userLogonHandling.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.userLogonHandling.userToken + " was successfully logged out.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key " +
+        gpii.tests.userLogonHandling.gpiiKey + " was successfully logged out.", data);
 };
 
 gpii.tests.userLogonHandling.testErrorResponse = function (expMsg, expCode) {
@@ -117,7 +117,7 @@ gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
                 configPath: "%universal/gpii/configs"
             },
             gradeNames: [ "gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux" ],
-            userToken: gpii.tests.userLogonHandling.userToken
+            gpiiKey: gpii.tests.userLogonHandling.gpiiKey
         }, testDef);
     });
 };
@@ -231,7 +231,7 @@ gpii.tests.userLogonHandling.testDefs = [{
     }, {
         event: "{proximityTriggeredRequestOther}.events.onComplete",
         listener: "jqUnit.assertEquals",
-        args: [ "Response is correct", "User with token sammy was successfully logged in.", "{arguments}.0" ]
+        args: [ "Response is correct", "User with GPII key sammy was successfully logged in.", "{arguments}.0" ]
     }]
 }, {
     name: "Login with a different user with proximity trigger should ignore debounce",
@@ -253,10 +253,10 @@ gpii.tests.userLogonHandling.testDefs = [{
     }, {
         event: "{proximityTriggeredRequestOther}.events.onComplete",
         listener: "jqUnit.assertEquals",
-        args: [ "Response is correct", "User with token sammy was successfully logged in.", "{arguments}.0" ]
+        args: [ "Response is correct", "User with GPII key sammy was successfully logged in.", "{arguments}.0" ]
     }]
 }, {
-    name: "Testing proximityTriggered with 'reset' token",
+    name: "Testing proximityTriggered with 'reset' GPII key",
     expect: 5,
     sequence: [{ // resetting with no user logged in
         func: "{resetRequest}.send"
@@ -282,7 +282,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         listener: "gpii.tests.userLogonHandling.testLogoutResponse"
     }]
 }, {
-    name: "Testing standard user/<token>/login and /user/<token>/logout URLs",
+    name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
     expect: 11,
     sequence: [{ // standard login
         func: "{loginRequest}.send"

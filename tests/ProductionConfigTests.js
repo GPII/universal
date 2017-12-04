@@ -40,7 +40,7 @@ gpii.loadTestingSupport();
 gpii.tests.productionConfigTesting = [
     {
         name: "Production config test with os_common using Flat matchmaker",
-        userToken: "MikelVargas",
+        gpiiKey: "MikelVargas",
         settingsHandlers: {
             "gpii.gsettings": {
                 "some.app.id": [{
@@ -86,7 +86,7 @@ gpii.test.bootstrap({
 var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using gnome keyboard settings",
-        userToken: "MikelVargas",
+        gpiiKey: "MikelVargas",
         OSid: "linux",
         solutionId: "org.gnome.desktop.a11y.keyboard",
         config: {

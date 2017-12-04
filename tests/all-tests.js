@@ -54,7 +54,7 @@ var testIncludes = [
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
-    "../gpii/node_modules/flowManager/test/GetUserTokenTests.js",
+    "../gpii/node_modules/flowManager/test/GetGpiiKeyTests.js",
     "../gpii/node_modules/flowManager/test/PCPChannelTests.js",
     "../gpii/node_modules/flowManager/test/UntrustedSettingsDataSourceTests.js",
     "../gpii/node_modules/dbOperation/test/DbDataStoreTests.js",

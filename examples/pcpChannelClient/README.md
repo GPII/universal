@@ -56,7 +56,7 @@ After logging in `snapset_1a`, the client receives the following update:
         "path": [],
         "type": "ADD",
         "value": {
-            "userToken": "snapset_1a",
+            "gpiiKey": "snapset_1a",
             "activeContextName": "gpii-default",
             "settingControls": {
                 "http://registry\\.gpii\\.net/common/DPIScale": {

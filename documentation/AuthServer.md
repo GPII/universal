@@ -5,7 +5,7 @@ The authorization server adds access control to the cloud-based flow manger to s
 ### Supported GPII Clients
 The authorization server authorizes **GPII App installations**
 
-* **Used OAuth2 grant**: [Resource Owner GPII Token Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant).
+* **Used OAuth2 grant**: [Resource Owner GPII key Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant).
 * **Capabilities**: GPII App installations can retrieve untrusted settings from GPII Cloud.
 * Local Flow Manger within the GPII App installation interacts with GPII Cloud-Based Flow Manager to:
     * Retrieve user settings
@@ -17,17 +17,17 @@ The authorization server uses CouchDB to store data in JSON documents when GPII 
 
 The document types used by the authorization server include:
 
-* [GPII Tokens](#gpii-tokens)
+* [GPII keys](#gpii-keys)
 * [GPII App Installation Clients](#gpii-app-installation-clients)
 * [GPII App Installation Authorizations](#gpii-app-installation-authorizations)
 
-#### GPII Tokens
+#### GPII keys
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
-| `id` | String | The GPII token id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
-| `type` | String | The document type for storing GPII tokens. | The value must be set to "gpiiKey". |
-| `gpiiKey` | String | The GPII token. | None |
+| `id` | String | The GPII key id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
+| `type` | String | The document type for storing GPII keys. | The value must be set to "gpiiKey". |
+| `gpiiKey` | String | The GPII key. | None |
 
 #### GPII App Installation Clients
 
@@ -46,7 +46,7 @@ The document types used by the authorization server include:
 | `id` | String | The GPII app installation authorizations id. Can be a UUID or any unique string. This value is saved into `_id` field in CouchDB/PouchDB. | None |
 | `type` | String | The document type for storing GPII app installation authorizationss. | The value must be set to "gpiiAppInstallationAuthorization". |
 | `clientId` | String | The client id that this token is assigned to. | None |
-| `gpiiKey` | String | The GPII token that this token record is associated with. | None |
+| `gpiiKey` | String | The GPII key that this token record is associated with. | None |
 | `accessToken` | String | The access token used to retrieved the protected user preferences. | None |
 | `revoked` | Boolean | Whether this token has been revoked. | false |
 | `timestampCreated` | Date | The timestamp when the token is created. | now() |

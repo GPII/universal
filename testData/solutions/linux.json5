@@ -507,7 +507,7 @@
             "configuration": {
                 "type": "gpii.orca",
                 "options": {
-                    "user": "${{userToken}}"
+                    "user": "${{gpiiKey}}"
                 },
                 "supportedSettings": {
                     "enableTutorialMessages": {},
@@ -1231,7 +1231,7 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "google-chrome http://easyone.gpii.net/user/${{userToken}}"
+                "command": "google-chrome http://easyone.gpii.net/user/${{gpiiKey}}"
             }
         ],
         "stop": [

@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.android.talkback");
 gpii.tests.android.talkback = [
     {
         name: "Testing talkback1 using Flat matchmaker",
-        userToken: "talkback1",
+        gpiiKey: "talkback1",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [
@@ -55,7 +55,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing talkback2 using Flat matchmaker",
-        userToken: "talkback2",
+        gpiiKey: "talkback2",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "some.app.id": [
@@ -74,7 +74,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
+        gpiiKey: "screenreader_orca",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "some.app.id": [
@@ -92,7 +92,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "some.app.id": [
@@ -110,7 +110,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [

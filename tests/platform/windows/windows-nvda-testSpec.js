@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.nvda = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [
@@ -67,7 +67,7 @@ gpii.tests.windows.nvda = [
         ]
     }, {
         name: "Testing screenreader_common using Flat matchmaker",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [
@@ -105,7 +105,7 @@ gpii.tests.windows.nvda = [
         ]
     }, {
         name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
+        gpiiKey: "screenreader_orca",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
                 "some.app.id": [

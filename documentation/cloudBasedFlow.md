@@ -6,17 +6,17 @@ This page describes the flow when GPII is run in cloud based flowmanager mode. T
 
 ### Overview and APIs
 
-The Cloud Based FlowManager can be considered as a standalone, cloud-only configuration of the GPII. This is relevant for applications that are built to support this, and running on a system without the core GPII installed. So for example, a simple javaphone that has a built-in support for GPII, but is not running the core architecture. This can send a user token and platform information to the Cloud Based FlowManager, and get instructions back on how it should be set up.
+The Cloud Based FlowManager can be considered as a standalone, cloud-only configuration of the GPII. This is relevant for applications that are built to support this, and running on a system without the core GPII installed. So for example, a simple javaphone that has a built-in support for GPII, but is not running the core architecture. This can send a GPII key and platform information to the Cloud Based FlowManager, and get instructions back on how it should be set up.
 
-The endpoint for this service is at `:token/settings/:device` (where `:token` is the user token to log in and `:device` is information about the current platform.)
+The endpoint for this service is at `:gpiiKey/settings/:device` (where `:gpiiKey` is the GPII key to log in and `:device` is information about the current platform.)
 
 ### Detailed walkthrough of flow:
 The process of retrieving application settings in the Cloud Based FlowManager mode is as follows:
 
-1. GET request is sent to the `:token/settings/:device` URL where `:token` is the user token to log in and `:device` is a device reporter payload, like: `{"OS":{"id":"web"},"solutions":[{"id":"org.chrome.cloud4chrome"}]}`. It is handled by the `onSettings` (Cloud Based FlowManager) function which ensures the device payload is valid and fires two events: `onUserToken` and `onDeviceContext`
-1. `onUserToken` event has two listeners:
+1. GET request is sent to the `:gpiiKey/settings/:device` URL where `:gpiiKey` is the GPII key to log in and `:device` is a device reporter payload, like: `{"OS":{"id":"web"},"solutions":[{"id":"org.chrome.cloud4chrome"}]}`. It is handled by the `onSettings` (Cloud Based FlowManager) function which ensures the device payload is valid and fires two events: `onGpiiKey` and `onDeviceContext`
+1. `onGpiiKey` event has two listeners:
   *`getPreferences` (FlowManagerRequests) which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
-  * `setUserToken` (FlowManagerRequests) which sets the userToken property in the handler
+  * `setGpiiKey` (FlowManagerRequests) which sets the gpiiKey property in the handler
 1. `onDeviceContext` event has one listener:
 ** `getSolutions` (FlowManagerRequests) which fetches the solutions registry and filters it based on the device reporter info. The `onSolutions` event is fired with the result.
 . The `onReadyToMatch` event is listening to the three events described above: `onDeviceContext`, `onPreferences` and `onSolutions`. When these three events have been fired, the `onReadyToMatch` event will be triggered.

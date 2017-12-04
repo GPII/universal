@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.builtIn = [
     {
         name: "Testing os_win7 using default matchmaker",
-        userToken: "os_win7",
+        gpiiKey: "os_win7",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "some.app.id": [
@@ -231,7 +231,7 @@ gpii.tests.windows.builtIn = [
         ]
     }, {
         name: "Testing os_common using default matchmaker",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         settingsHandlers: {
             "gpii.windows.spiSettingsHandler": {
                 "some.app.id": [
@@ -393,7 +393,7 @@ gpii.tests.windows.builtIn = [
         ]
     }, {
         name: "Testing os_gnome using default matchmaker",
-        userToken: "os_gnome",
+        gpiiKey: "os_gnome",
         settingsHandlers: {
             "gpii.windows.registrySettingsHandler": {
                 "some.app.id": [{ // magnifier stuff

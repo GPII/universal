@@ -40,13 +40,13 @@ Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/bl
 The Preferences Server with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
   * `GPII_PREFERENCES_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `GPII_PREFERENCES_DATASOURCE_URL`: Location of CouchDB database (default: http://localhost:5984/preferences/%userToken)
+  * `GPII_PREFERENCES_DATASOURCE_URL`: Location of CouchDB database (default: http://localhost:5984/preferences/%gpiiKey)
 
 Example:
 
 ```
 GPII_PREFERENCES_LISTEN_PORT=9090 \
-GPII_PREFERENCES_DATASOURCE_URL=https://localhost:5984/%userToken \
+GPII_PREFERENCES_DATASOURCE_URL=https://localhost:5984/%gpiiKey \
 NODE_ENV=gpii.config.cloudBased.flowManager.production \
 npm start
 ```
@@ -55,13 +55,13 @@ npm start
 The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
   * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `GPII_FLOWMANAGER_PREFERENCES_URL`: Location of the Preferences Server (default: https://preferences.gpii.net/preferences/%userToken)
+  * `GPII_FLOWMANAGER_PREFERENCES_URL`: Location of the Preferences Server (default: https://preferences.gpii.net/preferences/%gpiiKey)
 
 Example:
 
 ```
 GPII_FLOWMANAGER_LISTEN_PORT=9091 \
-GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9090/preferences/%userToken \
+GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9090/preferences/%gpiiKey \
 NODE_ENV=gpii.config.cloudBased.flowManager.production \
 npm start
 ```

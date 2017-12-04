@@ -80,7 +80,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.cleanUpTestFile = function () {
 
 gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse = function (responseText, expectedKey, expectedMsg, expectedPrefsSet) {
     var response = JSON.parse(responseText);
-    jqUnit.assertEquals("The returned key in the response is correct", expectedKey, response.userToken);
+    jqUnit.assertEquals("The returned key in the response is correct", expectedKey, response.gpiiKey);
     jqUnit.assertDeepEq("The returned preferences set in the response is correct", expectedMsg, response.message);
 
     var filePath = gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir + expectedKey + ".json";
@@ -109,12 +109,12 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.requests", {
 // using access tokens granted by /access_token endpoint
 gpii.tests.cloud.oauth2.untrustedSettingsPut.mainSequence = [
     { // 0
-        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     { // 1
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse",
+        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
     { // 2
@@ -188,7 +188,7 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untruste
 
 // Main tests that contain all test cases
 gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
-    // Succesful use cases that request user settings with proper access tokens granted via Resource Owner GPII Token grant
+    // Succesful use cases that request user settings with proper access tokens granted via Resource Owner GPII key grant
     {
         testDef: {
             name: "A successful workflow for updating preferences",

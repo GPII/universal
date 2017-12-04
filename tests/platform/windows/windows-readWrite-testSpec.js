@@ -24,7 +24,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.readWrite = [
     {
         name: "Testing rwg1",
-        userToken: "rwg1",
+        gpiiKey: "rwg1",
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
                 "some.app.id": [
@@ -67,7 +67,7 @@ gpii.tests.windows.readWrite = [
         ]
     }, {
         name: "Testing rwg2",
-        userToken: "rwg2",
+        gpiiKey: "rwg2",
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
                 "some.app.id": [

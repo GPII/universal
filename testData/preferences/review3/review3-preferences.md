@@ -23,7 +23,7 @@ He is a Windows user who usually combines JAWS; high contrast, large cursor with
 
 ####Demo 1.2:
 * **Backstory:** In his room, Vladimir wants to check out what’s on TV before going to bed.
-He inserts his USB key token into the TV system.
+He inserts his USB key into the TV system.
 * **Device reporter:** `deviceReporter/review3/installedSolutionsVladimirHotel.json`
 * **NP Set:** `vladimir_smm`
 * **Device requirement:** A smart TV
@@ -33,7 +33,7 @@ He inserts his USB key token into the TV system.
 ####Demo 1.3:
 * **Backstory:** The next morning,
 Vladimir goes to a bus station to buy a ticket at a ticket vending machine.
-He uses the barcode on his key token Card to Key-in
+He uses the barcode on his GPII key Card to Key-in
 * **Device reporter:** `deviceReporter/review3/installedSolutionsVladimirVending.json`
 * **NP Set:** `vladimir_smm`
 * **Device requirement:** Ticket vending machine
@@ -59,8 +59,8 @@ We visit a teacher in a classroom with many students who have disabilities. Here
 
 
 This is the first day of class and because many students without disabilities have not been in a class with people with disabilities
-the teacher explains to class on the first day that the computers in the classroom will automatically adapt to students who need special settings whenever they use their key tokens with the computers.
-The other students are told that they can also all get their own key token that will save and restore their preferences.
+the teacher explains to class on the first day that the computers in the classroom will automatically adapt to students who need special settings whenever they use their GPII keys with the computers.
+The other students are told that they can also all get their own GPII key that will save and restore their preferences.
 
 The teacher then invites the students to come up and demonstrate how the computers automatically set up for them, explaining how the system adapts for them.
 They also show the systems instantly resets when they key out.
@@ -103,8 +103,8 @@ They also show the systems instantly resets when they key out.
 (who used NVDA and Screen resolution change on his computer above) now steps up again and demonstrates how he can share his own Android tablet running Mobile Accessibility with other visually impaired users in the class who have different needs and settings.
 He uses this tablet for note-taking and combines a very high speech rate with Braille output.
 He can share the tablet and or show information on the tablet with Li, who has low vision with some skills on screen reader usage but doesn’t know Braille and also prefers a lower speech rate.
-He explains that Li can just hold her key token up to the back of the tablet and MA will stop Braille output and slow down the speech rate to her preference.
-Li can then use the device for a while, look at the notes Chris has been taking, and when she's done she can use her key token again to log out or just hand it back to Chris who can use his key token to change it back to Braille and increase the speech again.
+He explains that Li can just hold her GPII key up to the back of the tablet and MA will stop Braille output and slow down the speech rate to her preference.
+Li can then use the device for a while, look at the notes Chris has been taking, and when she's done she can use her GPII key again to log out or just hand it back to Chris who can use his GPII key to change it back to Braille and increase the speech again.
 * **NP Set:** `chris` and `li`
 * **Device requirement:** Android with Mobile Accessibility
 * **Other requirements**: Li and Chris have a preference for the Rule-based matchmaker, so it should be present on at declared URL.

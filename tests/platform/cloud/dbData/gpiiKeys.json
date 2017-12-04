@@ -1,6 +1,6 @@
 [
     {
-        "_id": "alice_gpii_token",
+        "_id": "alice_gpii_key",
         "type": "gpiiKey",
         "schemaVersion": "0.1",
         "prefsSafeId": "prefsSafe-1",

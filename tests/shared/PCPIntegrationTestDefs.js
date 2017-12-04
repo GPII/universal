@@ -517,7 +517,7 @@ fluid.defaults("gpii.tests.pcpIntegration.testCaseHolder.common.linux", {
             type: "gpii.tests.pcpIntegration.environmentChangedRequestType"
         }
     },
-    userToken: "context1",
+    gpiiKey: "context1",
     data: gpii.tests.pcpIntegration.data
 });
 

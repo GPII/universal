@@ -20,7 +20,7 @@
                 "priority": "after:flowManager.development.solutions"
             },
             "browserChannel.tests.rawPreferences": {
-                "record": "%flowManager/test/data/%userToken.json",
+                "record": "%flowManager/test/data/%gpiiKey.json",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             },

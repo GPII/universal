@@ -27,11 +27,11 @@ fluid.require("%universal");
 require("./shared/UserLogonStateChangeTestDefs.js");
 fluid.registerNamespace("gpii.tests.userLogonEvents");
 
-gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, userToken) {
+gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, gpiiKey) {
     return function (changePayload) {
         jqUnit.assertEquals("Checking type of model change", type, changePayload.type);
         jqUnit.assertEquals("Checking inProgress of model change", inProgress, changePayload.inProgress);
-        jqUnit.assertEquals("Checking userToken of model change", userToken, changePayload.userToken);
+        jqUnit.assertEquals("Checking gpiiKey of model change", gpiiKey, changePayload.gpiiKey);
     };
 };
 

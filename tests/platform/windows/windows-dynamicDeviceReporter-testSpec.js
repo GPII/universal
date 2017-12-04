@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.deviceReporterAware.windows");
 gpii.tests.deviceReporterAware.windows = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
@@ -78,7 +78,7 @@ gpii.tests.deviceReporterAware.windows = [
     },
     {
         name: "Testing readwritegold_application1 using Flat matchmaker",
-        userToken: "readwritegold_application1",
+        gpiiKey: "readwritegold_application1",
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {},
         processes: [

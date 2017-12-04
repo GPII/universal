@@ -31,7 +31,7 @@ fluid.registerNamespace("gpii.tests.multiSHSupport");
 gpii.tests.multiSHSupport.testDefs = [
     {
         name: "Multiple settings handlers with common terms only",
-        userToken: "multiSHCommonOnly",
+        gpiiKey: "multiSHCommonOnly",
         settingsHandlers: {
             "gpii.settingsHandlers.JSONSettingsHandler": {
                 "some.app.id": [

@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.linux.builtIn");
 gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     {
         name: "Testing os_common using default matchmaker",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         settingsHandlers: {
             "gpii.gsettings": {
                 "some.app.id": [{
@@ -64,7 +64,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     },
     {
         name: "Testing os_common2 using default matchmaker",
-        userToken: "os_common2",
+        gpiiKey: "os_common2",
         settingsHandlers: {
             "gpii.gsettings": {
                 "some.app.id": [{
@@ -82,7 +82,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     },
     {
         name: "Testing os_gnome using default matchmaker",
-        userToken: "os_gnome",
+        gpiiKey: "os_gnome",
         settingsHandlers: {
             "gpii.gsettings": {
                 "some.app.id": [{
@@ -121,7 +121,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     },
     {
         name: "Testing os_win7 using default matchmaker",
-        userToken: "os_win7",
+        gpiiKey: "os_win7",
         settingsHandlers: {
             "gpii.gsettings": {
                 "some.app.id": [{

@@ -457,7 +457,7 @@ gpii.tests.journal.badJournalFixtures = [
 ];
 
 gpii.tests.journal.baseTestDefBase = fluid.freezeRecursive({
-    userToken: gpii.tests.journal.testDef.userToken,
+    gpiiKey: gpii.tests.journal.testDef.gpiiKey,
     settingsHandlers: gpii.tests.journal.testDef.settingsHandlers,
     config: {
         configName: gpii.tests.journal.testSpec.configName,

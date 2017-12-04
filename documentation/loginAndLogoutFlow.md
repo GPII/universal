@@ -4,19 +4,19 @@ This document describes the flow on a locally installed GPII system when the use
 
 ### Overview and APIs
 We support 3 different logon related URLs, namely:
-* `/user/:token/proximityTriggered` - change the logon state of the given token (i.e. log in or out)
-  * **Debounce rule**: any RFID actions is ignored for <mytoken> if a login/logout for <mytoken> is in progress OR if the last login/logout process for <mytoken> finished less than 5 seconds ago
-  * If no user is logged in and debounce doesn't apply, log in <mytoken>
-  * If <mytoken> is logged in and debounce doesn't apply, log out <mytoken>
-  * If another user is already logged in or in the process of logging in or out, log that user out and log in <mytoken>
+* `/user/:gpiiKey/proximityTriggered` - change the logon state of the given GPII key (i.e. log in or out)
+  * **Debounce rule**: any RFID actions is ignored for <myGpiiKey> if a login/logout for <myGpiiKey> is in progress OR if the last login/logout process for <myGpiiKey> finished less than 5 seconds ago
+  * If no user is logged in and debounce doesn't apply, log in <myGpiiKey>
+  * If <myGpiiKey> is logged in and debounce doesn't apply, log out <myGpiiKey>
+  * If another user is already logged in or in the process of logging in or out, log that user out and log in <myGpiiKey>
 
-* `/user/:token/login` - log the token in
-  * If no user is logged in, <mytoken> will be logged in
+* `/user/:gpiiKey/login` - log the GPII key in
+  * If no user is logged in, <myGpiiKey> will be logged in
   * If another user is logged in, nothing will happen and an error is returned
 
-* `/user/:token/logout` - log the token out
+* `/user/:gpiiKey/logout` - log the GPII key out
   * If no user is logged in, nothing happens
-  * if user mytoken is logged in, he will be logged out
+  * if user myGpiiKey is logged in, he will be logged out
   * If another user is logged in, nothing will happen and an error is returned
 
 In general, the the `proximityTriggered` URL should be used by proximity devices. This will take the appropriate action depending on whether the user is logged into the system or not.
@@ -34,11 +34,11 @@ The core part of the flow is defined in two files:
 
 The user login process is as follows:
 
-1. a GET request is sent to either `/user/:token/login` or `/user/:token/proximityTriggered`. This is retrieved by the relevant handler in `UserLogonStateChange`, and if it is found that the token needs to be logged in, the `onUserToken` event is fired (via the `gpii.flowManager.userLogonHandling.loginUser` function)
-2. the `onUserToken` event has three listeners:
+1. a GET request is sent to either `/user/:gpiiKey/login` or `/user/:gpiiKey/proximityTriggered`. This is retrieved by the relevant handler in `UserLogonStateChange`, and if it is found that the GPII key needs to be logged in, the `onGpiiKey` event is fired (via the `gpii.flowManager.userLogonHandling.loginUser` function)
+2. the `onGpiiKey` event has three listeners:
    1. UserLogonStateChange's `getDeviceContext`, which fetches the device reporter data. When this has been fetched an `onDeviceContext` event is fired.
    2. `getPreferences` (FlowManagerRequests), which fetches the preferences and fires the `onPreferences` event when the preferences are fetched.
-   3. `setUserToken` (FlowManagerRequests) which sets the userToken property in the handler
+   3. `setGpiiKey` (FlowManagerRequests) which sets the gpiiKey property in the handler
 3. the `onDeviceContext` event has one listener:
    1. `getSolutions` (FlowManagerRequests), which fetches the solutions registry and filters it based on the device reporter info. The `onSolutions` event is fired with the result.
 4. The `onReadyToMatch` event is listening to the three events described above: `onDeviceContext`, `onPreferences` and `onSolutions`. When these three events have been fired, the `onReadyToMatch` event will be triggered.
