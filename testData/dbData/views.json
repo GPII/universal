@@ -2,6 +2,9 @@
     {
         "_id": "_design/views",
         "views": {
+            "findPrefsSafeByGpiiKey": {
+                "map": "function(doc) {if (doc.type === 'gpiiKey') emit(doc._id, {'_id': doc.prefsSafeId, 'gpiiKey': doc})}"
+            },
             "findClientByOauth2ClientId": {
                 "map": "function(doc) {if (doc.type === 'clientCredential' && doc.revoked === false) emit(doc.oauth2ClientId, {'_id': doc.clientId, 'clientCredential': doc})}"
             },
