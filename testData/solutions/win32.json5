@@ -3346,5 +3346,36 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+    "net.gpii.test.speechControl": { // This solution does not exist in real life and has been added strictly for user testing/demoing
+        "name": "GPII Test solution for speech control of the computer",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "OSRestart",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/speechControl"
+                ],
+                "supportedSettings": {}
+            }
+        },
+        "configure": [],
+        "restore": [],
+        "start": [],
+        "stop": [],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": []
     }
 }
