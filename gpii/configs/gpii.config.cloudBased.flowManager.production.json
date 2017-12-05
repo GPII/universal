@@ -1,7 +1,7 @@
 {
     "type": "gpii.config.cloudBased.flowManager.production",
     "options": {
-        "authDBServerPort": 5984,
+        "dbServerPort": 5984,
         "distributeOptions": {
             "flowManager.production.matchMakers": {
                 "record": "http://localhost:8082",

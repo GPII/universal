@@ -40,8 +40,8 @@ Success: Pouch has been restored with the initial data set.
 
 | Option            | Type       | Description | Default |
 | ----------------- | ---------- | ----------- | ------- |
-| `authDBServerPort` | Integer | Required. The port on which the pouchdb-express server will run. | 8058 |
-| `authDBServerPort` | Integer | Required. The port on which the express server for restoring the pouchdb-express server with its initial data set will run. | 8060 |
+| `dbServerPort` | Integer | Required. The port on which the pouchdb-express server will run. | 8058 |
+| `dbServerPort` | Integer | Required. The port on which the express server for restoring the pouchdb-express server with its initial data set will run. | 8060 |
 | `baseDir` | String | Optional. The path to the directory used for saving pouchDB data. | OS system temp directory |
 | `pouchConfig` | Object | Optional. Configuration options to config the pouchDB instance. See [Pouch Component](https://github.com/GPII/gpii-pouchdb/blob/master/docs/pouch-component.md) on details. | None |
 
