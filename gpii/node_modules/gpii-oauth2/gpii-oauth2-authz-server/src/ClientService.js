@@ -31,7 +31,7 @@ fluid.defaults("gpii.oauth2.clientService", {
             args: ["{dataStore}", "{arguments}.0", "oauth2ClientSecret", "{arguments}.1"]
                 // oauth2ClientId, oauth2ClientSecret
         },
-        checkClientRedirectUri: {
+        checkWebPrefsConsumerRedirectUri: {
             funcName: "gpii.oauth2.clientService.processClient",
             args: ["{dataStore}", "{arguments}.0", "redirectUri", "{arguments}.1"]
                 // oauth2ClientId, redirectUri
@@ -47,7 +47,7 @@ fluid.defaults("gpii.oauth2.clientService", {
 // @dataStore (Object) - an instance of a data store component such as gpii.oauth2.dbDataStore
 // @oauth2ClientId (String) - an oAuth2 client id
 // @fieldToVerify (String) - A field of the client object to be verified:
-// in authenticateClient() API, this field is "oauth2ClientSecret"; in checkClientRedirectUri() API,
+// in authenticateClient() API, this field is "oauth2ClientSecret"; in checkWebPrefsConsumerRedirectUri() API,
 // this field is "redirectUri"
 // @expectedVerifiedValue (Any) - The expected verified value
 //

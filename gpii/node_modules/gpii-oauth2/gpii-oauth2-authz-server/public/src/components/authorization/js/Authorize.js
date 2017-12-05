@@ -116,7 +116,7 @@ var gpii = gpii || {};
                         selections: {
                             expander: {
                                 funcName: "gpii.oauth2.selectionTree.toSelectionsModel",
-                                // The original model is expected to have nothing selected as no previous decisions have been made
+                                // The original model is expected to have nothing selected as no previous authorizations have been made
                                 args: [{}, "{that}.options.availablePrefs"]
                             }
                         }

@@ -81,7 +81,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 args: [
                     "{that}",
                     "{that}.options.selectors.serviceName",
-                    "{that}.options.selectors.oauth2ClientId",
+                    "{that}.options.selectors.clientId",
                     "{arguments}.0", // jQuery UI: event
                     "{arguments}.1"  // jQuery UI: ui
                 ]
@@ -93,7 +93,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         selectors: {
             serviceName: ".gpiic-oauth2-servicesMenu-serviceName",
-            oauth2ClientId: "[name=oauth2ClientId]"
+            clientId: "[name=clientId]"
         },
         styles: {
             menuOpen: "gpii-oauth2-servicesMenuOpen",
@@ -125,10 +125,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         }
     };
 
-    gpii.oauth2.servicesMenu.fireOnServiceSelected = function (that, serviceNameSelector, oauth2ClientIdSelector, evt, ui) {
+    gpii.oauth2.servicesMenu.fireOnServiceSelected = function (that, serviceNameSelector, clientIdSelector, evt, ui) {
         var serviceName = ui.item.find(serviceNameSelector).text();
-        var oauth2ClientId = ui.item.find(oauth2ClientIdSelector).attr("value");
-        that.events.onServiceSelected.fire(serviceName, oauth2ClientId);
+        var clientId = ui.item.find(clientIdSelector).attr("value");
+        that.events.onServiceSelected.fire(serviceName, clientId);
     };
 
     gpii.oauth2.servicesMenu.addMenuItemFocusCss = function (menuItem, cssClass) {
