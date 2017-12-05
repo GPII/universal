@@ -306,6 +306,13 @@
             "type": "boolean",
             "default": "false"
         },
+        "http://registry.gpii.net/common/supportTool": {
+            "title": "Support Tools",
+            "description": "Whether to enable/disable certain support tools",
+            "type": "array",
+            "default": "dictionary", // What if there's no default value?
+            "enum": ["dictionary"]
+        },
         "http://registry.gpii.net/common/speechControl": { // This is not currently supported by any real solutions, but rather used for user testing/demoing
             "title": "Talk to the Computer",
             "description": "Whether to enable/disable voice commands for computer",
