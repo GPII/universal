@@ -181,7 +181,7 @@ gpii.tests.pcpIntegration.testDefs = [
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: [ "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    args: [ "{pcpClient}", [ "settingControls", "http://registry\\.gpii\\.net/common/magnification", "value" ], 3]
                 }, {
                     event: "{pcpClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pcpIntegration.checkPayload",
@@ -242,7 +242,7 @@ gpii.tests.pcpIntegration.testDefs = [
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: [ "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+                    args: [ "{pcpClient}", [ "settingControls", "http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification", "value" ], 3]
                 }, {
                     event: "{pcpClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pcpIntegration.checkPayload",
@@ -307,7 +307,7 @@ gpii.tests.pcpIntegration.testDefs = [
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    args: ["{pcpClient}", [ "settingControls", "http://registry\\.gpii\\.net/common/magnification", "value" ], 3]
                 }, {
                     event: "{pcpClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pcpIntegration.checkPayload",
@@ -320,7 +320,7 @@ gpii.tests.pcpIntegration.testDefs = [
                     listener: "fluid.identity"
                 }, {
                     funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/volume"], 0.75]
+                    args: ["{pcpClient}", [ "settingControls", "http://registry\\.gpii\\.net/common/volume", "value" ], 0.75]
                 }, {
                     event: "{pcpClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pcpIntegration.checkPayload",
@@ -442,7 +442,7 @@ gpii.tests.pcpIntegration.testDefs = [
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    args: ["{pcpClient}", [ "settingControls", "http://registry\\.gpii\\.net/common/magnification", "value" ], 3]
                 }, {
                     event: "{pcpClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pcpIntegration.checkPayload",
@@ -518,7 +518,7 @@ gpii.tests.pcpIntegration.testDefs = [
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    args: ["{pcpClient}", [ "settingControls", "http://registry\\.gpii\\.net/common/magnification", "value" ], 3]
                 }, {
                     event: "{pcpClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pcpIntegration.checkPayload",
