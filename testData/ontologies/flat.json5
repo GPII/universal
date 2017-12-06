@@ -310,7 +310,7 @@
             "title": "Support Tools",
             "description": "Whether to enable/disable certain support tools",
             "type": "array",
-            "default": "dictionary", // What if there's no default value?
+            "default": [],
             "enum": ["dictionary"]
         },
         "http://registry.gpii.net/common/speechControl": { // This is not currently supported by any real solutions, but rather used for user testing/demoing
