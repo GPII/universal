@@ -1762,10 +1762,11 @@
         ],
         "stop": [
             {
-                    "type": "gpii.windows.closeProcessByName",
-                    "filename": "firefox.exe"
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "firefox.exe"
             }
         ],
+        "configure": [ "settings.configure" ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
