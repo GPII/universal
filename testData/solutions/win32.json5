@@ -2078,6 +2078,10 @@
             "settings.configureTheme",
             "settings.configure"
         ],
+        "update": [
+            "settings.configureTheme",
+            "settings.configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

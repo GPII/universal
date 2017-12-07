@@ -207,6 +207,71 @@ gpii.tests.pcpIntegration.testDefs = [
             ]
         ]
     }, {
+        name: "Settings change by PCP with scoped common term",
+        expect: 9,
+        sequence: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pcpClient}.connect"
+                }, {
+                    event: "{pcpClient}.events.onConnect",
+                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                }, {
+                    event: "{pcpClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    funcName: "gpii.tests.pcpIntegration.sendMsg",
+                    args: [ "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+                }, {
+                    event: "{pcpClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    event: "{pcpClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    args: ["{arguments}.0", "preferencesApplied"]
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{logoutRequest}.send"
+                }, {
+                    event: "{logoutRequest}.events.onComplete",
+                    listener: "gpii.test.logoutRequestListen"
+                }, {
+                    func: "gpii.test.checkRestoredConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
+                }
+            ]
+        ]
+    }, {
         name: "Sequential setting changes by the PCP",
         expect: 10,
         sequence: [
