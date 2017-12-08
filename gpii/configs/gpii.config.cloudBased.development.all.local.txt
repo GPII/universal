@@ -14,6 +14,5 @@ This mean that:
 ** solutionsRegistry (reading registry from file)
 ** canopyMatchMaker
 ** matchMakerFramework
-** lifecycleManager
 
 Note that this config incorrectly derives from the deviceReporter development config. This is because of a dependency error in the system design where the cloudBased flowManager still attempts to query the platform deviceReporter rather than recognising that it is on platform "web" - e.g. within BrowserChannel.js

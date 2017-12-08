@@ -190,10 +190,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     gpii.tests.oauth2.servicesMenu.verifyServiceSelected = function (that, index, arg1, arg2) {
         var serviceName = that.locate("serviceName")[index],
-            oauth2ClientId = that.locate("oauth2ClientId")[index];
+            clientId = that.locate("clientId")[index];
 
         jqUnit.assertEquals("The event onServiceSelected is fired with the correct service name as the first argument", $(serviceName).text(), arg1);
-        jqUnit.assertEquals("The event onServiceSelected is fired with the correct oauth client id as the second argument", $(oauth2ClientId).val(), arg2);
+        jqUnit.assertEquals("The event onServiceSelected is fired with the correct oauth client id as the second argument", $(clientId).val(), arg2);
     };
 
     $(document).ready(function () {
