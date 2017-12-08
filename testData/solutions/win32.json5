@@ -2681,6 +2681,7 @@
                         "iNegNumber": "REG_SZ",
                         "iLZero": "REG_SZ",
                         "sList": "REG_SZ",
+                        "iMeasure": "REG_SZ",
                         "sNativeDigits": "REG_SZ",
                         "NumShape": "REG_SZ",
                         "sCurrency": "REG_SZ",
