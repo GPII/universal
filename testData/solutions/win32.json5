@@ -2691,7 +2691,13 @@
                         "sMonThousandSep": "REG_SZ",
                         "sMonGrouping": "REG_SZ"
                     },
-                    "verifySettings": true
+                    "verifySettings": true,
+                    "message": {
+                        "hwnd": "HWND_BROADCAST",
+                        "msg": "WM_SETTINGCHANGE",
+                        "wparam": 0,
+                        "lparam": "intl"
+                    }
                 },
                 "supportedSettings": {
                     "iFirstDayOfWeek": {
