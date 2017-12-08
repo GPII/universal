@@ -80,6 +80,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.internationalization"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
