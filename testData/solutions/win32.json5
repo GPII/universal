@@ -2651,6 +2651,606 @@
         ]
     },
 
+    "com.microsoft.windows.internazionalization": {
+        "name": "Windows Cursors",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\International",
+                    "dataTypes": {
+                        "iFirstDayOfWeek": "REG_SZ",
+                        "sShortDate": "REG_SZ",
+                        "sLongDate": "REG_SZ",
+                        "sShortTime": "REG_SZ",
+                        "sTimeFormat": "REG_SZ",
+                        "sDecimal": "REG_SZ",
+                        "iDigits": "REG_SZ",
+                        "sThousand": "REG_SZ",
+                        "sGrouping": "REG_SZ",
+                        "sNegativeSign": "REG_SZ",
+                        "iNegNumber": "REG_SZ",
+                        "iLZero": "REG_SZ",
+                        "sList": "REG_SZ",
+                        "sNativeDigits": "REG_SZ",
+                        "NumShape": "REG_SZ",
+                        "sCurrency": "REG_SZ",
+                        "iCurrency": "REG_SZ",
+                        "iNegCurr": "REG_SZ",
+                        "sMonDecimalSep": "REG_SZ",
+                        "iCurrDigits": "REG_SZ",
+                        "sMonThousandSep": "REG_SZ",
+                        "sMonGrouping": "REG_SZ"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "iFirstDayOfWeek": {
+                        "schema": {
+                            "title": "First day of week",
+                            "description": "The day that will be used for marking the start of the week",
+                            "type": "string",
+                            "default": "Monday",
+                            "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                        }
+                    },
+                    "sShortDate": {
+                        "schema": {
+                            "title": "Short date representation",
+                            "description": "Short format for date representation",
+                            "type": "string",
+                            "default": "M/d/yyyy",
+                            "enum": ["M/d/yyyy", "M/d/yy", "MM/dd/yy", "MM/dd/yyyy", "yy/MM/dd", "yyyy-MM-dd", "dd-MMM-yy"]
+                        }
+                    },
+                    "sLongDate": {
+                        "schema": {
+                            "title": "Long date representation",
+                            "description": "Long format for date representation",
+                            "type": "string",
+                            "default": "dddd, MMMM d, yyyy",
+                            "enum": ["dddd, MMMM d, yyyy", "MMMM d, yyyy", "dddd, d MMMM, yyyy", "d, MMMM, yyyy"]
+                        }
+                    },
+                    "sShortTime": {
+                        "schema": {
+                            "title": "Short time representation",
+                            "description": "Short format for time representation",
+                            "type": "string",
+                            "default": "h:mm tt",
+                            "enum": ["h:mm tt", "hh:mm tt", "H:mm", "HH:mm"]
+                        }
+                    },
+                    "sTimeFormat": {
+                        "schema": {
+                            "title": "Time representation",
+                            "description": "Format for time representation",
+                            "type": "string",
+                            "default": "h:mm:ss tt",
+                            "enum": ["h:mm:ss tt", "hh:mm:ss tt", "H:mm:ss", "HH:mm:ss"]
+                        }
+                    },
+                    "sDecimal": {
+                        "schema": {
+                            "title": "Decimal representation symbol",
+                            "description": "Symbol for decimal representation",
+                            "type": "string with a max of three chars",
+                            "default": "."
+                        }
+                    },
+                    "iDigits": {
+                        "schema": {
+                            "title": "Digits number in decimal representation",
+                            "description": "Number of digits to be shown in decimal representation",
+                            "type": "number",
+                            "range": "[0..9]"
+                        }
+                    },
+                    "sThousand": {
+                        "schema": {
+                            "title": "Digits grouping symbol",
+                            "description": "Symbol for using in digits grouping",
+                            "type": "string with a max of three chars"
+                        }
+                    },
+                    "sGrouping": {
+                        "schema": {
+                            "title": "Digits grouping format",
+                            "description": "Format for grouping digits",
+                            "type": "string",
+                            "enum": "[0;0, 3;0, 3;0;0, 3;2;0]",
+                            "outputFormat": "[123456789 - 123,456,789 - 123456,789, 12,34,56,789]"
+                        }
+                    },
+                    "sNegativeSign": {
+                        "schema": {
+                            "title": "Negative sign symbol",
+                            "description": "Symbol for representing negative values",
+                            "type": "string with a max of four chars",
+                        }
+                    },
+                    "iNegNumber": {
+                        "schema": {
+                            "title": "Negative number format",
+                            "description": "Fomat for representing negative values",
+                            "type": "number",
+                            "range": "[0..9]",
+                            "outputFormat": "[(1.1),-1.1,- 1.1,1.1-,1.1 -]"
+                        }
+                    },
+                    "iLZero": {
+                        "scheme": {
+                            "title": "Display leading zeros",
+                            "description": "Display or not leading zeros in decimal number",
+                            "type": "bool",
+                            "meaning": "[0: Leading zeros not displayed, 1: Leading zeros displayed]"
+                        }
+                    },
+                    "sList": {
+                        "scheme": {
+                            "title": "List separator symbol",
+                            "description": "Symbol for separating elements in lists",
+                            "type": "string with a max of 3 chars",
+                        }
+                    },
+                    "iMeasure": {
+                        "scheme": {
+                            "title": "Unit system",
+                            "description": "Unit system to be used as default",
+                            "type": "number",
+                            "enum": ["0", "1"],
+                            "outputFormat": ["Metrict", "Imperial"]
+                        }
+                    },
+                    "sNativeDigits": {
+                        "scheme": {
+                            "title": "Native digits representation",
+                            "description": "Character set for representing the native digits",
+                            "type": "string",
+                            "enum": [
+                                "0123456789",
+                                "٠١٢٣٤٥٦٧٨٩",
+                                "০১২৩৪৫৬৭৮৯",
+                                "〇一二三四五六七八九",
+                                "०१२३४५६७८९",
+                                "૦૧૨૩૪૫૬૭૮૯",
+                                "၀၁၂၃၄၅၆၇၈၉",
+                                "༠༡༢༣༤༥༦༧༨༩",
+                                "೦೧೨೩೪೫೬೭೮೯",
+                                "០១២៣៤៥៦៧៨៩",
+                                "໐໑໒໓໔໕໖໗໘໙",
+                                "൦൧൨൩൪൫൬൭൮൯",
+                                "๐๑๒๓๔๕๖๗๘๙",
+                                "౦౧౨౩౪౫౬౭౮౯",
+                                "๐๑๒๓๔๕๖๗๘๙",
+                                "۰۱۲۳۴۵۶۷۸۹"
+                            ],
+                            "outputFormat": [
+                                "Latin",
+                                "Arabic",
+                                "Bengali",
+                                "Chinese",
+                                "Devanagari",
+                                "Gujarati",
+                                "Burmese",
+                                "Gurmukhi",
+                                "Kannada",
+                                "Khmer",
+                                "Lao",
+                                "Khmer",
+                                "Tamil",
+                                "Telugu",
+                                "Thai",
+                                "Urdu"
+                            ]
+                        }
+                    },
+                    "NumShape": {
+                        "scheme": {
+                            "title": "Native digits contextual usage",
+                            "description": "Determines the context in which the native digits should be used or not",
+                            "type": "string",
+                            "enum": ["Context", "Level", "National"]
+                        }
+                    },
+                    "sCurrency": {
+                        "scheme": {
+                            "title": "System default currency",
+                            "description": "Standard currency for being used in the system",
+                            "type": "string",
+                            "enum": ["$", "€"]
+                        }
+                    },
+                    "iCurrency": {
+                        "scheme": {
+                            "title": "Positive currency format",
+                            "description": "Format in which express money cuantities",
+                            "type": "number",
+                            "range": "0..3",
+                            "outputFormat": ["$1.1", "1.1$", "$ 1.1", "1.1 $"]
+                        }
+                    },
+                    "iNegCurr": {
+                        "scheme": {
+                            "title": "Negative currency format",
+                            "description": "Format in which express negative money cuantities",
+                            "type": "number",
+                            "range": "0..5",
+                            "outputFormat": ["($1.1)", "-$1.1", "$-1.1", "$1.1-", "($1.1)", "-1.1$"]
+                        }
+                    },
+                    "sMonDecimalSep": {
+                        "scheme": {
+                            "title": "Currency decimal symbol",
+                            "description": "The symbol for decimal in monetary amount",
+                            "type": "string with a max of three chars",
+                            "defaults": [",", ".", "'"]
+                        }
+                    },
+                    "iCurrDigits": {
+                        "scheme": {
+                            "title": "Currency decimal digits",
+                            "description": "Number of decimal digits in a monetary amount",
+                            "type": "number",
+                            "range": "0..9"
+                        }
+                    },
+                    "sMonThousandSep": {
+                        "scheme": {
+                            "title": "Currency digits grouping symbol",
+                            "description": "Determines the grouping symbol for digits in a monetary amount representation",
+                            "type": "string",
+                            "enum": [",", ".", "'"]
+                        }
+                    },
+                    "sMonGrouping": {
+                        "scheme": {
+                            "title": "Currency digits grouping format",
+                            "description": "Determines the grouping format for digits in a monetary amount representation",
+                            "type": "string",
+                            "enum": ["0;0", "3;0", "3;0;0", "3;2;0"],
+                            "outputFormat": ["123457$", "123456,789$", "123,456,79$", "12,34,56,789$"]
+                        }
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/firstDayOfWeek",
+                    "http://registry\\.gpii\\.net/common/dateFormat",
+                    "http://registry\\.gpii\\.net/common/stringDateFormat",
+                    "http://registry\\.gpii\\.net/common/shortTimeFormat",
+                    "http://registry\\.gpii\\.net/common/timeFormat",
+                    "http://registry\\.gpii\\.net/common/firstDayOfWeek",
+                    "http://registry\\.gpii\\.net/common/dateFormat",
+                    "http://registry\\.gpii\\.net/common/stringDateFormat",
+                    "http://registry\\.gpii\\.net/common/shortTimeFormat",
+                    "http://registry\\.gpii\\.net/common/timeFormat",
+                    "http://registry\\.gpii\\.net/common/decimalSymbol",
+                    "http://registry\\.gpii\\.net/common/digitsAfterDecimal",
+                    "http://registry\\.gpii\\.net/common/digitsGroupingSymbol",
+                    "http://registry\\.gpii\\.net/common/digitsGroupingStyle",
+                    "http://registry\\.gpii\\.net/common/negativeValueSymbol",
+                    "http://registry\\.gpii\\.net/common/negativeValueFormat",
+                    "http://registry\\.gpii\\.net/common/leadingZeros",
+                    "http://registry\\.gpii\\.net/common/listSeparatorSymbol",
+                    "http://registry\\.gpii\\.net/common/measurementSystem",
+                    "http://registry\\.gpii\\.net/common/standardDigits",
+                    "http://registry\\.gpii\\.net/common/useNativeDigits",
+                    "http://registry\\.gpii\\.net/common/currencySymbol",
+                    "http://registry\\.gpii\\.net/common/positiveCurrencyFormat",
+                    "http://registry\\.gpii\\.net/common/negativeCurrencyFormat",
+                    "http://registry\\.gpii\\.net/common/currencyDecimalSymbol",
+                    "http://registry\\.gpii\\.net/common/currencyDigitsAfterDecimal",
+                    "http://registry\\.gpii\\.net/common/currencyDigitsGroupingSymbol",
+                    "http://registry\\.gpii\\.net/common/currencyDigitsGroupingFormat",
+                    "http://registry\\.gpii\\.net/common/twoDigitsYear"
+                ],
+                "capabilitiesTransformations": {
+                    "iFirstDayOfWeek": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/firstDayOfWeek",
+                            "match": {
+                                "Monday": 0,
+                                "Tuesday": 1,
+                                "Wednesday": 2,
+                                "Thursday": 3,
+                                "Friday": 4,
+                                "Saturday": 5,
+                                "Sunday": 6
+                            },
+                            "noMatch"
+                        }
+                    },
+                    "sShortDate": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/dateFormat",
+                            "match": {
+                                "m/d/yyyy": "M/d/yyyy",
+                                "m/d/yy": "M/d/yy",
+                                "mm/dd/yy": "MM/dd/yy",
+                                "mm/dd/yyyy": "MM/dd/yyyy",
+                                "yy/mm/dd": "yy/MM/dd",
+                                "yyyy-mm-dd": "yyyy-MM-dd",
+                                // This format has month acronym'MMM'
+                                "dd-mmm-yy": "dd-MMM-yy"
+                            }
+                        }
+                    },
+                    "sLongDate": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/stringDateFormat",
+                            "match": {
+                                "dddd/mmmm-d/yyyy": "dddd, MMMM d, yyyy",
+                                "mmmm-d/yyyy": "MMMM d, yyyy",
+                                "dddd/d-mmmm/yyyy": "dddd, d MMMM, yyyy",
+                                "d/mmmm/yyyy": "d, MMMM, yyyy"
+                            }
+                        }
+                    },
+                    "sTimeFormat": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/timeFormat",
+                            "match": {
+                                "h:mm tt": "h:mm tt",
+                                "hh:mm tt": "hh:mm tt",
+                                "h:mm": "H:mm",
+                                "hh:mm": "HH:mm"
+                            }
+                        }
+                    },
+                    "sDecimal": "http://registry\\.gpii\\.net/common/decimalSymbol",
+                    "iDigits": "http://registry\\.gpii\\.net/common/digitsAfterDecimal",
+                    "sThousand": "http://registry\\.gpii\\.net/common/digitsGroupingSymbol",
+                    "sGrouping": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/digitsGroupingStyle",
+                            "match": {
+                                "*0": "0;0",
+                                "*3:3": "3;0",
+                                "*0:3": "3;0;0",
+                                "*2:3": "3;2;0"
+                            },
+                            "noMatch": {
+                                "outputValue": "3;0"
+                            }
+                        }
+                    },
+                    // We should search for an ISO with different representations
+                    // ==================================================================
+                    "sNegativeSign": "http://registry\\.gpii\\.net/common/negativeValueSymbol",
+                    "iNegNumber": "http://registry\\.gpii\\.net/common/negativeValueFormat",
+                    // ==================================================================
+                    "iLZero": {
+                        "transform": {
+                            "type": "gpii.transformer.booleanToNumber",
+                            "inputPath": "http://registry\\.gpii\\.net/common/leadingZeros"
+                        }
+                    },
+                    "sList": "http://registry\\.gpii\\.net/common/listSeparatorSymbol",
+                    "iMeasure": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/measurementSystem",
+                            "match": {
+                                "Metric": "0",
+                                "Imperial": "1"
+                            }
+                        }
+                    },
+                    "sNativeDigits": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/standardDigits",
+                            "match": {
+                                "Latin": "0123456789",
+                                "Arabic": "٠١٢٣٤٥٦٧٨٩",
+                                "Bengali": "০১২৩৪৫৬৭৮৯",
+                                "Chinese": "〇一二三四五六七八九",
+                                "Devanagari": "०१२३४५६७८९",
+                                "Gujarati": "૦૧૨૩૪૫૬૭૮૯",
+                                "Burmese": "၀၁၂၃၄၅၆၇၈၉",
+                                "Gurmukhi": "༠༡༢༣༤༥༦༧༨༩",
+                                "Kannada": "೦೧೨೩೪೫೬೭೮೯",
+                                "Khmer": "០១២៣៤៥៦៧៨៩",
+                                "Lao": "໐໑໒໓໔໕໖໗໘໙",
+                                "Khmer": "൦൧൨൩൪൫൬൭൮൯",
+                                "Tamil": "๐๑๒๓๔๕๖๗๘๙",
+                                "Telugu": "౦౧౨౩౪౫౬౭౮౯",
+                                "Thai": "๐๑๒๓๔๕๖๗๘๙",
+                                "Urdu": "۰۱۲۳۴۵۶۷۸۹"
+                            },
+                            "noMatch": {
+                                "outputValue": "0123456789"
+                            }
+                        }
+                    },
+                    "NumShape": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/useNativeDigits",
+                            "match": {
+                                "Context": "Context",
+                                "Level": "Level",
+                                "National": "National"
+                            },
+                            "noMatch": {
+                                "outputValue": "Context"
+                            }
+                        }
+                    },
+                    "sCurrency": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/currencySymbol",
+                            "match": {
+                                "$": "$",
+                                "€": "€"
+                            },
+                            "noMatch": {
+                                "outputValue": "$"
+                            }
+                        }
+                    },
+                    "iCurrency": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/positiveCurrencyFormat",
+                            "match": {
+                                "Cs0.0": 0,
+                                "0.0Cs": 1,
+                                "Cs 0.0": 2,
+                                "0.0 Cs": 3
+                            },
+                            "noMatch": {
+                                "outputValue": 0
+                            }
+                        }
+                    },
+                    // Legend:
+                    //     - Ns: Negative symbol.
+                    //     - Cs: Currency symbol.
+                    "iNegCurr": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/negativeCurrencyFormat",
+                            "match": {
+                                "(Cs0.0)": 0,
+                                "NsCs0.0": 1,
+                                "CsNs0.0": 2,
+                                "Cs0.0Ns": 3,
+                                "(0.0Cs)": 4,
+                                "Ns0.0Cs": 5
+                            },
+                            "noMatch": {
+                                "outputValue": 1
+                            }
+                        }
+                    },
+                    "sMonDecimalSep": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/currencyDecimalSymbol",
+                            "match": {
+                                ".": ".",
+                                ",": ",",
+                                "'": "'"
+                            },
+                            "noMatch": {
+                                "outputValue": "."
+                            }
+                        }
+                    },
+                    "iCurrDigits": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/currencyDigitsAfterDecimal",
+                            "match": {
+                                "0": "0",
+                                "1": "1",
+                                "2": "2",
+                                "3": "3",
+                                "4": "4",
+                                "5": "5",
+                                "6": "6",
+                                "7": "7",
+                                "8": "8",
+                                "9": "9"
+                            },
+                            "noMatch": {
+                                "outputValue": "2"
+                            }
+                        }
+                    },
+                    "sMonThousandSep": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/currencyDigitsGroupingSymbol",
+                            "match": {
+                                ",": ",",
+                                ".": ".",
+                                "'": "'",
+                                " ": " "
+                            },
+                            "noMatch": {
+                                "outputValue": ","
+                            }
+                        }
+                    },
+                    "sMonGrouping": {
+                         "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/currencyDigitsGroupingFormat",
+                            "match": {
+                                "*0": "0;0",
+                                "*3:3": "3;0",
+                                "*0:3": "3;0;0",
+                                "*2:3": "3;2;0"
+                            },
+                            "noMatch": {
+                                "outputValue": "0;3"
+                            }
+                        }
+                    }
+                },
+                "inversesCapabilitiesTransformations": {
+                    // TODO
+                }
+            },
+            "configure2": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\International\\Calendars\\TwoDigitYearMax",
+                    "dataTypes": {
+                        "1": "REG_SZ",
+                        "10": "REG_SZ",
+                        "11": "REG_SZ",
+                        "12": "REG_SZ",
+                        "2": "REG_SZ",
+                        "9": "REG_SZ"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "TwoDigitYearMax": {
+                        "schema": {
+                            "title": "Two Digits Year Representation",
+                            "description": "Range of dates which will be represented by two digits",
+                            "type": "number",
+                            "default": "system-defined"
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure",
+            "settings.configure2"
+        ],
+        "restore": [
+            "settings.configure",
+            "settings.configure2"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
