@@ -1,5 +1,9 @@
 [
     {
+        "id": "net.gpii.test.speechControl"
+    },
+
+    {
         "id": "org.gnome.desktop.interface"
     },
 

@@ -55,13 +55,15 @@ fluid.defaults("gpii.tests.cloud.oauth2.authorizationRequests", {
         putAuthorizationRequest: {
             type: "kettle.test.request.httpCookie",
             options: {
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+                path: "/authorizations/%authorizationId",
                 method: "PUT"
             }
         },
         getAuthorizationRequest2: {
-            type: "kettle.test.request.httpCookie"
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+            type: "kettle.test.request.httpCookie",
+            options: {
+                path: "/authorizations/%authorizationId"
+            }
         }
     }
 });
@@ -73,13 +75,15 @@ fluid.defaults("gpii.tests.cloud.oauth2.revocationRequests", {
         revocationRequest: {
             type: "kettle.test.request.httpCookie",
             options: {
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+                path: "/authorizations/%authorizationId",
                 method: "DELETE"
             }
         },
         getAuthorizationRequest2: {
-            type: "kettle.test.request.httpCookie"
-                // path: "/authorizations/%authorizationId/preferences", // TODO: currently cannot be dynamically templated
+            type: "kettle.test.request.httpCookie",
+            options: {
+                path: "/authorizations/%authorizationId"
+            }
         }
     }
 });
@@ -148,15 +152,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithUpdatedDecision", {
     expect: 22,
     insertRecords: [{
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{putAuthorizationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
-            "/preferences", "{testCaseHolder}.options.updatedSelectedPreferences"]
+        args: ["{putAuthorizationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
+            true, "{testCaseHolder}.options.updatedSelectedPreferences"]
     }, {
         event: "{putAuthorizationRequest}.events.onComplete",
         listener: "fluid.identity"
     }, {
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
-            "/preferences"]
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId", true]
     }, {
         event: "{getAuthorizationRequest2}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyGetAuthorization",
@@ -173,15 +176,14 @@ fluid.defaults("gpii.tests.cloud.oauth2.disruptWithRevocation", {
     expect: 20,
     insertRecords: [{
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{revocationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
-            null, "{testCaseHolder}.options.updatedSelectedPreferences"]
+        args: ["{revocationRequest}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId",
+            false, "{testCaseHolder}.options.updatedSelectedPreferences"]
     }, {
         event: "{revocationRequest}.events.onComplete",
         listener: "fluid.identity"
     }, {
         funcName: "gpii.test.cloudBased.oauth2.sendAuthorizationRequest",
-        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authDecisionId",
-            "/preferences"]
+        args: ["{getAuthorizationRequest2}", "{getAuthorizedServicesRequest}.authorizedService.authorizationId", true]
     }, {
         event: "{getAuthorizationRequest2}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
@@ -252,7 +254,7 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
         path: "redirect_uri",
         type: "DELETE"
     },
-    expectedStatusCode: 403 // TODO: actually returns "invalid access token"
+    expectedStatusCode: 401
 }, {
     name: "Attempt to get access token without sending client_id",
     gradeName: "gpii.tests.cloud.oauth2.disruptAccessToken",
@@ -268,13 +270,13 @@ gpii.tests.cloud.oauth2.chrome.disruptions = [{
         type: "DELETE"
     }
 }, {
-    name: "Test ability to update selectedPreferences in auth decision",
+    name: "Test ability to update selectedPreferences in authorization",
     gradeName: "gpii.tests.cloud.oauth2.disruptWithUpdatedDecision",
     expected: {
         "org.chrome.cloud4chrome": {}
     }
 }, {
-    name: "Test ability to revoke an authorization decision",
+    name: "Test ability to revoke an authorization",
     gradeName: "gpii.tests.cloud.oauth2.disruptWithRevocation"
 }
 ];

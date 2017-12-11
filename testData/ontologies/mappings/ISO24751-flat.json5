@@ -55,6 +55,8 @@
     "http://registry\\.gpii\\.net/common/syllabificationEnabled": "-provisional-cognitiveSupport.-provisional-syllabificationEnabled",
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
     "http://registry\\.gpii\\.net/common/language": "language",
+    "http://registry\\.gpii\\.net/common/DPIScale": "display.screenEnhancement.-provisional-DPIScale",
+    "http://registry\\.gpii\\.net/common/speechControl": "control.-provisional-speechControl", // This is not currently supported by any real solutions, but rather used for user testing/demoing
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",
