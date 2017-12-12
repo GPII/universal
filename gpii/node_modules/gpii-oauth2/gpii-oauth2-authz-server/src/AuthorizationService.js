@@ -105,7 +105,7 @@ var fluid = fluid || require("infusion");
     gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
 
-        var addGpiiAppInstallationAuthorizationPromise = dataStore.addAuthorization(gpii.dbOperation.docTypes.gpiiAppInstallationAuthorization, {
+        var addGpiiAppInstallationAuthorizationPromise = dataStore.addAuthorization({
             clientId: clientId,
             gpiiKey: gpiiKey,
             accessToken: accessToken,
