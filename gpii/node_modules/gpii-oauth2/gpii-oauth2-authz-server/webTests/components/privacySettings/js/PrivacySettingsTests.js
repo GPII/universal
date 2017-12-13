@@ -21,10 +21,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.registerNamespace("gpii.tests.oauth2.privacySettings");
 
     gpii.tests.oauth2.privacySettings.additionalRequestInfos = {
-        addAuthorization: {
+        addUserAuthorizedAuthorization: {
             url: "/authorizations",
             type: "post",
-            data: "{\"oauth2ClientId\":1,\"selectedPreferences\":{\"\":true}}",
+            data: "{\"clientId\":1,\"selectedPreferences\":{\"\":true}}",
             status: 200,
             responseText: {
                 isError: false
@@ -36,7 +36,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             status: 200
         },
         fetchDecisionPrefs: {
-            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authorizationId + "/preferences",
             type: "get",
             dataType: "json",
             status: 200,
@@ -45,7 +45,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             }
         },
         saveDecisionPrefs: {
-            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authDecisionId + "/preferences",
+            url: "/authorizations/" + gpii.tests.oauth2.privacySettings.clientData.authorizationId + "/preferences",
             type: "put",
             data: "{\"\":true}",
             status: 200,
@@ -101,35 +101,35 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             buttonIndex: 0
         },
         events: {
-            onAddAuthorizationDialogClose: null
+            onAddUserAuthorizedAuthorizationDialogClose: null
         },
         listeners: {
             "onCreate.registerMockjax": {
                 listener: "gpii.tests.oauth2.privacySettings.registerMockjax",
                 priority: "first"
             },
-            // Override the page reload listener when a decision is successfully removed
+            // Override the page reload listener when an authorization is successfully removed
             "onRemovalSuccess.reload": "fluid.identity"
         },
         distributeOptions: [{
             // Override the page reload listener when a service is successfully added
-            target: "{that addAuthorizationDialog}.options.listeners",
+            target: "{that addUserAuthorizedAuthorizationDialog}.options.listeners",
             record: {
                 "authorizationAdded.reload": "fluid.identity"
             }
         }, {
             // Override the page reload listener when a service is successfully added
-            target: "{that addAuthorizationDialog}.options.listeners",
+            target: "{that addUserAuthorizedAuthorizationDialog}.options.listeners",
             record: {
                 "onClose.escalate": {
-                    listener: "{privacySettings}.events.onAddAuthorizationDialogClose",
+                    listener: "{privacySettings}.events.onAddUserAuthorizedAuthorizationDialogClose",
                     priority: "last"
                 }
             }
         }]
     });
 
-    gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettingsDialog", "addAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
+    gpii.tests.oauth2.privacySettings.subcomponents = ["editPrivacySettingsDialog", "addUserAuthorizedAuthorizationDialog", "dialogForRemoval", "addServiceMenu"];
 
     fluid.defaults("gpii.tests.oauth2.privacySettingsTest", {
         gradeNames: ["fluid.test.testEnvironment"],
@@ -200,15 +200,15 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 }, {
                     listener: "gpii.tests.oauth2.privacySettings.oneServiceSelected",
                     args: ["{privacySettings}"],
-                    event: "{privacySettings}.events.onRenderAddAuthorizationDialog",
+                    event: "{privacySettings}.events.onRenderAddUserAuthorizedAuthorizationDialog",
                     priority: "last"
                 }, {
                     jQueryTrigger: "click",
-                    element: "{privacySettings}.addAuthorizationDialog.dom.cancel"
+                    element: "{privacySettings}.addUserAuthorizedAuthorizationDialog.dom.cancel"
                 }, {
-                    listener: "gpii.tests.oauth2.privacySettings.addAuthorizationDialogClosed",
+                    listener: "gpii.tests.oauth2.privacySettings.addUserAuthorizedAuthorizationDialogClosed",
                     args: ["{privacySettings}"],
-                    event: "{privacySettings}.events.onAddAuthorizationDialogClose",
+                    event: "{privacySettings}.events.onAddUserAuthorizedAuthorizationDialogClose",
                     priority: "last"
                 }]
             }]
@@ -284,18 +284,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     gpii.tests.oauth2.privacySettings.oneServiceSelected = function (that) {
-        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog"]);
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addUserAuthorizedAuthorizationDialog"]);
 
         var expectedClientData = {
             serviceName: "Service 1",
-            oauth2ClientId: "2"
+            clientId: "2"
         };
 
         jqUnit.assertDeepEq("The model value of currentClientData has been set correctly", expectedClientData, that.model.currentClientData);
-        jqUnit.assertDeepEq("The value of currentClientData has been passed to addAuthorizationDialog.model.clientData", expectedClientData, that.addAuthorizationDialog.model.clientData);
+        jqUnit.assertDeepEq("The value of currentClientData has been passed to addUserAuthorizedAuthorizationDialog.model.clientData", expectedClientData, that.addUserAuthorizedAuthorizationDialog.model.clientData);
     };
 
-    gpii.tests.oauth2.privacySettings.addAuthorizationDialogClosed = function (that) {
+    gpii.tests.oauth2.privacySettings.addUserAuthorizedAuthorizationDialogClosed = function (that) {
         jqUnit.assertTrue("The focus returns back to the add service button", that.locate("addServiceButton").is(":focus"));
     };
 
@@ -307,7 +307,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.privacySettings.verifyClientData = function (msg, data, elements, expected) {
         fluid.each(elements, function (elm) {
             var value = data[elm];
-            if (elm === "authDecisionId" || elm === "oauth2ClientId") {
+            if (elm === "authorizationId" || elm === "clientId") {
                 value = value.toString();
             }
             jqUnit.assertEquals(msg + "aaThe value of " + elm + " is expected", expected[elm], value);
@@ -315,18 +315,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     };
 
     gpii.tests.oauth2.privacySettings.verifyEditPrivacySettingsDialog = function (that) {
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.model.currentClientData);
-        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authDecisionId", "oauth2ClientId"], that.editPrivacySettingsDialog.model.clientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value for currentClientData: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "clientId"], that.model.currentClientData);
+        gpii.tests.oauth2.privacySettings.verifyClientData("The model value of clientData in editPrivacySettingsDialog: ", gpii.tests.oauth2.privacySettings.clientData, ["serviceName", "authorizationId", "clientId"], that.editPrivacySettingsDialog.model.clientData);
 
-        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addAuthorizationDialog", "editPrivacySettingsDialog"]);
+        gpii.tests.oauth2.privacySettings.assertSubcomponents(that, ["dialogForRemoval", "addServiceMenu", "addUserAuthorizedAuthorizationDialog", "editPrivacySettingsDialog"]);
         gpii.tests.oauth2.privacySettings.assertDialog(that.editPrivacySettingsDialog, "opened");
     };
 
     gpii.tests.oauth2.privacySettings.verifyDialogForRemoval = function (that) {
         var expectedDialogContent = fluid.stringTemplate(that.options.strings.removeDecisionContent, {serviceName: gpii.tests.oauth2.privacySettings.clientData.serviceName});
-        jqUnit.assertEquals("The authDecisionId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authDecisionId, parseInt(that.dialogForRemoval.model.authDecisionId, 10));
+        jqUnit.assertEquals("The authorizationId has been set correctly in dialogForRemoval subcomponent", gpii.tests.oauth2.privacySettings.clientData.authorizationId, parseInt(that.dialogForRemoval.model.authorizationId, 10));
         jqUnit.assertEquals("The dialogContent has been set correctly in dialogForRemoval subcomponent", expectedDialogContent, that.dialogForRemoval.model.dialogContent);
-        jqUnit.isVisible("The dialog for removing the decision is visible", that.dialogForRemoval.container);
+        jqUnit.isVisible("The dialog for removing the authorization is visible", that.dialogForRemoval.container);
         jqUnit.assertTrue("The dialogForRemoval container should have been instantiated as a jQuery dialog", that.dialogForRemoval.container.hasClass("ui-dialog-content"));
     };
 

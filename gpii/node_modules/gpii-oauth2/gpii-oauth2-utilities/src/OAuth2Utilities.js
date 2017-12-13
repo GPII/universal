@@ -1,5 +1,5 @@
 /*!
-Copyright 2014 OCAD university
+Copyright 2014-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -16,44 +16,6 @@ var fluid = fluid || require("infusion");
 
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.oauth2");
-
-gpii.oauth2.errors = fluid.freezeRecursive({
-    missingInput: {
-        msg: "The input field \"%fieldName\" is undefined",
-        statusCode: 400,
-        isError: true
-    },
-    missingDoc: {
-        msg: "The record of %docName is not found",
-        statusCode: 400,
-        isError: true
-    },
-    unauthorizedUser: {
-        msg: "The user %userId is not authorized",
-        statusCode: 401,
-        isError: true
-    },
-    invalidUser: {
-        msg: "Invalid user name and password combination",
-        statusCode: 401,
-        isError: true
-    },
-    unauthorizedAuthCode: {
-        msg: "The authorization code %code is not authorized",
-        statusCode: 401,
-        isError: true
-    },
-    unauthorizedClient: {
-        msg: "The client is not authorized",
-        statusCode: 401,
-        isError: true
-    },
-    unauthorizedAccessToken: {
-        msg: "The access token is not authorized",
-        statusCode: 401,
-        isError: true
-    }
-});
 
 gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     if (req.headers && req.headers.authorization) {
@@ -93,3 +55,24 @@ gpii.oauth2.mapPromiseToResponse = function (promise, response) {
     });
 };
 
+/**
+ * Returns the current time in a human readable string that also naturally sort in chronological order.
+ * See http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.5.43
+ * @return {String} The current time in ISO string format.
+ */
+gpii.oauth2.getCurrentTimestamp = function () {
+    return new Date().toISOString();
+};
+
+/**
+ * Calculate the timestamp of currentTime + expiresIn.
+ * @param timestampStarts {Date} A start timestamp in the format returned by Date()
+ * @param expiresIn {Number} The number of seconds that the expiration will occur.
+ * @return {String} A date in simpilified ISO string format.
+ */
+gpii.oauth2.getTimestampExpires = function (timestampStarts, expiresIn) {
+    if (!timestampStarts) {
+        return undefined;
+    }
+    return new Date(timestampStarts.getTime() + expiresIn * 1000).toISOString();
+};
