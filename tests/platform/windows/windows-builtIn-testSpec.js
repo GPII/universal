@@ -20,8 +20,6 @@ var fluid = require("infusion"),
 
 fluid.require("%universal");
 
-fluid.logObjectRenderChars = 10024;
-
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.windows");
