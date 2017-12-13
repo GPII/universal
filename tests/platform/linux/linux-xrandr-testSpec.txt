@@ -1,8 +1,7 @@
-AcceptanceTests_xrandr.js
+linux-xrandr-testSpec.js
 
 Description:
 
 This tests the functionality of GNOME/Linux XRandR bridge, or the linux display
 settings handler. It tests the system using one NP set:
  (1) os_gnome_display: application specific gnome settings.
-

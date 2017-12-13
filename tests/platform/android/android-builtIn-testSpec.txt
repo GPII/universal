@@ -1,4 +1,4 @@
-AcceptanceTests_builtIn.js
+android-builtIn-testSpec.js
 
 Description:
 

@@ -60,7 +60,12 @@ gpii.tests.linux.orca.testDefs = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
@@ -96,7 +101,12 @@ gpii.tests.linux.orca.testDefs = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
@@ -131,13 +141,18 @@ gpii.tests.linux.orca.testDefs = [
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["orca"]
+            }
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.orca.testDefs",
-    configName: "gpii.tests.acceptance.linux.orca.config",
+    configName: "gpii.tests.acceptance.linux.config",
     configPath: "%universal/tests/platform/linux/configs"
-}, ["gpii.test.integration.testCaseHolder.linux"],
+}, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);

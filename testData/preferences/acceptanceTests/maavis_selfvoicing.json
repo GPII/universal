@@ -5,7 +5,16 @@
                 "name": "Default preferences",
                 "preferences": {
                    "http://registry.gpii.net/common/selfVoicingEnabled": true
-               }
+               },
+               "metadata": [
+                   {
+                       "type": "priority",
+                       "scope": [
+                           "http://registry.gpii.net/applications/net.opendirective.maavis"
+                       ],
+                       "value": 1024
+                   }
+               ]
            }
        }
    }

@@ -24,7 +24,7 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.linux.builtIn");
 
-gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
+gpii.tests.linux.builtIn.testDefs = [
     {
         name: "Testing os_common using default matchmaker",
         userToken: "os_common",
@@ -60,7 +60,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gnome-shell", "gsettings-desktop-schemas"]
+            }
+        }
     },
     {
         name: "Testing os_common2 using default matchmaker",
@@ -78,7 +83,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 }]
             }
         },
-        processes: []
+        processes: [],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gsettings-desktop-schemas"]
+            }
+        }
     },
     {
         name: "Testing os_gnome using default matchmaker",
@@ -117,7 +127,12 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gnome-shell", "gsettings-desktop-schemas", "alsa"]
+            }
+        }
     },
     {
         name: "Testing os_win7 using default matchmaker",
@@ -153,14 +168,19 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
                 "expectConfigured": "true",
                 "expectRestored": "false"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.packageKit.find": {
+                "expectInstalled": ["gnome-shell", "gsettings-desktop-schemas"]
+            }
+        }
     }
-]);
+];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.linux.builtIn.testDefs",
-    configName: "gpii.tests.acceptance.linux.builtIn.config",
+    configName: "gpii.tests.acceptance.linux.config",
     configPath: "%universal/tests/platform/linux/configs"
-}, ["gpii.test.integration.testCaseHolder.linux"],
+}, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);
 

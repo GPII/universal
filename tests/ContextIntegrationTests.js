@@ -27,7 +27,7 @@ gpii.tests.contextIntegration.baseTestDef = {
         "gpii.test.common.lifecycleManagerReceiver"
     ],
     config: {
-        configName: "gpii.tests.acceptance.linux.builtIn.config",
+        configName: "gpii.tests.acceptance.linux.config",
         configPath: "%universal/tests/platform/linux/configs"
     }
 };

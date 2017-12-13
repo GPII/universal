@@ -1,8 +1,3 @@
-This config file is used for integration and acceptance tests on Android.
+This config file is used for integration and acceptance tests on built-in Android solutions.
 
-It includes to the basic localInstall setup for acceptance tests (modifying the
-preferences folder used), which in turn includes the standard development
-config file (running GPII locally, using development setup).
-
-This config sets the device reporter file to be 'android_builtIn.json', which will
-report only the standard built in solutions as installed.
+It uses the basic local install setup in development mode.

@@ -228,7 +228,12 @@ gpii.tests.windows.builtIn = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
+        }
     }, {
         name: "Testing os_common using default matchmaker",
         userToken: "os_common",
@@ -390,7 +395,12 @@ gpii.tests.windows.builtIn = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
+        }
     }, {
         name: "Testing os_gnome using default matchmaker",
         userToken: "os_gnome",
@@ -457,13 +467,18 @@ gpii.tests.windows.builtIn = [
                 "expectConfigured": "1",
                 "expectRestored": "0"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": []
+            }
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.builtIn",
-    configName: "gpii.tests.acceptance.windows.builtIn.config",
+    configName: "gpii.tests.acceptance.windows.config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);

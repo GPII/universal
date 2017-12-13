@@ -93,7 +93,16 @@ gpii.tests.windows.jaws = [
                 "expectRestored": "0",
                 "maxTimeouts": "40"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     },
     {
         name: "Testing NP set \"jaws_common\" using Flat matchmaker",
@@ -163,7 +172,16 @@ gpii.tests.windows.jaws = [
                 "expectRestored": "0",
                 "maxTimeouts": "40"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     },
     {
         name: "Testing NP set \"jaws_common2\" using Flat matchmaker",
@@ -232,7 +250,16 @@ gpii.tests.windows.jaws = [
                 "expectRestored": "0",
                 "maxTimeouts": "40"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     },
     {
         name: "Testing NP set \"jaws_common3\" using Flat matchmaker",
@@ -302,13 +329,22 @@ gpii.tests.windows.jaws = [
                 "expectRestored": "0",
                 "maxTimeouts": "40"
             }
-        ]
+        ],
+        deviceReporters: {
+            "gpii.deviceReporter.registryKeyExists": {
+                "expectInstalled": [{
+                    "hKey": "HKEY_LOCAL_MACHINE",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
+                    "subPath": ""
+                }]
+            }
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.jaws",
-    configName: "gpii.tests.acceptance.windows.jaws.config",
+    configName: "gpii.tests.acceptance.windows.config",
     configPath: "%universal/tests/platform/windows/configs"
-}, ["gpii.test.integration.testCaseHolder.windows"],
+}, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
     module, require, __dirname);
