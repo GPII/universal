@@ -22,8 +22,8 @@ fluid.registerNamespace("gpii.tests.uioPlus");
 
 gpii.tests.uioPlus.testDefs = [
     {
-        name: "Acceptance test for default preferences in Browser Extension",
-        gpiiKey: "uioPlus_defaults",
+        name: "Acceptance test for default preferences for UIO+",
+        userToken: "uioPlus_defaults",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -51,8 +51,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for background color change in Browser Extension",
-        gpiiKey: "uioPlus_high_contrast",
+        name: "Acceptance test for background color change for UIO+",
+        userToken: "uioPlus_high_contrast",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -80,8 +80,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for font size transformation in Browser Extension",
-        gpiiKey: "uioPlus_font_size",
+        name: "Acceptance test for font size transformation for UIO+",
+        userToken: "uioPlus_font_size",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -109,8 +109,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for line space transformation in Browser Extension",
-        gpiiKey: "uioPlus_line_space",
+        name: "Acceptance test for line space transformation for UIO+",
+        userToken: "uioPlus_line_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -138,8 +138,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for highlight color transformation in Browser Extension",
-        gpiiKey: "uioPlus_highlight_colour",
+        name: "Acceptance test for highlight color transformation for UIO+",
+        userToken: "uioPlus_highlight_colour",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -167,8 +167,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for character space transformation in Browser Extension",
-        gpiiKey: "uioPlus_character_space",
+        name: "Acceptance test for character space transformation for UIO+",
+        userToken: "uioPlus_character_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -196,8 +196,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for inputs larger transformation in Browser Extension",
-        gpiiKey: "uioPlus_inputs_larger",
+        name: "Acceptance test for inputs larger transformation for UIO+",
+        userToken: "uioPlus_inputs_larger",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -225,8 +225,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for self voicing transformation in Browser Extension",
-        gpiiKey: "uioPlus_self_voicing",
+        name: "Acceptance test for self voicing transformation for UIO+",
+        userToken: "uioPlus_self_voicing",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -254,8 +254,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for table of contents transformation in Browser Extension",
-        gpiiKey: "uioPlus_toc",
+        name: "Acceptance test for table of contents transformation for UIO+",
+        userToken: "uioPlus_toc",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -283,8 +283,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for dictionary transformation in Browser Extension",
-        gpiiKey: "uioPlus_support_tool",
+        name: "Acceptance test for dictionary transformation for UIO+",
+        userToken: "uioPlus_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -312,8 +312,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for support tool transformation in Browser Extension - multiple values",
-        gpiiKey: "uioPlus_multiple_support_tool",
+        name: "Acceptance test for support tool transformation for UIO+ - multiple values",
+        userToken: "uioPlus_multiple_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -341,8 +341,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for support tool transformation in Browser Extension - unsupported values",
-        gpiiKey: "uioPlus_unhandled_support_tool",
+        name: "Acceptance test for support tool transformation for UIO+ - unsupported values",
+        userToken: "uioPlus_unhandled_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -370,8 +370,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for simplified UI transformation in Browser Extension",
-        gpiiKey: "uioPlus_simplified",
+        name: "Acceptance test for simplified UI transformation for UIO+",
+        userToken: "uioPlus_simplified",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -399,8 +399,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for syllabification UI transformation in Browser Extension",
-        gpiiKey: "uioPlus_syllabification",
+        name: "Acceptance test for syllabification UI transformation for UIO+",
+        userToken: "uioPlus_syllabification",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -428,8 +428,8 @@ gpii.tests.uioPlus.testDefs = [
         processes: []
     },
     {
-        name: "Acceptance test for multiple transformations in Browser Extension",
-        gpiiKey: "uioPlus_multiple_settings",
+        name: "Acceptance test for multiple transformations for UIO+",
+        userToken: "uioPlus_multiple_settings",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
