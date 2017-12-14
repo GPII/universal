@@ -1762,10 +1762,17 @@
         ],
         "stop": [
             {
-                    "type": "gpii.windows.closeProcessByName",
-                    "filename": "firefox.exe"
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "firefox.exe"
             }
         ],
+        // Although there are no settings to deal with, we need to pass through
+        // the "configure" action in order to proceed with the "stop" directive
+        // when keying out. This is a current limitation of the system, you can
+        // check https://issues.gpii.net/browse/GPII-2106 and
+        // https://issues.gpii.net/browse/GPII-1235 for more detailed information.
+        //
+        "configure": [ "settings.configure" ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2075,6 +2082,10 @@
             "settings.configure"
         ],
         "restore": [
+            "settings.configureTheme",
+            "settings.configure"
+        ],
+        "update": [
             "settings.configureTheme",
             "settings.configure"
         ],
@@ -3079,7 +3090,7 @@
     },
 
     "net.gpii.uioPlus": {
-        "name": "UIO+ Browser Extension",
+        "name": "UIO+",
         "contexts": {
             "OS": [{
                     "id": "win32",
