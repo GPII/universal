@@ -40,42 +40,42 @@ gpii.oauth2.defaultTokenLifeTimeInSeconds = 3600;
 // All error details that the gpii-oauth2 module reports.
 gpii.oauth2.errors = fluid.freezeRecursive({
     missingInput: {
-        msg: "The input field \"%fieldName\" is undefined",
+        message: "The input field \"%fieldName\" is undefined",
         statusCode: 400,
         isError: true
     },
     missingDoc: {
-        msg: "The record of %docName is not found",
+        message: "The record of %docName is not found",
         statusCode: 400,
         isError: true
     },
     unauthorizedUser: {
-        msg: "The user %userId is not authorized",
+        message: "The user %userId is not authorized",
         statusCode: 401,
         isError: true
     },
     invalidUser: {
-        msg: "Invalid user name and password combination",
+        message: "Invalid user name and password combination",
         statusCode: 401,
         isError: true
     },
     unauthorizedAuthCode: {
-        msg: "The authorization code %code is not authorized",
+        message: "The authorization code %code is not authorized",
         statusCode: 401,
         isError: true
     },
     unauthorizedClient: {
-        msg: "The client is not authorized",
+        message: "The client is not authorized",
         statusCode: 401,
         isError: true
     },
     unauthorizedAccessToken: {
-        msg: "The access token is not authorized",
+        message: "The access token is not authorized",
         statusCode: 401,
         isError: true
     },
     unauthorized: {
-        msg: "Unauthorized",
+        message: "Unauthorized",
         statusCode: 401,
         isError: true
     }

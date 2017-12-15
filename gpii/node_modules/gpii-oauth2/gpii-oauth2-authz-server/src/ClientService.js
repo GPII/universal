@@ -59,7 +59,8 @@ gpii.oauth2.clientService.processClient = function (dataStore, oauth2ClientId, f
         if (client && client[fieldToVerify] === expectedVerifiedValue) {
             promiseTogo.resolve(client);
         } else {
-            promiseTogo.reject(gpii.oauth2.errors.unauthorizedClient);
+            fluid.log("clientService: unauthorized client with oauth2ClientId - " + oauth2ClientId);
+            promiseTogo.reject(gpii.oauth2.errors.unauthorized);
         }
     }, function (err) {
         promiseTogo.reject(err);

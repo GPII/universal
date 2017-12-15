@@ -20,6 +20,36 @@
         "userId": "user-2"
     },
     {
+        "_id": "gpiiToken-2",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome2",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-3",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome_and_firefox",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-4",
+        "type": "gpiiToken",
+        "gpiiToken": "testUser1",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-5",
+        "type": "gpiiToken",
+        "gpiiToken": "sammy",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-6",
+        "type": "gpiiToken",
+        "gpiiToken": "context1",
+        "userId": null
+    },
+    {
         "_id": "client-1",
         "type": "webPrefsConsumerClient",
         "name": "Cloud4Chrome",
@@ -67,6 +97,14 @@
         "name": "Bakersfield AJC - PC1",
         "oauth2ClientId": "Bakersfield-AJC-client-id",
         "oauth2ClientSecret": "Bakersfield-AJC-client-secret",
+        "userId": "user-1"
+    },
+    {
+        "_id": "client-8",
+        "type": "gpiiAppInstallationClient",
+        "name": "Pilot computers",
+        "oauth2ClientId": "pilot-computer",
+        "oauth2ClientSecret": "pilot-computer-secret",
         "userId": "user-1"
     },
     {
