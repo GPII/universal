@@ -99,7 +99,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "type": "gpiiKey",
         "schemaVersion": "0.1",
         "prefsSafeId": "prefsSafe-1",
-        "prefsSafeContext": "gpii-default",
+        "prefsSetName": "gpii-default",
         "revoked": false,
         "revokedReason": null,
         "timestampCreated": "2017-11-21T18:11:22.101Z",

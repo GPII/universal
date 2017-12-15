@@ -2,7 +2,7 @@
 // GPII keys and preferences safes in the new GPII data model: https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences
 
 // Example command to run this script:
-// node convertPreferences.js testData/preferences/ gpiiKeys.json prefsSafes.json
+// node convertPrefs.js testData/preferences/ testData/dbData/gpiiKeys.json testData/dbData/prefsSafes.json
 
 "use strict";
 
@@ -30,7 +30,7 @@ filenames.forEach(function (filename) {
             "type": "gpiiKey",
             "schemaVersion": "0.1",
             "prefsSafeId": prefsSafeId,
-            "prefsSafeContext": "gpii-default",
+            "prefsSetName": "gpii-default",
             "revoked": false,
             "revokedReason": null,
             "timestampCreated": currentTime,
