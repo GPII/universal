@@ -21,6 +21,7 @@
         "node-jqunit": "1.1.7",
         "node-uuid": "1.4.8",
         "mkdirp": "0.5.1",
+        "nock": "9.1.0",
         "oauth2orize": "1.8.0",
         "passport": "0.3.2",
         "passport-local": "1.0.0",

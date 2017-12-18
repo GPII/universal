@@ -1,7 +1,7 @@
 /*!
 GPII CouchDB OAuth 2 Data Store
 
-Copyright 2016 OCAD university
+Copyright 2016-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -25,10 +25,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 var fluid = fluid || require("infusion");
 var gpii = fluid.registerNamespace("gpii");
-
-if (!gpii.oauth2.dbDataStore) {
-    require("./DbDataStoreUtils.js");
-}
 
 fluid.defaults("gpii.oauth2.dbDataSource", {
     gradeNames: ["kettle.dataSource.URL", "kettle.dataSource.CouchDB"],
@@ -157,10 +153,24 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAllClientsDataSource: {
+        findClientBySolutionIdDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAllClients",
+                requestUrl: "/_design/views/_view/findClientBySolutionId?key=\"%solutionId\"",
+                termMap: {
+                    solutionId: "%solutionId"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
+                    }
+                }
+            }
+        },
+        findUserAuthorizableClientsDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findUserAuthorizableClients",
                 rules: {
                     readPayload: {
                         "": "rows"
@@ -177,10 +187,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthDecisionsByGpiiTokenDataSource: {
+        findUserAuthorizationsByGpiiTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthByGpiiToken?key=\"%gpiiToken\"",
+                requestUrl: "/_design/views/_view/findUserAuthorizationsByGpiiToken?key=\"%gpiiToken\"",
                 termMap: {
                     gpiiToken: "%gpiiToken"
                 },
@@ -191,10 +201,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthDecisionDataSource: {
+        findWebPrefsConsumerAuthorizationDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthDecision?key=[\"%gpiiToken\",\"%clientId\",\"%redirectUri\"]",
+                requestUrl: "/_design/views/_view/findWebPrefsConsumerAuthorization?key=[\"%gpiiToken\",\"%clientId\",\"%redirectUri\"]",
                 termMap: {
                     gpiiToken: "%gpiiToken",
                     clientId: "%clientId",
@@ -207,52 +217,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findAuthByCodeDataSource: {
+        findOnboardedSolutionAuthorizationDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthDecisionByAuthCode?key=%22%code%22&include_docs=true",
-                termMap: {
-                    code: "%code"
-                },
-                rules: {
-                    readPayload: {
-                        "": "rows.0"
-                    }
-                }
-            }
-        },
-        findAuthorizedClientsByGpiiTokenDataSource: {
-            type: "gpii.oauth2.dbDataSource",
-            options: {
-                requestUrl: "/_design/views/_view/findAuthorizedClientsByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
-                termMap: {
-                    gpiiToken: "%gpiiToken"
-                },
-                rules: {
-                    readPayload: {
-                        "": "rows"
-                    }
-                }
-            }
-        },
-        findAuthByAccessTokenDataSource: {
-            type: "gpii.oauth2.dbDataSource",
-            options: {
-                requestUrl: "/_design/views/_view/findAuthByAccessToken?key=%22%accessToken%22&include_docs=true",
-                termMap: {
-                    accessToken: "%accessToken"
-                },
-                rules: {
-                    readPayload: {
-                        "": "rows.0"
-                    }
-                }
-            }
-        },
-        findAuthDecisionByGpiiTokenAndClientIdDataSource: {
-            type: "gpii.oauth2.dbDataSource",
-            options: {
-                requestUrl: "/_design/views/_view/findAuthDecisionByGpiiTokenAndClientId?key=[\"%gpiiToken\",\"%clientId\"]",
+                requestUrl: "/_design/views/_view/findOnboardedSolutionAuthorization?key=[\"%gpiiToken\",\"%clientId\"]",
                 termMap: {
                     gpiiToken: "%gpiiToken",
                     clientId: "%clientId"
@@ -264,12 +232,26 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findClientCredentialsTokenByClientIdDataSource: {
+        findWebPrefsConsumerAuthorizationByAuthCodeDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findClientCredentialsTokenByClientId?key=\"%clientId\"",
+                requestUrl: "/_design/views/_view/findWebPrefsConsumerAuthorizationByAuthCode?key=%22%code%22&include_docs=true",
                 termMap: {
-                    clientId: "%clientId"
+                    code: "%code"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0"
+                    }
+                }
+            }
+        },
+        findUserAuthorizedAuthorizationByIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findUserAuthorizedAuthorizationById?key=%22%id%22",
+                termMap: {
+                    id: "%id"
                 },
                 rules: {
                     readPayload: {
@@ -278,30 +260,58 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 }
             }
         },
-        findClientCredentialsTokenByAccessTokenDataSource: {
+        findUserAuthorizedClientsByGpiiTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findClientCredentialsTokenByAccessToken?key=\"%accessToken\"",
+                requestUrl: "/_design/views/_view/findUserAuthorizedClientsByGpiiToken?key=%22%gpiiToken%22&include_docs=true",
                 termMap: {
-                    accessToken: "%accessToken"
+                    gpiiToken: "%gpiiToken"
                 },
                 rules: {
                     readPayload: {
-                        "": "rows.0.value"
+                        "": "rows"
                     }
                 }
             }
         },
-        findAuthByClientCredentialsAccessTokenDataSource: {
+        findAuthorizationByAccessTokenDataSource: {
             type: "gpii.oauth2.dbDataSource",
             options: {
-                requestUrl: "/_design/views/_view/findAuthByClientCredentialsAccessToken?key=%22%accessToken%22&include_docs=true",
+                requestUrl: "/_design/views/_view/findAuthorizationByAccessToken?key=%22%accessToken%22&include_docs=true",
                 termMap: {
                     accessToken: "%accessToken"
                 },
                 rules: {
                     readPayload: {
                         "": "rows.0"
+                    }
+                }
+            }
+        },
+        findPrivilegedPrefsCreatorAuthorizationByIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findPrivilegedPrefsCreatorAuthorizationById?key=%22%id%22",
+                termMap: {
+                    id: "%id"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
+                    }
+                }
+            }
+        },
+        findPrivilegedPrefsCreatorAuthorizationByClientIdDataSource: {
+            type: "gpii.oauth2.dbDataSource",
+            options: {
+                requestUrl: "/_design/views/_view/findPrivilegedPrefsCreatorAuthorizationByClientId?key=\"%clientId\"",
+                termMap: {
+                    clientId: "%clientId"
+                },
+                rules: {
+                    readPayload: {
+                        "": "rows.0.value"
                     }
                 }
             }
@@ -335,14 +345,8 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             // userName
         },
         findUserByGpiiToken: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
-            args: [
-                "{that}.findUserByGpiiTokenDataSource",
-                {
-                    gpiiToken: "{arguments}.0"
-                },
-                "gpiiToken"
-            ]
+            funcName: "gpii.oauth2.dbDataStore.findUserByGpiiToken",
+            args: ["{that}.findUserByGpiiTokenDataSource", "{arguments}.0"]
             // gpiiToken
         },
         findGpiiToken: {
@@ -371,56 +375,60 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // oauth2ClientId
         },
-        findAllClients: {
+        findClientBySolutionId: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAllClientsDataSource",
+                "{that}.findClientBySolutionIdDataSource",
+                {
+                    solutionId: "{arguments}.0"
+                },
+                "solutionId"
+            ]
+            // SolutionId
+        },
+        findUserAuthorizableClients: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findUserAuthorizableClientsDataSource",
                 {},
                 null,
                 gpii.oauth2.dbDataStore.handleMultipleRecords
             ]
         },
-        // TODO in this implementation, there is a one-to-one correspondence between
-        // recorded user 'authorization decisions' and access tokens. We may want to
-        // rethink this and give them different lifetimes.
-        // TODO: make sure there's only one active access token for one client
-        addAuthDecision: {
-            funcName: "gpii.oauth2.dbDataStore.addRecord",
-            args: [
-                "{that}.saveDataSource",
-                gpii.oauth2.dbDataStore.docTypes.authDecision,
-                "id",
-                "{arguments}.0"
-            ]
-            // authDecision
-        },
-        updateAuthDecision: {
-            funcName: "gpii.oauth2.dbDataStore.updateAuthDecision",
+        updateUserAuthorizedAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.updateUserAuthorizedAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0",
                 "{arguments}.1"
             ]
-            // userId, authDecisionData
+            // userId, authorizationData
         },
-        revokeAuthDecision: {
-            funcName: "gpii.oauth2.dbDataStore.revokeAuthDecision",
+        revokeUserAuthorizedAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.revokeUserAuthorizedAuthorization",
             args: [
                 "{that}",
                 gpii.oauth2.dbDataStore.setRevoke,
                 "{arguments}.0",
                 "{arguments}.1"
             ]
-            // userId, authDecisionId
+            // userId, authorizationId
         },
-        findAuthDecisionById: {
-            func: "{that}.findById"
-            // authDecisionId
-        },
-        findAuthDecisionsByGpiiToken: {
+        findUserAuthorizedAuthorizationById: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthDecisionsByGpiiTokenDataSource",
+                "{that}.findUserAuthorizedAuthorizationByIdDataSource",
+                {
+                    id: "{arguments}.0"
+                },
+                "id"
+            ]
+            // onboardedSolutionAuthorizationId or webPrefsConsumerAuthorizationId
+        },
+        findUserAuthorizationsByGpiiToken: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findUserAuthorizationsByGpiiTokenDataSource",
                 {
                     gpiiToken: "{arguments}.0"
                 },
@@ -429,10 +437,10 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // gpiiToken
         },
-        findAuthDecision: {
+        findWebPrefsConsumerAuthorization: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthDecisionDataSource",
+                "{that}.findWebPrefsConsumerAuthorizationDataSource",
                 {
                     gpiiToken: "{arguments}.0",
                     clientId: "{arguments}.1",
@@ -441,6 +449,18 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 ["gpiiToken", "clientId", "redirectUri"]
             ]
             // gpiiToken, clientId, redirectUri
+        },
+        findOnboardedSolutionAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findOnboardedSolutionAuthorizationDataSource",
+                {
+                    gpiiToken: "{arguments}.0",
+                    clientId: "{arguments}.1"
+                },
+                ["gpiiToken", "clientId"]
+            ]
+            // gpiiToken, clientId
         },
         // TODO make authCodes active only for a limited period of time
         // TODO make authCodes single use
@@ -451,54 +471,73 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
                 "{arguments}.0",
                 "{arguments}.1"
             ]
-            // authDecisionId, code
+            // authorizationId, code
         },
-        findAuthByCode: {
+        findWebPrefsConsumerAuthorizationByAuthCode: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthByCodeDataSource",
+                "{that}.findWebPrefsConsumerAuthorizationByAuthCodeDataSource",
                 {
                     code: "{arguments}.0"
                 },
                 "code",
-                gpii.oauth2.dbDataStore.findAuthByCodePostProcess
+                gpii.oauth2.dbDataStore.findWebPrefsConsumerAuthorizationByAuthCodePostProcess
             ]
             // code
         },
         // Note: With the In Memory Data Store, this function returns an empty array when no clients are found.
         // However, with the DB Data Store, "undefined" is returned.
-        findAuthorizedClientsByGpiiToken: {
+        findUserAuthorizedClientsByGpiiToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthorizedClientsByGpiiTokenDataSource",
+                "{that}.findUserAuthorizedClientsByGpiiTokenDataSource",
                 {
                     gpiiToken: "{arguments}.0"
                 },
                 "gpiiToken",
-                gpii.oauth2.dbDataStore.findAuthorizedClientsByGpiiTokenPostProcess
+                gpii.oauth2.dbDataStore.findUserAuthorizedClientsByGpiiTokenPostProcess
             ]
             // gpiiToken
         },
-        findAuthByAccessToken: {
+        findAuthorizationByAccessToken: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findAuthByAccessTokenDataSource",
+                "{that}.findAuthorizationByAccessTokenDataSource",
                 {
                     accessToken: "{arguments}.0"
                 },
                 "accessToken",
-                gpii.oauth2.dbDataStore.findAuthByAccessTokenPostProcess
+                gpii.oauth2.dbDataStore.findAuthorizationByAccessTokenPostProcess
             ]
             // accessToken
         },
-        findClientCredentialsTokenById: {
-            func: "{that}.findById"
-            // clientCredentialsTokenId
+        // TODO in this implementation, only GPII app installation authorizations have access token
+        // lifetime control and there's only one active access token for each "client-gpiiToken"
+        // correspondence. Should add the same functionality for other authorization types.
+        addAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.addAuthorization",
+            args: [
+                "{that}.saveDataSource",
+                "{arguments}.0",
+                "{arguments}.1"
+            ]
+            // authorizationType, authorizationData
         },
-        findClientCredentialsTokenByClientId: {
+        findPrivilegedPrefsCreatorAuthorizationById: {
             funcName: "gpii.oauth2.dbDataStore.findRecord",
             args: [
-                "{that}.findClientCredentialsTokenByClientIdDataSource",
+                "{that}.findPrivilegedPrefsCreatorAuthorizationByIdDataSource",
+                {
+                    id: "{arguments}.0"
+                },
+                "id"
+            ]
+            // privilegedPrefsCreatorAuthorizationId
+        },
+        findPrivilegedPrefsCreatorAuthorizationByClientId: {
+            funcName: "gpii.oauth2.dbDataStore.findRecord",
+            args: [
+                "{that}.findPrivilegedPrefsCreatorAuthorizationByClientIdDataSource",
                 {
                     clientId: "{arguments}.0"
                 },
@@ -506,91 +545,63 @@ fluid.defaults("gpii.oauth2.dbDataStore", {
             ]
             // clientId
         },
-        findClientCredentialsTokenByAccessToken: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
-            args: [
-                "{that}.findClientCredentialsTokenByAccessTokenDataSource",
-                {
-                    accessToken: "{arguments}.0"
-                },
-                "accessToken"
-            ]
-            // accessToken
-        },
-        // TODO: make sure there's only one non-revoked client credentials token for the given client
-        addClientCredentialsToken: {
-            funcName: "gpii.oauth2.dbDataStore.addClientCredentialsToken",
-            args: [
-                "{that}.saveDataSource",
-                "{arguments}.0"
-            ]
-            // clientCredentialsTokenData
-        },
-        revokeClientCredentialsToken: {
-            funcName: "gpii.oauth2.dbDataStore.revokeClientCredentialsToken",
+        revokePrivilegedPrefsCreatorAuthorization: {
+            funcName: "gpii.oauth2.dbDataStore.revokePrivilegedPrefsCreatorAuthorization",
             args: [
                 "{that}",
                 "{arguments}.0"
             ]
-            // clientCredentialsTokenId
+            // privilegedPrefsCreatorAuthorizationId
         },
-        findAuthByClientCredentialsAccessToken: {
-            funcName: "gpii.oauth2.dbDataStore.findRecord",
-            args: [
-                "{that}.findAuthByClientCredentialsAccessTokenDataSource",
-                {
-                    accessToken: "{arguments}.0"
-                },
-                "accessToken",
-                gpii.oauth2.dbDataStore.findAuthByClientCredentialsAccessTokenPostProcess
-            ]
-            // accessToken
+        findGpiiAppInstallationAuthorizationById: {
+            func: "{that}.findById"
+            // gpiiAppInstallationAuthorizationId
         }
     },
     events: {
-        onUpdateAuthDecision: null,
-        onRevokeAuthDecision: null,
-        onRevokeClientCredentialsToken: null
+        onUpdateUserAuthorizedAuthorization: null,
+        onRevokeUserAuthorizedAuthorization: null,
+        onRevokePrivilegedPrefsCreatorAuthorization: null
     },
     listeners: {
-        onUpdateAuthDecision: [{
-            listener: "gpii.oauth2.dbDataStore.authDecisionExists",
-            args: ["{that}.findAuthDecisionById", "{arguments}.0"],
-            namespace: "authDecisionExists"
+        onUpdateUserAuthorizedAuthorization: [{
+            listener: "gpii.oauth2.dbDataStore.authorizationExists",
+            args: ["{that}.findUserAuthorizedAuthorizationById", "{arguments}.0"],
+            namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
             args: ["{that}.findGpiiToken", "{arguments}.0"],
             namespace: "validateGpiiToken",
-            priority: "after:authDecisionExists"
+            priority: "after:authorizationExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdate",
+            listener: "gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdate",
+            namespace: "doUpdateUserAuthorizedAuthorization",
             priority: "after:validateGpiiToken"
         }],
-        onRevokeAuthDecision: [{
-            listener: "gpii.oauth2.dbDataStore.authDecisionExists",
-            args: ["{that}.findAuthDecisionById", "{arguments}.0"],
-            namespace: "authDecisionExists"
+        onRevokeUserAuthorizedAuthorization: [{
+            listener: "gpii.oauth2.dbDataStore.authorizationExists",
+            args: ["{that}.findUserAuthorizedAuthorizationById", "{arguments}.0"],
+            namespace: "authorizationExists"
         }, {
             listener: "gpii.oauth2.dbDataStore.validateGpiiToken",
             args: ["{that}.findGpiiToken", "{arguments}.0"],
             namespace: "validateGpiiToken",
-            priority: "after:authDecisionExists"
+            priority: "after:authorizationExists"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doUpdate",
+            listener: "gpii.oauth2.dbDataStore.doUpdateUserAuthorizedAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doUpdate",
+            namespace: "doUpdateUserAuthorizedAuthorization",
             priority: "after:validateGpiiToken"
         }],
-        onRevokeClientCredentialsToken: [{
-            listener: "{that}.findClientCredentialsTokenById",
-            namespace: "findClientCredentialsToken"
+        onRevokePrivilegedPrefsCreatorAuthorization: [{
+            listener: "{that}.findPrivilegedPrefsCreatorAuthorizationById",
+            namespace: "findPrivilegedPrefsCreatorAuthorization"
         }, {
-            listener: "gpii.oauth2.dbDataStore.doRevokeClientCredentialsToken",
+            listener: "gpii.oauth2.dbDataStore.doRevokePrivilegedPrefsCreatorAuthorization",
             args: ["{that}.saveDataSource", "{arguments}.0"],
-            namespace: "doRevokeClientCredentialsToken",
-            priority: "after:findClientCredentialsToken"
+            namespace: "doRevokePrivilegedPrefsCreatorAuthorization",
+            priority: "after:findPrivilegedPrefsCreatorAuthorization"
         }]
     }
 });
