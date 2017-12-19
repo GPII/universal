@@ -1387,7 +1387,7 @@
     },
 
     "net.gpii.uioPlus": {
-        "name": "UIO+ Browser Extension",
+        "name": "UIO+",
         "contexts": {
             "OS": [{
                 "id": "linux",
