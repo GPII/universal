@@ -297,7 +297,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }
@@ -488,7 +488,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }
@@ -519,7 +519,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }
@@ -710,7 +710,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }
@@ -741,7 +741,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }
@@ -932,7 +932,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }
@@ -963,7 +963,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk"
+                        "queryProcess": "osk.exe"
                     }
                 }]
             }

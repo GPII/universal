@@ -93,7 +93,7 @@ gpii.tests.journal.initialSettings = {
             },
             "options": {
                 "registryName": "magnifierpane",
-                "queryProcess": "Magnify"
+                "queryProcess": "Magnify.exe"
             }
         }]
     }
@@ -107,7 +107,7 @@ gpii.tests.journal.settingsAfterCrash = {
             },
             "options": {
                 "registryName": "magnifierpane",
-                "queryProcess": "Magnify"
+                "queryProcess": "Magnify.exe"
             }
         }]
     }
