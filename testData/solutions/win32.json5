@@ -970,7 +970,7 @@
                         "retryInterval": 1000
                     },
                     "registryName": "magnifierpane",
-                    "queryProcess": "Magnify"
+                    "queryProcess": "Magnify.exe"
                 }
             }
         },
@@ -1044,7 +1044,7 @@
                 "type": "gpii.windows.enableRegisteredAT",
                 "options": {
                     "registryName": "osk",
-                    "queryProcess": "osk"
+                    "queryProcess": "osk.exe"
                 }
             }
         },

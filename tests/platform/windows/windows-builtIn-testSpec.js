@@ -42,7 +42,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }]
             }
@@ -266,7 +266,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }]
             }
@@ -288,7 +288,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -479,7 +479,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -510,7 +510,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -701,7 +701,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -732,7 +732,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -923,7 +923,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -954,7 +954,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -1038,7 +1038,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify"
+                        "queryProcess": "Magnify.exe"
                     }
                 }]
             }
