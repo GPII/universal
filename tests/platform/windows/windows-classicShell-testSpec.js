@@ -21,6 +21,60 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.windows");
 
+gpii.tests.windows.checkCloseAfterCommand = function(that, processSpec, expected) {
+    var options = {timeout: 30000};
+
+    var processToWait = processSpec.processToWait;
+    var processToClose = processSpec.processToClose;
+
+    var waitProcValidState;
+
+    if (expected === "start") {
+        fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToWait' to start: ", processToWait);
+        waitProcValidState = gpii.windows.waitForProcessStart(processToWait, options);
+    } else if (expected === "stop") {
+        fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToWait' to close: ", processToWait);
+        waitProcValidState = gpii.windows.waitForProcessTermination(processToWait, options);
+    }
+
+    waitProcValidState
+        .then(
+            function() {
+                var closeProcsPids = gpii.windows.findProcessByName(processToClose, true);
+                var procsClosed = [];
+
+                for (const pid of closeProcsPids) {
+                    procsClosed.push(gpii.windows.waitForProcessTermination(pid, options));
+                }
+
+                fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToClose' to close: ", processToClose);
+                Promise.all(procsClosed)
+                    .then(
+                        function() {
+                            if (processSpec.options.restart) {
+                                fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToClose' to start: ", processToClose);
+                                gpii.windows.waitForProcessStart(processToClose, options)
+                                    .then(
+                                        function() {
+                                            that.events.onExecExit.fire(true, processSpec);
+                                        },
+                                        function(err) {
+                                            that.events.onExecExit.fire(false, processSpec);
+                                        }
+                                    );
+                            }
+                        },
+                        function(err) {
+                            that.events.onExecExit.fire(false, "gpii.test.windows.checkCloseAfterCommand: '" + processToClose + "' not closed.");
+                        }
+                    );
+            },
+            function(err) {
+                that.events.onExecExit.fire(false, processSpec);
+            }
+        );
+}
+
 gpii.tests.windows.classicShell = [
     {
         name: "Testing ClassicShell",
@@ -46,9 +100,14 @@ gpii.tests.windows.classicShell = [
         },
         processes: [
             {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ClassicShell.exe\" | find /I \"ClassicShell.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
+                "type": gpii.tests.windows.checkCloseAfterCommand,
+                "processToWait": "ClassicStartMenu.exe",
+                "processToClose": "explorer.exe",
+                "expectConfigured": "start",
+                "expectRestored": "stop",
+                "options": {
+                    "restart": true
+                }
             }
         ]
     }
