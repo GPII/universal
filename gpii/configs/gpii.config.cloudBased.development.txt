@@ -11,7 +11,6 @@ It includes configs to locate these items all locally:
 ** solutionsRegistry (reading registry from file)
 ** flatMatchMaker
 ** matchMakerFramework
-** lifecycleManager
 
 Notes on testing:
 This setup is used by the acceptance tests in universal testing the cloudBased applications. Each individual acceptance test may override some elements

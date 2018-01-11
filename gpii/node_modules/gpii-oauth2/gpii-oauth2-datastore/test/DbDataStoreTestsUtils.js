@@ -103,6 +103,12 @@ gpii.tests.dbDataStore.testData = {
         "userId": "user-1",
         "gpiiToken": "chrome_high_contrast"
     },
+    anonymousToken: {
+        "id": "gpiiToken-anonymous",
+        "type": "gpiiToken",
+        "userId": null,
+        "gpiiToken": "anonymous_gpii_token"
+    },
     client1: {
         "id": "client-1",
         "type": "webPrefsConsumerClient",
@@ -335,5 +341,27 @@ gpii.tests.dbDataStore.testData = {
         "gpiiToken": "chrome_high_contrast",
         "accessToken": "gpii-app-installation-token-1",
         "timestampExpires": "3020-05-29T17:54:00.000Z"
+    },
+    findGpiiAppInstallationAuthorizationByAccessToken: {
+        "accessToken": "gpii-app-installation-token-1",
+        "client": {
+            "id": "client-4",
+            "type": "gpiiAppInstallationClient",
+            "name": "AJC-Bakersfield",
+            "oauth2ClientId": "net.gpii.ajc.bakersfield",
+            "oauth2ClientSecret": "client_secret_ajc_bakersfield",
+            "userId": "user-1"
+        },
+        "authorization": {
+            "id": "gpiiAppInstallationAuthorization-1",
+            "type": "gpiiAppInstallationAuthorization",
+            "clientId": "client-4",
+            "gpiiToken": "chrome_high_contrast",
+            "accessToken": "gpii-app-installation-token-1",
+            "revoked": false,
+            "timestampCreated": "2017-05-29T17:54:00.000Z",
+            "timestampRevoked": null,
+            "timestampExpires": "3020-05-30T17:54:00.000Z"
+        }
     }
 };
