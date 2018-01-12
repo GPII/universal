@@ -106,28 +106,28 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.requests", {
 // For successful workflows that update user settings from /untrusted-settings endpoint
 // using access tokens granted by /access_token endpoint
 gpii.tests.cloud.oauth2.untrustedSettingsPut.mainSequence = [
-    {
+    { // 0: create the test file
         funcName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.createTestFile"
     },
-    { // 0
+    { // 1
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
-    { // 1
+    { // 2
         event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
-    { // 2
+    { // 3
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
         args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
     },
-    { // 3
+    { // 4
         event: "{untrustedSettingsPutRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse",
         args: ["{arguments}.0", "{testCaseHolder}.options.key", "{testCaseHolder}.options.expectedMsg", "{testCaseHolder}.options.expectedPrefsSet"]
     },
-    { // 4: clean up
+    { // 5: clean up
         funcName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.cleanUpTestFile"
     }
 ];
