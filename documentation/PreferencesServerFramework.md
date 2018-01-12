@@ -3,12 +3,9 @@
 ### Introduction
 As the name suggests, the purpose of the preferences server framework is to server the user needs and preferences. Only the preferences that are relevant and permitted to the consumer are provided, and they can be provided in the ontology desired by the consumer, given that an ontology (or 'view') has been provided for this.
 
-Currently, the preferences server Framework consist of three components:
-* [The Raw Preferences Server](RawPreferencesServer.md)
+Currently, the preferences server Framework consist of two components:
 * The Ontology Handler (see below)
 * [The Preferences Server](PreferencesServer.md)
-
-_The raw preferences server_ is a very basic service, sitting in front of a database of records (eg. couchDB). It stores and serves the full, unmodified preferences sets, keyed by the ontology they are in. A raw preferences set can be stored in multiple ontologies (i.e. one part can be in ISO-24751, another in the 'flat' format). The raw preferences document consist of containers with preferences, each keyed by the format in which they are in. Since the raw preferences server exposes _all_ the users needs and preferences, this should generally not be public fracing without a preferences server in front of it to filter the settings according to permissions and views. For a full description of the Raw Preferences server, see: [The Raw Preferences Server](RawPreferencesServer.md)
 
 _The Ontology Handler_ is the component containing the functionality for translating between one ontology (or 'view') and another. Certain consumers prefer viewing the preferences in one view more suitable for them (i.e. ISO-24751) and the Ontology Handler is able to translate these settings (given that an ontology transformation has been provided) from one view to another.
 
@@ -32,8 +29,3 @@ Component with the ability of performing various operations on preferences sets 
 
 #### Ontologies:
 The ontology transform specs are stored in the `testData/ontologies` folder of the `universal` repository. The filename of a transformation spec file should describe what transformation that file contains. More specifically, a filename for ontology transformations should have the following format: <from>-<to>.json where <from> should be replaced with the name of the ontology that is expected as the input model, and <to> should be the name of the ontology that will be output from the transformation.
-
-
-
-
-

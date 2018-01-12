@@ -9,7 +9,6 @@ This mean that:
 ** flowManager
 ** preferencesServer
 ** OntologyHandler
-** rawPreferencesServer (reading preferences from file)
 ** solutionsRegistry (reading registry from file)
 ** deviceReporter (reading device context info from file)
 ** matchMakerFramework

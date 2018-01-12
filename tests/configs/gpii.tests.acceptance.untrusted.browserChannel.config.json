@@ -19,11 +19,6 @@
                 "target": "{that flowManager solutionsRegistryDataSource}.options.path",
                 "priority": "after:flowManager.development.solutions"
             },
-            "browserChannel.tests.rawPreferences": {
-                "record": "%flowManager/test/data/%gpiiKey.json",
-                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
-                "priority": "after:development.rawPreferencesDataSource"
-            },
             "browserChannel.tests.osReporting": {
                 "record": {
                     "funcName": "gpii.tests.flowManager.browserChannel.reportPlatform"

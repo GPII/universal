@@ -54,31 +54,6 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
                 request: "{loginRequest}"
             }
         }]
-    }, {
-        name: "Login fails due to malformed preference set and reports to login",
-        expect: 4,
-        gpiiKey: "malformed",
-
-        "distributeOptions": {
-            "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%gpiiKey.jsonx",
-                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
-                "priority": "after:development.rawPreferencesDataSource"
-            }
-        },
-
-        sequence: [{
-            func: "{loginRequest}.send"
-        }, {
-            event: "{loginRequest}.events.onComplete",
-            listener: "kettle.test.assertErrorResponse",
-            args: {
-                message: "Received 500 error when logging in with corrupt preferences",
-                errorTexts: ["Error when retrieving preferences", "Parse error on line 5"],
-                string: "{arguments}.0",
-                request: "{loginRequest}"
-            }
-        }]
     }];
 
 gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {

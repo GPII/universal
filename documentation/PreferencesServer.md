@@ -304,4 +304,3 @@ There are two important things to note here:
 ### Other relevant documentation:
 
 * [The Preferences Server Framework](PreferencesServerFramework.md)
-* [The Raw Preferences Server](RawPreferencesServer.md)

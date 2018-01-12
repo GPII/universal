@@ -30,7 +30,6 @@ require("./gpii/node_modules/lifecycleActions");
 require("./gpii/node_modules/flowManager");
 require("./gpii/node_modules/settingsHandlers");
 require("./gpii/node_modules/preferencesServer");
-require("./gpii/node_modules/rawPreferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");

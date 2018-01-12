@@ -15,5 +15,4 @@ It uses a multi-server Kettle configuration to run the Untrusted Flow Manager an
 *** flowManager (cloud based oauth2)
 *** canopyMatchMaker
 *** solutionsRegistry
-*** rawPreferencesServer
 *** preferencesServer

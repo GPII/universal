@@ -12,11 +12,6 @@
                 "record": "%universal/testData/deviceReporter/acceptanceTests/linux_builtIn.json",
                 "target": "{that localConfig deviceReporter installedSolutionsDataSource}.options.path",
                 "priority": "after:development.installedSolutionsPath"
-            },
-            "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%gpiiKey.json",
-                "target": "{that cloudBasedConfig rawPreferencesServer rawPreferencesDataSource}.options.path",
-                "priority": "after:development.rawPreferencesDataSource"
             }
         }
     },
