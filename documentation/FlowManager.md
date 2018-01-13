@@ -186,8 +186,13 @@ OR if the last login/logout process for <myGpiiKey> finished less than 5 seconds
 }
 ```
 
+<<<<<<< HEAD
 #### Update settings on Online Flowmanager (PUT /:gpiiKey/untrusted-settings)
 * **description**: Update preferences on the online flowmanager
+=======
+#### Update settings on Online Flowmanager (PUT /:token/untrusted-settings)
+* **description**: Merge the incoming preferences with the existing user preferences and update the merged preferences on the online flowmanager.
+>>>>>>> GPII-2558
 * **Supported modes**: Cloud-based (online) flowmanager only
 * **route:** `/:gpiiKey/untrusted-settings` where:
     - `:gpiiKey` should be the GPII key of the user for which the settings are updated

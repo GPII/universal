@@ -7,8 +7,6 @@ compliance with this License.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 "use strict";
@@ -81,7 +79,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.cleanUpTestFile = function () {
 gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse = function (responseText, expectedKey, expectedMsg, expectedPrefsSet) {
     var response = JSON.parse(responseText);
     jqUnit.assertEquals("The returned key in the response is correct", expectedKey, response.gpiiKey);
-    jqUnit.assertDeepEq("The returned preferences set in the response is correct", expectedMsg, response.message);
+    jqUnit.assertDeepEq("The returned message in the response is correct", expectedMsg, response.message);
 
     var filePath = gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir + expectedKey + ".json";
     var savedPrefs = require(filePath);
@@ -108,25 +106,28 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.requests", {
 // For successful workflows that update user settings from /untrusted-settings endpoint
 // using access tokens granted by /access_token endpoint
 gpii.tests.cloud.oauth2.untrustedSettingsPut.mainSequence = [
-    { // 0
+    { // 0: create the test file
+        funcName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.createTestFile"
+    },
+    { // 1
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
-    { // 1
+    { // 2
         event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
-    { // 2
+    { // 3
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
         args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
     },
-    { // 3
+    { // 4
         event: "{untrustedSettingsPutRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse",
         args: ["{arguments}.0", "{testCaseHolder}.options.key", "{testCaseHolder}.options.expectedMsg", "{testCaseHolder}.options.expectedPrefsSet"]
     },
-    { // 4: clean up
+    { // 5: clean up
         funcName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.cleanUpTestFile"
     }
 ];
@@ -176,14 +177,31 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untruste
 });
 
 // 3. rejected by requesting /untrusted-settings with a key that is not associated with any preferences set
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutKeyWithoutPrefs", {
-    gradeNames: ["gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.mainSequence"],
-    truncateAt: 3,
-    finalRecord: {
+gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutKeyWithoutPrefs = [
+    {
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
+        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+    },
+    {
+        event: "{accessTokenRequest}.events.onComplete",
+        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse",
+        args: ["{arguments}.0", "{accessTokenRequest}"]
+    },
+    {
+        funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
+        args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
+    },
+    {
         event: "{untrustedSettingsPutRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
         args: ["{arguments}.0", "{untrustedSettingsPutRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
+];
+
+fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutKeyWithoutPrefs", {
+    gradeNames: ["gpii.test.disruption"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsPut.requests",
+    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutKeyWithoutPrefs"
 });
 
 // Main tests that contain all test cases
@@ -252,8 +270,6 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
         }]
     }
 ];
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.createTestFile();
 
 fluid.each(gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests, function (oneTest) {
     gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
