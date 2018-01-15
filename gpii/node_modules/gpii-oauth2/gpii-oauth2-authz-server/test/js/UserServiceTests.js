@@ -48,11 +48,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.userService.expected = {
         invalidUser: {
             isError: true,
-            msg: "Invalid user name and password combination",
+            message: "Invalid user name and password combination",
             statusCode: 401
         },
         user: {
             "id": "user-1",
+            "type": "user",
             "name": "alice",
             "password": "a",
             "defaultGpiiToken": "alice_gpii_token"

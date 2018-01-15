@@ -1,5 +1,5 @@
 /*!
-Copyright 2015 OCAD university
+Copyright 2015-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -50,12 +50,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.tests.oauth2.authorizationService.emptyDataStore", {
         gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
         rawModules: [{
-            name: "Test getUnauthorizedClientsForGpiiToken()",
+            name: "Test getUserUnauthorizedClientsForGpiiToken()",
             tests: [{
-                name: "getUnauthorizedClientsForGpiiToken() returns undefined with an empty dataStore",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns undefined with an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
@@ -112,21 +112,38 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         "userId": "user-4"
     }, {
         "_id": "client-1",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client A",
         "oauth2ClientId": "client_id_A",
         "oauth2ClientSecret": "client_secret_A",
         "redirectUri": "http://example.com/callback_A"
     }, {
         "_id": "client-2",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Client B",
         "oauth2ClientId": "client_id_B",
         "oauth2ClientSecret": "client_secret_B",
         "redirectUri": "http://example.com/callback_B"
     }, {
-        "_id": "authDecision-1",
-        "type": "authDecision",
+        "_id": "client-3",
+        "type": "gpiiAppInstallationClient",
+        "name": "AJC1",
+        "oauth2ClientId": "client_id_AJC1",
+        "oauth2ClientSecret": "client_secret_AJC1",
+        "userId": "user-1"
+    }, {
+        "_id": "client-4",
+        "type": "onboardedSolutionClient",
+        "name": "Windows Magnifier",
+        "solutionId": "net.gpii.windows.magnifier"
+    }, {
+        "_id": "client-5",
+        "type": "onboardedSolutionClient",
+        "name": "Jaws",
+        "solutionId": "net.gpii.jaws"
+    }, {
+        "_id": "auth-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "bob_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -136,8 +153,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-2",
-        "type": "authDecision",
+        "_id": "auth-2",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -147,8 +164,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-3",
-        "type": "authDecision",
+        "_id": "auth-3",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "carol_gpii_token",
         "clientId": "client-2",
         "redirectUri": "",
@@ -158,8 +175,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": false
     }, {
-        "_id": "authDecision-4",
-        "type": "authDecision",
+        "_id": "auth-4",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "dave_gpii_token",
         "clientId": "client-1",
         "redirectUri": "",
@@ -169,8 +186,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         },
         "revoked": true
     }, {
-        "_id": "authDecision-5",
-        "type": "authDecision",
+        "_id": "auth-5",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "dave_gpii_token",
         "clientId": "client-2",
         "redirectUri": "",
@@ -179,82 +196,176 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             "": true
         },
         "revoked": false
+    }, {
+        "_id": "auth-6",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "carol_gpii_token",
+        "clientId": "client-4",
+        "redirectUri": "",
+        "accessToken": "carol_C_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "auth-7",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "carol_gpii_token",
+        "clientId": "client-5",
+        "redirectUri": "",
+        "accessToken": "carol_D_access_token",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "auth-8",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "bob_gpii_token",
+        "clientId": "client-4",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "_id": "auth-9",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "dave_gpii_token",
+        "clientId": "client-5",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": true
+    }, {
+        "_id": "auth-10",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
+        "gpiiToken": "alice_gpii_token",
+        "accessToken": "gpii-app-installation-token-2",
+        "revoked": false,
+        "timestampCreated": new Date(new Date().getTime() - 60 * 1000).toISOString(),
+        "timestampRevoked": null,
+        "timestampExpires": new Date(new Date().getTime() + 40 * 1000).toISOString()
+    }, {
+        "_id": "auth-11",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
+        "gpiiToken": "alice_gpii_token",
+        "accessToken": "gpii-app-installation-token-3",
+        "revoked": false,
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": "2017-05-29T19:54:00.000Z",
+        "timestampExpires": "2017-05-29T20:54:00.000Z"
+    }, {
+        "_id": "auth-12",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-3",
+        "gpiiToken": "alice_gpii_token",
+        "accessToken": "gpii-app-installation-token-1",
+        "revoked": false,
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "2017-05-30T17:54:00.000Z"
     }];
 
     // All expected results
     gpii.tests.oauth2.authorizationService.expected = {
         invalidUser: {
             isError: true,
-            msg: "Invalid user name and password combination",
+            message: "Invalid user name and password combination",
             statusCode: 401
         },
-        clientsForAlice: [{
-            "clientName": "Client A",
-            "oauth2ClientId": "client_id_A"
-        }, {
-            "clientName": "Client B",
-            "oauth2ClientId": "client_id_B"
-        }],
-        unauthorizedClientsForBob: [{
-            "clientName": "Client B",
-            "oauth2ClientId": "client_id_B"
-        }],
-        revokedClientsForDave: [{
-            "clientName": "Client A",
-            "oauth2ClientId": "client_id_A"
-        }]
+        clientsForAlice: {
+            "webPrefsConsumerClient": [{
+                "clientName": "Client A",
+                "oauth2ClientId": "client_id_A"
+            }, {
+                "clientName": "Client B",
+                "oauth2ClientId": "client_id_B"
+            }],
+            "onboardedSolutionClient": [{
+                "clientName": "Windows Magnifier",
+                "solutionId": "net.gpii.windows.magnifier"
+            }, {
+                "clientName": "Jaws",
+                "solutionId": "net.gpii.jaws"
+            }]
+        },
+        unauthorizedClientsForBob: {
+            "webPrefsConsumerClient": [{
+                "clientName": "Client B",
+                "oauth2ClientId": "client_id_B"
+            }],
+            "onboardedSolutionClient": [{
+                "clientName": "Jaws",
+                "solutionId": "net.gpii.jaws"
+            }]
+        },
+        revokedClientsForDave: {
+            "webPrefsConsumerClient": [{
+                "clientName": "Client A",
+                "oauth2ClientId": "client_id_A"
+            }],
+            "onboardedSolutionClient": [{
+                "clientName": "Windows Magnifier",
+                "solutionId": "net.gpii.windows.magnifier"
+            }, {
+                "clientName": "Jaws",
+                "solutionId": "net.gpii.jaws"
+            }]
+        }
     };
 
-    fluid.defaults("gpii.tests.oauth2.authorizationService.withData", {
+    fluid.defaults("gpii.tests.oauth2.authorizationService.withData.getUserUnauthorizedClientsForGpiiToken", {
         gradeNames: ["gpii.tests.oauth2.authorizationService.testEnvironment"],
         pouchData: gpii.tests.oauth2.authorizationService.testData,
         rawModules: [{
-            name: "Test getUnauthorizedClientsForGpiiToken()",
+            name: "Test getUserUnauthorizedClientsForGpiiToken()",
             tests: [{
-                name: "getUnauthorizedClientsForGpiiToken() returns undefined for unknown token",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns undefined for unknown token",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["unknown"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["unknown"], "{that}"]
                 }, {
                     listener: "jqUnit.assertUndefined",
                     args: ["undefined should be received with an empty data store", "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns all clients for user with no authorizations",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns all clients for user with no authorizations",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["alice_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["2 client information should be received", gpii.tests.oauth2.authorizationService.expected.clientsForAlice, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns unauthorized clients for user with authorization",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns unauthorized clients for user with authorization",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["bob_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["bob_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The unauthorized client information should be received", gpii.tests.oauth2.authorizationService.expected.unauthorizedClientsForBob, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns empty list for user with all clients authorized",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns empty list for user with all clients authorized",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["carol_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["carol_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
-                    args: ["An empty array should be received", [], "{arguments}.0"],
+                    args: ["An empty object should be received", {}, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }, {
-                name: "getUnauthorizedClientsForGpiiToken() returns clients with revoked authorizations",
+                name: "getUserUnauthorizedClientsForGpiiToken() returns clients with revoked authorizations",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{authorizationService}.getUnauthorizedClientsForGpiiToken", ["dave_gpii_token"], "{that}"]
+                    args: ["{authorizationService}.getUserUnauthorizedClientsForGpiiToken", ["dave_gpii_token"], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["The revoked client information should be received", gpii.tests.oauth2.authorizationService.expected.revokedClientsForDave, "{arguments}.0"],

@@ -1,7 +1,7 @@
 /**
 GPII DB Data Store Tests
 
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -82,45 +82,63 @@ gpii.tests.dbDataStore.verifyFetched = function (response, expected) {
     jqUnit.assertLeftHand("The data is saved successfully", expected, response);
 };
 
+gpii.tests.dbDataStore.verifyFetchedGpiiAppInstallationAuthorization = function (response, expected) {
+    gpii.tests.dbDataStore.verifyFetched(response, expected);
+    jqUnit.assertFalse("The \"revoked\" value has been set to false", response.revoked);
+    jqUnit.assertNotUndefined("The \"timestampCreated\" value has been created", response.timestampCreated);
+    jqUnit.assertNull("The \"timestampRevoked\" value has been set to null", response.timestampRevoked);
+};
+
 gpii.tests.dbDataStore.testData = {
     user1: {
         "id": "user-1",
+        "type": "user",
         "name": "chromehc",
         "password": "chromehc_password",
         "defaultGpiiToken": "chrome_high_contrast"
     },
     tokenChromehcDefault: {
         "id": "gpiiToken-1",
+        "type": "gpiiToken",
         "userId": "user-1",
         "gpiiToken": "chrome_high_contrast"
     },
+    anonymousToken: {
+        "id": "gpiiToken-anonymous",
+        "type": "gpiiToken",
+        "userId": null,
+        "gpiiToken": "anonymous_gpii_token"
+    },
     client1: {
         "id": "client-1",
+        "type": "webPrefsConsumerClient",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
         "redirectUri": "http://localhost:3002/authorize_callback"
     },
+    client3: {
+        "id": "client-3",
+        "type": "onboardedSolutionClient",
+        "name": "Windows Magnifier",
+        "solutionId": "net.gpii.windows.magnifier"
+    },
     allClients: [{
         "id": "client-1",
+        "type": "webPrefsConsumerClient",
         "name": "Service A",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_1",
         "redirectUri": "http://localhost:3002/authorize_callback"
     }, {
-        "id": "client-2",
-        "name": "First Discovery",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "allowAddPrefs": true
-    }, {
+        "id": "client-3",
+        "type": "onboardedSolutionClient",
         "name": "Windows Magnifier",
-        "oauth2ClientId": "net.gpii.windows.magnifier",
-        "oauth2ClientSecret": "client_secret_windows_magnifier",
-        "id": "client-3"
+        "solutionId": "net.gpii.windows.magnifier"
     }],
-    authDecision1: {
-        "id": "authDecision-1",
+    authorization1: {
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -130,7 +148,17 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
-    authDecisionToCreate: {
+    authorization2: {
+        "id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-3",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    },
+    webPrefsConsumerAuthorizationToCreate: {
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-2",
         "redirectUri": false,
@@ -140,8 +168,9 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
-    authDecisionToUpdate: {
-        "id": "authDecision-1",
+    webPrefsConsumerAuthorizationToUpdate: {
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "a test url",
@@ -152,8 +181,16 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": false
     },
-    revokedAuthDecision1: {
-        "id": "authDecision-1",
+    onboardedSolutionAuthorizationToCreate: {
+        "gpiiToken": "chrome_high_contrast_dark",
+        "clientId": "client-3",
+        "selectedPreferences": {
+            "": true
+        }
+    },
+    revokedAuthorization1: {
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -163,8 +200,18 @@ gpii.tests.dbDataStore.testData = {
         },
         "revoked": true
     },
-    AuthDecisionsByGpiiToken: [{
-        "id": "authDecision-1",
+    UserAuthorizationsByGpiiToken: [{
+        "id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
+        "gpiiToken": "chrome_high_contrast",
+        "clientId": "client-3",
+        "selectedPreferences": {
+            "": true
+        },
+        "revoked": false
+    }, {
+        "id": "webPrefsConsumerAuthorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "chrome_high_contrast",
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
@@ -173,89 +220,148 @@ gpii.tests.dbDataStore.testData = {
             "": true
         },
         "revoked": false
-    }, {
-        "id": "authDecision-2",
+    }],
+    UserAuthorizationsByGpiiTokenAfterRevoke: [{
+        "id": "onboardedSolutionAuthorization-1",
+        "type": "onboardedSolutionAuthorization",
         "gpiiToken": "chrome_high_contrast",
-        "clientId": "client-2",
-        "redirectUri": false,
-        "accessToken": "chrome_high_contrast_access_token_client_2",
+        "clientId": "client-3",
         "selectedPreferences": {
-            "textFont": "arial"
+            "": true
         },
         "revoked": false
     }],
-    AuthDecisionsByGpiiTokenAfterRevoke: [{
-        "id": "authDecision-2",
-        "gpiiToken": "chrome_high_contrast",
-        "clientId": "client-2",
-        "redirectUri": false,
-        "accessToken": "chrome_high_contrast_access_token_client_2",
-        "selectedPreferences": {
-            "textFont": "arial"
-        },
-        "revoked": false
-    }],
-    findAuthByCode1: {
+    findWebPrefsConsumerAuthorizationByAuthCode1: {
         "clientId": "client-1",
         "redirectUri": "http://org.chrome.cloud4chrome/the-client%27s-uri/",
         "accessToken": "chrome_high_contrast_access_token"
     },
-    findAuthByCodeNew: {
+    findWebPrefsConsumerAuthorizationByAuthCodeNew: {
         "clientId": "client-2",
         "redirectUri": false,
         "accessToken": "client2_new_access_token"
     },
-    findAuthorizedClientsByGpiiToken: [{
-        "authDecisionId": "authDecision-1",
-        "oauth2ClientId": "org.chrome.cloud4chrome",
-        "clientName": "Service A",
-        "selectedPreferences": {
-            "": true
-        }
-    }, {
-        "authDecisionId": "authDecision-2",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "clientName": "First Discovery",
-        "selectedPreferences": {
-            "textFont": "arial"
-        }
-    }],
-    findAuthorizedClientsByGpiiTokenAfterRevoke: [{
-        "authDecisionId": "authDecision-2",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "clientName": "First Discovery",
-        "selectedPreferences": {
-            "textFont": "arial"
-        }
-    }],
-    findAuthByAccessToken: {
-        userGpiiToken: "chrome_high_contrast",
-        oauth2ClientId: "org.chrome.cloud4chrome",
-        selectedPreferences: {
-            "": true
+    findUserAuthorizedClientsByGpiiToken: {
+        "webPrefsConsumerClient": [{
+            "authorizationId": "webPrefsConsumerAuthorization-1",
+            "oauth2ClientId": "org.chrome.cloud4chrome",
+            "clientName": "Service A",
+            "selectedPreferences": {
+                "": true
+            }
+        }],
+        "onboardedSolutionClient": [{
+            "authorizationId": "onboardedSolutionAuthorization-1",
+            "solutionId": "net.gpii.windows.magnifier",
+            "clientName": "Windows Magnifier",
+            "selectedPreferences": {
+                "": true
+            }
+        }]
+    },
+    findUserAuthorizedClientsByGpiiTokenAfterRevoke: {
+        "onboardedSolutionClient": [{
+            "authorizationId": "onboardedSolutionAuthorization-1",
+            "solutionId": "net.gpii.windows.magnifier",
+            "clientName": "Windows Magnifier",
+            "selectedPreferences": {
+                "": true
+            }
+        }]
+    },
+    findWebPrefsConsumerAuthorizationByAccessToken: {
+        accessToken: "chrome_high_contrast_access_token",
+        client: {
+            id: "client-1",
+            type: "webPrefsConsumerClient",
+            name: "Service A",
+            oauth2ClientId: "org.chrome.cloud4chrome",
+            oauth2ClientSecret: "client_secret_1",
+            redirectUri: "http://localhost:3002/authorize_callback"
+        },
+        authorization: {
+            id: "webPrefsConsumerAuthorization-1",
+            type: "webPrefsConsumerAuthorization",
+            gpiiToken: "chrome_high_contrast",
+            clientId: "client-1",
+            redirectUri: "http://org.chrome.cloud4chrome/the-client%27s-uri/",
+            accessToken: "chrome_high_contrast_access_token",
+            selectedPreferences: { "": true },
+            revoked: false
         }
     },
-    clientCredentialsToken1: {
-        "id": "clientCredentialsToken-1",
+    privilegedPrefsCreatorAuthorization1: {
+        "id": "privilegedPrefsCreatorAuthorization-1",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",
-        "allowAddPrefs": true,
         "revoked": false
     },
-    clientCredentialsTokenAfterRevoke1: {
-        "id": "clientCredentialsToken-1",
+    privilegedPrefsCreatorAuthorizationAfterRevoke1: {
+        "id": "privilegedPrefsCreatorAuthorization-1",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-2",
         "accessToken": "firstDiscovery_access_token",
-        "allowAddPrefs": true,
         "revoked": true
     },
-    clientCredentialsTokenToCreate: {
-        "clientId": "client-1",
-        "accessToken": "chrome_client_credentials_access_token",
-        "allowAddPrefs": true
+    privilegedPrefsCreatorAuthorizationToCreate: {
+        "clientId": "client-5",
+        "accessToken": "chrome_client_credentials_access_token"
     },
-    findAuthByClientCredentialsAccessToken: {
-        oauth2ClientId: "net.gpii.prefsEditors.firstDiscovery",
-        allowAddPrefs: true
+    findPrivilegedPrefsCreatorAuthorizationByAccessToken: {
+        "accessToken": "firstDiscovery_access_token",
+        "client": {
+            "id": "client-2",
+            "type": "privilegedPrefsCreatorClient",
+            "name": "First Discovery",
+            "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
+            "oauth2ClientSecret": "client_secret_firstDiscovery"
+        },
+        "authorization": {
+            "id": "privilegedPrefsCreatorAuthorization-1",
+            "type": "privilegedPrefsCreatorAuthorization",
+            "clientId": "client-2",
+            "accessToken": "firstDiscovery_access_token",
+            "revoked": false
+        }
+    },
+    gpiiAppInstallationAuthorization1: {
+        "id": "gpiiAppInstallationAuthorization-1",
+        "type": "gpiiAppInstallationAuthorization",
+        "clientId": "client-4",
+        "gpiiToken": "chrome_high_contrast",
+        "accessToken": "gpii-app-installation-token-1",
+        "revoked": false,
+        "timestampCreated": "2017-05-29T17:54:00.000Z",
+        "timestampRevoked": null,
+        "timestampExpires": "3020-05-30T17:54:00.000Z"
+    },
+    gpiiAppInstallationAuthorizationToCreate: {
+        "clientId": "client-1",
+        "gpiiToken": "chrome_high_contrast",
+        "accessToken": "gpii-app-installation-token-1",
+        "timestampExpires": "3020-05-29T17:54:00.000Z"
+    },
+    findGpiiAppInstallationAuthorizationByAccessToken: {
+        "accessToken": "gpii-app-installation-token-1",
+        "client": {
+            "id": "client-4",
+            "type": "gpiiAppInstallationClient",
+            "name": "AJC-Bakersfield",
+            "oauth2ClientId": "net.gpii.ajc.bakersfield",
+            "oauth2ClientSecret": "client_secret_ajc_bakersfield",
+            "userId": "user-1"
+        },
+        "authorization": {
+            "id": "gpiiAppInstallationAuthorization-1",
+            "type": "gpiiAppInstallationAuthorization",
+            "clientId": "client-4",
+            "gpiiToken": "chrome_high_contrast",
+            "accessToken": "gpii-app-installation-token-1",
+            "revoked": false,
+            "timestampCreated": "2017-05-29T17:54:00.000Z",
+            "timestampRevoked": null,
+            "timestampExpires": "3020-05-30T17:54:00.000Z"
+        }
     }
 };

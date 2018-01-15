@@ -20,8 +20,38 @@
         "userId": "user-2"
     },
     {
+        "_id": "gpiiToken-2",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome2",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-3",
+        "type": "gpiiToken",
+        "gpiiToken": "chrome_and_firefox",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-4",
+        "type": "gpiiToken",
+        "gpiiToken": "testUser1",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-5",
+        "type": "gpiiToken",
+        "gpiiToken": "sammy",
+        "userId": null
+    },
+    {
+        "_id": "gpiiToken-6",
+        "type": "gpiiToken",
+        "gpiiToken": "context1",
+        "userId": null
+    },
+    {
         "_id": "client-1",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Cloud4Chrome",
         "oauth2ClientId": "org.chrome.cloud4chrome",
         "oauth2ClientSecret": "client_secret_chrome",
@@ -29,7 +59,7 @@
     },
     {
         "_id": "client-2",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Easit4all",
         "oauth2ClientId": "com.bdigital.easit4all",
         "oauth2ClientSecret": "client_secret_easit4all",
@@ -37,62 +67,70 @@
     },
     {
         "_id": "client-3",
-        "type": "client",
+        "type": "onboardedSolutionClient",
         "name": "GNOME Magnifier",
-        "oauth2ClientId": "org.gnome.desktop.a11y.magnifier",
-        "oauth2ClientSecret": false,
-        "redirectUri": false
+        "solutionId": "org.gnome.desktop.a11y.magnifier"
     },
     {
         "_id": "client-4",
-        "type": "client",
+        "type": "onboardedSolutionClient",
         "name": "GNOME Desktop",
-        "oauth2ClientId": "org.gnome.desktop.interface",
-        "oauth2ClientSecret": false,
-        "redirectUri": false
+        "solutionId": "org.gnome.desktop.interface"
     },
     {
         "_id": "client-5",
-        "type": "client",
+        "type": "privilegedPrefsCreatorClient",
         "name": "First Discovery",
         "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery",
-        "allowAddPrefs": true
+        "oauth2ClientSecret": "client_secret_firstDiscovery"
     },
     {
         "_id": "client-6",
-        "type": "client",
+        "type": "webPrefsConsumerClient",
         "name": "Cloud4ClientCredentials",
-        "oauth2ClientId": "client_for_client_credentials",
-        "oauth2ClientSecret": "client_secret_for_client_credentials",
-        "allowAddPrefs": true
+        "oauth2ClientId": "wrong_client_for_client_credentials",
+        "oauth2ClientSecret": "wrong_client_secret_for_client_credentials"
     },
     {
-        "_id": "authDecision-1",
-        "type": "authDecision",
+        "_id": "client-7",
+        "type": "gpiiAppInstallationClient",
+        "name": "Bakersfield AJC - PC1",
+        "oauth2ClientId": "Bakersfield-AJC-client-id",
+        "oauth2ClientSecret": "Bakersfield-AJC-client-secret",
+        "userId": "user-1"
+    },
+    {
+        "_id": "client-8",
+        "type": "gpiiAppInstallationClient",
+        "name": "Pilot computers",
+        "oauth2ClientId": "pilot-computer",
+        "oauth2ClientSecret": "pilot-computer-secret",
+        "userId": "user-1"
+    },
+    {
+        "_id": "authorization-1",
+        "type": "webPrefsConsumerAuthorization",
         "gpiiToken": "alice_gpii_token",
         "clientId": "client-2",
         "redirectUri": false,
-        "accessToken": "alice_eassit_access_token",
+        "accessToken": "alice_easit_access_token",
         "selectedPreferences": {
             "": true
         },
         "revoked": false
     },
     {
-        "_id": "clientCredentialsToken-1",
-        "type": "clientCredentialsToken",
+        "_id": "privilegedPrefsCreatorAuthorization-1",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-99",
         "accessToken": "non_existent_client",
-        "revoked": false,
-        "allowAddPrefs": true
+        "revoked": false
     },
     {
-        "_id": "clientCredentialsToken-2",
-        "type": "clientCredentialsToken",
+        "_id": "privilegedPrefsCreatorAuthorization-2",
+        "type": "privilegedPrefsCreatorAuthorization",
         "clientId": "client-6",
         "accessToken": "not_allowed_to_add_prefs",
-        "revoked": false,
-        "allowAddPrefs": false
+        "revoked": true
     }
 ]
