@@ -35,10 +35,10 @@ gpii.tests.payloadSize.testDefs = [{
     name: "Payload size limit tests > 100kb",
     expect: 2,
     config: {
-        configName: "gpii.tests.acceptance.localInstall.config",
-        configPath: "%universal/tests/configs"
+        configName: "gpii.config.development.local",
+        configPath: "%universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
     gpiiKey: "giant",
 
     sequence: [{
@@ -54,4 +54,7 @@ gpii.tests.payloadSize.testDefs = [{
     }]
 }];
 
-kettle.test.bootstrapServer(fluid.copy(gpii.tests.payloadSize.testDefs));
+kettle.test.bootstrapServer(fluid.transform(gpii.tests.payloadSize.testDefs, function (testDef) {
+    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
+    return testDef;
+}));

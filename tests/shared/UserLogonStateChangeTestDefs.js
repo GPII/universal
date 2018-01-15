@@ -113,10 +113,10 @@ gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             config: {
-                configName: "gpii.config.development.all.local",
+                configName: "gpii.config.development.local",
                 configPath: "%universal/gpii/configs"
             },
-            gradeNames: [ "gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux" ],
+            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
             gpiiKey: gpii.tests.userLogonHandling.gpiiKey
         }, testDef);
     });

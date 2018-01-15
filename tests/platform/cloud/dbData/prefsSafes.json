@@ -2002,5 +2002,57 @@
         },
         "timestampCreated": "2018-01-12T14:32:37.829Z",
         "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-61",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/common/fontSize": 24,
+                            "http://registry.gpii.net/common/foregroundColor": "white"
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-62",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/common/setting1": 12 ,
+                            "http://registry.gpii.net/common/setting2": "white",
+                            "http://registry.gpii.net/common/setting3": "black",
+                            "http://registry.gpii.net/common/setting4": ["Comic Sans"],
+                            "http://registry.gpii.net/common/setting5": "sans serif",
+                            "http://registry.gpii.net/common/setting6": false
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
     }
 ]

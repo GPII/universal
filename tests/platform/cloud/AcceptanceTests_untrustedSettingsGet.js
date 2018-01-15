@@ -7,8 +7,6 @@ compliance with this License.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 
-The research leading to these results has received funding from the European Union's
-Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
 "use strict";
@@ -76,29 +74,29 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.requests", {
 // For successful workflows that request user settings from /untrusted-settings endpoint
 // using access tokens granted by /access_token endpoint
 gpii.tests.cloud.oauth2.untrustedSettingsGet.mainSequence = [
-    { // 0
+    {
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
-    { // 1
+    {
         event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
-    { // 2
+    {
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest_untrustedSettings}", "{testCaseHolder}.options"]
     },
-    { // 3
+    {
         event: "{accessTokenRequest_untrustedSettings}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyRefetchedAccessToken",
         args: ["{arguments}.0", "{accessTokenRequest_untrustedSettings}", "{accessTokenRequest}"]
     },
-    { // 4
+    {
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
         args: ["{untrustedSettingsRequest}", "{accessTokenRequest_untrustedSettings}.access_token"]
     },
-    { // 5
+    {
         event: "{untrustedSettingsRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyPayloadMatchMakerOutput",
         args: ["{arguments}.0", "{testCaseHolder}.options.expectedMatchMakerOutput"]
@@ -112,16 +110,24 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.mainSequ
 });
 
 // For failed test cases that are rejected by /access_token endpoint
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode", {
-    gradeNames: ["gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.mainSequence"],
-    truncateAt: 1,
-    expect: 1,
-    recordName: "accessTokenForm",
-    finalRecord: {
+gpii.tests.cloud.oauth2.untrustedSettingsGet.statusCode = [
+    {
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
+        args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
+    },
+    {
         event: "{accessTokenRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
         args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
+];
+
+fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode", {
+    gradeNames: ["gpii.test.disruption"],
+    recordName: "accessTokenForm",
+    expect: 1,
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsGet.requests",
+    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.statusCode"
 });
 
 gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [

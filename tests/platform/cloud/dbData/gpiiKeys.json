@@ -660,6 +660,28 @@
         "timestampUpdated": null
     },
     {
+        "_id": "untrustedSettingsUser",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-61",
+        "prefsSetName": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "testUser1",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": "prefsSafe-62",
+        "prefsSetName": "gpii-default",
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    },
+    {
         "_id": "alice_gpii_key",
         "type": "gpiiKey",
         "schemaVersion": "0.1",
@@ -683,17 +705,6 @@
     },
     {
         "_id": "chrome_and_firefox",
-        "type": "gpiiKey",
-        "schemaVersion": "0.1",
-        "prefsSafeId": null,
-        "prefsSetName": null,
-        "revoked": false,
-        "revokedReason": null,
-        "timestampCreated": "2017-11-21T18:11:22.101Z",
-        "timestampUpdated": null
-    },
-    {
-        "_id": "testUser1",
         "type": "gpiiKey",
         "schemaVersion": "0.1",
         "prefsSafeId": null,

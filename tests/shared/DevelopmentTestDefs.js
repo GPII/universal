@@ -43,10 +43,10 @@ gpii.tests.development.testDefs = [{
     name: "Flow Manager development tests",
     expect: 2,
     config: {
-        configName: "gpii.config.development.all.local",
+        configName: "gpii.config.development.local",
         configPath: "%universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
     gpiiKey: gpii.tests.development.gpiiKey,
 
     sequence: [{
