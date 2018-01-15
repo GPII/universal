@@ -2054,5 +2054,36 @@
         },
         "timestampCreated": "2018-01-12T14:32:37.829Z",
         "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-63",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "name": "Sammy",
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/common/fontSize": 24,
+                            "http://registry.gpii.net/common/foregroundColor": "white",
+                            "http://registry.gpii.net/common/backgroundColor": "black",
+                            "http://registry.gpii.net/common/fontFaceFontName": ["Comic Sans"],
+                            "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
+                            "http://registry.gpii.net/common/magnification": 2.0,
+                            "http://registry.gpii.net/common/tracking": ["mouse"],
+                            "http://registry.gpii.net/common/invertColours": true
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
     }
 ]
