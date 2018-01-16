@@ -7,12 +7,19 @@ It uses a multi-server Kettle configuration to run the Untrusted Flow Manager an
 
 * The Untrusted Flow Manager runs on port 8081
 * The Cloud Based Flow Manager runs on port 8084
+* The pouchDB runs on port 8058
+* The express server for reloading pouchDB data runs on port 8060. The endpoint to reload is http://localhost:8060/reset-pouch
+
 * The following components are running on the local machine:
 ** Untrusted Flow Manager
-*** flowManager (untrusted, browser channel)
 *** deviceReporter
+*** flowManager (untrusted, browser channel)
+
 ** Cloud Based Flow Manager
-*** flowManager (cloud based oauth2)
+*** authServer
 *** canopyMatchMaker
-*** solutionsRegistry
+*** flowManager (cloud based oauth2)
 *** preferencesServer
+*** solutionsRegistry
+
+** Pouch Manager

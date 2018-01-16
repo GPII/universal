@@ -8,7 +8,7 @@
                 "configPath": "%universal/gpii/configs"
             },
             "cloudBasedConfig": {
-                "configName": "gpii.config.cloudBased.development.all.local",
+                "configName": "gpii.config.cloudBased.development",
                 "configPath": "%universal/gpii/configs"
             }
         },
@@ -23,5 +23,8 @@
                 "priority": "after:flowManager.development.matchMakers"
             }
         }
-    }
+    },
+    "mergeConfigs": [
+        "%pouchManager/configs/gpii.pouchManager.config.base.json"
+    ]
 }
