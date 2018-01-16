@@ -390,8 +390,20 @@ gpii.oauth2.dbDataStore.setRevoke = function (data) {
 };
 // ==== End of revokeUserAuthorizedAuthorization()
 
-// Access Token
-// ------------
+// GPII Token
+// ----------
+
+/**
+ * When a GPII token is not associated with any user, the fetched data provides the gpiiToken record
+ * instead of the user record. This function ensures to return a user record.
+ */
+gpii.oauth2.dbDataStore.findUserByGpiiToken = function (findUserByGpiiTokenDataSource, gpiiToken) {
+    var findUserByGpiiTokenPromise = gpii.oauth2.dbDataStore.findRecord(findUserByGpiiTokenDataSource, {gpiiToken: gpiiToken}, "gpiiToken");
+    var mapper = function (record) {
+        return record && record.type === "user" ? record : undefined;
+    };
+    return fluid.promise.map(findUserByGpiiTokenPromise, mapper);
+};
 
 /**
  * The post data process function for implementing findUserAuthorizedClientsByGpiiToken()

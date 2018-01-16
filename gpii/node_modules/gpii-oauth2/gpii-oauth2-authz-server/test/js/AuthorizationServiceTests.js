@@ -272,7 +272,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.authorizationService.expected = {
         invalidUser: {
             isError: true,
-            msg: "Invalid user name and password combination",
+            message: "Invalid user name and password combination",
             statusCode: 401
         },
         clientsForAlice: {
