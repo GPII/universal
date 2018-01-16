@@ -28,10 +28,10 @@ fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 
 gpii.tests.preferencesServerErrorTests.testDefCommon = {
     config: {
-        configName: "gpii.config.development.all.local",
+        configName: "gpii.config.development.local",
         configPath: "%universal/gpii/configs"
     },
-    gradeNames: "gpii.test.common.testCaseHolder"
+    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"]
 };
 
 
@@ -39,7 +39,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
     {
         name: "Login fails due to missing preference set and reports to login",
         expect: 4,
-        gpiiKey: "idontexist",
+        gpiiKey: "idnotexist",
 
         sequence: [{
             func: "{loginRequest}.send"
@@ -48,7 +48,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
             listener: "kettle.test.assertErrorResponse",
             args: {
                 message: "Received 404 error when logging in with missing preferences",
-                errorTexts: ["Error when retrieving preferences", "idontexist"],
+                errorTexts: ["Error when retrieving preferences", "idnotexist"],
                 statusCode: 404,
                 string: "{arguments}.0",
                 request: "{loginRequest}"
@@ -58,6 +58,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
 
 gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {
     return fluid.transform(gpii.tests.preferencesServerErrorTests.testDefs, function (testDef) {
+        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return fluid.extend(true, {}, gpii.tests.preferencesServerErrorTests.testDefCommon, testDef);
     });
 };

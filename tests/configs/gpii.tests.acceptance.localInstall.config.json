@@ -1,4 +1,0 @@
-{
-    "type": "gpii.tests.acceptance.localInstall.config",
-    "mergeConfigs": "%universal/gpii/configs/gpii.config.development.all.local.json"
-}
