@@ -80,7 +80,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         rawModules: [{
             name: "Test grantGpiiAppInstallationAuthorization()",
             tests: [{
-                name: "grantGpiiAppInstallationAuthorization() returns undefined with an empty dataStore",
+                name: "grantGpiiAppInstallationAuthorization() returns an error with an empty dataStore",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
                     args: ["{authorizationService}.grantGpiiAppInstallationAuthorization", ["alice_gpii_token", "client-1"], "{that}"]
