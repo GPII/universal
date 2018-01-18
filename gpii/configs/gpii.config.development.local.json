@@ -1,5 +1,5 @@
 {
-    "type": "gpii.config.development.all.local",
+    "type": "gpii.config.development.local",
     "mergeConfigs": [
         "%deviceReporter/configs/gpii.deviceReporter.config.development.json",
         "%universal/gpii/configs/gpii.config.development.base.local.json"

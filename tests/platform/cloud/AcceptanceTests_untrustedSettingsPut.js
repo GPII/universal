@@ -13,8 +13,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
-    jqUnit = fluid.registerNamespace("jqUnit"),
-    fs = require("fs");
+    jqUnit = fluid.registerNamespace("jqUnit");
 
 fluid.require("%universal");
 
@@ -34,7 +33,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet = {
     }
 };
 
-gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse = function (responseText, expectedGpiiKey, expectedMsg, expectedPrefsSet) {
+gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse = function (responseText, expectedGpiiKey, expectedMsg) {
     var response = JSON.parse(responseText);
     jqUnit.assertEquals("The returned GPII key in the response is correct", expectedGpiiKey, response.gpiiKey);
     jqUnit.assertDeepEq("The returned message in the response is correct", expectedMsg, response.message);
@@ -71,12 +70,12 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.mainSequence = [
     },
     {
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-        args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.expectedPrefsSet"]
+        args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
     },
     {
         event: "{untrustedSettingsPutRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse",
-        args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey", "{testCaseHolder}.options.expectedMsg", "{testCaseHolder}.options.updatedPrefsSet"]
+        args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey", "{testCaseHolder}.options.expectedMsg"]
     }
 ];
 
@@ -159,8 +158,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
             // The options below are required for sending /untrusted-settings
             gpiiKey: "untrustedSettingsUser",
             updatedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet,
-            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success,
-            expectedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet
+            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.mainSequence"
@@ -180,8 +178,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
             // The options below are required for sending /untrusted-settings
             gpiiKey: "chrome_and_firefox",
             updatedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet,
-            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success,
-            expectedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet
+            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.mainSequence"

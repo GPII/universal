@@ -66,13 +66,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
         gpii.start({
             configPath: "%universal/gpii/configs",
-            configName: "gpii.config.development.all.local"
+            configName: "gpii.config.development.local"
         });
 
         configs = gpii.queryConfigs();
         jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
         jqUnit.assertEquals("Default Config should be local install.", configs[0].typeName,
-                "gpii.config.development.all.local");
+                "gpii.config.development.local");
 
         gpii.stop();
         configs = gpii.queryConfigs();
