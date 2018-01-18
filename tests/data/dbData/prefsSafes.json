@@ -2085,5 +2085,170 @@
         },
         "timestampCreated": "2018-01-12T14:32:37.829Z",
         "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-64",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
+                                "screenReaderTTSEnabled": false,
+                                "highContrastEnabled": true,
+                                "invertColours": false,
+                                "magnifierEnabled": true,
+                                "magnification": 2,
+                                "fontSize": "medium",
+                                "simplifier": false,
+                                "highContrastTheme": "white-black"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-65",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/applications/org.mozilla.cloud4firefox": {
+                                "screenReaderTTSEnabled": false,
+                                "highContrastEnabled": true,
+                                "invertColours": false,
+                                "magnifierEnabled": true,
+                                "magnification": 2,
+                                "fontSize": "medium",
+                                "simplifier": false,
+                                "highContrastTheme": "black-white"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-66",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
+                                "screenReaderTTSEnabled": false,
+                                "highContrastEnabled": true,
+                                "invertColours": false,
+                                "magnifierEnabled": true,
+                                "magnification": 2,
+                                "fontSize": "medium",
+                                "simplifier": false,
+                                "highContrastTheme": "white-black"
+                            },
+                            "http://registry.gpii.net/applications/org.mozilla.cloud4firefox": {
+                                "screenReaderTTSEnabled": false,
+                                "highContrastEnabled": true,
+                                "invertColours": false,
+                                "magnifierEnabled": true,
+                                "magnification": 2,
+                                "fontSize": "medium",
+                                "simplifier": false,
+                                "highContrastTheme": "black-white"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-67",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "name": "Larger 125%",
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/common/DPIScale": 1.25,
+                            "http://registry.gpii.net/common/cursorSize": 1.0,
+                            "http://registry.gpii.net/common/supportTool": ["dictionary"]
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
+    },
+    {
+        "_id": "prefsSafe-68",
+        "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": null,
+        "password": null,
+        "email": null,
+        "preferences": {
+            "flat": {
+                "name": "Dark & Larger 175%",
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/common/cursorSize": 1.0,
+                            "http://registry.gpii.net/common/DPIScale": 1.75,
+                            "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
+                                "http://registry.gpii.net/common/highContrastEnabled": true,
+                                "http://registry.gpii.net/common/highContrastTheme": "white-black"
+                            },
+                            "http://registry.gpii.net/applications/net.gpii.uioPlus": {
+                                "http://registry.gpii.net/common/highContrastEnabled": true,
+                                "http://registry.gpii.net/common/highContrastTheme": "white-black"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "timestampCreated": "2018-01-12T14:32:37.829Z",
+        "timestampUpdated": null
     }
 ]

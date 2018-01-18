@@ -1,12 +1,6 @@
 {
     "type": "gpii.tests.acceptance.linux.builtIn.untrusted.config",
     "options": {
-        "configs": {
-            "cloudBasedConfig": {
-                "configName": "gpii.config.cloudBased.development",
-                "configPath": "%universal/gpii/configs"
-            }
-        },
         "distributeOptions": {
             "acceptance.installedSolutionsPath": {
                 "record": "%universal/testData/deviceReporter/acceptanceTests/linux_builtIn.json",
@@ -15,5 +9,5 @@
             }
         }
     },
-    "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
+    "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.local.json"
 }

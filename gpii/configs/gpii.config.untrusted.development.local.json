@@ -1,14 +1,14 @@
 {
-    "type": "gpii.config.untrusted.development.all.local.mock.windows",
+    "type": "gpii.config.untrusted.development.local",
     "options": {
         "gradeNames": ["kettle.multiConfig.config"],
         "configs": {
             "localConfig": {
-                "configName": "gpii.config.untrusted.development.mock.windows",
-                "configPath": "%universal/gpii/configs/mocks"
+                "configName": "gpii.config.untrusted.development",
+                "configPath": "%universal/gpii/configs"
             },
             "cloudBasedConfig": {
-                "configName": "gpii.config.cloudBased.development.local",
+                "configName": "gpii.config.cloudBased.development",
                 "configPath": "%universal/gpii/configs"
             }
         },
@@ -23,8 +23,5 @@
                 "priority": "after:flowManager.development.matchMakers"
             }
         }
-    },
-    "mergeConfigs": [
-        "%pouchManager/configs/gpii.pouchManager.config.base.json"
-    ]
+    }
 }
