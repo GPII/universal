@@ -8,6 +8,6 @@
         }
     },
     "mergeConfigs": [
-        "%universal/gpii/configs/gpii.config.cloudBased.development.all.local.json"
+        "%universal/gpii/configs/gpii.config.cloudBased.development.json"
     ]
 }

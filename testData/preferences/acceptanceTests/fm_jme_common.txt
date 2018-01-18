@@ -1,5 +1,0 @@
-fm_jme_common.json
-
-This NP set contains a set of common terms and is used by AcceptanceTests_jme.js
-tests file.
-
