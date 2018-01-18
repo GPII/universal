@@ -22,7 +22,6 @@ var fluid = require("infusion"),
 
 require("./shared/UserLogonStateChangeTestDefs.js");
 
-// kettle.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonHandling.testDefs));
 var testDefs = gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonHandling.testDefs);
 kettle.test.bootstrapServer(fluid.transform(testDefs, function (testDef) {
     testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
