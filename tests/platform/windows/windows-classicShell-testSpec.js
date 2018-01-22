@@ -21,59 +21,61 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.windows");
 
-gpii.tests.windows.checkCloseAfterCommand = function(that, processSpec, expected) {
-    var options = {timeout: 30000};
+gpii.tests.windows.checkCloseAfterCommand = function (that, processSpec, expected) {
+    var waitOptions = { timeout: 30000, pollDelay: 100 };
+    var closeOptions = { timeout: 15000, pollDelay: 100 };
 
     var processToWait = processSpec.processToWait;
     var processToClose = processSpec.processToClose;
 
     var waitProcValidState;
 
+    fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for '" + processToWait + "' to " + expected + ".");
     if (expected === "start") {
-        fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToWait' to start: ", processToWait);
-        waitProcValidState = gpii.windows.waitForProcessStart(processToWait, options);
+        waitProcValidState = gpii.windows.waitForProcessStart(processToWait, waitOptions);
     } else if (expected === "stop") {
-        fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToWait' to close: ", processToWait);
-        waitProcValidState = gpii.windows.waitForProcessTermination(processToWait, options);
+        waitProcValidState = gpii.windows.waitForProcessTermination(processToWait, waitOptions);
     }
 
     waitProcValidState
         .then(
-            function() {
+            function () {
                 var closeProcsPids = gpii.windows.findProcessByName(processToClose, true);
                 var procsClosed = [];
 
-                for (const pid of closeProcsPids) {
-                    procsClosed.push(gpii.windows.waitForProcessTermination(pid, options));
-                }
+                fluid.each(closeProcsPids, function (pid) {
+                    procsClosed.push(gpii.windows.waitForProcessTermination(pid, closeOptions));
+                });
 
-                fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToClose' to close: ", processToClose);
-                Promise.all(procsClosed)
+                fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for '" + processToClose + "' to close.");
+                fluid.promise.sequence(procsClosed)
                     .then(
-                        function() {
+                        function () {
                             if (processSpec.options.restart) {
-                                fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for 'processToClose' to start: ", processToClose);
-                                gpii.windows.waitForProcessStart(processToClose, options)
+                                fluid.log("gpii.test.windows.checkCloseAfterCommand: Waiting for '" + processToClose + "' to start.");
+                                gpii.windows.waitForProcessStart(processToClose, closeOptions)
                                     .then(
-                                        function() {
+                                        function () {
                                             that.events.onExecExit.fire(true, processSpec);
                                         },
-                                        function(err) {
+                                        function () {
                                             that.events.onExecExit.fire(false, processSpec);
                                         }
                                     );
                             }
                         },
-                        function(err) {
-                            that.events.onExecExit.fire(false, "gpii.test.windows.checkCloseAfterCommand: '" + processToClose + "' not closed.");
+                        function () {
+                            that.events.onExecExit.fire(
+                                false, "gpii.test.windows.checkCloseAfterCommand: '" + processToClose + "' not closed.");
                         }
                     );
             },
-            function(err) {
-                that.events.onExecExit.fire(false, processSpec);
+            function () {
+                that.events.onExecExit.fire(
+                    false, "gpii.test.windows.checkCloseAfterCommand: Process '" + processToWait + "' failed to " + expected + ".");
             }
         );
-}
+};
 
 gpii.tests.windows.classicShell = [
     {
