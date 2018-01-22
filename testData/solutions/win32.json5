@@ -3217,7 +3217,7 @@
                 "processToClose": "explorer.exe",
                 "options": {
                     "processToWait": "ClassicStartMenu.exe",
-                    "processToWaitState": "Open",
+                    "processToWaitState": "Close",
                     "restart": true,
                     "retries": 5
                 }
