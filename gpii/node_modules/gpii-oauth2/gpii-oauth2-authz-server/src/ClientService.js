@@ -5,6 +5,9 @@ Copyright 2017 OCAD university
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
 
+The research leading to these results has received funding from the European Union's
+Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
+
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
@@ -27,7 +30,7 @@ fluid.defaults("gpii.oauth2.clientService", {
         authenticateClient: {
             funcName: "gpii.oauth2.clientService.authenticateClient",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
-                // oauth2ClientId, oauth2ClientSecret
+                // oauth2ClientId, expectedOauth2ClientSecret
         },
         getClientById: {
             func: "{dataStore}.findClientById"
