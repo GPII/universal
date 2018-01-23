@@ -3,7 +3,7 @@
 
 require 'yaml'
 
-ansible_vars = YAML.load_file('provisioning/preferences-server-vars.yml')
+ansible_vars = YAML.load_file('provisioning/flow-manager-vars.yml')
 
 app_name = "gpii-components"
 
@@ -50,12 +50,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 5984, host: 5984, protocol: "tcp",
     auto_correct: true
 
-  # Port forwarding for Preferences Server
-  config.vm.network "forwarded_port", guest: 8081, host: 8081, protocol: "tcp",
-    auto_correct: true
-
   # Port forwarding for Flow Manager
-  config.vm.network "forwarded_port", guest: 8082, host: 8082, protocol: "tcp",
+  config.vm.network "forwarded_port", guest: 8081, host: 8081, protocol: "tcp",
     auto_correct: true
 
   # Port 19531 is needed so logs can be viewed using systemd-journal-gateway
@@ -76,13 +72,10 @@ Vagrant.configure(2) do |config|
     instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
   end
 
-  config.vm.provision "shell", inline: "sudo systemctl restart preferences-server.service",
-    run: "always"
-
   config.vm.provision "shell", inline: "sudo systemctl restart flow-manager.service",
     run: "always"
 
-  config.vm.provision "shell", inline: "sudo systemctl restart systemd-journal-gatewayd.service",
-    run: "always"
+  # config.vm.provision "shell", inline: "sudo systemctl restart systemd-journal-gatewayd.service",
+  #   run: "always"
 
 end
