@@ -8,7 +8,7 @@
                 "configPath": "%universal/gpii/configs/mocks"
             },
             "cloudBasedConfig": {
-                "configName": "gpii.config.cloudBased.development.local",
+                "configName": "gpii.config.cloudBased.development",
                 "configPath": "%universal/gpii/configs"
             }
         },
