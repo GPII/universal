@@ -72,9 +72,9 @@ OR if the last login/logout process for <myGpiiKey> finished less than 5 seconds
 * **return:** A payload with the GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by `preferences`).
 
 
-#### Get settings from Online Flowmanager (GET /:gpiiKey/settings/:device)
-* **description**: Get settings from the online flowmanager
-* **Supported modes**: Cloud-based (online) flowmanager only
+#### Get settings from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
+* **description**: Get settings from the cloud based flow manager
+* **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings/:device` where:
     - `:gpiiKey` should be the GPII key of the user for which the settings are requested
     - `:device` should be a device reporter payload - for example: `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
@@ -89,11 +89,11 @@ OR if the last login/logout process for <myGpiiKey> finished less than 5 seconds
     }
 }
 ```
-* **Notes:** Currently the payloads of the online flowmanager does **not** take contexts into account. The current payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want the context information.
+* **Notes:** Currently the payloads of the cloud based flow manager does **not** take contexts into account. The current payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want the context information.
 
-#### Get lifecycle instructions from Online Flowmanager (GET /:gpiiKey/untrusted-settings/:device)
-* **description**: Get settings in the ontology of preferences from the online flowmanager. These settings are untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
-* **Supported modes**: Cloud-based (online) flowmanager only
+#### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/untrusted-settings/:device)
+* **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
+* **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/untrusted-settings/:device` where:
     - `:gpiiKey` should be the GPII key of the user for which the settings are requested
     - `:device` should be a device reporter payload - for example: `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
@@ -186,20 +186,15 @@ OR if the last login/logout process for <myGpiiKey> finished less than 5 seconds
 }
 ```
 
-<<<<<<< HEAD
-#### Update settings on Online Flowmanager (PUT /:gpiiKey/untrusted-settings)
-* **description**: Update preferences on the online flowmanager
-=======
-#### Update settings on Online Flowmanager (PUT /:token/untrusted-settings)
-* **description**: Merge the incoming preferences with the existing user preferences and update the merged preferences on the online flowmanager.
->>>>>>> GPII-2558
-* **Supported modes**: Cloud-based (online) flowmanager only
+#### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/untrusted-settings)
+* **description**: Call the preferences server API to update user preferences. The preferences server API merges the incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow manager.
+* **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/untrusted-settings` where:
-    - `:gpiiKey` should be the GPII key of the user for which the settings are updated
+    - `:gpiiKey` should be the GPII key of the user for which the preferences are updated
 * **header:** Authorization: Bearer < access_token >
     - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to update settings associated with a GPII key. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant) about the detail steps.
 * **method:** `PUT`
-* **request body:** An object, containing a subset of to-be-updated settings. For example:
+* **request body:** An object, containing a subset of to-be-updated preferences. For example:
 ```
 {
     "contexts": {

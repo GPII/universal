@@ -70,10 +70,10 @@ Recovering From System Corruption Using the Journal
 ---------------------------------------------------
 
 Either when operating the live GPII system or running test cases, you may end up corrupting your desktop settings in the
-case there is a system crash. In this case, you can navigate to 
+case there is a system crash. In this case, you can navigate to
 
     http://localhost:8081/journal/journals.html
-    
+
 to browse a set of journal recovery snapshots. Clicking on the first link on this page will restore your system
 to the state it was in prior to the most recent GPII login.
 
@@ -97,7 +97,7 @@ root of the `universal` folder, run the following command:
 
 `npm run test:browser`
 
-Please note, when running the browser tests locally using this command, the tests will fail on some browsers 
+Please note, when running the browser tests locally using this command, the tests will fail on some browsers
 (notably Firefox, Safari, and Opera) unless the browser has focus.  You can manually click the browser when it launches
 to give it focus.  You should not give another window focus until the tests complete.  This is not a problem when
 running the browser tests in Vagrant (see below).  It's also not a problem when running the tests in Chrome, which you
@@ -107,7 +107,7 @@ can do using a command like:
 
 You can also run (and debug) the tests manually from the root of the repository using a command like:
 
-`node node_modules/testem/testem.js --file tests/testem.js` 
+`node node_modules/testem/testem.js --file tests/testem.js`
 
 The required test fixtures and testem will start, and Testem will provide a URL you can open in a browser.
 
@@ -170,15 +170,13 @@ fluid.require("%universal");
 
 
 #### Running node-based production tests
-The purpose of these tests are to test production config setups of the system. This involves using the online
-preferences server when fetching preferences sets, so there are extended requirements for these tests.
+The purpose of these tests are to test production config setups of the system. This involves using the cloud based flow manager when fetching or updating user settings, so there are extended requirements for these tests.
 
-These tests are a supplement to the `all-tests.js` (and hence not part of that test suite) and should be run separately
-when testing the system and having the below requirements available.
+These tests are a supplement to the `all-tests.js` (and hence not part of that test suite) and should be run separately when testing the system and having the below requirements available.
 
 Requirements:
 * an internet connection
-* a preferences server running at `http://preferences.gpii.net` containing at least the following (unmodified) NP set: `MikelVargas`
+* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified) NP set: `MikelVargas`
 
 The tests are run using the following command:
 
@@ -186,14 +184,14 @@ The tests are run using the following command:
 
 #### Coverage Reporting
 
-The preferred way to consistentely generate a code coverage report is to use Vagrant as described above.  When you 
-start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM,  and a coverage 
-report will be saved to the `reports` directory.  You can also run the `npm test` command on your local machine, but 
+The preferred way to consistentely generate a code coverage report is to use Vagrant as described above.  When you
+start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM,  and a coverage
+report will be saved to the `reports` directory.  You can also run the `npm test` command on your local machine, but
 you will need to ensure that browsers receive focus when they are launched (see above).
 
 The `npm test` command has [two additional associated scripts](https://docs.npmjs.com/misc/scripts).  The `pretest`
 script runs before the command defined for the `test` script.  The `posttest` script runs after.  In our case
-we use a `pretest` script to clean up previous coverage data before we run the tests, and a `posttest` script to 
+we use a `pretest` script to clean up previous coverage data before we run the tests, and a `posttest` script to
 compile the actual report.  You should not need to run the `pretest` scripts manually before running either the node or
 browser tests, or to run the `posttest` scripts afterward.
 

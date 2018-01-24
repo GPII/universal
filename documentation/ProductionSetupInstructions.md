@@ -1,14 +1,13 @@
 ## Introduction
 
-GPII components such as the *Preferences Server* and *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```vagrant-configs``` directory. Once the VM is running, the following services will be available in the VM:
+The *Cloud Based Flow Manager* can be deployed in a VM using production configurations. Please refer to the ```vagrant-configs``` directory. Once the VM is running, the following services will be available in the VM:
 
-* *Preferences Server* listening on port 8081
-* *Cloud Based Flow Manager* listening on port 8082
-* *CouchDB* as the backend database for the above two servers listening on port 5984
+* *Cloud Based Flow Manager* listening on port 8081
+* *CouchDB* as the backend database listening on port 5984
 
 **Note:**
 
-* The *Preferences Server* and *Cloud Based Flow Manager* will be managed by two separate Node.js processes
+* The *Cloud Based Flow Manager* is a Node.js processes
 * The above mentioned ports will be forwarded from your host machine to the VM allowing access to deployed services
 * Before starting the VM please make sure the ports in question are not being used on your host machine
 * All the Vagrant commands listed below should be run in the ```vagrant-configs``` directory.
@@ -27,14 +26,6 @@ vagrant up
 
 ## Test the VM
 
-### Test the Preferences Server
-
-Visiting the following link in a browser should return the [Carla](https://github.com/GPII/universal/blob/master/testData/preferences/carla.json) NP set:
-
-```
-http://localhost:8081/preferences/carla
-```
-
 ### Test the Cloud Based Flow Manager
 
 Visiting the following link in a browser:
@@ -43,7 +34,7 @@ Visiting the following link in a browser:
 http://localhost:8082/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D
 ```
 
-should return this result:
+should return:
 
 ```
 {
@@ -57,6 +48,24 @@ should return this result:
         "lens-mode": false,
         "scroll-at-edges": true
     }
+}
+```
+
+Or,
+
+Open a terminal and copy, paste this command:
+
+```
+curl -X POST -d "grant_type=password&client_id=pilot-computer&client_secret=pilot-computer-secret&username=li&password=dummy" http://localhost:8081/access_token
+```
+
+should return:
+
+```
+{
+    "access_token": {String},
+    "expiresIn":3600,
+    "token_type":"Bearer"
 }
 ```
 

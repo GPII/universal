@@ -1,6 +1,6 @@
 ## lifecycleManager
 
-The Lifecycle Manager is responsible for actually configuring the users system via setting shandlers and launch handlers. It is the only component in the system that keeps state. This is done in the "session" member of the lifecycleManager component, and tracks what changes have been done to the system, what the original configuration of the system was and which user is currently logged in.
+The Lifecycle Manager is responsible for actually configuring the users system via setting handlers and launch handlers. It is the only component in the system that keeps state. This is done in the "session" member of the lifecycleManager component, and tracks what changes have been done to the system, what the original configuration of the system was and which user is currently logged in.
 
 #### LifecycleManager Queue
 
@@ -17,5 +17,3 @@ The lifecycle manager have three invokers that are generally the ones that will 
 `start`: Should be called when keying in (configuring the system)
 `stop`: Should be called when keying out (restoring the system)
 `update`: Should be called when changing the settings of an already configured system (updating the applied settings)
-
-
