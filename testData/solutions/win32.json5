@@ -3227,7 +3227,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\IvoSoft\\ClassicShell",
+                "path": "64:Software\\IvoSoft\\ClassicShell",
                 "subPath": "Path",
                 "dataType": "REG_SZ"
             }
