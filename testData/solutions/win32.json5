@@ -17,6 +17,7 @@
                 "supportedSettings": {
                     "ZT\\.Enabled": {},
                     "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": {},
+                    "ZT\\.Speech\\.CurrentVoice\\.Voice": {},
                     "ZT\\.Speech\\.CurrentVoice\\.Rate": {},
                     "ZT\\.Speech\\.CurrentVoice\\.Volume": {},
                     "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Increase": {},
@@ -30,6 +31,7 @@
                 "capabilitiesTransformations": {
                     "ZT\\\\\\.Enabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
                     "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Level": "http://registry\\.gpii\\.net/common/magnification",
+                    "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Voice": "http://registry\\.gpii\\.net/common/voice",
                     "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
                     "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume": "http://registry\\.gpii\\.net/common/volume",
                     "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Increase": "http://registry\\.gpii\\.net/common/increaseMagnification",
@@ -42,6 +44,7 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/magnifierEnabled": "ZT\\.Enabled",
                     "http://registry\\.gpii\\.net/common/magnification": "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Level",
+                    "http://registry\\.gpii\\.net/common/voice": "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Voice",
                     "http://registry\\.gpii\\.net/common/speechRate": "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Rate",
                     "http://registry\\.gpii\\.net/common/volume": "ZT\\\\\\.Speech\\\\\\.CurrentVoice\\\\\\.Volume",
                     "http://registry\\.gpii\\.net/common/increaseMagnification": "ZT\\\\\\.Magnification\\\\\\.PrimaryWindow\\\\\\.Power\\\\\\.Increase",
@@ -62,11 +65,11 @@
         "start": [
             {
                 "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v10.1\\StartExe}\""
+                "command": "\"C:\\Program Files (x86)\\ZoomText 11\\Zt.exe\""
             },
             {
                 "type": "gpii.launch.exec",
-                "command": "CScript .\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_api.js 20"
+                "command": "CScript .\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_api.js 40"
             }
         ],
         "stop": [
@@ -95,7 +98,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v10.1\\StartExe",
+                "path": "64:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v11\\StartExe",
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
