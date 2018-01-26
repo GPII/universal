@@ -1308,7 +1308,7 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
+            "configure1": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
@@ -1327,14 +1327,43 @@
                             "inputPath": "http://registry\\.gpii\\.net/common/language"
                         }
                     }
+                },
+                "supportedSettings": {
+                    "MachinePreferredUILanguages": {}
+                }
+            },
+            "configure2": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "PreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "PreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "PreferredUILanguages": {}
                 }
             }
         },
         "configure": [
-            "settings.configure"
+            "settings.configure1",
+            "settings.configure2"
         ],
         "restore": [
-            "settings.configure"
+            "settings.configure1",
+            "settings.configure2"
         ],
         "start": [
             {
