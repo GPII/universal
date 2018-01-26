@@ -91,6 +91,26 @@ function write_settings_file(filename, settings){
 	file.Close();
 }
 
+/**
+ * Gets the location of the APPLOCALDATA folder.
+ */
+function zoomtext_folder() {
+	var WSHShell = new ActiveXObject("WScript.Shell");
+	var Env = WSHShell.Environment("PROCESS");
+	var zoomTextFolder = "";
+	var enVars = new Enumerator(Env);
+	
+	for(; !enVars.atEnd(); enVars.moveNext())
+	{
+		if (enVars.item().indexOf("LOCALAPPDATA") == 0) {
+			zoomTextFolder += enVars.item().split("=")[1] + "\\GPII\\ZoomText";
+		}
+	}
+	return zoomTextFolder;
+}
+
+var zoomtext_data_folder = zoomtext_folder();
+
 /*
  * Parse the arguments for this script
  * Usage:
@@ -98,7 +118,7 @@ function write_settings_file(filename, settings){
  */
 function parse_arguments(){
 	// Default Values
-	var SETTINGS_FILE_NAME = ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini";
+	var SETTINGS_FILE_NAME = zoomtext_data_folder + "\\zoomtext_settings.ini";
 	var SCRIPT_TIME_OUT = 0; // In seconds
 
 	var args = WScript.Arguments;
@@ -108,7 +128,7 @@ function parse_arguments(){
 		WScript.Echo("<SCRIPT_TIME_OUT>: Timeout in seconds for this script if ZoomText's API is not available");
 		WScript.Echo("DEFAULT = 0\n");
 		WScript.Echo("<SETTINGS_FILE_NAME>: Path to the ini settings file");
-		WScript.Echo("DEFAULT = \".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini\"");
+		WScript.Echo("DEFAULT = \"" + SETTINGS_FILE_NAME+ "\"");
 		WScript.Quit(1);
 	}
 
@@ -144,12 +164,15 @@ function parse_arguments(){
 
 // Get arguments
 args = parse_arguments();
-var SETTINGS_FILE_NAME = args[0];
+// Removed in favor of using GPII data folder
+// ==========================================
+// var SETTINGS_FILE_NAME = args[0];
+// ==========================================
 var SCRIPT_TIME_OUT = args[1];
-var SETTINGS_FILE_TO_RESTORE = ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings_restore.ini";
+var SETTINGS_FILE_TO_RESTORE = zoomtext_data_folder + "\\zoomtext_settings_restore.ini";
 
 // Obtain settings to applu
-var settings_to_apply = load_settings_file(SETTINGS_FILE_NAME);
+var settings_to_apply = load_settings_file(args[0]);
 
 // Access ZoomText's API
 var ZT = null;
@@ -296,7 +319,6 @@ map_settings_to_API = {
 
 			for (var type in valid_monitor_types) {
 				if (type === args) {
-					WScript.Echo(args)
 					ZT.Magnification.PrimaryWindow.Type = valid_monitor_types[args];
 				}
 			}

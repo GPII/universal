@@ -12,11 +12,12 @@
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
-                    "filename": ".\\node_modules\\universal\\testData\\solutions\\zoomtext\\zoomtext_settings.ini"
+                    "filename": "${{environment}.LOCALAPPDATA}\\GPII\\ZoomText\\zoomtext_settings.ini"
                 },
                 "supportedSettings": {
                     "ZT\\.Enabled": {},
                     "ZT\\.Magnification\\.PrimaryWindow\\.Power\\.Level": {},
+                    "ZT\\.Magnification\\.PrimaryWindow\\.Type": {},
                     "ZT\\.Speech\\.CurrentVoice\\.Voice": {},
                     "ZT\\.Speech\\.CurrentVoice\\.Rate": {},
                     "ZT\\.Speech\\.CurrentVoice\\.Volume": {},
