@@ -98,8 +98,8 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "64:SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v11\\StartExe",
-                "subPath": "",
+                "path": "64:Software\\Microsoft\\Windows NT\\CurrentVersion\\Accessibility\\ATs\\AiSquared_ZoomText_v11",
+                "subPath": "StartExe",
                 "dataType": "REG_SZ"
             }
         ]
