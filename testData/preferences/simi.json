@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Simi",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
