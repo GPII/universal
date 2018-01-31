@@ -341,7 +341,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         statusCode: 401,
         errorText: "Error while executing HTTP POST on"
     },
-    errorText: "Error when retrieving preferences: Raw preferences server: Preferences missing for user bogusToken",
+    errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist",
     statusCode: 404,
     sequence: [{ // standard login
         func: "{proximityTriggeredRequest}.send"
