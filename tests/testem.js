@@ -24,13 +24,17 @@ gpii.tests.universal.testem.getTestemOptions = function (that) {
 };
 
 fluid.defaults("gpii.tests.universal.testem", {
-    gradeNames: ["gpii.testem.coverageDataOnly"],
-    testPages:  "tests/web/html/all-tests.html",
-    sourceDirs: [],
+    gradeNames: ["gpii.testem.coverage"],
+    testPages:  ["tests/web/html/all-tests.html"],
     coverageDir: "coverage",
-    generateCoverageReport: false,
-    instrumentSource: false,
-    serveDirs:  ["node_modules", "browserify"],
+    reportsDir: "reports",
+    sourceDirs: {
+        gpii: "%universal/gpii"
+    },
+    contentDirs: {
+        browserify:   "%universal/browserify",
+        node_modules: "%universal/node_modules"
+    },
     invokers: {
         "getTestemOptions": {
             funcName: "gpii.tests.universal.testem.getTestemOptions",
@@ -38,8 +42,11 @@ fluid.defaults("gpii.tests.universal.testem", {
         }
     },
     testemOptions: {
+        tap_quiet_logs: true,
+        disable_watching: true,
+        skip: "PhantomJS,Opera,Safari",
         "routes": {
-            "/gpii": "instrumented/universal/gpii"
+            "/gpii": "instrumented/gpii"
         }
     }
 });

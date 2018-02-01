@@ -1,0 +1,15 @@
+{
+    "type": "gpii.tests.instrumenter.config",
+    "options": {
+        "nonSources": [
+            "!./**/*.js",
+            "./Gruntfile.js",
+            "**/tests/**",
+            "**/test/**",
+            "**/webTests/**",
+            "**/public/lib/**"
+        ]
+    },
+    "mergeConfigs": "%gpii-testem/configs/instrumenter.json",
+    "require": "%gpii-testem"
+}
