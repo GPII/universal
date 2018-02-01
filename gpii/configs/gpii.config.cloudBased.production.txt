@@ -1,4 +1,4 @@
-gpii.config.cloudBased.flowManager.production.json
+gpii.config.cloudBased.production.json
 ==================================================
 
 Flow Manager running on the server (incl. dependencies). It will expect a couchDB to be running on the local host using the default port.

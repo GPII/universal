@@ -1,5 +1,5 @@
 ---
-flow_manager_environment: gpii.config.cloudBased.flowManager.production
+flow_manager_environment: gpii.config.cloudBased.production
 
 nodejs_app_name: flow-manager
 

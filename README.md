@@ -35,24 +35,9 @@ Environment Variables
 
 Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/blob/master/docs/ConfigsAndApplications.md#referring-to-external-data-via-resolvers), some pre-defined configuration files offer the ability to read environment variables to change commonly used settings.
 
-#### Preferences Server
-
-The Preferences Server with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
-
-  * `GPII_PREFERENCES_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `GPII_PREFERENCES_DATASOURCE_URL`: Location of CouchDB database (default: http://localhost:5984/preferences/%gpiiKey)
-
-Example:
-
-```
-GPII_PREFERENCES_LISTEN_PORT=9090 \
-GPII_PREFERENCES_DATASOURCE_URL=https://localhost:5984/%gpiiKey \
-NODE_ENV=gpii.config.cloudBased.flowManager.production \
-npm start
-```
 #### Flow Manager
 
-The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
+The Flow Manager with the `gpii.config.cloudBased.production` configuration uses the following variables:
 
   * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
   * `GPII_FLOWMANAGER_PREFERENCES_URL`: Location of the Preferences Server (default: https://preferences.gpii.net/preferences/%gpiiKey)
@@ -62,7 +47,7 @@ Example:
 ```
 GPII_FLOWMANAGER_LISTEN_PORT=9091 \
 GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9090/preferences/%gpiiKey \
-NODE_ENV=gpii.config.cloudBased.flowManager.production \
+NODE_ENV=gpii.config.cloudBased.production \
 npm start
 ```
 

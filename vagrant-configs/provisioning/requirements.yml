@@ -7,5 +7,6 @@
 - src: https://github.com/idi-ops/ansible-nodejs
   name: nodejs
 
-- src: https://github.com/gpii-ops/ansible-flow-manager
+- src: https://github.com/cindyli/ansible-flow-manager
+  version: remotes/origin/GPII-2630
   name: flow-manager

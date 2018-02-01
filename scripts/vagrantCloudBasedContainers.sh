@@ -31,7 +31,7 @@ PREFERENCES_DATASOURCE_URL="http://couchdb:${COUCHDB_PORT}/preferences/%gpiiKey"
 PREFERENCES_DIR="/home/vagrant/sync/universal/testData/preferences"
 PREFERENCES_PORT=9081
 
-FLOWMANAGER_CONFIG="gpii.config.cloudBased.flowManager.production"
+FLOWMANAGER_CONFIG="gpii.config.cloudBased.production"
 FLOWMANAGER_PREFERENCES_URL="http://preferences:${PREFERENCES_PORT}/preferences/%gpiiKey"
 FLOWMANAGER_PORT=9082
 
