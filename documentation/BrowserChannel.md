@@ -82,7 +82,7 @@ The workflow between the client and server can be summarised as follows:
 The client has been checked in to [../examples/browserChannelClient](../examples/browserChannelClient). To try it out, first
 start the GPII in the CloudBased browserChannel test configuration from the root of universal with
 
-    node gpii.js gpii/configs gpii.config.cloudBased.production
+    node gpii.js gpii/configs gpii.config.development.all.local
 
 Then start the client from [../examples/browserChannelClient](../examples/browserChannelClient) with
 
