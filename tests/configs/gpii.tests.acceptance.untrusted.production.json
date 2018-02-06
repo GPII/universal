@@ -1,0 +1,22 @@
+{
+    "type": "gpii.tests.acceptance.untrusted.production",
+    "options": {
+        "distributeOptions": {
+            "flowManager.untrustedSettingsGetUrl": {
+                "record": "http://localhost:8084/%gpiiKey/untrusted-settings/%device",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.untrustedSettingsGetUrl"
+            },
+            "flowManager.untrustedSettingsPutUrl": {
+                "record": "http://localhost:8084/%gpiiKey/untrusted-settings",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.untrustedSettingsPutUrl"
+            },
+            "flowManager.accessTokenUrl": {
+                "record": "http://localhost:8084/access_token",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.accessTokenUrl"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%universal/gpii/configs/gpii.config.untrusted.development.json"
+    ]
+}

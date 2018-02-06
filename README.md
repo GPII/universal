@@ -40,13 +40,11 @@ Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/bl
 The Flow Manager with the `gpii.config.cloudBased.production` configuration uses the following variables:
 
   * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `GPII_FLOWMANAGER_PREFERENCES_URL`: Location of the Preferences Server (default: https://preferences.gpii.net/preferences/%gpiiKey)
 
 Example:
 
 ```
 GPII_FLOWMANAGER_LISTEN_PORT=9091 \
-GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9090/preferences/%gpiiKey \
 NODE_ENV=gpii.config.cloudBased.production \
 npm start
 ```
