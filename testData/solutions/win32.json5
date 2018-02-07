@@ -8,7 +8,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
@@ -693,7 +693,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
@@ -805,7 +805,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
@@ -1011,7 +1011,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
@@ -1086,7 +1086,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
@@ -1362,7 +1362,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configs": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
@@ -1815,7 +1815,7 @@
             ]
         },
 
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
@@ -1872,7 +1872,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
@@ -1922,7 +1922,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
@@ -1973,7 +1973,7 @@
             ]
         },
 
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
@@ -2102,7 +2102,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "options": {
@@ -2220,7 +2220,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "options": {
@@ -2280,7 +2280,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "options": {
@@ -2497,7 +2497,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "options": {
@@ -2642,7 +2642,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "options": {
@@ -2715,7 +2715,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
                 "capabilities": [
@@ -2757,7 +2757,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.displaySettingsHandler",
                 "supportedSettings": {
@@ -2809,7 +2809,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
@@ -3137,7 +3137,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "options": {
@@ -3241,7 +3241,7 @@
                     "version": ">=5.0"
             }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "options": {
@@ -3368,7 +3368,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "OSRestart",

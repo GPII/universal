@@ -7,7 +7,7 @@ Each entry in the solution registry should have a unique ID (`Solution.id` in th
 "Solution.id": {
     "name": "My Solution"
     "contexts": { ... },
-    "settingsHandlers": { ... },
+    "handlers": { ... },
     "configure": [ .. ],
     "restore": [ .. ],
     "update": [ .. ],
@@ -38,12 +38,12 @@ The `contexts` block describes what the required context is for the solution to 
 }
 ```
 
-### settingsHandlers
-The `settingsHandlers` block is unique and one of the most important blocks in the solutions registry entry. It consists of zero or more settingsHandler entries, each keyed by an arbitrary name (that is unique within this solutions settingsHandlers block). Inside each settingsHandler entry, the properties for that settingsHandler is provided. The entries in the settingsHandlers block can be referred to from the other lifecycle blocks of the solutions registry entry. The settingsHandlers block is mandatory.
+### handlers
+The `handlers` block is unique and one of the most important blocks in the solutions registry entry. It consists of zero or more settingsHandler or LaunchHandler entries, each keyed by an arbitrary name (that is unique within this solutions handlers block). Inside each handler entry, the properties for that handler is provided. The entries in the settingsHandlers block can be referred to from the other lifecycle blocks of the solutions registry entry. The handlers block is mandatory.
 
 **Example settingsHandlers block**:
 ```
-"settingsHandlers": {
+"handlers": {
     "myconf": {
         "type": "gpii.settingsHandlers.INISettingsHandler",
         "options": {

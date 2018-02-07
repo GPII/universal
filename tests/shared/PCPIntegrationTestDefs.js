@@ -66,7 +66,7 @@ gpii.tests.pcpIntegration.connectionSucceeded = function (data) {
 
 gpii.tests.pcpIntegration.data = {
     initial: {
-        "settingsHandlers": {
+        "handlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
@@ -87,7 +87,7 @@ gpii.tests.pcpIntegration.data = {
         }
     },
     afterChange1: {
-        "settingsHandlers": {
+        "handlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
@@ -108,7 +108,7 @@ gpii.tests.pcpIntegration.data = {
         }
     },
     afterChange2: {
-        "settingsHandlers": {
+        "handlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {
@@ -129,7 +129,7 @@ gpii.tests.pcpIntegration.data = {
         }
     },
     bright: {
-        "settingsHandlers": {
+        "handlers": {
             "gpii.gsettings": {
                 "data": [{
                     "settings": {

@@ -8,7 +8,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -79,7 +79,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -187,7 +187,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -283,7 +283,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -356,7 +356,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -424,7 +424,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -501,7 +501,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {

@@ -115,7 +115,7 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
                     }
                 ]
             },
-            "settingsHandlers": {
+            "handlers": {
                 "configs": {
                     "type": "gpii.settingsHandlers.INISettingsHandler",
                     "options": {

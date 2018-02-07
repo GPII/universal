@@ -92,7 +92,7 @@ gpii.tests.contextIntegration.data = {
                 "http://registry.gpii.net/common/environment/illuminance": 200,
                 "http://registry.gpii.net/common/environment/auditory.noise": 10000
             },
-            "settingsHandlers": {
+            "handlers": {
                 "gpii.gsettings": {
                     "data": [{
                         "settings": {
@@ -117,7 +117,7 @@ gpii.tests.contextIntegration.data = {
                 "http://registry.gpii.net/common/environment/illuminance": 500,
                 "http://registry.gpii.net/common/environment/auditory.noise": 10000
             },
-            "settingsHandlers": {
+            "handlers": {
                 "gpii.gsettings": {
                     "data": [{
                         "settings": {
@@ -138,7 +138,7 @@ gpii.tests.contextIntegration.data = {
             }
         },
         "onlyBright": { // if user logs in when brightness is active from the beginning - only expect mag
-            "settingsHandlers": {
+            "handlers": {
                 "gpii.gsettings": {
                     "data": [{
                         "settings": {
@@ -156,7 +156,7 @@ gpii.tests.contextIntegration.data = {
                 "http://registry.gpii.net/common/environment/illuminance": 200,
                 "http://registry.gpii.net/common/environment/auditory.noise": 30000
             },
-            "settingsHandlers": {
+            "handlers": {
                 "gpii.gsettings": {
                     "data": [{
                         "settings": {
@@ -181,7 +181,7 @@ gpii.tests.contextIntegration.data = {
                 "http://registry.gpii.net/common/environment/illuminance": 500,
                 "http://registry.gpii.net/common/environment/auditory.noise": 30000
             },
-            "settingsHandlers": {
+            "handlers": {
                 "gpii.gsettings": {
                     "data": [{
                         "settings": {

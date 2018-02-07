@@ -7,7 +7,7 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
@@ -42,7 +42,7 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
@@ -85,7 +85,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidPersistentConfiguration",
                 "supportedSettings": {
@@ -189,7 +189,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidAudioManager.volume",
                 "supportedSettings": {
@@ -244,7 +244,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidSettings",
                 "options": {
@@ -313,7 +313,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidSettings",
                 "options": {
@@ -398,7 +398,7 @@
                 "version": ">=0.1"
               }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "supportedSettings": {
@@ -490,7 +490,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
