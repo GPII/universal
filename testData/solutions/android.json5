@@ -13,7 +13,9 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
@@ -27,10 +29,10 @@
             }
         },
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ]
     },
 
@@ -48,7 +50,9 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
@@ -65,13 +69,13 @@
             }
         },
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ]
     },
 
@@ -440,7 +444,9 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {}
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
@@ -464,13 +470,13 @@
             }
         },
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "configure": [
             "settings.configuration"

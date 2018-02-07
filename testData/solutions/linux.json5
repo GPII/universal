@@ -83,7 +83,9 @@
                         }
                     ]
                 }
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.gsettings.launch",
                 "options": {
@@ -105,13 +107,13 @@
             "settings.configuration"
         ],
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isInstalled": [
             {
@@ -1098,7 +1100,9 @@
                         }
                     ]
                 }
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.gsettings.launch",
                 "options": {
@@ -1119,13 +1123,13 @@
             "settings.configuration"
         ],
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isInstalled": [
             {
@@ -1200,7 +1204,9 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
@@ -1219,13 +1225,13 @@
             }
         },
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isInstalled": [
             {
@@ -1259,7 +1265,9 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
@@ -1278,13 +1286,13 @@
             }
         },
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isInstalled": [
             {
@@ -1318,7 +1326,9 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
-            },
+            }
+        },
+        "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
@@ -1337,13 +1347,13 @@
             }
         },
         "start": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "stop": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isRunning": [
-            "settings.launcher"
+            "launchers.launcher"
         ],
         "isInstalled": [
             {
