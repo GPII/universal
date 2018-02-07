@@ -3,15 +3,15 @@
     "options": {
         "distributeOptions": {
             "flowManager.untrustedSettingsGetUrl": {
-                "record": "http://localhost:8084/%gpiiKey/untrusted-settings/%device",
+                "record": "http://flowmanager.dev-cindyli.gpii.net/%gpiiKey/untrusted-settings/%device",
                 "target": "{that flowManager untrustedSettingsDataSource}.options.untrustedSettingsGetUrl"
             },
             "flowManager.untrustedSettingsPutUrl": {
-                "record": "http://localhost:8084/%gpiiKey/untrusted-settings",
+                "record": "http://flowmanager.dev-cindyli.gpii.net/%gpiiKey/untrusted-settings",
                 "target": "{that flowManager untrustedSettingsDataSource}.options.untrustedSettingsPutUrl"
             },
             "flowManager.accessTokenUrl": {
-                "record": "http://localhost:8084/access_token",
+                "record": "http://flowmanager.dev-cindyli.gpii.net/access_token",
                 "target": "{that flowManager untrustedSettingsDataSource}.options.accessTokenUrl"
             }
         }
