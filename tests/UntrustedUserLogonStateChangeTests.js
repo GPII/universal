@@ -36,8 +36,8 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
                 configPath: "%universal/tests/configs"
             },
             gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
-            userToken: gpii.tests.userLogonHandling.userToken
-        });
+            userToken: testDefIn.userToken || gpii.tests.userLogonHandling.userToken
+        }, testDefIn.untrustedExtras || {});
 
         testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return testDef;

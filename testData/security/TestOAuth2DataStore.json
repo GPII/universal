@@ -1,112 +1,30 @@
 [
     {
         "_id": "client-1",
-        "type": "webPrefsConsumerClient",
-        "name": "Service A",
-        "oauth2ClientId": "org.chrome.cloud4chrome",
-        "oauth2ClientSecret": "client_secret_1",
-        "redirectUri": "http://localhost:3002/authorize_callback"
-    },
-    {
-        "_id": "client-2",
-        "type": "webPrefsConsumerClient",
-        "name": "Service Passport Client",
-        "oauth2ClientId": "client_id_pp",
-        "oauth2ClientSecret": "client_secret_pp",
-        "redirectUri": "http://localhost:3003/authorize_callback"
-    },
-    {
-        "_id": "client-3",
-        "type": "webPrefsConsumerClient",
-        "name": "Easit4all",
-        "oauth2ClientId": "com.bdigital.easit4all",
-        "oauth2ClientSecret": "client_secret_easit4all",
-        "redirectUri": "http://www.easit4all.com/oauth_signin/authorize_callback"
-    },
-    {
-        "_id": "client-4",
-        "type": "onboardedSolutionClient",
-        "name": "GNOME Magnifier",
-        "solutionId": "org.gnome.desktop.a11y.magnifier"
-    },
-    {
-        "_id": "client-6",
-        "type": "onboardedSolutionClient",
-        "name": "Windows Magnifier",
-        "solutionId": "com.microsoft.windows.magnifier"
-    },
-    {
-        "_id": "client-7",
-        "type": "onboardedSolutionClient",
-        "name": "NVDA Screen Reader",
-        "solutionId": "org.nvda-project"
-    },
-    {
-        "_id": "client-8",
-        "type": "privilegedPrefsCreatorClient",
-        "name": "First Discovery",
-        "oauth2ClientId": "net.gpii.prefsEditors.firstDiscovery",
-        "oauth2ClientSecret": "client_secret_firstDiscovery"
-    },
-    {
-        "_id": "client-9",
         "type": "gpiiAppInstallationClient",
         "name": "Pilot Computers",
         "oauth2ClientId": "pilot-computer",
-        "oauth2ClientSecret": "pilot-computer-secret",
-        "userId": null
-    },
-    {
-        "_id": "user-1",
-        "type": "user",
-        "name": "chromehc",
-        "password": "chromehc",
-        "defaultGpiiToken": "review3_chrome_high_contrast"
-    },
-    {
-        "_id": "user-2",
-        "type": "user",
-        "name": "ma1",
-        "password": "ma1",
-        "defaultGpiiToken": "review3_ma1"
-    },
-    {
-        "_id": "user-3",
-        "type": "user",
-        "name": "ma2",
-        "password": "ma2",
-        "defaultGpiiToken": "review3_ma2"
-    },
-    {
-        "_id": "user-4",
-        "type": "user",
-        "name": "li",
-        "password": "li",
-        "defaultGpiiToken": "li"
+        "oauth2ClientSecret": "pilot-computer-secret"
     },
     {
         "_id": "gpiiToken-1",
         "type": "gpiiToken",
-        "gpiiToken": "review3_chrome_high_contrast",
-        "userId": "user-1"
+        "gpiiToken": "review3_chrome_high_contrast"
     },
     {
         "_id": "gpiiToken-2",
         "type": "gpiiToken",
-        "gpiiToken": "review3_ma1",
-        "userId": "user-2"
+        "gpiiToken": "review3_ma1"
     },
     {
         "_id": "gpiiToken-3",
         "type": "gpiiToken",
-        "gpiiToken": "review3_ma2",
-        "userId": "user-3"
+        "gpiiToken": "review3_ma2"
     },
     {
         "_id": "gpiiToken-4",
         "type": "gpiiToken",
-        "gpiiToken": "li",
-        "userId": "user-4"
+        "gpiiToken": "li"
     },
     {
         "_id": "gpiiToken-5",

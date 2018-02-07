@@ -1,5 +1,6 @@
 /*!
 Copyright 2014 OCAD university
+Copyright 2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -27,14 +28,9 @@ fluid.defaults("gpii.oauth2.clientService", {
     },
     invokers: {
         authenticateClient: {
-            funcName: "gpii.oauth2.clientService.processClient",
-            args: ["{dataStore}", "{arguments}.0", "oauth2ClientSecret", "{arguments}.1"]
-                // oauth2ClientId, oauth2ClientSecret
-        },
-        checkWebPrefsConsumerRedirectUri: {
-            funcName: "gpii.oauth2.clientService.processClient",
-            args: ["{dataStore}", "{arguments}.0", "redirectUri", "{arguments}.1"]
-                // oauth2ClientId, redirectUri
+            funcName: "gpii.oauth2.clientService.authenticateClient",
+            args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
+                // oauth2ClientId, expectedOauth2ClientSecret
         },
         getClientById: {
             func: "{dataStore}.findClientById"
@@ -45,18 +41,15 @@ fluid.defaults("gpii.oauth2.clientService", {
 // To verify a client information matches the expected value
 //
 // @dataStore (Object) - an instance of a data store component such as gpii.oauth2.dbDataStore
-// @oauth2ClientId (String) - an oAuth2 client id
-// @fieldToVerify (String) - A field of the client object to be verified:
-// in authenticateClient() API, this field is "oauth2ClientSecret"; in checkWebPrefsConsumerRedirectUri() API,
-// this field is "redirectUri"
-// @expectedVerifiedValue (Any) - The expected verified value
+// @oauth2ClientId (String) - an OAuth2 client id
+// @expectedOauth2ClientSecret (String) - The expected OAuth2 client secret
 //
 // @return (Promise) - A promise object that contains either a client record or an error
-gpii.oauth2.clientService.processClient = function (dataStore, oauth2ClientId, fieldToVerify, expectedVerifiedValue) {
+gpii.oauth2.clientService.authenticateClient = function (dataStore, oauth2ClientId, expectedOauth2ClientSecret) {
     var promiseTogo = fluid.promise();
     var clientPromise = dataStore.findClientByOauth2ClientId(oauth2ClientId);
     clientPromise.then(function (client) {
-        if (client && client[fieldToVerify] === expectedVerifiedValue) {
+        if (client && fluid.get(client, ["oauth2ClientSecret"]) === expectedOauth2ClientSecret) {
             promiseTogo.resolve(client);
         } else {
             fluid.log("clientService: unauthorized client with oauth2ClientId - " + oauth2ClientId);
