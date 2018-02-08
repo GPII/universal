@@ -1,7 +1,7 @@
 AcceptanceTests_untrustedSettingsGet.js
 
 Description:
-This is a series of tests using the online flowmanager to test the workflow that GPII app installations request filtered user settings for onboarded solutions that are authorized by users to access some or all of their preferences. Before requesting untrusted settings, the GPII app installation must request an access tokens from GPII Cloud using OAuth2 resource owner GPII token grant. This access token is then sent along with the untrusted setting request to represent the authorization of the GPII app installation to user settings.
+This is a series of tests using the online flowmanager to test the workflow that GPII app installations request settings in the ontology of preferences. Before requesting untrusted settings, the GPII app installation must request an access token from GPII Cloud using OAuth2 resource owner GPII token grant. This access token is then sent along with the untrusted setting request to represent the authorization of the GPII app installation to user settings.
 
 Requirements:
 Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

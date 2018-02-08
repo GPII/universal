@@ -1,5 +1,5 @@
 /*!
-Copyright 2016 OCAD university
+Copyright 2016-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -39,9 +39,7 @@ var fluid = fluid || require("infusion");
     });
 
     // Return a promise object that contains the granted privilege for the access token.
-    // This function looks up access tokens granted for privileged prefs creators and
-    // web prefs consumers to find the match. The different data structure
-    // can be returned based on the client/authorization type.
+    // This function looks up access tokens granted for GPII app installations to find the match.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
         var promiseTogo = fluid.promise();
         var authorizationPromise = authorizationService.getAuthorizationByAccessToken(accessToken);
@@ -58,27 +56,10 @@ var fluid = fluid || require("infusion");
                         allowUntrustedSettingsPut: true
                     };
                 }
-
-                if (authRecord.authorization.type === gpii.oauth2.docTypes.privilegedPrefsCreatorAuthorization) {
-                    grant = {
-                        accessToken: accessToken,
-                        allowAddPrefs: true
-                    };
-                }
-
-                if (authRecord.authorization.type === gpii.oauth2.docTypes.webPrefsConsumerAuthorization) {
-                    grant = {
-                        accessToken: accessToken,
-                        gpiiToken: authRecord.authorization.gpiiToken,
-                        selectedPreferences: authRecord.authorization.selectedPreferences,
-                        oauth2ClientId: authRecord.client.oauth2ClientId
-                    };
-                }
             }
             promiseTogo.resolve(grant);
         });
 
         return promiseTogo;
     };
-
 })();

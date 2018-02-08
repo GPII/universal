@@ -209,7 +209,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
     // Succesful use cases that request user settings with proper access tokens granted via Resource Owner GPII Token grant
     {
         testDef: {
-            name: "A successful workflow for no authorized solutions",
+            name: "A successful workflow for updating preferences",
 
             // The options below are for sending /access_token request
             client_id: "Bakersfield-AJC-client-id",
