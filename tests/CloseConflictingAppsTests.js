@@ -108,7 +108,6 @@ gpii.tests.conflictingApps.testDefs = [
                 gpii.tests.conflictingApps.NVDAHandlerEntry(false))
         },
         settingsHandlers: {
-
             "gpii.settingsHandlers.INISettingsHandler": {
                 "org.nvda-project": [
                     {
@@ -258,7 +257,7 @@ gpii.tests.conflictingApps.testDefs = [
     }
 ];
 
-module.exports = gpii.test.bootstrap({
+module.exports = gpii.test.runTests({
     testDefs:  "gpii.tests.conflictingApps.testDefs",
     configName: "gpii.tests.multiScreenreader.config",
     configPath: "%universal/tests/configs"

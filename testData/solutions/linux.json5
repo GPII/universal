@@ -91,9 +91,6 @@
                 "options": {
                     "schema": "org.gnome.desktop.a11y.applications",
                     "key": "screen-magnifier-enabled"
-                },
-                "supportedSettings": {
-                    "running": {}
                 }
             }
         },
@@ -298,7 +295,9 @@
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
                 ]
-            },
+            }
+        },
+        "launchHandlers": {
             "launching": {
                 "type": "gpii.gsettings.launch",
                 "options": {
@@ -310,13 +309,13 @@
         "update": [
         ],
         "start": [
-            "settings.launching"
+            "launchers.launching"
         ],
         "stop": [
-            "settings.launching"
+            "launchers.launching"
         ],
         "isRunning": [
-            "settings.launching"
+            "launchers.launching"
         ],
         "isInstalled": [
             {

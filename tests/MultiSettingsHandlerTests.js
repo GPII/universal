@@ -56,8 +56,7 @@ gpii.tests.multiSHSupport.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     }
 ];
 
