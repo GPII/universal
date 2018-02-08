@@ -1,0 +1,8 @@
+This configuration file is used for testing the browser extension in Linux
+
+It includes to the basic localInstall setup for acceptance tests (modifying the
+preferences folder used), which in turn includes the standard development
+config file (running GPII locally, using development setup).
+
+This config sets the device reporter file to be 'uioPlus.json', which will report
+UIO+ as being installed on the system.

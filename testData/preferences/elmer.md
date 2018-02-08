@@ -10,4 +10,4 @@ the GPII.
 
 Elmer  — Low Screen Resolution
 
-Elmer is older and his sight is failing — but magnifiers confuse him.  So he just uses a low screen resolution and everything is larger for him.
+Elmer is older and his sight is failing — but magnifiers confuse him.  So he just uses a low screen resolution and everything is larger for him, but nothing moves offscreen like a magnifier would do.
