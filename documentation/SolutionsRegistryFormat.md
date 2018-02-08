@@ -46,6 +46,7 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
 "settingsHandlers": {
     "myconf": {
         "type": "gpii.settingsHandlers.INISettingsHandler",
+        "liveness": "manualRestart",
         "options": {
             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
             "allowNumberSignComments": true,
@@ -98,6 +99,7 @@ An important thing to notice here is that this solution example has two referenc
 
 Each settingsHandler block can contain the following information:
 * **type (mandatory):** the type of settingshandler
+* **liveness (mandatory):** Describes the update behavior of this solution: `"live"` means that the settings can be applied live without needing to restart the solution. `"liveRestart"` means that the a restart is required but considered low-impact enough for e.g. the PCP to trigger this automatically but not on a framerate of e.g. dragging a slider. `"manualRestart"` means that a change in settings requires a restart and that the restart of the solution is considered high-impact and slow. `"OSRestart"` means that a restart of the OS required.
 * **options:** Any options that should be passed to the settingsHandler. This is specific to the type of settingshandler specified in the "type" block.
 * **capabilities:** Is used to specify the capabilities of the solution (i.e. the settings/terms that the solution is capable of handling). Note that the framework can automatically deduce capabilities from the `capabilitiesTransformations` block, so if a setting is specified here, the system will automatically consider it a capability which means it does not need to specified in the `capabilities` block.
 * **capabilitiesTransformations**: Transformations from common terms to application specific settings can be defined here. These will enable the framework to automatically translate common terms from a user's NP set into application settings. Any common terms listed here, will automatically be added to the `capabilities` of the solution.

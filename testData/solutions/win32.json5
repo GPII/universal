@@ -11,6 +11,7 @@
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
@@ -205,6 +206,7 @@
             },
             "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
@@ -698,6 +700,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
                     "encoding": "utf-8",
@@ -812,6 +815,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier",
@@ -1020,6 +1024,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Osk",
@@ -1097,6 +1102,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator",
@@ -1376,6 +1382,7 @@
         "settingsHandlers": {
             "configs": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
@@ -1995,6 +2002,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
@@ -2126,6 +2134,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETHIGHCONTRAST",
                     "setAction": "SPI_SETHIGHCONTRAST",
@@ -2170,6 +2179,7 @@
             },
             "configureTheme": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
@@ -2244,6 +2254,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETSTICKYKEYS",
                     "setAction": "SPI_SETSTICKYKEYS",
@@ -2304,6 +2315,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETFILTERKEYS",
                     "setAction": "SPI_SETFILTERKEYS",
@@ -2521,6 +2533,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETMOUSEKEYS",
                     "setAction": "SPI_SETMOUSEKEYS",
@@ -2666,6 +2679,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETMOUSETRAILS",
                     "setAction": "SPI_SETMOUSETRAILS",
@@ -2739,6 +2753,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "liveRestart",
                 "capabilities": [
                     "display.screenEnhancement.screenResolution",
                     "applications.com\\.microsoft\\.windows\\.screenResolution.id"
@@ -2781,6 +2796,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "live",
                 "supportedSettings": {
                     "screen-dpi": {}
                 },
@@ -2833,6 +2849,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors",
@@ -3163,6 +3180,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
@@ -3269,6 +3287,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
                 "options": {
                     "path": "net.gpii.uioPlus"
                 },

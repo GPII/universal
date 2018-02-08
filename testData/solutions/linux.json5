@@ -12,6 +12,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "liveness": "live",
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 },
@@ -133,6 +134,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "text-scaling-factor": {},
                     "cursor-size": {},
@@ -254,6 +256,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "font": {}
                 },
@@ -336,6 +339,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "liveness": "live",
                 "supportedSettings": {
                     "stickykeys-enable": {},
                     "slowkeys-enable": {},
@@ -420,6 +424,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "liveness": "live",
                 "capabilities": [],
                 "options": {
                     "schema": "org.gnome.desktop.wm.preferences"
@@ -452,6 +457,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
+                "liveness": "live",
                 "capabilities": [
                 ],
                 "options": {
@@ -484,6 +490,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.orca",
+                "liveness": "manualRestart",
                 "options": {
                     "user": "${{userToken}}"
                 },
@@ -1151,6 +1158,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.alsa",
+                "liveness": "live",
                 "supportedSettings": {
                     "masterVolume": {}
                 },
@@ -1381,6 +1389,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.xrandr",
+                "liveness": "liveRestart",
                 "capabilities": [],
                 "supportedSettings": {
                     "screen-resolution": {}
@@ -1406,6 +1415,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
                 "options": {
                     "path": "net.gpii.uioPlus"
                 },
