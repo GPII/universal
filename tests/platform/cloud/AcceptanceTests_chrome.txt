@@ -3,7 +3,7 @@ AcceptanceTests_chrome.js
 Description:
 This is an series of tests using the online flowmanager.
 
-These tests use the testDefinitions from AcceptanceTests_chrome_testDefs.json (which are also shared with the chrome_oauth2 tests)
+These tests use the testDefinitions from AcceptanceTests_chrome_testDefs.json.
 
 Three N&P sets have been created in order to test the different transformations between the common terms and the clouc4all specific settings:
 * chrome_font_size tests the transformation from a numeric value in the common terms to an enumeration value ("medium", "large", "x-large")
