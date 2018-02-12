@@ -4,7 +4,7 @@
         "dbServerPort": 5984,
         "distributeOptions": {
             "flowManager.production.matchMakers": {
-                "record": "http://flowmanager.dev-cindyli.gpii.net/",
+                "record": "http://localhost:9081",
                 "target": "{that flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
             }
