@@ -34,7 +34,6 @@ FLOWMANAGER_MATCHMAKER_URL="http://localhost:9081"
 
 # Remove old containers (exit code is ignored)
 docker rm -f couchdb 2>/dev/null || true
-docker rm -f preferences 2>/dev/null || true
 docker rm -f flowmanager 2>/dev/null || true
 
 # Remove old image (exit code is ignored)
