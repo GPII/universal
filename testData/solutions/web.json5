@@ -8,7 +8,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -79,7 +79,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -187,7 +187,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -283,7 +283,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -356,7 +356,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -424,14 +424,16 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
                     "language": {},
                     "contrastTheme": {},
                     "fontSize": {},
-                    "timeOut": {}
+                    "timeOut": {},
+                    "buttonSize": {},
+                    "fontFace": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastTheme",
@@ -499,7 +501,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "conf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
@@ -511,8 +513,14 @@
                     "signLanguageEnabled": {},
                     "signLanguage": {},
                     "interpreterType": {},
+                    "interpreterName": {},
                     "pictogramsEnabled": {},
-                    "simplifiedUiEnabled": {}
+                    "simplifiedUiEnabled": {},
+                    "textStyle": {},
+                    "lineSpacing": {},
+                    "contrastTheme": {},
+                    "inputsLarger": {}
+
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastTheme",
@@ -598,4 +606,3 @@
         }
     }
 }
-

@@ -148,7 +148,7 @@ The input for these POST requests will be in the following format. Note that it 
 
 ### Return payload
 
-The return payload from at call to `/match` should be in the following format:
+The return payload from at call to `/match` should be in the following format. The "active" key expresses whether the application should be set to running. A `true` value means that it should be running, `undefined` means we leave it in its current run state and `false` mean we should actively ensure that it is not running.
 
 ```
 {

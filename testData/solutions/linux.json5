@@ -9,7 +9,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
@@ -84,6 +84,16 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.gsettings.launch",
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-magnifier-enabled"
+                },
+                "supportedSettings": {
+                    "running": {}
+                }
             }
         },
         "update": [
@@ -96,33 +106,18 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "gnome-shell"
-            },
-            {
-                "type": "gpii.processReporter.checkSetting",
-                "schema": "org.gnome.desktop.a11y.applications",
-                "setting": "screen-magnifier-enabled",
-                "value": true
             }
         ]
     },
@@ -137,7 +132,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
@@ -247,12 +242,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "dunno"
-            }
         ]
     },
 
@@ -265,7 +254,7 @@
             }]
         },
 
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
@@ -293,12 +282,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "nautilus"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "nautilus"
-            }
         ]
     },
 
@@ -310,37 +293,37 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
                 ]
+            },
+            "launching": {
+                "type": "gpii.gsettings.launch",
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-keyboard-enabled"
+                }
             }
         },
+        "update": [
+        ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
-            }
+            "settings.launching"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
-            }
+            "settings.launching"
+        ],
+        "isRunning": [
+            "settings.launching"
         ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
                 "name": "gnome-shell"
             }
-        ],
-        "isRunning": [
-           {
-               "type": "gpii.processReporter.find",
-                "command": "caribou"
-           }
         ]
     },
 
@@ -352,7 +335,7 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
@@ -425,12 +408,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "gsettings-desktop-schemas"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "gnome-settings-daemon"
-            }
         ]
     },
 
@@ -443,7 +420,7 @@
             }]
         },
 
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
@@ -476,7 +453,7 @@
             }]
         },
 
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
@@ -509,7 +486,7 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.orca",
                 "liveness": "manualRestart",
@@ -1128,8 +1105,20 @@
                         }
                     ]
                 }
+            },
+            "launcher": {
+                "type": "gpii.gsettings.launch",
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-reader-enabled"
+                }
             }
         },
+        "update": [
+            "stop",
+            "configure",
+            "start"
+        ],
         "configure": [
             "settings.configuration"
         ],
@@ -1137,27 +1126,18 @@
             "settings.configuration"
         ],
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled false"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
                 "name": "orca"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "orca"
             }
         ]
     },
@@ -1172,7 +1152,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.alsa",
                 "liveness": "live",
@@ -1209,12 +1189,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "alsa-lib"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "alsactl"
-            }
         ]
     },
 
@@ -1228,25 +1202,38 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.launch.exec",
+                        "command": "google-chrome http://easyone.gpii.net/user/${{userToken}}"
+                    },
+                    "setFalse": {
+                        "type": "gpii.launch.exec",
+                        "command": "pkill -2 chrome"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome http://easyone.gpii.net/user/${{userToken}}"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -1260,12 +1247,6 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "chrome"
             }
         ]
     },
@@ -1280,25 +1261,38 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/simplification"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.launch.exec",
+                        "command": "google-chrome http://easyone.gpii.net/sudan"
+                    },
+                    "setFalse": {
+                        "type": "gpii.launch.exec",
+                        "command": "pkill -2 chrome"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome http://easyone.gpii.net/sudan"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -1312,12 +1306,6 @@
             {
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "chrome"
             }
         ]
     },
@@ -1332,25 +1320,38 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.launch.exec",
+                        "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
+                    },
+                    "setFalse": {
+                        "type": "gpii.launch.exec",
+                        "command": "pkill -2 chrome"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "pkill -2 chrome"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ],
         "isInstalled": [
             {
@@ -1365,12 +1366,6 @@
                 "type": "gpii.packageKit.find",
                 "name": "google-chrome-unstable"
             }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "chrome"
-            }
         ]
     },
 
@@ -1382,7 +1377,7 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.xrandr",
                 "liveness": "liveRestart",
@@ -1395,14 +1390,8 @@
         "configure": [
             "settings.configuration"
         ],
-        "stop": [
+        "restore": [
             "settings.configuration"
-        ],
-        "isInstalled": [
-            {
-                "type": "gpii.packageKit.find",
-                "name": "libXrandr"
-            }
         ]
     },
 
@@ -1410,11 +1399,11 @@
         "name": "UIO+",
         "contexts": {
             "OS": [{
-                    "id": "win32",
-                    "version": ">=5.0"
+                "id": "linux",
+                "version": ">=5.0"
             }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
                 "liveness": "live",
@@ -1526,8 +1515,6 @@
         "restore": [
             "settings.configuration"
         ],
-        "start": [],
-        "stop": [],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

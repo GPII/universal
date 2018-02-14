@@ -7,7 +7,7 @@ Each entry in the solution registry should have a unique ID (`Solution.id` in th
 "Solution.id": {
     "name": "My Solution"
     "contexts": { ... },
-    "settingsHandlers": { ... },
+    "handlers": { ... },
     "configure": [ .. ],
     "restore": [ .. ],
     "update": [ .. ],
@@ -38,12 +38,12 @@ The `contexts` block describes what the required context is for the solution to 
 }
 ```
 
-### settingsHandlers
-The `settingsHandlers` block is unique and one of the most important blocks in the solutions registry entry. It consists of zero or more settingsHandler entries, each keyed by an arbitrary name (that is unique within this solutions settingsHandlers block). Inside each settingsHandler entry, the properties for that settingsHandler is provided. The entries in the settingsHandlers block can be referred to from the other lifecycle blocks of the solutions registry entry. The settingsHandlers block is mandatory.
+### handlers
+The `handlers` block is unique and one of the most important blocks in the solutions registry entry. It consists of zero or more settingsHandler or LaunchHandler entries, each keyed by an arbitrary name (that is unique within this solutions handlers block). Inside each handler entry, the properties for that handler is provided. The entries in the settingsHandlers block can be referred to from the other lifecycle blocks of the solutions registry entry. The handlers block is mandatory.
 
 **Example settingsHandlers block**:
 ```
-"settingsHandlers": {
+"handlers": {
     "myconf": {
         "type": "gpii.settingsHandlers.INISettingsHandler",
         "liveness": "manualRestart",
@@ -146,7 +146,7 @@ Each of these lifecycle blocks allow the same content - which is an array with e
 
 The `update` block works very similarly to the configure, restore, start and stop blocks. It describes what should happen when the configuration needs to be updated (e.g. due to context changes, PCP adjustments, etc).
 
-The format of the `update` block allows for the same entries as the configure, restore, start and stop blocks - that is: arbitrary lifecycle action blocks and `settings.<blockname>`. Unlike for the other lifecycle blocks, the `update` block furthermore allows references to the `start`, `stop` and `configure` blocks. This is one by putting a string with the name of that block. When the system encounters one of these references, the entries of that block will be run.
+The format of the `update` block allows for the same entries as the configure, restore, start and stop blocks - that is: arbitrary lifecycle action blocks and `settings.<blockname>`. Unlike for the other lifecycle blocks, the `update` block furthermore allows references to the `start`, `stop` and `configure` blocks. This is done by putting a string with the name of that block. When the system encounters one of these references, the entries of that block will be run.
 
 **Example block**:
 ```

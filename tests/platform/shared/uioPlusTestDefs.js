@@ -47,8 +47,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for background color change for UIO+",
@@ -76,8 +75,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for font size transformation for UIO+",
@@ -105,8 +103,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for line space transformation for UIO+",
@@ -134,8 +131,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for highlight color transformation for UIO+",
@@ -163,8 +159,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for character space transformation for UIO+",
@@ -192,8 +187,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for inputs larger transformation for UIO+",
@@ -221,8 +215,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for self voicing transformation for UIO+",
@@ -250,8 +243,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for table of contents transformation for UIO+",
@@ -279,8 +271,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for dictionary transformation for UIO+",
@@ -308,8 +299,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for support tool transformation for UIO+ - multiple values",
@@ -337,8 +327,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for support tool transformation for UIO+ - unsupported values",
@@ -366,8 +355,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for simplified UI transformation for UIO+",
@@ -395,8 +383,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for syllabification UI transformation for UIO+",
@@ -424,8 +411,7 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     },
     {
         name: "Acceptance test for multiple transformations for UIO+",
@@ -453,7 +439,6 @@ gpii.tests.uioPlus.testDefs = [
                     }
                 ]
             }
-        },
-        processes: []
+        }
     }
 ];

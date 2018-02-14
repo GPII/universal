@@ -7,18 +7,30 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.androidActivityManager.startFreespeech"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.androidActivityManager.startFreespeech"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ]
     },
 
@@ -30,23 +42,36 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
                 ]
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.androidActivityManager.startTalkback"
+                    },
+                    "setFalse": {
+                        "type": "gpii.androidActivityManager.stopTalkback"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
         "start": [
-            {
-                "type": "gpii.androidActivityManager.startTalkback"
-            }
+            "settings.launcher"
         ],
         "stop": [
-            {
-                "type": "gpii.androidActivityManager.stopTalkback"
-            }
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
         ]
     },
 
@@ -60,7 +85,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidPersistentConfiguration",
                 "supportedSettings": {
@@ -164,7 +189,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidAudioManager.volume",
                 "supportedSettings": {
@@ -219,7 +244,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidSettings",
                 "options": {
@@ -288,7 +313,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.androidSettings",
                 "options": {
@@ -373,7 +398,7 @@
                 "version": ">=0.1"
               }]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "supportedSettings": {
@@ -415,28 +440,43 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {}
+            },
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.androidActivityManager.startActivityByPackageName",
+                        "packageName": "se.omnitor.ecmobile"
+                    },
+                    "setFalse": [
+                        {
+                            "type": "gpii.androidActivityManager.stopActivityByPackageName",
+                            "packageName": "se.omnitor.ecmobile"
+                        },
+                        {
+                            "type": "gpii.androidActivityManager.goToHomeScreen"
+                        }
+                    ],
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
+        "start": [
+            "settings.launcher"
+        ],
+        "stop": [
+            "settings.launcher"
+        ],
+        "isRunning": [
+            "settings.launcher"
+        ],
         "configure": [
             "settings.configuration"
         ],
         "restore": [
             "settings.configuration"
-        ],
-        "start": [
-            {
-                "type": "gpii.androidActivityManager.startActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.androidActivityManager.stopActivityByPackageName",
-                "packageName": "se.omnitor.ecmobile"
-            },
-            {
-                "type": "gpii.androidActivityManager.goToHomeScreen"
-            }
         ]
     },
 
@@ -450,7 +490,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {

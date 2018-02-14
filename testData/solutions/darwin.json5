@@ -8,7 +8,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
@@ -46,7 +46,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
@@ -85,7 +85,7 @@
                 }
             ]
         },
-        "settingsHandlers": {
+        "handlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
