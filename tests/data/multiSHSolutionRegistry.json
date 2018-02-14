@@ -10,6 +10,9 @@
                     }
                 ]
             },
+           "capabilities": [
+                "http://registry\\.gpii\\.net/common/magnification/enabled"
+            ],
             "settingsHandlers": {
                 "configuration": {
                     "type": "gpii.settingsHandlers.JSONSettingsHandler",
@@ -21,9 +24,6 @@
                         "magnification": {},
                         "tracking": {}
                     },
-                   "capabilities": [
-                        "http://registry\\.gpii\\.net/common/magnification/enabled"
-                    ],
                     "capabilitiesTransformations": {
                         "magnification": "http://registry\\.gpii\\.net/common/magnification",
                         "tracking": "http://registry\\.gpii\\.net/common/tracking"
@@ -38,7 +38,6 @@
                         "weirdSetting": {},
                         "crazyColor": {}
                     },
-                    "capabilities": [],
                     "capabilitiesTransformations": {
                         "crazyColor": "http://registry\\.gpii\\.net/common/invertColours"
                     }

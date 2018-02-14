@@ -8,6 +8,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -76,9 +79,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "literalValue": "GPII"
@@ -243,7 +243,6 @@
                     "ENU-Message.SynthLangString": {},
                     "ENU-PCCursor.SynthLangString": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
                     "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
@@ -697,6 +696,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/languageAssistance"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
@@ -706,9 +708,6 @@
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/languageAssistance"
-                ],
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings"
                 },
@@ -812,6 +811,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry.gpii.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
@@ -886,7 +888,6 @@
                     },
                     "ZoomIncrement": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "Invert": {
                         "transform": {
@@ -1021,6 +1022,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
+        ],
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
@@ -1042,9 +1046,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "NavigationMode": {
                         "literalValue": 0
@@ -1099,6 +1100,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
@@ -1125,14 +1129,6 @@
                     "EchoChars": {},
                     "EchoWords": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
-                    "http://registry\\.gpii\\.net/common/speechRate",
-                    "http://registry\\.gpii\\.net/common/trackingTTS",
-                    "http://registry\\.gpii\\.net/common/keyEcho",
-                    "http://registry\\.gpii\\.net/common/wordEcho",
-                    "http://registry\\.gpii\\.net/common/pitch"
-                ],
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
                         "transform": {
@@ -1303,9 +1299,6 @@
                     "ShowKeyboardIntroduction": {},
                     "ShowBrowserSelection": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/volumeTTS"
-                ],
                 "capabilitiesTransformations": {
                     "SpeechVolume": {
                         "transform": {
@@ -1405,7 +1398,6 @@
                     "speech.symbolLevel": {},
                     "speech.espeak.voice": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "speech\\.espeak\\.pitch": {
                         "transform": {
@@ -1834,15 +1826,9 @@
                 }
             ]
         },
-
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/simplification"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/simplification"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -1894,14 +1880,9 @@
                 }
             ]
         },
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/pictorialSimplification"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/pictorialSimplification"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -1946,14 +1927,9 @@
                 }
             ]
         },
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -1998,7 +1974,6 @@
                 }
             ]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
@@ -2012,11 +1987,6 @@
                     "speakLabels": {},
                     "theme": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastTheme"
-                ],
                 "capabilitiesTransformations": {
                     "transform": [
                         {
@@ -2155,9 +2125,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
                         "transform": {
@@ -2202,9 +2169,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme"
-                ],
                 "capabilitiesTransformations": {
                     "LastHighContrastTheme": {
                         "transform": {
@@ -2268,7 +2232,6 @@
                 "supportedSettings": {
                     "StickyKeysOn": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
                         "transform": {
@@ -2354,7 +2317,6 @@
                         }
                     }
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "FilterKeysEnable": {
                         "transform": {
@@ -2571,7 +2533,6 @@
                         }
                     }
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "MouseKeysOn": {
                         "transform": {
@@ -2701,9 +2662,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/mouseTrailing"
-                ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
                         "transform": {
@@ -2754,10 +2712,6 @@
             "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "liveRestart",
-                "capabilities": [
-                    "display.screenEnhancement.screenResolution",
-                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
-                ],
                 "supportedSettings": {
                     "screen-resolution": {
                         "schema": {
@@ -2800,10 +2754,6 @@
                 "supportedSettings": {
                     "screen-dpi": {}
                 },
-                "capabilities": [
-                    "display.screenEnhancement.screenScale",
-                    "applications.com\\.microsoft\\.windows\\.screenDPI.id"
-                ],
                 "supportedSettings": {
                     "screen-dpi": {
                         "schema": {
@@ -2885,9 +2835,6 @@
                     "UpArrow": {},
                     "Wait": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/cursorSize"
-                ],
                 "capabilitiesTransformations": {
                     "Arrow": {
                         "transform": {
@@ -3194,7 +3141,6 @@
                     "highContrastEnabled": {},
                     "fontSize": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
@@ -3304,19 +3250,6 @@
                     "simplifiedUiEnabled": {},
                     "syllabificationEnabled": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/lineSpace",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/characterSpace",
-                    "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                    "http://registry\\.gpii\\.net/common/highlightColor",
-                    "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "http://registry\\.gpii\\.net/common/supportTool",
-                    "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
                     "fontSize": {
@@ -3416,10 +3349,12 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "OSRestart",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/speechControl"
-                ],
-                "supportedSettings": {}
+                "capabilitiesTransformations": {
+                    "sc": "http://registry\\.gpii\\.net/common/speechControl"
+                },
+                "supportedSettings": {
+                    "sc": {}
+                }
             }
         },
         "configure": [],

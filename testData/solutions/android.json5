@@ -7,14 +7,9 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -44,14 +39,9 @@
                     "version": ">=0.1"
                 }]
         },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -96,8 +86,7 @@
                     "fontScale": {},
                     "locale": {}
                 },
-                "capabilities": [],
-                "capabilitiesTransformations": {
+                                "capabilitiesTransformations": {
                     "fontScale": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
@@ -200,7 +189,6 @@
                     "STREAM_MUSIC": {},
                     "STREAM_SYSTEM": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "STREAM_MUSIC": {
                         "transform": {
@@ -261,7 +249,6 @@
                     "user_rotation": {},
                     "screen_off_timeout": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "dim_screen": {
                         "transform": {
@@ -327,7 +314,6 @@
                     "tts_default_pitch": {},
                     "tts_default_rate": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "tts_default_pitch": {
                         "transform": {
@@ -424,7 +410,6 @@
                         }
                     }
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "map\\.string\\.fontsize\\.$t": {
                         "transform": {
@@ -506,7 +491,6 @@
                     "access_commonprefs_punctuation": {},
                     "access_commonprefs_capitalization": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {

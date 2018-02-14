@@ -57,7 +57,6 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
             "presentation.reportHelpBalloons": { ... metadata for setting ... },
             "speech.nonTransformableSetting": { ... metadata for setting ... }
         },
-        "capabilities": [],
         "capabilitiesTransformations": {
             "speech.espeak.pitch": {
                 "transform": {

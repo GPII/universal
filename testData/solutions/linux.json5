@@ -24,7 +24,6 @@
                     "mouse-tracking": {},
                     "screen-position": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
                     "show-cross-hairs": "http://registry\\.gpii\\.net/common/showCrosshairs",
@@ -141,7 +140,6 @@
                     "gtk-theme": {},
                     "icon-theme": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "text-scaling-factor": {
                         "transform": {
@@ -260,7 +258,6 @@
                 "supportedSettings": {
                     "font": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "font": "http://registry\\.gpii\\.net/common/0"
                 },
@@ -292,14 +289,9 @@
                 "version": ">=2.6.26"
             }]
         },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
+        ],
         "launchHandlers": {
             "launching": {
                 "type": "gpii.gsettings.launch",
@@ -351,7 +343,6 @@
                     "mousekeys-max-speed": {},
                     "mousekeys-accel-time": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "stickykeys-enable": "http://registry\\.gpii\\.net/common/stickyKeys",
                     "slowkeys-enable": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
@@ -425,7 +416,6 @@
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
-                "capabilities": [],
                 "options": {
                     "schema": "org.gnome.desktop.wm.preferences"
                 }
@@ -453,13 +443,10 @@
                 "version": ">=2.6.26"
             }]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
                 "liveness": "live",
-                "capabilities": [
-                ],
                 "options": {
                     "schema": "org.gnome.shell.overrides"
                 }
@@ -487,6 +474,9 @@
                 "version": ">=2.6.26"
             }]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.orca",
@@ -507,9 +497,6 @@
                     "voices.default.family": {},
                     "verbalizePunctuationStyle": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "enableTutorialMessages": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
                     "enableEchoByCharacter": "http://registry\\.gpii\\.net/common/keyEcho",
@@ -1162,7 +1149,6 @@
                 "supportedSettings": {
                     "masterVolume": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "masterVolume": {
                         "transform": {
@@ -1205,14 +1191,9 @@
                 }
             ]
         },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/simplification"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/simplification"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -1266,12 +1247,12 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/simplification"
+        ],
         "settingsHandlers": {
             "configuration": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/simplification"
-                ]
+                "type": "gpii.settingsHandlers.noSettings"
             }
         },
         "launchHandlers": {
@@ -1327,14 +1308,9 @@
                 }
             ]
         },
-        "settingsHandlers": {
-            "configuration": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ]
-            }
-        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
@@ -1390,7 +1366,6 @@
             "configuration": {
                 "type": "gpii.xrandr",
                 "liveness": "liveRestart",
-                "capabilities": [],
                 "supportedSettings": {
                     "screen-resolution": {}
                 }
@@ -1432,19 +1407,6 @@
                     "simplifiedUiEnabled": {},
                     "syllabificationEnabled": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/lineSpace",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/characterSpace",
-                    "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                    "http://registry\\.gpii\\.net/common/highlightColor",
-                    "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "http://registry\\.gpii\\.net/common/supportTool",
-                    "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
                     "fontSize": {

@@ -20,7 +20,6 @@
                     "highContrastTheme": {},
                     "invertColours": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
                     "fontSize": {
@@ -96,7 +95,6 @@
                     "tracking": {},
                     "magnification": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontSize": {
                         "transform":{
@@ -196,12 +194,6 @@
                     "language": {},
                     "theme": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/volume",
-                    "http://registry\\.gpii\\.net/common/language"
-                ],
                 "capabilitiesTransformations": {
                     "theme": {
                         "transform": {
@@ -292,11 +284,6 @@
                     "highContrastTheme": {},
                     "volume": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/volume"
-                ],
                 "capabilitiesTransformations": {
                     "fontSize": {
                         "transform": {
@@ -367,7 +354,6 @@
                     "access_commonprefs_capitalization": {},
                     "access_commonprefs_c4a_enable_braille": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {
@@ -435,11 +421,6 @@
                     "buttonSize": {},
                     "fontFace": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "contrastTheme": {
@@ -522,10 +503,6 @@
                     "inputsLarger": {}
 
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "textSize": {
