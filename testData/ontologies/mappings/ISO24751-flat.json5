@@ -8,7 +8,7 @@
     "http://registry\\.gpii\\.net/common/highlightColor": "display.screenEnhancement.highlightColor",
     "http://registry\\.gpii\\.net/common/fontFaceFontName": "display.screenEnhancement.fontFaceFontName",
     "http://registry\\.gpii\\.net/common/fontFaceGenericFontFace": "display.screenEnhancement.fontFaceGenericFontFace",
-    "http://registry\\.gpii\\.net/common/magnifierEnabled": "display.screenEnhancement.-provisional-magnifierEnabled",
+    "http://registry\\.gpii\\.net/common/magnification/enabled": "display.screenEnhancement.-provisional-magnification/enabled",
     "http://registry\\.gpii\\.net/common/magnification": "display.screenEnhancement.magnification",
     "http://registry\\.gpii\\.net/common/magnifierPosition": "display.screenEnhancement.-provisional-magnifierPosition",
     "http://registry\\.gpii\\.net/common/tracking": "display.screenEnhancement.tracking",

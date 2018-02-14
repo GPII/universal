@@ -15,7 +15,7 @@
                     "filename": "/tmp/fakemag1.settings.json"
                 },
                 "capabilities": [
-                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                    "http://registry\\.gpii\\.net/common/magnification/enabled"
                 ],
                 "capabilitiesTransformations": {
                     "magnification": "http://registry\\.gpii\\.net/common/magnification"
@@ -53,7 +53,7 @@
                     "filename": "/tmp/fakemag2.settings.json"
                 },
                 "capabilities": [
-                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                    "http://registry\\.gpii\\.net/common/magnification/enabled"
                 ],
                 "capabilitiesTransformations": {
                     "magnification": "http://registry\\.gpii\\.net/common/magnification",

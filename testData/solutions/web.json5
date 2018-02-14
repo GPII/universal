@@ -42,7 +42,7 @@
                             ]
                         }
                     },
-                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnification/enabled",
                     "magnification": {
                         "transform": {
                             "type": "fluid.transforms.quantize",

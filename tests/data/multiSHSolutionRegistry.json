@@ -22,7 +22,7 @@
                         "tracking": {}
                     },
                    "capabilities": [
-                        "http://registry\\.gpii\\.net/common/magnifierEnabled"
+                        "http://registry\\.gpii\\.net/common/magnification/enabled"
                     ],
                     "capabilitiesTransformations": {
                         "magnification": "http://registry\\.gpii\\.net/common/magnification",

@@ -164,7 +164,7 @@
             "max": 100,
             "divisibleBy": 1
         },
-        "http://registry.gpii.net/common/magnifierEnabled": {
+        "http://registry.gpii.net/common/magnification/enabled": {
             "title": "Magnifier Enabled",
             "description": "Whether to enable/disable magnification",
             "type": "boolean",
