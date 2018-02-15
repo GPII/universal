@@ -20,7 +20,7 @@
             "flowManager.production.preferencesServer.dataStore": {
                 "source": "{that}.options.dataSourceConfigProductionEnv",
                 "target": "{that preferencesServer dataStore}.options.dataSourceConfig",
-                "priority": "after:flowManager.development.preferencesServer.dataStore"
+                "priority": "after:preferencesServer.dataStore"
             }
         }
     },
