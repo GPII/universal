@@ -2,7 +2,7 @@
     "type": "gpii.tests.instrumenter.config",
     "options": {
         "sources": ["./gpii/**/*.js"],
-        "excludes": ["./node_modules/**/*", "./gpii/node_modules/testing/**/*"],
+        "excludes": ["./node_modules/**/*"],
         "nonSources": [
             "./*.json",
             "./scripts/*.js",

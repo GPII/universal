@@ -91,7 +91,6 @@
     "!**/gpii/node_modules/singleInstance/src/singleInstance.js",
     "!**/gpii/node_modules/transformer/index.js",
     "!**/gpii/node_modules/transformer/src/js/Transformer.js",
-    "gpii/node_modules/testing",
     "testData",
     "tests",
     "reports",
