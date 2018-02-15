@@ -1,13 +1,21 @@
 {
     "type": "gpii.tests.instrumenter.config",
     "options": {
+        "sources": ["./gpii/**/*.js"],
+        "excludes": ["./node_modules/**/*", "./gpii/node_modules/testing/**/*"],
         "nonSources": [
-            "!./**/*.js",
-            "./Gruntfile.js",
-            "**/tests/**",
-            "**/test/**",
-            "**/webTests/**",
-            "**/public/lib/**"
+            "./*.json",
+            "./scripts/*.js",
+            "./testData/**/*.js",
+            "./tests/**",
+            "./!(node_modules)/**/*.!(js)",
+            "./!(node_modules)/*.!(js)",
+            "./!(node_modules)/tests/**/*.js",
+            "./!(node_modules)/**/tests/**/*.js",
+            "./!(node_modules)/test/**/*.js",
+            "./!(node_modules)/**/test/**/*.js",
+            "./!(node_modules)/**/webTests/**/*.js",
+            "./!(node_modules)/**/public/lib/**/*"
         ]
     },
     "mergeConfigs": "%gpii-testem/configs/instrumenter.json",

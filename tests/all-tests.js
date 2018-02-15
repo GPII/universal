@@ -22,7 +22,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-fluid.require("%universal");
+// We must pass the current `require` to `fluid.require`, as nyc's instrumentation is hooked into it.
+fluid.require("%universal", require);
 
 kettle.loadTestingSupport();
 
