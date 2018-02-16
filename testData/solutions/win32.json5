@@ -2148,6 +2148,9 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/stickyKeys": "StickyKeysOn.value"
                 }
             }
         },
