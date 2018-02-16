@@ -18,7 +18,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("./shared/ContextIntegrationTestDefs.js");
 
 gpii.tests.contextIntegration.baseTestDef = {
@@ -28,7 +28,7 @@ gpii.tests.contextIntegration.baseTestDef = {
     ],
     config: {
         configName: "gpii.tests.acceptance.linux.builtIn.config",
-        configPath: "%universal/tests/platform/linux/configs"
+        configPath: "%gpii-universal/tests/platform/linux/configs"
     }
 };
 

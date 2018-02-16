@@ -7,7 +7,7 @@
                     "type": "kettle.dataSource.file",
                     "options": {
                         "gradeNames": "kettle.dataSource.file.moduleTerms",
-                        "path": "%universal/testData/preferences/acceptanceTests/%userToken.json"
+                        "path": "%gpii-universal/testData/preferences/acceptanceTests/%userToken.json"
                     }
                 },
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}",
@@ -16,6 +16,6 @@
         }
     },
     "mergeConfigs": [
-        "%universal/gpii/configs/gpii.config.cloudBased.development.json"
+        "%gpii-universal/gpii/configs/gpii.config.cloudBased.development.json"
     ]
 }

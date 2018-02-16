@@ -19,7 +19,7 @@
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -260,6 +260,6 @@ gpii.tests.conflictingApps.testDefs = [
 module.exports = gpii.test.runTests({
     testDefs:  "gpii.tests.conflictingApps.testDefs",
     configName: "gpii.tests.multiScreenreader.config",
-    configPath: "%universal/tests/configs"
+    configPath: "%gpii-universal/tests/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);
