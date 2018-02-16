@@ -17,7 +17,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -25,13 +25,13 @@ fluid.require("%flowManager/test/shared/BrowserChannelTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.untrusted.flowManager.browserChannel");
 
-// The test pouchdb data is from %universal/tests/platform/cloud/OAuth2AcceptanceDataStore.json
+// The test pouchdb data is from %gpii-universal/tests/platform/cloud/OAuth2AcceptanceDataStore.json
 gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.tests.flowManager.browserChannel.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         gradeNames: ["gpii.test.pouch.pouchTestCaseHolder"],
         config: {
             configName: "gpii.tests.acceptance.untrusted.browserChannel.config",
-            configPath: "%universal/tests/configs"
+            configPath: "%gpii-universal/tests/configs"
         }
     });
 

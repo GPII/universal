@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("./shared/PCPIntegrationTestDefs.js");
 
 gpii.loadTestingSupport();
@@ -32,7 +32,7 @@ gpii.tests.untrusted.pcpIntegration.testDefs =
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
                 configName: "gpii.tests.acceptance.linux.builtIn.untrusted.config",
-                configPath: "%universal/tests/platform/linux/configs"
+                configPath: "%gpii-universal/tests/platform/linux/configs"
             },
             gradeNames: [
                 "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
