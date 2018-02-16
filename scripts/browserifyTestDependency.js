@@ -16,7 +16,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // This script uses fluid-resolve npm package (https://www.npmjs.com/package/fluid-resolve) to detect
 // the existence of a resolvable browserify module which is ordinarily only pulled in as a devDependency.
 // If the directory is present, this script browserifies some node js scripts that are used by some
-// in-browser tests, e.g. all tests located at %universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/.
+// in-browser tests, e.g. all tests located at %gpii-universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/.
 // Otherwise, skip the browserifying and exit quietly.
 
 "use strict";
@@ -27,7 +27,7 @@ var fluid = require("infusion"),
     mkdirp = require("mkdirp"),
     exec = require('child_process').exec;
 
-var universalPath = fluid.module.resolvePath("%universal");
+var universalPath = fluid.module.resolvePath("%gpii-universal");
 
 // Detect whether the devDependency module "browserify" exists
 resolve("browserify", {basedir: universalPath}, function (err, res) {
