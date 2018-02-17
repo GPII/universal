@@ -65,7 +65,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
         gpii.start({
-            configPath: "%universal/gpii/configs",
+            configPath: "%gpii-universal/gpii/configs",
             configName: "gpii.config.development.local"
         });
 
