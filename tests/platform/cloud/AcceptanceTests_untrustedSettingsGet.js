@@ -18,7 +18,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     jqUnit = fluid.registerNamespace("jqUnit");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 

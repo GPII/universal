@@ -18,7 +18,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -156,6 +156,6 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.deviceReporterAware.linux.orca.testDefs",
     configName: "gpii.tests.acceptance.linux.dynamicDeviceReporter.config",
-    configPath: "%universal/tests/platform/linux/configs"
+    configPath: "%gpii-universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux", "gpii.test.integration.deviceReporterAware.linux"],
     module, require, __dirname);

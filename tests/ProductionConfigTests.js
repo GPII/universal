@@ -29,7 +29,7 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 /*
  * ========================================================================
@@ -45,7 +45,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.tests.acceptance.untrusted.production",
-            configPath: "%universal/tests/configs"
+            configPath: "%gpii-universal/tests/configs"
         }
     });
     return testDef;

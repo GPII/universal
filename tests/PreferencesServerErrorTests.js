@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -29,7 +29,7 @@ fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 gpii.tests.preferencesServerErrorTests.testDefCommon = {
     config: {
         configName: "gpii.config.development.local",
-        configPath: "%universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"]
 };

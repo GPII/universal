@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 require("./shared/UserLogonStateChangeTestDefs.js");
 
@@ -33,7 +33,7 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
                 configName: "gpii.config.untrusted.development.local.json",
-                configPath: "%universal/gpii/configs"
+                configPath: "%gpii-universal/gpii/configs"
             },
             gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
             gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
