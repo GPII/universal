@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -100,27 +100,29 @@ gpii.tests.userLogonHandling.testLogoutResponse = function (data) {
         gpii.tests.userLogonHandling.userToken + " was successfully logged out.", data);
 };
 
-gpii.tests.userLogonHandling.testErrorResponse = function (expMsg, expCode) {
-    return function (data) {
-        data = JSON.parse(data);
-        jqUnit.assertTrue("Received error as expected", data.isError);
-        jqUnit.assertEquals("Received message as expected", expMsg, data.message);
-        jqUnit.assertEquals("Received correct error code", expCode, data.statusCode);
-    };
+gpii.tests.userLogonHandling.checkClearedLifecycleManager = function (lifecycleManager) {
+    var model = lifecycleManager.model;
+    jqUnit.assertTrue("LogonChange model exists", model && model.logonChange);
+    jqUnit.assertFalse("Login should not be set as in proress", model.logonChange.inProgress);
+    jqUnit.assertTrue("Current user token should be undefined", model.logonChange.userToken === undefined);
+
+    jqUnit.assertEquals("No active sessions stored in lifecycle manager", lifecycleManager.getActiveSessionTokens().length, 0);
 };
+
 
 gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             config: {
                 configName: "gpii.config.development.all.local",
-                configPath: "%universal/gpii/configs"
+                configPath: "%gpii-universal/gpii/configs"
             },
             gradeNames: [ "gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux" ],
-            userToken: gpii.tests.userLogonHandling.userToken
+            userToken: testDefs.userToken || gpii.tests.userLogonHandling.userToken
         }, testDef);
     });
 };
+
 
 gpii.tests.userLogonHandling.testDefs = [{
     name: "Testing standard proximityTriggered login and logout",
@@ -330,5 +332,31 @@ gpii.tests.userLogonHandling.testDefs = [{
             string: "{arguments}.0",
             request: "{logoutRequest2}"
         }
+    }]
+}, {
+    name: "Testing standard error handling: invalid user URLs",
+    expect: 7,
+    userToken: "bogusToken",
+    untrustedExtras: {
+        statusCode: 401,
+        errorText: "Error while executing HTTP POST on"
+    },
+    errorText: "Error when retrieving preferences: Raw preferences server: Preferences missing for user bogusToken",
+    statusCode: 404,
+    sequence: [{ // standard login
+        func: "{proximityTriggeredRequest}.send"
+    }, {
+        event: "{proximityTriggeredRequest}.events.onComplete",
+        listener: "kettle.test.assertErrorResponse",
+        args: {
+            message: "Received error when logging in non-existing user",
+            errorTexts: "{testCaseHolder}.options.errorText",
+            string: "{arguments}.0",
+            request: "{proximityTriggeredRequest}",
+            statusCode: "{testCaseHolder}.options.statusCode"
+        }
+    }, {
+        func: "gpii.tests.userLogonHandling.checkClearedLifecycleManager",
+        args: [ "{lifecycleManager}" ]
     }]
 }];

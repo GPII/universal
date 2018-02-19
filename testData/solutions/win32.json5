@@ -11,6 +11,7 @@
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
@@ -205,6 +206,7 @@
             },
             "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
@@ -622,6 +624,11 @@
             "settings.configuration1",
             "settings.configuration2"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.launch.exec",
@@ -664,6 +671,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
                     "encoding": "utf-8",
@@ -704,6 +712,11 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
         ],
         "start": [
             {
@@ -747,6 +760,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier",
@@ -920,6 +934,11 @@
                 "enable": false
             }
         ],
+        "update": [
+            "stop",
+            "configure",
+            "start"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -946,6 +965,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Osk",
@@ -1020,6 +1040,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator",
@@ -1257,6 +1278,11 @@
             "settings.configure",
             "settings.configureNoRoam"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -1291,6 +1317,7 @@
         "settingsHandlers": {
             "configs": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
@@ -1678,6 +1705,11 @@
         "restore": [
             "settings.configs"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.launch.exec",
@@ -1737,10 +1769,17 @@
         ],
         "stop": [
             {
-                    "type": "gpii.windows.closeProcessByName",
-                    "filename": "firefox.exe"
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "firefox.exe"
             }
         ],
+        // Although there are no settings to deal with, we need to pass through
+        // the "configure" action in order to proceed with the "stop" directive
+        // when keying out. This is a current limitation of the system, you can
+        // check https://issues.gpii.net/browse/GPII-2106 and
+        // https://issues.gpii.net/browse/GPII-1235 for more detailed information.
+        //
+        "configure": [ "settings.configure" ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1854,6 +1893,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
@@ -1959,6 +1999,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETHIGHCONTRAST",
                     "setAction": "SPI_SETHIGHCONTRAST",
@@ -2003,6 +2044,7 @@
             },
             "configureTheme": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
@@ -2053,6 +2095,10 @@
             "settings.configureTheme",
             "settings.configure"
         ],
+        "update": [
+            "settings.configureTheme",
+            "settings.configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2073,6 +2119,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETSTICKYKEYS",
                     "setAction": "SPI_SETSTICKYKEYS",
@@ -2101,9 +2148,15 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/stickyKeys": "StickyKeysOn.value"
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2130,6 +2183,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETFILTERKEYS",
                     "setAction": "SPI_SETFILTERKEYS",
@@ -2321,6 +2375,9 @@
         "configure": [
             "settings.configure"
         ],
+        "update": [
+          "configure"
+        ],
         "restore": [
             "settings.configure"
         ],
@@ -2344,6 +2401,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETMOUSEKEYS",
                     "setAction": "SPI_SETMOUSEKEYS",
@@ -2460,6 +2518,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2486,6 +2547,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETMOUSETRAILS",
                     "setAction": "SPI_SETMOUSETRAILS",
@@ -2527,9 +2589,15 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/mouseTrailing": "MouseTrails.value"
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2556,6 +2624,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "liveRestart",
                 "capabilities": [
                     "display.screenEnhancement.screenResolution",
                     "applications.com\\.microsoft\\.windows\\.screenResolution.id"
@@ -2598,6 +2667,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "live",
                 "supportedSettings": {
                     "screen-dpi": {}
                 },
@@ -2627,6 +2697,9 @@
         "restore": [
             "settings.configure"
         ],
+        "update": [
+          "configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2647,6 +2720,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors",
@@ -2933,6 +3007,10 @@
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
         ],
+        "update": [
+            "configure",
+            "start"
+        ],
         "start": [
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
@@ -2960,6 +3038,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
@@ -3035,7 +3114,7 @@
     },
 
     "net.gpii.uioPlus": {
-        "name": "UIO+ Browser Extension",
+        "name": "UIO+",
         "contexts": {
             "OS": [{
                     "id": "win32",
@@ -3045,6 +3124,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
                 "options": {
                     "path": "net.gpii.uioPlus"
                 },
@@ -3150,6 +3230,9 @@
         "restore": [
             "settings.configuration"
         ],
+        "update": [
+          "configure"
+        ],
         "start": [],
         "stop": [],
         "isInstalled": [
@@ -3157,5 +3240,36 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+    "net.gpii.test.speechControl": { // This solution does not exist in real life and has been added strictly for user testing/demoing
+        "name": "GPII Test solution for speech control of the computer",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "OSRestart",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/speechControl"
+                ],
+                "supportedSettings": {}
+            }
+        },
+        "configure": [],
+        "restore": [],
+        "start": [],
+        "stop": [],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": []
     }
 }
