@@ -1,6 +1,6 @@
 # uioPlusCommon
 
-A preference set for testing preference settings in the UIO+ browser extension.
+A preference set for testing preference settings in UIO+.
 
 Attempts to set all of the UIO+ supported preferences.
 

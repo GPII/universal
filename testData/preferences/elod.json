@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Elod",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

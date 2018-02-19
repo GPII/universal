@@ -1,0 +1,32 @@
+{
+    "type": "gpii.config.untrusted.development.all.local.mock.windows",
+    "options": {
+        "gradeNames": ["kettle.multiConfig.config"],
+        "configs": {
+            "localConfig": {
+                "configName": "gpii.config.untrusted.development.mock.windows",
+                "configPath": "%universal/gpii/configs/mocks"
+            },
+            "cloudBasedConfig": {
+                "configName": "gpii.config.cloudBased.development.all.local",
+                "configPath": "%universal/gpii/configs"
+            }
+        },
+        "distributeOptions": {
+            "untrusted.development.port": {
+                "record": 8084,
+                "target": "{that cloudBasedConfig}.options.mainServerPort"
+            },
+            "untrusted.development.prefs": {
+                "record": "http://localhost:8084/preferences/%userToken",
+                "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
+                "priority": "after:flowManager.development.prefs"
+            },
+            "untrusted.development.matchMakers": {
+                "record": "http://localhost:8084",
+                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.default.url",
+                "priority": "after:flowManager.development.matchMakers"
+            }
+        }
+    }
+}
