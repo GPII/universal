@@ -5,7 +5,7 @@
         "configs": {
             "cloudBasedConfig": {
                 "configName": "gpii.config.cloudBased.development",
-                "configPath": "%universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs"
             }
         },
         "distributeOptions": {
@@ -32,5 +32,5 @@
             }
         }
     },
-    "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
+    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
 }

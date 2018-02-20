@@ -18,7 +18,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("./shared/PCPIntegrationTestDefs.js");
 
 kettle.test.bootstrapServer(gpii.tests.pcpIntegration.buildTestDefs(gpii.tests.pcpIntegration.testDefs));
