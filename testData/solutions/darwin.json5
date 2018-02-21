@@ -86,7 +86,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
         ],
         "settingsHandlers": {
             "configuration": {

@@ -23,7 +23,7 @@
                     "http://registry.gpii.net/common/punctuationVerbosity": "some",
                     "http://registry.gpii.net/common/readingUnit": "word",
                     "http://registry.gpii.net/common/auditoryOutLanguage": "GR",
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/screenReaderTTS/enabled": true,
                     "http://registry.gpii.net/common/pitch": 0.4,
                     "http://registry.gpii.net/common/volumeTTS": 0.5,
 

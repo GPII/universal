@@ -9,7 +9,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
         ],
         "settingsHandlers": {
             "configuration1": {
@@ -1023,7 +1023,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
+            "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled"
         ],
         "settingsHandlers": {
             "configure": {
@@ -1101,7 +1101,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
         ],
         "settingsHandlers": {
             "configure": {
@@ -1432,7 +1432,7 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                             "match": {
                                 "false": {
                                     "outputValue": {
@@ -1624,7 +1624,7 @@
                         },
                         {
                             "type": "fluid.transforms.condition",
-                            "outputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "outputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                             "false": true,
                             "true": false,
                             "condition": {
@@ -1928,7 +1928,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
         ],
         "launchHandlers": {
             "launcher": {
@@ -1991,25 +1991,25 @@
                     "transform": [
                         {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakOnActivate",
                             "true": "yes",
                             "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakTitles",
                             "true": "yes",
                             "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakLabels",
                             "true": "yes",
                             "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "condition": false,
                             "outputPath": "theme",
                             "false": "colour",
@@ -2129,7 +2129,7 @@
                     "HighContrastOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "inputPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "outputPath": "value"
                         },
                         "path": {
@@ -2141,7 +2141,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled": "HighContrastOn.value"
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
                 }
             },
             "configureTheme": {
@@ -2324,9 +2324,9 @@
                     "FilterKeysEnable": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
+                            "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
                             "left": false,
-                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
@@ -2341,7 +2341,7 @@
                     "SlowKeysInterval": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
@@ -2365,7 +2365,7 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                                     "left": false,
                                     "right": false,
                                     "operator": "==="
@@ -2374,7 +2374,7 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.condition",
-                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
                                     "true": {
                                         "transform": {
                                             "type": "fluid.transforms.linearScale",
@@ -2398,7 +2398,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/slowKeysEnabled": {
+                    "http://registry\\.gpii\\.net/common/slowKeys/enabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2432,7 +2432,7 @@
                             }
                         }
                     },
-                    "http://registry\\.gpii\\.net/common/debounceEnabled": {
+                    "http://registry\\.gpii\\.net/common/debounce/enabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2540,7 +2540,7 @@
                     "MouseKeysOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                             "outputPath": "value"
                         },
                         "path": {
@@ -2601,7 +2601,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/mouseEmulationEnabled": "MouseKeysOn.value",
+                    "http://registry\\.gpii\\.net/common/mouseEmulation/enabled": "MouseKeysOn.value",
                     "http://registry\\.gpii\\.net/common/cursorSpeed": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -3158,10 +3158,10 @@
                         "literalValue": 1
                     },
                     "screenReaderTTSEnabled": {
-                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
                     },
                     "highContrastEnabled": {
-                        "value": "http://registry\\.gpii\\.net/common/highContrastEnabled"
+                        "value": "http://registry\\.gpii\\.net/common/highContrast/enabled"
                     },
                     "fontSize": {
                         "value": {
@@ -3273,11 +3273,11 @@
                         }
                     },
                     "characterSpace": "http://registry\\.gpii\\.net/common/characterSpace",
-                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -3294,7 +3294,7 @@
                             "false": "default"
                         }
                     },
-                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
                     "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
                     "dictionaryEnabled": {
@@ -3320,8 +3320,8 @@
                             }
                         }
                     },
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabificationEnabled"
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }

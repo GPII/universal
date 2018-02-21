@@ -19,8 +19,8 @@
                 "magnifierEnabled": false,
                 "magnification": 1,
                 "highContrastTheme": "white-black",
-                "highContrastEnabled": true,
-                "screenReaderTTSEnabled": false
+                "highContrast/enabled": true,
+                "screenReaderTTS/enabled": false
             }
         }
     },
@@ -34,8 +34,8 @@
                 "invertColours": false,
                 "magnifierEnabled": false,
                 "magnification": 1,
-                "highContrastEnabled": false,
-                "screenReaderTTSEnabled": false
+                "highContrast/enabled": false,
+                "screenReaderTTS/enabled": false
             }
         }
     },
@@ -49,8 +49,8 @@
                 "invertColours": false,
                 "magnifierEnabled": true,
                 "magnification": 2,
-                "highContrastEnabled": false,
-                "screenReaderTTSEnabled": false
+                "highContrast/enabled": false,
+                "screenReaderTTS/enabled": false
             }
         }
     }

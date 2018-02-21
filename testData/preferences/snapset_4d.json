@@ -8,12 +8,12 @@
                     "http://registry.gpii.net/common/magnification": 2,
                     "http://registry.gpii.net/common/magnifierPosition": "Lens",
                     "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
-                        "http://registry.gpii.net/common/highContrastEnabled": true,
+                        "http://registry.gpii.net/common/highContrast/enabled": true,
                         "http://registry.gpii.net/common/highContrastTheme": "white-black"
                     },
                     "http://registry.gpii.net/applications/net.gpii.uioPlus": {
                         "http://registry.gpii.net/common/supportTool": ["dictionary"],
-                        "http://registry.gpii.net/common/highContrastEnabled": true,
+                        "http://registry.gpii.net/common/highContrast/enabled": true,
                         "http://registry.gpii.net/common/highContrastTheme": "white-black"
                     }
                 }

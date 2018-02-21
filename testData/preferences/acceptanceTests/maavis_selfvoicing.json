@@ -4,7 +4,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                   "http://registry.gpii.net/common/selfVoicingEnabled": true
+                   "http://registry.gpii.net/common/selfVoicing/enabled": true
                }
            }
        }

@@ -171,7 +171,7 @@
                     "gtk-theme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": "HighContrast",
                             "false": "Adwaita"
                         }
@@ -179,7 +179,7 @@
                     "icon-theme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": "HighContrast",
                             "false": "gnome"
                         }
@@ -205,7 +205,7 @@
                         },
                         {
                             "type": "fluid.transforms.binaryOp",
-                            "outputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "outputPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "left": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
@@ -290,7 +290,7 @@
             }]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
+            "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled"
         ],
         "launchHandlers": {
             "launching": {
@@ -345,7 +345,7 @@
                 },
                 "capabilitiesTransformations": {
                     "stickykeys-enable": "http://registry\\.gpii\\.net/common/stickyKeys",
-                    "slowkeys-enable": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                    "slowkeys-enable": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                     "slowkeys-delay": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -353,7 +353,7 @@
                             "factor": 1000
                         }
                     },
-                    "bouncekeys-enable": "http://registry\\.gpii\\.net/common/debounceEnabled",
+                    "bouncekeys-enable": "http://registry\\.gpii\\.net/common/debounce/enabled",
                     "bouncekeys-delay": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -361,7 +361,7 @@
                             "factor": 1000
                         }
                     },
-                    "mousekeys-enable": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+                    "mousekeys-enable": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                     "mousekeys-init-delay": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -475,7 +475,7 @@
             }]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
         ],
         "settingsHandlers": {
             "configuration": {
@@ -502,7 +502,7 @@
                     "enableEchoByCharacter": "http://registry\\.gpii\\.net/common/keyEcho",
                     "enableEchoByWord": "http://registry\\.gpii\\.net/common/wordEcho",
                     "enableBraille": "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput",
-                    "enableSpeech": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "enableSpeech": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                     "sayAllStyle": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -967,7 +967,7 @@
                     "http://registry\\.gpii\\.net/common/keyEcho": "enableEchoByCharacter",
                     "http://registry\\.gpii\\.net/common/wordEcho": "enableEchoByWord",
                     "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": "enableBraille",
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled": "enableSpeech",
+                    "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": "enableSpeech",
                     "transform": [
                         {
                             "type": "fluid.transforms.valueMapper",
@@ -1309,7 +1309,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
         ],
         "launchHandlers": {
             "launcher": {
@@ -1424,11 +1424,11 @@
                         }
                     },
                     "characterSpace": "http://registry\\.gpii\\.net/common/characterSpace",
-                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -1445,7 +1445,7 @@
                             "false": "default"
                         }
                     },
-                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
                     "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
                     "dictionaryEnabled": {
@@ -1471,8 +1471,8 @@
                             }
                         }
                     },
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabificationEnabled"
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }

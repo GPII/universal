@@ -12,16 +12,16 @@
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
-                    "screenReaderTTSEnabled": {},
+                    "screenReaderTTS/enabled": {},
                     "fontSize": {},
                     "magnifierEnabled": {},
                     "magnification": {},
-                    "highContrastEnabled": {},
+                    "highContrast/enabled": {},
                     "highContrastTheme": {},
                     "invertColours": {}
                 },
                 "capabilitiesTransformations": {
-                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "screenReaderTTS/enabled": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                     "fontSize": {
                         "transform":{
                             "type": "fluid.transforms.quantize",
@@ -61,7 +61,7 @@
                             ]
                         }
                     },
-                    "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "highContrast/enabled": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
                 },
@@ -426,7 +426,7 @@
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -535,7 +535,7 @@
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -550,7 +550,7 @@
                             }
                         }
                     },
-                    "signLanguageEnabled": "http://registry\\.gpii\\.net/common/signLanguageEnabled",
+                    "signLanguageEnabled": "http://registry\\.gpii\\.net/common/signLanguage/enabled",
                     "signLanguage": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -575,8 +575,8 @@
                             }
                         }
                     },
-                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled",
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
+                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictograms/enabled",
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
