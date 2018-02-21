@@ -38,7 +38,7 @@ gpii.tests.payloadSize.testDefs = [{
         configName: "gpii.config.development.local",
         configPath: "%gpii-universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
+    gradeNames: ["gpii.test.common.testCaseHolder"],
     gpiiKey: "giant",
 
     sequence: [{
@@ -54,7 +54,4 @@ gpii.tests.payloadSize.testDefs = [{
     }]
 }];
 
-kettle.test.bootstrapServer(fluid.transform(gpii.tests.payloadSize.testDefs, function (testDef) {
-    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
-    return testDef;
-}));
+gpii.test.bootstrapServer(gpii.tests.payloadSize.testDefs);

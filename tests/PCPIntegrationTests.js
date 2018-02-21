@@ -21,4 +21,4 @@ var fluid = require("infusion"),
 fluid.require("%gpii-universal");
 require("./shared/PCPIntegrationTestDefs.js");
 
-kettle.test.bootstrapServer(gpii.tests.pcpIntegration.buildTestDefs(gpii.tests.pcpIntegration.testDefs));
+gpii.test.bootstrapServer(gpii.tests.pcpIntegration.buildTestDefs(gpii.tests.pcpIntegration.testDefs));

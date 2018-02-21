@@ -46,7 +46,7 @@ gpii.tests.development.testDefs = [{
         configName: "gpii.config.development.local",
         configPath: "%gpii-universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
+    gradeNames: ["gpii.test.common.testCaseHolder"],
     gpiiKey: gpii.tests.development.gpiiKey,
 
     sequence: [{

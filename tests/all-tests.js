@@ -53,6 +53,7 @@ var testIncludes = [
     "./UntrustedPCPIntegrationTests.js",
     "./UntrustedUserLogonStateChangeTests.js",
     "./UserLogonStateChangeTests.js",
+    "./UserLogonStateEventsTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/canopyMatchMaker/test/CanopyMatchMakerTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",

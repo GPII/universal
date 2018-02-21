@@ -476,8 +476,8 @@ gpii.tests.journal.badJournalBaseTestDef = fluid.extend({
 }, gpii.tests.journal.baseTestDefBase);
 
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.journal.fixtures, gpii.tests.journal.baseTestDef));
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.journal.badJournalFixtures, gpii.tests.journal.badJournalBaseTestDef));

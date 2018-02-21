@@ -25,7 +25,4 @@ require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-kettle.test.bootstrapServer(fluid.transform(gpii.tests.development.testDefs, function (testDef) {
-    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
-    return testDef;
-}));
+gpii.test.bootstrapServer(gpii.tests.development.testDefs);

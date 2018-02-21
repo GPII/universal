@@ -78,4 +78,4 @@ gpii.tests.userLogonEvents.testDefs = [{
     }]
 }];
 
-kettle.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
+gpii.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonEvents.testDefs));

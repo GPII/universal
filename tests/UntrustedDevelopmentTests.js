@@ -36,10 +36,7 @@ gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.developme
         }
     });
 
-    testDef.gradeNames.push("gpii.test.pouch.pouchTestCaseHolder");
-
-    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
     return testDef;
 });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.development.testDefs);

@@ -25,7 +25,7 @@ fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
 fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"],
+    gradeNames: ["gpii.test.common.testCaseHolder"],
     distributeOptions: {
         "development.installedSolutionsPath": {
             "record": "%gpii-universal/tests/data/faultyDeviceReport.jsonx",
@@ -94,9 +94,8 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
 
 gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
     return fluid.transform(gpii.tests.deviceReporterErrorTests.testDefs, function (testDef) {
-        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return fluid.extend(true, {}, gpii.tests.deviceReporterErrorTests.testDefCommon, testDef);
     });
 };
 
-kettle.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());
+gpii.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());

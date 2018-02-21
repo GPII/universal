@@ -36,13 +36,11 @@ gpii.tests.untrusted.pcpIntegration.testDefs =
             },
             gradeNames: [
                 "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
-                "gpii.test.common.lifecycleManagerReceiver",
-                "gpii.test.pouch.pouchTestCaseHolder"
+                "gpii.test.common.lifecycleManagerReceiver"
             ]
         });
 
-        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return testDef;
     });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.pcpIntegration.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.pcpIntegration.testDefs);

@@ -31,7 +31,7 @@ gpii.tests.preferencesServerErrorTests.testDefCommon = {
         configName: "gpii.config.development.local",
         configPath: "%gpii-universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.test.pouch.pouchTestCaseHolder"]
+    gradeNames: ["gpii.test.common.testCaseHolder"]
 };
 
 
@@ -58,9 +58,8 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
 
 gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {
     return fluid.transform(gpii.tests.preferencesServerErrorTests.testDefs, function (testDef) {
-        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return fluid.extend(true, {}, gpii.tests.preferencesServerErrorTests.testDefCommon, testDef);
     });
 };
 
-kettle.test.bootstrapServer(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());
+gpii.test.bootstrapServer(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());

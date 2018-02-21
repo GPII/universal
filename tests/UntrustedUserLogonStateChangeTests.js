@@ -35,12 +35,11 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
                 configName: "gpii.config.untrusted.development.local.json",
                 configPath: "%gpii-universal/gpii/configs"
             },
-            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
+            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
         }, testDefIn.untrustedExtras || {});
 
-        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return testDef;
     });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonHandling.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.userLogonHandling.testDefs);

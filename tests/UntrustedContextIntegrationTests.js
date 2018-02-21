@@ -33,14 +33,12 @@ gpii.tests.untrusted.contextIntegration.testDefs = fluid.transform(gpii.tests.un
             configPath: "%gpii-universal/tests/platform/linux/configs"
         },
         gradeNames: [
-            "gpii.test.pouch.pouchTestCaseHolder",
             "gpii.tests.contextIntegration.testCaseHolder.common.linux",
             "gpii.test.common.untrusted.lifecycleManagerReceiver"
         ]
     });
 
-    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
     return testDef;
 });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.contextIntegration.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.contextIntegration.testDefs);

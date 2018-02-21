@@ -590,7 +590,6 @@ fluid.defaults("gpii.tests.pcpIntegration.testCaseHolder.common.linux", {
 
 gpii.tests.pcpIntegration.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
-        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return fluid.extend(true, {
             gradeNames: [
                 "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
