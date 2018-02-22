@@ -97,21 +97,6 @@
         "update": [
             "settings.configuration"
         ],
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -228,12 +213,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -267,12 +246,6 @@
                 "inverseCapabilitiesTransformations": {}
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -301,17 +274,7 @@
                 }
             }
         },
-        "update": [
-        ],
-        "start": [
-            "launchers.launching"
-        ],
-        "stop": [
-            "launchers.launching"
-        ],
-        "isRunning": [
-            "launchers.launching"
-        ],
+        "update": [],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -389,12 +352,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -421,12 +378,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -452,12 +403,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -1104,26 +1049,6 @@
                 }
             }
         },
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -1160,15 +1085,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "update": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -1212,15 +1128,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -1273,15 +1180,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -1329,15 +1227,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.packageKit.find",
@@ -1370,13 +1259,7 @@
                     "screen-resolution": {}
                 }
            }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ]
+        }
     },
 
     "net.gpii.uioPlus": {
@@ -1477,15 +1360,6 @@
                 "inverseCapabilitiesTransformations": {}
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"

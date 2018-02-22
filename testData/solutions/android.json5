@@ -57,16 +57,7 @@
                     }]
                 }
             }
-        },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ]
+        }
     },
 
     "com.android.persistentConfiguration": {
@@ -86,7 +77,8 @@
                     "fontScale": {},
                     "locale": {}
                 },
-                                "capabilitiesTransformations": {
+                "liveness": "live",
+                "capabilitiesTransformations": {
                     "fontScale": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
@@ -163,13 +155,7 @@
                 },
                 "inverseCapabilitiesTransformations": {}
             }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ]
+        }
     },
 
     "com.android.audioManager": {
@@ -185,6 +171,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidAudioManager.volume",
+                "liveness": "live",
                 "supportedSettings": {
                     "STREAM_MUSIC": {},
                     "STREAM_SYSTEM": {}
@@ -217,13 +204,7 @@
                 },
                 "inverseCapabilitiesTransformations": {}
             }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ]
+        }
     },
 
     "com.android.settings.system": {
@@ -239,6 +220,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidSettings",
+                "liveness": "live",
                 "options": {
                     "settingType": "System"
                 },
@@ -285,13 +267,7 @@
                 },
                 "inverseCapabilitiesTransformations": {}
             }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ]
+        }
     },
 
     "com.android.settings.secure": {
@@ -307,6 +283,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.androidSettings",
+                "liveness": "live",
                 "options": {
                     "settingType": "Secure"
                 },
@@ -371,13 +348,7 @@
                 },
                 "inverseCapabilitiesTransformations": {}
             }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ]
+        }
     },
 
     "se.omnitor.ecmobile": {
@@ -391,6 +362,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "supportedSettings": {
                     "map.string.fontsize.$t": {},
                     "map.string.theme.$t": {}
@@ -453,22 +425,7 @@
                     }]
                 }
             }
-        },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ]
+        }
     },
 
     "es.codefactory.android.app.ma": {

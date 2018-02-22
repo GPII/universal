@@ -648,33 +648,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration1",
-            "settings.configuration2"
-        ],
-        "restore": [
-            "settings.configuration1",
-            "settings.configuration2"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -765,31 +738,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -985,26 +933,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1062,26 +990,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1325,22 +1233,6 @@
                 }
             }
         },
-        "launchHandlers": {
-
-        },
-        "configure": [
-            "settings.configure",
-            "settings.configureNoRoam"
-        ],
-        "restore": [
-            "settings.configure",
-            "settings.configureNoRoam"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
         "start": [
             {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -1777,7 +1669,7 @@
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "nvda_service.exe"
-                        },{
+                        }, {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "nvda.exe"
                         }
@@ -1785,26 +1677,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        "configure": [
-            "settings.configs"
-        ],
-        "restore": [
-            "settings.configs"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -1847,22 +1719,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        // Although there are no settings to deal with, we need to pass through
-        // the "configure" action in order to proceed with the "stop" directive
-        // when keying out. This is a current limitation of the system, you can
-        // check https://issues.gpii.net/browse/GPII-2106 and
-        // https://issues.gpii.net/browse/GPII-1235 for more detailed information.
-        //
-        "configure": [ "settings.configure" ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1901,15 +1757,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1948,15 +1795,6 @@
                 }
             }
         },
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2064,26 +1902,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2186,18 +2004,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configureTheme",
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configureTheme",
-            "settings.configure"
-        ],
-        "update": [
-            "settings.configureTheme",
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2252,15 +2058,6 @@
                 }
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2469,15 +2266,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "update": [
-          "configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2614,15 +2402,6 @@
                 }
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2688,15 +2467,6 @@
                 }
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2730,12 +2500,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2776,15 +2540,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
-        "update": [
-          "configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -3205,27 +2960,7 @@
                     ]
                 }
             }
-        },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "isRunning": [
-            "launchers.launcher"
-        ],
-        "start": [
-            "launchers.launcher"
-        ],
-        "stop": [
-            "launchers.launcher"
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ]
+        }
     },
 
     "net.gpii.uioPlus": {
@@ -3326,15 +3061,6 @@
                 "inverseCapabilitiesTransformations": {}
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "update": [
-          "configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
