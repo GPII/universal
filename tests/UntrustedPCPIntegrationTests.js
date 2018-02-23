@@ -17,8 +17,7 @@
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
 require("./shared/PCPIntegrationTestDefs.js");

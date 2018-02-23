@@ -27,6 +27,7 @@ fluid.require("%gpii-universal");
 kettle.loadTestingSupport();
 
 var testIncludes = [
+    "../gpii/node_modules/eventLog/test/EventLogTests.js",
     "./platform/cloud/AcceptanceTests_chrome.js",
     "./platform/cloud/AcceptanceTests_easit4all.js",
     "./platform/cloud/AcceptanceTests_empty.js",
@@ -58,7 +59,6 @@ var testIncludes = [
     "../gpii/node_modules/canopyMatchMaker/test/CanopyMatchMakerTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
     "../gpii/node_modules/dbOperation/test/DbDataStoreTests.js",
-    "../gpii/node_modules/eventLog/test/EventLogTests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
