@@ -130,9 +130,6 @@ From your project's top-level directory (where the `Vagrantfile` and `package.js
 - Node and browser tests: `npm run test:vagrant`
 - Node tests only: `npm run test:vagrantNode`
 - browser tests only: `npm run test:vagrantBrowser`
-- production tests: `npm run test:vagrantProduction`
-
-The `test:vagrantProduction` target will use the `vagrantCloudBasedContainers.sh` script to spin up container-based GPII components inside the VM.
 
 You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop
 environment) and run the tests manually if you wish.
@@ -159,7 +156,7 @@ These tests are a supplement to the `all-tests.js` (and hence not part of that t
 
 Requirements:
 * an internet connection
-* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified) NP set: `MikelVargas`
+* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified) NP set: `testUser1`
 
 The tests are run using the following command:
 
@@ -184,6 +181,21 @@ Docker Containers
 The provided Dockerfile can be used to run GPII Universal directly.
 
 #### Build image
+
+##### Method 1: In the universal VM
+
+Start the universal VM by running `vagrant up` in the universal root directory.
+
+Inside the universal VM, run:
+```
+cd sync/universal
+./scripts/vagrantCloudBasedContainers.sh
+docker images
+```
+
+`docker images` will show the universal docker image named `vagrant-universal` has been built.
+
+##### Method 2: On the host machine that has docker installed
 
 To build a Docker image simply run: `docker build -t my-universal .`
 
