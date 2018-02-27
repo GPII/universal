@@ -12,8 +12,8 @@
                 "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
                 "priority": "after:development.installedSolutionsPath"
             },
-            "multiSH.solutionRegistry": {
-                "record": "%gpii-universal/tests/data/multiSHSolutionRegistry.json",
+            "multiSH.solutionsRegistry": {
+                "record": "%gpii-universal/tests/data/multiSHsolutionsRegistry.json",
                 "target": "{that flowManager solutionsRegistryDataSource}.options.path",
                 "priority": "after:flowManager.development.solutions"
             }
