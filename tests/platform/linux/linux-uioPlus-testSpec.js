@@ -19,7 +19,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("../shared/uioPlusTestDefs.js");
 
 gpii.loadTestingSupport();
@@ -27,6 +27,6 @@ gpii.loadTestingSupport();
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.uioPlus.testDefs",
     configName: "gpii.tests.acceptance.linux.uioPlus.config",
-    configPath: "%universal/tests/platform/linux/configs"
+    configPath: "%gpii-universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);
