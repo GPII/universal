@@ -21,17 +21,10 @@ Broadly, the match making algorithm used by the canopy match maker is as follows
 More details are given below on solution types, as well as the two disposition methods used (priority and canopy).
 
 ## Solution Types:
-To ensure that several conflicting solutions (e.g. two screenreaders) are not launched, "Types" are calculated for each solution, based on the capabilities they have (and in the future, on their explicitly stated types). The inference of solution type based on capabilities is based on the "apptology" tranformation, from the "flat" format into a solution type ontology. In the matchmaking process, each time a solution is 'accepted', any other conflicting solutions (i.e. of the same type) will be rejected.
+To avoid that two conflicting solutions of the same time are run, the canopy matchmaker uses Solution Types, as described in [Match Maker Framework](MatchMakerFramework.md) under the section on utilities and concepts.
 
-The apptology is described in more details here: [Apptology.md](Apptology.md).
-
-## Dispositions
-As described below, the matchmaker will assign a disposition to each solution based on priority and canopy matching. There are three dispositions available: "accept", "reject" and "deactivate". "accept" means that the solution will be accepted (and started, if relevant for that solution). "reject" means we do not do anything to the solution. "deactivate" means that we ensure that the solution is not running (i.e. running stop if required). The latter case is relevant for solutions that are conflicting with other solutions that the user might need.
-
-## Disposing from prioriy:
-Explicit priorities are declared in the NP sets metadata section and will always be a floating point value of 1024 or more. Implicit priorities are deduced from application specific settings. When a user has application specific settings for a solution a priority of 512 is set for that solution.
-
-Goes through all solutions from high priority to low. If a solution already has a disposition, it is ignored. Else it will be selected (accepted). Any solution with the same type, but a lower priority (or no priority) will be rejected. If there are two or more solutions of the same priority _and_ the same type (even partly), these will be considered a "tie". All lower-priority solutions of this type will still be rejected. The tied solutions will have their current disposition and priority removed and left to be disposed by some other disposal algorithm.
+## Disposing from priority:
+If the user explicitly or implicitly has specified priorities in terms of applications, this will be used to select the relevant solutions. Priorities can be inferred from application specific settings, or they can be explicitly stated by the user. More information on disposition from priority can be found in [Match Maker Framework](MatchMakerFramework.md) under the utilities and concepts section.
 
 ## Disposing from Canopy
 The Canopy matching strategy is used for deciding how to dispose solutions in case no priorities are available or there is a priority-tie between two applications of the same type.
@@ -56,5 +49,3 @@ The Canopy matching strategy is used for deciding how to dispose solutions in ca
 * For each solution, “raise the canopy” by setting the canopy value to the maximum of its old value and solution value
   * For each solution which “raised the canopy” at any leaf, accept it. Reject any solution of the same type.
   * For each solution which did not raise the canopy, reject it
-
-
