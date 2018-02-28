@@ -103,68 +103,60 @@ The input for these POST requests will be in the following format. Note that it 
 
 ```
 {
-{
-  "activeContexts": [],
-  "environmentReporter": {},
-  "inferredCommonTerms": {
-    "gpii-default": {
-      "com.microsoft.windows.highContrast": {
-        "http://registry.gpii.net/common/highContrastEnabled": true,
-        "http://registry.gpii.net/common/highContrastTheme": "white-black"
-      },
-      "net.gpii.uioPlus": {
-        "http://registry.gpii.net/common/highContrastEnabled": true,
-        "http://registry.gpii.net/common/highContrastTheme": "white-black"
-      }
-    }
-  },
-  "userToken": "snapset_2a",
-  "preferences": {
-    "name": "Dark & Larger 125%",
-    "contexts": {
-      "gpii-default": {
-        "name": "Default preferences",
-        "preferences": {
-          "http://registry.gpii.net/common/cursorSize": 1,
-          "http://registry.gpii.net/common/DPIScale": 1.25,
-          "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
-            "http://registry.gpii.net/common/highContrastEnabled": true,
-            "http://registry.gpii.net/common/highContrastTheme": "white-black"
-          },
-          "http://registry.gpii.net/applications/net.gpii.uioPlus": {
-            "http://registry.gpii.net/common/highContrastEnabled": true,
-            "http://registry.gpii.net/common/highContrastTheme": "white-black"
-          }
+    "activeContexts": [],
+    "environmentReporter": {},
+    "inferredCommonTerms": {
+        "gpii-default": {
+            "com.microsoft.windows.highContrast": {
+              "http://registry.gpii.net/common/highContrastEnabled": true,
+              "http://registry.gpii.net/common/highContrastTheme": "white-black"
+            },
+            (...),
+            "org.gnome.desktop.a11y.magnifier": { ... },
         }
-      }
+    },
+    "specialPreferences": {
+        "gpii-default": {}
+    },
+    "userToken": "carla",
+    "preferences": { ... } // unmodified preferences set
+    "deviceContext": {
+        "solutions": [
+            { "id": "com.texthelp.readWriteGold" },
+            (...),
+            { "id": "org.gnome.desktop.a11y.magnifier" }
+        ],
+        "OS": {
+            "id": "win32",
+            "version": "6.1.7601"
+        }
+    },
+    "solutionsRegistryEntries": {
+        "com.texthelp.readWriteGold": { ... },
+        (..)
+        "org.gnome.desktop.a11y.magnifier": { ... }
+    },
+    "solutionCapabilities": {
+        "com.texthelp.readWriteGold": [ ... ],
+        (...),
+        "org.gnome.desktop.a11y.magnifier": [ ... ]
+    },
+    "specialCapabilities": {
+        "com.microsoft.windows.filterKeys": [
+            "http://registry\\.gpii\\.net/common/debounce/enabled",
+            "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+            "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+            "http://registry\\.gpii\\.net/common/debounce/enabled",
+            "http://registry\\.gpii\\.net/common/slowKeys/enabled"
+        ],
+        (...),
+        "com.microsoft.windows.mouseKeys": [ ... ]
     }
-  },
-  "deviceContext": {
-    "solutions": [
-      {
-        "id": "com.microsoft.windows.magnifier"
-      },
-      {
-        "id": "com.microsoft.windows.onscreenKeyboard"
-      },
-      ...
-      {
-        "id": "com.microsoft.windows.narrator"
-      }
-    ],
-    "OS": {
-      "id": "win32",
-      "version": "6.1.7601"
-    }
-  },
-  "solutionsRegistryEntries": {
-    "com.microsoft.windows.magnifier": { .. },
-    "com.microsoft.windows.narrator": { ... },
-    ....
-    "com.microsoft.windows.filterKeys": { ... }
-  }
 }
+
 ```
+
+
 
 ### Return payload
 
@@ -172,39 +164,36 @@ The return payload from at call to `/match` should be in the following format. T
 
 ```
 {
-  "inferredConfiguration": {
-    "gpii-default": {
-      "applications": {
-        "com.microsoft.windows.highContrast": {
-          "active": true,
-          "settings": {
-            "http://registry.gpii.net/common/highContrastEnabled": true,
-            "http://registry.gpii.net/common/highContrastTheme": "white-black",
-            "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {}
-          }
-        },
-        "com.microsoft.windows.screenDPI": {
-          "active": true,
-          "settings": {
-            "http://registry.gpii.net/common/DPIScale": 1.25
-          }
-        },
-        "com.microsoft.windows.cursors": {
-          "active": true,
-          "settings": {
-            "http://registry.gpii.net/common/cursorSize": 1
-          }
-        },
-        "net.gpii.uioPlus": {
-          "active": true,
-          "settings": {
-            "http://registry.gpii.net/common/highContrastEnabled": true,
-            "http://registry.gpii.net/common/highContrastTheme": "white-black",
-            "http://registry.gpii.net/applications/net.gpii.uioPlus": {}
-          }
+    "inferredConfiguration": {
+        "gpii-default": {
+            "applications": {
+                "com.microsoft.windows.magnifier": {
+                    "active": true,
+                    "settings": {
+                        "http://registry.gpii.net/common/tracking": ["mouse", "mouse", "caret"],
+                        "http://registry.gpii.net/common/magnification": 2,
+                        "http://registry.gpii.net/common/invertColours": true,
+                        "http://registry.gpii.net/common/magnifierPosition": "RightHalf",
+                        "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                            "Magnification": 200,
+                            "ZoomIncrement": 50,
+                            "Invert": 0,
+                            "FollowMouse": 1,
+                            "FollowFocus": 1,
+                            "FollowCaret": 1,
+                            "MagnificationMode": 1
+                        }
+                    }
+                },
+                "net.gpii.uioPlus": {
+                    "active": true,
+                    "settings": {
+                        "http://registry.gpii.net/common/fontSize": 24,
+                        "http://registry.gpii.net/common/tableOfContents": false
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 ```
