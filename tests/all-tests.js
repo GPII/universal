@@ -23,7 +23,7 @@ var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
 // We must pass the current `require` to `fluid.require`, as nyc's instrumentation is hooked into it.
-fluid.require("%universal", require);
+fluid.require("%gpii-universal", require);
 
 kettle.loadTestingSupport();
 

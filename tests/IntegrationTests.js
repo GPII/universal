@@ -25,7 +25,7 @@ fluid.contextAware.makeChecks({
     }
 });
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 

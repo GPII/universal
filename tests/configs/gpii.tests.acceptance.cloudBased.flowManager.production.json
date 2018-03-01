@@ -15,6 +15,6 @@
         }
     },
     "mergeConfigs": [
-        "%universal/gpii/configs/gpii.config.cloudBased.flowManager.production.json"
+        "%gpii-universal/gpii/configs/gpii.config.cloudBased.flowManager.production.json"
     ]
 }

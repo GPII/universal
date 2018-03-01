@@ -5,11 +5,11 @@
         "configs": {
             "localConfig": {
                 "configName": "gpii.config.untrusted.development.mock.windows",
-                "configPath": "%universal/gpii/configs/mocks"
+                "configPath": "%gpii-universal/gpii/configs/mocks"
             },
             "cloudBasedConfig": {
                 "configName": "gpii.config.cloudBased.development.all.local",
-                "configPath": "%universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs"
             }
         },
         "distributeOptions": {

@@ -3,11 +3,11 @@
     "options": {
         "distributeOptions": {
             "acceptance.installedSolutionsPath": {
-                "record": "%universal/testData/deviceReporter/acceptanceTests/android_builtIn.json",
+                "record": "%gpii-universal/testData/deviceReporter/acceptanceTests/android_builtIn.json",
                 "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
                 "priority": "after:development.installedSolutionsPath"
             }
         }
     },
-    "mergeConfigs": "%universal/tests/configs/gpii.tests.acceptance.localInstall.config.json"
+    "mergeConfigs": "%gpii-universal/tests/configs/gpii.tests.acceptance.localInstall.config.json"
 }

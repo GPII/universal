@@ -29,11 +29,11 @@ fluid.defaults("gpii.tests.universal.testem", {
     coverageDir: "coverage",
     reportsDir: "reports",
     sourceDirs: {
-        gpii: "%universal/gpii"
+        gpii: "%gpii-universal/gpii"
     },
     contentDirs: {
-        browserify:   "%universal/browserify",
-        node_modules: "%universal/node_modules"
+        browserify:   "%gpii-universal/browserify",
+        node_modules: "%gpii-universal/node_modules"
     },
     invokers: {
         "getTestemOptions": {
