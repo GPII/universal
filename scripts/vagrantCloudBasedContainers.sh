@@ -52,7 +52,8 @@ docker run -d -p $COUCHDB_PORT:$COUCHDB_PORT --name couchdb $COUCHDB_IMAGE
 
 # Wait for CouchDB
 sleep $COUCHDB_HEALTHCHECK_DELAY
-curl --retry $COUCHDB_HEALTHCHECK_TIMEOUT --retry-delay 1 --retry-connrefused http://localhost:$COUCHDB_PORT
+#curl --retry $COUCHDB_HEALTHCHECK_TIMEOUT --retry-delay 1 --retry-connrefused http://localhost:$COUCHDB_PORT
+wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 30 http://localhost:$COUCHDB_PORT
 
 docker run -d -p $PREFERENCES_PORT:$PREFERENCES_PORT --name preferences --link couchdb -e NODE_ENV=$PREFERENCES_CONFIG -e GPII_PREFERENCES_DATASOURCE_URL=$PREFERENCES_DATASOURCE_URL -e GPII_PREFERENCES_LISTEN_PORT=$PREFERENCES_PORT $UNIVERSAL_IMAGE
 docker run -d -p $FLOWMANAGER_PORT:$FLOWMANAGER_PORT --name flowmanager --link preferences -e NODE_ENV=$FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_PREFERENCES_URL=$FLOWMANAGER_PREFERENCES_URL -e GPII_FLOWMANAGER_LISTEN_PORT=$FLOWMANAGER_PORT $UNIVERSAL_IMAGE
