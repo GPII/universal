@@ -5,11 +5,11 @@
         "configs": {
             "localConfig": {
                 "configName": "gpii.config.untrusted.development",
-                "configPath": "%universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs"
             },
             "cloudBasedConfig": {
                 "configName": "gpii.config.cloudBased.development.all.local",
-                "configPath": "%universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs"
             }
         },
         "distributeOptions": {

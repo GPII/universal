@@ -45,8 +45,8 @@ gpii.test.testem.copier.copyDirs = function (srcRoot, targetRoot, dirsToCopy) {
 
 fluid.defaults("gpii.test.testem.copier", {
     gradeNames: ["fluid.component"],
-    srcRoot:    "%universal/gpii",
-    targetRoot: "%universal/instrumented/universal/gpii",
+    srcRoot:    "%gpii-universal/gpii",
+    targetRoot: "%gpii-universal/instrumented/universal/gpii",
     dirsToCopy: [
         "node_modules/gpii-oauth2/gpii-oauth2-authz-server/public/lib",
         "node_modules/gpii-oauth2/gpii-oauth2-authz-server/webTests/lib",

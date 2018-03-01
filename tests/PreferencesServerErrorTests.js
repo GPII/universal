@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -29,7 +29,7 @@ fluid.registerNamespace("gpii.tests.preferencesServerErrorTests");
 gpii.tests.preferencesServerErrorTests.testDefCommon = {
     config: {
         configName: "gpii.config.development.all.local",
-        configPath: "%universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: "gpii.test.common.testCaseHolder"
 };
@@ -61,7 +61,7 @@ gpii.tests.preferencesServerErrorTests.testDefs = [
 
         "distributeOptions": {
             "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%userToken.jsonx",
+                "record": "%gpii-universal/testData/preferences/acceptanceTests/%userToken.jsonx",
                 "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }

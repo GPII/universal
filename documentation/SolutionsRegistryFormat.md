@@ -14,7 +14,7 @@ Each entry in the solution registry should have a unique ID (`Solution.id` in th
     "start": [ .. ],
     "stop": [ .. ],
     "isInstalled": [ .. ],
-    
+
     // Not yet supported. Post-Cloud4All features.
     "install": [ ... ],
     "uninstall": [ ... ],
@@ -46,6 +46,7 @@ The `settingsHandlers` block is unique and one of the most important blocks in t
 "settingsHandlers": {
     "myconf": {
         "type": "gpii.settingsHandlers.INISettingsHandler",
+        "liveness": "manualRestart",
         "options": {
             "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
             "allowNumberSignComments": true,
@@ -98,6 +99,7 @@ An important thing to notice here is that this solution example has two referenc
 
 Each settingsHandler block can contain the following information:
 * **type (mandatory):** the type of settingshandler
+* **liveness (mandatory):** Describes the update behavior of this solution: `"live"` means that the settings can be applied live without needing to restart the solution. `"liveRestart"` means that the a restart is required but considered low-impact enough for e.g. the PCP to trigger this automatically but not on a framerate of e.g. dragging a slider. `"manualRestart"` means that a change in settings requires a restart and that the restart of the solution is considered high-impact and slow. `"OSRestart"` means that a restart of the OS required.
 * **options:** Any options that should be passed to the settingsHandler. This is specific to the type of settingshandler specified in the "type" block.
 * **capabilities:** Is used to specify the capabilities of the solution (i.e. the settings/terms that the solution is capable of handling). Note that the framework can automatically deduce capabilities from the `capabilitiesTransformations` block, so if a setting is specified here, the system will automatically consider it a capability which means it does not need to specified in the `capabilities` block.
 * **capabilitiesTransformations**: Transformations from common terms to application specific settings can be defined here. These will enable the framework to automatically translate common terms from a user's NP set into application settings. Any common terms listed here, will automatically be added to the `capabilities` of the solution.
@@ -116,7 +118,7 @@ These four lifecycle blocks have different meanings to the system but has the sa
 * `start`: Launch/start the solution
 * `stop`: Stop/kill the solution
 
-Each of these lifecycle blocks allow the same content - which is an array with entries that are either references to settingsHandlers blocks or customized lifecycle blocks. To reference a settingsHandler block, the keyword `settings.<blockname>` is used, where `<blockname>` should be replaced with the name of a settingsHandler block. In the case of `configure` and `start`, a consequence of referencing a settingsHandler is that the settings given in the settingsHandler and users preferences set will be applied to that solution (and their original values will be saved to the system - if the user just logged in). In the case of `restore` and `stop`, the settings that have previously been written using the settingshandler(s) in question will be restored. Alternative to referencings setting and restoring settings, arbitrary lifecycle actions are allowed - the syntax for this is an object that contains at least a `type` key for the function to call. None of these blocks are mandatory. 
+Each of these lifecycle blocks allow the same content - which is an array with entries that are either references to settingsHandlers blocks or customized lifecycle blocks. To reference a settingsHandler block, the keyword `settings.<blockname>` is used, where `<blockname>` should be replaced with the name of a settingsHandler block. In the case of `configure` and `start`, a consequence of referencing a settingsHandler is that the settings given in the settingsHandler and users preferences set will be applied to that solution (and their original values will be saved to the system - if the user just logged in). In the case of `restore` and `stop`, the settings that have previously been written using the settingshandler(s) in question will be restored. Alternative to referencings setting and restoring settings, arbitrary lifecycle actions are allowed - the syntax for this is an object that contains at least a `type` key for the function to call. None of these blocks are mandatory.
 
 **Example blocks**:
 ```
@@ -204,7 +206,7 @@ This is run before configuration to ensure that the application is actually read
 
 **Example Entry**:
 ```
-"isConfigurable": [{ 
+"isConfigurable": [{
     "type": "gpii.reporter.fileExists",
     "path": "${{environment}.XDG_DATA_HOME}/orca/user-settings.conf""
 }]
