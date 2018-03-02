@@ -2,17 +2,14 @@
     "type": "gpii.tests.acceptance.untrusted.production",
     "options": {
         "distributeOptions": {
-            "flowManager.untrustedSettingsGetUrl": {
-                "record": "http://flowmanager.dev-cindyli.gpii.net/%gpiiKey/untrusted-settings/%device",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.untrustedSettingsGetUrl"
+            "flowManager.defaultFlowManagerBaseUrl": {
+                "record": "http://flowmanager.dev-cindyli.gpii.net",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.flowManagerBaseUrl"
             },
-            "flowManager.untrustedSettingsPutUrl": {
-                "record": "http://flowmanager.dev-cindyli.gpii.net/%gpiiKey/untrusted-settings",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.untrustedSettingsPutUrl"
-            },
-            "flowManager.accessTokenUrl": {
-                "record": "http://flowmanager.dev-cindyli.gpii.net/access_token",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.accessTokenUrl"
+            "flowManager.production.flowManagerBaseUrl": {
+                "record": "@expand:kettle.resolvers.env(FLOWMANAGER_URL)",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.flowManagerBaseUrl",
+                "priority": "after:flowManager.defaultFlowManagerBaseUrl"
             }
         }
     },
