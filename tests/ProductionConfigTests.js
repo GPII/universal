@@ -26,7 +26,7 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -73,7 +73,7 @@ gpii.tests.productionConfigTesting = [
 gpii.test.bootstrap({
     testDefs:  "gpii.tests.productionConfigTesting",
     configName: "gpii.config.trusted-flowmanager.production",
-    configPath: "%universal/gpii/configs"
+    configPath: "%gpii-universal/gpii/configs"
 }, ["gpii.test.integration.deviceReporterAware.linux", "gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);
 
@@ -91,7 +91,7 @@ var testDefs = [
         solutionId: "org.gnome.desktop.a11y.keyboard",
         config: {
             configName: "gpii.tests.acceptance.cloudBased.flowManager.production",
-            configPath: "%universal/tests/configs"
+            configPath: "%gpii-universal/tests/configs"
         },
         expected: {
             "org.gnome.desktop.a11y.keyboard": {

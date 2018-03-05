@@ -1,7 +1,0 @@
-AcceptanceTests_privilegedPrefsCreator.js
-
-Description:
-This is a series of tests using the online flowmanager to test the workflow of privileged preferences creators to add new preferences sets using OAuth2 client credentials grant.
-
-Requirements:
-Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).
