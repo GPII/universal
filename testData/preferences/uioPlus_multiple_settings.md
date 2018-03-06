@@ -1,6 +1,6 @@
 # uioPlus_multiple_settings
 
-A preference set for testing preference settings in the UIO+ browser extension.
+A preference set for testing preference settings in UIO+.
 
 Attempts to set all of the UIO+ preferences. The Syllabification and CharacterSpace preferences are currently not supported by UIO+ and will be ignored.
 

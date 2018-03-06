@@ -2,7 +2,7 @@ linux-uioPlus-testSpec.txt
 
 Descriptions:
 
-* Solution: Browser extension (UIO Plus)
+* Solution: UIO+
 * Device reporter file: uioPlus.json
 * NP sets:
  * uioPlus_character_space
