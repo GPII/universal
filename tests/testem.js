@@ -66,7 +66,7 @@ fluid.defaults("gpii.tests.universal.testem", {
     testemOptions: {
         tap_quiet_logs: true,
         disable_watching: true,
-        skip: "PhantomJS,Opera,Safari"
+        skip: "PhantomJS,Opera,Safari,IE"
     }
 });
 
