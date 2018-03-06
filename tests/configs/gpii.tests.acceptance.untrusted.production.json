@@ -3,7 +3,7 @@
     "options": {
         "distributeOptions": {
             "flowManager.defaultFlowManagerBaseUrl": {
-                "record": "http://flowmanager.dev-cindyli.gpii.net",
+                "record": "http://flowmanager:9081",
                 "target": "{that flowManager untrustedSettingsDataSource}.options.flowManagerBaseUrl"
             },
             "flowManager.production.flowManagerBaseUrl": {
