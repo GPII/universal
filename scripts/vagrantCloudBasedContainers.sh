@@ -34,7 +34,7 @@ FLOWMANAGER_MATCHMAKER_URL="http://localhost:9081"
 FLOWMANAGER_URL="http://flowmanager:9081"
 
 COUCHDB_VIEW_URL="http://localhost:$COUCHDB_PORT/gpii/_design/views/_view/findPrefsSafeByGpiiKey?key=%22carla%22&include_docs=true"
-CARLA_SETTINGS_URL=http://localhost:$FLOWMANAGER_PORT/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:\[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D\]%7D
+CARLA_SETTINGS_URL="http://localhost:$FLOWMANAGER_PORT/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D"
 
 # Remove old containers (exit code is ignored)
 docker rm -f couchdb 2>/dev/null || true
@@ -56,14 +56,14 @@ wget -O /dev/null --retry-connrefused --waitretry=$COUCHDB_HEALTHCHECK_DELAY --r
 # Load the CouchDB data
 docker run --rm --link couchdb -v $DBDATA_DIR:/data -e DBDATA_DIR=/data -e COUCHDB_URL=$DATALOADER_COUCHDB_URL -e CLEAR_INDEX=$DATALOADER_CLEAR_INDEX $DATALOADER_IMAGE
 
-# Wait for the CouchDB views become accessible
-wget -O /dev/null --retry-connrefused --waitretry=10 --timeout=60 --tries=30 $COUCHDB_VIEW_URL
+# Wait for the CouchDB views become accessible. Building view indexes requires time.
+curl --retry 10 --max-time 300 --retry-delay 1 --retry-connrefused $COUCHDB_VIEW_URL
 
 # Start the flow manager container
 docker run -d -p $FLOWMANAGER_PORT:$FLOWMANAGER_PORT --name flowmanager --link couchdb -e NODE_ENV=$FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_LISTEN_PORT=$FLOWMANAGER_PORT -e FLOWMANAGER_DATASOURCE_HOSTNAME=$FLOWMANAGER_DATASOURCE_HOSTNAME -e FLOWMANAGER_DATASOURCE_PORT=$COUCHDB_PORT -e FLOWMANAGER_MATCHMAKER_URL=$FLOWMANAGER_MATCHMAKER_URL $UNIVERSAL_IMAGE
 
 # Wait for the flow manager container to be ready
-wget -O /dev/null --retry-connrefused --waitretry=$COUCHDB_HEALTHCHECK_DELAY --read-timeout=20 --timeout=1 --tries=$COUCHDB_HEALTHCHECK_TIMEOUT $CARLA_SETTINGS_URL
+wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $CARLA_SETTINGS_URL
 
 # Start the container to run production config tests
 FLOWMANAGER_URL=$FLOWMANAGER_URL docker run --name productionConfigTests --link flowmanager $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js

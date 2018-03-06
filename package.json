@@ -70,7 +70,6 @@
         "test:browser": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && npm run test:browser-noprep",
         "test:node-noprep": "node_modules/.bin/nyc --reporter=json node tests/all-tests.js",
         "test:node": "npm run pretest:instrument && npm run pretest:copyUninstrumentedCode && npm run test:node-noprep",
-        "test:production": "node tests/ProductionConfigTests.js",
         "test:vagrant": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm test'",
         "test:vagrantBrowser": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm run test:browser'",
         "test:vagrantNode": "vagrant ssh -c 'cd /home/vagrant/sync/universal; npm run test:node'",
