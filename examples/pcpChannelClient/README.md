@@ -5,7 +5,7 @@ This directory contains a tiny sample client for the pcpChannel WebSockets conne
 ## Starting up the GPII and trying out the PCP channel example client.
 
 It can be tested by firing up any configuration of the GPII which includes a local FlowManager. Particularly
-suitable are the mock configurations in %universal/gpii/configs/mocks - for example you can type
+suitable are the mock configurations in %gpii-universal/gpii/configs/mocks - for example you can type
 
     `node gpii.js gpii/configs/mocks gpii.config.development.all.local.mock.windows`
 
