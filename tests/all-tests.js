@@ -27,7 +27,10 @@ fluid.require("%gpii-universal", require);
 
 kettle.loadTestingSupport();
 
+
 var testIncludes = [
+    "./platform/android/android-builtIn-testSpec.js",
+    "./platform/android/android-talkback-testSpec.js",
     "./platform/cloud/AcceptanceTests_chrome.js",
     "./platform/cloud/AcceptanceTests_easit4all.js",
     "./platform/cloud/AcceptanceTests_empty.js",
@@ -38,6 +41,18 @@ var testIncludes = [
     "./platform/cloud/AcceptanceTests_tvm.js",
     "./platform/cloud/AcceptanceTests_untrustedSettingsGet.js",
     "./platform/cloud/AcceptanceTests_untrustedSettingsPut.js",
+    "./platform/linux/linux-builtIn-testSpec.js",
+    "./platform/linux/linux-dynamicDeviceReporter-testSpec.js",
+    "./platform/linux/linux-orca-testSpec.js",
+    "./platform/linux/linux-uioPlus-testSpec.js",
+    "./platform/linux/linux-xrandr-testSpec.js",
+    "./platform/windows/windows-builtIn-testSpec.js",
+    "./platform/windows/windows-dynamicDeviceReporter-testSpec.js",
+    "./platform/windows/windows-jaws-testSpec.js",
+    "./platform/windows/windows-maavis-testSpec.js",
+    "./platform/windows/windows-nvda-testSpec.js",
+    "./platform/windows/windows-readWrite-testSpec.js",
+    "./platform/windows/windows-uioPlus-testSpec.js",
     "./DevelopmentTests.js",
     "./UserLogonStateChangeTests.js",
     "./MultiSettingsHandlerTests.js",
