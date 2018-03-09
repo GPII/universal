@@ -137,7 +137,7 @@ command can then be used to provision a new VM.
 
 Within the VM, the application will be installed in the directory specified by the `nodejs_app_install_dir` variable,
 which is defined in `provisioning/vagrant-vars.yml` configuration file in this repository. By default the installation
- directory is set to `/home/vagrant/sync/node_modules/universal`.
+ directory is set to `/home/vagrant/sync/universal`.
 
 Following the provisioning phase, tests can be run in the VM directly from the host system, without the need to log
 into the VM or interact with its console.
