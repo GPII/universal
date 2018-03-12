@@ -22,11 +22,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-// We must pass the current `require` to `fluid.require`, as nyc's instrumentation is hooked into it.
-fluid.require("%gpii-universal", require);
-
+// Ensure this happens first, to catch errors during code loading, especially before KETTLE-67 is fixed
 kettle.loadTestingSupport();
 
+// We must pass the current `require` to `fluid.require`, as nyc's instrumentation is hooked into it.
+fluid.require("%gpii-universal", require);
 
 var testIncludes = [
     "./platform/android/android-builtIn-testSpec.js",
