@@ -73,6 +73,7 @@ var testIncludes = [
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
     "../gpii/node_modules/eventLog/test/EventLogTests.js",
+    "../gpii/node_modules/userListeners/test/all-tests.js",
     "../gpii/node_modules/deviceReporter/test/all-tests.js"
 ];
 
