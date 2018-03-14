@@ -15,6 +15,5 @@ Vagrantfile.local
 report.tap
 coverage
 .nyc_output
-instrumented
 reports
 .idea/
