@@ -6,7 +6,7 @@
                 "preferences": {
                     "http://registry.gpii.net/common/lineSpace": 2,
                     "http://registry.gpii.net/common/fontSize": 24,
-                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/characterSpace": 0.2,
                     "http://registry.gpii.net/common/selfVoicingEnabled": true,
                     "http://registry.gpii.net/common/inputsLargerEnabled": true,
                     "http://registry.gpii.net/common/highContrastEnabled": true,
