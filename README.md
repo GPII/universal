@@ -207,7 +207,13 @@ cd sync/universal
 docker images
 ```
 
-Running the command `docker images` will show the universal docker image named `vagrant-universal` has been built.
+Running `docker images` will show the universal docker image named `vagrant-universal` has been built.
+
+Running `./scripts/vagrantCloudBasedContainers.sh` above also:
+
+1. Starts the flow manager in the production mode on the port 9081 inside the VM. To test it, open a browser and access the URL: `http://localhost:9081/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D`. The settings for `carla` should be returned.
+
+1. The CouchDB data can be accessed via the URL: http://localhost:5984/_utils/
 
 ##### Method 2: On the host machine that has docker installed
 
