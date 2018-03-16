@@ -1465,13 +1465,13 @@
                     },
                     "characterSpace": {
                         "transform": {
-                            type: "fluid.transforms.round",
-                            scale: 1,
-                            input: {
-                                transform: {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
                                     "type": "fluid.transforms.linearScale",
                                     "offset": 1,
-                                    "input": "http://registry\\.gpii\\.net/common/characterSpace"
+                                    "inputPath": "http://registry\\.gpii\\.net/common/characterSpace"
                                 }
                             }
                         }
