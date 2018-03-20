@@ -172,7 +172,7 @@ start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suit
 the run:
 
 1. A summary of the report will be displayed to the console.
-2. A coverage report will be saved to the `coverage/report` directory (open the `index.html` file in that directory in a browser to see the full details).  
+2. A coverage report will be saved to the `reports` directory (open the `index.html` file in that directory in a browser to see the full details).  
 
 The report displays the code coverage for:
 
