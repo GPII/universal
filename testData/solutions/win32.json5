@@ -3495,6 +3495,16 @@
 
     "net.gpii.test.speechControl": { // This solution does not exist in real life and has been added strictly for user testing/demoing
         "name": "GPII Test solution for speech control of the computer",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "OSRestart",
                 "capabilities": [
@@ -3511,7 +3521,8 @@
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
-        ]
+        ],
+        "isRunning": []
     },
 
     "com.microsoft.windows.titleBarColor": {
@@ -3685,41 +3696,49 @@
             ]
         },
         "settingsHandlers": {
+            "configureMenu": {
+                "type": "gpii.windows.startMenuLayoutHandler",
+                "options": {},
+                "supportedSettings": {
+                    "FilePath": {},
+                },
+                "capabilities": [],
+                "capabilitiesTransformations": {}
+            },
             "configuration": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
-                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                    "path": "Software\\Policies\\Microsoft\\Windows\\Explorer",
                     "dataTypes": {
-                        "ForceStartSize": "REG_DWORD"
+                        "ForceStartSize": "REG_DWORD",
                     }
                 },
                 "supportedSettings": {
-                    "ForceStartSize": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {}
             },
         },
         "configure": [
+            "settings.configureMenu",
             "settings.configuration",
         ],
         "restore": [
+            "settings.configureMenu",
             "settings.configuration",
         ],
         "start": [
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuSetter.ps1\""
-            }
+        //    {
+        //        "type": "gpii.windows.closeProcessByName",
+        //        "filename": "ShellExperienceHost.exe"
+        //    }
         ],
         "stop": [
-            {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\StartMenuRecover.ps1\""
-            }
+        //    {
+        //        "type": "gpii.windows.closeProcessByName",
+        //        "filename": "ShellExperienceHost.exe"
+        //    }
         ],
         "isInstalled": [
             {
@@ -3767,16 +3786,24 @@
         ],
         "start": [
             {
-                "type": "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                           -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellSetter.ps1\""
+                "type": "gpii.windows.tabletMode.setTabletMode",
+                "mode": 1
             }
+            // {
+            //     "type": "gpii.launch.exec",
+            //     "command": "Powershell.exe -ExecutionPolicy Bypass \
+            //                -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellSetter.ps1\""
+            // }
         ],
         "stop": [
+            // {
+            //     "type" : "gpii.launch.exec",
+            //     "command": "Powershell.exe -ExecutionPolicy Bypass \
+            //                 -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellRecover.ps1\""
+            // }
             {
-                "type" : "gpii.launch.exec",
-                "command": "Powershell.exe -ExecutionPolicy Bypass \
-                            -File \"%homedrive%%homepath%\\AppData\\Local\\GPII\\scripts\\ImmersiveShellRecover.ps1\""
+                "type": "gpii.windows.tabletMode.setTabletMode",
+                "mode": 0
             }
         ],
         "isInstalled": [
@@ -3784,7 +3811,5 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
-        ],
-        "isRunning": []
     }
 }
