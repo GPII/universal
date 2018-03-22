@@ -111,9 +111,6 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.taskBarColor": {
                         "ColorPrevalence": 1
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.customStartMenu": {
-                        "ForceStartSize": 1
-                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.immersiveMode": {
                         "TabletMode": 1,
                         "SignInMode": 0,

@@ -281,17 +281,19 @@ gpii.tests.windows.builtIn = [
                             "ColorPrevalence": "REG_DWORD"
                         }
                     }
-                }, { // CustomStartMenu
-                    "settings": {
-                        "ForceStartSize": 1
-                    }, "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
-                        "dataTypes": {
-                            "ForceStartSize": "REG_DWORD"
-                        }
-                    }
-                }, { // ImmersiveMode
+                },
+                // { // CustomStartMenu
+                //     "settings": {
+                //         "ForceStartSize": 1
+                //     }, "options": {
+                //         "hKey": "HKEY_CURRENT_USER",
+                //         "path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                //         "dataTypes": {
+                //             "ForceStartSize": "REG_DWORD"
+                //         }
+                //     }
+                // },
+                { // ImmersiveMode
                     "settings": {
                         "TabletMode": 1,
                         "SignInMode": 0,
