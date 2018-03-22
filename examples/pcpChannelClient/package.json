@@ -1,0 +1,7 @@
+{
+    "name": "gpii-pcp-channel-client",
+    "version": "0.1.0",
+    "dependencies": {
+        "ws": "1.1.0"
+    }
+}

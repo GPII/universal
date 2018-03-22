@@ -1,16 +1,20 @@
 {
     "type": "gpii.tests.acceptance.cloudBased.flowManager.production",
     "options": {
-        "mainServerPort": 8081,
         "distributeOptions": {
             "flowManager.production.matchMakers": {
                 "record": "http://localhost:8081",
                 "target": "{that flowManager}.options.matchMakers.flat.url",
                 "priority": "after:flowManager.development.matchMakers"
+            },
+            "distributePort.acceptanceTestsProductionPort": {
+                "record": 8081,
+                "target": "{that kettle.server}.options.port",
+                "priority": "after:distributePort.cloudBasedProductionPort"
             }
         }
     },
     "mergeConfigs": [
-        "%universal/gpii/configs/gpii.config.cloudBased.flowManager.production.json"
+        "%gpii-universal/gpii/configs/gpii.config.cloudBased.flowManager.production.json"
     ]
 }

@@ -18,12 +18,11 @@ var crypto = require("crypto");
 
 var gpii = fluid.registerNamespace("gpii");
 
-// The gpii.oauth2.codeGenerator component is responsible for
-// generating OAuth 2 authorization codes and access tokens. The codes
-// and tokens generated must be unguessable.
+// The gpii.oauth2.codeGenerator component is responsible for generating OAuth 2 access tokens.
+// The codes and tokens generated must be unguessable.
 //
-// The implementation uses the Node.js crypto module and was
-// originally part of the gpii.oauth2.authorizationService component.
+// The implementation uses the Node.js crypto module and was originally part of the
+// gpii.oauth2.authorizationService component.
 // The code generation functionality was moved to its own component to
 // remove dependencies on Node.js from the authorizationService, so
 // that the authorzationService could be unit tested with
@@ -32,26 +31,13 @@ var gpii = fluid.registerNamespace("gpii");
 fluid.defaults("gpii.oauth2.codeGenerator", {
     gradeNames: ["fluid.component"],
     invokers: {
-        generateAuthCode: {
-            funcName: "gpii.oauth2.codeGenerator.generateAuthCode"
-        },
-        generateAccessToken: {
-            funcName: "gpii.oauth2.codeGenerator.generateAccessToken"
-        }
+        generateAccessToken: "gpii.oauth2.codeGenerator.generateAccessToken"
     }
 });
 
-gpii.oauth2.codeGenerator.generateHandle = function () {
+gpii.oauth2.codeGenerator.generateAccessToken = function () {
     // TODO: Ensure that handles cannot be guessed
     // TODO: crypto.randomBytes can fail if there is not enough entropy
     // see http://nodejs.org/api/crypto.html
     return crypto.randomBytes(16).toString("hex");
-};
-
-gpii.oauth2.codeGenerator.generateAuthCode = function () {
-    return gpii.oauth2.codeGenerator.generateHandle();
-};
-
-gpii.oauth2.codeGenerator.generateAccessToken = function () {
-    return gpii.oauth2.codeGenerator.generateHandle();
 };

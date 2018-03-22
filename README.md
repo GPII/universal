@@ -109,7 +109,7 @@ You can also run (and debug) the tests manually from the root of the repository 
 
 `node node_modules/testem/testem.js --file tests/testem.js` 
 
-The required test fixtures and testem will start, and Testem will provide a URL you can open in a browser.
+The required test fixtures and Testem will start, and Testem will provide a URL you can open in a browser.
 
 If you would like to debug individual tests or view the test summary in a browser without using Testem, you can:
 
@@ -137,7 +137,7 @@ command can then be used to provision a new VM.
 
 Within the VM, the application will be installed in the directory specified by the `nodejs_app_install_dir` variable,
 which is defined in `provisioning/vagrant-vars.yml` configuration file in this repository. By default the installation
- directory is set to `/home/vagrant/sync/node_modules/universal`.
+ directory is set to `/home/vagrant/sync/universal`.
 
 Following the provisioning phase, tests can be run in the VM directly from the host system, without the need to log
 into the VM or interact with its console.
@@ -164,7 +164,7 @@ following statements to get access to fluid and/or gpii objects.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 // Now you will have access to both fluid and gpii namespaces.
 ```
 
@@ -186,16 +186,27 @@ The tests are run using the following command:
 
 #### Coverage Reporting
 
-The preferred way to consistentely generate a code coverage report is to use Vagrant as described above.  When you 
-start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM,  and a coverage 
-report will be saved to the `reports` directory.  You can also run the `npm test` command on your local machine, but 
-you will need to ensure that browsers receive focus when they are launched (see above).
+The preferred way to consistently generate a code coverage report is to use Vagrant as described above.  When you 
+start a VM using `vagrant up` and run `npm run test:vagrant`, the full test suite will run in the VM, and at then end of
+the run:
+ 
+1. A summary of the report will be displayed to the console.
+2. A coverage report will be saved to the `reports` directory (open the `index.html` file in that directory in a browser to see the full details).  
+
+The report displays the code coverage for:
+                                                  
+1. Code reached from the tests run directly in Node.
+2. Code reached within a browser when running the tests in Testem.
+3. Server fixtures exercised by browser requests when running the Testem tests.
+
+A code coverage report will also be generated when you run the `npm test` command on your local machine, but you will
+need to ensure that browsers receive focus when they are launched (see above).
 
 The `npm test` command has [two additional associated scripts](https://docs.npmjs.com/misc/scripts).  The `pretest`
 script runs before the command defined for the `test` script.  The `posttest` script runs after.  In our case
 we use a `pretest` script to clean up previous coverage data before we run the tests, and a `posttest` script to 
-compile the actual report.  You should not need to run the `pretest` scripts manually before running either the node or
-browser tests, or to run the `posttest` scripts afterward.
+compile the actual report.  Both the `pretest` and `posttest` steps must run in order to generate the report.  If you
+only care about the test results, you should not need to run either of these scripts.
 
 Docker Containers
 -----------------

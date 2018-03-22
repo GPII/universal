@@ -6,4 +6,4 @@ This is the acceptanceTests for the cloudBased solution 'net.gpii.smarthouses', 
 It uses the 'smarthouse1' and 'smarthouse2' NP sets which contains different common term preferences.
 
 Requirements:
-Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode.
+Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

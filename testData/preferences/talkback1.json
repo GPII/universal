@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "TallBack1",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

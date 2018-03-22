@@ -1,5 +1,6 @@
 {
     "flat": {
+        "name": "Wayne",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",

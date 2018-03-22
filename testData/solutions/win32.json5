@@ -11,16 +11,70 @@
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": {
-                    "Voice Profiles.ActiveVoiceProfileName": {},
-                    "options.SayAllIndicateCaps": {},
-                    "options.TypingEcho": {},
-                    "options.SayAllMode": {},
-                    "Braille.BrailleMode": {},
-                    "options.SayAllIgnoreShiftKeys": {}
+                "supportedSettings": { // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
+                // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
+                // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
+                    "Voice Profiles.ActiveVoiceProfileName": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                        "schema": {
+                            "title": "Active Voice Profile Name",
+                            "description": "The active voice profile",
+                            "type": "string",
+                            "default": "GPII"
+                        }
+                    },
+                    "options.SayAllIndicateCaps": { // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
+                        "schema": {
+                            "title": "Announce capitals",
+                            "description": "During SayAll, indicate initial cap or capitalized word",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    },
+                    "options.TypingEcho": {
+                        "schema": {
+                            "title": "Typing echo",
+                            "description": "Typing echo mode, its value can be either character, word, char&Word or none",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3]
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "off", 1: "character", 2: "words", 3: "character and words"
+                        }
+                    },
+                    "options.SayAllMode": {
+                        "schema": {
+                            "title": "SayAllMode",
+                            "description": "Sets the amount of text which SayAll sends to the synthesizer as a single unit",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2]
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "line", 1: "sentence", 2: "paragraph"
+                        }
+                    },
+                    "Braille.BrailleMode": {
+                        "schema": {
+                            "title": "Braille mode",
+                            "description": "",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1, 2, 3]
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "line", 1: "structured", 2: "speech output", 3: "attribute indicators"
+                        }
+                    },
+                    "options.SayAllIgnoreShiftKeys": {
+                        "schema": {
+                            "title": "SayAll Ignore Shift Keys",
+                            "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
@@ -152,6 +206,7 @@
             },
             "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
@@ -569,6 +624,11 @@
             "settings.configuration1",
             "settings.configuration2"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.launch.exec",
@@ -611,6 +671,7 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
                     "encoding": "utf-8",
@@ -621,6 +682,28 @@
                 ],
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings"
+                },
+                "supportedSettings": {
+                    "ApplicationSettings.AppBar.optToolbarIconSet.$t": {},
+                    "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": {},
+                    "ApplicationSettings.AppBar.DocType.$t": {},
+                    "ApplicationSettings.AppBar.Width.$t": {},
+                    "ApplicationSettings.AppBar.ShowText.$t": {},
+                    "ApplicationSettings.AppBar.optToolbarShowText.$t": {},
+                    "ApplicationSettings.AppBar.LargeIcons.$t": {},
+                    "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Pitch.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Speed.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Volume.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5Voice.$t": {},
+                    "ApplicationSettings.Speech.WebHighlighting.$t": {},
+                    "ApplicationSettings.Translation.ToLanguage.$t": {},
+                    "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": {},
+                    "ApplicationSettings.Scanning.ScanDestination.$t": {},
+                    "ApplicationSettings.Scanning.ScanToFile.$t": {},
+                    "ApplicationSettings.Spelling.SpellAsIType.$t": {},
+                    "ApplicationSettings.Speech.optAutoUseScreenReading.$t": {}
                 }
             }
         },
@@ -629,6 +712,11 @@
         ],
         "restore": [
             "settings.configuration"
+        ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
         ],
         "start": [
             {
@@ -672,6 +760,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\ScreenMagnifier",
@@ -684,6 +773,63 @@
                         "MagnificationMode": "REG_DWORD",
                         "ZoomIncrement": "REG_DWORD"
                     }
+                },
+                "supportedSettings": {
+                    "Invert": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                        "schema": {
+                            "title": "Invert Colours",
+                            "description": "Enable colour inversion for Magnifier",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "Magnification": {
+                        "schema": {
+                            "title": "Magnification",
+                            "description": "Set up magnification level",
+                            "type": "number",
+                            "default": 200,
+                            "min": 100,
+                            "max": 1600,
+                            "divisibleBy": 1
+                        }
+                    },
+                    "FollowFocus": {
+                        "schema": {
+                            "title": "Magnifier follows focus",
+                            "description": "Magnifier follows the keyboard focus",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "FollowCaret": {
+                        "schema": {
+                            "title": "Magnifier follows caret",
+                            "description": "Magnifier follows the text insertion point",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "FollowMouse": {
+                        "schema": {
+                            "title": "Magnifier follows mouse",
+                            "description": "Magnifier follows the mouse pointer",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "MagnificationMode": {
+                        "schema": {
+                            "title": "Magnifier position",
+                            "description": "Position of the magnified area",
+                            "type": "number",
+                            "default": 2,
+                            "enum": [1, 2, 3]
+                            // TODO: We must present these values in a human readable form
+                            // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
+                        }
+                    },
+                    "ZoomIncrement": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -734,7 +880,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/invertColours": "Invert.value",
+                    "http://registry\\.gpii\\.net/common/invertColours": "Invert",
                     "transform": [
                         {
                             "type": "fluid.transforms.linearScale",
@@ -756,7 +902,7 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "MagnificationMode.value",
+                            "defaultInputPath": "MagnificationMode",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
                             "match": {
                                 "2": "FullScreen",
@@ -788,6 +934,11 @@
                 "enable": false
             }
         ],
+        "update": [
+            "stop",
+            "configure",
+            "start"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -814,11 +965,22 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Osk",
                     "dataTypes": {
                         "NavigationMode": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "NavigationMode": { // TODO: Weird supported setting - How do we provide such use case?
+                        "schema": {
+                            "title": "On-Screen Keyboard",
+                            "description": "Enable/Disable On-Screen Keyboard",
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 },
                 "capabilities": [
@@ -878,6 +1040,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator",
@@ -1115,6 +1278,11 @@
             "settings.configure",
             "settings.configureNoRoam"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -1149,10 +1317,28 @@
         "settingsHandlers": {
             "configs": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                     "allowNumberSignComments": true,
                     "allowSubSections": true
+                },
+                "supportedSettings": {
+                    "speech.espeak.pitch": {},
+                    "speech.espeak.volume": {},
+                    "presentation.reportHelpBalloons": {},
+                    "keyboard.speakTypedCharacters": {},
+                    "keyboard.speakTypedWords": {},
+                    "speech.espeak.sayCapForCapitals": {},
+                    "reviewCursor.followFocus": {},
+                    "reviewCursor.followCaret": {},
+                    "reviewCursor.followMouse": {},
+                    "speech.synth": {},
+                    "speech.outputDevice": {},
+                    "speech.espeak.rate": {},
+                    "speech.espeak.rateBoost": {},
+                    "speech.symbolLevel": {},
+                    "speech.espeak.voice": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -1519,6 +1705,11 @@
         "restore": [
             "settings.configs"
         ],
+        "update": [
+          "stop",
+          "configure",
+          "start"
+        ],
         "start": [
             {
                 "type": "gpii.launch.exec",
@@ -1578,10 +1769,17 @@
         ],
         "stop": [
             {
-                    "type": "gpii.windows.closeProcessByName",
-                    "filename": "firefox.exe"
+                "type": "gpii.windows.closeProcessByName",
+                "filename": "firefox.exe"
             }
         ],
+        // Although there are no settings to deal with, we need to pass through
+        // the "configure" action in order to proceed with the "stop" directive
+        // when keying out. This is a current limitation of the system, you can
+        // check https://issues.gpii.net/browse/GPII-2106 and
+        // https://issues.gpii.net/browse/GPII-1235 for more detailed information.
+        //
+        "configure": [ "settings.configure" ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1695,11 +1893,20 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
                 },
+                "supportedSettings": {
+                    "speakOnActivate": {},
+                    "speakTitles": {},
+                    "speakLabels": {},
+                    "theme": {}
+                },
                 "capabilities": [
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled"
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme"
                 ],
                 "capabilitiesTransformations": {
                     "transform": [
@@ -1792,6 +1999,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETHIGHCONTRAST",
                     "setAction": "SPI_SETHIGHCONTRAST",
@@ -1803,7 +2011,14 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "HighContrastOn": {}
+                    "HighContrastOn": {
+                        "schema": {
+                            "title": "High Contrast",
+                            "description": "Whether to enable/disable High Contrast",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastEnabled"
@@ -1829,6 +2044,7 @@
             },
             "configureTheme": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
@@ -1837,7 +2053,19 @@
                     }
                 },
                 "supportedSettings": {
-                    "LastHighContrastTheme": {}
+                    "LastHighContrastTheme": {
+                        "schema": {
+                            "title": "High Contrast theme",
+                            "description": "High Contrast Theme",
+                            "type": "string",
+                            "default": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                            "enum": [
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"]
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/highContrastTheme"
@@ -1867,6 +2095,10 @@
             "settings.configureTheme",
             "settings.configure"
         ],
+        "update": [
+            "settings.configureTheme",
+            "settings.configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -1887,6 +2119,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETSTICKYKEYS",
                     "setAction": "SPI_SETSTICKYKEYS",
@@ -1896,6 +2129,9 @@
                         "name": "STICKYKEYS"
                     },
                     "verifySettings": true
+                },
+                "supportedSettings": {
+                    "StickyKeysOn": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -1912,9 +2148,15 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/stickyKeys": "StickyKeysOn.value"
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -1941,6 +2183,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETFILTERKEYS",
                     "setAction": "SPI_SETFILTERKEYS",
@@ -1950,6 +2193,34 @@
                         "name": "FILTERKEYS"
                     },
                     "verifySettings": false
+                },
+                "supportedSettings": {
+                    "FilterKeysEnable": {
+                        "schema": {
+                            "title": "Filter keys",
+                            "description": "Enable/Disable filter keys",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "SlowKeysInterval": {
+                        "schema": {
+                            "title": "Slow keys interval",
+                            "description": "Slow keys interval time in milliseconds",
+                            "type": "number",
+                            "default": 0,  // 0 means no interval time
+                            "divisibleBy": 1
+                        }
+                    },
+                    "BounceKeysInterval": {
+                        "schema": {
+                            "title": "Bounce keys interval",
+                            "description": "Bounce keys interval time in milliseconds",
+                            "type": "number",
+                            "default": 0,
+                            "divisibleBy": 1
+                        }
+                    }
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2104,6 +2375,9 @@
         "configure": [
             "settings.configure"
         ],
+        "update": [
+          "configure"
+        ],
         "restore": [
             "settings.configure"
         ],
@@ -2127,6 +2401,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETMOUSEKEYS",
                     "setAction": "SPI_SETMOUSEKEYS",
@@ -2136,6 +2411,33 @@
                         "name": "MOUSEKEYS"
                     },
                     "verifySettings": true
+                },
+                "supportedSettings": {
+                    "MouseKeysOn": {
+                        "schema": {
+                            "title": "Mouse keys",
+                            "description": "Enable/Disable mouse keys",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "MaxSpeed": {
+                        "schema": {
+                            "title": "Mouse keys speed",
+                            "description": "Speed of mouse keys",
+                            "type": "number",
+                            "divisibleBy": 10
+                        }
+                    },
+                    "Acceleration": {
+                        "schema": {
+                            "title": "Mouse keys acceleration",
+                            "description": "Acceleration of mouse keys",
+                            "type": "number",
+                            "min": -1000, // TODO: Not clear how to describe this setting
+                            "max": 1000
+                        }
+                    }
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2216,6 +2518,9 @@
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2242,6 +2547,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "getAction": "SPI_GETMOUSETRAILS",
                     "setAction": "SPI_SETMOUSETRAILS",
@@ -2250,6 +2556,18 @@
                         "type": "UINT"
                     },
                     "verifySettings": true
+                },
+                "supportedSettings": {
+                    "MouseTrails": {
+                        "schema": { // Exactly the same schema as mouseTrailing common term
+                            "title": "Mouse trails",
+                            "description": "Amount of mouse trailing",
+                            "type": "number",
+                            "min": 0,
+                            "max": 10,
+                            "divisibleBy": 1
+                        }
+                    }
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/mouseTrailing"
@@ -2271,9 +2589,15 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/mouseTrailing": "MouseTrails.value"
                 }
             }
         },
+        "update": [
+          "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -2300,10 +2624,21 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "liveRestart",
                 "capabilities": [
                     "display.screenEnhancement.screenResolution",
                     "applications.com\\.microsoft\\.windows\\.screenResolution.id"
-                ]
+                ],
+                "supportedSettings": {
+                    "screen-resolution": {
+                        "schema": {
+                            "title": "Screen resolution",
+                            "description": "Screen resolution of the default display",
+                            "type": "array", // TODO: Not sure about this type
+                            "enum": [] // TODO: This must be filled in on the fly with available screen resolutions
+                        }
+                    }
+                }
             }
         },
         "configure": [
@@ -2332,10 +2667,28 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "live",
+                "supportedSettings": {
+                    "screen-dpi": {}
+                },
                 "capabilities": [
                     "display.screenEnhancement.screenScale",
                     "applications.com\\.microsoft\\.windows\\.screenDPI.id"
-                ]
+                ],
+                "supportedSettings": {
+                    "screen-dpi": {
+                        "schema": {
+                            "title": "Screen DPI",
+                            "description": "Screen DPI of the default display",
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 5 // Taken from dpiWindows10.js, may not be appropriate
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "screen-dpi": "http://registry\\.gpii\\.net/common/DPIScale"
+                }
             }
         },
         "configure": [
@@ -2343,6 +2696,9 @@
         ],
         "restore": [
             "settings.configure"
+        ],
+        "update": [
+          "configure"
         ],
         "isInstalled": [
             {
@@ -2364,6 +2720,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Cursors",
@@ -2383,6 +2740,21 @@
                         "Wait": "REG_SZ"
                     },
                     "verifySettings": true
+                },
+                "supportedSettings": {
+                    "Arrow": {},
+                    "Hand": {},
+                    "Help": {},
+                    "AppStarting": {},
+                    "No": {},
+                    "NWPen": {},
+                    "SizeAll": {},
+                    "SizeNESW": {},
+                    "SizeNS": {},
+                    "SizeNWSE": {},
+                    "SizeWE": {},
+                    "UpArrow": {},
+                    "Wait": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/cursorSize"
@@ -2635,6 +3007,10 @@
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
         ],
+        "update": [
+            "configure",
+            "start"
+        ],
         "start": [
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
@@ -2662,10 +3038,19 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "C:\\Sociable\\Configuration.xml",
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\"?>"
+                },
+                "supportedSettings": {
+                    "user.$t": {},
+                    "expert.$t": {},
+                    "careCenter.$t": {},
+                    "screenReaderTTSEnabled": {},
+                    "highContrastEnabled": {},
+                    "fontSize": {}
                 },
                 "capabilities": [],
                 "capabilitiesTransformations": {
@@ -2684,7 +3069,7 @@
                     "highContrastEnabled": {
                         "value": "http://registry\\.gpii\\.net/common/highContrastEnabled"
                     },
-                     "fontSize": {
+                    "fontSize": {
                         "value": {
                             "transform": {
                                 "type": "fluid.transforms.quantize",
@@ -2729,7 +3114,7 @@
     },
 
     "net.gpii.uioPlus": {
-        "name": "UIO+ Browser Extension",
+        "name": "UIO+",
         "contexts": {
             "OS": [{
                     "id": "win32",
@@ -2739,8 +3124,22 @@
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
                 "options": {
                     "path": "net.gpii.uioPlus"
+                },
+                "supportedSettings": {
+                    "lineSpace": {},
+                    "fontSize": {},
+                    "characterSpace": {},
+                    "inputsLargerEnabled": {},
+                    "contrastTheme": {},
+                    "selfVoicingEnabled": {},
+                    "selectionTheme": {},
+                    "tableOfContentsEnabled": {},
+                    "dictionaryEnabled": {},
+                    "simplifiedUiEnabled": {},
+                    "syllabificationEnabled": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/lineSpace",
@@ -2795,7 +3194,7 @@
                     },
                     "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
-                    "tableOfContents": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
                     "dictionaryEnabled": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -2831,6 +3230,9 @@
         "restore": [
             "settings.configuration"
         ],
+        "update": [
+          "configure"
+        ],
         "start": [],
         "stop": [],
         "isInstalled": [
@@ -2838,5 +3240,36 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+    "net.gpii.test.speechControl": { // This solution does not exist in real life and has been added strictly for user testing/demoing
+        "name": "GPII Test solution for speech control of the computer",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "OSRestart",
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/speechControl"
+                ],
+                "supportedSettings": {}
+            }
+        },
+        "configure": [],
+        "restore": [],
+        "start": [],
+        "stop": [],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": []
     }
 }

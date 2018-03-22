@@ -3,6 +3,8 @@ preferences_server_couchdb_host_address: localhost:5984
 
 preferences_server_environment: gpii.config.preferencesServer.standalone.production
 
+preferences_server_config_dir: gpii/configs
+
 nodejs_app_name: preferences-server
 
 nodejs_app_env_vars:

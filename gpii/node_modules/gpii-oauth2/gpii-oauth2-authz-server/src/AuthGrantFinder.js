@@ -1,5 +1,5 @@
 /*!
-Copyright 2016 OCAD university
+Copyright 2016-2017 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -39,27 +39,27 @@ var fluid = fluid || require("infusion");
     });
 
     // Return a promise object that contains the granted privilege for the access token.
-    // This function looks up access tokens granted for both authorization code grant
-    // and the client credentials grant to find the match. The different data structure
-    // can be returned based on the grant type.
+    // This function looks up access tokens granted for GPII app installations to find the match.
     gpii.oauth2.authGrantFinder.getGrantForAccessToken = function (authorizationService, accessToken) {
-        var authCodePrmoise = authorizationService.getAuthForAccessToken(accessToken);
-        var clientCredentialsPromise = authorizationService.getAuthByClientCredentialsAccessToken(accessToken);
-
-        // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-        var sources = [authCodePrmoise, clientCredentialsPromise];
-        var promisesSequence = fluid.promise.sequence(sources);
-
         var promiseTogo = fluid.promise();
+        var authorizationPromise = authorizationService.getAuthorizationByAccessToken(accessToken);
+        var grant;
 
-        promisesSequence.then(function (responses) {
-            var authCodeResult = responses[0];
-            var clientCredentialsResult = responses[1];
-
-            promiseTogo.resolve(authCodeResult ? authCodeResult : clientCredentialsResult);
+        authorizationPromise.then(function (authRecord) {
+            if (authRecord) {
+                if (authRecord.authorization.type === gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
+                    gpii.oauth2.getExpiresIn(new Date(), authRecord.authorization.timestampExpires) > 0) {
+                    grant = {
+                        accessToken: accessToken,
+                        gpiiToken: authRecord.authorization.gpiiToken,
+                        allowUntrustedSettingsGet: true,
+                        allowUntrustedSettingsPut: true
+                    };
+                }
+            }
+            promiseTogo.resolve(grant);
         });
 
         return promiseTogo;
     };
-
 })();
