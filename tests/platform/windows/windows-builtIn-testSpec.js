@@ -293,21 +293,22 @@ gpii.tests.windows.builtIn = [
                 //         }
                 //     }
                 // },
-                { // ImmersiveMode
-                    "settings": {
-                        "TabletMode": 1,
-                        "SignInMode": 0,
-                        "ConvertibleSlateModePromptPreference": 2
-                    }, "options": {
-                        "hKey": "HKEY_CURRENT_USER",
-                        "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
-                        "dataTypes": {
-                            "TabletMode": "REG_DWORD",
-                            "SignInMode": "REG_DWORD",
-                            "ConvertibleSlateModePromptPreference": "REG_DWORD"
-                        }
-                    }
-                }, { // TaskbarAppsVisibility
+                //{ // ImmersiveMode
+                //    "settings": {
+                //        "TabletMode": 1,
+                //        "SignInMode": 0,
+                //        "ConvertibleSlateModePromptPreference": 2
+                //    }, "options": {
+                //        "hKey": "HKEY_CURRENT_USER",
+                //        "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell",
+                //        "dataTypes": {
+                //            "TabletMode": "REG_DWORD",
+                //            "SignInMode": "REG_DWORD",
+                //            "ConvertibleSlateModePromptPreference": "REG_DWORD"
+                //        }
+                //    }
+                //},
+                { // TaskbarAppsVisibility
                     "settings": {
                         "TaskbarAppsVisibleInTabletMode": 0
                     }, "options": {
