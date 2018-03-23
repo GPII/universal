@@ -55,7 +55,7 @@ gpii.tests.userLogonEvents.testDefs = [{
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 2000 ]
+        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"

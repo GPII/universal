@@ -114,8 +114,15 @@ gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             config: {
-                configName: "gpii.config.development.local",
-                configPath: "%gpii-universal/gpii/configs"
+                // The custom config file is to config the debounce time at /proximityTriggered endpoint to 3 seconds
+                // rather than using the default 1.5 seconds. This is to work around an issue with testing a following
+                // request that occurs < the debounce time. In this test, the following request was sent after waiting
+                // for 1 second. However in the reality with all other running processes, CPU processing power etc,
+                // this request is usually sent a bit more than after 1 second, occassionally even more than 1.5 seconds,
+                // which causes the test to fail. Setting the debounce time to 3 seconds provides more buffering time
+                // for the following request to send.
+                configName: "gpii.tests.acceptance.userLogonStateChange.config",
+                configPath: "%gpii-universal/tests/configs"
             },
             gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
@@ -135,7 +142,7 @@ gpii.tests.userLogonHandling.testDefs = [{
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 6000 ]
+        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"
@@ -185,7 +192,7 @@ gpii.tests.userLogonHandling.testDefs = [{
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 6000 ]
+        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"
@@ -224,7 +231,7 @@ gpii.tests.userLogonHandling.testDefs = [{
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 6000 ]
+        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"

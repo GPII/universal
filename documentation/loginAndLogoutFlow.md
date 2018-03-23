@@ -5,7 +5,7 @@ This document describes the flow on a locally installed GPII system when the use
 ### Overview and APIs
 We support 3 different logon related URLs, namely:
 * `/user/:gpiiKey/proximityTriggered` - change the logon state of the given GPII key (i.e. log in or out)
-  * **Debounce rule**: any RFID actions is ignored for <myGpiiKey> if a login/logout for <myGpiiKey> is in progress OR if the last login/logout process for <myGpiiKey> finished less than 5 seconds ago
+  * **Debounce rule**: any RFID actions is ignored for <myGpiiKey> if a login/logout for <myGpiiKey> is in progress OR if the last login/logout process for <myGpiiKey> finished less than 1.5 seconds ago
   * If no user is logged in and debounce doesn't apply, log in <myGpiiKey>
   * If <myGpiiKey> is logged in and debounce doesn't apply, log out <myGpiiKey>
   * If another user is already logged in or in the process of logging in or out, log that user out and log in <myGpiiKey>

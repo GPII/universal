@@ -31,8 +31,8 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
     fluid.transform(gpii.tests.userLogonHandling.testDefs, function (testDefIn) {
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
-                configName: "gpii.config.untrusted.development.local.json",
-                configPath: "%gpii-universal/gpii/configs"
+                configName: "gpii.tests.acceptance.untrusted.userLogonStateChange.config",
+                configPath: "%gpii-universal/tests/configs"
             },
             gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
