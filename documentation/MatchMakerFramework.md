@@ -108,7 +108,7 @@ The input for these POST requests will be in the following format. Note that it 
     "inferredCommonTerms": {
         "gpii-default": {
             "com.microsoft.windows.highContrast": {
-              "http://registry.gpii.net/common/highContrastEnabled": true,
+              "http://registry.gpii.net/common/highContrast/enabled": true,
               "http://registry.gpii.net/common/highContrastTheme": "white-black"
             },
             (...),
