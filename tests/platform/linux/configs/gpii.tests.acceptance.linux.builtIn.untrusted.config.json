@@ -4,21 +4,21 @@
         "configs": {
             "cloudBasedConfig": {
                 "configName": "gpii.config.cloudBased.development",
-                "configPath": "%universal/gpii/configs"
+                "configPath": "%gpii-universal/gpii/configs"
             }
         },
         "distributeOptions": {
             "acceptance.installedSolutionsPath": {
-                "record": "%universal/testData/deviceReporter/acceptanceTests/linux_builtIn.json",
+                "record": "%gpii-universal/testData/deviceReporter/acceptanceTests/linux_builtIn.json",
                 "target": "{that localConfig deviceReporter installedSolutionsDataSource}.options.path",
                 "priority": "after:development.installedSolutionsPath"
             },
             "acceptance.rawPreferencesDataSource": {
-                "record": "%universal/testData/preferences/acceptanceTests/%userToken.json",
+                "record": "%gpii-universal/testData/preferences/acceptanceTests/%userToken.json",
                 "target": "{that cloudBasedConfig rawPreferencesServer rawPreferencesDataSource}.options.path",
                 "priority": "after:development.rawPreferencesDataSource"
             }
         }
     },
-    "mergeConfigs": "%universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
+    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.all.local.json"
 }

@@ -20,17 +20,18 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     var gpii = fluid.registerNamespace("gpii");
 
     var pouchData = [{
-        "_id": "user1",
-        "type": "user",
-        "name": "alice",
-        "token": "alice_gpii_token"
+        "_id": "client1",
+        "type": "gpiiAppInstallationClient",
+        "name": "Test Computer",
+        "oauth2ClientId": "testOauth2ClientId",
+        "oauth2ClientSecret": "testOauth2ClientSecret"
     }];
 
     var dbViews = [{
         "_id": "_design/views",
         "views": {
-            "findUserByName": {
-                "map": "function(doc) {if (doc.type === 'user') emit(doc.name, doc)}"
+            "findClientByOauth2ClientId": {
+                "map": "function(doc) {emit(doc.oauth2ClientId, doc)}"
             }
         }
     }];
@@ -61,10 +62,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     // All expected results
     gpii.tests.dataSourcePouchDB.expected = {
-        user1: {
-            "type": "user",
-            "name": "alice",
-            "token": "alice_gpii_token"
+        client1: {
+            "type": "gpiiAppInstallationClient",
+            "name": "Test Computer",
+            "oauth2ClientId": "testOauth2ClientId",
+            "oauth2ClientSecret": "testOauth2ClientSecret"
         },
         missingError: {
             error: true,
@@ -87,7 +89,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.tests.dataSourcePouchDB.getByExisingId", {
         gradeNames: ["gpii.tests.dataSourcePouchDB.testEnvironment"],
         dataSourceOptions: {
-            requestUrl: "/user1"
+            requestUrl: "/client1"
         },
         rawModules: [{
             name: "Query PouchDB by an existing document id",
@@ -98,7 +100,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                     args: ["{dataSource}.get", [], "{that}"]
                 }, {
                     listener: "jqUnit.assertLeftHand",
-                    args: ["The expected record should be received", gpii.tests.dataSourcePouchDB.expected.user1, "{arguments}.0"],
+                    args: ["The expected record should be received", gpii.tests.dataSourcePouchDB.expected.client1, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }]
@@ -119,10 +121,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "Querying by an existing document id using term map and direct model returns the expected record",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{dataSource}.get", [{id: "user1"}], "{that}"]
+                    args: ["{dataSource}.get", [{id: "client1"}], "{that}"]
                 }, {
                     listener: "jqUnit.assertLeftHand",
-                    args: ["The expected record should be received", gpii.tests.dataSourcePouchDB.expected.user1, "{arguments}.0"],
+                    args: ["The expected record should be received", gpii.tests.dataSourcePouchDB.expected.client1, "{arguments}.0"],
                     event: "{that}.events.onResponse"
                 }]
             }]
@@ -181,9 +183,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.tests.dataSourcePouchDB.getByView", {
         gradeNames: ["gpii.tests.dataSourcePouchDB.testEnvironment"],
         dataSourceOptions: {
-            requestUrl: "/_design/views/_view/findUserByName?key=\"%username\"",
+            requestUrl: "/_design/views/_view/findClientByOauth2ClientId?key=\"%oauth2ClientId\"",
             termMap: {
-                username: "%username"
+                oauth2ClientId: "%oauth2ClientId"
             }
         },
         rawModules: [{
@@ -192,10 +194,10 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "Querying by a view returns expected record",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{dataSource}.get", [{username: "alice"}], "{that}"]
+                    args: ["{dataSource}.get", [{oauth2ClientId: "testOauth2ClientId"}], "{that}"]
                 }, {
                     listener: "jqUnit.assertLeftHand",
-                    args: ["The expected record should be received", gpii.tests.dataSourcePouchDB.expected.user1, "{arguments}.0.rows.0.value"],
+                    args: ["The expected record should be received", gpii.tests.dataSourcePouchDB.expected.client1, "{arguments}.0.rows.0.value"],
                     event: "{that}.events.onResponse"
                 }]
             }]
@@ -205,9 +207,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     fluid.defaults("gpii.tests.dataSourcePouchDB.getByViewWithUnmatchedRec", {
         gradeNames: ["gpii.tests.dataSourcePouchDB.testEnvironment"],
         dataSourceOptions: {
-            requestUrl: "/_design/views/_view/findUserByName?key=\"%username\"",
+            requestUrl: "/_design/views/_view/findClientByOauth2ClientId?key=\"%oauth2ClientId\"",
             termMap: {
-                username: "%username"
+                oauth2ClientId: "%oauth2ClientId"
             }
         },
         rawModules: [{
@@ -216,7 +218,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 name: "Querying by a view returns an empty \"rows\" array",
                 sequence: [{
                     func: "gpii.tests.oauth2.invokePromiseProducer",
-                    args: ["{dataSource}.get", [{username: "nonexistent-user"}], "{that}"]
+                    args: ["{dataSource}.get", [{oauth2ClientId: "nonexistent-client"}], "{that}"]
                 }, {
                     listener: "jqUnit.assertDeepEq",
                     args: ["An empty \"rows\" array should be received", [], "{arguments}.0.rows"],

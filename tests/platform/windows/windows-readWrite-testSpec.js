@@ -15,7 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -116,6 +116,6 @@ gpii.tests.windows.readWrite = [
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.readWrite",
     configName: "gpii.tests.acceptance.windows.readWrite.config",
-    configPath: "%universal/tests/platform/windows/configs"
+    configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

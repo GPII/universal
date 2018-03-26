@@ -18,7 +18,7 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 fluid.setLogging(true);
@@ -26,7 +26,7 @@ fluid.logObjectRenderChars = 10240;
 
 fluid.registerNamespace("gpii.tests.journal");
 
-gpii.tests.journal.testSpec = fluid.require("%universal/tests/platform/windows/windows-builtIn-testSpec.js");
+gpii.tests.journal.testSpec = fluid.require("%gpii-universal/tests/platform/windows/windows-builtIn-testSpec.js");
 
 // The os_win7 entry forms the spine of our test. This user has 4 application-specific preferences encoded
 // for Windows built-in a11y features - mouse trailing (SPI), high contrast (SPI), large cursors (registry), magnifier (registry)

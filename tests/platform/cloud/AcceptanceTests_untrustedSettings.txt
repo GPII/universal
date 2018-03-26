@@ -1,7 +1,0 @@
-AcceptanceTests_untrustedSettings.js
-
-Description:
-This is a series of tests using the online flowmanager to test the feature that filtered user settings will be returned for onboarded solutions that are authorized by users to access some or all of their preferences.
-
-Requirements:
-Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

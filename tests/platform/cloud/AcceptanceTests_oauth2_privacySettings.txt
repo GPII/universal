@@ -1,7 +1,0 @@
-AcceptanceTests_privacySettings.js
-
-Description:
-This is a series of tests using the online flowmanager to test the workflow of GPII users authorize onboarded solutions or web preferences consumers to access some or all of their preferences.
-
-Requirements:
-Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

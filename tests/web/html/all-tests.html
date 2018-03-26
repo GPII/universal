@@ -10,33 +10,27 @@
     <script src="/testem.js"></script>
     <script src="../../../node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.js"></script>
     <script>
-    QUnit.testSuites([
-        "../../../gpii/node_modules/matchMakerFramework/test/html/MatchMakerUtilitiesTest.html",
-        "../../../gpii/node_modules/matchMakerFramework/test/html/InverseCapabilitiesTest.html",
-        "../../../gpii/node_modules/transformer/test/html/TransformerTests.html",
-        "../../../gpii/node_modules/journal/test/html/JournalIdParserTests.html",
-        "../../../gpii/node_modules/lifecycleManager/test/html/LifecycleManagerTest.html",
-        "../../../gpii/node_modules/lifecycleManager/test/html/DynamicComponentIndexerTest.html",
-        "../../../gpii/node_modules/ontologyHandler/test/html/OntologyHandlerUtilitiesTest.html",
-        "../../../gpii/node_modules/settingsHandlers/test/web/html/SettingsHandlerUtilitiesTest.html",
-        "../../../gpii/node_modules/contextManager/test/html/ContextManagerUtilitiesTests.html",
-        "../../../gpii/node_modules/flowManager/test/html/PrivacyFilterTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthGrantFinderTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthorizationServiceTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/UserServiceTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/test/html/DataSource-PouchDBTests.html",
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/test/html/OAuth2UtilitiesTests.html",
-        "../../../gpii/node_modules/processReporter/test/web/html/ProcessesBridgeTest.html",
-        "../../../gpii/node_modules/processReporter/test/web/html/ProcessReporterTest.html"
-    ]);
-
-    QUnit.testSuites([
-        "../../../gpii/node_modules/canopyMatchMaker/test/web/html/CanopyMatchMakerUtilitiesTests.html"
-    ]);
-
-    QUnit.testSuites("GPII OAuth2 Component Tests", [
-        "../../../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/webTests/all-tests.html"
-    ]);
+        // We use one path convention for Testem, another when Testem isn't available, i.e. when the tests are hosted in a web server.
+        var rawTestSuitePaths = [
+            "/gpii/node_modules/matchMakerFramework/test/html/MatchMakerUtilitiesTest.html",
+            "/gpii/node_modules/matchMakerFramework/test/html/InverseCapabilitiesTest.html",
+            "/gpii/node_modules/transformer/test/html/TransformerTests.html",
+            "/gpii/node_modules/journal/test/html/JournalIdParserTests.html",
+            "/gpii/node_modules/lifecycleManager/test/html/LifecycleManagerTest.html",
+            "/gpii/node_modules/lifecycleManager/test/html/DynamicComponentIndexerTest.html",
+            "/gpii/node_modules/ontologyHandler/test/html/OntologyHandlerUtilitiesTest.html",
+            "/gpii/node_modules/settingsHandlers/test/web/html/SettingsHandlerUtilitiesTest.html",
+            "/gpii/node_modules/contextManager/test/html/ContextManagerUtilitiesTests.html",
+            "/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthGrantFinderTests.html",
+            "/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/html/AuthorizationServiceTests.html",
+            "/gpii/node_modules/gpii-oauth2/gpii-oauth2-datastore/test/html/DataSource-PouchDBTests.html",
+            "/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/test/html/OAuth2UtilitiesTests.html",
+            "/gpii/node_modules/processReporter/test/web/html/ProcessesBridgeTest.html",
+            "/gpii/node_modules/processReporter/test/web/html/ProcessReporterTest.html",
+            "/gpii/node_modules/canopyMatchMaker/test/web/html/CanopyMatchMakerUtilitiesTests.html"
+        ];
+        var testSuitePaths = typeof Testem !== "undefined" ? rawTestSuitePaths : rawTestSuitePaths.map(function (entry) { return "../../.." + entry; });
+        QUnit.testSuites(testSuitePaths);
     </script>
 </head>
 <body>

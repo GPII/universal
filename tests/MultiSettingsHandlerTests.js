@@ -22,7 +22,7 @@
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -64,6 +64,6 @@ gpii.tests.multiSHSupport.testDefs = [
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.multiSHSupport.testDefs",
     configName: "gpii.tests.multiSH.config",
-    configPath: "%universal/tests/configs"
+    configPath: "%gpii-universal/tests/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

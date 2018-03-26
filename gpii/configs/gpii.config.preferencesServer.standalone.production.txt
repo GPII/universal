@@ -3,7 +3,4 @@ gpii.config.preferencesServer.standalone.production.json
 
 Preferences server running standalone on the server (incl. dependencies). It will expect a couchDB to be running on the local host using the default port.
 
-Note:
-The use of the end point `/add-preferences` requires the collaboration of Flow Manager and Preferences Server. When this end point is required, start Flow Manager with `gpii.config.cloudBased.flowManager.production` and config Preferences Server with the authentication DB configs.
-
 **WARNING: This config has been tested manually with the setup described in the production setup documentation (Sep. 5, 2016). It is NOT regularly tested by acceptance/integration or unit tests and therefore cannot be fully trusted.**

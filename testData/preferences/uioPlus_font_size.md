@@ -1,5 +1,5 @@
 # uioPlus_font_size
 
-A preference set for testing preference settings in the UIO+ browser extension.
+A preference set for testing preference settings in UIO+.
 
 Applies the Font Size preference. The text should increase in size.

@@ -21,7 +21,7 @@ Federal Government.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -50,7 +50,7 @@ gpii.tests.acceptance.linux.xrandr.testDefs = fluid.freezeRecursive([
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.acceptance.linux.xrandr.testDefs",
     configName: "gpii.tests.acceptance.linux.xrandr.config",
-    configPath: "%universal/tests/platform/linux/configs"
+    configPath: "%gpii-universal/tests/platform/linux/configs"
 }, ["gpii.test.integration.testCaseHolder.linux"],
     module, require, __dirname);
 
