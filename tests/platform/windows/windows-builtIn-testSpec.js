@@ -219,7 +219,7 @@ gpii.tests.windows.builtIn = [
                         "EnableAutoShiftEngage": 1,
                         "EnableShiftLock": 1,
                         "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1 
+                        "EnableDesktopModeAutoInvoke": 1
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
