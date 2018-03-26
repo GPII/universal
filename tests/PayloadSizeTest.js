@@ -17,7 +17,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -36,7 +36,7 @@ gpii.tests.payloadSize.testDefs = [{
     expect: 2,
     config: {
         configName: "gpii.tests.acceptance.localInstall.config",
-        configPath: "%universal/tests/configs"
+        configPath: "%gpii-universal/tests/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
     userToken: "giant",

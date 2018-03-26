@@ -14,19 +14,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var bodyParser = require("body-parser");
-var login = require("connect-ensure-login");
-var exphbs  = require("express-handlebars");
-var session = require("express-session");
 var oauth2orize = require("oauth2orize");
 var passportModule = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
 var ClientPasswordStrategy = require("passport-oauth2-client-password").Strategy;
 
 var fluid = require("infusion");
 
 require("../../gpii-oauth2-datastore");
 require("../../gpii-oauth2-utilities");
-require("./UserService");
 require("./AuthorizationService");
 require("./AuthGrantFinder");
 require("./ClientService");
@@ -68,24 +63,6 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         gpii.oauth2.oauth2orizeServer.promiseToDone(clientPromise, done);
     });
 
-    oauth2orizeServer.grant(oauth2orize.grant.code(function (client, redirectUri, user, ares, done) {
-        // TODO: Update the user interface to support multiple tokens per user rather than using a single default
-        var gpiiToken = user.defaultGpiiToken;
-        var authPromise = authorizationService.grantWebPrefsConsumerAuthCode(gpiiToken, client.id, redirectUri, ares.selectedPreferences);
-
-        gpii.oauth2.oauth2orizeServer.promiseToDone(authPromise, done);
-    }));
-
-    oauth2orizeServer.exchange(oauth2orize.exchange.code(function (client, code, redirectUri, done) {
-        var authPromise = authorizationService.exchangeCodeForAccessToken(code, client.id, redirectUri);
-        gpii.oauth2.oauth2orizeServer.promiseToDone(authPromise, done);
-    }));
-
-    oauth2orizeServer.exchange(oauth2orize.exchange.clientCredentials(function (client, scope, done) {
-        var clientCredentialsPromise = authorizationService.grantPrivilegedPrefsCreatorAuthorization(client.id, scope);
-        gpii.oauth2.oauth2orizeServer.promiseToDone(clientCredentialsPromise, done);
-    }));
-
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (client, username, password, scope, done) {
         var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, client.id);
 
@@ -125,29 +102,13 @@ fluid.defaults("gpii.oauth2.passport", {
     listeners: {
         onCreate: {
             listener: "gpii.oauth2.passport.listenPassport",
-            args: ["{that}.passport", "{userService}", "{clientService}"]
+            args: ["{that}.passport", "{clientService}"]
         }
     }
 });
 
 // TODO what name here?
-gpii.oauth2.passport.listenPassport = function (passport, userService, clientService) {
-    passport.serializeUser(function (user, done) {
-        return done(null, user.id);
-    });
-
-    passport.deserializeUser(function (id, done) {
-        var userPromise = userService.getUserById(id);
-        gpii.oauth2.oauth2orizeServer.promiseToDone(userPromise, done);
-    });
-
-    passport.use(new LocalStrategy(
-        function (username, password, done) {
-            var authenticateUserPromise = userService.authenticateUser(username, password);
-            gpii.oauth2.oauth2orizeServer.promiseToDone(authenticateUserPromise, done);
-        }
-    ));
-
+gpii.oauth2.passport.listenPassport = function (passport, clientService) {
     // ClientPasswordStrategy reads the client_id and client_secret from the
     // request body. Can also use a BasicStrategy for HTTP Basic authentication.
     passport.use(new ClientPasswordStrategy(
@@ -173,19 +134,7 @@ fluid.defaults("gpii.oauth2.authServer", {
             expander: {
                 func: "gpii.oauth2.createExpressApp"
             }
-        },
-        sessionMiddleware: {
-            expander: {
-                func: "gpii.oauth2.authServer.createSessionMiddleware"
-            }
-        },
-        passportMiddleware: {
-            expander: {
-                func: "gpii.oauth2.authServer.createPassportMiddleware",
-                args: ["{that}.passport.passport"]
-            }
-        },
-        homePage: "/privacy-settings"
+        }
     },
     components: {
         oauth2orizeServer: {
@@ -212,25 +161,12 @@ fluid.defaults("gpii.oauth2.authServer", {
                     dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
                 }
             }
-        },
-        userService: {
-            type: "gpii.oauth2.userService",
-            options: {
-                components: {
-                    dataStore: "{gpii.oauth2.dataStoreHolder}.dataStore"
-                }
-            }
         }
     },
     events: {
-        onContributeMiddleware: null,
         onContributeRouteHandlers: null
     },
     listeners: {
-        onContributeMiddleware: {
-            listener: "gpii.oauth2.authServer.contributeMiddleware",
-            args: ["{that}.expressApp"]
-        },
         onContributeRouteHandlers: {
             listener: "gpii.oauth2.authServer.contributeRouteHandlers",
             args: ["{that}", "{that}.oauth2orizeServer.oauth2orizeServer",
@@ -240,20 +176,6 @@ fluid.defaults("gpii.oauth2.authServer", {
     }
 });
 
-gpii.oauth2.authServer.createSessionMiddleware = function () {
-    // TODO move the secret to configuration
-    return session({
-        name: "auth_server_connect.sid",
-        secret: "some secret",
-        resave: false,
-        saveUninitialized: false
-    });
-};
-
-gpii.oauth2.authServer.createPassportMiddleware = function (passport) {
-    return [ passport.initialize(), passport.session() ];
-};
-
 gpii.oauth2.authServer.registerBodyParser = function (that) {
     that.expressApp.use(gpii.oauth2.jsonBodyParser());
     that.expressApp.use(gpii.oauth2.urlencodedBodyParser());
@@ -262,57 +184,12 @@ gpii.oauth2.authServer.registerBodyParser = function (that) {
 fluid.defaults("gpii.oauth2.authServer.standalone", {
     gradeNames: ["gpii.oauth2.authServer"],
     listeners: {
-        "onCreate.onContributeMiddleware": {
-            priority: "after:registerBodyParser",
-            func: "{that}.events.onContributeMiddleware.fire"
-        },
         "onCreate.onContributeRouteHandlers": {
-            priority: "after:onContributeMiddleware",
+            priority: "after:registerBodyParser",
             func: "{that}.events.onContributeRouteHandlers.fire"
         }
     }
 });
-
-/*
- * Based on the Custom Callback example from the passportjs guide.
- * http://passportjs.org/guide/authenticate/
- * Licensed under CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0/)
- *
- * Manually performs the login routing, similar to the passport
- * middleware, but with the addition of adding a "loginFailed"
- * flag to the session. This is useful for displaying an error
- * message on the login screen after an unsucessful login attempt.
- *
- * @param {object} passport - an instance of a passport object
- *
- * @param {object} options - Like the passport middleware it takes in
- *                           successReturnToOrRedirect and failureRedirect
- *                           paths.
- */
-gpii.oauth2.authServer.loginRouting = function (passport, options) {
-    return function (req, res, next) {
-        passport.authenticate("local", function (err, user) {
-            if (!user) {
-                req.session.loginFailed = true;
-                return res.redirect(options.failureRedirect);
-            } else if (err) {
-                return next(err);
-            }
-
-            req.logIn(user, function (err) {
-                var url = options.successReturnToOrRedirect;
-                if (err) {
-                    return next(err);
-                }
-                if (req.session && req.session.returnTo) {
-                    url = req.session.returnTo;
-                    delete req.session.returnTo;
-                }
-                return res.redirect(url);
-            });
-        })(req, res, next);
-    };
-};
 
 gpii.oauth2.jsonBodyParser = function () {
     return bodyParser.json();
@@ -322,287 +199,10 @@ gpii.oauth2.urlencodedBodyParser = function () {
     return bodyParser.urlencoded({ extended: true });
 };
 
-gpii.oauth2.authServer.contributeMiddleware = function (app) {
-
-    var hbs = exphbs.create({
-        layoutsDir: __dirname + "/../views/layouts",
-        defaultLayout: "main",
-        helpers: {
-            // Based on the example from page 79 of:
-            // Web Development with Node and Express by Ethan Brown (O'Reilly).
-            // Copyright 2014 Ethan Brown, 978-1-491-94930-6
-            section: function (name, options) {
-                if (!this._sections) {
-                    this._sections = {};
-                }
-                this._sections[name] = options.fn(this);
-                return null;
-            }
-        }
-
-    });
-
-    // TODO Let's not mount at the root as it will be hit for every request
-    app.use(gpii.oauth2.expressStatic(__dirname + "/../public"));
-    app.use("/infusion", gpii.oauth2.expressStatic(fluid.module.modules.infusion.baseDir));
-    app.set("views", __dirname + "/../views");
-    app.engine("handlebars", hbs.engine);
-    app.set("view engine", "handlebars");
-};
-
-gpii.oauth2.authServer.getIdFieldByClientType = function (clientType) {
-    return clientType === gpii.oauth2.docTypes.onboardedSolutionClient ? "solutionId" : "oauth2ClientId";
-};
-
-gpii.oauth2.authServer.buildAuthorizedServicesPayload = function (authorizationService, user) {
-    // TODO: Update the user interface to support multiple tokens per
-    // user rather than using a single default
-    var gpiiToken = user.defaultGpiiToken;
-
-    var authorizedClientsPromise = authorizationService.getUserAuthorizedClientsForGpiiToken(gpiiToken);
-    var unauthorizedClientsPromise = authorizationService.getUserUnauthorizedClientsForGpiiToken(gpiiToken);
-
-    // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-    var sources = [authorizedClientsPromise, unauthorizedClientsPromise];
-    var promisesSequence = fluid.promise.sequence(sources);
-
-    var authorizedServicesPromise = fluid.promise();
-    // TODO: Convert to use fluid.promise.map once https://issues.fluidproject.org/browse/FLUID-5968 is resolved
-    promisesSequence.then(function (responses) {
-        var authorizedClients = responses[0];
-        var unauthorizedClients = responses[1];
-
-        var authorizedServices = [],
-            unauthorizedServices = [];
-
-        fluid.each(authorizedClients, function (clients) {
-            var authorizedServicesForOneType = fluid.transform(clients, function (client) {
-                return {
-                    authorizationId: client.authorizationId,
-                    serviceName: client.clientName,
-                    clientId: client.oauth2ClientId ? client.oauth2ClientId : client.solutionId
-                };
-            });
-            authorizedServices = authorizedServices.concat(authorizedServicesForOneType);
-        });
-
-        fluid.each(unauthorizedClients, function (clients) {
-            var unauthorizedServicesForOneType = fluid.transform(clients, function (client) {
-                return {
-                    serviceName: client.clientName,
-                    clientId: client.oauth2ClientId ? client.oauth2ClientId : client.solutionId
-                };
-            });
-            unauthorizedServices = unauthorizedServices.concat(unauthorizedServicesForOneType);
-        });
-
-        authorizedServicesPromise.resolve({
-            username: user.name,
-            authorizedServices: authorizedServices,
-            unauthorizedServices: unauthorizedServices
-        });
-    });
-
-    return authorizedServicesPromise;
-};
-
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
-
-    that.expressApp.get("/login",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        function (req, res) {
-            var loginFailed = req.session.loginFailed || false;
-            delete req.session.loginFailed;
-            res.render("login", {loginFailed: loginFailed});
-        }
-    );
-
-    that.expressApp.post("/login",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        gpii.oauth2.authServer.loginRouting(passport, {successReturnToOrRedirect: that.homePage, failureRedirect: "/login"})
-    );
-
-    that.expressApp.post("/logout",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        function (req, res) {
-            req.logout();
-            res.redirect(that.homePage);
-        }
-    );
-
-    // The entry endpoint for OAuth2 authorization code grant, to request the auth code
-    that.expressApp.get("/authorize",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        oauth2orizeServer.authorize(function (oauth2ClientId, redirectUri, done) {
-            var clientPromise = that.clientService.checkWebPrefsConsumerRedirectUri(oauth2ClientId, redirectUri);
-            clientPromise.then(function (client) {
-                done(null, client, redirectUri);
-            });
-        }),
-        function (req, res, next) {
-            // TODO: Update the user interface to support multiple
-            // tokens per user rather than using a single default
-            var gpiiToken = req.user.defaultGpiiToken;
-
-            var clientId = req.oauth2.client.id;
-            var redirectUri = req.oauth2.redirectURI;
-            var isUserAuthorizedPromise = that.authorizationService.userHasAuthorizedWebPrefsConsumer(gpiiToken, clientId, redirectUri);
-            isUserAuthorizedPromise.then(function (isUserAuthorized) {
-                if (isUserAuthorized) {
-                    // The user has previously authorized so we can grant a code without asking them
-                    req.query.transaction_id = req.oauth2.transactionID;
-                    // TODO we can cache the oauth2orizeServer.decision middleware as it doesn't change for each request
-                    var middleware = oauth2orizeServer.decision();
-                    return gpii.oauth2.walkMiddleware(middleware, 0, req, res, next);
-                } else {
-                    // otherwise, show the authorize page
-                    res.render("authorize", { transactionID: req.oauth2.transactionID, user: req.user, client: req.oauth2.client });
-                }
-            });
-        }
-    );
-
-    // Used by UI for users to define the selected preferences set that the web preferences consumer
-    // is authorized to access.
-    that.expressApp.post("/authorize_decision",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        oauth2orizeServer.decision(function (req, done) {
-            if (req.body.selectedPreferences) {
-                // TODO validate selectedPreferences?
-                var selectedPreferences = JSON.parse(req.body.selectedPreferences);
-                return done(null, { selectedPreferences: selectedPreferences });
-            } else {
-                var err = new Error("Missing parameter selectedPreferences");
-                err.status = 400;
-                return done(err);
-            }
-        })
-    );
-
-    that.expressApp["delete"]("/authorizations/:authorizationId",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var userId = req.user.id;
-            // TODO: Validate authorizationId
-            var authorizationId = req.params.authorizationId;
-            var revokePromise = that.authorizationService.revokeUserAuthorizedAuthorization(userId, authorizationId);
-            gpii.oauth2.mapPromiseToResponse(revokePromise, res);
-        }
-    );
-
-    // TODO: Perhaps a better URL would be /authorization/:authorizationId/selectedPreferences
-    that.expressApp.get("/authorizations/:authorizationId/preferences",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var userId = req.user.id;
-            // TODO: Validate authorizationId
-            var authorizationId = req.params.authorizationId;
-            var selectedPreferencesPromise = that.authorizationService.getSelectedPreferences(userId, authorizationId);
-            selectedPreferencesPromise.then(function (selectedPreferences) {
-                if (selectedPreferences) {
-                    res.type("application/json");
-                    res.send(JSON.stringify(selectedPreferences, null, 4));
-                } else {
-                    res.sendStatus(404);
-                }
-            }, function (err) {
-                res.sendStatus(err.statusCode);
-            });
-        }
-    );
-
-    // TODO CSRF Prevention mechanism
-    // TODO https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet
-    that.expressApp.put("/authorizations/:authorizationId/preferences",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var userId = req.user.id;
-            // TODO: Validate authorizationId
-            var authorizationId = req.params.authorizationId;
-            // TODO communicate bad authorizationId or an id for an authorization that is not yours?
-            if (req.is("application/json")) {
-                var selectedPreferences = req.body;
-                // TODO validate selectedPreferences?
-                var setPromise = that.authorizationService.setSelectedPreferences(userId, authorizationId, selectedPreferences);
-                gpii.oauth2.mapPromiseToResponse(setPromise, res);
-            } else {
-                res.sendStatus(400);
-            }
-        }
-    );
-
-    // TODO CSRF Prevention mechanism
-    // TODO https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet
-    that.expressApp.post("/authorizations",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            if (req.is("application/json")) {
-                // TODO: Update the user interface to support multiple
-                // tokens per user rather than using a single default
-                var gpiiToken = req.user.defaultGpiiToken;
-
-                // "clientId" received in the request body maps to:
-                // 1. "solutionId" for onboarded solution clients;
-                // 2. "oauth2ClientId" for web preferences consumer clients.
-                var clientId = req.body.clientId;
-                var selectedPreferences = req.body.selectedPreferences;
-
-                // TODO validate selectedPreferences?
-                var addPromise = that.authorizationService.addUserAuthorizedAuthorization(gpiiToken, clientId, selectedPreferences);
-                gpii.oauth2.mapPromiseToResponse(addPromise, res);
-            } else {
-                res.sendStatus(400);
-            }
-        }
-    );
-
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
         oauth2orizeServer.token()
-    );
-
-    // TODO: This API is a workalike of /privacy-settings, only it returns the JSON
-    // payload directly rather than baking it into the markup. Currently this is used
-    // only in our cloud-based acceptance tests. In future, when /privacy-settings is
-    // refactored to use AJAX, this API will be used to retieve the services listed
-    // on the Privacy Settings page.
-    that.expressApp.get("/authorized-services",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var authorizedServicesPromise = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
-            authorizedServicesPromise.then(function (payload) {
-                res.json(payload);
-            });
-        }
-    );
-
-    that.expressApp.get("/privacy-settings",
-        that.sessionMiddleware,
-        that.passportMiddleware,
-        login.ensureLoggedIn("/login"),
-        function (req, res) {
-            var authorizedServicesPromise = gpii.oauth2.authServer.buildAuthorizedServicesPayload(that.authorizationService, req.user);
-            authorizedServicesPromise.then(function (payload) {
-                res.render("privacySettings", payload);
-            });
-        }
     );
 };
 

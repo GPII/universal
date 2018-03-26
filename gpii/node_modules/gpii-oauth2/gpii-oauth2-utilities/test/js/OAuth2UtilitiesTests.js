@@ -152,5 +152,42 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
                 jqUnit.assertEquals(msg, testCase.expected, result);
             });
         });
+
+        jqUnit.test("Test gpii.oauth2.getExpiresIn()", function () {
+            jqUnit.expect(6);
+
+            var testCases = [{
+                timestampStarts: new Date("2017-09-22"),
+                timestampExpires: "2017-05-29T17:54:00.000Z",
+                expected: 0
+            }, {
+                timestampStarts: null,
+                timestampExpires: new Date("2017-09-22"),
+                expected: undefined
+            }, {
+                timestampStarts: new Date("2017-09-22"),
+                timestampExpires: null,
+                expected: undefined
+            }, {
+                timestampStarts: undefined,
+                timestampExpires: new Date("2017-09-22"),
+                expected: undefined
+            }, {
+                timestampStarts: new Date("2017-09-22"),
+                timestampExpires: undefined,
+                expected: undefined
+            }, {
+                timestampStarts: new Date("2017-09-22"),
+                timestampExpires: "2017-09-22T00:01:00.000Z",
+                expected: 60
+            }];
+
+            fluid.each(testCases, function (testCase) {
+                var result = gpii.oauth2.getExpiresIn(testCase.timestampStarts, testCase.timestampExpires);
+                var msg = "The timestamp \"" + testCase.timestampExpires + "\" will expire in " + testCase.expected + " seconds";
+
+                jqUnit.assertEquals(msg, testCase.expected, result);
+            });
+        });
     };
 })();

@@ -27,6 +27,18 @@ gpii.oauth2.parseBearerAuthorizationHeader = function (req) {
     return undefined;
 };
 
+gpii.oauth2.getAuthorization = function (req, authGrantFinder) {
+    var promiseTogo = fluid.promise();
+    var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
+
+    if (!accessToken) {
+        promiseTogo.reject(gpii.oauth2.errors.unauthorized);
+    } else {
+        promiseTogo = authGrantFinder.getGrantForAccessToken(accessToken);
+    }
+    return promiseTogo;
+};
+
 gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
     // TODO best way to check if middleware is a single function?
     if (typeof middleware === "function") {
@@ -43,7 +55,7 @@ gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
 
 gpii.oauth2.composeError = function (error, termMap) {
     var err = fluid.copy(error);
-    err.msg = fluid.stringTemplate(err.msg, termMap);
+    err.message = fluid.stringTemplate(err.message, termMap);
     return err;
 };
 
@@ -75,4 +87,20 @@ gpii.oauth2.getTimestampExpires = function (timestampStarts, expiresIn) {
         return undefined;
     }
     return new Date(timestampStarts.getTime() + expiresIn * 1000).toISOString();
+};
+
+/**
+ * Compare the current time with the expiresIn time and return the number of seconds that the expiration will occur.
+ * @param timestampStarts {Date} A start timestamp in the format returned by Date()
+ * @param timestampExpires {String} A string in the format returned by Date().toISOString()
+ * @return {Number} The number of seconds that the expiration will occur. Return 0 if the given timestampExpires < the current timestamp.
+ */
+gpii.oauth2.getExpiresIn = function (timestampStarts, timestampExpires) {
+    if (!timestampStarts || !timestampExpires) {
+        return undefined;
+    }
+
+    var startsTimeInMsec = timestampStarts.getTime();
+    var expiresTimeInMsec = new Date(timestampExpires).getTime();
+    return expiresTimeInMsec > startsTimeInMsec ? Math.round((expiresTimeInMsec - startsTimeInMsec) / 1000) : 0;
 };
