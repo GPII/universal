@@ -3065,7 +3065,7 @@
                     "EnableAutoShiftEngage": {},
                     "EnableShiftLock": {},
                     "EnableCompatibilityKeyboard": {},
-                    "EnableDesktopModeAutoInvoke": {} 
+                    "EnableDesktopModeAutoInvoke": {}
                 },
                 "capabilities": [
                     "http://registry\\.gpii\\.net/common/autocorrectionEnabled",
@@ -3205,7 +3205,7 @@
                     "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "EnableKeyAudioFeedbackchoWords",
+                            "leftPath": "EnableKeyAudioFeedback",
                             "right": 0,
                             "operator": "!=="
                         }
