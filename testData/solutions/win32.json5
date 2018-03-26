@@ -3026,7 +3026,7 @@
     },
 
     "com.microsoft.windows.internationalization": {
-        "name": "Windows Cursors",
+        "name": "Windows Internationalization Settings",
         "contexts": {
             "OS": [
                 {
@@ -3169,7 +3169,7 @@
                         }
                     },
                     "iLZero": {
-                        "scheme": {
+                        "schema": {
                             "title": "Display leading zeros",
                             "description": "Display or not leading zeros in decimal number",
                             "type": "bool",
@@ -3177,14 +3177,15 @@
                         }
                     },
                     "sList": {
-                        "scheme": {
+                        "schema": {
                             "title": "List separator symbol",
                             "description": "Symbol for separating elements in lists",
-                            "type": "string with a max of 3 chars",
+                            "type": "string with a max of 3 chars"
                         }
                     },
+                    // Needs to change in favour of iMetric
                     "iMeasure": {
-                        "scheme": {
+                        "schema": {
                             "title": "Unit system",
                             "description": "Unit system to be used as default",
                             "type": "number",
@@ -3193,7 +3194,7 @@
                         }
                     },
                     "sNativeDigits": {
-                        "scheme": {
+                        "schema": {
                             "title": "Native digits representation",
                             "description": "Character set for representing the native digits",
                             "type": "string",
@@ -3236,7 +3237,7 @@
                         }
                     },
                     "NumShape": {
-                        "scheme": {
+                        "schema": {
                             "title": "Native digits contextual usage",
                             "description": "Determines the context in which the native digits should be used or not",
                             "type": "string",
@@ -3244,7 +3245,7 @@
                         }
                     },
                     "sCurrency": {
-                        "scheme": {
+                        "schema": {
                             "title": "System default currency",
                             "description": "Standard currency for being used in the system",
                             "type": "string",
@@ -3252,7 +3253,7 @@
                         }
                     },
                     "iCurrency": {
-                        "scheme": {
+                        "schema": {
                             "title": "Positive currency format",
                             "description": "Format in which express money cuantities",
                             "type": "number",
@@ -3261,7 +3262,7 @@
                         }
                     },
                     "iNegCurr": {
-                        "scheme": {
+                        "schema": {
                             "title": "Negative currency format",
                             "description": "Format in which express negative money cuantities",
                             "type": "number",
@@ -3270,7 +3271,7 @@
                         }
                     },
                     "sMonDecimalSep": {
-                        "scheme": {
+                        "schema": {
                             "title": "Currency decimal symbol",
                             "description": "The symbol for decimal in monetary amount",
                             "type": "string with a max of three chars",
@@ -3278,7 +3279,7 @@
                         }
                     },
                     "iCurrDigits": {
-                        "scheme": {
+                        "schema": {
                             "title": "Currency decimal digits",
                             "description": "Number of decimal digits in a monetary amount",
                             "type": "number",
@@ -3286,7 +3287,7 @@
                         }
                     },
                     "sMonThousandSep": {
-                        "scheme": {
+                        "schema": {
                             "title": "Currency digits grouping symbol",
                             "description": "Determines the grouping symbol for digits in a monetary amount representation",
                             "type": "string",
@@ -3294,7 +3295,7 @@
                         }
                     },
                     "sMonGrouping": {
-                        "scheme": {
+                        "schema": {
                             "title": "Currency digits grouping format",
                             "description": "Determines the grouping format for digits in a monetary amount representation",
                             "type": "string",
