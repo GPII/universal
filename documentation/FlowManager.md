@@ -56,20 +56,22 @@ OR if the last login/logout process for <myGpiiKey> finished less than 1.5 secon
 
 #### Save new preferences set (POST /user/preferences)
 * **description**: Save a preferences set to a new GPII key
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
+* **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
 * **route:** `/user/preferences`
 * **method:** `POST`
 * **body:** The preferences to save as a JSON structure
 * **return:** A payload with the newly generated GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by `preferences`).
+* **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow manager configs due to the security consideration.
 
 
 #### Save preferences set to existing GPII key (PUT /user/preferences/:gpiiKey)
 * **description**: Save a preferences set to an existing GPII key
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
+* **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
 * **route:** `/user/preferences/:gpiiKey` where `:gpiiKey` is the GPII key to save the preferences for
 * **method:** `PUT`
 * **body:** The preferences to save as a JSON structure
 * **return:** A payload with the GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by `preferences`).
+* **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow manager configs due to the security consideration.
 
 
 #### Get settings from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
