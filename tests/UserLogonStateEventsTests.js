@@ -22,7 +22,7 @@ var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle");
 
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 require("./shared/UserLogonStateChangeTestDefs.js");
 fluid.registerNamespace("gpii.tests.userLogonEvents");

@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.module.register("universal", __dirname, require);
+fluid.module.register("gpii-universal", __dirname, require);
 
 // TODO: proper module loader will eliminate these requires (FLUID-5521)
 require("./gpii/node_modules/transformer");

@@ -16,7 +16,7 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit"),
     fs = require("fs");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -24,7 +24,7 @@ fluid.registerNamespace("gpii.tests.cloud.oauth2.untrustedSettingsPut");
 
 gpii.tests.cloud.oauth2.untrustedSettingsPut.key = "testUser1";
 gpii.tests.cloud.oauth2.untrustedSettingsPut.keyWithoutPrefs = "chrome_and_firefox";
-gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir = fluid.module.resolvePath("%universal/testData/preferences/acceptanceTests/");
+gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir = fluid.module.resolvePath("%gpii-universal/testData/preferences/acceptanceTests/");
 
 gpii.tests.cloud.oauth2.untrustedSettingsPut.initialPrefsSet = {
     "flat": {
