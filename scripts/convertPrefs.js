@@ -30,7 +30,7 @@ filenames.forEach(function (filename) {
             "type": "gpiiKey",
             "schemaVersion": "0.1",
             "prefsSafeId": prefsSafeId,
-            "prefsSetName": "gpii-default",
+            "prefsSetId": "gpii-default",
             "revoked": false,
             "revokedReason": null,
             "timestampCreated": currentTime,
