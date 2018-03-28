@@ -231,3 +231,4 @@ Universal image you can use this command:
 Or use the following command to download a particular image identified using a Git commit hash:
 
 `docker pull gpii/universal:<first seven characters of a git commit hash>`
+
