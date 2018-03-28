@@ -85,6 +85,17 @@ gpii.tests.journal.initialSettings = {
                 "screen-dpi": 1
             }
         }]
+    },
+    "gpii.windows.systemSettingsHandler": {
+        "some.app.id": [
+            {
+                "settings": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "value": false
+                    }
+                }
+            }
+        ]
     }
 };
 

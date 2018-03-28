@@ -3060,6 +3060,9 @@
                             "default": 0
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
                 }
             }
         },
