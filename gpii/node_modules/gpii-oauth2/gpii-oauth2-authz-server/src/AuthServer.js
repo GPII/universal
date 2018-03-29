@@ -62,8 +62,21 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         gpii.oauth2.oauth2orizeServer.promiseToDone(clientPromise, done);
     });
 
-    oauth2orizeServer.exchange(oauth2orize.exchange.password(function (client, username, password, scope, done) {
-        var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, client.id);
+    /*
+     * Processes OAuth2 resource owner GPII key grant requests.
+     * @param clientInfo {Object} The structure is {
+     *     client: {Object},  // all fields from "client" document for this client
+     *     clientCredentialId: {String}  // The internal "id" value from "clientCredential" document that associates with
+     *                                   // the client credential used in this authorization request.
+     * }
+     * @param username {String} The username value in the grant request.
+     * @param password {String} The password value in the grant request.
+     * @param scope {String} The scope value in the grant request.
+     * @param done {Function} The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
+     * @return The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
+     */
+    oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, done) {
+        var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredentialId);
 
         var authorizationMapper = function (authorization) {
             return authorization.accessToken;

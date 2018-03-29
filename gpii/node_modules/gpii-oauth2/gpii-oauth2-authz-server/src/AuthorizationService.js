@@ -35,7 +35,7 @@ var fluid = fluid || require("infusion");
         invokers: {
             grantGpiiAppInstallationAuthorization: {
                 funcName: "gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization",
-                args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1"]
+                args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
                     // gpiiKey, clientId
             },
             getAuthorizationByAccessToken: {
@@ -55,23 +55,25 @@ var fluid = fluid || require("infusion");
      * @param clientId {String} A client id
      * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the GPII key is not found.
      */
-    gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization = function (dataStore, codeGenerator, gpiiKey, clientId) {
+    gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization = function (dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId) {
         var promiseTogo = fluid.promise();
 
-        if (!gpiiKey || !clientId) {
-            var error = gpii.dbOperation.composeError(gpii.dbOperation.errors.missingInput, {fieldName: "GPII key or client ID"});
+        if (!gpiiKey || !clientId || !clientCredentialId) {
+            var error = gpii.dbOperation.composeError(gpii.dbOperation.errors.missingInput, {fieldName: "GPII key, client ID or client credential ID"});
             promiseTogo.reject(error);
         } else {
             var gpiiKeyPromise = dataStore.findGpiiKey(gpiiKey);
             var clientPromise = dataStore.findClientById(clientId);
+            var clientCredentialPromise = dataStore.findClientCredentialById(clientCredentialId);
 
             // TODO: Update the usage of fluid.promise.sequence() once https://issues.fluidproject.org/browse/FLUID-5938 is resolved.
-            var sources = [gpiiKeyPromise, clientPromise];
+            var sources = [gpiiKeyPromise, clientPromise, clientCredentialPromise];
             var promisesSequence = fluid.promise.sequence(sources);
 
             promisesSequence.then(function (responses) {
                 var gpiiKeyRec = responses[0];
                 var clientRec = responses[1];
+                var clientCredentialRec = responses[2];
 
                 var error;
 
@@ -83,12 +85,19 @@ var fluid = fluid || require("infusion");
                     fluid.log("authorizationService, granting GPII app installation authorization: invalid client or the type of the client with the client id (" + clientId + ") is not \"" + gpii.dbOperation.docTypes.gpiiAppInstallationClient + "\"");
                     error = gpii.dbOperation.composeError(gpii.dbOperation.errors.unauthorized);
                     promiseTogo.reject(error);
+                } else if (!clientCredentialRec || clientCredentialRec.type !== gpii.dbOperation.docTypes.clientCredential) {
+                    fluid.log("authorizationService, granting GPII app installation authorization: invalid client credential or the type of the client credential with id (" + clientCredentialId + ") is not \"" + gpii.dbOperation.docTypes.clientCredential + "\"");
+                    error = gpii.dbOperation.composeError(gpii.dbOperation.errors.unauthorized);
+                    promiseTogo.reject(error);
+                } else if (clientCredentialRec.clientId !== clientId) {
+                    fluid.log("authorizationService, granting GPII app installation authorization: the client id (" + clientCredentialRec.clientId + ") that the client credential belongs to does not match the client id (" + clientId + ") that requests the authorization");
+                    error = gpii.dbOperation.composeError(gpii.dbOperation.errors.unauthorized);
+                    promiseTogo.reject(error);
                 } else {
                     // Re-issue a new access token every time. In the case that multiple requests were made for the same "client credential + GPII key"
                     // combination, the access token would be different for each request in the audit log. In the case that one request was detected to
                     // be from an attacker, invoking the associating access token would not affect other access tokens or the real user.
-
-                    gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization(promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, gpii.oauth2.defaultTokenLifeTimeInSeconds);
+                    gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization(promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId, gpii.oauth2.defaultTokenLifeTimeInSeconds);
                 }
             });
         }
@@ -102,15 +111,17 @@ var fluid = fluid || require("infusion");
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiKey {String} a GPII key
      * @param clientId {String} an unique client id
+     * @param clientCredentialId {String} an unique client credential id
      * @param expiresIn {String} the lifetime in seconds of the access token
      * @return: none. The first argument of promiseTogo contains returned values
      */
-    gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, expiresIn) {
+    gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
 
         var addGpiiAppInstallationAuthorizationPromise = dataStore.addAuthorization({
             clientId: clientId,
             gpiiKey: gpiiKey,
+            clientCredentialId: clientCredentialId,
             accessToken: accessToken,
             timestampExpires: gpii.oauth2.getTimestampExpires(new Date(), expiresIn)
         });
