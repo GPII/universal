@@ -1373,20 +1373,12 @@
         ],
         "start": [
             {
-                "type": "gpii.windows.closeApplications",
-                "level": "low",
-                "options": {
-                    "restart": true
-                }
+                "type": "gpii.windows.restartExplorer"
             }
         ],
         "stop": [
             {
-                "type": "gpii.windows.closeApplications",
-                "level": "low",
-                "options": {
-                    "restart": true
-                }
+                "type": "gpii.windows.restartExplorer"
             }
         ],
         "isInstalled": [
