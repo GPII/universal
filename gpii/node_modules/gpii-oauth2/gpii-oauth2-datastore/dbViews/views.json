@@ -2,50 +2,14 @@
     {
         "_id": "_design/views",
         "views": {
-            "findUserByName": {
-                "map": "function(doc) {if (doc.type === 'user') emit(doc.name, doc)}"
-            },
             "findGpiiToken": {
                 "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, doc)}"
             },
-            "findUserByGpiiToken": {
-                "map": "function(doc) {if (doc.type === 'gpiiToken') emit(doc.gpiiToken, {'_id': doc.userId})}"
-            },
             "findClientByOauth2ClientId": {
-                "map": "function(doc) {if (doc.type === 'gpiiAppInstallationClient' || doc.type === 'privilegedPrefsCreatorClient' || doc.type === 'webPrefsConsumerClient') emit(doc.oauth2ClientId, doc)}"
-            },
-            "findClientBySolutionId": {
-                "map": "function(doc) {if (doc.type === 'onboardedSolutionClient') emit(doc.solutionId, doc)}"
-            },
-            "findUserAuthorizableClients": {
-                "map": "function(doc) {if (doc.type === 'onboardedSolutionClient' || doc.type === 'webPrefsConsumerClient') emit(doc._id, doc)}"
-            },
-            "findUserAuthorizationsByGpiiToken": {
-                "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.gpiiToken, doc)}}"
-            },
-            "findWebPrefsConsumerAuthorization": {
-                "map": "function(doc) {if (doc.type === 'webPrefsConsumerAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId, doc.redirectUri], doc)}}"
-            },
-            "findWebPrefsConsumerAuthorizationByAuthCode": {
-                "map": "function(doc) {if (doc.type === 'authCode') {emit(doc.code, {'_id': doc.authorizationId})}}"
-            },
-            "findOnboardedSolutionAuthorization": {
-                "map": "function(doc) {if (doc.type === 'onboardedSolutionAuthorization' && doc.revoked === false) {emit([doc.gpiiToken, doc.clientId], doc)}}"
-            },
-            "findUserAuthorizedAuthorizationById": {
-                "map": "function(doc) {if (doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') emit(doc._id, doc)}"
-            },
-            "findUserAuthorizedClientsByGpiiToken": {
-                "map": "function(doc) {if ((doc.type === 'onboardedSolutionAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.gpiiToken, {'_id': doc.clientId, 'selectedPreferences': doc.selectedPreferences})}}"
-            },
-            "findPrivilegedPrefsCreatorAuthorizationById": {
-                "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization') emit(doc._id, doc)}"
-            },
-            "findPrivilegedPrefsCreatorAuthorizationByClientId": {
-                "map": "function(doc) {if (doc.type === 'privilegedPrefsCreatorAuthorization' && doc.revoked === false) emit(doc.clientId, doc)}"
+                "map": "function(doc) {if (doc.type === 'gpiiAppInstallationClient') emit(doc.oauth2ClientId, doc)}"
             },
             "findAuthorizationByAccessToken": {
-                "map": "function(doc) {if ((doc.type === 'gpiiAppInstallationAuthorization' || doc.type === 'privilegedPrefsCreatorAuthorization' || doc.type === 'webPrefsConsumerAuthorization') && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"
+                "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"
             }
         }
     }

@@ -20,7 +20,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -56,4 +56,3 @@ var testDefs = [
 ];
 
 module.exports = gpii.test.cloudBased.bootstrap(testDefs, __dirname);
-

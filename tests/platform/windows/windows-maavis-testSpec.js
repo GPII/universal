@@ -18,7 +18,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -85,6 +85,6 @@ gpii.tests.windows.maavis = [
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.windows.maavis",
     configName: "gpii.tests.acceptance.windows.maavis.config",
-    configPath: "%universal/tests/platform/windows/configs"
+    configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

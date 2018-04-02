@@ -19,7 +19,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.registerNamespace("gpii.tests.pcpIntegration");
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
 
@@ -597,7 +597,7 @@ gpii.tests.pcpIntegration.buildTestDefs = function (testDefs) {
             ],
             config: {
                 configName: "gpii.tests.acceptance.linux.builtIn.config",
-                configPath: "%universal/tests/platform/linux/configs"
+                configPath: "%gpii-universal/tests/platform/linux/configs"
             }
         }, testDef);
     });

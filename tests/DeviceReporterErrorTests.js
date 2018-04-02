@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
     kettle = fluid.registerNamespace("kettle");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -28,7 +28,7 @@ fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
     gradeNames: "gpii.test.common.testCaseHolder",
     distributeOptions: {
         "development.installedSolutionsPath": {
-            "record": "%universal/tests/data/faultyDeviceReport.jsonx",
+            "record": "%gpii-universal/tests/data/faultyDeviceReport.jsonx",
             "target": "{that deviceReporter installedSolutionsDataSource}.options.path"
         }
     },
@@ -48,7 +48,7 @@ gpii.tests.deviceReporterErrorTests.userToken = "testUser1";
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
         configName: "gpii.config.development.all.local",
-        configPath: "%universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
 };
@@ -75,7 +75,7 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
         expect: 4,
         config: {
             configName: "gpii.config.development.all.local",
-            configPath: "%universal/gpii/configs"
+            configPath: "%gpii-universal/gpii/configs"
         },
         gradeNames: [ "gpii.tests.deviceReporterErrorTests.testCaseHolder" ],
         sequence: [{

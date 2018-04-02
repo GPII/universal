@@ -17,7 +17,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit = fluid.registerNamespace("jqUnit"),
         gpii = fluid.registerNamespace("gpii");
 
-    fluid.require("%universal");
+    fluid.require("%gpii-universal");
 
     kettle.loadTestingSupport();
     fluid.setLogging(true);

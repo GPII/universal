@@ -185,3 +185,34 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
     }
 }
 ```
+
+#### Update settings on Online Flowmanager (PUT /:token/untrusted-settings)
+* **description**: Merge the incoming preferences with the existing user preferences and update the merged preferences on the online flowmanager.
+* **Supported modes**: Cloud-based (online) flowmanager only
+* **route:** `/:token/untrusted-settings` where:
+    - `:token` should be the token of the user for which the settings are updated
+* **header:** Authorization: Bearer < access_token >
+    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to update settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
+* **method:** `PUT`
+* **request body:** An object, containing a subset of to-be-updated settings. For example:
+```
+{
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                "http://registry.gpii.net/common/initDelay": 0.120,
+                "http://registry.gpii.net/common/cursorSpeed": 0.850
+            }
+        }
+    }
+}
+```
+* **return:** An object, containing the user token and a status message. For example:
+```
+{
+    "userToken": "li",
+    "messgae": "Successfully updated."
+}
+```

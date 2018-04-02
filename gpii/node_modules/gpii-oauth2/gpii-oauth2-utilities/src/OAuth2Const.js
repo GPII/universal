@@ -21,17 +21,9 @@ fluid.registerNamespace("gpii.oauth2");
 // See [the documentation of Authorization Server](../../../../../documentation/AuthServer.md)
 // regarding accepted fields for each document type.
 gpii.oauth2.docTypes = fluid.freezeRecursive({
-    user: "user",
     gpiiAppInstallationClient: "gpiiAppInstallationClient",
-    onboardedSolutionClient: "onboardedSolutionClient",
-    privilegedPrefsCreatorClient: "privilegedPrefsCreatorClient",
-    webPrefsConsumerClient: "webPrefsConsumerClient",
     gpiiToken: "gpiiToken",
-    gpiiAppInstallationAuthorization: "gpiiAppInstallationAuthorization",
-    onboardedSolutionAuthorization: "onboardedSolutionAuthorization",
-    privilegedPrefsCreatorAuthorization: "privilegedPrefsCreatorAuthorization",
-    webPrefsConsumerAuthorization: "webPrefsConsumerAuthorization",
-    authCode: "authCode"
+    gpiiAppInstallationAuthorization: "gpiiAppInstallationAuthorization"
 });
 
 // The default value of the number of seconds that access tokens become invalid.
@@ -49,35 +41,9 @@ gpii.oauth2.errors = fluid.freezeRecursive({
         statusCode: 400,
         isError: true
     },
-    unauthorizedUser: {
-        message: "The user %userId is not authorized",
-        statusCode: 401,
-        isError: true
-    },
-    invalidUser: {
-        message: "Invalid user name and password combination",
-        statusCode: 401,
-        isError: true
-    },
-    unauthorizedAuthCode: {
-        message: "The authorization code %code is not authorized",
-        statusCode: 401,
-        isError: true
-    },
-    unauthorizedClient: {
-        message: "The client is not authorized",
-        statusCode: 401,
-        isError: true
-    },
-    unauthorizedAccessToken: {
-        message: "The access token is not authorized",
-        statusCode: 401,
-        isError: true
-    },
     unauthorized: {
         message: "Unauthorized",
         statusCode: 401,
         isError: true
     }
 });
-
