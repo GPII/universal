@@ -44,7 +44,7 @@ gpii.tests.development.testDefs = [{
     expect: 2,
     config: {
         configName: "gpii.config.development.all.local",
-        configPath: "%universal/gpii/configs"
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
     userToken: gpii.tests.development.userToken,

@@ -116,7 +116,7 @@ gpii.oauth2.dbDataStore.cleanUpDoc = function (data) {
  * CouchDB/PouchDB, it is modified by adding an unique _id field and a proper document type.
  * @param dataSource {Component} An instance of gpii.oauth2.dbDataSource
  * @param docType {String} The document type. See gpii.oauth2.docTypes defined in
- * %universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/src/OAuth2Const.js
+ * %gpii-universal/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/src/OAuth2Const.js
  * @param idName {String} The name for the unique id field. Usually "id".
  * @param data {Object} The data to be saved in the new record
  * @return {Promise} A promise for the save response

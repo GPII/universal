@@ -20,7 +20,7 @@ var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -115,7 +115,7 @@ gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
         return fluid.extend(true, {
             config: {
                 configName: "gpii.config.development.all.local",
-                configPath: "%universal/gpii/configs"
+                configPath: "%gpii-universal/gpii/configs"
             },
             gradeNames: [ "gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux" ],
             userToken: testDefs.userToken || gpii.tests.userLogonHandling.userToken
