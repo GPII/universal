@@ -19,15 +19,59 @@ fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows");
+fluid.registerNamespace("gpii.tests.windows.readwrite");
 
-gpii.tests.windows.readWrite = [
+// To avoid duplicating this entire piece in each test. Given a true or false value
+// as input, this will return a settingshandler entry, containing all the options from
+// the solutions registry entry for NVDAs launchHandler, with a settings block with
+// running: X - where X is replaced with the input parameter
+gpii.tests.windows.readwrite.flexibleHandlerEntry = function (running) {
+    return {
+        "com.texthelp.readWriteGold": [{
+            "settings": {
+                "running": running
+            },
+            "options": {
+                "verifySettings": true,
+                retryOptions: {
+                    rewriteEvery: 0,
+                    numRetries: 40,
+                    retryInterval: 1000
+                },
+                "setTrue": [
+                    {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                    }
+                ],
+                "setFalse": [
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "ReadAndWrite.exe"
+                    }
+                ],
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "ReadAndWrite"
+                    }
+                ]
+            }
+        }]
+    };
+};
+
+
+gpii.tests.windows.readwrite.testDefs = [
     {
-        name: "Testing rwg1",
+        name: "Testing rwg1 - running on login",
         userToken: "rwg1",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
-                "some.app.id": [
+                "com.texthelp.readWriteGold": [
                     {
                         "settings": {
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
@@ -56,21 +100,58 @@ gpii.tests.windows.readWrite = [
                         }
                     }
                 ]
-            }
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
+        }
+    }, {
+        name: "Testing rwg1",
+        userToken: "rwg1",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+        settingsHandlers: {
+            "gpii.settingsHandlers.XMLHandler": {
+                "com.texthelp.readWriteGold": [
+                    {
+                        "settings": {
+                            "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
+                            "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
+                            "ApplicationSettings.AppBar.DocType.$t": "1",
+                            "ApplicationSettings.AppBar.ShowText.$t": "true",
+                            "ApplicationSettings.AppBar.optToolbarShowText.$t": "true",
+                            "ApplicationSettings.AppBar.LargeIcons.$t": "true",
+                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": "true",
+                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": "36",
+                            "ApplicationSettings.Speech.optSAPI5Speed.$t": "38",
+                            "ApplicationSettings.Speech.optSAPI5Volume.$t": "72",
+                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": "0",
+                            "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
+                            "ApplicationSettings.Speech.WebHighlighting.$t": "false",
+                            "ApplicationSettings.Translation.ToLanguage.$t": "fr",
+                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": "2",
+                            "ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
+                            "ApplicationSettings.Scanning.ScanToFile.$t": "false",
+                            "ApplicationSettings.Spelling.SpellAsIType.$t": "true"
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
+                            "encoding": "utf-8",
+                            "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
+        }
     }, {
         name: "Testing rwg2",
         userToken: "rwg2",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.XMLHandler": {
-                "some.app.id": [
+                "com.texthelp.readWriteGold": [
                     {
                         "settings": {
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
@@ -101,20 +182,14 @@ gpii.tests.windows.readWrite = [
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.windows.readWrite",
+    testDefs:  "gpii.tests.windows.readwrite.testDefs",
     configName: "gpii.tests.acceptance.windows.readWrite.config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],

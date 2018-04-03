@@ -1,7 +1,7 @@
 os_common2.json
 ===============
 
-This NP set is used to check the behaviour under GNU/Linux when highContrastEnabled is set to false.
+This NP set is used to check the behaviour under GNU/Linux when highContrast/enabled is set to false.
 
 When logging in with this NP set, GNOME should use its default values for gtk-theme and icon-theme.
 So if you want to see this in action:
