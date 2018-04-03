@@ -24,10 +24,90 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.deviceReporterAware.windows");
 
-gpii.tests.deviceReporterAware.windows = [
+gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries = {
+    nvda: function (running) {
+        return {
+            "org.nvda-project": [{
+                "settings": {
+                    "running": running
+                },
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20,
+                        retryInterval: 1000
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "nvda_service.exe"
+                        },{
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "nvda.exe"
+                        }
+                    ]
+                }
+            }]
+        };
+    },
+    readwrite: function (running) {
+        return {
+            "com.texthelp.readWriteGold": [{
+                "settings": {
+                    "running": running
+                },
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 40,
+                        retryInterval: 1000
+                    },
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ReadAndWrite.exe"
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "ReadAndWrite"
+                        }
+                    ]
+                }
+            }]
+        };
+    }
+};
+
+
+gpii.tests.deviceReporterAware.windows.testDefs = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         userToken: "screenreader_nvda",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.nvda(false)
+        },
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
@@ -57,15 +137,9 @@ gpii.tests.deviceReporterAware.windows = [
                         }
                     }
                 ]
-            }
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.nvda(true)
         },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ],
         deviceReporters: {
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{
@@ -80,14 +154,12 @@ gpii.tests.deviceReporterAware.windows = [
         name: "Testing readwritegold_application1 using Flat matchmaker",
         userToken: "readwritegold_application1",
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
-        settingsHandlers: {},
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq ReadAndWrite.exe\" | find /I \"ReadAndWrite.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0"
-            }
-        ],
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.readwrite(false)
+        },
+        settingsHandlers: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.readwrite(true)
+        },
         deviceReporters: {
             "gpii.deviceReporter.registryKeyExists": {
                 "expectInstalled": [{
@@ -101,7 +173,7 @@ gpii.tests.deviceReporterAware.windows = [
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.deviceReporterAware.windows",
+    testDefs:  "gpii.tests.deviceReporterAware.windows.testDefs",
     configName: "windows-dynamicDeviceReporter-config",
     configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows", "gpii.test.integration.deviceReporterAware.windows"],
