@@ -7,9 +7,9 @@ Following those steps, the payload is sent via the [Context Manager](ContextMana
 ### Important flows
 Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different.
 Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerRequests.js`. The different kinds of flows are:
-* **User Login** (`UserLogin.js`) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
-* **User Logout** (`UserLogout.js`) - the flow for a user keying out of the system
-* **Retrieving Settings** (`Settings.js`) - used to retrieve the settings when the system is running in cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
+* **User Login** (UserLogonStateChange.js) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
+* **User Logout** (UserLogonStateChange.js) - the flow for a user keying out of the system
+* **Retrieving Settings** (CloudBasedFlowManager.js) - used to retrieve the settings when the system is running in cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 * **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
 
 ### Important events:
@@ -25,7 +25,7 @@ There are a few notification events on the flowmanager related to the key-in and
 #### User Logon state change (GET /user/:gpiiKey/proximityTriggered)
 * **description**: Change the logon state for the user with the given `:gpiiKey`. Note that there is a debounce functionality
 implemented following these rules: any RFID actions is ignored for <myGpiiKey> if a login/logout for <myGpiiKey> is in progress
-OR if the last login/logout process for <myGpiiKey> finished less than 1.5 seconds ago. For more details for rules on keying and out, see [KeyInAndOutRules](KeyInAndOutRules.md)
+OR if the last login/logout process for <myGpiiKey> finished less than 1.5 seconds ago. For more details for rules on keying and out, see [LoginAndLogoutFlow](LoginAndLogoutFlow.md)
 
 * **route:** `/user/:gpiiKey/proximityTriggered` where `:gpiiKey` should be the GPII key of the user for which to change the logon state
 * **return:** Message on success or failure of the login/logout

@@ -14,7 +14,7 @@ The authorization server authorizes **GPII App installations**
 ### APIs
 
 #### Request an access token (POST /access_token)
-* **description**: Returns an access token. Requesting an access token is the first step of using Resource Owner GPII Key Grant. This access token will be used in the following http request that retrieves or updates user settings.
+* **description**: Returns an access token. Requesting an access token is the first step of using Resource Owner GPII Key Grant. This access token is required by http requests that retrieve or update user settings.
 * **route:** `/access_token`
 * **body:**
     - `grant_type`: Must be "password"
