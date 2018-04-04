@@ -34,4 +34,3 @@ gpii.tests.contextIntegration.baseTestDef = {
 
 kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.contextIntegration.fixtures, gpii.tests.contextIntegration.baseTestDef));
-

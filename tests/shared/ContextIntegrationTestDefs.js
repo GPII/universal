@@ -207,7 +207,7 @@ gpii.tests.contextIntegration.data = {
 gpii.tests.contextIntegration.fixtures = [
     {
         name: "Simple context change after login",
-        expect: 9,
+        expect: 7,
         sequenceSegments: [
             [
                 {
@@ -235,7 +235,6 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{lifecycleManager}", "context1", "gpii-default"]
                 }
             ],
-            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
             [
                 {
@@ -243,11 +242,7 @@ gpii.tests.contextIntegration.fixtures = [
                 }, {
                     event: "{logoutRequest}.events.onComplete",
                     listener: "gpii.test.logoutRequestListen"
-                }
-            ],
-            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectRestored"),
-            [
-                {
+                }, {
                     func: "gpii.test.checkRestoredConfiguration",
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
                 }, {
@@ -259,7 +254,7 @@ gpii.tests.contextIntegration.fixtures = [
     },
     {
         name: "Context changed before login",
-        expect: 6,
+        expect: 5,
         sequenceSegments: [
             [
                 {
@@ -297,11 +292,7 @@ gpii.tests.contextIntegration.fixtures = [
                 }, {
                     event: "{logoutRequest}.events.onComplete",
                     listener: "gpii.test.logoutRequestListen"
-                }
-            ],
-            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectRestored"),
-            [
-                {
+                }, {
                     func: "gpii.test.checkRestoredConfiguration",
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
                 }, {
@@ -312,7 +303,7 @@ gpii.tests.contextIntegration.fixtures = [
         ]
     }, {
         name: "Multiple context changes",
-        expect: 15,
+        expect: 13,
         sequenceSegments: [
             [
                 {
@@ -340,7 +331,6 @@ gpii.tests.contextIntegration.fixtures = [
                     args: ["{lifecycleManager}", "context1", "gpii-default"]
                 }
             ],
-            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectConfigured"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("bright"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("gpii-default"),
             gpii.tests.contextIntegration.changeEnvironmentAndCheck("noise"),
@@ -351,11 +341,7 @@ gpii.tests.contextIntegration.fixtures = [
                 }, {
                     event: "{logoutRequest}.events.onComplete",
                     listener: "gpii.test.logoutRequestListen"
-                }
-            ],
-            gpii.test.createProcessChecks(gpii.tests.contextIntegration.data.processes, "expectRestored"),
-            [
-                {
+                }, {
                     func: "gpii.test.checkRestoredConfiguration",
                     args: ["{tests}.contexts.gpii-default.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
                 }, {

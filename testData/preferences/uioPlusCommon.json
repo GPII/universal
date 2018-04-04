@@ -7,15 +7,15 @@
                     "http://registry.gpii.net/common/lineSpace": 2,
                     "http://registry.gpii.net/common/fontSize": 24,
                     "http://registry.gpii.net/common/characterSpace": 0.2,
-                    "http://registry.gpii.net/common/selfVoicingEnabled": true,
-                    "http://registry.gpii.net/common/inputsLargerEnabled": true,
-                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/selfVoicing/enabled": true,
+                    "http://registry.gpii.net/common/inputsLarger/enabled": true,
+                    "http://registry.gpii.net/common/highContrast/enabled": true,
                     "http://registry.gpii.net/common/highContrastTheme": "white-black",
                     "http://registry.gpii.net/common/highlightColor": "green",
                     "http://registry.gpii.net/common/tableOfContents": true,
                     "http://registry.gpii.net/common/supportTool": ["dictionary"],
-                    "http://registry.gpii.net/common/simplifiedUiEnabled": true,
-                    "http://registry.gpii.net/common/syllabificationEnabled": false
+                    "http://registry.gpii.net/common/simplifiedUi/enabled": true,
+                    "http://registry.gpii.net/common/syllabification/enabled": false
                 }
             }
         }

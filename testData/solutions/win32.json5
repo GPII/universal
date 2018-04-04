@@ -8,6 +8,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+        ],
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -76,9 +79,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "literalValue": "GPII"
@@ -243,7 +243,6 @@
                     "ENU-Message.SynthLangString": {},
                     "ENU-PCCursor.SynthLangString": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
                     "ENU-Global\\.Rate": "http://registry\\.gpii\\.net/common/speechRate",
@@ -556,11 +555,6 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/speechSynthesizer": "Options\\.PrimarySynthesizer",
                     "http://registry\\.gpii\\.net/common/speechRate": "ENU-Global\\.Rate",
-                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-JAWSCursor\\.Rate",
-                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Keyboard\\.Rate",
-                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-MenuAndDialog\\.Rate",
-                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-Message\\.Rate",
-                    "http://registry\\.gpii\\.net/common/speechRate": "ENU-PCCursor\\.Rate",
                     "http://registry\\.gpii\\.net/common/pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -616,31 +610,44 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration1",
-            "settings.configuration2"
-        ],
-        "restore": [
-            "settings.configuration1",
-            "settings.configuration2"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "jfw"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jfw.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "fsSynth32.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jhookldr.exe"
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "jfw.exe"
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -648,12 +655,6 @@
                 "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "jaws"
             }
         ]
     },
@@ -668,6 +669,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/languageAssistance"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
@@ -677,9 +681,6 @@
                     "encoding": "utf-8",
                     "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/languageAssistance"
-                ],
                 "capabilitiesTransformations": {
                     "ApplicationSettings": "ApplicationSettings"
                 },
@@ -707,29 +708,36 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        rewriteEvery: 0,
+                        numRetries: 40
+                    },
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ReadAndWrite.exe"
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "ReadAndWrite"
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "ReadAndWrite.exe"
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -737,12 +745,6 @@
                 "path": "Software\\Texthelp\\Read&Write11",
                 "subPath": "InstallPath",
                 "dataType": "REG_SZ"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "readandwrite"
             }
         ]
     },
@@ -757,6 +759,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
@@ -831,7 +836,6 @@
                     },
                     "ZoomIncrement": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "Invert": {
                         "transform": {
@@ -914,40 +918,24 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
-        "start": [
-            {
+        "launchHandlers": {
+            "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
-                "name": "magnifierpane",
-                "enable": true
+                "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20,
+                        "retryInterval": 1000
+                    },
+                    "registryName": "magnifierpane",
+                    "queryProcess": "Magnify.exe"
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "magnifierpane",
-                "enable": false
-            }
-        ],
-        "update": [
-            "stop",
-            "configure",
-            "start"
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "Magnify"
             }
         ]
     },
@@ -962,6 +950,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled"
+        ],
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
@@ -983,9 +974,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "NavigationMode": {
                         "literalValue": 0
@@ -993,35 +981,18 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
-        "start": [
-            {
+        "launchHandlers": {
+            "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
-                "name": "osk",
-                "enable": true
+                "options": {
+                    "registryName": "osk",
+                    "queryProcess": "osk.exe"
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "osk",
-                "enable": false
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "osk"
             }
         ]
     },
@@ -1037,6 +1008,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+        ],
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
@@ -1063,14 +1037,6 @@
                     "EchoChars": {},
                     "EchoWords": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
-                    "http://registry\\.gpii\\.net/common/speechRate",
-                    "http://registry\\.gpii\\.net/common/trackingTTS",
-                    "http://registry\\.gpii\\.net/common/keyEcho",
-                    "http://registry\\.gpii\\.net/common/wordEcho",
-                    "http://registry\\.gpii\\.net/common/pitch"
-                ],
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
                         "transform": {
@@ -1241,9 +1207,6 @@
                     "ShowKeyboardIntroduction": {},
                     "ShowBrowserSelection": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/volumeTTS"
-                ],
                 "capabilitiesTransformations": {
                     "SpeechVolume": {
                         "transform": {
@@ -1270,19 +1233,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure",
-            "settings.configureNoRoam"
-        ],
-        "restore": [
-            "settings.configure",
-            "settings.configureNoRoam"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
         "start": [
             {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -1340,7 +1290,6 @@
                     "speech.symbolLevel": {},
                     "speech.espeak.voice": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "speech\\.espeak\\.pitch": {
                         "transform": {
@@ -1375,7 +1324,7 @@
                         },
                         {
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                             "match": {
                                 "false": {
                                     "outputValue": {
@@ -1482,7 +1431,6 @@
                                 "grc": "test\\grc",
                                 "eo": "eo",
                                 "es": "es",
-                                "es-ES": "es",
                                 "es-419": "es-la",
                                 "et": "et",
                                 "fi": "fi",
@@ -1523,8 +1471,7 @@
                                 "vi": "vi",
                                 "zh-cmn": "zh",
                                 "cmn": "zh",
-                                "zh-yue": "zh-yue",
-                                "zh-yue": "yue"
+                                "zh-yue": "zh-yue"
                             }
                         }
                     }
@@ -1569,7 +1516,7 @@
                         },
                         {
                             "type": "fluid.transforms.condition",
-                            "outputPath": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                            "outputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                             "false": true,
                             "true": false,
                             "condition": {
@@ -1651,7 +1598,6 @@
                                 "test\\grc": "grc",
                                 "eo": "eo",
                                 "es": "es",
-                                "es": "es-ES",
                                 "es-la": "es-419",
                                 "et": "et",
                                 "fi": "fi",
@@ -1692,39 +1638,45 @@
                                 "vi": "vi",
                                 "zh": "zh-cmn",
                                 "zh-yue": "zh-yue",
-                                "yue": "zh-yue"
                             }
                         }
                     ]
                 }
             }
         },
-        "configure": [
-            "settings.configs"
-        ],
-        "restore": [
-            "settings.configs"
-        ],
-        "update": [
-          "stop",
-          "configure",
-          "start"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "nvda"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "nvda_service.exe"
+                        }, {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "nvda.exe"
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "nvda_service.exe"
-            },{
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "nvda.exe"
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
@@ -1732,12 +1684,6 @@
                 "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\nvda.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "nvda"
             }
         ]
     },
@@ -1752,43 +1698,30 @@
                 }
             ]
         },
-
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/simplification"
-                ]
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/simplification"
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/user/${{userToken}}"
+                    },
+                    "setFalse": {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "firefox.exe"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/user/${{userToken}}"
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
-        ],
-        // Although there are no settings to deal with, we need to pass through
-        // the "configure" action in order to proceed with the "stop" directive
-        // when keying out. This is a current limitation of the system, you can
-        // check https://issues.gpii.net/browse/GPII-2106 and
-        // https://issues.gpii.net/browse/GPII-1235 for more detailed information.
-        //
-        "configure": [ "settings.configure" ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "firefox"
             }
         ]
     },
@@ -1803,35 +1736,30 @@
                 }
             ]
         },
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/pictorialSimplification"
-                ]
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/pictorialSimplification"
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/sudan"
+                    },
+                    "setFalse": {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "firefox.exe"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/sudan"
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "firefox"
             }
         ]
     },
@@ -1846,35 +1774,30 @@
                 }
             ]
         },
-        "settingsHandlers": {
-            "configure": {
-                "type": "gpii.settingsHandlers.noSettings",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ]
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
+                    },
+                    "setFalse": {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "firefox.exe"
+                    },
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
             }
         },
-         "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
-            }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "firefox"
             }
         ]
     },
@@ -1889,7 +1812,6 @@
                 }
             ]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
@@ -1903,34 +1825,29 @@
                     "speakLabels": {},
                     "theme": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastTheme"
-                ],
                 "capabilitiesTransformations": {
                     "transform": [
                         {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakOnActivate",
                             "true": "yes",
                             "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakTitles",
                             "true": "yes",
                             "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakLabels",
                             "true": "yes",
                             "false": "no"
                         }, {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "condition": false,
                             "outputPath": "theme",
                             "false": "colour",
@@ -1955,33 +1872,39 @@
                 "inverseCapabilitiesTransformations": {}
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
+                    },
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "firefox.exe"
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "MaavisPortable"
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "firefox.exe"
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "MaavisPortable"
             }
         ]
     },
@@ -2020,14 +1943,11 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "inputPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "outputPath": "value"
                         },
                         "path": {
@@ -2039,7 +1959,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled": "HighContrastOn.value"
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
                 }
             },
             "configureTheme": {
@@ -2067,9 +1987,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme"
-                ],
                 "capabilitiesTransformations": {
                     "LastHighContrastTheme": {
                         "transform": {
@@ -2087,18 +2004,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configureTheme",
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configureTheme",
-            "settings.configure"
-        ],
-        "update": [
-            "settings.configureTheme",
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2133,7 +2038,6 @@
                 "supportedSettings": {
                     "StickyKeysOn": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "StickyKeysOn": {
                         "transform": {
@@ -2154,15 +2058,6 @@
                 }
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2222,14 +2117,13 @@
                         }
                     }
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "FilterKeysEnable": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
-                            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
+                            "leftPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
                             "left": false,
-                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                            "rightPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                             "right": false,
                             "operator": "||",
                             "outputPath": "value"
@@ -2244,7 +2138,7 @@
                     "SlowKeysInterval": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
@@ -2268,7 +2162,7 @@
                             "condition": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
                                     "left": false,
                                     "right": false,
                                     "operator": "==="
@@ -2277,7 +2171,7 @@
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.condition",
-                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnabled",
+                                    "conditionPath": "http://registry\\.gpii\\.net/common/debounce/enabled",
                                     "true": {
                                         "transform": {
                                             "type": "fluid.transforms.linearScale",
@@ -2301,7 +2195,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/slowKeysEnabled": {
+                    "http://registry\\.gpii\\.net/common/slowKeys/enabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2335,7 +2229,7 @@
                             }
                         }
                     },
-                    "http://registry\\.gpii\\.net/common/debounceEnabled": {
+                    "http://registry\\.gpii\\.net/common/debounce/enabled": {
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2372,15 +2266,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "update": [
-          "configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2439,12 +2324,11 @@
                         }
                     }
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "MouseKeysOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+                            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulation/enabled",
                             "outputPath": "value"
                         },
                         "path": {
@@ -2505,7 +2389,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/mouseEmulationEnabled": "MouseKeysOn.value",
+                    "http://registry\\.gpii\\.net/common/mouseEmulation/enabled": "MouseKeysOn.value",
                     "http://registry\\.gpii\\.net/common/cursorSpeed": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -2518,15 +2402,6 @@
                 }
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2569,9 +2444,6 @@
                         }
                     }
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/mouseTrailing"
-                ],
                 "capabilitiesTransformations": {
                     "MouseTrails": {
                         "transform": {
@@ -2595,15 +2467,6 @@
                 }
             }
         },
-        "update": [
-          "configure"
-        ],
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2625,10 +2488,6 @@
             "configuration": {
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "liveRestart",
-                "capabilities": [
-                    "display.screenEnhancement.screenResolution",
-                    "applications.com\\.microsoft\\.windows\\.screenResolution.id"
-                ],
                 "supportedSettings": {
                     "screen-resolution": {
                         "schema": {
@@ -2641,12 +2500,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2671,10 +2524,6 @@
                 "supportedSettings": {
                     "screen-dpi": {}
                 },
-                "capabilities": [
-                    "display.screenEnhancement.screenScale",
-                    "applications.com\\.microsoft\\.windows\\.screenDPI.id"
-                ],
                 "supportedSettings": {
                     "screen-dpi": {
                         "schema": {
@@ -2691,15 +2540,6 @@
                 }
             }
         },
-        "configure": [
-            "settings.configure"
-        ],
-        "restore": [
-            "settings.configure"
-        ],
-        "update": [
-          "configure"
-        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -2756,9 +2596,6 @@
                     "UpArrow": {},
                     "Wait": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/cursorSize"
-                ],
                 "capabilitiesTransformations": {
                     "Arrow": {
                         "transform": {
@@ -2998,6 +2835,30 @@
                 }
             }
         },
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": [{
+                        "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                    }],
+                    "getState": [{
+                        "type": "gpii.processReporter.neverRunning"
+                    }]
+                }
+            }
+        },
+        "start": [
+            "launchers.launcher"
+        ],
+        "stop": [],
+        "update": [
+            "configure",
+            "start"
+        ],
+        "isRunning": [
+            "launchers.launcher"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -3006,17 +2867,6 @@
             {
                 "type": "gpii.windows.spiSettingsHandler.updateCursors"
             }
-        ],
-        "update": [
-            "configure",
-            "start"
-        ],
-        "start": [
-            {
-                "type": "gpii.windows.spiSettingsHandler.updateCursors"
-            }
-        ],
-        "stop": [
         ],
         "isInstalled": [
             {
@@ -3052,7 +2902,6 @@
                     "highContrastEnabled": {},
                     "fontSize": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "user.$t": {
                         "literalValue": 1
@@ -3064,10 +2913,10 @@
                         "literalValue": 1
                     },
                     "screenReaderTTSEnabled": {
-                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+                        "value": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
                     },
                     "highContrastEnabled": {
-                        "value": "http://registry\\.gpii\\.net/common/highContrastEnabled"
+                        "value": "http://registry\\.gpii\\.net/common/highContrast/enabled"
                     },
                     "fontSize": {
                         "value": {
@@ -3087,30 +2936,31 @@
                 "inverseCapabilitiesTransformations": {}
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "C:\\Sociable\\Cloud4All.exe"
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "C:\\Sociable\\Cloud4All.exe"
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "C:\\Sociable\\Cloud4All.exe -stop"
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "Cloud4Allcd "
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "C:\\Sociable\\Cloud4All.exe -stop"
-            }
-        ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "Cloud4Allcd "
-            }
-        ]
+        }
     },
 
     "net.gpii.uioPlus": {
@@ -3141,19 +2991,6 @@
                     "simplifiedUiEnabled": {},
                     "syllabificationEnabled": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/lineSpace",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/characterSpace",
-                    "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
-                    "http://registry\\.gpii\\.net/common/highlightColor",
-                    "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "http://registry\\.gpii\\.net/common/supportTool",
-                    "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
                     "fontSize": {
@@ -3183,11 +3020,11 @@
                             }
                         }
                     },
-                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -3204,7 +3041,7 @@
                             "false": "default"
                         }
                     },
-                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
                     "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
                     "dictionaryEnabled": {
@@ -3230,23 +3067,12 @@
                             }
                         }
                     },
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabificationEnabled"
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
         },
-        "configure": [
-            "settings.configuration"
-        ],
-        "restore": [
-            "settings.configuration"
-        ],
-        "update": [
-          "configure"
-        ],
-        "start": [],
-        "stop": [],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -3267,10 +3093,12 @@
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "OSRestart",
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/speechControl"
-                ],
-                "supportedSettings": {}
+                "capabilitiesTransformations": {
+                    "sc": "http://registry\\.gpii\\.net/common/speechControl"
+                },
+                "supportedSettings": {
+                    "sc": {}
+                }
             }
         },
         "configure": [],
