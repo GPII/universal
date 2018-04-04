@@ -2201,8 +2201,9 @@
                             "literalValue": "pvParam.lfMessageFont.lfHeight"
                         }
                     },
-                    // The pixel heights will grow, but will not shrink back, so set the value to something so it will
-                    // be restored.
+                    // The following three values are no-ops, which set the value to the same value. The reason behind
+                    // them is that these heights will grow with a larger font, but will not shrink back with a smaller
+                    // one. They're set here so GPII will restore them.
                     "CaptionHeight": {
                         "transform": {
                             "type": "fluid.transforms.literalValue",
