@@ -203,7 +203,7 @@ OR if the last login/logout process for <myGpiiKey> finished less than 1.5 secon
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                 "http://registry.gpii.net/common/initDelay": 0.120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850
             }

@@ -12,8 +12,10 @@ The queue is run sequentially, and an item is considered "done" once the promise
 
 
 #### Main functions of lifecycle manager:
-The lifecycle manager have three invokers that are generally the ones that will be called from the general system, namely "start", "stop" and "update". These invokers are manually created, so are not obvious to spot on the component defaults block, but the are the ones to be used (instead of the processStart, processStop and processUpdate). They will add the relevant task to the Lifecycle Managers queue:
+The lifecycle manager have three invokers that are generally the ones that will be called from the general system, namely "start", "stop" and "update". These invokers are manually created, so are not obvious to spot on the component defaults block, but they are the ones to be used (instead of the processStart, processStop and processUpdate). They will add the relevant task to the Lifecycle Managers queue:
 
 `start`: Should be called when keying in (configuring the system)
 `stop`: Should be called when keying out (restoring the system)
 `update`: Should be called when changing the settings of an already configured system (updating the applied settings)
+
+Note that these are unrelated to, and should not be confused with the "start", "stop" and "update" directives from solutions registry entries.

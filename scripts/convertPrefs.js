@@ -1,8 +1,8 @@
 // This script reads files from a directory that has old preferences data, such as testData/preferences/, and convert them to json files of
 // GPII keys and preferences safes in the new GPII data model: https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences
 
-// Example command to run this script:
-// node convertPrefs.js testData/preferences/ testData/dbData/gpiiKeys.json testData/dbData/prefsSafes.json
+// Example command to run this script in the universal root directory:
+// node scripts/convertPrefs.js testData/preferences/ testData/dbData/gpiiKeys.json testData/dbData/prefsSafes.json
 
 "use strict";
 

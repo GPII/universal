@@ -54,6 +54,7 @@ var testIncludes = [
     "./platform/windows/windows-nvda-testSpec.js",
     "./platform/windows/windows-readWrite-testSpec.js",
     "./platform/windows/windows-uioPlus-testSpec.js",
+    "./CloseConflictingAppsTests.js",
     "./ContextIntegrationTests.js",
     "./DevelopmentTests.js",
     "./DeviceReporterErrorTests.js",

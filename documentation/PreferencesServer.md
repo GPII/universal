@@ -21,11 +21,11 @@ The main types of filtering provided by the Preferences Server are the following
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                 "http://registry.gpii.net/common/initDelay": 0.120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850,
                 "http://registry.gpii.net/common/cursorAcceleration": 0.800,
-                "http://registry.gpii.net/common/mouseEmulationEnabled": true,
+                "http://registry.gpii.net/common/mouseEmulation/enabled": true,
                 "http://registry.gpii.net/common/unknown": true,
                 "http://registry.gpii.net/applications/org.alsa-project": {
                     "volume": 14,

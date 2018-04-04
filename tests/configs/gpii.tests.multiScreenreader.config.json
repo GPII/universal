@@ -1,0 +1,18 @@
+{
+    "type": "gpii.tests.multiScreenreader.config",
+    "options": {
+        "distributeOptions": {
+            "multiSH.rawPreferencesDataSource": {
+                "record": "%gpii-universal/testData/preferences/acceptanceTests/%gpiiKey.json",
+                "target": "{that rawPreferencesServer rawPreferencesDataSource}.options.path",
+                "priority": "after:development.rawPreferencesDataSource"
+            },
+            "multiSH.deviceReporter": {
+                "record": "%gpii-universal/tests/data/multiScreenreaderDeviceReporter.json",
+                "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
+                "priority": "after:development.installedSolutionsPath"
+            }
+        }
+    },
+    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.development.local.json"
+}
