@@ -3281,9 +3281,8 @@
         ],
         "start": [
             {
-                "type": "gpii.windows.execWaitAndClose",
+                "type": "gpii.windows.execAndRestartExplorer",
                 "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe",
-                "processToClose": "explorer.exe",
                 "options": {
                     "processToWait": "ClassicStartMenu.exe",
                     "processToWaitState": "Open",
@@ -3294,10 +3293,9 @@
         ],
         "stop": [
             {
-                "type": "gpii.windows.execWaitAndClose",
+                "type": "gpii.windows.execAndRestartExplorer",
                 "command": "C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe",
                 "args": ["-exit"],
-                "processToClose": "explorer.exe",
                 "options": {
                     "processToWait": "ClassicStartMenu.exe",
                     "processToWaitState": "Close",
