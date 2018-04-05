@@ -29,6 +29,9 @@ See also:
 
 SystemParametersInfo is called, with SPI_SETNONCLIENTMETRICS. The unit is the approximate height of the font in pixels.
 
+This solution also sets the pixel height of each display element to the its current value. This is because increasing
+the font size causes the heights to grow, but decreasing the font (when restoring) leaves the enlarged sizes.
+
 ## Testing
 
 The user [gert](../../preferences/gert.json) can be used to test this solution. The font-size should increase.
