@@ -125,6 +125,22 @@ gpii.tests.windows.builtIn = [
                                 "name": "HIGHCONTRAST"
                             }
                         }
+                    }, { // font size settings
+                        "settings": {
+                            "CaptionFont": {
+                                "path": "pvParam.lfCaptionFont.lfHeight",
+                                "value": -12
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETNONCLIENTMETRICS",
+                            "setAction": "SPI_SETNONCLIENTMETRICS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "NONCLIENTMETRICS"
+                            }
+                        }
                     }
                 ]
             },
