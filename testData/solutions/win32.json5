@@ -2234,7 +2234,17 @@
                             "literalValue": "pvParam.iMenuHeight"
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "factor": -1,
+                            "inputPath": "CaptionFont.value"
+                        }
+                    }
                 }
+
             },
             "configure.IconTitle": {
                 "type": "gpii.windows.spiSettingsHandler",
