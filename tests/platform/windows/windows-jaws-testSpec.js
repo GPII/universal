@@ -74,7 +74,7 @@ gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
 
 gpii.tests.windows.jaws.testDefs = [
     {
-        name: "Testing NP set \"jaws_application\"",
+        name: "Testing preferences set \"jaws_application\"",
         gpiiKey: "jaws_application",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
@@ -140,7 +140,7 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_application\" - where jaws is running on startup",
+        name: "Testing preferences set \"jaws_application\" - where jaws is running on startup",
         gpiiKey: "jaws_application",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
@@ -206,7 +206,7 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_common\"",
+        name: "Testing preferences set \"jaws_common\"",
         gpiiKey: "jaws_common",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
@@ -272,7 +272,7 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_common2\"",
+        name: "Testing preferences set \"jaws_common2\"",
         gpiiKey: "jaws_common2",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
@@ -337,7 +337,7 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_common3\"",
+        name: "Testing preferences set \"jaws_common3\"",
         gpiiKey: "jaws_common3",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)

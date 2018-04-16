@@ -3,7 +3,7 @@ AcceptanceTests_builtIn.js
 Description:
 
 This tests the built in functionality of Android settings.
-It tests the system using four NP sets:
+It tests the system using four preferences sets:
  (1) os_android: application specific android settings
  (2) os_android_common: android related common terms
  (3) os_gnome: application specific gnome settings

@@ -29,7 +29,7 @@ and
 
     `http://localhost:8081/user/snapset_1a/logout`
 
-Note that the NP sets used with the above configurations should be in the testData/preferences folder of this repository.
+Note that the preferences sets used with the above configurations should be in the testData/preferences folder of this repository.
 
 ## Example payloads received by the PCP
 

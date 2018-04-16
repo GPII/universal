@@ -4,9 +4,9 @@
 //  * default font size
 //  * high contrast off
 //
-// When logging in/out with this NP sets into a device where eCmobile/eCtouch is installed a user will observe the following sequence:
+// When logging in/out with this preferences sets into a device where eCmobile/eCtouch is installed a user will observe the following sequence:
 //  * eCmobile/eCtouch will be launched
-//  * It will be configured according to the used NP set
+//  * It will be configured according to the used preferences set
 //  * When logging out, the user will be taken to the home screen (even if eCmobile/eCtouch is still running in the background)
 {
     "flat": {

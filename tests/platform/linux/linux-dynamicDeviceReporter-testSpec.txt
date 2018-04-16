@@ -3,4 +3,4 @@ linux-dynamicDeviceReporter-testSpec.js
 Descriptions:
 
 This will run the acceptance tests with dynamic device reporting.
-It uses 3 NP sets: screenreader_common, screenreader_orca and screenreader_nvda
+It uses 3 preferences sets: screenreader_common, screenreader_orca and screenreader_nvda

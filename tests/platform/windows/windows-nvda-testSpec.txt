@@ -1,7 +1,7 @@
 windows-nvda-testSpec.js
 
 Descriptions:
-This will run the acceptance tests for the free and open source screen reader NVDA. It uses 3 NP sets: screenreader_orca, screenreader_nvda and screenreader_common.
+This will run the acceptance tests for the free and open source screen reader NVDA. It uses 3 preferences sets: screenreader_orca, screenreader_nvda and screenreader_common.
 
 Requirements:
 * NVDA installed

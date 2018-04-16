@@ -33,4 +33,4 @@ For manual testing, please follow the "Installation" steps above. After the brow
 Another option for manual testing is to login to the GPII with a preference set containing preferences supported by the extension. A profile with a set of Needs & Preferences has been provided in order to properly perform the tests.
 
 ### uioPlusCommon
-NP set located at universal's testData/preferences/uioPlusCommon.json
+preferences set located at universal's testData/preferences/uioPlusCommon.json
