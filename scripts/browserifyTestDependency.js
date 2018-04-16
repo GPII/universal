@@ -28,17 +28,18 @@ var fluid = require("infusion"),
 
 var universalPath = fluid.module.resolvePath("%gpii-universal");
 
+console.log("Browserifying dependent modules for web tests ...");
 // Detect whether the devDependency module "browserify" exists
 resolve("browserify", {basedir: universalPath}, function (err, res) {
     if (err) {
         console.log("GPII is not running in a development mode, skipped the step to browserify test dependent node js scripts.")
     } else {
-        var browserifyDir = universalPath + "/browserify";
+        var browserifyDir = universalPath + "/build/browserify";
         // Remove the browserify directory to start a fresh browserifying
         rimraf(browserifyDir, function () {
             // Create the browserify directory for holding browserfied files in the next steps
             mkdirp(browserifyDir, function () {
-                var browserifyCommandTemplate = "node " + universalPath + "/node_modules/browserify/bin/cmd.js -s %module " + universalPath + "/node_modules/%moduleScript -o " + universalPath + "/browserify/%outputFile";
+                var browserifyCommandTemplate = "node " + universalPath + "/node_modules/browserify/bin/cmd.js -s %module " + universalPath + "/node_modules/%moduleScript -o " + browserifyDir + "/%outputFile";
 
                 var browserifyHttpCommand = fluid.stringTemplate(browserifyCommandTemplate, {
                     module: "http",
@@ -64,3 +65,5 @@ resolve("browserify", {basedir: universalPath}, function (err, res) {
         });
     }
 });
+
+console.log("Finished browserifying!");

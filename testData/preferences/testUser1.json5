@@ -1,0 +1,17 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/setting1": 12 ,
+                    "http://registry.gpii.net/common/setting2": "white",
+                    "http://registry.gpii.net/common/setting3": "black",
+                    "http://registry.gpii.net/common/setting4": ["Comic Sans"],
+                    "http://registry.gpii.net/common/setting5": "sans serif",
+                    "http://registry.gpii.net/common/setting6": false
+                }
+            }
+        }
+    }
+}

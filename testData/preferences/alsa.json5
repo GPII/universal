@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/org.alsa-project": {
+                        "masterVolume": 0
+                    }
+                }
+            }
+        }
+    }
+}

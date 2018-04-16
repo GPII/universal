@@ -1,0 +1,43 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 12
+                },
+                "metadata" : [
+                    {
+                        "message" : {
+                            "de" : {
+                                "learnMore" : "http://cloud4all.info",
+                                "message" : "Ihr bevorzugtes technisches Hilfsmittel ist auf diesem Gerät nicht vorhanden. Als Ersatz haben wir ein anderes Hilfsmittel gestartet."
+                            },
+                            "en" : {
+                                "learnMore" : "http://cloud4all.info",
+                                "message" : "Your preferred Assistive Technology is not available on the device. We have launched this alternative solution for you."
+                            },
+                            "gr" : {
+                                "learnMore" : "http://cloud4all.info",
+                                "message" : "Bla Bla Bla in Greek."
+                            }
+                        },
+                        "scope" : [ "com.yourdolphin.supernova-as" ],
+                        "type" : "helpMessage"
+                    }
+                ]
+            },
+            "really-bright": {
+                "name": "Really bright out",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 16
+                },
+                "conditions": [{
+                    "type": "http://registry.gpii.net/conditions/inRange",
+                    "min": 700,
+                    "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
+                }]
+            }
+        }
+    }
+}

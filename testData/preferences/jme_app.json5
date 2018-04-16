@@ -1,0 +1,18 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/info.cloud4all.JME": {
+                        "theme": "Black-White",
+                        "fontSize": "veryLarge",
+                        "language": "English",
+                        "volume": 50,
+                        "hapticFeedback": 2
+                    }
+                }
+            }
+        }
+    }
+}

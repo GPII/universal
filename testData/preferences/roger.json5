@@ -1,0 +1,19 @@
+{
+    "flat": {
+        "name": "Roger",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/cursorSize": 0.9,
+                    "http://registry.gpii.net/common/fontSize": 20,
+                    "http://registry.gpii.net/common/mouseTrailing": 16,
+
+                    "http://registry.gpii.net/common/magnification": 2.0,
+                    "http://registry.gpii.net/common/tracking": ["focus"],
+                    "http://registry.gpii.net/common/invertColours": false
+                }
+            }
+        }
+    }
+}

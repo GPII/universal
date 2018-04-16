@@ -1,0 +1,19 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/hapticFeedback": true,
+                    "http://registry.gpii.net/common/screenDim": true,
+                    "http://registry.gpii.net/common/screenRotation": false,
+                    "http://registry.gpii.net/common/screenDefaultRotation": 1,
+                    "http://registry.gpii.net/common/screenOffTime": 15,
+                    "http://registry.gpii.net/common/volume": 0.5,
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/language": "en-GB"
+                }
+            }
+        }
+    }
+}

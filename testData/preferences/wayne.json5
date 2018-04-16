@@ -1,0 +1,13 @@
+{
+    "flat": {
+        "name": "Wayne",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.android.freespeech": {}
+                }
+            }
+        }
+    }
+}

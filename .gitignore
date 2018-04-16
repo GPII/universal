@@ -1,5 +1,5 @@
 /node_modules/
-/browserify/
+/build/
 
 /examples/browserChannelClient/node_modules/
 

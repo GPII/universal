@@ -1,0 +1,24 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 10,
+                    "http://registry.gpii.net/common/foregroundColor": "default",
+                    "http://registry.gpii.net/common/backgroundColor": "default",
+                    "http://registry.gpii.net/common/fontFaceFontName": [ "default" ],
+                    "http://registry.gpii.net/common/fontFaceGenericFontFace": "default",
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry.gpii.net/common/tracking": ["mouse"],
+                    "http://registry.gpii.net/common/invertImages": false,
+                    "http://registry.gpii.net/common/links": false,
+                    "http://registry.gpii.net/common/toc": false,
+                    "http://registry.gpii.net/common/inputsLarger": false,
+                    "http://registry.gpii.net/common/layout": false,
+                    "http://registry.gpii.net/common/lineSpacing": 1
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "flat": {
+        "name": "Maguro",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.android.persistentConfiguration": {
+                        "fontScale": 1.5,
+                        "locale": "en_GB"
+                    }
+                }
+            }
+        }
+    }
+}

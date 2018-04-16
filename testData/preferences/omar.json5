@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "name": "Omar",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/trace.easyOne.sudan.windows": {},
+                    "http://registry.gpii.net/applications/trace.easyOne.sudan.linux": {}
+                }
+            }
+        }
+    }
+}

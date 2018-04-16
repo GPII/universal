@@ -1,0 +1,20 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.android.audioManager": {
+                        "STREAM_VOICE_CALL": 15,
+                        "STREAM_SYSTEM": 14.5,
+                        "STREAM_RING": 15,
+                        "STREAM_MUSIC": 15,
+                        "STREAM_ALARM": 15,
+                        "STREAM_NOTIFICATION": 15,
+                        "STREAM_DTMF": 15
+                    }
+                }
+            }
+        }
+    }
+}

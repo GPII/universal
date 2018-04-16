@@ -1,0 +1,25 @@
+// # Omnitor's eCmobile/eCtouch preference sets
+//
+//  * `omnitor2.json5`: custom settings as common terms
+//  * larger text
+//  * high contrast on
+//  * use the yellow-black high contrast theme
+//
+// When logging in/out with this NP sets into a device where eCmobile/eCtouch is installed a user will observe the following sequence:
+// * eCmobile/eCtouch will be launched
+// * It will be configured according to the used NP set
+// * When logging out, the user will be taken to the home screen (even if eCmobile/eCtouch is still running in the background)
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 25,
+                    "http://registry.gpii.net/common/highContrast/enabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "yellow-black"
+                }
+            }
+        }
+    }
+}
