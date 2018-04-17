@@ -31,7 +31,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -59,7 +59,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "wb",
                             "selfVoicingEnabled": false,
@@ -87,7 +87,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 2,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -115,7 +115,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 2,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -143,7 +143,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -171,7 +171,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 1,
+                            "characterSpace": 1.2,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -199,7 +199,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": true,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -227,7 +227,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": true,
@@ -255,7 +255,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -283,7 +283,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -311,7 +311,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -339,7 +339,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -367,7 +367,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,
@@ -395,7 +395,7 @@ gpii.tests.uioPlus.testDefs = [
                         "settings": {
                             "lineSpace": 1,
                             "fontSize": 1,
-                            "characterSpace": 0,
+                            "characterSpace": 1,
                             "inputsLargerEnabled": false,
                             "contrastTheme": "default",
                             "selfVoicingEnabled": false,

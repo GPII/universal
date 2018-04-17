@@ -3007,7 +3007,19 @@
                             }
                         }
                     },
-                    "characterSpace": "http://registry\\.gpii\\.net/common/characterSpace",
+                    "characterSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "offset": 1,
+                                    "inputPath": "http://registry\\.gpii\\.net/common/characterSpace"
+                                }
+                            }
+                        }
+                    },
                     "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
