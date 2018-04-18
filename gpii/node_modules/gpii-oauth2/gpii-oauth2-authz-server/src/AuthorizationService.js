@@ -53,6 +53,7 @@ var fluid = fluid || require("infusion");
      * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
      * @param gpiiKey {String} A GPII key
      * @param clientId {String} A client id
+     * @param clientCredentialId {String} A client credential id
      * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the GPII key is not found.
      */
     gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization = function (dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId) {
