@@ -88,7 +88,7 @@
             // TODO: We should present the value to the user in a human readable format.
             // i.e.: "English (US)" instead of "en-US" or "Mandarin" instead of "zh-cmn"
         },
-        "http://registry.gpii.net/common/screenReaderTTSEnabled": {
+        "http://registry.gpii.net/common/screenReaderTTS/enabled": {
             "title": "TTS enabled",
             "description": "Whether to enable/disable text to speech from screen reader",
             "type": "boolean",
@@ -111,13 +111,13 @@
             "max": 1,
             "divisibleBy": 0.1
         },
-        "http://registry.gpii.net/common/selfVoicingEnabled": {
+        "http://registry.gpii.net/common/selfVoicing/enabled": {
             "title": "Self Voicing",
             "description": "Whether to enable/disable self voicing",
             "type": "boolean",
             "default": false
         },
-        "http://registry.gpii.net/common/highContrastEnabled": {
+        "http://registry.gpii.net/common/highContrast/enabled": {
             "title": "High Contrast",
             "description": "Whether to enable/disable High Contrast",
             "type": "boolean",
@@ -164,7 +164,7 @@
             "max": 100,
             "divisibleBy": 1
         },
-        "http://registry.gpii.net/common/magnifierEnabled": {
+        "http://registry.gpii.net/common/magnification/enabled": {
             "title": "Magnifier Enabled",
             "description": "Whether to enable/disable magnification",
             "type": "boolean",
@@ -232,13 +232,13 @@
             "default": "normal",
             "enum": ["high", "normal", "low", "very low"]
         },
-        "http://registry.gpii.net/common/onScreenKeyboardEnabled": {
+        "http://registry.gpii.net/common/onScreenKeyboard/enabled": {
             "title": "On-Screen keyboard",
             "description": "Whether to enable/disable the on-screen keyboard",
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/mouseEmulationEnabled": {
+        "http://registry.gpii.net/common/mouseEmulation/enabled": {
             "title": "Mouse emulation",
             "description": "Whether to enable/disable the mouse emulation",
             "type": "boolean",
@@ -288,19 +288,19 @@
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/captionsEnabled": {
+        "http://registry.gpii.net/common/captions/enabled": {
             "title": "Captions",
             "description": "Whether to enable/disable captions on videos",
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/subtitlesEnabled": {
+        "http://registry.gpii.net/common/subtitles/enabled": {
             "title": "Subtitles",
             "description": "Whether to enable/disable subtitles on videos",
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/audioDescriptionEnabled": {
+        "http://registry.gpii.net/common/audioDescription/enabled": {
             "title": "Audio Description",
             "description": "Whether to enable/disable audio description on videos",
             "type": "boolean",

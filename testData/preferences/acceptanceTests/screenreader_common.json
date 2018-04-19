@@ -10,7 +10,7 @@
                     "http://registry.gpii.net/common/announceCapitals": true ,
                     "http://registry.gpii.net/common/readingUnit": "word" ,
                     "http://registry.gpii.net/common/punctuationVerbosity": "all" ,
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true ,
+                    "http://registry.gpii.net/common/screenReaderTTS/enabled": true ,
                     "http://registry.gpii.net/common/trackingTTS": ["mouse", "caret"],
                     "http://registry.gpii.net/common/speechRate": 400 ,
                     "http://registry.gpii.net/common/auditoryOutLanguage": "en-BS",

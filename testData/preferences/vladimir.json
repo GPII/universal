@@ -5,15 +5,15 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrast/enabled": true,
                     "http://registry.gpii.net/common/highContrastTheme": "white-black",
                     "http://registry.gpii.net/common/cursorSize": 0.5,
                     "http://registry.gpii.net/common/mouseTrailing": 5,
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/screenReaderTTS/enabled": true,
                     "http://registry.gpii.net/common/speechRate": 300,
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "fontSize": "medium",
-                        "highContrastEnabled": true
+                        "highContrast/enabled": true
                     },
                     "http://registry.gpii.net/common/matchMakerType": "RuleBased"
                 },
@@ -21,7 +21,7 @@
                     {
                         "type": "required",
                         "scope": [
-                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
+                            "http://registry.gpii.net/common/screenReaderTTS/enabled"
                         ],
                         "value": 1024
                     },
@@ -37,16 +37,16 @@
             "subway": {
                 "name": "subway",
                 "preferences": {
-                    "http://registry.gpii.net/common/highContrastEnabled": true,
+                    "http://registry.gpii.net/common/highContrast/enabled": true,
                     "http://registry.gpii.net/common/highContrastTheme": "white-black",
                     "http://registry.gpii.net/common/cursorSize": 0.5,
                     "http://registry.gpii.net/common/mouseTrailing": 5,
-                    "http://registry.gpii.net/common/screenReaderTTSEnabled": true,
+                    "http://registry.gpii.net/common/screenReaderTTS/enabled": true,
                     "http://registry.gpii.net/common/speechRate": 300,
                     "http://registry.gpii.net/common/volumeTTS": 0.9,
                     "http://registry.gpii.net/applications/org.chrome.cloud4chrome": {
                         "fontSize": "medium",
-                        "highContrastEnabled": true
+                        "highContrast/enabled": true
                     },
                     "http://registry.gpii.net/common/matchMakerType": "RuleBased"
                 },
@@ -54,7 +54,7 @@
                     {
                         "type": "required",
                         "scope": [
-                            "http://registry.gpii.net/common/screenReaderTTSEnabled"
+                            "http://registry.gpii.net/common/screenReaderTTS/enabled"
                         ],
                         "value": 1024
                     },
