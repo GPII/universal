@@ -2963,6 +2963,33 @@
         }
     },
 
+    "net.gpii.psp": {
+        "name": "Personal Settings Panel",
+        "contexts": {
+            "OS": [{
+                    "id": "win32",
+                    "version": ">=5.0"
+            }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
+                "options": {
+                    "path": "net.gpii.psp"
+                },
+                "supportedSettings": {
+                    "language": {},
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "net.gpii.uioPlus": {
         "name": "UIO+",
         "contexts": {
