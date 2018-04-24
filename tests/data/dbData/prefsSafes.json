@@ -255,8 +255,6 @@
         "timestampUpdated": null
     },
     {
-        // Empty preferences set, used by acceptance tests to check whether the system crashes when logging in. This is
-        // done by ensuring that we still get the expected login/logout messages and that no errors are thrown.
         "_id": "prefsSafe-9",
         "type": "prefsSafe",
         "schemaVersion": "0.1",
@@ -311,7 +309,6 @@
         "preferences": {
             "flat": {
                 "contexts": {
-                    // This preferences set contains a set of common terms and is used by AcceptanceTests_jme.js tests file.
                     "gpii-default": {
                         "name": "Default preferences",
                         "preferences": {
@@ -882,14 +879,6 @@
         "preferences": {
             "flat": {
                 "contexts": {
-                    // This preferences set is used to check the behaviour under GNU/Linux when highContrast/enabled is set to false.
-                    // When logging in with this preferences set, GNOME should use its default values for gtk-theme and icon-theme.
-                    // So if you want to see this in action:
-                    //  1. Manually turn HighContrast on
-                    //  2. Log-in as os_common2
-                    //  3. GNOME will disable the HighContrast theme
-                    //  4. Log-out
-                    //  5. HighContrast is enabled again
                     "gpii-default": {
                         "name": "Default preferences",
                         "preferences": {

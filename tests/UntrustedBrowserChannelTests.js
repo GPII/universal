@@ -24,7 +24,6 @@ fluid.require("%flowManager/test/shared/BrowserChannelTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.untrusted.flowManager.browserChannel");
 
-// The test pouchdb data is from %gpii-universal/tests/platform/cloud/dbData/*.json
 gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.tests.flowManager.browserChannel.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {

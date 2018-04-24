@@ -11,7 +11,7 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-// This script reads files from an input directory that contains preferences JSON5 files and convert them to json5 files of GPII keys and
+// This script reads files from an input directory that contains preferences JSON5 files and convert them to json files of GPII keys and
 // preferences safes that complies with the new GPII data model: https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences in the target directory
 // Usage: node scripts/convertPrefs.js {input_path} {target_path}
 //
@@ -25,8 +25,8 @@ var fs = require("fs"),
 
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
-var gpiiKeysFile = targetDir + "gpiiKeys.json5";
-var prefsSafesFile = targetDir + "prefsSafes.json5";
+var gpiiKeysFile = targetDir + "gpiiKeys.json";
+var prefsSafesFile = targetDir + "prefsSafes.json";
 
 var prefsSafes = [];
 var gpiiKeys = [];

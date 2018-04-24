@@ -26,7 +26,6 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.development");
 
-// The test pouchdb data is from %gpii-universal/tests/platform/cloud/dbData/*.json
 gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
