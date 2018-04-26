@@ -37,7 +37,7 @@ Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/bl
 
 #### Flow Manager
 
-The Flow Manager with the `gpii.config.cloudBased.production` configuration uses the following variables:
+The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
   * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
 
@@ -45,7 +45,7 @@ Example:
 
 ```
 GPII_FLOWMANAGER_LISTEN_PORT=9091 \
-NODE_ENV=gpii.config.cloudBased.production \
+NODE_ENV=gpii.config.cloudBased.flowManager.production \
 npm start
 ```
 

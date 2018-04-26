@@ -1,26 +1,26 @@
 {
-    "type": "gpii.config.cloudBased.production",
+    "type": "gpii.config.cloudBased.flowManager.production",
     "options": {
         "dbServerPort": 5984,
         "dataSourceConfigProductionEnv": {
-            "baseUrl": "@expand:kettle.resolvers.env(FLOWMANAGER_DATASOURCE_HOSTNAME)",
-            "port": "@expand:kettle.resolvers.env(FLOWMANAGER_DATASOURCE_PORT)"
+            "baseUrl": "@expand:kettle.resolvers.env(DATASOURCE_HOSTNAME)",
+            "port": "@expand:kettle.resolvers.env(DATASOURCE_PORT)"
         },
         "distributeOptions": {
+            "distributePort.cloudBasedProductionPort": {
+                "record": 8082,
+                "target": "{that kettle.server}.options.port",
+                "priority": "after:distributePort.productionPort"
+            },
             "flowManager.production.matchMakers": {
                 "record": "@expand:kettle.resolvers.env(FLOWMANAGER_MATCHMAKER_URL)",
                 "target": "{that flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
             },
-            "flowManager.production.oauth2.dataStore": {
+            "flowManager.production.dataStore": {
                 "source": "{that}.options.dataSourceConfigProductionEnv",
                 "target": "{that flowManager oauth2DataStore}.options.dataSourceConfig",
-                "priority": "after:flowManager.development.oauth2.dataStore"
-            },
-            "flowManager.production.preferencesServer.dataStore": {
-                "source": "{that}.options.dataSourceConfigProductionEnv",
-                "target": "{that preferencesServer dataStore}.options.dataSourceConfig",
-                "priority": "after:preferencesServer.dataStore"
+                "priority": "after:flowManager.base.dataStore"
             }
         }
     },
