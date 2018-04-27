@@ -7,4 +7,4 @@ Flow Manager running on the server (incl. dependencies). It will expect a couchD
 ** flowManager
 ** canopyMatchMaker
 
-**WARNING: This config has been tested manually with the setup described in the production setup documentation (Jan. 22, 2018). It is NOT regularly tested by acceptance/integration or unit tests and therefore cannot be fully trusted.**
+Note that this config expects Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.

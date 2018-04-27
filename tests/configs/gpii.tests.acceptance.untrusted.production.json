@@ -3,7 +3,7 @@
     "options": {
         "distributeOptions": {
             "flowManager.defaultFlowManagerBaseUrl": {
-                "record": "http://flowmanager:9081",
+                "record": "http://flowmanager:9082",
                 "target": "{that flowManager untrustedSettingsDataSource}.options.flowManagerBaseUrl"
             },
             "flowManager.production.flowManagerBaseUrl": {

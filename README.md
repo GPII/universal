@@ -35,16 +35,42 @@ Environment Variables
 
 Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/blob/master/docs/ConfigsAndApplications.md#referring-to-external-data-via-resolvers), some pre-defined configuration files offer the ability to read environment variables to change commonly used settings.
 
-#### Flow Manager
+#### Preferences Server
 
-The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
+The Preferences Server with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
-  * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `PREFERENCESSERVER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
+  * `DATASOURCE_PORT`: The port of CouchDB (default: 5984)
 
 Example:
 
 ```
-GPII_FLOWMANAGER_LISTEN_PORT=9091 \
+PREFERENCESSERVER_LISTEN_PORT=9081 \
+DATASOURCE_HOSTNAME=https://localhost \
+DATASOURCE_PORT=5984 \
+NODE_ENV=gpii.config.cloudBased.flowManager.production \
+npm start
+```
+
+#### Flow Manager
+
+The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
+
+  * `FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `FLOWMANAGER_MATCHMAKER_URL`: The matchmaker URL (default: http://localhost:8081)
+  * `FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write preferences (default: http://localhost:8081/preferences/%gpiiKey?merge=%merge)
+  * `DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
+  * `DATASOURCE_PORT`: The port of CouchDB (default: 5984)
+
+Example:
+
+```
+FLOWMANAGER_LISTEN_PORT=9091 \
+FLOWMANAGER_MATCHMAKER_URL=http://localhost:8081 \
+FLOWMANAGER_TO_PREFERENCESSERVER_URL=http://localhost:8081/preferences/%gpiiKey?merge=%merge \
+DATASOURCE_HOSTNAME=https://localhost \
+DATASOURCE_PORT=5984 \
 NODE_ENV=gpii.config.cloudBased.flowManager.production \
 npm start
 ```
@@ -132,7 +158,7 @@ From your project's top-level directory (where the `Vagrantfile` and `package.js
 - browser tests only: `npm run test:vagrantBrowser`
 - production tests: `npm run test:vagrantProduction`
 
-The `test:vagrantProduction` target will use the `vagrantCloudBasedContainers.sh` script to spin up docker container-based GPII components inside the VM.
+The `test:vagrantProduction` target uses the `vagrantCloudBasedContainers.sh` script to spin up docker container-based GPII components inside the VM.
 
 You can also run `vagrant ssh` to connect to the VM (or open the VirtualBox console and interface with the desktop
 environment) and run the tests manually if you wish.
@@ -163,7 +189,7 @@ Requirements:
 
 The tests are run using the following command:
 
-`node tests/ProductionConfigTests.js`
+`FLOWMANAGER_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
 
 #### Coverage Reporting
 
