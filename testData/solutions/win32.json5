@@ -2875,6 +2875,239 @@
         ]
     },
 
+    "com.microsoft.windows.typingEnhancement": {
+        "name": "Windows typing autocorrection",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\TabletTip\\1.7",
+                    "dataTypes": {
+                        "EnableAutocorrection": "REG_DWORD",
+                        "EnableSpellchecking": "REG_DWORD",
+                        "EnableTextPrediction": "REG_DWORD",
+                        "EnablePredictionSpaceInsertion": "REG_DWORD",
+                        "EnableDoubleTapSpace": "REG_DWORD",
+                        "EnableKeyAudioFeedback": "REG_DWORD",
+                        "EnableAutoShiftEngage": "REG_DWORD",
+                        "EnableShiftLock": "REG_DWORD",
+                        "EnableCompatibilityKeyboard": "REG_DWORD",
+                        "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "EnableAutocorrection": {},
+                    "EnableSpellchecking": {},
+                    "EnableTextPrediction": {},
+                    "EnablePredictionSpaceInsertion": {},
+                    "EnableDoubleTapSpace": {},
+                    "EnableKeyAudioFeedback": {},
+                    "EnableAutoShiftEngage": {},
+                    "EnableShiftLock": {},
+                    "EnableCompatibilityKeyboard": {},
+                    "EnableDesktopModeAutoInvoke": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/autocorrectionEnabled",
+                    "http://registry\\.gpii\\.net/common/spellCheckEnabled",
+                    "http://registry\\.gpii\\.net/common/textPredictionEnabled",
+                    "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled",
+                    "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled",
+                    "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled",
+                    "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled",
+                    "http://registry\\.gpii\\.net/common/shiftLockEnabled",
+                    "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled",
+                    "http://registry\\.gpii\\.net/common/desktopModeAutoInvokeEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "EnableAutocorrection": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/autocorrectionEnabled"
+                        }
+                    },
+                    "EnableSpellchecking": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/spellCheckEnabled"
+                        }
+                    },
+                    "EnableTextPrediction": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/textPredictionEnabled"
+                        }
+                    },
+                    "EnablePredictionSpaceInsertion": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled"
+                        }
+                    },
+                    "EnableDoubleTapSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled"
+                        }
+                    },
+                    "EnableKeyAudioFeedback": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled"
+                        }
+                    },
+                    "EnableAutoShiftEngage": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled"
+                        }
+                    },
+                    "EnableShiftLock": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/shiftLockEnabled"
+                        }
+                    },
+                    "EnableCompatibilityKeyboard": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled"
+                        }
+                    },
+                    "EnableDesktopModeAutoInvoke": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1,
+                            "conditionPath": "http://registry\\.gpii\\.net/common/desktopModeAutoInvokeEnabled"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/autocorrectionEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableAutocorrection",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/spellCheckEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableSpellchecking",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/textPredictionEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableTextPrediction",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnablePredictionSpaceInsertion",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableDoubleTapSpace",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableKeyAudioFeedback",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableAutoShiftEngage",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/shiftLockEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableShiftLock",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableCompatibilityKeyboard",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/common/desktopModeAutoInvokeEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "EnableDesktopModeAutoInvoke",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
