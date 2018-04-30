@@ -94,6 +94,18 @@
                         "InteractionMouse": 1,
                         "EchoWords": 1,
                         "EchoChars": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
+                        "EnableAutocorrection": 1,
+                        "EnableSpellchecking": 1,
+                        "EnableTextPrediction": 1,
+                        "EnablePredictionSpaceInsertion": 1,
+                        "EnableDoubleTapSpace": 1,
+                        "EnableKeyAudioFeedback": 1,
+                        "EnableAutoShiftEngage": 1,
+                        "EnableShiftLock": 1,
+                        "EnableCompatibilityKeyboard": 1,
+                        "EnableDesktopModeAutoInvoke": 1 
                     }
                 }
             }
