@@ -166,7 +166,7 @@ As with PUT, this takes an optional boolean `merge` parameter denoting whether t
 
 When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I have some settings A, B and C already existing in my preference set (in a given view), and a put request is made containing only settings B and D, the resulting preferences set will contain only settings B and D.
 
-As described earlier in the introduction to the preferences framework, underlying the preferences server, there is the raw preferences server allowing the preferences to be stored in different ontologies. A (transformable) user preference will only be stored once in the preference set. This also means that if a put request is make containing a preference A1, which already exists in the preference set, but in a different ontology (lets call this same setting in a different ontology Ax), the preference A1 will be stored in the provided ontology, while Ax will be removed from the preference set. An example will be given below to help make this clearer.
+The preferences are allowed to be stored in different ontologies. A (transformable) user preference will only be stored once in the preference set. This also means that if a put request is make containing a preference A1, which already exists in the preference set, but in a different ontology (lets call this same setting in a different ontology Ax), the preference A1 will be stored in the provided ontology, while Ax will be removed from the preference set. An example will be given below to help make this clearer.
 
 ##### Example PUT query
 
@@ -211,7 +211,7 @@ The return payload would then be the following:
 }
 ```
 
-If we look at what's going on at the raw preferences server level, imagine that the original preferences set looked like this before the PUT request:
+If we look at what's going on at the preferences server level, imagine that the original preferences set looked like this before the PUT request:
 
 ```
 {
@@ -306,4 +306,3 @@ There are two important things to note here:
 ### Other relevant documentation:
 
 * [The Preferences Server Framework](PreferencesServerFramework.md)
-* [The Raw Preferences Server](RawPreferencesServer.md)
