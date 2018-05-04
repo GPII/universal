@@ -929,7 +929,7 @@
                         "retryInterval": 1000
                     },
                     "registryName": "magnifierpane",
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "Magnify.exe"
@@ -991,7 +991,7 @@
                 "type": "gpii.windows.enableRegisteredAT",
                 "options": {
                     "registryName": "osk",
-                    "isRunning": [
+                    "getState": [
                         {
                             "type": "gpii.processReporter.find",
                             "command": "osk.exe"

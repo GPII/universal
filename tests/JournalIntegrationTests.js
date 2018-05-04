@@ -93,7 +93,7 @@ gpii.tests.journal.initialSettings = {
             },
             "options": {
                 "registryName": "magnifierpane",
-                "isRunning": [
+                "getState": [
                     {
                         "type": "gpii.processReporter.find",
                         "command": "Magnify.exe"
@@ -112,7 +112,7 @@ gpii.tests.journal.settingsAfterCrash = {
             },
             "options": {
                 "registryName": "magnifierpane",
-                "isRunning": [
+                "getState": [
                     {
                         "type": "gpii.processReporter.find",
                         "command": "Magnify.exe"

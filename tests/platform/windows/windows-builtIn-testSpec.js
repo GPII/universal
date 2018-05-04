@@ -42,7 +42,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -301,7 +301,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -328,7 +328,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -342,7 +342,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -529,7 +529,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -543,7 +543,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -570,7 +570,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -584,7 +584,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -771,7 +771,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -785,7 +785,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -812,7 +812,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -826,7 +826,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -1013,7 +1013,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -1027,7 +1027,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -1054,7 +1054,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
@@ -1068,7 +1068,7 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "osk.exe"
@@ -1148,7 +1148,7 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "isRunning": [
+                        "getState": [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
