@@ -104,7 +104,12 @@ gpii.tests.journal.initialSettings = {
             },
             "options": {
                 "registryName": "magnifierpane",
-                "queryProcess": "Magnify.exe"
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "Magnify.exe"
+                    }
+                ]
             }
         }]
     }
@@ -118,7 +123,12 @@ gpii.tests.journal.settingsAfterCrash = {
             },
             "options": {
                 "registryName": "magnifierpane",
-                "queryProcess": "Magnify.exe"
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "Magnify.exe"
+                    }
+                ]
             }
         }]
     }
