@@ -68,7 +68,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo ansible-galaxy install -fr #{app_directory}/provisioning/requirements.yml
-    sudo UNIVERSAL_VARS_FILE=vagrant-vars.yml PYTHONUNBUFFERED=1 ansible-playbook #{app_directory}/provisioning/playbook.yml --tags="install,configure"
+    sudo UNIVERSAL_VARS_FILE=vagrant-vars.yml PYTHONUNBUFFERED=1 ansible-playbook #{app_directory}/provisioning/playbook.yml --tags="install,configure" --inventory="localhost ansible_connection=local,"
   SHELL
 
   # Using config.vm.hostname to set the hostname on Fedora VMs seems to remove the string

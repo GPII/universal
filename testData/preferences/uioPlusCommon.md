@@ -8,6 +8,7 @@ Attempts to set all of the UIO+ supported preferences.
 
 * Line Space: doubled (2)
 * Font Size: doubled (2)
+* Character Space: increased (0.2)
 * Self Voicing: enabled
 * Inputs Larger: enabled (form controls increase in size)
 * High Contrast: Enabled

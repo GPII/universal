@@ -201,7 +201,7 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                 "http://registry.gpii.net/common/initDelay": 0.120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850
             }
