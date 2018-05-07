@@ -42,7 +42,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -240,7 +245,37 @@ gpii.tests.windows.builtIn = [
                             "EchoWords": "REG_DWORD"
                         }
                     }
-                }]
+                }, { // TypingEnhancement
+                    "settings": {
+                        "EnableAutocorrection": 1,
+                        "EnableSpellchecking": 1,
+                        "EnableTextPrediction": 1,
+                        "EnablePredictionSpaceInsertion": 1,
+                        "EnableDoubleTapSpace": 1,
+                        "EnableKeyAudioFeedback": 1,
+                        "EnableAutoShiftEngage": 1,
+                        "EnableShiftLock": 1,
+                        "EnableCompatibilityKeyboard": 1,
+                        "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\TabletTip\\1.7",
+                        "dataTypes": {
+                            "EnableAutocorrection": "REG_DWORD",
+                            "EnableSpellchecking": "REG_DWORD",
+                            "EnableTextPrediction": "REG_DWORD",
+                            "EnablePredictionSpaceInsertion": "REG_DWORD",
+                            "EnableDoubleTapSpace": "REG_DWORD",
+                            "EnableKeyAudioFeedback": "REG_DWORD",
+                            "EnableAutoShiftEngage": "REG_DWORD",
+                            "EnableShiftLock": "REG_DWORD",
+                            "EnableCompatibilityKeyboard": "REG_DWORD",
+                            "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                        }
+                    }
+                }
+            ]
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
@@ -266,7 +301,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -288,7 +328,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -297,7 +342,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -479,7 +529,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -488,7 +543,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -510,7 +570,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -519,7 +584,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -701,7 +771,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -710,7 +785,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -732,7 +812,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -741,7 +826,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -923,7 +1013,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -932,7 +1027,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -954,7 +1054,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -963,7 +1068,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -1038,7 +1148,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }]
             }
