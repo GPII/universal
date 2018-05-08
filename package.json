@@ -7,6 +7,7 @@
     "homepage": "http://gpii.net/",
     "dependencies": {
         "body-parser": "1.18.2",
+        "bonjour": "3.5",
         "connect-ensure-login": "0.1.1",
         "express": "4.16.2",
         "express-handlebars": "3.0.0",
