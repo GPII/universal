@@ -34,7 +34,7 @@ var count = 0;
 
 var filenames = fs.readdirSync(inputDir);
 
-console.log("Converting test preferences data to database loadable structures ...");
+console.log("Converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + "...");
 
 // Read and loop thru json5 files in the input directory
 filenames.forEach(function (filename) {
@@ -83,4 +83,4 @@ if (!fs.existsSync(targetDir)){
 fs.writeFileSync(prefsSafesFile, JSON.stringify(prefsSafes, null, 4));
 fs.writeFileSync(gpiiKeysFile, JSON.stringify(gpiiKeys, null, 4));
 
-console.log("Finished converting test preferences data!");
+console.log("Finished converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + "!");

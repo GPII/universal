@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/magnification": 1.5,
+                    "http://registry.gpii.net/common/tracking": [ "mouse", "caret" ],
+                    "http://registry.gpii.net/common/invertColours": true
+                }
+            }
+        }
+    }
+}

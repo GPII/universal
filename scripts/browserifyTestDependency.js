@@ -34,7 +34,7 @@ resolve("browserify", {basedir: universalPath}, function (err, res) {
     if (err) {
         console.log("GPII is not running in a development mode, skipped the step to browserify test dependent node js scripts.")
     } else {
-        var browserifyDir = universalPath + "/build/browserify";
+        var browserifyDir = universalPath + "/build/tests/browserify";
         // Remove the browserify directory to start a fresh browserifying
         rimraf(browserifyDir, function () {
             // Create the browserify directory for holding browserfied files in the next steps

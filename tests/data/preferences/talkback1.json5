@@ -1,0 +1,19 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.android.talkback": {},
+                    "http://registry.gpii.net/applications/com.android.audioManager": {
+                        "STREAM_MUSIC": 14
+                    },
+                    "http://registry.gpii.net/applications/com.android.settings.secure": {
+                        "tts_default_rate": 450,
+                        "tts_default_pitch": 450
+                    }
+                }
+            }
+        }
+    }
+}

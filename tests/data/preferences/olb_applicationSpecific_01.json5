@@ -1,0 +1,26 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/eu.gpii.olb": {
+                        "textSize": 1.1,
+                        "lineSpacing": 2,
+                        "textStyle": "comic",
+                        "toc": true,
+                        "links": true,
+                        "inputsLarger": true,
+                        "contrastTheme": "yb",
+                        "signLanguageEnabled": true,
+                        "signLanguage": "ils",
+                        "interpreterType": "avatar",
+                        "interpreterName": "Neytiri",
+                        "pictogramsEnabled": false
+                    }
+                }
+            }
+        }
+    }
+}
+

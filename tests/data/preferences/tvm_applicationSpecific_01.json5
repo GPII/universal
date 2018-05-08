@@ -1,0 +1,20 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/de.fraunhofer.iao.C4A-TVM": {
+                        "contrastTheme": "yellow-black",
+                        "fontFace": "Comic Sans",
+                        "fontSize": "big",
+                        "buttonSize": "big",
+                        "timeOut": "long",
+                        "language": "de"
+                    }
+                }
+            }
+        }
+    }
+}
+

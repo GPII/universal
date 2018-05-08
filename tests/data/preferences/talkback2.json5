@@ -1,0 +1,14 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/pitch": 1,
+                    "http://registry.gpii.net/common/speechRate": 340,
+                    "http://registry.gpii.net/common/volumeTTS": 0.5
+                }
+            }
+        }
+    }
+}

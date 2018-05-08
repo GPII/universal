@@ -98,7 +98,15 @@ There are currently 3 different sets of tests:
 The `npm test` command will run the browser and Node based tests.  Please note, the node tests may behave oddly if you
 have set the `NODE_ENV` variable.
 
-#### Running browser tests:
+#### Convert Preferences Data
+GPII has 2 set of preferences JSON5 data files:
+
+* The preferences files for running GPII are located at %gpii-universal/testData/preferences
+* The preferences files for running node tests are located at %gpii-universal/tests/data/preferences
+
+When any preferences file in either one of these 2 directories are modified, running `npm run postinstall` will generate gpiiKeys.json and prefsSafes.json, the files that are in the structure to be loaded into PouchDB/CouchDB, based off these directories. This step is needed for the modification to be applied to GPII.
+
+#### Running browser tests
 
 You can run the browser tests in this package with a range of browsers using [Testem](https://github.com/testem/testem),
 and the configuration file `tests/testem.js`, which will ensure that code coverage information is collected.  From the
@@ -176,7 +184,6 @@ var fluid = require("infusion"),
 fluid.require("%gpii-universal");
 // Now you will have access to both fluid and gpii namespaces.
 ```
-
 
 #### Running node-based production tests
 The purpose of these tests are to test production config setups of the system. This involves using the cloud based flow manager when fetching or updating user settings, so there are extended requirements for these tests.
