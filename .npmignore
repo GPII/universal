@@ -1,0 +1,17 @@
+/node_modules/
+
+/examples/browserChannelClient/node_modules/
+
+/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/node_modules/
+
+npm-debug.log
+*.bak
+
+Vagrantfile.local
+.vagrant/
+
+report.tap
+coverage
+.nyc_output
+reports
+.idea/
