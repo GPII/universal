@@ -29,7 +29,7 @@ fluid.registerNamespace("gpii.tests.untrusted.development");
 gpii.tests.untrusted.development.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
-            configName: "gpii.config.untrusted.development.local.json",
+            configName: "gpii.config.untrusted.development.local",
             configPath: "%gpii-universal/gpii/configs"
         }
     });

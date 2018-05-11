@@ -18,7 +18,7 @@ The main types of filtering provided by the Preferences Server are the following
 
 #### GET /preferences/:token[?view=:view]
 
-Retrieves the preferences sets for the token (`:token`). The optional `view` parameter is to retrieve the preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
+Retrieves the preference sets for the token (`:token`). The optional `view` parameter is to retrieve the preferences in a different view (ontology). If no `view` is specified the 'flat' ontology will be defaulted to.
 
 ##### Example of GET request with no view provided
 
@@ -126,7 +126,7 @@ Example POST body:
 }
 ```
 
-The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated token (keyed by `token`) under which the preferences set is stored.
+The return payload will contain the stored preferences (keyed by `preferences`) and the newly generated token (keyed by `token`) under which the preference set is stored.
 
 Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-426655440000` the return payload would be:
 
@@ -158,13 +158,13 @@ Given that the above payload was stored with the token `123e4567-e89b-12d3-a456-
 
 #### PUT /preferences/:token[?merge=:mergeview=:view]
 
-This is used to update an existing preferences set to the Preferences Server. In case no preferences set exists associated with that token, a new one will be created.
+This is used to update an existing preference set to the Preferences Server. In case no preference set exists associated with that token, a new one will be created.
 
 As with GET and PUT, this takes an optional `view` parameter denoting the ontology of the settings provided in the payload of the request body. If no `view` is provided, the preferences will be stored and interpreted as being in the `flat` format.
 
 As with PUT, this takes an optional boolean `merge` parameter denoting whether the incoming preferences should be merged with the existing preferences. If `merge` is `true`, the incoming preferences will be merged with the existing ones. Otherwise, the incoming preferences will override the existing ones. If no `merge` is provided, the default value will be `false`.
 
-When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I have some settings A, B and C already existing in my preference set (in a given view), and a put request is made containing only settings B and D, the resulting preferences set will contain only settings B and D.
+When settings are PUT to the preferences server, all the settings in that view will be overwritten. In other words, if I have some settings A, B and C already existing in my preference set (in a given view), and a put request is made containing only settings B and D, the resulting preference set will contain only settings B and D.
 
 The preferences are allowed to be stored in different ontologies. A (transformable) user preference will only be stored once in the preference set. This also means that if a put request is make containing a preference A1, which already exists in the preference set, but in a different ontology (lets call this same setting in a different ontology Ax), the preference A1 will be stored in the provided ontology, while Ax will be removed from the preference set. An example will be given below to help make this clearer.
 
@@ -211,7 +211,7 @@ The return payload would then be the following:
 }
 ```
 
-If we look at what's going on at the preferences server level, imagine that the original preferences set looked like this before the PUT request:
+If we look at what's going on at the preferences server level, imagine that the original preference set looked like this before the PUT request:
 
 ```
 {

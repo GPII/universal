@@ -10,4 +10,4 @@ Each data file is corresponding to a document structure specified in the documen
 * gpiiAppInstallationClients.json: Contains the information of all registered GPII app installations.
 * views.json: The PouchDB/CouchDB view functions.
 
-The README of GPII keys and their corresponding preferences sets can be found in the subdirectory "README/".
+The README of GPII keys and their corresponding preference sets can be found in the subdirectory "README/".

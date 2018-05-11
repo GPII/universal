@@ -1,7 +1,0 @@
-{
-    "type": "gpii.config.development.local",
-    "mergeConfigs": [
-        "%deviceReporter/configs/gpii.deviceReporter.config.development.json",
-        "%gpii-universal/gpii/configs/gpii.config.development.base.local.json"
-    ]
-}

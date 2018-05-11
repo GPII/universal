@@ -16,7 +16,7 @@ Useful links:
   * [Smart House wiki](http://wiki.gpii.net/w/Smart_House_Online_Simulation)
 
 ## Integration
-The solution is used by the simulation itself to map the common terms in a preferences set to application-specific ones.
+The solution is used by the simulation itself to map the common terms in a preference set to application-specific ones.
 
 ## Testing
 The Smart House online simulation comes along with a couple of acceptance tests which aim to confirm the correct transformation of common terms. You can also test the simulation online.
@@ -32,5 +32,5 @@ The simulation can be tested online. This is the expected behavior
 * Select the __Living room__, then the __Multimedia system__
 * Click the __menu__ button on the TV remote
 * Click __Sample users__
-* In the text field labeled _"My GPII key"_ enter the name of a preferences set (in this case __sammy__) and press _"Log in"_
+* In the text field labeled _"My GPII key"_ enter the name of a preference set (in this case __sammy__) and press _"Log in"_
 * The font size of the TV menu should be set to __24px__ and a __black-white__ high contrast theme should be applied

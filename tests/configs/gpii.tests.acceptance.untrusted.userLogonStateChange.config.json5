@@ -1,0 +1,12 @@
+{
+    "type": "gpii.tests.acceptance.untrusted.userLogonStateChange.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.debounceTimeMs": {
+                "record": 3000,
+                "target": "{that localConfig flowManager gpii.flowManager.userLogonHandling.stateChangeHandler}.options.debounceTimeMs"
+            }
+        }
+    },
+    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.local.json5"
+}

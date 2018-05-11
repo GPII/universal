@@ -5,9 +5,9 @@
 //  * high contrast on
 //  * use the yellow-black high contrast theme
 //
-// When logging in/out with this preferences sets into a device where eCmobile/eCtouch is installed a user will observe the following sequence:
+// When logging in/out with this preference sets into a device where eCmobile/eCtouch is installed a user will observe the following sequence:
 // * eCmobile/eCtouch will be launched
-// * It will be configured according to the used preferences set
+// * It will be configured according to the used preference set
 // * When logging out, the user will be taken to the home screen (even if eCmobile/eCtouch is still running in the background)
 {
     "flat": {

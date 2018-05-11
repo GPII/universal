@@ -24,7 +24,7 @@ gpii.loadTestingSupport();
 
 var testDefs = [
     {
-        name: "Acceptance test for empty preferences set",
+        name: "Acceptance test for empty preference set",
         gpiiKey: "empty",
         solutionId: "org.chrome.cloud4chrome",
         expected: {}

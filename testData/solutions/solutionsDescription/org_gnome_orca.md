@@ -29,15 +29,15 @@ To ensure that the solution is well integrated, in the linux repo, there are Acc
 Information about value ranges and mappings to common terms can be found [here](https://docs.google.com/spreadsheet/ccc?key=0AppduB_JZh5EdDRYT1pmOTc5eUpNbkpMckhacUVxWXc&usp=sharing) under _LinuxGNOME_ sheet.
 
 ## Testing
-When using a preferences set that makes use of a screen reader, Orca should be launched and configured properly by taking into account the settings included in that preferences set.
+When using a preference set that makes use of a screen reader, Orca should be launched and configured properly by taking into account the settings included in that preference set.
 
 ### screenreader_orca
 
-By using this preferences set (located at universal's _testData/preferences/acceptanceTests/screenreader_orca.json_), this is the expected behaviour.
+By using this preference set (located at universal's _testData/preferences/acceptanceTests/screenreader_orca.json_), this is the expected behaviour.
 
 * When logging in, Orca should be started automatically and you should listen to the screen reader.
 
-* A new profile should be added to Orca's user-settings.conf file. It should be called as the preferences set (_screenreader_orca_), and it should be set as the default used profile.
+* A new profile should be added to Orca's user-settings.conf file. It should be called as the preference set (_screenreader_orca_), and it should be set as the default used profile.
 
 <pre>
 "startingProfile": [

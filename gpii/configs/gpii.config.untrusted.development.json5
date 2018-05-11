@@ -1,0 +1,14 @@
+/**
+ * This configuration runs the local Untrusted Flow Manager in development mode.
+ *
+ * The following components are running on the local machine:
+ * * flowManager (untrusted, browser channel)
+ * * deviceReporter
+ */
+{
+    "type": "gpii.config.untrusted.development",
+    "mergeConfigs": [
+        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.development.json5",
+        "../node_modules/flowManager/configs/gpii.flowManager.untrusted.config.development.json5"
+    ]
+}

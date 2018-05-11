@@ -192,7 +192,7 @@ These tests are a supplement to the `all-tests.js` (and hence not part of that t
 
 Requirements:
 * an internet connection
-* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified) preferences set: `testUser1`
+* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the following (unmodified) preference set: `testUser1`
 
 The tests are run using the following command:
 

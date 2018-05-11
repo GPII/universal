@@ -1,5 +1,0 @@
-gpii.config.untrusted.development.mock.windows.json
-===================================================
-
-Variant of gpii.config.untrusted.development.json with the local (untrusted) flowManager's settings handlers
-replaced by mocks emulating the Windows platform.

@@ -40,7 +40,7 @@ Manual testing can be of two kinds:
 
 ### olb_Carla
 
-Using this preferences set in the OLB should have the following effects:
+Using this preference set in the OLB should have the following effects:
 
 * text size doubles,.
 * line spacing doubles,
@@ -50,7 +50,7 @@ Using this preferences set in the OLB should have the following effects:
 
 ### olb_KimCallahan
 
-Using this preferences set in the OLB should have the following effects:
+Using this preference set in the OLB should have the following effects:
 
 * American sign language videos become available (check the icons next to form fields etc.),
 * the sign language videos use avatars,
@@ -58,7 +58,7 @@ Using this preferences set in the OLB should have the following effects:
 
 ### olb_Lara
 
-Using this preferences set in the OLB should have the following effects:
+Using this preference set in the OLB should have the following effects:
 
 * German sign language videos become available (check the icons next to form fields etc.),
 * the sign language videos show a human sign language interpreter,
@@ -66,7 +66,7 @@ Using this preferences set in the OLB should have the following effects:
 
 ### [olb_QinKesheng](https://zh.wikipedia.org/wiki/%E6%AC%BD%E5%8F%AF%E8%81%96)
 
-Using this preferences set in the OLB should have the following effects:
+Using this preference set in the OLB should have the following effects:
 
 * 'International Sign' sign language videoes become available (since the OLB does not support Chinese Sign Language or csl),
 * the sign language videos use avatars,

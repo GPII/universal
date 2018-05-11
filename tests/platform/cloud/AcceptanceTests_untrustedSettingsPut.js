@@ -208,7 +208,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
     },
     {
         testDef: {
-            name: "Attempt to update user preferences by providing a GPII key that is not associated with any preferences set",
+            name: "Attempt to update user preferences by providing a GPII key that is not associated with any preference set",
 
             // The options below are for sending /access_token request
             client_id: "Bakersfield-AJC-client-id",

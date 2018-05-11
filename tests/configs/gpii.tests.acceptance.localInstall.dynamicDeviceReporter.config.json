@@ -1,4 +1,0 @@
-{
-    "type": "gpii.tests.acceptance.localInstall.dynamicDeviceReporter.config",
-    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.all.development.dr.production.json"
-}

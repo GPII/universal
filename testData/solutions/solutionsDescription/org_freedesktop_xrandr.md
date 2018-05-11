@@ -22,11 +22,11 @@ XRandR is used by the GPII personalization framework as a display settings handl
 To ensure that the solution is well integrated, there are Acceptance Tests (_tests/platform/linux/linux-xrandr-testSpec.js_) as well as tests of XRandR at a settings handler-level (_gpii/node_modules/xrandr/test/xrandrSettingsHandlerTests.js_).  The latter are located in the linux repository.
 
 ## Testing
-When using an preferences set that makes use of a display settings handler to change the screen resolution, XRandR should launch and re-configure the display resolution using the settings included in that preferences set.
+When using an preference set that makes use of a display settings handler to change the screen resolution, XRandR should launch and re-configure the display resolution using the settings included in that preference set.
 
 ### os_gnome_display
 
-The expected behaviour of using the preferences set located at universal's _testData/preferences/acceptanceTests/os_gnome_display.json_ is:
+The expected behaviour of using the preference set located at universal's _testData/preferences/acceptanceTests/os_gnome_display.json_ is:
 
 * When logging in, XRandR should be launched to change the screen resolution as specified in the above json file.  In this particular case, it should change to 800 pixels wide by 600 pixels high.
 

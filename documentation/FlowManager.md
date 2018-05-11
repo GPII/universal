@@ -54,8 +54,8 @@ OR if the last login/logout process for <myGpiiKey> finished less than 1.5 secon
 * **return:** A JSON array with a string entry for each user
 
 
-#### Save new preferences set (POST /user/preferences)
-* **description**: Save a preferences set to a new GPII key
+#### Save new preference set (POST /user/preferences)
+* **description**: Save a preference set to a new GPII key
 * **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
 * **route:** `/user/preferences`
 * **method:** `POST`
@@ -64,8 +64,8 @@ OR if the last login/logout process for <myGpiiKey> finished less than 1.5 secon
 * **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow manager configs due to the security consideration.
 
 
-#### Save preferences set to existing GPII key (PUT /user/preferences/:gpiiKey)
-* **description**: Save a preferences set to an existing GPII key
+#### Save preference set to existing GPII key (PUT /user/preferences/:gpiiKey)
+* **description**: Save a preference set to an existing GPII key
 * **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
 * **route:** `/user/preferences/:gpiiKey` where `:gpiiKey` is the GPII key to save the preferences for
 * **method:** `PUT`

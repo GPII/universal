@@ -32,18 +32,18 @@ Other solution-specific settings are also possible. These include
 See the Maavis documentation for full details
 
 ## Testing
-When using a preferences set that makes use of Maavis, it should be launched and configured properly by taking into account the settings included in that preferences set.
+When using a preference set that makes use of Maavis, it should be launched and configured properly by taking into account the settings included in that preference set.
 
 ### High contrast
 
-preferences set: [preferences/acceptanceTests/maavis_highcontrast.json](https://github.com/GPII/universal/blob/GPII-881/testData/preferences/acceptanceTests/maavis_highcontrast.json)
+preference set: [preferences/acceptanceTests/maavis_highcontrast.json](https://github.com/GPII/universal/blob/GPII-881/testData/preferences/acceptanceTests/maavis_highcontrast.json)
 
 * When logging in, Maavis should be started automatically and you should see the yellow on black theme.
 * When logging out, Maavis should be stopped and default settings will be restored.
 
 ### Self voicing
 
-preferences set: [preferences/acceptanceTests/maavis_selfvoicing.json](https://github.com/GPII/universal/blob/GPII-881/testData/preferences/acceptanceTests/maavis_selfvoicing.json)
+preference set: [preferences/acceptanceTests/maavis_selfvoicing.json](https://github.com/GPII/universal/blob/GPII-881/testData/preferences/acceptanceTests/maavis_selfvoicing.json)
 
 * When logging in, Maavis should be started automatically and you should see the yellow on black theme.
 * When logging out, Maavis should be stopped and default settings will be restored.
