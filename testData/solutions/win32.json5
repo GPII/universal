@@ -1647,7 +1647,7 @@
                                 "tr": "tr",
                                 "vi": "vi",
                                 "zh": "zh-cmn",
-                                "zh-yue": "zh-yue",
+                                "zh-yue": "zh-yue"
                             }
                         }
                     ]
@@ -2065,6 +2065,30 @@
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/stickyKeys": "StickyKeysOn.value"
+                }
+            }
+        },
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "getState": {
+                        "type": "gpii.iod.isInstalled",
+                        "packageName": "demo-package"
+                    },
+                    "setTrue": {
+                        "type": "gpii.iod.invoke",
+                        "method": "requirePackage",
+                        "args": ["demo-package"]
+                    },
+                    "setFalse": {
+                        "type": "gpii.iod.invoke",
+                        "method": "uninstallPackage",
+                        "args": ["demo-package"]
+                    }
+
+
+
                 }
             }
         },
