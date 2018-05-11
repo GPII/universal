@@ -7,7 +7,7 @@
                 "target": "{that flowManager untrustedSettingsDataSource}.options.flowManagerBaseUrl"
             },
             "flowManager.production.flowManagerBaseUrl": {
-                "record": "@expand:kettle.resolvers.env(FLOWMANAGER_URL)",
+                "record": "@expand:kettle.resolvers.env(GPII_FLOWMANAGER_URL)",
                 "target": "{that flowManager untrustedSettingsDataSource}.options.flowManagerBaseUrl",
                 "priority": "after:flowManager.defaultFlowManagerBaseUrl"
             }

@@ -21,8 +21,6 @@ var fluid = require("infusion"),
 fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
-fluid.setLogging(true);
-fluid.logObjectRenderChars = 10240;
 
 fluid.registerNamespace("gpii.tests.journal");
 

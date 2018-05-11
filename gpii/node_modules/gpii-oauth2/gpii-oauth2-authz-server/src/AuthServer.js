@@ -62,18 +62,18 @@ gpii.oauth2.oauth2orizeServer.listenOauth2orize = function (oauth2orizeServer, c
         gpii.oauth2.oauth2orizeServer.promiseToDone(clientPromise, done);
     });
 
-    /*
+    /**
      * Processes OAuth2 resource owner GPII key grant requests.
-     * @param clientInfo {Object} The structure is {
+     * @param {Object} clientInfo - The structure is {
      *     client: {Object},  // all fields from "client" document for this client
      *     clientCredentialId: {String}  // The internal "id" value from "clientCredential" document that associates with
      *                                   // the client credential used in this authorization request.
      * }
-     * @param username {String} The username value in the grant request.
-     * @param password {String} The password value in the grant request.
-     * @param scope {String} The scope value in the grant request.
-     * @param done {Function} The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
-     * @return The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
+     * @param {String} username - The username value in the grant request.
+     * @param {String} password - The password value in the grant request.
+     * @param {String} scope - The scope value in the grant request.
+     * @param {Function} done - The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
+     * @return {Object} The result of gpii.oauth2.oauth2orizeServer.promiseToDone() that contains the response to the grant request.
      */
     oauth2orizeServer.exchange(oauth2orize.exchange.password(function (clientInfo, username, password, scope, done) {
         var passwordPromise = authorizationService.grantGpiiAppInstallationAuthorization(username, clientInfo.client.id, clientInfo.clientCredentialId);
@@ -218,14 +218,14 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
     );
 };
 
-/*
+/**
  * An utility function to parse a promise object to determine whether to grant or reject an authorization. The grant occurs in the promise resolve callback while
  * the reject occurs in the promise reject callback.
- * @param promise {Promise} The promise object to determine the grant or reject an authorization.
- * @param done {Function} The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
- * @param paramsPromise {Object} Contains additional parameters to be included in the success response.
+ * @param {Promise} promise - The promise object to determine the grant or reject an authorization.
+ * @param {Function} done - The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
+ * @param {Object} paramsPromise - Contains additional parameters to be included in the success response.
  *  See [oauth2orize in github](https://github.com/jaredhanson/oauth2orize) for more information
- * @return The result of invoking done() within the promise callback. At the promise onResolve, done() is called with the resolved value as its parameter,
+ * @return {Object} The result of invoking done() within the promise callback. At the promise onResolve, done() is called with the resolved value as its parameter,
  * and the resolved value of paramsPromise as the additional parameter.
  * At the promise onReject, done() is called with the error.
  */

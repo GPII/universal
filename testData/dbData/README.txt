@@ -4,10 +4,8 @@ This folder contains the DB data that is used for running GPII in a development 
 
 Each data file is corresponding to a document structure specified in the documentation of [GPII Data Model](https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences):
 
-* %universal/build/gpiiKeys.json: Contains all GPII keys.
-* %universal/build/prefsSafes.json: Contains all preferences safes corresponding to GPII keys.
+* %universal/build/dbData/gpiiKeys.json: Contains all GPII keys.
+* %universal/build/dbData/prefsSafes.json: Contains all preferences safes corresponding to GPII keys.
 * clientCredentials.json: Contains OAuth2 client credentials.
 * gpiiAppInstallationClients.json: Contains the information of all registered GPII app installations.
 * views.json: The PouchDB/CouchDB view functions.
-
-The README of GPII keys and their corresponding preference sets can be found in the subdirectory "README/".

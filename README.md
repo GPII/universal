@@ -39,16 +39,16 @@ Through the use of Kettle [resolvers](https://github.com/fluid-project/kettle/bl
 
 The Preferences Server with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
-  * `PREFERENCESSERVER_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
-  * `DATASOURCE_PORT`: The port of CouchDB (default: 5984)
+  * `GPII_PREFERENCESSERVER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
+  * `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
 
 Example:
 
 ```
-PREFERENCESSERVER_LISTEN_PORT=9081 \
-DATASOURCE_HOSTNAME=https://localhost \
-DATASOURCE_PORT=5984 \
+GPII_PREFERENCESSERVER_LISTEN_PORT=9081 \
+GPII_DATASOURCE_HOSTNAME=https://localhost \
+GPII_DATASOURCE_PORT=5984 \
 NODE_ENV=gpii.config.cloudBased.flowManager.production \
 npm start
 ```
@@ -57,20 +57,20 @@ npm start
 
 The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
-  * `FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `FLOWMANAGER_MATCHMAKER_URL`: The matchmaker URL (default: http://localhost:8081)
-  * `FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write preferences (default: http://localhost:8081/preferences/%gpiiKey?merge=%merge)
-  * `DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
-  * `DATASOURCE_PORT`: The port of CouchDB (default: 5984)
+  * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+  * `GPII_FLOWMANAGER_MATCHMAKER_URL`: The matchmaker URL (default: http://localhost:8081)
+  * `GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write preferences (default: http://localhost:8081/preferences/%gpiiKey?merge=%merge)
+  * `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
+  * `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
 
 Example:
 
 ```
-FLOWMANAGER_LISTEN_PORT=9091 \
-FLOWMANAGER_MATCHMAKER_URL=http://localhost:8081 \
-FLOWMANAGER_TO_PREFERENCESSERVER_URL=http://localhost:8081/preferences/%gpiiKey?merge=%merge \
-DATASOURCE_HOSTNAME=https://localhost \
-DATASOURCE_PORT=5984 \
+GPII_FLOWMANAGER_LISTEN_PORT=9091 \
+GPII_FLOWMANAGER_MATCHMAKER_URL=http://localhost:8081 \
+GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=http://localhost:8081/preferences/%gpiiKey?merge=%merge \
+GPII_DATASOURCE_HOSTNAME=https://localhost \
+GPII_DATASOURCE_PORT=5984 \
 NODE_ENV=gpii.config.cloudBased.flowManager.production \
 npm start
 ```
@@ -196,7 +196,7 @@ Requirements:
 
 The tests are run using the following command:
 
-`FLOWMANAGER_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
+`GPII_FLOWMANAGER_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
 
 #### Coverage Reporting
 

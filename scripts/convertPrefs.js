@@ -38,7 +38,7 @@ console.log("Converting preferences data in the source directory " + inputDir + 
 
 // Read and loop thru json5 files in the input directory
 filenames.forEach(function (filename) {
-    if (filename.substr(filename.length - 6) === ".json5") {
+    if (filename.endsWith(".json5")) {
         var gpiiKey = filename.substr(0, filename.length - 6);
         var preferences = fs.readFileSync(inputDir + filename, "utf-8");
         var currentTime = new Date().toISOString();

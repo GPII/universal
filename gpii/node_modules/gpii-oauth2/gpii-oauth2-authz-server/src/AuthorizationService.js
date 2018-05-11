@@ -49,11 +49,11 @@ var fluid = fluid || require("infusion");
 
     /**
      * Grant an authorization for the give GPII app installation. The gpii key will be verified before the access token is returned.
-     * @param dataStore {Component} An instance of gpii.dbOperation.dbDataStore
-     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
-     * @param gpiiKey {String} A GPII key
-     * @param clientId {String} A client id
-     * @param clientCredentialId {String} A client credential id
+     * @param {Component} dataStore - An instance of gpii.dbOperation.dbDataStore.
+     * @param {Component} codeGenerator - An instance of gpii.oauth2.codeGenerator.
+     * @param {String} gpiiKey - A GPII key.
+     * @param {String} clientId - A client id.
+     * @param {String} clientCredentialId - A client credential id.
      * @return {Promise} A promise object whose resolved value is the access token. An error will be returned if the GPII key is not found.
      */
     gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization = function (dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId) {
@@ -107,14 +107,14 @@ var fluid = fluid || require("infusion");
     };
 
     /**
-     * @param promiseTogo {Object} Modified by the function with objects to be resolved or to fail
-     * @param dataStore {Component} An instance of gpii.dbOperation.dbDataStore
-     * @param codeGenerator {Component} An instance of gpii.oauth2.codeGenerator
-     * @param gpiiKey {String} a GPII key
-     * @param clientId {String} an unique client id
-     * @param clientCredentialId {String} an unique client credential id
-     * @param expiresIn {String} the lifetime in seconds of the access token
-     * @return: none. The first argument of promiseTogo contains returned values
+     * @param {Promise} promiseTogo - Modified by the function with objects to be resolved or to fail.
+     * @param {Component} dataStore - An instance of gpii.dbOperation.dbDataStore.
+     * @param {Component} codeGenerator - An instance of gpii.oauth2.codeGenerator.
+     * @param {String} gpiiKey - A GPII key.
+     * @param {String} clientId - An unique client id.
+     * @param {String} clientCredentialId - An unique client credential id.
+     * @param {String} expiresIn - The lifetime in seconds of the access token.
+     * @return: None. The first argument of promiseTogo contains returned values.
      */
     gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();

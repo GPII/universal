@@ -12,8 +12,8 @@
     "options": {
         "dbServerPort": 5984,
         "dataSourceConfigProductionEnv": {
-            "baseUrl": "@expand:kettle.resolvers.env(DATASOURCE_HOSTNAME)",
-            "port": "@expand:kettle.resolvers.env(DATASOURCE_PORT)"
+            "baseUrl": "@expand:kettle.resolvers.env(GPII_DATASOURCE_HOSTNAME)",
+            "port": "@expand:kettle.resolvers.env(GPII_DATASOURCE_PORT)"
         },
         "distributeOptions": {
             "distributePort.cloudBasedProductionPort": {
@@ -22,7 +22,7 @@
                 "priority": "after:distributePort.productionPort"
             },
             "flowManager.production.matchMakers": {
-                "record": "@expand:kettle.resolvers.env(FLOWMANAGER_MATCHMAKER_URL)",
+                "record": "@expand:kettle.resolvers.env(GPII_FLOWMANAGER_MATCHMAKER_URL)",
                 "target": "{that flowManager}.options.matchMakers.default.url",
                 "priority": "after:flowManager.development.matchMakers"
             },

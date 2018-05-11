@@ -40,21 +40,21 @@ DATALOADER_IMAGE="cindyqili/gpii-dataloader"
 DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
 
-PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
-PREFERENCES_PORT=9081
+GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
+GPII_PREFERENCES_PORT=9081
 
-FLOWMANAGER_CONFIG="gpii.config.cloudBased.flowManager.production"
-FLOWMANAGER_PORT=9082
-FLOWMANAGER_MATCHMAKER_URL="http://localhost:9082"
-FLOWMANAGER_TO_PREFERENCESSERVER_URL="http://preferences:${PREFERENCES_PORT}/preferences/%gpiiKey?merge=%merge"
+GPII_FLOWMANAGER_CONFIG="gpii.config.cloudBased.flowManager.production"
+GPII_FLOWMANAGER_PORT=9082
+GPII_FLOWMANAGER_MATCHMAKER_URL="http://localhost:9082"
+GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL="http://preferences:${GPII_PREFERENCES_PORT}/preferences/%gpiiKey?merge=%merge"
 
 # The URL to point to the flow manager docker container, only used by running the production config tests
-FLOWMANAGER_URL="http://flowmanager:9082"
+GPII_FLOWMANAGER_URL="http://flowmanager:9082"
 
 # The URLs to test the readiness of each docker container
 COUCHDB_VIEW_URL="http://localhost:$COUCHDB_PORT/gpii/_design/views/_view/findPrefsSafeByGpiiKey?key=%22carla%22&include_docs=true"
-CARLA_PREFERENCES_URL="http://localhost:$PREFERENCES_PORT/preferences/carla"
-CARLA_SETTINGS_URL="http://localhost:$FLOWMANAGER_PORT/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D"
+CARLA_PREFERENCES_URL="http://localhost:$GPII_PREFERENCES_PORT/preferences/carla"
+CARLA_SETTINGS_URL="http://localhost:$GPII_FLOWMANAGER_PORT/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D"
 
 # Remove old containers (exit code is ignored)
 docker rm -f couchdb 2>/dev/null || true
@@ -84,16 +84,16 @@ docker run --rm --link couchdb -v $STATIC_DATA_DIR:/static_data -e STATIC_DATA_D
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 --retry-on-http-error=500 $COUCHDB_VIEW_URL
 
 # Start the preferences server container
-docker run -d -p $PREFERENCES_PORT:$PREFERENCES_PORT --name preferences --link couchdb -e NODE_ENV=$PREFERENCES_CONFIG  -e PREFERENCESSERVER_LISTEN_PORT=$PREFERENCES_PORT -e DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e DATASOURCE_PORT=$COUCHDB_PORT $UNIVERSAL_IMAGE
+docker run -d -p $GPII_PREFERENCES_PORT:$GPII_PREFERENCES_PORT --name preferences --link couchdb -e NODE_ENV=$GPII_PREFERENCES_CONFIG  -e GPII_PREFERENCESSERVER_LISTEN_PORT=$GPII_PREFERENCES_PORT -e GPII_DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e GPII_DATASOURCE_PORT=$COUCHDB_PORT $UNIVERSAL_IMAGE
 
 # Wait for the preferences server container to be ready
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $CARLA_PREFERENCES_URL
 
 # Start the flow manager container
-docker run -d -p $FLOWMANAGER_PORT:$FLOWMANAGER_PORT --name flowmanager --link couchdb --link preferences -e NODE_ENV=$FLOWMANAGER_CONFIG -e FLOWMANAGER_LISTEN_PORT=$FLOWMANAGER_PORT -e DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e DATASOURCE_PORT=$COUCHDB_PORT -e FLOWMANAGER_MATCHMAKER_URL=$FLOWMANAGER_MATCHMAKER_URL -e FLOWMANAGER_TO_PREFERENCESSERVER_URL=$FLOWMANAGER_TO_PREFERENCESSERVER_URL $UNIVERSAL_IMAGE
+docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanager --link couchdb --link preferences -e NODE_ENV=$GPII_FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_FLOWMANAGER_PORT -e GPII_DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e GPII_DATASOURCE_PORT=$COUCHDB_PORT -e GPII_FLOWMANAGER_MATCHMAKER_URL=$GPII_FLOWMANAGER_MATCHMAKER_URL -e GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=$GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL $UNIVERSAL_IMAGE
 
 # Wait for the flow manager container to be ready
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $CARLA_SETTINGS_URL
 
 # Start the container to run production config tests
-FLOWMANAGER_URL=$FLOWMANAGER_URL docker run --name productionConfigTests --link flowmanager $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js
+GPII_FLOWMANAGER_URL=$GPII_FLOWMANAGER_URL docker run --name productionConfigTests --link flowmanager $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js
