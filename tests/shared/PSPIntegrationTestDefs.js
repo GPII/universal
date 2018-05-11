@@ -1,5 +1,5 @@
 /**
-Shared GPII PCP Integration Test definitions
+Shared GPII PSP Integration Test definitions
 
 Copyright 2014, 2017 Raising the Floor - International
 
@@ -18,33 +18,33 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.registerNamespace("gpii.tests.pcpIntegration");
+fluid.registerNamespace("gpii.tests.pspIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
 
-fluid.defaults("gpii.tests.pcpIntegration.environmentChangedRequestType", {
+fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
     gradeNames: "kettle.test.request.http",
     path: "/environmentChanged",
     method: "PUT"
 });
 
-fluid.defaults("gpii.tests.pcpIntegration.client", {
+fluid.defaults("gpii.tests.pspIntegration.client", {
     gradeNames: "kettle.test.request.ws",
-    path: "/pcpChannel",
+    path: "/pspChannel",
     port: 8081,
     events: {
         connectionSucceeded: null
     },
     listeners: {
         connectionSucceeded: {
-            funcName: "gpii.tests.pcpIntegration.connectionSucceeded",
+            funcName: "gpii.tests.pspIntegration.connectionSucceeded",
             args: ["{arguments}.0"]
         }
     }
 });
 
-gpii.tests.pcpIntegration.sendMsg = function (client, path, value) {
+gpii.tests.pspIntegration.sendMsg = function (client, path, value) {
     client.send({
         path: path,
         value: value,
@@ -52,19 +52,19 @@ gpii.tests.pcpIntegration.sendMsg = function (client, path, value) {
     });
 };
 
-gpii.tests.pcpIntegration.sendContextChange = function (client, newContext) {
-    gpii.tests.pcpIntegration.sendMsg(client, ["activeContextName"], newContext);
+gpii.tests.pspIntegration.sendContextChange = function (client, newContext) {
+    gpii.tests.pspIntegration.sendMsg(client, ["activeContextName"], newContext);
 };
 
-gpii.tests.pcpIntegration.checkPayload = function (data, expectedType) {
-    jqUnit.assertEquals("Checking message from PCP: ", expectedType, data.type);
+gpii.tests.pspIntegration.checkPayload = function (data, expectedType) {
+    jqUnit.assertEquals("Checking message from PSP: ", expectedType, data.type);
 };
 
-gpii.tests.pcpIntegration.connectionSucceeded = function (data) {
+gpii.tests.pspIntegration.connectionSucceeded = function (data) {
     jqUnit.assertValue("Connection between client and server can be established", data);
 };
 
-gpii.tests.pcpIntegration.data = {
+gpii.tests.pspIntegration.data = {
     initial: {
         "settingsHandlers": {
             "gpii.gsettings": {
@@ -144,9 +144,9 @@ gpii.tests.pcpIntegration.data = {
     }
 };
 
-gpii.tests.pcpIntegration.testDefs = [
+gpii.tests.pspIntegration.testDefs = [
     {
-        name: "Simple settings change by PCP",
+        name: "Simple settings change by PSP",
         expect: 8,
         sequence: [
             [
@@ -171,20 +171,20 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    func: "{pcpClient}.connect"
+                    func: "{pspClient}.connect"
                 }, {
-                    event: "{pcpClient}.events.onConnect",
-                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: [ "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -207,7 +207,7 @@ gpii.tests.pcpIntegration.testDefs = [
             ]
         ]
     }, {
-        name: "Settings change by PCP with scoped common term",
+        name: "Settings change by PSP with scoped common term",
         expect: 9,
         sequence: [
             [
@@ -232,24 +232,24 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    func: "{pcpClient}.connect"
+                    func: "{pspClient}.connect"
                 }, {
-                    event: "{pcpClient}.events.onConnect",
-                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: [ "{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.desktop\\.a11y\\.magnifier.http://registry\\.gpii\\.net/common/magnification"], 3]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -272,7 +272,7 @@ gpii.tests.pcpIntegration.testDefs = [
             ]
         ]
     }, {
-        name: "Sequential setting changes by the PCP",
+        name: "Sequential setting changes by the PSP",
         expect: 10,
         sequence: [
             [
@@ -297,20 +297,20 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    func: "{pcpClient}.connect"
+                    func: "{pspClient}.connect"
                 }, {
-                    event: "{pcpClient}.events.onConnect",
-                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -319,11 +319,11 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/volume"], 0.75]
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/volume"], 0.75]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -346,7 +346,7 @@ gpii.tests.pcpIntegration.testDefs = [
             ]
         ]
     }, {
-        name: "Context change via the PCP",
+        name: "Context change via the PSP",
         expect: 8,
         sequence: [
             [
@@ -371,20 +371,20 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    func: "{pcpClient}.connect"
+                    func: "{pspClient}.connect"
                 }, {
-                    event: "{pcpClient}.events.onConnect",
-                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendContextChange",
-                    args: ["{pcpClient}", "bright"]
+                    funcName: "gpii.tests.pspIntegration.sendContextChange",
+                    args: ["{pspClient}", "bright"]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -407,7 +407,7 @@ gpii.tests.pcpIntegration.testDefs = [
             ]
         ]
     }, {
-        name: "Settings change from PCP followed by context change via the PCP (new context should be applied)",
+        name: "Settings change from PSP followed by context change via the PSP (new context should be applied)",
         expect: 10,
         sequence: [
             [
@@ -432,20 +432,20 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    func: "{pcpClient}.connect"
+                    func: "{pspClient}.connect"
                 }, {
-                    event: "{pcpClient}.events.onConnect",
-                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -454,11 +454,11 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendContextChange",
-                    args: ["{pcpClient}", "bright"]
+                    funcName: "gpii.tests.pspIntegration.sendContextChange",
+                    args: ["{pspClient}", "bright"]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -483,7 +483,7 @@ gpii.tests.pcpIntegration.testDefs = [
     }, {
       // This test checks that the manually changed context from the user is not overridden
       // by a context change triggered by changes in the environment
-        name: "Manual context change via the PCP followed by a change in environment",
+        name: "Manual context change via the PSP followed by a change in environment",
         expect: 11,
         sequence: [
             [
@@ -508,20 +508,20 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    func: "{pcpClient}.connect"
+                    func: "{pspClient}.connect"
                 }, {
-                    event: "{pcpClient}.events.onConnect",
-                    listener: "gpii.tests.pcpIntegration.connectionSucceeded"
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendMsg",
-                    args: ["{pcpClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: ["{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/magnification"], 3]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -530,11 +530,11 @@ gpii.tests.pcpIntegration.testDefs = [
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
                 }, {
-                    funcName: "gpii.tests.pcpIntegration.sendContextChange",
-                    args: ["{pcpClient}", "bright"]
+                    funcName: "gpii.tests.pspIntegration.sendContextChange",
+                    args: ["{pspClient}", "bright"]
                 }, {
-                    event: "{pcpClient}.events.onReceiveMessage",
-                    listener: "gpii.tests.pcpIntegration.checkPayload",
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
                     func: "gpii.test.checkConfiguration",
@@ -570,29 +570,29 @@ gpii.tests.pcpIntegration.testDefs = [
     }
 ];
 
-fluid.defaults("gpii.tests.pcpIntegration.testCaseHolder.common.linux", {
+fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
     gradeNames: [
         "gpii.test.integration.testCaseHolder.linux"
     ],
     components: {
-        pcpClient: {
-            type: "gpii.tests.pcpIntegration.client"
+        pspClient: {
+            type: "gpii.tests.pspIntegration.client"
         },
         environmentChangedRequest: {
-            type: "gpii.tests.pcpIntegration.environmentChangedRequestType"
+            type: "gpii.tests.pspIntegration.environmentChangedRequestType"
         }
     },
     gpiiKey: "context1",
-    data: gpii.tests.pcpIntegration.data
+    data: gpii.tests.pspIntegration.data
 });
 
 
 
-gpii.tests.pcpIntegration.buildTestDefs = function (testDefs) {
+gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             gradeNames: [
-                "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
+                "gpii.tests.pspIntegration.testCaseHolder.common.linux",
                 "gpii.test.common.lifecycleManagerReceiver"
             ],
             config: {

@@ -1,5 +1,5 @@
 /*
- * GPII Untrusted PCP Integration Tests
+ * GPII Untrusted PSP Integration Tests
  *
  * Copyright 2017 Raising the floor - international
  *
@@ -20,21 +20,21 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
-require("./shared/PCPIntegrationTestDefs.js");
+require("./shared/PSPIntegrationTestDefs.js");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.untrusted.pcpIntegration");
+fluid.registerNamespace("gpii.tests.untrusted.pspIntegration");
 
-gpii.tests.untrusted.pcpIntegration.testDefs =
-    fluid.transform(gpii.tests.pcpIntegration.testDefs, function (testDefIn) {
+gpii.tests.untrusted.pspIntegration.testDefs =
+    fluid.transform(gpii.tests.pspIntegration.testDefs, function (testDefIn) {
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
                 configName: "gpii.tests.acceptance.linux.builtIn.untrusted.config",
                 configPath: "%gpii-universal/tests/platform/linux/configs"
             },
             gradeNames: [
-                "gpii.tests.pcpIntegration.testCaseHolder.common.linux",
+                "gpii.tests.pspIntegration.testCaseHolder.common.linux",
                 "gpii.test.common.lifecycleManagerReceiver"
             ]
         });
@@ -42,4 +42,4 @@ gpii.tests.untrusted.pcpIntegration.testDefs =
         return testDef;
     });
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.pcpIntegration.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.pspIntegration.testDefs);

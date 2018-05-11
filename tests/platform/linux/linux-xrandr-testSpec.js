@@ -10,7 +10,7 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 The R&D leading to these results received funding from the
-Department of Education - Grant H421A150005 (GPII-APCP). However,
+Department of Education - Grant H421A150005 (GPII-APSP). However,
 these results do not necessarily represent the policy of the
 Department of Education, and you should not assume endorsement by the
 Federal Government.

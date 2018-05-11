@@ -3,23 +3,7 @@ gpii.config.untrusted.development.all.local.json
 
 This configuration runs the entire system locally under the hybrid Flow Manager architecture and in development mode. It also starts pouchDB to serve data for the preferences server and the auth server.
 
-It runs a multi-server configuration on different ports:
+It runs:
 
-* The Untrusted Flow Manager runs on port 8081
-* The Cloud Based Flow Manager runs on port 8084
-* The pouchDB runs on port 8058
-* The express server for reloading pouchDB data runs on port 8060. The endpoint to reload is http://localhost:8060/reset-pouch
-
-* The following components are running on the local machine:
-** Untrusted Flow Manager
-*** deviceReporter
-*** flowManager (untrusted, browser channel)
-
-** Cloud Based Flow Manager
-*** authServer
-*** canopyMatchMaker
-*** flowManager (cloud based oauth2)
-*** preferencesServer
-*** solutionsRegistry
-
-** Pouch Manager
+* A multi-server configuration with gpii.config.untrusted.development.local.json (See corresponding file for details)
+* Pouch Manager

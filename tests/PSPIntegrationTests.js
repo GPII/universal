@@ -1,5 +1,5 @@
 /**
-GPII PCP Integration Tests
+GPII PSP Integration Tests
 
 Copyright 2017 Raising the Floor - International
 
@@ -18,6 +18,6 @@ var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
-require("./shared/PCPIntegrationTestDefs.js");
+require("./shared/PSPIntegrationTestDefs.js");
 
-gpii.test.bootstrapServer(gpii.tests.pcpIntegration.buildTestDefs(gpii.tests.pcpIntegration.testDefs));
+gpii.test.bootstrapServer(gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs));

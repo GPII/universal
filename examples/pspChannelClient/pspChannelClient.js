@@ -1,10 +1,10 @@
 /*!
- * Test client for PCPChannel WebSockets
+ * Test client for PSPChannel WebSockets
  *
  * Copyright 2017 Raising the Floor - International
  *
  * The R&D leading to these results received funding from the
- * Department of Education - Grant H421A150005 (GPII-APCP). However,
+ * Department of Education - Grant H421A150005 (GPII-APSP). However,
  * these results do not necessarily represent the policy of the
  * Department of Education, and you should not assume endorsement by the
  * Federal Government.
@@ -21,7 +21,7 @@
 var ws = require("ws");
 
 // The client starts the communication
-var socket = new ws("ws://localhost:8081/pcpChannel"); // eslint-disable-line new-cap
+var socket = new ws("ws://localhost:8081/pspChannel"); // eslint-disable-line new-cap
 
 // When the connection is done, the server will send the initial data of the current session if any
 socket.on("open", function () {

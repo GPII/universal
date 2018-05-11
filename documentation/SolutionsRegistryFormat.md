@@ -101,7 +101,7 @@ An important thing to notice here is that this solution example has two settings
 
 Each settingsHandler block can contain the following information:
 * **type (mandatory):** the type of settingshandler
-* **liveness (mandatory):** Describes the update behavior of this solution: `"live"` means that the settings can be applied live without needing to restart the solution. `"liveRestart"` means that the a restart is required but considered low-impact enough for e.g. the PCP to trigger this automatically but not on a framerate of e.g. dragging a slider. `"manualRestart"` means that a change in settings requires a restart and that the restart of the solution is considered high-impact and slow. `"OSRestart"` means that a restart of the operating system required.
+* **liveness (mandatory):** Describes the update behavior of this solution: `"live"` means that the settings can be applied live without needing to restart the solution. `"liveRestart"` means that the a restart is required but considered low-impact enough for e.g. the PSP to trigger this automatically but not on a framerate of e.g. dragging a slider. `"manualRestart"` means that a change in settings requires a restart and that the restart of the solution is considered high-impact and slow. `"OSRestart"` means that a restart of the operating system required.
 * **options:** Any options that should be passed to the settingsHandler. This is specific to the type of settingshandler specified in the "type" block.
 * **capabilitiesTransformations**: Transformations from common terms to application specific settings can be defined here. These will enable the framework to automatically translate common terms from a user's preferences set into application settings. Any common terms listed here, will automatically be added to the `capabilities` of the solution.
 * **inverseCapabilitiesTransformations**: This block describes transformations from application settings to common terms. If this block is present, the transformations specified will be used by the framework to deduce common terms based on any application specific settings in the users preferences set. If this key is not present, the framework will attempt to do the inversion itself, based on the `capabilitiesTransformations`. If this block is present, but empty, the system will make no attempt to automatically invert the `capabilitiesTransformations`.
@@ -222,7 +222,7 @@ None of these blocks are mandatory. If one is omitted from the solution registry
 
 ### update
 
-The `update` block works very similarly to the lifecycle blocks. It describes what should happen when the configuration needs to be updated (e.g. due to context changes, PCP adjustments, etc).
+The `update` block works very similarly to the lifecycle blocks. It describes what should happen when the configuration needs to be updated (e.g. due to context changes, PSP adjustments, etc).
 
 The format of the `update` block allows for the same entries as the other lifecycle blocks - that is: arbitrary lifecycle action blocks and references to `settings.<blockname>` and `launchers.<blockname>`. Unlike for the other lifecycle blocks, the `update` block furthermore allows references to the `start`, `stop` and `configure` blocks. This is done by putting a string with the name of that block. When the system encounters one of these references, the entries of that block will be run.
 

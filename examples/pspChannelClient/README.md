@@ -1,8 +1,8 @@
-# PCP Example client
+# PSP Example client
 
-This directory contains a tiny sample client for the pcpChannel WebSockets connection.
+This directory contains a tiny sample client for the pspChannel WebSockets connection.
 
-## Starting up the GPII and trying out the PCP channel example client.
+## Starting up the GPII and trying out the PSP channel example client.
 
 It can be tested by firing up any configuration of the GPII which includes a local FlowManager. Particularly
 suitable are the mock configurations in %gpii-universal/gpii/configs/mocks - for example you can type
@@ -17,7 +17,7 @@ from the root of this repository. This will start up the servers in trusted or u
 
 After that, you can fire up the client at any time during the lifetime of the FlowManager by typing
 
-    `node pcpChannelClient.js`
+    `node pspChannelClient.js`
 
 from this directory in another shell.
 
@@ -31,7 +31,7 @@ and
 
 Note that the preferences sets used with the above configurations should be in the testData/preferences folder of this repository.
 
-## Example payloads received by the PCP
+## Example payloads received by the PSP
 
 Here are some sample payloads collected from this client during such testing.
 
@@ -108,7 +108,7 @@ After logging out `snapset_1a`, the client receives the following update:
 }
 ```
 
-When the PCP issues an update to the preferences (see below), a message will be sent to the PCP once the settings change has been applied to the system:
+When the PSP issues an update to the preferences (see below), a message will be sent to the PSP once the settings change has been applied to the system:
 
 ```
 {
@@ -117,17 +117,17 @@ When the PCP issues an update to the preferences (see below), a message will be 
 ```
 
 
-## Example payloads sent by the PCP
+## Example payloads sent by the PSP
 
-The PCP has can send two different payloads to the GPII core architecture. Namely a change in context or a change in a setting.
+The PSP has can send two different payloads to the GPII core architecture. Namely a change in context or a change in a setting.
 
-Changing the context via the pcp is done with the following payload:
+Changing the context via the psp is done with the following payload:
 
 `{"path": ["activeContextName"], "value": "bright", type: "ADD"}`
 
 This will change the context to "bright". To change the context to something else, simply change "bright" with the name of the desired context.
 
-The PCP API also supports changing preferences (one at a time). This is done via the following payload:
+The PSP API also supports changing preferences (one at a time). This is done via the following payload:
 
 `{"path":["preferences","http://registry\\.gpii\\.net/common/magnification"],"type":"ADD","value":4}`
 
