@@ -21,12 +21,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fs = require("fs"),
+    rimraf = require("rimraf"),
+    mkdirp = require("mkdirp"),
     JSON5 = require("json5");
 
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
-var gpiiKeysFile = targetDir + "gpiiKeys.json";
-var prefsSafesFile = targetDir + "prefsSafes.json";
 
 var prefsSafes = [];
 var gpiiKeys = [];
@@ -37,50 +37,53 @@ var filenames = fs.readdirSync(inputDir);
 console.log("Converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + "...");
 
 // Read and loop thru json5 files in the input directory
-filenames.forEach(function (filename) {
-    if (filename.endsWith(".json5")) {
-        var gpiiKey = filename.substr(0, filename.length - 6);
-        var preferences = fs.readFileSync(inputDir + filename, "utf-8");
-        var currentTime = new Date().toISOString();
-        var prefsSafeId = "prefsSafe-" + gpiiKey;
+rimraf(targetDir, function () {
+    mkdirp(targetDir, function () {
+        filenames.forEach(function (filename) {
+            if (filename.endsWith(".json5")) {
+                var gpiiKey = filename.substr(0, filename.length - 6);
+                var preferences = fs.readFileSync(inputDir + filename, "utf-8");
+                var currentTime = new Date().toISOString();
+                var prefsSafeId = "prefsSafe-" + gpiiKey;
 
-        var oneGpiiKey = {
-            "_id": gpiiKey,
-            "type": "gpiiKey",
-            "schemaVersion": "0.1",
-            "prefsSafeId": prefsSafeId,
-            "prefsSetId": "gpii-default",
-            "revoked": false,
-            "revokedReason": null,
-            "timestampCreated": currentTime,
-            "timestampUpdated": null
-        };
-        gpiiKeys.push(oneGpiiKey);
+                var oneGpiiKey = {
+                    "_id": gpiiKey,
+                    "type": "gpiiKey",
+                    "schemaVersion": "0.1",
+                    "prefsSafeId": prefsSafeId,
+                    "prefsSetId": "gpii-default",
+                    "revoked": false,
+                    "revokedReason": null,
+                    "timestampCreated": currentTime,
+                    "timestampUpdated": null
+                };
+                gpiiKeys.push(oneGpiiKey);
 
-        var onePrefsSafe = {
-            "_id": prefsSafeId,
-            "type": "prefsSafe",
-            "schemaVersion": "0.1",
-            "prefsSafeType": "user",
-            "name": gpiiKey,
-            "password": null,
-            "email": null,
-            "preferences": JSON5.parse(preferences),
-            "timestampCreated": currentTime,
-            "timestampUpdated": null
-        };
-        prefsSafes.push(onePrefsSafe);
+                var onePrefsSafe = {
+                    "_id": prefsSafeId,
+                    "type": "prefsSafe",
+                    "schemaVersion": "0.1",
+                    "prefsSafeType": "user",
+                    "name": gpiiKey,
+                    "password": null,
+                    "email": null,
+                    "preferences": JSON5.parse(preferences),
+                    "timestampCreated": currentTime,
+                    "timestampUpdated": null
+                };
+                prefsSafes.push(onePrefsSafe);
 
-    }
+            }
+        });
+
+        // Write the target files
+        var prefsSafesFile = targetDir + "prefsSafes.json";
+        console.log("prefsSafesFile: " + prefsSafesFile);
+        fs.writeFileSync(prefsSafesFile, JSON.stringify(prefsSafes, null, 4));
+
+        var gpiiKeysFile = targetDir + "gpiiKeys.json";
+        fs.writeFileSync(gpiiKeysFile, JSON.stringify(gpiiKeys, null, 4));
+
+        console.log("Finished converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + "!");
+    });
 });
-
-// Create the target directory if it doesn't exist
-if (!fs.existsSync(targetDir)){
-    fs.mkdirSync(targetDir);
-}
-
-// Write the target files
-fs.writeFileSync(prefsSafesFile, JSON.stringify(prefsSafes, null, 4));
-fs.writeFileSync(gpiiKeysFile, JSON.stringify(gpiiKeys, null, 4));
-
-console.log("Finished converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + "!");
