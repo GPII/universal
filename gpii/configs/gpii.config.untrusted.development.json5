@@ -7,6 +7,19 @@
  */
 {
     "type": "gpii.config.untrusted.development",
+    "options": {
+        "distributeOptions": {
+            "flowManager.defaultCloudURL": {
+                "record": "http://localhost:8084",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL"
+            },
+            "flowManager.cloudURL": {
+                "record": "@expand:kettle.resolvers.env(GPII_CLOUD_URL)",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL",
+                "priority": "after:flowManager.defaultCloudURL"
+            }
+        }
+    },
     "mergeConfigs": [
         "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.development.json5",
         "../node_modules/flowManager/configs/gpii.flowManager.untrusted.config.development.json5"

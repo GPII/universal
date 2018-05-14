@@ -62,6 +62,7 @@ The Flow Manager with the `gpii.config.cloudBased.flowManager.production` config
   * `GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write preferences (default: http://localhost:8081/preferences/%gpiiKey?merge=%merge)
   * `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
   * `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
+  * `GPII_CLOUD_URL`: The URL to GPII Cloud (default: http://localhost:8084). Used by untrusted local flow manager to communicate with GPII Cloud.
 
 Example:
 
@@ -196,7 +197,7 @@ Requirements:
 
 The tests are run using the following command:
 
-`GPII_FLOWMANAGER_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
+`GPII_CLOUD_URL="http://flowmanager.gpii.net" node tests/ProductionConfigTests.js`
 
 #### Coverage Reporting
 

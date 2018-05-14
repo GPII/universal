@@ -44,8 +44,8 @@ gpii.loadTestingSupport();
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
-            configName: "gpii.tests.acceptance.untrusted.production",
-            configPath: "%gpii-universal/tests/configs"
+            configName: "gpii.config.untrusted.development",
+            configPath: "%gpii-universal/gpii/configs"
         }
     });
     return testDef;

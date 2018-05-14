@@ -49,7 +49,7 @@ GPII_FLOWMANAGER_MATCHMAKER_URL="http://localhost:9082"
 GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL="http://preferences:${GPII_PREFERENCES_PORT}/preferences/%gpiiKey?merge=%merge"
 
 # The URL to point to the flow manager docker container, only used by running the production config tests
-GPII_FLOWMANAGER_URL="http://flowmanager:9082"
+GPII_CLOUD_URL="http://flowmanager:9082"
 
 # The URLs to test the readiness of each docker container
 COUCHDB_VIEW_URL="http://localhost:$COUCHDB_PORT/gpii/_design/views/_view/findPrefsSafeByGpiiKey?key=%22carla%22&include_docs=true"
@@ -96,4 +96,4 @@ docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanage
 wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 $CARLA_SETTINGS_URL
 
 # Start the container to run production config tests
-GPII_FLOWMANAGER_URL=$GPII_FLOWMANAGER_URL docker run --name productionConfigTests --link flowmanager $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js
+docker run --name productionConfigTests --link flowmanager -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js
