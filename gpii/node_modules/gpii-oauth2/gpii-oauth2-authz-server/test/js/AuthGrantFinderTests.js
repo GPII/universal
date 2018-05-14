@@ -39,6 +39,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
     fluid.defaults("gpii.tests.oauth2.authGrantFinder.testEnvironment", {
         gradeNames: ["gpii.tests.dbOperation.pouchBackedTestEnvironment"],
+        // Use a module-relative path when https://issues.gpii.net/browse/GPII-3030 is addressed
         dbViewsLocation: "../../../../../../testData/dbData/views.json",
         dbName: "gpii",
         components: {
