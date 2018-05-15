@@ -107,7 +107,7 @@ gpii.tests.errors.coreTestDef = {
         configName: "gpii.config.development.all.local",
         configPath: "%gpii-universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder", "gpii.tests.errors.mixin"],
+    gradeNames: ["gpii.test.integration.testCaseHolder.windows", "gpii.tests.errors.mixin"],
     userToken: null,
     expectedError: null,
     expectedMethodFail: null,
