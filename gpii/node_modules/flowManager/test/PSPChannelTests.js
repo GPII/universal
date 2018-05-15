@@ -4,7 +4,7 @@
  * Copyright 2017 Raising the Floor - International
  *
  * The R&D leading to these results received funding from the
- * Department of Education - Grant H421A150005 (GPII-APSP). However,
+ * Department of Education - Grant H421A150005 (GPII-APCP). However,
  * these results do not necessarily represent the policy of the
  * Department of Education, and you should not assume endorsement by the
  * Federal Government.

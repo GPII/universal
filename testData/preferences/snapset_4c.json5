@@ -1,8 +1,8 @@
-// # Snapsets for APSP pilots
+// # Snapsets for APCP pilots
 //
 // ## Description
 //
-// These snapsets have been created in order to test the GPII in the APSP pilots.
+// These snapsets have been created in order to test the GPII in the APCP pilots.
 // A full description of them can be found here: https://docs.google.com/document/d/1B3uIonWJNqbzoMgboVc7b-T3UJYuikB2FKJmIIp4DYE/edit#
 // In addition to the specifications from the original document:
 // * All **snapset_2** have been updated to include the Google dictionary extension for Google Chrome. See https://issues.gpii.net/browse/GPII-2872
