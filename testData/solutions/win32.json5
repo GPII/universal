@@ -3079,7 +3079,9 @@
             }
         ]
     },
-    "net.gpii.test.speechControl": { // This solution does not exist in real life and has been added strictly for user testing/demoing
+    "net.gpii.test.speechControl": { 
+    // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
+    // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
         "contexts": {
             "OS": [
@@ -3111,5 +3113,64 @@
             }
         ],
         "isRunning": []
+    },
+    
+    "net.gpii.explode": { 
+    // This solution exists only to support manual and automated testing of GPII's error support. It references the 
+    // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
+    // get, set or launch settingsHandler action 
+        "name": "GPII Test solution for triggering settingsHandler errors",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.exploding",
+                "supportedSettings": {
+                    "explodeMethod": {
+                        "schema": {
+                            "title": "Explode Method",
+                            "description": "The strategy to be used when exploding",
+                            "type": "string",
+                            "enum": ["reject", "fail", "throw"]
+                        },
+                    },
+                    "explodeOn": {
+                        "schema": {
+                            "title": "Explode On",
+                            "description": "Whether to explode during the get or set settingsHandler method",
+                            "type": "string",
+                            "enum": ["get", "set"]
+                        }
+                    }
+                }
+            }
+        },
+        "launchHandlers": {
+            "launch": {
+                "type": "gpii.settingsHandlers.exploding",
+                "options": {
+                    "launchHandler": true,
+                    // We tunnel this through since we blundered in the initial design of settings handlers in not contextualising them.
+                    // This is preferable to the other approaches of i) Rewriting the matchmaker/lifecycle manager so that it routes other
+                    // settings to launch handlers, or ii) Rewriting the settingshandler contract so that it supports arbitrary interception
+                    // Real solutions should never read directly from the session in this way
+                    "preferences": "${{session}.preferences}"
+                }
+            }
+        },
+        "isRunning": [
+            "launchers.launch"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }

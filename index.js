@@ -51,6 +51,38 @@ gpii.loadTestingSupport = function () {
     require("./gpii/node_modules/testing");
 };
 
+// Variant of Kettle's failureHandler which gives the request a chance to clean itself up first and perhaps
+// throw a more elaborate error
+gpii.failureHandler = function (args, activity) {
+    var request = kettle.getCurrentRequest();
+    if (request) {
+        fluid.invokeLater(function () {
+            if (!request.handlerPromise.disposition) {
+                request.handlerPromise.reject({
+                    isError: true,
+                    message: args[0]
+                });
+            }
+        });
+    }
+    fluid.builtinFail(args, activity);
+};
+
+fluid.failureEvent.addListener(gpii.failureHandler, "fail");
+
+kettle.JSON.parse = function (string) {
+    if (typeof(string) !== "string") {
+        fluid.fail("kettle.JSON.parse called on non-string object ", string);
+    }
+    var togo;
+    kettle.dataSource.parseJSON(string).then(function (parsed) {
+        togo = parsed;
+    }, function (err) {
+        throw new Error(err.message);
+    });
+    return togo;
+};
+
 /**
  * Query and fetch the array of configs for this GPII Kettle Server.
  * These are the configuration that allow to see if the current running
