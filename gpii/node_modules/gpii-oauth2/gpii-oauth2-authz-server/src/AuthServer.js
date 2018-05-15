@@ -204,11 +204,22 @@ fluid.defaults("gpii.oauth2.authServer.standalone", {
 });
 
 gpii.oauth2.jsonBodyParser = function () {
-    return bodyParser.json();
+    return bodyParser.json({
+        // Increase the limit of the request body to 50MB instead of the default 100KB.
+        // This solves the error "request entity too large" when the responded lifecycle
+        // instruction payload is larger than 100KB.
+        // See: https://github.com/expressjs/body-parser#limit-1
+        // and https://stackoverflow.com/questions/19917401/error-request-entity-too-large
+        limit: 52428800
+    });
 };
 
 gpii.oauth2.urlencodedBodyParser = function () {
-    return bodyParser.urlencoded({ extended: true });
+    return bodyParser.urlencoded({
+        // See the comment above for bodyParser.json() about the necessity to increase the limit.
+        limit: 52428800,
+        extended: true
+    });
 };
 
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
