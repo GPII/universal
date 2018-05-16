@@ -1,0 +1,25 @@
+// # Snapsets for APCP pilots
+//
+// ## Description
+//
+// These snapsets have been created in order to test the GPII in the APCP pilots.
+// A full description of them can be found here: https://docs.google.com/document/d/1B3uIonWJNqbzoMgboVc7b-T3UJYuikB2FKJmIIp4DYE/edit#
+// In addition to the specifications from the original document:
+// * All **snapset_2** have been updated to include the Google dictionary extension for Google Chrome. See https://issues.gpii.net/browse/GPII-2872
+//
+// * **snapset_1b**: Win10 Display scaling (150%), Win10 Mouse cursor size (1.0) and Google Dictionary for Chrome (Enabled)
+{
+    "flat": {
+        "name": "Larger 150%",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/DPIScale": 1.50,
+                    "http://registry.gpii.net/common/cursorSize": 1.0,
+                    "http://registry.gpii.net/common/supportTool": ["dictionary"]
+                }
+            }
+        }
+    }
+}

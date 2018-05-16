@@ -1,0 +1,23 @@
+// # Omnitor's eCmobile/eCtouch preference sets
+//
+// * `omnitor1.json5`: eCmobile's factory settings as common terms
+//  * default font size
+//  * high contrast off
+//
+// When logging in/out with this preference sets into a device where eCmobile/eCtouch is installed a user will observe the following sequence:
+//  * eCmobile/eCtouch will be launched
+//  * It will be configured according to the used preference set
+//  * When logging out, the user will be taken to the home screen (even if eCmobile/eCtouch is still running in the background)
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 12,
+                    "http://registry.gpii.net/common/highContrast/enabled": false
+                }
+            }
+        }
+    }
+}

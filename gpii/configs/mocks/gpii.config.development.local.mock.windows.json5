@@ -1,0 +1,21 @@
+/**
+ * A variety of gpii.config.development.local.json5 which supplies mock implementations of all settings handlers
+ * supported on the Windows platform.
+ *
+ * This configuration runs the entire system, in the "trusted local FlowManager" configuration, locally and in development mode.
+ * This configuration is used for testing PSP channel, which means that the fetch of solutions is sourced from the filesystem,
+ * and the fetch of preferences is sourced from the pouchDB that is constructed at the start of each test sequence and demolished
+ * at the end of each test sequence.
+ */
+{
+    "type": "gpii.config.development.local.mock.windows",
+    "options": {
+        "gradeNames": "gpii.test.integration.mockHolder.windows"
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/gpii.config.development.local"
+    ],
+    "require": [
+        "%gpii-universal/gpii/node_modules/testing/src/Mocks.js"
+    ]
+}

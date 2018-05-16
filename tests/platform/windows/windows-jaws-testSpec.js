@@ -74,8 +74,8 @@ gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
 
 gpii.tests.windows.jaws.testDefs = [
     {
-        name: "Testing NP set \"jaws_application\"",
-        userToken: "jaws_application",
+        name: "Testing preference set \"jaws_application\"",
+        gpiiKey: "jaws_application",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
         },
@@ -140,8 +140,8 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_application\" - where jaws is running on startup",
-        userToken: "jaws_application",
+        name: "Testing preference set \"jaws_application\" - where jaws is running on startup",
+        gpiiKey: "jaws_application",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
         },
@@ -206,8 +206,8 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_common\"",
-        userToken: "jaws_common",
+        name: "Testing preference set \"jaws_common\"",
+        gpiiKey: "jaws_common",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
         },
@@ -272,8 +272,8 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_common2\"",
-        userToken: "jaws_common2",
+        name: "Testing preference set \"jaws_common2\"",
+        gpiiKey: "jaws_common2",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
         },
@@ -337,8 +337,8 @@ gpii.tests.windows.jaws.testDefs = [
         }
     },
     {
-        name: "Testing NP set \"jaws_common3\"",
-        userToken: "jaws_common3",
+        name: "Testing preference set \"jaws_common3\"",
+        gpiiKey: "jaws_common3",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
         },

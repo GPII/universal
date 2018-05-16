@@ -1,20 +1,20 @@
 # Canopy Match Maker
 
 The canopy matchmaker uses three different metrics to decide the best configuration of the device
-* Explicit priorities from NP set, and implicit priorities from application specific settings
+* Explicit priorities from preference set, and implicit priorities from application specific settings
 * Canopy matching based on how closely the user's preferences matches the capabilities of a solution.
 * Solution types
 
 Broadly, the match making algorithm used by the canopy match maker is as follows:
 1. Augmentation of the payload:
-    * Add inferred common terms to the preferences set
+    * Add inferred common terms to the preference set
     * Add information about solution types/categories to each solution
-    * Add an ontologized ISO24751 version of the NP set
+    * Add an ontologized ISO24751 version of the preference set
     * In the ISO-24751 ontology, calculate and add leaves (EL-paths) of preferences and of the capabilities of solutions
 3. Decide solution disposition for each context by:
     * Further augment solution entries with priority information:
-        * Extract explicit solution priorities from user's NP set
-        * Add implicit solution priorities based on the presence of application specific settings in the user NP set
+        * Extract explicit solution priorities from user's preference set
+        * Add implicit solution priorities based on the presence of application specific settings in the user preference set
     * Dispose solutions based on priority (see below for more details)
     * For tied solutions, dispose based on canopy matching (see below for more details)
 
@@ -39,7 +39,7 @@ The Canopy matching strategy is used for deciding how to dispose solutions in ca
 *Calculating fitness vector for a solution*
 * Convert user preferences to leaves (array of el-paths)
 * Compute capabilities of solution
-* Compute vector of prefix depths for each leaf el path from NP set
+* Compute vector of prefix depths for each leaf el path from preference set
 * Sort vector in descending order of fitness ("fitness vector")
 * Rank solutions by fitness using lexicographic ordering
 

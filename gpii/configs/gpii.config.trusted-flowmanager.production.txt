@@ -1,8 +1,0 @@
-gpii.config.trusted-flowmanager.production.json
-===============================================
-
-Locally running system in production mode
-
-Tested via ProductionConfigTests.js
-
-NOTE: duplicates solutionsRegistryDataSource options distribution from gpii.config.all.development.dr.production.json

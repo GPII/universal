@@ -15,8 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
 require("./shared/ContextIntegrationTestDefs.js");
@@ -32,5 +31,5 @@ gpii.tests.contextIntegration.baseTestDef = {
     }
 };
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.contextIntegration.fixtures, gpii.tests.contextIntegration.baseTestDef));

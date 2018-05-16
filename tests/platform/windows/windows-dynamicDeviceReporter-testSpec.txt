@@ -3,7 +3,7 @@ windows-dynamicDeviceReporter-testSpec.js
 Descriptions:
 
 This will run the acceptance tests with dynamic device reporting.
-It uses 2 NP sets: screenreader_nvda and readwritegold_application1.
+It uses 2 preference sets: screenreader_nvda and readwritegold_application1.
 
 Due to some current limitations/issues with the current flat matchmaker, JAWS
 should not be installed, and sociable should not be listed as installed, because

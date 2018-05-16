@@ -72,13 +72,12 @@
         "test": "npm run test:node && npm run test:browser",
         "test:browser": "node node_modules/testem/testem.js ci --file tests/testem.js",
         "test:node": "node node_modules/nyc/bin/nyc.js node tests/all-tests.js",
-        "test:production": "node tests/ProductionConfigTests.js",
         "test:vagrant": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm test'",
         "test:vagrantBrowser": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; npm run test:browser'",
         "test:vagrantNode": "vagrant ssh -c 'cd /home/vagrant/sync/universal; npm run test:node'",
-        "test:vagrantProduction": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; ./scripts/vagrantCloudBasedContainers.sh && GPII_FLOWMANAGER_PREFERENCES_URL=http://localhost:9081/preferences/%userToken npm run test:production'",
+        "test:vagrantProduction": "vagrant ssh -c 'cd /home/vagrant/sync/universal; DISPLAY=:0; ./scripts/vagrantCloudBasedContainers.sh'",
         "posttest": "node node_modules/nyc/bin/nyc.js report -r text-summary -r html --report-dir reports --temp-directory coverage",
         "start": "node gpii.js",
-        "postinstall": "node scripts/browserifyTestDependency.js"
+        "postinstall": "node scripts/browserifyTestDependency.js && node scripts/convertPrefs.js testData/preferences/ build/dbData/ && node scripts/convertPrefs.js tests/data/preferences/ build/tests/dbData/"
     }
 }
