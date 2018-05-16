@@ -39,7 +39,7 @@ require("./gpii/node_modules/journal");
 require("./gpii/node_modules/pouchManager");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
-require("./gpii/node_modules/dbOperation");
+require("./gpii/node_modules/gpii-db-operation");
 require("./gpii/node_modules/userListeners");
 
 gpii.loadTestingSupport = function () {

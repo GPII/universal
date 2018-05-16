@@ -72,7 +72,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             isError: true
         },
         missingInput: {
-            message: "The input field \"GPII key, client ID or client credential ID\" is undefined",
+            message: "The input field \"GPII key, client ID or client credential ID\" was undefined",
             statusCode: 400,
             isError: true
         }
