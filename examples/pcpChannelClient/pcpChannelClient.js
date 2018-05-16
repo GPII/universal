@@ -41,10 +41,9 @@ socket.on("message", function (data) {
     // socket.send(JSON.stringify({"path": ["activeContextName"], "value": "bright", type: "ADD"}));
     socket.send(JSON.stringify(
         {
-            "path": [ "preferences", "http://registry\\.gpii\\.net/common/DPIScale" ],
+            "path": [ "settingControls", "http://registry\\.gpii\\.net/common/DPIScale", "value" ],
             "type": "ADD",
-            "value": 1.75
+            "value": false
         }));
-
 });
 
