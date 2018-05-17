@@ -2083,7 +2083,7 @@
                     },
                     "setFalse": {
                         "type": "gpii.iod.invoke",
-                        "method": "uninstallPackage",
+                        "method": "unrequirePackage",
                         "args": ["demo-package"]
                     }
 
