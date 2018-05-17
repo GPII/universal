@@ -26,7 +26,7 @@ gpii.loadTestingSupport();
 var testDefs = [
     {
         name: "Example acceptance test with 'cloudbased' flow manager using common JME settings",
-        userToken: "fm_jme_common",
+        gpiiKey: "fm_jme_common",
         solutionId: "info.cloud4all.JME",
         expected: {
             "info.cloud4all.JME": {

@@ -8,16 +8,16 @@ Note that when GPII runs in the production configuration, the authorization serv
 
 ### API
 
-The pouchManager currently has two APIs: 
+The pouchManager currently has two APIs:
 
 #### The CouchDB compatible API
 The pouchdb-express server, listening on port 8058 by default, accepts the same data, design documents, and REST calls as you would with CouchDB. The API is described in details in [CouchDB API Reference](http://docs.couchdb.org/en/stable/api/index.html).
 
 ##### Example
 
-`http://localhost:8058/auth`
+`http://localhost:8058/gpii`
 
-This example returns a minimal amount of information about the database named `auth`.
+This example returns a minimal amount of information about the database named `gpii`.
 
 #### GET /reset-pouch
 
@@ -34,16 +34,16 @@ Success: Pouch has been restored with the initial data set.
 
 ### How to config Pouch Manager
 
-`gpii.pouchManager` is the Infusion component that implements the pouchManager. 
+`gpii.pouchManager` is the Infusion component that implements the pouchManager.
 
 #### Component Options
 
 | Option            | Type       | Description | Default |
 | ----------------- | ---------- | ----------- | ------- |
-| `authDBServerPort` | Integer | Required. The port on which the pouchdb-express server will run. | 8058 |
-| `authDBServerPort` | Integer | Required. The port on which the express server for restoring the pouchdb-express server with its initial data set will run. | 8060 |
-| `baseDir` | String | Optional. The path to the directory used for saving pouchDB data. | OS system temp directory |
-| `pouchConfig` | Object | Optional. Configuration options to config the pouchDB instance. See [Pouch Component](https://github.com/GPII/gpii-pouchdb/blob/master/docs/pouch-component.md) on details. | None |
+| `dbServerPort` | Integer | Required. The port on which the pouchdb-express server will run. | 8058 |
+| `dbServerPort` | Integer | Required. The port on which the express server for restoring the pouchdb-express server with its initial data set will run. | 8060 |
+| `baseDir` | String | [optional] The path to the directory used for saving pouchDB data. | OS system temp directory |
+| `pouchConfig` | Object | [optional] Configuration options to config the pouchDB instance. See [Pouch Component](https://github.com/GPII/gpii-pouchdb/blob/master/docs/pouch-component.md) on details. | None |
 
 #### Supported Events
 

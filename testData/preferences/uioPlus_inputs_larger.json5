@@ -1,0 +1,27 @@
+// # uioPlus_inputs_larger
+//
+// A preference set for testing preference settings in UIO+.
+//
+// Applies the Inputs Larger preference. Form controls should increase in size.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/lineSpace": 1,
+                    "http://registry.gpii.net/common/fontSize": 12,
+                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/selfVoicing/enabled": false,
+                    "http://registry.gpii.net/common/inputsLarger/enabled": true,
+                    "http://registry.gpii.net/common/highContrast/enabled": false,
+                    "http://registry.gpii.net/common/highlightColor": "default",
+                    "http://registry.gpii.net/common/tableOfContents": false,
+                    "http://registry.gpii.net/common/supportTool": [],
+                    "http://registry.gpii.net/common/simplifiedUi/enabled": false,
+                    "http://registry.gpii.net/common/syllabification/enabled": false
+                }
+            }
+        }
+    }
+}

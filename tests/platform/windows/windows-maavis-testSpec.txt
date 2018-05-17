@@ -1,7 +1,7 @@
 windows-maavis-testSpec.js
 
 Descriptions:
-This will run the acceptance tests for the Maavis application. It uses 2 NP sets: maavis_highcontrast.json and maavis_selfvoicing.json
+This will run the acceptance tests for the Maavis application. It uses 2 preference sets: maavis_highcontrast.json5 and maavis_selfvoicing.json5
 
 Prerequisites:
 * Maavis needs to be installed

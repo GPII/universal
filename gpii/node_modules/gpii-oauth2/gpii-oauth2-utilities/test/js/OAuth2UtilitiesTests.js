@@ -81,7 +81,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
             });
         });
 
-        jqUnit.test("parseBearerAuthorizationHeader() returns token from Authorization header", function () {
+        jqUnit.test("parseBearerAuthorizationHeader() returns access token from Authorization header", function () {
             jqUnit.expect(3);
             gpii.tests.oauth2.testdata.goodAuthHeaderRequests.forEach(function (pair) {
                 jqUnit.assertEquals(pair.expected, pair.expected, gpii.oauth2.parseBearerAuthorizationHeader(pair.req));
