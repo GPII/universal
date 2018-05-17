@@ -12,11 +12,20 @@ app_directory = vagrant_vars["nodejs_app_install_dir"]
 
 app_start_script = vars["nodejs_app_start_script"]
 
-# Check for the existence of the 'VM_HOST_TCP_PORT' environment variable. If it
-# doesn't exist and 'nodejs_app_tcp_port' is defined in vars.yml then use that
-# port. Failing that use defaults provided in this file.
-host_tcp_port = ENV["VM_HOST_TCP_PORT"] || vars["nodejs_app_tcp_port"] || 8081
-guest_tcp_port = vars["nodejs_app_tcp_port"] || 8081
+# Prepare the port forwarding for the preferences server
+# Check for the existence of the 'VM_PREFERENCES_SERVER_PORT' environment variable. If it
+# doesn't exist but 'nodejs_preferences_server_port' is defined in vars.yml, then use that
+# port. The default port for the preferences server is 9081.
+host_preferences_server_port = ENV["VM_PREFERENCES_SERVER_PORT"] || vars["nodejs_preferences_server_port"] || 9081
+guest_preferences_server_port = vars["nodejs_preferences_server_port"] || 9081
+
+# Prepare the port forwarding for the preferences server
+host_flow_manager_port = ENV["VM_FLOW_MANAGER_PORT"] || vars["nodejs_flow_manager_port"] || 9082
+guest_flow_manager_port = vars["nodejs_flow_manager_port"] || 9082
+
+# Prepare the port forwarding for CouchDB
+host_couchdb_port = ENV["VM_FLOW_MANAGER_PORT"] || vars["nodejs_couchdb_port"] || 9082
+guest_couchdb_port = vars["nodejs_couchdb_port"] || 9082
 
 # By default this VM will use 2 processor cores and 2GB of RAM. The 'VM_CPUS' and
 # "VM_RAM" environment variables can be used to change that behaviour.
@@ -47,7 +56,11 @@ Vagrant.configure(2) do |config|
 
   # Port forwarding takes place here. The 'guest' port is used inside the VM
   # whereas the 'host' port is used by your host operating system.
-  config.vm.network "forwarded_port", guest: guest_tcp_port, host: host_tcp_port, protocol: "tcp",
+  config.vm.network "forwarded_port", guest: guest_preferences_server_port, host: host_preferences_server_port, protocol: "tcp",
+    auto_correct: true
+  config.vm.network "forwarded_port", guest: guest_flow_manager_port, host: host_flow_manager_port, protocol: "tcp",
+    auto_correct: true
+  config.vm.network "forwarded_port", guest: guest_couchdb_port, host: host_couchdb_port, protocol: "tcp",
     auto_correct: true
 
   # Port 19531 is needed so logs can be viewed using systemd-journal-gateway

@@ -17,10 +17,8 @@
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 require("./shared/UserLogonStateChangeTestDefs.js");
 
-
-kettle.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonHandling.testDefs));
+gpii.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonHandling.testDefs));

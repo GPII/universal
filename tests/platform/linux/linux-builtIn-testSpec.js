@@ -28,7 +28,7 @@ fluid.registerNamespace("gpii.tests.linux.builtIn");
 gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     {
         name: "Testing os_common using default matchmaker",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
@@ -100,7 +100,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         }
     }, {
         name: "Testing os_common - magnifier running on startup",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
@@ -172,7 +172,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
         }
     }, {
         name: "Testing os_common - magnifier and keyboard running on startup",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
@@ -245,7 +245,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     },
     {
         name: "Testing os_common2 using default matchmaker",
-        userToken: "os_common2",
+        gpiiKey: "os_common2",
         settingsHandlers: {
             "gpii.gsettings": {
                 "some.app.id": [{
@@ -262,7 +262,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     },
     {
         name: "Testing os_gnome using default matchmaker",
-        userToken: "os_gnome",
+        gpiiKey: "os_gnome",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{
@@ -319,7 +319,7 @@ gpii.tests.linux.builtIn.testDefs = fluid.freezeRecursive([
     },
     {
         name: "Testing os_win7 using default matchmaker",
-        userToken: "os_win7",
+        gpiiKey: "os_win7",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.desktop.a11y.magnifier": [{

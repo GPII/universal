@@ -48,8 +48,8 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder", {
     }
 });
 
-gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, token, expected) {
-    var session = lifecycleManager.getSession(token);
+gpii.tests.contextIntegration.checkCurrentContext = function (lifecycleManager, gpiiKey, expected) {
+    var session = lifecycleManager.getSession(gpiiKey);
     jqUnit.assertEquals("Checking that the activeContextName matches: ", expected, session.model.activeContextName);
 };
 
@@ -78,7 +78,7 @@ gpii.tests.contextIntegration.changeEnvironmentAndCheck = function (contextName)
 };
 
 gpii.tests.contextIntegration.data = {
-    userToken: "context1",
+    gpiiKey: "context1",
     processes: [
         {
             "command": "gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled",
@@ -358,6 +358,6 @@ fluid.defaults("gpii.tests.contextIntegration.testCaseHolder.common.linux", {
         "gpii.test.integration.testCaseHolder.linux",
         "gpii.tests.contextIntegration.testCaseHolder"
     ],
-    userToken: "context1",
+    gpiiKey: "context1",
     contexts: gpii.tests.contextIntegration.data.contexts
 });

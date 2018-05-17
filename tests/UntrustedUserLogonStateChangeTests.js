@@ -17,8 +17,7 @@
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
 
@@ -32,15 +31,14 @@ gpii.tests.untrusted.userLogonHandling.testDefs =
     fluid.transform(gpii.tests.userLogonHandling.testDefs, function (testDefIn) {
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
-                configName: "gpii.tests.acceptance.untrusted.development.config",
+                configName: "gpii.tests.acceptance.untrusted.userLogonStateChange.config",
                 configPath: "%gpii-universal/tests/configs"
             },
-            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux", "gpii.test.pouch.pouchTestCaseHolder"],
-            userToken: testDefIn.userToken || gpii.tests.userLogonHandling.userToken
+            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+            gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
         }, testDefIn.untrustedExtras || {});
 
-        testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
         return testDef;
     });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonHandling.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.userLogonHandling.testDefs);
