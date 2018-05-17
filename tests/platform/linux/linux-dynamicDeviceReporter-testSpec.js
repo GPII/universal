@@ -28,7 +28,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common using Flat matchmaker",
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
@@ -88,7 +88,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     {
         name: "Testing screenreader_orca using Flat matchmaker",
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
-        userToken: "screenreader_orca",
+        gpiiKey: "screenreader_orca",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
@@ -147,7 +147,7 @@ gpii.tests.deviceReporterAware.linux.orca.testDefs = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gradeNames: "gpii.test.integration.deviceReporterAware.linux",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{

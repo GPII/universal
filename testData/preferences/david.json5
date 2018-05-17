@@ -1,0 +1,47 @@
+// # david.json5
+//
+// ## Demo Personas with User Stories
+//
+// This preference set is part of our set of personas used for the demo install,
+// presentations, and in general conveying an array of compelling user stories for
+// the GPII.
+//
+// ## Details
+//
+// David  -  (Davey’s dad)  Read Write Gold with Adult Icons
+//
+// Uses Read Write Gold to highlight and read text. Dave is Davey’s dad, and has the same problem as Davey.  But he wants a more adult looking interface for his setting, and a faster reading rate.
+{
+    "flat": {
+        "name": "David",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
+                        "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",
+                        "ApplicationSettings.AppBar.DocType.$t": "1",
+                        "ApplicationSettings.AppBar.Width.$t": 788,
+                        "ApplicationSettings.AppBar.ShowText.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                        "ApplicationSettings.Speech.optSAPI5Pitch.$t": 33,
+                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 31,
+                        "ApplicationSettings.Speech.optSAPI5Volume.$t": 90,
+                        "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 115,
+                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false,
+                        "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK Indian Sangeeta",
+                        "ApplicationSettings.Speech.WebHighlighting.$t": true,
+                        "ApplicationSettings.Translation.ToLanguage.$t": "hi",
+                        "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 0,
+                        "ApplicationSettings.Scanning.ScanDestination.$t": "Word",
+                        "ApplicationSettings.Scanning.ScanToFile.$t": true,
+                        "ApplicationSettings.Spelling.SpellAsIType.$t": false
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+// # Ticket Vending Machine (TVM): Preference Sets
+//
+// * `tvm_sammy.json5`: preference set with a combination of common and application-specific terms for the following settings:
+// ** a yellow-on-black contrast theme,
+// ** big font and big buttons,
+// ** the font face Comic Sans.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/de.fraunhofer.iao.C4A-TVM": {
+                        "contrastTheme": "yellow-black",
+                        "fontFace": "Comic Sans",
+                        "buttonSize": "big",
+                        "fontSize": "big"
+                    },
+                    "http://registry.gpii.net/common/fontSize": 24,
+                    "http://registry.gpii.net/common/magnification": 3,
+                    "http://registry.gpii.net/common/highContrast": true
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseTrailing": {
+                        "MouseTrails": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 10
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseKeys": {
+                        "MouseKeysOn": {
+                            "path": "pvParam.dwFlags.MKF_MOUSEKEYSON",
+                            "value": true
+                        },
+                        "MaxSpeed": {
+                            "path": "pvParam.iMaxSpeed",
+                            "value": 100
+                        },
+                        "Acceleration": {
+                            "path": "pvParam.iTimeToMaxSpeed",
+                            "value": 1000
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.stickyKeys": {
+                        "StickyKeysOn": {
+                            "path": "pvParam.dwFlags.SKF_STICKYKEYSON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
+                        "FilterKeysEnable": {
+                            "path": "pvParam.dwFlags.FKF_FILTERKEYSON",
+                            "value": true
+                        },
+                        "BounceKeysInterval": {
+                            "path": "pvParam.iBounceMSec",
+                            "value": 1000
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
+                        "HighContrastOn": {
+                            "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
+                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
+                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
+                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
+                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
+                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                        "FollowFocus": 0,
+                        "FollowCaret": 1,
+                        "FollowMouse": 1,
+                        "Invert": 1,
+                        "Magnification": 150,
+                        "MagnificationMode": 3
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
+                        "screen-resolution": {
+                            "width": 800,
+                            "height": 600
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
+                        "screen-dpi": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
+                        "SpeechSpeed": 11,
+                        "SpeechPitch": 4,
+                        "CoupleNarratorCursorKeyboard": 1,
+                        "FollowInsertion": 0,
+                        "InteractionMouse": 1,
+                        "EchoWords": 1,
+                        "EchoChars": 0
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
+                        "EnableAutocorrection": 1,
+                        "EnableSpellchecking": 1,
+                        "EnableTextPrediction": 1,
+                        "EnablePredictionSpaceInsertion": 1,
+                        "EnableDoubleTapSpace": 1,
+                        "EnableKeyAudioFeedback": 1,
+                        "EnableAutoShiftEngage": 1,
+                        "EnableShiftLock": 1,
+                        "EnableCompatibilityKeyboard": 1,
+                        "EnableDesktopModeAutoInvoke": 1 
+                    }
+                }
+            }
+        }
+    }
+}

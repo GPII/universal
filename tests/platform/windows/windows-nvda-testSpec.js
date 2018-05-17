@@ -70,7 +70,7 @@ gpii.tests.windows.nvda.flexibleHandlerEntry = function (running) {
 gpii.tests.windows.nvda.testDef = [
     {
         name: "Testing screenreader_nvda - When running on start",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(true)
         },
@@ -107,7 +107,7 @@ gpii.tests.windows.nvda.testDef = [
         }
     }, {
         name: "Testing screenreader_nvda",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
         },
@@ -144,7 +144,7 @@ gpii.tests.windows.nvda.testDef = [
         }
     }, {
         name: "Testing screenreader_common",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
         },
@@ -179,7 +179,7 @@ gpii.tests.windows.nvda.testDef = [
         }
     }, {
         name: "Testing screenreader_orca",
-        userToken: "screenreader_orca",
+        gpiiKey: "screenreader_orca",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.nvda.flexibleHandlerEntry(false)
         },

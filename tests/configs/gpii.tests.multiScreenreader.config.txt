@@ -1,4 +1,0 @@
-gpii.tests.multiScreenreader.config.json
-
-Is used for the integration test CloseConflictingAppsTest. It uses the NP sets of the testData's acceptanceTests folder and a device reporter that reports only two screenreaders (Jaws and NVDA) installed.
-
