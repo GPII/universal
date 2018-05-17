@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "name": "Liam",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.oneNoteLearningTools": {
+                        "DictationLanguage": 1033,
+                        "ReadingComprehensionDefaultFont": "Sitka Small",
+                        "IsReadingComprehensionFontWide": 1,
+                        "ReadingComprehensionTheme": 2,
+                        "ReadingComprehensionFontSize": 52,
+                        "SynthRate": 2,
+                        "SynthVoices": "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]"
+                    }
+                }
+            }
+        }
+    }
+}
