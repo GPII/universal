@@ -243,7 +243,7 @@ docker images
 
 Running `docker images` will show the universal docker image named `vagrant-universal` has been built.
 
-Running `./scripts/vagrantCloudBasedContainers.sh` does:
+Running `./scripts/vagrantCloudBasedContainers.sh`:
 
 1. Starts the preferences server in the production mode on the port 9081 inside the VM. To test it, open a browser and access the URL: `http://localhost:9081/preferences/carla`. The preferences for `carla` should be returned.
 
