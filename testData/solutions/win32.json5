@@ -3866,9 +3866,9 @@
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
-                "hKey": "HKEY_CURRENT_USER",
-                "path": "64:SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ServicesManagerCache\\ServicesCatalog\\O365_SHAREPOINT",
-                "subPath": "name",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
+                "subPath": "O365HomePremRetail.TenantId",
                 "dataType": "REG_SZ"
             }
         ],
