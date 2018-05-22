@@ -3870,6 +3870,13 @@
                 "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
                 "subPath": "O365HomePremRetail.TenantId",
                 "dataType": "REG_SZ"
+            },
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
+                "subPath": "O365ProPlusRetail.TenantId",
+                "dataType": "REG_SZ"
             }
         ],
         "isRunning": [
