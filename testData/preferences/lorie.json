@@ -9,7 +9,7 @@
                         "ReadingModeColumnWidth": 2,
                         "ReadingModePageColor": 2,
                         "ReadingModePrintedPage": 0,
-                        "ReadAloudVoiceId": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_MarkM",
+                        "ReadAloudVoiceId": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_ZiraM",
                         "ReadAloudVoiceRate": 2,
                         "ReadingModeSyllables": 1,
                         "ReadingModeTextSpacing": 1
