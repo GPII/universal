@@ -21,8 +21,6 @@ var fluid = require("infusion"),
 fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
-fluid.setLogging(true);
-fluid.logObjectRenderChars = 10240;
 
 fluid.registerNamespace("gpii.tests.journal");
 
@@ -509,7 +507,7 @@ gpii.tests.journal.badJournalFixtures = [
 ];
 
 gpii.tests.journal.baseTestDefBase = fluid.freezeRecursive({
-    userToken: gpii.tests.journal.testDef.userToken,
+    gpiiKey: gpii.tests.journal.testDef.gpiiKey,
     settingsHandlers: gpii.tests.journal.testDef.settingsHandlers,
     config: {
         configName: gpii.tests.journal.testSpec.configName,
@@ -528,8 +526,8 @@ gpii.tests.journal.badJournalBaseTestDef = fluid.extend({
 }, gpii.tests.journal.baseTestDefBase);
 
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.journal.fixtures, gpii.tests.journal.baseTestDef));
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.journal.badJournalFixtures, gpii.tests.journal.badJournalBaseTestDef));

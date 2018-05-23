@@ -47,11 +47,11 @@ var fluid = fluid || require("infusion");
 
         authorizationPromise.then(function (authRecord) {
             if (authRecord) {
-                if (authRecord.authorization.type === gpii.oauth2.docTypes.gpiiAppInstallationAuthorization &&
+                if (authRecord.authorization.type === gpii.dbOperation.docTypes.gpiiAppInstallationAuthorization &&
                     gpii.oauth2.getExpiresIn(new Date(), authRecord.authorization.timestampExpires) > 0) {
                     grant = {
                         accessToken: accessToken,
-                        gpiiToken: authRecord.authorization.gpiiToken,
+                        gpiiKey: authRecord.authorization.gpiiKey,
                         allowUntrustedSettingsGet: true,
                         allowUntrustedSettingsPut: true
                     };

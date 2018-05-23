@@ -101,7 +101,7 @@ gpii.tests.conflictingApps.NVDAHandlerEntry = function (running) {
 gpii.tests.conflictingApps.testDefs = [
     {
         name: "Only one screenreader is launched",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": fluid.extend({},
                 gpii.tests.conflictingApps.jawsHandlerEntry(false),
@@ -178,7 +178,7 @@ gpii.tests.conflictingApps.testDefs = [
         }
     }, {
         name: "Conflicting screenreader (jaws) is closed is Only one screenreader is launched",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": fluid.extend({},
                 gpii.tests.conflictingApps.jawsHandlerEntry(true),

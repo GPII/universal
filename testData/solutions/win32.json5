@@ -1717,7 +1717,7 @@
                 "options": {
                     "setTrue": {
                         "type": "gpii.launch.exec",
-                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/user/${{userToken}}"
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easyone.gpii.net/user/${{gpiiKey}}"
                     },
                     "setFalse": {
                         "type": "gpii.windows.closeProcessByName",
