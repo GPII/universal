@@ -38,4 +38,4 @@ section of System Settings the "Turn on/off" button will display the appropriate
 
 ## Limitations
 
-* This solution is yet to support the strength or times.
+* This solution is yet to support the strength of the blue light reduction, or time range when should apply.
