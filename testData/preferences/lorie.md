@@ -1,6 +1,7 @@
 # Lorie
 
-It has been tested with the Learning Tools features for Word from Office 17. Available with Office 365 product.
+It has been tested with the Learning Tools features for Word from Office 16.
+Available with Microsoft Office 2016 Word Pro/Home 365 edition for Windows 10.
 
 Website: https://www.office.com/
 
