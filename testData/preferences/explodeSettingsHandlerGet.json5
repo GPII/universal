@@ -1,0 +1,15 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/net.gpii.explode": {
+                        "explodeOn": "get",
+                        "explodeMethod": "reject"
+                    }
+                }
+            }
+        }
+    }
+}
