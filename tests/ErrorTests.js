@@ -108,7 +108,7 @@ gpii.tests.errors.coreTestDef = {
         configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: ["gpii.test.integration.testCaseHolder.windows", "gpii.tests.errors.mixin"],
-    userToken: null,
+    gpiiKey: null,
     expectedError: null,
     expectedMethodFail: null,
     explodeMethod: null,
@@ -151,7 +151,7 @@ gpii.tests.errors.logoutSequence = [{
         string: "{arguments}.0",
         plainText: true,
         request: "{loginRequest}",
-        expected: "User with token explodeLaunchHandlerStop was successfully logged in."
+        expected: "User with GPII key explodeLaunchHandlerStop was successfully logged in."
     }
 }, {
     func: "{logoutRequest}.send"
@@ -183,15 +183,15 @@ gpii.tests.errors.adjustSequenceToLogout = function (testDef) {
 // when the capture tool/snapshotter is implemented for GPII-228
 
 gpii.tests.errors.testVariants = [{
-    userToken: "explodeSettingsHandlerSet",
+    gpiiKey: "explodeSettingsHandlerSet",
     expectedError: "WriteSettingFail",
     expectedMethodFail: "set"
 }, {
-    userToken: "explodeLaunchHandlerStart",
+    gpiiKey: "explodeLaunchHandlerStart",
     expectedError: "StartApplicationFail",
     expectedMethodFail: "launch"
 }, {
-    userToken: "explodeLaunchHandlerStop",
+    gpiiKey: "explodeLaunchHandlerStop",
     expectedError: "StopApplicationFail",
     expectedMethodFail: "stop",
     expect: 9
@@ -203,10 +203,10 @@ gpii.tests.errors.buildTestDefs = function (coreTestDef, testVariants, explodeMe
     return fluid.flatten(fluid.transform(explodeMethodVariants, function (explodeMethodVariant) {
         return fluid.transform(testVariants, function (testVariant) {
             var testDef = Object.assign(fluid.copy(coreTestDef), testVariant);
-            if (testDef.userToken === "explodeLaunchHandlerStop") {
+            if (testDef.gpiiKey === "explodeLaunchHandlerStop") {
                 gpii.tests.errors.adjustSequenceToLogout(testDef);
             }
-            testDef.name += " - user token " + testVariant.userToken + ", explode method " + explodeMethodVariant;
+            testDef.name += " - GPII key " + testVariant.gpiiKey + ", explode method " + explodeMethodVariant;
             testDef.explodeMethod = explodeMethodVariant;
             return testDef;
         });

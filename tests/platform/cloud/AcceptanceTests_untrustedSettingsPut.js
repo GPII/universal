@@ -13,32 +13,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
-    jqUnit = fluid.registerNamespace("jqUnit"),
-    fs = require("fs");
+    jqUnit = fluid.registerNamespace("jqUnit");
 
 fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.untrustedSettingsPut");
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.key = "testUser1";
-gpii.tests.cloud.oauth2.untrustedSettingsPut.keyWithoutPrefs = "chrome_and_firefox";
-gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir = fluid.module.resolvePath("%gpii-universal/testData/preferences/acceptanceTests/");
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.initialPrefsSet = {
-    "flat": {
-        "contexts": {
-            "gpii-default": {
-                "name": "Default preferences",
-                "preferences": {
-                    "http://registry.gpii.net/common/fontSize": 24,
-                    "http://registry.gpii.net/common/foregroundColor": "white"
-                }
-            }
-        }
-    }
-};
 
 gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet = {
     "contexts": {
@@ -52,38 +33,10 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet = {
     }
 };
 
-gpii.tests.cloud.oauth2.untrustedSettingsPut.expectedPrefsSet = {
-    "contexts": {
-        "gpii-default": {
-            "name": "Default preferences",
-            "preferences": {
-                "http://registry.gpii.net/common/fontSize": 40,
-                "http://registry.gpii.net/common/backgroundColor": "black",
-                "http://registry.gpii.net/common/foregroundColor": "white"
-            }
-        }
-    }
-};
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.testFilePath = gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir + gpii.tests.cloud.oauth2.untrustedSettingsPut.key + ".json";
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.createTestFile = function () {
-    var initialPrefs = JSON.stringify(gpii.tests.cloud.oauth2.untrustedSettingsPut.initialPrefsSet);
-    fs.writeFile(gpii.tests.cloud.oauth2.untrustedSettingsPut.testFilePath, initialPrefs);
-};
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.cleanUpTestFile = function () {
-    fs.unlinkSync(gpii.tests.cloud.oauth2.untrustedSettingsPut.testFilePath);
-};
-
-gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse = function (responseText, expectedKey, expectedMsg, expectedPrefsSet) {
+gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse = function (responseText, expectedGpiiKey, expectedMsg) {
     var response = JSON.parse(responseText);
-    jqUnit.assertEquals("The returned key in the response is correct", expectedKey, response.userToken);
-    jqUnit.assertDeepEq("The returned message set in the response is correct", expectedMsg, response.message);
-
-    var filePath = gpii.tests.cloud.oauth2.untrustedSettingsPut.prefsDir + expectedKey + ".json";
-    var savedPrefs = require(filePath);
-    jqUnit.assertDeepEq("Saved preferences are correct", expectedPrefsSet, savedPrefs.flat);
+    jqUnit.assertEquals("The returned GPII key in the response is correct", expectedGpiiKey, response.gpiiKey);
+    jqUnit.assertDeepEq("The returned message in the response is correct", expectedMsg, response.message);
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.requests", {
@@ -92,11 +45,11 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.requests", {
         untrustedSettingsPutRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/%key/untrusted-settings",
+                path: "/%gpiiKey/untrusted-settings",
                 port: 8081,
                 method: "PUT",
                 termMap: {
-                    key: "{testCaseHolder}.options.key"
+                    gpiiKey: "{testCaseHolder}.options.gpiiKey"
                 }
             }
         }
@@ -106,29 +59,23 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.requests", {
 // For successful workflows that update user settings from /untrusted-settings endpoint
 // using access tokens granted by /access_token endpoint
 gpii.tests.cloud.oauth2.untrustedSettingsPut.mainSequence = [
-    { // 0: create the test file
-        funcName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.createTestFile"
-    },
-    { // 1
-        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
+    {
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
-    { // 2
+    {
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse",
+        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse",
         args: ["{arguments}.0", "{accessTokenRequest}"]
     },
-    { // 3
+    {
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
         args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
     },
-    { // 4
+    {
         event: "{untrustedSettingsPutRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.untrustedSettingsPut.verifyUpdateResponse",
-        args: ["{arguments}.0", "{testCaseHolder}.options.key", "{testCaseHolder}.options.expectedMsg", "{testCaseHolder}.options.expectedPrefsSet"]
-    },
-    { // 5: clean up
-        funcName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.cleanUpTestFile"
+        args: ["{arguments}.0", "{testCaseHolder}.options.gpiiKey", "{testCaseHolder}.options.expectedMsg"]
     }
 ];
 
@@ -176,52 +123,62 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untruste
     sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutWrongAccessTokenSequence"
 });
 
-// 3. rejected by requesting /untrusted-settings with a key that is not associated with any preferences set
-gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutKeyWithoutPrefs = [
+// 3. rejected by requesting /untrusted-settings with a GPII key that does not exist in the database
+gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutNonExistentGpiiKey = [
     {
-        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiTokenAccessTokenRequest",
+        funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
     },
     {
         event: "{accessTokenRequest}.events.onComplete",
-        listener: "gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiTokenAccessTokenInResponse",
-        args: ["{arguments}.0", "{accessTokenRequest}"]
-    },
-    {
-        funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-        args: ["{untrustedSettingsPutRequest}", "{accessTokenRequest}.access_token", "{testCaseHolder}.options.updatedPrefsSet"]
-    },
-    {
-        event: "{untrustedSettingsPutRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{untrustedSettingsPutRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        args: ["{arguments}.0", "{accessTokenRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 ];
 
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutKeyWithoutPrefs", {
+fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutNonExistentGpiiKey", {
     gradeNames: ["gpii.test.disruption"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsPut.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutKeyWithoutPrefs"
+    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.untrustedSettingsPutNonExistentGpiiKey"
 });
 
 // Main tests that contain all test cases
 gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
-    // Succesful use cases that request user settings with proper access tokens granted via Resource Owner GPII Token grant
+    // Succesful use cases that update user preferences with proper access tokens granted via Resource Owner GPII key grant
     {
         testDef: {
-            name: "A successful workflow for updating preferences",
+            name: "A successful workflow that updates a GPII key with an existing prefs safe",
 
             // The options below are for sending /access_token request
             client_id: "Bakersfield-AJC-client-id",
             client_secret: "Bakersfield-AJC-client-secret",
-            username: gpii.tests.cloud.oauth2.untrustedSettingsPut.key,
+            username: "untrustedSettingsUser",
             password: "dummy",
 
             // The options below are required for sending /untrusted-settings
-            key: gpii.tests.cloud.oauth2.untrustedSettingsPut.key,
+            gpiiKey: "untrustedSettingsUser",
             updatedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet,
-            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success,
-            expectedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.expectedPrefsSet
+            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success
+        },
+        disruptions: [{
+            gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.mainSequence"
+        }]
+    },
+
+    {
+        testDef: {
+            name: "A successful workflow that updates a GPII key that has no associated prefs safe",
+
+            // The options below are for sending /access_token request
+            client_id: "Bakersfield-AJC-client-id",
+            client_secret: "Bakersfield-AJC-client-secret",
+            username: "chrome_and_firefox",
+            password: "dummy",
+
+            // The options below are required for sending /untrusted-settings
+            gpiiKey: "chrome_and_firefox",
+            updatedPrefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet,
+            expectedMsg: gpii.flowManager.cloudBased.untrustedSettings.put.messages.success
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.mainSequence"
@@ -231,8 +188,8 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
     // Rejected by /untrusted-settings endpoint
     {
         testDef: {
-            name: "Attempt to retrieve user settings without providing an access token",
-            key: gpii.tests.cloud.oauth2.untrustedSettingsPut.key
+            name: "Attempt to update preferences without providing an access token",
+            gpiiKey: "untrustedSettingsUser"
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutNoAccessTokenSequence",
@@ -241,8 +198,8 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
     },
     {
         testDef: {
-            name: "Attempt to retrieve user settings by providing a wrong access token",
-            key: gpii.tests.cloud.oauth2.untrustedSettingsPut.key
+            name: "Attempt to update preferences by providing a wrong access token",
+            gpiiKey: "untrustedSettingsUser"
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutWrongAccessTokenSequence",
@@ -251,22 +208,17 @@ gpii.tests.cloud.oauth2.untrustedSettingsPut.disruptedTests = [
     },
     {
         testDef: {
-            name: "Attempt to retrieve user settings by providing a key that is not associated with any preferences set",
-
+            name: "Attempt to update user preferences by providing a GPII key that is not associated with any preference set",
 
             // The options below are for sending /access_token request
             client_id: "Bakersfield-AJC-client-id",
             client_secret: "Bakersfield-AJC-client-secret",
-            username: gpii.tests.cloud.oauth2.untrustedSettingsPut.keyWithoutPrefs,
-            password: "dummy",
-
-            // The options below are required for sending /untrusted-settings
-            key: gpii.tests.cloud.oauth2.untrustedSettingsPut.keyWithoutPrefs,
-            prefsSet: gpii.tests.cloud.oauth2.untrustedSettingsPut.updatedPrefsSet
+            username: "nonexistent_gpii_key",
+            password: "dummy"
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutKeyWithoutPrefs",
-            expectedStatusCode: 404
+            gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsPut.disruption.untrustedSettingsPutNonExistentGpiiKey",
+            expectedStatusCode: 401
         }]
     }
 ];

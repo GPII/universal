@@ -1,0 +1,16 @@
+/**
+ * Variant of gpii.config.untrusted.development.json5 with the local (untrusted) flowManager's settings handlers
+ * replaced by mocks emulating the Windows platform.
+ */
+{
+    "type": "gpii.config.untrusted.development.mock.windows",
+    "options": {
+        "gradeNames": "gpii.test.integration.mockHolder.windows"
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.json5"
+    ],
+    "require": [
+        "%gpii-universal/gpii/node_modules/testing/src/Mocks.js"
+    ]
+}

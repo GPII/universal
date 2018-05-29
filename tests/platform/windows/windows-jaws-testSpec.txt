@@ -1,7 +1,7 @@
 windows-jaws-testSpec.js
 
 Descriptions:
-This will run the acceptance tests for the JAWS screenreader (Freedom Scientific). It uses 4 NP sets: jaws_common.json, jaws_common2.json, jaws_common3.json and jaws_application.json
+This will run the acceptance tests for the JAWS screenreader (Freedom Scientific). It uses 4 preference sets: jaws_common.json5, jaws_common2.json5, jaws_common3.json5 and jaws_application.json5
 
 Prerequisites:
 * JAWS needs to be installed

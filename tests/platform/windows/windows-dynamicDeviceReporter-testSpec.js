@@ -104,7 +104,7 @@ gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries = {
 gpii.tests.deviceReporterAware.windows.testDefs = [
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.nvda(false)
         },
@@ -152,7 +152,7 @@ gpii.tests.deviceReporterAware.windows.testDefs = [
     },
     {
         name: "Testing readwritegold_application1 using Flat matchmaker",
-        userToken: "readwritegold_application1",
+        gpiiKey: "readwritegold_application1",
         gradeNames: "gpii.test.integration.deviceReporterAware.windows",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.deviceReporterAware.windows.flexibleHandlerEntries.readwrite(false)
