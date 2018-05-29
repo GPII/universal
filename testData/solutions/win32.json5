@@ -1243,20 +1243,20 @@
                 }
             }
         },
-        "start": [
-            {
+        "launchHandlers": {
+            "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
-                "name": "Narrator",
-                "enable": true
+                "options": {
+                    "registryName": "Narrator",
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "Narrator.exe"
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "Narrator",
-                "enable": false
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
