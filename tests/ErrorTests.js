@@ -104,7 +104,7 @@ gpii.tests.errors.coreTestDef = {
     name: "Flow Manager error tests",
     expect: 7,
     config: {
-        configName: "gpii.config.development.all.local",
+        configName: "gpii.config.development.local",
         configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: ["gpii.test.integration.testCaseHolder.windows", "gpii.tests.errors.mixin"],
@@ -220,4 +220,4 @@ gpii.tests.errors.testDefs = gpii.tests.errors.buildTestDefs(
 
 gpii.loadTestingSupport(gpii.tests.errors.testDefs);
 
-kettle.test.bootstrapServer(fluid.copy(gpii.tests.errors.testDefs));
+gpii.test.bootstrapServer(fluid.copy(gpii.tests.errors.testDefs));
