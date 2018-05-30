@@ -14,8 +14,7 @@
 
 var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.logObjectRenderChars = 10240;
 fluid.require("%gpii-universal");
