@@ -1,7 +1,7 @@
 AcceptanceTests_easit4all.js
 
 Description:
-This is an series of tests using the online flowmanager.
+This is an series of tests using the cloud based flow manager.
 
 These tests use the testDefinitions from AcceptanceTests_easit4all_testDefs.json (which are also shared with the easit4all_oauth2 tests)
 
@@ -9,4 +9,4 @@ Three N&P sets have been created in order to test the different transformations 
 
 
 Requirements:
-Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).
+Since it's using the cloud based flow manager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

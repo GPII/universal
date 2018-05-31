@@ -1,7 +1,0 @@
-{
-    "type": "gpii.config.cloudBased.development.all.local",
-    "mergeConfigs": [
-        "%gpii-universal/gpii/configs/gpii.config.cloudBased.development.json",
-        "%pouchManager/configs/gpii.pouchManager.config.base.json"
-    ]
-}

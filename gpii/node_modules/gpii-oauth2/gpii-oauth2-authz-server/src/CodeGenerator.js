@@ -19,7 +19,7 @@ var crypto = require("crypto");
 var gpii = fluid.registerNamespace("gpii");
 
 // The gpii.oauth2.codeGenerator component is responsible for generating OAuth 2 access tokens.
-// The codes and tokens generated must be unguessable.
+// The codes and access tokens generated must be unguessable.
 //
 // The implementation uses the Node.js crypto module and was originally part of the
 // gpii.oauth2.authorizationService component.
