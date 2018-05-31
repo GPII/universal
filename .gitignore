@@ -1,6 +1,5 @@
 /node_modules/
 /build/
-/browserify/
 /instrumented/
 
 /examples/browserChannelClient/node_modules/
