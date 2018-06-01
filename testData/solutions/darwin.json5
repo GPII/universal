@@ -114,5 +114,132 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+
+    "net.gpii.uioPlus": {
+        "name": "UIO+",
+        "contexts": {
+            "OS": [{
+                    "id": "darwin"
+            }]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "options": {
+                    "path": "net.gpii.uioPlus"
+                },
+                "supportedSettings": {
+                    "lineSpace": {},
+                    "fontSize": {},
+                    "characterSpace": {},
+                    "inputsLargerEnabled": {},
+                    "contrastTheme": {},
+                    "selfVoicingEnabled": {},
+                    "selectionTheme": {},
+                    "tableOfContentsEnabled": {},
+                    "dictionaryEnabled": {},
+                    "simplifiedUiEnabled": {},
+                    "syllabificationEnabled": {}
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/lineSpace",
+                    "http://registry\\.gpii\\.net/common/fontSize",
+                    "http://registry\\.gpii\\.net/common/characterSpace",
+                    "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "http://registry\\.gpii\\.net/common/highContrastTheme",
+                    "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "http://registry\\.gpii\\.net/common/highlightColor",
+                    "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "http://registry\\.gpii\\.net/common/supportTool",
+                    "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
+                ],
+                "capabilitiesTransformations": {
+                    "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
+                    "fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
+                                    "right": 12,
+                                    "operator": "/"
+                                }
+                            }
+                        }
+                    },
+                    "characterSpace": "http://registry\\.gpii\\.net/common/characterSpace",
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLargerEnabled",
+                    "contrastTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "defaultOutputValue": "default",
+                                    "match": {
+                                        "black-white": "bw",
+                                        "white-black": "wb",
+                                        "black-yellow": "by",
+                                        "yellow-black": "yb"
+                                    }
+                                }
+                            },
+                            "false": "default"
+                        }
+                    },
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+                    "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "dictionaryEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "match": [{
+                                "inputValue": {
+                                    "dictionaryEnabled": true
+                                },
+                                "outputValue": true
+                            }],
+                            "noMatch": {
+                                "outputValue": false
+                            },
+                            "defaultInput": {
+                                "transform": {
+                                    "type": "fluid.transforms.arrayToSetMembership",
+                                    "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
+                                    "options": {
+                                        "dictionary": "dictionaryEnabled"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabificationEnabled"
+                },
+                "inverseCapabilitiesTransformations": {}
+            }
+        },
+        "update": [
+          "configure"
+        ],
+        "configure": [
+            "settings.configuration"
+        ],
+        "restore": [
+            "settings.configuration"
+        ],
+        "start": [],
+        "stop": [],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }

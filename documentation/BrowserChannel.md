@@ -58,32 +58,33 @@ socket.on("message", function (data) {
 });
 ```
 
-The workflow between the client and server can be summarised as follows:
+The workflow between the client and server can be summarized as follows:
 
 * After connecting to the flow manager, the client sends a socket message to the channel, which is a payload containing the *id* of the client, in this instance `net.gpii.uioPlus`.
 * The client will be registered if the solution's id can be found of the solutions registry, otherwise, the registration will be rejected and the system will emit en error, and the client will disconnect.
-* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available settings for the client in the following way:
+* When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available user settings for the client in the following way:
 ```
 {
-    "screenReaderTTS/enabled":false,
-    "highContrast/enabled":true,
-    "invertColours":false,
-    "magnifierEnabled":true,
-    "magnification":2,
-    "fontSize":"medium",
-    "simplifier":false,
-    "highContrastTheme":"white-black"
+    contrastTheme: 'default',
+    dictionaryEnabled: true
 }
 ```
 * When a client disconnects, it'll be removed from the list of registered clients
 
 ### Running the sample client
 
-The client has been checked in to [../examples/browserChannelClient](../examples/browserChannelClient). To try it out, first
-start the GPII in the CloudBased browserChannel test configuration from the root of universal with
+The client has been checked in to [../examples/browserChannelClient](../examples/browserChannelClient). To try it out:
+1. start the GPII in the local development configuration from the root of universal with
+```
+node gpii.js gpii/configs gpii.config.development.all.local
+```
 
-    node gpii.js gpii/configs gpii.config.cloudBased.production
+2. login with `snapset_2a` by sending a login request to GPII
+```
+curl http://localhost:8081/user/snapset_2a/login
+```
 
-Then start the client from [../examples/browserChannelClient](../examples/browserChannelClient) with
-
-    node browserChannelClient.js
+3. start the client from [../examples/browserChannelClient](../examples/browserChannelClient) with
+```
+node browserChannelClient.js
+```
