@@ -1,0 +1,54 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "Voice Profiles.ActiveVoiceProfileName" : "GPII",
+                        "Options.PrimarySynthesizer" : "eloq",
+                        "options.SayAllIndicateCaps" : false,
+                        "ENU-Global.Rate" : 100,
+                        "ENU-Global.Pitch" : 75,
+                        "ENU-Global.Volume" : 100,
+                        "ENU-Global.Punctuation" : 2,
+                        "ENU-Global.Rate": 100,
+                        "ENU-JAWSCursor.Rate": 100,
+                        "ENU-Keyboard.Rate": 100,
+                        "ENU-MenuAndDialog.Rate": 100,
+                        "ENU-Message.Rate": 100,
+                        "ENU-PCCursor.Rate": 100,
+                        "ENU-Global.Pitch": 75,
+                        "ENU-JAWSCursor.Pitch": 75,
+                        "ENU-Keyboard.Pitch": 75,
+                        "ENU-MenuAndDialog.Pitch": 75,
+                        "ENU-Message.Pitch": 75,
+                        "ENU-PCCursor.Pitch": 75,
+                        "ENU-Global.Volume": 100,
+                        "ENU-JAWSCursor.Volume": 100,
+                        "ENU-Keyboard.Volume": 100,
+                        "ENU-MenuAndDialog.Volume": 100,
+                        "ENU-Message.Volume": 100,
+                        "ENU-PCCursor.Volume": 100,
+                        "ENU-Global.Punctuation": 2,
+                        "ENU-JAWSCursor.Punctuation": 2,
+                        "ENU-Keyboard.Punctuation": 2,
+                        "ENU-MenuAndDialog.Punctuation": 2,
+                        "ENU-Message.Punctuation": 2,
+                        "ENU-PCCursor.Punctuation": 2,
+                        "ENU-Global.SynthLangString": "Italian",
+                        "ENU-JAWSCursor.SynthLangString": "Italian",
+                        "ENU-Keyboard.SynthLangString": "Italian",
+                        "ENU-MenuAndDialog.SynthLangString": "Italian",
+                        "ENU-Message.SynthLangString": "Italian",
+                        "ENU-PCCursor.SynthLangString": "Italian",
+                        "options.TypingEcho": 3,
+                        "options.SayAllMode": 0,
+                        "Braille.BrailleMode": 0,
+                        "options.SayAllIgnoreShiftKeys": true
+                    }
+                }
+            }
+        }
+    }
+}

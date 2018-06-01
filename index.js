@@ -30,7 +30,6 @@ require("./gpii/node_modules/lifecycleActions");
 require("./gpii/node_modules/flowManager");
 require("./gpii/node_modules/settingsHandlers");
 require("./gpii/node_modules/preferencesServer");
-require("./gpii/node_modules/rawPreferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
@@ -40,6 +39,8 @@ require("./gpii/node_modules/journal");
 require("./gpii/node_modules/pouchManager");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
+require("./gpii/node_modules/gpii-db-operation");
+require("./gpii/node_modules/userListeners");
 
 gpii.loadTestingSupport = function () {
     fluid.contextAware.makeChecks({
@@ -72,7 +73,7 @@ gpii.queryConfigs = function () {
  * that allows specifying the configuration name and directory
  * of configurations.
  *
- * @param options {Object} Accepts the following options:
+ * @param {Object} options - Accepts the following options:
  *   - configName {String} Name of a configuration to use, specified by the name
  *     of the file without the .json extension.
  *   - configPath {String} Directory of the configuration json files.

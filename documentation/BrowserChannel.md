@@ -65,8 +65,8 @@ The workflow between the client and server can be summarized as follows:
 * When the flow manager emits either the _connectionSucceeded_ (after being registered) or the _onSettingsChanged_ (after a user login/logout) signal to the client, it is delivering the current available user settings for the client in the following way:
 ```
 {
-    "contrastTheme": "wb",
-    "dictionaryEnabled": false
+    contrastTheme: 'default',
+    dictionaryEnabled: true
 }
 ```
 * When a client disconnects, it'll be removed from the list of registered clients

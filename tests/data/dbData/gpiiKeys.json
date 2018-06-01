@@ -1,0 +1,13 @@
+[
+    {
+        "_id": "alice_gpii_key",
+        "type": "gpiiKey",
+        "schemaVersion": "0.1",
+        "prefsSafeId": null,
+        "prefsSetId": null,
+        "revoked": false,
+        "revokedReason": null,
+        "timestampCreated": "2017-11-21T18:11:22.101Z",
+        "timestampUpdated": null
+    }
+]

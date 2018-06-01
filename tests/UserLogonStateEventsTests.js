@@ -18,8 +18,7 @@
 
 var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
 
 fluid.require("%gpii-universal");
@@ -27,11 +26,11 @@ fluid.require("%gpii-universal");
 require("./shared/UserLogonStateChangeTestDefs.js");
 fluid.registerNamespace("gpii.tests.userLogonEvents");
 
-gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, userToken) {
+gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, gpiiKey) {
     return function (changePayload) {
         jqUnit.assertEquals("Checking type of model change", type, changePayload.type);
         jqUnit.assertEquals("Checking inProgress of model change", inProgress, changePayload.inProgress);
-        jqUnit.assertEquals("Checking userToken of model change", userToken, changePayload.userToken);
+        jqUnit.assertEquals("Checking gpiiKey of model change", gpiiKey, changePayload.gpiiKey);
     };
 };
 
@@ -56,7 +55,7 @@ gpii.tests.userLogonEvents.testDefs = [{
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 2000 ]
+        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"
@@ -78,4 +77,4 @@ gpii.tests.userLogonEvents.testDefs = [{
     }]
 }];
 
-kettle.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
+gpii.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonEvents.testDefs));

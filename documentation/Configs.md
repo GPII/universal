@@ -1,4 +1,4 @@
-## System Launch and Configs 
+## System Launch and Configs
 
 ### Overview
 The system can generally run in three different modes:
@@ -22,7 +22,7 @@ If you have installed GPII in the folder <GPII-install>:
 
 Then run the command: `node gpii.js`
 
-By default this will start up the system with everything running locally, using the `gpii.config.development.all.local.json` configuration file of universal repository (see the `universal/gpii/configs` folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
+By default this will start up the system with everything running locally, using the `gpii.config.development.all.local.json5` configuration file of universal repository (see the `universal/gpii/configs` folder). If you would like to run the system using a different configuration, say `dev.remote.prefs` run the following:
 * in Microsoft Windows: `SET NODE_ENV=dev.remote.prefs`
 * in GNU/Linux and other Unix-like systems: `export NODE_ENV=dev.remote.prefs`
 

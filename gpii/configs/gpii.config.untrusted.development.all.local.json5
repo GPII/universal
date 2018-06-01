@@ -1,0 +1,14 @@
+/**
+ * This configuration runs the entire system locally under the hybrid Flow Manager architecture and in development mode. It also starts pouchDB to serve data for the preferences server and the auth server.
+ *
+ * It runs:
+ * * A multi-server configuration with gpii.config.untrusted.development.local.json5 (See corresponding file for details)
+ * * Pouch Manager to store data on the local pouchDB
+ */
+{
+    "type": "gpii.config.untrusted.development.all.local",
+    "mergeConfigs": [
+        "./gpii.config.untrusted.development.local.json5",
+        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+    ]
+}

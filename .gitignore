@@ -1,10 +1,10 @@
 /node_modules/
-/browserify/
+/build/
+/instrumented/
 
 /examples/browserChannelClient/node_modules/
 
 /gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/node_modules/
-/gpii/node_modules/gpii-oauth2/gpii-oauth2-utilities/node_modules/
 
 npm-debug.log
 *.bak
@@ -15,6 +15,5 @@ Vagrantfile.local
 report.tap
 coverage
 .nyc_output
-instrumented
 reports
 .idea/

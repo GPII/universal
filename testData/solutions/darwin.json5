@@ -8,15 +8,15 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "/tmp/fakemag1.settings.json"
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "magnification": "http://registry\\.gpii\\.net/common/magnification"
                 }
@@ -46,15 +46,15 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "/tmp/fakemag2.settings.json"
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/magnifierEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "magnification": "http://registry\\.gpii\\.net/common/magnification",
                     "invert": "http://registry\\.gpii\\.net/common/invertColours"
@@ -85,15 +85,15 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.JSONSettingsHandler",
                 "options": {
                     "filename": "/tmp/fakescreenreader1.json"
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "pitch": "http://registry\\.gpii\\.net/common/pitch",
                     "volumeTTS": "http://registry\\.gpii\\.net/common/volumeTTS",
