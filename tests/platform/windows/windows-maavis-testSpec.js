@@ -66,7 +66,7 @@ gpii.tests.windows.maavis.flexibleHandlerEntry = function (running) {
 gpii.tests.windows.maavis.testDefs = [
     {
         name: "Testing maavis_highcontrast - when maavis is running on login",
-        userToken: "maavis_highcontrast",
+        gpiiKey: "maavis_highcontrast",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.maavis.flexibleHandlerEntry(true)
         },
@@ -90,7 +90,7 @@ gpii.tests.windows.maavis.testDefs = [
         }
     }, {
         name: "Testing maavis_highcontrast",
-        userToken: "maavis_highcontrast",
+        gpiiKey: "maavis_highcontrast",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.maavis.flexibleHandlerEntry(false)
         },
@@ -114,7 +114,7 @@ gpii.tests.windows.maavis.testDefs = [
         }
     }, {
         name: "Testing maavis_selfvoicing",
-        userToken: "maavis_selfvoicing",
+        gpiiKey: "maavis_selfvoicing",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.maavis.flexibleHandlerEntry(false)
         },

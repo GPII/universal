@@ -32,7 +32,7 @@ gpii.oauth2.getAuthorization = function (req, authGrantFinder) {
     var accessToken = gpii.oauth2.parseBearerAuthorizationHeader(req);
 
     if (!accessToken) {
-        promiseTogo.reject(gpii.oauth2.errors.unauthorized);
+        promiseTogo.reject(gpii.dbOperation.errors.unauthorized);
     } else {
         promiseTogo = authGrantFinder.getGrantForAccessToken(accessToken);
     }
@@ -53,12 +53,6 @@ gpii.oauth2.walkMiddleware = function (middleware, i, req, res, next) {
     }
 };
 
-gpii.oauth2.composeError = function (error, termMap) {
-    var err = fluid.copy(error);
-    err.message = fluid.stringTemplate(err.message, termMap);
-    return err;
-};
-
 gpii.oauth2.mapPromiseToResponse = function (promise, response) {
     promise.then(function () {
         response.sendStatus(200);
@@ -68,18 +62,9 @@ gpii.oauth2.mapPromiseToResponse = function (promise, response) {
 };
 
 /**
- * Returns the current time in a human readable string that also naturally sort in chronological order.
- * See http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.5.43
- * @return {String} The current time in ISO string format.
- */
-gpii.oauth2.getCurrentTimestamp = function () {
-    return new Date().toISOString();
-};
-
-/**
  * Calculate the timestamp of currentTime + expiresIn.
- * @param timestampStarts {Date} A start timestamp in the format returned by Date()
- * @param expiresIn {Number} The number of seconds that the expiration will occur.
+ * @param {Date} timestampStarts - A start timestamp in the format returned by Date().
+ * @param {Number} expiresIn - The number of seconds that the expiration will occur.
  * @return {String} A date in simpilified ISO string format.
  */
 gpii.oauth2.getTimestampExpires = function (timestampStarts, expiresIn) {
@@ -91,8 +76,8 @@ gpii.oauth2.getTimestampExpires = function (timestampStarts, expiresIn) {
 
 /**
  * Compare the current time with the expiresIn time and return the number of seconds that the expiration will occur.
- * @param timestampStarts {Date} A start timestamp in the format returned by Date()
- * @param timestampExpires {String} A string in the format returned by Date().toISOString()
+ * @param {Date} timestampStarts - A start timestamp in the format returned by Date().
+ * @param {String} timestampExpires - A string in the format returned by Date().toISOString().
  * @return {Number} The number of seconds that the expiration will occur. Return 0 if the given timestampExpires < the current timestamp.
  */
 gpii.oauth2.getExpiresIn = function (timestampStarts, timestampExpires) {

@@ -65,7 +65,7 @@ gpii.tests.windows.readwrite.flexibleHandlerEntry = function (running) {
 gpii.tests.windows.readwrite.testDefs = [
     {
         name: "Testing rwg1 - running on login",
-        userToken: "rwg1",
+        gpiiKey: "rwg1",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         },
@@ -105,7 +105,7 @@ gpii.tests.windows.readwrite.testDefs = [
         }
     }, {
         name: "Testing rwg1",
-        userToken: "rwg1",
+        gpiiKey: "rwg1",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },
@@ -145,7 +145,7 @@ gpii.tests.windows.readwrite.testDefs = [
         }
     }, {
         name: "Testing rwg2",
-        userToken: "rwg2",
+        gpiiKey: "rwg2",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },

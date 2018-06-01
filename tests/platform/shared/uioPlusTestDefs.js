@@ -23,7 +23,7 @@ fluid.registerNamespace("gpii.tests.uioPlus");
 gpii.tests.uioPlus.testDefs = [
     {
         name: "Acceptance test for default preferences for UIO+",
-        userToken: "uioPlus_defaults",
+        gpiiKey: "uioPlus_defaults",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -51,7 +51,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for background color change for UIO+",
-        userToken: "uioPlus_high_contrast",
+        gpiiKey: "uioPlus_high_contrast",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -79,7 +79,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for font size transformation for UIO+",
-        userToken: "uioPlus_font_size",
+        gpiiKey: "uioPlus_font_size",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -107,7 +107,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for line space transformation for UIO+",
-        userToken: "uioPlus_line_space",
+        gpiiKey: "uioPlus_line_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -135,7 +135,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for highlight color transformation for UIO+",
-        userToken: "uioPlus_highlight_colour",
+        gpiiKey: "uioPlus_highlight_colour",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -163,7 +163,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for character space transformation for UIO+",
-        userToken: "uioPlus_character_space",
+        gpiiKey: "uioPlus_character_space",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -191,7 +191,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for inputs larger transformation for UIO+",
-        userToken: "uioPlus_inputs_larger",
+        gpiiKey: "uioPlus_inputs_larger",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -219,7 +219,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for self voicing transformation for UIO+",
-        userToken: "uioPlus_self_voicing",
+        gpiiKey: "uioPlus_self_voicing",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -247,7 +247,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for table of contents transformation for UIO+",
-        userToken: "uioPlus_toc",
+        gpiiKey: "uioPlus_toc",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -275,7 +275,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for dictionary transformation for UIO+",
-        userToken: "uioPlus_support_tool",
+        gpiiKey: "uioPlus_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -303,7 +303,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for support tool transformation for UIO+ - multiple values",
-        userToken: "uioPlus_multiple_support_tool",
+        gpiiKey: "uioPlus_multiple_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -331,7 +331,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for support tool transformation for UIO+ - unsupported values",
-        userToken: "uioPlus_unhandled_support_tool",
+        gpiiKey: "uioPlus_unhandled_support_tool",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -359,7 +359,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for simplified UI transformation for UIO+",
-        userToken: "uioPlus_simplified",
+        gpiiKey: "uioPlus_simplified",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -387,7 +387,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for syllabification UI transformation for UIO+",
-        userToken: "uioPlus_syllabification",
+        gpiiKey: "uioPlus_syllabification",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
@@ -415,7 +415,7 @@ gpii.tests.uioPlus.testDefs = [
     },
     {
         name: "Acceptance test for multiple transformations for UIO+",
-        userToken: "uioPlus_multiple_settings",
+        gpiiKey: "uioPlus_multiple_settings",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
