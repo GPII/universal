@@ -26,11 +26,24 @@ fluid.registerNamespace("gpii.tests.linux.orca");
 
 gpii.tests.linux.orca.testDefs = [
     {
-        name: "Testing screenreader_common using Flat matchmaker",
-        userToken: "screenreader_common",
+        name: "Testing screenreader_common",
+        gpiiKey: "screenreader_common",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.orca": {
-                "some.app.id": [
+                "org.gnome.orca": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -52,22 +65,92 @@ gpii.tests.linux.orca.testDefs = [
                         }
                     }
                 ]
+            },
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        }
+    }, {
+        name: "Testing screenreader_common with orca running on login",
+        gpiiKey: "screenreader_common",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
             }
         },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
-    },
-    {
-        name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
         settingsHandlers: {
             "gpii.orca": {
-                "some.app.id": [
+                "org.gnome.orca": [
+                    {
+                        "settings": {
+                            "sayAllStyle": 1,
+                            "enableSpeech": true,
+                            "enableEchoByWord": true,
+                            "enableEchoByCharacter": false,
+                            "voices.default.rate": 102.27272727272727,
+                            "voices.default.gain": 7.5,
+                            "enableTutorialMessages": false,
+                            "voices.default.family": {
+                                "locale": "en",
+                                "name": "en-westindies"
+                            },
+                            "verbalizePunctuationStyle": 0,
+                            "voices.default.average-pitch": 1.5
+                        },
+                        "options": {
+                            "user": "screenreader_common"
+                        }
+                    }
+                ]
+            },
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        }
+    },
+    {
+        name: "Testing screenreader_orca",
+        gpiiKey: "screenreader_orca",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        },
+        settingsHandlers: {
+            "gpii.orca": {
+                "org.gnome.orca": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -88,22 +171,39 @@ gpii.tests.linux.orca.testDefs = [
                         }
                     }
                 ]
+            },
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     },
     {
-        name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
+        name: "Testing screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
+        initialState: {
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
+            }
+        },
         settingsHandlers: {
             "gpii.orca": {
-                "some.app.id": [
+                "org.gnome.orca": [
                     {
                         "settings": {
                             "sayAllStyle": 1,
@@ -123,15 +223,19 @@ gpii.tests.linux.orca.testDefs = [
                         }
                     }
                 ]
+            },
+            "gpii.gsettings.launch": {
+                "org.gnome.orca": [{
+                    "settings": {
+                        "running": true
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.a11y.applications",
+                        "key": "screen-reader-enabled"
+                    }
+                }]
             }
-        },
-        processes: [
-            {
-                "command": "gsettings get org.gnome.desktop.a11y.applications screen-reader-enabled",
-                "expectConfigured": "true",
-                "expectRestored": "false"
-            }
-        ]
+        }
     }
 ];
 

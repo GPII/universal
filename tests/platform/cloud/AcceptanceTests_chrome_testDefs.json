@@ -1,7 +1,7 @@
 [
     {
         "name": "Acceptance test for empty preferences in Chrome",
-        "userToken": "chrome_empty",
+        "gpiiKey": "chrome_empty",
         "solutionId": "org.chrome.cloud4chrome",
         "expected": {
             "org.chrome.cloud4chrome": {
@@ -10,7 +10,7 @@
     },
     {
         "name": "Acceptance test for background color change in Chrome",
-        "userToken": "chrome_high_contrast",
+        "gpiiKey": "chrome_high_contrast",
         "solutionId": "org.chrome.cloud4chrome",
         "expected": {
             "org.chrome.cloud4chrome": {
@@ -19,14 +19,14 @@
                 "magnifierEnabled": false,
                 "magnification": 1,
                 "highContrastTheme": "white-black",
-                "highContrastEnabled": true,
-                "screenReaderTTSEnabled": false
+                "highContrast/enabled": true,
+                "screenReaderTTS/enabled": false
             }
         }
     },
     {
         "name": "Acceptance test for font size transformation in Chrome",
-        "userToken": "chrome_font_size",
+        "gpiiKey": "chrome_font_size",
         "solutionId": "org.chrome.cloud4chrome",
         "expected": {
             "org.chrome.cloud4chrome": {
@@ -34,14 +34,14 @@
                 "invertColours": false,
                 "magnifierEnabled": false,
                 "magnification": 1,
-                "highContrastEnabled": false,
-                "screenReaderTTSEnabled": false
+                "highContrast/enabled": false,
+                "screenReaderTTS/enabled": false
             }
         }
     },
     {
         "name": "Acceptance test for magnification transformation in Chrome",
-        "userToken": "chrome_magnification",
+        "gpiiKey": "chrome_magnification",
         "solutionId": "org.chrome.cloud4chrome",
         "expected": {
             "org.chrome.cloud4chrome": {
@@ -49,8 +49,8 @@
                 "invertColours": false,
                 "magnifierEnabled": true,
                 "magnification": 2,
-                "highContrastEnabled": false,
-                "screenReaderTTSEnabled": false
+                "highContrast/enabled": false,
+                "screenReaderTTS/enabled": false
             }
         }
     }

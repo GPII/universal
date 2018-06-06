@@ -9,7 +9,7 @@ The origin of the inferred common terms are ignored - instead they are all merge
 ###Selection of solutions to configure and launch
 This involves four steps:
 
-1. Finding the leaves of all the (common term) preferences - 'leaves' meaning all the keys of the preferences set that holds a primitive as it's value.
+1. Finding the leaves of all the (common term) preferences - 'leaves' meaning all the keys of the preference set that holds a primitive as it's value.
 
 2. Finding all the capabilities of the solutions on the machine. The capabilities are taken from two sources, both part of the solutions registry entry of each solution:
     * Those explicitly expressed in the solution entry's `capabilitities` block

@@ -1,0 +1,23 @@
+// # debbie
+//
+// This preference set enables de-bounce keys.
+//
+// This makes the system ignore repeated key presses.
+//
+// ## Testing
+//
+// In something like Notepad, quickly press the same key twice. The key press should only be accepted once.
+{
+    "flat": {
+        "name": "Debbie",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/debounceEnable": true,
+                    "http://registry.gpii.net/common/debounceInterval": 0.20
+                }
+            }
+        }
+    }
+}
