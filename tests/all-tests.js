@@ -43,6 +43,7 @@ var testIncludes = [
     "./CloseConflictingAppsTests.js",
     "./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
+    "./ErrorTests.js",
     "./IntegrationTests.js",
     "./JournalIntegrationTests.js",
     "./MultiSettingsHandlerTests.js",
