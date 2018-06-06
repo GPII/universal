@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.linux.orca");
 gpii.tests.linux.orca.testDefs = [
     {
         name: "Testing screenreader_common",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
@@ -80,7 +80,7 @@ gpii.tests.linux.orca.testDefs = [
         }
     }, {
         name: "Testing screenreader_common with orca running on login",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
@@ -134,7 +134,7 @@ gpii.tests.linux.orca.testDefs = [
     },
     {
         name: "Testing screenreader_orca",
-        userToken: "screenreader_orca",
+        gpiiKey: "screenreader_orca",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{
@@ -187,7 +187,7 @@ gpii.tests.linux.orca.testDefs = [
     },
     {
         name: "Testing screenreader_nvda",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         initialState: {
             "gpii.gsettings.launch": {
                 "org.gnome.orca": [{

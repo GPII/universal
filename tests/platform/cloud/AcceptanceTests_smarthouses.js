@@ -25,8 +25,8 @@ gpii.loadTestingSupport();
 
 var testDefs = [
     {
-        name: "Acceptance test with 'cloudbased' flow manager for smarthouse1 token",
-        userToken: "smarthouse1",
+        name: "Acceptance test with 'cloudbased' flow manager for smarthouse1 GPII key",
+        gpiiKey: "smarthouse1",
         solutionId: "net.gpii.smarthouses",
         expected: {
             "net.gpii.smarthouses": {
@@ -38,8 +38,8 @@ var testDefs = [
         }
     },
     {
-        name: "Acceptance test with 'cloudbased' flow manager for smarthouse2 token",
-        userToken: "smarthouse2",
+        name: "Acceptance test with 'cloudbased' flow manager for smarthouse2 GPII key",
+        gpiiKey: "smarthouse2",
         solutionId: "net.gpii.smarthouses",
         expected: {
             "net.gpii.smarthouses": {
