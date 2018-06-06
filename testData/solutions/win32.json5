@@ -1,4 +1,42 @@
 {
+    "net.gpii.test.iod": {
+        "name": "Install on demand demo package",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "install": {
+                "type": "gpii.iod.settingsHandler",
+                "capabilities": [],
+                "options": {
+                    "package1": {
+                        "packageName": "demo-package"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "package1": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": "hello",
+                            "outputPath": "a",
+                        }
+                    }
+                },
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+
     "com.freedomscientific.jaws": {
         "name": "JAWS",
         "contexts": {
@@ -3378,5 +3416,5 @@
             }
         ],
         "isRunning": []
-    }
+    },
 }
