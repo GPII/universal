@@ -32,9 +32,9 @@ gpii.tests.android.builtIn = [
             "gpii.androidSettings": {
                 "some.app.id": [{
                     "settings": {
-                        "dim_screen": 1,
-                        "haptic_feedback_enabled": 1,
-                        "accelerometer_rotation": 0,
+                        "dim_screen": true,
+                        "haptic_feedback_enabled": true,
+                        "accelerometer_rotation": false,
                         "user_rotation": 2,
                         "screen_off_timeout": 10000
                     },
@@ -46,7 +46,7 @@ gpii.tests.android.builtIn = [
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [{
                     "settings": {
-                        "STREAM_SYSTEM": 7
+                        "STREAM_SYSTEM": 0.5
                     }
                 }]
             },
