@@ -3161,7 +3161,6 @@
                     },
                     "verifySettings": true,
                     "message": {
-                        "hwnd": "HWND_BROADCAST",
                         "msg": "WM_SETTINGCHANGE",
                         "wparam": 0,
                         "lparam": "intl"
