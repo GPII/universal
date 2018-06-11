@@ -49,6 +49,20 @@ gpii.tests.windows.builtIn = [
                             }
                         ]
                     }
+                }],
+                "com.microsoft.windows.narrator": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "registryName": "Narrator",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Narrator.exe"
+                            }
+                        ]
+                    }
                 }]
             }
         },
