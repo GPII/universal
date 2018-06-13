@@ -3282,7 +3282,7 @@
                             "description": "Unit system to be used as default",
                             "type": "number",
                             "enum": ["0", "1"],
-                            "outputFormat": ["Metrict", "Imperial"]
+                            "outputFormat": ["Metric", "Imperial"]
                         }
                     },
                     "sNativeDigits": {
