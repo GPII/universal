@@ -194,7 +194,7 @@ gpii.tests.untrusted.pspIntegration.testDefs =
     fluid.transform(gpii.tests.pspIntegration.testDefs, function (testDefIn, i) {
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
-                configName: "gpii.tests.acceptance.linux.builtIn.UntrustedPSPIntegration.config",
+                configName: "gpii.tests.acceptance.linux.builtIn.untrustedPSPIntegration.config",
                 configPath: "%gpii-universal/tests/platform/linux/configs"
             },
             gradeNames: [
