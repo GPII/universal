@@ -1,5 +1,5 @@
 {
-    "type": "gpii.tests.acceptance.linux.builtIn.untrusted.config",
+    "type": "gpii.tests.acceptance.linux.builtIn.UntrustedPSPIntegration.config",
     "options": {
         "distributeOptions": {
             "acceptance.installedSolutionsPath": {
