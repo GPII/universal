@@ -6,6 +6,10 @@
                 "record": "%gpii-universal/testData/deviceReporter/acceptanceTests/linux_builtIn.json",
                 "target": "{that localConfig deviceReporter installedSolutionsDataSource}.options.path",
                 "priority": "after:development.installedSolutionsPath"
+            },
+            "acceptance.cloudBasedConfig.preferencesServer": {
+                "record": "gpii.tests.untrusted.pspIntegration.preferencesServer",
+                "target": "{that cloudBasedConfig preferencesServer}.type"
             }
         }
     },
