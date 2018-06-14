@@ -3160,11 +3160,7 @@
                         "sMonGrouping": "REG_SZ"
                     },
                     "verifySettings": true,
-                    "message": {
-                        "msg": "WM_SETTINGCHANGE",
-                        "wparam": 0,
-                        "lparam": "intl"
-                    }
+
                 },
                 "supportedSettings": {
                     "iFirstDayOfWeek": {
@@ -3431,6 +3427,26 @@
         "restore": [
             "settings.configure",
             "settings.configure2"
+        ],
+        "start": [
+            {
+                "type": "gpii.windows.sendWindowMessage",
+                "message": {
+                    "msg": "WM_SETTINGCHANGE",
+                    "wparam": 0,
+                    "lparam": "intl"
+                }
+            }
+        ],
+        "stop": [
+            {
+                "type": "gpii.windows.sendWindowMessage",
+                "message": {
+                    "msg": "WM_SETTINGCHANGE",
+                    "wparam": 0,
+                    "lparam": "intl"
+                }
+            }
         ],
         "isInstalled": [
             {
