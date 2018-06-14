@@ -129,6 +129,10 @@
 
     {
         "id": "net.gpii.uioPlus"
+    },
+
+    {
+        "id": "net.gpii.explode"
     }
 
 ]
