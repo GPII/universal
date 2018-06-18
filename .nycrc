@@ -41,7 +41,6 @@
     "!**/gpii/node_modules/flowManager/src/UntrustedSettingsGetHandler.js",
     "!**/gpii/node_modules/flowManager/src/UntrustedSettingsPutHandler.js",
     "!**/gpii/node_modules/flowManager/src/UserLogonStateChange.js",
-    "!**/gpii/node_modules/flowManager/src/UserSave.js",
     "!**/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/index.js",
     "!**/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/src/AuthGrantFinder.js",
     "!**/gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/src/AuthServer.js",
