@@ -10,6 +10,7 @@
  * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
+/* eslint-env node */
 "use strict";
 
 var fluid = require("infusion"),
@@ -168,7 +169,7 @@ gpii.tests.errors.logoutSequence = [{
     }
 }];
 
-/** Accepts a coreTestDef and modifies its sequence by splicing in gpii.tests.errors.logoutSequence **/
+/* Accepts a coreTestDef and modifies its sequence by splicing in gpii.tests.errors.logoutSequence */
 gpii.tests.errors.adjustSequenceToLogout = function (testDef) {
     testDef.sequence = [].concat(
         testDef.sequence.slice(0, 2),

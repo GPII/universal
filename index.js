@@ -12,8 +12,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
-
-
+/* eslint-env node */
 "use strict";
 
 var fluid = require("infusion"),

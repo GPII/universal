@@ -9,6 +9,7 @@ compliance with this License.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
+/* eslint-env node */
 "use strict";
 
 (function () {

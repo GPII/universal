@@ -1,3 +1,5 @@
+# Browser Channel Client
+
 This directory contains a tiny sample client for the browserChannel WebSockets connection
 as described in [../documentation/BrowserChannel.md](../documentation/BrowserChannel.md).
 
