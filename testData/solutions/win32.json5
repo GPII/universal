@@ -3118,6 +3118,203 @@
         ]
     },
 
+    "com.microsoft.windows.closedCaptions": {
+        "name": "Windows captions personalization settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Windows\\CurrentVersion\\ClosedCaptioning",
+                    "dataTypes": {
+                        "BackgroundColor": "REG_DWORD",
+                        "BackgroundOpacity": "REG_DWORD",
+                        "CaptionColor": "REG_DWORD",
+                        "CaptionEdgeEffect": "REG_DWORD",
+                        "CaptionFontStyle": "REG_DWORD",
+                        "CaptionOpacity": "REG_DWORD",
+                        "CaptionSize": "REG_DWORD",
+                        "RegionColor": "REG_DWORD",
+                        "RegionOpacity": "REG_DWORD"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "BackgroundColor": {
+                        "schema": {
+                            "title": "Background color for captions",
+                            "description": "Specifies which background color is going to be used for captions",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                            "outputFormat": [
+                                "Default",
+                                "White",
+                                "Black",
+                                "Red",
+                                "Green",
+                                "Blue",
+                                "Yellow",
+                                "Magenta",
+                                "Cyan"
+                            ]
+                        }
+                    },
+                    "BackgroundTransparency": {
+                        "schema": {
+                            "title": "Changes the captions background transparency",
+                            "description": "Captions are placed in a small box, this property decides the transparency policy for that box",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4],
+                            "outputFormat": [
+                                "Default",
+                                "Opaque",
+                                "Translucent",
+                                "Semitransparent",
+                                "Transparent"
+                            ]
+                        }
+                    },
+                    "CaptionColor": {
+                        "schema": {
+                            "title": "Captions color",
+                            "description": "Determines the color in which captions are going to be draw",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                            "outputFormat": [
+                                "Default",
+                                "White",
+                                "Black",
+                                "Red",
+                                "Green",
+                                "Blue",
+                                "Yellow",
+                                "Magenta",
+                                "Cyan"
+                            ]
+                        }
+                    },
+                    "CaptionEdgeEffect": {
+                        "schema": {
+                            "title": "Captions edge effect",
+                            "description": "Determines the color in which captions are going to be draw",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4, 5],
+                            "outputFormat": [
+                                "Default",
+                                "None",
+                                "Raised",
+                                "Depressed",
+                                "Uniform",
+                                "Drop shadow"
+                            ]
+                        }
+                    },
+                    "CaptionFontStyle": {
+                        "schema": {
+                            "title": "Captions font style",
+                            "description": "Determines the style to apply to the captions font",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4, 5, 6, 7],
+                            "outputFormat": [
+                                "Default",
+                                "Mono serif",
+                                "Proportional serif",
+                                "Mono sans serif",
+                                "Proportional sans serif",
+                                "Casual",
+                                "Cursive",
+                                "Small caps"
+                            ]
+                        }
+                    },
+                    "CaptionOpacity": {
+                        "schema": {
+                            "title": "Captions opacity",
+                            "description": "Determines the degree of opacity that the captions will have",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4],
+                            "outputFormat": [
+                                "Default",
+                                "Opaque",
+                                "Translucent",
+                                "Semitransparent",
+                                "Transparent"
+                            ]
+                        }
+                    },
+                    "CaptionSize": {
+                        "schema": {
+                            "title": "Captions opacity",
+                            "description": "Determines the degree of opacity that the captions will have",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4],
+                            "outputFormat": [
+                                "Default",
+                                "Opaque",
+                                "Translucent",
+                                "Semitransparent",
+                                "Transparent"
+                            ]
+                        }
+                    },
+                    "RegionColor": {
+                        "schema": {
+                            "title": "Window color",
+                            "description": "Determines the color of the whole window/region in which captions are displayed",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                            "outputFormat": [
+                                "Default",
+                                "White",
+                                "Black",
+                                "Red",
+                                "Green",
+                                "Blue",
+                                "Yellow",
+                                "Magenta",
+                                "Cyan"
+                            ]
+                        }
+                    },
+                    "RegionOpacity": {
+                        "schema": {
+                            "title": "Window opacity",
+                            "description": "Determines the opacity of the whole window/region in which captions are displayed",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4],
+                            "outputFormat": [
+                                "Default",
+                                "Opaque",
+                                "Translucent",
+                                "Semitransparent",
+                                "Transparent"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
@@ -3322,7 +3519,7 @@
             }
         ]
     },
-    "net.gpii.test.speechControl": { 
+    "net.gpii.test.speechControl": {
     // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
     // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
@@ -3357,11 +3554,11 @@
         ],
         "isRunning": []
     },
-    
-    "net.gpii.explode": { 
-    // This solution exists only to support manual and automated testing of GPII's error support. It references the 
+
+    "net.gpii.explode": {
+    // This solution exists only to support manual and automated testing of GPII's error support. It references the
     // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
-    // get, set or launch settingsHandler action 
+    // get, set or launch settingsHandler action
         "name": "GPII Test solution for triggering settingsHandler errors",
         "contexts": {
             "OS": [
