@@ -427,7 +427,7 @@
                 "type": "gpii.orca",
                 "liveness": "manualRestart",
                 "options": {
-                    "user": "${{userToken}}"
+                    "user": "${{gpiiKey}}"
                 },
                 "supportedSettings": {
                     "enableTutorialMessages": {},
@@ -1116,7 +1116,7 @@
                 "options": {
                     "setTrue": {
                         "type": "gpii.launch.exec",
-                        "command": "google-chrome http://easyone.gpii.net/user/${{userToken}}"
+                        "command": "google-chrome http://easyone.gpii.net/user/${{gpiiKey}}"
                     },
                     "setFalse": {
                         "type": "gpii.launch.exec",

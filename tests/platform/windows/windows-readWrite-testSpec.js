@@ -65,7 +65,7 @@ gpii.tests.windows.readwrite.flexibleHandlerEntry = function (running) {
 gpii.tests.windows.readwrite.testDefs = [
     {
         name: "Testing rwg1 - running on login",
-        userToken: "rwg1",
+        gpiiKey: "rwg1",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(true)
         },
@@ -77,21 +77,21 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
                             "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
                             "ApplicationSettings.AppBar.DocType.$t": "1",
-                            "ApplicationSettings.AppBar.ShowText.$t": "true",
-                            "ApplicationSettings.AppBar.optToolbarShowText.$t": "true",
-                            "ApplicationSettings.AppBar.LargeIcons.$t": "true",
-                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": "true",
-                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": "36",
-                            "ApplicationSettings.Speech.optSAPI5Speed.$t": "38",
-                            "ApplicationSettings.Speech.optSAPI5Volume.$t": "72",
-                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": "0",
+                            "ApplicationSettings.AppBar.ShowText.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": 36,
+                            "ApplicationSettings.Speech.optSAPI5Speed.$t": 38,
+                            "ApplicationSettings.Speech.optSAPI5Volume.$t": 72,
+                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
                             "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
-                            "ApplicationSettings.Speech.WebHighlighting.$t": "false",
+                            "ApplicationSettings.Speech.WebHighlighting.$t": false,
                             "ApplicationSettings.Translation.ToLanguage.$t": "fr",
-                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": "2",
+                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
                             "ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
-                            "ApplicationSettings.Scanning.ScanToFile.$t": "false",
-                            "ApplicationSettings.Spelling.SpellAsIType.$t": "true"
+                            "ApplicationSettings.Scanning.ScanToFile.$t": false,
+                            "ApplicationSettings.Spelling.SpellAsIType.$t": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
@@ -105,7 +105,7 @@ gpii.tests.windows.readwrite.testDefs = [
         }
     }, {
         name: "Testing rwg1",
-        userToken: "rwg1",
+        gpiiKey: "rwg1",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },
@@ -117,21 +117,21 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Fun",
                             "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Writing Features",
                             "ApplicationSettings.AppBar.DocType.$t": "1",
-                            "ApplicationSettings.AppBar.ShowText.$t": "true",
-                            "ApplicationSettings.AppBar.optToolbarShowText.$t": "true",
-                            "ApplicationSettings.AppBar.LargeIcons.$t": "true",
-                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": "true",
-                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": "36",
-                            "ApplicationSettings.Speech.optSAPI5Speed.$t": "38",
-                            "ApplicationSettings.Speech.optSAPI5Volume.$t": "72",
-                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": "0",
+                            "ApplicationSettings.AppBar.ShowText.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": 36,
+                            "ApplicationSettings.Speech.optSAPI5Speed.$t": 38,
+                            "ApplicationSettings.Speech.optSAPI5Volume.$t": 72,
+                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 0,
                             "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK English Daniel",
-                            "ApplicationSettings.Speech.WebHighlighting.$t": "false",
+                            "ApplicationSettings.Speech.WebHighlighting.$t": false,
                             "ApplicationSettings.Translation.ToLanguage.$t": "fr",
-                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": "2",
+                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 2,
                             "ApplicationSettings.Scanning.ScanDestination.$t": "PDF",
-                            "ApplicationSettings.Scanning.ScanToFile.$t": "false",
-                            "ApplicationSettings.Spelling.SpellAsIType.$t": "true"
+                            "ApplicationSettings.Scanning.ScanToFile.$t": false,
+                            "ApplicationSettings.Spelling.SpellAsIType.$t": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
@@ -145,7 +145,7 @@ gpii.tests.windows.readwrite.testDefs = [
         }
     }, {
         name: "Testing rwg2",
-        userToken: "rwg2",
+        gpiiKey: "rwg2",
         initialState: {
             "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.readwrite.flexibleHandlerEntry(false)
         },
@@ -157,23 +157,23 @@ gpii.tests.windows.readwrite.testDefs = [
                             "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
                             "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",
                             "ApplicationSettings.AppBar.DocType.$t": "1",
-                            "ApplicationSettings.AppBar.Width.$t": "788",
-                            "ApplicationSettings.AppBar.ShowText.$t": "true",
-                            "ApplicationSettings.AppBar.optToolbarShowText.$t": "true",
-                            "ApplicationSettings.AppBar.LargeIcons.$t": "true",
-                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": "true",
-                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": "33",
-                            "ApplicationSettings.Speech.optSAPI5Speed.$t": "31",
-                            "ApplicationSettings.Speech.optSAPI5Volume.$t": "90",
-                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": "115",
-                            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": "false",
+                            "ApplicationSettings.AppBar.Width.$t": 788,
+                            "ApplicationSettings.AppBar.ShowText.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                            "ApplicationSettings.Speech.optSAPI5Pitch.$t": 33,
+                            "ApplicationSettings.Speech.optSAPI5Speed.$t": 31,
+                            "ApplicationSettings.Speech.optSAPI5Volume.$t": 90,
+                            "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 115,
+                            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false,
                             "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK Indian Sangeeta",
-                            "ApplicationSettings.Speech.WebHighlighting.$t": "true",
+                            "ApplicationSettings.Speech.WebHighlighting.$t": true,
                             "ApplicationSettings.Translation.ToLanguage.$t": "hi",
-                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": "0",
+                            "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 0,
                             "ApplicationSettings.Scanning.ScanDestination.$t": "Word",
-                            "ApplicationSettings.Scanning.ScanToFile.$t": "true",
-                            "ApplicationSettings.Spelling.SpellAsIType.$t": "false"
+                            "ApplicationSettings.Scanning.ScanToFile.$t": true,
+                            "ApplicationSettings.Spelling.SpellAsIType.$t": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",

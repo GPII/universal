@@ -1,0 +1,18 @@
+/**
+ * Used for the integration test CloseConflictingAppsTest. It uses the preference sets of
+ * the testData's acceptanceTests folder and a device reporter that reports only two screenreaders
+ * (Jaws and NVDA) installed.
+ */
+{
+    "type": "gpii.tests.multiScreenreader.config",
+    "options": {
+        "distributeOptions": {
+            "multiSH.deviceReporter": {
+                "record": "%gpii-universal/tests/data/multiScreenreaderDeviceReporter.json",
+                "target": "{that deviceReporter installedSolutionsDataSource}.options.path",
+                "priority": "after:development.installedSolutionsPath"
+            }
+        }
+    },
+    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.development.local.json5"
+}

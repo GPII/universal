@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.builtIn = [
     {
         name: "Testing os_win7 using default matchmaker",
-        userToken: "os_win7",
+        gpiiKey: "os_win7",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -46,6 +46,20 @@ gpii.tests.windows.builtIn = [
                             {
                                 "type": "gpii.processReporter.find",
                                 "command": "Magnify.exe"
+                            }
+                        ]
+                    }
+                }],
+                "com.microsoft.windows.narrator": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "registryName": "Narrator",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Narrator.exe"
                             }
                         ]
                     }
@@ -329,7 +343,7 @@ gpii.tests.windows.builtIn = [
         }
     }, {
         name: "Testing os_common using default matchmaker",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -571,7 +585,7 @@ gpii.tests.windows.builtIn = [
         }
     }, {
         name: "Testing os_common - magnifier running on startup",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -829,7 +843,7 @@ gpii.tests.windows.builtIn = [
         }
     }, {
         name: "Testing os_common - magnifier and keyboard both running on startup",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -1071,7 +1085,7 @@ gpii.tests.windows.builtIn = [
         }
     }, {
         name: "Testing os_gnome using default matchmaker",
-        userToken: "os_gnome",
+        gpiiKey: "os_gnome",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{

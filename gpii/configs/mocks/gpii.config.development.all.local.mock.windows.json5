@@ -1,5 +1,5 @@
 /**
- * A variety of gpii.config.development.all.local.json which supplies mock implementations of all settings handlers
+ * A variety of gpii.config.development.all.local.json5 which supplies mock implementations of all settings handlers
  * supported on the Windows platform.
  *
  * This configuration runs the entire system, in the "trusted local FlowManager" configuration, locally and in development mode.
