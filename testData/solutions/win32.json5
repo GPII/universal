@@ -3167,7 +3167,7 @@
                             ]
                         }
                     },
-                    "BackgroundTransparency": {
+                    "BackgroundOpacity": {
                         "schema": {
                             "title": "Changes the captions background transparency",
                             "description": "Captions are placed in a small box, this property decides the transparency policy for that box",
@@ -3258,10 +3258,10 @@
                             "enum": [0, 1, 2, 3, 4],
                             "outputFormat": [
                                 "Default",
-                                "Opaque",
-                                "Translucent",
-                                "Semitransparent",
-                                "Transparent"
+                                "50%",
+                                "100%",
+                                "150%",
+                                "200%"
                             ]
                         }
                     },
@@ -3306,7 +3306,25 @@
             "settings.configure"
         ],
         "restore": [
-            "settings.configure"
+            "settings.configure",
+            {
+                "type": "gpii.windows.sendWindowMessage",
+                "message": {
+                    "msg": "WM_SETTINGCHANGE",
+                    "wparam": 0,
+                    "lparam": "intl"
+                }
+            }
+        ],
+        "start": [
+            {
+                "type": "gpii.windows.sendWindowMessage",
+                "message": {
+                    "msg": "WM_SETTINGCHANGE",
+                    "wparam": 0,
+                    "lparam": "intl"
+                }
+            }
         ],
         "isInstalled": [
             {
