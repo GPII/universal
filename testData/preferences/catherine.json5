@@ -1,0 +1,46 @@
+// # Catherine.json5
+//
+// ## Demo Personas with User Stories
+//
+// This preference set is part of our set of personas used for the demo install,
+// presentations, and in general conveying an array of compelling user stories for
+// the GPII.
+//
+// ## Details
+//
+// Catherine:
+//  - CaptionColor: The color in which captions will be drawn: "black".
+//  - CaptionEdgeeffect: The effect to be added to the captions: Default. (None of the options has visible results)
+//  - CaptionFontStyle: The font style in which captions will be drawn: small caps.
+//  - CaptionSize: The captions size : 150%.
+//  - RegionColor: The color of the video region: Default.
+//  - RegionOpacity: The opacity of the video region: Default. (Video should be seen).
+//  - BackgroundColor: The background color for the box in which captions are drawn: White.
+//  - BackgroundTransparency: The transparency of the background box in which captions are drawn.
+//
+// Configure the system for modifying how captions are displayed in applications. Catherine ins't a English native
+// speaker, and she also doesn't have very good eyesight with low light, so, for seeing movies she prefers to
+// have big captions with high contrast between letters and background color.
+{
+    "flat": {
+        "name": "Catherine",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.closedCaptions": {
+                        "CaptionColor": 2,
+                        "CaptionEdgeEffect": 0,
+                        "CaptionFontStyle": 7,
+                        "CaptionOpacity": 1,
+                        "CaptionSize": 3,
+                        "RegionColor": 0,
+                        "RegionOpacity": 0,
+                        "BackgroundColor": 1,
+                        "BackgroundTransparency": 1
+                    }
+                }
+            }
+        }
+    }
+}
