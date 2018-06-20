@@ -11,7 +11,6 @@
  * https://github.com/GPII/universal/blob/master/LICENSE.txt
  */
 
-/* eslint-env node */
 "use strict";
 
 var fluid = require("infusion"),

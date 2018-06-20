@@ -14,7 +14,6 @@ The research leading to these results has received funding from the European Uni
 Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 */
 
-/* eslint-env node */
 "use strict";
 
 var fluid = require("infusion"),
