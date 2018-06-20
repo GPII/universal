@@ -7,10 +7,10 @@ Following those steps, the payload is sent via the [Context Manager](ContextMana
 ### Important flows
 Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and retrieving settings from the system in "cloud based flowmanager" mode are all different.
 Each "flow" is managed in a different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerRequests.js`. The different kinds of flows are:
-* **User Login** (`UserLogin.js`) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
-* **User Logout** (`UserLogout.js`) - the flow for a user keying out of the system
-* **Retrieving Settings** (`Settings.js`) - used to retrieve the settings when the system is running in cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
-* **Get User Token** (`GetUserToken.js`) - retrieval of the token of the currently logged in user.
+* **User Login** (UserLogonStateChange.js) - the flow for a user keying in to the system. The flow is described in details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
+* **User Logout** (UserLogonStateChange.js) - the flow for a user keying out of the system
+* **Retrieving Settings** (CloudBasedFlowManager.js) - used to retrieve the settings when the system is running in cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
+* **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
 
 ### Important events:
 
@@ -22,61 +22,63 @@ There are a few notification events on the flowmanager related to the key-in and
 
 ### APIs
 
-#### User Logon state change (GET /user/:token/proximityTriggered)
-* **description**: Change the logon state for the user with the given `:token`. Note that there is a debounce functionality
-implemented following these rules: any RFID actions is ignored for <mytoken> if a login/logout for <mytoken> is in progress
-OR if the last login/logout process for <mytoken> finished less than 5 seconds ago. For more details for rules on keying and out, see [KeyInAndOutRules](KeyInAndOutRules.md)
+#### User Logon state change (GET /user/:gpiiKey/proximityTriggered)
+* **description**: Change the logon state for the user with the given `:gpiiKey`. Note that there is a debounce functionality
+implemented following these rules: any RFID actions is ignored for <myGpiiKey> if a login/logout for <myGpiiKey> is in progress
+OR if the last login/logout process for <myGpiiKey> finished less than 1.5 seconds ago. For more details for rules on keying and out, see [LoginAndLogoutFlow](LoginAndLogoutFlow.md)
 
-* **route:** `/user/:token/proximityTriggered` where `:token` should be the token of the user for which to change the logon state
+* **route:** `/user/:gpiiKey/proximityTriggered` where `:gpiiKey` should be the GPII key of the user for which to change the logon state
 * **return:** Message on success or failure of the login/logout
 
-#### User Login (GET /user/:token/login)
+#### User Login (GET /user/:gpiiKey/login)
 * **description**: Log in a user to the system
 * **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/user/:token/login` where :token should be the token of the user
+* **route:** `/user/:gpiiKey/login` where :gpiiKey should be the GPII key of the user
 * **method:** `GET`
 * **return:** Message saying that user successfully logged into the system or an error message.
 
 
-#### User Logout (GET /user/:token/logout)
+#### User Logout (GET /user/:gpiiKey/logout)
 * **description**: Log out a user of the system
 * **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/user/:token/logout` where `:token` should be the token of the user
+* **route:** `/user/:gpiiKey/logout` where `:gpiiKey` should be the GPII key of the user
 * **method:** `GET`
 * **return:** Message saying that user successfully logged out of the system or an error message.
 
 
-#### Retrieve token (GET /userToken)
-* **description**: Get the token of the user(s) who is (are) currently logged into the system
+#### Retrieve GPII key (GET /gpiiKey)
+* **description**: Get the GPII key of the user(s) who is (are) currently logged into the system
 * **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/userToken`
+* **route:** `/gpiiKey`
 * **method:** `GET`
 * **return:** A JSON array with a string entry for each user
 
 
-#### Save new preferences set (POST /user/preferences)
-* **description**: Save a preferences set to a new user token
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
+#### Save new preference set (POST /user/preferences)
+* **description**: Save a preference set to a new GPII key
+* **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
 * **route:** `/user/preferences`
 * **method:** `POST`
 * **body:** The preferences to save as a JSON structure
-* **return:** A payload with the newly generated token (keyed by `token`) and the stored preferences (keyed by `preferences`).
+* **return:** A payload with the newly generated GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by `preferences`).
+* **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow manager configs due to the security consideration.
 
 
-#### Save preferences set to existing token (PUT /user/preferences/:token)
-* **description**: Save a preferences set to an existing token
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/user/preferences/:token` where `:token` is the token to save the preferences for
+#### Save preference set to existing GPII key (PUT /user/preferences/:gpiiKey)
+* **description**: Save a preference set to an existing GPII key
+* **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
+* **route:** `/user/preferences/:gpiiKey` where `:gpiiKey` is the GPII key to save the preferences for
 * **method:** `PUT`
 * **body:** The preferences to save as a JSON structure
-* **return:** A payload with the token (keyed by `token`) and the stored preferences (keyed by `preferences`).
+* **return:** A payload with the GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by `preferences`).
+* **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow manager configs due to the security consideration.
 
 
-#### Get settings from Online Flowmanager (GET /:token/settings/:device)
-* **description**: Get settings from the online flowmanager
-* **Supported modes**: Cloud-based (online) flowmanager only
-* **route:** `/:token/settings/:device` where:
-    - `:token` should be the token of the user for which the settings are requested
+#### Get settings from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
+* **description**: Get settings from the cloud based flow manager
+* **Supported modes**: Cloud Based Flow Manager only
+* **route:** `/:gpiiKey/settings/:device` where:
+    - `:gpiiKey` should be the GPII key of the user for which the settings are requested
     - `:device` should be a device reporter payload - for example: `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
 * **method:** `GET`
 * **return:** An object, keyed by solution ID, with each block containing the relevant settings in a format understandable by the solution. For example:
@@ -89,21 +91,21 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
     }
 }
 ```
-* **Notes:** Currently the payloads of the online flowmanager does **not** take contexts into account. The current payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want the context information.
+* **Notes:** Currently the payloads of the cloud based flow manager does **not** take contexts into account. The current payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want the context information.
 
-#### Get lifecycle instructions from Online Flowmanager (GET /:token/untrusted-settings/:device)
-* **description**: Get settings in the ontology of preferences from the online flowmanager. These settings are untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
-* **Supported modes**: Cloud-based (online) flowmanager only
-* **route:** `/:token/untrusted-settings/:device` where:
-    - `:token` should be the token of the user for which the settings are requested
+#### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/untrusted-settings/:device)
+* **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
+* **Supported modes**: Cloud Based Flow Manager only
+* **route:** `/:gpiiKey/untrusted-settings/:device` where:
+    - `:gpiiKey` should be the GPII key of the user for which the settings are requested
     - `:device` should be a device reporter payload - for example: `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
 * **header:** Authorization: Bearer < access_token >
-    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to access settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
+    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to access settings associated with a GPII key. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant) about the detail steps.
 * **method:** `GET`
-* **return:** An object, containing the user token and solution registry entries. Each block in the solution registry entries contains the relevant lifecycle instructions in a format understandable by the solution. For example:
+* **return:** An object, containing the GPII key and solution registry entries. Each block in the solution registry entries contains the relevant lifecycle instructions in a format understandable by the solution. For example:
 ```
 {
-    "userToken": "li",
+    "gpiiKey": "li",
     "solutionsRegistryEntries": {
         "org.nvda-project": {
             "name": "NVDA Screen Reader",
@@ -186,22 +188,22 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
 }
 ```
 
-#### Update settings on Online Flowmanager (PUT /:token/untrusted-settings)
-* **description**: Merge the incoming preferences with the existing user preferences and update the merged preferences on the online flowmanager.
-* **Supported modes**: Cloud-based (online) flowmanager only
-* **route:** `/:token/untrusted-settings` where:
-    - `:token` should be the token of the user for which the settings are updated
+#### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/untrusted-settings)
+* **description**: Call the preferences server API to update user preferences. The preferences server API merges the incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow manager.
+* **Supported modes**: Cloud Based Flow Manager only
+* **route:** `/:gpiiKey/untrusted-settings` where:
+    - `:gpiiKey` should be the GPII key of the user for which the preferences are updated
 * **header:** Authorization: Bearer < access_token >
-    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to update settings associated with a token. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Token_Grant) about the detail steps.
+    - `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization that grants a GPII app to update settings associated with a GPII key. Refer to [GPII OAuth2 Guide](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant) about the detail steps.
 * **method:** `PUT`
-* **request body:** An object, containing a subset of to-be-updated settings. For example:
+* **request body:** An object, containing a subset of to-be-updated preferences. For example:
 ```
 {
     "contexts": {
         "gpii-default": {
             "name": "Default preferences",
             "preferences": {
-                "http://registry.gpii.net/common/onScreenKeyboardEnabled": true,
+                "http://registry.gpii.net/common/onScreenKeyboard/enabled": true,
                 "http://registry.gpii.net/common/initDelay": 0.120,
                 "http://registry.gpii.net/common/cursorSpeed": 0.850
             }
@@ -209,10 +211,10 @@ OR if the last login/logout process for <mytoken> finished less than 5 seconds a
     }
 }
 ```
-* **return:** An object, containing the user token and a status message. For example:
+* **return:** An object, containing the GPII key and a status message. For example:
 ```
 {
-    "userToken": "li",
+    "gpiiKey": "li",
     "messgae": "Successfully updated."
 }
 ```

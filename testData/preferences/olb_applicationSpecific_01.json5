@@ -1,0 +1,33 @@
+// # Online Banking Demonstrator (OLB): Preference Sets
+//
+// * `olb_applicationSpecific_01.json5`: preference set with only application-specific terms for the following settings:
+//  * somewhat larger text and bigger line height,
+//  * the font face Comic Sans,
+//  * showing a table of contents, making the links more visible and making form elements bigger,
+//  * a yellow-on-black contrast theme,
+//  * International Sign (sign language) by an avatar.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/eu.gpii.olb": {
+                        "textSize": 1.1,
+                        "lineSpacing": 2,
+                        "textStyle": "comic",
+                        "toc": true,
+                        "links": true,
+                        "inputsLarger": true,
+                        "contrastTheme": "yb",
+                        "signLanguageEnabled": true,
+                        "signLanguage": "ils",
+                        "interpreterType": "avatar",
+                        "interpreterName": "Neytiri",
+                        "pictogramsEnabled": false
+                    }
+                }
+            }
+        }
+    }
+}

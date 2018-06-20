@@ -2,7 +2,7 @@
     "transform": [
         {
             "type": "fluid.transforms.value",
-            "inputPath": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+            "inputPath": "http://registry\\.gpii\\.net/common/magnification/enabled",
             "outputPath": "http://registry\\.gpii\\.net/common/magnifierApplication"
         }, {
             "type": "fluid.transforms.value",
@@ -10,9 +10,9 @@
             "outputPath": "http://registry\\.gpii\\.net/common/magnifierApplication"
         }
     ],
-    "http://registry\\.gpii\\.net/common/screenReaderApplication": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+    "http://registry\\.gpii\\.net/common/screenReaderApplication": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
     "http://registry\\.gpii\\.net/common/stickyKeysApplication": "http://registry\\.gpii\\.net/common/stickyKeys",
-    "http://registry\\.gpii\\.net/common/slowKeysApplication": "http://registry\\.gpii\\.net/common/slowKeysEnabled",
-    "http://registry\\.gpii\\.net/common/debounceKeysApplication": "http://registry\\.gpii\\.net/common/debounceEnabled",
-    "http://registry\\.gpii\\.net/common/onScreenKeyboardApplication": "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
+    "http://registry\\.gpii\\.net/common/slowKeysApplication": "http://registry\\.gpii\\.net/common/slowKeys/enabled",
+    "http://registry\\.gpii\\.net/common/debounceKeysApplication": "http://registry\\.gpii\\.net/common/debounce/enabled",
+    "http://registry\\.gpii\\.net/common/onScreenKeyboardApplication": "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled"
 }
