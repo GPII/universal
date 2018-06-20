@@ -1,0 +1,42 @@
+// # Nikola.json5
+//
+// ## Demo Personas with User Stories
+//
+// This preference set is part of our set of personas used for the demo install,
+// presentations, and in general conveying an array of compelling user stories for
+// the GPII.
+//
+// ## Details
+//
+// Nikola:
+//  - sShortDate: Short date representation: "M/d/yy".
+//  - sLongDate: Long date representation: "MMMM d, yyyy".
+//  - Currency format: iCurrency: 1$ sign after digit.
+//  - Unit system: iMeasure: Metric system
+//  - iDigits: Decimal representation format: 4 digits.
+//  - sGrouping: Digits grouping for decimal representation: 3 decimals and groups of 2, ex: 12,34,56,789
+//
+// Configure the system for changing several measurements formats. Nikola is European and he ins't familiarized with
+// American or Asian date formats. Also, he isn't used to the imperial system and prefers the currency symbol after
+// the quantity.
+{
+    "flat": {
+        "name": "Nikola",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.internationalization": {
+                        "sShortDate": "dd-MMM-yy",
+                        "sLongDate": "dddd, d MMMM, yyyy",
+                        "iFirstDayOfWeek": "1",
+                        "iCurrency": "1",
+                        "iMeasure": "0",
+                        "iDigits": "3",
+                        "sGrouping": "3;0"
+                    }
+                }
+            }
+        }
+    }
+}
