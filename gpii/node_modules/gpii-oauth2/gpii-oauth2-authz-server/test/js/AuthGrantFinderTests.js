@@ -117,8 +117,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
     gpii.tests.oauth2.authGrantFinder.expected = {
         accessToken: "Bakersfiled_AJC_access_token",
         gpiiKey: "carol_gpii_key",
-        allowUntrustedSettingsGet: true,
-        allowUntrustedSettingsPut: true
+        allowSettingsGet: true,
+        allowSettingsPut: true
     };
 
     fluid.defaults("gpii.tests.oauth2.authGrantFinder.withData", {

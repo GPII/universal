@@ -92,31 +92,6 @@ should return:
 
 ### Test the Cloud Based Flow Manager
 
-Visiting the following link in a browser:
-
-```
-http://localhost:9082/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D
-```
-
-should return:
-
-```
-{
-    "org.gnome.desktop.a11y.magnifier": {
-        "focus-tracking": "none",
-        "caret-tracking": "proportional",
-        "mouse-tracking": "proportional",
-        "mag-factor": 2,
-        "screen-position": "right-half",
-        "show-cross-hairs": true,
-        "lens-mode": false,
-        "scroll-at-edges": true
-    }
-}
-```
-
-Or,
-
 Open a terminal and copy, paste this command:
 
 ```
