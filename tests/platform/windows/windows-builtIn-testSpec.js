@@ -175,7 +175,10 @@ gpii.tests.windows.builtIn = [
                                 "name": "HIGHCONTRAST"
                             }
                         }
-                    }, { // font size settings
+                    }
+                ],
+                "com.microsoft.windows.fontSize": [
+                    { // font size settings
                         "settings": {
                             "CaptionFont": {
                                 "path": "pvParam.lfCaptionFont.lfHeight",
