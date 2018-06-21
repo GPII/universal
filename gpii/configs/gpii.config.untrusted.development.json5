@@ -11,11 +11,11 @@
         "distributeOptions": {
             "flowManager.defaultCloudURL": {
                 "record": "http://localhost:8084",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL"
+                "target": "{that flowManager settingsDataSource}.options.cloudURL"
             },
             "flowManager.cloudURL": {
                 "record": "@expand:kettle.resolvers.env(GPII_CLOUD_URL)",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL",
+                "target": "{that flowManager settingsDataSource}.options.cloudURL",
                 "priority": "after:flowManager.defaultCloudURL"
             }
         }

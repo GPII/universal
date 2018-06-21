@@ -22,22 +22,22 @@ fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.cloud.oauth2.untrustedSettingsGet");
+fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsGet");
 
-gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
+gpii.tests.cloud.oauth2.settingsGet.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
     gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse(body, refetchAccessTokenRequest);
     jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
 };
 
-gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
+gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
     var payload = JSON.parse(body);
     jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };
 
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.requests", {
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
     gradeNames: ["fluid.component"],
     components: {
-        accessTokenRequest_untrustedSettings: {
+        accessTokenRequest_settings: {
             type: "kettle.test.request.http",
             options: {
                 headers: {
@@ -48,10 +48,10 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.requests", {
                 method: "POST"
             }
         },
-        untrustedSettingsRequest: {
+        settingsRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/%gpiiKey/untrusted-settings/%device",
+                path: "/%gpiiKey/settings/%device",
                 port: 8081,
                 termMap: {
                     gpiiKey: "{testCaseHolder}.options.gpiiKey",
@@ -74,9 +74,9 @@ fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.requests", {
     }
 });
 
-// For successful workflows that request user settings from /untrusted-settings endpoint
+// For successful workflows that request user settings from /settings endpoint
 // using access tokens granted by /access_token endpoint
-gpii.tests.cloud.oauth2.untrustedSettingsGet.mainSequence = [
+gpii.tests.cloud.oauth2.settingsGet.mainSequence = [
     {
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
@@ -88,32 +88,32 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.mainSequence = [
     },
     {
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
-        args: ["{accessTokenRequest_untrustedSettings}", "{testCaseHolder}.options"]
+        args: ["{accessTokenRequest_settings}", "{testCaseHolder}.options"]
     },
     {
-        event: "{accessTokenRequest_untrustedSettings}.events.onComplete",
-        listener: "gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyRefetchedAccessToken",
-        args: ["{arguments}.0", "{accessTokenRequest_untrustedSettings}", "{accessTokenRequest}"]
+        event: "{accessTokenRequest_settings}.events.onComplete",
+        listener: "gpii.tests.cloud.oauth2.settingsGet.verifyRefetchedAccessToken",
+        args: ["{arguments}.0", "{accessTokenRequest_settings}", "{accessTokenRequest}"]
     },
     {
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-        args: ["{untrustedSettingsRequest}", "{accessTokenRequest_untrustedSettings}.access_token"]
+        args: ["{settingsRequest}", "{accessTokenRequest_settings}.access_token"]
     },
     {
-        event: "{untrustedSettingsRequest}.events.onComplete",
-        listener: "gpii.tests.cloud.oauth2.untrustedSettingsGet.verifyPayloadMatchMakerOutput",
+        event: "{settingsRequest}.events.onComplete",
+        listener: "gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput",
         args: ["{arguments}.0", "{testCaseHolder}.options.expectedMatchMakerOutput"]
     }
 ];
 
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.mainSequence", {
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence", {
     gradeNames: ["gpii.test.disruption"],
-    testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsGet.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.mainSequence"
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
+    sequenceName: "gpii.tests.cloud.oauth2.settingsGet.mainSequence"
 });
 
 // For failed test cases that are rejected by /access_token endpoint
-gpii.tests.cloud.oauth2.untrustedSettingsGet.statusCode = [
+gpii.tests.cloud.oauth2.settingsGet.statusCode = [
     {
         funcName: "gpii.test.cloudBased.oauth2.sendResourceOwnerGpiiKeyAccessTokenRequest",
         args: ["{accessTokenRequest}", "{testCaseHolder}.options"]
@@ -125,18 +125,18 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.statusCode = [
     }
 ];
 
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode", {
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode", {
     gradeNames: ["gpii.test.disruption"],
     recordName: "accessTokenForm",
     expect: 1,
-    testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsGet.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.statusCode"
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
+    sequenceName: "gpii.tests.cloud.oauth2.settingsGet.statusCode"
 });
 
-gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [
+gpii.tests.cloud.oauth2.settingsGet.disruptionsWithMissingGrantArgs = [
     {
         name: "Attempt to get access token without sending client_id",
-        gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
         changes: {
             path: "client_id",
             type: "DELETE"
@@ -145,7 +145,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [
     },
     {
         name: "Attempt to get access token without sending client_secret",
-        gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
         changes: {
             path: "client_secret",
             type: "DELETE"
@@ -154,7 +154,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [
     },
     {
         name: "Attempt to get access token without sending username",
-        gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
         changes: {
             path: "username",
             type: "DELETE"
@@ -163,7 +163,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [
     },
     {
         name: "Attempt to get access token without sending password",
-        gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
         changes: {
             path: "password",
             type: "DELETE"
@@ -172,7 +172,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [
     },
     {
         name: "Attempt to get access token without sending grant_type",
-        gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode",
+        gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
         changes: {
             path: "grant_type",
             type: "DELETE"
@@ -181,51 +181,51 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs = [
     }
 ];
 
-gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithWrongGrantArgs = [{
-    gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.statusCode",
+gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs = [{
+    gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.statusCode",
     expectedStatusCode: 401
 }];
 
-// For failed test case that are rejected by /untrusted-settings endpoint
-// 1. rejected when requesting /untrusted-settings without providing an access token
-gpii.tests.cloud.oauth2.untrustedSettingsGet.untrustedSettingsNoAccessTokenSequence = [
+// For failed test case that are rejected by /settings endpoint
+// 1. rejected when requesting /settings without providing an access token
+gpii.tests.cloud.oauth2.settingsGet.settingsNoAccessTokenSequence = [
     {
-        func: "{untrustedSettingsRequest}.send"
+        func: "{settingsRequest}.send"
     },
     {
-        event: "{untrustedSettingsRequest}.events.onComplete",
+        event: "{settingsRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{untrustedSettingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        args: ["{arguments}.0", "{settingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 ];
 
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.untrustedSettingsNoAccessTokenSequence", {
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessTokenSequence", {
     gradeNames: ["gpii.test.disruption"],
-    testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsGet.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.untrustedSettingsNoAccessTokenSequence"
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
+    sequenceName: "gpii.tests.cloud.oauth2.settingsGet.settingsNoAccessTokenSequence"
 });
 
-// 2. rejected when requesting /untrusted-settings by providing a wrong access token
-gpii.tests.cloud.oauth2.untrustedSettingsGet.untrustedSettingsWrongAccessTokenSequence = [
+// 2. rejected when requesting /settings by providing a wrong access token
+gpii.tests.cloud.oauth2.settingsGet.settingsWrongAccessTokenSequence = [
     {
         funcName: "gpii.test.cloudBased.oauth2.sendRequestWithAccessToken",
-        args: ["{untrustedSettingsRequest}", "a_wrong_access_token"]
+        args: ["{settingsRequest}", "a_wrong_access_token"]
     },
     {
-        event: "{untrustedSettingsRequest}.events.onComplete",
+        event: "{settingsRequest}.events.onComplete",
         listener: "gpii.test.verifyStatusCodeResponse",
-        args: ["{arguments}.0", "{untrustedSettingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
+        args: ["{arguments}.0", "{settingsRequest}", "{testCaseHolder}.options.expectedStatusCode"]
     }
 ];
 
-fluid.defaults("gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.untrustedSettingsWrongAccessTokenSequence", {
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAccessTokenSequence", {
     gradeNames: ["gpii.test.disruption"],
-    testCaseGradeNames: "gpii.tests.cloud.oauth2.untrustedSettingsGet.requests",
-    sequenceName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.untrustedSettingsWrongAccessTokenSequence"
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsGet.requests",
+    sequenceName: "gpii.tests.cloud.oauth2.settingsGet.settingsWrongAccessTokenSequence"
 });
 
 // Main tests that contain all test cases
-gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
+gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     // Succesful use cases that request user settings with proper access tokens granted via Resource Owner GPII key grant
     {
         testDef: {
@@ -237,7 +237,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             username: "os_gnome",
             password: "dummy",
 
-            // The options below are required for sending /untrusted-settings
+            // The options below are required for sending /settings
             gpiiKey: "os_gnome",
             expectedMatchMakerOutput: {
                 "inferredConfiguration": {
@@ -280,7 +280,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             }
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.mainSequence"
+            gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.mainSequence"
         }]
     },
 
@@ -293,7 +293,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             username: "os_gnome",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithMissingGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithMissingGrantArgs
     },
     {
         testDef: {
@@ -303,7 +303,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             username: "alice_gpii_key",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithWrongGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
     },
     {
         testDef: {
@@ -313,7 +313,7 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             username: "alice_gpii_key",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithWrongGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
     },
     {
         testDef: {
@@ -323,17 +323,17 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             username: "nonexistent_gpii_key",
             password: "dummy"
         },
-        disruptions: gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptionsWithWrongGrantArgs
+        disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
     },
 
-    // Rejected by /untrusted-settings endpoint
+    // Rejected by /settings endpoint
     {
         testDef: {
             name: "Attempt to retrieve user settings without providing an access token",
             gpiiKey: "os_gnome"
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.untrustedSettingsNoAccessTokenSequence",
+            gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessTokenSequence",
             expectedStatusCode: 401
         }]
     },
@@ -343,13 +343,13 @@ gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests = [
             gpiiKey: "os_gnome"
         },
         disruptions: [{
-            gradeName: "gpii.tests.cloud.oauth2.untrustedSettingsGet.disruption.untrustedSettingsWrongAccessTokenSequence",
+            gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAccessTokenSequence",
             expectedStatusCode: 401
         }]
     }
 ];
 
-fluid.each(gpii.tests.cloud.oauth2.untrustedSettingsGet.disruptedTests, function (oneTest) {
+fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
     gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,
         {},
