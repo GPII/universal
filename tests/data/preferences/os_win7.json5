@@ -49,6 +49,12 @@
                             "value": true
                         }
                     },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.fontSize": {
+                        "CaptionFont": {
+                            "path": "pvParam.lfCaptionFont.lfHeight",
+                            "value": -9
+                        },
+                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.cursors": {
                         "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
                         "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
@@ -100,7 +106,7 @@
                         "EnableAutoShiftEngage": 1,
                         "EnableShiftLock": 1,
                         "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1 
+                        "EnableDesktopModeAutoInvoke": 1
                     }
                 }
             }
