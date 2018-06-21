@@ -85,7 +85,7 @@ gpii.tests.journal.initialSettings = {
         }]
     },
     "gpii.windows.systemSettingsHandler": {
-        "some.app.id": [
+        "com.microsoft.windows.nightScreen": [
             {
                 "settings": {
                     "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
