@@ -3221,7 +3221,7 @@
                             "title": "Digits number in decimal representation",
                             "description": "Number of digits to be shown in decimal representation",
                             "type": "number",
-                            "range": "[0..9]"
+                            "range": "0..9"
                         }
                     },
                     "sThousand": {
@@ -3236,7 +3236,7 @@
                             "title": "Digits grouping format",
                             "description": "Format for grouping digits",
                             "type": "string",
-                            "enum": "[0;0, 3;0, 3;0;0, 3;2;0]",
+                            "enum": ["0;0", "3;0", "3;0;0", "3;2;0"],
                             "outputFormat": "[123456789 - 123,456,789 - 123456,789, 12,34,56,789]"
                         }
                     },
@@ -3252,8 +3252,8 @@
                             "title": "Negative number format",
                             "description": "Fomat for representing negative values",
                             "type": "number",
-                            "range": "[0..9]",
-                            "outputFormat": "[(1.1),-1.1,- 1.1,1.1-,1.1 -]"
+                            "range": "0..9",
+                            "outputFormat": ["(1.1)","-1.1","- 1.1","1.1-","1.1 -"]
                         }
                     },
                     "iLZero": {
@@ -3343,7 +3343,7 @@
                     "iCurrency": {
                         "schema": {
                             "title": "Positive currency format",
-                            "description": "Format in which express money cuantities",
+                            "description": "Format in which express money quantities",
                             "type": "number",
                             "range": "0..3",
                             "outputFormat": ["$1.1", "1.1$", "$ 1.1", "1.1 $"]
@@ -3352,7 +3352,7 @@
                     "iNegCurr": {
                         "schema": {
                             "title": "Negative currency format",
-                            "description": "Format in which express negative money cuantities",
+                            "description": "Format in which express negative money quantities",
                             "type": "number",
                             "range": "0..5",
                             "outputFormat": ["($1.1)", "-$1.1", "$-1.1", "$1.1-", "($1.1)", "-1.1$"]
