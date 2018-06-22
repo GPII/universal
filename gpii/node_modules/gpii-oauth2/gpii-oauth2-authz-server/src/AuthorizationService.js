@@ -114,7 +114,8 @@ var fluid = fluid || require("infusion");
      * @param {String} clientId - An unique client id.
      * @param {String} clientCredentialId - An unique client credential id.
      * @param {String} expiresIn - The lifetime in seconds of the access token.
-     * @return: None. The first argument of promiseTogo contains returned values.
+     *
+     * If promiseTogo is fired, the first argument will be the returned values.
      */
     gpii.oauth2.authorizationService.createGpiiAppInstallationAuthorization = function (promiseTogo, dataStore, codeGenerator, gpiiKey, clientId, clientCredentialId, expiresIn) {
         var accessToken = codeGenerator.generateAccessToken();
