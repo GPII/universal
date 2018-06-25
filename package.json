@@ -49,16 +49,6 @@
         "testem": "2.6.0",
         "url": "0.11.0"
     },
-    "oldDeps": {
-        "jsonlint": "1.6.3",
-        "gpii-grunt-mdjson-lint": "1.0.0-dev.20171024T123903Z.3c91988",
-        "grunt-jsonlint": "1.1.0",
-        "grunt-markdownlint": "1.1.6",
-        "eslint-config-fluid": "1.3.0",
-        "eslint-plugin-markdown": "1.0.0-beta.6",
-        "fluid-grunt-eslint": "18.1.2",
-        "fluid-grunt-json5lint": "1.0.0"
-    },
     "license": "BSD-3-Clause",
     "keywords": [
         "gpii",
