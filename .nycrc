@@ -96,6 +96,7 @@
     "!**/gpii/node_modules/testing/index.js",
     "!**/gpii/node_modules/testing/src/PouchTestCaseHolder.js",
     "!**/gpii/node_modules/testing/src/Acceptance.js",
+    "!**/gpii/node_modules/testing/src/CloudBased.js",
     "!**/gpii/node_modules/testing/src/CloudBasedOAuth2TestsUtils.js",
     "!**/gpii/node_modules/testing/src/BrowserIncludes.js",
     "!**/gpii/node_modules/testing/src/NockUtils.js",
