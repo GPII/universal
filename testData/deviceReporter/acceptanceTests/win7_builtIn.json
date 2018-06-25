@@ -45,6 +45,10 @@
 
     {
         "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
+        "id": "com.microsoft.windows.language"
     }
 
 ]
