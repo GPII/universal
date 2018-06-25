@@ -1325,18 +1325,14 @@
         },
         "configure": [
             "settings.configure1",
-            "settings.configure2"
-        ],
-        "restore": [
-            "settings.configure1",
-            "settings.configure2"
-        ],
-        "start": [
+            "settings.configure2",
             {
                 "type": "gpii.windows.restartExplorer"
             }
         ],
-        "stop": [
+        "restore": [
+            "settings.configure1",
+            "settings.configure2",
             {
                 "type": "gpii.windows.restartExplorer"
             }
@@ -3406,7 +3402,7 @@
             }
         ]
     },
-    "net.gpii.test.speechControl": { 
+    "net.gpii.test.speechControl": {
     // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
     // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
@@ -3441,11 +3437,11 @@
         ],
         "isRunning": []
     },
-    
-    "net.gpii.explode": { 
-    // This solution exists only to support manual and automated testing of GPII's error support. It references the 
+
+    "net.gpii.explode": {
+    // This solution exists only to support manual and automated testing of GPII's error support. It references the
     // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
-    // get, set or launch settingsHandler action 
+    // get, set or launch settingsHandler action
         "name": "GPII Test solution for triggering settingsHandler errors",
         "contexts": {
             "OS": [
