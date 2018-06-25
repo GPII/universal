@@ -30,14 +30,6 @@ fluid.require("%gpii-universal", require);
 
 var testIncludes = [
     "./DevelopmentTests.js",
-    "./platform/cloud/AcceptanceTests_chrome.js",
-    "./platform/cloud/AcceptanceTests_easit4all.js",
-    "./platform/cloud/AcceptanceTests_empty.js",
-    "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
-    "./platform/cloud/AcceptanceTests_jme.js",
-    "./platform/cloud/AcceptanceTests_olb.js",
-    "./platform/cloud/AcceptanceTests_smarthouses.js",
-    "./platform/cloud/AcceptanceTests_tvm.js",
     "./platform/cloud/AcceptanceTests_settingsGet.js",
     "./platform/cloud/AcceptanceTests_settingsPut.js",
     "./CloseConflictingAppsTests.js",

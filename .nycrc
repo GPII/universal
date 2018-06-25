@@ -100,7 +100,6 @@
     "!**/gpii/node_modules/testing/src/BrowserIncludes.js",
     "!**/gpii/node_modules/testing/src/NockUtils.js",
     "!**/gpii/node_modules/testing/src/Testing.js",
-    "!**/gpii/node_modules/testing/src/CloudBased.js",
     "!**/gpii/node_modules/testing/src/Mocks.js",
     "!**/gpii/node_modules/testing/src/Integration.js",
     "testData",
