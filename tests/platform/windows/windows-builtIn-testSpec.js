@@ -346,6 +346,15 @@ gpii.tests.windows.builtIn = [
                         ]
                     }
                 }]
+            },
+            "gpii.windows.systemSettingsHandler": {
+                "com.microsoft.windows.nightScreen": [{
+                    "settings": {
+                        "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                            "value": false
+                        }
+                    }
+                }]
             }
         }
     }, {
