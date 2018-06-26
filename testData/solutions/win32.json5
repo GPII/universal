@@ -16,6 +16,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
+                    // TODO: Break out version somehow, as 18 is now available.  What do the AJCs have now?
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
@@ -42,27 +43,28 @@
                             ]
                         }
                     },
-                    // TODO: Verify this as the spreadsheet is largely incomplete.
+                    // TODO: Verify, especially confirm the default.
                     "options.Acronyms": {
                         "schema": {
                             "title": "Acronyms",
-                            "description": "Whether to expand acronyms.",
+                            "description": "Whether to expand acronyms.  If this is enabled, acronyms with a title attribute will have their title read instead of the on screen text.",
                             "type": "number",
                             "default": 0,
                             "enum": [0,1],
                             "enumLabels": ["off", "on"]
                         }
                     },
-                    // TODO: Verify this as the spreadsheet has no description.
+                    // TODO: Ask about the related Abbreviations setting.
+                    // TODO: Verify
                     "options.AllCapsIndicator": {
                         "schema": {
                             "title": "AllCapsIndicator",
                             "description": "The text to read before text that appears in all capital letters.",
                             "type": "string",
-                            "default": "all caps"
+                            "default": "all cap"
                         }
                     },
-                    // TODO: Verify this as the spreadsheet is largely incomplete.
+                    // TODO: How can we even verify this?
                     "options.BrailleDisplay": {
                         "schema": {
                             "title": "BrailleDisplay",
@@ -151,6 +153,7 @@
                         }
                     },
                     // TODO: Get more details for this setting.
+                    // There's not even anything in the JAWS documentation.
                     "options.DosScreenReader": {
                         "schema": {
                             "title": "DosScreenReader",
@@ -176,7 +179,7 @@
                     "options.Indentation": {
                         "schema": {
                             "title": "Indentation",
-                            "description": "whether or not to indicate indentation",
+                            "description": "whether or not to indicateSayu indentation",
                             "type": "number",
                             "default": 0,
                             "enum": [0, 1],
@@ -190,6 +193,7 @@
                             "description": "set to 1 to enable announcement of attributes etc in dialogs and menus if the scheme allows for it",
                             "type": "number",
                             "default": 0,
+                            // TODO: All of these 0,1 examples are a firm use case for an application-specific transform mechanism so that our JSON payloads can use true/false.
                             "enum": [0, 1],
                             "enumLabels": ["off", "on"]
                         }
@@ -202,6 +206,7 @@
                             "type": "number",
                             "default": 0,
                             "enum": [0, 1, 2, 3],
+                            // TODO: Once this is moved into the LSR, these will all be message keys.
                             "enumLabels": [
                                 "Off",
                                 "indicate caps when spelling or when navigating by character",
@@ -503,11 +508,11 @@
                     "options.SayNumericDates": {
                         "schema": {
                             "title": "SayNumericDates",
-                            "description": "Whether to announce numeric dates.",
+                            "description": "How to announce numeric dates.  With no translation, dates are read as numbers.  With some translation, dd-mm-yy values are read as text.  With extended translation, both dd-mm-yy and dd-mm values are read as text.",
                             "type": "number",
                             "default": 0,
-                            "enum": [0, 1],
-                            "enumLabels": ["off", "on"]
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["no translation", "some translation", "extended translation"]
                         }
                     },
                     // TODO: Verify what this does and fill in the description.
@@ -627,13 +632,15 @@
                             "default": "Synth1"
                         }
                     },
-                    // TODO: Verify and come up with a better description.  What units are these?  Are decimals allowed?
+                    // TODO: Verify
                     "options.SynthesizerResetFrequency": {
                         "schema": {
                             "title": "SynthesizerResetFrequency",
-                            "description": "The reset frequency of the synthesizer.",
+                            "description": "How often to reset communication with the synthesizer, in milliseconds.",
                             "type": "number",
-                            "default": 2000
+                            "default": 2000,
+                            "multipleOf": 1,
+                            "minValue": 0
                         }
                     },
                     // TODO: Verify
@@ -649,6 +656,7 @@
                         }
                     },
                     // TODO: Verify and fill in the description.
+                    // Can't find information in the help file.
                     "options.TreeViewCheckBoxes": {
                         "schema": {
                             "title": "TreeViewCheckBoxes",
@@ -683,7 +691,7 @@
                     "options.TypingInterrupt": {
                         "schema": {
                             "title": "TypingInterrupt",
-                            "description": "",
+                            "description": "Whether to stop speaking when the user types.",
                             "type": "number",
                             "default": 1,
                             "enum": [0, 1],
