@@ -586,16 +586,16 @@
                         }
                     },
                     // TODO: Verify what type of setting this even is.
-//                    "options.SleepMode": {
-//                        "schema": {
-//                            "title": "SleepMode",
-//                            "description": "",
-//                            "type": "",
-//                            "default": 0,
-//                            "enum": [],
-//                            "enumLabels": []
-//                        }
-//                    },
+                    "options.SleepMode": {
+                        "schema": {
+                            "title": "SleepMode",
+                            "description": "",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [ 0, 1 ],
+                            "enumLabels": [ "off", "on" ]
+                        }
+                    },
                     // TODO: Verify what type of setting this even is and that the description is accurate.
                     "options.SpeakANSIChars": {
                         "schema": {
@@ -759,6 +759,7 @@
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "literalValue": "GPII"
                     },
+                    // TODO: Discuss this, as it doesn't seem to match the actual value space JAWS uses directly.
                     "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
                     "options\\.TypingEcho": {
                         // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
@@ -811,6 +812,7 @@
                             }
                         }
                     },
+                    // TODO: Same question about the value space here.
                     "options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
                 },
                 "inverseCapabilitiesTransformations": {
