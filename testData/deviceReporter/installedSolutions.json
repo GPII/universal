@@ -56,6 +56,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.audioDescription"
+    },
+
+    {
         "id": "com.microsoft.windows.stickyKeys"
     },
 
