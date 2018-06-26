@@ -21,11 +21,6 @@
                 "target": "{that kettle.server}.options.port",
                 "priority": "after:distributePort.productionPort"
             },
-            "flowManager.production.matchMakers": {
-                "record": "@expand:kettle.resolvers.env(GPII_FLOWMANAGER_MATCHMAKER_URL)",
-                "target": "{that flowManager}.options.matchMakers.default.url",
-                "priority": "after:flowManager.development.matchMakers"
-            },
             "flowManager.production.dataStore": {
                 "source": "{that}.options.dataSourceConfigProductionEnv",
                 "target": "{that flowManager oauth2DataStore}.options.dataSourceConfig",
