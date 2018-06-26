@@ -10,7 +10,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-
 "use strict";
 
 var fluid = require("infusion"),
@@ -83,6 +82,17 @@ gpii.tests.journal.initialSettings = {
                 "screen-dpi": 1
             }
         }]
+    },
+    "gpii.windows.systemSettingsHandler": {
+        "com.microsoft.windows.nightScreen": [
+            {
+                "settings": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "value": false
+                    }
+                }
+            }
+        ]
     },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{

@@ -8,7 +8,6 @@
     3. Avoid using the normal "generated options merging" from gpii.testem.
 
  */
-/* eslint-env node */
 "use strict";
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
