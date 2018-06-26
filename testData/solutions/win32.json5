@@ -18,34 +18,434 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": { // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
-                // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
-                // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
-                    "Voice Profiles.ActiveVoiceProfileName": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                "supportedSettings": {
+                    // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
+                    // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
+                    // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
+                    "Braille.BrailleMode": {
                         "schema": {
-                            "title": "Active Voice Profile Name",
-                            "description": "The active voice profile",
-                            "type": "string",
-                            "default": "GPII"
+                            "title": "Braille mode",
+                            "description": "",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "line",
+                                "structured",
+                                "speech output",
+                                "attribute indicators"
+                            ]
                         }
                     },
-                    "options.SayAllIndicateCaps": { // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
+                    // TODO: Verify this as the spreadsheet is largely incomplete.
+                    "options.Acronyms": {
+                        "schema": {
+                            "title": "Acronyms",
+                            "description": "Whether to expand acronyms.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0,1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify this as the spreadsheet has no description.
+                    "options.AllCapsIndicator": {
+                        "schema": {
+                            "title": "AllCapsIndicator",
+                            "description": "The text to read before text that appears in all capital letters.",
+                            "type": "string",
+                            "default": "all caps"
+                        }
+                    },
+                    // TODO: Verify this as the spreadsheet is largely incomplete.
+                    "options.BrailleDisplay": {
+                        "schema": {
+                            "title": "BrailleDisplay",
+                            "description": "The braille display to use.",
+                            "type": "string",
+                            "default": "Braille1"
+                        }
+                    },
+                    // TODO: Verify this.
+                    "options.CapIndicator": {
+                        "schema": {
+                            "title": "CapIndicator",
+                            "description": "The text to read before a capital letter.",
+                            "type": "string",
+                            "default": "cap"
+                        }
+                    },
+                    // TODO: Verify this.
+                    "options.CaretBlinkRate": {
+                        "schema": {
+                            "title": "CaretBlinkRate",
+                            "description": "how fast the caret blinks, milliseconds on/off",
+                            "type": "number",
+                            "default": 53,
+                            "multipleOf": 1,
+                            "minValue": 1
+                        }
+                    },
+                    // TODO: Verify
+                    "options.CaretDetect": {
+                        "schema": {
+                            "title": "CaretDetect",
+                            "description": "how many cursor blinks are used to locate the caret",
+                            "type": "number",
+                            "default": 1,
+                            "minValue": 1,
+                            "multipleOf": 1
+                        }
+                    },
+                    // TODO: Verify
+                    "options.CaretDetectTimeOut": {
+                        "schema": {
+                            "title": "CaretDetectTimeOut",
+                            "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret",
+                            "type": "number",
+                            "default": 250,
+                            "minValue": 0,
+                            "multipleOf": 1
+                        }
+                    },
+                    // TODO: Verify
+                    "options.Case": {
+                        "schema": {
+                            "title": "Case",
+                            "description": "Indicate case of spoken text with inflection change",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0,1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.CustomPageSummary": {
+                        "schema": {
+                            "title": "CustomPageSummary",
+                            "description": "this setting determines what happens when a virtual document loads for which a custom page summary has been defined 0 do nothing (a SayAll will be started as normal) 1 The summary will be spoken and focus left on the page at the place defined by the page 2 the summary will be presented in the virtual viewer for the user to immediately read. The user must press Escape to return to the actual document. Note this setting should generally be set from Personalized Web Settings",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2],
+                            "enumLabels": [
+                                "do nothing (a SayAll will be started as normal)",
+                                "The summary will be spoken and focus left on the page at the place defined by the page",
+                                "the summary will be presented in the virtual viewer for the user to immediately read"
+                            ]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.Dictionary": {
+                        "schema": {
+                            "title": "Dictionary",
+                            "description": "process text through the dictionary 0=off, 1 on",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Get more details for this setting.
+                    "options.DosScreenReader": {
+                        "schema": {
+                            "title": "DosScreenReader",
+                            "description": "",
+                            "type": "",
+                            "default": 0,
+                            "enum": [],
+                            "enumLabels": []
+                        }
+                    },
+                    // TODO: Get more details for this setting.
+                    "options.Filter": {
+                        "schema": {
+                            "title": "Filter",
+                            "description": "filter repetitive characters after this many of them",
+                            "type": "number",
+                            "default": 3,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": []
+                        }
+                    },
+                    // TODO: Verify
+                    "options.Indentation": {
+                        "schema": {
+                            "title": "Indentation",
+                            "description": "whether or not to indicate indentation",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.IndicateAttributesInDialogsAndMenus": {
+                        "schema": {
+                            "title": "IndicateAttributesInDialogsAndMenus",
+                            "description": "set to 1 to enable announcement of attributes etc in dialogs and menus if the scheme allows for it",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.IndicateCaps": {
+                        "schema": {
+                            "title": "IndicateCaps",
+                            "description": "When to indicate the presence of capital letters.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": [
+                                "Off",
+                                "indicate caps when spelling or when navigating by character",
+                                "also indicate caps when reading by words",
+                                "also indicate caps when reading by lines"
+                            ]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.IndicateNewlinesAndParagraphs": {
+                        "schema": {
+                            "title": "IndicateNewlinesAndParagraphs",
+                            "description": "Whether/how to indicate the presence of new lines and paragraphs.",
+                            "type": "",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3, 4],
+                            "enumLabels": [
+                                "off",
+                                "indicate when typing and the editor or wordprocessor wraps to a new line",
+                                "indicate when arrowing left/right or using left/right with modifiers",
+                                "indicate when typing and also when arrowing. the method of indication is controlled by the Speech and Sounds scheme in use",
+                                "indicate when reading text containing newline characters bitwise or the values together to indicate in multiple contexts eg a value of"
+                            ]
+                        }
+                    },
+                    // TODO: Get more information
+                    "options.IndicateSelected": {
+                        "schema": {
+                            "title": "IndicateSelected",
+                            "description": "",
+                            "type": "number",
+                            "default": 2,
+                            "enum": [0, 1, 2],
+                            "enumLabels": []
+                        }
+                    },
+                    // TODO: Verify
+                    "options.InsertKeyMode": {
+                        "schema": {
+                            "title": "InsertKeyMode",
+                            "description": "operating mode of insert key 0=JAWS, 1= Sticky",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["JAWS", "Sticky"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.JAWSInsertKey": {
+                        "schema": {
+                            "title": "JAWSInsertKey",
+                            "description": "",
+                            "type": "",
+                            "default": 0,
+                            "enum": [],
+                            "enumLabels": []
+                        }
+                    },
+                    // TODO: Verify
+                    "options.JAWSPunctuationEnabled": {
+                        "schema": {
+                            "title": "JAWSPunctuationEnabled",
+                            "description": "Which insert keys can be used as a JAWS Insert 0=none 1=Numpad Insert 2=Extended Insert 3=both Numpad and Extended",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": [ "none", "Numpad Insert", "Extended Insert", "both Numpad and Extended" ]
+                        }
+                    },
+                    // TODO: See if there is documentation on the supported options.
+                    "options.KeyboardType": {
+                        "schema": {
+                            "title": "KeyboardType",
+                            "description": "Can be one of the types defined in default.jkm",
+                            "type": "string",
+                            "default": "Laptop"
+                        }
+                    },
+                    // TODO: Test this and improve the description
+                    "options.KeyRepeat": {
+                        "schema": {
+                            "title": "KeyRepeat",
+                            "description": "0=off, 1 = on",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.LanguageDetection": {
+                        "schema": {
+                            "title": "LanguageDetection",
+                            "description": "automatic Language detection, 1 on, 0 off",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.LeftShiftSkipBack": {
+                        "schema": {
+                            "title": "LeftShiftSkipBack",
+                            "description": "1=during SayAll, left shift will skip back and right shift will skip forward 0=vice versa",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": [
+                                "during SayAll, right shift will skip back and left shift will skip forward",
+                                "during SayAll, left shift will skip back and right shift will skip forward"
+                            ]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.LinePauses": {
+                        "schema": {
+                            "title": "LinePauses",
+                            "description": "pause at end of a line 0=off, 1=on",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify this and improve the description.
+                    "options.ListBoxCheckBoxes": {
+                        "schema": {
+                            "title": "ListBoxCheckBoxes",
+                            "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["off", "non-ownerdrawn listboxes", "also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style."]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.MixedCase": {
+                        "schema": {
+                            "title": "MixedCase",
+                            "description": "words with embedded capital letters are spoken as separate words 0=off, 1 = on",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.Numbers": {
+                        "schema": {
+                            "title": "Numbers",
+                            "description": "How to announce numbers.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["off (handled by synth)", "digits", "pairs", "full numbers"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.ProcessToolTipEvent": {
+                        "schema": {
+                            "title": "ProcessToolTipEvent",
+                            "description": "Whether or not to process tooltip events.",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["on", "off"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.ProgressBarUpdateInterval": {
+                        "schema": {
+                            "title": "ProgressBarUpdateInterval",
+                            "description": "0 don't announce ProgressBar updates, non-zero value specifies time in milliseconds which must elapse before the next update is announced",
+                            "type": "number",
+                            "default": 5000,
+                            "multipleOf": 1,
+                            "minValue": 0
+                        }
+                    },
+                    // TODO: Verify
+                    "options.QuickKeyNavigationMode": {
+                        "schema": {
+                            "title": "QuickKeyNavigationMode",
+                            "description": "Currently this option is linked to the virtual cursor only 0 off, 1 on, 2 only on during SayAll",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["off", "on", "only on during SayAll"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.ReadingInterrupt": {
+                        "schema": {
+                            "title": "ReadingInterrupt",
+                            "description": "pressing a key that is bound to a macro will interrupt speech 0=off, 1 = on",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.Repetitions": {
+                        "schema": {
+                            "title": "Repetitions",
+                            "description": "Whether or not to indicate repeated characters, 1 on, 0 off",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    "options.SayAllIgnoreShiftKeys": {
+                        "schema": {
+                            "title": "SayAll Ignore Shift Keys",
+                            "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "on",
+                                "off"
+                            ]
+                        }
+                    },
+                    "options.SayAllIndicateCaps": {
+                        // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
                         "schema": {
                             "title": "Announce capitals",
                             "description": "During SayAll, indicate initial cap or capitalized word",
-                            "type": "boolean",
-                            "default": 0
-                        }
-                    },
-                    "options.TypingEcho": {
-                        "schema": {
-                            "title": "Typing echo",
-                            "description": "Typing echo mode, its value can be either character, word, char&Word or none",
                             "type": "number",
                             "default": 0,
-                            "enum": [0, 1, 2, 3]
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "off", 1: "character", 2: "words", 3: "character and words"
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "on",
+                                "off"
+                            ]
                         }
                     },
                     "options.SayAllMode": {
@@ -54,28 +454,304 @@
                             "description": "Sets the amount of text which SayAll sends to the synthesizer as a single unit",
                             "type": "number",
                             "default": 0,
-                            "enum": [0, 1, 2]
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "line", 1: "sentence", 2: "paragraph"
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "line",
+                                "sentence",
+                                "paragraph"
+                            ]
                         }
                     },
-                    "Braille.BrailleMode": {
+                    // TODO: Verify what this does and fill in the description.
+                    "options.SayBlankLineCount": {
                         "schema": {
-                            "title": "Braille mode",
+                            "title": "SayBlankLineCount",
+                            "description": "Whether to announce the number of blank lines.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify what this does and fill in the description.
+                    "options.SayCursorShapeChange": {
+                        "schema": {
+                            "title": "SayCursorShapeChange",
+                            "description": "Whether to announce a change in the shape of the cursor.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify what this does and fill in the description.
+                    "options.SayDollars": {
+                        "schema": {
+                            "title": "SayDollars",
+                            "description": "Whether to announce currency symbols.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify what this does and fill in the description.
+                    "options.SayNumericDates": {
+                        "schema": {
+                            "title": "SayNumericDates",
+                            "description": "Whether to announce numeric dates.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify what this does and fill in the description.
+                    "options.SaySelectedFirst": {
+                        "schema": {
+                            "title": "SaySelectedFirst",
+                            "description": "Whether to announce the selected text first.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify working.
+                    "options.SayStateFirst": {
+                        "schema": {
+                            "title": "SayStateFirst",
+                            "description": "Whether to announce the window state before title/text.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.SayWindowTypeFirst": {
+                        "schema": {
+                            "title": "SayWindowTypeFirst",
+                            "description": "Say Window type before window title/text 0=off, 1 = on",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify. Figure out if there are other valid options.
+                    "options.Scheme": {
+                        "schema": {
+                            "title": "Scheme",
+                            "description": "Whether or not to intercept CreateDIBSection Note that this value is only read once per JAWS session at startup thus changing this value while JAWS is running has no effect.",
+                            "type": "string",
+                            "default": "Classic"
+                        }
+                    },
+                    // TODO: Verify and come up with a better description.
+                    "options.ScreenEcho": {
+                        "schema": {
+                            "title": "ScreenEcho",
+                            "description": "0=off, 1= highlight, 2 = all",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["off", "highlight", "all"]
+                        }
+                    },
+                    // TODO: Verify and come up with a description.
+                    "options.SimultaneousSynthAndWave": {
+                        "schema": {
+                            "title": "SimultaneousSynthAndWave",
+                            "description": "",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.SkimReadingIndication": {
+                        "schema": {
+                            "title": "SkimReadingIndication",
+                            "description": "Whether or not to indicate (via a beep) when skimming over text units for which the regular expression returns FALSE. 0=off, 1=on (beep every 20 units skimmed over)",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [ 0, 1 ],
+                            "enumLabels": [ "off", "on" ]
+                        }
+                    },
+                    // TODO: Verify what type of setting this even is.
+//                    "options.SleepMode": {
+//                        "schema": {
+//                            "title": "SleepMode",
+//                            "description": "",
+//                            "type": "",
+//                            "default": 0,
+//                            "enum": [],
+//                            "enumLabels": []
+//                        }
+//                    },
+                    // TODO: Verify what type of setting this even is and that the description is accurate.
+                    "options.SpeakANSIChars": {
+                        "schema": {
+                            "title": "SpeakANSIChars",
+                            "description": "Whether or not to announce ANSI characters.",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [ 0, 1 ],
+                            "enumLabels": [ "off", "on" ]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.SpellPhonetic": {
+                        "schema": {
+                            "title": "SpellPhonetic",
+                            "description": "How to announce word spellings.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["spell normal", "spell phonetic"]
+                        }
+                    },
+                    // TODO: Verify.  Look at the INI file and suggest defaults?
+                    "options.Synthesizer": {
+                        "schema": {
+                            "title": "Synthesizer",
+                            "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
+                            "type": "string",
+                            "default": "Synth1"
+                        }
+                    },
+                    // TODO: Verify and come up with a better description.  What units are these?  Are decimals allowed?
+                    "options.SynthesizerResetFrequency": {
+                        "schema": {
+                            "title": "SynthesizerResetFrequency",
+                            "description": "The reset frequency of the synthesizer.",
+                            "type": "number",
+                            "default": 2000
+                        }
+                    },
+                    // TODO: Verify
+                    "options.TetherJawsToPC": {
+                        "schema": {
+                            "title": "TetherJawsToPC",
+                            "description": "Whether or not to tether the JAWS cursor to the PC cursor.  If this is set to 'on', whenever the Pc cursor moves, the Jaws cursor will follow it. If this is set to 'off', the JAWS cursor is indifferent to Pc cursor movements (this is the default).",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+
+                        }
+                    },
+                    // TODO: Verify and fill in the description.
+                    "options.TreeViewCheckBoxes": {
+                        "schema": {
+                            "title": "TreeViewCheckBoxes",
                             "description": "",
                             "type": "number",
                             "default": 1,
-                            "enum": [0, 1, 2, 3]
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "line", 1: "structured", 2: "speech output", 3: "attribute indicators"
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
                         }
                     },
-                    "options.SayAllIgnoreShiftKeys": {
+                    "options.TypingEcho": {
                         "schema": {
-                            "title": "SayAll Ignore Shift Keys",
-                            "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
-                            "type": "boolean",
-                            "default": 0
+                            "title": "Typing echo",
+                            "description": "Typing echo mode, its value can be either character, word, char&Word or none",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "character",
+                                "words",
+                                "character and words"
+                            ]
+                        }
+                    },
+                    // TODO: Verify and fill this out further.
+                    "options.TypingInterrupt": {
+                        "schema": {
+                            "title": "TypingInterrupt",
+                            "description": "",
+                            "type": "number",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.UseExtendedKeys": {
+                        "schema": {
+                            "title": "UseExtendedKeys",
+                            "description": "Determines whether Extended and Numpad keys should be processed separately. 0=Treat Extended and Numpad keys the same 1=Differentiate between Extended and Numpad keys",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["Treat Extended and Numpad keys the same", "Differentiate between Extended and Numpad keys"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.UseVirtualInfoInFormsMode": {
+                        "schema": {
+                            "title": "UseVirtualInfoInFormsMode",
+                            "description": "Whether to use information from the virtual HTML area for prompts in Forms mode. Warning: this will not always result in accurate information, particularly on pages where there are errors in the HTML coding which result in forms mode and virtual mode being out of synchronization",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify and fill this out.
+                    "options.UseWindowsKeyboardHook": {
+                        "schema": {
+                            "title": "UseWindowsKeyboardHook",
+                            "description": "",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.Verbosity": {
+                        "schema": {
+                            "title": "Verbosity",
+                            "description": "how much speech to say beginner=0 (most speech), intermediate = 1, advanced = 2 (least speech)",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["most speech", "intermediate", "least speech"]
+                        }
+                    },
+                    // TODO: Verify
+                    "options.VIRTUALMSAAREFRESH": {
+                        "schema": {
+                            "title": "VIRTUALMSAAREFRESH",
+                            "description": "determines how often an embedded ActiveX control causes the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA 0 means allow refresh rate to be dictated by MSAA a positive number means only refresh every X miliseconds -1 means don't refresh at all.",
+                            "type": "number",
+                            "default": 0,
+                            "multipleOf": 1,
+                            "minValue": -1
+                        }
+                    },
+                    // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                    "Voice Profiles.ActiveVoiceProfileName": {
+                        "schema": {
+                            "title": "Active Voice Profile Name",
+                            "description": "The active voice profile",
+                            "type": "string",
+                            "default": "GPII"
                         }
                     }
                 },
@@ -84,7 +760,8 @@
                         "literalValue": "GPII"
                     },
                     "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "options\\.TypingEcho": { // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                    "options\\.TypingEcho": {
+                        // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -141,14 +818,18 @@
                     "http://registry\\.gpii\\.net/common/keyEcho": {
                         "transform": {
                             "type": "valueMapper",
-                            "defaultInputPath": "options\\.TypingEcho", // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
-                            "match": [{
-                                inputValue: 1,
-                                outputValue: true
-                            }, {
-                                inputValue: 3,
-                                outputValue: true
-                            }],
+                            "defaultInputPath": "options\\.TypingEcho",
+                            // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                            "match": [
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": true
+                                },
+                                {
+                                    "inputValue": 3,
+                                    "outputValue": true
+                                }
+                            ],
                             "noMatch": {
                                 "outputValue": false
                             }
@@ -157,14 +838,18 @@
                     "http://registry\\.gpii\\.net/common/wordEcho": {
                         "transform": {
                             "type": "valueMapper",
-                            "defaultInputPath": "options\\.TypingEcho", // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
-                            "match": [{
-                                inputValue: 2,
-                                outputValue: true
-                            }, {
-                                inputValue: 3,
-                                outputValue: true
-                            }],
+                            "defaultInputPath": "options\\.TypingEcho",
+                            // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                            "match": [
+                                {
+                                    "inputValue": 2,
+                                    "outputValue": true
+                                },
+                                {
+                                    "inputValue": 3,
+                                    "outputValue": true
+                                }
+                            ],
                             "noMatch": {
                                 "outputValue": false
                             }
@@ -174,32 +859,40 @@
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "options\\.SayAllMode",
-                            "match": [{
-                                inputValue: 0,
-                                outputValue: "line"
-                            }, {
-                                inputValue: 1,
-                                outputValue: "sentence"
-                            }, {
-                                inputValue: 2,
-                                outputValue: "paragraph"
-                            }]
+                            "match": [
+                                {
+                                    "inputValue": 0,
+                                    "outputValue": "line"
+                                },
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": "sentence"
+                                },
+                                {
+                                    "inputValue": 2,
+                                    "outputValue": "paragraph"
+                                }
+                            ]
                         }
                     },
                     "http://registry\\.gpii\\.net/common/brailleMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "Braille\\.BrailleMode",
-                            "match": [{
-                                inputValue: 0,
-                                outputValue: "line"
-                            }, {
-                                inputValue: 1,
-                                outputValue: "structured"
-                            }, {
-                                inputValue: 2,
-                                outputValue: "speechHistory"
-                            }]
+                            "match": [
+                                {
+                                    "inputValue": 0,
+                                    "outputValue": "line"
+                                },
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": "structured"
+                                },
+                                {
+                                    "inputValue": 2,
+                                    "outputValue": "speechHistory"
+                                }
+                            ]
                         }
                     }
                 }
@@ -330,42 +1023,42 @@
                         }
                     },
                     "ENU-Global\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-JAWSCursor\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-Keyboard\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-MenuAndDialog\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-Message\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-PCCursor\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
@@ -564,7 +1257,7 @@
                         }
                     },
                     "http://registry\\.gpii\\.net/common/volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "ENU-Global\\.Volume",
                             "factor": 0.01
@@ -574,19 +1267,24 @@
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "ENU-Global\\.Punctuation",
-                            "match": [{
-                                inputValue: 0,
-                                outputValue: "none"
-                            }, {
-                                inputValue: 1,
-                                outputValue: "some"
-                            }, {
-                                inputValue: 2,
-                                outputValue: "most"
-                            }, {
-                                inputValue: 3,
-                                outputValue: "all"
-                            }]
+                            "match": [
+                                {
+                                    "inputValue": 0,
+                                    "outputValue": "none"
+                                },
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": "some"
+                                },
+                                {
+                                    "inputValue": 2,
+                                    "outputValue": "most"
+                                },
+                                {
+                                    "inputValue": 3,
+                                    "outputValue": "all"
+                                }
+                            ]
                         }
                     },
                     "http://registry\\.gpii\\.net/common/auditoryOutLanguage": {
@@ -615,9 +1313,9 @@
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
                     "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
                     },
                     "getState": [
                         {
@@ -658,7 +1356,6 @@
             }
         ]
     },
-
     "com.texthelp.readWriteGold": {
         "name": "Read Write Gold",
         "contexts": {
@@ -714,8 +1411,8 @@
                 "options": {
                     "verifySettings": true,
                     "retryOptions": {
-                        rewriteEvery: 0,
-                        numRetries: 40
+                        "rewriteEvery": 0,
+                        "numRetries": 40
                     },
                     "setTrue": [
                         {
@@ -748,7 +1445,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
         "contexts": {
@@ -780,7 +1476,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "Invert": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                    "Invert": {
+                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
@@ -829,7 +1526,11 @@
                             "description": "Position of the magnified area",
                             "type": "number",
                             "default": 2,
-                            "enum": [1, 2, 3]
+                            "enum": [
+                                1,
+                                2,
+                                3
+                            ]
                             // TODO: We must present these values in a human readable form
                             // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
                         }
@@ -855,18 +1556,20 @@
                             }
                         }
                     },
-                    "transform": [{
-                        "type": "fluid.transforms.arrayToSetMembership",
-                        "inputPath": "http://registry\\.gpii\\.net/common/tracking",
-                        "outputPath": "",
-                        "presentValue": 1,
-                        "missingValue": 0,
-                        "options": {
-                            "focus": "FollowFocus",
-                            "caret": "FollowCaret",
-                            "mouse": "FollowMouse"
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.arrayToSetMembership",
+                            "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                            "outputPath": "",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "focus": "FollowFocus",
+                                "caret": "FollowCaret",
+                                "mouse": "FollowMouse"
+                            }
                         }
-                    }],
+                    ],
                     "MagnificationMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -944,7 +1647,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.onscreenKeyboard": {
         "name": "Windows Built-in Onscreen Keyboard",
         "contexts": {
@@ -970,7 +1672,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "NavigationMode": { // TODO: Weird supported setting - How do we provide such use case?
+                    "NavigationMode": {
+                        // TODO: Weird supported setting - How do we provide such use case?
                         "schema": {
                             "title": "On-Screen Keyboard",
                             "description": "Enable/Disable On-Screen Keyboard",
@@ -1006,8 +1709,6 @@
             }
         ]
     },
-
-
     "com.microsoft.windows.narrator": {
         "name": "Windows Built-in Narrator",
         "contexts": {
@@ -1104,18 +1805,20 @@
                             "offset": 0
                         }
                     },
-                    "transform": [{
-                        "type": "fluid.transforms.arrayToSetMembership",
-                        "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
-                        "outputPath": "",
-                        "presentValue": 1,
-                        "missingValue": 0,
-                        "options": {
-                            "focus": "CoupleNarratorCursorKeyboard",
-                            "caret": "FollowInsertion",
-                            "mouse": "InteractionMouse"
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.arrayToSetMembership",
+                            "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "outputPath": "",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "focus": "CoupleNarratorCursorKeyboard",
+                                "caret": "FollowInsertion",
+                                "mouse": "InteractionMouse"
+                            }
                         }
-                    }],
+                    ],
                     "EchoChars": {
                         "transform": {
                             "type": "fluid.transforms.condition",
@@ -1171,18 +1874,20 @@
                             "offset": 0
                         }
                     },
-                    "transform": [{
-                        "type": "fluid.transforms.setMembershipToArray",
-                        "inputPath": "",
-                        "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
-                        "presentValue": 1,
-                        "missingValue": 0,
-                        "options": {
-                            "CoupleNarratorCursorKeyboard": "focus",
-                            "FollowInsertion": "caret",
-                            "InteractionMouse": "mouse"
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.setMembershipToArray",
+                            "inputPath": "",
+                            "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "CoupleNarratorCursorKeyboard": "focus",
+                                "FollowInsertion": "caret",
+                                "InteractionMouse": "mouse"
+                            }
                         }
-                    }],
+                    ],
                     "http://registry\\.gpii\\.net/common/keyEcho": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
@@ -1263,7 +1968,6 @@
             }
         ]
     },
-
     "org.nvda-project": {
         "name": "NVDA Screen Reader",
         "contexts": {
@@ -1647,7 +2351,7 @@
                                 "tr": "tr",
                                 "vi": "vi",
                                 "zh": "zh-cmn",
-                                "zh-yue": "zh-yue",
+                                "zh-yue": "zh-yue"
                             }
                         }
                     ]
@@ -1659,9 +2363,9 @@
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
                     "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
                     },
                     "getState": [
                         {
@@ -1679,7 +2383,8 @@
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "nvda_service.exe"
-                        }, {
+                        },
+                        {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "nvda.exe"
                         }
@@ -1697,7 +2402,6 @@
             }
         ]
     },
-
     "trace.easyOne.communicator.windows": {
         "name": "EasyOne Communicator Windows",
         "contexts": {
@@ -1723,9 +2427,11 @@
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1735,7 +2441,6 @@
             }
         ]
     },
-
     "trace.easyOne.sudan.windows": {
         "name": "EasyOne Communicator Sudan",
         "contexts": {
@@ -1761,9 +2466,11 @@
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1773,7 +2480,6 @@
             }
         ]
     },
-
     "webinsight.webAnywhere.windows": {
         "name": "Web Anywhere",
         "contexts": {
@@ -1799,9 +2505,11 @@
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1811,7 +2519,6 @@
             }
         ]
     },
-
     "net.opendirective.maavis": {
         "name": "maavis",
         "contexts": {
@@ -1843,19 +2550,22 @@
                             "outputPath": "speakOnActivate",
                             "true": "yes",
                             "false": "no"
-                        }, {
+                        },
+                        {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakTitles",
                             "true": "yes",
                             "false": "no"
-                        }, {
+                        },
+                        {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                             "outputPath": "speakLabels",
                             "true": "yes",
                             "false": "no"
-                        }, {
+                        },
+                        {
                             "type": "fluid.transforms.condition",
                             "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "condition": false,
@@ -1918,7 +2628,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
         "contexts": {
@@ -1993,7 +2702,8 @@
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"]
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"
+                            ]
                         }
                     }
                 },
@@ -2020,7 +2730,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.stickyKeys": {
         "name": "Windows StickyKeys",
         "contexts": {
@@ -2074,7 +2783,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
@@ -2113,7 +2821,8 @@
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
                             "type": "number",
-                            "default": 0,  // 0 means no interval time
+                            "default": 0,
+                            // 0 means no interval time
                             "divisibleBy": 1
                         }
                     },
@@ -2282,7 +2991,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.mouseKeys": {
         "name": "Windows MouseKeys",
         "contexts": {
@@ -2329,7 +3037,8 @@
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
                             "type": "number",
-                            "min": -1000, // TODO: Not clear how to describe this setting
+                            "min": -1000,
+                            // TODO: Not clear how to describe this setting
                             "max": 1000
                         }
                     }
@@ -2406,7 +3115,6 @@
                             "inputPath": "MaxSpeed.value",
                             "factor": 0.00285714285714,
                             "offset": -0.0285714285714
-
                         }
                     }
                 }
@@ -2418,7 +3126,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.mouseTrailing": {
         "name": "Windows Mouse Trailing",
         "contexts": {
@@ -2444,7 +3151,8 @@
                 },
                 "supportedSettings": {
                     "MouseTrails": {
-                        "schema": { // Exactly the same schema as mouseTrailing common term
+                        "schema": {
+                            // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
                             "type": "number",
@@ -2483,7 +3191,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.screenResolution": {
         "name": "Windows Screen Resolution",
         "contexts": {
@@ -2503,8 +3210,10 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display",
-                            "type": "array", // TODO: Not sure about this type
-                            "enum": [] // TODO: This must be filled in on the fly with available screen resolutions
+                            "type": "array",
+                            // TODO: Not sure about this type
+                            "enum": []
+                            // TODO: This must be filled in on the fly with available screen resolutions
                         }
                     }
                 }
@@ -2516,7 +3225,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.screenDPI": {
         "name": "Windows DPI",
         "contexts": {
@@ -2541,7 +3249,8 @@
                             "description": "Screen DPI of the default display",
                             "type": "number",
                             "minimum": 1,
-                            "maximum": 5 // Taken from dpiWindows10.js, may not be appropriate
+                            "maximum": 5
+                            // Taken from dpiWindows10.js, may not be appropriate
                         }
                     }
                 },
@@ -2556,7 +3265,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
@@ -2615,10 +3323,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_arrow.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
                                 }
                             ]
@@ -2632,10 +3342,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_link.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_link_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_link_xl.cur"
                                 }
                             ]
@@ -2649,10 +3361,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_helpsel.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
                                 }
                             ]
@@ -2666,10 +3380,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_working.ani"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_working_l.ani"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_working_xl.ani"
                                 }
                             ]
@@ -2683,10 +3399,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_unavail.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
                                 }
                             ]
@@ -2700,10 +3418,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_pen.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_pen_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
                                 }
                             ]
@@ -2717,10 +3437,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_move.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_move_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_move_xl.cur"
                                 }
                             ]
@@ -2734,10 +3456,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_nesw.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
                                 }
                             ]
@@ -2751,10 +3475,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_ns.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_ns_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
                                 }
                             ]
@@ -2768,10 +3494,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_nwse.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
                                 }
                             ]
@@ -2785,10 +3513,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_ew.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_ew_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
                                 }
                             ]
@@ -2802,10 +3532,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_up.cur"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_up_l.cur"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_up_xl.cur"
                                 }
                             ]
@@ -2819,10 +3551,12 @@
                                 {
                                     "upperBound": 0.333,
                                     "output": "%SystemRoot%\\cursors\\aero_busy.ani"
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": "%SystemRoot%\\cursors\\aero_busy_l.ani"
-                                }, {
+                                },
+                                {
                                     "output": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
                                 }
                             ]
@@ -2830,7 +3564,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                     "transform": [
+                    "transform": [
                         {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "Arrow",
@@ -2849,12 +3583,16 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "setTrue": [{
-                        "type": "gpii.windows.spiSettingsHandler.updateCursors"
-                    }],
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "setTrue": [
+                        {
+                            "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -2884,7 +3622,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.typingEnhancement": {
         "name": "Windows typing autocorrection",
         "contexts": {
@@ -3117,7 +3854,6 @@
             }
         ]
     },
-
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
@@ -3166,12 +3902,15 @@
                             "transform": {
                                 "type": "fluid.transforms.quantize",
                                 "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
-                                "ranges": [{
-                                    "upperBound": 14,
-                                    "output": "normal"
-                                },{
-                                    "output": "large"
-                                }]
+                                "ranges": [
+                                    {
+                                        "upperBound": 14,
+                                        "output": "normal"
+                                    },
+                                    {
+                                        "output": "large"
+                                    }
+                                ]
                             }
                         }
                     }
@@ -3205,14 +3944,15 @@
             }
         }
     },
-
     "net.gpii.uioPlus": {
         "name": "UIO+",
         "contexts": {
-            "OS": [{
+            "OS": [
+                {
                     "id": "win32",
                     "version": ">=5.0"
-            }]
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -3290,12 +4030,14 @@
                     "dictionaryEnabled": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "match": [{
-                                "inputValue": {
-                                    "dictionaryEnabled": true
-                                },
-                                "outputValue": true
-                            }],
+                            "match": [
+                                {
+                                    "inputValue": {
+                                        "dictionaryEnabled": true
+                                    },
+                                    "outputValue": true
+                                }
+                            ],
                             "noMatch": {
                                 "outputValue": false
                             },
@@ -3322,9 +4064,9 @@
             }
         ]
     },
-    "net.gpii.test.speechControl": { 
-    // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
-    // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
+    "net.gpii.test.speechControl": {
+        // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
+        // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
         "contexts": {
             "OS": [
@@ -3357,11 +4099,10 @@
         ],
         "isRunning": []
     },
-    
-    "net.gpii.explode": { 
-    // This solution exists only to support manual and automated testing of GPII's error support. It references the 
-    // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
-    // get, set or launch settingsHandler action 
+    "net.gpii.explode": {
+        // This solution exists only to support manual and automated testing of GPII's error support. It references the
+        // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
+        // get, set or launch settingsHandler action
         "name": "GPII Test solution for triggering settingsHandler errors",
         "contexts": {
             "OS": [
@@ -3380,15 +4121,22 @@
                             "title": "Explode Method",
                             "description": "The strategy to be used when exploding",
                             "type": "string",
-                            "enum": ["reject", "fail", "throw"]
-                        },
+                            "enum": [
+                                "reject",
+                                "fail",
+                                "throw"
+                            ]
+                        }
                     },
                     "explodeOn": {
                         "schema": {
                             "title": "Explode On",
                             "description": "Whether to explode during the get or set settingsHandler method",
                             "type": "string",
-                            "enum": ["get", "set"]
+                            "enum": [
+                                "get",
+                                "set"
+                            ]
                         }
                     }
                 }
