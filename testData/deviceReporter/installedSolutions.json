@@ -60,6 +60,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.notificationDuration"
+    },
+
+    {
         "id": "com.microsoft.windows.stickyKeys"
     },
 

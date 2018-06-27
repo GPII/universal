@@ -2091,6 +2091,67 @@
         ]
     },
 
+    "com.microsoft.windows.notificationDuration": {
+        "name": "Windows notification duration",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMESSAGEDURATION",
+                    "setAction": "SPI_SETMESSAGEDURATION",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "Duration": {
+                        "schema": {
+                            "title": "Notification duration",
+                            "description": "Changes the time system notifications are displayed",
+                            "type": "number",
+                            "default": 5,
+                            "enum": [5, 7, 15, 30, 60, 300]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Duration": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.notificationDuration.NotificationDuration": "Duration.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.stickyKeys": {
         "name": "Windows StickyKeys",
         "contexts": {
