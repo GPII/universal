@@ -9,7 +9,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This script reads files from an input directory that contains preferences JSON5 files and convert them to JSON files of GPII keys and
-// preferences safes suitable for direct loading into CouchDB or PouchDB, which comply with the new GPII data model: 
+// preferences safes suitable for direct loading into CouchDB or PouchDB, which comply with the new GPII data model:
 // https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences in the target directory
 // Usage: node scripts/convertPrefs.js {input_path} {target_path}
 //
@@ -61,7 +61,7 @@ rimraf(targetDir, function () {
                     "_id": prefsSafeId,
                     "type": "prefsSafe",
                     "schemaVersion": "0.1",
-                    "prefsSafeType": "user",
+                    "prefsSafeType": "snapset",
                     "name": gpiiKey,
                     "password": null,
                     "email": null,

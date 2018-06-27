@@ -10,6 +10,12 @@
             },
             "findAuthorizationByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"
+            },
+            "findSnapsetPrefsSafes": {
+                "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') {emit(doc._id, doc)}}"
+            },
+            "findGpiiKeysByPrefsSafeId": {
+                "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc.prefsSafeId, doc)}}"
             }
         }
     }
