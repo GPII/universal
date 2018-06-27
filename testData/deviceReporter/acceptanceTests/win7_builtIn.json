@@ -44,6 +44,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.nightScreen"
+    },
+
+    {
         "id": "com.microsoft.windows.typingEnhancement"
     }
 
