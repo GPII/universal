@@ -2075,6 +2075,67 @@
         ]
     },
 
+    "com.microsoft.windows.toggleKeys": {
+        "name": "Windows Toggle keys feature",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETTOGGLEKEYS",
+                    "setAction": "SPI_SETTOGGLEKEYS",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "TOGGLEKEYS"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "ToggleKeysOn": {
+                        "schema": {
+                            "title": "ToggleKeys accesibility feature",
+                            "description": "Enable/Disable ToggleKeys feature",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ToggleKeysOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/toggleKeys",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam.dwFlags.TKF_TOGGLEKEYSON"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/toggleKeys": "ToggleKeysOn.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
@@ -3379,7 +3440,7 @@
             }
         ]
     },
-    "net.gpii.test.speechControl": { 
+    "net.gpii.test.speechControl": {
     // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
     // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
@@ -3414,11 +3475,11 @@
         ],
         "isRunning": []
     },
-    
-    "net.gpii.explode": { 
-    // This solution exists only to support manual and automated testing of GPII's error support. It references the 
+
+    "net.gpii.explode": {
+    // This solution exists only to support manual and automated testing of GPII's error support. It references the
     // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
-    // get, set or launch settingsHandler action 
+    // get, set or launch settingsHandler action
         "name": "GPII Test solution for triggering settingsHandler errors",
         "contexts": {
             "OS": [

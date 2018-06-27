@@ -288,6 +288,12 @@
             "type": "boolean",
             "default": "false"
         },
+        "http://registry.gpii.net/common/toggleKeys": {
+            "title": "Toggle Keys",
+            "description": "Whether to enable/disable toggle keys",
+            "type": "boolean",
+            "default": "false"
+        },
         "http://registry.gpii.net/common/captions/enabled": {
             "title": "Captions",
             "description": "Whether to enable/disable captions on videos",
