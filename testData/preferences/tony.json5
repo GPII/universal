@@ -5,7 +5,10 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/toggleKeys": true
+                    "http://registry.gpii.net/common/toggleKeys": true,
+                    "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
+                        "Enabled": true
+                    }
                 }
             }
         }
