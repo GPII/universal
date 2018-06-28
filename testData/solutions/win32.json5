@@ -4973,6 +4973,75 @@
         ]
     },
 
+    "com.microsoft.windows.underlineMenuShortcuts": {
+        "name": "Underline menu shorcuts",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETKEYBOARDCUES",
+                    "setAction": "SPI_SETKEYBOARDCUES",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT",
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "UnderlineMenuShorcutsOn": {
+                        "schema": {
+                            "title": "Enable/Disable underlaying menu shortcuts",
+                            "description": "Displays a underline showing which is the shortcut to active a menu item",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "UnderlineMenuShorcutsOn": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
+                            "false": 0,
+                            "true": 1,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "UnderlineMenuShorcutsOn.value",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    }
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {

@@ -76,6 +76,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.underlineMenuShortcuts"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
