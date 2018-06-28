@@ -5004,6 +5004,14 @@
                             "type": "boolean",
                             "default": false
                         }
+                    },
+                    "KeyboardPreferenceOn": {
+                        "schema": {
+                            "title": "Keyboard as preferred input method",
+                            "description": "Set the keyboard as the preferred input method",
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 },
                 "capabilitiesTransformations": {
@@ -5021,6 +5029,21 @@
                                 "input": "pvParam"
                             }
                         }
+                    },
+                    "KeyboardPreferenceOn": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
+                            "false": 0,
+                            "true": 1,
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -5028,6 +5051,14 @@
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
                             "leftPath": "UnderlineMenuShorcutsOn.value",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    },
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "KeyboardPreferenceOn.value",
                             "right": 0,
                             "operator": "!=="
                         }
