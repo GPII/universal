@@ -15,28 +15,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 module.exports = function (grunt) {
     grunt.initConfig({
-        eslint: {
-            js: {
-                src: ["gpii/**/*.js", "tests/**/*.js", "examples/**/*.js", "*.js"]
-            },
-            md: {
-                options: {
-                    configFile: ".eslintrc-md.json"
-                },
-                src: [ "./*.md","./documentation/*.md", "./examples/**/*.md"]
+        lintAll: {
+            sources: {
+                md: [ "./*.md","./documentation/*.md", "./examples/**/*.md"],
+                js: ["gpii/**/*.js", "tests/**/*.js", "examples/**/*.js", "*.js"],
+                json: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json", "*.json"],
+                json5: ["gpii/**/*.json5", "tests/**/*.json5", "testData/**/*.json5", "*.json5"]
             }
-        },
-        jsonlint: {
-            src: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json", "*.json"]
-        },
-        json5lint: {
-            src: ["gpii/**/*.json5", "tests/**/*.json5", "testData/**/*.json5", "*.json5"]
-        },
-        mdjsonlint: {
-            src: ["./*.md", "./documentation/**/*.md", "./examples/**/*.md"]
-        },
-        markdownlint: {
-            src: ["./*.md", "./documentation/**/*.md", "./examples/**/*.md"]
         }
     });
 
