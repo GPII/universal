@@ -176,6 +176,43 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
+                ],
+                "com.microsoft.windows.toggleKeys": [
+                    {
+                        "settings": {
+                            "ToggleKeysOn": {
+                                "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETTOGGLEKEYS",
+                            "setAction": "SPI_SETTOGGLEKEYS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "TOGGLEKEYS"
+                            }
+                        }
+                    }
+                ],
+                "com.microsoft.windows.underlineMenuShortcuts": [
+                    {
+                        "settings": {
+                            "UnderlineMenuShorcutsOn": {
+                                "path": "pvParam",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDCUES",
+                            "setAction": "SPI_SETKEYBOARDCUES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL",
+                            }
+                        }
+                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -310,6 +347,18 @@ gpii.tests.windows.builtIn = [
                         "path": "Control Panel\\Desktop\\MuiCached",
                         "dataTypes": {
                             "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.shortcutWarningMessage": [{
+                    "settings": {
+                        "Warning Sounds": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Warning Sounds": "REG_DWORD"
                         }
                     }
                 }]

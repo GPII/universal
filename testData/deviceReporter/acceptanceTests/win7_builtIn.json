@@ -36,6 +36,14 @@
     },
 
     {
+        "id": "com.microsoft.windows.underlineMenuShortcuts"
+    },
+
+    {
+        "id": "com.microsoft.windows.shortcutWarningMessage"
+    },
+
+    {
         "id": "com.microsoft.windows.filterKeys"
     },
 
