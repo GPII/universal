@@ -209,7 +209,7 @@ gpii.tests.windows.builtIn = [
                             "setAction": "SPI_SETKEYBOARDCUES",
                             "uiParam": 0,
                             "pvParam": {
-                                "type": "BOOL",
+                                "type": "BOOL"
                             }
                         }
                     }
