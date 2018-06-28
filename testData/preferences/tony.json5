@@ -8,6 +8,9 @@
                     "http://registry.gpii.net/common/toggleKeys": true,
                     "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
                         "Enabled": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
+                        "Enabled": true
                     }
                 }
             }
