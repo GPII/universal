@@ -2,7 +2,7 @@
  * This configuration runs the entire system locally under the hybrid Flow Manager architecture and in development mode.
  *
  * It uses a multi-server Kettle configuration to run the Untrusted Flow Manager and a local version of the Cloud Based Flow Manager within the same Kettle process, but on different ports.
- * 
+ *
  * * The Untrusted Flow Manager runs on port 8081
  * * The Cloud Based Flow Manager runs on port 8084
  *

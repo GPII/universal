@@ -42,19 +42,19 @@ gpii.tests.userLogonEvents.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: [ "login", true, "testUser1" ]
+        makerArgs: ["login", true, "testUser1"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: [ "login", false, "testUser1" ]
+        makerArgs: ["login", false, "testUser1"]
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandling.testLoginResponse"
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
+        args: ["{tests}.events.timeoutComplete.fire", 3500]
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"
@@ -64,12 +64,12 @@ gpii.tests.userLogonEvents.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: [ "logout", true, "testUser1" ]
+        makerArgs: ["logout", true, "testUser1"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: [ "logout", false, "testUser1" ]
+        makerArgs: ["logout", false, "testUser1"]
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonHandling.testLogoutResponse"
