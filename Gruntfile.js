@@ -20,7 +20,8 @@ module.exports = function (grunt) {
                 md: [ "./*.md","./documentation/*.md", "./examples/**/*.md"],
                 js: ["gpii/**/*.js", "tests/**/*.js", "examples/**/*.js", "*.js"],
                 json: ["gpii/**/*.json", "tests/**/*.json", "testData/**/*.json", "*.json"],
-                json5: ["gpii/**/*.json5", "tests/**/*.json5", "testData/**/*.json5", "*.json5"]
+                json5: ["gpii/**/*.json5", "tests/**/*.json5", "testData/**/*.json5", "*.json5"],
+                other: ["./.*"]
             }
         }
     });

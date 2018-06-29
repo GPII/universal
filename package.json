@@ -38,7 +38,7 @@
         "babel-register": "6.26.0",
         "browserify": "16.2.2",
         "gpii-express": "1.0.14",
-        "gpii-grunt-lint-all": "1.0.0-dev.20180628T115201Z.a294d1b",
+        "gpii-grunt-lint-all": "1.0.0-dev.20180629T081932Z.8a1f7fe",
         "gpii-testem": "2.1.0",
         "grunt": "1.0.2",
         "http-browserify": "1.7.0",
