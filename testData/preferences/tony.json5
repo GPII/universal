@@ -12,6 +12,9 @@
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
                         "Enabled": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSounds": {
+                        "Enabled": true
                     }
                 }
             }
