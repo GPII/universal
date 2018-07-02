@@ -33,6 +33,22 @@
                             "value": true
                         }
                     },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.toggleKeys": {
+                        "ToggleKeysOn": {
+                            "path": "pvParam.dwFlags.TKF_TOGGLEKEYSON",
+                            "value": true
+                        }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
+                        "Enabled": true,
+                        "KeyboardPrefEnabled": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
+                        "Warning Sounds": true
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shorcutWarningSound": {
+                        "Sound on Activation": true
+                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
                         "FilterKeysEnable": {
                             "path": "pvParam.dwFlags.FKF_FILTERKEYSON",

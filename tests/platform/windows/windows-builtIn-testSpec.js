@@ -338,6 +338,7 @@ gpii.tests.windows.builtIn = [
                             "PreferredUILanguages": "REG_SZ"
                         }
                     }
+<<<<<<< HEAD
                 }, {
                     "settings": {
                         "MachinePreferredUILanguages": "en-US"
@@ -362,6 +363,22 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }]
+=======
+                }
+            }],
+            "com.microsoft.windows.shortcutWarningSound": [{
+                "settings": {
+                    "Sound on Activation": 1
+                },
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility",
+                    "dataTypes": {
+                        "Sound on Activation": "REG_DWORD"
+                    }
+                }
+            }]
+>>>>>>> 3b2ba1de... GPII-3139: Added acceptance tests for new added solutions
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
