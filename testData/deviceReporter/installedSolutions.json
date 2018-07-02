@@ -76,6 +76,14 @@
     },
 
     {
+        "id": "com.microsoft.windows.shortcutWarningMessage"
+    },
+
+    {
+        "id": "com.microsoft.windows.shorcutWarningSound"
+    },
+
+    {
         "id": "com.microsoft.windows.mouseTrailing"
     },
 
