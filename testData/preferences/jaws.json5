@@ -1,0 +1,211 @@
+/*
+
+    A fixture to test many JAWS settings at once by setting them to something other than the default.
+
+*/
+{
+    "flat": {
+        "name": "JAWS",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "Braille": {
+                            "BrailleMode": 2
+                        },
+                        "options": {
+                            "Abbreviations": 1,
+                            "Acronyms": 1,
+                            "AllCapsIndicator": "definitely all cap",
+                            // TODO: How can we even verify this?
+                            // "options.BrailleDisplay": "Braille1",
+                            "CapIndicator": "definitely cap",
+                            "CaretBlinkRate": 106,
+                            "CaretDetect": 5,
+                            "CaretDetectTimeOut": 500,
+                            "Case": 0,
+                            "CustomPageSummary": 2,
+                            "Dictionary": 1,
+                            // TODO: Get more details for this setting.
+                            // There's not even anything in the JAWS documentation.
+//                            "options.DosScreenReader": {
+//                                "schema": {
+//                                    "title": "DosScreenReader",
+//                                    "description": "",
+//                                    "type": "",
+//                                    "default": 0,
+//                                    "enum": [],
+//                                    "enumLabels": []
+//                                }
+//                            },
+                            "Filter": 5,
+                            "Indentation": 1,
+                            "IndicateAttributesInDialogsAndMenus": 1,
+                            "IndicateCaps": 3,
+                            "IndicateNewlinesAndParagraphs": 2,
+                            // TODO: Get more information
+                            "options.IndicateSelected": {
+                                "schema": {
+                                    "title": "IndicateSelected",
+                                    "description": "",
+                                    "type": "number",
+                                    "default": 2,
+                                    "enum": [0, 1, 2],
+                                    "enumLabels": []
+                                }
+                            },
+                            "InsertKeyMode": 1,
+                            // TODO: Update this once we know how it actually works.
+                            "JAWSInsertKey": 0,
+                            // TODO: Update this once we know how it actually works.
+                             "JAWSPunctuationEnabled": 3,
+                            // TODO: See if there is documentation on the supported options.
+//                            "options.KeyboardType": {
+//                                "schema": {
+//                                    "title": "KeyboardType",
+//                                    "description": "Can be one of the types defined in default.jkm",
+//                                    "type": "string",
+//                                    "default": "Laptop"
+//                                }
+//                            },
+                            "KeyRepeat": 0,
+                            "LanguageDetection": 0,
+                            "LeftShiftSkipBack": 0,
+                            "LinePauses": 1,
+                            // TODO: Verify this and improve the description.
+//                            "options.ListBoxCheckBoxes": {
+//                                "schema": {
+//                                    "title": "ListBoxCheckBoxes",
+//                                    "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
+//                                    "type": "number",
+//                                    "default": 0,
+//                                    "enum": [0, 1, 2],
+//                                    "enumLabels": ["off", "non-ownerdrawn listboxes", "also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style."]
+//                                }
+//                            },
+                            "MixedCase": 0,
+                            "Numbers": 3,
+                            "ProcessToolTipEvent": 0,
+                            "ProgressBarUpdateInterval": 2500,
+                            "QuickKeyNavigationMode": 1,
+                            "ReadingInterrupt": 0,
+                            "Repetitions": 1,
+                            "SayAllIgnoreShiftKeys": 1,
+                            "SayAllIndicateCaps": 1,
+                            "SayAllMode": 2,
+                            "SayBlankLineCount": 1,
+                            "SayCursorShapeChange": 1,
+                            "SayDollars": 1,
+                            "SayNumericDates": 2,
+                            "SaySelectedFirst": 1,
+                            "SayStateFirst": 1,
+                            "SayWindowTypeFirst": 1,
+//                            "options.ScreenEcho": {
+//                                "schema": {
+//                                    "title": "ScreenEcho",
+//                                    "description": "0=off, 1= highlight, 2 = all",
+//                                    "type": "number",
+//                                    "default": 1,
+//                                    "enum": [0, 1, 2],
+//                                    "enumLabels": ["off", "highlight", "all"]
+//                                }
+//                            },
+//                            // TODO: Verify and come up with a description.
+//                            "options.SimultaneousSynthAndWave": {
+//                                "schema": {
+//                                    "title": "SimultaneousSynthAndWave",
+//                                    "description": "",
+//                                    "type": "number",
+//                                    "default": 0,
+//                                    "enum": [0, 1],
+//                                    "enumLabels": ["off", "on"]
+//                                }
+//                            },
+                            "SkimReadingIndication": 0,
+                            // TODO: Discuss whether we can meaningfully set this.
+//                            "options.SleepMode": {
+//                                "schema": {
+//                                    "title": "SleepMode",
+//                                    "description": "",
+//                                    "type": "number",
+//                                    "default": 1,
+//                                    "enum": [ 0, 1 ],
+//                                    "enumLabels": [ "off", "on" ]
+//                                }
+//                            },
+//                            // TODO: Verify what type of setting this even is and that the description is accurate.
+//                            "options.SpeakANSIChars": {
+//                                "schema": {
+//                                    "title": "SpeakANSIChars",
+//                                    "description": "Whether or not to announce ANSI characters.",
+//                                    "type": "number",
+//                                    "default": 1,
+//                                    "enum": [ 0, 1 ],
+//                                    "enumLabels": [ "off", "on" ]
+//                                }
+//                            },
+                            "SpellPhonetic": 1,
+                            // TODO: Verify.  Look at the INI file and suggest defaults?
+//                            "options.Synthesizer": {
+//                                "schema": {
+//                                    "title": "Synthesizer",
+//                                    "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
+//                                    "type": "string",
+//                                    "default": "Synth1"
+//                                }
+//                            },
+                            "SynthesizerResetFrequency": 5000,
+                            "TetherJawsToPC": 1,
+                            // TODO: Verify and fill in the description.
+                            // Can't find information in the help file.
+//                            "options.TreeViewCheckBoxes": {
+//                                "schema": {
+//                                    "title": "TreeViewCheckBoxes",
+//                                    "description": "",
+//                                    "type": "number",
+//                                    "default": 1,
+//                                    "enum": [0, 1],
+//                                    "enumLabels": ["off", "on"]
+//                                }
+//                            },
+                            "TypingEcho": 3,
+                            "TypingInterrupt": 0,
+                            "UseExtendedKeys": 1,
+                            "UseVirtualInfoInFormsMode": 1,
+//                            // TODO: Verify and fill this out.
+//                            "options.UseWindowsKeyboardHook": {
+//                                "schema": {
+//                                    "title": "UseWindowsKeyboardHook",
+//                                    "description": "",
+//                                    "type": "number",
+//                                    "default": 0,
+//                                    "enum": [0, 1],
+//                                    "enumLabels": ["off", "on"]
+//                                }
+//                            },
+                            "Verbosity": 2,
+                            "VIRTUALMSAAREFRESH": -1
+                        }
+                    }
+                },
+                "metadata": [
+                    {
+                        "type": "required",
+                        "scope": [
+                            "http://registry.gpii.net/common/screenReaderTTS/enabled"
+                        ],
+                        "value": 1024
+                    },
+                    {
+                        "type": "priority",
+                        "scope": [
+                            "http://registry.gpii.net/applications/com.freedomScientific.jaws"
+                        ],
+                        "value": 1024
+                    }
+                ]
+            }
+        }
+    }
+}

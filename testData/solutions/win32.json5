@@ -43,7 +43,18 @@
                             ]
                         }
                     },
-                    // TODO: Verify, especially confirm the default.
+                    // TODO: Verify
+                    "options.Abbreviations": {
+                        "schema": {
+                            "title": "Abbreviations",
+                            "description": "Whether to expand abbreviations.  If this is enabled, abbreviations with a title attribute will have their title read instead of the on screen text.",
+                            "type": "number",
+                            "default": 0,
+                            "enum": [0,1],
+                            "enumLabels": ["off", "on"]
+                        }
+                    },
+                    // TODO: Verify
                     "options.Acronyms": {
                         "schema": {
                             "title": "Acronyms",
@@ -54,7 +65,6 @@
                             "enumLabels": ["off", "on"]
                         }
                     },
-                    // TODO: Ask about the related Abbreviations setting.
                     // TODO: Verify
                     "options.AllCapsIndicator": {
                         "schema": {
@@ -164,15 +174,22 @@
                             "enumLabels": []
                         }
                     },
-                    // TODO: Get more details for this setting.
+                    // TODO: Verify this, especially the mapping.
                     "options.Filter": {
                         "schema": {
                             "title": "Filter",
-                            "description": "filter repetitive characters after this many of them",
+                            "description": "Determines how repeated characters are handled.",
                             "type": "number",
-                            "default": 3,
-                            "enum": [0, 1, 2, 3],
-                            "enumLabels": []
+                            "default": 0,
+                            "enum": [0, 1, 2, 3, 4, 5],
+                            "enumLabels": [
+                                "Say First 3 Repeated Characters",
+                                "Say First 4 Repeated Characters",
+                                "Say First 5 Repeated Characters",
+                                "Say First 6 Repeated Characters",
+                                "Say All Repeated Characters",
+                                "Count Repeated Characters"
+                            ]
                         }
                     },
                     // TODO: Verify
@@ -254,26 +271,26 @@
                             "enumLabels": ["JAWS", "Sticky"]
                         }
                     },
-                    // TODO: Verify
+                    // TODO: VERIFY WITH EXTREME PREJUDICE
                     "options.JAWSInsertKey": {
                         "schema": {
                             "title": "JAWSInsertKey",
-                            "description": "",
-                            "type": "",
-                            "default": 0,
-                            "enum": [],
-                            "enumLabels": []
+                            "description": "Which insert keys can be used as a JAWS Insert 0=none 1=Numpad Insert 2=Extended Insert 3=both Numpad and Extended",
+                            "type": "number",
+                            "default": 3,
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": [ "none", "Numpad Insert", "Extended Insert", "both Numpad and Extended" ]
                         }
                     },
-                    // TODO: Verify
+                    // TODO: This now appears to be a "level" option.  Verify by looking at the INI file.
                     "options.JAWSPunctuationEnabled": {
                         "schema": {
                             "title": "JAWSPunctuationEnabled",
-                            "description": "Which insert keys can be used as a JAWS Insert 0=none 1=Numpad Insert 2=Extended Insert 3=both Numpad and Extended",
+                            "description": "Which punctuation marks to speak.",
                             "type": "number",
-                            "default": 0,
+                            "default": 2,
                             "enum": [0, 1, 2, 3],
-                            "enumLabels": [ "none", "Numpad Insert", "Extended Insert", "both Numpad and Extended" ]
+                            "enumLabels": [ "None", "Some", "Most", "All" ]
                         }
                     },
                     // TODO: See if there is documentation on the supported options.
@@ -285,11 +302,11 @@
                             "default": "Laptop"
                         }
                     },
-                    // TODO: Test this and improve the description
+                    // TODO: Verify
                     "options.KeyRepeat": {
                         "schema": {
                             "title": "KeyRepeat",
-                            "description": "0=off, 1 = on",
+                            "description": "Whether or not to allow repeated keys.  Repeated keys are allowed by default.",
                             "type": "number",
                             "default": 1,
                             "enum": [0, 1],
@@ -471,11 +488,11 @@
                             ]
                         }
                     },
-                    // TODO: Verify what this does and fill in the description.
+                    // TODO: Verify
                     "options.SayBlankLineCount": {
                         "schema": {
                             "title": "SayBlankLineCount",
-                            "description": "Whether to announce the number of blank lines.",
+                            "description": "In 'say all' mode, whether to announce the number of blank lines.",
                             "type": "number",
                             "default": 0,
                             "enum": [0, 1],
@@ -590,13 +607,13 @@
                             "enumLabels": [ "off", "on" ]
                         }
                     },
-                    // TODO: Verify what type of setting this even is.
+                    // TODO: Discuss, this is not meaningful unless it's coupled with an application for context.
                     "options.SleepMode": {
                         "schema": {
                             "title": "SleepMode",
-                            "description": "",
+                            "description": "Whether to put JAWS to sleep.  In the context of a specific application, this preference can be set to disable JAWS within that application.",
                             "type": "number",
-                            "default": 1,
+                            "default": 0,
                             "enum": [ 0, 1 ],
                             "enumLabels": [ "off", "on" ]
                         }
@@ -672,7 +689,7 @@
                             "title": "Typing echo",
                             "description": "Typing echo mode, its value can be either character, word, char&Word or none",
                             "type": "number",
-                            "default": 0,
+                            "default": 1,
                             "enum": [
                                 0,
                                 1,
@@ -687,7 +704,7 @@
                             ]
                         }
                     },
-                    // TODO: Verify and fill this out further.
+                    // TODO: Verify
                     "options.TypingInterrupt": {
                         "schema": {
                             "title": "TypingInterrupt",
