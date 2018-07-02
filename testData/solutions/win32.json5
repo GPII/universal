@@ -5073,6 +5073,126 @@
         ]
     },
 
+    "com.microsoft.windows.shortcutWarningMessage": {
+        "name": "Warning messages for shortcuts",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility",
+                    "dataTypes": {
+                        "Warning Sounds": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "Warning Sounds": {
+                        "schema": {
+                            "title": "Shortcut warning messages",
+                            "description": "Enable/Disable warning messages when changing a setting with a shortcut",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Warning Sounds": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
+                            "false": 0,
+                            "true": 1
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "Warning Sounds",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    }
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.shorcutWarningSound": {
+        "name": "Warning sounds for shortcuts",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility",
+                    "dataTypes": {
+                        "Sound on Activation": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "Sound on Activation": {
+                        "schema": {
+                            "title": "Shortcut warning sounds",
+                            "description": "Enable/Disable warning sounds when changing a setting with a shortcut",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "Sound on Activation": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningSound.Enabled",
+                            "false": 0,
+                            "true": 1
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningSound.Enabled": {
+                        "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "Sound on Activation",
+                            "right": 0,
+                            "operator": "!=="
+                        }
+                    }
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
