@@ -338,6 +338,18 @@ gpii.tests.windows.builtIn = [
                         "Warning Sounds": "REG_DWORD"
                     }
                 }
+            }],
+            "com.microsoft.windows.shortcutWarningSound": [{
+                "settings": {
+                    "Sound on Activation": 1
+                },
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Accessibility",
+                    "dataTypes": {
+                        "Sound on Activation": "REG_DWORD"
+                    }
+                }
             }]
             },
             "gpii.windows.displaySettingsHandler": {
