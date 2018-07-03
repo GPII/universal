@@ -1371,6 +1371,11 @@
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "jhookldr.exe"
+                        },
+                        // New for JAWS 2018
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ScannerHandler.exe"
                         }
                     ]
                 }
