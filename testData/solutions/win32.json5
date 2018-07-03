@@ -1355,7 +1355,8 @@
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
-                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+//                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe\\}\""
                         }
                     ],
                     "setFalse": [
@@ -1379,7 +1380,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018ins.exe",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
