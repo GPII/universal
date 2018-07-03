@@ -18,7 +18,7 @@
                 "options": {
                     // TODO: Break out version somehow, as 18 is now available.  What do the AJCs have now?
 //                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
-                    "filename": "${{environment}.APPDATA}\\Roaming\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
                     // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
