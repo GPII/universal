@@ -14,6 +14,7 @@
                         "Braille": {
                             "BrailleMode": 2
                         },
+                        "Abbreviations": 1,
                         "options": {
                             "Abbreviations": 1,
                             "Acronyms": 1,
@@ -44,17 +45,17 @@
                             "IndicateAttributesInDialogsAndMenus": 1,
                             "IndicateCaps": 3,
                             "IndicateNewlinesAndParagraphs": 2,
-                            // TODO: Get more information
-                            "options.IndicateSelected": {
-                                "schema": {
-                                    "title": "IndicateSelected",
-                                    "description": "",
-                                    "type": "number",
-                                    "default": 2,
-                                    "enum": [0, 1, 2],
-                                    "enumLabels": []
-                                }
-                            },
+//                            // TODO: Get more information
+//                            "options.IndicateSelected": {
+//                                "schema": {
+//                                    "title": "IndicateSelected",
+//                                    "description": "",
+//                                    "type": "number",
+//                                    "default": 2,
+//                                    "enum": [0, 1, 2],
+//                                    "enumLabels": []
+//                                }
+//                            },
                             "InsertKeyMode": 1,
                             // TODO: Update this once we know how it actually works.
                             "JAWSInsertKey": 0,
