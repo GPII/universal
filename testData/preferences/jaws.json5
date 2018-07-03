@@ -14,7 +14,8 @@
                         "Braille": {
                             "BrailleMode": 2
                         },
-                        "Abbreviations": 1,
+                        // TODO: Test following this convention.
+                        "options.Abbreviations": 1,
                         "options": {
                             "Abbreviations": 1,
                             "Acronyms": 1,
