@@ -45,7 +45,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Abbreviations": {
+                    "Options.Abbreviations": {
                         "schema": {
                             "title": "Abbreviations",
                             "description": "Whether to expand abbreviations.  If this is enabled, abbreviations with a title attribute will have their title read instead of the on screen text.",
@@ -56,7 +56,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Acronyms": {
+                    "Options.Acronyms": {
                         "schema": {
                             "title": "Acronyms",
                             "description": "Whether to expand acronyms.  If this is enabled, acronyms with a title attribute will have their title read instead of the on screen text.",
@@ -67,7 +67,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.AllCapsIndicator": {
+                    "Options.AllCapsIndicator": {
                         "schema": {
                             "title": "AllCapsIndicator",
                             "description": "The text to read before text that appears in all capital letters.",
@@ -76,7 +76,7 @@
                         }
                     },
                     // TODO: How can we even verify this?
-                    "options.BrailleDisplay": {
+                    "Options.BrailleDisplay": {
                         "schema": {
                             "title": "BrailleDisplay",
                             "description": "The braille display to use.",
@@ -85,7 +85,7 @@
                         }
                     },
                     // TODO: Verify this.
-                    "options.CapIndicator": {
+                    "Options.CapIndicator": {
                         "schema": {
                             "title": "CapIndicator",
                             "description": "The text to read before a capital letter.",
@@ -94,7 +94,7 @@
                         }
                     },
                     // TODO: Verify this.
-                    "options.CaretBlinkRate": {
+                    "Options.CaretBlinkRate": {
                         "schema": {
                             "title": "CaretBlinkRate",
                             "description": "how fast the caret blinks, milliseconds on/off",
@@ -105,7 +105,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.CaretDetect": {
+                    "Options.CaretDetect": {
                         "schema": {
                             "title": "CaretDetect",
                             "description": "how many cursor blinks are used to locate the caret",
@@ -116,7 +116,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.CaretDetectTimeOut": {
+                    "Options.CaretDetectTimeOut": {
                         "schema": {
                             "title": "CaretDetectTimeOut",
                             "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret",
@@ -127,7 +127,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Case": {
+                    "Options.Case": {
                         "schema": {
                             "title": "Case",
                             "description": "Indicate case of spoken text with inflection change",
@@ -138,7 +138,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.CustomPageSummary": {
+                    "Options.CustomPageSummary": {
                         "schema": {
                             "title": "CustomPageSummary",
                             "description": "this setting determines what happens when a virtual document loads for which a custom page summary has been defined 0 do nothing (a SayAll will be started as normal) 1 The summary will be spoken and focus left on the page at the place defined by the page 2 the summary will be presented in the virtual viewer for the user to immediately read. The user must press Escape to return to the actual document. Note this setting should generally be set from Personalized Web Settings",
@@ -153,7 +153,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Dictionary": {
+                    "Options.Dictionary": {
                         "schema": {
                             "title": "Dictionary",
                             "description": "process text through the dictionary 0=off, 1 on",
@@ -165,7 +165,7 @@
                     },
                     // TODO: Get more details for this setting.
                     // There's not even anything in the JAWS documentation.
-                    "options.DosScreenReader": {
+                    "Options.DosScreenReader": {
                         "schema": {
                             "title": "DosScreenReader",
                             "description": "",
@@ -176,7 +176,7 @@
                         }
                     },
                     // TODO: Verify this, especially the mapping.
-                    "options.Filter": {
+                    "Options.Filter": {
                         "schema": {
                             "title": "Filter",
                             "description": "Determines how repeated characters are handled.",
@@ -194,7 +194,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Indentation": {
+                    "Options.Indentation": {
                         "schema": {
                             "title": "Indentation",
                             "description": "whether or not to indicateSayu indentation",
@@ -205,7 +205,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.IndicateAttributesInDialogsAndMenus": {
+                    "Options.IndicateAttributesInDialogsAndMenus": {
                         "schema": {
                             "title": "IndicateAttributesInDialogsAndMenus",
                             "description": "set to 1 to enable announcement of attributes etc in dialogs and menus if the scheme allows for it",
@@ -217,7 +217,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.IndicateCaps": {
+                    "Options.IndicateCaps": {
                         "schema": {
                             "title": "IndicateCaps",
                             "description": "When to indicate the presence of capital letters.",
@@ -234,7 +234,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.IndicateNewlinesAndParagraphs": {
+                    "Options.IndicateNewlinesAndParagraphs": {
                         "schema": {
                             "title": "IndicateNewlinesAndParagraphs",
                             "description": "Whether/how to indicate the presence of new lines and paragraphs.",
@@ -251,7 +251,7 @@
                         }
                     },
                     // TODO: Get more information
-                    "options.IndicateSelected": {
+                    "Options.IndicateSelected": {
                         "schema": {
                             "title": "IndicateSelected",
                             "description": "",
@@ -262,7 +262,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.InsertKeyMode": {
+                    "Options.InsertKeyMode": {
                         "schema": {
                             "title": "InsertKeyMode",
                             "description": "operating mode of insert key 0=JAWS, 1= Sticky",
@@ -273,7 +273,7 @@
                         }
                     },
                     // TODO: VERIFY WITH EXTREME PREJUDICE
-                    "options.JAWSInsertKey": {
+                    "Options.JAWSInsertKey": {
                         "schema": {
                             "title": "JAWSInsertKey",
                             "description": "Which insert keys can be used as a JAWS Insert 0=none 1=Numpad Insert 2=Extended Insert 3=both Numpad and Extended",
@@ -284,7 +284,7 @@
                         }
                     },
                     // TODO: This now appears to be a "level" option.  Verify by looking at the INI file.
-                    "options.JAWSPunctuationEnabled": {
+                    "Options.JAWSPunctuationEnabled": {
                         "schema": {
                             "title": "JAWSPunctuationEnabled",
                             "description": "Which punctuation marks to speak.",
@@ -295,7 +295,7 @@
                         }
                     },
                     // TODO: See if there is documentation on the supported options.
-                    "options.KeyboardType": {
+                    "Options.KeyboardType": {
                         "schema": {
                             "title": "KeyboardType",
                             "description": "Can be one of the types defined in default.jkm",
@@ -304,7 +304,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.KeyRepeat": {
+                    "Options.KeyRepeat": {
                         "schema": {
                             "title": "KeyRepeat",
                             "description": "Whether or not to allow repeated keys.  Repeated keys are allowed by default.",
@@ -315,7 +315,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.LanguageDetection": {
+                    "Options.LanguageDetection": {
                         "schema": {
                             "title": "LanguageDetection",
                             "description": "automatic Language detection, 1 on, 0 off",
@@ -326,7 +326,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.LeftShiftSkipBack": {
+                    "Options.LeftShiftSkipBack": {
                         "schema": {
                             "title": "LeftShiftSkipBack",
                             "description": "1=during SayAll, left shift will skip back and right shift will skip forward 0=vice versa",
@@ -340,7 +340,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.LinePauses": {
+                    "Options.LinePauses": {
                         "schema": {
                             "title": "LinePauses",
                             "description": "pause at end of a line 0=off, 1=on",
@@ -351,7 +351,7 @@
                         }
                     },
                     // TODO: Verify this and improve the description.
-                    "options.ListBoxCheckBoxes": {
+                    "Options.ListBoxCheckBoxes": {
                         "schema": {
                             "title": "ListBoxCheckBoxes",
                             "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
@@ -362,7 +362,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.MixedCase": {
+                    "Options.MixedCase": {
                         "schema": {
                             "title": "MixedCase",
                             "description": "words with embedded capital letters are spoken as separate words 0=off, 1 = on",
@@ -373,7 +373,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Numbers": {
+                    "Options.Numbers": {
                         "schema": {
                             "title": "Numbers",
                             "description": "How to announce numbers.",
@@ -384,7 +384,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.ProcessToolTipEvent": {
+                    "Options.ProcessToolTipEvent": {
                         "schema": {
                             "title": "ProcessToolTipEvent",
                             "description": "Whether or not to process tooltip events.",
@@ -395,7 +395,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.ProgressBarUpdateInterval": {
+                    "Options.ProgressBarUpdateInterval": {
                         "schema": {
                             "title": "ProgressBarUpdateInterval",
                             "description": "0 don't announce ProgressBar updates, non-zero value specifies time in milliseconds which must elapse before the next update is announced",
@@ -406,7 +406,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.QuickKeyNavigationMode": {
+                    "Options.QuickKeyNavigationMode": {
                         "schema": {
                             "title": "QuickKeyNavigationMode",
                             "description": "Currently this option is linked to the virtual cursor only 0 off, 1 on, 2 only on during SayAll",
@@ -417,7 +417,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.ReadingInterrupt": {
+                    "Options.ReadingInterrupt": {
                         "schema": {
                             "title": "ReadingInterrupt",
                             "description": "pressing a key that is bound to a macro will interrupt speech 0=off, 1 = on",
@@ -428,7 +428,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Repetitions": {
+                    "Options.Repetitions": {
                         "schema": {
                             "title": "Repetitions",
                             "description": "Whether or not to indicate repeated characters, 1 on, 0 off",
@@ -438,7 +438,7 @@
                             "enumLabels": ["off", "on"]
                         }
                     },
-                    "options.SayAllIgnoreShiftKeys": {
+                    "Options.SayAllIgnoreShiftKeys": {
                         "schema": {
                             "title": "SayAll Ignore Shift Keys",
                             "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
@@ -454,7 +454,7 @@
                             ]
                         }
                     },
-                    "options.SayAllIndicateCaps": {
+                    "Options.SayAllIndicateCaps": {
                         // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
                         "schema": {
                             "title": "Announce capitals",
@@ -471,7 +471,7 @@
                             ]
                         }
                     },
-                    "options.SayAllMode": {
+                    "Options.SayAllMode": {
                         "schema": {
                             "title": "SayAllMode",
                             "description": "Sets the amount of text which SayAll sends to the synthesizer as a single unit",
@@ -490,7 +490,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.SayBlankLineCount": {
+                    "Options.SayBlankLineCount": {
                         "schema": {
                             "title": "SayBlankLineCount",
                             "description": "In 'say all' mode, whether to announce the number of blank lines.",
@@ -501,7 +501,7 @@
                         }
                     },
                     // TODO: Verify what this does and fill in the description.
-                    "options.SayCursorShapeChange": {
+                    "Options.SayCursorShapeChange": {
                         "schema": {
                             "title": "SayCursorShapeChange",
                             "description": "Whether to announce a change in the shape of the cursor.",
@@ -512,7 +512,7 @@
                         }
                     },
                     // TODO: Verify what this does and fill in the description.
-                    "options.SayDollars": {
+                    "Options.SayDollars": {
                         "schema": {
                             "title": "SayDollars",
                             "description": "Whether to announce currency symbols.",
@@ -523,7 +523,7 @@
                         }
                     },
                     // TODO: Verify what this does and fill in the description.
-                    "options.SayNumericDates": {
+                    "Options.SayNumericDates": {
                         "schema": {
                             "title": "SayNumericDates",
                             "description": "How to announce numeric dates.  With no translation, dates are read as numbers.  With some translation, dd-mm-yy values are read as text.  With extended translation, both dd-mm-yy and dd-mm values are read as text.",
@@ -534,7 +534,7 @@
                         }
                     },
                     // TODO: Verify what this does and fill in the description.
-                    "options.SaySelectedFirst": {
+                    "Options.SaySelectedFirst": {
                         "schema": {
                             "title": "SaySelectedFirst",
                             "description": "Whether to announce the selected text first.",
@@ -545,7 +545,7 @@
                         }
                     },
                     // TODO: Verify working.
-                    "options.SayStateFirst": {
+                    "Options.SayStateFirst": {
                         "schema": {
                             "title": "SayStateFirst",
                             "description": "Whether to announce the window state before title/text.",
@@ -556,7 +556,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.SayWindowTypeFirst": {
+                    "Options.SayWindowTypeFirst": {
                         "schema": {
                             "title": "SayWindowTypeFirst",
                             "description": "Say Window type before window title/text 0=off, 1 = on",
@@ -567,7 +567,7 @@
                         }
                     },
                     // TODO: Verify. Figure out if there are other valid options.
-                    "options.Scheme": {
+                    "Options.Scheme": {
                         "schema": {
                             "title": "Scheme",
                             "description": "Whether or not to intercept CreateDIBSection Note that this value is only read once per JAWS session at startup thus changing this value while JAWS is running has no effect.",
@@ -576,7 +576,7 @@
                         }
                     },
                     // TODO: Verify and come up with a better description.
-                    "options.ScreenEcho": {
+                    "Options.ScreenEcho": {
                         "schema": {
                             "title": "ScreenEcho",
                             "description": "0=off, 1= highlight, 2 = all",
@@ -587,7 +587,7 @@
                         }
                     },
                     // TODO: Verify and come up with a description.
-                    "options.SimultaneousSynthAndWave": {
+                    "Options.SimultaneousSynthAndWave": {
                         "schema": {
                             "title": "SimultaneousSynthAndWave",
                             "description": "",
@@ -598,7 +598,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.SkimReadingIndication": {
+                    "Options.SkimReadingIndication": {
                         "schema": {
                             "title": "SkimReadingIndication",
                             "description": "Whether or not to indicate (via a beep) when skimming over text units for which the regular expression returns FALSE. 0=off, 1=on (beep every 20 units skimmed over)",
@@ -609,7 +609,7 @@
                         }
                     },
                     // TODO: Discuss, this is not meaningful unless it's coupled with an application for context.
-                    "options.SleepMode": {
+                    "Options.SleepMode": {
                         "schema": {
                             "title": "SleepMode",
                             "description": "Whether to put JAWS to sleep.  In the context of a specific application, this preference can be set to disable JAWS within that application.",
@@ -620,7 +620,7 @@
                         }
                     },
                     // TODO: Verify what type of setting this even is and that the description is accurate.
-                    "options.SpeakANSIChars": {
+                    "Options.SpeakANSIChars": {
                         "schema": {
                             "title": "SpeakANSIChars",
                             "description": "Whether or not to announce ANSI characters.",
@@ -631,7 +631,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.SpellPhonetic": {
+                    "Options.SpellPhonetic": {
                         "schema": {
                             "title": "SpellPhonetic",
                             "description": "How to announce word spellings.",
@@ -642,7 +642,7 @@
                         }
                     },
                     // TODO: Verify.  Look at the INI file and suggest defaults?
-                    "options.Synthesizer": {
+                    "Options.Synthesizer": {
                         "schema": {
                             "title": "Synthesizer",
                             "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
@@ -651,7 +651,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.SynthesizerResetFrequency": {
+                    "Options.SynthesizerResetFrequency": {
                         "schema": {
                             "title": "SynthesizerResetFrequency",
                             "description": "How often to reset communication with the synthesizer, in milliseconds.",
@@ -662,7 +662,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.TetherJawsToPC": {
+                    "Options.TetherJawsToPC": {
                         "schema": {
                             "title": "TetherJawsToPC",
                             "description": "Whether or not to tether the JAWS cursor to the PC cursor.  If this is set to 'on', whenever the Pc cursor moves, the Jaws cursor will follow it. If this is set to 'off', the JAWS cursor is indifferent to Pc cursor movements (this is the default).",
@@ -675,7 +675,7 @@
                     },
                     // TODO: Verify and fill in the description.
                     // Can't find information in the help file.
-                    "options.TreeViewCheckBoxes": {
+                    "Options.TreeViewCheckBoxes": {
                         "schema": {
                             "title": "TreeViewCheckBoxes",
                             "description": "",
@@ -685,7 +685,7 @@
                             "enumLabels": ["off", "on"]
                         }
                     },
-                    "options.TypingEcho": {
+                    "Options.TypingEcho": {
                         "schema": {
                             "title": "Typing echo",
                             "description": "Typing echo mode, its value can be either character, word, char&Word or none",
@@ -706,7 +706,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.TypingInterrupt": {
+                    "Options.TypingInterrupt": {
                         "schema": {
                             "title": "TypingInterrupt",
                             "description": "Whether to stop speaking when the user types.",
@@ -717,7 +717,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.UseExtendedKeys": {
+                    "Options.UseExtendedKeys": {
                         "schema": {
                             "title": "UseExtendedKeys",
                             "description": "Determines whether Extended and Numpad keys should be processed separately. 0=Treat Extended and Numpad keys the same 1=Differentiate between Extended and Numpad keys",
@@ -728,7 +728,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.UseVirtualInfoInFormsMode": {
+                    "Options.UseVirtualInfoInFormsMode": {
                         "schema": {
                             "title": "UseVirtualInfoInFormsMode",
                             "description": "Whether to use information from the virtual HTML area for prompts in Forms mode. Warning: this will not always result in accurate information, particularly on pages where there are errors in the HTML coding which result in forms mode and virtual mode being out of synchronization",
@@ -739,7 +739,7 @@
                         }
                     },
                     // TODO: Verify and fill this out.
-                    "options.UseWindowsKeyboardHook": {
+                    "Options.UseWindowsKeyboardHook": {
                         "schema": {
                             "title": "UseWindowsKeyboardHook",
                             "description": "",
@@ -750,7 +750,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.Verbosity": {
+                    "Options.Verbosity": {
                         "schema": {
                             "title": "Verbosity",
                             "description": "how much speech to say beginner=0 (most speech), intermediate = 1, advanced = 2 (least speech)",
@@ -761,7 +761,7 @@
                         }
                     },
                     // TODO: Verify
-                    "options.VIRTUALMSAAREFRESH": {
+                    "Options.VIRTUALMSAAREFRESH": {
                         "schema": {
                             "title": "VIRTUALMSAAREFRESH",
                             "description": "determines how often an embedded ActiveX control causes the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA 0 means allow refresh rate to be dictated by MSAA a positive number means only refresh every X miliseconds -1 means don't refresh at all.",
@@ -785,9 +785,8 @@
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "literalValue": "GPII"
                     },
-                    // TODO: Discuss this, as it doesn't seem to match the actual value space JAWS uses directly.
-                    "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "options\\.TypingEcho": {
+                    "Options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "Options\\.TypingEcho": {
                         // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                         "transform": {
                             "type": "fluid.transforms.condition",
@@ -816,7 +815,7 @@
                             }
                         }
                     },
-                    "options\\.SayAllMode": {
+                    "Options\\.SayAllMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/readingUnit",
@@ -839,7 +838,7 @@
                         }
                     },
                     // TODO: Same question about the value space here.
-                    "options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
+                    "Options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/announceCapitals": "options\\.SayAllIndicateCaps",
