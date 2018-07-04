@@ -19,9 +19,6 @@
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
-                    // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
-                    // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
-                    // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
                     "Voice Profiles.ActiveVoiceProfileName": {
                         // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
