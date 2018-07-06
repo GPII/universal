@@ -481,8 +481,8 @@ gpii.tests.pspIntegration.testDefs = [
             ]
         ]
     }, {
-      // This test checks that the manually changed context from the user is not overridden
-      // by a context change triggered by changes in the environment
+        // This test checks that the manually changed context from the user is not overridden
+        // by a context change triggered by changes in the environment
         name: "Manual context change via the PSP followed by a change in environment",
         expect: 11,
         sequence: [
