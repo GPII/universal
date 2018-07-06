@@ -83,6 +83,17 @@ gpii.tests.journal.initialSettings = {
             }
         }]
     },
+    "gpii.windows.systemSettingsHandler": {
+        "com.microsoft.windows.nightScreen": [
+            {
+                "settings": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "value": false
+                    }
+                }
+            }
+        ]
+    },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{
             "settings": {

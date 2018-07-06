@@ -3274,9 +3274,6 @@
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "live",
                 "supportedSettings": {
-                    "screen-dpi": {}
-                },
-                "supportedSettings": {
                     "screen-dpi": {
                         "schema": {
                             "title": "Screen DPI",
@@ -3888,6 +3885,62 @@
             }
         ]
     },
+    "com.microsoft.windows.nightScreen": {
+        "name": "Windows night light settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.nightScreen",
+                    "applications.com\\.microsoft\\.windows\\.nightScreen.id"
+                ],
+                "capabilitiesTransformations": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/nightScreen",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "schema": {
+                            "title": "Night Screen",
+                            "description": "Reduce the blue emitted from the screen.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
+                }
+            }
+        },
+        "update": [
+            "configure"
+        ],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
@@ -4155,11 +4208,7 @@
                             "title": "Explode Method",
                             "description": "The strategy to be used when exploding",
                             "type": "string",
-                            "enum": [
-                                "reject",
-                                "fail",
-                                "throw"
-                            ]
+                            "enum": ["reject", "fail", "throw"]
                         }
                     },
                     "explodeOn": {
