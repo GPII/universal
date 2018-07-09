@@ -55,8 +55,19 @@
     "http://registry\\.gpii\\.net/common/syllabification/enabled": "-provisional-cognitiveSupport.-provisional-syllabification/enabled",
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
     "http://registry\\.gpii\\.net/common/language": "language",
+    "http://registry\\.gpii\\.net/common/autocorrectionEnabled": "keyboard.typingEnhancement.autocorrection",
+    "http://registry\\.gpii\\.net/common/spellCheckEnabled": "keyboard.typingEnhancement.spellCheck",
+    "http://registry\\.gpii\\.net/common/textPredictionEnabled": "keyboard.typingEnhancement.textPrediction",
+    "http://registry\\.gpii\\.net/common/textPredictionWithSpaceEnabled": "keyboard.typingEnhancement.textPredictionWithSpace",
+    "http://registry\\.gpii\\.net/common/doubleTabSpaceEnabled": "keyboard.typingEnhancement.doubleTabSpace",
+    "http://registry\\.gpii\\.net/common/keyAudioFeedbackEnabled": "keyboard.typingEnhancement.keyAudioFeedback",
+    "http://registry\\.gpii\\.net/common/autoShiftEngageEnabled": "keyboard.typingEnhancement.autoShiftEngage",
+    "http://registry\\.gpii\\.net/common/shiftLockEnabled": "keyboard.typingEnhancement.shiftLock",
+    "http://registry\\.gpii\\.net/common/compatibilityKeyboardEnabled": "keyboard.typingEnhancement.compatibilityKeyboard",
+    "http://registry\\.gpii\\.net/common/autoScreenKeyboardEnabled": "keyboard.typingEnhancement.autoScreenKeyboard",
     "http://registry\\.gpii\\.net/common/DPIScale": "display.screenEnhancement.-provisional-DPIScale",
     "http://registry\\.gpii\\.net/common/speechControl": "control.-provisional-speechControl", // This is not currently supported by any real solutions, but rather used for user testing/demoing
+    "http://registry\\.gpii\\.net/common/nightScreen": "display.screenEnhancement.-provisional-nightScreen",
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",

@@ -1,0 +1,33 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                        "ApplicationSettings.AppBar.optToolbarIconSet.$t": "Professional",
+                        "ApplicationSettings.AppBar.optToolbarButtonGroupNameCurrent.$t": "Reading Features",
+                        "ApplicationSettings.AppBar.DocType.$t": "1",
+                        "ApplicationSettings.AppBar.Width.$t": 788,
+                        "ApplicationSettings.AppBar.ShowText.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                        "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                        "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                        "ApplicationSettings.Speech.optSAPI5Pitch.$t": 33,
+                        "ApplicationSettings.Speech.optSAPI5Speed.$t": 31,
+                        "ApplicationSettings.Speech.optSAPI5Volume.$t": 90,
+                        "ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t": 115,
+                        "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false,
+                        "ApplicationSettings.Speech.optSAPI5Voice.$t": "ScanSoft UK Indian Sangeeta",
+                        "ApplicationSettings.Speech.WebHighlighting.$t": true,
+                        "ApplicationSettings.Translation.ToLanguage.$t": "hi",
+                        "ApplicationSettings.Speech.optSAPI5SpeechHighlightContext.$t": 0,
+                        "ApplicationSettings.Scanning.ScanDestination.$t": "Word",
+                        "ApplicationSettings.Scanning.ScanToFile.$t": true,
+                        "ApplicationSettings.Spelling.SpellAsIType.$t": false
+                    }
+                }
+            }
+        }
+    }
+}

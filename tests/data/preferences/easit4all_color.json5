@@ -1,0 +1,15 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/fontSize": 1,
+                    "http://registry.gpii.net/common/magnification": 1,
+                    "http://registry.gpii.net/common/foregroundColor": "yellow",
+                    "http://registry.gpii.net/common/backgroundColor": "black"
+                }
+            }
+        }
+    }
+}

@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.tests.windows");
 gpii.tests.windows.builtIn = [
     {
         name: "Testing os_win7 using default matchmaker",
-        userToken: "os_win7",
+        gpiiKey: "os_win7",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -42,7 +42,26 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
+                    }
+                }],
+                "com.microsoft.windows.narrator": [{
+                    "settings": {
+                        "running": false
+                    },
+                    "options": {
+                        "registryName": "Narrator",
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Narrator.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -240,7 +259,37 @@ gpii.tests.windows.builtIn = [
                             "EchoWords": "REG_DWORD"
                         }
                     }
-                }]
+                }, { // TypingEnhancement
+                    "settings": {
+                        "EnableAutocorrection": 1,
+                        "EnableSpellchecking": 1,
+                        "EnableTextPrediction": 1,
+                        "EnablePredictionSpaceInsertion": 1,
+                        "EnableDoubleTapSpace": 1,
+                        "EnableKeyAudioFeedback": 1,
+                        "EnableAutoShiftEngage": 1,
+                        "EnableShiftLock": 1,
+                        "EnableCompatibilityKeyboard": 1,
+                        "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\TabletTip\\1.7",
+                        "dataTypes": {
+                            "EnableAutocorrection": "REG_DWORD",
+                            "EnableSpellchecking": "REG_DWORD",
+                            "EnableTextPrediction": "REG_DWORD",
+                            "EnablePredictionSpaceInsertion": "REG_DWORD",
+                            "EnableDoubleTapSpace": "REG_DWORD",
+                            "EnableKeyAudioFeedback": "REG_DWORD",
+                            "EnableAutoShiftEngage": "REG_DWORD",
+                            "EnableShiftLock": "REG_DWORD",
+                            "EnableCompatibilityKeyboard": "REG_DWORD",
+                            "EnableDesktopModeAutoInvoke": "REG_DWORD"
+                        }
+                    }
+                }
+            ]
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
@@ -266,14 +315,28 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
+                    }
+                }]
+            },
+            "gpii.windows.systemSettingsHandler": {
+                "com.microsoft.windows.nightScreen": [{
+                    "settings": {
+                        "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                            "value": false
+                        }
                     }
                 }]
             }
         }
     }, {
         name: "Testing os_common using default matchmaker",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -288,7 +351,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -297,7 +365,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -479,7 +552,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -488,14 +566,19 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
         }
     }, {
         name: "Testing os_common - magnifier running on startup",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -510,7 +593,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -519,7 +607,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -701,7 +794,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -710,14 +808,19 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
         }
     }, {
         name: "Testing os_common - magnifier and keyboard both running on startup",
-        userToken: "os_common",
+        gpiiKey: "os_common",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -732,7 +835,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -741,7 +849,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -923,7 +1036,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -932,14 +1050,19 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
         }
     }, {
         name: "Testing os_gnome using default matchmaker",
-        userToken: "os_gnome",
+        gpiiKey: "os_gnome",
         initialState: {
             "gpii.windows.enableRegisteredAT": {
                 "com.microsoft.windows.magnifier": [{
@@ -954,7 +1077,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }],
                 "com.microsoft.windows.onscreenKeyboard": [{
@@ -963,7 +1091,12 @@ gpii.tests.windows.builtIn = [
                     },
                     "options": {
                         "registryName": "osk",
-                        "queryProcess": "osk.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "osk.exe"
+                            }
+                        ]
                     }
                 }]
             }
@@ -1038,7 +1171,12 @@ gpii.tests.windows.builtIn = [
                             retryInterval: 1000
                         },
                         "registryName": "magnifierpane",
-                        "queryProcess": "Magnify.exe"
+                        "getState": [
+                            {
+                                "type": "gpii.processReporter.find",
+                                "command": "Magnify.exe"
+                            }
+                        ]
                     }
                 }]
             }

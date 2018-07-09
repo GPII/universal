@@ -7,8 +7,7 @@
     2. Handcraft our testemOptions.routes
     3. Avoid using the normal "generated options merging" from gpii.testem.
 
- */
-/* eslint-env node */
+*/
 "use strict";
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
@@ -36,6 +35,9 @@ fluid.defaults("gpii.tests.universal.testem", {
             "./**/*.json",
             "./*.html",
             "./**/*.html",
+            "./**/*Tests.js",
+            "./**/*TestEnv.js",
+            "./**/*TestsUtils.js",
             "./scripts/*.js",
             "./testData/**/*.js",
             "./tests/**",
