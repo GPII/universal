@@ -145,7 +145,7 @@ dbLoader.doBatchDelete = function (docsToRemove) {
         });
     });
     batchDeleteReq.on('error', function (e) {
-        fluid.error("Error deleting snapset Prefs Safes: " + e.message);
+        fluid.log("Error deleting snapset Prefs Safes: " + e.message);
     });
     batchDeleteReq.write(batchPostData);
     batchDeleteReq.end();
