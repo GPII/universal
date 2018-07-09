@@ -18,7 +18,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 "use strict";
 
-var http = require('http'),
+var http = require("http"),
+    url = require("url"),
     fluid = require("infusion");
 
 var gpii = fluid.registerNamespace("gpii");
@@ -26,14 +27,15 @@ fluid.registerNamespace("gpii.dataLoader");
 fluid.setLogging(fluid.logLevel.INFO)
 
 var dbLoader = gpii.dataLoader;
-dbLoader.couchDBURL = process.argv[2];
-if (!fluid.isValue(dbLoader.couchDBURL)) {
+dbLoader.couchDbUrl = process.argv[2];
+if (!fluid.isValue(dbLoader.couchDbUrl)) {
     fluid.log ("COUCHDB_URL environment variable must be defined");
     process.exit(1);
 }
-fluid.log("COUCHDB_URL: '" + dbLoader.couchDBURL + "'");
-dbLoader.prefsSafesViewUrl = dbLoader.couchDBURL + "/_design/views/_view/findSnapsetPrefsSafes";
-dbLoader.gpiiKeyViewUrl = dbLoader.couchDBURL + "/_design/views/_view/findGpiiKeysByPrefsSafeId";
+fluid.log("COUCHDB_URL: '" + dbLoader.couchDbUrl + "'");
+dbLoader.prefsSafesViewUrl = dbLoader.couchDbUrl + "/_design/views/_view/findSnapsetPrefsSafes";
+dbLoader.gpiiKeyViewUrl = dbLoader.couchDbUrl + "/_design/views/_view/findGpiiKeysByPrefsSafeId";
+dbLoader.parsedCouchDbUrl = url.parse(dbLoader.couchDbUrl);
 dbLoader.docsToRemove=[];
 
 /**
@@ -100,8 +102,8 @@ dbLoader.addGpiiKeysAndBulkDelete = function (snapSets, docsToRemove) {
  */
 dbLoader.deleteGpiiKey = function (gpiiKey) {
     var deleteOptions = {
-        hostname: "localhost",
-        port: 5984,
+        hostname: dbLoader.parsedCouchDbUrl.hostname,
+        port: dbLoader.parsedCouchDbUrl.port,
         path: "",           // filled in below.
         method: "DELETE",
         headers: {
@@ -125,8 +127,8 @@ dbLoader.deleteGpiiKey = function (gpiiKey) {
  */
 dbLoader.doBatchDelete = function (docsToRemove) {
     var batchDeleteOptions = {
-        hostname: "localhost",
-        port: 5984,
+        hostname: dbLoader.parsedCouchDbUrl.hostname,
+        port: dbLoader.parsedCouchDbUrl.port,
         path: "/gpii/_bulk_docs",
         method: "POST",
         headers: {
