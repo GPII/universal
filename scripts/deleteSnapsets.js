@@ -52,7 +52,7 @@ dbLoader.processSnapsets = function (response) {
     });
     response.on("end", function () {
         dbLoader.snapSets = JSON.parse(snapSetsString);
-        dbLoader.snapSets.rows.forEach(function (aSnapset) {
+        fluid.each(dbLoader.snapSets.rows, function (aSnapset) {
             aSnapset.value._deleted = true;
             dbLoader.docsToRemove.push(aSnapset.value);
         });
@@ -67,7 +67,7 @@ dbLoader.processSnapsets = function (response) {
  * @param {Array} docsToRemove  - Array of records to delete.
  */
 dbLoader.addGpiiKeysAndBulkDelete = function (snapSets, docsToRemove) {
-    fluid.each (snapSets, function (aSnapset) {
+    fluid.each(snapSets, function (aSnapset) {
         var gpiiKeyId = aSnapset.value._id;
         var gpiiKeyViewUrl = dbLoader.gpiiKeyViewUrl + "?key=%22" + gpiiKeyId + "%22";
         var getGpiiKeysRequest = http.request(gpiiKeyViewUrl, function (resp) {
@@ -83,7 +83,7 @@ dbLoader.addGpiiKeysAndBulkDelete = function (snapSets, docsToRemove) {
             // it could  call doBatchDelete().
             resp.on("end", function () {
                 var gpiiKeyRecords = JSON.parse(respString);
-                gpiiKeyRecords.rows.forEach(function (record) {
+                fluid.each(gpiiKeyRecords.rows, function (record) {
                     dbLoader.deleteGpiiKey(record.value);
                 });
             });
