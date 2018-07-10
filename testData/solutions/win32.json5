@@ -1327,14 +1327,16 @@
             "settings.configure1",
             "settings.configure2",
             {
-                "type": "gpii.windows.restartExplorer"
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}",
             }
         ],
         "restore": [
             "settings.configure1",
             "settings.configure2",
             {
-                "type": "gpii.windows.restartExplorer"
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}",
             }
         ],
         "isInstalled": [
