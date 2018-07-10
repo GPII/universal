@@ -14,7 +14,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 3. Deletes the found Prefs Safes and associated GPII Keys
 //
 // A sample command that runs this script:
-// node deleteAndLoadSnapsets.js $COUCHDBURL
+// node deleteSnapsets.js $COUCHDBURL
 
 "use strict";
 
@@ -69,6 +69,7 @@ dbLoader.processSnapsets = function (response) {
 dbLoader.addGpiiKeysAndBulkDelete = function (snapSets, docsToRemove) {
     fluid.each(snapSets, function (aSnapset) {
         var gpiiKeyId = aSnapset.value._id;
+        fluid.log("Snapset: " + gpiiKeyId);
         var gpiiKeyViewUrl = dbLoader.gpiiKeyViewUrl + "?key=%22" + gpiiKeyId + "%22";
         var getGpiiKeysRequest = http.request(gpiiKeyViewUrl, function (resp) {
             var respString = "";
@@ -83,8 +84,9 @@ dbLoader.addGpiiKeysAndBulkDelete = function (snapSets, docsToRemove) {
             // it could  call doBatchDelete().
             resp.on("end", function () {
                 var gpiiKeyRecords = JSON.parse(respString);
-                fluid.each(gpiiKeyRecords.rows, function (record) {
-                    dbLoader.deleteGpiiKey(record.value);
+                fluid.each(gpiiKeyRecords.rows, function (gpiiKey) {
+                    fluid.log("GPII Key: " + gpiiKey.value._id);
+                    dbLoader.deleteGpiiKey(gpiiKey.value);
                 });
             });
         });
