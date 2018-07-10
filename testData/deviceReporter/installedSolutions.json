@@ -84,6 +84,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.nightScreen"
+    },
+
+    {
         "id": "com.microsoft.windows.typingEnhancement"
     },
 
@@ -125,6 +129,10 @@
 
     {
         "id": "net.gpii.uioPlus"
+    },
+
+    {
+        "id": "net.gpii.explode"
     },
 
     {

@@ -36,7 +36,7 @@ COUCHDB_HEALTHCHECK_TIMEOUT=30
 STATIC_DATA_DIR="/home/vagrant/sync/universal/testData/dbData"
 BUILD_DATA_DIR="/home/vagrant/sync/universal/build/dbData"
 
-DATALOADER_IMAGE="cindyqili/gpii-dataloader"
+DATALOADER_IMAGE="gpii/gpii-dataloader"
 DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
 

@@ -33,7 +33,7 @@ gpii.tests.android.talkback = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "STREAM_MUSIC": 14
+                            "STREAM_MUSIC": 14.5
                         }
                     }
                 ]
@@ -42,8 +42,8 @@ gpii.tests.android.talkback = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "tts_default_rate": 450,
-                            "tts_default_pitch": 450
+                            "tts_default_rate": 450.99,
+                            "tts_default_pitch": 450.99
                         },
                         "options": {
                             "settingType": "Secure"
