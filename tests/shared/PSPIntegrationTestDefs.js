@@ -22,7 +22,6 @@ fluid.registerNamespace("gpii.tests.pspIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
-
 fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
     gradeNames: "kettle.test.request.http",
     path: "/environmentChanged",

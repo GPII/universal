@@ -221,7 +221,9 @@ There are a few notification events on the flowmanager related to the key-in and
 
 ### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/untrusted-settings)
 
-* **description**: Call the preferences server API to update user preferences. This endpoint will request the preferences server API to merge the incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow manager.
+* **description**: Call the preferences server API to update user preferences. This endpoint will request the preferences
+  server API to merge the incoming preferences with the existing user preferences and update the merged preferences on the
+  cloud based flow manager.
 * **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/untrusted-settings` where:
   * `:gpiiKey` should be the GPII key of the user for which the preferences are updated
