@@ -26,4 +26,3 @@ The following test users make use of the language setting:
 ## Limitations
 
 * The appropriate language pack must already be installed.
-* If the language "changes" to the same value as the current, explorer is still restarted.
