@@ -226,6 +226,6 @@ There are a few notification events on the flowmanager related to the key-in and
 ```json
 {
     "gpiiKey": "li",
-    "messgae": "Successfully updated."
+    "message": "Successfully updated."
 }
 ```

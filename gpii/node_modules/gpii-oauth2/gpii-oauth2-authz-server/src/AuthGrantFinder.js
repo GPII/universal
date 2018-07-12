@@ -33,7 +33,7 @@ var fluid = fluid || require("infusion");
             getGrantForAccessToken: {
                 funcName: "gpii.oauth2.authGrantFinder.getGrantForAccessToken",
                 args: ["{that}.authorizationService", "{arguments}.0"]
-                    // accessToken
+                                                      // accessToken
             }
         }
     });

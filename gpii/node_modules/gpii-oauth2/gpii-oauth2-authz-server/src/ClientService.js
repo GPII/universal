@@ -30,7 +30,7 @@ fluid.defaults("gpii.oauth2.clientService", {
         authenticateClient: {
             funcName: "gpii.oauth2.clientService.authenticateClient",
             args: ["{dataStore}", "{arguments}.0", "{arguments}.1"]
-                // oauth2ClientId, expectedOauth2ClientSecret
+                                  // oauth2ClientId, expectedOauth2ClientSecret
         },
         getClientById: {
             func: "{dataStore}.findClientById"
