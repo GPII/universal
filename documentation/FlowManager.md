@@ -65,29 +65,6 @@ There are a few notification events on the flowmanager related to the key-in and
 * **method:** `GET`
 * **return:** A JSON array with a string entry for each user
 
-### Get settings from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
-
-* **description**: Get settings from the cloud based flow manager
-* **Supported modes**: Cloud Based Flow Manager only
-* **route:** `/:gpiiKey/settings/:device` where:
-  * `:gpiiKey` should be the GPII key of the user for which the settings are requested
-  * `:device` should be a device reporter payload - for example:
-    `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for
-    the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
-* **method:** `GET`
-* **return:** An object, keyed by solution ID, with each block containing the relevant settings in a format
-  understandable by the solution. For example:
-
-```json
-{
-    "org.gnome.desktop.a11y.magnifier": {
-        "mag-factor": 2,
-        "mouse-tracking": "centered",
-        "screen-position": "full-screen"
-    }
-}
-```
-
 ### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
 
 * **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are

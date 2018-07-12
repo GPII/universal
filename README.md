@@ -255,10 +255,24 @@ Running `./scripts/vagrantCloudBasedContainers.sh`:
 
 1. Starts the preferences server in the production mode on the port 9081 inside the VM. To test it, open a browser and
    access the URL: `http://localhost:9081/preferences/carla`. The preferences for `carla` should be returned.
-2. Starts the flow manager in the production mode on the port 9082 inside the VM. To test it, open a browser and access
-   the URL:
-   `http://localhost:9082/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D`.
-   The settings for `carla` should be returned.
+2. Starts the flow manager in the production mode on the port 9082 inside the VM. To test it, open a terminal and run:
+
+    ```snippet
+    curl -H "Content-Type: application/x-www-form-urlencoded" -X POST
+     -d "username=li&password=dummy&client_id=pilot-computer&client_secret=pilot-computer-secret&grant_type=password"
+     -X POST http://localhost:9081/access_token
+    ```
+
+   An access token should be returned:
+
+   ``` snippet
+    {
+        "access_token": "19199532c97ed2e0f0d360df6679f058",
+        "expiresIn":3600,
+        "token_type":"Bearer"
+    }
+    ```
+
 3. The CouchDB data can be accessed via the URL: `http://localhost:5984/_utils/`
 
 **Note**:

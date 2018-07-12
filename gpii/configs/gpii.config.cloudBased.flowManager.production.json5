@@ -16,10 +16,9 @@
             "port": "@expand:kettle.resolvers.env(GPII_DATASOURCE_PORT)"
         },
         "distributeOptions": {
-            "distributePort.cloudBasedProductionPort": {
+            "flowManager.port": {
                 "record": 8082,
-                "target": "{that kettle.server}.options.port",
-                "priority": "after:distributePort.productionPort"
+                "target": "{that kettle.server}.options.port"
             },
             "flowManager.production.dataStore": {
                 "source": "{that}.options.dataSourceConfigProductionEnv",
