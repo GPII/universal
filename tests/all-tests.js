@@ -79,7 +79,8 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/settingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
-    "../gpii/node_modules/userListeners/test/all-tests.js"
+    "../gpii/node_modules/userListeners/test/all-tests.js",
+    "../gpii/node_modules/deviceReporter/test/all-tests.js"
 ];
 
 fluid.each(testIncludes, function (path) {
