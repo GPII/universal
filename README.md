@@ -56,11 +56,13 @@ npm start
 
 The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
-  * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
-  * `GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write preferences (default: http://localhost:8081/preferences/%gpiiKey?merge=%merge)
-  * `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: http://localhost)
-  * `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
-  * `GPII_CLOUD_URL`: The URL to GPII Cloud (default: http://localhost:8084). Used by untrusted local flow manager to communicate with GPII Cloud.
+* `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
+* `GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write
+ preferences (default: `http://localhost:8081/preferences/%gpiiKey?merge=%merge`)
+* `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: `http://localhost`)
+* `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
+* `GPII_CLOUD_URL`: The URL to GPII Cloud (default: `http://localhost:8084`). Used by untrusted local flow manager
+ to communicate with GPII Cloud.
 
 #### Example:
 
@@ -255,7 +257,7 @@ Running `./scripts/vagrantCloudBasedContainers.sh`:
    access the URL: `http://localhost:9081/preferences/carla`. The preferences for `carla` should be returned.
 2. Starts the flow manager in the production mode on the port 9082 inside the VM. To test it, open a browser and access
    the URL:
-   `http://localhost:9081/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D`.
+   `http://localhost:9082/carla/settings/%7B%22OS%22:%7B%22id%22:%22linux%22%7D,%22solutions%22:[%7B%22id%22:%22org.gnome.desktop.a11y.magnifier%22%7D]%7D`.
    The settings for `carla` should be returned.
 3. The CouchDB data can be accessed via the URL: `http://localhost:5984/_utils/`
 

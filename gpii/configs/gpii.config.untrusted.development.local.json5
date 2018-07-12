@@ -40,7 +40,7 @@
             "untrusted.development.prefs": {
                 "record": "http://localhost:8084/preferences/%gpiiKey?merge=%merge",
                 "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
-                "priority": "after:flowManager.development.prefs"
+                "priority": "after:flowManager.preferencesDataSource.default"
             }
         }
     }

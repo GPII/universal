@@ -22,7 +22,7 @@
 {
     "type": "gpii.config.cloudBased.development",
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json5",
+        "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
         "%preferencesServer/configs/gpii.preferencesServer.config.development.json5",
         "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
     ]

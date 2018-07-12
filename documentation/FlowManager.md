@@ -66,6 +66,7 @@ There are a few notification events on the flowmanager related to the key-in and
 * **return:** A JSON array with a string entry for each user
 
 ### Get settings from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
+
 * **description**: Get settings from the cloud based flow manager
 * **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings/:device` where:
@@ -88,11 +89,15 @@ There are a few notification events on the flowmanager related to the key-in and
 ```
 
 ### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
-* **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
+
+* **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are
+ untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
 * **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings/:device` where:
-    - `:gpiiKey` should be the GPII key of the user for which the settings are requested
-    - `:device` should be a device reporter payload - for example: `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
+  * `:gpiiKey` should be the GPII key of the user for which the settings are requested
+  * `:device` should be a device reporter payload - for example:
+  `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the
+  solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
 * **header:** Authorization: Bearer < access_token >
   * `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization
     that grants a GPII app to access settings associated with a GPII key. Refer to [GPII OAuth2
@@ -187,10 +192,13 @@ There are a few notification events on the flowmanager related to the key-in and
 ```
 
 ### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/settings)
-* **description**: Call the preferences server API to update user preferences. The preferences server API merges the incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow manager.
+
+* **description**: Call the preferences server API to update user preferences. The preferences server API merges the
+ incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow
+ manager.
 * **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings` where:
-    - `:gpiiKey` should be the GPII key of the user for which the preferences are updated
+  * `:gpiiKey` should be the GPII key of the user for which the preferences are updated
 * **header:** Authorization: Bearer < access_token >
   * `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization
     that grants a GPII app to update settings associated with a GPII key. Refer to [GPII OAuth2

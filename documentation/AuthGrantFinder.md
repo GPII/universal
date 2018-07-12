@@ -12,11 +12,12 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
 * **return:** A promise object. Once resolved, this object contains the authorization information for the access token.
   Return `undefined` when the access token is not found.
   * An example of the returned object:
-    ```json
-    {
-        accessToken: "the_input_accessToken",
-        gpiiKey: "bob_gpii_key",
-        allowSettingsGet: true,
-        allowSettingsPut: true
-    }
-    ```
+
+```JSON
+{
+    accessToken: "the_input_accessToken",
+    gpiiKey: "bob_gpii_key",
+    allowSettingsGet: true,
+    allowSettingsPut: true
+}
+```
