@@ -11,78 +11,83 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
+                        "Braille.attributeRotationDelay": 500,
+                        "Braille.AutoPanMode": 6,
+                        "Braille.BrailleMessages": 0,
                         "Braille.BrailleMode": 2,
-                        "Options.Abbreviations": 1,
+                        "Braille.BrailleShowMarking": 32,
+                        "Braille.BrailleSleepMode": 1,
+                        // TODO: Figure out default.
+                        "Braille.BrailleVerbosity": 2,
+                        "Braille.EightDotBraille": 0,
+                        "Braille.MessagePrefixes": 0,
+                        "Braille.MessageTime": 2500,
+                        "Braille.ReversePanningButtons": 1,
+                        "Braille.StructuredModeReverseOrder": 0,
+                        "Braille.WordWrap": 0,
+
+                        "FSCasts.EnableNotifications": 0,
+
+                        "HTML.AccessKeys": 0,
+                        "HTML.ExpandAbbreviations": 1,
+                        "HTML.ExpandAcronyms": 1,
+                        "HTML.FilterConsecutiveDuplicateLinks": 0,
+                        "HTML.FormFieldPromptOptions": 1,
+                        "HTML.FormsModeAutoOff": 0,
+                        "HTML.IgnoreInlineFrames": 1,
+                        "HTML.IncludeGraphics": 0,
+                        "HTML.IndicateColSpan": 0,
+                        "HTML.SayAllOnDocumentLoad": 0,
+                        "HTML.SmartNavigation": 1,
+                        "HTML.TextBlockLength": 15,
+
+                       "Options.Abbreviations": 1,
                         "Options.Acronyms": 1,
                         "Options.AllCapsIndicator": "definitely all cap",
-                        // TODO: How can we even verify this?
-                        // "Options.BrailleDisplay": "Braille1",
+                        "Options.AllowMouseEchoWhenMuted": 1,
+                        "Options.AllowSpeechOnDemandWhenMuted": 0,
+                        "Options.AllowTypingEchoWhenMuted": 1,
+                        "Options.BrailleDisplay": "nonsense",
                         "Options.CapIndicator": "definitely cap",
                         "Options.CaretBlinkRate": 106,
                         "Options.CaretDetect": 5,
                         "Options.CaretDetectTimeOut": 500,
                         "Options.Case": 0,
                         "Options.CustomPageSummary": 2,
+                        "Options.DetectKeyboardInputLanguage": 0,
                         "Options.Dictionary": 1,
-                        // TODO: Get more details for this setting.
-                        // There's not even anything in the JAWS documentation.
-//                            "Options.DosScreenReader": {
-//                                "schema": {
-//                                    "title": "DosScreenReader",
-//                                    "description": "",
-//                                    "type": "",
-//                                    "default": 0,
-//                                    "enum": [],
-//                                    "enumLabels": []
-//                                }
-//                            },
+                        // TODO: Figure out what this should be
+                        "Options.DosScreenReader": 1,
                         "Options.Filter": 5,
+                        "Options.GeneralizeDialect": 0,
                         "Options.Indentation": 1,
                         "Options.IndicateAttributesInDialogsAndMenus": 1,
                         "Options.IndicateCaps": 3,
                         "Options.IndicateNewlinesAndParagraphs": 2,
-//                            // TODO: Get more information
-//                            "Options.IndicateSelected": {
-//                                "schema": {
-//                                    "title": "IndicateSelected",
-//                                    "description": "",
-//                                    "type": "number",
-//                                    "default": 2,
-//                                    "enum": [0, 1, 2],
-//                                    "enumLabels": []
-//                                }
-//                            },
+                        "Options.IndicateSelected": 1,
+                        "Options.InitialNumlockState": 2,
                         "Options.InsertKeyMode": 1,
-                        // TODO: Update this once we know how it actually works.
                         "Options.JAWSInsertKey": 0,
-                        // TODO: Update this once we know how it actually works.
-                         "Options.JAWSPunctuationEnabled": 3,
-                        // TODO: See if there is documentation on the supported Options.
-//                            "Options.KeyboardType": {
-//                                "schema": {
-//                                    "title": "KeyboardType",
-//                                    "description": "Can be one of the types defined in default.jkm",
-//                                    "type": "string",
-//                                    "default": "Laptop"
-//                                }
-//                            },
+                        "Options.JAWSPunctuationEnabled": 3,
+                        // TODO: Better value?
+                        "Options.KeyboardType": "nonsense",
                         "Options.KeyRepeat": 0,
                         "Options.LanguageDetection": 0,
                         "Options.LeftShiftSkipBack": 0,
+                        // TODO: Verify default
+                        "Options.LessSpeechMode": 1,
                         "Options.LinePauses": 1,
-                        // TODO: Verify this and improve the description.
-//                            "Options.ListBoxCheckBoxes": {
-//                                "schema": {
-//                                    "title": "ListBoxCheckBoxes",
-//                                    "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
-//                                    "type": "number",
-//                                    "default": 0,
-//                                    "enum": [0, 1, 2],
-//                                    "enumLabels": ["off", "non-ownerdrawn listboxes", "also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style."]
-//                                }
-//                            },
+                        "Options.ListBoxCheckBoxes": 2,
+                        "Options.LowerOtherAppsVolumeWhileJAWSIsRunning": 1,
                         "Options.MixedCase": 0,
+                        "Options.MouseEchoSpeaksControlTypeAndState": 0,
+                        "Options.MouseEchoSpeaksHelpAndDescription": 1,
+                        "Options.MouseMovementStopsSpeech": 0,
+                        "Options.MouseSpeechDelay": 250,
+                        "Options.MouseSpeechEchoUnit": 3,
+                        "Options.MouseSpeechEnabled": 1,
                         "Options.Numbers": 3,
+                        "Options.OnScreenKeyboard": 1,
                         "Options.ProcessToolTipEvent": 0,
                         "Options.ProgressBarUpdateInterval": 2500,
                         "Options.QuickKeyNavigationMode": 1,
@@ -91,6 +96,7 @@
                         "Options.SayAllIgnoreShiftKeys": 1,
                         "Options.SayAllIndicateCaps": 1,
                         "Options.SayAllMode": 2,
+                        "Options.SayAllScheme": "nonsense",
                         "Options.SayBlankLineCount": 1,
                         "Options.SayCursorShapeChange": 1,
                         "Options.SayDollars": 1,
@@ -98,91 +104,61 @@
                         "Options.SaySelectedFirst": 1,
                         "Options.SayStateFirst": 1,
                         "Options.SayWindowTypeFirst": 1,
-//                            "Options.ScreenEcho": {
-//                                "schema": {
-//                                    "title": "ScreenEcho",
-//                                    "description": "0=off, 1= highlight, 2 = all",
-//                                    "type": "number",
-//                                    "default": 1,
-//                                    "enum": [0, 1, 2],
-//                                    "enumLabels": ["off", "highlight", "all"]
-//                                }
-//                            },
-//                            // TODO: Verify and come up with a description.
-//                            "Options.SimultaneousSynthAndWave": {
-//                                "schema": {
-//                                    "title": "SimultaneousSynthAndWave",
-//                                    "description": "",
-//                                    "type": "number",
-//                                    "default": 0,
-//                                    "enum": [0, 1],
-//                                    "enumLabels": ["off", "on"]
-//                                }
-//                            },
+                        // TODO: Fix this
+                        "Options.Scheme": "no idea",
+                        "Options.ScreenEcho": 2,
+                        "Options.SimultaneousSynthAndWave": 1,
+                        "Options.SingleDigitThreshold": 7,
                         "Options.SkimReadingIndication": 0,
-                        // TODO: Discuss whether we can meaningfully set this.
-//                            "Options.SleepMode": {
-//                                "schema": {
-//                                    "title": "SleepMode",
-//                                    "description": "",
-//                                    "type": "number",
-//                                    "default": 1,
-//                                    "enum": [ 0, 1 ],
-//                                    "enumLabels": [ "off", "on" ]
-//                                }
-//                            },
-//                            // TODO: Verify what type of setting this even is and that the description is accurate.
-//                            "Options.SpeakANSIChars": {
-//                                "schema": {
-//                                    "title": "SpeakANSIChars",
-//                                    "description": "Whether or not to announce ANSI characters.",
-//                                    "type": "number",
-//                                    "default": 1,
-//                                    "enum": [ 0, 1 ],
-//                                    "enumLabels": [ "off", "on" ]
-//                                }
-//                            },
+                        "Options.SleepMode": 0,
+                        "Options.SmartWordReading": 0,
+                        "Options.SpeakANSIChars": 0,
+                        "Options.SpeakCharacterValueAsMultibyteSequence": 1,
+                        "Options.SpeakCharacterValueInHex": 1,
+                        "Options.SpeakNumbersSepByDashesAsDigits": 1,
+                        "Options.SpeechHistory": 0,
+                        "Options.SpeechMode": 1,
+                        "Options.SpellAlphanumericData": 1,
                         "Options.SpellPhonetic": 1,
-                        // TODO: Verify.  Look at the INI file and suggest defaults?
-//                            "Options.Synthesizer": {
-//                                "schema": {
-//                                    "title": "Synthesizer",
-//                                    "description": "The synthesizer to use/ Available synthesizers are listed in JfW.INI",
-//                                    "type": "string",
-//                                    "default": "Synth1"
-//                                }
-//                            },
+                        "Options.Synthesizer": "nonsense",
                         "Options.SynthesizerResetFrequency": 5000,
                         "Options.TetherJawsToPC": 1,
-                        // TODO: Verify and fill in the description.
-                        // Can't find information in the help file.
-//                            "Options.TreeViewCheckBoxes": {
-//                                "schema": {
-//                                    "title": "TreeViewCheckBoxes",
-//                                    "description": "",
-//                                    "type": "number",
-//                                    "default": 1,
-//                                    "enum": [0, 1],
-//                                    "enumLabels": ["off", "on"]
-//                                }
-//                            },
+                        "Options.TextAnalyser": 2,
+                        // TODO: Better value?
+                        "Options.TextAnalyserSymbolFlags": 999,
+                        // TODO: Better value?
+                        "Options.TextAnalyserTypeFlags": 999,
+                        "Options.TouchKeyboardChildPanelNotification": 1,
+                        "Options.TouchKeyboardNotification": 1,
+                        "Options.TouchTypingEcho": 2,
+                        "Options.TouchTypingMode": 0,
+                        "Options.TreeViewCheckBoxes": 0,
                         "Options.TypingEcho": 3,
                         "Options.TypingInterrupt": 0,
                         "Options.UseExtendedKeys": 1,
                         "Options.UseVirtualInfoInFormsMode": 1,
-//                            // TODO: Verify and fill this out.
-//                            "Options.UseWindowsKeyboardHook": {
-//                                "schema": {
-//                                    "title": "UseWindowsKeyboardHook",
-//                                    "description": "",
-//                                    "type": "number",
-//                                    "default": 0,
-//                                    "enum": [0, 1],
-//                                    "enumLabels": ["off", "on"]
-//                                }
-//                            },
+                        "Options.UseWindowsKeyboardHook": 1,
                         "Options.Verbosity": 2,
-                        "Options.VIRTUALMSAAREFRESH": -1
+                        "Options.VTcolor": 9999,
+                        "Options.VTspacing": 15,
+                        "Options.VTstyle": 2,
+                        "Options.VTthickness": 10,
+                        "Options.VTtransparency": 50,
+                        "Options.VTUseTouchCursor": 1,
+                        "Options.VTUseVirtualPCCursor": 0,
+                        "Options.VTUseVirtualRibbon": 1,
+                        "Options.VIRTUALMSAAREFRESH": -1,
+
+                        "OSM.PixelsPerSpace": 4,
+                        "OSM.PixelsPerTab": 5,
+                        "OSM.TableDetection": 1,
+                        "OSM.TrackFocusRect": 0,
+                        "OSM.UnderlineProximity": 5,
+
+                        "Touch.FlickVelocityMin": 99,
+                        "Touch.TapEventDurationMax": 99,
+                        "Touch.TapInterEventDurationMax": 99,
+                        "Touch.TapTranslationMax": 99
                     }
                 },
                 "metadata": [
