@@ -1,13 +1,14 @@
 /**
- * This configuration runs the entire system locally and in development mode.
+ * This configuration acts as a base for `gpii.config.development.all.local` and many configurations used by
+ * integration tests. It runs the entire system including the local flow manager, the cloud based flow manager,
+ * the preferences server and matchmaker all locally. It doesn't start any backend database for data persistence.
  *
- * This mean that:
- * * All storage is on the local filesystem (as opposed to couchDB servers/remote URLs)
- * * The following components are running on the local machine:
+ * * The following components are running:
  * ** canopyMatchMaker
  * ** deviceReporter (reading device context info from file)
- * ** flowManager
+ * ** cloudBasedFlowManager
  * ** lifecycleManager
+ * ** localFlowManager
  * ** matchMakerFramework
  * ** OntologyHandler
  * ** preferencesServer

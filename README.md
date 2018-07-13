@@ -260,10 +260,10 @@ Running `./scripts/vagrantCloudBasedContainers.sh`:
     ```snippet
     curl -H "Content-Type: application/x-www-form-urlencoded" -X POST
      -d "username=li&password=dummy&client_id=pilot-computer&client_secret=pilot-computer-secret&grant_type=password"
-     -X POST http://localhost:9081/access_token
+     -X POST http://localhost:9082/access_token
     ```
 
-   An access token should be returned:
+   An access token should be returned. An example:
 
    ``` snippet
     {

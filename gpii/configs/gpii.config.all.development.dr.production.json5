@@ -1,10 +1,8 @@
 /**
- * This configuration runs the entire system locally and in development mode with the exception of the deviceReporter,
- * which runs in production mode.
+ * This configuration runs the entire system locally with a dynamic deviceReporter. It expects couchDB
+ * to be running separately on localhost for data persistence.
  *
- * This mean that:
- * * All storage is on the local filesystem (as opposed to couchDB servers/remote URLs)
- * * The following components are running on the local machine:
+ * * The following components are running:
  * ** flowManager
  * ** preferencesServer
  * ** OntologyHandler

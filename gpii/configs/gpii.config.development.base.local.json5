@@ -1,7 +1,18 @@
 /**
- * This config acts as a base for `gpii.config.development.all.local` and `gpii.config.all.development.dr.production`.
- * It includes configs to locate the flow manager, preferences server and matchmaker all locally. The extra
- * work required is to arrange to cross-inject the ontology handler between the matchmaker and preferences server.
+ * This configuration acts as a base for `gpii.config.development.local` and `gpii.config.all.development.dr.production`.
+ * It includes configs to locate the local flow manager, the cloud based flow manager, the preferences server and
+ * matchmaker all locally. The extra work required is to arrange to cross-inject the ontology handler between the
+ * matchmaker and preferences server.
+ *
+ * * The following components are running:
+ * ** authServer
+ * ** canopyMatchMaker
+ * ** cloudBasedFlowManager
+ * ** localFlowManager
+ * ** matchMakerFramework
+ * ** OntologyHandler
+ * ** preferencesServer
+ * ** solutionsRegistry (reading registry from file)
  */
 {
     "type": "gpii.config.development.base.local",
@@ -16,7 +27,7 @@
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
         "%flowManager/configs/gpii.flowManager.config.local.base.json5",
-        "%preferencesServer/configs/gpii.preferencesServer.config.development.json5",
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
         "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
     ]
 }

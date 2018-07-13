@@ -1,7 +1,7 @@
 /**
- * This config acts as a base for `gpii.config.cloudBased.development.all.local`.
- * It includes configs to locate these items all locally:
+ * This configuration acts as a base for `gpii.config.cloudBased.development.all.local`.
  *
+ * * The following components are running:
  * ** authServer
  * ** canopyMatchMaker
  * ** flowManager
@@ -23,7 +23,7 @@
     "type": "gpii.config.cloudBased.development",
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
-        "%preferencesServer/configs/gpii.preferencesServer.config.development.json5",
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
         "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
     ]
 }

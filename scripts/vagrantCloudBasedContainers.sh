@@ -92,7 +92,7 @@ wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout
 docker run -d -p $GPII_FLOWMANAGER_PORT:$GPII_FLOWMANAGER_PORT --name flowmanager --link couchdb --link preferences -e NODE_ENV=$GPII_FLOWMANAGER_CONFIG -e GPII_FLOWMANAGER_LISTEN_PORT=$GPII_FLOWMANAGER_PORT -e GPII_DATASOURCE_HOSTNAME=$DATASOURCE_HOSTNAME -e GPII_DATASOURCE_PORT=$COUCHDB_PORT -e GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=$GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL $UNIVERSAL_IMAGE
 
 # Wait for the flow manager container to be ready
-wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 --post-data "username=li&password=dummy&client_id=pilot-computer&client_secret=pilot-computer-secret&grant_type=password" $ACCESS_TOKEN_URL
+wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=1 --tries=30 --post-data "username=carla&password=dummy&client_id=pilot-computer&client_secret=pilot-computer-secret&grant_type=password" $ACCESS_TOKEN_URL
 
 # Start the container to run production config tests
 docker run --name productionConfigTests --link flowmanager -e GPII_CLOUD_URL=$GPII_CLOUD_URL $UNIVERSAL_IMAGE node tests/ProductionConfigTests.js

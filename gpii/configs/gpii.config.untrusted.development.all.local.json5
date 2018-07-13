@@ -1,9 +1,20 @@
 /**
- * This configuration runs the entire system locally under the hybrid Flow Manager architecture and in development mode. It also starts pouchDB to serve data for the preferences server and the auth server.
+ * This configuration runs the entire system locally under the untrusted Flow Manager architecture.
+ * It starts these servers:
+ * 1. untrusted local flow manager on port 8081
+ * 2. cloud based flow manager and preferences server on port 8084
+ * 3. pouchDB on port 8058
  *
- * It runs:
- * * A multi-server configuration with gpii.config.untrusted.development.local.json5 (See corresponding file for details)
- * * Pouch Manager to store data on the local pouchDB
+ * * The following components are running:
+ * ** authServer
+ * ** canopyMatchMaker
+ * ** cloudBasedFlowManager
+ * ** untrusted localFlowManager
+ * ** matchMakerFramework
+ * ** OntologyHandler
+ * ** preferencesServer
+ * ** solutionsRegistry (reading registry from file)
+ * ** pouchManager
  */
 {
     "type": "gpii.config.untrusted.development.all.local",
