@@ -1,5 +1,5 @@
 /**
- * This configuration runs the entire system locally with a dynamic deviceReporter. It expects couchDB
+ * This configuration runs the entire system locally with a dynamic deviceReporter on port 8081. It expects couchDB
  * to be running separately on localhost for data persistence.
  *
  * * The following components are running:
