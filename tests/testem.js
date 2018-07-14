@@ -7,7 +7,7 @@
     2. Handcraft our testemOptions.routes
     3. Avoid using the normal "generated options merging" from gpii.testem.
 
- */
+*/
 "use strict";
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");

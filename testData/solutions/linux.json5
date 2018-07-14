@@ -104,7 +104,6 @@
             }
         ]
     },
-
     "org.gnome.desktop.interface": {
         "name": "GNOME Interface Settings",
         "contexts": {
@@ -141,13 +140,16 @@
                                 {
                                     "upperBound": 0,
                                     "output": -1
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.333,
                                     "output": 20
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": 29
-                                }, {
+                                },
+                                {
                                     "output": 41
                                 }
                             ]
@@ -220,16 +222,16 @@
             }
         ]
     },
-
     "org.gnome.nautilus": {
         "name": "GNOME Nautilus Settings",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
@@ -253,14 +255,15 @@
             }
         ]
     },
-
     "org.gnome.desktop.a11y.applications.onscreen-keyboard": {
         "name": "GNOME Assistive Technology - Screen Keyboard",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "capabilities": [
             "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled"
@@ -282,14 +285,15 @@
             }
         ]
     },
-
     "org.gnome.desktop.a11y.keyboard": {
         "name": "GNOME Shell Keyboard Settings",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -359,16 +363,16 @@
             }
         ]
     },
-
     "org.gnome.desktop.wm.preferences": {
         "name": "GNOME desktop Window Manager preferences",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
@@ -385,14 +389,15 @@
             }
         ]
     },
-
     "org.gnome.shell.overrides": {
         "name": "GNOME Shell overrides",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -410,14 +415,15 @@
             }
         ]
     },
-
     "org.gnome.orca": {
         "name": "ORCA Screen Reader",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "capabilities": [
             "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
@@ -482,7 +488,7 @@
                                         "transform": {
                                             "type": "fluid.transforms.condition",
                                             "condition": {
-                                                "transform" : {
+                                                "transform": {
                                                     "type": "fluid.transforms.binaryOp",
                                                     "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                     "operator": "<",
@@ -753,7 +759,7 @@
                                 "lv": {
                                     "outputValue": {
                                         "locale": "lv",
-                                       "name": "latvian"
+                                        "name": "latvian"
                                     }
                                 },
                                 "mk": {
@@ -959,7 +965,7 @@
                                         "transform": {
                                             "type": "fluid.transforms.condition",
                                             "condition": {
-                                                "transform" : {
+                                                "transform": {
                                                     "type": "fluid.transforms.binaryOp",
                                                     "leftPath": "voices\\.default\\.rate",
                                                     "operator": "<",
@@ -981,60 +987,61 @@
                                 "outputValue": "en"
                             },
                             "match": {
-                                "english": "en" ,
-                                "english-us": "en-US" ,
-                                "en-scottish": "en-scotland" ,
-                                "en-westindies": "en-BZ" ,
-                                "afrikaans": "af" ,
-                                "bulgarian-test": "bg" ,
-                                "bosnian": "bs" ,
-                                "catalan": "ca" ,
-                                "czech": "cs" ,
-                                "welsh-test": "cy" ,
-                                "danish": "da" ,
-                                "german": "de" ,
-                                "greek": "el" ,
-                                "greek-ancient": "grc" ,
-                                "esperanto": "eo" ,
-                                "spanish": "es" ,
-                                "spanish-latin-american": "es-419" ,
-                                "estonian": "et" ,
-                                "finnish": "fi" ,
-                                "french": "fr" ,
-                                "hindi": "hi" ,
-                                "croatian": "hr" ,
-                                "hungarian": "hu" ,
-                                "armenian": "hy" ,
-                                "armenian-west": "hy-arevmda" ,
-                                "indonesian-test": "id" ,
-                                "icelandic-test": "is" ,
-                                "italian": "it" ,
-                                "lojban": "jbo" ,
-                                "georgian-test": "ka" ,
-                                "kannada": "kn" ,
-                                "kurdish": "ku" ,
-                                "latin": "la" ,
-                                "latvian": "lv" ,
-                                "macedonian-test": "mk" ,
-                                "malayalam": "ml" ,
-                                "dutch-test": "nl" ,
-                                "norwegian": "no" ,
-                                "papiamento-test": "pap" ,
-                                "polish": "pl" ,
-                                "brazil": "pt-BR" ,
-                                "portugal": "pt-PT" ,
-                                "romanian": "ro" ,
-                                "russian_test": "ru" ,
-                                "slovak": "sk" ,
-                                "albanian": "sq" ,
-                                "serbian": "sr" ,
-                                "swedish": "sv" ,
-                                "swahili-test": "sw" ,
-                                "tamil": "ta" ,
-                                "turkish": "tr" ,
-                                "vietnam": "vi" ,
-                                "Mandarin": "zh-cmn" ,
-                                "cantonese": "zh-yue" }
+                                "english": "en",
+                                "english-us": "en-US",
+                                "en-scottish": "en-scotland",
+                                "en-westindies": "en-BZ",
+                                "afrikaans": "af",
+                                "bulgarian-test": "bg",
+                                "bosnian": "bs",
+                                "catalan": "ca",
+                                "czech": "cs",
+                                "welsh-test": "cy",
+                                "danish": "da",
+                                "german": "de",
+                                "greek": "el",
+                                "greek-ancient": "grc",
+                                "esperanto": "eo",
+                                "spanish": "es",
+                                "spanish-latin-american": "es-419",
+                                "estonian": "et",
+                                "finnish": "fi",
+                                "french": "fr",
+                                "hindi": "hi",
+                                "croatian": "hr",
+                                "hungarian": "hu",
+                                "armenian": "hy",
+                                "armenian-west": "hy-arevmda",
+                                "indonesian-test": "id",
+                                "icelandic-test": "is",
+                                "italian": "it",
+                                "lojban": "jbo",
+                                "georgian-test": "ka",
+                                "kannada": "kn",
+                                "kurdish": "ku",
+                                "latin": "la",
+                                "latvian": "lv",
+                                "macedonian-test": "mk",
+                                "malayalam": "ml",
+                                "dutch-test": "nl",
+                                "norwegian": "no",
+                                "papiamento-test": "pap",
+                                "polish": "pl",
+                                "brazil": "pt-BR",
+                                "portugal": "pt-PT",
+                                "romanian": "ro",
+                                "russian_test": "ru",
+                                "slovak": "sk",
+                                "albanian": "sq",
+                                "serbian": "sr",
+                                "swedish": "sv",
+                                "swahili-test": "sw",
+                                "tamil": "ta",
+                                "turkish": "tr",
+                                "vietnam": "vi",
+                                "Mandarin": "zh-cmn",
+                                "cantonese": "zh-yue"
+                            }
                         }
                     ]
                 }
@@ -1056,7 +1063,6 @@
             }
         ]
     },
-
     "org.alsa-project": {
         "name": "ALSA System Volume",
         "contexts": {
@@ -1096,7 +1102,6 @@
             }
         ]
     },
-
     "trace.easyOne.communicator.linux": {
         "name": "EasyOne Communicator Linux",
         "contexts": {
@@ -1122,9 +1127,11 @@
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1143,7 +1150,6 @@
             }
         ]
     },
-
     "trace.easyOne.sudan.linux": {
         "name": "EasyOne Communicator Sudan",
         "contexts": {
@@ -1174,9 +1180,11 @@
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1195,7 +1203,6 @@
             }
         ]
     },
-
     "webinsight.webAnywhere.linux": {
         "name": "Web Anywhere",
         "contexts": {
@@ -1221,9 +1228,11 @@
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1242,14 +1251,15 @@
             }
         ]
     },
-
     "org.freedesktop.xrandr": {
         "name": "Xrandr",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -1258,17 +1268,18 @@
                 "supportedSettings": {
                     "screen-resolution": {}
                 }
-           }
+            }
         }
     },
-
     "net.gpii.uioPlus": {
         "name": "UIO+",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=5.0"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=5.0"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -1346,12 +1357,14 @@
                     "dictionaryEnabled": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "match": [{
-                                "inputValue": {
-                                    "dictionaryEnabled": true
-                                },
-                                "outputValue": true
-                            }],
+                            "match": [
+                                {
+                                    "inputValue": {
+                                        "dictionaryEnabled": true
+                                    },
+                                    "outputValue": true
+                                }
+                            ],
                             "noMatch": {
                                 "outputValue": false
                             },

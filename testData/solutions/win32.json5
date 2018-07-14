@@ -18,10 +18,9 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": { // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
-                // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
-                // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
-                    "Voice Profiles.ActiveVoiceProfileName": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                "supportedSettings": {
+                    "Voice Profiles.ActiveVoiceProfileName": {
+                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Active Voice Profile Name",
                             "description": "The active voice profile",
@@ -29,7 +28,8 @@
                             "default": "GPII"
                         }
                     },
-                    "options.SayAllIndicateCaps": { // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
+                    "options.SayAllIndicateCaps": {
+                        // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
                         "schema": {
                             "title": "Announce capitals",
                             "description": "During SayAll, indicate initial cap or capitalized word",
@@ -330,42 +330,42 @@
                         }
                     },
                     "ENU-Global\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-JAWSCursor\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-Keyboard\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-MenuAndDialog\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-Message\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-PCCursor\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
@@ -564,7 +564,7 @@
                         }
                     },
                     "http://registry\\.gpii\\.net/common/volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "ENU-Global\\.Volume",
                             "factor": 0.01
@@ -1647,7 +1647,7 @@
                                 "tr": "tr",
                                 "vi": "vi",
                                 "zh": "zh-cmn",
-                                "zh-yue": "zh-yue",
+                                "zh-yue": "zh-yue"
                             }
                         }
                     ]
@@ -2813,9 +2813,6 @@
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "live",
                 "supportedSettings": {
-                    "screen-dpi": {}
-                },
-                "supportedSettings": {
                     "screen-dpi": {
                         "schema": {
                             "title": "Screen DPI",
@@ -3111,7 +3108,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                     "transform": [
+                    "transform": [
                         {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "Arrow",
@@ -3661,8 +3658,8 @@
         ]
     },
     "net.gpii.test.speechControl": {
-    // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
-    // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
+        // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
+        // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
         "contexts": {
             "OS": [
@@ -3695,11 +3692,10 @@
         ],
         "isRunning": []
     },
-
     "net.gpii.explode": {
-    // This solution exists only to support manual and automated testing of GPII's error support. It references the
-    // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
-    // get, set or launch settingsHandler action
+        // This solution exists only to support manual and automated testing of GPII's error support. It references the
+        // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
+        // get, set or launch settingsHandler action
         "name": "GPII Test solution for triggering settingsHandler errors",
         "contexts": {
             "OS": [
@@ -3719,7 +3715,7 @@
                             "description": "The strategy to be used when exploding",
                             "type": "string",
                             "enum": ["reject", "fail", "throw"]
-                        },
+                        }
                     },
                     "explodeOn": {
                         "schema": {
