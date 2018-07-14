@@ -318,6 +318,12 @@
             "description": "Whether to enable/disable voice commands for computer",
             "type": "boolean",
             "default": "false"
+        },
+        "http://registry.gpii.net/common/nightScreen": {
+            "title": "Night Screen",
+            "description": "Reduce the blue emitted from the screen.",
+            "type": "boolean",
+            "default": false
         }
     }
 }

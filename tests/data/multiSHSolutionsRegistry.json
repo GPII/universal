@@ -10,7 +10,7 @@
                     }
                 ]
             },
-           "capabilities": [
+            "capabilities": [
                 "http://registry\\.gpii\\.net/common/magnification/enabled"
             ],
             "settingsHandlers": {
@@ -51,8 +51,8 @@
                 "settings.configuration",
                 "settings.configuration1"
             ],
-            "start": [ ],
-            "stop": [ ],
+            "start": [],
+            "stop": [],
             "isInstalled": [
                 {
                     "type": "gpii.deviceReporter.alwaysInstalled"
