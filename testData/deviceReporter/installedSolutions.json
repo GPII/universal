@@ -86,7 +86,11 @@
     {
         "id": "com.microsoft.windows.internationalization"
     },
-    
+
+    {
+        "id": "com.microsoft.windows.nightScreen"
+    },
+
     {
         "id": "com.microsoft.windows.typingEnhancement"
     },

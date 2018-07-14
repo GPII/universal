@@ -91,6 +91,7 @@
     "http://registry\\.gpii\\.net/common/currencyDigitsGroupingSymbol": "customization.internationalization.currencyDigitsGroupingSymbol",
     "http://registry\\.gpii\\.net/common/currencyDigitsGroupingFormat": "customization.internationalization.currencyDigitsGroupingFormat",
     "http://registry\\.gpii\\.net/common/twoDigitsYear": "customization.internationalization.twoDigitsYear",
+    "http://registry\\.gpii\\.net/common/nightScreen": "display.screenEnhancement.-provisional-nightScreen",
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",
