@@ -2147,7 +2147,7 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
+            "configureShortcuts": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -2155,7 +2155,7 @@
                     "setAction": "SPI_SETKEYBOARDCUES",
                     "uiParam": 0,
                     "pvParam": {
-                        "type": "UINT",
+                        "type": "BOOL",
                     },
                     "verifySettings": true
                 },
@@ -2167,38 +2167,13 @@
                             "type": "boolean",
                             "default": false
                         }
-                    },
-                    "KeyboardPreferenceOn": {
-                        "schema": {
-                            "title": "Keyboard as preferred input method",
-                            "description": "Set the keyboard as the preferred input method",
-                            "type": "boolean",
-                            "default": false
-                        }
                     }
                 },
                 "capabilitiesTransformations": {
                     "UnderlineMenuShorcutsOn": {
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
-                            "false": 0,
-                            "true": 1,
-                            "outputPath": "value"
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
-                        }
-                    },
-                    "KeyboardPreferenceOn": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
-                            "false": 0,
-                            "true": 1,
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
                             "outputPath": "value"
                         },
                         "path": {
@@ -2217,7 +2192,50 @@
                             "right": 0,
                             "operator": "!=="
                         }
+                    }
+                }
+            },
+            "keyboardPreferred": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETKEYBOARDPREF",
+                    "setAction": "SPI_SETKEYBOARDPREF",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
                     },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "KeyboardPreferenceOn": {
+                        "schema": {
+                            "title": "Keyboard as preferred input method",
+                            "description": "Set the keyboard as the preferred input method",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "KeyboardPreferenceOn": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
@@ -2229,6 +2247,14 @@
                 }
             }
         },
+        "configure": [
+            "settings.configureShortcuts",
+            "settings.keyboardPreferred"
+        ],
+        "restore": [
+            "settings.configureShortcuts",
+            "settings.keyboardPreferred"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
