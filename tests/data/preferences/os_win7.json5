@@ -55,7 +55,7 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
                         "Warning Sounds": true
                     },
-                    "http://registry.gpii.net/applications/com.microsoft.windows.shorcutWarningSound": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
                         "Sound on Activation": true
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {

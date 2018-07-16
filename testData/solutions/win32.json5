@@ -2185,14 +2185,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "UnderlineMenuShorcutsOn.value",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    }
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled": "UnderlineMenuShorcutsOn.value"
                 }
             },
             "keyboardPreferred": {
@@ -2236,14 +2229,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "KeyboardPreferenceOn.value",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    }
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.KeyboardPrefEnabled": "KeyboardPreferenceOn.value"
                 }
             }
         },
@@ -2252,8 +2238,8 @@
             "settings.keyboardPreferred"
         ],
         "restore": [
-            "settings.configureShortcuts",
-            "settings.keyboardPreferred"
+            "settings.keyboardPreferred",
+            "settings.configureShortcuts"
         ],
         "isInstalled": [
             {
@@ -2322,7 +2308,7 @@
         ]
     },
 
-    "com.microsoft.windows.shorcutWarningSound": {
+    "com.microsoft.windows.shortcutWarningSound": {
         "name": "Warning sounds for shortcuts",
         "contexts": {
             "OS": [
