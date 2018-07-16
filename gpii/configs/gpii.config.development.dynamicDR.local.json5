@@ -3,11 +3,11 @@
  * to be running separately on localhost for data persistence.
  *
  * * The following components are running:
+ * ** Dynamic Device Reporter
  * ** Flow Manager
  * ** Preferences Server
  * ** Ontology Handler
  * ** Solutions Registry (reading registry from file)
- * ** Device Reporter (using a dynamic device reporter)
  * ** MatchMaker Framework
  * ** Canopy MatchMaker
  * ** Lifecycle Manager
@@ -16,7 +16,7 @@
  * This setup is used as a basis for the platform specific acceptance tests that make use of a dynamic device reporter.
  */
 {
-    "type": "gpii.config.all.development.dr.production",
+    "type": "gpii.config.development.dynamicDR.local",
     "options": {
         "distributeOptions": {
             "gpii.config.deviceReporter.flowManager": {
@@ -26,7 +26,7 @@
         }
     },
     "mergeConfigs": [
-        "%deviceReporter/configs/gpii.deviceReporter.config.production.json5",
+        "%deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
         "%gpii-universal/gpii/configs/gpii.config.development.base.local.json5"
     ]
 }

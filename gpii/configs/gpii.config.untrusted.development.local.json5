@@ -9,7 +9,7 @@
  *
  * * The following components are running on the local machine:
  * ** Untrusted Local Flow Manager
- * *** Device Reporter
+ * ** Static Device Reporter (reading from file)
  *
  * * The following components are running on the cloud:
  * *** Auth Server

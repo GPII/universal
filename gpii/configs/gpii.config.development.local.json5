@@ -5,7 +5,6 @@
  *
  * * The following components are running:
  * ** Canopy MatchMaker
- * ** Device Reporter (reading device context info from file)
  * ** Cloud Based Flow Manager
  * ** Lifecycle Manager
  * ** Local Flow Manager
@@ -13,6 +12,7 @@
  * ** Ontology Handler
  * ** Preferences Server
  * ** Solutions Registry (reading registry from file)
+ * ** Static Device Reporter (reading from file)
  *
  * Notes on testing:
  * This setup is used as a basis for the platform specific acceptance tests. Since the acceptance tests might use slightly different paths for the tests (i.e. a special folder for reading prefs and solutionsRegistry),
@@ -23,7 +23,7 @@
 {
     "type": "gpii.config.development.local",
     "mergeConfigs": [
-        "%deviceReporter/configs/gpii.deviceReporter.config.development.json5",
+        "%deviceReporter/configs/gpii.deviceReporter.config.static.json5",
         "%gpii-universal/gpii/configs/gpii.config.development.base.local.json5"
     ]
 }

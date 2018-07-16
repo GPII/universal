@@ -1,5 +1,5 @@
 /**
- * This configuration acts as a base for `gpii.config.development.local` and `gpii.config.all.development.dr.production`.
+ * This configuration acts as a base for `gpii.config.development.local` and `gpii.config.development.dynamicDR.local`.
  * It includes configs to locate the local flow manager, the cloud based flow manager, the preferences server and
  * matchmaker all locally. The extra work required is to arrange to cross-inject the ontology handler between the
  * matchmaker and preferences server.
