@@ -201,12 +201,31 @@ gpii.tests.windows.builtIn = [
                         "settings": {
                             "UnderlineMenuShorcutsOn": {
                                 "path": "pvParam",
-                                "value": true
+                                "value": 1
                             }
                         },
                         "options": {
                             "getAction": "SPI_GETKEYBOARDCUES",
                             "setAction": "SPI_SETKEYBOARDCUES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "KeyboardPreferenceOn": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETKEYBOARDPREF",
+                            "setAction": "SPI_SETKEYBOARDPREF",
                             "uiParam": 0,
                             "pvParam": {
                                 "type": "BOOL"
