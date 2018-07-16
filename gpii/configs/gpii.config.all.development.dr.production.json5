@@ -3,14 +3,14 @@
  * to be running separately on localhost for data persistence.
  *
  * * The following components are running:
- * ** flowManager
- * ** preferencesServer
- * ** OntologyHandler
- * ** solutionsRegistry (reading registry from file)
- * ** deviceReporter (using a dynamic device reporter)
- * ** matchMakerFramework
- * ** canopyMatchMaker
- * ** lifecycleManager
+ * ** Flow Manager
+ * ** Preferences Server
+ * ** Ontology Handler
+ * ** Solutions Registry (reading registry from file)
+ * ** Device Reporter (using a dynamic device reporter)
+ * ** MatchMaker Framework
+ * ** Canopy MatchMaker
+ * ** Lifecycle Manager
  *
  * Notes on testing:
  * This setup is used as a basis for the platform specific acceptance tests that make use of a dynamic device reporter.

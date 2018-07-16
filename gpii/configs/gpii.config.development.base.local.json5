@@ -5,14 +5,14 @@
  * matchmaker and preferences server.
  *
  * * The following components are running:
- * ** authServer
- * ** canopyMatchMaker
- * ** cloudBasedFlowManager
- * ** localFlowManager
- * ** matchMakerFramework
- * ** OntologyHandler
- * ** preferencesServer
- * ** solutionsRegistry (reading registry from file)
+ * ** Auth Server
+ * ** Canopy MatchMaker
+ * ** Cloud Based Flow Manager
+ * ** Local Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
  */
 {
     "type": "gpii.config.development.base.local",

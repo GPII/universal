@@ -3,8 +3,8 @@
  * local Untrusted Flow Manager locally.
  *
  * The following components are running on the local machine:
- * * localFlowManager (untrusted, browser channel)
- * * deviceReporter
+ * * Untrusted Local Flow Manager
+ * * Device Reporter
  */
 {
     "type": "gpii.config.untrusted.development",

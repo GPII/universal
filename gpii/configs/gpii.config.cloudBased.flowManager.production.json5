@@ -4,8 +4,8 @@
  * 2. Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.
  *
  * * The following components are running:
- * ** cloudBsedFlowManager
- * ** canopyMatchMaker
+ * ** Cloud Bsed Flow Manager
+ * ** Canopy MatchMaker
  */
 {
     "type": "gpii.config.cloudBased.flowManager.production",

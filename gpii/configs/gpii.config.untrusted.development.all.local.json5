@@ -6,15 +6,15 @@
  * 3. pouchDB on port 8058
  *
  * * The following components are running:
- * ** authServer
- * ** canopyMatchMaker
- * ** cloudBasedFlowManager
- * ** untrusted localFlowManager
- * ** matchMakerFramework
- * ** OntologyHandler
- * ** preferencesServer
- * ** solutionsRegistry (reading registry from file)
- * ** pouchManager
+ * ** Auth Server
+ * ** Canopy MatchMaker
+ * ** Cloud Based Flow Manager
+ * ** Untrusted Local Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** Pouch Manager
  */
 {
     "type": "gpii.config.untrusted.development.all.local",

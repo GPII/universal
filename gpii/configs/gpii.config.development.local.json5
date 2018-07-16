@@ -4,15 +4,15 @@
  * the preferences server and matchmaker all locally. It doesn't start any backend database for data persistence.
  *
  * * The following components are running:
- * ** canopyMatchMaker
- * ** deviceReporter (reading device context info from file)
- * ** cloudBasedFlowManager
- * ** lifecycleManager
- * ** localFlowManager
- * ** matchMakerFramework
- * ** OntologyHandler
- * ** preferencesServer
- * ** solutionsRegistry (reading registry from file)
+ * ** Canopy MatchMaker
+ * ** Device Reporter (reading device context info from file)
+ * ** Cloud Based Flow Manager
+ * ** Lifecycle Manager
+ * ** Local Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
  *
  * Notes on testing:
  * This setup is used as a basis for the platform specific acceptance tests. Since the acceptance tests might use slightly different paths for the tests (i.e. a special folder for reading prefs and solutionsRegistry),

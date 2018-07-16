@@ -3,7 +3,7 @@
  * for data persistence, but expect couchDB to be running separately on the localhost using the default port 5984.
  *
  * * The following components are running on the local machine:
- * ** preferencesServer
+ * ** Preferences Server
  */
 {
     "type": "gpii.config.preferencesServer.standalone.production",

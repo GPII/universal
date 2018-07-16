@@ -3,8 +3,8 @@
  * into pouchDB on port 8058 for data persistence.
  *
  * * The following components are running:
- * ** preferencesServer
- * ** pouchManager
+ * ** Preferences Server
+ * ** Pouch Manager
  *
  * Note: this config is created for testing PPT locally. Currently it's not used by any other configs and tests.
  */

@@ -2,13 +2,13 @@
  * This configuration acts as a base for `gpii.config.cloudBased.development.all.local`.
  *
  * * The following components are running:
- * ** authServer
- * ** canopyMatchMaker
- * ** flowManager
- * ** matchMakerFramework
- * ** OntologyHandler
- * ** preferencesServer
- * ** solutionsRegistry (reading registry from file)
+ * ** Auth Server
+ * ** Canopy MatchMaker
+ * ** Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
  *
  * Notes on testing:
  * This setup is used by the acceptance tests in universal testing the cloudBased applications.
