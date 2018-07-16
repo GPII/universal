@@ -10,7 +10,6 @@
                         "ApplicationSettings.AppBar.ShowText.$t": false,
                         "ApplicationSettings.AppBar.optToolbarShowText.$t": false,
                         "ApplicationSettings.AppBar.LargeIcons.$t": true,
-                        "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
                         "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
                         "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
                         "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
