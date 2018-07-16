@@ -1,0 +1,31 @@
+/**
+ * This configuration runs the local Untrusted Flow Manager in development mode and the device reporter in production mode.
+ *
+ * The following components are running on the local machine:
+ * * flowManager (untrusted, browser channel)
+ * * dynamic deviceReporter
+ */
+{
+    "type": "gpii.config.untrusted.development.dr.production",
+    "options": {
+        "distributeOptions": {
+            "flowManager.defaultCloudURL": {
+                "record": "http://localhost:8084",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL"
+            },
+            "flowManager.cloudURL": {
+                "record": "@expand:kettle.resolvers.env(GPII_CLOUD_URL)",
+                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL",
+                "priority": "after:flowManager.defaultCloudURL"
+            },
+            "flowManager.dynamicDeviceReporter": {
+                "record": "{flowManager}.solutionsRegistryDataSource",
+                "target": "{that gpii.deviceReporter.live}.options.components.solutionsRegistryDataSource"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.production.json5",
+        "../node_modules/flowManager/configs/gpii.flowManager.untrusted.config.development.json5"
+    ]
+}
