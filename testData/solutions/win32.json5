@@ -1666,7 +1666,7 @@
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
-                            "command": "nvda"
+                            "command": "nvda.exe"
                         }
                     ],
                     "setTrue": [
