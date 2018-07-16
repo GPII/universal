@@ -2322,7 +2322,7 @@
         ]
     },
 
-    "com.microsoft.windows.shorcutWarningSound": {
+    "com.microsoft.windows.shortcutWarningSound": {
         "name": "Warning sounds for shortcuts",
         "contexts": {
             "OS": [

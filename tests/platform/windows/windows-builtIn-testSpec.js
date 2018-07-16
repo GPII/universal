@@ -344,32 +344,31 @@ gpii.tests.windows.builtIn = [
                             "EnableDesktopModeAutoInvoke": "REG_DWORD"
                         }
                     }
-                }
-            ],
-            "com.microsoft.windows.shortcutWarningMessage": [{
-                "settings": {
-                    "Warning Sounds": 1
-                },
-                "options": {
-                    "hKey": "HKEY_CURRENT_USER",
-                    "path": "Control Panel\\Accessibility",
-                    "dataTypes": {
-                        "Warning Sounds": "REG_DWORD"
+                }],
+                "com.microsoft.windows.shortcutWarningMessage": [{
+                    "settings": {
+                        "Warning Sounds": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Warning Sounds": "REG_DWORD"
+                        }
                     }
-                }
-            }],
-            "com.microsoft.windows.shortcutWarningSound": [{
-                "settings": {
-                    "Sound on Activation": 1
-                },
-                "options": {
-                    "hKey": "HKEY_CURRENT_USER",
-                    "path": "Control Panel\\Accessibility",
-                    "dataTypes": {
-                        "Sound on Activation": "REG_DWORD"
+                }],
+                "com.microsoft.windows.shortcutWarningSound": [{
+                    "settings": {
+                        "Sound on Activation": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Accessibility",
+                        "dataTypes": {
+                            "Sound on Activation": "REG_DWORD"
+                        }
                     }
-                }
-            }]
+                }]
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
