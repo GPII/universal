@@ -4992,7 +4992,7 @@
                     "setAction": "SPI_SETKEYBOARDCUES",
                     "uiParam": 0,
                     "pvParam": {
-                        "type": "BOOL",
+                        "type": "BOOL"
                     },
                     "verifySettings": true
                 },
