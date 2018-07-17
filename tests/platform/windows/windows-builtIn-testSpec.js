@@ -313,7 +313,7 @@ gpii.tests.windows.builtIn = [
                             "CaptionOpacity": "REG_DWORD",
                             "CaptionSize": "REG_DWORD",
                             "RegionColor": "REG_DWORD",
-                            "RegionOpacity": "REG_DWORD",
+                            "RegionOpacity": "REG_DWORD"
                         }
                     }
                 }]
