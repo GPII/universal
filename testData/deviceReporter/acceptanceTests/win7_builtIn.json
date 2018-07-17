@@ -44,6 +44,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.closedCaptions"
+    },
+
+    {
         "id": "com.microsoft.windows.nightScreen"
     },
 

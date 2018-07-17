@@ -288,8 +288,35 @@ gpii.tests.windows.builtIn = [
                             "EnableDesktopModeAutoInvoke": "REG_DWORD"
                         }
                     }
-                }
-            ]
+                }],
+                "com.microsoft.windows.closedCaptions": [{ // magnifier stuff
+                    "settings": {
+                        "CaptionColor": 2,
+                        "CaptionEdgeEffect": 0,
+                        "CaptionFontStyle": 7,
+                        "CaptionOpacity": 1,
+                        "CaptionSize": 3,
+                        "RegionColor": 0,
+                        "RegionOpacity": 0,
+                        "BackgroundColor": 1,
+                        "BackgroundOpacity": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Windows\\CurrentVersion\\ClosedCaptioning",
+                        "dataTypes": {
+                            "BackgroundColor": "REG_DWORD",
+                            "BackgroundOpacity": "REG_DWORD",
+                            "CaptionColor": "REG_DWORD",
+                            "CaptionEdgeEffect": "REG_DWORD",
+                            "CaptionFontStyle": "REG_DWORD",
+                            "CaptionOpacity": "REG_DWORD",
+                            "CaptionSize": "REG_DWORD",
+                            "RegionColor": "REG_DWORD",
+                            "RegionOpacity": "REG_DWORD",
+                        }
+                    }
+                }]
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{

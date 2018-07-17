@@ -106,6 +106,17 @@
                         "EnableShiftLock": 1,
                         "EnableCompatibilityKeyboard": 1,
                         "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.closedCaptions": {
+                        "CaptionColor": 2,
+                        "CaptionEdgeEffect": 0,
+                        "CaptionFontStyle": 7,
+                        "CaptionOpacity": 1,
+                        "CaptionSize": 3,
+                        "RegionColor": 0,
+                        "RegionOpacity": 0,
+                        "BackgroundColor": 1,
+                        "BackgroundOpacity": 1
                     }
                 }
             }
