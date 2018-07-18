@@ -1040,7 +1040,6 @@
                         "ReadHints": "REG_DWORD",
                         "PlayAudioCues": "REG_DWORD",
                         "NarratorCursorHighlight": "REG_DWORD",
-                        "FollowInsertion": "REG_DWORD",
                         "FastKeyEntryEnabled": "REG_DWORD"
                     }
                 },
@@ -1063,7 +1062,14 @@
                     },
                     // This three properties are mapped to one common term, maybe we should have indivial schemas, maybe not.
                     "CoupleNarratorCursorKeyboard": {},
-                    "FollowInsertion": {},
+                    "FollowInsertion": {
+                        "schema": {
+                            "title": "Text insertion point following Narrator",
+                            "description": "Make text insertion point follows Narrator cursor",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
                     "InteractionMouse": {},
                     "EchoChars": {
                         "schema": {
@@ -1109,14 +1115,6 @@
                         "schema": {
                             "title": "Cursor Highlight",
                             "description": "Enable cursor highlighting with a blue focus box",
-                            "type": "boolean",
-                            "default": true
-                        }
-                    },
-                    "FollowInsertion": {
-                        "schema": {
-                            "title": "Text insertion point following Narrator",
-                            "description": "Make text insertion point follows Narrator cursor",
                             "type": "boolean",
                             "default": true
                         }
@@ -1364,7 +1362,7 @@
                             "title": "Lower other sounds",
                             "description": "Enable/Disable lowering other sounds while narrator is speaking",
                             "type": "boolean",
-                            "default": true,
+                            "default": true
                         }
                     }
                 },
