@@ -3213,8 +3213,7 @@
                         "sMonThousandSep": "REG_SZ",
                         "sMonGrouping": "REG_SZ"
                     },
-                    "verifySettings": true,
-
+                    "verifySettings": true
                 },
                 "supportedSettings": {
                     "iFirstDayOfWeek": {
@@ -3298,7 +3297,7 @@
                         "schema": {
                             "title": "Negative sign symbol",
                             "description": "Symbol for representing negative values",
-                            "type": "string with a max of four chars",
+                            "type": "string with a max of four chars"
                         }
                     },
                     "iNegNumber": {
