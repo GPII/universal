@@ -1,22 +1,22 @@
 /**
- * This configuration runs the entire system locally under the hybrid Flow Manager architecture and in development mode.
+ * This configuration acts as a base for `gpii.config.untrusted.evelopment.all.local`.
  *
- * It uses a multi-server Kettle configuration to run the Untrusted Flow Manager and a local version of the Cloud Based Flow Manager within the same Kettle process, but on different ports.
- * 
- * * The Untrusted Flow Manager runs on port 8081
- * * The Cloud Based Flow Manager runs on port 8084
+ * It uses a multi-server Kettle configuration to run the Untrusted Flow Manager and
+ * a local version of the Cloud Based Flow Manager within the same Kettle process, but on different ports:
+ * It starts these servers:
+ * 1. Untrusted Local Flow Manager on port 8081
+ * 2. Cloud with both Cloud Based Flow Manager and Preferences Server on port 8084
  *
  * * The following components are running on the local machine:
- * ** Untrusted Flow Manager
- * *** deviceReporter
- * *** flowManager (untrusted, browser channel)
+ * ** Untrusted Local Flow Manager
+ * ** Static Device Reporter (reading from file)
  *
- * ** Cloud Based Flow Manager
- * *** authServer
- * *** canopyMatchMaker
- * *** flowManager (cloud based oauth2)
- * *** preferencesServer
- * *** solutionsRegistry
+ * * The following components are running on the cloud:
+ * *** Auth Server
+ * *** Canopy MatchMaker
+ * *** Cloud Based Flow Manager
+ * *** Preferences Server
+ * *** Solutions Registry
  */
 {
     "type": "gpii.config.untrusted.development.local",
@@ -40,12 +40,7 @@
             "untrusted.development.prefs": {
                 "record": "http://localhost:8084/preferences/%gpiiKey?merge=%merge",
                 "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
-                "priority": "after:flowManager.development.prefs"
-            },
-            "untrusted.development.matchMakers": {
-                "record": "http://localhost:8084",
-                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.default.url",
-                "priority": "after:flowManager.development.matchMakers"
+                "priority": "after:flowManager.preferencesDataSource.default"
             }
         }
     }

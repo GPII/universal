@@ -1,14 +1,14 @@
 /**
- * This config acts as a base for `gpii.config.cloudBased.development.all.local`.
- * It includes configs to locate these items all locally:
+ * This configuration acts as a base for `gpii.config.cloudBased.development.all.local`.
  *
- * ** authServer
- * ** canopyMatchMaker
- * ** flowManager
- * ** matchMakerFramework
- * ** OntologyHandler
- * ** preferencesServer
- * ** solutionsRegistry (reading registry from file)
+ * * The following components are running:
+ * ** Auth Server
+ * ** Canopy MatchMaker
+ * ** Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
  *
  * Notes on testing:
  * This setup is used by the acceptance tests in universal testing the cloudBased applications.
@@ -22,8 +22,8 @@
 {
     "type": "gpii.config.cloudBased.development",
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.cloudBased.config.development.json5",
-        "%preferencesServer/configs/gpii.preferencesServer.config.development.json5",
+        "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
         "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
     ]
 }

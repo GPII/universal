@@ -16,7 +16,6 @@ var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.logObjectRenderChars = 10240;
 fluid.require("%gpii-universal");
 
 // These tests execute the login cycle which is expected to terminate with an error,
@@ -168,7 +167,7 @@ gpii.tests.errors.logoutSequence = [{
     }
 }];
 
-/** Accepts a coreTestDef and modifies its sequence by splicing in gpii.tests.errors.logoutSequence **/
+/* Accepts a coreTestDef and modifies its sequence by splicing in gpii.tests.errors.logoutSequence */
 gpii.tests.errors.adjustSequenceToLogout = function (testDef) {
     testDef.sequence = [].concat(
         testDef.sequence.slice(0, 2),

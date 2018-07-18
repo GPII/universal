@@ -1,27 +1,15 @@
 /**
- * This configuration runs the local Untrusted Flow Manager in development mode.
+ * This configuration acts as a base for `gpii.config.untrusted.evelopment.local`. It runs the
+ * local Untrusted Flow Manager locally.
  *
- * The following components are running on the local machine:
- * * flowManager (untrusted, browser channel)
- * * deviceReporter
+ * * The following components are running on the local machine:
+ * ** Untrusted Local Flow Manager
+ * ** Static Device Reporter (reading from file)
  */
 {
     "type": "gpii.config.untrusted.development",
-    "options": {
-        "distributeOptions": {
-            "flowManager.defaultCloudURL": {
-                "record": "http://localhost:8084",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL"
-            },
-            "flowManager.cloudURL": {
-                "record": "@expand:kettle.resolvers.env(GPII_CLOUD_URL)",
-                "target": "{that flowManager untrustedSettingsDataSource}.options.cloudURL",
-                "priority": "after:flowManager.defaultCloudURL"
-            }
-        }
-    },
     "mergeConfigs": [
-        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.development.json5",
-        "../node_modules/flowManager/configs/gpii.flowManager.untrusted.config.development.json5"
+        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.static.json5",
+        "../node_modules/flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
     ]
 }
