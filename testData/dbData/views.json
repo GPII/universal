@@ -16,6 +16,9 @@
             },
             "findGpiiKeysByPrefsSafeId": {
                 "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc.prefsSafeId, doc)}}"
+            },
+            "findAllGpiiKeys": {
+                "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc._id, doc)}}"
             }
         }
     }
