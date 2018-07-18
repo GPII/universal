@@ -10,7 +10,7 @@
             "multiSH.solutionsRegistry": {
                 "record": "%gpii-universal/tests/data/multiSHsolutionsRegistry.json",
                 "target": "{that flowManager solutionsRegistryDataSource}.options.path",
-                "priority": "after:flowManager.development.solutions"
+                "priority": "after:flowManager.solutions"
             }
         }
     },
