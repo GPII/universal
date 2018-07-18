@@ -11,7 +11,7 @@
             "browserChannel.tests.solutions": {
                 "record": "%flowManager/test/data/browserChannel_solutionsRegistry.json",
                 "target": "{that flowManager solutionsRegistryDataSource}.options.path",
-                "priority": "after:flowManager.development.solutions"
+                "priority": "after:flowManager.solutions"
             },
             "browserChannel.tests.osReporting": {
                 "record": {

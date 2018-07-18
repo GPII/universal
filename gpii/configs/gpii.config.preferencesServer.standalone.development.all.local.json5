@@ -1,0 +1,20 @@
+/**
+ * This configuration runs a standalone preferences server locally on port 8081. It also starts and load test data
+ * into pouchDB on port 8058 for data persistence.
+ *
+ * * The following components are running:
+ * ** Preferences Server
+ * ** Pouch Manager
+ *
+ * Note: this config is created for testing PPT locally. Currently it's not used by any other configs and tests.
+ */
+{
+    "type": "gpii.config.preferencesServer.standalone.development.all.local",
+    "options": {
+        "dbServerPort": 8058
+    },
+    "mergeConfigs": [
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
+        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+    ]
+}
