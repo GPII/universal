@@ -45,7 +45,7 @@ fluid.defaults("gpii.oauth2.oauth2orizeServer", {
         }
     },
     listeners: {
-        onCreate: {
+        "onCreate.listenOauth2orize": {
             listener: "gpii.oauth2.oauth2orizeServer.listenOauth2orize",
             args: ["{that}.oauth2orizeServer", "{clientService}", "{authorizationService}"]
         }
@@ -225,7 +225,8 @@ gpii.oauth2.urlencodedBodyParser = function () {
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
-        oauth2orizeServer.token()
+        oauth2orizeServer.token(),
+        oauth2orizeServer.errorHandler()
     );
 };
 

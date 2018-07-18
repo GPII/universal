@@ -1,6 +1,9 @@
 /**
- * Preferences server running standalone on the server (incl. dependencies).
- * It will expect a couchDB to be running on the local host using the default port 5984.
+ * This configuration runs a standalone Preferences Server on port 8081. It doesn't start any backend database
+ * for data persistence, but expect couchDB to be running separately on the localhost using the default port 5984.
+ *
+ * * The following components are running on the local machine:
+ * ** Preferences Server
  */
 {
     "type": "gpii.config.preferencesServer.standalone.production",
@@ -19,6 +22,6 @@
         }
     },
     "mergeConfigs": [
-        "%preferencesServer/configs/gpii.preferencesServer.config.production.json5"
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5"
     ]
 }
