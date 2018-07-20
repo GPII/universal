@@ -329,12 +329,13 @@ gpii.tests.untrusted.pspIntegration.testDefs = fluid.transform(gpii.tests.pspInt
     return testDef;
 });
 
-// Test PSP integration with auto-saving preferences that are allowed to be autosaved in the metadata.
+// Test PSP integration with:
+// 1. auto-save only saves preferences that are allowed to be autosaved to the cloud.
 gpii.test.bootstrapServer(gpii.tests.untrusted.pspIntegration.testDefs);
 
 // Test PSP integration with:
-// 1. cannot auto-saving preferences that are not allowed to be autosaved in the metadata;
-// 2. explicit save when the save button is clicked.
+// 1. preferences that are not allowed to be autosaved should not be autosaved to the cloud;
+// 2. explicit save, such as when the save button is clicked, saves all updated preferences to the cloud.
 gpii.test.bootstrapServer(fluid.transform(gpii.tests.pspIntegration.saveTestDefs, function (testDefIn) {
     return gpii.tests.untrusted.pspIntegration.addConfig(testDefIn);
 }));
