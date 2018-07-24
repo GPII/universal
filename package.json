@@ -31,7 +31,8 @@
         "rimraf": "2.6.2",
         "semver": "5.5.0",
         "write-file-atomic": "2.3.0",
-        "xml-mapping": "1.7.1"
+        "xml-mapping": "1.7.1",
+        "xregexp": "4.2.0"
     },
     "devDependencies": {
         "babel-plugin-istanbul": "4.1.6",
