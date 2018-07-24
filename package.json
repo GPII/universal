@@ -15,7 +15,6 @@
         "glob": "7.1.2",
         "gpii-pouchdb": "1.0.12",
         "infusion": "3.0.0-dev.20180222T160835Z.6e1311a",
-        "ini": "git://github.com/GPII/ini.git#be8a04aa22f5ad9321ebcbba7740314a53bc8ab2",
         "json5": "1.0.1",
         "kettle": "1.7.3",
         "mkdirp": "0.5.1",
