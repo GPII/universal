@@ -31,7 +31,7 @@ var dbLoader = gpii.dataLoader;
 
 // Handle command line
 if (process.argv.length !== 5) {
-    fluid.log("Usage: node deleteSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR");
+    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR");
     process.exit(1);
 }
 dbLoader.couchDbUrl = process.argv[2];
@@ -132,18 +132,11 @@ dbLoader.createBulkDocsRequest = function (dataToPost, responseHandler) {
         };
         var batchPostData = JSON.stringify({"docs": dataToPost});
         postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
-        var batchDeleteRequest = http.request(postOptions, responseHandler);
-        batchDeleteRequest.write(batchPostData);
-        batchDeleteRequest.end();
-        return batchDeleteRequest;
+        var batchDocsRequest = http.request(postOptions, responseHandler);
+        batchDocsRequest.write(batchPostData);
+        batchDocsRequest.end();
+        return batchDocsRequest;
     };
-};
-
-/**
- * Log that the snapsets (Prefs Safes and GPII Keys) have been deleted.
- */
-dbLoader.bulkDeletionComplete = function () {
-    fluid.log ("\tBulk deletion completed.");
 };
 
 /**
@@ -207,7 +200,7 @@ dbLoader.getDataFromDirectory = function (dataDir) {
     files.forEach(function (aFile) {
         if (aFile.endsWith(".json")) {
             var fileContent = fs.readFileSync(dataDir + "/" + aFile, "utf-8");
-            contentArray.push(JSON.parse(fileContent));
+            contentArray = contentArray.concat(JSON.parse(fileContent));
         }
     });
     return contentArray;
