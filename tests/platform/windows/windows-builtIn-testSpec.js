@@ -176,6 +176,25 @@ gpii.tests.windows.builtIn = [
                             }
                         }
                     }
+                ],
+                "com.microsoft.windows.fontSize": [
+                    { // font size settings
+                        "settings": {
+                            "CaptionFont": {
+                                "path": "pvParam.lfCaptionFont.lfHeight",
+                                "value": -9
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETNONCLIENTMETRICS",
+                            "setAction": "SPI_SETNONCLIENTMETRICS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "NONCLIENTMETRICS"
+                            }
+                        }
+                    }
                 ]
             },
             "gpii.windows.registrySettingsHandler": {
@@ -716,6 +735,25 @@ gpii.tests.windows.builtIn = [
                             "pvParam": {
                                 "type": "struct",
                                 "name": "HIGHCONTRAST"
+                            }
+                        }
+                    }
+                ],
+                "com.microsoft.windows.fontSize": [
+                    { // font size settings
+                        "settings": {
+                            "CaptionFont": {
+                                "path": "pvParam.lfCaptionFont.lfHeight",
+                                "value": -9
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETNONCLIENTMETRICS",
+                            "setAction": "SPI_SETNONCLIENTMETRICS",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "NONCLIENTMETRICS"
                             }
                         }
                     }
