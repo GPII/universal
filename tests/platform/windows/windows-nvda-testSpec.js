@@ -96,9 +96,7 @@ gpii.tests.windows.nvda.testDef = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                         }
                     }
                 ]
@@ -133,9 +131,7 @@ gpii.tests.windows.nvda.testDef = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                         }
                     }
                 ]
@@ -168,9 +164,7 @@ gpii.tests.windows.nvda.testDef = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                         }
                     }
                 ]
@@ -197,9 +191,7 @@ gpii.tests.windows.nvda.testDef = [
                             "presentation.reportHelpBalloons": false
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                         }
                     }
                 ]
