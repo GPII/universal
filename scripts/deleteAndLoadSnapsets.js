@@ -176,14 +176,41 @@ dbLoader.createResponseHandler = function (handleEnd, promise, errorMsg) {
             responseString += chunk;
         });
         response.on("end", function () {
-            var value = handleEnd(responseString);
-            promise.resolve(value);
+            if (response.statusCode >= 400) {   // error
+                var fullErrorMsg = errorMsg +
+                                   response.statusCode + " - " +
+                                   response.statusMessage;
+                // Document-not-found or 404 errors include a reason in the
+                // response.
+                // http://docs.couchdb.org/en/stable/api/basics.html#http-status-codes
+                if (response.statusCode === 404) {
+                    fullErrorMsg = fullErrorMsg + ", " +
+                                   JSON.parse(responseString).reason;
+                }
+                promise.reject(fullErrorMsg);
+            }
+            else {
+                var value = handleEnd(responseString);
+                promise.resolve(value);
+            }
         });
         response.on("error", function (e) {
             fluid.log(errorMsg + e.message);
             promise.reject(e);
         });
     };
+};
+
+/**
+ * Quit the whole process because a request of the database has failed, and log
+ * the error.  Use this function when the failure has not actually modified the
+ * database; for example, when getting all the current snapset Prefs Safes.  If
+ * that failed, that database is as it was, but there is no point in continuing.
+ * @param {String} errorMsg - The reason why database access failed.
+ */
+dbLoader.bail = function (errorMsg) {
+    fluid.log (errorMsg);
+    process.exit(1);
 };
 
 /**
@@ -249,8 +276,7 @@ var getGpiiKeysRequest = dbLoader.queryDatabase(
     getGpiiKeysResponse,
     "Error requesting GPII Keys: "
 );
-
-snapsetsPromise.then(function () { getGpiiKeysRequest.end(); });
+snapsetsPromise.then(function () { getGpiiKeysRequest.end(); }, dbLoader.bail);
 
 // Batch delete snapset Prefs Safes and their GPII Keys.
 var batchDeletePromise = fluid.promise();
@@ -258,7 +284,7 @@ dbLoader.batchDeleteResponse = dbLoader.createResponseHandler(
     function () { fluid.log("Snapset Prefs Safes and associated GPII Keys deleted."); },
     batchDeletePromise
 );
-gpiiKeysPromise.then(dbLoader.doBatchDelete);
+gpiiKeysPromise.then(dbLoader.doBatchDelete, dbLoader.bail);
 
 // ==========
 // Load the snapset PrefsSafes, their GPII Keys, and client credentials from disk.
@@ -271,7 +297,7 @@ var staticPostResponse = dbLoader.createResponseHandler(
     staticDataPromise
 );
 var execStaticDataRequest = dbLoader.createBulkDocsRequest(staticData, staticPostResponse);
-batchDeletePromise.then(execStaticDataRequest);
+batchDeletePromise.then(execStaticDataRequest, dbLoader.bail);
 
 // Load the build data
 var buildData = dbLoader.getDataFromDirectory(dbLoader.buildDataDir);
@@ -281,6 +307,6 @@ var buildPostResponse = dbLoader.createResponseHandler(
     buildDataPromise
 );
 var execBuildDataRequest = dbLoader.createBulkDocsRequest(buildData, buildPostResponse);
-staticDataPromise.then(execBuildDataRequest);
-buildDataPromise.then(function () { fluid.log("Done."); });
+staticDataPromise.then(execBuildDataRequest, dbLoader.bail);
+buildDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
 
