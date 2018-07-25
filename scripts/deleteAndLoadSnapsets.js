@@ -255,7 +255,22 @@ dbLoader.getDataFromDirectory = function (dataDir) {
     return contentArray;
 };
 
-// Get the snapsets Prefs Safes.
+// Load the static data first.  If the database is fresh, there won't be any
+// views to use to find the snapset Prefs Safes.  This ensures they are loaded
+// regardless.  If the data base already has these views, then this is
+// essentially a no-op.
+var staticData = dbLoader.getDataFromDirectory(dbLoader.staticDataDir);
+var staticDataPromise = fluid.promise();
+var staticDataResponse = dbLoader.createResponseHandler(
+    function () {
+        fluid.log("Loading static data from '" + dbLoader.staticDataDir + "'");
+    },
+    staticDataPromise
+);
+var execStaticDataRequest = dbLoader.createBulkDocsRequest(staticData, staticDataResponse);
+execStaticDataRequest();
+
+// Secondly, get the snapsets Prefs Safes.
 var snapsetsPromise = fluid.promise();
 var getSnapSetsResponse = dbLoader.createResponseHandler(
     dbLoader.processSnapsets,
@@ -267,9 +282,9 @@ var snapSetsRequest = dbLoader.queryDatabase(
     getSnapSetsResponse,
     "Error requesting snapsets Prefs Safes: "
 );
-snapSetsRequest.end();
+staticDataPromise.then(function () { snapSetsRequest.end(); }, dbLoader.bail);
 
-// Get the associated GPII Keys.
+// Thirdly, the associated GPII Keys.
 var gpiiKeysPromise = fluid.promise();
 var getGpiiKeysResponse = dbLoader.createResponseHandler(
     dbLoader.processGpiiKeys,
@@ -283,7 +298,7 @@ var getGpiiKeysRequest = dbLoader.queryDatabase(
 );
 snapsetsPromise.then(function () { getGpiiKeysRequest.end(); }, dbLoader.bail);
 
-// Batch delete snapset Prefs Safes and their GPII Keys.
+// Next, delete the snapset Prefs Safes and their GPII Keys in batch.
 var batchDeletePromise = fluid.promise();
 dbLoader.batchDeleteResponse = dbLoader.createResponseHandler(
     function () { fluid.log("Snapset Prefs Safes and associated GPII Keys deleted."); },
@@ -294,23 +309,17 @@ gpiiKeysPromise.then(dbLoader.doBatchDelete, dbLoader.bail);
 if (dbLoader.justDelete) {
     batchDeletePromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
 } else {
-    // ==========
-    // Load the snapset PrefsSafes, their GPII Keys, and client credentials from
-    // disk, i.e. load the static and build data
-    var staticData = dbLoader.getDataFromDirectory(dbLoader.staticDataDir);
+    // Finally, load the latest snapsets data from the build data.
     var buildData = dbLoader.getDataFromDirectory(dbLoader.buildDataDir);
-    var allData = staticData.concat(buildData);
-    var allDataPromise = fluid.promise();
-    var allDataResponse = dbLoader.createResponseHandler(
+    var buildDataPromise = fluid.promise();
+    var buildDataResponse = dbLoader.createResponseHandler(
         function () {
-            fluid.log ("Bulk loading of static and build data from '" +
-                        dbLoader.staticDataDir + ", and '" +
-                        dbLoader.buildDataDir + "', respectively");
+            fluid.log ("Bulk loading of build data from '" + dbLoader.buildDataDir + "'");
         },
-        allDataPromise
+        buildDataPromise
     );
-    var execAllDataRequest = dbLoader.createBulkDocsRequest(allData, allDataResponse);
-    batchDeletePromise.then(execAllDataRequest, dbLoader.bail);
-    allDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
+    var execBuildDataRequest = dbLoader.createBulkDocsRequest(buildData, buildDataResponse);
+    batchDeletePromise.then(execBuildDataRequest, dbLoader.bail);
+    buildDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
 }
 
