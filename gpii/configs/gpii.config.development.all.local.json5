@@ -1,9 +1,17 @@
 /**
- * This configuration runs the entire system locally and in development mode.
+ * This configuration runs the entire system locally on port 8081, including a local flow manager, a cloud based
+ * flow manager, a preferences server. It also runs and loads test data into pouchDB on port 8058 for data persistence.
  *
- * This mean that:
- * * A all-in-one configuration with gpii.config.development.local.json5 (See corresponding file for details)
- * * Pouch Manager to store data on the local pouchDB
+ * * The following components are running:
+ * ** Auth Server
+ * ** Canopy MatchMaker
+ * ** Cloud Based FlowManager
+ * ** Local FlowManager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** Pouch Manager
  */
 {
     "type": "gpii.config.development.all.local",
