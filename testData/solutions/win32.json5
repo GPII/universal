@@ -3381,6 +3381,493 @@
         ]
     },
 
+    "com.microsoft.windows.mouseSettings": {
+        "name": "Windows typing autocorrection",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureMousePrimaryButton": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSEBUTTONSWAP",
+                    "setAction": "SPI_SETMOUSEBUTTONSWAP",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "SwapMouseButtonsConfig": {
+                        "schema": {
+                            "title": "Swap mouse primary button",
+                            "description": "Swap mouse left/right buttons",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SwapMouseButtonsConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons",
+                            "outputPath": "value",
+                            "defaultValue": 0
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons": "SwapMouseButtonsConfig.value"
+                }
+            },
+            "configureScrollWheelMode": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETWHEELSCROLLLINES",
+                    "setAction": "SPI_SETWHEELSCROLLLINES",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "ScrollWheelModeConfig": {
+                        "schema": {
+                            "title": "Mouse scroll wheel mode",
+                            "description": "Changes the way scroll wheel behaves, between lines and screens",
+                            "type": "number",
+                            "default": 3,
+                            "min": 0,
+                            "max": 4294967294,
+                            "divisibleBy": 1,
+                            // This special value trigger the special meaning
+                            // of full-page scrolling.
+                            "specialValue": "'full-page' | 4294967295"
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScrollWheelModeConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
+                            "defaultOutputPath": "value",
+                            "match": {
+                                "full-page": 4294967295
+                            },
+                            "noMatch": {
+                                "outputValue": {
+                                    "transform": {
+                                        "type": "fluid.transforms.value",
+                                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines"
+                                    }
+                                }
+                            }
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "ScrollWheelModeConfig.value",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
+                            "match": {
+                                "4294967295": "full-page"
+                            },
+                            "noMatch": "ScrollWheelModeConfig.value"
+                        }
+                    ]
+                }
+            },
+            "configureScrollInactiveWindow": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSEWHEELROUTING",
+                    "setAction": "SPI_SETMOUSEWHEELROUTING",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "ScrollFocusRoutingConfig": {
+                        "schema": {
+                            "title": "Mouse scroll focus routing",
+                            "description": "Changes the way mouse scrolling is passed to applications",
+                            "type": "string",
+                            "enum": ["RoutingFocus", "RoutingHybrid"]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScrollFocusRoutingConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInput": {
+                                "transform": {
+                                    "type": "fluid.transforms.fallbackValue",
+                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
+                                    "defaultValue": "RoutingFocus"
+                                }
+                            },
+                            "defaultOutputPath": "value",
+                            "match": {
+                                "RoutingFocus": 0,
+                                "RoutingHybrid": 1
+                            },
+                            "noMatch": 0
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "ScrollFocusRoutingConfig.value",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
+                            "match": {
+                                "0": "RoutingFocus",
+                                "1": "RoutingHybrid"
+                            },
+                            "noMatch": "RoutingFocus"
+                        }
+                    ]
+                }
+            },
+            "configureMouseCursorShadow": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETCURSORSHADOW",
+                    "setAction": "SPI_SETCURSORSHADOW",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "MouseCursorShadowConfig": {
+                        "schema": {
+                            "title": "Enable disable mouse cursor shadow",
+                            "description": "Changes the way mouse scrolling is passed to applications",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "MouseCursorShadowConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
+                            "outputPath": "value",
+                            "defaultValue": 0
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow":  "MouseCursorShadowConfig.value"
+                }
+            },
+            "configureHorizontalScrollChars": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETWHEELSCROLLCHARS",
+                    "setAction": "SPI_SETWHEELSCROLLCHARS",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "ScrollCharsConfig": {
+                        "schema": {
+                            "title": "Mouse wheel horizontal scroll",
+                            "description": "Changes the number of chars that are scrolled horizontally",
+                            "type": "number",
+                            "default": 3,
+                            "min": 1,
+                            "max": 100,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScrollCharsConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars",
+                            "outputPath": "value",
+                            "defaultValue": 3
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars": "ScrollCharsConfig.value"
+                }
+            },
+            "configureActiveWindowTracking": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETACTIVEWINDOWTRACKING",
+                    "setAction": "SPI_SETACTIVEWINDOWTRACKING",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "WindowsTrackingConfig": {
+                        "schema": {
+                            "title": "Mouse wheel horizontal scroll",
+                            "description": "Changes the number of chars that are scrolled horizontally",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "WindowsTrackingConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
+                            "outputPath": "value",
+                            "defaultValue": 0
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled": "WindowsTrackingConfig.value"
+                }
+            },
+            "configureActiveWindowZOrder": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETACTIVEWNDTRKZORDER",
+                    "setAction": "SPI_SETACTIVEWNDTRKZORDER",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "ActiveZOrder": {
+                        "schema": {
+                            "title": "Mouse wheel horizontal scroll",
+                            "description": "Changes the number of chars that are scrolled horizontally",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ActiveZOrder": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
+                            "outputPath": "value",
+                            "defaultValue": 0
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                }
+            },
+            "configureWindowsArrangement": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETWINARRANGING",
+                    "setAction": "SPI_SETWINARRANGING",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "WindowsArrangement": {
+                        "schema": {
+                            "title": "Configures Window arrangement",
+                            "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse",
+                            "type": "boolean",
+                            "default": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "WindowsArrangement": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement",
+                            "outputPath": "value",
+                            "defaultValue": 1
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                }
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement": "WindowsArrangement.value"
+                }
+            },
+            "configureMouseDoubleClickTime": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "DoubleClickTime",
+                    "setParam": 0,
+                    "checkReturn": true,
+                    "successValue": 1,
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "DoubleClickTimeConfig": {
+                        "schema": {
+                            "title": "Mouse scroll focus routing",
+                            "description": "Changes the way mouse scrolling is passed to applications",
+                            "type": "number",
+                            "default": 500,
+                            "min": 500,
+                            "max": 5000,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "DoubleClickTimeConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.fallbackValue",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
+                            "outputPath": "value",
+                            "defaultValue": 500
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "setParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime": "DoubleClickTimeConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configureScrollWheelMode",
+            "settings.configureScrollInactiveWindow",
+            "settings.configureMouseCursorShadow",
+            "settings.configureHorizontalScrollChars",
+            "settings.configureActiveWindowTracking",
+            "settings.configureActiveWindowZOrder",
+            "settings.configureWindowsArrangement",
+            "settings.configureMouseDoubleClickTime",
+            "settings.configureMousePrimaryButton"
+        ],
+        "restore": [
+            "settings.configureScrollWheelMode",
+            "settings.configureScrollInactiveWindow",
+            "settings.configureMouseCursorShadow",
+            "settings.configureHorizontalScrollChars",
+            "settings.configureActiveWindowTracking",
+            "settings.configureActiveWindowZOrder",
+            "settings.configureWindowsArrangement",
+            "settings.configureMouseDoubleClickTime",
+            "settings.configureMousePrimaryButton"
+        ],
+        "isInstalled": [
+            {
+                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "com.microsoft.windows.typingEnhancement": {
         "name": "Windows typing autocorrection",
         "contexts": {

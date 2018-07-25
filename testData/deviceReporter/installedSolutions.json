@@ -72,6 +72,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mouseSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.screenDPI"
     },
 
