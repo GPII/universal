@@ -59,6 +59,7 @@ fluid.log("BUILD_DATA_DIR: '" + dbLoader.buildDataDir + "'");
  * them to an array of records to remove.
  * @param {String} responseString - The response from the database query for
  *                                  retrieving the snapset PrefsSafes records
+ * @return {Array} - The snapset PrefsSafes records marked for deletion.
  */
 dbLoader.processSnapsets = function (responseString) {
     fluid.log("Processing the snapset Prefs Safes records...");
@@ -68,6 +69,7 @@ dbLoader.processSnapsets = function (responseString) {
         dbLoader.snapsetPrefsSafes.push(aSnapset.value);
     });
     fluid.log("\tSnapset Prefs Safes marked for deletion.");
+    return dbLoader.snapsetPrefsSafes;
 };
 
 /**
@@ -75,6 +77,7 @@ dbLoader.processSnapsets = function (responseString) {
  * them for deletion, and add them to array of records to delete.
  * @param {String} responseString - The response from the database query for
  *                                  retrieving all the GPII Keys.
+ * @return {Array} - The GPII Key records marked for deletion.
  */
 dbLoader.processGpiiKeys = function (responseString) {
     fluid.log("Processing the GPII Keys...");
@@ -83,6 +86,7 @@ dbLoader.processGpiiKeys = function (responseString) {
         gpiiKeyRecords, dbLoader.snapsetPrefsSafes
     );
     fluid.log("\tGPII Keys associated with snapset Prefs Safes marked for deletion.");
+    return dbLoader.gpiiKeys;
 };
 
 /**
@@ -108,6 +112,19 @@ dbLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, snapSets)
         }
     });
     return gpiiKeysToDelete;
+};
+
+/**
+ * Utility to wrap all the pieces to make a bulk documents deletion request
+ * for the snapset Prefs Safes and their associated GPII keys.  Its intended use
+ * is the parameter of the appropriate promise.then() call.
+ */
+dbLoader.doBatchDelete = function () {
+    var docsToRemove = dbLoader.snapsetPrefsSafes.concat(dbLoader.gpiiKeys);
+    var execBatchDelete = dbLoader.createBulkDocsRequest(
+        docsToRemove, dbLoader.batchDeleteResponse
+    );
+    execBatchDelete();
 };
 
 /**
@@ -232,17 +249,16 @@ var getGpiiKeysRequest = dbLoader.queryDatabase(
     getGpiiKeysResponse,
     "Error requesting GPII Keys: "
 );
+
 snapsetsPromise.then(function () { getGpiiKeysRequest.end(); });
 
 // Batch delete snapset Prefs Safes and their GPII Keys.
 var batchDeletePromise = fluid.promise();
-var batchDeleteResponse = dbLoader.createResponseHandler(
+dbLoader.batchDeleteResponse = dbLoader.createResponseHandler(
     function () { fluid.log("Snapset Prefs Safes and associated GPII Keys deleted."); },
     batchDeletePromise
 );
-var docsToRemove = dbLoader.snapsetPrefsSafes.concat(dbLoader.gpiiKeys);
-var execBatchDelete = dbLoader.createBulkDocsRequest(docsToRemove, batchDeleteResponse);
-gpiiKeysPromise.then(execBatchDelete);
+gpiiKeysPromise.then(dbLoader.doBatchDelete);
 
 // ==========
 // Load the snapset PrefsSafes, their GPII Keys, and client credentials from disk.
@@ -267,5 +283,4 @@ var buildPostResponse = dbLoader.createResponseHandler(
 var execBuildDataRequest = dbLoader.createBulkDocsRequest(buildData, buildPostResponse);
 staticDataPromise.then(execBuildDataRequest);
 buildDataPromise.then(function () { fluid.log("Done."); });
-
 
