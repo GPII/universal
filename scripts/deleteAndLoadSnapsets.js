@@ -30,13 +30,18 @@ fluid.setLogging(fluid.logLevel.INFO);
 var dbLoader = gpii.dataLoader;
 
 // Handle command line
-if (process.argv.length !== 5) {
-    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR");
+if (process.argv.length < 5) {
+    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR [--justDelete]");
     process.exit(1);
 }
 dbLoader.couchDbUrl = process.argv[2];
 dbLoader.staticDataDir = process.argv[3];
 dbLoader.buildDataDir = process.argv[4];
+if (process.argv.length > 5 && process.argv[5] === "--justDelete") { // for debugging.
+    dbLoader.justDelete = true;
+} else {
+    dbLoader.justDelete = false;
+}
 
 dbLoader.prefsSafesViewUrl = dbLoader.couchDbUrl + "/_design/views/_view/findSnapsetPrefsSafes";
 dbLoader.gpiiKeysViewUrl = dbLoader.couchDbUrl + "/_design/views/_view/findAllGpiiKeys";
@@ -286,27 +291,26 @@ dbLoader.batchDeleteResponse = dbLoader.createResponseHandler(
 );
 gpiiKeysPromise.then(dbLoader.doBatchDelete, dbLoader.bail);
 
-// ==========
-// Load the snapset PrefsSafes, their GPII Keys, and client credentials from disk.
-
-// Load the static data
-var staticData = dbLoader.getDataFromDirectory(dbLoader.staticDataDir);
-var staticDataPromise = fluid.promise();
-var staticPostResponse = dbLoader.createResponseHandler(
-    function () { fluid.log ("Bulk loading of static data from '" + dbLoader.staticDataDir + "'"); },
-    staticDataPromise
-);
-var execStaticDataRequest = dbLoader.createBulkDocsRequest(staticData, staticPostResponse);
-batchDeletePromise.then(execStaticDataRequest, dbLoader.bail);
-
-// Load the build data
-var buildData = dbLoader.getDataFromDirectory(dbLoader.buildDataDir);
-var buildDataPromise = fluid.promise();
-var buildPostResponse = dbLoader.createResponseHandler(
-    function () { fluid.log ("Bulk loading of build data from '" + dbLoader.buildDataDir + "'"); },
-    buildDataPromise
-);
-var execBuildDataRequest = dbLoader.createBulkDocsRequest(buildData, buildPostResponse);
-staticDataPromise.then(execBuildDataRequest, dbLoader.bail);
-buildDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
+if (dbLoader.justDelete) {
+    batchDeletePromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
+} else {
+    // ==========
+    // Load the snapset PrefsSafes, their GPII Keys, and client credentials from
+    // disk, i.e. load the static and build data
+    var staticData = dbLoader.getDataFromDirectory(dbLoader.staticDataDir);
+    var buildData = dbLoader.getDataFromDirectory(dbLoader.buildDataDir);
+    var allData = staticData.concat(buildData);
+    var allDataPromise = fluid.promise();
+    var allDataResponse = dbLoader.createResponseHandler(
+        function () {
+            fluid.log ("Bulk loading of static and build data from '" +
+                        dbLoader.staticDataDir + ", and '" +
+                        dbLoader.buildDataDir + "', respectively");
+        },
+        allDataPromise
+    );
+    var execAllDataRequest = dbLoader.createBulkDocsRequest(allData, allDataResponse);
+    batchDeletePromise.then(execAllDataRequest, dbLoader.bail);
+    allDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
+}
 
