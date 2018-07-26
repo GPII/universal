@@ -1,0 +1,39 @@
+/*
+
+    A fixture to test inheritance of material between a generic product entry and a version-specific entry.
+
+*/
+{
+    "flat": {
+        "name": "JAWS",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws.2018": {
+                        "Options.Abbreviations": 1,
+                        "Options.Acronyms": 1,
+                        "Options.TypingEcho": 3,
+                        "Options.TypingInterrupt": 0
+                    }
+                },
+                "metadata": [
+                    {
+                        "type": "required",
+                        "scope": [
+                            "http://registry.gpii.net/common/screenReaderTTS/enabled"
+                        ],
+                        "value": 1024
+                    },
+                    {
+                        "type": "priority",
+                        "scope": [
+                            "http://registry.gpii.net/applications/com.freedomscientific.jaws.2018"
+                        ],
+                        "value": 1024
+                    }
+                ]
+            }
+        }
+    }
+}
