@@ -10,7 +10,7 @@ Manager](LifecycleManager.md).
 
 Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and
 retrieving settings from the system in "cloud based flowmanager" mode are all different. Each "flow" is managed in a
-different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerRequests.js`. The
+different file, with the common events, functions, etc., located in `FlowManager.js` and `MatchMaking.js`. The
 different kinds of flows are:
 
 * **User Login** (UserLogonStateChange.js) - the flow for a user keying in to the system. The flow is described in
