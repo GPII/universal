@@ -2012,6 +2012,14 @@
                 }
             }
         },
+        "configure": [
+            "settings.configureTheme",
+            {
+                "type": "gpii.windows.setHighContrastTheme",
+                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+            },
+            "settings.configure"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
