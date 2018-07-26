@@ -67,7 +67,148 @@ gpii.tests.windows.builtIn = [
             }
         },
         settingsHandlers: {
+            "gpii.windows.nativeSettingsHandler": {
+                "com.microsoft.windows.mouseSettings": [
+                    {
+                        "settings": {
+                            "DoubleClickTimeConfig": {
+                                "path": "setParam",
+                                "value": 600
+                            }
+                        },
+                        "options": {
+                            "functionName": "DoubleClickTime",
+                            "setParam": 0,
+                            "checkReturn": true,
+                            "successValue": 1
+                        }
+                    }
+                ]
+            },
             "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.mouseSettings": [
+                    {
+                        "settings": {
+                            "SwapMouseButtons": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEBUTTONSWAP",
+                            "setAction": "SPI_SETMOUSEBUTTONSWAP",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ScrollWheelModeConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 4294967294
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETWHEELSCROLLLINES",
+                            "setAction": "SPI_SETWHEELSCROLLLINES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ScrollFocusRoutingConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEWHEELROUTING",
+                            "setAction": "SPI_SETMOUSEWHEELROUTING",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "MouseCursorShadowConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETCURSORSHADOW",
+                            "setAction": "SPI_SETCURSORSHADOW",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ScrollCharsConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 10
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETWHEELSCROLLCHARS",
+                            "setAction": "SPI_SETWHEELSCROLLCHARS",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "WindowsTrackingConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETACTIVEWINDOWTRACKING",
+                            "setAction": "SPI_SETACTIVEWINDOWTRACKING",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ActiveZOrder": {
+                                "path": "pvParam",
+                                "value": 0
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETACTIVEWNDTRKZORDER",
+                            "setAction": "SPI_SETACTIVEWNDTRKZORDER",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    }
+                ],
                 "com.microsoft.windows.mouseTrailing": [
                     {
                         "settings": {

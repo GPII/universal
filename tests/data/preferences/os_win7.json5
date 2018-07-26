@@ -106,6 +106,49 @@
                         "EnableShiftLock": 1,
                         "EnableCompatibilityKeyboard": 1,
                         "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
+                        "SwapMouseButtonsConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
+                        "ScrollWheelModeConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 4294967294
+                        },
+                        "ScrollFocusRoutingConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "MouseCursorShadowConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "ScrollCharsConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 10
+                        },
+                        "WindowsTrackingConfig": {
+                            "path": "pvParam",
+                            "value": 1
+                        },
+                        "ActiveZOrder": {
+                            "path": "pvParam",
+                            "value": 0
+                        },
+                        "DoubleClickTimeConfig": {
+                            "path": "setParam",
+                            "value": 600
+                        }
                     }
                 }
             }
