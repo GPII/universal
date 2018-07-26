@@ -2015,7 +2015,7 @@
         "configure": [
             "settings.configureTheme",
             {
-                "type": "gpii.windows.setHighContrastTheme",
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
                 "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
             },
             "settings.configure"
