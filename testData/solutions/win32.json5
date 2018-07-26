@@ -16,10 +16,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    // TODO: Break out version somehow, as 18 is now available.  What do the AJCs have now?
-                    // "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
-                    // "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\enu\\DEFAULT.JCF"
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
                     "Braille.attributeRotationDelay": {
@@ -659,6 +656,7 @@
                         "enumLabels": ["off at startup", "on at startup", "leave unmodified"],
                         "default": 0
                     },
+                    // TODO: Doesn't seem to work.
                     "Options.InsertKeyMode": {
                         "schema": {
                             "title": "InsertKeyMode",
@@ -1905,8 +1903,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    //                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "supportedSettings": {
                     "Options.PrimarySynthesizer": {},
@@ -2331,7 +2328,159 @@
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
-                            //                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jfw.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "fsSynth32.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jhookldr.exe"
+                        }
+                    ]
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
+        ]
+    },
+    "com.freedomscientific.jaws.v18": {
+        "name": "JAWS v. 18.0",
+        "contexts": "${{solution}.com.freedomscientific.jaws}.contexts",
+        "capabilities": "${{solution}.com.freedomscientific.jaws}.capabilities",
+        "settingsHandlers": {
+            "configuration1": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\enu\\DEFAULT.JCF"
+                },
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.supportedSettings",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.capabilitiesTransformations",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.inverseCapabilitiesTransformations"
+            },
+            "configuration2": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                },
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.supportedSettings",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.capabilitiesTransformations",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.inverseCapabilitiesTransformations"
+            }
+        },
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "jfw"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS18.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jfw.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "fsSynth32.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jhookldr.exe"
+                        },
+                        // New for JAWS 2018
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ScannerHandler.exe"
+                        }
+                    ]
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS18.exe",
+                "subPath": "",
+                "dataType": "REG_SZ"
+            }
+        ]
+    },
+    "com.freedomscientific.jaws.2018": {
+        "name": "JAWS 2018",
+        "contexts": "${{solution}.com.freedomscientific.jaws}.contexts",
+        "capabilities": "${{solution}.com.freedomscientific.jaws}.capabilities",
+        "settingsHandlers": {
+            "configuration1": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                },
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.supportedSettings",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.capabilitiesTransformations",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.inverseCapabilitiesTransformations"
+            },
+            "configuration2": {
+                "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                },
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.supportedSettings",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.capabilitiesTransformations",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.inverseCapabilitiesTransformations"
+            }
+        },
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "jfw"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
                             "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe\\}\""
                         }
                     ],
