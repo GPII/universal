@@ -42,11 +42,12 @@ inserting/removing the USB, respectively
 
 The core part of the flow is defined in two files:
 
-* `UserLogonStateChange.js` contains the handling of the logon related endpoints kicks off the related process. It
+* `UserLogonHandlers.js` contains the handling of the logon related endpoints kicks off the related process. It
   contains individual handlers for the `login`, `logout` and `proximityTriggered` URLs. These handlers all have the
   `gpii.flowManager.userLogonHandling.stateChangeHandler` grade, which is the component that contains the functionality
-  for the actual logging in and logging off.
-* `MatchMaking.js` which describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
+  for the actual logging in and logging out.
+* `UserLogonStateChange.js` contains the functionality for the actual logging in and logging out.
+* `MatchMaking.js` describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
 
 The user login process is as follows:
 
