@@ -4,12 +4,12 @@
  *
  * * The following components are running on the local machine:
  * ** Untrusted Local Flow Manager
- * ** Static Device Reporter (reading from file)
+ * ** Dynamic Device Reporter
  */
 {
-    "type": "gpii.config.untrusted.development",
+    "type": "gpii.config.untrusted.development.dynamicDR",
     "mergeConfigs": [
-        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.static.json5",
+        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
         "../node_modules/flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
     ]
 }
