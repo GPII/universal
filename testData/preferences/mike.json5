@@ -1,0 +1,22 @@
+{
+    "flat": {
+        "name": "mike",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
+                        "ScrollLines": "full-page",
+                        "ScrollRouting": "RoutingHybrid",
+                        "DoubleClickTime": 5000,
+                        "EnableCursorShadow": 1,
+                        "ScrollChars": 10,
+                        "WindowsTrackingEnabled": 1,
+                        "AutoWinArrangement": 0,
+                        "SwapMouseButtons": 1
+                    }
+                }
+            }
+        }
+    }
+}
