@@ -3332,7 +3332,10 @@
                                         "black-white": "bw",
                                         "white-black": "wb",
                                         "black-yellow": "by",
-                                        "yellow-black": "yb"
+                                        "yellow-black": "yb",
+                                        "gray-dark": "lgdg",
+                                        "gray-white": "gw",
+                                        "black-brown": "bbr"
                                     }
                                 }
                             },
