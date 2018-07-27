@@ -25,14 +25,14 @@ var fs = require("fs"),
 
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
+var prefsSafeType = process.argv[4];
 
 var prefsSafes = [];
 var gpiiKeys = [];
-var count = 0;
 
 var filenames = fs.readdirSync(inputDir);
 
-console.log("Converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + " ...");
+console.log("Converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir + " as " + prefsSafeType + " Prefs Safes ...");
 
 // Read and loop thru json5 files in the input directory
 rimraf(targetDir, function () {
@@ -61,7 +61,7 @@ rimraf(targetDir, function () {
                     "_id": prefsSafeId,
                     "type": "prefsSafe",
                     "schemaVersion": "0.1",
-                    "prefsSafeType": "snapset",
+                    "prefsSafeType": prefsSafeType,
                     "name": gpiiKey,
                     "password": null,
                     "email": null,

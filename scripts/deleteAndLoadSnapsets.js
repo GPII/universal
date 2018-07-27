@@ -322,4 +322,3 @@ if (dbLoader.justDelete) {
     batchDeletePromise.then(execBuildDataRequest, dbLoader.bail);
     buildDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
 }
-
