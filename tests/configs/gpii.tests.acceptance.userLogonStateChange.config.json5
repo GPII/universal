@@ -4,7 +4,7 @@
         "distributeOptions": {
             "acceptance.debounceTimeMs": {
                 "record": 3000,
-                "target": "{that flowManager gpii.flowManager.userLogonHandling.stateChangeHandler}.options.debounceTimeMs"
+                "target": "{that flowManager gpii.flowManager.proximityTrigger.handler}.options.debounceTimeMs"
             }
         }
     },
