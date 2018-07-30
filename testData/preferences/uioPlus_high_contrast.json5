@@ -18,7 +18,6 @@
                     "http://registry.gpii.net/common/highContrastTheme": "white-black",
                     "http://registry.gpii.net/common/highlightColor": "default",
                     "http://registry.gpii.net/common/tableOfContents": false,
-                    "http://registry.gpii.net/common/supportTool": [],
                     "http://registry.gpii.net/common/simplifiedUi/enabled": false,
                     "http://registry.gpii.net/common/syllabification/enabled": false,
                     "http://registry.gpii.net/common/captions/enabled": false
