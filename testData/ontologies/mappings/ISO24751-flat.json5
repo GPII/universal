@@ -53,7 +53,6 @@
     "http://registry\\.gpii\\.net/common/supportTool": "content.supportTool",
     "http://registry\\.gpii\\.net/common/simplifiedUi/enabled": "-provisional-cognitiveSupport.-provisional-simplifiedUi/enabled",
     "http://registry\\.gpii\\.net/common/syllabification/enabled": "-provisional-cognitiveSupport.-provisional-syllabification/enabled",
-    "http://registry\\.gpii\\.net/common/captions/enabled": "-provisional-media.-provisional-captions/enabled",
     "http://registry\\.gpii\\.net/common/volume": "-provisional-general.-provisional-volume",
     "http://registry\\.gpii\\.net/common/language": "language",
     "http://registry\\.gpii\\.net/common/autocorrectionEnabled": "keyboard.typingEnhancement.autocorrection",
