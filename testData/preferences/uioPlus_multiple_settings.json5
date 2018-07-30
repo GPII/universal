@@ -18,6 +18,7 @@
 // * Dictionary: enabled (requires page reload)
 // * Simplified UI: enabled
 // * Syllabification: enabled
+// * Captions: enabled
 {
     "flat": {
         "contexts": {

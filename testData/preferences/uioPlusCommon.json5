@@ -17,6 +17,7 @@
 // * Table of Contents: enabled
 // * Dictionary: enabled (requires page reload)
 // * Simplified UI: enabled
+// * Captions: enabled
 {
     "flat": {
         "contexts": {
