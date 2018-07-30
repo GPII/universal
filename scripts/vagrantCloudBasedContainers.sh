@@ -42,7 +42,7 @@ UNIVERSAL_DIR="/home/vagrant/sync/universal"
 STATIC_DATA_DIR="$UNIVERSAL_DIR/testData/dbData"
 BUILD_DATA_DIR="$UNIVERSAL_DIR/build/dbData/snapset"
 
-DATALOADER_IMAGE="gpii/gpii-dataloader"
+DATALOADER_IMAGE="herrclown/gpii-dataloader"
 DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
 
