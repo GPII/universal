@@ -220,9 +220,9 @@
                 "en", "en-GB", "en-US", "en-scotland", "en-BZ", "en-BS", "en-AG", "en-AI",
                 "af", "bg", "bs", "ca", "cs", "cy", "da", "de", "el", "grc", "eo", "es",
                 "es-419", "et", "fi", "fr", "fr-BE", "hi", "hr", "hu", "hy", "hy-arevmda",
-                "id", "is", "it", "jbo", "ka", "kn", "ku", "la", "lv", "mk", "ml", "nl",
+                "id", "is", "it", "jbo", "ka", "kn", "ko", "ku", "la", "lv", "mk", "ml", "nl",
                 "no", "pap", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sq", "sr", "sv",
-                "sw", "ta", "tr", "vi", "zh-cmn", "cmn", "zh-yue", "yue"
+                "sw", "ta", "tr", "vi", "zh-cmn", "cmn", "zh-Hans", "zh-Hant", "zh-yue", "yue"
             ]
         },
         "http://registry.gpii.net/common/screenResolution": {
