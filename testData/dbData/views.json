@@ -14,9 +14,6 @@
             "findSnapsetPrefsSafes": {
                 "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') {emit(doc._id, doc)}}"
             },
-            "findGpiiKeysByPrefsSafeId": {
-                "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc.prefsSafeId, doc)}}"
-            },
             "findAllGpiiKeys": {
                 "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc._id, doc)}}"
             }
