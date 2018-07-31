@@ -31,13 +31,14 @@ var dbLoader = gpii.dataLoader;
 
 // Handle command line
 if (process.argv.length < 5) {
-    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR [--justDelete]");
+    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR [--justDelete]");
     process.exit(1);
 }
 dbLoader.couchDbUrl = process.argv[2];
 dbLoader.staticDataDir = process.argv[3];
 dbLoader.buildDataDir = process.argv[4];
-if (process.argv.length > 5 && process.argv[5] === "--justDelete") { // for debugging.
+dbLoader.demoUserDir = process.argv[5];
+if (process.argv.length > 6 && process.argv[6] === "--justDelete") { // for debugging.
     dbLoader.justDelete = true;
 } else {
     dbLoader.justDelete = false;
@@ -311,6 +312,8 @@ if (dbLoader.justDelete) {
 } else {
     // Finally, load the latest snapsets data from the build data.
     var buildData = dbLoader.getDataFromDirectory(dbLoader.buildDataDir);
+    var demoUserData = dbLoader.getDataFromDirectory(dbLoader.demoUserDir);
+    buildData = buildData.concat(demoUserData);
     var buildDataPromise = fluid.promise();
     var buildDataResponse = dbLoader.createResponseHandler(
         function () {
