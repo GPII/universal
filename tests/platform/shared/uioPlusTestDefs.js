@@ -1,7 +1,7 @@
 /*
 GPII Integration and Acceptance Testing
 
-Copyright 2017 OCAD University
+Copyright 2017-2018 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -39,7 +39,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -67,7 +68,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -95,7 +97,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -123,7 +126,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -151,7 +155,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -179,7 +184,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -207,7 +213,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -235,7 +242,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -263,7 +271,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": true,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -291,7 +300,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": true,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -319,7 +329,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": true,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -347,7 +358,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -375,7 +387,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": true,
-                            "syllabificationEnabled": false
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": false
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -403,7 +416,37 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": false,
                             "dictionaryEnabled": false,
                             "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": true
+                            "syllabificationEnabled": true,
+                            "captionsEnabled": false
+                        },
+                        "options": {
+                            "path": "net.gpii.uioPlus"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        name: "Acceptance test for captions UI transformation for UIO+",
+        gpiiKey: "uioPlus_captions",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "lineSpace": 1,
+                            "fontSize": 1,
+                            "characterSpace": 1,
+                            "inputsLargerEnabled": false,
+                            "contrastTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "selectionTheme": "default",
+                            "tableOfContentsEnabled": false,
+                            "dictionaryEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false,
+                            "captionsEnabled": true
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -431,7 +474,8 @@ gpii.tests.uioPlus.testDefs = [
                             "tableOfContentsEnabled": true,
                             "dictionaryEnabled": true,
                             "simplifiedUiEnabled": true,
-                            "syllabificationEnabled": true
+                            "syllabificationEnabled": true,
+                            "captionsEnabled": true
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"

@@ -1,0 +1,28 @@
+// # uioPlus_captions
+//
+// A preference set for testing preference settings in UIO+.
+//
+// Applies the Captions preference. The captions for a supported media player should be enabled.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/lineSpace": 1,
+                    "http://registry.gpii.net/common/fontSize": 12,
+                    "http://registry.gpii.net/common/characterSpace": 0,
+                    "http://registry.gpii.net/common/selfVoicing/enabled": false,
+                    "http://registry.gpii.net/common/inputsLarger/enabled": false,
+                    "http://registry.gpii.net/common/highContrast/enabled": false,
+                    "http://registry.gpii.net/common/highlightColor": "default",
+                    "http://registry.gpii.net/common/tableOfContents": false,
+                    "http://registry.gpii.net/common/supportTool": [],
+                    "http://registry.gpii.net/common/simplifiedUi/enabled": false,
+                    "http://registry.gpii.net/common/syllabification/enabled": false,
+                    "http://registry.gpii.net/common/captions/enabled": true
+                }
+            }
+        }
+    }
+}

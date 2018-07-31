@@ -45,12 +45,7 @@
             "untrusted.development.prefs": {
                 "record": "http://localhost:8084/preferences/%gpiiKey?merge=%merge",
                 "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
-                "priority": "after:flowManager.development.prefs"
-            },
-            "untrusted.development.matchMakers": {
-                "record": "http://localhost:8084",
-                "target": "{that cloudBasedConfig flowManager}.options.matchMakers.default.url",
-                "priority": "after:flowManager.development.matchMakers"
+                "priority": "after:flowManager.preferencesDataSource.default"
             }
         }
     },
