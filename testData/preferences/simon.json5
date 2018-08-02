@@ -1,0 +1,26 @@
+// # Simon.json5
+//
+// This preference set changes touchpad sensibility to low.
+// This way it's more difficult to trigger mouse accidentally while typing.
+//
+// This setting makes the system ignore brief key presses.
+//
+// ## Testing
+//
+// In any text writing app, this should decrease the probability mouse being moved by accidentally touching touchpad.
+//
+{
+    "flat": {
+        "name": "Simon",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.touchPadSettings": {
+                        "Sensitivity": "low"
+                    }
+                }
+            }
+        }
+    }
+}
