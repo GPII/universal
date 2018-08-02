@@ -324,6 +324,55 @@
             "description": "Reduce the blue emitted from the screen.",
             "type": "boolean",
             "default": false
+        },
+        "http://registry.gpii.net/common/lineSpace": {
+            "title": "Line Space",
+            "description": "Increases the distance between lines of text.",
+            "type": "number",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 3,
+            "divisibleBy": 0.1
+        },
+        "http://registry.gpii.net/common/characterSpace": {
+            "title": "Character Space",
+            "description": "Increases the distance between characters.",
+            "type": "number",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 2,
+            "divisibleBy": 0.1
+        },
+        "http://registry.gpii.net/common/inputsLarger/enabled": {
+            "title": "Inputs Larger",
+            "description": "Increases the size of inputs to make them more discoverable.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/highlightColor": {
+            "title": "Highlight Color",
+            "description": "The color used to highlight a user's selection.",
+            "type": "string",
+            "default": "default",
+            "enum": ["default", "yellow", "green", "pink"]
+        },
+        "http://registry.gpii.net/common/tableOfContents": {
+            "title": "Table of Contents",
+            "description": "Displays a Table of Contents for the sections of a document.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/simplifiedUi/enabled": {
+            "title": "Simplified User Interface",
+            "description": "Removes extraneous content to reduce the cognitive load and improve comprehension and/or focus.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/syllabification/enabled": {
+            "title": "Syllabification",
+            "description": "Separate words into their syllables.",
+            "type": "boolean",
+            "default": false
         }
     }
 }
