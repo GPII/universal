@@ -3682,8 +3682,8 @@
                 "supportedSettings": {
                     "WindowsTrackingConfig": {
                         "schema": {
-                            "title": "Mouse wheel horizontal scroll",
-                            "description": "Changes the number of chars that are scrolled horizontally",
+                            "title": "Mouse Windows tracking",
+                            "description": "Windows are focused when mouse is stopped over them",
                             "type": "boolean",
                             "default": 0
                         }
