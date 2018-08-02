@@ -3172,6 +3172,67 @@
         ]
     },
 
+    "com.microsoft.windows.touchPadSettings": {
+        "name": "Windows precision touchpad settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity",
+                            "defaultOutputPath": "value",
+                            "match": {
+                                "low": "Low sensitivity",
+                                "medium": "Medium sensitivity",
+                                "high": "High sensitivity",
+                                "most": "Most sensitive"
+                            },
+                            "noMatch": "Medium sensitivity"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "schema": {
+                            "title": "Touchpad sensitivity",
+                            "description": "Changes Windows 10 precision touchpad sensitivity.",
+                            "type": "string",
+                            "default": "medium"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity": "SystemSettings_Input_Touch_SetActivationTimeout.value"
+                }
+            }
+        },
+        "update": [
+            "configure"
+        ],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
