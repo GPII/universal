@@ -1,8 +1,8 @@
-// # uioPlus_multiple_support_tool
+// # uioPlus_captions
 //
 // A preference set for testing preference settings in UIO+.
 //
-// Enables the Dictionary preference. The Google Dictionary browser extension should be enabled. Any open pages/tabs will need to be reloaded before the Google Dictionary extension will work on a page. The "thesaurus" supportTool is not supported and will be ignored.
+// Applies the Captions preference. The captions for a supported media player should be enabled.
 {
     "flat": {
         "contexts": {
@@ -17,10 +17,10 @@
                     "http://registry.gpii.net/common/highContrast/enabled": false,
                     "http://registry.gpii.net/common/highlightColor": "default",
                     "http://registry.gpii.net/common/tableOfContents": false,
-                    "http://registry.gpii.net/common/supportTool": ["dictionary", "thesaurus"],
+                    "http://registry.gpii.net/common/supportTool": [],
                     "http://registry.gpii.net/common/simplifiedUi/enabled": false,
                     "http://registry.gpii.net/common/syllabification/enabled": false,
-                    "http://registry.gpii.net/common/captions/enabled": false
+                    "http://registry.gpii.net/common/captions/enabled": true
                 }
             }
         }

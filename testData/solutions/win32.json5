@@ -4272,7 +4272,8 @@
                     "tableOfContentsEnabled": {},
                     "dictionaryEnabled": {},
                     "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {}
+                    "syllabificationEnabled": {},
+                    "captionsEnabled": {}
                 },
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
@@ -4317,7 +4318,10 @@
                                         "black-white": "bw",
                                         "white-black": "wb",
                                         "black-yellow": "by",
-                                        "yellow-black": "yb"
+                                        "yellow-black": "yb",
+                                        "gray-dark": "lgdg",
+                                        "gray-white": "gw",
+                                        "black-brown": "bbr"
                                     }
                                 }
                             },
@@ -4351,7 +4355,8 @@
                         }
                     },
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
