@@ -20,4 +20,18 @@ var fluid = require("infusion"),
 fluid.require("%gpii-universal");
 require("./shared/PSPIntegrationTestDefs.js");
 
+gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
+    return fluid.transform(testDefs, function (testDef) {
+        return fluid.extend(true, {
+            gradeNames: [
+                "gpii.tests.pspIntegration.testCaseHolder.common.linux",
+                "gpii.test.common.lifecycleManagerReceiver"
+            ],
+            config: {
+                configName: "gpii.tests.acceptance.linux.builtIn.config",
+                configPath: "%gpii-universal/tests/platform/linux/configs"
+            }
+        }, testDef);
+    });
+};
 gpii.test.bootstrapServer(gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs));
