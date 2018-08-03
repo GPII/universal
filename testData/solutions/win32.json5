@@ -2360,8 +2360,8 @@
     },
     "com.freedomscientific.jaws.v18": {
         "name": "JAWS v. 18.0",
-        "contexts": "${{solution}.com.freedomscientific.jaws}.contexts",
-        "capabilities": "${{solution}.com.freedomscientific.jaws}.capabilities",
+        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
+        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -2369,9 +2369,9 @@
                 "options": {
                      "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.supportedSettings",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.capabilitiesTransformations",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.inverseCapabilitiesTransformations"
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.supportedSettings}",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.capabilitiesTransformations}",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.inverseCapabilitiesTransformations}"
             },
             "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -2379,9 +2379,9 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.supportedSettings",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.capabilitiesTransformations",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.inverseCapabilitiesTransformations"
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.supportedSettings}",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.capabilitiesTransformations}",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.inverseCapabilitiesTransformations}"
             }
         },
         "launchHandlers": {
@@ -2439,8 +2439,8 @@
     },
     "com.freedomscientific.jaws.2018": {
         "name": "JAWS 2018",
-        "contexts": "${{solution}.com.freedomscientific.jaws}.contexts",
-        "capabilities": "${{solution}.com.freedomscientific.jaws}.capabilities",
+        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
+        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -2448,9 +2448,9 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.supportedSettings",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.capabilitiesTransformations",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration1.inverseCapabilitiesTransformations"
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.supportedSettings}",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.capabilitiesTransformations}",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.inverseCapabilitiesTransformations}"
             },
             "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -2458,9 +2458,9 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.supportedSettings",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.capabilitiesTransformations",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws}.settingsHandlers.configuration2.inverseCapabilitiesTransformations"
+                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.supportedSettings}",
+                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.capabilitiesTransformations}",
+                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.inverseCapabilitiesTransformations}"
             }
         },
         "launchHandlers": {
