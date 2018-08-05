@@ -8,13 +8,15 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-// This script modifies the preferences data base:
-// 1. Finds all the Prefs Safes of type "snapset" (prefsSafesType = "snapset"),
-// 2. Finds all the GPII Keys associated with each snapset Prefs Safe
-// 3. Deletes the found Prefs Safes and associated GPII Keys
-//
+// This script modifies the preferences database:
+// 1. Loads static data into the database,
+// 2. Retrieves all the Prefs Safes of type "snapset" (prefsSafesType = "snapset") from the databsse.
+// 3. Retrieves all the GPII Keys associated with each snapset Prefs Safe so found,
+// 4. Deletes these Prefs Safes and their associated GPII Keys from the database,
+// 5. Uploads the new Prefs Safes and their GPII Keys to the database,
+// 6. Uploads demo user Prefs Safes and their Keys in to the database, if they are not already present.
 // A sample command that runs this script:
-// node deleteSnapsets.js $COUCHDBURL
+// node deleteAndLoadSnapsets.js $COUCHDBURL $STATIC_DATA_DIR $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR
 
 "use strict";
 
@@ -27,38 +29,64 @@ var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.dataLoader");
 fluid.setLogging(fluid.logLevel.INFO);
 
-var dbLoader = gpii.dataLoader;
-
 // Handle command line
 if (process.argv.length < 5) {
     fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR [--justDelete]");
     process.exit(1);
 }
-dbLoader.couchDbUrl = process.argv[2];
-dbLoader.staticDataDir = process.argv[3];
-dbLoader.buildDataDir = process.argv[4];
-dbLoader.demoUserDir = process.argv[5];
-if (process.argv.length > 6 && process.argv[6] === "--justDelete") { // for debugging.
-    dbLoader.justDelete = true;
-} else {
-    dbLoader.justDelete = false;
-}
 
-dbLoader.prefsSafesViewUrl = dbLoader.couchDbUrl + "/_design/views/_view/findSnapsetPrefsSafes";
-dbLoader.gpiiKeysViewUrl = dbLoader.couchDbUrl + "/_design/views/_view/findAllGpiiKeys";
-dbLoader.parsedCouchDbUrl = url.parse(dbLoader.couchDbUrl);
-dbLoader.snapsetPrefsSafes = [];
-dbLoader.gpiiKeys = [];
+var dbLoader = gpii.dataLoader;
 
-fluid.log("COUCHDB_URL: '" +
-    dbLoader.parsedCouchDbUrl.protocol + "//" +
-    dbLoader.parsedCouchDbUrl.hostname + ":" +
-    dbLoader.parsedCouchDbUrl.port +
-    dbLoader.parsedCouchDbUrl.pathname +
-"'");
+/**
+ * Create a set of options for data loader and a function to retreive them.
+ * The options are based on the command line parameters and a set of database
+ * constants.
+ * @param {Array} processArgv - The command line arguments.
+ */
+dbLoader.initOptions = function (processArgv) {
+    var dbOptions = {};
+    dbOptions.couchDbUrl = processArgv[2];
+    dbOptions.staticDataDir = processArgv[3];
+    dbOptions.buildDataDir = processArgv[4];
+    dbOptions.demoUserDir = processArgv[5];
+    if (processArgv.length > 6 && processArgv[6] === "--justDelete") { // for debugging.
+        dbOptions.justDelete = true;
+    } else {
+        dbOptions.justDelete = false;
+    }
 
-fluid.log("STATIC_DATA_DIR: '" + dbLoader.staticDataDir + "'");
-fluid.log("BUILD_DATA_DIR: '" + dbLoader.buildDataDir + "'");
+    // Set up database specific options
+    dbOptions.prefsSafesViewUrl = dbOptions.couchDbUrl + "/_design/views/_view/findSnapsetPrefsSafes";
+    dbOptions.gpiiKeysViewUrl = dbOptions.couchDbUrl + "/_design/views/_view/findAllGpiiKeys";
+    dbOptions.parsedCouchDbUrl = url.parse(dbOptions.couchDbUrl);
+    dbOptions.snapsetPrefsSafes = [];
+    dbOptions.gpiiKeys = [];
+    dbOptions.postOptions = {
+        hostname: dbOptions.parsedCouchDbUrl.hostname,
+        port: dbOptions.parsedCouchDbUrl.port,
+        path: "/gpii/_bulk_docs",
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Length": 0,          // IMPORTANT: FILL IN PER REQUEST
+            "Content-Type": "application/json"
+        }
+    };
+
+    // Set up function to get at these options.
+    gpii.dataLoader.getOptions = function () {
+        return dbOptions;
+    };
+    fluid.log("COUCHDB_URL: '" +
+        dbOptions.parsedCouchDbUrl.protocol + "//" +
+        dbOptions.parsedCouchDbUrl.hostname + ":" +
+        dbOptions.parsedCouchDbUrl.port +
+        dbOptions.parsedCouchDbUrl.pathname + "'"
+    );
+    fluid.log("STATIC_DATA_DIR: '" + dbOptions.staticDataDir + "'");
+    fluid.log("BUILD_DATA_DIR: '" + dbOptions.buildDataDir + "'");
+};
+dbLoader.initOptions(process.argv);
 
 /**
  * Find the Prefs Safes of type "snapset", mark them to be deleted and add
@@ -69,13 +97,14 @@ fluid.log("BUILD_DATA_DIR: '" + dbLoader.buildDataDir + "'");
  */
 dbLoader.processSnapsets = function (responseString) {
     fluid.log("Processing the snapset Prefs Safes records...");
-    dbLoader.snapSets = JSON.parse(responseString);
-    fluid.each(dbLoader.snapSets.rows, function (aSnapset) {
+    var options = dbLoader.getOptions();
+    var snapSetRecords = JSON.parse(responseString);
+    fluid.each(snapSetRecords.rows, function (aSnapset) {
         aSnapset.value._deleted = true;
-        dbLoader.snapsetPrefsSafes.push(aSnapset.value);
+        options.snapsetPrefsSafes.push(aSnapset.value);
     });
     fluid.log("\tSnapset Prefs Safes marked for deletion.");
-    return dbLoader.snapsetPrefsSafes;
+    return options.snapsetPrefsSafes;
 };
 
 /**
@@ -87,12 +116,13 @@ dbLoader.processSnapsets = function (responseString) {
  */
 dbLoader.processGpiiKeys = function (responseString) {
     fluid.log("Processing the GPII Keys...");
+    var options = dbLoader.getOptions();
     var gpiiKeyRecords = JSON.parse(responseString);
-    dbLoader.gpiiKeys = dbLoader.markPrefsSafesGpiiKeysForDeletion(
-        gpiiKeyRecords, dbLoader.snapsetPrefsSafes
+    options.gpiiKeys = dbLoader.markPrefsSafesGpiiKeysForDeletion(
+        gpiiKeyRecords, options.snapsetPrefsSafes
     );
     fluid.log("\tGPII Keys associated with snapset Prefs Safes marked for deletion.");
-    return dbLoader.gpiiKeys;
+    return options.gpiiKeys;
 };
 
 /**
@@ -124,11 +154,14 @@ dbLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, snapSets)
  * Utility to wrap all the pieces to make a bulk documents deletion request
  * for the snapset Prefs Safes and their associated GPII keys.  Its intended use
  * is the parameter of the appropriate promise.then() call.
+ * @param {Object} batchDeleteResponse - the reponse handler configured for the
+ *                                       batch delete request.
  */
-dbLoader.doBatchDelete = function () {
-    var docsToRemove = dbLoader.snapsetPrefsSafes.concat(dbLoader.gpiiKeys);
+dbLoader.doBatchDelete = function (batchDeleteResponse) {
+    var options = dbLoader.getOptions();
+    var docsToRemove = options.snapsetPrefsSafes.concat(options.gpiiKeys);
     var execBatchDelete = dbLoader.createBulkDocsRequest(
-        docsToRemove, dbLoader.batchDeleteResponse
+        docsToRemove, batchDeleteResponse, options
     );
     execBatchDelete();
 };
@@ -137,25 +170,15 @@ dbLoader.doBatchDelete = function () {
  * Create a function that makes a bulk docs POST request using the given data.
  * @param {Object} dataToPost - JSON data to POST and process in bulk.
  * @param {Object} responseHandler - http response handler for the request.
+ * @param {Object} options - Data loader options, specifically the POST options.
  * @return {Function} - A function that wraps an http request to execute the
  *                      POST.
  */
-dbLoader.createBulkDocsRequest = function (dataToPost, responseHandler) {
+dbLoader.createBulkDocsRequest = function (dataToPost, responseHandler, options) {
     return function () {
-        var postOptions = {
-            hostname: dbLoader.parsedCouchDbUrl.hostname,
-            port: dbLoader.parsedCouchDbUrl.port,
-            path: "/gpii/_bulk_docs",
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Length": 0,          // filled in below
-                "Content-Type": "application/json"
-            }
-        };
         var batchPostData = JSON.stringify({"docs": dataToPost});
-        postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
-        var batchDocsRequest = http.request(postOptions, responseHandler);
+        options.postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
+        var batchDocsRequest = http.request(options.postOptions, responseHandler);
         batchDocsRequest.write(batchPostData);
         batchDocsRequest.end();
         return batchDocsRequest;
@@ -215,7 +238,7 @@ dbLoader.createResponseHandler = function (handleEnd, promise, errorMsg) {
  * @param {String} errorMsg - The reason why database access failed.
  */
 dbLoader.bail = function (errorMsg) {
-    fluid.log (errorMsg);
+    fluid.log(errorMsg);
     process.exit(1);
 };
 
@@ -256,72 +279,149 @@ dbLoader.getDataFromDirectory = function (dataDir) {
     return contentArray;
 };
 
-// Load the static data first.  If the database is fresh, there won't be any
-// views to use to find the snapset Prefs Safes.  This ensures they are loaded
-// regardless.  If the data base already has these views, then this is
-// essentially a no-op.
-var staticData = dbLoader.getDataFromDirectory(dbLoader.staticDataDir);
-var staticDataPromise = fluid.promise();
-var staticDataResponse = dbLoader.createResponseHandler(
-    function () {
-        fluid.log("Loading static data from '" + dbLoader.staticDataDir + "'");
-    },
-    staticDataPromise
-);
-var execStaticDataRequest = dbLoader.createBulkDocsRequest(staticData, staticDataResponse);
-execStaticDataRequest();
-
-// Secondly, get the snapsets Prefs Safes.
-var snapsetsPromise = fluid.promise();
-var getSnapSetsResponse = dbLoader.createResponseHandler(
-    dbLoader.processSnapsets,
-    snapsetsPromise,
-    "Error retrieving snapsets Prefs Safes: "
-);
-var snapSetsRequest = dbLoader.queryDatabase(
-    dbLoader.prefsSafesViewUrl,
-    getSnapSetsResponse,
-    "Error requesting snapsets Prefs Safes: "
-);
-staticDataPromise.then(function () { snapSetsRequest.end(); }, dbLoader.bail);
-
-// Thirdly, the associated GPII Keys.
-var gpiiKeysPromise = fluid.promise();
-var getGpiiKeysResponse = dbLoader.createResponseHandler(
-    dbLoader.processGpiiKeys,
-    gpiiKeysPromise,
-    "Error finding snapset Prefs Safes associated GPII Keys: "
-);
-var getGpiiKeysRequest = dbLoader.queryDatabase(
-    dbLoader.gpiiKeysViewUrl,
-    getGpiiKeysResponse,
-    "Error requesting GPII Keys: "
-);
-snapsetsPromise.then(function () { getGpiiKeysRequest.end(); }, dbLoader.bail);
-
-// Next, delete the snapset Prefs Safes and their GPII Keys in batch.
-var batchDeletePromise = fluid.promise();
-dbLoader.batchDeleteResponse = dbLoader.createResponseHandler(
-    function () { fluid.log("Snapset Prefs Safes and associated GPII Keys deleted."); },
-    batchDeletePromise
-);
-gpiiKeysPromise.then(dbLoader.doBatchDelete, dbLoader.bail);
-
-if (dbLoader.justDelete) {
-    batchDeletePromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
-} else {
-    // Finally, load the latest snapsets data from the build data.
-    var buildData = dbLoader.getDataFromDirectory(dbLoader.buildDataDir);
-    var demoUserData = dbLoader.getDataFromDirectory(dbLoader.demoUserDir);
-    buildData = buildData.concat(demoUserData);
-    var buildDataPromise = fluid.promise();
-    var buildDataResponse = dbLoader.createResponseHandler(
+/*
+ * Create the step that loads the static data. This should be done first since
+ * if the database is fresh, there won't be any views to use to find the snapset
+ * Prefs Safes.  This ensures the views are loaded regardless.  If the database
+ * already has these views, then this is a no-op.
+ * @param {Object} options - Object that has the path to the directory
+ *                           containing the static data.
+ * @return {Object} - An object containing the database request to load the
+ *                    static data, and a promise configure to trigger the next
+ *                    step.
+ */
+dbLoader.createStaticDataStep = function (options) {
+    var togo = fluid.promise();
+    var data = dbLoader.getDataFromDirectory(options.staticDataDir);
+    var response = dbLoader.createResponseHandler(
         function () {
-            fluid.log ("Bulk loading of build data from '" + dbLoader.buildDataDir + "'");
+            fluid.log("Loading static data from '" + options.staticDataDir + "'");
         },
-        buildDataPromise
+        togo
     );
-    var execBuildDataRequest = dbLoader.createBulkDocsRequest(buildData, buildDataResponse);
-    batchDeletePromise.then(execBuildDataRequest, dbLoader.bail);
-    buildDataPromise.then(function () { fluid.log("Done."); }, dbLoader.bail);
-}
+    var staticDataRequest = dbLoader.createBulkDocsRequest(data, response, options);
+    return { request: staticDataRequest, promise: togo };
+};
+
+/*
+ * Create the step that fetches the current snapset Prefs Safes from the
+ * database.
+ * @param {Object} options - Object that has the view for finding snap set
+ *                           Prefs Safes records in the database.
+ * @param {Promise} previousStep - Promise from a previous step whose fulfillment
+ *                                 triggers the request configured herein.
+ * @return {Promise} - The promise asoociated with this step.
+ */
+dbLoader.createFetchSnapsetsStep = function (options, previousStep) {
+    var togo = fluid.promise();
+    var response = dbLoader.createResponseHandler(
+        dbLoader.processSnapsets,
+        togo,
+        "Error retrieving snapsets Prefs Safes: "
+    );
+    var request = dbLoader.queryDatabase(
+        options.prefsSafesViewUrl,
+        response,
+        "Error requesting snapsets Prefs Safes: "
+    );
+    previousStep.then(function () { request.end(); }, dbLoader.bail);
+    return togo;
+};
+
+/*
+ * Create the step that fetches the current GPII keys associate with the snapset
+ * Prefs Safes.
+ * @param {Object} options - Object that has the view for finding all GPII Key
+ *                           records in the database.
+ * @param {Promise} previousStep - Promise from a previous step whose fulfillment
+ *                                 triggers the request configured herein.
+ * @return {Promise} - The promise asoociated with this step.
+ */
+dbLoader.createFetchGpiiKeysStep = function (options, previousStep) {
+    var togo = fluid.promise();
+    var response = dbLoader.createResponseHandler(
+        dbLoader.processGpiiKeys,
+        togo,
+        "Error finding snapset Prefs Safes associated GPII Keys: "
+    );
+    var request = dbLoader.queryDatabase(
+        options.gpiiKeysViewUrl,
+        response,
+        "Error requesting GPII Keys: "
+    );
+    previousStep.then(function () { request.end(); }, dbLoader.bail);
+    return togo;
+};
+
+/*
+ * Create the step that deletes, in batch, the current snapset Prefs Safes and
+ * their associated GPII keys.
+ * @param {Promise} previousStep - Promise from a previous step whose fulfillment
+ *                                 triggers the bulk delete request.
+ * @return {Promise} - The promise asoociated with this step.
+ */
+dbLoader.createBatchDeleteStep = function (previousStep) {
+    var togo = fluid.promise();
+    var response = dbLoader.createResponseHandler(
+        function () {
+            fluid.log("Snapset Prefs Safes and associated GPII Keys deleted.");
+        },
+        togo
+    );
+    previousStep.then(
+        function () { dbLoader.doBatchDelete(response); },
+        dbLoader.bail
+    );
+    return togo;
+};
+
+/*
+ * Create the step that uploads, in batch, the new snapset Prefs Safes, their
+ * associated GPII keys, and the demo user Prefs Safes/GPII Keys.
+ * @param {Object} options - Object that has the paths to the directories that
+ *                           contain the new snapsets and demo user preferences.
+ * @param {Promise} previousStep - Promise from a previous step whose fulfillment
+ *                                 triggers this bulk upload request.
+ * @return {Promise} - The promise asoociated with this step.
+ */
+dbLoader.createBatchUploadStep = function (options, previousStep) {
+    var togo = fluid.promise();
+    var buildData = dbLoader.getDataFromDirectory(options.buildDataDir);
+    var demoUserData = dbLoader.getDataFromDirectory(options.demoUserDir);
+    var allData = buildData.concat(demoUserData);
+    var response = dbLoader.createResponseHandler(
+        function () {
+            fluid.log ("Bulk loading of build data from '" + options.buildDataDir + "'");
+        },
+        togo
+    );
+    var request = dbLoader.createBulkDocsRequest(allData, response, options);
+    previousStep.then(request, dbLoader.bail);
+    return togo;
+};
+
+/*
+ * Create the steps to load the static data, find and delete the current snapset
+ * Prefs Safes and the GPII keys, and then load the latest snapset Prefs Safes
+ * and their Keys, and the demo user Prefs Safes and their GPII Keys.  After all
+ * steps are configured and connected, trigger the first one.
+ */
+dbLoader.orchestrate = function () {
+    var options = dbLoader.getOptions();
+    var lastStep;
+    var firstStep = dbLoader.createStaticDataStep(options);
+    var aStep = dbLoader.createFetchSnapsetsStep(options, firstStep.promise);
+    aStep = dbLoader.createFetchGpiiKeysStep(options, aStep);
+    aStep = dbLoader.createBatchDeleteStep(aStep);
+    if (options.justDelete) {
+        lastStep = aStep;
+    } else {
+        lastStep = dbLoader.createBatchUploadStep(options, aStep);
+    };
+    // Go!
+    firstStep.request();
+    lastStep.then(function () { fluid.log("Done."); }, dbLoader.bail);
+};
+
+dbLoader.orchestrate();
+
