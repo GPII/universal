@@ -2352,7 +2352,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
@@ -2360,8 +2360,19 @@
     },
     "com.freedomscientific.jaws.v18": {
         "name": "JAWS v. 18.0",
-        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
-        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
+        // TODO: Discuss with Antranig, et cetera.
+//        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
+//        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+        ],
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
@@ -2439,8 +2450,19 @@
     },
     "com.freedomscientific.jaws.2018": {
         "name": "JAWS 2018",
-        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
-        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
+        // TODO: Discuss with Antranig, et cetera
+//        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
+//        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32"
+                }
+            ]
+        },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
+        ],
         "settingsHandlers": {
             "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
