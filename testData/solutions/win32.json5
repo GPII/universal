@@ -3318,9 +3318,9 @@
                     "selfVoicingEnabled": {},
                     "selectionTheme": {},
                     "tableOfContentsEnabled": {},
-                    "dictionaryEnabled": {},
                     "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {}
+                    "syllabificationEnabled": {},
+                    "captionsEnabled": {}
                 },
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
@@ -3365,7 +3365,10 @@
                                         "black-white": "bw",
                                         "white-black": "wb",
                                         "black-yellow": "by",
-                                        "yellow-black": "yb"
+                                        "yellow-black": "yb",
+                                        "gray-dark": "lgdg",
+                                        "gray-white": "gw",
+                                        "black-brown": "bbr"
                                     }
                                 }
                             },
@@ -3375,31 +3378,9 @@
                     "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
                     "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "dictionaryEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "match": [{
-                                "inputValue": {
-                                    "dictionaryEnabled": true
-                                },
-                                "outputValue": true
-                            }],
-                            "noMatch": {
-                                "outputValue": false
-                            },
-                            "defaultInput": {
-                                "transform": {
-                                    "type": "fluid.transforms.arrayToSetMembership",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
-                                    "options": {
-                                        "dictionary": "dictionaryEnabled"
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
