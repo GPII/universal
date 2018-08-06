@@ -2010,7 +2010,7 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
+            "configure-spi": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -2052,7 +2052,7 @@
                     "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
                 }
             },
-            "configureTheme": {
+            "configure-registry": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -2083,17 +2083,28 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                             "match": {
-                                "black-white": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
-                                "white-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
-                                "black-yellow": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "yellow-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "lime-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme"
+                                "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
+                                "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
+                                "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
+                                "gray-dark": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "gray-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
                             }
                         }
                     }
                 }
             }
         },
+        "configure": [
+            "settings.configure-registry",
+            {
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
+                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+            },
+            "settings.configure-spi"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
