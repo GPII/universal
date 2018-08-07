@@ -1960,25 +1960,20 @@
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
                                     "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                    "left": false,
                                     "operator": "||",
-                                    "right": {
-                                        "transform": {
-                                            "type": "fluid.transforms.stringToBoolean",
-                                            "inputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                            "outputPath": "value"
-                                        }
-                                    },
-                                    "outputPath": "value"
+                                    "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "right": false
                                 }
                             },
                             "operator": "&&",
                             "right": {
                                 "transform": {
                                     "type": "fluid.transforms.binaryOp",
+                                    "left": "",
                                     "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                                     "operator": "!==",
-                                    "right": "regular-contrast",
-                                    "outputPath": "value"
+                                    "right": "regular-contrast"
                                 }
                             },
                             "outputPath": "value"
