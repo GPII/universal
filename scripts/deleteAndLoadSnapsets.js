@@ -9,14 +9,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This script modifies the preferences database:
-// 1. Loads static data into the database,
-// 2. Retrieves all the Prefs Safes of type "snapset" (prefsSafesType = "snapset") from the databsse.
-// 3. Retrieves all the GPII Keys associated with each snapset Prefs Safe so found,
-// 4. Deletes these Prefs Safes and their associated GPII Keys from the database,
-// 5. Uploads the new Prefs Safes and their GPII Keys to the database,
-// 6. Uploads demo user Prefs Safes and their Keys in to the database, if they are not already present.
+// 1. Retrieves all the Prefs Safes of type "snapset" (prefsSafesType = "snapset") from the databsse.
+// 2. Retrieves all the GPII Keys associated with each snapset Prefs Safe so found,
+// 3. Deletes these Prefs Safes and their associated GPII Keys from the database,
+// 4. Uploads the new Prefs Safes and their GPII Keys to the database,
+// 5. Uploads demo user Prefs Safes and their Keys in to the database, if they are not already present.
 // A sample command that runs this script:
-// node deleteAndLoadSnapsets.js $COUCHDBURL $STATIC_DATA_DIR $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR
+// node deleteAndLoadSnapsets.js $COUCHDBURL $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR
 
 "use strict";
 
@@ -31,7 +30,7 @@ fluid.setLogging(fluid.logLevel.INFO);
 
 // Handle command line
 if (process.argv.length < 5) {
-    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR [--justDelete]");
+    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR [--justDelete]");
     process.exit(1);
 }
 
@@ -46,10 +45,9 @@ var dbLoader = gpii.dataLoader;
 dbLoader.initOptions = function (processArgv) {
     var dbOptions = {};
     dbOptions.couchDbUrl = processArgv[2];
-    dbOptions.staticDataDir = processArgv[3];
-    dbOptions.buildDataDir = processArgv[4];
-    dbOptions.demoUserDir = processArgv[5];
-    if (processArgv.length > 6 && processArgv[6] === "--justDelete") { // for debugging.
+    dbOptions.buildDataDir = processArgv[3];
+    dbOptions.demoUserDir = processArgv[4];
+    if (processArgv.length > 5 && processArgv[5] === "--justDelete") { // for debugging.
         dbOptions.justDelete = true;
     } else {
         dbOptions.justDelete = false;
@@ -83,7 +81,6 @@ dbLoader.initOptions = function (processArgv) {
         dbOptions.parsedCouchDbUrl.port +
         dbOptions.parsedCouchDbUrl.pathname + "'"
     );
-    fluid.log("STATIC_DATA_DIR: '" + dbOptions.staticDataDir + "'");
     fluid.log("BUILD_DATA_DIR: '" + dbOptions.buildDataDir + "'");
 };
 dbLoader.initOptions(process.argv);
@@ -280,53 +277,27 @@ dbLoader.getDataFromDirectory = function (dataDir) {
 };
 
 /*
- * Create the step that loads the static data. This should be done first since
- * if the database is fresh, there won't be any views to use to find the snapset
- * Prefs Safes.  This ensures the views are loaded regardless.  If the database
- * already has these views, then this is a no-op.
- * @param {Object} options - Object that has the path to the directory
- *                           containing the static data.
- * @return {Object} - An object containing the database request to load the
- *                    static data, and a promise configure to trigger the next
- *                    step.
- */
-dbLoader.createStaticDataStep = function (options) {
-    var togo = fluid.promise();
-    var data = dbLoader.getDataFromDirectory(options.staticDataDir);
-    var response = dbLoader.createResponseHandler(
-        function (responseString) {
-            fluid.log("Loading static data from '" + options.staticDataDir + "'");
-            fluid.log("\tresponse: '" + responseString + "'");
-        },
-        togo
-    );
-    var staticDataRequest = dbLoader.createBulkDocsRequest(data, response, options);
-    return { request: staticDataRequest, promise: togo };
-};
-
-/*
  * Create the step that fetches the current snapset Prefs Safes from the
  * database.
  * @param {Object} options - Object that has the view for finding snap set
  *                           Prefs Safes records in the database.
- * @param {Promise} previousStep - Promise from a previous step whose fulfillment
- *                                 triggers the request configured herein.
- * @return {Promise} - The promise asoociated with this step.
+ * @return {Object} - An object containing the database request to load the
+ *                    static data, and a promise configure to trigger the next
+ *                    step.
  */
-dbLoader.createFetchSnapsetsStep = function (options, previousStep) {
+dbLoader.createFetchSnapsetsStep = function (options) {
     var togo = fluid.promise();
     var response = dbLoader.createResponseHandler(
         dbLoader.processSnapsets,
         togo,
         "Error retrieving snapsets Prefs Safes: "
     );
-    var request = dbLoader.queryDatabase(
+    var snapsSetsRequest = dbLoader.queryDatabase(
         options.prefsSafesViewUrl,
         response,
         "Error requesting snapsets Prefs Safes: "
     );
-    previousStep.then(function () { request.end(); }, dbLoader.bail);
-    return togo;
+    return { request: snapsSetsRequest, promise: togo };
 };
 
 /*
@@ -410,17 +381,16 @@ dbLoader.createBatchUploadStep = function (options, previousStep) {
 dbLoader.orchestrate = function () {
     var options = dbLoader.getOptions();
     var lastStep;
-    var firstStep = dbLoader.createStaticDataStep(options);
-    var aStep = dbLoader.createFetchSnapsetsStep(options, firstStep.promise);
-    aStep = dbLoader.createFetchGpiiKeysStep(options, aStep);
-    aStep = dbLoader.createBatchDeleteStep(aStep);
+    var firstStep = dbLoader.createFetchSnapsetsStep(options);
+    var nextStep = dbLoader.createFetchGpiiKeysStep(options, firstStep.promise);
+    nextStep = dbLoader.createBatchDeleteStep(nextStep);
     if (options.justDelete) {
-        lastStep = aStep;
+        lastStep = nextStep;
     } else {
-        lastStep = dbLoader.createBatchUploadStep(options, aStep);
+        lastStep = dbLoader.createBatchUploadStep(options, nextStep);
     };
     // Go!
-    firstStep.request();
+    firstStep.request.end();
     lastStep.then(function () { fluid.log("Done."); }, dbLoader.bail);
 };
 
