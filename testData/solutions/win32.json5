@@ -1276,6 +1276,7 @@
         "settingsHandlers": {
             "configure1": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Desktop\\MuiCached",
@@ -1300,6 +1301,7 @@
             },
             "configure2": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Control Panel\\Desktop",
