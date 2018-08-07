@@ -294,8 +294,9 @@ dbLoader.createStaticDataStep = function (options) {
     var togo = fluid.promise();
     var data = dbLoader.getDataFromDirectory(options.staticDataDir);
     var response = dbLoader.createResponseHandler(
-        function () {
+        function (responseString) {
             fluid.log("Loading static data from '" + options.staticDataDir + "'");
+            fluid.log("\tresponse: '" + responseString + "'");
         },
         togo
     );
