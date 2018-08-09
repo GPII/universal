@@ -4,10 +4,10 @@
             "title": "DPI Scale",
             "description": "DPI scale factor on default monitor",
             "type": "number",
-            "default": 1,
-            "min": 1,
-            "max": 2,
-            "divisibleBy": 0.25
+            "default": 0,
+            "min": -2,
+            "max": 4,
+            "divisibleBy": 1
         },
         "http://registry.gpii.net/common/speechRate": {
             "title": "Speech rate",
