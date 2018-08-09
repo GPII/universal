@@ -14,7 +14,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // Usage: node scripts/convertPrefs.js {input_path} {target_path}
 //
 // A sample command that runs this script in the universal root directory:
-// node scripts/convertPrefs.js testData/preferences/ build/dbData/
+// node scripts/convertPrefs.js testData/preferences/ build/dbData/ snapset
 
 "use strict";
 
