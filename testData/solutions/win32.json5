@@ -2023,12 +2023,14 @@
                             "match": {
                                 "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
                                 "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
-                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
-                                "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
+                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
                                 "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
                                 "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
-                                "gray-dark": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
-                                "gray-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
+                                "gray-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "gray-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme",
+                                "grey-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
                             }
                         }
                     }
