@@ -92,6 +92,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.language"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
