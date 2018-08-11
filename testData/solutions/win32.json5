@@ -1994,11 +1994,7 @@
                 }
             }
         },
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
+        "isInstalled": []
     },
 
     "com.microsoft.windows.highContrast": {
