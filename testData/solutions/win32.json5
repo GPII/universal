@@ -1256,11 +1256,7 @@
                 }
             }
         },
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
+        "isInstalled": []
     },
 
     "com.microsoft.windows.language": {
@@ -2159,11 +2155,7 @@
                 }
             }
         },
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
+        "isInstalled": []
     },
 
     "com.microsoft.windows.filterKeys": {
