@@ -622,7 +622,7 @@
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
-                            "command": "jfw"
+                            "command": "jfw.exe"
                         }
                     ],
                     "setTrue": [
