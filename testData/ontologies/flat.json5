@@ -127,8 +127,8 @@
             "title": "High Contrast theme",
             "description": "High Contrast Theme",
             "type": "string",
-            "default": "black-white",
-            "enum": ["black-white", "white-black", "yellow-black", "black-yellow"]
+            "default": "regular-contrast",
+            "enum": ["regular-contrast", "black-white", "white-black", "yellow-black", "black-yellow", "grey-black", "grey-white", "black-brown"]
         },
         "http://registry.gpii.net/common/fontSize": {
             "title": "Font Size",
