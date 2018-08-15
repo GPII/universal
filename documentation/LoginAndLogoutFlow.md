@@ -44,7 +44,7 @@ The core part of the flow is defined in two files:
 
 * `UserLogonHandlers.js` contains the handling of the logon related endpoints kicks off the related process. It
   contains individual handlers for the `login`, `logout` and `proximityTriggered` URLs. These handlers all have the
-  `gpii.flowManager.userLogonHandling.stateChangeHandler` grade, which is the component that contains the functionality
+  `gpii.lifecycleManager.userLogonHandling.stateChangeHandler` grade, which is the component that contains the functionality
   for the actual logging in and logging out.
 * `UserLogonStateChange.js` contains the functionality for the actual logging in and logging out.
 * `MatchMaking.js` describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
