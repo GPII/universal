@@ -1,0 +1,15 @@
+//# tom
+//
+//This preference set sets the OS language to English (US), en-US.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/language": "en-US"
+                }
+            }
+        }
+    }
+}
