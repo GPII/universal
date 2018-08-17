@@ -63,6 +63,7 @@
     "!**/gpii/node_modules/lifecycleManager/src/LifecycleManager.js",
     "!**/gpii/node_modules/lifecycleManager/src/LifecycleManagerSession.js",
     "!**/gpii/node_modules/lifecycleManager/src/Resolvers.js",
+    "!**/gpii/node_modules/lifecycleManager/src/SessionAware.js",
     "!**/gpii/node_modules/lifecycleManager/src/UserLogonRequest.js",
     "!**/gpii/node_modules/lifecycleManager/src/UserLogonStateChange.js",
     "!**/gpii/node_modules/matchMakerFramework/index.js",
