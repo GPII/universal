@@ -1,7 +1,7 @@
 /*
  * User Logon State Change Test Definitions
  *
- * Copyright 2013-2015 OCAD University
+ * Copyright 2013-2018 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -35,9 +35,19 @@ gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, gpii
 
 gpii.tests.userLogonEvents.testDefs = [{
     name: "Testing events related to login and logout via proximityTriggered endpoint",
-    expect: 14,
+    expect: 20,
     sequence: [{ // standard login
         func: "{proximityTriggeredRequest}.send"
+    }, {
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
+        makerArgs: ["logout", true, "noUser"]
+    }, {
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
+        makerArgs: ["logout", false, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",

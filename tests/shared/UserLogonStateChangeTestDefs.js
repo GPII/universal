@@ -1,7 +1,7 @@
 /*
  * User Logon State Change Test Definitions
  *
- * Copyright 2013-2015 OCAD University
+ * Copyright 2013-2018 OCAD University
  *
  * Licensed under the New BSD license. You may not use this file except in
  * compliance with this License.
@@ -103,10 +103,7 @@ gpii.tests.userLogonHandling.testLogoutResponse = function (data) {
 gpii.tests.userLogonHandling.checkClearedLifecycleManager = function (lifecycleManager) {
     var model = lifecycleManager.model;
     jqUnit.assertTrue("LogonChange model exists", model && model.logonChange);
-    jqUnit.assertFalse("Login should not be set as in proress", model.logonChange.inProgress);
-    jqUnit.assertTrue("Current GPII key should be undefined", model.logonChange.gpiiKey === undefined);
-
-    jqUnit.assertEquals("No active sessions stored in lifecycle manager", lifecycleManager.getActiveSessionGpiiKeys().length, 0);
+    jqUnit.assertTrue("Current GPII key should be noUser", model.logonChange.gpiiKey === "noUser");
 };
 
 
@@ -354,7 +351,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
-            errorTexts: "No user logged in, so ignoring logout action.",
+            errorTexts: "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
             request: "{logoutRequest2}"
@@ -362,7 +359,7 @@ gpii.tests.userLogonHandling.testDefs = [{
     }]
 }, {
     name: "Testing standard error handling: invalid user URLs",
-    expect: 7,
+    expect: 5,
     gpiiKey: "bogusToken",
     untrustedExtras: {
         statusCode: 401,
