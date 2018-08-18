@@ -13,21 +13,25 @@ retrieving settings from the system in "cloud based flowmanager" mode are all di
 different file, with the common events, functions, etc., located in `FlowManager.js` and `MatchMaking.js`. The
 different kinds of flows are:
 
-* **User Login** (UserLogonHandlers.js) - the flow for a user keying in to the system. The flow is described in
+* **User Login** (`UserLogonHandlers.js`) - the flow for a user keying in to the system. The flow is described in
   details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
-* **User Logout** (UserLogonHandlers.js) - the flow for a user keying out of the system
-* **Retrieving Settings** (CloudBasedFlowManager.js) - used to retrieve the settings when the system is running in
+* **User Logout** (`UserLogonHandlers.js`) - the flow for a user keying out of the system
+* **User Logon State Change** (`UserLogonHandlers.js`) - the flow for changing a user's logon state
+* **Retrieve Settings** (`CloudBasedFlowManager.js`) - used to retrieve the settings when the system is running in
+  cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
+* **Update Preferences** (`CloudBasedFlowManager.js`) - used to update the preferences when the system is running in
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 * **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
 
-## Important events:
+## Special GPII Key "noUser"
 
-There are a few notification events on the flowmanager related to the key-in and key-out process.
+The reserved special GPII key "noUser" is keyed into the system when there is not an actual key keyed in. This includes:
 
-* userLoginInitiated: fired when the process of keying in a user (ie. configuring the system) starts,
-* userLogoutInitiated: fired when the process of keying out a user (ie. restoring the system) has started,
-* userLoginComplete: fired when the process of keying in a user (ie. configuring the system) has completed,
-* userLogoutComplete: fired when the process of keying out a user (ie. restoring the system) has completed,
+* When GPII starts
+* Once an actual GPII key is keyed out
+
+The present of "noUser" key allows users to continue to change settings via QSS (Quick Strip Set) when no actual GPII
+key is keyed into the system.
 
 ## APIs
 

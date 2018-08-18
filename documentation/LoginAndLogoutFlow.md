@@ -40,20 +40,24 @@ inserting/removing the USB, respectively
 
 ## Technical description
 
-The core part of the flow is defined in two files:
+The core part of the flow is defined in these files:
 
 * `UserLogonHandlers.js` contains the handling of the logon related endpoints kicks off the related process. It
-  contains individual handlers for the `login`, `logout` and `proximityTriggered` URLs. These handlers all have the
-  `gpii.lifecycleManager.userLogonHandling.stateChangeHandler` grade, which is the component that contains the functionality
-  for the actual logging in and logging out.
-* `UserLogonStateChange.js` contains the functionality for the actual logging in and logging out.
-* `MatchMaking.js` describes the remaining part of the flow (e.g. fetching resources, matchmaking, etc.).
+  contains individual handlers for the `login`, `logout` and `proximityTriggered` URLs. These handlers add user logon
+  request to Lifecycle Manager user logon request queue. Lifecycle Manager then processes the queue in sequence to
+  perform actual logging in, loggin out and retrieving the current logged in GPII key.
+* `UserLogonStateChange.js` contains the functionality for the actual logging in, logging out and retrieving the active
+  GPII key.
+* `MatchMaking.js` describes the remaining part of the flow (e.g. fetching resources and preferences, matchmaking,
+  etc.).
 
 The user login process is as follows:
 
 1. a GET request is sent to either `/user/:gpiiKey/login` or `/user/:gpiiKey/proximityTriggered`. This is retrieved by
-   the relevant handler in `UserLogonStateChange`, and if it is found that the GPII key needs to be logged in, the
-   `onGpiiKey` event is fired (via the `gpii.flowManager.userLogonHandling.loginUser` function)
+   the relevant handler in `UserLogonHandlers`. The handler adds a relevant login or logout request to Lifecycle
+   Manager user logon request queue, which trigger the actual logging in or logging out. If it is found that the GPII
+   key needs to be logged in, the `onGpiiKey` event is fired (via the
+   `gpii.lifecycleManager.userLogonHandling.loginUser` function)
 2. the `onGpiiKey` event has three listeners:
    1. UserLogonStateChange's `getDeviceContext`, which fetches the device reporter data. When this has been fetched an
       `onDeviceContext` event is fired.
@@ -78,10 +82,3 @@ The user login process is as follows:
       match maker frameworks internal workings, see: [Match Maker Framework Documentation](MatchMakerFramework.md)
 6. `onMatchDone` is being listened to by the `startLifecycle` (UserLogonStateChange), which applies the settings to the
    system via the functionality in the LifecycleManager.
-
-## Finally, there are some important events exposed on the `flowManager` component:
-
-* userLoginInitiated: fired when the process of keying in a user (ie. configuring the system) starts.
-* userLogoutInitiated: fired when the process of keying out a user (ie. restoring the system) has started.
-* userLoginComplete: fired when the process of keying in a user (ie. configuring the system) has completed.
-* userLogoutComplete: fired when the process of keying out a user (ie. restoring the system) has completed.

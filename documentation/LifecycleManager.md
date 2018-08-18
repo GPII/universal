@@ -1,9 +1,34 @@
 # lifecycleManager
 
-The Lifecycle Manager is responsible for actually configuring the users system via setting handlers and launch handlers.
-It is the only component in the system that keeps state. This is done in the "session" member of the lifecycleManager
-component, and tracks what changes have been done to the system, what the original configuration of the system was and
-which user is currently logged in.
+The Lifecycle Manager is responsible for actually performing user login, logout, retrieving the active GPII key
+requests. It also configs the users system via setting handlers and launch handlers.
+
+The Lifecycle Manager is the only component in the system that keeps state. This is done in the "session" member of
+the lifecycleManager component, and tracks what changes have been done to the system, what the original configuration
+of the system was and which user is currently logged in.
+
+## LifecycleManager User Logon Request Queue
+
+The lifecycleManager user logon request queue is used to hold all requests for user logging in, logging out and
+retrieving the active GPII key. The queue is handled sequentially to avoid racing issues (e.g. the next request will
+wait until the previous request finishes before the processing).
+
+The logging in and logging out item in the queue should have the following format:
+
+```snippet
+{
+    gpiiKey: <String>,     // A GPII key
+    logonState: <String>   // "login" or "logout"
+}
+```
+
+The active GPII key request item in the queue should have the following format:
+
+```snippet
+{
+    logonState: "getGpiiKey"
+}
+```
 
 ## LifecycleManager Action Queue
 
