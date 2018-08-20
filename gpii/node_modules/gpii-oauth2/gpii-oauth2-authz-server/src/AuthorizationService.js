@@ -36,7 +36,7 @@ var fluid = fluid || require("infusion");
             grantGpiiAppInstallationAuthorization: {
                 funcName: "gpii.oauth2.authorizationService.grantGpiiAppInstallationAuthorization",
                 args: ["{dataStore}", "{codeGenerator}", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-                    // gpiiKey, clientId, clientCredentialId
+                                                         // gpiiKey, clientId, clientCredentialId
             },
             getAuthorizationByAccessToken: {
                 func: "{dataStore}.findAuthorizationByAccessToken"

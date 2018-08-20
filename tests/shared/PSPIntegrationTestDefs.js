@@ -22,7 +22,6 @@ fluid.registerNamespace("gpii.tests.pspIntegration");
 fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
-
 fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
     gradeNames: "kettle.test.request.http",
     path: "/environmentChanged",
@@ -32,16 +31,7 @@ fluid.defaults("gpii.tests.pspIntegration.environmentChangedRequestType", {
 fluid.defaults("gpii.tests.pspIntegration.client", {
     gradeNames: "kettle.test.request.ws",
     path: "/pspChannel",
-    port: 8081,
-    events: {
-        connectionSucceeded: null
-    },
-    listeners: {
-        connectionSucceeded: {
-            funcName: "gpii.tests.pspIntegration.connectionSucceeded",
-            args: ["{arguments}.0"]
-        }
-    }
+    port: 8081
 });
 
 gpii.tests.pspIntegration.sendMsg = function (client, path, value) {
@@ -481,8 +471,8 @@ gpii.tests.pspIntegration.testDefs = [
             ]
         ]
     }, {
-      // This test checks that the manually changed context from the user is not overridden
-      // by a context change triggered by changes in the environment
+        // This test checks that the manually changed context from the user is not overridden
+        // by a context change triggered by changes in the environment
         name: "Manual context change via the PSP followed by a change in environment",
         expect: 11,
         sequence: [
@@ -585,20 +575,3 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
     gpiiKey: "context1",
     data: gpii.tests.pspIntegration.data
 });
-
-
-
-gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
-    return fluid.transform(testDefs, function (testDef) {
-        return fluid.extend(true, {
-            gradeNames: [
-                "gpii.tests.pspIntegration.testCaseHolder.common.linux",
-                "gpii.test.common.lifecycleManagerReceiver"
-            ],
-            config: {
-                configName: "gpii.tests.acceptance.linux.builtIn.config",
-                configPath: "%gpii-universal/tests/platform/linux/configs"
-            }
-        }, testDef);
-    });
-};
