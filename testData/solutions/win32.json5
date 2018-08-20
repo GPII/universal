@@ -23,10 +23,10 @@
                         "transform": {
                             "type": "fluid.transforms.literalValue",
                             "input": "hello",
-                            "outputPath": "a",
+                            "outputPath": "a"
                         }
                     }
-                },
+                }
             }
         },
         "isInstalled": [
