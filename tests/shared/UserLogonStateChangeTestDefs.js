@@ -366,7 +366,7 @@ gpii.tests.userLogonHandling.testDefs = [{
     gpiiKey: "bogusToken",
     untrustedExtras: {
         statusCode: 401,
-        errorText: "Error while executing HTTP POST on"
+        errorText: "server_error while executing HTTP POST on"
     },
     errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist",
     statusCode: 404,

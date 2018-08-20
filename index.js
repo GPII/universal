@@ -39,6 +39,7 @@ require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
 require("./gpii/node_modules/gpii-db-operation");
 require("./gpii/node_modules/userListeners");
+require("./gpii/node_modules/gpii-ini-file");
 require("./gpii/node_modules/installOnDemand");
 
 gpii.loadTestingSupport = function () {
