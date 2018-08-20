@@ -82,7 +82,8 @@ gpii.tests.userLogonEvents.testDefs = [{
         makerArgs: ["logout", false, "testUser1"]
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse"
+        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
+        args: ["{arguments}.0", "testUser1"]
     }]
 }];
 
