@@ -4,7 +4,7 @@
         "distributeOptions": {
             "acceptance.debounceTimeMs": {
                 "record": 3000,
-                "target": "{that localConfig flowManager gpii.flowManager.proximityTrigger.handler}.options.debounceTimeMs"
+                "target": "{that localConfig flowManager lifecycleManager}.options.debounceTimeMs"
             }
         }
     },

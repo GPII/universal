@@ -23,7 +23,7 @@ different kinds of flows are:
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 * **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
 
-## Special GPII Key "noUser"
+## Reserved GPII Key "noUser"
 
 The reserved special GPII key "noUser" is keyed into the system when there is not an actual key keyed in. This includes:
 
