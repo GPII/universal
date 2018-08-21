@@ -1,6 +1,7 @@
-## GPII Data Model
+# GPII Data Model
 
-GPII uses CouchDB to store data in JSON documents when GPII runs in the production configuration. In development configuration, CouchDB-compatible PouchDB is used for the data storage.
+GPII uses CouchDB to store data in JSON documents when GPII runs in the production configuration. In development
+configuration, CouchDB-compatible PouchDB is used for the data storage.
 
 The two GPII components that read and write data from the data storage are Preferences Server and Authorization Server.
 

@@ -34,7 +34,7 @@ Also, the GPII has [acceptance tests](https://github.com/GPII/universal/blob/mas
 
 preference set: [preferences/rwg1.json](https://github.com/GPII/universal/blob/master/testData/preferences/rwg1.json)
 
-* When logging in, Read&Write should be started automatically and among many other adaptations: 
+* When logging in, Read&Write should be started automatically and among many other adaptations:
   * The toolbar must use the "Fun" icon set and they should be shown in "large" mode
   * The toolbar must show the "Writing Features" including buttons such as "Spell check", "Prediction", etc.
 * When logging out, Read&Write should be stopped and default settings will be restored.

@@ -18,10 +18,9 @@
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
                 },
-                "supportedSettings": { // Full description of settings in JAWS: https://github.com/gloob/gpii-settings/blob/master/AT-Tools/JAWS/Default.jcf.csv
-                // Note that we will never actually support schemas for application-specific settings here in the solutions registry. These are left here as the
-                // remnant of some historical research until we have a place to transfer them in a "sharded ontology" for what could be called "uncommon terms" ...
-                    "Voice Profiles.ActiveVoiceProfileName": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                "supportedSettings": {
+                    "Voice Profiles.ActiveVoiceProfileName": {
+                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Active Voice Profile Name",
                             "description": "The active voice profile",
@@ -29,7 +28,8 @@
                             "default": "GPII"
                         }
                     },
-                    "options.SayAllIndicateCaps": { // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
+                    "options.SayAllIndicateCaps": {
+                        // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
                         "schema": {
                             "title": "Announce capitals",
                             "description": "During SayAll, indicate initial cap or capitalized word",
@@ -330,42 +330,42 @@
                         }
                     },
                     "ENU-Global\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-JAWSCursor\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-Keyboard\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-MenuAndDialog\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-Message\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
                         }
                     },
                     "ENU-PCCursor\\.Volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "http://registry\\.gpii\\.net/common/volume",
                             "factor": 100
@@ -564,7 +564,7 @@
                         }
                     },
                     "http://registry\\.gpii\\.net/common/volume": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "ENU-Global\\.Volume",
                             "factor": 0.01
@@ -1007,7 +1007,6 @@
         ]
     },
 
-
     "com.microsoft.windows.narrator": {
         "name": "Windows Built-in Narrator",
         "contexts": {
@@ -1243,18 +1242,101 @@
                 }
             }
         },
-        "start": [
-            {
+        "launchHandlers": {
+            "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
-                "name": "Narrator",
-                "enable": true
+                "options": {
+                    "registryName": "Narrator",
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "Narrator.exe"
+                        }
+                    ]
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.language": {
+        "name": "Windows Display Language",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure1": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop\\MuiCached",
+                    "dataTypes": {
+                        "MachinePreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "MachinePreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "MachinePreferredUILanguages": {}
+                }
+            },
+            "configure2": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "PreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "PreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "PreferredUILanguages": {}
+                }
+            }
+        },
+        "configure": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
             }
         ],
-        "stop": [
+        "restore": [
+            "settings.configure1",
+            "settings.configure2",
             {
-                "type": "gpii.windows.enableRegisteredAT",
-                "name": "Narrator",
-                "enable": false
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
             }
         ],
         "isInstalled": [
@@ -1279,9 +1361,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                    "allowNumberSignComments": true,
-                    "allowSubSections": true
+                    "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                 },
                 "supportedSettings": {
                     "speech.espeak.pitch": {},
@@ -1647,7 +1727,7 @@
                                 "tr": "tr",
                                 "vi": "vi",
                                 "zh": "zh-cmn",
-                                "zh-yue": "zh-yue",
+                                "zh-yue": "zh-yue"
                             }
                         }
                     ]
@@ -1666,7 +1746,7 @@
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
-                            "command": "nvda"
+                            "command": "nvda.exe"
                         }
                     ],
                     "setTrue": [
@@ -2532,9 +2612,6 @@
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "live",
                 "supportedSettings": {
-                    "screen-dpi": {}
-                },
-                "supportedSettings": {
                     "screen-dpi": {
                         "schema": {
                             "title": "Screen DPI",
@@ -2830,7 +2907,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                     "transform": [
+                    "transform": [
                         {
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "Arrow",
@@ -3118,6 +3195,63 @@
         ]
     },
 
+    "com.microsoft.windows.nightScreen": {
+        "name": "Windows night light settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "capabilities": [
+                    "display.screenEnhancement.nightScreen",
+                    "applications.com\\.microsoft\\.windows\\.nightScreen.id"
+                ],
+                "capabilitiesTransformations": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/nightScreen",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "schema": {
+                            "title": "Night Screen",
+                            "description": "Reduce the blue emitted from the screen.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/nightScreen": "SystemSettings_Display_BlueLight_ManualToggleQuickAction.value"
+                }
+            }
+        },
+        "update": [
+            "configure"
+        ],
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
@@ -3230,9 +3364,9 @@
                     "selfVoicingEnabled": {},
                     "selectionTheme": {},
                     "tableOfContentsEnabled": {},
-                    "dictionaryEnabled": {},
                     "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {}
+                    "syllabificationEnabled": {},
+                    "captionsEnabled": {}
                 },
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
@@ -3277,7 +3411,10 @@
                                         "black-white": "bw",
                                         "white-black": "wb",
                                         "black-yellow": "by",
-                                        "yellow-black": "yb"
+                                        "yellow-black": "yb",
+                                        "gray-dark": "lgdg",
+                                        "gray-white": "gw",
+                                        "black-brown": "bbr"
                                     }
                                 }
                             },
@@ -3287,31 +3424,9 @@
                     "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
                     "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "dictionaryEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "match": [{
-                                "inputValue": {
-                                    "dictionaryEnabled": true
-                                },
-                                "outputValue": true
-                            }],
-                            "noMatch": {
-                                "outputValue": false
-                            },
-                            "defaultInput": {
-                                "transform": {
-                                    "type": "fluid.transforms.arrayToSetMembership",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
-                                    "options": {
-                                        "dictionary": "dictionaryEnabled"
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
@@ -3322,7 +3437,9 @@
             }
         ]
     },
-    "net.gpii.test.speechControl": { // This solution does not exist in real life and has been added strictly for user testing/demoing
+    "net.gpii.test.speechControl": {
+        // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
+        // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
         "name": "GPII Test solution for speech control of the computer",
         "contexts": {
             "OS": [
@@ -3354,5 +3471,63 @@
             }
         ],
         "isRunning": []
+    },
+    "net.gpii.explode": {
+        // This solution exists only to support manual and automated testing of GPII's error support. It references the
+        // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
+        // get, set or launch settingsHandler action
+        "name": "GPII Test solution for triggering settingsHandler errors",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.exploding",
+                "supportedSettings": {
+                    "explodeMethod": {
+                        "schema": {
+                            "title": "Explode Method",
+                            "description": "The strategy to be used when exploding",
+                            "type": "string",
+                            "enum": ["reject", "fail", "throw"]
+                        }
+                    },
+                    "explodeOn": {
+                        "schema": {
+                            "title": "Explode On",
+                            "description": "Whether to explode during the get or set settingsHandler method",
+                            "type": "string",
+                            "enum": ["get", "set"]
+                        }
+                    }
+                }
+            }
+        },
+        "launchHandlers": {
+            "launch": {
+                "type": "gpii.settingsHandlers.exploding",
+                "options": {
+                    "launchHandler": true,
+                    // We tunnel this through since we blundered in the initial design of settings handlers in not contextualising them.
+                    // This is preferable to the other approaches of i) Rewriting the matchmaker/lifecycle manager so that it routes other
+                    // settings to launch handlers, or ii) Rewriting the settingshandler contract so that it supports arbitrary interception
+                    // Real solutions should never read directly from the session in this way
+                    "preferences": "${{session}.preferences}"
+                }
+            }
+        },
+        "isRunning": [
+            "launchers.launch"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }

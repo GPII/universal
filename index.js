@@ -12,8 +12,6 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
-
-
 "use strict";
 
 var fluid = require("infusion"),
@@ -41,6 +39,7 @@ require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
 require("./gpii/node_modules/gpii-db-operation");
 require("./gpii/node_modules/userListeners");
+require("./gpii/node_modules/gpii-ini-file");
 
 gpii.loadTestingSupport = function () {
     fluid.contextAware.makeChecks({

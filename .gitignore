@@ -7,6 +7,7 @@
 /gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/node_modules/
 
 npm-debug.log
+package-lock.json
 *.bak
 
 Vagrantfile.local
@@ -17,3 +18,4 @@ coverage
 .nyc_output
 reports
 .idea/
+browserify

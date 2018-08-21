@@ -1,31 +1,22 @@
 /**
- * Flow Manager running on the server (incl. dependencies). It will expect a couchDB to be running on the local host using the default port.
+ * This configuration runs a cloud based flow manager locally on port 8082. It expects:
+ * 1. couchDB to be running on the localhost using the default port 5984.
+ * 2. Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.
  *
- * * The following components are running on Flow Manager:
- * ** flowManager
- * ** canopyMatchMaker
- *
- * Note that this config expects Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.
+ * * The following components are running:
+ * ** Cloud Bsed Flow Manager
+ * ** Canopy MatchMaker
  */
 {
     "type": "gpii.config.cloudBased.flowManager.production",
     "options": {
+        "mainServerPort": 8082,
         "dbServerPort": 5984,
         "dataSourceConfigProductionEnv": {
             "baseUrl": "@expand:kettle.resolvers.env(GPII_DATASOURCE_HOSTNAME)",
             "port": "@expand:kettle.resolvers.env(GPII_DATASOURCE_PORT)"
         },
         "distributeOptions": {
-            "distributePort.cloudBasedProductionPort": {
-                "record": 8082,
-                "target": "{that kettle.server}.options.port",
-                "priority": "after:distributePort.productionPort"
-            },
-            "flowManager.production.matchMakers": {
-                "record": "@expand:kettle.resolvers.env(GPII_FLOWMANAGER_MATCHMAKER_URL)",
-                "target": "{that flowManager}.options.matchMakers.default.url",
-                "priority": "after:flowManager.development.matchMakers"
-            },
             "flowManager.production.dataStore": {
                 "source": "{that}.options.dataSourceConfigProductionEnv",
                 "target": "{that flowManager oauth2DataStore}.options.dataSourceConfig",
@@ -34,7 +25,7 @@
         }
     },
     "mergeConfigs": [
-        "%flowManager/configs/gpii.flowManager.cloudBased.config.production.json5",
+        "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
         "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
     ]
 }
