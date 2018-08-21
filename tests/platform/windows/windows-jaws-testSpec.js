@@ -85,11 +85,11 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.SayAllIndicateCaps" : false,
-                            "options.TypingEcho": 3,
-                            "options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps" : false,
+                            "Options.TypingEcho": 3,
+                            "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
@@ -151,11 +151,11 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.SayAllIndicateCaps" : false,
-                            "options.TypingEcho": 3,
-                            "options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps" : false,
+                            "Options.TypingEcho": 3,
+                            "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": true
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
@@ -257,10 +257,10 @@ gpii.tests.windows.jaws.testDefs = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 1,
-                            "options.SayAllMode": 1,
-                            "options.SayAllIndicateCaps": false,
-                            "options.SayAllIgnoreShiftKeys": false,
-                            "options.TypingEcho": 3
+                            "Options.SayAllMode": 1,
+                            "Options.SayAllIndicateCaps": false,
+                            "Options.SayAllIgnoreShiftKeys": false,
+                            "Options.TypingEcho": 3
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
@@ -323,9 +323,9 @@ gpii.tests.windows.jaws.testDefs = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 0,
-                            "options.SayAllMode": 0,
-                            "options.SayAllIndicateCaps": false,
-                            "options.SayAllIgnoreShiftKeys": false
+                            "Options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps": false,
+                            "Options.SayAllIgnoreShiftKeys": false
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
@@ -388,10 +388,10 @@ gpii.tests.windows.jaws.testDefs = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 2,
-                            "options.SayAllMode": 2,
-                            "options.SayAllIndicateCaps": true,
-                            "options.SayAllIgnoreShiftKeys": true,
-                            "options.TypingEcho": 1
+                            "Options.SayAllMode": 2,
+                            "Options.SayAllIndicateCaps": true,
+                            "Options.SayAllIgnoreShiftKeys": true,
+                            "Options.TypingEcho": 1
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"

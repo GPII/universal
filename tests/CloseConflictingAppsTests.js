@@ -135,8 +135,8 @@ gpii.tests.conflictingApps.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "options.SayAllIndicateCaps": true,
-                            "options.TypingEcho": 2
+                            "Options.SayAllIndicateCaps": true,
+                            "Options.TypingEcho": 2
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
@@ -211,8 +211,8 @@ gpii.tests.conflictingApps.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "options.SayAllIndicateCaps": true,
-                            "options.TypingEcho": 2
+                            "Options.SayAllIndicateCaps": true,
+                            "Options.TypingEcho": 2
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
