@@ -1760,8 +1760,8 @@
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "literalValue": "GPII"
                     },
-                    "options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "options\\.TypingEcho": { // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                    "Options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "Options\\.TypingEcho": { // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -1815,11 +1815,11 @@
                     "Options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/announceCapitals": "options\\.SayAllIndicateCaps",
+                    "http://registry\\.gpii\\.net/common/announceCapitals": "Options\\.SayAllIndicateCaps",
                     "http://registry\\.gpii\\.net/common/keyEcho": {
                         "transform": {
                             "type": "valueMapper",
-                            "defaultInputPath": "options\\.TypingEcho",
+                            "defaultInputPath": "Options\\.TypingEcho",
                             // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                             "match": [
                                 {
@@ -1839,7 +1839,7 @@
                     "http://registry\\.gpii\\.net/common/wordEcho": {
                         "transform": {
                             "type": "valueMapper",
-                            "defaultInputPath": "options\\.TypingEcho",
+                            "defaultInputPath": "Options\\.TypingEcho",
                             // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                             "match": [
                                 {
@@ -1859,7 +1859,7 @@
                     "http://registry\\.gpii\\.net/common/readingUnit": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "options\\.SayAllMode",
+                            "defaultInputPath": "Options\\.SayAllMode",
                             "match": [
                                 {
                                     "inputValue": 0,
