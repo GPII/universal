@@ -24,9 +24,9 @@ fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.userLogonHandling");
+fluid.registerNamespace("gpii.tests.userLogonHandlers");
 
-fluid.defaults("gpii.tests.userLogonHandling.proximityTriggered", {
+fluid.defaults("gpii.tests.userLogonHandlers.proximityTriggered", {
     gradeNames: "kettle.test.request.http",
     path: "/user/%gpiiKey/proximityTriggered",
     termMap: {
@@ -34,12 +34,12 @@ fluid.defaults("gpii.tests.userLogonHandling.proximityTriggered", {
     }
 });
 
-fluid.defaults("gpii.tests.userLogonHandling.getGpiiKey", {
+fluid.defaults("gpii.tests.userLogonHandlers.getGpiiKey", {
     gradeNames: "kettle.test.request.http",
     path: "/gpiiKey"
 });
 
-fluid.defaults("gpii.tests.userLogonHandling.testCaseHolder", {
+fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
     gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder" ],
     components: {
         resetRequest: {
@@ -55,13 +55,13 @@ fluid.defaults("gpii.tests.userLogonHandling.testCaseHolder", {
             }
         },
         proximityTriggeredRequest: {
-            type: "gpii.tests.userLogonHandling.proximityTriggered"
+            type: "gpii.tests.userLogonHandlers.proximityTriggered"
         },
         proximityTriggeredRequest2: {
-            type: "gpii.tests.userLogonHandling.proximityTriggered"
+            type: "gpii.tests.userLogonHandlers.proximityTriggered"
         },
         proximityTriggeredRequest3: {
-            type: "gpii.tests.userLogonHandling.proximityTriggered"
+            type: "gpii.tests.userLogonHandlers.proximityTriggered"
         },
         proximityTriggeredRequestOther: {
             type: "kettle.test.request.http",
@@ -94,13 +94,13 @@ fluid.defaults("gpii.tests.userLogonHandling.testCaseHolder", {
             }
         },
         getGpiiKeyRequest1: {
-            type: "gpii.tests.userLogonHandling.getGpiiKey"
+            type: "gpii.tests.userLogonHandlers.getGpiiKey"
         },
         getGpiiKeyRequest2: {
-            type: "gpii.tests.userLogonHandling.getGpiiKey"
+            type: "gpii.tests.userLogonHandlers.getGpiiKey"
         },
         getGpiiKeyRequest3: {
-            type: "gpii.tests.userLogonHandling.getGpiiKey"
+            type: "gpii.tests.userLogonHandlers.getGpiiKey"
         }
     },
     events: {
@@ -108,26 +108,26 @@ fluid.defaults("gpii.tests.userLogonHandling.testCaseHolder", {
     }
 });
 
-gpii.tests.userLogonHandling.gpiiKey = "testUser1";
+gpii.tests.userLogonHandlers.gpiiKey = "testUser1";
 
-gpii.tests.userLogonHandling.testLoginResponse = function (data) {
+gpii.tests.userLogonHandlers.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
-        gpii.tests.userLogonHandling.gpiiKey + " was successfully logged in.", data);
+        gpii.tests.userLogonHandlers.gpiiKey + " was successfully logged in.", data);
 };
 
-gpii.tests.userLogonHandling.testLogoutResponse = function (data, gpiiKey) {
+gpii.tests.userLogonHandlers.testLogoutResponse = function (data, gpiiKey) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
         gpiiKey + " was successfully logged out.", data);
 };
 
-gpii.tests.userLogonHandling.checkClearedLifecycleManager = function (lifecycleManager) {
+gpii.tests.userLogonHandlers.checkClearedLifecycleManager = function (lifecycleManager) {
     var model = lifecycleManager.model;
     jqUnit.assertTrue("LogonChange model exists", model && model.logonChange);
     jqUnit.assertTrue("Current GPII key should be noUser", model.logonChange.gpiiKey === "noUser");
 };
 
 
-gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
+gpii.tests.userLogonHandlers.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
             config: {
@@ -138,17 +138,17 @@ gpii.tests.userLogonHandling.buildTestDefs = function (testDefs) {
                 // this request is usually sent a bit more than after 1 second, occassionally even more than 1.5 seconds,
                 // which causes the test to fail. Setting the debounce time to 3 seconds provides more buffering time
                 // for the following request to send.
-                configName: "gpii.tests.acceptance.userLogonStateChange.config",
+                configName: "gpii.tests.acceptance.userLogon.config",
                 configPath: "%gpii-universal/tests/configs"
             },
-            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
-            gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
+            gradeNames: ["gpii.tests.userLogonHandlers.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+            gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonHandlers.gpiiKey
         }, testDef);
     });
 };
 
 
-gpii.tests.userLogonHandling.testDefs = [{
+gpii.tests.userLogonHandlers.testDefs = [{
     name: "Testing standard proximityTriggered login and logout",
     expect: 5,
     sequence: [{
@@ -162,7 +162,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         func: "{getGpiiKeyRequest2}.send"
     }, {
@@ -181,8 +181,8 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest2}.send"
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandling.gpiiKey]
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         func: "{getGpiiKeyRequest3}.send"
     }, {
@@ -198,7 +198,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // wait within the debounce period to trigger the debounce logic so that the following /proximityTriggered request will be rejected
         func: "setTimeout",
@@ -229,7 +229,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // wait for the debounce period to pass so that the following /proximityTriggered request is not rejected
         func: "setTimeout",
@@ -242,8 +242,8 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest2}.send"
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandling.gpiiKey]
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // wait within the debounce period to trigger the debounce logic so that the following /proximityTriggered request with the same GPII key will be rejected
         func: "setTimeout",
@@ -273,7 +273,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // wait for the debounce period to pass
         func: "setTimeout",
@@ -309,7 +309,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // wait within the debounce period
         func: "setTimeout",
@@ -346,14 +346,14 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // resetting with user logged in (part 2: reset and check that user is logged out)
         func: "{resetRequest2}.send"
     }, {
         event: "{resetRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandling.gpiiKey]
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         func: "{getGpiiKeyRequest1}.send"
     }, {
@@ -369,7 +369,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // standard login with an already logged in user:
         func: "{loginTestUser1Request}.send"
@@ -401,8 +401,8 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{logoutRequest}.send"
     }, {
         event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandling.gpiiKey]
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         func: "{getGpiiKeyRequest1}.send"
     }, {
@@ -447,7 +447,7 @@ gpii.tests.userLogonHandling.testDefs = [{
             statusCode: "{testCaseHolder}.options.statusCode"
         }
     }, {
-        func: "gpii.tests.userLogonHandling.checkClearedLifecycleManager",
+        func: "gpii.tests.userLogonHandlers.checkClearedLifecycleManager",
         args: [ "{lifecycleManager}" ]
     }, {
         func: "{getGpiiKeyRequest1}.send"
@@ -470,7 +470,7 @@ gpii.tests.userLogonHandling.testDefs = [{
         func: "{logoutNoUserRequest}.send"
     }, {
         event: "{logoutNoUserRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", "noUser"]
     }, {
         func: "{getGpiiKeyRequest2}.send"

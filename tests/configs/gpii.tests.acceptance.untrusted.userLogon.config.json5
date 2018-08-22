@@ -1,5 +1,5 @@
 {
-    "type": "gpii.tests.acceptance.untrusted.userLogonStateChange.config",
+    "type": "gpii.tests.acceptance.untrusted.userLogon.config",
     "options": {
         "distributeOptions": {
             "acceptance.debounceTimeMs": {

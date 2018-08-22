@@ -1,5 +1,5 @@
 /*
- * User Logon State Change Test Definitions
+ * User logon Handlers Events Tests
  *
  * Copyright 2013-2018 OCAD University
  *
@@ -22,15 +22,13 @@ var fluid = require("infusion"),
 
 fluid.require("%gpii-universal");
 
-require("./shared/UserLogonStateChangeTestDefs.js");
+require("./shared/UserLogonHandlersTestDefs.js");
 fluid.registerNamespace("gpii.tests.userLogonEvents");
 
-gpii.tests.userLogonEvents.modelChangeChecker = function (type, inProgress, gpiiKey) {
-    return function (changePayload) {
-        jqUnit.assertEquals("Checking type of model change", type, changePayload.type);
-        jqUnit.assertEquals("Checking inProgress of model change", inProgress, changePayload.inProgress);
-        jqUnit.assertEquals("Checking gpiiKey of model change", gpiiKey, changePayload.gpiiKey);
-    };
+gpii.tests.userLogonEvents.modelChangeChecker = function (changePayload, type, inProgress, gpiiKey) {
+    jqUnit.assertEquals("Checking type of model change", type, changePayload.type);
+    jqUnit.assertEquals("Checking inProgress of model change", inProgress, changePayload.inProgress);
+    jqUnit.assertEquals("Checking gpiiKey of model change", gpiiKey, changePayload.gpiiKey);
 };
 
 gpii.tests.userLogonEvents.testDefs = [{
@@ -41,26 +39,26 @@ gpii.tests.userLogonEvents.testDefs = [{
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
-        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: ["logout", true, "noUser"]
+        listener: "gpii.tests.userLogonEvents.modelChangeChecker",
+        args: ["{arguments}.0", "logout", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
-        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: ["logout", false, "noUser"]
+        listener: "gpii.tests.userLogonEvents.modelChangeChecker",
+        args: ["{arguments}.0", "logout", false, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
-        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: ["login", true, "testUser1"]
+        listener: "gpii.tests.userLogonEvents.modelChangeChecker",
+        args: ["{arguments}.0", "login", true, "testUser1"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
-        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: ["login", false, "testUser1"]
+        listener: "gpii.tests.userLogonEvents.modelChangeChecker",
+        args: ["{arguments}.0", "login", false, "testUser1"]
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLoginResponse"
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // wait for debounce
         func: "setTimeout",
@@ -73,18 +71,18 @@ gpii.tests.userLogonEvents.testDefs = [{
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
-        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: ["logout", true, "testUser1"]
+        listener: "gpii.tests.userLogonEvents.modelChangeChecker",
+        args: ["{arguments}.0", "logout", true, "testUser1"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
-        listenerMaker: "gpii.tests.userLogonEvents.modelChangeChecker",
-        makerArgs: ["logout", false, "testUser1"]
+        listener: "gpii.tests.userLogonEvents.modelChangeChecker",
+        args: ["{arguments}.0", "logout", false, "testUser1"]
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandling.testLogoutResponse",
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", "testUser1"]
     }]
 }];
 
-gpii.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
+gpii.test.bootstrapServer(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
