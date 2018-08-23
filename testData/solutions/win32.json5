@@ -166,6 +166,19 @@
                         ],
                         "default": 1
                     },
+                    "FSCasts.EnableNotifications": {
+                        "title": "Notify about new FSCasts [JAWS Settings Center >> Miscellaneous]",
+                        "description": "Whether to have JAWS display a dialog when new podcasts from Freedom Scientific are available.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
                     "HTML.Abbreviations": {
                         "schema": {
                             "title": "Abbreviations",
@@ -197,19 +210,6 @@
                                 "on"
                             ]
                         }
-                    },
-                    "FSCasts.EnableNotifications": {
-                        "title": "Notify about new FSCasts [JAWS Settings Center >> Miscellaneous]",
-                        "description": "Whether to have JAWS display a dialog when new podcasts from Freedom Scientific are available.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
                     },
                     "HTML.AccessKeys": {
                         "title": "Speak Access Keys Within Web Page [Utilies >> JAWS Setting Center >> Web/HTML/PDF >> Reading]",
@@ -1440,14 +1440,15 @@
                         "enumLabels": ["turn off", "indicate with sound", "speak count", "describe inconsistencies"],
                         "default": 0
                     },
-                    "Options.TextAnalyserSymbolFlags": {
-                        "title": "Indicate Mismatched Symbols [JAWS Settings Center >> Text Analyzer]",
-                        "description": "Which mismatched symbols (such as mismatched opening and closing parentheses) to indicate when editing. Defaults to announcing all supported mismatching symbols."
-                    },
-                    "Options.TextAnalyserTypeFlags": {
-                        "title": "Inconsistencies to Check  [JAWS Settings Center >> Text Analyzer]",
-                        "description": "Which types of inconsistencies to check.  Defaults to \"all\"."
-                    },
+                    // TODO: Discuss whether / how to handle "bit fields" like these.
+                    // "Options.TextAnalyserSymbolFlags": {
+                    //     "title": "Indicate Mismatched Symbols [JAWS Settings Center >> Text Analyzer]",
+                    //     "description": "Which mismatched symbols (such as mismatched opening and closing parentheses) to indicate when editing. Defaults to announcing all supported mismatching symbols."
+                    // },
+                    // "Options.TextAnalyserTypeFlags": {
+                    //     "title": "Inconsistencies to Check  [JAWS Settings Center >> Text Analyzer]",
+                    //     "description": "Which types of inconsistencies to check.  Defaults to \"all\"."
+                    // },
                     "Options.TouchKeyboardChildPanelNotification": {
                         "title": "Touch Alternative Character Panel Popup Notification [JAWS Settings Center >> Keyboard >> Touch Keyboard]",
                         "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
