@@ -18,8 +18,7 @@ var fluid = require("infusion"),
 
 fluid.require("%gpii-universal");
 
-// To reuse gpii.tests.dbOperation.invokePromiseProducer()
-fluid.require("%gpii-universal/gpii/node_modules/gpii-db-operation/test/js/DataStoreTestsUtils.js");
+fluid.require("%gpii-universal/gpii/node_modules/testing/src/PromiseUtils.js");
 
 gpii.loadTestingSupport();
 
@@ -87,7 +86,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }, {
         // 1. 1nd proximityTriggered request to key in testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -125,7 +124,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "fluid.identity"
     }, {
         // 3. 2nd proximityTriggered request to key out testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -161,7 +160,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     expect: 15,
     sequence: [{
         // 1. 1nd proximityTriggered request to key in testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -179,7 +178,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         // 1) key out the first key "testUser1";
         // 2) key in the 2nd key "sammy";
         // 3) "noUser" is not keyed in between step 1 and 2.
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -214,7 +213,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     expect: 2,
     sequence: [{
         // 1. 1nd proximityTriggered request to key in testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -229,7 +228,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "fluid.identity"
     }, {
         // 3. 2nd proximityTriggered request to key in with a different user
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -241,7 +240,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     expect: 2,
     sequence: [{
         // 1. 1nd proximityTriggered request to key in testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -257,7 +256,7 @@ gpii.tests.userLogonRequest.testDefs = [{
 
     }, {
         // 1. 2nd proximityTriggered request to key out testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -272,7 +271,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     expect: 3,
     sequence: [{
         // 1. 1nd proximityTriggered request to key in testUser1
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -287,7 +286,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "fluid.identity"
     }, {
         // 3. 2nd proximityTriggered request: standard logout
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -302,7 +301,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "fluid.identity"
     }, {
         // 5. 3rd proximityTriggered request with the same GPII key: will be rejected
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -317,7 +316,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     expect: 16,
     sequence: [{
         // 1. resetting with no user logged in
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -328,7 +327,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         }, "{arguments}.0"]
     }, {
         // 2. resetting with user logged in (part 1: login)
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -336,7 +335,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
         // 2. resetting with user logged in (part 2: reset and check that user is logged out)
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -373,7 +372,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     expect: 12,
     sequence: [{
         // standard login
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -381,7 +380,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
         // standard login with an already logged in user:
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -392,7 +391,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         }, "{arguments}.0"]
     }, {
         // logout of different user
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -403,7 +402,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         }, "{arguments}.0"]
     }, {
         // logout of the correct user
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
@@ -425,7 +424,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }, {
         // logout of user when none is logged in
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -447,7 +446,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     statusCode: 404,
     sequence: [{
         // login with a non-existing GPII key
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogin", ["{testCaseHolder}.options.gpiiKey"], "{that}"]
     }, {
         event: "{that}.events.onError",
@@ -482,7 +481,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }, {
         // 2. explicitly key out "noUser"
-        func: "gpii.tests.dbOperation.invokePromiseProducer",
+        func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogout", ["noUser"], "{that}"]
     }, {
         // 3. "noUser" is in the process of being keyed out

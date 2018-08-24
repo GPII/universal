@@ -21,7 +21,6 @@ different kinds of flows are:
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 * **Update Preferences** (`CloudBasedFlowManager.js`) - used to update the preferences when the system is running in
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
-* **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
 
 ## Reserved GPII Key "noUser"
 

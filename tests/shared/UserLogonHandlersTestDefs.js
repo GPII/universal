@@ -34,11 +34,6 @@ fluid.defaults("gpii.tests.userLogonHandlers.proximityTriggered", {
     }
 });
 
-fluid.defaults("gpii.tests.userLogonHandlers.getGpiiKey", {
-    gradeNames: "kettle.test.request.http",
-    path: "/gpiiKey"
-});
-
 fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
     gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder" ],
     components: {
@@ -92,15 +87,6 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
             options: {
                 path: "/user/noUser/logout"
             }
-        },
-        getGpiiKeyRequest1: {
-            type: "gpii.tests.userLogonHandlers.getGpiiKey"
-        },
-        getGpiiKeyRequest2: {
-            type: "gpii.tests.userLogonHandlers.getGpiiKey"
-        },
-        getGpiiKeyRequest3: {
-            type: "gpii.tests.userLogonHandlers.getGpiiKey"
         }
     },
     events: {
@@ -150,25 +136,13 @@ gpii.tests.userLogonHandlers.buildTestDefs = function (testDefs) {
 
 gpii.tests.userLogonHandlers.testDefs = [{
     name: "Testing standard proximityTriggered login and logout",
-    expect: 5,
+    expect: 2,
     sequence: [{
-        func: "{getGpiiKeyRequest1}.send"
-    }, {
-        event: "{getGpiiKeyRequest1}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is logged in when GPII starts", "[\"noUser\"]", "{arguments}.0"]
-    }, {
         // 1st /proximityTriggered request: standard login
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLoginResponse"
-    }, {
-        func: "{getGpiiKeyRequest2}.send"
-    }, {
-        event: "{getGpiiKeyRequest2}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"testUser1\" is logged in", "[\"testUser1\"]", "{arguments}.0"]
     }, {
         // wait for the debounce period to pass so that the following /proximityTriggered request is not rejected
         func: "setTimeout",
@@ -183,12 +157,6 @@ gpii.tests.userLogonHandlers.testDefs = [{
         event: "{proximityTriggeredRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
-    }, {
-        func: "{getGpiiKeyRequest3}.send"
-    }, {
-        event: "{getGpiiKeyRequest3}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is logged in when no key is logged into GPII", "[\"noUser\"]", "{arguments}.0"]
     }]
 }, {
     name: "Testing proximityTriggered login with debounce",
@@ -267,7 +235,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Login with a different user with proximity trigger should log previous user out",
-    expect: 4,
+    expect: 2,
     sequence: [{
         // 1st /proximityTriggered request: standard login
         func: "{proximityTriggeredRequest}.send"
@@ -282,24 +250,12 @@ gpii.tests.userLogonHandlers.testDefs = [{
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"
     }, {
-        func: "{getGpiiKeyRequest1}.send"
-    }, {
-        event: "{getGpiiKeyRequest1}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"testUser1\" is logged in", "[\"testUser1\"]", "{arguments}.0"]
-    }, {
         // 2nd /proximityTriggered request to login with a different user
         func: "{proximityTriggeredRequestOther}.send"
     }, {
         event: "{proximityTriggeredRequestOther}.events.onComplete",
         listener: "jqUnit.assertEquals",
         args: [ "Response is correct", "User with GPII key sammy was successfully logged in.", "{arguments}.0" ]
-    }, {
-        func: "{getGpiiKeyRequest2}.send"
-    }, {
-        event: "{getGpiiKeyRequest2}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"sammy\" is logged in", "[\"sammy\"]", "{arguments}.0"]
     }]
 }, {
     name: "Login with a different user with proximity trigger should ignore debounce",
@@ -327,7 +283,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Testing proximityTriggered with 'reset' GPII key",
-    expect: 6,
+    expect: 5,
     sequence: [{
         // resetting with no user logged in
         func: "{resetRequest}.send"
@@ -354,16 +310,10 @@ gpii.tests.userLogonHandlers.testDefs = [{
         event: "{resetRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
-    }, {
-        func: "{getGpiiKeyRequest1}.send"
-    }, {
-        event: "{getGpiiKeyRequest1}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is logged in after the reset", "[\"noUser\"]", "{arguments}.0"]
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-    expect: 12,
+    expect: 11,
     sequence: [{
         // standard login
         func: "{loginRequest}.send"
@@ -404,12 +354,6 @@ gpii.tests.userLogonHandlers.testDefs = [{
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
-        func: "{getGpiiKeyRequest1}.send"
-    }, {
-        event: "{getGpiiKeyRequest1}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is logged in after the logged in user is logged out", "[\"noUser\"]", "{arguments}.0"]
-    }, {
         // logout of user when none is logged in
         func: "{logoutTestUser1Request}.send"
     }, {
@@ -425,7 +369,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Testing standard error handling: invalid user URLs",
-    expect: 6,
+    expect: 5,
     gpiiKey: "bogusToken",
     untrustedExtras: {
         statusCode: 401,
@@ -449,34 +393,16 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         func: "gpii.tests.userLogonHandlers.checkClearedLifecycleManager",
         args: [ "{lifecycleManager}" ]
-    }, {
-        func: "{getGpiiKeyRequest1}.send"
-    }, {
-        event: "{getGpiiKeyRequest1}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is still logged in when a login request is rejected", "[\"noUser\"]", "{arguments}.0"]
     }]
 }, {
     name: "noUser logs back in after an explicit request to logout noUser",
-    expect: 3,
+    expect: 1,
     sequence: [{
-        func: "{getGpiiKeyRequest1}.send"
-    }, {
-        event: "{getGpiiKeyRequest1}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is logged in when GPII starts", "[\"noUser\"]", "{arguments}.0"]
-    }, {
         // 1st /proximityTriggered request: standard login
         func: "{logoutNoUserRequest}.send"
     }, {
         event: "{logoutNoUserRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", "noUser"]
-    }, {
-        func: "{getGpiiKeyRequest2}.send"
-    }, {
-        event: "{getGpiiKeyRequest2}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["\"noUser\" is logged in when no key is logged into GPII", "[\"noUser\"]", "{arguments}.0"]
     }]
 }];
