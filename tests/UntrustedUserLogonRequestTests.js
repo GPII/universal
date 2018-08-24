@@ -31,7 +31,21 @@ gpii.tests.untrusted.userLogonRequest.testDefs =
                 configPath: "%gpii-universal/tests/configs"
             },
             gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
-            gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonRequest.gpiiKey
+            gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
+            distributeOptions: {
+                "lifecycleManager.logonChangeListener": {
+                    "record": {
+                        trackedLogonChange: [],
+                        modelListeners: {
+                            "logonChange": {
+                                listener: "gpii.tests.userLogonRequest.trackLogonChange",
+                                args: ["{that}.options.trackedLogonChange", "{change}.value"]
+                            }
+                        }
+                    },
+                    "target": "{that localConfig flowManager lifecycleManager}.options"
+                }
+            }
         }, testDefIn.untrustedExtras || {});
 
         return testDef;

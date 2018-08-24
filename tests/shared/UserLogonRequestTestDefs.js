@@ -50,7 +50,8 @@ gpii.tests.userLogonRequest.testLogoutResponse = function (data, gpiiKey) {
         gpiiKey + " was successfully logged out.", data);
 };
 
-gpii.tests.userLogonRequest.modelChangeChecker = function (result, expectedType, expectedInProgress, expectedGpiiKey) {
+gpii.tests.userLogonRequest.modelChangeChecker = function (trackedLogonChange, expectedType, expectedInProgress, expectedGpiiKey) {
+    var result = trackedLogonChange[trackedLogonChange.length - 1];
     jqUnit.assertEquals("Checking type of model change", expectedType, result.type);
     jqUnit.assertEquals("Checking inProgress of model change", expectedInProgress, result.inProgress);
     jqUnit.assertEquals("Checking gpiiKey of model change", expectedGpiiKey, result.gpiiKey);
@@ -71,11 +72,28 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs) {
                 configPath: "%gpii-universal/tests/configs"
             },
             gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
-            gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey
+            gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
+            distributeOptions: {
+                "lifecycleManager.logonChangeListener": {
+                    "record": {
+                        trackedLogonChange: [],
+                        modelListeners: {
+                            "logonChange": {
+                                listener: "gpii.tests.userLogonRequest.trackLogonChange",
+                                args: ["{that}.options.trackedLogonChange", "{change}.value"]
+                            }
+                        }
+                    },
+                    "target": "{that gpii.flowManager.local lifecycleManager}.options"
+                }
+            }
         }, testDef);
     });
 };
 
+gpii.tests.userLogonRequest.trackLogonChange = function (trackedLogonChange, logonChange) {
+    trackedLogonChange.push(logonChange);
+};
 
 gpii.tests.userLogonRequest.testDefs = [{
     name: "Testing standard proximityTriggered login and logout",
@@ -92,22 +110,22 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "testUser1"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "testUser1"]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
@@ -130,12 +148,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, "testUser1"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, "testUser1"]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLogoutResponse",
@@ -145,12 +163,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
         args: ["{lifecycleManager}", ["noUser"]]
@@ -184,22 +202,22 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, gpii.tests.userLogonRequest.gpiiKey]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, gpii.tests.userLogonRequest.gpiiKey]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, gpii.tests.userLogonRequest.anotherGpiiKey]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, gpii.tests.userLogonRequest.anotherGpiiKey]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
@@ -341,12 +359,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, gpii.tests.userLogonRequest.gpiiKey]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, gpii.tests.userLogonRequest.gpiiKey]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         // 2. resetting with user logged in (part 3: reset and check that user is logged out)
         event: "{that}.events.onResponse",
@@ -357,12 +375,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
         args: ["{lifecycleManager}", ["noUser"]]
@@ -413,12 +431,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
         args: ["{lifecycleManager}", ["noUser"]]
@@ -461,12 +479,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         // "noUser" is still keyed in when a logon request is rejected
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
@@ -488,12 +506,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, "noUser"]
     }, {
         // 4. "noUser" has been keyed out
         event: "{that}.events.onResponse",
@@ -504,12 +522,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "noUser"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "noUser"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
         args: ["{lifecycleManager}", ["noUser"]]
