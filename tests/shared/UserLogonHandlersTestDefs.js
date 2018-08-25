@@ -106,13 +106,6 @@ gpii.tests.userLogonHandlers.testLogoutResponse = function (data, gpiiKey) {
         gpiiKey + " was successfully logged out.", data);
 };
 
-gpii.tests.userLogonHandlers.checkClearedLifecycleManager = function (lifecycleManager) {
-    var model = lifecycleManager.model;
-    jqUnit.assertTrue("LogonChange model exists", model && model.logonChange);
-    jqUnit.assertTrue("Current GPII key should be noUser", model.logonChange.gpiiKey === "noUser");
-};
-
-
 gpii.tests.userLogonHandlers.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
@@ -283,22 +276,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Testing proximityTriggered with 'reset' GPII key",
-    expect: 5,
+    expect: 2,
     sequence: [{
-        // resetting with no user logged in
-        func: "{resetRequest}.send"
-    }, {
-        event: "{resetRequest}.events.onComplete",
-        listener: "kettle.test.assertErrorResponse",
-        args: {
-            message: "Received 409 error on reset with no users logged on",
-            errorTexts: "No users currently logged in - nothing to reset",
-            statusCode: 409,
-            string: "{arguments}.0",
-            request: "{resetRequest}"
-        }
-    }, {
-        // resetting with user logged in (part 1: login)
+        // log in a user (part 1: login)
         func: "{proximityTriggeredRequest}.send"
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
@@ -310,6 +290,17 @@ gpii.tests.userLogonHandlers.testDefs = [{
         event: "{resetRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
+    }]
+}, {
+    name: "Testing proximityTriggered with 'reset' noUser",
+    expect: 1,
+    sequence: [{
+        // resetting with no user logged in
+        func: "{resetRequest}.send"
+    }, {
+        event: "{resetRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", "noUser"]
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
@@ -369,7 +360,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Testing standard error handling: invalid user URLs",
-    expect: 5,
+    expect: 3,
     gpiiKey: "bogusToken",
     untrustedExtras: {
         statusCode: 401,
@@ -390,9 +381,6 @@ gpii.tests.userLogonHandlers.testDefs = [{
             request: "{proximityTriggeredRequest}",
             statusCode: "{testCaseHolder}.options.statusCode"
         }
-    }, {
-        func: "gpii.tests.userLogonHandlers.checkClearedLifecycleManager",
-        args: [ "{lifecycleManager}" ]
     }]
 }, {
     name: "noUser logs back in after an explicit request to logout noUser",

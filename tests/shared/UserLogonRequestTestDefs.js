@@ -271,7 +271,6 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         event: "{tests}.events.timeoutComplete",
         listener: "fluid.identity"
-
     }, {
         // 1. 2nd proximityTriggered request to key out testUser1
         func: "gpii.tests.invokePromiseProducer",
@@ -331,18 +330,25 @@ gpii.tests.userLogonRequest.testDefs = [{
     }]
 }, {
     name: "Testing proximityTriggered with 'reset' GPII key",
-    expect: 16,
+    expect: 22,
     sequence: [{
-        // 1. resetting with no user logged in
+        // 1. resetting with noUser logs out noUser
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
-        event: "{that}.events.onError",
-        listener: "jqUnit.assertDeepEq",
-        args: ["Received 409 error on reset with no users logged on", {
-            "statusCode": 409,
-            "message": "No users currently logged in - nothing to reset"
-        }, "{arguments}.0"]
+        event: "{that}.events.onResponse",
+        listener: "gpii.tests.userLogonRequest.testLogoutResponse",
+        args: ["{arguments}.0", "noUser"]
+    }, {
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listener: "gpii.tests.userLogonRequest.modelChangeChecker",
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "noUser"]
+    }, {
+        changeEvent: "{lifecycleManager}.applier.modelChanged",
+        path: "logonChange",
+        listener: "gpii.tests.userLogonRequest.modelChangeChecker",
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         // 2. resetting with user logged in (part 1: login)
         func: "gpii.tests.invokePromiseProducer",
