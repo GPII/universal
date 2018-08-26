@@ -15,6 +15,7 @@
         "glob": "7.1.2",
         "gpii-pouchdb": "1.0.12",
         "infusion": "3.0.0-dev.20180222T160835Z.6e1311a",
+        "gpii-express-user": "https://github.com/sgithens/gpii-express-user.git#a6014a987c03fc6674121e4348d7264ca85d2dd9",
         "json5": "1.0.1",
         "kettle": "1.7.3",
         "mkdirp": "0.5.1",
