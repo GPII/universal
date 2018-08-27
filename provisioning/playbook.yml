@@ -5,7 +5,7 @@
   vars_files:
     # The Dockerfile, Vagrantfile or other means of running the playbook
     # must set the UNIVERSAL_VARS_FILE variable appropriately for its
-    # environment    
+    # environment
     - "{{ lookup('env', 'UNIVERSAL_VARS_FILE') }}"
     - vars.yml
 

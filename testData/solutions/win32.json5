@@ -1007,7 +1007,6 @@
         ]
     },
 
-
     "com.microsoft.windows.narrator": {
         "name": "Windows Built-in Narrator",
         "contexts": {
@@ -1257,6 +1256,89 @@
                 }
             }
         },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
+    "com.microsoft.windows.language": {
+        "name": "Windows Display Language",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure1": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop\\MuiCached",
+                    "dataTypes": {
+                        "MachinePreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "MachinePreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "MachinePreferredUILanguages": {}
+                }
+            },
+            "configure2": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "PreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "PreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "PreferredUILanguages": {}
+                }
+            }
+        },
+        "configure": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
+            }
+        ],
+        "restore": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
+            }
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
