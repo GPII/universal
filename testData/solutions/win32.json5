@@ -20,22 +20,22 @@
                 },
                 "supportedSettings": {
                     "Braille.attributeRotationDelay": {
-                        "title": "Attribute rotation rate [Utilities >> JAWS settings center >> Braille >> Braille marking]",
+                        "title": "Attribute Rotation Delay",
                         "description": "When in Attribute Mode and characters have multiple attributes, determines how long each attribute should be shown for. This value is in Milliseconds.",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 1000
                     },
-                    "Braille.AutoPanMode ": {
-                        "title": "auto pan mode [Utilities >> JAWS settings center >> Braille >> General >> Panning]",
-                        "description": "AutoPan Algorithm 0=off, 1=move display minimally to include whole word containing cursor, 2=MatchUserPan, 3=move display to show whole word at cursor nearest the middle of the display area, 4=maximize text after cursor, 5=maximize text before cursor, 6=autopan to default structured segment 255=Smart Autopan, autopan using the best algorithm for the current situation",
+                    "Braille.AutoPanMode": {
+                        "title": "Auto Pan Mode",
+                        "description": "The \"Auto Pan\" algorithm to use.",
                         "enum": [0, 1, 2, 3, 4, 5, 6, 255],
                         "enumLabels": ["off", "move display minimally to include whole word containing cursor", "match user pan", "move display to show whole word at cursor nearest the middle of the display area", "maximize text after cursor", "maximize text before cursor", "autopan to default structured segment", "Smart Autopan, autopan using the best algorithm for the current situation"],
                         "default": 255
                     },
-                    "Braille.BrailleMessages ": {
-                        "title": "Enable flash message [Utilities >> JAWS settings center >> Braille >> Flash messages]",
-                        "description": "Whether or not to show Flash Messages ",
+                    "Braille.BrailleMessages": {
+                        "title": "Enable Flash Messages",
+                        "description": "Whether or not to show Flash Messages on a Braille display.",
                         "enum": [
                             0,
                             1
@@ -48,7 +48,8 @@
                     },
                     "Braille.BrailleMode": {
                         "schema": {
-                            "title": "Braille mode",
+                            "title": "Braille Mode",
+                            // TODO: Look up in defaults file.
                             "description": "",
                             "type": "number",
                             "default": 1,
@@ -66,17 +67,18 @@
                             ]
                         }
                     },
-                    "Braille.BrailleShowMarking": {
-                        "title": "Braille marking for highlight [Utilities >> JAWS settings center >> Braille >> Braille Marking] ; Braille marking for bold [Utilities >> JAWS settings center >> Braille >> Braille Marking] ; Braille marking for underline        [Utilities >> JAWS settings center >> Braille >> Braille Marking] ; Braille marking for italic [Utilities >> JAWS settings center >> Braille >> Braille Marking] ; Braille marking for strikeout [Utilities >> JAWS settings center >> Braille >> Braille Marking] ; Braille marking for script defined markups [Utilities >> JAWS settings center >> Braille >> Braille Marking]",
-                        "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
-                        "type": "integer",
-                        "multipleOf": 1,
-                        "minValue": 0,
-                        "maxValue": 65536,
-                        "default": 64
-                    },
-                    "Braille.BrailleSleepMode ": {
-                        "title": " enable braille sleep mode [Utilities >> JAWS settings center >> Braille >> General]",
+                    // Enable this if requested, we have no reasonable way of presenting a UI at the moment.
+                    // "Braille.BrailleShowMarking": {
+                    //     "title": "Braille Marking",
+                    //     "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
+                    //     "type": "integer",
+                    //     "multipleOf": 1,
+                    //     "minValue": 0,
+                    //     "maxValue": 65536,
+                    //     "default": 64
+                    // },
+                    "Braille.BrailleSleepMode": {
+                        "title": " Enable Braille Sleep Mode",
                         "description": "Set to 1 to turn off Braille driver, typically used to disable Braille for a specific application",
                         "enum": [
                             0,
@@ -88,27 +90,27 @@
                         ],
                         "default": 0
                     },
-                    "Braille.BrailleVerbosity ": {
-                        "title": "verbosity level for message prefixes (beginner/intermediate/advacned) [Utilities >> JAWS settings center >> Braille >> Flash messages ]",
+                    "Braille.BrailleVerbosity": {
+                        "title": "Braille Verbosity",
                         "description": "Sets Braille verbosity for Flash messages, 0 beginner, 1 intermediate, 2 advanced ",
                         "enum": [0, 1, 2],
                         "enumLabels": ["beginner", "intermediate", "advanced"]
                     },
-                    "Braille.EightDotBraille ": {
-                        "title": "display text in 8 dot braille mode [Utilities >> JAWS settings center >> Braille >> General ]",
-                        "description": "eight dot braille mode 0=six dots mode, 1 = eight dots mode",
+                    "Braille.EightDotBraille": {
+                        "title": "Eight Dot Braille",
+                        "description": "Whether to enable eight dot braille versus six dot braille mode.",
                         "enum": [
                             0,
                             1
                         ],
                         "enumLabels": [
-                            "off",
-                            "on"
+                            "six dot braille.",
+                            "8 dot braille."
                         ],
                         "default": 1
                     },
-                    "Braille.MessagePrefixes ": {
-                        "title": "enable message prefixes [Utilities >> JAWS settings center >> Braille >> Flash messages ]",
+                    "Braille.MessagePrefixes": {
+                        "title": "Enable Message Prefixes",
                         "description": "If a display has no Status Cells, whether or not to prepend the Message Prefix to the Flash Message",
                         "enum": [
                             0,
@@ -121,14 +123,14 @@
                         "default": 1
                     },
                     "Braille.MessageTime": {
-                        "title": "flash message timeout [Utilities >> JAWS settings center >> Braille >> Flash messages]",
-                        "description": "when a Flash message is sent to the display via a script, how long it should be shown for if not specified by the script. measured in milliseconds",
+                        "title": "Flash Message Timeout",
+                        "description": "When a Flash message is sent to the display via a script, how long in milliseconds should it be shown if not specified by the script.",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 5000
                     },
-                    "Braille.ReversePanningButtons ": {
-                        "title": "reverse panning buttons [Utilities >> JAWS settings center >> Braille >> General >> Panning]",
+                    "Braille.ReversePanningButtons": {
+                        "title": "Reverse Panning Buttons",
                         "description": "Whether or not panning buttons are reversed.",
                         "enum": [
                             0,
@@ -141,7 +143,7 @@
                         "default": 0
                     },
                     "Braille.StructuredModeReverseOrder": {
-                        "title": "reverse order of structured data [Utilities >> JAWS settings center >> Braille >> Structured mode]",
+                        "title": "Reverse Order of Structured Data",
                         "description": "If off, order is dlg info|group info|focus info, If on, order is focus info|group info|dialog info",
                         "enum": [
                             0,
@@ -153,8 +155,8 @@
                         ],
                         "default": 1
                     },
-                    "Braille.WordWrap ": {
-                        "title": "enable word wrap [Utilities >> JAWS settings center >> Braille >> General ]",
+                    "Braille.WordWrap": {
+                        "title": "Enable Word Wrap",
                         "description": "Whether or not to allow words to be split in order to maximize the use of the Braille display. Ignored if panning is set to fixed increment",
                         "enum": [
                             0,
@@ -167,7 +169,7 @@
                         "default": 1
                     },
                     "FSCasts.EnableNotifications": {
-                        "title": "Notify about new FSCasts [JAWS Settings Center >> Miscellaneous]",
+                        "title": "Notify about New FSCasts",
                         "description": "Whether to have JAWS display a dialog when new podcasts from Freedom Scientific are available.",
                         "enum": [
                             0,
@@ -212,7 +214,7 @@
                         }
                     },
                     "HTML.AccessKeys": {
-                        "title": "Speak Access Keys Within Web Page [Utilies >> JAWS Setting Center >> Web/HTML/PDF >> Reading]",
+                        "title": "Speak Access Keys Within Web Page",
                         "description": "0 don't include HTML Element access keys, 1 include them",
                         "enum": [
                             0,
@@ -225,8 +227,8 @@
                         "default": 1
                     },
                     "HTML.ExpandAbbreviations": {
-                        "title": "Expand Abbreviations [Utilities >> JAWS Settings Center >> Web/ HTML/ PDFs >> Reading]",
-                        "description": "whether or not to expand abbreviations (using the abbr tag)",
+                        "title": "Expand Abbreviations",
+                        "description": "Whether or not to expand abbreviations (using the abbr tag).",
                         "enum": [
                             0,
                             1
@@ -238,8 +240,8 @@
                         "default": 0
                     },
                     "HTML.ExpandAcronyms": {
-                        "title": "Expand Acronyms [Utilities >> JAWS Settings Center >> Web/ HTML/ PDFs >> Reading]",
-                        "description": "whether or not to expand acronyms (using the acronym tag)",
+                        "title": "Expand Acronyms",
+                        "description": "Whether or not to expand acronyms (using the acronym tag).",
                         "enum": [
                             0,
                             1
@@ -267,14 +269,14 @@
                         }
                     },
                     "HTML.FormFieldPromptOptions": {
-                        "title": "For a Form Field Prompt Speak [Utilies >> JAWS Setting Center >> Web/HTML/PDF >> Miscellaneous]",
-                        "description": "0 favor label tag, 1 favor title attribute, 2 favor alt attribute, 3 favor longest, 4 use both label and title if different, 5 use both label and alt if different",
+                        "title": "Form Field Prompt Options",
+                        "description": "Which attributes to prefer when describing form fields.",
                         "enum": [0, 1, 2, 3, 4, 5],
                         "enumLabels": ["favor label tag", "favor title attribute", "favor alt attribute", "favor longest", "use both label and title if different", "use both label and alt if different"],
                         "default": 0
                     },
                     "HTML.FormsModeAutoOff": {
-                        "title": "Select forms mode-auto/semiauto/manual [Utilities >> JAWS Settings Center >> Forms mode]",
+                        "title": "Forms Mode Auto Off",
                         "description": "Whether or not Forms Mode is automatically turned off when the current page is updated 1 means turn forms mode off automatically (default), 0 means leave Forms Mode on",
                         "enum": [
                             0,
@@ -287,8 +289,8 @@
                         "default": 1
                     },
                     "HTML.IgnoreInlineFrames": {
-                        "title": "ignore inline frames [Utilities >> JAWS Settings Center >> Web/ HTML/ PDFs >> Heading & Frames]",
-                        "description": "Inline frames are often used for advertising 0 do not ignore inline frames, 1 ignore them",
+                        "title": "Ignore Inline Frames",
+                        "description": "Whether to ignore inline frames, such as those used for advertising.",
                         "enum": [
                             0,
                             1
@@ -300,15 +302,15 @@
                         "default": 0
                     },
                     "HTML.IncludeGraphics": {
-                        "title": "Include Image [Utilities >> JAWS Settings Center >> Web/ HTML/ PDFs >> Images/ Graphics]",
-                        "description": "0 means to never include graphics 1 means to include graphics that have labels, i.e. alt=attributes 2 means to include all graphics",
+                        "title": "Include Graphics",
+                        "description": "Whether/when to include graphics in web pages.",
                         "enum": [0, 1, 2],
                         "enumLabels": ["never include graphics", "include graphics that have labels, i.e. alt=attributes", "include all graphics"],
                         "default": 1
                     },
                     "HTML.IndicateColSpan": {
-                        "title": "Indicate ColSpan for Braille [Utilies >> JAWS Setting Center >> Web/HTML/PDF >> Tables]",
-                        "description": "Whether to announce column spans when reading table data.",
+                        "title": "Indicate ColSpan for Braille",
+                        "description": "Whether to announce column spans when reading table data in web pages.",
                         "enum": [
                             0,
                             1
@@ -320,8 +322,8 @@
                         "default": 1
                     },
                     "HTML.SayAllOnDocumentLoad": {
-                        "title": "Document and Web Pages Automatically Read When Loaded  [Utilities >> JAWS Setting Center >> Web/HTML/PDF >> Reading]",
-                        "description": "Whether to automatically read pages when they're first loaded.",
+                        "title": "Read Web Pages Automatically When Loaded",
+                        "description": "Whether to automatically read web pages when they're first loaded.",
                         "enum": [
                             0,
                             1
@@ -333,8 +335,8 @@
                         "default": 1
                     },
                     "HTML.SmartNavigation": {
-                        "title": "Smart Navigation  [Utilities >> JAWS Setting Center >> Web/HTML/PDF >> Navigation]",
-                        "description": "Whether to enable \"smart navigation\".",
+                        "title": "Smart Navigation",
+                        "description": "Whether to enable \"smart navigation\" when reading web pages.",
                         "enum": [
                             0,
                             1
@@ -346,8 +348,8 @@
                         "default": 0
                     },
                     "HTML.TextBlockLength": {
-                        "title": "Text Block Length [Utilities >> JAWS Settings Center >> Web/ HTML/ PDFs >> Navigation]",
-                        "description": "The number of consecutive characters that must appear for JAWS to treat this as a block of text",
+                        "title": "Text Block Length",
+                        "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 25
@@ -360,9 +362,8 @@
                             "default": "all cap"
                         }
                     },
-
                     "Options.AllowMouseEchoWhenMuted": {
-                        "title": "Allow Mouse Echo [JAWS setting center >> Speech Options]",
+                        "title": "Allow Mouse Echo",
                         "description": "Whether to echo mouse movement when otherwise muted.",
                         "enum": [
                             0,
@@ -375,7 +376,7 @@
                         "default": 0
                     },
                     "Options.AllowSpeechOnDemandWhenMuted": {
-                        "title": "Allow Reading Commands  [JAWS setting center >> Speech Options]",
+                        "title": "Allow Reading Commands",
                         "description": "Whether to allow speech on demand when otherwise muted.",
                         "enum": [
                             0,
@@ -388,7 +389,7 @@
                         "default": 1
                     },
                     "Options.AllowTypingEchoWhenMuted": {
-                        "title": "Allow Typing Echo [JAWS setting center >> Speech Options]",
+                        "title": "Allow Typing Echo",
                         "description": "Whether to echo typed keys when otherwise muted.",
                         "enum": [
                             0,
@@ -402,7 +403,7 @@
                     },
                     "Options.BrailleDisplay": {
                         "schema": {
-                            "title": "BrailleDisplay",
+                            "title": "Braille Display",
                             "description": "The braille display to use.",
                             "type": "string",
                             "default": "Braille1"
@@ -410,7 +411,7 @@
                     },
                     "Options.CapIndicator": {
                         "schema": {
-                            "title": "CapIndicator",
+                            "title": "Cap Indicator",
                             "description": "The text to read before a capital letter.",
                             "type": "string",
                             "default": "cap"
@@ -418,8 +419,8 @@
                     },
                     "Options.CaretBlinkRate": {
                         "schema": {
-                            "title": "CaretBlinkRate",
-                            "description": "how fast the caret blinks, milliseconds on/off",
+                            "title": "Caret Blink Rate",
+                            "description": "How fast the caret blinks, in milliseconds.",
                             "type": "number",
                             "default": 53,
                             "multipleOf": 1,
@@ -428,8 +429,8 @@
                     },
                     "Options.CaretDetect": {
                         "schema": {
-                            "title": "CaretDetect",
-                            "description": "how many cursor blinks are used to locate the caret",
+                            "title": "Caret Detect",
+                            "description": "How many cursor blinks are used to locate the caret.",
                             "type": "number",
                             "default": 1,
                             "minValue": 1,
@@ -438,7 +439,7 @@
                     },
                     "Options.CaretDetectTimeOut": {
                         "schema": {
-                            "title": "CaretDetectTimeOut",
+                            "title": "Caret Detect Timeout",
                             "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret",
                             "type": "number",
                             "default": 250,
@@ -449,7 +450,7 @@
                     "Options.Case": {
                         "schema": {
                             "title": "Case",
-                            "description": "Indicate case of spoken text with inflection change",
+                            "description": "Whether to indicate the case of spoken text with inflection change.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -464,8 +465,8 @@
                     },
                     "Options.CustomPageSummary": {
                         "schema": {
-                            "title": "CustomPageSummary",
-                            "description": "this setting determines what happens when a virtual document loads for which a custom page summary has been defined 0 do nothing (a SayAll will be started as normal) 1 The summary will be spoken and focus left on the page at the place defined by the page 2 the summary will be presented in the virtual viewer for the user to immediately read. The user must press Escape to return to the actual document. Note this setting should generally be set from Personalized Web Settings",
+                            "title": "Custom Page Summary",
+                            "description": "What to do when a virtual document loads for which a custom page summary has been defined.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -474,14 +475,14 @@
                                 2
                             ],
                             "enumLabels": [
-                                "do nothing (a SayAll will be started as normal)",
+                                "do nothing (\"Say All\" will be started as normal)",
                                 "The summary will be spoken and focus left on the page at the place defined by the page",
                                 "the summary will be presented in the virtual viewer for the user to immediately read"
                             ]
                         }
                     },
                     "Options.DetectKeyboardInputLanguage": {
-                        "title": "Detect Keyboard Languages [JAWS Settings Center >> Text Processing >> General]",
+                        "title": "Detect Keyboard Languages",
                         "description": "Whether to detect the language used by the keyboard.",
                         "enum": [
                             0,
@@ -496,7 +497,7 @@
                     "Options.Dictionary": {
                         "schema": {
                             "title": "Dictionary",
-                            "description": "process text through the dictionary 0=off, 1 on",
+                            "description": "Whether words, phrases, abbreviations, or symbols should be processed through a global or application specific dictionary to determine proper pronunciation. This is enabled by default.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -509,19 +510,17 @@
                             ]
                         }
                     },
-                    // TODO: Get more details for this setting.
-                    // There's not even anything in the JAWS documentation.
-                    "Options.DosScreenReader": {
-                        "schema": {
-                            "title": "DosScreenReader",
-                            "description": "",
-                            "type": "",
-                            "default": 0,
-                            "enum": [],
-                            "enumLabels": []
-                        }
-                    },
-                    // TODO: Verify this, especially the mapping.
+                    // There's not even anything in the JAWS documentation for this. Disabled for now.
+                    // "Options.DosScreenReader": {
+                    //     "schema": {
+                    //         "title": "Dos Screen Reader",
+                    //         "description": "",
+                    //         "type": "",
+                    //         "default": 0,
+                    //         "enum": [],
+                    //        "enumLabels": []
+                    //     }
+                    // },
                     "Options.Filter": {
                         "schema": {
                             "title": "Filter",
@@ -547,7 +546,7 @@
                         }
                     },
                     "Options.GeneralizeDialect": {
-                        "title": "Generalize Dialect [JAWS Settings Center >> Text Processing >> General]",
+                        "title": "Generalize Dialect",
                         "description": "Whether to switch languages when encountering content with the same underlying base language.",
                         "enum": [
                             0,
@@ -562,7 +561,7 @@
                     "Options.Indentation": {
                         "schema": {
                             "title": "Indentation",
-                            "description": "whether or not to indicateSayu indentation",
+                            "description": "Whether or not to announce indentation.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -577,8 +576,8 @@
                     },
                     "Options.IndicateAttributesInDialogsAndMenus": {
                         "schema": {
-                            "title": "IndicateAttributesInDialogsAndMenus",
-                            "description": "set to 1 to enable announcement of attributes etc in dialogs and menus if the scheme allows for it",
+                            "title": "Indicate Attributes on Dialogs and Menus",
+                            "description": "Whether to announce attributes in dialogs and menus if the scheme allows for it.",
                             "type": "number",
                             "default": 0,
                             // TODO: All of these 0,1 examples are a firm use case for an application-specific transform mechanism so that our JSON payloads can use true/false.
@@ -615,9 +614,9 @@
                     },
                     "Options.IndicateNewlinesAndParagraphs": {
                         "schema": {
-                            "title": "IndicateNewlinesAndParagraphs",
+                            "title": "Indicate Newlines and Paragraphs",
                             "description": "Whether/how to indicate the presence of new lines and paragraphs.",
-                            "type": "",
+                            "type": "number",
                             "default": 0,
                             "enum": [
                                 0,
@@ -637,7 +636,7 @@
                     },
                     "Options.IndicateSelected": {
                         "schema": {
-                            "title": "IndicateSelected",
+                            "title": "Indicate Selected",
                             "description": "",
                             "type": "number",
                             "default": 2,
@@ -650,8 +649,9 @@
                         }
                     },
                     "Options.InitialNumlockState": {
-                        "title": "Initial state of NumLock key [ JAWS Settings Center >> Keyboard >> General]",
-                        "description": "The initial state of the numLock key.",
+                        "title": "Initial State of NumLock Key",
+                        "description": "The initial state of the NumLock key.",
+                        "type": "number",
                         "enum": [0, 1, 2],
                         "enumLabels": ["off at startup", "on at startup", "leave unmodified"],
                         "default": 0
@@ -659,8 +659,8 @@
                     // TODO: Doesn't seem to work.
                     "Options.InsertKeyMode": {
                         "schema": {
-                            "title": "InsertKeyMode",
-                            "description": "operating mode of insert key 0=JAWS, 1= Sticky",
+                            "title": "Insert Key Mode",
+                            "description": "The operating mode of the insert key.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -676,8 +676,8 @@
                     // TODO: VERIFY WITH EXTREME PREJUDICE
                     "Options.JAWSInsertKey": {
                         "schema": {
-                            "title": "JAWSInsertKey",
-                            "description": "Which insert keys can be used as a JAWS Insert 0=none 1=Numpad Insert 2=Extended Insert 3=both Numpad and Extended",
+                            "title": "JAWS Insert Key",
+                            "description": "Whether/which insert keys can be used as a JAWS Insert.",
                             "type": "number",
                             "default": 3,
                             "enum": [
@@ -697,7 +697,7 @@
                     // TODO: This now appears to be a "level" option.  Verify by looking at the INI file.
                     "Options.JAWSPunctuationEnabled": {
                         "schema": {
-                            "title": "JAWSPunctuationEnabled",
+                            "title": "JAWS Punctuation Enabled",
                             "description": "Which punctuation marks to speak.",
                             "type": "number",
                             "default": 2,
@@ -715,18 +715,18 @@
                             ]
                         }
                     },
-                    // TODO: See if there is documentation on the supported options.
-                    "Options.KeyboardType": {
-                        "schema": {
-                            "title": "KeyboardType",
-                            "description": "Can be one of the types defined in default.jkm",
-                            "type": "string",
-                            "default": "Laptop"
-                        }
-                    },
+                    // No documentation, disabled for now.
+                    // "Options.KeyboardType": {
+                    //     "schema": {
+                    //         "title": "KeyboardType",
+                    //         "description": "Can be one of the types defined in default.jkm",
+                    //         "type": "string",
+                    //         "default": "Laptop"
+                    //     }
+                    // },
                     "Options.KeyRepeat": {
                         "schema": {
-                            "title": "KeyRepeat",
+                            "title": "Key Repeat",
                             "description": "Whether or not to allow repeated keys.  Repeated keys are allowed by default.",
                             "type": "number",
                             "default": 1,
@@ -742,8 +742,8 @@
                     },
                     "Options.LanguageDetection": {
                         "schema": {
-                            "title": "LanguageDetection",
-                            "description": "automatic Language detection, 1 on, 0 off",
+                            "title": "Language Detection",
+                            "description": "Whether to enable automatic Language detection.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -758,8 +758,8 @@
                     },
                     "Options.LeftShiftSkipBack": {
                         "schema": {
-                            "title": "LeftShiftSkipBack",
-                            "description": "1=during SayAll, left shift will skip back and right shift will skip forward 0=vice versa",
+                            "title": "Left Shift Skip Back",
+                            "description": "How the shift keys should behave in \"Say All\" mode.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -774,16 +774,15 @@
                     },
                     // TODO: Verify default
                     "Options.LessSpeechMode": {
-                        "title": "Less Speech Options [JAWS Settings Center >> Speech Options]",
+                        "title": "Less Speech Options",
                         "description": "How to behave when in \"less speech mode\".",
                         "enum": [0, 1],
                         "enumLabels": ["Speech On Demand", "Mute Speech"]
                     },
-
                     "Options.LinePauses": {
                         "schema": {
-                            "title": "LinePauses",
-                            "description": "pause at end of a line 0=off, 1=on",
+                            "title": "Line Pauses",
+                            "description": "Whether to pause at end of a line.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -799,7 +798,7 @@
                     // TODO: Verify this and improve the description.
                     "Options.ListBoxCheckBoxes": {
                         "schema": {
-                            "title": "ListBoxCheckBoxes",
+                            "title": "List Box Check Boxes",
                             "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
                             "type": "number",
                             "default": 0,
@@ -816,8 +815,8 @@
                         }
                     },
                     "Options.LowerOtherAppsVolumeWhileJAWSIsRunning": {
-                        "title": "Lower audio volume of programs while JAWS speaks [JAWS Settings Center >> User]",
-                        "description": "Whether to lower the volume of programs otehr than JAWS when speaking.",
+                        "title": "Lower Audio Volume of Programs while JAWS Speaks",
+                        "description": "Whether to lower the volume of programs other than JAWS when speaking.",
                         "enum": [
                             0,
                             1
@@ -830,8 +829,8 @@
                     },
                     "Options.MixedCase": {
                         "schema": {
-                            "title": "MixedCase",
-                            "description": "words with embedded capital letters are spoken as separate words 0=off, 1 = on",
+                            "title": "Mixed Case",
+                            "description": "Whether to announce words with embedded capital letters (such as \"MixedCase\") as separate words.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -845,7 +844,7 @@
                         }
                     },
                     "Options.MouseEchoSpeaksControlTypeAndState": {
-                        "title": "Speak control type and state of item [JAWS Settings Center >> Mouse Echo]",
+                        "title": "Speak Control Type and State of Item",
                         "description": "Whether to speak the type of control and state of item when mousing over a control.",
                         "enum": [
                             0,
@@ -858,7 +857,7 @@
                         "default": 1
                     },
                     "Options.MouseEchoSpeaksHelpAndDescription": {
-                        "title": "Speak description of item [JAWS Settings Center >> Mouse Echo]",
+                        "title": "Speak Description of Item",
                         "description": "Whether to speak the description of an item on mouseover.",
                         "enum": [
                             0,
@@ -871,7 +870,7 @@
                         "default": 0
                     },
                     "Options.MouseMovementStopsSpeech": {
-                        "title": "Mouse Echo Interrupt [JAWS Settings Center >> Mouse Echo]",
+                        "title": "Mouse Echo Interrupt",
                         "description": "Whether to stop speaking when the mouse is moved.",
                         "enum": [
                             0,
@@ -884,21 +883,21 @@
                         "default": 1
                     },
                     "Options.MouseSpeechDelay": {
-                        "title": "Mouse Echo Delay [JAWS Settings Center >> Mouse Echo]",
+                        "title": "Mouse Echo Delay",
                         "description": "How long to delay speaking content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 0
                     },
                     "Options.MouseSpeechEchoUnit": {
-                        "title": "Mouse Echo Unit [JAWS Settings Center >> Mouse Echo]",
+                        "title": "Mouse Echo Unit",
                         "description": "The unit of text to hear when the mouse pauses over text in a control.  Defaults to reading the whole line.",
                         "enum": [0, 1, 2, 3],
                         "enumLabels": ["character", "word", "line", "paragraph"],
                         "default": 2
                     },
                     "Options.MouseSpeechEnabled": {
-                        "title": "Enable Mouse Echo [JAWS Settings Center >> Mouse Echo]",
+                        "title": "Enable Mouse Echo",
                         "description": "Whether or not to enable the mouse echo, i.e. reading content under the mouse pointer.",
                         "enum": [
                             0,
@@ -931,7 +930,7 @@
                         }
                     },
                     "Options.OnScreenKeyboard": {
-                        "title": "Allow On Screen Keyboards [ JAWS Settings Center >> Keyboard >> General]",
+                        "title": "Allow On Screen Keyboards",
                         "description": "Whether to allow on screen keyboards.",
                         "enum": [
                             0,
@@ -945,7 +944,7 @@
                     },
                     "Options.ProcessToolTipEvent": {
                         "schema": {
-                            "title": "ProcessToolTipEvent",
+                            "title": "Process Tooltip Event",
                             "description": "Whether or not to process tooltip events.",
                             "type": "number",
                             "default": 1,
@@ -961,8 +960,8 @@
                     },
                     "Options.ProgressBarUpdateInterval": {
                         "schema": {
-                            "title": "ProgressBarUpdateInterval",
-                            "description": "0 don't announce ProgressBar updates, non-zero value specifies time in milliseconds which must elapse before the next update is announced",
+                            "title": "Progress Bar Update Interval",
+                            "description": "How often to announce progress bar updates, in milliseconds.  Set to 0 to disable update announcements.",
                             "type": "number",
                             "default": 5000,
                             "multipleOf": 1,
@@ -971,7 +970,7 @@
                     },
                     "Options.QuickKeyNavigationMode": {
                         "schema": {
-                            "title": "QuickKeyNavigationMode",
+                            "title": "Quick Key Navigation Mode",
                             "description": "Currently this option is linked to the virtual cursor only 0 off, 1 on, 2 only on during SayAll",
                             "type": "number",
                             "default": 1,
@@ -983,14 +982,14 @@
                             "enumLabels": [
                                 "off",
                                 "on",
-                                "only on during SayAll"
+                                "only on during \"Say All\""
                             ]
                         }
                     },
                     "Options.ReadingInterrupt": {
                         "schema": {
-                            "title": "ReadingInterrupt",
-                            "description": "pressing a key that is bound to a macro will interrupt speech 0=off, 1 = on",
+                            "title": "Reading Interrupt",
+                            "description": "Whether to interrupt speech when a key that is bound to a macro is pressed.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -1006,7 +1005,7 @@
                     "Options.Repetitions": {
                         "schema": {
                             "title": "Repetitions",
-                            "description": "Whether or not to indicate repeated characters, 1 on, 0 off",
+                            "description": "Whether or not to indicate repeated characters.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1021,7 +1020,7 @@
                     },
                     "Options.SayAllIgnoreShiftKeys": {
                         "schema": {
-                            "title": "SayAll Ignore Shift Keys",
+                            "title": "\"Say All\" Ignores Shift Keys",
                             "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
                             "type": "number",
                             "default": 0,
@@ -1038,8 +1037,8 @@
                     "Options.SayAllIndicateCaps": {
                         // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
                         "schema": {
-                            "title": "Announce capitals",
-                            "description": "During SayAll, indicate initial cap or capitalized word",
+                            "title": "Announce Capitals",
+                            "description": "In \"Say All\" mode, indicate initial cap or capitalized word",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1054,8 +1053,8 @@
                     },
                     "Options.SayAllMode": {
                         "schema": {
-                            "title": "SayAllMode",
-                            "description": "Sets the amount of text which SayAll sends to the synthesizer as a single unit",
+                            "title": "\"Say All\" Mode",
+                            "description": "Sets the amount of text which \"Say All\" sends to the synthesizer as a single unit",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1071,15 +1070,14 @@
                         }
                     },
                     "Options.SayAllScheme": {
-                        "title": "Say All Scheme [ JAWS Settings Center >> Say All]",
+                        "title": "Say All Scheme",
                         "description": "Which user-defined \"Say All\" scheme to use. ",
                         "type": "string"
                     },
-
                     "Options.SayBlankLineCount": {
                         "schema": {
                             "title": "SayBlankLineCount",
-                            "description": "In 'say all' mode, whether to announce the number of blank lines.",
+                            "description": "In \"Say All\" mode, whether to announce the number of blank lines.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1092,10 +1090,9 @@
                             ]
                         }
                     },
-                    // TODO: Verify what this does and fill in the description.
                     "Options.SayCursorShapeChange": {
                         "schema": {
-                            "title": "SayCursorShapeChange",
+                            "title": "Say Cursor Shape Change",
                             "description": "Whether to announce a change in the shape of the cursor.",
                             "type": "number",
                             "default": 0,
@@ -1109,10 +1106,9 @@
                             ]
                         }
                     },
-                    // TODO: Verify what this does and fill in the description.
                     "Options.SayDollars": {
                         "schema": {
-                            "title": "SayDollars",
+                            "title": "Say Dollars",
                             "description": "Whether to announce currency symbols.",
                             "type": "number",
                             "default": 0,
@@ -1126,10 +1122,9 @@
                             ]
                         }
                     },
-                    // TODO: Verify what this does and fill in the description.
                     "Options.SayNumericDates": {
                         "schema": {
-                            "title": "SayNumericDates",
+                            "title": "Say Numeric Dates",
                             "description": "How to announce numeric dates.  With no translation, dates are read as numbers.  With some translation, dd-mm-yy values are read as text.  With extended translation, both dd-mm-yy and dd-mm values are read as text.",
                             "type": "number",
                             "default": 0,
@@ -1145,10 +1140,9 @@
                             ]
                         }
                     },
-                    // TODO: Verify what this does and fill in the description.
                     "Options.SaySelectedFirst": {
                         "schema": {
-                            "title": "SaySelectedFirst",
+                            "title": "Say Selected First",
                             "description": "Whether to announce the selected text first.",
                             "type": "number",
                             "default": 0,
@@ -1164,7 +1158,7 @@
                     },
                     "Options.SayStateFirst": {
                         "schema": {
-                            "title": "SayStateFirst",
+                            "title": "Say State First",
                             "description": "Whether to announce the window state before title/text.",
                             "type": "number",
                             "default": 0,
@@ -1180,8 +1174,8 @@
                     },
                     "Options.SayWindowTypeFirst": {
                         "schema": {
-                            "title": "SayWindowTypeFirst",
-                            "description": "Say Window type before window title/text 0=off, 1 = on",
+                            "title": "Say Window Type First",
+                            "description": "Announce the type of window before announcing the window title/text.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1206,7 +1200,7 @@
                     // TODO: Verify and come up with a better description.
                     "Options.ScreenEcho": {
                         "schema": {
-                            "title": "ScreenEcho",
+                            "title": "Screen Echo",
                             "description": "0=off, 1= highlight, 2 = all",
                             "type": "number",
                             "default": 1,
@@ -1222,11 +1216,10 @@
                             ]
                         }
                     },
-                    // TODO: Verify and come up with a description.
                     "Options.SimultaneousSynthAndWave": {
                         "schema": {
-                            "title": "SimultaneousSynthAndWave",
-                            "description": "",
+                            "title": "Simultaneous Synth and Wave",
+                            "description": "Whether to enable smoother playing of WAV files when using the DEC Talk Access 32 software synthesizer. This option is only available in Default.jcf. Changes to this setting take effect the next time you start JAWS.  Disabled by default.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1239,19 +1232,17 @@
                             ]
                         }
                     },
-
                     "Options.SingleDigitThreshold": {
-                        "title": "If Number Contains [JAWS Settings Center >> Text Processing >> Number and Date Processing]",
+                        "title": "Single Digit Threshold",
                         "description": "The number of digits a number must contain before it is read as single digits (like a phone number).  Defaults to five.",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 5
                     },
-
                     "Options.SkimReadingIndication": {
                         "schema": {
-                            "title": "SkimReadingIndication",
-                            "description": "Whether or not to indicate (via a beep) when skimming over text units for which the regular expression returns FALSE. 0=off, 1=on (beep every 20 units skimmed over)",
+                            "title": "Skim Reading Indication",
+                            "description": "Whether or not to indicate (via a beep) when skimming over text units for which the regular expression returns FALSE.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -1260,30 +1251,29 @@
                             ],
                             "enumLabels": [
                                 "off",
-                                "on"
+                                "beep every 20 units skimmed over"
                             ]
                         }
                     },
-                    // TODO: Discuss, this is not meaningful unless it's coupled with an application for context.
-                    "Options.SleepMode": {
-                        "schema": {
-                            "title": "SleepMode",
-                            "description": "Whether to put JAWS to sleep.  In the context of a specific application, this preference can be set to disable JAWS within that application.",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
-
+                    // This is not meaningful unless it's coupled with an application for context.  Disabled for now.
+                    // "Options.SleepMode": {
+                    //     "schema": {
+                    //         "title": "SleepMode",
+                    //         "description": "Whether to put JAWS to sleep.  In the context of a specific application, this preference can be set to disable JAWS within that application.",
+                    //         "type": "number",
+                    //         "default": 0,
+                    //         "enum": [
+                    //             0,
+                    //             1
+                    //         ],
+                    //         "enumLabels": [
+                    //             "off",
+                    //             "on"
+                    //         ]
+                    //     }
+                    // },
                     "Options.SmartWordReading": {
-                        "title": "Smart Word Reading [JAWS Settings Center >> Text Processing >> General]",
+                        "title": "Smart Word Reading",
                         "description": "Whether or not to enable \"smart reading\" when using the \"Say Word\" command.",
                         "enum": [
                             0,
@@ -1295,10 +1285,9 @@
                         ],
                         "default": 1
                     },
-
                     "Options.SpeakANSIChars": {
                         "schema": {
-                            "title": "SpeakANSIChars",
+                            "title": "Speak ANSI Chars",
                             "description": "Whether or not to announce ANSI characters.",
                             "type": "number",
                             "default": 1,
@@ -1312,9 +1301,8 @@
                             ]
                         }
                     },
-
                     "Options.SpeakCharacterValueAsMultibyteSequence": {
-                        "title": "Speak Character Value As Sequence of Multibyte Values [JAWS Settings Center >> Graphics and Symbols]",
+                        "title": "Speak Character Value As Sequence of Multibyte Values",
                         "description": "Whether to read unicode characters as a series of multi-byte values.",
                         "enum": [
                             0,
@@ -1327,7 +1315,7 @@
                         "default": 0
                     },
                     "Options.SpeakCharacterValueInHex": {
-                        "title": "Speak Character Value In Hex [JAWS Settings Center >> Graphics and Symbols]",
+                        "title": "Speak Character Value In Hex",
                         "description": "Whether to announce the hex value of a character when numpad 5 is pressed three times quickly.",
                         "enum": [
                             0,
@@ -1340,7 +1328,7 @@
                         "default": 0
                     },
                     "Options.SpeakNumbersSepByDashesAsDigits": {
-                        "title": "In Number Contains Dashes [JAWS Settings Center >> Text Processing >> Number and Date Processing]",
+                        "title": "Numbers Containing Dashes as Digits",
                         "description": "Whether to read numbers that contain dashes (such as phone numbers) as a series of digits.",
                         "enum": [
                             0,
@@ -1352,9 +1340,8 @@
                         ],
                         "default": 0
                     },
-
                     "Options.SpeechHistory": {
-                        "title": "Enable Speech History [JAWS Settings Center >> Speech Verbosity]",
+                        "title": "Enable Speech History",
                         "description": "Whether to read through the 50-item speech history when \"insert+spacebar\" and then \"h\" are pressed.",
                         "enum": [
                             0,
@@ -1367,23 +1354,22 @@
                         "default": 1
                     },
                     "Options.SpeechMode": {
-                        "title": "Speech Mode [JAWS Settings Center >> Speech Options]",
-                        "description": "The \"speech mode\" to use (full or \"less\").",
+                        "title": "Speech Mode",
+                        "description": "The \"speech mode\" to use, either \"full\" or \"less\".",
                         "enum": [0, 1],
                         "enumLabels": ["full speech", "less speech"],
                         "default": 0
                     },
                     "Options.SpellAlphanumericData": {
-                        "title": "Spell Alphanumeric Data [JAWS Settings Center >> Text Processing >> General]",
+                        "title": "Spell Alphanumeric Data",
                         "description": "How to read alphanumeric data.",
                         "enum": [0, 1, 2],
                         "enumLabels": ["read as appears", "spell", "spell phonetically"],
                         "default": 0
                     },
-
                     "Options.SpellPhonetic": {
                         "schema": {
-                            "title": "SpellPhonetic",
+                            "title": "Spell Phonetic",
                             "description": "How to announce word spellings.",
                             "type": "number",
                             "default": 0,
@@ -1408,7 +1394,7 @@
                     },
                     "Options.SynthesizerResetFrequency": {
                         "schema": {
-                            "title": "SynthesizerResetFrequency",
+                            "title": "Synthesizer Reset Frequency",
                             "description": "How often to reset communication with the synthesizer, in milliseconds.",
                             "type": "number",
                             "default": 2000,
@@ -1416,10 +1402,9 @@
                             "minValue": 0
                         }
                     },
-
                     "Options.TetherJawsToPC": {
                         "schema": {
-                            "title": "TetherJawsToPC",
+                            "title": "Tether Jaws to PC",
                             "description": "Whether or not to tether the JAWS cursor to the PC cursor.  If this is set to 'on', whenever the Pc cursor moves, the Jaws cursor will follow it. If this is set to 'off', the JAWS cursor is indifferent to Pc cursor movements (this is the default).",
                             "type": "number",
                             "default": 0,
@@ -1434,7 +1419,7 @@
                         }
                     },
                     "Options.TextAnalyser": {
-                        "title": "Text Analyzer [JAWS Settings Center >> Text Analyzer]",
+                        "title": "Text Analyzer",
                         "description": "The type of alert to use when announcing formatting errors.",
                         "enum": [0, 1, 2, 3],
                         "enumLabels": ["turn off", "indicate with sound", "speak count", "describe inconsistencies"],
@@ -1442,59 +1427,58 @@
                     },
                     // TODO: Discuss whether / how to handle "bit fields" like these.
                     // "Options.TextAnalyserSymbolFlags": {
-                    //     "title": "Indicate Mismatched Symbols [JAWS Settings Center >> Text Analyzer]",
+                    //     "title": "Indicate Mismatched Symbols",
                     //     "description": "Which mismatched symbols (such as mismatched opening and closing parentheses) to indicate when editing. Defaults to announcing all supported mismatching symbols."
                     // },
                     // "Options.TextAnalyserTypeFlags": {
-                    //     "title": "Inconsistencies to Check  [JAWS Settings Center >> Text Analyzer]",
+                    //     "title": "Inconsistencies to Check",
                     //     "description": "Which types of inconsistencies to check.  Defaults to \"all\"."
                     // },
                     "Options.TouchKeyboardChildPanelNotification": {
-                        "title": "Touch Alternative Character Panel Popup Notification [JAWS Settings Center >> Keyboard >> Touch Keyboard]",
+                        "title": "Touch Alternative Character Panel Popup Notification",
                         "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
                         "enum": [0, 1],
                         "enumLabels": ["by both message and sound", "by sound only"],
                         "default": 0
                     },
                     "Options.TouchKeyboardNotification": {
-                        "title": "Touch Keyboard Notification [JAWS Settings Center >> Keyboard >> Touch Keyboard]",
+                        "title": "Touch Keyboard Notification",
                         "description": "Whether/how to notify when the touch keyboard appears/disappears.",
                         "enum": [0, 1, 2],
                         "enumLabels": ["by message", "by sound", "by both message and sound"],
                         "default": 2
                     },
                     "Options.TouchTypingEcho": {
-                        "title": "Touch Typing Echo [JAWS Settings Center >> Keyboard >> Touch Keyboard]",
+                        "title": "Touch Typing Echo",
                         "description": "Whether/how to echo text entered using the touch keyboard.",
                         "enum": [0, 1, 2, 3],
                         "enumLabels": ["none", "characters", "words", "both characters and words"],
                         "default": 3
                     },
                     "Options.TouchTypingMode": {
-                        "title": "Touch Typing Mode [JAWS Settings Center >> Keyboard >> Touch Keyboard]",
+                        "title": "Touch Typing Mode",
                         "description": "Which keyboard mode to use for the touch keyboard.",
                         "enum": [0, 1],
                         "enumLabels": ["standard", "touch typing"],
                         "default": 1
                     },
-                    // TODO: Verify and fill in the description.
-                    // Can't find information in the help file.
-                    "Options.TreeViewCheckBoxes": {
-                        "schema": {
-                            "title": "TreeViewCheckBoxes",
-                            "description": "",
-                            "type": "number",
-                            "default": 1,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
+                    // Can't find information in the help file or default settings.  Disabled for now.
+                    // "Options.TreeViewCheckBoxes": {
+                    //     "schema": {
+                    //         "title": "Tree View Check Boxes",
+                    //         "description": "",
+                    //         "type": "number",
+                    //         "default": 1,
+                    //        "enum": [
+                    //             0,
+                    //            1
+                    //         ],
+                    //         "enumLabels": [
+                    //             "off",
+                    //             "on"
+                    //         ]
+                    //     }
+                    // },
                     "Options.TypingEcho": {
                         "schema": {
                             "title": "Typing echo",
@@ -1533,8 +1517,8 @@
                     },
                     "Options.UseExtendedKeys": {
                         "schema": {
-                            "title": "UseExtendedKeys",
-                            "description": "Determines whether Extended and Numpad keys should be processed separately. 0=Treat Extended and Numpad keys the same 1=Differentiate between Extended and Numpad keys",
+                            "title": "Use Extended Keys",
+                            "description": "Whether to distinguish between extended and number pad keys.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1549,7 +1533,7 @@
                     },
                     "Options.UseVirtualInfoInFormsMode": {
                         "schema": {
-                            "title": "UseVirtualInfoInFormsMode",
+                            "title": "Use Virtual Info in Forms Mode",
                             "description": "Whether to use information from the virtual HTML area for prompts in Forms mode. Warning: this will not always result in accurate information, particularly on pages where there are errors in the HTML coding which result in forms mode and virtual mode being out of synchronization",
                             "type": "number",
                             "default": 0,
@@ -1563,27 +1547,27 @@
                             ]
                         }
                     },
-                    // TODO: Verify and fill this out.
-                    "Options.UseWindowsKeyboardHook": {
-                        "schema": {
-                            "title": "UseWindowsKeyboardHook",
-                            "description": "",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ]
-                        }
-                    },
+                    // No documentation or onscreen option.  Disabled for now.
+                    // "Options.UseWindowsKeyboardHook": {
+                    //     "schema": {
+                    //         "title": "Use Windows Keyboard Hook",
+                    //         "description": "",
+                    //         "type": "number",
+                    //         "default": 0,
+                    //         "enum": [
+                    //             0,
+                    //             1
+                    //         ],
+                    //         "enumLabels": [
+                    //             "off",
+                    //             "on"
+                    //         ]
+                    //     }
+                    // },
                     "Options.Verbosity": {
                         "schema": {
                             "title": "Verbosity",
-                            "description": "how much speech to say beginner=0 (most speech), intermediate = 1, advanced = 2 (least speech)",
+                            "description": "How verbose announcements should be.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1601,46 +1585,50 @@
                     "Options.VIRTUALMSAAREFRESH": {
                         "schema": {
                             "title": "VIRTUALMSAAREFRESH",
-                            "description": "determines how often an embedded ActiveX control causes the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA 0 means allow refresh rate to be dictated by MSAA a positive number means only refresh every X miliseconds -1 means don't refresh at all.",
+                            "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
                             "type": "number",
                             "default": 0,
                             "multipleOf": 1,
                             "minValue": -1
                         }
                     },
+                    // TODO: DEFAULT
                     "Options.VTcolor": {
-                        "title": "Color [JAWS Settings Center >> Visual Tracking >> Visual Settings]",
+                        "title": "Visual Tracking Color",
                         "description": "The colour to use when highlighting items selected using the touch cursor.",
                         "type": "number",
                         "multipleOf": 1
                     },
+                    // TODO: DEFAULT
                     "Options.VTspacing": {
-                        "title": "Spacing [JAWS Settings Center >> Visual Tracking >> Visual Settings]",
+                        "title": "Visual Tracking Spacing",
                         "description": "The amount of spacing between the highlight box and the highlighted item.",
                         "type": "number",
                         "multipleOf": 1
                     },
                     "Options.VTstyle": {
-                        "title": "Style [JAWS Settings Center >> Visual Tracking >> Visual Settings]",
+                        "title": "Visual Tracking Style",
                         "description": "The style of highlighting to use.",
                         "enum": [0, 1, 2],
                         "enumLabels": ["box", "block", "underline"],
                         "default": 0
                     },
+                    // TODO: DEFAULT
                     "Options.VTthickness": {
-                        "title": "Thickness [JAWS Settings Center >> Visual Tracking >> Visual Settings]",
+                        "title": "Visual Tracking Thickness",
                         "description": "How thick to make the \"box\" and \"underline\" highlighting styles.",
                         "type": "number",
                         "multipleOf": 1
                     },
+                    // TODO: DEFAULT
                     "Options.VTtransparency": {
-                        "title": "Transparency [JAWS Settings Center >> Visual Tracking >> Visual Settings]",
+                        "title": "Visual Tracking Transparency",
                         "description": "How transparent to make the visual highlighting of selected items.",
                         "type": "number",
                         "multipleOf": 1
                     },
                     "Options.VTUseTouchCursor": {
-                        "title": "Highlight Touch Cursor [JAWS Settings Center >> Visual Tracking]",
+                        "title": "Highlight Touch Cursor",
                         "description": "Whether or not to highlight selected items when using the touch cursor or touch gestures.",
                         "enum": [
                             0,
@@ -1653,7 +1641,7 @@
                         "default": 0
                     },
                     "Options.VTUseVirtualPCCursor": {
-                        "title": "Use Virtual PC Cursor [ JAWS Settings Center >> Miscellaneous]",
+                        "title": "Use Virtual PC Cursor",
                         "description": "Whether to use the virtual PC cursor when reading HTML documents.",
                         "enum": [
                             0,
@@ -1666,7 +1654,7 @@
                         "default": 1
                     },
                     "Options.VTUseVirtualRibbon": {
-                        "title": "Use Virtual Ribbon Menu [ JAWS Settings Center >> Miscellaneous]",
+                        "title": "Use Virtual Ribbon Menu",
                         "description": "Whether to turn on the virtual ribbon menu.",
                         "enum": [
                             0,
@@ -1679,28 +1667,28 @@
                         "default": 0
                     },
                     "OSM.PixelsPerSpace": {
-                        "title": "Pixels per space [JAWS settings center >> Miscellaneous ]",
-                        "description": "when simulating spaces in blank portions of a line, number of pixels represented by each space",
+                        "title": "Pixels Per Space",
+                        "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 8
                     },
                     "OSM.PixelsPerTab": {
-                        "title": "Pixels Per Tab [JAWS settings center >> Miscellaneous]",
+                        "title": "Pixels Per Tab",
                         "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 10
                     },
                     "OSM.TableDetection": {
-                        "title": "Table Presentation Information [JAWS Settings Center >> Web/HTML/PDFs >> Tables]",
+                        "title": "Table Presentation Information",
                         "description": "Which tables to read as tables (data tables, or all tables).",
                         "enum": [0, 1],
-                        "enumLabels": ["for data tables only", "for all tables"],
+                        "enumLabels": ["data tables only", "all tables"],
                         "default": 0
                     },
                     "OSM.TrackFocusRect": {
-                        "title": "track focus rectangle [JAWS settings center >> Miscellaneous]",
+                        "title": "Track Focus Rectangle",
                         "description": "Set to one causes MAGic to track the focus rectangle in standard controls that utilize focus rectangles.",
                         "enum": [
                             0,
@@ -1713,36 +1701,36 @@
                         "default": 1
                     },
                     "OSM.UnderlineProximity": {
-                        "title": "underline proximity [JAWS settings center >> Miscellaneous]",
-                        "description": "how far away in pixels can an underline be before being considered an actual underline",
+                        "title": "Underline Proximity",
+                        "description": "How far away in pixels can an underline be before being considered an actual underline",
                         "type": "number",
                         "multipleOf": 1,
                         "default": 0
                     },
                     // TODO: Document default.
                     "Touch.FlickVelocityMin": {
-                        "title": "Flick Velocity [JAWS Settings Center >> Gestures]",
+                        "title": "Flick Velocity",
                         "description": "The minimum finger velocity to treat as a \"flick\".",
                         "type": "number",
                         "multipleOf": 1
                     },
                     // TODO: Document default.
                     "Touch.TapEventDurationMax": {
-                        "title": "Explore Delay [JAWS Settings Center >> Gestures]",
+                        "title": "Explore Delay",
                         "description": "The delay between touching a touch screen and displaying the explore menu, in milliseconds.",
                         "type": "number",
                         "multipleOf": 1
                     },
                     // TODO: Document default.
                     "Touch.TapInterEventDurationMax": {
-                        "title": "Double Tap Speed [JAWS Settings Center >> Gestures]",
+                        "title": "Double Tap Speed",
                         "description": "The threshold for treating two taps as a double-tap, expressed in milliseconds between taps.",
                         "type": "number",
                         "multipleOf": 1
                     },
                     // TODO: Document default.
                     "Touch.TapTranslationMax": {
-                        "title": "Tap Radius [JAWS Settings Center >> Gestures]",
+                        "title": "Tap Radius",
                         "description": "The size of the finger contact spot on the touch screen.",
                         "type": "number",
                         "multipleOf": 1
@@ -2627,7 +2615,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.magnifier": {
         "name": "Windows Built-in Screen Magnifier",
         "contexts": {
@@ -2823,7 +2810,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.onscreenKeyboard": {
         "name": "Windows Built-in Onscreen Keyboard",
         "contexts": {
@@ -2885,7 +2871,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.narrator": {
         "name": "Windows Built-in Narrator",
         "contexts": {
@@ -3141,7 +3126,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.language": {
         "name": "Windows Display Language",
         "contexts": {
@@ -3224,7 +3208,6 @@
             }
         ]
     },
-
     "org.nvda-project": {
         "name": "NVDA Screen Reader",
         "contexts": {
@@ -3657,7 +3640,6 @@
             }
         ]
     },
-
     "trace.easyOne.communicator.windows": {
         "name": "EasyOne Communicator Windows",
         "contexts": {
@@ -3695,7 +3677,6 @@
             }
         ]
     },
-
     "trace.easyOne.sudan.windows": {
         "name": "EasyOne Communicator Sudan",
         "contexts": {
@@ -3733,7 +3714,6 @@
             }
         ]
     },
-
     "webinsight.webAnywhere.windows": {
         "name": "Web Anywhere",
         "contexts": {
@@ -3771,7 +3751,6 @@
             }
         ]
     },
-
     "net.opendirective.maavis": {
         "name": "maavis",
         "contexts": {
@@ -3881,7 +3860,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
         "contexts": {
@@ -3984,7 +3962,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.stickyKeys": {
         "name": "Windows StickyKeys",
         "contexts": {
@@ -4038,7 +4015,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
@@ -4246,7 +4222,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.mouseKeys": {
         "name": "Windows MouseKeys",
         "contexts": {
@@ -4370,7 +4345,6 @@
                             "inputPath": "MaxSpeed.value",
                             "factor": 0.00285714285714,
                             "offset": -0.0285714285714
-
                         }
                     }
                 }
@@ -4382,7 +4356,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.mouseTrailing": {
         "name": "Windows Mouse Trailing",
         "contexts": {
@@ -4447,7 +4420,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.screenResolution": {
         "name": "Windows Screen Resolution",
         "contexts": {
@@ -4480,7 +4452,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.screenDPI": {
         "name": "Windows DPI",
         "contexts": {
@@ -4517,7 +4488,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.cursors": {
         "name": "Windows Cursors",
         "contexts": {
@@ -4871,7 +4841,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.typingEnhancement": {
         "name": "Windows typing autocorrection",
         "contexts": {
@@ -5104,7 +5073,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.nightScreen": {
         "name": "Windows night light settings",
         "contexts": {
@@ -5161,7 +5129,6 @@
             }
         ]
     },
-
     "eu.singularlogic.pixelsense.sociable": {
         "name": "Sociable",
         "contexts": {
@@ -5252,7 +5219,6 @@
             }
         }
     },
-
     "net.gpii.uioPlus": {
         "name": "UIO+",
         "contexts": {
