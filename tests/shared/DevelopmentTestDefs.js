@@ -49,18 +49,7 @@ gpii.tests.development.testDefs = [{
     gradeNames: ["gpii.test.common.testCaseHolder"],
     gpiiKey: gpii.tests.development.gpiiKey,
     sequence: [{
-        // TODO: Wait till the noUser keyin at the GPII start completes. This is to work around an issue with
-        // running productionConfigTests.js when kettle onListen event, (which fires onServerReady event
-        // (https://github.com/fluid-project/kettle/blob/master/lib/test/KettleTestUtils.js#L112), which then
-        // starts test sequence), fires before the noUser keyin at the system start completes. The proper fix
-        // is to have the test sequence start until noUser keyin completes. For example, the first test case
-        // could be to listen to {flowManager}.events.noUserLoggedIn. This fix is not used because hitting the
-        // error: Failed to resolve reference {flowManager}.
-        func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 100 ]
-    }, {
-        event: "{tests}.events.timeoutComplete",
-        listener: "{loginRequest}.send"
+        func: "{loginRequest}.send"
     }, {
         event: "{loginRequest}.events.onComplete",
         listener: "gpii.tests.development.testLoginResponse"
