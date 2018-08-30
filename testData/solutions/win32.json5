@@ -3433,8 +3433,34 @@
                     "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
+                            // Use the same condition for applying a high contrast theme to windows:
+                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                            "left": false,
+                                            "operator": "||",
+                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "right": false
+                                        }
+                                    },
+                                    "operator": "&&",
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "left": "",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "operator": "!==",
+                                            "right": "regular-contrast"
+                                        }
+                                    }
+                                }
+                            },
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
