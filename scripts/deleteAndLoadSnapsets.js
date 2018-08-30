@@ -26,6 +26,7 @@ var http = require("http"),
 
 var gpii = fluid.registerNamespace("gpii");
 fluid.registerNamespace("gpii.dataLoader");
+
 fluid.setLogging(fluid.logLevel.INFO);
 
 // Handle command line
@@ -34,15 +35,14 @@ if (process.argv.length < 5) {
     process.exit(1);
 }
 
-var dbLoader = gpii.dataLoader;
-
 /**
  * Create a set of options for data loader and a function to retreive them.
  * The options are based on the command line parameters and a set of database
  * constants.
  * @param {Array} processArgv - The command line arguments.
+ * @return {Object} - The options.
  */
-dbLoader.initOptions = function (processArgv) {
+gpii.dataLoader.initOptions = function (processArgv) {
     var dbOptions = {};
     dbOptions.couchDbUrl = processArgv[2];
     dbOptions.buildDataDir = processArgv[3];
@@ -70,11 +70,6 @@ dbLoader.initOptions = function (processArgv) {
             "Content-Type": "application/json"
         }
     };
-
-    // Set up function to get at these options.
-    gpii.dataLoader.getOptions = function () {
-        return dbOptions;
-    };
     fluid.log("COUCHDB_URL: '" +
         dbOptions.parsedCouchDbUrl.protocol + "//" +
         dbOptions.parsedCouchDbUrl.hostname + ":" +
@@ -82,19 +77,20 @@ dbLoader.initOptions = function (processArgv) {
         dbOptions.parsedCouchDbUrl.pathname + "'"
     );
     fluid.log("BUILD_DATA_DIR: '" + dbOptions.buildDataDir + "'");
+    return dbOptions;
 };
-dbLoader.initOptions(process.argv);
 
 /**
  * Find the Prefs Safes of type "snapset", mark them to be deleted and add
  * them to an array of records to remove.
  * @param {String} responseString - The response from the database query for
  *                                  retrieving the snapset PrefsSafes records
+ * @param {Object} options - Data loader options used to store the current set
+ *                           of processed snapsets.
  * @return {Array} - The snapset PrefsSafes records marked for deletion.
  */
-dbLoader.processSnapsets = function (responseString) {
+gpii.dataLoader.processSnapsets = function (responseString, options) {
     fluid.log("Processing the snapset Prefs Safes records...");
-    var options = dbLoader.getOptions();
     var snapSetRecords = JSON.parse(responseString);
     fluid.each(snapSetRecords.rows, function (aSnapset) {
         aSnapset.value._deleted = true;
@@ -109,13 +105,14 @@ dbLoader.processSnapsets = function (responseString) {
  * them for deletion, and add them to array of records to delete.
  * @param {String} responseString - The response from the database query for
  *                                  retrieving all the GPII Keys.
+ * @param {Object} options - Data loader options used to store the current set
+ *                           of snapset GPII keys.
  * @return {Array} - The GPII Key records marked for deletion.
  */
-dbLoader.processGpiiKeys = function (responseString) {
+gpii.dataLoader.processGpiiKeys = function (responseString, options) {
     fluid.log("Processing the GPII Keys...");
-    var options = dbLoader.getOptions();
     var gpiiKeyRecords = JSON.parse(responseString);
-    options.gpiiKeys = dbLoader.markPrefsSafesGpiiKeysForDeletion(
+    options.gpiiKeys = gpii.dataLoader.markPrefsSafesGpiiKeysForDeletion(
         gpiiKeyRecords, options.snapsetPrefsSafes
     );
     fluid.log("\tGPII Keys associated with snapset Prefs Safes marked for deletion.");
@@ -131,7 +128,7 @@ dbLoader.processGpiiKeys = function (responseString) {
  *                           its associated GPII Key record.
  * @return {Array} - the values from the gpiiKeyRecords that are snapset GPII Keys.
  */
-dbLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, snapSets) {
+gpii.dataLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, snapSets) {
     var gpiiKeysToDelete = [];
     fluid.each(gpiiKeyRecords.rows, function (gpiiKeyRecord) {
         var gpiiKey = fluid.find(snapSets, function (aSnapSet) {
@@ -153,11 +150,11 @@ dbLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, snapSets)
  * is the parameter of the appropriate promise.then() call.
  * @param {Object} batchDeleteResponse - the reponse handler configured for the
  *                                       batch delete request.
+ * @param {Object} options - Object that contains the records to be deleted.
  */
-dbLoader.doBatchDelete = function (batchDeleteResponse) {
-    var options = dbLoader.getOptions();
+gpii.dataLoader.doBatchDelete = function (batchDeleteResponse, options) {
     var docsToRemove = options.snapsetPrefsSafes.concat(options.gpiiKeys);
-    var execBatchDelete = dbLoader.createBulkDocsRequest(
+    var execBatchDelete = gpii.dataLoader.createBulkDocsRequest(
         docsToRemove, batchDeleteResponse, options
     );
     execBatchDelete();
@@ -171,7 +168,7 @@ dbLoader.doBatchDelete = function (batchDeleteResponse) {
  * @return {Function} - A function that wraps an http request to execute the
  *                      POST.
  */
-dbLoader.createBulkDocsRequest = function (dataToPost, responseHandler, options) {
+gpii.dataLoader.createBulkDocsRequest = function (dataToPost, responseHandler, options) {
     return function () {
         var batchPostData = JSON.stringify({"docs": dataToPost});
         options.postOptions.headers["Content-Length"] = Buffer.byteLength(batchPostData);
@@ -187,13 +184,14 @@ dbLoader.createBulkDocsRequest = function (dataToPost, responseHandler, options)
  * at the correct time.
  * @param {Function} handleEnd - Function to call that deals with the response
  *                               data when the response receives an "end" event.
- * @param {Promise} promise - Promose to resolve/reject on a response "end" or
+ * @param {Object} options - Data loader options passed to handleEnd().
+ * @param {Promise} promise - Promise to resolve/reject on a response "end" or
  *                           "error" event.
  * @param {String} errorMsg - Optional error message to prepend to the error
  *                            received from a response "error" event.
  * @return {Function} - Function reponse callback for an http request.
  */
-dbLoader.createResponseHandler = function (handleEnd, promise, errorMsg) {
+gpii.dataLoader.createResponseHandler = function (handleEnd, options, promise, errorMsg) {
     return function (response) {
         var responseString = "";
 
@@ -216,7 +214,7 @@ dbLoader.createResponseHandler = function (handleEnd, promise, errorMsg) {
                 promise.reject(fullErrorMsg);
             }
             else {
-                var value = handleEnd(responseString);
+                var value = handleEnd(responseString, options);
                 promise.resolve(value);
             }
         });
@@ -231,10 +229,10 @@ dbLoader.createResponseHandler = function (handleEnd, promise, errorMsg) {
  * Quit the whole process because a request of the database has failed, and log
  * the error.  Use this function when the failure has not actually modified the
  * database; for example, when getting all the current snapset Prefs Safes.  If
- * that failed, that database is as it was, but there is no point in continuing.
+ * that failed, the database is unchanged, but there is no point in continuing.
  * @param {String} errorMsg - The reason why database access failed.
  */
-dbLoader.bail = function (errorMsg) {
+gpii.dataLoader.bail = function (errorMsg) {
     fluid.log(errorMsg);
     process.exit(1);
 };
@@ -249,7 +247,7 @@ dbLoader.bail = function (errorMsg) {
  * @param {String} errorMsg - optional error message for request errors.
  * @return {http.ClientRequest} - The http request object.
  */
-dbLoader.queryDatabase = function (databaseURL, handleResponse, errorMsg) {
+gpii.dataLoader.queryDatabase = function (databaseURL, handleResponse, errorMsg) {
     var aRequest = http.request(databaseURL, handleResponse);
     aRequest.on("error", function (e) {
         fluid.log(errorMsg + e.message);
@@ -264,7 +262,7 @@ dbLoader.queryDatabase = function (databaseURL, handleResponse, errorMsg) {
  * @return {Array} - Each element of the array is an Object based on the
  *                   contents of each file loaded.
  */
-dbLoader.getDataFromDirectory = function (dataDir) {
+gpii.dataLoader.getDataFromDirectory = function (dataDir) {
     var contentArray = [];
     var files = fs.readdirSync(dataDir);
     files.forEach(function (aFile) {
@@ -282,17 +280,18 @@ dbLoader.getDataFromDirectory = function (dataDir) {
  * @param {Object} options - Object that has the view for finding snap set
  *                           Prefs Safes records in the database.
  * @return {Object} - An object containing the database request to load the
- *                    static data, and a promise configure to trigger the next
+ *                    static data, and a promise configured to trigger the next
  *                    step.
  */
-dbLoader.createFetchSnapsetsStep = function (options) {
+gpii.dataLoader.createFetchSnapsetsStep = function (options) {
     var togo = fluid.promise();
-    var response = dbLoader.createResponseHandler(
-        dbLoader.processSnapsets,
+    var response = gpii.dataLoader.createResponseHandler(
+        gpii.dataLoader.processSnapsets,
+        options,
         togo,
         "Error retrieving snapsets Prefs Safes: "
     );
-    var snapsSetsRequest = dbLoader.queryDatabase(
+    var snapsSetsRequest = gpii.dataLoader.queryDatabase(
         options.prefsSafesViewUrl,
         response,
         "Error requesting snapsets Prefs Safes: "
@@ -303,26 +302,41 @@ dbLoader.createFetchSnapsetsStep = function (options) {
 /*
  * Create the step that fetches the current GPII keys associate with the snapset
  * Prefs Safes.
- * @param {Object} options - Object that has the view for finding all GPII Key
- *                           records in the database.
  * @param {Promise} previousStep - Promise from a previous step whose fulfillment
  *                                 triggers the request configured herein.
+ * @param {Object} options - Object that has the view for finding all GPII Key
+ *                           records in the database.
  * @return {Promise} - The promise asoociated with this step.
  */
-dbLoader.createFetchGpiiKeysStep = function (options, previousStep) {
+gpii.dataLoader.createFetchGpiiKeysStep = function (previousStep, options) {
     var togo = fluid.promise();
-    var response = dbLoader.createResponseHandler(
-        dbLoader.processGpiiKeys,
+    var response = gpii.dataLoader.createResponseHandler(
+        gpii.dataLoader.processGpiiKeys,
+        options,
         togo,
         "Error finding snapset Prefs Safes associated GPII Keys: "
     );
-    var request = dbLoader.queryDatabase(
+    var request = gpii.dataLoader.queryDatabase(
         options.gpiiKeysViewUrl,
         response,
         "Error requesting GPII Keys: "
     );
-    previousStep.then(function () { request.end(); }, dbLoader.bail);
+    previousStep.then(function () { request.end(); }, gpii.dataLoader.gbail);
     return togo;
+};
+
+/*
+ * Log how many snapset Prefs Safes and GPII Keys were deleted.
+ * @param {String} responseString - Response from the database
+ * @param {Object} options - Object that contains the sets of Prefs Safes and
+ *                           their keys.
+ */
+gpii.dataLoader.logSnapsetDeletion = function (responseString, options) {
+    fluid.log(  "Deleted " +
+                options.snapsetPrefsSafes.length + " Prefs Safes and " +
+                options.gpiiKeys.length + " associated GPII Keys, " +
+                "response:  " + responseString
+    );
 };
 
 /*
@@ -330,45 +344,55 @@ dbLoader.createFetchGpiiKeysStep = function (options, previousStep) {
  * their associated GPII keys.
  * @param {Promise} previousStep - Promise from a previous step whose fulfillment
  *                                 triggers the bulk delete request.
+ * @param {Object} options - Object that contains the records to be deleted.
  * @return {Promise} - The promise asoociated with this step.
  */
-dbLoader.createBatchDeleteStep = function (previousStep) {
+gpii.dataLoader.createBatchDeleteStep = function (previousStep, options) {
     var togo = fluid.promise();
-    var response = dbLoader.createResponseHandler(
-        function () {
-            fluid.log("Snapset Prefs Safes and associated GPII Keys deleted.");
-        },
+    var response = gpii.dataLoader.createResponseHandler(
+        gpii.dataLoader.logSnapsetDeletion,
+        options,
         togo
     );
     previousStep.then(
-        function () { dbLoader.doBatchDelete(response); },
-        dbLoader.bail
+        function () { gpii.dataLoader.doBatchDelete(response, options); },
+        gpii.dataLoader.bail
     );
     return togo;
 };
 
 /*
+ * Log the uploading of all the snapset and user Prefs Safes.
+ * @param {String} responseString - Response from the database (ignored)
+ * @param {Object} options - Object that contains the directories from which
+ *                           the Prefs Safes were loaded.
+ */
+gpii.dataLoader.logSnapsetsUpload = function (responseString, options) {
+    fluid.log ("Bulk loading of build data from '" + options.buildDataDir + "'");
+    fluid.log ("Bulk loading of demo user data from '" + options.demoUserDir + "'");
+};
+
+/*
  * Create the step that uploads, in batch, the new snapset Prefs Safes, their
  * associated GPII keys, and the demo user Prefs Safes/GPII Keys.
- * @param {Object} options - Object that has the paths to the directories that
- *                           contain the new snapsets and demo user preferences.
  * @param {Promise} previousStep - Promise from a previous step whose fulfillment
  *                                 triggers this bulk upload request.
+ * @param {Object} options - Object that has the paths to the directories that
+ *                           contain the new snapsets and demo user preferences.
  * @return {Promise} - The promise asoociated with this step.
  */
-dbLoader.createBatchUploadStep = function (options, previousStep) {
+gpii.dataLoader.createBatchUploadStep = function (previousStep, options) {
     var togo = fluid.promise();
-    var buildData = dbLoader.getDataFromDirectory(options.buildDataDir);
-    var demoUserData = dbLoader.getDataFromDirectory(options.demoUserDir);
+    var buildData = gpii.dataLoader.getDataFromDirectory(options.buildDataDir);
+    var demoUserData = gpii.dataLoader.getDataFromDirectory(options.demoUserDir);
     var allData = buildData.concat(demoUserData);
-    var response = dbLoader.createResponseHandler(
-        function () {
-            fluid.log ("Bulk loading of build data from '" + options.buildDataDir + "'");
-        },
+    var response = gpii.dataLoader.createResponseHandler(
+        gpii.dataLoader.logSnapsetsUpload,
+        options,
         togo
     );
-    var request = dbLoader.createBulkDocsRequest(allData, response, options);
-    previousStep.then(request, dbLoader.bail);
+    var request = gpii.dataLoader.createBulkDocsRequest(allData, response, options);
+    previousStep.then(request, gpii.dataLoader.bail);
     return togo;
 };
 
@@ -378,21 +402,20 @@ dbLoader.createBatchUploadStep = function (options, previousStep) {
  * and their Keys, and the demo user Prefs Safes and their GPII Keys.  After all
  * steps are configured and connected, trigger the first one.
  */
-dbLoader.orchestrate = function () {
-    var options = dbLoader.getOptions();
+gpii.dataLoader.orchestrate = function () {
+    var options = gpii.dataLoader.initOptions(process.argv);
     var lastStep;
-    var firstStep = dbLoader.createFetchSnapsetsStep(options);
-    var nextStep = dbLoader.createFetchGpiiKeysStep(options, firstStep.promise);
-    nextStep = dbLoader.createBatchDeleteStep(nextStep);
+    var firstStep = gpii.dataLoader.createFetchSnapsetsStep(options);
+    var nextStep = gpii.dataLoader.createFetchGpiiKeysStep(firstStep.promise, options);
+    nextStep = gpii.dataLoader.createBatchDeleteStep(nextStep, options);
     if (options.justDelete) {
         lastStep = nextStep;
     } else {
-        lastStep = dbLoader.createBatchUploadStep(options, nextStep);
+        lastStep = gpii.dataLoader.createBatchUploadStep(nextStep, options);
     };
     // Go!
     firstStep.request.end();
-    lastStep.then(function () { fluid.log("Done."); }, dbLoader.bail);
+    lastStep.then(function () { fluid.log("Done."); }, gpii.dataLoader.bail);
 };
 
-dbLoader.orchestrate();
-
+gpii.dataLoader.orchestrate();
