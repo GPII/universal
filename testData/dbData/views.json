@@ -11,7 +11,7 @@
             "findAuthorizationByAccessToken": {
                 "map": "function(doc) {if (doc.type === 'gpiiAppInstallationAuthorization' && doc.revoked === false) {emit(doc.accessToken, {'_id': doc.clientId, 'authorization': doc})}}"
             },
-            "listKeysForPrefsSafe": {
+            "findKeysForPrefsSafe": {
                 "map": "function(doc) {if (doc.type === 'gpiiKey' || doc.type === 'gpiiCloudSafeCredential') emit(doc.prefsSafeId, null) }"
             },
             "listPrefsSafes": {
