@@ -3734,12 +3734,36 @@
                 "dataType": "REG_SZ"
             }
         ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "ONENOTE"
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "ONENOTE.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\OneNote.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ONENOTE.exe"
+                        }
+                    ]
+                }
             }
-        ]
+        }
     },
 
     "com.office.windowsWordHome365LearningTools": {
@@ -3872,12 +3896,36 @@
                 "dataType": "REG_SZ"
             }
         ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "WINWORD"
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "WINWORD.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winword.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "WINWORD.exe"
+                        }
+                    ]
+                }
             }
-        ]
+        }
     },
 
     "com.office.windowsWordPro365LearningTools": {
@@ -4007,11 +4055,35 @@
                 "dataType": "REG_SZ"
             }
         ],
-        "isRunning": [
-            {
-                "type": "gpii.processReporter.find",
-                "command": "WINWORD"
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "WINWORD.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winword.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "WINWORD.exe"
+                        }
+                    ]
+                }
             }
-        ]
+        }
     }
 }
