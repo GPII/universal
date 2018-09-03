@@ -3691,24 +3691,24 @@
                             "type": "string",
                             // TODO: We should present the value to the user in a human readable format
                             "enum": [
-                                '[{"Lang":"zh","Voice":"Microsoft  Tracy Desktop"}]',      // - Hong kong
-                                '[{"Lang":"zh","Voice":"Microsoft  Hanhan Desktop"}]',     // - Taiwan
-                                '[{"Lang":"zh","Voice":"Microsoft  HuiHui Desktop"}]',	   // - People’s Chinese Republic
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  Tracy Desktop\"}]",      // - Hong kong
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  Hanhan Desktop\"}]",     // - Taiwan
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  HuiHui Desktop\"}]",	   // - People’s Chinese Republic
 
-                                '[{"Lang":"en","Voice":"Microsoft Zira Desktop"}]',        // - US
-                                '[{"Lang":"en","Voice":"Microsoft David Desktop"}]',       // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",        // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",       // - US
 
-                                '[{"Lang":"en","Voice":"Microsoft Helena Desktop"}]',      // - United Kingdom
-                                '[{"Lang":"fr","Voice":"Microsoft Hortense Desktop"}]',    // - France
-                                '[{"Lang":"de","Voice":"Microsoft Hedda Desktop"}]',       // - Germany
-                                '[{"Lang":"it","Voice":"Microsoft Elsa Desktop"}]',        // - Italy
-                                '[{"Lang":"ja","Voice":"Microsoft Haruka Desktop"}]',      // - Japan
-                                '[{"Lang":"ko","Voice":"Microsoft Heami Desktop"}]',       // - Korea
-                                '[{"Lang":"pl","Voice":"Microsoft Paulina Desktop"}]',     // - Poland
-                                '[{"Lang":"pt","Voice":"Microsoft Maria Desktop"}]',       // - Portugal
-                                '[{"Lang":"ru","Voice":"Microsoft Irina Desktop"}]',       // - Russia
-                                '[{"Lang":"es","Voice":"Microsoft Sabina Desktop"}]',      // - Mexico
-                                '[{"Lang":"es","Voice":"Microsoft Helena Desktop"}]',      // - Spain
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",      // - United Kingdom
+                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",    // - France
+                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",       // - Germany
+                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",        // - Italy
+                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",      // - Japan
+                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",       // - Korea
+                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",     // - Poland
+                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",       // - Portugal
+                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",       // - Russia
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",      // - Mexico
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"       // - Spain
                             ]
                         }
                     }
