@@ -3532,5 +3532,528 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+
+    "com.office.windowsOneNoteLearningTools": {
+        "name": "LearningTools for OneNote 2016",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "64:Software\\Microsoft\\OneNoteLearningTools",
+                    "dataTypes": {
+                        "DictationLanguage": "REG_DWORD",
+                        "ReadingComprehensionDefaultFont": "REG_SZ",
+                        "IsReadingComprehensionFontWide": "REG_DWORD",
+                        "ReadingComprehensionTheme": "REG_DWORD",
+                        "ReadingComprehensionFontSize": "REG_DWORD",
+                        "SynthRate": "REG_DWORD",
+                        "SynthVoices": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "DictationLanguage": {
+                        "schema": {
+                            "title": "Dictation Language",
+                            "description": "Voice dictation language",
+                            "type": "number",
+                            // TODO: We should present the value to the user in a human readable format
+                            "enum": [
+                                1031, // German
+                                3082, // Spanish
+                                1036, // French
+                                1033, // English
+                                1040, // Italian
+                                1041, // Japanese
+                                1046, // Portuguese
+                                1049  // Russian
+                            ],
+                            "default": 1033
+                        }
+                    },
+                    "ReadingComprehensionDefaultFont": {
+                        "schema": {
+                            "title": "Font Spacing",
+                            "description": "The font in which text is preferred to be presented",
+                            "type": "string",
+                            "enum": [ "Calibri", "Sitka Small" ],
+                            "default": "Calibri"
+                        }
+                    },
+                    "IsReadingComprehensionFontWide": {
+                        "schema": {
+                            "title": "Font Spacing",
+                            "description": "Set wider font spacing for reading",
+                            "type": "number",
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "Default", 1: "Wide"
+                            "enum": [1, 0],
+                            "default": 0
+                        }
+                    },
+                    "ReadingComprehensionTheme": {
+                        "schema": {
+                            "title": "Theme",
+                            "description": "Set the theme for reading",
+                            "type": "number",
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "White", 1: "Reverse (High-Contrast)", 2: "Yellow", 3: "Pink", 4: "Green", 5: "Blue"
+                            "enum": [0, 1, 2, 3, 4, 5],
+                            "default": 0
+                        }
+                    },
+                    "ReadingComprehensionFontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "min": 12,
+                            "max": 96,
+                            "default": 48,
+                            "divisibleBy" : 2
+                        }
+                    },
+                    "SynthRate": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a homogeneus speech rate. For this
+                            // particular value we need also being able to translate signed values to unsigned ones.
+                            "enum": [
+                                4294967286,
+                                4294967287,
+                                4294967288,
+                                4294967289,
+                                4294967290,
+                                4294967291,
+                                4294967292,
+                                4294967293,
+                                4294967294,
+                                4294967295,
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "SynthVoices": {
+                        "schema": {
+                            "title": "Synth voice",
+                            "description": "The voice that will be used for text reading",
+                            "type": "string",
+                            // TODO: We should present the value to the user in a human readable format
+                            "enum": [
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  Tracy Desktop\"}]",      // - Hong kong
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  Hanhan Desktop\"}]",     // - Taiwan
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  HuiHui Desktop\"}]",	   // - People’s Chinese Republic
+
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",        // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",       // - US
+
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",      // - United Kingdom
+                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",    // - France
+                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",       // - Germany
+                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",        // - Italy
+                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",      // - Japan
+                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",       // - Korea
+                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",     // - Poland
+                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",       // - Portugal
+                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",       // - Russia
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",      // - Mexico
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"       // - Spain
+                            ]
+                        }
+                    }
+                },
+                "capabilities": [
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\OneNote\\AddIns\\LearningTools.OneNoteLearningTools",
+                "subPath": "FriendlyName",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "ONENOTE.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\OneNote.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ONENOTE.exe"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+
+    "com.office.windowsWordHome365LearningTools": {
+        "name": "LearningTools for Microsoft Office 2016 Word Home 365 edition for Windows 10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "64:Software\\Microsoft\\Office\\16.0\\Word\\Options",
+                    "dataTypes": {
+                        "ReadingModeColumnWidth": "REG_DWORD",
+                        "ReadingModePageColor": "REG_DWORD",
+                        "ReadingModePrintedPage": "REG_DWORD",
+                        "ReadAloudVoiceId": "REG_SZ",
+                        "ReadAloudVoiceRate": "REG_DWORD",
+                        "ReadingModeSyllables": "REG_DWORD",
+                        "ReadingModeTextSpacing": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "ReadingModeColumnWidth": {
+                        "schema": {
+                            "title": "Column mode",
+                            "description": "Column mode in which to display text",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "Narrow", 1: "Default", 2: "Wide"
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePageColor": {
+                        "schema": {
+                            "title": "Page color",
+                            "description": "The color that will be used as page background",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "None", 1: "Sepia", 2: "Reverse (High-Contrast)"
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePrintedPage": {
+                        "schema": {
+                            "title": "Design",
+                            "description": "Select between column desing and page design",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    },
+                    "ReadAloudVoiceId": {
+                        "schema": {
+                            "title": "Voice Id",
+                            "description": "The voice that will be used for text reading",
+                            "type": "string",
+                            "enum": [
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_PabloM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_HelenaM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_LauraM",
+
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_MarkM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_ZiraM"
+                            ],
+                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
+                        }
+                    },
+                    "ReadAloudVoiceRate": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a homogeneus speech rate
+                            "default": 10,
+                            "min": 0,
+                            "max": 20,
+                            "divisibleBy": 1
+                        }
+                    },
+                    "ReadingModeSyllables": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a human readable format. Boolean?
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModeTextSpacing": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a human readable format. Boolean?
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilities": [
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
+                "subPath": "O365HomePremRetail.TenantId",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "WINWORD.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winword.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "WINWORD.exe"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+
+    "com.office.windowsWordPro365LearningTools": {
+        "name": "LearningTools for Microsoft Office 2016 Word Pro 365 edition for Windows 10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "64:Software\\Microsoft\\Office\\16.0\\Word\\Options",
+                    "dataTypes": {
+                        "ReadingModeColumnWidth": "REG_DWORD",
+                        "ReadingModePageColor": "REG_DWORD",
+                        "ReadingModePrintedPage": "REG_DWORD",
+                        "ReadAloudVoiceId": "REG_SZ",
+                        "ReadAloudVoiceRate": "REG_DWORD",
+                        "ReadingModeSyllables": "REG_DWORD",
+                        "ReadingModeTextSpacing": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "ReadingModeColumnWidth": {
+                        "schema": {
+                            "title": "Column mode",
+                            "description": "Column mode in which to display text",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "Narrow", 1: "Default", 2: "Wide"
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePageColor": {
+                        "schema": {
+                            "title": "Page color",
+                            "description": "The color that will be used as page background",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            // TODO: We should present the value to the user in a human readable format
+                            // 0: "None", 1: "Sepia", 2: "Reverse (High-Contrast)"
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePrintedPage": {
+                        "schema": {
+                            "title": "Design",
+                            "description": "Select between column desing and page design",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    },
+                    "ReadAloudVoiceId": {
+                        "schema": {
+                            "title": "Voice Id",
+                            "description": "The voice that will be used for text reading",
+                            "type": "string",
+                            "enum": [
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0",
+
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_ES-ES_HELENA_11.0"
+                            ],
+                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
+                        }
+                    },
+                    "ReadAloudVoiceRate": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a homogeneus speech rate
+                            "default": 10,
+                            "min": 0,
+                            "max": 20,
+                            "divisibleBy": 1
+                        }
+                    },
+                    "ReadingModeSyllables": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a human readable format. Boolean?
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModeTextSpacing": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a human readable format. Boolean?
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilities": [
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
+                "subPath": "O365ProPlusRetail.TenantId",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    retryOptions: {
+                        rewriteEvery: 0,
+                        numRetries: 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "WINWORD.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winword.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "WINWORD.exe"
+                        }
+                    ]
+                }
+            }
+        }
     }
 }
