@@ -62,9 +62,9 @@ gpii.tests.userLogonEvents.testDefs = [{
     }, {
         // wait for debounce
         func: "setTimeout",
-        args: ["{tests}.events.timeoutComplete.fire", 3500]
+        args: ["{tests}.events.debounceTimeoutComplete.fire", 3500]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, { // standard logout
         func: "{proximityTriggeredRequest2}.send"

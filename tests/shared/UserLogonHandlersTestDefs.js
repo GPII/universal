@@ -90,7 +90,7 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
         }
     },
     events: {
-        timeoutComplete: null
+        debounceTimeoutComplete: null
     }
 });
 
@@ -139,9 +139,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         // wait for the debounce period to pass so that the following /proximityTriggered request is not rejected
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 3500 ]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
         // 2nd /proximityTriggered request: standard logout
@@ -163,9 +163,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         // wait within the debounce period to trigger the debounce logic so that the following /proximityTriggered request will be rejected
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 100 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 100 ]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
 
     }, {
@@ -194,9 +194,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         // wait for the debounce period to pass so that the following /proximityTriggered request is not rejected
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 3500 ]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
         // 2nd /proximityTriggered request: standard logout
@@ -208,9 +208,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         // wait within the debounce period to trigger the debounce logic so that the following /proximityTriggered request with the same GPII key will be rejected
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 100 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 100 ]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
         // 3rd /proximityTriggered request with the same GPII key: will be rejected
@@ -238,9 +238,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         // wait for the debounce period to pass
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 3500 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 3500 ]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
         // 2nd /proximityTriggered request to login with a different user
@@ -262,9 +262,9 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         // wait within the debounce period
         func: "setTimeout",
-        args: [ "{tests}.events.timeoutComplete.fire", 100 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 100 ]
     }, {
-        event: "{tests}.events.timeoutComplete",
+        event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
         // 2nd /proximityTriggered request to login with a different user

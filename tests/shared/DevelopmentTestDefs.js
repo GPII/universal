@@ -58,8 +58,5 @@ gpii.tests.development.testDefs = [{
     }, {
         event: "{logoutRequest}.events.onComplete",
         listener: "gpii.tests.development.testLogoutResponse"
-    }],
-    events: {
-        timeoutComplete: null
-    }
+    }]
 }];
