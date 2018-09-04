@@ -96,6 +96,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.desktopBackground"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
