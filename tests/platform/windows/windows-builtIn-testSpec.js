@@ -355,6 +355,23 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }]
+            },
+            "gpii.windows.desktopBackgroundSettingsHandler": {
+                "com.microsoft.windows.desktopBackground": {
+                    "settings": {
+                        "BackgroundType": {
+                            "value": "SolidColor"
+                        },
+                        "Input": {
+                            "value": {
+                                "Color": 1293123
+                            }
+                        }
+                    },
+                    "options": {
+                        "verifySettings": true
+                    }
+                }
             }
         }
     }, {
