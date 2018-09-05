@@ -21,6 +21,13 @@
                     {
                         "type": "required",
                         "scope": [
+                            "http://registry.gpii.net/common/screenReaderTTS/enabled"
+                        ],
+                        "value": 1024
+                    },
+                    {
+                        "type": "priority",
+                        "scope": [
                             "http://registry.gpii.net/applications/com.freedomscientific.jaws.2018"
                         ],
                         "value": 1024
