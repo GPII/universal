@@ -3872,7 +3872,7 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
+            "configure-spi": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -3897,9 +3897,29 @@
                 },
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
+                        // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                            "type": "fluid.transforms.binaryOp",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                    "left": false,
+                                    "operator": "||",
+                                    "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "right": false
+                                }
+                            },
+                            "operator": "&&",
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": "",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "operator": "!==",
+                                    "right": "regular-contrast"
+                                }
+                            },
                             "outputPath": "value"
                         },
                         "path": {
@@ -3914,7 +3934,7 @@
                     "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
                 }
             },
-            "configureTheme": {
+            "configure-registry": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -3946,17 +3966,30 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                             "match": {
-                                "black-white": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
-                                "white-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
-                                "black-yellow": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "yellow-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "lime-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme"
+                                "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
+                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
+                                "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
+                                "gray-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "gray-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme",
+                                "grey-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
                             }
                         }
                     }
                 }
             }
         },
+        "configure": [
+            "settings.configure-registry",
+            {
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
+                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+            },
+            "settings.configure-spi"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -5280,8 +5313,34 @@
                     "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
+                            // Use the same condition for applying a high contrast theme to windows:
+                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                            "left": false,
+                                            "operator": "||",
+                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "right": false
+                                        }
+                                    },
+                                    "operator": "&&",
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "left": "",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "operator": "!==",
+                                            "right": "regular-contrast"
+                                        }
+                                    }
+                                }
+                            },
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",

@@ -3,7 +3,7 @@
 This page describes the flow when GPII is run in cloud based flowmanager mode. This mainly involves two files:
 
 * `CloudBasedFlowManager.js` - This will be referred to as `Cloud Based FlowManager` in the below
-* `FlowManagerRequests.js` - referred to in the below as `FlowManagerRequests`.
+* `MatchMaking.js` - referred to in the below as `FlowManagerRequests`.
 
 ## Overview and APIs
 
