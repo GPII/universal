@@ -28,7 +28,9 @@
 
                         "FSCasts.EnableNotifications": 0,
 
+                        "HTML.Abbreviations": 1,
                         "HTML.AccessKeys": 0,
+                        "HTML.Acronyms": 1,
                         "HTML.ExpandAbbreviations": 1,
                         "HTML.ExpandAcronyms": 1,
                         "HTML.FilterConsecutiveDuplicateLinks": 0,
@@ -41,8 +43,6 @@
                         "HTML.SmartNavigation": 1,
                         "HTML.TextBlockLength": 15,
 
-                       "Options.Abbreviations": 1,
-                        "Options.Acronyms": 1,
                         "Options.AllCapsIndicator": "definitely all cap",
                         "Options.AllowMouseEchoWhenMuted": 1,
                         "Options.AllowSpeechOnDemandWhenMuted": 0,
