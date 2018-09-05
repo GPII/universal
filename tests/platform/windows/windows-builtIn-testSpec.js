@@ -358,6 +358,33 @@ gpii.tests.windows.builtIn = [
             }
         }
     }, {
+        name: "Testing os_win7 using default matchmaker",
+        gpiiKey: "os_win7_2",
+        initialState: {},
+        settingsHandlers: {
+            "gpii.windows.accentColorSettingsHandler": {
+                "com.microsoft.windows.accentColors": [{
+                    "settings": {
+                        "color": {
+                            "value": 65433
+                        },
+                        "transparencyEffects": {
+                            "value": true
+                        },
+                        "colorPrevalence": {
+                            "value": true
+                        },
+                        "colorPrevalenceTitleBars": {
+                            "value": true
+                        },
+                        "appsUseLightTheme": {
+                            "value": false
+                        }
+                    }
+                }]
+            }
+        }
+    }, {
         name: "Testing os_common using default matchmaker",
         gpiiKey: "os_common",
         initialState: {

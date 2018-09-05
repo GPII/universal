@@ -1,0 +1,28 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.accentColors": {
+                        color: {
+                            value: 65433
+                        },
+                        transparencyEffects: {
+                            value: true
+                        },
+                        colorPrevalence: {
+                            value: true
+                        },
+                        colorPrevalenceTitleBars: {
+                            value: true
+                        },
+                        appsUseLightTheme: {
+                            value: false
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

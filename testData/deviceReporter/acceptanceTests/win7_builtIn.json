@@ -53,6 +53,9 @@
 
     {
         "id": "com.microsoft.windows.language"
-    }
+    },
 
+    {
+        "id": "com.microsoft.windows.accentColors"
+    }
 ]
