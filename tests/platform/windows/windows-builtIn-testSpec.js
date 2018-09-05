@@ -430,7 +430,30 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }
-            ]
+                ],
+                "com.microsoft.windows.language": [{
+                    "settings": {
+                        "PreferredUILanguages": "en-US"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "PreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }, {
+                    "settings": {
+                        "MachinePreferredUILanguages": "en-US"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop\\MuiCached",
+                        "dataTypes": {
+                            "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }]
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{

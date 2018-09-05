@@ -149,6 +149,10 @@
                             "path": "setParam",
                             "value": 600
                         }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.language": {
+                        "MachinePreferredUILanguages": "en-US",
+                        "PreferredUILanguages": "en-US"
                     }
                 }
             }
