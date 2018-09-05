@@ -1,0 +1,21 @@
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
+                        "BackgroundType": {
+                            "value": "SolidColor"
+                        },
+                        "Input": {
+                            "value": {
+                                "Color": 1293123
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

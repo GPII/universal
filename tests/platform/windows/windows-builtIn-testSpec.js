@@ -355,9 +355,15 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }]
-            },
+            }
+        }
+    }, {
+        name: "Testing os_win7 using default matchmaker",
+        gpiiKey: "os_win7_2",
+        initialState: {},
+        settingsHandlers: {
             "gpii.windows.desktopBackgroundSettingsHandler": {
-                "com.microsoft.windows.desktopBackground": {
+                "com.microsoft.windows.desktopBackground": [{
                     "settings": {
                         "BackgroundType": {
                             "value": "SolidColor"
@@ -367,11 +373,8 @@ gpii.tests.windows.builtIn = [
                                 "Color": 1293123
                             }
                         }
-                    },
-                    "options": {
-                        "verifySettings": true
                     }
-                }
+                }]
             }
         }
     }, {
