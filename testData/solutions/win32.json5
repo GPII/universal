@@ -92,7 +92,7 @@
                     },
                     "Braille.BrailleVerbosity": {
                         "title": "Braille Verbosity",
-                        "description": "Sets Braille verbosity for Flash messages, 0 beginner, 1 intermediate, 2 advanced ",
+                        "description": "Sets Braille verbosity for Flash messages.",
                         "enum": [0, 1, 2],
                         "enumLabels": ["beginner", "intermediate", "advanced"]
                     },
@@ -634,6 +634,7 @@
                             ]
                         }
                     },
+                    // TODO: Look this up in the docs
                     "Options.IndicateSelected": {
                         "schema": {
                             "title": "Indicate Selected",
