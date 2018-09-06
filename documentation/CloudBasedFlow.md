@@ -3,7 +3,7 @@
 This page describes the flow when GPII is run in cloud based flowmanager mode. This mainly involves two files:
 
 * `CloudBasedFlowManager.js` - This will be referred to as `Cloud Based FlowManager` in the below
-* `FlowManagerRequests.js` - referred to in the below as `FlowManagerRequests`.
+* `MatchMaking.js` - referred to in the below as `FlowManagerRequests`.
 
 ## Overview and APIs
 
@@ -18,7 +18,7 @@ The endpoint for this service is at `:gpiiKey/settings/:device` (where `:gpiiKey
 
 ## Detailed walkthrough of flow:
 
-The process of retrieving application settings in the Cloud Based FlowManager mode is as follows:
+The process of retrieving application lifecycle instructions in the Cloud Based FlowManager mode is as follows:
 
 1. GET request is sent to the `:gpiiKey/settings/:device` URL where `:gpiiKey` is the GPII key to log in and `:device`
    is a device reporter payload, like: `{"OS":{"id":"web"},"solutions":[{"id":"org.chrome.cloud4chrome"}]}`. It is

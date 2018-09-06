@@ -1,8 +1,5 @@
 - src: https://github.com/idi-ops/ansible-facts
   name: facts
 
-# The recent change of ansible-nodejs repo includes a work around for an issue with running "npm install --no-bin-links"
-# within the VirtualBox shared folder - https://issues.gpii.net/browse/GPII-2060). The work around is to mounts the
-# /node_modules directory of the host machine to a different directory than the VirtualBox shared folder.
 - src: https://github.com/idi-ops/ansible-nodejs
   name: nodejs

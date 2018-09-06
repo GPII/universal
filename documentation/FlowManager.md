@@ -10,24 +10,27 @@ Manager](LifecycleManager.md).
 
 Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and
 retrieving settings from the system in "cloud based flowmanager" mode are all different. Each "flow" is managed in a
-different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerRequests.js`. The
+different file, with the common events, functions, etc., located in `FlowManager.js` and `MatchMaking.js`. The
 different kinds of flows are:
 
-* **User Login** (UserLogonStateChange.js) - the flow for a user keying in to the system. The flow is described in
+* **User Login** (`UserLogonHandlers.js`) - the flow for a user keying in to the system. The flow is described in
   details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
-* **User Logout** (UserLogonStateChange.js) - the flow for a user keying out of the system
-* **Retrieving Settings** (CloudBasedFlowManager.js) - used to retrieve the settings when the system is running in
+* **User Logout** (`UserLogonHandlers.js`) - the flow for a user keying out of the system
+* **User Logon State Change** (`UserLogonHandlers.js`) - the flow for changing a user's logon state
+* **Retrieve Settings** (`CloudBasedFlowManager.js`) - used to retrieve the settings when the system is running in
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
-* **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
+* **Update Preferences** (`CloudBasedFlowManager.js`) - used to update the preferences when the system is running in
+  cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 
-## Important events:
+## Reserved GPII Key "noUser"
 
-There are a few notification events on the flowmanager related to the key-in and key-out process.
+The reserved special GPII key "noUser" is keyed into the system when there is not an actual key keyed in. This includes:
 
-* userLoginInitiated: fired when the process of keying in a user (ie. configuring the system) starts,
-* userLogoutInitiated: fired when the process of keying out a user (ie. restoring the system) has started,
-* userLoginComplete: fired when the process of keying in a user (ie. configuring the system) has completed,
-* userLogoutComplete: fired when the process of keying out a user (ie. restoring the system) has completed,
+* When GPII starts
+* Once an actual GPII key is keyed out
+
+The present of "noUser" key allows users to continue to change settings via QSS (Quick Strip Set) when no actual GPII
+key is keyed into the system.
 
 ## APIs
 
@@ -65,67 +68,16 @@ There are a few notification events on the flowmanager related to the key-in and
 * **method:** `GET`
 * **return:** A JSON array with a string entry for each user
 
-### Save new preference set (POST /user/preferences)
+### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
 
-* **description**: Save a preference set to a new GPII key
-* **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
-* **route:** `/user/preferences`
-* **method:** `POST`
-* **body:** The preferences to save as a JSON structure
-* **return:** A payload with the newly generated GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by
-  `preferences`).
-* **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow
-  manager configs due to the security consideration.
-
-### Save preference set to existing GPII key (PUT /user/preferences/:gpiiKey)
-
-* **description**: Save a preference set to an existing GPII key
-* **Supported modes**: works with Flow Manager that includes "gpii.flowManager.save" grade
-* **route:** `/user/preferences/:gpiiKey` where `:gpiiKey` is the GPII key to save the preferences for
-* **method:** `PUT`
-* **body:** The preferences to save as a JSON structure
-* **return:** A payload with the GPII key (keyed by `gpiiKey`) and the stored preferences (keyed by `preferences`).
-* **note:** This endpoint is implemented via "gpii.flowManager.save" grade that is not included in the default flow
-  manager configs due to the security consideration.
-
-### Get settings from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
-
-* **description**: Get settings from the cloud based flow manager
+* **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are
+ untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
 * **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings/:device` where:
   * `:gpiiKey` should be the GPII key of the user for which the settings are requested
   * `:device` should be a device reporter payload - for example:
-    `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for
-    the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
-* **method:** `GET`
-* **return:** An object, keyed by solution ID, with each block containing the relevant settings in a format
-  understandable by the solution. For example:
-
-```json
-{
-    "org.gnome.desktop.a11y.magnifier": {
-        "mag-factor": 2,
-        "mouse-tracking": "centered",
-        "screen-position": "full-screen"
-    }
-}
-```
-
-* **Notes:** Currently the payloads of the cloud based flow manager does **not** take contexts into account. The current
-  payloads are simplified (and there for legacy purposes). In the future we could easily imagine that users would want
-  the context information.
-
-### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/untrusted-settings/:device)
-
-* **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are
-  untransformed lifecycle instructions. See [an example of the return payload of this
-  endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
-* **Supported modes**: Cloud Based Flow Manager only
-* **route:** `/:gpiiKey/untrusted-settings/:device` where:
-  * `:gpiiKey` should be the GPII key of the user for which the settings are requested
-  * `:device` should be a device reporter payload - for example:
-    `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for
-    the solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
+  `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the
+  solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
 * **header:** Authorization: Bearer < access_token >
   * `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization
     that grants a GPII app to access settings associated with a GPII key. Refer to [GPII OAuth2
@@ -219,13 +171,13 @@ There are a few notification events on the flowmanager related to the key-in and
 }
 ```
 
-### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/untrusted-settings)
+### Update preferences on Cloud Based Flow Manager (PUT /:gpiiKey/settings)
 
-* **description**: Call the preferences server API to update user preferences. This endpoint will request the preferences
-  server API to merge the incoming preferences with the existing user preferences and update the merged preferences on the
-  cloud based flow manager.
+* **description**: Call the preferences server API to update user preferences. The preferences server API merges the
+ incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow
+ manager.
 * **Supported modes**: Cloud Based Flow Manager only
-* **route:** `/:gpiiKey/untrusted-settings` where:
+* **route:** `/:gpiiKey/settings` where:
   * `:gpiiKey` should be the GPII key of the user for which the preferences are updated
 * **header:** Authorization: Bearer < access_token >
   * `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization

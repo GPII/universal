@@ -1007,7 +1007,6 @@
         ]
     },
 
-
     "com.microsoft.windows.narrator": {
         "name": "Windows Built-in Narrator",
         "contexts": {
@@ -1264,6 +1263,89 @@
         ]
     },
 
+    "com.microsoft.windows.language": {
+        "name": "Windows Display Language",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure1": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop\\MuiCached",
+                    "dataTypes": {
+                        "MachinePreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "MachinePreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "MachinePreferredUILanguages": {}
+                }
+            },
+            "configure2": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "PreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "PreferredUILanguages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "PreferredUILanguages": {}
+                }
+            }
+        },
+        "configure": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
+            }
+        ],
+        "restore": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+
     "org.nvda-project": {
         "name": "NVDA Screen Reader",
         "contexts": {
@@ -1279,9 +1361,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                    "allowNumberSignComments": true,
-                    "allowSubSections": true
+                    "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                 },
                 "supportedSettings": {
                     "speech.espeak.pitch": {},
@@ -1930,7 +2010,7 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
+            "configure-spi": {
                 "type": "gpii.windows.spiSettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -1955,9 +2035,29 @@
                 },
                 "capabilitiesTransformations": {
                     "HighContrastOn": {
+                        // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                            "type": "fluid.transforms.binaryOp",
+                            "left": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                    "left": false,
+                                    "operator": "||",
+                                    "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "right": false
+                                }
+                            },
+                            "operator": "&&",
+                            "right": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": "",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "operator": "!==",
+                                    "right": "regular-contrast"
+                                }
+                            },
                             "outputPath": "value"
                         },
                         "path": {
@@ -1972,7 +2072,7 @@
                     "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
                 }
             },
-            "configureTheme": {
+            "configure-registry": {
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -2003,17 +2103,30 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
                             "match": {
-                                "black-white": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
-                                "white-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
-                                "black-yellow": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "yellow-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "lime-black": "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme"
+                                "black-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcwhite.theme",
+                                "white-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hcblack.theme",
+                                "yellow-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc1.theme",
+                                "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
+                                "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
+                                "gray-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "gray-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme",
+                                "grey-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
                             }
                         }
                     }
                 }
             }
         },
+        "configure": [
+            "settings.configure-registry",
+            {
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
+                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+            },
+            "settings.configure-spi"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
@@ -3500,9 +3613,9 @@
                     "selfVoicingEnabled": {},
                     "selectionTheme": {},
                     "tableOfContentsEnabled": {},
-                    "dictionaryEnabled": {},
                     "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {}
+                    "syllabificationEnabled": {},
+                    "captionsEnabled": {}
                 },
                 "capabilitiesTransformations": {
                     "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
@@ -3536,8 +3649,34 @@
                     "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
+                            // Use the same condition for applying a high contrast theme to windows:
+                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                            "left": false,
+                                            "operator": "||",
+                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "right": false
+                                        }
+                                    },
+                                    "operator": "&&",
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "left": "",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "operator": "!==",
+                                            "right": "regular-contrast"
+                                        }
+                                    }
+                                }
+                            },
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -3547,7 +3686,10 @@
                                         "black-white": "bw",
                                         "white-black": "wb",
                                         "black-yellow": "by",
-                                        "yellow-black": "yb"
+                                        "yellow-black": "yb",
+                                        "gray-dark": "lgdg",
+                                        "gray-white": "gw",
+                                        "black-brown": "bbr"
                                     }
                                 }
                             },
@@ -3557,31 +3699,9 @@
                     "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
                     "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "dictionaryEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "match": [{
-                                "inputValue": {
-                                    "dictionaryEnabled": true
-                                },
-                                "outputValue": true
-                            }],
-                            "noMatch": {
-                                "outputValue": false
-                            },
-                            "defaultInput": {
-                                "transform": {
-                                    "type": "fluid.transforms.arrayToSetMembership",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
-                                    "options": {
-                                        "dictionary": "dictionaryEnabled"
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }

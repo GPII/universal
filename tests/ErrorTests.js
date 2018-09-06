@@ -16,7 +16,6 @@ var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.logObjectRenderChars = 10240;
 fluid.require("%gpii-universal");
 
 // These tests execute the login cycle which is expected to terminate with an error,
@@ -69,7 +68,7 @@ fluid.defaults("gpii.tests.errors.mixin", {
             }
         },
         clearQueue: {
-            target: "{testCaseHolder lifecycleManager}.options.listeners.onClearQueue",
+            target: "{testCaseHolder lifecycleManager}.options.listeners.onClearActionQueue",
             record: {
                 func: "gpii.tests.errors.recordClear",
                 args: ["{gpii.tests.errors.mixin}"]

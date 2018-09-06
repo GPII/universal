@@ -316,6 +316,29 @@ gpii.tests.windows.builtIn = [
                             "RegionOpacity": "REG_DWORD"
                         }
                     }
+                }],
+                "com.microsoft.windows.language": [{
+                    "settings": {
+                        "PreferredUILanguages": "en-US"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "PreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }, {
+                    "settings": {
+                        "MachinePreferredUILanguages": "en-US"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop\\MuiCached",
+                        "dataTypes": {
+                            "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
                 }]
             },
             "gpii.windows.displaySettingsHandler": {

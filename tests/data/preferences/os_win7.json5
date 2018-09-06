@@ -117,6 +117,10 @@
                         "RegionOpacity": 0,
                         "BackgroundColor": 1,
                         "BackgroundOpacity": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.language": {
+                        "MachinePreferredUILanguages": "en-US",
+                        "PreferredUILanguages": "en-US"
                     }
                 }
             }
