@@ -1,5 +1,5 @@
 /*
- * GPII Flow Manager Development Tests
+ * User Logon Request Tests
  *
  * Copyright 2013 OCAD University
  *
@@ -19,6 +19,6 @@
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-require("./shared/UserLogonStateChangeTestDefs.js");
+require("./shared/UserLogonRequestTestDefs.js");
 
-gpii.test.bootstrapServer(gpii.tests.userLogonHandling.buildTestDefs(gpii.tests.userLogonHandling.testDefs));
+gpii.test.bootstrapServer(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs));
