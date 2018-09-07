@@ -20,31 +20,37 @@
                 },
                 "supportedSettings": {
                     "Braille.attributeRotationDelay": {
-                        "title": "Attribute Rotation Delay",
-                        "description": "When in Attribute Mode and characters have multiple attributes, determines how long each attribute should be shown for. This value is in Milliseconds.",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 1000
+                        "schema": {
+                            "title": "Attribute Rotation Delay",
+                            "description": "When in Attribute Mode and characters have multiple attributes, determines how long each attribute should be shown for. This value is in Milliseconds.",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 1000
+                        }
                     },
                     "Braille.AutoPanMode": {
-                        "title": "Auto Pan Mode",
-                        "description": "The \"Auto Pan\" algorithm to use.",
-                        "enum": [0, 1, 2, 3, 4, 5, 6, 255],
-                        "enumLabels": ["off", "move display minimally to include whole word containing cursor", "match user pan", "move display to show whole word at cursor nearest the middle of the display area", "maximize text after cursor", "maximize text before cursor", "autopan to default structured segment", "Smart Autopan, autopan using the best algorithm for the current situation"],
-                        "default": 255
+                        "schema": {
+                            "title": "Auto Pan Mode",
+                            "description": "The \"Auto Pan\" algorithm to use.",
+                            "enum": [0, 1, 2, 3, 4, 5, 6, 255],
+                            "enumLabels": ["off", "move display minimally to include whole word containing cursor", "match user pan", "move display to show whole word at cursor nearest the middle of the display area", "maximize text after cursor", "maximize text before cursor", "autopan to default structured segment", "Smart Autopan, autopan using the best algorithm for the current situation"],
+                            "default": 255
+                        }
                     },
                     "Braille.BrailleMessages": {
-                        "title": "Enable Flash Messages",
-                        "description": "Whether or not to show Flash Messages on a Braille display.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Enable Flash Messages",
+                            "description": "Whether or not to show Flash Messages on a Braille display.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Braille.BrailleMode": {
                         "schema": {
@@ -69,117 +75,137 @@
                     },
                     // Enable this if requested, we have no reasonable way of presenting a UI at the moment.
                     // "Braille.BrailleShowMarking": {
-                    //     "title": "Braille Marking",
-                    //     "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
-                    //     "type": "integer",
-                    //     "multipleOf": 1,
-                    //     "minValue": 0,
-                    //     "maxValue": 65536,
-                    //     "default": 64
+                    //     "schema": {
+                    //         "title": "Braille Marking",
+                    //         "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
+                    //         "type": "integer",
+                    //         "multipleOf": 1,
+                    //         "minValue": 0,
+                    //         "maxValue": 65536,
+                    //         "default": 64
+                    //     }
                     // },
                     "Braille.BrailleSleepMode": {
-                        "title": " Enable Braille Sleep Mode",
-                        "description": "Set to 1 to turn off Braille driver, typically used to disable Braille for a specific application",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": " Enable Braille Sleep Mode",
+                            "description": "Set to 1 to turn off Braille driver, typically used to disable Braille for a specific application",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Braille.BrailleVerbosity": {
-                        "title": "Braille Verbosity",
-                        "description": "Sets Braille verbosity for Flash messages.",
-                        "enum": [0, 1, 2],
-                        "enumLabels": ["beginner", "intermediate", "advanced"]
+                        "schema": {
+                            "title": "Braille Verbosity",
+                            "description": "Sets Braille verbosity for Flash messages.",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["beginner", "intermediate", "advanced"]
+                        }
                     },
                     "Braille.EightDotBraille": {
-                        "title": "Eight Dot Braille",
-                        "description": "Whether to enable eight dot braille versus six dot braille mode.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "six dot braille.",
-                            "8 dot braille."
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Eight Dot Braille",
+                            "description": "Whether to enable eight dot braille versus six dot braille mode.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "six dot braille.",
+                                "8 dot braille."
+                            ],
+                            "default": 1
+                        }
                     },
                     "Braille.MessagePrefixes": {
-                        "title": "Enable Message Prefixes",
-                        "description": "If a display has no Status Cells, whether or not to prepend the Message Prefix to the Flash Message",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Enable Message Prefixes",
+                            "description": "If a display has no Status Cells, whether or not to prepend the Message Prefix to the Flash Message",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Braille.MessageTime": {
-                        "title": "Flash Message Timeout",
-                        "description": "When a Flash message is sent to the display via a script, how long in milliseconds should it be shown if not specified by the script.",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 5000
+                        "schema": {
+                            "title": "Flash Message Timeout",
+                            "description": "When a Flash message is sent to the display via a script, how long in milliseconds should it be shown if not specified by the script.",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 5000
+                        }
                     },
                     "Braille.ReversePanningButtons": {
-                        "title": "Reverse Panning Buttons",
-                        "description": "Whether or not panning buttons are reversed.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Reverse Panning Buttons",
+                            "description": "Whether or not panning buttons are reversed.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Braille.StructuredModeReverseOrder": {
-                        "title": "Reverse Order of Structured Data",
-                        "description": "If off, order is dlg info|group info|focus info, If on, order is focus info|group info|dialog info",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Reverse Order of Structured Data",
+                            "description": "If off, order is dlg info|group info|focus info, If on, order is focus info|group info|dialog info",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Braille.WordWrap": {
-                        "title": "Enable Word Wrap",
-                        "description": "Whether or not to allow words to be split in order to maximize the use of the Braille display. Ignored if panning is set to fixed increment",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Enable Word Wrap",
+                            "description": "Whether or not to allow words to be split in order to maximize the use of the Braille display. Ignored if panning is set to fixed increment",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "FSCasts.EnableNotifications": {
-                        "title": "Notify about New FSCasts",
-                        "description": "Whether to have JAWS display a dialog when new podcasts from Freedom Scientific are available.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Notify about New FSCasts",
+                            "description": "Whether to have JAWS display a dialog when new podcasts from Freedom Scientific are available.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "HTML.Abbreviations": {
                         "schema": {
@@ -214,43 +240,49 @@
                         }
                     },
                     "HTML.AccessKeys": {
-                        "title": "Speak Access Keys Within Web Page",
-                        "description": "0 don't include HTML Element access keys, 1 include them",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Speak Access Keys Within Web Page",
+                            "description": "0 don't include HTML Element access keys, 1 include them",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "HTML.ExpandAbbreviations": {
-                        "title": "Expand Abbreviations",
-                        "description": "Whether or not to expand abbreviations (using the abbr tag).",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Expand Abbreviations",
+                            "description": "Whether or not to expand abbreviations (using the abbr tag).",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "HTML.ExpandAcronyms": {
-                        "title": "Expand Acronyms",
-                        "description": "Whether or not to expand acronyms (using the acronym tag).",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Expand Acronyms",
+                            "description": "Whether or not to expand acronyms (using the acronym tag).",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "HTML.FilterConsecutiveDuplicateLinks": {
                         "schema": {
@@ -269,90 +301,106 @@
                         }
                     },
                     "HTML.FormFieldPromptOptions": {
-                        "title": "Form Field Prompt Options",
-                        "description": "Which attributes to prefer when describing form fields.",
-                        "enum": [0, 1, 2, 3, 4, 5],
-                        "enumLabels": ["favor label tag", "favor title attribute", "favor alt attribute", "favor longest", "use both label and title if different", "use both label and alt if different"],
-                        "default": 0
+                        "schema": {
+                            "title": "Form Field Prompt Options",
+                            "description": "Which attributes to prefer when describing form fields.",
+                            "enum": [0, 1, 2, 3, 4, 5],
+                            "enumLabels": ["favor label tag", "favor title attribute", "favor alt attribute", "favor longest", "use both label and title if different", "use both label and alt if different"],
+                            "default": 0
+                        }
                     },
                     "HTML.FormsModeAutoOff": {
-                        "title": "Forms Mode Auto Off",
-                        "description": "Whether or not Forms Mode is automatically turned off when the current page is updated 1 means turn forms mode off automatically (default), 0 means leave Forms Mode on",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Forms Mode Auto Off",
+                            "description": "Whether or not Forms Mode is automatically turned off when the current page is updated 1 means turn forms mode off automatically (default), 0 means leave Forms Mode on",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "HTML.IgnoreInlineFrames": {
-                        "title": "Ignore Inline Frames",
-                        "description": "Whether to ignore inline frames, such as those used for advertising.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Ignore Inline Frames",
+                            "description": "Whether to ignore inline frames, such as those used for advertising.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "HTML.IncludeGraphics": {
-                        "title": "Include Graphics",
-                        "description": "Whether/when to include graphics in web pages.",
-                        "enum": [0, 1, 2],
-                        "enumLabels": ["never include graphics", "include graphics that have labels, i.e. alt=attributes", "include all graphics"],
-                        "default": 1
+                        "schema": {
+                            "title": "Include Graphics",
+                            "description": "Whether/when to include graphics in web pages.",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["never include graphics", "include graphics that have labels, i.e. alt=attributes", "include all graphics"],
+                            "default": 1
+                        }
                     },
                     "HTML.IndicateColSpan": {
-                        "title": "Indicate ColSpan for Braille",
-                        "description": "Whether to announce column spans when reading table data in web pages.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Indicate ColSpan for Braille",
+                            "description": "Whether to announce column spans when reading table data in web pages.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "HTML.SayAllOnDocumentLoad": {
-                        "title": "Read Web Pages Automatically When Loaded",
-                        "description": "Whether to automatically read web pages when they're first loaded.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Read Web Pages Automatically When Loaded",
+                            "description": "Whether to automatically read web pages when they're first loaded.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "HTML.SmartNavigation": {
-                        "title": "Smart Navigation",
-                        "description": "Whether to enable \"smart navigation\" when reading web pages.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Smart Navigation",
+                            "description": "Whether to enable \"smart navigation\" when reading web pages.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "HTML.TextBlockLength": {
-                        "title": "Text Block Length",
-                        "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 25
+                        "schema": {
+                            "title": "Text Block Length",
+                            "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 25
+                        }
                     },
                     "Options.AllCapsIndicator": {
                         "schema": {
@@ -363,43 +411,49 @@
                         }
                     },
                     "Options.AllowMouseEchoWhenMuted": {
-                        "title": "Allow Mouse Echo",
-                        "description": "Whether to echo mouse movement when otherwise muted.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Allow Mouse Echo",
+                            "description": "Whether to echo mouse movement when otherwise muted.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.AllowSpeechOnDemandWhenMuted": {
-                        "title": "Allow Reading Commands",
-                        "description": "Whether to allow speech on demand when otherwise muted.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Allow Reading Commands",
+                            "description": "Whether to allow speech on demand when otherwise muted.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.AllowTypingEchoWhenMuted": {
-                        "title": "Allow Typing Echo",
-                        "description": "Whether to echo typed keys when otherwise muted.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Allow Typing Echo",
+                            "description": "Whether to echo typed keys when otherwise muted.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.BrailleDisplay": {
                         "schema": {
@@ -482,17 +536,19 @@
                         }
                     },
                     "Options.DetectKeyboardInputLanguage": {
-                        "title": "Detect Keyboard Languages",
-                        "description": "Whether to detect the language used by the keyboard.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Detect Keyboard Languages",
+                            "description": "Whether to detect the language used by the keyboard.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.Dictionary": {
                         "schema": {
@@ -546,17 +602,19 @@
                         }
                     },
                     "Options.GeneralizeDialect": {
-                        "title": "Generalize Dialect",
-                        "description": "Whether to switch languages when encountering content with the same underlying base language.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Generalize Dialect",
+                            "description": "Whether to switch languages when encountering content with the same underlying base language.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.Indentation": {
                         "schema": {
@@ -650,12 +708,14 @@
                         }
                     },
                     "Options.InitialNumlockState": {
-                        "title": "Initial State of NumLock Key",
-                        "description": "The initial state of the NumLock key.",
-                        "type": "number",
-                        "enum": [0, 1, 2],
-                        "enumLabels": ["off at startup", "on at startup", "leave unmodified"],
-                        "default": 0
+                        "schema": {
+                            "title": "Initial State of NumLock Key",
+                            "description": "The initial state of the NumLock key.",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["off at startup", "on at startup", "leave unmodified"],
+                            "default": 0
+                        }
                     },
                     // TODO: Doesn't seem to work.
                     "Options.InsertKeyMode": {
@@ -775,10 +835,12 @@
                     },
                     // TODO: Verify default
                     "Options.LessSpeechMode": {
-                        "title": "Less Speech Options",
-                        "description": "How to behave when in \"less speech mode\".",
-                        "enum": [0, 1],
-                        "enumLabels": ["Speech On Demand", "Mute Speech"]
+                        "schema": {
+                            "title": "Less Speech Options",
+                            "description": "How to behave when in \"less speech mode\".",
+                            "enum": [0, 1],
+                            "enumLabels": ["Speech On Demand", "Mute Speech"]
+                        }
                     },
                     "Options.LinePauses": {
                         "schema": {
@@ -816,17 +878,19 @@
                         }
                     },
                     "Options.LowerOtherAppsVolumeWhileJAWSIsRunning": {
-                        "title": "Lower Audio Volume of Programs while JAWS Speaks",
-                        "description": "Whether to lower the volume of programs other than JAWS when speaking.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Lower Audio Volume of Programs while JAWS Speaks",
+                            "description": "Whether to lower the volume of programs other than JAWS when speaking.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.MixedCase": {
                         "schema": {
@@ -845,70 +909,82 @@
                         }
                     },
                     "Options.MouseEchoSpeaksControlTypeAndState": {
-                        "title": "Speak Control Type and State of Item",
-                        "description": "Whether to speak the type of control and state of item when mousing over a control.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Speak Control Type and State of Item",
+                            "description": "Whether to speak the type of control and state of item when mousing over a control.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.MouseEchoSpeaksHelpAndDescription": {
-                        "title": "Speak Description of Item",
-                        "description": "Whether to speak the description of an item on mouseover.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Speak Description of Item",
+                            "description": "Whether to speak the description of an item on mouseover.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.MouseMovementStopsSpeech": {
-                        "title": "Mouse Echo Interrupt",
-                        "description": "Whether to stop speaking when the mouse is moved.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Mouse Echo Interrupt",
+                            "description": "Whether to stop speaking when the mouse is moved.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.MouseSpeechDelay": {
-                        "title": "Mouse Echo Delay",
-                        "description": "How long to delay speaking content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 0
+                        "schema": {
+                            "title": "Mouse Echo Delay",
+                            "description": "How long to delay speaking content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 0
+                        }
                     },
                     "Options.MouseSpeechEchoUnit": {
-                        "title": "Mouse Echo Unit",
-                        "description": "The unit of text to hear when the mouse pauses over text in a control.  Defaults to reading the whole line.",
-                        "enum": [0, 1, 2, 3],
-                        "enumLabels": ["character", "word", "line", "paragraph"],
-                        "default": 2
+                        "schema": {
+                            "title": "Mouse Echo Unit",
+                            "description": "The unit of text to hear when the mouse pauses over text in a control.  Defaults to reading the whole line.",
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["character", "word", "line", "paragraph"],
+                            "default": 2
+                        }
                     },
                     "Options.MouseSpeechEnabled": {
-                        "title": "Enable Mouse Echo",
-                        "description": "Whether or not to enable the mouse echo, i.e. reading content under the mouse pointer.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Enable Mouse Echo",
+                            "description": "Whether or not to enable the mouse echo, i.e. reading content under the mouse pointer.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.Numbers": {
                         "schema": {
@@ -931,17 +1007,19 @@
                         }
                     },
                     "Options.OnScreenKeyboard": {
-                        "title": "Allow On Screen Keyboards",
-                        "description": "Whether to allow on screen keyboards.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Allow On Screen Keyboards",
+                            "description": "Whether to allow on screen keyboards.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.ProcessToolTipEvent": {
                         "schema": {
@@ -1071,9 +1149,11 @@
                         }
                     },
                     "Options.SayAllScheme": {
-                        "title": "Say All Scheme",
-                        "description": "Which user-defined \"Say All\" scheme to use. ",
-                        "type": "string"
+                        "schema": {
+                            "title": "Say All Scheme",
+                            "description": "Which user-defined \"Say All\" scheme to use. ",
+                            "type": "string"
+                        }
                     },
                     "Options.SayBlankLineCount": {
                         "schema": {
@@ -1234,11 +1314,13 @@
                         }
                     },
                     "Options.SingleDigitThreshold": {
-                        "title": "Single Digit Threshold",
-                        "description": "The number of digits a number must contain before it is read as single digits (like a phone number).  Defaults to five.",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 5
+                        "schema": {
+                            "title": "Single Digit Threshold",
+                            "description": "The number of digits a number must contain before it is read as single digits (like a phone number).  Defaults to five.",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 5
+                        }
                     },
                     "Options.SkimReadingIndication": {
                         "schema": {
@@ -1274,17 +1356,19 @@
                     //     }
                     // },
                     "Options.SmartWordReading": {
-                        "title": "Smart Word Reading",
-                        "description": "Whether or not to enable \"smart reading\" when using the \"Say Word\" command.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Smart Word Reading",
+                            "description": "Whether or not to enable \"smart reading\" when using the \"Say Word\" command.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.SpeakANSIChars": {
                         "schema": {
@@ -1303,70 +1387,82 @@
                         }
                     },
                     "Options.SpeakCharacterValueAsMultibyteSequence": {
-                        "title": "Speak Character Value As Sequence of Multibyte Values",
-                        "description": "Whether to read unicode characters as a series of multi-byte values.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Speak Character Value As Sequence of Multibyte Values",
+                            "description": "Whether to read unicode characters as a series of multi-byte values.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.SpeakCharacterValueInHex": {
-                        "title": "Speak Character Value In Hex",
-                        "description": "Whether to announce the hex value of a character when numpad 5 is pressed three times quickly.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Speak Character Value In Hex",
+                            "description": "Whether to announce the hex value of a character when numpad 5 is pressed three times quickly.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.SpeakNumbersSepByDashesAsDigits": {
-                        "title": "Numbers Containing Dashes as Digits",
-                        "description": "Whether to read numbers that contain dashes (such as phone numbers) as a series of digits.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Numbers Containing Dashes as Digits",
+                            "description": "Whether to read numbers that contain dashes (such as phone numbers) as a series of digits.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.SpeechHistory": {
-                        "title": "Enable Speech History",
-                        "description": "Whether to read through the 50-item speech history when \"insert+spacebar\" and then \"h\" are pressed.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Enable Speech History",
+                            "description": "Whether to read through the 50-item speech history when \"insert+spacebar\" and then \"h\" are pressed.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.SpeechMode": {
-                        "title": "Speech Mode",
-                        "description": "The \"speech mode\" to use, either \"full\" or \"less\".",
-                        "enum": [0, 1],
-                        "enumLabels": ["full speech", "less speech"],
-                        "default": 0
+                        "schema": {
+                            "title": "Speech Mode",
+                            "description": "The \"speech mode\" to use, either \"full\" or \"less\".",
+                            "enum": [0, 1],
+                            "enumLabels": ["full speech", "less speech"],
+                            "default": 0
+                        }
                     },
                     "Options.SpellAlphanumericData": {
-                        "title": "Spell Alphanumeric Data",
-                        "description": "How to read alphanumeric data.",
-                        "enum": [0, 1, 2],
-                        "enumLabels": ["read as appears", "spell", "spell phonetically"],
-                        "default": 0
+                        "schema": {
+                            "title": "Spell Alphanumeric Data",
+                            "description": "How to read alphanumeric data.",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["read as appears", "spell", "spell phonetically"],
+                            "default": 0
+                        }
                     },
                     "Options.SpellPhonetic": {
                         "schema": {
@@ -1420,48 +1516,62 @@
                         }
                     },
                     "Options.TextAnalyser": {
-                        "title": "Text Analyzer",
-                        "description": "The type of alert to use when announcing formatting errors.",
-                        "enum": [0, 1, 2, 3],
-                        "enumLabels": ["turn off", "indicate with sound", "speak count", "describe inconsistencies"],
-                        "default": 0
+                        "schema": {
+                            "title": "Text Analyzer",
+                            "description": "The type of alert to use when announcing formatting errors.",
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["turn off", "indicate with sound", "speak count", "describe inconsistencies"],
+                            "default": 0
+                        }
                     },
                     // TODO: Discuss whether / how to handle "bit fields" like these.
                     // "Options.TextAnalyserSymbolFlags": {
-                    //     "title": "Indicate Mismatched Symbols",
+                    //                             "schema": {
+                    //                        }
+                    // "title": "Indicate Mismatched Symbols",
                     //     "description": "Which mismatched symbols (such as mismatched opening and closing parentheses) to indicate when editing. Defaults to announcing all supported mismatching symbols."
                     // },
                     // "Options.TextAnalyserTypeFlags": {
+                    //                         "schema": {
+                    //                        }
                     //     "title": "Inconsistencies to Check",
                     //     "description": "Which types of inconsistencies to check.  Defaults to \"all\"."
                     // },
                     "Options.TouchKeyboardChildPanelNotification": {
-                        "title": "Touch Alternative Character Panel Popup Notification",
-                        "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
-                        "enum": [0, 1],
-                        "enumLabels": ["by both message and sound", "by sound only"],
-                        "default": 0
+                        "schema": {
+                            "title": "Touch Alternative Character Panel Popup Notification",
+                            "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
+                            "enum": [0, 1],
+                            "enumLabels": ["by both message and sound", "by sound only"],
+                            "default": 0
+                        }
                     },
                     "Options.TouchKeyboardNotification": {
-                        "title": "Touch Keyboard Notification",
-                        "description": "Whether/how to notify when the touch keyboard appears/disappears.",
-                        "enum": [0, 1, 2],
-                        "enumLabels": ["by message", "by sound", "by both message and sound"],
-                        "default": 2
+                        "schema": {
+                            "title": "Touch Keyboard Notification",
+                            "description": "Whether/how to notify when the touch keyboard appears/disappears.",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["by message", "by sound", "by both message and sound"],
+                            "default": 2
+                        }
                     },
                     "Options.TouchTypingEcho": {
-                        "title": "Touch Typing Echo",
-                        "description": "Whether/how to echo text entered using the touch keyboard.",
-                        "enum": [0, 1, 2, 3],
-                        "enumLabels": ["none", "characters", "words", "both characters and words"],
-                        "default": 3
+                        "schema": {
+                            "title": "Touch Typing Echo",
+                            "description": "Whether/how to echo text entered using the touch keyboard.",
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["none", "characters", "words", "both characters and words"],
+                            "default": 3
+                        }
                     },
                     "Options.TouchTypingMode": {
-                        "title": "Touch Typing Mode",
-                        "description": "Which keyboard mode to use for the touch keyboard.",
-                        "enum": [0, 1],
-                        "enumLabels": ["standard", "touch typing"],
-                        "default": 1
+                        "schema": {
+                            "title": "Touch Typing Mode",
+                            "description": "Which keyboard mode to use for the touch keyboard.",
+                            "enum": [0, 1],
+                            "enumLabels": ["standard", "touch typing"],
+                            "default": 1
+                        }
                     },
                     // Can't find information in the help file or default settings.  Disabled for now.
                     // "Options.TreeViewCheckBoxes": {
@@ -1595,146 +1705,180 @@
                     },
                     // TODO: DEFAULT
                     "Options.VTcolor": {
-                        "title": "Visual Tracking Color",
-                        "description": "The colour to use when highlighting items selected using the touch cursor.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Visual Tracking Color",
+                            "description": "The colour to use when highlighting items selected using the touch cursor.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     // TODO: DEFAULT
                     "Options.VTspacing": {
-                        "title": "Visual Tracking Spacing",
-                        "description": "The amount of spacing between the highlight box and the highlighted item.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Visual Tracking Spacing",
+                            "description": "The amount of spacing between the highlight box and the highlighted item.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     "Options.VTstyle": {
-                        "title": "Visual Tracking Style",
-                        "description": "The style of highlighting to use.",
-                        "enum": [0, 1, 2],
-                        "enumLabels": ["box", "block", "underline"],
-                        "default": 0
+                        "schema": {
+                            "title": "Visual Tracking Style",
+                            "description": "The style of highlighting to use.",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["box", "block", "underline"],
+                            "default": 0
+                        }
                     },
                     // TODO: DEFAULT
                     "Options.VTthickness": {
-                        "title": "Visual Tracking Thickness",
-                        "description": "How thick to make the \"box\" and \"underline\" highlighting styles.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Visual Tracking Thickness",
+                            "description": "How thick to make the \"box\" and \"underline\" highlighting styles.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     // TODO: DEFAULT
                     "Options.VTtransparency": {
-                        "title": "Visual Tracking Transparency",
-                        "description": "How transparent to make the visual highlighting of selected items.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Visual Tracking Transparency",
+                            "description": "How transparent to make the visual highlighting of selected items.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     "Options.VTUseTouchCursor": {
-                        "title": "Highlight Touch Cursor",
-                        "description": "Whether or not to highlight selected items when using the touch cursor or touch gestures.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Highlight Touch Cursor",
+                            "description": "Whether or not to highlight selected items when using the touch cursor or touch gestures.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "Options.VTUseVirtualPCCursor": {
-                        "title": "Use Virtual PC Cursor",
-                        "description": "Whether to use the virtual PC cursor when reading HTML documents.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Use Virtual PC Cursor",
+                            "description": "Whether to use the virtual PC cursor when reading HTML documents.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "Options.VTUseVirtualRibbon": {
-                        "title": "Use Virtual Ribbon Menu",
-                        "description": "Whether to turn on the virtual ribbon menu.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 0
+                        "schema": {
+                            "title": "Use Virtual Ribbon Menu",
+                            "description": "Whether to turn on the virtual ribbon menu.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
                     },
                     "OSM.PixelsPerSpace": {
-                        "title": "Pixels Per Space",
-                        "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 8
+                        "schema": {
+                            "title": "Pixels Per Space",
+                            "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 8
+                        }
                     },
                     "OSM.PixelsPerTab": {
-                        "title": "Pixels Per Tab",
-                        "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 10
+                        "schema": {
+                            "title": "Pixels Per Tab",
+                            "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 10
+                        }
                     },
                     "OSM.TableDetection": {
-                        "title": "Table Presentation Information",
-                        "description": "Which tables to read as tables (data tables, or all tables).",
-                        "enum": [0, 1],
-                        "enumLabels": ["data tables only", "all tables"],
-                        "default": 0
+                        "schema": {
+                            "title": "Table Presentation Information",
+                            "description": "Which tables to read as tables (data tables, or all tables).",
+                            "enum": [0, 1],
+                            "enumLabels": ["data tables only", "all tables"],
+                            "default": 0
+                        }
                     },
                     "OSM.TrackFocusRect": {
-                        "title": "Track Focus Rectangle",
-                        "description": "Set to one causes MAGic to track the focus rectangle in standard controls that utilize focus rectangles.",
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "enumLabels": [
-                            "off",
-                            "on"
-                        ],
-                        "default": 1
+                        "schema": {
+                            "title": "Track Focus Rectangle",
+                            "description": "Set to one causes MAGic to track the focus rectangle in standard controls that utilize focus rectangles.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
                     },
                     "OSM.UnderlineProximity": {
-                        "title": "Underline Proximity",
-                        "description": "How far away in pixels can an underline be before being considered an actual underline",
-                        "type": "number",
-                        "multipleOf": 1,
-                        "default": 0
+                        "schema": {
+                            "title": "Underline Proximity",
+                            "description": "How far away in pixels can an underline be before being considered an actual underline",
+                            "type": "number",
+                            "multipleOf": 1,
+                            "default": 0
+                        }
                     },
                     // TODO: Document default.
                     "Touch.FlickVelocityMin": {
-                        "title": "Flick Velocity",
-                        "description": "The minimum finger velocity to treat as a \"flick\".",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Flick Velocity",
+                            "description": "The minimum finger velocity to treat as a \"flick\".",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     // TODO: Document default.
                     "Touch.TapEventDurationMax": {
-                        "title": "Explore Delay",
-                        "description": "The delay between touching a touch screen and displaying the explore menu, in milliseconds.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Explore Delay",
+                            "description": "The delay between touching a touch screen and displaying the explore menu, in milliseconds.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     // TODO: Document default.
                     "Touch.TapInterEventDurationMax": {
-                        "title": "Double Tap Speed",
-                        "description": "The threshold for treating two taps as a double-tap, expressed in milliseconds between taps.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Double Tap Speed",
+                            "description": "The threshold for treating two taps as a double-tap, expressed in milliseconds between taps.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     // TODO: Document default.
                     "Touch.TapTranslationMax": {
-                        "title": "Tap Radius",
-                        "description": "The size of the finger contact spot on the touch screen.",
-                        "type": "number",
-                        "multipleOf": 1
+                        "schema": {
+                            "title": "Tap Radius",
+                            "description": "The size of the finger contact spot on the touch screen.",
+                            "type": "number",
+                            "multipleOf": 1
+                        }
                     },
                     // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                     "Voice Profiles.ActiveVoiceProfileName": {
