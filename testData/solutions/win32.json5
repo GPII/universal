@@ -40,7 +40,7 @@
                     "Braille.BrailleMessages": {
                         "schema": {
                             "title": "Enable Flash Messages",
-                            "description": "Whether or not to show Flash Messages on a Braille display.",
+                            "description": "Whether or not to show Flash Messages on a braille display.",
                             "enum": [
                                 0,
                                 1
@@ -55,8 +55,7 @@
                     "Braille.BrailleMode": {
                         "schema": {
                             "title": "Braille Mode",
-                            // TODO: Look up in defaults file.
-                            "description": "",
+                            "description": "Use this option to control the format of the information sent to the braille display. When Line mode is selected, JAWS sends the line of text at the current cursor position to the braille display. When Structured mode is selected, JAWS sends information to the display that is relevant to the current cursor position. The information sent includes things such as control type, dialog name, or number of items in a list. When Speech Output mode is selected, JAWS sends the same text to the display that it sends to the synthesizer. The default setting for this option is Structured.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -87,8 +86,8 @@
                     // },
                     "Braille.BrailleSleepMode": {
                         "schema": {
-                            "title": " Enable Braille Sleep Mode",
-                            "description": "Set to 1 to turn off Braille driver, typically used to disable Braille for a specific application",
+                            "title": "Enable Braille Sleep Mode",
+                            "description": "Whether to turn off the braille driver, typically used to disable braille for a specific application.",
                             "enum": [
                                 0,
                                 1
@@ -103,29 +102,29 @@
                     "Braille.BrailleVerbosity": {
                         "schema": {
                             "title": "Braille Verbosity",
-                            "description": "Sets Braille verbosity for Flash messages.",
+                            "description": "Sets braille verbosity for Flash messages.",
                             "enum": [0, 1, 2],
                             "enumLabels": ["beginner", "intermediate", "advanced"]
                         }
                     },
                     "Braille.EightDotBraille": {
                         "schema": {
-                            "title": "Eight Dot Braille",
-                            "description": "Whether to enable eight dot braille versus six dot braille mode.",
+                            "title": "Braille Dots",
+                            "description": "The number of braille dots (six or eight) to use.",
                             "enum": [
                                 0,
                                 1
                             ],
                             "enumLabels": [
-                                "six dot braille.",
-                                "8 dot braille."
+                                "6 dot braille",
+                                "8 dot braille"
                             ],
                             "default": 1
                         }
                     },
                     "Braille.MessagePrefixes": {
                         "schema": {
-                            "title": "Enable Message Prefixes",
+                            "title": "Enable Flash Message Prefixes",
                             "description": "If a display has no Status Cells, whether or not to prepend the Message Prefix to the Flash Message",
                             "enum": [
                                 0,
@@ -165,7 +164,7 @@
                     "Braille.StructuredModeReverseOrder": {
                         "schema": {
                             "title": "Reverse Order of Structured Data",
-                            "description": "If off, order is dlg info|group info|focus info, If on, order is focus info|group info|dialog info",
+                            "description": "Whether to reverse the order of the structured data to show the focused control's info first, followed by its grouping information, and then the dialog box information. By default, items are read in the opposite order.",
                             "enum": [
                                 0,
                                 1
@@ -180,7 +179,7 @@
                     "Braille.WordWrap": {
                         "schema": {
                             "title": "Enable Word Wrap",
-                            "description": "Whether or not to allow words to be split in order to maximize the use of the Braille display. Ignored if panning is set to fixed increment",
+                            "description": "Whether or not to allow words to be split in order to maximize the use of the braille display. Ignored if panning is set to fixed increment",
                             "enum": [
                                 0,
                                 1
@@ -194,7 +193,7 @@
                     },
                     "FSCasts.EnableNotifications": {
                         "schema": {
-                            "title": "Notify about New FSCasts",
+                            "title": "FSCast Notifications",
                             "description": "Whether to have JAWS display a dialog when new podcasts from Freedom Scientific are available.",
                             "enum": [
                                 0,
@@ -223,10 +222,25 @@
                             ]
                         }
                     },
+                    "HTML.AccessKeys": {
+                        "schema": {
+                            "title": "Speak Access Keys Within Web Page",
+                            "description": "Whether to announce HTML element access keys when reading a web page.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    },
                     "HTML.Acronyms": {
                         "schema": {
                             "title": "Acronyms",
-                            "description": "Whether to expand acronyms.  If this is enabled, acronyms with a title attribute will have their title read instead of the on screen text.",
+                            "description": "If this is enabled, acronyms with a title attribute will have their title read instead of the on screen text.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -237,21 +251,6 @@
                                 "off",
                                 "on"
                             ]
-                        }
-                    },
-                    "HTML.AccessKeys": {
-                        "schema": {
-                            "title": "Speak Access Keys Within Web Page",
-                            "description": "0 don't include HTML Element access keys, 1 include them",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 1
                         }
                     },
                     "HTML.ExpandAbbreviations": {
@@ -312,14 +311,14 @@
                     "HTML.FormsModeAutoOff": {
                         "schema": {
                             "title": "Forms Mode Auto Off",
-                            "description": "Whether or not Forms Mode is automatically turned off when the current page is updated 1 means turn forms mode off automatically (default), 0 means leave Forms Mode on",
+                            "description": "Whether or not Forms Mode should be automatically turned off when the current page is updated.",
                             "enum": [
                                 0,
                                 1
                             ],
                             "enumLabels": [
-                                "off",
-                                "on"
+                                "Leave Forms Mode on",
+                                "Turn Forms Mode off automatically"
                             ],
                             "default": 1
                         }
@@ -455,14 +454,15 @@
                             "default": 0
                         }
                     },
-                    "Options.BrailleDisplay": {
-                        "schema": {
-                            "title": "Braille Display",
-                            "description": "The braille display to use.",
-                            "type": "string",
-                            "default": "Braille1"
-                        }
-                    },
+                    // This does not seem safe to update, as we have no idea which displays are available on a given machine.
+                    // "Options.BrailleDisplay": {
+                    //     "schema": {
+                    //         "title": "Braille Display",
+                    //         "description": "The braille display to use.",
+                    //         "type": "string",
+                    //         "default": "Braille1"
+                    //     }
+                    // },
                     "Options.CapIndicator": {
                         "schema": {
                             "title": "Cap Indicator",
@@ -504,7 +504,7 @@
                     "Options.Case": {
                         "schema": {
                             "title": "Case",
-                            "description": "Whether to indicate the case of spoken text with inflection change.",
+                            "description": "Whether to indicate the case of spoken text with a change of inflection.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -651,7 +651,7 @@
                     },
                     "Options.IndicateCaps": {
                         "schema": {
-                            "title": "IndicateCaps",
+                            "title": "Indicate Caps",
                             "description": "When to indicate the presence of capital letters.",
                             "type": "number",
                             "default": 0,
@@ -692,21 +692,26 @@
                             ]
                         }
                     },
-                    // TODO: Look this up in the docs
-                    "Options.IndicateSelected": {
-                        "schema": {
-                            "title": "Indicate Selected",
-                            "description": "",
-                            "type": "number",
-                            "default": 2,
-                            "enum": [
-                                0,
-                                1,
-                                2
+                    // TODO: Look at the wording under text processing >> general >> list item
+                     "Options.IndicateSelected": {
+                         "schema": {
+                             "title": "List Item",
+                             "description": "Use this list to determine how JAWS describes list box items. Select \"Say None\" to silence reading of list box descriptions. When you select \"Say Selected\", JAWS only tells you when list box items are selected. When you select the \"Say Not Selected\" item, JAWS only tells you when list box items are not selected. This is the default setting. If you select \"Say Both\", JAWS tells you when list box items are selected, and when they are not selected.",
+                             "default": 2,
+                             "enum": [
+                                 0,
+                                 1,
+                                 2,
+                                 3
                             ],
-                            "enumLabels": []
-                        }
-                    },
+                             "enumLabels": [
+                                 "None",
+                                 "Selected",
+                                 "Not Selected",
+                                 "Both"
+                             ]
+                         }
+                     },
                     "Options.InitialNumlockState": {
                         "schema": {
                             "title": "Initial State of NumLock Key",
@@ -755,7 +760,6 @@
                             ]
                         }
                     },
-                    // TODO: This now appears to be a "level" option.  Verify by looking at the INI file.
                     "Options.JAWSPunctuationEnabled": {
                         "schema": {
                             "title": "JAWS Punctuation Enabled",
@@ -779,8 +783,8 @@
                     // No documentation, disabled for now.
                     // "Options.KeyboardType": {
                     //     "schema": {
-                    //         "title": "KeyboardType",
-                    //         "description": "Can be one of the types defined in default.jkm",
+                    //         "title": "Keyboard Type",
+                    //         "description": "Can be one of the types defined in the default.jkm settings file.",
                     //         "type": "string",
                     //         "default": "Laptop"
                     //     }
@@ -858,29 +862,44 @@
                             ]
                         }
                     },
-                    // TODO: Verify this and improve the description.
-                    "Options.ListBoxCheckBoxes": {
-                        "schema": {
-                            "title": "List Box Check Boxes",
-                            "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
-                            "type": "number",
-                            "default": 0,
-                            "enum": [
-                                0,
-                                1,
-                                2
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "non-ownerdrawn listboxes",
-                                "also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style."
-                            ]
-                        }
-                    },
+                    // Can't find any documentation about this.
+                    // "Options.ListBoxCheckBoxes": {
+                    //     "schema": {
+                    //         "title": "List Box Check Boxes",
+                    //         "description": "0 off, 1 non-ownerdrawn listboxes, 2 also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style.",
+                    //         "type": "number",
+                    //         "default": 0,
+                    //         "enum": [
+                    //             0,
+                    //             1,
+                    //             2
+                    //         ],
+                    //         "enumLabels": [
+                    //             "off",
+                    //             "non-ownerdrawn listboxes",
+                    //             "also check listboxes with LBS_OWNERDRAWVARIABLE or LBS_OWNERDRAWFIXED window style."
+                    //         ]
+                    //     }
+                    // },
                     "Options.LowerOtherAppsVolumeWhileJAWSIsRunning": {
                         "schema": {
                             "title": "Lower Audio Volume of Programs while JAWS Speaks",
                             "description": "Whether to lower the volume of programs other than JAWS when speaking.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
+                        }
+                    },
+                    "Options.MigrationWizardDisplayed": {
+                        "schema": {
+                            "title": "Migration Wizard Displayed",
+                            "description": "Whether or not to display the migration wizard on startup.",
                             "enum": [
                                 0,
                                 1
@@ -1050,7 +1069,7 @@
                     "Options.QuickKeyNavigationMode": {
                         "schema": {
                             "title": "Quick Key Navigation Mode",
-                            "description": "Currently this option is linked to the virtual cursor only 0 off, 1 on, 2 only on during SayAll",
+                            "description": "Navigation Quick Keys let you move through Web pages with easy to remember commands, such as T for table, F for form field, N for non link text, and V for visited link. These commands are only available when the Virtual Cursor is active. Use these radio buttons to set Navigation Quick Keys off, on, or on only during Say All reading. The default is on.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -1100,7 +1119,7 @@
                     "Options.SayAllIgnoreShiftKeys": {
                         "schema": {
                             "title": "\"Say All\" Ignores Shift Keys",
-                            "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions",
+                            "description": "Allows sticky keys to be used, i.e.: ignores shift keys during SayAll. User can use left/right arrow to do same functions.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1116,8 +1135,8 @@
                     "Options.SayAllIndicateCaps": {
                         // The same as http://registry.gpii.net/common/announceCapitals. We should just reuse it and override with custom values
                         "schema": {
-                            "title": "Announce Capitals",
-                            "description": "In \"Say All\" mode, indicate initial cap or capitalized word",
+                            "title": "\"Say All\" Announces Capitals",
+                            "description": "In \"Say All\" mode, announce an initial capital letter or capitalized word.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1133,7 +1152,7 @@
                     "Options.SayAllMode": {
                         "schema": {
                             "title": "\"Say All\" Mode",
-                            "description": "Sets the amount of text which \"Say All\" sends to the synthesizer as a single unit",
+                            "description": "Sets the amount of text which \"Say All\" sends to the synthesizer as a single unit.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1148,16 +1167,17 @@
                             ]
                         }
                     },
-                    "Options.SayAllScheme": {
-                        "schema": {
-                            "title": "Say All Scheme",
-                            "description": "Which user-defined \"Say All\" scheme to use. ",
-                            "type": "string"
-                        }
-                    },
+                    // Requires creating a schema or knowing the name of the default.  Leave out for now.
+                    // "Options.SayAllScheme": {
+                    //     "schema": {
+                    //         "title": "\"Say All\" Scheme",
+                    //         "description": "Which user-defined \"Say All\" scheme to use.",
+                    //         "type": "string"
+                    //     }
+                    // },
                     "Options.SayBlankLineCount": {
                         "schema": {
-                            "title": "SayBlankLineCount",
+                            "title": "Say Blank Line Count",
                             "description": "In \"Say All\" mode, whether to announce the number of blank lines.",
                             "type": "number",
                             "default": 0,
@@ -1256,7 +1276,7 @@
                     "Options.SayWindowTypeFirst": {
                         "schema": {
                             "title": "Say Window Type First",
-                            "description": "Announce the type of window before announcing the window title/text.",
+                            "description": "Whether to announce the type of window before announcing the window title/text.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1278,11 +1298,10 @@
                             "default": "Classic"
                         }
                     },
-                    // TODO: Verify and come up with a better description.
                     "Options.ScreenEcho": {
                         "schema": {
                             "title": "Screen Echo",
-                            "description": "0=off, 1= highlight, 2 = all",
+                            "description": "Use the radio buttons in this group to determine how much text is read when information on the screen changes. This includes highlighted text, all text as it appears, or no speech echo as text appears or changes on screen. The default setting is Echo Highlighted Text. Changing the Screen Echo setting may affect the reading of menus and other items. For this reason, it is recommended that you only make Screen Echo changes in application-specific settings files.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -1335,6 +1354,21 @@
                             "enumLabels": [
                                 "off",
                                 "beep every 20 units skimmed over"
+                            ]
+                        }
+                    },
+                    "Options.SkipILM": {
+                        "schema": {
+                            "title": "Skip ILM",
+                            "description": "Whether to show the licensing manager on startup when running in 40-minute evaluation mode.",
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "display the license manager on startup",
+                                "do not display the license manager on startup"
                             ]
                         }
                     },
@@ -1502,7 +1536,7 @@
                     "Options.TetherJawsToPC": {
                         "schema": {
                             "title": "Tether Jaws to PC",
-                            "description": "Whether or not to tether the JAWS cursor to the PC cursor.  If this is set to 'on', whenever the Pc cursor moves, the Jaws cursor will follow it. If this is set to 'off', the JAWS cursor is indifferent to Pc cursor movements (this is the default).",
+                            "description": "Whether or not to tether the JAWS cursor to the PC cursor.  If this is set to 'on', whenever the Pc cursor moves, the Jaws cursor will follow it. If this is set to 'off', the JAWS cursor is indifferent to PC cursor movements (this is the default).",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1593,7 +1627,7 @@
                     "Options.TypingEcho": {
                         "schema": {
                             "title": "Typing echo",
-                            "description": "Typing echo mode, its value can be either character, word, char&Word or none",
+                            "description": "How to announce typed words and/or characters.",
                             "type": "number",
                             "default": 1,
                             "enum": [
@@ -1603,16 +1637,16 @@
                                 3
                             ],
                             "enumLabels": [
-                                "off",
-                                "character",
-                                "words",
-                                "character and words"
+                                "don't announce characters or words",
+                                "announce characters",
+                                "announce words",
+                                "announce characters and words"
                             ]
                         }
                     },
                     "Options.TypingInterrupt": {
                         "schema": {
-                            "title": "TypingInterrupt",
+                            "title": "Typing Interrupt",
                             "description": "Whether to stop speaking when the user types.",
                             "type": "number",
                             "default": 1,
@@ -1645,7 +1679,7 @@
                     "Options.UseVirtualInfoInFormsMode": {
                         "schema": {
                             "title": "Use Virtual Info in Forms Mode",
-                            "description": "Whether to use information from the virtual HTML area for prompts in Forms mode. Warning: this will not always result in accurate information, particularly on pages where there are errors in the HTML coding which result in forms mode and virtual mode being out of synchronization",
+                            "description": "Whether to use information from the virtual HTML area for prompts in Forms mode. Warning: this will not always result in accurate information, particularly on pages where there are errors in the HTML coding which result in forms mode and virtual mode being out of synchronization.",
                             "type": "number",
                             "default": 0,
                             "enum": [
@@ -1695,7 +1729,7 @@
                     },
                     "Options.VIRTUALMSAAREFRESH": {
                         "schema": {
-                            "title": "VIRTUALMSAAREFRESH",
+                            "title": "Virtual MSAA Refresh",
                             "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
                             "type": "number",
                             "default": 0,
@@ -1838,7 +1872,7 @@
                     "OSM.UnderlineProximity": {
                         "schema": {
                             "title": "Underline Proximity",
-                            "description": "How far away in pixels can an underline be before being considered an actual underline",
+                            "description": "How far away in pixels can an underline be before being considered an actual underline.",
                             "type": "number",
                             "multipleOf": 1,
                             "default": 0
@@ -1884,7 +1918,7 @@
                     "Voice Profiles.ActiveVoiceProfileName": {
                         "schema": {
                             "title": "Active Voice Profile Name",
-                            "description": "The active voice profile",
+                            "description": "The active voice profile.",
                             "type": "string",
                             "default": "GPII"
                         }
