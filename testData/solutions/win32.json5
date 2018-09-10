@@ -975,7 +975,7 @@
                     "Options.MouseSpeechDelay": {
                         "schema": {
                             "title": "Mouse Echo Delay",
-                            "description": "How long to delay speaking content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
+                            "description": "How long to delay announcing content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
                             "type": "number",
                             "multipleOf": 1,
                             "default": 0
@@ -984,7 +984,7 @@
                     "Options.MouseSpeechEchoUnit": {
                         "schema": {
                             "title": "Mouse Echo Unit",
-                            "description": "The unit of text to hear when the mouse pauses over text in a control.  Defaults to reading the whole line.",
+                            "description": "The unit of text to announce when the mouse pauses over text in a control.  Defaults to reading the whole line.",
                             "enum": [0, 1, 2, 3],
                             "enumLabels": ["character", "word", "line", "paragraph"],
                             "default": 2
