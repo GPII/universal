@@ -5,12 +5,12 @@
 */
 {
     "flat": {
-        "name": "JAWS",
+        "name": "JAWS 18.0",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/com.freedomscientific.jaws.2018": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws.18": {
                         "HTML.Abbreviations": 1,
                         "HTML.Acronyms": 1,
                         "Options.TypingEcho": 3,
@@ -28,7 +28,7 @@
                     {
                         "type": "priority",
                         "scope": [
-                            "http://registry.gpii.net/applications/com.freedomscientific.jaws.2018"
+                            "http://registry.gpii.net/applications/com.freedomscientific.jaws.18"
                         ],
                         "value": 1024
                     }
