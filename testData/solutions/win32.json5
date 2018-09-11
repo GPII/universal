@@ -23,8 +23,7 @@
                         "schema": {
                             "title": "Attribute Rotation Delay",
                             "description": "When in Attribute Mode and characters have multiple attributes, determines how long each attribute should be shown for. This value is in Milliseconds.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 1000
                         }
                     },
@@ -96,7 +95,6 @@
                     //         "title": "Braille Marking",
                     //         "description": "Show Marking may be any combination of the following ored together brlMarkNothing= 0, brlMarkText = 1, brlMarkBold = 2, brlMarkItalic = 4, brlMarkUnderline = 8, brlMarkStrikeout = 16, brlMarkGraphic = 32, brlMarkHighlight = 64, brlMarkColor= 128, // see brlOptColorsToMark string option brlMarkExtended=256, // things like spelling and grammatical errors in MSWord etc, script defined marking brlMarkDoubleStrikeout=512, brlMarkSuperscript=1024, brlMarkSubscript=2048, brlMarkShadow=4096, brlMarkOutline=8192, brlMarkEmboss=16384, brlMarkEngrave=32768, Note when Extended marking is on, JAWS calls the PointNeedsMarking function passing in the coordinates of each cell to determine whether text at that location requires marking. This is useful when the attribute you want to mark is not actually known to JAWS such as the red and green zigzags in MSWord indicating spelling or grammatical errors.",
                     //         "type": "integer",
-                    //         "multipleOf": 1,
                     //         "minValue": 0,
                     //         "maxValue": 65536,
                     //         "default": 64
@@ -167,8 +165,7 @@
                         "schema": {
                             "title": "Flash Message Timeout",
                             "description": "When a Flash message is sent to the display via a script, how long in milliseconds should it be shown if not specified by the script.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 5000
                         }
                     },
@@ -444,8 +441,7 @@
                         "schema": {
                             "title": "Text Block Length",
                             "description": "The number of consecutive characters that must appear in a web page for JAWS to treat this as a block of text.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 25
                         }
                     },
@@ -523,9 +519,8 @@
                         "schema": {
                             "title": "Caret Blink Rate",
                             "description": "How fast the caret blinks, in milliseconds.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 53,
-                            "multipleOf": 1,
                             "minValue": 1
                         }
                     },
@@ -533,20 +528,18 @@
                         "schema": {
                             "title": "Caret Detect",
                             "description": "How many cursor blinks are used to locate the caret.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 1,
-                            "minValue": 1,
-                            "multipleOf": 1
+                            "minValue": 1
                         }
                     },
                     "Options.CaretDetectTimeOut": {
                         "schema": {
                             "title": "Caret Detect Timeout",
                             "description": "The number of milliseconds before JAWS for Windows will give up looking for the caret",
-                            "type": "number",
+                            "type": "integer",
                             "default": 250,
-                            "minValue": 0,
-                            "multipleOf": 1
+                            "minValue": 0
                         }
                     },
                     "Options.Case": {
@@ -1037,8 +1030,7 @@
                         "schema": {
                             "title": "Mouse Echo Delay",
                             "description": "How long to delay announcing content under the mouse, in milliseconds.  Defaults to 0 (no delay).",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 0
                         }
                     },
@@ -1131,9 +1123,8 @@
                         "schema": {
                             "title": "Progress Bar Update Interval",
                             "description": "How often to announce progress bar updates, in milliseconds.  Set to 0 to disable update announcements.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 5000,
-                            "multipleOf": 1,
                             "minValue": 0
                         }
                     },
@@ -1407,8 +1398,7 @@
                         "schema": {
                             "title": "Single Digit Threshold",
                             "description": "The number of digits a number must contain before it is read as single digits (like a phone number).  Defaults to five.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 5
                         }
                     },
@@ -1612,9 +1602,8 @@
                         "schema": {
                             "title": "Synthesizer Reset Frequency",
                             "description": "How often to reset communication with the synthesizer, in milliseconds.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 2000,
-                            "multipleOf": 1,
                             "minValue": 0
                         }
                     },
@@ -1856,9 +1845,8 @@
                         "schema": {
                             "title": "Virtual MSAA Refresh",
                             "description": "How often (in milliseconds) should an embedded ActiveX control cause the Virtual HTML area to be updated when receiving rapid ValueChange events from MSAA.  Set to -1 to disable refreshes.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 0,
-                            "multipleOf": 1,
                             "minValue": -1
                         }
                     },
@@ -1867,8 +1855,7 @@
                         "schema": {
                             "title": "Visual Tracking Color",
                             "description": "The colour to use when highlighting items selected using the touch cursor.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     // TODO: DEFAULT
@@ -1876,8 +1863,7 @@
                         "schema": {
                             "title": "Visual Tracking Spacing",
                             "description": "The amount of spacing between the highlight box and the highlighted item.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     "Options.VTstyle": {
@@ -1902,8 +1888,7 @@
                         "schema": {
                             "title": "Visual Tracking Thickness",
                             "description": "How thick to make the \"box\" and \"underline\" highlighting styles.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     // TODO: DEFAULT
@@ -1911,8 +1896,7 @@
                         "schema": {
                             "title": "Visual Tracking Transparency",
                             "description": "How transparent to make the visual highlighting of selected items.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     "Options.VTUseTouchCursor": {
@@ -1964,8 +1948,7 @@
                         "schema": {
                             "title": "Pixels Per Space",
                             "description": "When simulating spaces in blank portions of a line, the number of pixels used to represent each space.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 8
                         }
                     },
@@ -1973,8 +1956,7 @@
                         "schema": {
                             "title": "Pixels Per Tab",
                             "description": "The number of pixels per tab, used to estimate the number of tab spaces contained within the blank portion of a line.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 10
                         }
                     },
@@ -2012,8 +1994,7 @@
                         "schema": {
                             "title": "Underline Proximity",
                             "description": "How far away in pixels can an underline be before being considered an actual underline.",
-                            "type": "number",
-                            "multipleOf": 1,
+                            "type": "integer",
                             "default": 0
                         }
                     },
@@ -2022,8 +2003,7 @@
                         "schema": {
                             "title": "Flick Velocity",
                             "description": "The minimum finger velocity to treat as a \"flick\".",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     // TODO: Document default.
@@ -2031,8 +2011,7 @@
                         "schema": {
                             "title": "Explore Delay",
                             "description": "The delay between touching a touch screen and displaying the explore menu, in milliseconds.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     // TODO: Document default.
@@ -2040,8 +2019,7 @@
                         "schema": {
                             "title": "Double Tap Speed",
                             "description": "The threshold for treating two taps as a double-tap, expressed in milliseconds between taps.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     // TODO: Document default.
@@ -2049,8 +2027,7 @@
                         "schema": {
                             "title": "Tap Radius",
                             "description": "The size of the finger contact spot on the touch screen.",
-                            "type": "number",
-                            "multipleOf": 1
+                            "type": "integer"
                         }
                     },
                     // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
