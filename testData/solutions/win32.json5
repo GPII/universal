@@ -2214,36 +2214,264 @@
                 },
                 "supportedSettings": {
                     "Options.PrimarySynthesizer": {},
-                    "ENU-Global.Rate": {},
-                    "ENU-JAWSCursor.Rate": {},
-                    "ENU-Keyboard.Rate": {},
-                    "ENU-MenuAndDialog.Rate": {},
-                    "ENU-Message.Rate": {},
-                    "ENU-PCCursor.Rate": {},
-                    "ENU-Global.Pitch": {},
-                    "ENU-JAWSCursor.Pitch": {},
-                    "ENU-Keyboard.Pitch": {},
-                    "ENU-MenuAndDialog.Pitch": {},
-                    "ENU-Message.Pitch": {},
-                    "ENU-PCCursor.Pitch": {},
-                    "ENU-Global.Volume": {},
-                    "ENU-JAWSCursor.Volume": {},
-                    "ENU-Keyboard.Volume": {},
-                    "ENU-MenuAndDialog.Volume": {},
-                    "ENU-Message.Volume": {},
-                    "ENU-PCCursor.Volume": {},
-                    "ENU-Global.Punctuation": {},
-                    "ENU-JAWSCursor.Punctuation": {},
-                    "ENU-Keyboard.Punctuation": {},
-                    "ENU-MenuAndDialog.Punctuation": {},
-                    "ENU-Message.Punctuation": {},
-                    "ENU-PCCursor.Punctuation": {},
-                    "ENU-Global.SynthLangString": {},
-                    "ENU-JAWSCursor.SynthLangString": {},
-                    "ENU-Keyboard.SynthLangString": {},
-                    "ENU-MenuAndDialog.SynthLangString": {},
-                    "ENU-Message.SynthLangString": {},
-                    "ENU-PCCursor.SynthLangString": {}
+                    "ENU-Global.Pitch": {
+                        "schema": {
+                            "title": "Pitch",
+                            "description": "The pitch to use for all types of announcements.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 65
+                        }
+                    },
+                    "ENU-Global.Punctuation": {
+                        "schema": {
+                            "title": "Punctuation",
+                            "description": "How much punctuation to announce for all types of announcements.",
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "default": 2
+                        }
+                    },
+                    "ENU-Global.Rate": {
+                        "schema": {
+                            "title": "Rate",
+                            "description": "Speech rate for all announcements (scale varies by voice).",
+                            "type": "integer"
+                        }
+                    },
+                    "ENU-Global.SynthLangString": {
+                        "schema": {
+                            "title": "Synth Language",
+                            "description": "The language to use for all announcements.",
+                            "type": "string"
+                        }
+                    },
+                    "ENU-Global.Volume": {
+                        "schema": {
+                            "title": "Global Volume",
+                            "description": "The volume for all announcements.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 100
+                        }
+                    },
+                    "ENU-JAWSCursor.Pitch": {
+                        "schema": {
+                            "title": "JAWS Cursor Pitch",
+                            "description": "The pitch to use for announcements related to the JAWS cursor.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 65
+                        }
+                    },
+                    "ENU-JAWSCursor.Punctuation": {
+                        "schema": {
+                            "title": "JAWS Cursor Punctuation",
+                            "description": "How much punctuation to announce for the JAWS cursor.",
+                            "enum": [0, 1, 2, 3],
+                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "default": 2
+                        }
+                    },
+                    "ENU-JAWSCursor.Rate": {
+                        "schema": {
+                            "title": "JAWS Cursor Rate",
+                            "description": "Speech rate for announcements related to the JAWS cursor (scale varies by voice).",
+                            "type": "integer"
+                        }
+                    },
+                    "ENU-JAWSCursor.SynthLangString": {
+                        "schema": {
+                            "title": "JAWS Cursor Language",
+                            "description": "The language to use for announcements related to the JAWS cursor.",
+                            "type": "string"
+                        }
+                    },
+                    "ENU-JAWSCursor.Volume": {
+                        "schema": {
+                            "title": "JAWS Cursor Volume",
+                            "description": "The volume for announcements related to the JAWS cursor.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 100
+                        }
+                    },
+                    "ENU-Keyboard.Pitch": {
+                        "schema": {
+                            "title": "Keyboard Pitch",
+                            "description": "The pitch to use for announcements related to the keyboard.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 65
+                        }
+                    },
+                    "ENU-Keyboard.Punctuation": {
+                        "schema": {
+                            "title": "Keyboard Punctuation",
+                            "description": "How much punctuation to announce for announcements related to the keyboard.",
+                            "enum": [0,1,2,3],
+                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "default": 2
+                        }
+                    },
+                    "ENU-Keyboard.Rate": {
+                        "schema": {
+                            "title": "Keyboard Rate",
+                            "description": "Speech rate for announcements related to the keyboard (scale varies by voice).",
+                            "type": "integer"
+                        }
+                    },
+                    "ENU-Keyboard.SynthLangString": {
+                        "schema": {
+                            "title": "Keyboard Language",
+                            "description": "The language to use for announcements related to the keyboard.",
+                            "type": "string"
+                        }
+                    },
+                    "ENU-Keyboard.Volume": {
+                        "schema": {
+                            "title": "Keyboard Volume",
+                            "description": "The volume for announcements related to the keyboard.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 100
+                        }
+                    },
+                    "ENU-MenuAndDialog.Pitch": {
+                        "schema": {
+                            "title": "Menu and Dialog Pitch",
+                            "description": "The pitch to use for announcements related to menus and dialogs.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 65
+                        }
+                    },
+                    "ENU-MenuAndDialog.Punctuation": {
+                        "schema": {
+                            "title": "Menu and Dialog Punctuation",
+                            "description": "How much punctuation to announce for menus and dialogs.",
+                            "enum": [0,1,2,3],
+                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "default": 2
+                        }
+                    },
+                    "ENU-MenuAndDialog.Rate": {
+                        "schema": {
+                            "title": "Menu and Dialog Rate",
+                            "description": "Speech rate for announcements related to menus and dialogs (scale varies by voice).",
+                            "type": "integer"
+                        }
+                    },
+                    "ENU-MenuAndDialog.SynthLangString": {
+                        "schema": {
+                            "title": "Menu and Dialog Language",
+                            "description": "The language to use for announcements related to menus and dialogs.",
+                            "type": "string"
+                        }
+                    },
+                    "ENU-MenuAndDialog.Volume": {
+                        "schema": {
+                            "title": "Menu and Dialog Volume",
+                            "description": "The volume for announcements related to menus and dialogs.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 100
+                        }
+                    },
+                    "ENU-Message.Pitch": {
+                        "schema": {
+                            "title": "Message Pitch",
+                            "description": "The pitch to use for message announcements.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 65
+                        }
+                    },
+                    "ENU-Message.Punctuation": {
+                        "schema": {
+                            "title": "Message Punctuation",
+                            "description": "How much punctuation to announce for messages.",
+                            "enum": [0,1,2,3],
+                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "default": 2
+                        }
+                    },
+                    "ENU-Message.Rate": {
+                        "schema": {
+                            "title": "Message Rate",
+                            "description": "Speech rate for message announcements.",
+                            "type": "integer"
+                        }
+                    },
+                    "ENU-Message.SynthLangString": {
+                        "schema": {
+                            "title": "Message Language",
+                            "description": "The language to use for message announcements.",
+                            "type": "string"
+                        }
+                    },
+                    "ENU-Message.Volume": {
+                        "schema": {
+                            "title": "Message Volume",
+                            "description": "The volume for message announcements.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 100
+                        }
+                    },
+                    "ENU-PCCursor.Pitch": {
+                        "schema": {
+                            "title": "PC Cursor Pitch",
+                            "description": "The pitch to use for announcements related to the PC cursor.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "default": 65
+                        }
+                    },
+                    "ENU-PCCursor.Punctuation": {
+                        "schema": {
+                            "title": "PC Cursor Punctuation",
+                            "description": "How much punctuation to announce for the PC cursor.",
+                            "enum": [0,1,2,3],
+                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "default": 2
+                        }
+                    },
+                    "ENU-PCCursor.Rate": {
+                        "schema": {
+                            "title": "PC Cursor Rate",
+                            "description": "Speech rate for announcements related to the PC cursor (scale varies by voice).",
+                            "type": "integer"
+                        }
+                    },
+                    "ENU-PCCursor.SynthLangString": {
+                        "schema": {
+                            "title": "PC Cursor Language",
+                            "description": "The language to use for announcements related to the PC cursor.",
+                            "type": "string"
+                        }
+                    },
+                    "ENU-PCCursor.Volume": {
+                        "schema": {
+                            "title": "PC Cursor Volume",
+                            "description": "The volume for announcements related to the PC cursor.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 100
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "Options\\.PrimarySynthesizer": "http://registry\\.gpii\\.net/common/speechSynthesizer",
