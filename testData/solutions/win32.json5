@@ -32,8 +32,26 @@
                         "schema": {
                             "title": "Auto Pan Mode",
                             "description": "The \"Auto Pan\" algorithm to use.",
-                            "enum": [0, 1, 2, 3, 4, 5, 6, 255],
-                            "enumLabels": ["off", "move display minimally to include whole word containing cursor", "match user pan", "move display to show whole word at cursor nearest the middle of the display area", "maximize text after cursor", "maximize text before cursor", "autopan to default structured segment", "Smart Autopan, autopan using the best algorithm for the current situation"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                255
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "move display minimally to include whole word containing cursor",
+                                "match user pan",
+                                "move display to show whole word at cursor nearest the middle of the display area",
+                                "maximize text after cursor",
+                                "maximize text before cursor",
+                                "autopan to default structured segment",
+                                "Smart Autopan, autopan using the best algorithm for the current situation"
+                            ],
                             "default": 255
                         }
                     },
@@ -103,8 +121,16 @@
                         "schema": {
                             "title": "Braille Verbosity",
                             "description": "Sets braille verbosity for Flash messages.",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["beginner", "intermediate", "advanced"]
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "beginner",
+                                "intermediate",
+                                "advanced"
+                            ]
                         }
                     },
                     "Braille.EightDotBraille": {
@@ -303,8 +329,22 @@
                         "schema": {
                             "title": "Form Field Prompt Options",
                             "description": "Which attributes to prefer when describing form fields.",
-                            "enum": [0, 1, 2, 3, 4, 5],
-                            "enumLabels": ["favor label tag", "favor title attribute", "favor alt attribute", "favor longest", "use both label and title if different", "use both label and alt if different"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "enumLabels": [
+                                "favor label tag",
+                                "favor title attribute",
+                                "favor alt attribute",
+                                "favor longest",
+                                "use both label and title if different",
+                                "use both label and alt if different"
+                            ],
                             "default": 0
                         }
                     },
@@ -342,8 +382,16 @@
                         "schema": {
                             "title": "Include Graphics",
                             "description": "Whether/when to include graphics in web pages.",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["never include graphics", "include graphics that have labels, i.e. alt=attributes", "include all graphics"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "never include graphics",
+                                "include graphics that have labels, i.e. alt=attributes",
+                                "include all graphics"
+                            ],
                             "default": 1
                         }
                     },
@@ -692,33 +740,40 @@
                             ]
                         }
                     },
-                    // TODO: Look at the wording under text processing >> general >> list item
-                     "Options.IndicateSelected": {
-                         "schema": {
-                             "title": "List Item",
-                             "description": "Use this list to determine how JAWS describes list box items. Select \"Say None\" to silence reading of list box descriptions. When you select \"Say Selected\", JAWS only tells you when list box items are selected. When you select the \"Say Not Selected\" item, JAWS only tells you when list box items are not selected. This is the default setting. If you select \"Say Both\", JAWS tells you when list box items are selected, and when they are not selected.",
-                             "default": 2,
-                             "enum": [
-                                 0,
-                                 1,
-                                 2,
-                                 3
+                    "Options.IndicateSelected": {
+                        "schema": {
+                            "title": "List Item",
+                            "description": "Use this list to determine how JAWS describes list box items. Select \"Say None\" to silence reading of list box descriptions. When you select \"Say Selected\", JAWS only tells you when list box items are selected. When you select the \"Say Not Selected\" item, JAWS only tells you when list box items are not selected. This is the default setting. If you select \"Say Both\", JAWS tells you when list box items are selected, and when they are not selected.",
+                            "default": 2,
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
                             ],
-                             "enumLabels": [
-                                 "None",
-                                 "Selected",
-                                 "Not Selected",
-                                 "Both"
-                             ]
-                         }
-                     },
+                            "enumLabels": [
+                                "None",
+                                "Selected",
+                                "Not Selected",
+                                "Both"
+                            ]
+                        }
+                    },
                     "Options.InitialNumlockState": {
                         "schema": {
                             "title": "Initial State of NumLock Key",
                             "description": "The initial state of the NumLock key.",
                             "type": "number",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["off at startup", "on at startup", "leave unmodified"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off at startup",
+                                "on at startup",
+                                "leave unmodified"
+                            ],
                             "default": 0
                         }
                     },
@@ -842,8 +897,14 @@
                         "schema": {
                             "title": "Less Speech Options",
                             "description": "How to behave when in \"less speech mode\".",
-                            "enum": [0, 1],
-                            "enumLabels": ["Speech On Demand", "Mute Speech"]
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Speech On Demand",
+                                "Mute Speech"
+                            ]
                         }
                     },
                     "Options.LinePauses": {
@@ -985,8 +1046,18 @@
                         "schema": {
                             "title": "Mouse Echo Unit",
                             "description": "The unit of text to announce when the mouse pauses over text in a control.  Defaults to reading the whole line.",
-                            "enum": [0, 1, 2, 3],
-                            "enumLabels": ["character", "word", "line", "paragraph"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "character",
+                                "word",
+                                "line",
+                                "paragraph"
+                            ],
                             "default": 2
                         }
                     },
@@ -1484,8 +1555,14 @@
                         "schema": {
                             "title": "Speech Mode",
                             "description": "The \"speech mode\" to use, either \"full\" or \"less\".",
-                            "enum": [0, 1],
-                            "enumLabels": ["full speech", "less speech"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "full speech",
+                                "less speech"
+                            ],
                             "default": 0
                         }
                     },
@@ -1493,8 +1570,16 @@
                         "schema": {
                             "title": "Spell Alphanumeric Data",
                             "description": "How to read alphanumeric data.",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["read as appears", "spell", "spell phonetically"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "read as appears",
+                                "spell",
+                                "spell phonetically"
+                            ],
                             "default": 0
                         }
                     },
@@ -1553,8 +1638,18 @@
                         "schema": {
                             "title": "Text Analyzer",
                             "description": "The type of alert to use when announcing formatting errors.",
-                            "enum": [0, 1, 2, 3],
-                            "enumLabels": ["turn off", "indicate with sound", "speak count", "describe inconsistencies"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "turn off",
+                                "indicate with sound",
+                                "speak count",
+                                "describe inconsistencies"
+                            ],
                             "default": 0
                         }
                     },
@@ -1575,8 +1670,14 @@
                         "schema": {
                             "title": "Touch Alternative Character Panel Popup Notification",
                             "description": "How to announce the appearance of a panel of alternate keys in the touch keyboard.",
-                            "enum": [0, 1],
-                            "enumLabels": ["by both message and sound", "by sound only"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "by both message and sound",
+                                "by sound only"
+                            ],
                             "default": 0
                         }
                     },
@@ -1584,8 +1685,16 @@
                         "schema": {
                             "title": "Touch Keyboard Notification",
                             "description": "Whether/how to notify when the touch keyboard appears/disappears.",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["by message", "by sound", "by both message and sound"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "by message",
+                                "by sound",
+                                "by both message and sound"
+                            ],
                             "default": 2
                         }
                     },
@@ -1593,8 +1702,18 @@
                         "schema": {
                             "title": "Touch Typing Echo",
                             "description": "Whether/how to echo text entered using the touch keyboard.",
-                            "enum": [0, 1, 2, 3],
-                            "enumLabels": ["none", "characters", "words", "both characters and words"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "none",
+                                "characters",
+                                "words",
+                                "both characters and words"
+                            ],
                             "default": 3
                         }
                     },
@@ -1602,8 +1721,14 @@
                         "schema": {
                             "title": "Touch Typing Mode",
                             "description": "Which keyboard mode to use for the touch keyboard.",
-                            "enum": [0, 1],
-                            "enumLabels": ["standard", "touch typing"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "standard",
+                                "touch typing"
+                            ],
                             "default": 1
                         }
                     },
@@ -1759,8 +1884,16 @@
                         "schema": {
                             "title": "Visual Tracking Style",
                             "description": "The style of highlighting to use.",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["box", "block", "underline"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "box",
+                                "block",
+                                "underline"
+                            ],
                             "default": 0
                         }
                     },
@@ -1849,8 +1982,14 @@
                         "schema": {
                             "title": "Table Presentation Information",
                             "description": "Which tables to read as tables (data tables, or all tables).",
-                            "enum": [0, 1],
-                            "enumLabels": ["data tables only", "all tables"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "data tables only",
+                                "all tables"
+                            ],
                             "default": 0
                         }
                     },
@@ -1929,7 +2068,8 @@
                         "literalValue": "GPII"
                     },
                     "Options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "Options\\.TypingEcho": { // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
+                    "Options\\.TypingEcho": {
+                        // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                         "transform": {
                             "type": "fluid.transforms.condition",
                             "condition": {
@@ -2533,8 +2673,8 @@
     "com.freedomscientific.jaws.v18": {
         "name": "JAWS 18.0",
         // TODO: Discuss with Antranig, et cetera.
-//        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
-//        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
+        //        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
+        //        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
         "contexts": {
             "OS": [
                 {
@@ -2550,7 +2690,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\enu\\DEFAULT.JCF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.supportedSettings}",
                 "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.capabilitiesTransformations}",
@@ -2623,8 +2763,8 @@
     "com.freedomscientific.jaws.v17": {
         "name": "JAWS 17.0",
         // TODO: Discuss with Antranig, et cetera
-//        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
-//        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
+        //        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
+        //        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
         "contexts": {
             "OS": [
                 {
@@ -2825,7 +2965,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "Invert": { // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
+                    "Invert": {
+                        // I don't think this is something that the user should change since we always store the voice settings into our own profile name "GPII"
                         "schema": {
                             "title": "Invert Colours",
                             "description": "Enable colour inversion for Magnifier",
@@ -2874,7 +3015,11 @@
                             "description": "Position of the magnified area",
                             "type": "number",
                             "default": 2,
-                            "enum": [1, 2, 3]
+                            "enum": [
+                                1,
+                                2,
+                                3
+                            ]
                             // TODO: We must present these values in a human readable form
                             // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
                         }
@@ -2900,18 +3045,20 @@
                             }
                         }
                     },
-                    "transform": [{
-                        "type": "fluid.transforms.arrayToSetMembership",
-                        "inputPath": "http://registry\\.gpii\\.net/common/tracking",
-                        "outputPath": "",
-                        "presentValue": 1,
-                        "missingValue": 0,
-                        "options": {
-                            "focus": "FollowFocus",
-                            "caret": "FollowCaret",
-                            "mouse": "FollowMouse"
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.arrayToSetMembership",
+                            "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+                            "outputPath": "",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "focus": "FollowFocus",
+                                "caret": "FollowCaret",
+                                "mouse": "FollowMouse"
+                            }
                         }
-                    }],
+                    ],
                     "MagnificationMode": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -3014,7 +3161,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "NavigationMode": { // TODO: Weird supported setting - How do we provide such use case?
+                    "NavigationMode": {
+                        // TODO: Weird supported setting - How do we provide such use case?
                         "schema": {
                             "title": "On-Screen Keyboard",
                             "description": "Enable/Disable On-Screen Keyboard",
@@ -3146,18 +3294,20 @@
                             "offset": 0
                         }
                     },
-                    "transform": [{
-                        "type": "fluid.transforms.arrayToSetMembership",
-                        "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
-                        "outputPath": "",
-                        "presentValue": 1,
-                        "missingValue": 0,
-                        "options": {
-                            "focus": "CoupleNarratorCursorKeyboard",
-                            "caret": "FollowInsertion",
-                            "mouse": "InteractionMouse"
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.arrayToSetMembership",
+                            "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "outputPath": "",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "focus": "CoupleNarratorCursorKeyboard",
+                                "caret": "FollowInsertion",
+                                "mouse": "InteractionMouse"
+                            }
                         }
-                    }],
+                    ],
                     "EchoChars": {
                         "transform": {
                             "type": "fluid.transforms.condition",
@@ -3213,18 +3363,20 @@
                             "offset": 0
                         }
                     },
-                    "transform": [{
-                        "type": "fluid.transforms.setMembershipToArray",
-                        "inputPath": "",
-                        "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
-                        "presentValue": 1,
-                        "missingValue": 0,
-                        "options": {
-                            "CoupleNarratorCursorKeyboard": "focus",
-                            "FollowInsertion": "caret",
-                            "InteractionMouse": "mouse"
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.setMembershipToArray",
+                            "inputPath": "",
+                            "outputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "presentValue": 1,
+                            "missingValue": 0,
+                            "options": {
+                                "CoupleNarratorCursorKeyboard": "focus",
+                                "FollowInsertion": "caret",
+                                "InteractionMouse": "mouse"
+                            }
                         }
-                    }],
+                    ],
                     "http://registry\\.gpii\\.net/common/keyEcho": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
@@ -3844,9 +3996,11 @@
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -3881,9 +4035,11 @@
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -3918,9 +4074,11 @@
                         "type": "gpii.windows.closeProcessByName",
                         "filename": "firefox.exe"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -4265,7 +4423,8 @@
                             "title": "Slow keys interval",
                             "description": "Slow keys interval time in milliseconds",
                             "type": "number",
-                            "default": 0,  // 0 means no interval time
+                            "default": 0,
+                            // 0 means no interval time
                             "divisibleBy": 1
                         }
                     },
@@ -4480,7 +4639,8 @@
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
                             "type": "number",
-                            "min": -1000, // TODO: Not clear how to describe this setting
+                            "min": -1000,
+                            // TODO: Not clear how to describe this setting
                             "max": 1000
                         }
                     }
@@ -4593,7 +4753,8 @@
                 },
                 "supportedSettings": {
                     "MouseTrails": {
-                        "schema": { // Exactly the same schema as mouseTrailing common term
+                        "schema": {
+                            // Exactly the same schema as mouseTrailing common term
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
                             "type": "number",
@@ -4651,8 +4812,10 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display",
-                            "type": "array", // TODO: Not sure about this type
-                            "enum": [] // TODO: This must be filled in on the fly with available screen resolutions
+                            "type": "array",
+                            // TODO: Not sure about this type
+                            "enum": []
+                            // TODO: This must be filled in on the fly with available screen resolutions
                         }
                     }
                 }
@@ -4685,7 +4848,8 @@
                             "description": "Screen DPI of the default display",
                             "type": "number",
                             "minimum": 1,
-                            "maximum": 5 // Taken from dpiWindows10.js, may not be appropriate
+                            "maximum": 5
+                            // Taken from dpiWindows10.js, may not be appropriate
                         }
                     }
                 },
@@ -5018,12 +5182,16 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "setTrue": [{
-                        "type": "gpii.windows.spiSettingsHandler.updateCursors"
-                    }],
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "setTrue": [
+                        {
+                            "type": "gpii.windows.spiSettingsHandler.updateCursors"
+                        }
+                    ],
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -5434,10 +5602,12 @@
     "net.gpii.uioPlus": {
         "name": "UIO+",
         "contexts": {
-            "OS": [{
+            "OS": [
+                {
                     "id": "win32",
                     "version": ">=5.0"
-            }]
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -5611,7 +5781,11 @@
                             "title": "Explode Method",
                             "description": "The strategy to be used when exploding",
                             "type": "string",
-                            "enum": ["reject", "fail", "throw"]
+                            "enum": [
+                                "reject",
+                                "fail",
+                                "throw"
+                            ]
                         }
                     },
                     "explodeOn": {
@@ -5619,7 +5793,10 @@
                             "title": "Explode On",
                             "description": "Whether to explode during the get or set settingsHandler method",
                             "type": "string",
-                            "enum": ["get", "set"]
+                            "enum": [
+                                "get",
+                                "set"
+                            ]
                         }
                     }
                 }
