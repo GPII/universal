@@ -9,7 +9,8 @@
 {
     "type": "gpii.config.untrusted.development",
     "mergeConfigs": [
-        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.static.json5",
-        "../node_modules/flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
+        "%deviceReporter/configs/gpii.deviceReporter.config.static.json5",
+        "%flowManager/configs/gpii.flowManager.config.untrusted.base.json5",
+        "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
     ]
 }
