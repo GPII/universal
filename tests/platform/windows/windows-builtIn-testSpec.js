@@ -72,15 +72,11 @@ gpii.tests.windows.builtIn = [
                     {
                         "settings": {
                             "DoubleClickTimeConfig": {
-                                "path": "setParam",
                                 "value": 600
                             }
                         },
                         "options": {
-                            "functionName": "DoubleClickTime",
-                            "setParam": 0,
-                            "checkReturn": true,
-                            "successValue": 1
+                            "functionName": "DoubleClickTime"
                         }
                     }
                 ]
@@ -89,7 +85,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.mouseSettings": [
                     {
                         "settings": {
-                            "SwapMouseButtons": {
+                            "SwapMouseButtonsConfig": {
                                 "path": {
                                     "get": "pvParam",
                                     "set": "uiParam"
