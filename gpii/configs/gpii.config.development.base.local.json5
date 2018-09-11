@@ -29,6 +29,6 @@
         "%flowManager/configs/gpii.flowManager.config.local.base.json5",
         "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
         "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5",
-        "%installOnDemand/configs/gpii.iod.config.development.json"
+        "%gpii-iod/configs/gpii.iod.config.development.json"
     ]
 }
