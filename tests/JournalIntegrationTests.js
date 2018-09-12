@@ -109,6 +109,17 @@ gpii.tests.journal.initialSettings = {
                 ]
             }
         }]
+    },
+    "gpii.windows.nativeSettingsHandler": {
+        "com.microsoft.windows.mouseSettings": [
+            {
+                "settings": {
+                    "DoubleClickTimeConfig": {
+                        "value": 500
+                    }
+                }
+            }
+        ]
     }
 };
 
