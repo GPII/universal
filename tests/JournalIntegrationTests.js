@@ -117,6 +117,9 @@ gpii.tests.journal.initialSettings = {
                     "DoubleClickTimeConfig": {
                         "value": 500
                     }
+                },
+                "options": {
+                    "functionName": "DoubleClickTime"
                 }
             }
         ]
