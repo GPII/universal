@@ -2734,7 +2734,7 @@
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\wait_i.cur"
                                             },
                                             "noMatch": {
-                                                "outputValue": "%SystemRoot%\\cursors\\wait_im.cur"
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -2765,7 +2765,7 @@
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\wait_il.cur"
                                             },
                                             "noMatch": {
-                                                "outputValue": "%SystemRoot%\\cursors\\wait_im.cur"
+                                                "outputValue": "%SystemRoot%\\cursors\\wait_l.cur"
                                             }
                                         }
                                     }
@@ -2788,6 +2788,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\arrow_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\arrow_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -2801,6 +2804,9 @@
                                                 "White": "%SystemRoot%\\cursors\\arrow_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\arrow_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\arrow_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\arrow_m.cur"
                                             }
                                         }
                                     }
@@ -2813,6 +2819,9 @@
                                                 "White": "%SystemRoot%\\cursors\\arrow_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\arrow_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\arrow_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\arrow_l.cur"
                                             }
                                         }
                                     }
@@ -2835,6 +2844,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\cross_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\cross_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -2848,6 +2860,9 @@
                                                 "White": "%SystemRoot%\\cursors\\cross_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\cross_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\cross_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\cross_m.cur"
                                             }
                                         }
                                     }
@@ -2860,6 +2875,9 @@
                                                 "White": "%SystemRoot%\\cursors\\cross_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\cross_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\cross_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\cross_l.cur"
                                             }
                                         }
                                     }
@@ -2882,6 +2900,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\help_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\help_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -2895,6 +2916,9 @@
                                                 "White": "%SystemRoot%\\cursors\\help_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\help_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\help_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\help_m.cur"
                                             }
                                         }
                                     }
@@ -2907,6 +2931,9 @@
                                                 "White": "%SystemRoot%\\cursors\\help_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\help_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\help_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\help_l.cur"
                                             }
                                         }
                                     }
@@ -2929,6 +2956,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\beam_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\beam_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -2942,6 +2972,9 @@
                                                 "White": "%SystemRoot%\\cursors\\beam_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\beam_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\beam_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\beam_m.cur"
                                             }
                                         }
                                     }
@@ -2954,6 +2987,9 @@
                                                 "White": "%SystemRoot%\\cursors\\beam_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\beam_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\beam_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\beam_l.cur"
                                             }
                                         }
                                     }
@@ -2976,6 +3012,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\no_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\no_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -2989,6 +3028,9 @@
                                                 "White": "%SystemRoot%\\cursors\\no_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\no_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\no_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\no_m.cur"
                                             }
                                         }
                                     }
@@ -3001,6 +3043,9 @@
                                                 "White": "%SystemRoot%\\cursors\\no_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\no_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\no_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\no_l.cur"
                                             }
                                         }
                                     }
@@ -3023,6 +3068,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\pen_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\pen_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3036,6 +3084,9 @@
                                                 "White": "%SystemRoot%\\cursors\\pen_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\pen_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\pen_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\pen_m.cur"
                                             }
                                         }
                                     }
@@ -3048,6 +3099,9 @@
                                                 "White": "%SystemRoot%\\cursors\\pen_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\pen_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\pen_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\pen_l.cur"
                                             }
                                         }
                                     }
@@ -3070,6 +3124,9 @@
                                                 "White": 0,
                                                 "Black": 2,
                                                 "ReverseBlack": 2
+                                            },
+                                            "noMatch": {
+                                                "outputValue": 0
                                             }
                                         }
                                     }
@@ -3083,6 +3140,9 @@
                                                 "White": 0,
                                                 "Black": 2,
                                                 "ReverseBlack": 2
+                                            },
+                                            "noMatch": {
+                                                "outputValue": 0
                                             }
                                         }
                                     }
@@ -3095,6 +3155,9 @@
                                                 "White": 0,
                                                 "Black": 2,
                                                 "ReverseBlack": 2
+                                            },
+                                            "noMatch": {
+                                                "outputValue": 0
                                             }
                                         }
                                     }
@@ -3117,6 +3180,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\move_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\move_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3130,6 +3196,9 @@
                                                 "White": "%SystemRoot%\\cursors\\move_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\move_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\move_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\move_m.cur"
                                             }
                                         }
                                     }
@@ -3142,6 +3211,9 @@
                                                 "White": "%SystemRoot%\\cursors\\move_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\move_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\move_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\move_l.cur"
                                             }
                                         }
                                     }
@@ -3164,6 +3236,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\size1_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size1_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3177,6 +3252,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size1_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size1_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size1_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size1_m.cur"
                                             }
                                         }
                                     }
@@ -3189,6 +3267,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size1_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size1_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size1_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size1_l.cur"
                                             }
                                         }
                                     }
@@ -3211,6 +3292,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\size4_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size4_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3224,6 +3308,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size4_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size4_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size4_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size4_m.cur"
                                             }
                                         }
                                     }
@@ -3236,6 +3323,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size4_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size4_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size4_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size4_l.cur"
                                             }
                                         }
                                     }
@@ -3258,6 +3348,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\size2_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size2_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3271,6 +3364,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size2_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size2_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size2_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size2_m.cur"
                                             }
                                         }
                                     }
@@ -3283,6 +3379,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size2_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size2_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size2_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size2_l.cur"
                                             }
                                         }
                                     }
@@ -3305,6 +3404,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\size3_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size3_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3318,6 +3420,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size3_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size3_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size3_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size3_m.cur"
                                             }
                                         }
                                     }
@@ -3330,6 +3435,9 @@
                                                 "White": "%SystemRoot%\\cursors\\size3_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\size3_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\size3_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size3_l.cur"
                                             }
                                         }
                                     }
@@ -3352,6 +3460,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\up_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\up_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3365,6 +3476,9 @@
                                                 "White": "%SystemRoot%\\cursors\\up_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\up_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\up_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\up_m.cur"
                                             }
                                         }
                                     }
@@ -3377,6 +3491,9 @@
                                                 "White": "%SystemRoot%\\cursors\\up_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\up_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\up_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\up_l.cur"
                                             }
                                         }
                                     }
@@ -3399,6 +3516,9 @@
                                                 "White": "",
                                                 "Black": "%SystemRoot%\\cursors\\busy_r.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\busy_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
                                             }
                                         }
                                     }
@@ -3412,6 +3532,9 @@
                                                 "White": "%SystemRoot%\\cursors\\busy_m.cur",
                                                 "Black": "%SystemRoot%\\cursors\\busy_rm.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\busy_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\busy_m.cur"
                                             }
                                         }
                                     }
@@ -3424,6 +3547,9 @@
                                                 "White": "%SystemRoot%\\cursors\\busy_l.cur",
                                                 "Black": "%SystemRoot%\\cursors\\busy_rl.cur",
                                                 "ReverseBlack": "%SystemRoot%\\cursors\\busy_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\busy_l.cur"
                                             }
                                         }
                                     }
