@@ -2885,6 +2885,56 @@
                             ]
                         }
                     },
+                    "Hand": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "ReverseBlack": "C:\\Windows\\cursors\\aero_link_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "Help": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
