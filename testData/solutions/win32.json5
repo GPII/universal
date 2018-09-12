@@ -3913,9 +3913,6 @@
                 "liveness": "live",
                 "options": {
                     "functionName": "DoubleClickTime",
-                    "setParam": 0,
-                    "checkReturn": true,
-                    "successValue": 1,
                     "verifySettings": true
                 },
                 "supportedSettings": {
@@ -3938,12 +3935,6 @@
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
                             "outputPath": "value",
                             "defaultValue": 500
-                        },
-                        "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "setParam"
-                            }
                         }
                     }
                 },
