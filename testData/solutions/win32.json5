@@ -3513,7 +3513,7 @@
                     "setAction": "SPI_SETMOUSEBUTTONSWAP",
                     "uiParam": 0,
                     "pvParam": {
-                        "type": "UINT"
+                        "type": "BOOL"
                     },
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
                     "verifySettings": true
