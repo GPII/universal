@@ -9,13 +9,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 // This script modifies the preferences database:
-// 1. Retrieves all the Prefs Safes of type "snapset" (prefsSafesType = "snapset") from the databsse.
-// 2. Retrieves all the GPII Keys associated with each snapset Prefs Safe so found,
-// 3. Deletes these Prefs Safes and their associated GPII Keys from the database,
-// 4. Uploads the new Prefs Safes and their GPII Keys to the database,
-// 5. Uploads demo user Prefs Safes and their Keys in to the database, if they are not already present.
+// 1. Update the views records for accessing Prefs Safes and GPII Keys,
+// 2. Retrieves all the Prefs Safes of type "snapset" (prefsSafesType = "snapset") from the databsse.
+// 3. Retrieves all the GPII Keys associated with each snapset Prefs Safe so found,
+// 4. Deletes these Prefs Safes and their associated GPII Keys from the database,
+// 5. Uploads the new Prefs Safes and their GPII Keys to the database,
 // A sample command that runs this script:
-// node deleteAndLoadSnapsets.js $COUCHDBURL $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR
+// node deleteAndLoadSnapsets.js $COUCHDBURL $STATIC_DATA_DIR $BUILD_DATA_DIR
 
 "use strict";
 
@@ -30,8 +30,8 @@ fluid.registerNamespace("gpii.dataLoader");
 fluid.setLogging(fluid.logLevel.INFO);
 
 // Handle command line
-if (process.argv.length < 6) {
-    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR $BUILD_DEMOUSER_DIR [--justDelete]");
+if (process.argv.length < 5) {
+    fluid.log("Usage: node deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR [--justDelete]");
     process.exit(1);
 }
 
@@ -47,8 +47,7 @@ gpii.dataLoader.initOptions = function (processArgv) {
     dbOptions.couchDbUrl = processArgv[2];
     dbOptions.staticDataDir = processArgv[3];
     dbOptions.buildDataDir = processArgv[4];
-    dbOptions.demoUserDir = processArgv[5];
-    if (processArgv.length > 6 && processArgv[6] === "--justDelete") { // for debugging.
+    if (processArgv.length > 5 && processArgv[5] === "--justDelete") { // for debugging.
         dbOptions.justDelete = true;
     } else {
         dbOptions.justDelete = false;
@@ -83,7 +82,6 @@ gpii.dataLoader.initOptions = function (processArgv) {
     );
     fluid.log("STATIC_DATA_DIR: '" + dbOptions.staticDataDir + "'");
     fluid.log("BUILD_DATA_DIR: '" + dbOptions.buildDataDir + "'");
-    fluid.log("BUILD_DEMOUSER_DIR: '" + dbOptions.demoUserDir + "'");
     return dbOptions;
 };
 
@@ -467,28 +465,25 @@ gpii.dataLoader.createBatchDeleteStep = function (options) {
  */
 gpii.dataLoader.logSnapsetsUpload = function (responseString, options) {
     fluid.log("Bulk loading of build data from '" + options.buildDataDir + "'");
-    fluid.log("Bulk loading of demo user data from '" + options.demoUserDir + "'");
-    return "Uploaded latest snapsets and demo user preferences";
+    return "Uploaded latest snapsets preferences";
 };
 
 /*
- * Create the step that uploads, in batch, the new snapset Prefs Safes, their
- * associated GPII keys, and the demo user Prefs Safes/GPII Keys.
- * @param {Object} options - Object that has the paths to the directories that
- *                           contain the new snapsets and demo user preferences.
+ * Create the step that uploads, in batch, the new snapset Prefs Safes, and
+ * their associated GPII keys.
+ * @param {Object} options - Object that has the paths to the directory that
+ *                           contains the latest snapsets.
  * @return {Promise} - A promise that resolves the upload.
  */
 gpii.dataLoader.createBatchUploadStep = function (options) {
     var togo = fluid.promise();
     var buildData = gpii.dataLoader.getDataFromDirectory(options.buildDataDir);
-    var demoUserData = gpii.dataLoader.getDataFromDirectory(options.demoUserDir);
-    var allData = buildData.concat(demoUserData);
     var response = gpii.dataLoader.createResponseHandler(
         gpii.dataLoader.logSnapsetsUpload,
         options,
         togo
     );
-    var bulkUploadRequest = gpii.dataLoader.createPostRequest(allData, response, options);
+    var bulkUploadRequest = gpii.dataLoader.createPostRequest(buildData, response, options);
     bulkUploadRequest.end();
     return togo;
 };
