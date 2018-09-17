@@ -44,7 +44,7 @@ gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
                 "getState": [
                     {
                         "type": "gpii.processReporter.find",
-                        "command": "jfw"
+                        "command": "jfw.exe"
                     }
                 ],
                 "setTrue": [
@@ -85,11 +85,11 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "Options.SayAllIndicateCaps" : false,
+                            "Options.SayAllIndicateCaps" : 0,
                             "Options.TypingEcho": 3,
                             "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "Options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
@@ -151,11 +151,11 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "Options.SayAllIndicateCaps" : false,
+                            "Options.SayAllIndicateCaps" : 0,
                             "Options.TypingEcho": 3,
                             "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "Options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
@@ -258,8 +258,8 @@ gpii.tests.windows.jaws.testDefs = [
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 1,
                             "Options.SayAllMode": 1,
-                            "Options.SayAllIndicateCaps": false,
-                            "Options.SayAllIgnoreShiftKeys": false,
+                            "Options.SayAllIndicateCaps": 0,
+                            "Options.SayAllIgnoreShiftKeys": 0,
                             "Options.TypingEcho": 3
                         },
                         "options": {
@@ -324,8 +324,8 @@ gpii.tests.windows.jaws.testDefs = [
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 0,
                             "Options.SayAllMode": 0,
-                            "Options.SayAllIndicateCaps": false,
-                            "Options.SayAllIgnoreShiftKeys": false
+                            "Options.SayAllIndicateCaps": 0,
+                            "Options.SayAllIgnoreShiftKeys": 0
                         },
                         "options": {
                             "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
@@ -389,8 +389,8 @@ gpii.tests.windows.jaws.testDefs = [
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 2,
                             "Options.SayAllMode": 2,
-                            "Options.SayAllIndicateCaps": true,
-                            "Options.SayAllIgnoreShiftKeys": true,
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.SayAllIgnoreShiftKeys": 1,
                             "Options.TypingEcho": 1
                         },
                         "options": {

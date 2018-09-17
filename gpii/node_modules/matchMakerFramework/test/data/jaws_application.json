@@ -7,7 +7,7 @@
                     "http://registry.gpii.net/applications/com.freedomscientific.jaws": {
                         "Voice Profiles.ActiveVoiceProfileName" : "GPII",
                         "Options.PrimarySynthesizer" : "eloq",
-                        "Options.SayAllIndicateCaps" : false,
+                        "Options.SayAllIndicateCaps" : 0,
                         "ENU-Global.Rate" : 100,
                         "ENU-Global.Pitch" : 75,
                         "ENU-Global.Volume" : 100,
@@ -41,7 +41,7 @@
                         "Options.TypingEcho": 3,
                         "Options.SayAllMode": 0,
                         "Braille.BrailleMode": 0,
-                        "Options.SayAllIgnoreShiftKeys": true
+                        "Options.SayAllIgnoreShiftKeys": 1
                     }
                 }
             }

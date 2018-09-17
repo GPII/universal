@@ -2044,7 +2044,25 @@
                     "Voice Profiles\\.ActiveVoiceProfileName": {
                         "literalValue": "GPII"
                     },
-                    "Options\\.SayAllIndicateCaps": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    "Options\\.SayAllIndicateCaps": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/announceCapitals",
+                            "match": [
+                                {
+                                    "inputValue": true,
+                                    "outputValue": 1
+                                },
+                                {
+                                    "inputValue": false,
+                                    "outputValue": 0
+                                }
+                            ],
+                            "noMatch": {
+                                "outputValue": 0
+                            }
+                        }
+                    },
                     "Options\\.TypingEcho": {
                         // (1=keyEcho, 2=wordEcho, 3=key&wordEcho)
                         "transform": {
@@ -2096,11 +2114,46 @@
                             }
                         }
                     },
-                    // TODO: Same question about the value space here.
-                    "Options\\.SayAllIgnoreShiftKeys": "http://registry\\.gpii\\.net/common/stickyKeys"
+                    "Options\\.SayAllIgnoreShiftKeys": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/stickyKeys",
+                            "match": [
+                                {
+                                    "inputValue": true,
+                                    "outputValue": 1
+                                },
+                                {
+                                    "inputValue": false,
+                                    "outputValue": 0
+                                }
+                            ],
+                            "noMatch": {
+                                "outputValue": 0
+                            }
+                        }
+                    }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/announceCapitals": "Options\\.SayAllIndicateCaps",
+                    "http://registry\\.gpii\\.net/common/announceCapitals": {
+                        "transform": {
+                            "type": "valueMapper",
+                            "defaultInputPath": "Options\\.SayAllIndicateCaps",
+                            "match": [
+                                {
+                                    "inputValue": 0,
+                                    "outputValue": false
+                                },
+                                {
+                                    "inputValue": 1,
+                                    "outputValue": true
+                                }
+                            ],
+                            "noMatch": {
+                                "outputValue": false
+                            }
+                        }
+                    },
                     "http://registry\\.gpii\\.net/common/keyEcho": {
                         "transform": {
                             "type": "valueMapper",
@@ -2870,181 +2923,6 @@
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
                 "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe",
-                "subPath": "",
-                "dataType": "REG_SZ"
-            }
-        ]
-    },
-    "com.freedomscientific.jaws.v18": {
-        "name": "JAWS 18.0",
-        // TODO: Discuss with Antranig, et cetera.
-        //        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
-        //        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32"
-                }
-            ]
-        },
-        "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
-        ],
-        "settingsHandlers": {
-            "configuration1": {
-                "type": "gpii.settingsHandlers.INISettingsHandler",
-                "liveness": "manualRestart",
-                "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\enu\\DEFAULT.JCF"
-                },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.supportedSettings}",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.capabilitiesTransformations}",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.inverseCapabilitiesTransformations}"
-            },
-            "configuration2": {
-                "type": "gpii.settingsHandlers.INISettingsHandler",
-                "liveness": "manualRestart",
-                "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\18.0\\Settings\\VoiceProfiles\\GPII.VPF"
-                },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.supportedSettings}",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.capabilitiesTransformations}",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.inverseCapabilitiesTransformations}"
-            }
-        },
-        "launchHandlers": {
-            "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
-                "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20
-                    },
-                    "getState": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "jfw.exe"
-                        }
-                    ],
-                    "setTrue": [
-                        {
-                            "type": "gpii.launch.exec",
-                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS18.exe\\}\""
-                        }
-                    ],
-                    "setFalse": [
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "jfw.exe"
-                        },
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "fsSynth32.exe"
-                        },
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "jhookldr.exe"
-                        },
-                        // New for JAWS 2018
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "ScannerHandler.exe"
-                        }
-                    ]
-                }
-            }
-        },
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.registryKeyExists",
-                "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS18.exe",
-                "subPath": "",
-                "dataType": "REG_SZ"
-            }
-        ]
-    },
-    "com.freedomscientific.jaws.v17": {
-        "name": "JAWS 17.0",
-        // TODO: Discuss with Antranig, et cetera
-        //        "contexts": "${{solution}.com.freedomscientific.jaws.contexts}",
-        //        "capabilities": "${{solution}.com.freedomscientific.jaws.capabilities}",
-        "contexts": {
-            "OS": [
-                {
-                    "id": "win32"
-                }
-            ]
-        },
-        "capabilities": [
-            "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
-        ],
-        "settingsHandlers": {
-            "configuration1": {
-                "type": "gpii.settingsHandlers.INISettingsHandler",
-                "liveness": "manualRestart",
-                "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
-                },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.supportedSettings}",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.capabilitiesTransformations}",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration1.inverseCapabilitiesTransformations}"
-            },
-            "configuration2": {
-                "type": "gpii.settingsHandlers.INISettingsHandler",
-                "liveness": "manualRestart",
-                "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
-                },
-                "supportedSettings": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.supportedSettings}",
-                "capabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.capabilitiesTransformations}",
-                "inverseCapabilitiesTransformations": "${{solution}.com.freedomscientific.jaws.settingsHandlers.configuration2.inverseCapabilitiesTransformations}"
-            }
-        },
-        "launchHandlers": {
-            "launcher": {
-                "type": "gpii.launchHandlers.flexibleHandler",
-                "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
-                    "getState": [
-                        {
-                            "type": "gpii.processReporter.find",
-                            "command": "jfw.exe"
-                        }
-                    ],
-                    "setTrue": [
-                        {
-                            "type": "gpii.launch.exec",
-                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
-                        }
-                    ],
-                    "setFalse": [
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "jfw.exe"
-                        },
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "fsSynth32.exe"
-                        },
-                        {
-                            "type": "gpii.windows.closeProcessByName",
-                            "filename": "jhookldr.exe"
-                        }
-                    ]
-                }
-            }
-        },
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.registryKeyExists",
-                "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
