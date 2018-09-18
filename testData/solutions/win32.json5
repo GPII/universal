@@ -2650,8 +2650,8 @@
                             "title": "Screen DPI",
                             "description": "Screen DPI of the default display",
                             "type": "number",
-                            "minimum": 1,
-                            "maximum": 5 // Taken from dpiWindows10.js, may not be appropriate
+                            "minimum": -5,
+                            "maximum": 5
                         }
                     }
                 },
