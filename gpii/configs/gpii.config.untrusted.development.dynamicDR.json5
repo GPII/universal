@@ -17,7 +17,7 @@
         }
     },
     "mergeConfigs": [
-        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
-        "../node_modules/flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
+        "%deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
+        "%flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
     ]
 }
