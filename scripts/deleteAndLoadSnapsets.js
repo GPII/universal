@@ -74,6 +74,11 @@ gpii.dataLoader.initOptions = function (processArgv) {
             "Content-Type": "application/json"
         }
     };
+    if (dbOptions.parsedCouchDbUrl.username) {
+        dbOptions.postOptions.auth =
+            dbOptions.parsedCouchDbUrl.username + ":" +
+            dbOptions.parsedCouchDbUrl.password;
+    }
     fluid.log("COUCHDB_URL: '" +
         dbOptions.parsedCouchDbUrl.protocol + "//" +
         dbOptions.parsedCouchDbUrl.hostname + ":" +
