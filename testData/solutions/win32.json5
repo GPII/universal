@@ -19,7 +19,20 @@
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
-                    "Braille.attributeRotationDelay": {
+                    "Braille.AllDotsBrailleCursor": {
+                        "title": "All Dots Braille Cursor",
+                        "description": "Whether to display the braille cursor as all dots raised instead of showing it using only dots seven and eight.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
+                    },
+                    "Braille.AttributeRotationDelay": {
                         "schema": {
                             "title": "Attribute Rotation Delay",
                             "description": "When in Attribute Mode and characters have multiple attributes, determines how long each attribute should be shown for. This value is in Milliseconds.",
@@ -53,6 +66,38 @@
                             ],
                             "default": 255
                         }
+                    },
+                    "Braille.BrailleAutoRouteToCursor": {
+                        "title": "Braille Auto Route To Cursor",
+                        "description": "Whether to automatically route the Braille display to the active cursor whenever the active cursor moves or a key on the keyboard is pressed.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "Braille.BrailleCursorBlinkRate": {
+                        "title": "Braille Cursor Blink Rate",
+                        "description": "Speed, in milliseconds, at which the cursor on the braille display should blink.",
+                        "type": "integer",
+                        "default": 500
+                    },
+                    "Braille.BrailleKeyInterruptSpeech": {
+                        "title": "Braille Key Interrupt Speech",
+                        "description": "Whether to Interrupt speech if a keystroke in the Braille display is pressed.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
                     },
                     "Braille.BrailleMessages": {
                         "schema": {
@@ -88,6 +133,19 @@
                                 "attribute indicators"
                             ]
                         }
+                    },
+                    "Braille.BrailleMoveActiveCursor": {
+                        "title": "Braille Move Active Cursor",
+                        "description": "Whether to move the active cursor when the Braille cursor moves.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
                     },
                     // Enable this if requested, we have no reasonable way of presenting a UI at the moment.
                     // "Braille.BrailleShowMarking": {
@@ -131,6 +189,19 @@
                             ]
                         }
                     },
+                    "Braille.ContractedBrailleInput": {
+                        "title": "Contracted Braille Input",
+                        "description": "Enable contracted braille to be entered on the braille display's keyboard.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
+                    },
                     "Braille.EightDotBraille": {
                         "schema": {
                             "title": "Braille Dots",
@@ -146,6 +217,45 @@
                             "default": 1
                         }
                     },
+                    "Braille.FilterControlCharacters": {
+                        "title": "Filter Control Characters",
+                        "description": "Whether or not to filter certain control characters (currently newlines, linefeeds and tabs)",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "Braille.GeneralizeBullets": {
+                        "title": "Generalize Bullets",
+                        "description": "Whether to treat all bullets the same.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
+                    },
+                    "Braille.Grade2SuppressCapitalSigns": {
+                        "title": "Grade2 Suppress Capital Signs",
+                        "description": "When Grade 2 is on, whether or not to show capital indicators",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
+                    },
                     "Braille.MessagePrefixes": {
                         "schema": {
                             "title": "Enable Flash Message Prefixes",
@@ -160,6 +270,12 @@
                             ],
                             "default": 1
                         }
+                    },
+                    "Braille.MessageStatusText": {
+                        "title": "Message Status Text",
+                        "description": "The text to show in the status area of the display when a Flash message is being shown if the display has no status cells, the text will be prepended to the Flash message.",
+                        "type": "string",
+                        "default": "msg"
                     },
                     "Braille.MessageTime": {
                         "schema": {
@@ -198,6 +314,25 @@
                             ],
                             "default": 1
                         }
+                    },
+                    "Braille.UseHowManyStatusCells": {
+                        "title": "Use How Many Status Cells",
+                        "description": "How many cells to use for status information if the display defines none of its own.",
+                        "type": "integer",
+                        "default": 4
+                    },
+                    "Braille.UseScreenModelForBrailleInRichEdits": {
+                        "title": "Use Screen Model for Braille in Rich Edits",
+                        "description": "Whether to use the screen model when providing field prompts and text in Braille with rich edits.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
                     },
                     "Braille.WordWrap": {
                         "schema": {
@@ -275,6 +410,32 @@
                                 "on"
                             ]
                         }
+                    },
+                    "HTML.BlockQuoteIndication": {
+                        "title": "Block Quote Indication",
+                        "description": "Whether to indicate HTML block quotations.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "HTML.EmbeddedActiveXSupport": {
+                        "title": "Embedded ActiveX Support",
+                        "description": "Whether or not to support embedded ActiveX controls such as Macromedia Flash Movies.  If enabled, only objects defined in JActiveX.ini are affected by this setting.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
                     },
                     "HTML.ExpandAbbreviations": {
                         "schema": {
@@ -360,6 +521,39 @@
                             "default": 1
                         }
                     },
+                    "HTML.GraphicalLinkLastResort": {
+                        "title": "Graphical Link Last Resort",
+                        "description": "What to announce when a graphical link contains no title or alt text for its enclosing image and the enclosing anchor has no title.",
+                        "enum": "0,1",
+                        "enumLabels": "Read the image's src, Read the image's enclosing anchor's href.",
+                        "default": "0"
+                    },
+                    "HTML.IdentifyLinkType": {
+                        "title": "Identify Link Type",
+                        "description": "Whether to distinguish the various types of links e.g. \"FTP link\", \"mailto link\" versus simply announcing \"link\" for all types of links.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "HTML.IdentifySamePageLinks": {
+                        "title": "Identify Same Page Links",
+                        "description": "Whether to identify links that point to other places on the current page by saying \"same page link\".",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
                     "HTML.IgnoreInlineFrames": {
                         "schema": {
                             "title": "Ignore Inline Frames",
@@ -407,6 +601,45 @@
                             "default": 1
                         }
                     },
+
+                    "HTML.IndicateElementAttributes": {
+                        "title": "Indicate Element Attributes",
+                        "description": "Whether to announce any HTML attributes defined in the \"HTML Attributes Behavior\" map of the current scheme.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "HTML.ListIndication": {
+                        "title": "List Indication",
+                        "description": "Whether to announce lists with the item count and nesting level.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "HTML.MaxLineLength": {
+                        "title": "Max Line Length",
+                        "description": "The maximum number of characters which can appear on a line of a paragraph.",
+                        "type": "integer",
+                        "default": 150
+                    },
+                    "HTML.PageRefreshFilter": {
+                        "title": "Page Refresh Filter",
+                        "description": "How often, in milliseconds, to allow all refreshes.  Set to 0 to allow all refreshes without any delay.",
+                        "type": "integer",
+                        "default": 0
+                    },
                     "HTML.SayAllOnDocumentLoad": {
                         "schema": {
                             "title": "Read Web Pages Automatically When Loaded",
@@ -421,6 +654,32 @@
                             ],
                             "default": 1
                         }
+                    },
+                    "HTML.ScreenFollowsVCursor": {
+                        "title": "Screen Follows Virtual Cursor",
+                        "description": "Whether the screen should automatically scroll to display the line on which the Virtual Cursor is positioned.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "HTML.SkipPastRepeatedText": {
+                        "title": "Skip Past Repeated Text",
+                        "description": "Whether to position the Virtual Cursor on the first line which is different than the previous page whenever a new page is displayed.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
                     },
                     "HTML.SmartNavigation": {
                         "schema": {
@@ -437,6 +696,49 @@
                             "default": 0
                         }
                     },
+                    "HTML.TableDetection": {
+                        "title": "Table Detection",
+                        "description": "Whether to announce all tables, or only data tables.",
+                        "enum": "0,1",
+                        "enumLabels": "Indicate all tables, Only indicate data tables",
+                        "default": "1"
+                    },
+                    "HTML.TblMaxCellTextLength": {
+                        "title": "Table Maximum Cell Text Length",
+                        "description": "A cell is considered a valid data cell if it contains upto this number of characters",
+                        "type": "integer",
+                        "default": 250
+                    },
+                    "HTML.TblMinCellTextLength": {
+                        "title": "Table Minimum Cell Text Length",
+                        "description": "A cell is considered a valid data cell if it contains at least this number of characters",
+                        "type": "integer",
+                        "default": 1
+                    },
+                    "HTML.TblMinTextColumns": {
+                        "title": "Table Minimum Text Columns",
+                        "description": "This option specifies the minimum number of columns which must contain text in order for the table to be considered a data table.",
+                        "type": "integer",
+                        "default": 2
+                    },
+                    "HTML.TblMinTextRows": {
+                        "title": "Table Minimum Text Rows",
+                        "description": "This option specifies the minimum number of rows which must contain text in order for the table to be considered a data table.",
+                        "type": "integer",
+                        "default": 2
+                    },
+                    "HTML.TblMinValidDataRows": {
+                        "title": "Table Minimum Valid Data Rows",
+                        "description": "Next options used for configuring how data tables are detected This option specifies the minimum number of valid data rows that a table must contain in order for it to be considered a data table.",
+                        "type": "integer",
+                        "default": 2
+                    },
+                    "HTML.TblValidRowThreshold": {
+                        "title": "Table Valid Row Threshold",
+                        "description": "This option specifies the minimum number of cells that a row must contain in order for it to be considered a valid data row.",
+                        "type": "integer",
+                        "default": 2
+                    },
                     "HTML.TextBlockLength": {
                         "schema": {
                             "title": "Text Block Length",
@@ -444,6 +746,32 @@
                             "type": "integer",
                             "default": 25
                         }
+                    },
+                    "HTML.UseLegacyIESupport": {
+                        "title": "Use Legacy IE Support",
+                        "description": "Whether or not to use legacy IE support instead of the default FS Dom Server support.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "HTML.WrapNavigation": {
+                        "title": "Wrap Navigation",
+                        "description": "Whether or not to allow navigation keystrokes such as tab and shift tab to wrap to the top or bottom of the document.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
                     },
                     "Options.AllCapsIndicator": {
                         "schema": {
@@ -541,6 +869,12 @@
                             "default": 250,
                             "minValue": 0
                         }
+                    },
+                    "OSM.CaretTimeOut": {
+                        "title": "Caret Time Out",
+                        "description": "The time in milliseconds to wait before redrawing the caret.",
+                        "type": "integer",
+                        "default": 1000
                     },
                     "Options.Case": {
                         "schema": {
@@ -1944,6 +2278,70 @@
                             "default": 0
                         }
                     },
+                    "OSM.GraphicsMode": {
+                        "title": "Graphics Mode",
+                        "description": "How to handle graphic CRC values.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "Store graphic CRC values when the graphics are being drawn to the screen.",
+                            "Compute them from the screen image at the time they are requested to be spoken."
+                        ],
+                        "default": 0
+                    },
+                    "OSM.IgnoreSetSysModal": {
+                        "title": "Ignore Set Sys Modal",
+                        "description": "Whether to disallow Windows calling the SetSysModalWindow function. In most cases this is desirable, because System Modal Windows cannot be spoken.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
+                    "OSM.IncludeGraphics": {
+                        "title": "Include Graphics",
+                        "description": "Which graphics to announce.",
+                        "enum": "0,1,2",
+                        "enumLabels": "Ignore all graphics, Announce labeled graphics only, Announce all graphics",
+                        "default": "1"
+                    },
+                    "OSM.IncludeLines": {
+                        "title": "Include Lines",
+                        "description": "Whether to include line segments in the Off Screen Model. This is required for Excel and other programs which draw a focus rectangle.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
+                    },
+                    "OSM.MouseClickFudgeX": {
+                        "title": "Mouse Click Fudge X",
+                        "description": "number of pixels to the right of the current JAWS cursor at which a mouse click should be simulated",
+                        "type": "integer",
+                        "default": 1
+                    },
+                    "OSM.MouseClickFudgeY": {
+                        "title": "Mouse Click Fudge Y",
+                        "description": "number of pixels below the current JAWS cursor at which a mouse click should be simulated",
+                        "type": "integer",
+                        "default": -2
+                    },
+                    "OSM.PixelsPerBlankLine": {
+                        "title": "Pixels Per Blank Line",
+                        "description": "how many pixels (high) per blank line",
+                        "type": "integer",
+                        "default": 13
+                    },
                     "OSM.PixelsPerSpace": {
                         "schema": {
                             "title": "Pixels Per Space",
@@ -1960,6 +2358,19 @@
                             "default": 10
                         }
                     },
+                    "OSM.SpeakSysModalMessageBox": {
+                        "title": "Speak Sys Modal Message Box",
+                        "description": "Whether to announce System Modal Message Boxes.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
                     "OSM.TableDetection": {
                         "schema": {
                             "title": "Table Presentation Information",
@@ -1975,6 +2386,25 @@
                             "default": 0
                         }
                     },
+                    "OSM.TextOutDelay": {
+                        "title": "Text Out Delay",
+                        "description": "The number of milliseconds to wait before announcing newly written text. Setting this to a non-zero value may cause terminal programs to respond in a less choppy fashion.",
+                        "type": "integer",
+                        "default": 0
+                    },
+                    "OSM.TrackCommandBars": {
+                        "title": "Track Command Bars",
+                        "description": "Whether to track the menu bar in Office applications.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 1
+                    },
                     "OSM.TrackFocusRect": {
                         "schema": {
                             "title": "Track Focus Rectangle",
@@ -1989,6 +2419,19 @@
                             ],
                             "default": 1
                         }
+                    },
+                    "OSM.TrimBrailleGraphicLabels": {
+                        "title": "Trim Braille Graphic Labels",
+                        "description": "Whether to trim the size of a braille graphic. Useful to preserve the virtical positioning of braille text.",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "enumLabels": [
+                            "off",
+                            "on"
+                        ],
+                        "default": 0
                     },
                     "OSM.UnderlineProximity": {
                         "schema": {
