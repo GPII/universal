@@ -67,6 +67,7 @@ gpii.dataLoader.initOptions = function (processArgv) {
         hostname: dbOptions.parsedCouchDbUrl.hostname,
         port: dbOptions.parsedCouchDbUrl.port,
         path: "/gpii/_bulk_docs",
+        auth: dbOptions.parsedCouchDbUrl.auth,
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -74,9 +75,6 @@ gpii.dataLoader.initOptions = function (processArgv) {
             "Content-Type": "application/json"
         }
     };
-    if (dbOptions.parsedCouchDbUrl.auth) {
-        dbOptions.postOptions.auth = dbOptions.parsedCouchDbUrl.auth;
-    }
     fluid.log("COUCHDB_URL: '" +
         dbOptions.parsedCouchDbUrl.protocol + "//" +
         dbOptions.parsedCouchDbUrl.hostname + ":" +
@@ -85,13 +83,6 @@ gpii.dataLoader.initOptions = function (processArgv) {
     );
     fluid.log("STATIC_DATA_DIR: '" + dbOptions.staticDataDir + "'");
     fluid.log("BUILD_DATA_DIR: '" + dbOptions.buildDataDir + "'");
-
-    //***** For Debugging AWS.  To Be Removed.
-    fluid.log("DEBUG - CouchDB URL with secrets: '" + dbOptions.couchDbUrl + "'");
-    fluid.log("DEBUG - Parsed CouchDB username '" + dbOptions.parsedCouchDbUrl.username + "'");
-    fluid.log("DEBUG - Parsed CouchDB password '" + dbOptions.parsedCouchDbUrl.password + "'");
-    fluid.log("DEBUG - POST options auth: '" + dbOptions.postOptions.auth + "'");
-    //*****
 
     return dbOptions;
 };
@@ -115,7 +106,7 @@ gpii.dataLoader.loadStaticDataFromDisk = function (options) {
     options.staticData = data;
     options.newViews = views;
     fluid.log("Retrieved static data from: '" + options.staticDataDir + "'");
-    fluid.log("\tviews data '" + ( views ? "retrieved." : "missing." ) + "'");
+    fluid.log("\tViews data " + ( views ? "retrieved." : "missing." ));
 };
 
 /*
