@@ -74,10 +74,8 @@ gpii.dataLoader.initOptions = function (processArgv) {
             "Content-Type": "application/json"
         }
     };
-    if (dbOptions.parsedCouchDbUrl.username) {
-        dbOptions.postOptions.auth =
-            dbOptions.parsedCouchDbUrl.username + ":" +
-            dbOptions.parsedCouchDbUrl.password;
+    if (dbOptions.parsedCouchDbUrl.auth) {
+        dbOptions.postOptions.auth = dbOptions.parsedCouchDbUrl.auth;
     }
     fluid.log("COUCHDB_URL: '" +
         dbOptions.parsedCouchDbUrl.protocol + "//" +
@@ -116,8 +114,8 @@ gpii.dataLoader.loadStaticDataFromDisk = function (options) {
     });
     options.staticData = data;
     options.newViews = views;
-    fluid.log("Loaded static data from: '" + options.staticDataDir + "'");
-    fluid.log("\views data '" + ( views ? "loaded." : "missing." ) + "'");
+    fluid.log("Retrieved static data from: '" + options.staticDataDir + "'");
+    fluid.log("\tviews data '" + ( views ? "retrieved." : "missing." ) + "'");
 };
 
 /*
