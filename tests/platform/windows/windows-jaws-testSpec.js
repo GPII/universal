@@ -44,7 +44,7 @@ gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
                 "getState": [
                     {
                         "type": "gpii.processReporter.find",
-                        "command": "jfw"
+                        "command": "jfw.exe"
                     }
                 ],
                 "setTrue": [
@@ -85,14 +85,14 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.SayAllIndicateCaps" : false,
-                            "options.TypingEcho": 3,
-                            "options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps" : 0,
+                            "Options.TypingEcho": 3,
+                            "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -131,7 +131,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -151,14 +151,14 @@ gpii.tests.windows.jaws.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.SayAllIndicateCaps" : false,
-                            "options.TypingEcho": 3,
-                            "options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps" : 0,
+                            "Options.TypingEcho": 3,
+                            "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -197,7 +197,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -249,7 +249,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -257,13 +257,13 @@ gpii.tests.windows.jaws.testDefs = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 1,
-                            "options.SayAllMode": 1,
-                            "options.SayAllIndicateCaps": false,
-                            "options.SayAllIgnoreShiftKeys": false,
-                            "options.TypingEcho": 3
+                            "Options.SayAllMode": 1,
+                            "Options.SayAllIndicateCaps": 0,
+                            "Options.SayAllIgnoreShiftKeys": 0,
+                            "Options.TypingEcho": 3
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
@@ -315,7 +315,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -323,12 +323,12 @@ gpii.tests.windows.jaws.testDefs = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 0,
-                            "options.SayAllMode": 0,
-                            "options.SayAllIndicateCaps": false,
-                            "options.SayAllIgnoreShiftKeys": false
+                            "Options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps": 0,
+                            "Options.SayAllIgnoreShiftKeys": 0
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
@@ -380,7 +380,7 @@ gpii.tests.windows.jaws.testDefs = [
                             "ENU-MenuAndDialog.SynthLangString": "French Canadian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -388,13 +388,13 @@ gpii.tests.windows.jaws.testDefs = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 2,
-                            "options.SayAllMode": 2,
-                            "options.SayAllIndicateCaps": true,
-                            "options.SayAllIgnoreShiftKeys": true,
-                            "options.TypingEcho": 1
+                            "Options.SayAllMode": 2,
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.SayAllIgnoreShiftKeys": 1,
+                            "Options.TypingEcho": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]

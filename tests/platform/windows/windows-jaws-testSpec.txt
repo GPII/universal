@@ -6,4 +6,4 @@ This will run the acceptance tests for the JAWS screenreader (Freedom Scientific
 Prerequisites:
 * JAWS needs to be installed
 
-Only works with JAWS 17.0
+Only works with JAWS 2018
