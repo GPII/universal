@@ -36,7 +36,7 @@ gpii.tests.conflictingApps.jawsHandlerEntry = function (running) {
                 "getState": [
                     {
                         "type": "gpii.processReporter.find",
-                        "command": "jfw"
+                        "command": "jfw.exe"
                     }
                 ],
                 "setTrue": [
@@ -127,9 +127,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                         }
                     }
                 ],
@@ -137,11 +135,11 @@ gpii.tests.conflictingApps.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "options.SayAllIndicateCaps": true,
-                            "options.TypingEcho": 2
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.TypingEcho": 2
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -167,7 +165,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "ENU-MenuAndDialog.Pitch": 16
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
@@ -205,9 +203,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini",
-                            "allowNumberSignComments": true,
-                            "allowSubSections": true
+                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
                         }
                     }
                 ],
@@ -215,11 +211,11 @@ gpii.tests.conflictingApps.testDefs = [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
-                            "options.SayAllIndicateCaps": true,
-                            "options.TypingEcho": 2
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.TypingEcho": 2
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -245,7 +241,7 @@ gpii.tests.conflictingApps.testDefs = [
                             "ENU-MenuAndDialog.Pitch": 16
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]

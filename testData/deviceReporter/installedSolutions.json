@@ -40,6 +40,10 @@
     },
 
     {
+        "id": "com.freedomscientific.jaws"
+    },
+
+    {
         "id": "com.microsoft.windows.onscreenKeyboard"
     },
 
@@ -89,6 +93,10 @@
 
     {
         "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
+        "id": "com.microsoft.windows.language"
     },
 
     {

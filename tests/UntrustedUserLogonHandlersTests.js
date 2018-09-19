@@ -1,5 +1,5 @@
 /*
- * GPII Untrusted Flow Manager Development Tests
+ * Untrusted User logon Handlers Tests
  *
  * Copyright 2015 OCAD University
  *
@@ -21,21 +21,21 @@ var fluid = require("infusion"),
 
 fluid.require("%gpii-universal");
 
-require("./shared/UserLogonStateChangeTestDefs.js");
+require("./shared/UserLogonHandlersTestDefs.js");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.userLogonHandling");
 
 gpii.tests.untrusted.userLogonHandling.testDefs =
-    fluid.transform(gpii.tests.userLogonHandling.testDefs, function (testDefIn) {
+    fluid.transform(gpii.tests.userLogonHandlers.testDefs, function (testDefIn) {
         var testDef = fluid.extend(true, {}, testDefIn, {
             config: {
-                configName: "gpii.tests.acceptance.untrusted.userLogonStateChange.config",
+                configName: "gpii.tests.acceptance.untrusted.userLogon.config",
                 configPath: "%gpii-universal/tests/configs"
             },
-            gradeNames: ["gpii.tests.userLogonHandling.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
-            gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandling.gpiiKey
+            gradeNames: ["gpii.tests.userLogonHandlers.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+            gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonHandlers.gpiiKey
         }, testDefIn.untrustedExtras || {});
 
         return testDef;
