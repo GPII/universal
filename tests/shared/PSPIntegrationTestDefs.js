@@ -118,6 +118,27 @@ gpii.tests.pspIntegration.data = {
             }
         }
     },
+    afterDecreaseCursorSize: {
+        "settingsHandlers": {
+            "gpii.gsettings": {
+                "data": [{
+                    "settings": {
+                        "cursor-size": 29
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            },
+            "gpii.alsa": {
+                "data": [{
+                    "settings": {
+                        "masterVolume": 50
+                    }
+                }]
+            }
+        }
+    },
     afterChangeVolume: {
         "settingsHandlers": {
             "gpii.gsettings": {
@@ -218,8 +239,8 @@ gpii.tests.pspIntegration.testDefs = [
             ]
         ]
     }, {
-        name: "Simple settings change by PSP - change a new setting",
-        expect: 9,
+        name: "Simple settings change by PSP - sequentially change a new setting",
+        expect: 11,
         sequence: [
             [
                 {
@@ -265,6 +286,19 @@ gpii.tests.pspIntegration.testDefs = [
                 }, {
                     func: "gpii.test.checkConfiguration",
                     args: ["{tests}.options.data.afterChangeCursorSize.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/cursorSize"], 0.5]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "preferencesApplied"]
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterDecreaseCursorSize.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
