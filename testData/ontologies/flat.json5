@@ -217,12 +217,7 @@
             "type": "string",
             "default": "en",
             "enum": [
-                "en", "en-GB", "en-US", "en-scotland", "en-BZ", "en-BS", "en-AG", "en-AI",
-                "af", "bg", "bs", "ca", "cs", "cy", "da", "de", "el", "grc", "eo", "es",
-                "es-419", "et", "fi", "fr", "fr-BE", "hi", "hr", "hu", "hy", "hy-arevmda",
-                "id", "is", "it", "jbo", "ka", "kn", "ko", "ku", "la", "lv", "mk", "ml", "nl",
-                "no", "pap", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sq", "sr", "sv",
-                "sw", "ta", "tr", "vi", "zh-cmn", "cmn", "zh-Hans", "zh-Hant", "zh-yue", "yue"
+                "en-US", "hy-AM", "zh-CN", "zh-TW", "ko-KR", "ru-RU", "es-ES"
             ]
         },
         "http://registry.gpii.net/common/screenResolution": {
