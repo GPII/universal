@@ -87,6 +87,14 @@ gpii.dataLoader.initOptions = function (processArgv) {
     );
     fluid.log("STATIC_DATA_DIR: '" + dbOptions.staticDataDir + "'");
     fluid.log("BUILD_DATA_DIR: '" + dbOptions.buildDataDir + "'");
+
+    //***** For Debugging AWS.  To Be Removed.
+    fluid.log("DEBUG - CouchDB URL with secrets: '" + dbOptions.couchDbUrl + "'");
+    fluid.log("DEBUG - Parsed CouchDB username '" + dbOptions.parsedCouchDbUrl.username + "'");
+    fluid.log("DEBUG - Parsed CouchDB password '" + dbOptions.parsedCouchDbUrl.password + "'");
+    fluid.log("DEBUG - POST options auth: '" + dbOptions.postOptions.auth + "'");
+    //*****
+
     return dbOptions;
 };
 
@@ -108,6 +116,8 @@ gpii.dataLoader.loadStaticDataFromDisk = function (options) {
     });
     options.staticData = data;
     options.newViews = views;
+    fluid.log("Loaded static data from: '" + options.staticDataDir + "'");
+    fluid.log("\views data '" + ( views ? "loaded." : "missing." ) + "'");
 };
 
 /*
