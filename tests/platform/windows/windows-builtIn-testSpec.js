@@ -199,7 +199,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.underlineMenuShortcuts": [
                     {
                         "settings": {
-                            "UnderlineMenuShorcutsOn": {
+                            "UnderlineMenuShortcutsOn": {
                                 "path": "pvParam",
                                 "value": 1
                             }
