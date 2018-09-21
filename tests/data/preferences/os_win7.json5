@@ -40,7 +40,7 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.underlineMenuShortcuts": {
-                        "UnderlineMenuShorcutsOn": {
+                        "UnderlineMenuShortcutsOn": {
                             "value": 1,
                             "path": "pvParam"
                         },

@@ -4974,7 +4974,7 @@
     },
 
     "com.microsoft.windows.underlineMenuShortcuts": {
-        "name": "Underline menu shorcuts",
+        "name": "Underline menu shortcuts",
         "contexts": {
             "OS": [
                 {
@@ -4997,7 +4997,7 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "UnderlineMenuShorcutsOn": {
+                    "UnderlineMenuShortcutsOn": {
                         "schema": {
                             "title": "Enable/Disable underlaying menu shortcuts",
                             "description": "Displays a underline showing which is the shortcut to active a menu item",
@@ -5007,7 +5007,7 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "UnderlineMenuShorcutsOn": {
+                    "UnderlineMenuShortcutsOn": {
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled",
@@ -5022,7 +5022,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled": "UnderlineMenuShorcutsOn.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.underlineMenuShortcuts.Enabled": "UnderlineMenuShortcutsOn.value"
                 }
             },
             "keyboardPreferred": {
