@@ -1,3 +1,10 @@
+// tony.json5
+//
+// Settings:
+//  - shortcutWarningMessage: Activate Windows 10 warning message when enabling settings through shortcuts.
+//  - shortcutWarningSounds: Activate Windows 10 warning sounds when changing settings through shortcuts.
+//  - toggleKeys: Activates Windows 10 toggle keys feature.
+//  - underlineMenuShortcuts: Enable underlining for menu shortcuts and sets keyboard as preferred input method.
 {
     "flat": {
         "name": "Tony",
