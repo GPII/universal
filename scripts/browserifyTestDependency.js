@@ -24,15 +24,15 @@ var fluid = require("infusion"),
     resolve = require("fluid-resolve"),
     rimraf = require("rimraf"),
     mkdirp = require("mkdirp"),
-    exec = require('child_process').exec;
+    exec = require("child_process").exec;
 
 var universalPath = fluid.module.resolvePath("%gpii-universal");
 
 console.log("Browserifying dependent modules for web tests ...");
 // Detect whether the devDependency module "browserify" exists
-resolve("browserify", {basedir: universalPath}, function (err, res) {
+resolve("browserify", {basedir: universalPath}, function (err) {
     if (err) {
-        console.log("GPII is not running in a development mode, skipped the step to browserify test dependent node js scripts.")
+        console.log("GPII is not running in a development mode, skipped the step to browserify test dependent node js scripts.");
     } else {
         var browserifyDir = universalPath + "/build/tests/browserify";
         // Remove the browserify directory to start a fresh browserifying
