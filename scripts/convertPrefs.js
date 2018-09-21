@@ -21,8 +21,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fs = require("fs"),
     rimraf = require("rimraf"),
     mkdirp = require("mkdirp"),
-    JSON5 = require("json5");
+    JSON5 = require("json5"),
+    fluid = require("infusion"),
+    gpii = fluid.registerNamespace("gpii");
 
+require("./prefsSetsDbUtils.js");
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
 
@@ -40,35 +43,9 @@ rimraf(targetDir, function () {
             if (filename.endsWith(".json5")) {
                 var gpiiKey = filename.substr(0, filename.length - 6);
                 var preferences = fs.readFileSync(inputDir + filename, "utf-8");
-                var currentTime = new Date().toISOString();
-                var prefsSafeId = "prefsSafe-" + gpiiKey;
-
-                var oneGpiiKey = {
-                    "_id": gpiiKey,
-                    "type": "gpiiKey",
-                    "schemaVersion": "0.1",
-                    "prefsSafeId": prefsSafeId,
-                    "prefsSetId": "gpii-default",
-                    "revoked": false,
-                    "revokedReason": null,
-                    "timestampCreated": currentTime,
-                    "timestampUpdated": null
-                };
-                gpiiKeys.push(oneGpiiKey);
-
-                var onePrefsSafe = {
-                    "_id": prefsSafeId,
-                    "type": "prefsSafe",
-                    "schemaVersion": "0.1",
-                    "prefsSafeType": "user",
-                    "name": gpiiKey,
-                    "password": null,
-                    "email": null,
-                    "preferences": JSON5.parse(preferences),
-                    "timestampCreated": currentTime,
-                    "timestampUpdated": null
-                };
-                prefsSafes.push(onePrefsSafe);
+                var prefsSetData = gpii.prefsSetsDbUtils.generatePrefsSet(gpiiKey, JSON5.parse(preferences));
+                gpiiKeys.push(prefsSetData.key);
+                prefsSafes.push(prefsSetData.prefsSafe);
 
             }
         });
