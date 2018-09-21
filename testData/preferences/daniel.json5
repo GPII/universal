@@ -16,7 +16,7 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.desktopBackground": {
                         "BackgroundTypeVal": "SolidColor",
                         "InputVal": {
-                            "Color": 1293123
+                            "Color": {"r": 67, "g": 187, "b": 19}
                         }
                     }
                 }

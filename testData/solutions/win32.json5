@@ -1048,7 +1048,7 @@
                             "enum": [
                                 // SolidColor 'BackgroundType' Input payload format
                                 {
-                                    "Color": "0..MAX_VALUE"
+                                    "Color": "{ r: 0..0xff, g: 0..0xff, b: 0..0xff }"
                                 },
                                 // Slideshow 'BackgroundType' Input payload format
                                 {
