@@ -24,18 +24,9 @@ var process = require("process"),
     gpii = fluid.registerNamespace("gpii"),
     uuid = uuid || require("node-uuid");
 
+require("./prefsSetsDbUtils.js");
 require("gpii-pouchdb");
 
-var emptyPrefsSetBlock = {
-    "flat": {
-        "contexts": {
-            "gpii-default": {
-                "name": "Default preferences",
-                "preferences": {}
-            }
-        }
-    }
-};
 
 fluid.defaults("gpii.uuidLoader", {
     gradeNames: ["gpii.pouch"],
@@ -44,46 +35,12 @@ fluid.defaults("gpii.uuidLoader", {
         name: process.env.COUCHDB_URL
     },
     invokers: {
-        generatePrefsSet: { funcName: "gpii.uuidLoader.generatePrefsSet" },
         addPrefsSet: {
             funcName: "gpii.uuidLoader.addPrefsSet",
             args: [ "{that}", "{arguments}.0", "{arguments}.1"]
         }
     }
 });
-
-gpii.uuidLoader.generatePrefsSet = function () {
-    var gpiiKey = uuid.v4();
-    var currentTime = new Date().toISOString();
-    var prefsSafeId = "prefsSafe-" + gpiiKey;
-
-    var newGpiiKey = {
-        "_id": gpiiKey,
-        "type": "gpiiKey",
-        "schemaVersion": "0.1",
-        "prefsSafeId": prefsSafeId,
-        "prefsSetId": "gpii-default",
-        "revoked": false,
-        "revokedReason": null,
-        "timestampCreated": currentTime,
-        "timestampUpdated": null
-    };
-
-    var newPrefsSafe = {
-        "_id": prefsSafeId,
-        "type": "prefsSafe",
-        "schemaVersion": "0.1",
-        "prefsSafeType": "user",
-        "name": gpiiKey,
-        "password": null,
-        "email": null,
-        "preferences": emptyPrefsSetBlock,
-        "timestampCreated": currentTime,
-        "timestampUpdated": null
-    };
-
-    return { key: newGpiiKey, prefsSafe: newPrefsSafe };
-};
 
 gpii.uuidLoader.addPrefsSet = function (that, gpiiKey, prefSafe) {
     var promise = fluid.promise();
@@ -104,7 +61,7 @@ gpii.uuidLoader.addPrefsSet = function (that, gpiiKey, prefSafe) {
 // The real action
 //
 function createNewUsers (uuidLoader) {
-    var data = uuidLoader.generatePrefsSet();
+    var data = gpii.prefsSetsDbUtils.generatePrefsSet(uuid.v4(), gpii.prefsSetsDbUtils.emptyPrefsSetBlock);
     uuidLoader.addPrefsSet(data.key, data.prefsSafe).then(function (newUser) {
         console.log("## New user created:", newUser);
         if (n > 1) {
