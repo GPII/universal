@@ -30,10 +30,11 @@ gpii.prefsSetsDbUtils.emptyPrefsSetBlock = {
 };
 
 /**
- * Generate the data for a prefsSet creation
+ * Generate the data for a prefsSet creation.
  *
- * @param {String} gpiiKey - The identifier of the prefsSet (usually, a uuid).
- * @param {Object} preferences - The preferences to include in the prefsSet.
+ * @param  {String} gpiiKey - The identifier of the prefsSet (usually, a uuid).
+ * @param  {Object} preferences - The preferences to include in the prefsSet.
+ * @return {Object} A JSON object containing the documents ready to be inserted into DB.
  */
 gpii.prefsSetsDbUtils.generatePrefsSet = function (gpiiKey, preferences) {
     var currentTime = new Date().toISOString();

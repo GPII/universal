@@ -54,7 +54,7 @@ gpii.uuidLoader.dbPut = function (that, doc) {
     }, function (err) {
         if (err.message === "missing") {
             that.put(doc).then(function (newDoc) {promise.resolve(newDoc);}, function (err) {promise.reject(err);});
-	} else {
+        } else {
             promise.reject(err);
         };
     });
@@ -79,13 +79,13 @@ gpii.uuidLoader.addPrefsSet = function (that, gpiiKey, prefSafe) {
 
 // The real action
 //
-function createNewUsers (uuidLoader) {
+function createNewUsers(uuidLoader) {
     var data = gpii.prefsSetsDbUtils.generatePrefsSet(uuid.v4(), gpii.prefsSetsDbUtils.emptyPrefsSetBlock);
     uuidLoader.addPrefsSet(data.key, data.prefsSafe).then(function (newUser) {
         console.log("## New user created:", newUser);
         if (n > 1) {
             n--;
-            createNewUsers(uuidLoader)
+            createNewUsers(uuidLoader);
         } else {
             console.log("## We're done adding new users! :)");
         }
@@ -96,8 +96,8 @@ function createNewUsers (uuidLoader) {
 
 // This triggers the "real action"
 //
-var n = parseInt(process.env.NEW_USERS)
+var n = parseInt(process.env.NEW_USERS);
 if (n > 0) {
     var uuidLoader = gpii.uuidLoader();
     createNewUsers(uuidLoader);
-} 
+}
