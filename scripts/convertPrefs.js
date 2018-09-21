@@ -25,7 +25,7 @@ var fs = require("fs"),
     fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-require("./prefsSetsDbUtils.js");
+require("./shared/prefsSetsDbUtils.js");
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
 

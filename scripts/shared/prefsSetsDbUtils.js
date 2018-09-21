@@ -8,6 +8,15 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
+/**
+ * This file contains utilities that are useful to generate prefsSets data that
+ * can be inserted into a CouchDB.
+ *
+ * Actually, these utils are used in:
+ *   * convertPrefs.js
+ *   * loadEmptyPrefsSets.js 
+ */
+
 "use strict";
 
 var fluid = require("infusion"),

@@ -24,7 +24,7 @@ var process = require("process"),
     gpii = fluid.registerNamespace("gpii"),
     uuid = uuid || require("node-uuid");
 
-require("./prefsSetsDbUtils.js");
+require("./shared/prefsSetsDbUtils.js");
 require("gpii-pouchdb");
 
 
