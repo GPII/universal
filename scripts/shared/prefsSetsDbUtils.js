@@ -14,7 +14,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
  *
  * Actually, these utils are used in:
  *   * convertPrefs.js
- *   * loadEmptyPrefsSets.js 
+ *   * loadEmptyPrefsSets.js
  */
 
 "use strict";
