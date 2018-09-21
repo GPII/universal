@@ -3599,14 +3599,24 @@
                             "type": "number",
                             // TODO: We should present the value to the user in a human readable format
                             "enum": [
-                                1031, // German
-                                3082, // Spanish
-                                1036, // French
-                                1033, // English
-                                1040, // Italian
-                                1041, // Japanese
-                                1046, // Portuguese
-                                1049  // Russian
+                                1031,
+                                3082,
+                                1036,
+                                1033,
+                                1040,
+                                1041,
+                                1046,
+                                1049
+                            ],
+                            "enumLabels": [
+                                "German",
+                                "Spanish",
+                                "French",
+                                "English",
+                                "Italian",
+                                "Japanese",
+                                "Portuguese",
+                                "Russian",
                             ],
                             "default": 1033
                         }
