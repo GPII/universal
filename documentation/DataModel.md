@@ -14,7 +14,7 @@ includes their preference sets, keys, full login credentials, and a minimal amou
 such as name and email.  Currently, this consists of three document types: `prefsSafe`, `gpiiKey`,
 `gpiiCloudSafeCredential`.
 
-### Overview of Preference Safes
+### Preference Safes
 
 Preference Safes consist of a single primary document of type `prefsSafe`. These contain some optional metadata such
 as `name` and `email`, and the `preferences` section which contains the users preference sets. This is the central
@@ -97,19 +97,19 @@ An example document:
 For reference, the internal account record for the above looks as follows:
 
 ```json
-{
-    "name": "prefs7user",
-    "type": "user",
-    "email": null,
-    "roles": [],
-    "username": "prefs7user",
-    "verified": true,
-    "iterations": 10,
-    "password_scheme": "pbkdf2",
-    "salt": "7cf6961e6ded3bd25732e5466512d116bf9908ba9629d4ed060a03a965e5341d",
-    "derived_key": "e8bd265e7d82fd0f662e9ddaaf2e75acb294da1b",
-    "verification_code": "618fa72aa62af282704b556e34957a79",
-    "_id": "org.couch.db.user:prefs7user"
+    {
+        "name": "prefs7user",
+        "type": "user",
+        "email": null,
+        "roles": [],
+        "username": "prefs7user",
+        "verified": true,
+        "iterations": 10,
+        "password_scheme": "pbkdf2",
+        "salt": "7cf6961e6ded3bd25732e5466512d116bf9908ba9629d4ed060a03a965e5341d",
+        "derived_key": "e8bd265e7d82fd0f662e9ddaaf2e75acb294da1b",
+        "verification_code": "618fa72aa62af282704b556e34957a79",
+        "_id": "org.couch.db.user:prefs7user"
     }
 ```
 
