@@ -38,15 +38,34 @@ fluid.defaults("gpii.uuidLoader", {
         addPrefsSet: {
             funcName: "gpii.uuidLoader.addPrefsSet",
             args: [ "{that}", "{arguments}.0", "{arguments}.1"]
+        },
+        dbPut: {
+            funcName: "gpii.uuidLoader.dbPut",
+            args: [ "{that}", "{arguments}.0"]
         }
     }
 });
 
+gpii.uuidLoader.dbPut = function (that, doc) {
+    var promise = fluid.promise();
+    // We only perform the put after checking that the uuid doesn't exist in DB
+    that.get(doc._id).then(function (/* record */) {
+        promise.reject({isError: true, message: "docId already exists in DB"});
+    }, function (err) {
+        if (err.message === "missing") {
+            that.put(doc).then(function (newDoc) {promise.resolve(newDoc);}, function (err) {promise.reject(err);});
+	} else {
+            promise.reject(err);
+        };
+    });
+    return promise;
+};
+
 gpii.uuidLoader.addPrefsSet = function (that, gpiiKey, prefSafe) {
     var promise = fluid.promise();
     var sequence = [
-        that.put(gpiiKey),
-        that.put(prefSafe),
+        that.dbPut(gpiiKey),
+        that.dbPut(prefSafe)
     ];
 
     fluid.promise.sequence(sequence).then(function () {
