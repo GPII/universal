@@ -242,7 +242,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         // 2. wait within the debounce period
         func: "setTimeout",
-        args: [ "{tests}.events.debounceTimeoutComplete.fire", 100 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 10 ]
     }, {
         event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
@@ -269,7 +269,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         // 2. wait within the debounce period to trigger the debounce logic so that the following proximityTriggered request will be rejected
         func: "setTimeout",
-        args: [ "{tests}.events.debounceTimeoutComplete.fire", 100 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 10 ]
     }, {
         event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
@@ -313,8 +313,9 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
         // 4. wait within the debounce period to trigger the debounce logic so that the following proximityTriggered request with the same GPII key will be rejected
+        // use 1000ms to allow a buffer time for "noUser" login after the logout above to complete.
         func: "setTimeout",
-        args: [ "{tests}.events.debounceTimeoutComplete.fire", 100 ]
+        args: [ "{tests}.events.debounceTimeoutComplete.fire", 1000 ]
     }, {
         event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
