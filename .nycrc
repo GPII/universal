@@ -6,9 +6,6 @@
   "exclude": [
     "!**/gpii/node_modules/accessRequester/index.js",
     "!**/gpii/node_modules/accessRequester/src/accessRequester.js",
-    "!**/gpii/node_modules/canopyMatchMaker/index.js",
-    "!**/gpii/node_modules/canopyMatchMaker/src/CanopyMatchMaker.js",
-    "!**/gpii/node_modules/canopyMatchMaker/src/CanopyMatchMakerUtilities.js",
     "!**/gpii/node_modules/contextManager/index.js",
     "!**/gpii/node_modules/contextManager/src/ContextManager.js",
     "!**/gpii/node_modules/contextManager/src/ContextManagerUtilities.js",

@@ -9,7 +9,7 @@
  * ** Ontology Handler
  * ** Solutions Registry (reading registry from file)
  * ** MatchMaker Framework
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  * ** Lifecycle Manager
  *
  * Notes on testing:
