@@ -370,7 +370,7 @@ gpii.tests.windows.builtIn = [
                         },
                         "Input": {
                             "value": {
-                                "Color": 1293123
+                                "Color": {"r": 67, "g": 187, "b": 19}
                             }
                         }
                     }
