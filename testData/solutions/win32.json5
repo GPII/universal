@@ -1075,8 +1075,8 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.BackgroundTypeVal": "BackgroundType",
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.InputVal": "Input"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.BackgroundTypeVal": "BackgroundType.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.InputVal": "Input.value"
                 }
             }
         },
