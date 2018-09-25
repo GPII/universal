@@ -6545,13 +6545,8 @@
         ]
     },
     "net.gpii.test.speechControl": {
-<<<<<<< HEAD
         // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
         // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
-=======
-    // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
-    // which requires the OS to be restarted in order to respond to changed settings (e.g. DPI on Windows 7)
->>>>>>> e85c4702... GPII-3139: Added new solution 'ToggleKeys' for Windows
         "name": "GPII Test solution for speech control of the computer",
         "contexts": {
             "OS": [
@@ -6584,18 +6579,10 @@
         ],
         "isRunning": []
     },
-<<<<<<< HEAD
     "net.gpii.explode": {
         // This solution exists only to support manual and automated testing of GPII's error support. It references the
         // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
         // get, set or launch settingsHandler action
-=======
-
-    "net.gpii.explode": {
-    // This solution exists only to support manual and automated testing of GPII's error support. It references the
-    // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
-    // get, set or launch settingsHandler action
->>>>>>> e85c4702... GPII-3139: Added new solution 'ToggleKeys' for Windows
         "name": "GPII Test solution for triggering settingsHandler errors",
         "contexts": {
             "OS": [
