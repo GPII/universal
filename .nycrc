@@ -28,6 +28,7 @@
     "!**/gpii/node_modules/flowManager/index.js",
     "!**/gpii/node_modules/flowManager/src/BrowserChannel.js",
     "!**/gpii/node_modules/flowManager/src/CloudBasedFlowManager.js",
+    "!**/gpii/node_modules/flowManager/src/DefaultSettingsLoader.js",
     "!**/gpii/node_modules/flowManager/src/FlowManager.js",
     "!**/gpii/node_modules/flowManager/src/MatchMaking.js",
     "!**/gpii/node_modules/flowManager/src/PSPChannel.js",
