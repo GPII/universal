@@ -10,10 +10,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 
 // This script generates unique pref sets and loads them into CouchDB.
 //
-// See this JIRA for more information: https://issues.gpii.net/browse/GPII-3381
-// The options to this script must be set as environment variables when calling it,
-// these are:
-//   * COUCHDB_URL: This neeeds to be in the form: "http://user:pass@host:port/dbname"
+// To create 20 empty prefs sets, the sctipt needs to be called like this:
+//   * COUCHDB_URL=http://localhost:8058/gpii NEW_USERS=20 node scripts/loadEmptyPrefsSets.js
+//
+// The options to this script must be passed as environment variables, and they are:
+//   * COUCHDB_URL: This neeeds to be in the form "http://host/dbname", but in case
+//   you need to provide the credentials to CouchDB, you need to use the form
+//   "http://user:pass@host:port/dbname".
 //   * NEW_USERS: The amount of new empty preferences sets you want to create
 //
 
