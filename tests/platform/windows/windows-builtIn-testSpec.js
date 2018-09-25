@@ -371,7 +371,7 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.shortcutWarningMessage": [{
                     "settings": {
-                        "Warning Sounds": true
+                        "Warning Sounds": 1
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -383,7 +383,7 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.shortcutWarningSound": [{
                     "settings": {
-                        "Sound on Activation": true
+                        "Sound on Activation": 1
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
