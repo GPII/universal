@@ -94,18 +94,6 @@ gpii.tests.journal.initialSettings = {
             }
         ]
     },
-    "gpii.windows.desktopBackgroundSettingsHandler": {
-        "com.microsoft.windows.desktopBackground": [
-            {
-                "settings": {
-                    "BackgroundTypeVal": "SolidColor",
-                    "InputVal": {
-                        "Color": {"r": 67, "g": 187, "b": 19}
-                    }
-                }
-            }
-        ]
-    },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{
             "settings": {
