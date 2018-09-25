@@ -63,7 +63,7 @@ gpii.uuidLoader.dbPut = function (that, doc) {
     // just in case somebody wants to reuse this in the future.
     //
     that.get(doc._id).then(function (/* record */) {
-        promise.reject({isError: true, message: "docId already exists in DB"});
+        promise.reject({isError: true, message: "doc with id", doc._id, "already exists in DB"});
     }, function (err) {
         if (err.message === "missing") {
             that.put(doc).then(function (newDoc) {promise.resolve(newDoc);}, function (err) {promise.reject(err);});
