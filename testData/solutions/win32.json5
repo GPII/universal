@@ -4834,9 +4834,7 @@
                                 "black-yellow": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
                                 "lime-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\hc2.theme",
                                 "black-brown": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\blackOnBrown.theme",
-                                "gray-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
                                 "grey-black": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnDark.theme",
-                                "gray-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme",
                                 "grey-white": "${{environment}.SystemRoot}\\resources\\Ease of Access Themes\\grayOnWhite.theme"
                             }
                         }
@@ -6225,8 +6223,8 @@
                                         "white-black": "wb",
                                         "black-yellow": "by",
                                         "yellow-black": "yb",
-                                        "gray-dark": "lgdg",
-                                        "gray-white": "gw",
+                                        "grey-dark": "lgdg",
+                                        "grey-white": "gw",
                                         "black-brown": "bbr"
                                     }
                                 }
