@@ -3035,42 +3035,42 @@
                     "ENU-Global\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
                     "ENU-JAWSCursor\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
                     "ENU-Keyboard\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
                     "ENU-MenuAndDialog\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
                     "ENU-Message\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
                     "ENU-PCCursor\\.Volume": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
                             "factor": 100
                         }
                     },
@@ -6262,6 +6262,41 @@
                 "liveness": "OSRestart",
                 "capabilitiesTransformations": {
                     "sc": "http://registry\\.gpii\\.net/common/speechControl"
+                },
+                "supportedSettings": {
+                    "sc": {}
+                }
+            }
+        },
+        "configure": [],
+        "restore": [],
+        "start": [],
+        "stop": [],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "isRunning": []
+    },
+    "com.windows.volumeControl": {
+        // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
+        // which requires the volume settings to appear on PSP panel.
+        "name": "GPII Test solution for volume control of the computer",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.settingsHandlers.noSettings",
+                "liveness": "OSRestart",
+                "capabilitiesTransformations": {
+                    "sc": "http://registry\\.gpii\\.net/common/volume"
                 },
                 "supportedSettings": {
                     "sc": {}
