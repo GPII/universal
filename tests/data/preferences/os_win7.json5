@@ -53,10 +53,10 @@
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningMessage": {
-                        "Warning Sounds": true
+                        "Warning Sounds": 1
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.shortcutWarningSound": {
-                        "Sound on Activation": true
+                        "Sound on Activation": 1
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.filterKeys": {
                         "FilterKeysEnable": {
