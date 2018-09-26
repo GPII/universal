@@ -4717,11 +4717,7 @@
                 }
             }
         },
-        "isInstalled": [
-            {
-                "type": "gpii.deviceReporter.alwaysInstalled"
-            }
-        ]
+        "isInstalled": [] // Disabled due to GPII-3401
     },
     "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
