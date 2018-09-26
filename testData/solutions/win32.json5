@@ -6280,8 +6280,8 @@
         "isRunning": []
     },
     "com.microsoft.windows.volumeControl": {
-        // This solution does not exist in real life and has been added strictly for user testing/demoing of a solution
-        // which requires the volume settings to appear on PSP panel.
+        // This solution has not yet been implemented but has been mocked in the solutions registry to aid
+        // presentation of the PSP's volume control referenced by one of the standard snapsets
         "name": "GPII Test solution for volume control of the computer",
         "contexts": {
             "OS": [
