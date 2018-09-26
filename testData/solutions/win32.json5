@@ -6294,7 +6294,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.noSettings",
-                "liveness": "OSRestart",
+                "liveness": "live",
                 "capabilitiesTransformations": {
                     "sc": "http://registry\\.gpii\\.net/common/volume"
                 },
