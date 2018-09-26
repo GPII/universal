@@ -3266,7 +3266,7 @@
                             "offset": -0.010101
                         }
                     },
-                    "http://registry\\.gpii\\.net/common/volume": {
+                    "http://registry\\.gpii\\.net/common/volumeTTS": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
                             "inputPath": "ENU-Global\\.Volume",
