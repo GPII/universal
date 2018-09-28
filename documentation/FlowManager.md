@@ -22,15 +22,27 @@ different kinds of flows are:
 * **Update Preferences** (`CloudBasedFlowManager.js`) - used to update the preferences when the system is running in
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 
-## Reserved GPII Key "noUser"
+## Reserved GPII Keys
 
-The reserved special GPII key "noUser" is keyed into the system when there is not an actual key keyed in. This includes:
+### noUser
+
+The reserved GPII key "noUser" is automatically keyed into the system when there is not an actual key keyed in. This includes:
 
 * When GPII starts
 * Once an actual GPII key is keyed out
 
 The present of "noUser" key allows users to continue to change settings via QSS (Quick Strip Set) when no actual GPII
 key is keyed into the system.
+
+### reset
+
+The reserved GPII key "reset" is to be used with the flow manager login/logout APIs to reset the computer. These APIs are:
+
+GET /user/reset/proximityTriggered
+GET /user/reset/login
+GET /user/reset/logout
+
+See [Reset Computer Documentation](ResetComputer.md) for more details about the reset workflow.
 
 ## APIs
 
@@ -59,14 +71,6 @@ key is keyed into the system.
 * **route:** `/user/:gpiiKey/logout` where `:gpiiKey` should be the GPII key of the user
 * **method:** `GET`
 * **return:** Message saying that user successfully logged out of the system or an error message.
-
-### Retrieve GPII key (GET /gpiiKey)
-
-* **description**: Get the GPII key of the user(s) who is (are) currently logged into the system
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/gpiiKey`
-* **method:** `GET`
-* **return:** A JSON array with a string entry for each user
 
 ### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
 

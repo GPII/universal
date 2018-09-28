@@ -50,6 +50,10 @@ gpii.tests.userLogonRequest.testLogoutResponse = function (data, gpiiKey) {
         gpiiKey + " was successfully logged out.", data);
 };
 
+gpii.tests.userLogonRequest.testResetResponse = function (data) {
+    jqUnit.assertEquals("Response is correct", "Reset successfully.", data);
+};
+
 gpii.tests.userLogonRequest.modelChangeChecker = function (trackedLogonChange, expectedType, expectedInProgress, expectedGpiiKey) {
     var result = trackedLogonChange[trackedLogonChange.length - 1];
     jqUnit.assertEquals("Checking type of model change", expectedType, result.type);
@@ -332,16 +336,16 @@ gpii.tests.userLogonRequest.testDefs = [{
         }, "{arguments}.0"]
     }]
 }, {
-    name: "Testing proximityTriggered with 'reset' GPII key",
-    expect: 22,
+    name: "Testing 'reset' GPII key: resetting with noUser logs out noUser",
+    expect: 7,
     sequence: [{
         // 1. resetting with noUser logs out noUser
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
         event: "{that}.events.onResponse",
-        listener: "gpii.tests.userLogonRequest.testLogoutResponse",
-        args: ["{arguments}.0", "noUser"]
+        listener: "gpii.tests.userLogonRequest.testResetResponse",
+        args: ["{arguments}.0"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
@@ -352,8 +356,50 @@ gpii.tests.userLogonRequest.testDefs = [{
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
         args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
+    }]
+}, {
+    name: "Testing 'reset' GPII key: resetting with a user logged in",
+    expect: 17,
+    initialState: {
+        "gpii.gsettings.launch": {
+            "org.gnome.desktop.a11y.magnifier": [{
+                "settings": {
+                    "running": true
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-magnifier-enabled"
+                }
+            }]
+        }
+    },
+    expectedStateAfterReset: {
+        "gpii.gsettings.launch": {
+            "org.gnome.desktop.a11y.magnifier": [{
+                "settings": {
+                    "running": false
+                }
+            }]
+        }
+    },
+    sequence: [{
+        // 1. set the initial settings: start the magnifier
+        func: "gpii.test.expandSettings",
+        args: [ "{tests}", "initialState" ]
     }, {
-        // 2. resetting with user logged in (part 1: login)
+        func: "gpii.test.setInitialSettingsState",
+        args: [ "{tests}.initialState", "{nameResolver}", "{testCaseHolder}.events.onInitialStateSet.fire"]
+    }, {
+        event: "{testCaseHolder}.events.onInitialStateSet",
+        listener: "fluid.identity"
+    }, {
+        func: "gpii.test.checkConfiguration",
+        args: ["{tests}.initialState", "{nameResolver}", "{testCaseHolder}.events.onInitialStateConfirmed.fire", "Confirming initial state"]
+    }, {
+        event: "{testCaseHolder}.events.onInitialStateConfirmed",
+        listener: "fluid.identity"
+    }, {
+        // 2. login
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -361,7 +407,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
-        // 2. resetting with user logged in (part 2: reset and check that user is logged out)
+        // 3. reset and check that user is logged out)
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
@@ -375,12 +421,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
         args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, gpii.tests.userLogonRequest.gpiiKey]
     }, {
-        // 2. resetting with user logged in (part 3: reset and check that user is logged out)
+        // 4. reset and check that user is logged out)
         event: "{that}.events.onResponse",
-        listener: "gpii.tests.userLogonRequest.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+        listener: "gpii.tests.userLogonRequest.testResetResponse",
+        args: ["{arguments}.0"]
     }, {
-        // 3. "noUser" is automatically keyed in when no actual key is keyed in
+        // 5. "noUser" is automatically keyed in when no actual key is keyed in
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
@@ -393,6 +439,13 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
         args: ["{lifecycleManager}", ["noUser"]]
+    }, {
+        // 6. Verify the default settings have been applied: stop the magnifier
+        func: "gpii.test.checkRestoredInitialState",
+        args: [ "{tests}.expectedStateAfterReset", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
+    }, {
+        event: "{testCaseHolder}.events.onCheckRestoredInitialStateComplete",
+        listener: "fluid.identity"
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
