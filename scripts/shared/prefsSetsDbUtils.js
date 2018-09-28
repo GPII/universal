@@ -9,12 +9,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
 /**
- * This file contains utilities that are useful to generate prefsSets data that
+ * This file contains utilities that are useful to generate keys data that
  * can be inserted into a CouchDB.
  *
  * Actually, these utils are used in:
  *   * convertPrefs.js
- *   * loadEmptyPrefsSets.js
+ *   * loadEmptyKeys.js
  */
 
 "use strict";
@@ -27,7 +27,7 @@ fluid.registerNamespace("gpii.prefsSetsDbUtils");
 /**
  * This is an empty preferences set.
  */
-gpii.prefsSetsDbUtils.emptyPrefsSetBlock = {
+gpii.prefsSetsDbUtils.emptyPreferencesBlock = {
     "flat": {
         "contexts": {
             "gpii-default": {
@@ -39,18 +39,20 @@ gpii.prefsSetsDbUtils.emptyPrefsSetBlock = {
 };
 
 /**
- * Generate the data for a prefsSet creation.
+ * Generate the data for a key creation.
  *
- * @param  {String} gpiiKey - The identifier of the prefsSet (usually, a uuid).
+ * The data contains both the gpiiKey and the preferences safe.
+ *
+ * @param  {String} gpiiKeyId - The identifier of the prefsSet (usually, a uuid).
  * @param  {Object} preferences - The preferences to include in the prefsSet.
  * @return {Object} A JSON object containing the documents ready to be inserted into DB.
  */
-gpii.prefsSetsDbUtils.generatePrefsSet = function (gpiiKey, preferences) {
+gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences) {
     var currentTime = new Date().toISOString();
-    var prefsSafeId = "prefsSafe-" + gpiiKey;
+    var prefsSafeId = "prefsSafe-" + gpiiKeyId;
 
     var newGpiiKey = {
-        "_id": gpiiKey,
+        "_id": gpiiKeyId,
         "type": "gpiiKey",
         "schemaVersion": "0.1",
         "prefsSafeId": prefsSafeId,
@@ -66,7 +68,7 @@ gpii.prefsSetsDbUtils.generatePrefsSet = function (gpiiKey, preferences) {
         "type": "prefsSafe",
         "schemaVersion": "0.1",
         "prefsSafeType": "user",
-        "name": gpiiKey,
+        "name": gpiiKeyId,
         "password": null,
         "email": null,
         "preferences": preferences,
@@ -74,5 +76,5 @@ gpii.prefsSetsDbUtils.generatePrefsSet = function (gpiiKey, preferences) {
         "timestampUpdated": null
     };
 
-    return { key: newGpiiKey, prefsSafe: newPrefsSafe };
+    return { gpiiKey: newGpiiKey, prefsSafe: newPrefsSafe };
 };

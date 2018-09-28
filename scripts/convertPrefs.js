@@ -41,11 +41,11 @@ rimraf(targetDir, function () {
     mkdirp(targetDir, function () {
         filenames.forEach(function (filename) {
             if (filename.endsWith(".json5")) {
-                var gpiiKey = filename.substr(0, filename.length - 6);
+                var gpiiKeyId = filename.substr(0, filename.length - 6);
                 var preferences = fs.readFileSync(inputDir + filename, "utf-8");
-                var prefsSetData = gpii.prefsSetsDbUtils.generatePrefsSet(gpiiKey, JSON5.parse(preferences));
-                gpiiKeys.push(prefsSetData.key);
-                prefsSafes.push(prefsSetData.prefsSafe);
+                var keyData = gpii.prefsSetsDbUtils.generateKeyData(gpiiKeyId, JSON5.parse(preferences));
+                gpiiKeys.push(keyData.gpiiKey);
+                prefsSafes.push(keyData.prefsSafe);
 
             }
         });
