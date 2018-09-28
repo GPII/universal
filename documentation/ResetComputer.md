@@ -104,21 +104,27 @@ entry for stopping gnome magnifier on Linux:
 }
 ```
 
-When GPII starts, it copies `defaultSettings.json5` from `testData/solutions` directory to the GPII settings directory
-if it hasn't been copied. GPII reads the default settings from `defaultSettings.json5` located at the GPII settings
-directory. Users are invited to edit the default settings file at the settings directory instead of at
-`testData/solutions` directory to keep the code base clean and consistent.
+When GPII starts, `defaultSettings.json5` is automatically copied from `testData/solutions` directory to the GPII
+settings directory if it hasn't been copied. GPII reads the default settings from `defaultSettings.json5` located
+at the GPII settings directory. Users are invited to edit the default settings file at the settings directory instead
+of at `testData/solutions` directory to keep the code base clean and consistent.
+
+Note:
+
+* When `defaultSettings.json5` in the settings directory is wanted to be re-copied from `testData/solutions` directory,
+  removing `defaultSettings.json5` from the settings directory will trigger the recopy automatically next time when
+  GPII starts.
+
+* The actual location of the settings directory can be found at the beginning of the log output when GPII starts
 
 ## Reset the Computer
 
-Once the default settings file is ready, the reset can be initiated by sending http requests to APIs provided by the
-local flow manager. These APIs include:
+Once the default settings file is ready, the reset can be initiated by sending a HTTP request to the login API provided
+by the local flow manager. This API is:
 
-* GET /user/reset/proximityTriggered
 * GET /user/reset/login
-* GET /user/reset/logout
 
-The reset actions performed by the local flow manager include:
+The reset actions performed by the local flow manager are:
 
 1. If there's a GPII key currently keyed in GPII, key it out;
 2. If default settings are defined, apply them to reset the computer.

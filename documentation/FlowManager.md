@@ -36,13 +36,14 @@ key is keyed into the system.
 
 ### reset
 
-The reserved GPII key "reset" is to be used with the flow manager login/logout APIs to reset the computer. These APIs are:
+The reserved GPII key "reset" is to be used with the flow manager login API to reset the computer. The API is:
 
-GET /user/reset/proximityTriggered
 GET /user/reset/login
-GET /user/reset/logout
 
 See [Reset Computer Documentation](ResetComputer.md) for more details about the reset workflow.
+
+Note that a separate logout of "reset" is not necessary. The final condition of using the "reset" key is to have the
+"noUser" key log back in the system.
 
 ## APIs
 
