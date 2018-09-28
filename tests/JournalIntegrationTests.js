@@ -469,7 +469,7 @@ gpii.tests.journal.fixtures = [
             }, gpii.test.checkSequence,
             {
                 event: "{configuration}.server.flowManager.events.noUserLoggedIn",
-                listener: "fluid.identity",    
+                listener: "fluid.identity"
             },
             // Now verify that we can log on normally after a restore, and generate a non-crashed session after logging off
             gpii.tests.journal.normalLoginFixtures
