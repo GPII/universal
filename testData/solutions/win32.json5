@@ -6221,7 +6221,7 @@
                                         "white-black": "wb",
                                         "black-yellow": "by",
                                         "yellow-black": "yb",
-                                        "grey-dark": "lgdg",
+                                        "grey-black": "lgdg",
                                         "grey-white": "gw",
                                         "black-brown": "bbr"
                                     }
