@@ -6316,6 +6316,143 @@
         ],
         "isRunning": []
     },
+    "com.microsoft.windows.accentColors": {
+        "name": "Windows 10 accent color personalization",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.accentColorSettingsHandler",
+                "liveness": "live",
+                "supportedSettings": {
+                    "color": {
+                        "schema": {
+                            "title": "Desktop background payload",
+                            "description": "The type of background that user wants to select",
+                            "default": "auto",
+                            // In order to represent this type we need the possibility to encode something
+                            // like: { "r": Number, "g": Number, "b": Number } | "auto"
+                            "enum": [
+                                "{ \"r\": 0x0..0xFF, \"g\": 0x0..0xFF, \"b\": 0x0..0xFF }" ,
+                                "auto"
+                            ]
+                        }
+                    },
+                    "transparencyEffects": {
+                        "schema": {
+                            "title": "Desktop transparency effects",
+                            "description": "Sets the transparency effect for system main menu and windows.",
+                            "enum": [
+                                true,
+                                false
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Off"
+                            ]
+                        }
+                    },
+                    "colorPrevalence": {
+                        "schema": {
+                            "title": "Desktop color prevalence",
+                            "description": "Makes the accent color appear in Windows 10 Start, taskbar, and action center.",
+                            "enum": [
+                                true,
+                                false
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Off"
+                            ]
+                        }
+                    },
+                    "colorPrevalenceTitleBars": {
+                        "schema": {
+                            "title": "Desktop title bar color prevalence",
+                            "description": "Makes the accent color appears in the windows title bars.",
+                            "enum": [
+                                true,
+                                false
+                            ],
+                            "enumLabels": [
+                                "On",
+                                "Off"
+                            ]
+                        }
+                    },
+                    "appsUseLightTheme": {
+                        "schema": {
+                            "title": "Windows apps color theme",
+                            "description": "Sets the color theme for Windows 10 apps.",
+                            "enum": [
+                                true,
+                                false
+                            ],
+                            "enumLabels": [
+                                "Light",
+                                "Dark"
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "color": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.accentColor",
+                            "outputPath": "value"
+                        }
+                    },
+                    "transparencyEffects": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.transparencyEffectsEnabled",
+                            "outputPath": "value"
+                        }
+                    },
+                    "colorPrevalence": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.colorPrevalenceEnabled",
+                            "outputPath": "value"
+                        }
+                    },
+                    "colorPrevalenceTitleBars": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.colorPrevalenceTitleBarsEnabled",
+                            "outputPath": "value"
+                        }
+                    },
+                    "appsUseLightTheme": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.lightThemeEnabled",
+                            "outputPath": "value"
+                        }
+                    },
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.accentColor": "color.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.transparencyEffectsEnabled": "transparencyEffects.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.colorPrevalenceEnabled": "colorPrevalence.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.colorPrevalenceTitleBarsEnabled": "colorPrevalenceTitleBars.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.lightThemeEnabled": "appsUseLightTheme.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "net.gpii.explode": {
         // This solution exists only to support manual and automated testing of GPII's error support. It references the
         // "exploding settings handler" which will trigger a failure using a configurable strategy during either the
