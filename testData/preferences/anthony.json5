@@ -1,0 +1,33 @@
+// # Anthony.json5
+//
+// This preference sets the Windows 10 accent color, transparency effects, color prevalence
+// for Windows 10 start, taskbar, action center and title bars.
+//
+// ## Testing
+//
+// Windows 10 accent color should change to orange, the color should be seen in:
+//   - Windows 10 start menu.
+//   - Windows 10 title bars.
+//   - Windows 10 taskbar and action center.
+// Also transparency effects should be enabled, and Windows 10 applications such as "Settings" should
+// have in "Dark theme".
+//
+{
+    "flat": {
+        "name": "Anthony",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.accentColors": {
+                        "accentColor": { "r": 255, "g": 153, "b": 0 },
+                        "transparencyEffectsEnabled": true,
+                        "colorPrevalenceEnabled": true,
+                        "colorPrevalenceTitleBarsEnabled": true,
+                        "lightThemeEnabled": false
+                    }
+                }
+            }
+        }
+    }
+}
