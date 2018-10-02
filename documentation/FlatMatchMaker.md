@@ -25,6 +25,6 @@ This involves four steps:
     * Those explicitly expressed in the solution entry's `capabilitities` block
     * The input-paths, as calculated from the solution entry's `capabilitiesTransformations` block.
 3. Knowing what preferences the user has (in common terms) and what capabilities each solution has, the flat matchmaker
-   now simply selects those solutions that have a cabability matching a user preference.
-4. To this set of solutions is added any solution present on the device for which the user has application-specific
-   preferences.
+   now simply selects those solutions that have a capability matching a user preference.
+4. Any solution present on the device for which the user has application-specific preferences is added.
+5. Apply [Apptology](Apptology.md) to select only one solution from each solution type.

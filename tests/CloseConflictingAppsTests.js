@@ -109,28 +109,6 @@ gpii.tests.conflictingApps.testDefs = [
         },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
-                            "speech.espeak.rateBoost": true,
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
-                        }
-                    }
-                ],
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
@@ -171,8 +149,8 @@ gpii.tests.conflictingApps.testDefs = [
                 ]
             },
             "gpii.launchHandlers.flexibleHandler": fluid.extend({},
-                gpii.tests.conflictingApps.jawsHandlerEntry(false),
-                gpii.tests.conflictingApps.NVDAHandlerEntry(true))
+                gpii.tests.conflictingApps.jawsHandlerEntry(true),
+                gpii.tests.conflictingApps.NVDAHandlerEntry(false))
         }
     }, {
         name: "Conflicting screenreader (jaws) is closed is Only one screenreader is launched",
@@ -185,28 +163,6 @@ gpii.tests.conflictingApps.testDefs = [
         settingsHandlers: {
 
             "gpii.settingsHandlers.INISettingsHandler": {
-                "org.nvda-project": [
-                    {
-                        "settings": {
-                            "speech.espeak.rate": 17,
-                            "speech.espeak.volume": 75,
-                            "speech.espeak.pitch": 15,
-                            "speech.espeak.rateBoost": true,
-                            "speech.symbolLevel": 300,
-                            "speech.espeak.voice": "en\\en-wi",
-                            "reviewCursor.followFocus": false,
-                            "reviewCursor.followCaret": true,
-                            "reviewCursor.followMouse": true,
-                            "keyboard.speakTypedWords": true,
-                            "keyboard.speakTypedCharacters": false,
-                            "presentation.reportHelpBalloons": false,
-                            "speech.espeak.sayCapForCapitals": true
-                        },
-                        "options": {
-                            "filename": "${{environment}.APPDATA}\\nvda\\nvda.ini"
-                        }
-                    }
-                ],
                 "com.freedomscientific.jaws": [
                     {
                         "settings": {
@@ -247,8 +203,8 @@ gpii.tests.conflictingApps.testDefs = [
                 ]
             },
             "gpii.launchHandlers.flexibleHandler": fluid.extend({},
-                gpii.tests.conflictingApps.jawsHandlerEntry(false),
-                gpii.tests.conflictingApps.NVDAHandlerEntry(true))
+                gpii.tests.conflictingApps.jawsHandlerEntry(true),
+                gpii.tests.conflictingApps.NVDAHandlerEntry(false))
         }
     }
 ];
