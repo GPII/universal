@@ -40,6 +40,10 @@
     },
 
     {
+        "id": "com.freedomscientific.jaws"
+    },
+
+    {
         "id": "com.microsoft.windows.onscreenKeyboard"
     },
 
@@ -133,6 +137,10 @@
 
     {
         "id": "net.gpii.uioPlus"
+    },
+
+    {
+        "id": "com.microsoft.windows.volumeControl"
     },
 
     {

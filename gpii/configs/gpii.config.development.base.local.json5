@@ -6,7 +6,7 @@
  *
  * * The following components are running:
  * ** Auth Server
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  * ** Cloud Based Flow Manager
  * ** Local Flow Manager
  * ** MatchMaker Framework
@@ -28,6 +28,6 @@
         "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
         "%flowManager/configs/gpii.flowManager.config.local.base.json5",
         "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
-        "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
     ]
 }

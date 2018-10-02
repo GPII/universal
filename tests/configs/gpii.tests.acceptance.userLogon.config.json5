@@ -1,0 +1,19 @@
+{
+    "type": "gpii.tests.acceptance.userLogon.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.debounceTimeMs": {
+                "record": 3000,
+                "target": "{that flowManager lifecycleManager}.options.debounceTimeMs"
+            },
+            "acceptance.defaultSettings": {
+                "source": "{that}.options.flowManagerOptions",
+                "target": "{that flowManager}.options"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/gpii.config.development.local.json5",
+        "./shared/gpii.tests.userLogon.config.json5"
+    ]
+}

@@ -15,15 +15,8 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/common/cursorSize": 1.0,
-                    "http://registry.gpii.net/common/DPIScale": 1.50,
-                    "http://registry.gpii.net/applications/com.microsoft.windows.highContrast": {
-                        "http://registry.gpii.net/common/highContrast/enabled": true,
-                        "http://registry.gpii.net/common/highContrastTheme": "white-black"
-                    },
-                    "http://registry.gpii.net/applications/net.gpii.uioPlus": {
-                        "http://registry.gpii.net/common/highContrast/enabled": true,
-                        "http://registry.gpii.net/common/highContrastTheme": "white-black"
-                    }
+                    "http://registry.gpii.net/common/DPIScale": 2,
+                    "http://registry.gpii.net/common/highContrastTheme": "white-black"
                 }
             }
         }
