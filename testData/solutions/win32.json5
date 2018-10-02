@@ -6436,7 +6436,7 @@
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.lightThemeEnabled",
                             "outputPath": "value"
                         }
-                    },
+                    }
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.accentColors.accentColor": "color.value",
