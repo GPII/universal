@@ -6,7 +6,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.accentColors": {
                         color: {
-                            value: 65433
+                            value: { "r": 255, "g": 153, "b": 0 }
                         },
                         transparencyEffects: {
                             value: true

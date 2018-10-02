@@ -358,7 +358,7 @@ gpii.tests.windows.builtIn = [
             }
         }
     }, {
-        name: "Testing os_win7 using default matchmaker",
+        name: "Testing os_win7_2 using default matchmaker",
         gpiiKey: "os_win7_2",
         initialState: {},
         settingsHandlers: {
@@ -366,7 +366,7 @@ gpii.tests.windows.builtIn = [
                 "com.microsoft.windows.accentColors": [{
                     "settings": {
                         "color": {
-                            "value": 65433
+                            "value": { "r": 255, "g": 153, "b": 0 }
                         },
                         "transparencyEffects": {
                             "value": true
