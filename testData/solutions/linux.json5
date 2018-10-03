@@ -1312,7 +1312,6 @@
                         "schema": {
                             "title": "Contrast Theme",
                             "description": "Change text and background colors.",
-                            "type": "string",
                             "default": "default",
                             "enum": [
                                 "default",
@@ -1370,7 +1369,6 @@
                         "schema": {
                             "title": "Selection Theme",
                             "description": "Change the highlight colour for text selections.",
-                            "type": "string",
                             "default": "default",
                             "enum": [
                                 "default",
