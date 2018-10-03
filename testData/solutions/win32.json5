@@ -6173,6 +6173,16 @@
                                 "lgdg",
                                 "gw",
                                 "bbr"
+                            ],
+                            "enumLabels": [
+                                "Default Theme",
+                                "Black Foreground on a White Background",
+                                "White Foreground on a Black Background",
+                                "Black Foreground on a Yellow Background",
+                                "Yellow Foreground on a Black Background",
+                                "Light Gray Foreground on a Dark Gray Background",
+                                "Gray Foreground on a White Background",
+                                "Black Foreground on a Brown Background"
                             ]
                         }
                     },
@@ -6217,6 +6227,12 @@
                                 "yellow",
                                 "green",
                                 "pink"
+                            ],
+                            "enumLabels": [
+                                "Default Selection Highlight",
+                                "Yellow Selection Highlight",
+                                "Green Selection Highlight",
+                                "Pink Selection Highlight"
                             ]
                         }
                     },
