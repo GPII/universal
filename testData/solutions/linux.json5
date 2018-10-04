@@ -1302,9 +1302,9 @@
                             "title": "Character Space",
                             "description": "Adjust the space between characters.",
                             "type": "number",
-                            "default": 1,
-                            "minimum": 0.9,
-                            "maximum": 2,
+                            "default": 0,
+                            "minimum": -0.1,
+                            "maximum": 1,
                             "multipleOf": 0.1
                         }
                     },
@@ -1340,10 +1340,10 @@
                             "title": "Font Size",
                             "description": "Adjust text size.",
                             "type": "number",
-                            "default": 1,
-                            "minimum": 0.25,
-                            "maximum": 5,
-                            "multipleOf": 0.05
+                            "default": 12,
+                            "minimum": 3,
+                            "maximum": 60,
+                            "multipleOf": 1
                         }
                     },
                     "inputsLargerEnabled": {
@@ -1360,7 +1360,7 @@
                             "description": "Adjusts the spacing between lines of text.",
                             "type": "number",
                             "default": 1,
-                            "minimum": 1,
+                            "minimum": 0.7,
                             "maximum": 3,
                             "multipleOf": 0.1
                         }
@@ -1416,7 +1416,15 @@
                             "default": false
                         }
                     },
-                    "wordSpace": {}
+                    "wordSpace": {
+                        "schema": {
+                            "type": "number",
+                            "default": 0,
+                            "minimum": -0.3,
+                            "maximum": 3,
+                            "multipleOf": 0.1
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled",
