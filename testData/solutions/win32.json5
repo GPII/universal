@@ -6414,14 +6414,14 @@
                 "type": "gpii.settingsHandlers.noSettings",
                 "liveness": "live",
                 "capabilitiesTransformations": {
-                    "sc": "http://registry\\.gpii\\.net/common/volume"
+                    "volume": "http://registry\\.gpii\\.net/common/volume"
                 },
                 "supportedSettings": {
-                    "sc": {}
+                    "volume": {}
                 }
             }
         },
-        "configure": [],
+        "configure": ["settings.configure"],
         "restore": [],
         "start": [],
         "stop": [],
