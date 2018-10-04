@@ -6139,17 +6139,133 @@
                     "path": "net.gpii.uioPlus"
                 },
                 "supportedSettings": {
-                    "captionsEnabled": {},
-                    "characterSpace": {},
-                    "contrastTheme": {},
-                    "fontSize": {},
-                    "inputsLargerEnabled": {},
-                    "lineSpace": {},
-                    "selectionTheme": {},
-                    "selfVoicingEnabled": {},
-                    "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {},
-                    "tableOfContentsEnabled": {},
+                    "captionsEnabled": {
+                        "schema": {
+                            "title": "Captions",
+                            "description": "Request videos to display captions.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "characterSpace": {
+                        "schema": {
+                            "title": "Character Space",
+                            "description": "Adjust the space between characters.",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 0.9,
+                            "maximum": 2,
+                            "multipleOf": 0.1
+                        }
+                    },
+                    "contrastTheme": {
+                        "schema": {
+                            "title": "Contrast Theme",
+                            "description": "Change text and background colors.",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "bw",
+                                "wb",
+                                "by",
+                                "yb",
+                                "lgdg",
+                                "gw",
+                                "bbr"
+                            ],
+                            "enumLabels": [
+                                "Default Theme",
+                                "Black Foreground on a White Background",
+                                "White Foreground on a Black Background",
+                                "Black Foreground on a Yellow Background",
+                                "Yellow Foreground on a Black Background",
+                                "Light Gray Foreground on a Dark Gray Background",
+                                "Gray Foreground on a White Background",
+                                "Black Foreground on a Brown Background"
+                            ]
+                        }
+                    },
+                    "fontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "Adjust text size.",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 0.25,
+                            "maximum": 5,
+                            "multipleOf": 0.05
+                        }
+                    },
+                    "inputsLargerEnabled": {
+                        "schema": {
+                            "title": "Enhance Inputs",
+                            "description": "Emphasize links, buttons, menus, textfields, and other inputs.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "lineSpace": {
+                        "schema": {
+                            "title": "Line Space",
+                            "description": "Adjusts the spacing between lines of text.",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 1,
+                            "maximum": 3,
+                            "multipleOf": 0.1
+                        }
+                    },
+                    "selectionTheme": {
+                        "schema": {
+                            "title": "Selection Theme",
+                            "description": "Change the highlight colour for text selections.",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "yellow",
+                                "green",
+                                "pink"
+                            ],
+                            "enumLabels": [
+                                "Default Selection Highlight",
+                                "Yellow Selection Highlight",
+                                "Green Selection Highlight",
+                                "Pink Selection Highlight"
+                            ]
+                        }
+                    },
+                    "selfVoicingEnabled": {
+                        "schema": {
+                            "title": "Self Voicing",
+                            "description": "Let the device read site content aloud.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "simplifiedUiEnabled": {
+                        "schema": {
+                            "title": "Simplified UI",
+                            "description": "Only display the main content.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "syllabificationEnabled": {
+                        "schema": {
+                            "title": "Syllabification",
+                            "description": "Display words broken down into their syllables.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "tableOfContentsEnabled": {
+                        "schema": {
+                            "title": "Table of Contents",
+                            "description": "Create a table of contents.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
                     "wordSpace": {}
                 },
                 "capabilitiesTransformations": {
