@@ -6421,7 +6421,7 @@
                 }
             }
         },
-        "configure": [],
+        "configure": ["settings.configure"],
         "restore": [],
         "start": [],
         "stop": [],
