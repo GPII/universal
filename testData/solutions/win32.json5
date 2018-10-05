@@ -6152,9 +6152,9 @@
                             "title": "Character Space",
                             "description": "Adjust the space between characters.",
                             "type": "number",
-                            "default": 1,
-                            "minimum": 0.9,
-                            "maximum": 2,
+                            "default": 0,
+                            "minimum": -0.1,
+                            "maximum": 1,
                             "multipleOf": 0.1
                         }
                     },
@@ -6190,10 +6190,10 @@
                             "title": "Font Size",
                             "description": "Adjust text size.",
                             "type": "number",
-                            "default": 1,
-                            "minimum": 0.25,
-                            "maximum": 5,
-                            "multipleOf": 0.05
+                            "default": 12,
+                            "minimum": 3,
+                            "maximum": 60,
+                            "multipleOf": 1
                         }
                     },
                     "inputsLargerEnabled": {
@@ -6210,7 +6210,7 @@
                             "description": "Adjusts the spacing between lines of text.",
                             "type": "number",
                             "default": 1,
-                            "minimum": 1,
+                            "minimum": 0.7,
                             "maximum": 3,
                             "multipleOf": 0.1
                         }
@@ -6264,6 +6264,15 @@
                             "description": "Create a table of contents.",
                             "type": "boolean",
                             "default": false
+                        }
+                    },
+                    "wordSpace": {
+                        "schema": {
+                            "type": "number",
+                            "default": 0,
+                            "minimum": -0.3,
+                            "maximum": 3,
+                            "multipleOf": 0.1
                         }
                     }
                 },
@@ -6351,7 +6360,20 @@
                     "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
                     "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
-                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents"
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "wordSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "offset": 1,
+                                    "inputPath": "http://registry\\.gpii\\.net/common/wordSpace"
+                                }
+                            }
+                        }
+                    }
                 },
                 "inverseCapabilitiesTransformations": {}
             }
