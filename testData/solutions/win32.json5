@@ -3844,13 +3844,65 @@
                     }
                 },
                 "supportedSettings": {
-                    "SpeechSpeed": {},
-                    "SpeechPitch": {},
-                    "CoupleNarratorCursorKeyboard": {},
-                    "FollowInsertion": {},
-                    "InteractionMouse": {},
-                    "EchoChars": {},
-                    "EchoWords": {}
+                    "SpeechSpeed": {
+                        "schema": {
+                            "title": "Speech Speed",
+                            "description": "The speed at which text is announced.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 20,
+                            "default": 10
+                        }
+                    },
+                    "SpeechPitch": {
+                        "schema": {
+                            "title": "Speech Pitch",
+                            "description": "The pitch at which text is announced.",
+                            "minimum": 0,
+                            "maximum": 20
+                        }
+                    },
+                    "CoupleNarratorCursorKeyboard": {
+                        "schema": {
+                            "title": "Couple Narrator Cursor Keyboard",
+                            "description": "Whether to couple the narrator cursor to the keyboard",
+                            "enum": [0, 1],
+                            "enumLabels": ["on", "off"]
+                        }
+                    },
+                    "FollowInsertion": {
+                        "schema": {
+                            "title": "Couple Narrator Cursor Keyboard",
+                            "description": "Whether to couple the narrator cursor to the keyboard.",
+                            "enum": [0, 1],
+                            "enumLabels": ["on", "off"]
+                        }
+                    },
+                    "InteractionMouse": {
+                        "schema": {
+                            "title": "Interaction Mouse",
+                            "description": "",
+                            "enum": [0, 1],
+                            "enumLabels": ["on", "off"]
+                        }
+                    },
+                    "EchoChars": {
+                        "schema": {
+                            "title": "Echo Characters",
+                            "description": "Whether to echo characters typed.",
+                            "enum": [0, 1],
+                            "enumLabels": ["on", "off"]
+                        }
+
+                    },
+                    "EchoWords": {
+                        "schema": {
+                            "title": "Echo Words",
+                            "description": "Whether to echo words typed.",
+                            "enum": [0, 1],
+                            "enumLabels": ["on", "off"]
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
