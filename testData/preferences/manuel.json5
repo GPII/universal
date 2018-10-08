@@ -65,8 +65,8 @@
                 "conditions": [
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
-                        "max": 200,
-                        "min": 0,
+                        "maximum": 200,
+                        "minimum": 0,
                         "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
                     }
                 ]
