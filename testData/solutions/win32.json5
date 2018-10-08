@@ -3591,11 +3591,10 @@
                         "schema": {
                             "title": "Magnification",
                             "description": "Set up magnification level",
-                            "type": "number",
+                            "type": "integer",
                             "default": 200,
-                            "min": 100,
-                            "max": 1600,
-                            "divisibleBy": 1
+                            "minimum": 100,
+                            "maximum": 1600
                         }
                     },
                     "FollowFocus": {
@@ -3632,9 +3631,12 @@
                                 1,
                                 2,
                                 3
+                            ],
+                            "enumLabels": [
+                                "Top Half",
+                                "Full Screen",
+                                "Lens"
                             ]
-                            // TODO: We must present these values in a human readable form
-                            // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
                         }
                     },
                     "ZoomIncrement": {}
