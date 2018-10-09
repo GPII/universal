@@ -6945,8 +6945,6 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    // TODO: Discuss with Antranig, eSpeak is no longer the default, so we also need to set the voice to eSpeak.
-                    // TODO: Also discuss that we might want to set these for every voice.
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -6982,6 +6980,23 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                             "match": {
+                                // We have to set the synth to "espeak" if we want to use espeak-specific settings.
+                                "true": {
+                                    "outputValue": {
+                                        "transform": [
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "input": "espeak",
+                                                "outputPath": "speech\\.synth"
+                                            },
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "input": "Microsoft Sound Mapper",
+                                                "outputPath": "speech\\.outputDevice"
+                                            }
+                                        ]
+                                    }
+                                },
                                 "false": {
                                     "outputValue": {
                                         "transform": [
