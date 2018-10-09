@@ -11,7 +11,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // This script reads files from an input directory that contains preferences JSON5 files and convert them to JSON files of GPII keys and
 // preferences safes suitable for direct loading into CouchDB or PouchDB, which comply with the new GPII data model:
 // https://wiki.gpii.net/w/Keys,_KeyTokens,_and_Preferences in the target directory
-// Usage: node scripts/convertPrefs.js {input_path} {target_path}
+// Usage: node scripts/convertPrefs.js {input_path} {target_path} {prefsSafeType}, where {prefsSafeType} is one of "snapset" or "user" and defaults to "user"
 //
 // A sample command that runs this script in the universal root directory:
 // node scripts/convertPrefs.js testData/preferences/ build/dbData/ snapset
@@ -25,8 +25,13 @@ var fs = require("fs"),
 
 var inputDir = process.argv[2];
 var targetDir = process.argv[3];
-var prefsSafeType = process.argv[4];
+var prefsSafeType = process.argv[4] || "user";
 
+if (prefsSafeType !== "snapset" && prefsSafeType !== "user") {
+    console.log("Usage: node scripts/convertPrefs.js InputFolder OutputFolder PrefsSafeType");
+    console.log("  where PrefsSafeType, is one of 'snapset' or 'user' (defaults to 'user')");
+    process.exit(1);
+}
 var prefsSafes = [];
 var gpiiKeys = [];
 

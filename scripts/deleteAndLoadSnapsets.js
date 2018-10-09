@@ -16,6 +16,11 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // 5. Uploads the new Prefs Safes and their GPII Keys to the database,
 // A sample command that runs this script:
 // node deleteAndLoadSnapsets.js $COUCHDBURL $STATIC_DATA_DIR $BUILD_DATA_DIR
+//
+// There is also an optional final [--justDelete] argument for testing/debugging.
+// If present, the script exits with a zero exit status after deleting all the
+// snapset PrefsSafes and their GPII keys.  That is, the script does only the
+// first four steps listed above.
 
 "use strict";
 
@@ -110,26 +115,52 @@ gpii.dataLoader.loadStaticDataFromDisk = function (options) {
 };
 
 /*
+ * Utility to configure a step:  creates a response callback, binds it to an
+ * http database request, and configures a promise to resolve/reject when the
+ * response callback finishes or fails.
+ * @param {Object} details - Specific information for the request and response,
+ *                           such as error messages, urls, POST data, and so on.
+ *                           These details are set appropriately by the caller.
+ * @param {Object} options - Additional options.
+ * @return {Promise} - A promise that resolves the configured step.
+ */
+gpii.dataLoader.configureStep = function (details, options) {
+    var togo = fluid.promise();
+    var response = gpii.dataLoader.createResponseHandler(
+        details.responseDataHandler,
+        options,
+        togo,
+        details.responseErrMsg
+    );
+    var request;
+    if (details.dataToPost) {
+        request = gpii.dataLoader.createPostRequest(
+            details.dataToPost, response, options
+        );
+    } else {
+        request = gpii.dataLoader.queryDatabase(
+            details.requestUrl, response, details.requestErrMsg
+        );
+    }
+    request.end();
+    return togo;
+};
+
+/*
  * Create the step that loads the static data into the database.
  * @param {Object} options - Object that has the static data to load.
  * @return {Promise} - A promise that resolves loading the static data.
  */
 gpii.dataLoader.createStaticDataStep = function (options) {
-    var togo = fluid.promise();
-    var response = gpii.dataLoader.createResponseHandler(
-        function (responseString, options) {
+    var details = {
+        dataToPost: options.staticData,
+        responseDataHandler: function (responseString, options) {
             fluid.log("Loading static data from '" + options.staticDataDir + "'");
             return "Uploaded static data.";
         },
-        options,
-        togo,
-        "Error loading static data into database: "
-    );
-    var staticDataRequest = gpii.dataLoader.createPostRequest(
-        options.staticData, response, options
-    );
-    staticDataRequest.end();
-    return togo;
+        responseErrMsg: "Error loading static data into database: "
+    };
+    return gpii.dataLoader.configureStep(details, options);
 };
 
 /*
@@ -138,23 +169,18 @@ gpii.dataLoader.createStaticDataStep = function (options) {
  * @return {Promise} - A promise that resolves retrieving the old views.
  */
 gpii.dataLoader.createFetchOldViewsStep = function (options) {
-    var togo = fluid.promise();
-    var response = gpii.dataLoader.createResponseHandler(
-        function (responseString, options) {
+    var details = {
+        requestUrl: options.viewsUrl,
+        requestErrMsg: "Error requesting old views from database: ",
+        responseDataHandler: function (responseString, options) {
             fluid.log("Retrieving old views from database.");
             var oldViews = JSON.parse(responseString);
             options.oldViews = oldViews;
             return oldViews;
         },
-        options,
-        togo,
-        "Error retrieving old views from database: "
-    );
-    var viewsRequest = gpii.dataLoader.queryDatabase(
-        options.viewsUrl, response, options
-    );
-    viewsRequest.end();
-    return togo;
+        responseErrMsg: "Error retrieving old views from database: "
+    };
+    return gpii.dataLoader.configureStep(details, options);
 };
 
 /*
@@ -164,35 +190,30 @@ gpii.dataLoader.createFetchOldViewsStep = function (options) {
  * @return {Promise} - A promise that resolves updating the views.
  */
 gpii.dataLoader.createUpdateViewsStep = function (options) {
-    var togo = fluid.promise();
-
     // Check to see if the views need updating.
     // JS: Not sure how useful this is.
     var oldViews = JSON.stringify(options.oldViews.views);
     var newViews = JSON.stringify(options.newViews.views);
     if (newViews === oldViews) {
-        fluid.log ("New views match old views, no change.");
+        var togo = fluid.promise();
+        fluid.log("New views match old views, no change.");
         togo.resolve("Updated views:  no change");
+        return togo;
     }
     else {
-        var response = gpii.dataLoader.createResponseHandler(
-            function (responseString) {
+        var viewsDataToPost = options.oldViews;         // id and rev
+        viewsDataToPost.views = options.newViews.views; // new data.
+        var details = {
+            dataToPost: [viewsDataToPost],
+            responseDataHandler: function (responseString) {
                 var result = JSON.parse(responseString)[0];
                 fluid.log("Updated views: '" + JSON.stringify(result) + "'");
                 return JSON.stringify(result);
             },
-            options,
-            togo,
-            "Error updating views: "
-        );
-        var viewsDataToPost = options.oldViews;         // id and rev
-        viewsDataToPost.views = options.newViews.views; // new data.
-        var request = gpii.dataLoader.createPostRequest(
-            [viewsDataToPost], response, options
-        );
-        request.end();
+            responseErrMsg: "Error updating views: "
+        };
+        return gpii.dataLoader.configureStep(details, options);
     }
-    return togo;
 };
 
 /**
@@ -303,6 +324,9 @@ gpii.dataLoader.createPostRequest = function (dataToPost, responseHandler, optio
  * @return {Function} - Function reponse callback for an http request.
  */
 gpii.dataLoader.createResponseHandler = function (handleEnd, options, promise, errorMsg) {
+    if (!errorMsg) {
+        errorMsg = "";
+    }
     return function (response) {
         var responseString = "";
 
@@ -382,20 +406,13 @@ gpii.dataLoader.getDataFromDirectory = function (dataDir) {
  *                     currently in the database.
  */
 gpii.dataLoader.createFetchSnapsetsStep = function (options) {
-    var togo = fluid.promise();
-    var response = gpii.dataLoader.createResponseHandler(
-        gpii.dataLoader.processSnapsets,
-        options,
-        togo,
-        "Error retrieving snapsets Prefs Safes: "
-    );
-    var snapSetsRequest = gpii.dataLoader.queryDatabase(
-        options.prefsSafesViewUrl,
-        response,
-        "Error requesting snapsets Prefs Safes: "
-    );
-    snapSetsRequest.end();
-    return togo;
+    var details = {
+        requestUrl: options.prefsSafesViewUrl,
+        requestErrMsg: "Error requesting snapsets Prefs Safes: ",
+        responseDataHandler: gpii.dataLoader.processSnapsets,
+        responseErrMsg: "Error retrieving snapsets Prefs Safes: "
+    };
+    return gpii.dataLoader.configureStep(details, options);
 };
 
 /*
@@ -407,20 +424,13 @@ gpii.dataLoader.createFetchSnapsetsStep = function (options) {
  *                     database that correspond to snapset PrefsSafes.
  */
 gpii.dataLoader.createFetchGpiiKeysStep = function (options) {
-    var togo = fluid.promise();
-    var response = gpii.dataLoader.createResponseHandler(
-        gpii.dataLoader.processGpiiKeys,
-        options,
-        togo,
-        "Error finding snapset Prefs Safes associated GPII Keys: "
-    );
-    var request = gpii.dataLoader.queryDatabase(
-        options.gpiiKeysViewUrl,
-        response,
-        "Error requesting GPII Keys: "
-    );
-    request.end();
-    return togo;
+    var details = {
+        requestUrl: options.gpiiKeysViewUrl,
+        requestErrMsg: "Error requesting GPII Keys: ",
+        responseDataHandler: gpii.dataLoader.processGpiiKeys,
+        responseErrMsg: "Error finding snapset Prefs Safes associated GPII Keys: "
+    };
+    return gpii.dataLoader.configureStep(details, options);
 };
 
 /*
@@ -450,15 +460,11 @@ gpii.dataLoader.logSnapsetDeletion = function (responseString, options) {
  * @return {Promise} - The promise that resolves the deletion.
  */
 gpii.dataLoader.createBatchDeleteStep = function (options) {
-    var togo = fluid.promise();
-    var response = gpii.dataLoader.createResponseHandler(
-        gpii.dataLoader.logSnapsetDeletion,
-        options,
-        togo
-    );
-    var batchDeleteRequest = gpii.dataLoader.configureBatchDelete(response, options);
-    batchDeleteRequest.end();
-    return togo;
+    var details = {
+        dataToPost: options.snapsetPrefsSafes.concat(options.gpiiKeys),
+        responseDataHandler: gpii.dataLoader.logSnapsetDeletion
+    };
+    return gpii.dataLoader.configureStep(details, options);
 };
 
 /*
@@ -480,16 +486,12 @@ gpii.dataLoader.logSnapsetsUpload = function (responseString, options) {
  * @return {Promise} - A promise that resolves the upload.
  */
 gpii.dataLoader.createBatchUploadStep = function (options) {
-    var togo = fluid.promise();
-    var buildData = gpii.dataLoader.getDataFromDirectory(options.buildDataDir);
-    var response = gpii.dataLoader.createResponseHandler(
-        gpii.dataLoader.logSnapsetsUpload,
-        options,
-        togo
-    );
-    var bulkUploadRequest = gpii.dataLoader.createPostRequest(buildData, response, options);
-    bulkUploadRequest.end();
-    return togo;
+    var newSnapsetsData = gpii.dataLoader.getDataFromDirectory(options.buildDataDir);
+    var details = {
+        dataToPost: newSnapsetsData,
+        responseDataHandler: gpii.dataLoader.logSnapsetsUpload
+    };
+    return gpii.dataLoader.configureStep(details, options);
 };
 
 /*
