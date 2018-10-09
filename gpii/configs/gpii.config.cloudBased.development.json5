@@ -3,7 +3,7 @@
  *
  * * The following components are running:
  * ** Auth Server
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  * ** Flow Manager
  * ** MatchMaker Framework
  * ** Ontology Handler
@@ -24,6 +24,6 @@
     "mergeConfigs": [
         "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
         "%preferencesServer/configs/gpii.preferencesServer.config.base.json5",
-        "%canopyMatchMaker/configs/gpii.canopyMatchMaker.config.base.json5"
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
     ]
 }

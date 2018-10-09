@@ -14,7 +14,7 @@
  * ** preferencesServer
  * ** OntologyHandler
  * ** solutionsRegistry (reading registry from file)
- * ** canopyMatchMaker
+ * ** flatMatchMaker
  * ** matchMakerFramework
  * ** pouchManager
  *

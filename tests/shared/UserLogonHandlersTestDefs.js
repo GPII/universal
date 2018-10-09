@@ -106,6 +106,10 @@ gpii.tests.userLogonHandlers.testLogoutResponse = function (data, gpiiKey) {
         gpiiKey + " was successfully logged out.", data);
 };
 
+gpii.tests.userLogonHandlers.testResetResponse = function (data) {
+    jqUnit.assertEquals("Response is correct", "Reset successfully.", data);
+};
+
 gpii.tests.userLogonHandlers.buildTestDefs = function (testDefs) {
     return fluid.transform(testDefs, function (testDef) {
         return fluid.extend(true, {
@@ -288,8 +292,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{resetRequest2}.send"
     }, {
         event: "{resetRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
+        listener: "gpii.tests.userLogonHandlers.testResetResponse",
+        args: ["{arguments}.0"]
     }]
 }, {
     name: "Testing proximityTriggered with 'reset' noUser",
@@ -299,8 +303,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{resetRequest}.send"
     }, {
         event: "{resetRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", "noUser"]
+        listener: "gpii.tests.userLogonHandlers.testResetResponse",
+        args: ["{arguments}.0"]
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
