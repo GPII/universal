@@ -1289,34 +1289,145 @@
                     "path": "net.gpii.uioPlus"
                 },
                 "supportedSettings": {
-                    "lineSpace": {},
-                    "fontSize": {},
-                    "characterSpace": {},
-                    "inputsLargerEnabled": {},
-                    "contrastTheme": {},
-                    "selfVoicingEnabled": {},
-                    "selectionTheme": {},
-                    "tableOfContentsEnabled": {},
-                    "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {},
-                    "captionsEnabled": {}
-                },
-                "capabilitiesTransformations": {
-                    "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
-                    "fontSize": {
-                        "transform": {
-                            "type": "fluid.transforms.round",
-                            "scale": 1,
-                            "input": {
-                                "transform": {
-                                    "type": "fluid.transforms.binaryOp",
-                                    "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
-                                    "right": 12,
-                                    "operator": "/"
-                                }
-                            }
+                    "captionsEnabled": {
+                        "schema": {
+                            "title": "Captions",
+                            "description": "Request videos to display captions.",
+                            "type": "boolean",
+                            "default": false
                         }
                     },
+                    "characterSpace": {
+                        "schema": {
+                            "title": "Character Space",
+                            "description": "Adjust the space between characters.",
+                            "type": "number",
+                            "default": 0,
+                            "minimum": -0.1,
+                            "maximum": 1,
+                            "multipleOf": 0.1
+                        }
+                    },
+                    "contrastTheme": {
+                        "schema": {
+                            "title": "Contrast Theme",
+                            "description": "Change text and background colors.",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "bw",
+                                "wb",
+                                "by",
+                                "yb",
+                                "lgdg",
+                                "gw",
+                                "bbr"
+                            ],
+                            "enumLabels": [
+                                "Default Theme",
+                                "Black Foreground on a White Background",
+                                "White Foreground on a Black Background",
+                                "Black Foreground on a Yellow Background",
+                                "Yellow Foreground on a Black Background",
+                                "Light Gray Foreground on a Dark Gray Background",
+                                "Gray Foreground on a White Background",
+                                "Black Foreground on a Brown Background"
+                            ]
+                        }
+                    },
+                    "fontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "Adjust text size.",
+                            "type": "number",
+                            "default": 12,
+                            "minimum": 3,
+                            "maximum": 60,
+                            "multipleOf": 1
+                        }
+                    },
+                    "inputsLargerEnabled": {
+                        "schema": {
+                            "title": "Enhance Inputs",
+                            "description": "Emphasize links, buttons, menus, textfields, and other inputs.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "lineSpace": {
+                        "schema": {
+                            "title": "Line Space",
+                            "description": "Adjusts the spacing between lines of text.",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 0.7,
+                            "maximum": 3,
+                            "multipleOf": 0.1
+                        }
+                    },
+                    "selectionTheme": {
+                        "schema": {
+                            "title": "Selection Theme",
+                            "description": "Change the highlight colour for text selections.",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "yellow",
+                                "green",
+                                "pink"
+                            ],
+                            "enumLabels": [
+                                "Default Selection Highlight",
+                                "Yellow Selection Highlight",
+                                "Green Selection Highlight",
+                                "Pink Selection Highlight"
+                            ]
+                        }
+                    },
+                    "selfVoicingEnabled": {
+                        "schema": {
+                            "title": "Self Voicing",
+                            "description": "Let the device read site content aloud.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "simplifiedUiEnabled": {
+                        "schema": {
+                            "title": "Simplified UI",
+                            "description": "Only display the main content.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "syllabificationEnabled": {
+                        "schema": {
+                            "title": "Syllabification",
+                            "description": "Display words broken down into their syllables.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "tableOfContentsEnabled": {
+                        "schema": {
+                            "title": "Table of Contents",
+                            "description": "Create a table of contents.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "wordSpace": {
+                        "schema": {
+                            "type": "number",
+                            "default": 0,
+                            "minimum": -0.3,
+                            "maximum": 3,
+                            "multipleOf": 0.1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled",
                     "characterSpace": {
                         "transform": {
                             "type": "fluid.transforms.round",
@@ -1330,11 +1441,36 @@
                             }
                         }
                     },
-                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
                     "contrastTheme": {
                         "transform": {
+                            // Use the same condition for applying a high contrast theme to windows:
+                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                            "left": false,
+                                            "operator": "||",
+                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "right": false
+                                        }
+                                    },
+                                    "operator": "&&",
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "left": "",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "operator": "!==",
+                                            "right": "regular-contrast"
+                                        }
+                                    }
+                                }
+                            },
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -1354,12 +1490,40 @@
                             "false": "default"
                         }
                     },
-                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
+                    "fontSize": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "leftPath": "http://registry\\.gpii\\.net/common/fontSize",
+                                    "right": 12,
+                                    "operator": "/"
+                                }
+                            }
+                        }
+                    },
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
+                    "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
                     "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
-                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
                     "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
                     "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
-                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled"
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "wordSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "offset": 1,
+                                    "inputPath": "http://registry\\.gpii\\.net/common/wordSpace"
+                                }
+                            }
+                        }
+                    }
                 },
                 "inverseCapabilitiesTransformations": {}
             }

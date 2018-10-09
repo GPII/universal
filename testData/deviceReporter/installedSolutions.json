@@ -140,6 +140,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.volumeControl"
+    },
+
+    {
         "id": "net.gpii.explode"
     }
 

@@ -1,29 +1,21 @@
 {
-    // TODO: Discuss standardising language.
-    // We currently use this: https://tools.ietf.org/html/bcp47
-    // We need a crosswalk to the contexts in which we're using the language data, and to discuss if BCP 47 is the most useful in walking between.
-    // We need consistent transforms to/from whatever we choose, and a strategy for reuse.
-    "http://registry.gpii.net/common/DPIScale": {
-        "schema": {
+    "schemas": {
+        "http://registry.gpii.net/common/DPIScale": {
             "title": "DPI Scale",
-            "description": "DPI scale factor on default monitor.",
+            "description": "DPI scale factor on default monitor",
             "type": "integer",
             "default": 0,
             "minimum": -2,
             "maximum": 4
-        }
-    },
-    "http://registry.gpii.net/common/speechRate": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/speechRate": {
             "title": "Speech rate",
-            "description": "Text to speech output speech rate.",
+            "description": "Text to speech output speech rate",
             "type": "integer",
             "default": 150,
             "minimum": 1
-        }
-    },
-    "http://registry.gpii.net/common/trackingTTS": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/trackingTTS": {
             "title": "TTS tracking mode",
             "description": "Tracking mode for TTS.",
             "type": "array",
@@ -40,13 +32,10 @@
                     "Focus"
                 ]
             }
-        }
-    },
-    "http://registry.gpii.net/common/speakTutorialMessages": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/speakTutorialMessages": {
             "title": "Speak Tutorial Messages",
-            "description": "Whether to speak tutorial messages or not.",
-            "type": "boolean",
+            "description": "Whether to speak tutorial messages or not",
             "default": false,
             // TODO: We should present the value to the user in a human readable format.
             // Sometimes we can just use "true/false".
@@ -55,45 +44,34 @@
             // TODO: discuss this as a solution to the above concerns.
             "enum": [true, false],
             "enumLabels": [ "On", "Off"]
-        }
-    },
-    "http://registry.gpii.net/common/keyEcho": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/keyEcho": {
             "title": "Key echo",
-            "description": "Whether to speak each key as it is introduced.",
+            "description": "Whether to speak each key as it is introduced",
             "type": "boolean",
             "default": true
-        }
-    },
-    "http://registry.gpii.net/common/wordEcho": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/wordEcho": {
             "title": "Word echo",
-            "description": "Whether to speak each word as it is typed.",
+            "description": "Whether to speak each word as it is typed",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/announceCapitals": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/announceCapitals": {
             "title": "Announce capitals",
-            "description": "Whether to announce capitals.",
+            "description": "Whether to announce capitals",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/screenReaderBrailleOutput": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/screenReaderBrailleOutput": {
             "title": "Enable braille output",
-            "description": "Whether to enable/disable braille output.",
+            "description": "Whether to enable/disable braille output",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/punctuationVerbosity": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/punctuationVerbosity": {
             "title": "Punctuation verbosity",
-            "description": "Level of puctuacion verbosity when producing text to speech.",
-            "type": "string",
+            "description": "Level of puctuacion verbosity when producing text to speech",
             "default": "some",
             "enum": [
                 "none",
@@ -107,13 +85,10 @@
                 "Most",
                 "All"
             ]
-        }
-    },
-    "http://registry.gpii.net/common/readingUnit": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/readingUnit": {
             "title": "Reading Unit",
-            "description": "Reading mode when producing text to speech.",
-            "type": "string",
+            "description": "Reading mode when producing text to speech",
             "default": "sentence",
             "enum": [
                 "word",
@@ -127,133 +102,61 @@
                 "Sentence",
                 "Paragraph"
             ]
-        }
-    },
-    "http://registry.gpii.net/common/auditoryOutLanguage": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/auditoryOutLanguage": {
             "title": "TTS output language",
-            "description": "Language in which the text to speech must be produced.",
+            "description": "Language in which the text to speech must be produced",
             "type": "string",
-            "default": "en",
-            // TODO: Make an enum labels array for this.
-            //Not sure whether this should be specified and fallback to the currently used language
-            "enum": [
-                // since this enum applies to many settings we should be able to just reuse it
-                "en",
-                "en-GB",
-                "en-US",
-                "en-scotland",
-                "en-BZ",
-                "en-BS",
-                "en-AG",
-                "en-AI",
-                "af",
-                "bg",
-                "bs",
-                "ca",
-                "cs",
-                "cy",
-                "da",
-                "de",
-                "el",
-                "grc",
-                "eo",
-                "es",
-                "es-419",
-                "et",
-                "fi",
-                "fr",
-                "fr-BE",
-                "hi",
-                "hr",
-                "hu",
-                "hy",
-                "hy-arevmda",
-                "id",
-                "is",
-                "it",
-                "jbo",
-                "ka",
-                "kn",
-                "ku",
-                "la",
-                "lv",
-                "mk",
-                "ml",
-                "nl",
-                "no",
-                "pap",
-                "pl",
-                "pt-BR",
-                "pt-PT",
-                "ro",
-                "ru",
-                "sk",
-                "sq",
-                "sr",
-                "sv",
-                "sw",
-                "ta",
-                "tr",
-                "vi",
-                "zh-cmn",
-                "cmn",
-                "zh-yue",
-                "yue"
+            "default": "en", //Not sure whether this should be specified and fallback to the currently used language
+            "enum": [ // since this enum applies to many settings we should be able to just reuse it
+                "en", "en-GB", "en-US", "en-scotland", "en-BZ", "en-BS", "en-AG", "en-AI",
+                "af", "bg", "bs", "ca", "cs", "cy", "da", "de", "el", "grc", "eo", "es",
+                "es-419", "et", "fi", "fr", "fr-BE", "hi", "hr", "hu", "hy", "hy-arevmda",
+                "id", "is", "it", "jbo", "ka", "kn", "ku", "la", "lv", "mk", "ml", "nl",
+                "no", "pap", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sq", "sr", "sv",
+                "sw", "ta", "tr", "vi", "zh-cmn", "cmn", "zh-yue", "yue"
             ]
             // TODO: We should present the value to the user in a human readable format.
             // i.e.: "English (US)" instead of "en-US" or "Mandarin" instead of "zh-cmn"
-        }
-    },
-    "http://registry.gpii.net/common/screenReaderTTS/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/screenReaderTTS/enabled": {
             "title": "TTS enabled",
-            "description": "Whether to enable/disable text to speech from screen reader.",
+            "description": "Whether to enable/disable text to speech from screen reader",
             "type": "boolean",
             "default": true
-        }
-    },
-    "http://registry.gpii.net/common/pitch": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/pitch": {
             "title": "Pitch rate",
-            "description": "Text to speech output pitch rate.",
+            "description": "Text to speech output pitch rate",
             "type": "number",
             "default": 0.5,
             "minimum": 0,
             "maximum": 1,
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/volumeTTS": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/volumeTTS": {
             "title": "TTS Volume",
-            "description": "Output volume of TTS.",
+            "description": "Output volume of TTS",
             "type": "number",
             "minimum": 0,
             "maximum": 1,
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/selfVoicing/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/selfVoicing/enabled": {
             "title": "Self Voicing",
-            "description": "Whether to enable/disable self voicing.",
+            "description": "Whether to enable/disable self voicing",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/highContrast/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/highContrast/enabled": {
             "title": "High Contrast",
-            "description": "Whether to enable/disable High Contrast.",
+            "description": "Whether to enable/disable High Contrast",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/highContrastTheme": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/highContrastTheme": {
             "title": "High Contrast theme",
-            "description": "High Contrast Theme.",
+            "description": "High Contrast Theme",
             "type": "string",
             "default": "black-white",
             "enum": [
@@ -268,74 +171,58 @@
                 "Yellow on Black",
                 "Black on Yellow"
             ]
-
-        }
-    },
-    "http://registry.gpii.net/common/fontSize": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/fontSize": {
             "title": "Font Size",
-            "description": "Font size of the text.",
+            "description": "Font size of the text",
             "type": "number",
             "default": 12,
             "minimum": 0.1,
             //TODO: Do we need to define a maximum value to avoid the user to leave the computer unusable?
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/cursorSize": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/cursorSize": {
             "title": "Cursor Size",
-            "description": "Cursor size.",
+            "description": "Cursor size",
             "type": "number",
             "default": 0.5,
             "minimum": 0,
             "maximum": 1,
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/mouseTrailing": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/mouseTrailing": {
             "title": "Mouse Trailing",
-            "description": "Amount of mouse trailing.",
+            "description": "Amount of mouse trailing",
             "type": "integer",
             "minimum": 0,
             "maximum": 10
-        }
-    },
-    "http://registry.gpii.net/common/contrast": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/contrast": {
             "title": "Contrast",
-            "description": "Screen contrast.",
+            "description": "Screen contrast",
             "type": "integer",
-            "minimum": 0,
-            // 0 means black - should this be 1 instead?
+            "minimum": 0, // 0 means black - should this be 1 instead?
             "maximum": 100
-        }
-    },
-    "http://registry.gpii.net/common/magnification/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/magnification/enabled": {
             "title": "Magnifier Enabled",
-            "description": "Whether to enable/disable magnification.",
+            "description": "Whether to enable/disable magnification",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/magnification": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/magnification": {
             "title": "Magnification",
-            "description": "Level of magnification.",
+            "description": "Level of magnification",
             "type": "number",
             "default": 1,
             "minimum": 1,
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/tracking": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/tracking": {
             "title": "Tracking",
-            "description": "Tracking mode of the screen magnifier.",
+            "description": "Tracking mode of the screen magnifier",
             "type": "array",
-            "default": "mouse",
+            "default": ["mouse"],
             "items": {
                 "enum": [
                     "mouse",
@@ -348,12 +235,10 @@
                     "Focus"
                 ]
             }
-        }
-    },
-    "http://registry.gpii.net/common/magnifierPosition": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/magnifierPosition": {
             "title": "Magnifier position",
-            "description": "Position of the magnified area.",
+            "description": "Position of the magnified area",
             "type": "string",
             "default": "TopHalf",
             "enum": [
@@ -374,38 +259,29 @@
                 "Bottom Half",
                 "Custom"
             ]
-        }
-    },
-    "http://registry.gpii.net/common/invertColours": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/invertColours": {
             "title": "Invert colours",
-            "description": "Whether to invert colours.",
+            "description": "Whether to invert colours",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/showCrosshairs": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/showCrosshairs": {
             "title": "Show crosshairs",
-            "description": "Whether to show crosshairs.",
+            "description": "Whether to show crosshairs",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/volume": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/volume": {
             "title": "Volume",
-            "description": "General volume of the operating system.",
+            "description": "General volume of the operating system",
             "type": "number",
             "minimum": 0,
             "maximum": 1
-        }
-    },
-    // TODO: Discuss, this list does not contain many languages and contains others that don't appear to be supported in Windows.
-    "http://registry.gpii.net/common/language": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/language": {
             "title": "Language",
-            "description": "Language of the system.",
+            "description": "Language of the system",
             "type": "string",
             "default": "en",
             "enum": [
@@ -534,12 +410,10 @@
                 "zh-yue",
                 "yue"
             ]
-        }
-    },
-    "http://registry.gpii.net/common/screenResolution": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/screenResolution": {
             "title": "Screen Resolution",
-            "description": "Screen resolution of the default display.",
+            "description": "Screen resolution of the default display",
             "type": "string",
             "default": "normal",
             "enum": [
@@ -554,145 +428,104 @@
                 "Low",
                 "Very Low"
             ]
-        }
-    },
-    "http://registry.gpii.net/common/onScreenKeyboard/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/onScreenKeyboard/enabled": {
             "title": "On-Screen keyboard",
-            "description": "Whether to enable/disable the on-screen keyboard.",
+            "description": "Whether to enable/disable the on-screen keyboard",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/mouseEmulation/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/mouseEmulation/enabled": {
             "title": "Mouse emulation",
-            "description": "Whether to enable/disable the mouse emulation.",
+            "description": "Whether to enable/disable the mouse emulation",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/initDelay": {
-        "schema": {
-            "title": "Keyboard init delay",
-            // TODO: needs to be better defined
-            "description": "Keyboard's init delay.",
-            "type": "number",
-            "minimum": 0
-            // in milliseconds
-        }
-    },
-    "http://registry.gpii.net/common/cursorSpeed": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/initDelay": {
+            "title": "Keyboard init delay", // needs to be defined
+            "description": "Keyboard's init delay",
+            "type": "integer",
+            "minimum": 0 // in milliseconds
+        },
+        "http://registry.gpii.net/common/cursorSpeed": {
             "title": "Cursor speed",
-            "description": "The speed of the mouse cursor.",
-            // TODO: needs to be better defined.
+            "description": "The speed of the mouse cursor", // needs to be defined
             "type": "number"
-        }
-    },
-    "http://registry.gpii.net/common/cursorAcceleration": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/cursorAcceleration": {
             "title": "Cursor acceleration",
-            "description": "The acceleration of the mouse cursor.",
-            // TODO: needs to be better defined.
+            "description": "The acceleration of the mouse cursor", // needs to be defined
             "type": "number"
-        }
-    },
-    "http://registry.gpii.net/common/slowKeysEnable": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/slowKeysEnable": {
             "title": "Slow Keys",
-            "description": "Whether to enable/disable slow keys.",
+            "description": "Whether to enable/disable slow keys",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/slowKeysInterval": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/slowKeysInterval": {
             "title": "Slow Keys Interval",
-            "description": "Slow keys interval.",
-            // TODO: Needs to be better defined.
+            "description": "Slow keys interval", // needs to be defined
             "type": "number"
-        }
-    },
-    "http://registry.gpii.net/common/debounceEnable": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/debounceEnable": {
             "title": "Debounce",
-            "description": "Whether to enable/disable debounce.",
+            "description": "Whether to enable/disable debounce",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/debounceInterval": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/debounceInterval": {
             "title": "Debounce Interval",
-            "description": "Debounce interval.",
-            // TODO: needs to be better defined.
+            "description": "Debounce interval", // needs to be defined
             "type": "number"
-        }
-    },
-    "http://registry.gpii.net/common/stickyKeys": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/stickyKeys": {
             "title": "Sticky Keys",
-            "description": "Whether to enable/disable sticky keys.",
+            "description": "Whether to enable/disable sticky keys",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/captions/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/captions/enabled": {
             "title": "Captions",
-            "description": "Whether to enable/disable captions on videos.",
+            "description": "Whether to enable/disable captions on videos",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/subtitles/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/subtitles/enabled": {
             "title": "Subtitles",
-            "description": "Whether to enable/disable subtitles on videos.",
+            "description": "Whether to enable/disable subtitles on videos",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/audioDescription/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/audioDescription/enabled": {
             "title": "Audio Description",
-            "description": "Whether to enable/disable audio description on videos.",
+            "description": "Whether to enable/disable audio description on videos",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/supportTool": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/supportTool": {
             "title": "Support Tools",
-            "description": "Whether to enable/disable certain support tools.",
+            "description": "Whether to enable/disable certain support tools",
             "type": "array",
             "default": [],
             "items": {
-                "enum": [ "dictionary" ],
-                "enumLabels": [ "Dictionary" ]
+                "enum": ["dictionary"],
+                "enumLabels": ["Dictionary"]
             }
-        }
-    },
-    "http://registry.gpii.net/common/speechControl": {
-        // This is not currently supported by any real solutions, but rather used for user testing/demoing
-        "schema": {
+        },
+        "http://registry.gpii.net/common/speechControl": { // This is not currently supported by any real solutions, but rather used for user testing/demoing
             "title": "Talk to the Computer",
-            "description": "Whether to enable/disable voice commands for computer.",
+            "description": "Whether to enable/disable voice commands for computer",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/nightScreen": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/nightScreen": {
             "title": "Night Screen",
             "description": "Reduce the blue emitted from the screen.",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/lineSpace": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/lineSpace": {
             "title": "Line Space",
             "description": "Increases the distance between lines of text.",
             "type": "number",
@@ -700,10 +533,8 @@
             "minimum": 1,
             "maximum": 3,
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/characterSpace": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/characterSpace": {
             "title": "Character Space",
             "description": "Increases the distance between characters.",
             "type": "number",
@@ -711,18 +542,14 @@
             "minimum": 1,
             "maximum": 2,
             "multipleOf": 0.1
-        }
-    },
-    "http://registry.gpii.net/common/inputsLarger/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/inputsLarger/enabled": {
             "title": "Inputs Larger",
             "description": "Increases the size of inputs to make them more discoverable.",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/highlightColor": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/highlightColor": {
             "title": "Highlight Color",
             "description": "The color used to highlight a user's selection.",
             "type": "string",
@@ -739,26 +566,20 @@
                 "Green",
                 "Pink"
             ]
-        }
-    },
-    "http://registry.gpii.net/common/tableOfContents": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/tableOfContents": {
             "title": "Table of Contents",
             "description": "Displays a Table of Contents for the sections of a document.",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/simplifiedUi/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/simplifiedUi/enabled": {
             "title": "Simplified User Interface",
             "description": "Removes extraneous content to reduce the cognitive load and improve comprehension and/or focus.",
             "type": "boolean",
             "default": false
-        }
-    },
-    "http://registry.gpii.net/common/syllabification/enabled": {
-        "schema": {
+        },
+        "http://registry.gpii.net/common/syllabification/enabled": {
             "title": "Syllabification",
             "description": "Separate words into their syllables.",
             "type": "boolean",

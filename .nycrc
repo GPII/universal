@@ -6,9 +6,6 @@
   "exclude": [
     "!**/gpii/node_modules/accessRequester/index.js",
     "!**/gpii/node_modules/accessRequester/src/accessRequester.js",
-    "!**/gpii/node_modules/canopyMatchMaker/index.js",
-    "!**/gpii/node_modules/canopyMatchMaker/src/CanopyMatchMaker.js",
-    "!**/gpii/node_modules/canopyMatchMaker/src/CanopyMatchMakerUtilities.js",
     "!**/gpii/node_modules/contextManager/index.js",
     "!**/gpii/node_modules/contextManager/src/ContextManager.js",
     "!**/gpii/node_modules/contextManager/src/ContextManagerUtilities.js",
@@ -31,6 +28,7 @@
     "!**/gpii/node_modules/flowManager/index.js",
     "!**/gpii/node_modules/flowManager/src/BrowserChannel.js",
     "!**/gpii/node_modules/flowManager/src/CloudBasedFlowManager.js",
+    "!**/gpii/node_modules/flowManager/src/DefaultSettingsLoader.js",
     "!**/gpii/node_modules/flowManager/src/FlowManager.js",
     "!**/gpii/node_modules/flowManager/src/MatchMaking.js",
     "!**/gpii/node_modules/flowManager/src/PSPChannel.js",
