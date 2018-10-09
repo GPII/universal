@@ -5,8 +5,15 @@
             "acceptance.debounceTimeMs": {
                 "record": 3000,
                 "target": "{that localConfig flowManager lifecycleManager}.options.debounceTimeMs"
+            },
+            "acceptance.defaultSettings": {
+                "source": "{that}.options.flowManagerOptions",
+                "target": "{that localConfig flowManager}.options"
             }
         }
     },
-    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.local.json5"
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.local.json5",
+        "./shared/gpii.tests.userLogon.config.json5"
+    ]
 }
