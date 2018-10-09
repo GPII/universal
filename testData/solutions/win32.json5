@@ -6286,7 +6286,42 @@
                             "default": "True"
                         }
                     },
-                    "speech.espeak.voice": {}, // TODO: Find this.
+                    "speech.espeak.voice": {
+                        "title": "",
+                        "description": "",
+                        "enum": [
+                            "af", "sq", "am", "ar", "an", "hy-arevela", "hyw", "as", "az", "eu", "bn", "bpy", "bs",
+                            "bg", "ca", "zh-yue", "zh-cmn", "hr", "cs", "da", "nl", "en-us", "en-029", "en-gb",
+                            "en-gb-x-gbclan", "en-gb-x-rp", "en-gb-scotland", "en-gb-x-gbcwmd", "eo", "et", "fi",
+                            "fr-be", "fr-fr", "fr-ch", "ga", "gd", "ka", "de", "grc", "el", "kl", "gn", "gu", "ht",
+                            "hak", "hi", "hu", "is", "id", "ia", "it", "ja", "quc", "kn", "kk", "kok", "ko", "ku", "ky",
+                            "la", "lv", "lfn", "lt", "jbo", "mk", "ms", "ml", "mt", "mr", "my", "mi", "nci", "ne", "no",
+                            "or", "om", "pap", "fa-Latn", "fa", "pl", "pt-br", "pt-pt", "pa", "ro", "ru-LV", "ru", "sr",
+                            "tn", "shn", "sd", "si", "sk", "sl", "es-419", "es", "sw", "sv", "ta", "tt", "te", "tr",
+                            "ur", "vi-vn-x-central", "vi", "vi-vn-x-south", "cy"
+                        ],
+                        "enumLabels": [
+                            "Afrikaans", "Albanian", "Amharic", "Arabic", "Aragonese", "Armenian (East Armenia)",
+                            "Armenian (West Armenia)", "Assamese", "Azerbaijani", "Basque", "Bengali",
+                            "Bishnupriya Manipuri", "Bosnian", "Bulgarian", "Catalan", "Chinese (Cantonese)",
+                            "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English (America)",
+                            "English (Caribbean)", "English (Great Britain)", "English (Lancaster)",
+                            "English (Received Pronunciation)", "English (Scotland)", "English (West Midlands)",
+                            "Esperanto", "Estonian", "Finnish", "French (Belgium)", "French (France)",
+                            "French (Switzerland)", "Gaelic (Irish)", "Gaelic (Scottish)", "Georgian", "German",
+                            "Greek (Ancient)", "Greek", "Greenlandic", "Guarani", "Gujarati", "Haitian Creole",
+                            "Hakka Chinese", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Interlingua",
+                            "Italian", "Japanese", "K'iche'", "Kannada", "Kazakh", "Konkani", "Korean", "Kurdish",
+                            "Kyrgyz", "Latin", "Latvian", "Lingua Franca Nova", "Lithuanian", "Lojban", "Macedonian",
+                            "Malay", "Malayalam", "Maltese", "Marathi", "Myanmar (Burmese)", "Māori",
+                            "Nahuatl (Classical)", "Nepali", "Norwegian Bokmål", "Oriya", "Oromo", "Papiamento",
+                            "Persian (Pinglish)", "Persian", "Polish", "Portuguese (Brazil)", "Portuguese (Portugal)",
+                            "Punjabi", "Romanian", "Russian (Latvia)", "Russian", "Serbian", "Setswana",
+                            "Shan (Tai Yai)", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Spanish (Latin America)",
+                            "Spanish (Spain)", "Swahili", "Swedish", "Tamil", "Tatar", "Telugu", "Turkish", "Urdu",
+                            "Vietnamese (Central)", "Vietnamese (Northern)", "Vietnamese (Southern)", "Welsh"
+                        ]
+                    },
                     "speech.espeak.volume": {
                         "schema": {
                             "title": "eSpeak Volume",
@@ -6910,6 +6945,8 @@
                     }
                 },
                 "capabilitiesTransformations": {
+                    // TODO: Discuss with Antranig, eSpeak is no longer the default, so we also need to set the voice to eSpeak.
+                    // TODO: Also discuss that we might want to set these for every voice.
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
