@@ -1,6 +1,8 @@
 /**
- * This configuration runs the entire system locally under the untrusted Flow Manager architecture. At the system startup,
- * it resets the system to the default settings. See documentation/ResetComputer.md.
+ * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR.all.local`.
+ * It runs the entire system locally under the untrusted Flow Manager architecture and includes an extra feature
+ * that resets the system on system startup. See documentation/ResetComputer.md.
+ *
  * It starts these servers:
  * 1. Untrusted Local Flow Manager on port 8081
  * 2. Cloud Based Flow Manager and Preferences Server on port 8084
@@ -19,10 +21,9 @@
  * ** Pouch Manager
  */
 {
-    "type": "gpii.config.untrusted.development.dynamicDR.all.local",
+    "type": "gpii.config.untrusted.production.dynamicDR.all.local",
     "mergeConfigs": [
-        "./gpii.config.untrusted.development.dynamicDR.local.json5",
         "%flowManager/configs/gpii.flowManager.config.production.base.json5",
-        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.all.local"
     ]
 }

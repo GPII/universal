@@ -113,5 +113,8 @@
                 }
             }
         }
-    }
+    },
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.production.base.json5"
+    ]
 }
