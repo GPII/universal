@@ -11,7 +11,7 @@ nodejs_flow_manager_port: 9082
 nodejs_couchdb_port: 5984
 
 # Choose Node.js branch (lts or current)
-nodejs_branch: lts
+nodejs_branch: current
 
 # If a specific Node.js version is needed, specify it here. If not defined, defaults to the latest within the branch.
 #nodejs_version: 8.x.y
