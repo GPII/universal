@@ -1,11 +1,7 @@
 {
-    "type": "gpii.tests.userLogon.config",
+    "type": "gpii.tests.resetAtStart.config",
     "options": {
         "distributeOptions": {
-            "acceptance.debounceTimeMs": {
-                "record": 3000,
-                "target": "{that gpii.flowManager.local lifecycleManager}.options.debounceTimeMs"
-            },
             "acceptance.defaultSettings": {
                 "source": "{that}.options.flowManagerOptions",
                 "target": "{that gpii.flowManager.local}.options"
@@ -80,10 +76,12 @@
                             },
                             "settings": {
                                 "mag-factor": {
-                                    "type": "DELETE"
+                                    "type": "ADD",
+                                    "value": 3
                                 },
                                 "screen-position": {
-                                    "type": "DELETE"
+                                    "type": "ADD",
+                                    "value": "right-half"
                                 }
                             }
                         }
@@ -97,7 +95,7 @@
                             },
                             "settings": {
                                 "running": {
-                                    "value": false
+                                    "value": true
                                 }
                             }
                         }

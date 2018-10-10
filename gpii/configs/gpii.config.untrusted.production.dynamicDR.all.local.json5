@@ -1,0 +1,28 @@
+/**
+ * This configuration runs the entire system locally under the untrusted Flow Manager architecture. At the system startup,
+ * it resets the system to the default settings. See documentation/ResetComputer.md.
+ * It starts these servers:
+ * 1. Untrusted Local Flow Manager on port 8081
+ * 2. Cloud Based Flow Manager and Preferences Server on port 8084
+ * 3. PouchDB on port 8058
+ *
+ * * The following components are running:
+ * ** Auth Server
+ * ** Flat MatchMaker
+ * ** Cloud Based Flow Manager
+ * ** Dynamic Device Reporter
+ * ** Untrusted Local Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** Pouch Manager
+ */
+{
+    "type": "gpii.config.untrusted.development.dynamicDR.all.local",
+    "mergeConfigs": [
+        "./gpii.config.untrusted.development.dynamicDR.local.json5",
+        "%flowManager/configs/gpii.flowManager.config.production.base.json5",
+        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+    ]
+}
