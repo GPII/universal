@@ -1,5 +1,5 @@
 /*
- * Reset on system startup Tests
+ * Reset on System Startup Tests with Untrusted Config
  *
  * Copyright 2018 OCAD University
  *

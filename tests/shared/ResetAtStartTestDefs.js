@@ -1,5 +1,5 @@
 /*
- * User Logon Request Test Definitions
+ * Reset on System Startup Test Definitions
  *
  * Copyright 2018 OCAD University
  *
