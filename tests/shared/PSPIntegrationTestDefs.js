@@ -182,17 +182,6 @@ gpii.tests.pspIntegration.data = {
                 }]
             }
         }
-    },
-    afterTriggerAsync: {
-        "settingsHandlers": {
-            "gpii.settingsHandlers.async": {
-                "data": [{
-                    "settings": {
-                        "timeInMs": 200
-                    }
-                }]
-            }
-        }
     }
 };
 
@@ -732,18 +721,17 @@ gpii.tests.pspIntegration.testDefs = [
                     listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "modelChanged"]
                 }, {
+                    // Issue a setting change that will be applied using the async mock settings handler
                     funcName: "gpii.tests.pspIntegration.sendMsg",
-                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/net\\.gpii\\.async.http://registry\\.gpii\\.net/common/timeout"], 200]
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"], true]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
                 }, {
                     event: "{pspClient}.events.onReceiveMessage",
                     listener: "gpii.tests.pspIntegration.checkPayload",
                     args: ["{arguments}.0", "preferencesApplied"]
-                }, {
-                    func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterTriggerAsync.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
-                }, {
-                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
-                    listener: "fluid.identity"
                 }, {
                     func: "{resetRequest}.send"
                 }, {

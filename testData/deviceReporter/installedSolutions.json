@@ -145,10 +145,6 @@
 
     {
         "id": "net.gpii.explode"
-    },
-
-    {
-        "id": "net.gpii.async"
     }
 
 ]

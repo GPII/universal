@@ -15,6 +15,6 @@
         "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
     },
     {
-        "id": "net.gpii.async"
+        "id": "org.gnome.orca"
     }
 ]
