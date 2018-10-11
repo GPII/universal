@@ -52,11 +52,8 @@ gpii.dataLoader.initOptions = function (processArgv) {
     dbOptions.couchDbUrl = processArgv[2];
     dbOptions.staticDataDir = processArgv[3];
     dbOptions.buildDataDir = processArgv[4];
-    if (processArgv.length > 5 && processArgv[5] === "--justDelete") { // for debugging.
-        dbOptions.justDelete = true;
-    } else {
-        dbOptions.justDelete = false;
-    }
+    // for debugging
+    dbOptions.justDelete = processArgv.length > 5 && processArgv[5] === "--justDelete";
 
     // Set up database specific options
     dbOptions.viewsUrl = dbOptions.couchDbUrl + "/_design/views";
@@ -92,12 +89,15 @@ gpii.dataLoader.initOptions = function (processArgv) {
     return dbOptions;
 };
 
-/*
- * Loads the static data from disk, and creates a separate reference to the
- * views document.
- * @param {Object} options - Object that has the path to the directory
- *                           containing the static data. On output, contains
- *                           members for the new views and other static data.
+/**
+ * Reads the static data from disk, and creates a separate reference to the
+ * views document.  Two fields are added to the `options` parameter on return:
+ *   options.staticData {Array} - Array of Objects to be put in the database.
+ *   options.newViews {Object} - The data used to update the `_design/views`
+ *                               record.
+ * @param {Object} options - The source of the static data:
+ * @param {String} options.staticDataDir - The path to the directory containing
+ *                                         the static data.
  */
 gpii.dataLoader.loadStaticDataFromDisk = function (options) {
     var data = gpii.dataLoader.getDataFromDirectory(options.staticDataDir);
@@ -111,17 +111,64 @@ gpii.dataLoader.loadStaticDataFromDisk = function (options) {
     options.staticData = data;
     options.newViews = views;
     fluid.log("Retrieved static data from: '" + options.staticDataDir + "'");
-    fluid.log("\tViews data " + ( views ? "retrieved." : "missing." ));
+    fluid.log("\tViews data " + ( views ? "read." : "missing." ));
 };
 
-/*
- * Utility to configure a step:  creates a response callback, binds it to an
+/**
+ * Response handler function used for the callback argument of an
+ * {http.ClientRequest}.
+ * @callback ResponseCallback
+ * @param {http.IncomingMessage} response - Response object.
+ */
+
+/**
+ * Function that processes the data passed via the {ResponseCallback}.
+ * @callback ResponseDataHandler
+ * @param {String} responseString - The raw response data.
+ * @param {Object} options - Other information used by this handler; documented
+ *                           by specific data handler functions.
+ */
+
+/**
+ * POST request headers.
+ * @typedef {Object} PostRequestHeaders
+ * @property {String} Accept - "application/json" (constant).
+ * @property {String} Content-Length - Computed and filled in per request (variable).
+ * @property {String} Content-Type - "application/json" (constant).
+ */
+
+/**
+ * The POST request options for bulk updates.
+ * @typedef {Object} PostRequestOptions
+ * @property {String} hostname - The database host name (constant).
+ * @property {String} port - The port associated with the URL (constant).
+ * @property {String} path - The bulk documents command: "/gpii/_bulk_docs" (constant).
+ * @property {String} auth - Authorization for access (constant).
+ * @property {String} method - "POST" (constant).
+ * @property {PostRequestHeaders} headers - The POST headers.
+ */
+
+/**
+ * Utility to configure a step:  Creates a response callback, binds it to an
  * http database request, and configures a promise to resolve/reject when the
  * response callback finishes or fails.
- * @param {Object} details - Specific information for the request and response,
- *                           such as error messages, urls, POST data, and so on.
- *                           These details are set appropriately by the caller.
- * @param {Object} options - Additional options.
+ * @param {Object} details - Specific information for the request and response.
+ *                           These details are set appropriately by the caller:
+ * @param {String} details.requestErrMsg - Error message to display on a request
+ *                                         error.
+ * @param {ResponseDataHandler} details.responseDataHandler -
+ *                                  Function for processing the data returned in
+ *                                  the response.
+ * @param {String} details.responseErrMsg - Error message to display on a
+ *                                          response error.
+ * @param {Array} details.dataToPost - Optional: if present, a POST request is
+ *                                     used.
+ * @param {String} details.requestUrl - If not a POST request, the URL for a GET
+ *                                      request.
+ * @param {Object} options - Post request:
+ * @param {PostRequestOptions} options.postOptions - If a POST request is used,
+ *                                                   contains the specifics of
+ *                                                   the request.
  * @return {Promise} - A promise that resolves the configured step.
  */
 gpii.dataLoader.configureStep = function (details, options) {
@@ -146,9 +193,10 @@ gpii.dataLoader.configureStep = function (details, options) {
     return togo;
 };
 
-/*
+/**
  * Create the step that loads the static data into the database.
- * @param {Object} options - Object that has the static data to load.
+ * @param {Object} options - The static data:
+ * @param {Array} options.staticData - The static data to load.
  * @return {Promise} - A promise that resolves loading the static data.
  */
 gpii.dataLoader.createStaticDataStep = function (options) {
@@ -163,9 +211,10 @@ gpii.dataLoader.createStaticDataStep = function (options) {
     return gpii.dataLoader.configureStep(details, options);
 };
 
-/*
+/**
  * Create the step that retrieves the current views from the database.
- * @param {Object} options - Object containing the views URL into the database.
+ * @param {Object} options - The URL to query the database with:
+ * @param {String} options.viewsUrl - The `_design/views` URL.
  * @return {Promise} - A promise that resolves retrieving the old views.
  */
 gpii.dataLoader.createFetchOldViewsStep = function (options) {
@@ -183,10 +232,14 @@ gpii.dataLoader.createFetchOldViewsStep = function (options) {
     return gpii.dataLoader.configureStep(details, options);
 };
 
-/*
- * Create the step that updates the views in the database.
- * @param {Object} options - New views data to update with, and the old views
- *                           currently in the database.
+/**
+ * Create the step that updates the views in the database.  If the new views
+ * are the same as the old views, the `_design/views` record is not updated.
+ * @param {Object} options - New and old `_design/views` data:
+ * @param {Array} options.oldViews - the old views currently in the database.
+ *                                   Its `id` and `rev` fields are needed for
+ *                                   any update.
+ * @param {Object} options.newViews - the new views data to update with.
  * @return {Promise} - A promise that resolves updating the views.
  */
 gpii.dataLoader.createUpdateViewsStep = function (options) {
@@ -217,12 +270,13 @@ gpii.dataLoader.createUpdateViewsStep = function (options) {
 };
 
 /**
- * Find the Prefs Safes of type "snapset", mark them to be deleted and add
+ * Find the Prefs Safes of type "snapset", mark them to be deleted, and add
  * them to an array of records to remove.
- * @param {String} responseString - The response from the database query for
- *                                  retrieving the snapset PrefsSafes records
- * @param {Object} options - Data loader options used to store the current set
- *                           of processed snapsets.
+ * @param {String} responseString - The response from the database query -- the
+ *                                  retrieved snapset PrefsSafes records.
+ * @param {Object} options - Used to store the snapsets:
+ * @param {Array} options.snapsetPrefsSafes - On output, contains the "snapset"
+ *                                            PrefsSafes marked for deletion.
  * @return {Array} - The snapset PrefsSafes records marked for deletion.
  */
 gpii.dataLoader.processSnapsets = function (responseString, options) {
@@ -239,10 +293,14 @@ gpii.dataLoader.processSnapsets = function (responseString, options) {
 /**
  * Find the GPII Key records that are associated with a snapset PrefsSafe, mark
  * them for deletion, and add them to array of records to delete.
- * @param {String} responseString - The response from the database query for
- *                                  retrieving all the GPII Keys.
- * @param {Object} options - Data loader options used to store the current set
- *                           of snapset GPII keys.
+ * @param {String} responseString - The response from the database query -- all
+ *                                  of the GPII Keys in the database.
+ * @param {Object} options - Used to find and store the snapset GPII Keys:
+ * @param {Array} options.snapsetPrefsSafes - Contains the relevant PrefsSafes
+ *                                            to use to find their associated
+ *                                            GPII Keys.
+ * @param {Array} options.gpiiKeys - On output, contains the snapset GPII Key
+ *                                   records marked for deletion.
  * @return {Array} - The GPII Key records marked for deletion.
  */
 gpii.dataLoader.processGpiiKeys = function (responseString, options) {
@@ -262,7 +320,8 @@ gpii.dataLoader.processGpiiKeys = function (responseString, options) {
  * @param {Array} gpiiKeyRecords - Array of GPII Key records from the database.
  * @param {Array} snapSets - Array of snapset Prefs Safes whose id references
  *                           its associated GPII Key record.
- * @return {Array} - the values from the gpiiKeyRecords that are snapset GPII Keys.
+ * @return {Array} - the values from the gpiiKeyRecords that are snapset GPII
+ *                   Keys, marked for deletion.
  */
 gpii.dataLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, snapSets) {
     var gpiiKeysToDelete = [];
@@ -282,11 +341,12 @@ gpii.dataLoader.markPrefsSafesGpiiKeysForDeletion = function (gpiiKeyRecords, sn
 
 /**
  * Utility to wrap all the pieces to make a bulk documents deletion request
- * for the snapset Prefs Safes and their associated GPII keys.  Its intended use
- * is the parameter of the appropriate promise.then() call.
- * @param {Object} batchDeleteResponse - the reponse handler configured for the
- *                                       batch delete request.
- * @param {Object} options - Object that contains the records to be deleted.
+ * for the snapset Prefs Safes and their associated GPII keys.
+ * @param {ResponseCallback} batchDeleteResponse - Reponse handler for the batch
+ *                                                 delete request.
+ * @param {Object} options - The records to be deleted:
+ * @param {Array} options.snapsetPrefsSafes - "snapset" PrefsSafes to delete.
+ * @param {Array} options.gpiiKeys - Associated GPII Keys to delete.
  * @return {http.ClientRequest} - The http request object.
  */
 gpii.dataLoader.configureBatchDelete = function (batchDeleteResponse, options) {
@@ -297,10 +357,12 @@ gpii.dataLoader.configureBatchDelete = function (batchDeleteResponse, options) {
 };
 
 /**
- * Create a function that makes a bulk docs POST request using the given data.
+ * Create an http request for a bulk docs POST request using the given data.
  * @param {Object} dataToPost - JSON data to POST and process in bulk.
- * @param {Object} responseHandler - http response handler for the request.
- * @param {Object} options - Data loader options, specifically the POST options.
+ * @param {ResponseCallback} responseHandler - http response callback for the
+ *                                             request.
+ * @param {Object} options - Post request options:
+ * @param {PostRequestOptions} options.postOptions - the POST request specifics.
  * @return {http.ClientRequest} - An http request object.
  */
 gpii.dataLoader.createPostRequest = function (dataToPost, responseHandler, options) {
@@ -314,14 +376,16 @@ gpii.dataLoader.createPostRequest = function (dataToPost, responseHandler, optio
 /**
  * Generate a response handler, setting up the given promise to resolve/reject
  * at the correct time.
- * @param {Function} handleEnd - Function to call that deals with the response
- *                               data when the response receives an "end" event.
- * @param {Object} options - Data loader options passed to handleEnd().
+ * @param {ResponseDataHandler} handleEnd - Function that processes the response
+ *                                          data when the response receives an
+ *                                          "end" event.
+ * @param {Object} options - Data loader options passed to `handleEnd()`.
  * @param {Promise} promise - Promise to resolve/reject on a response "end" or
  *                           "error" event.
  * @param {String} errorMsg - Optional error message to prepend to the error
  *                            received from a response "error" event.
- * @return {Function} - Function reponse callback for an http request.
+ * @return {ResponseCallback} - Reponse callback function suitable for an http
+ *                              request.
  */
 gpii.dataLoader.createResponseHandler = function (handleEnd, options, promise, errorMsg) {
     if (!errorMsg) {
@@ -365,8 +429,8 @@ gpii.dataLoader.createResponseHandler = function (handleEnd, options, promise, e
  * return.  It is up to the caller to trigger the request by calling its end()
  * function.
  * @param {String} databaseURL - URL to query the database with.
- * @param {Function} handleResponse - callback that processes the response from
- *                                    the request.
+ * @param {ResponseCallback} handleResponse - callback that processes the
+ *                                            response from the request.
  * @param {String} errorMsg - optional error message for request errors.
  * @return {http.ClientRequest} - The http request object.
  */
@@ -379,7 +443,7 @@ gpii.dataLoader.queryDatabase = function (databaseURL, handleResponse, errorMsg)
 };
 
 /**
- * Get all the json files from the given directory, then loop to put their
+ * Read all the json files from the given directory, then loop to put their
  * contents into an array of Objects.
  * @param {String} dataDir - Directory containing the files to load.
  * @return {Array} - Each element of the array is an Object based on the
@@ -397,12 +461,13 @@ gpii.dataLoader.getDataFromDirectory = function (dataDir) {
     return contentArray;
 };
 
-/*
- * Create the step that fetches the current snapset Prefs Safes from the
+/**
+ * Create the step that fetches the current "snapset" Prefs Safes from the
  * database.
- * @param {Object} options - Object that has the view for finding snap set
- *                           Prefs Safes records in the database.
- * @return {Promise} - A promise that resolves to the set of snapset PrefsSafes
+ * @param {Object} options - Object for querying the database:
+ * @param {String} options.prefsSafesViewUrl - Views URL for finding all the
+ *                                             "snapset" PrefsSafes records.
+ * @return {Promise} - A promise that resolves to the set of "snapset" PrefsSafes
  *                     currently in the database.
  */
 gpii.dataLoader.createFetchSnapsetsStep = function (options) {
@@ -415,13 +480,14 @@ gpii.dataLoader.createFetchSnapsetsStep = function (options) {
     return gpii.dataLoader.configureStep(details, options);
 };
 
-/*
+/**
  * Create the step that fetches the current GPII keys associate with the snapset
  * Prefs Safes.
- * @param {Object} options - Object that has the view for finding all GPII Key
- *                           records in the database.
+ * @param {Object} options - Object for querying the database:
+ * @param {String} options.gpiiKeysViewUrl - Views URL for finding all GPII Key
+ *                                           records in the database.
  * @return {Promise} - A promise that resolves to the set of GPII keys in the
- *                     database that correspond to snapset PrefsSafes.
+ *                     database that correspond to "snapset" PrefsSafes.
  */
 gpii.dataLoader.createFetchGpiiKeysStep = function (options) {
     var details = {
@@ -433,12 +499,15 @@ gpii.dataLoader.createFetchGpiiKeysStep = function (options) {
     return gpii.dataLoader.configureStep(details, options);
 };
 
-/*
+/**
  * Log how many snapset Prefs Safes and GPII Keys were deleted.
  * @param {String} responseString - Response from the database (ignored)
- * @param {Object} options - Object that contains the sets of Prefs Safes and
- *                           their keys.
- * @return {Object} - The number of snapsets and gpiiKeys deleted.
+ * @param {Object} options - Object containing the sets of Prefs Safes and
+ *                           their GPII keys:
+ * @param {Array} options.snapsetPrefsSafes - The set of Prefs Safes.
+ * @param {Array} options.gpiiKeys - The set of associated GPII Keys.
+ * @return {Object} - An object with properties "snapsets" and "gpiiKeys" that
+ *                    are the number of snapsets and gpiiKeys deleted.
  */
 gpii.dataLoader.logSnapsetDeletion = function (responseString, options) {
     fluid.log(  "Deleted " +
@@ -451,12 +520,13 @@ gpii.dataLoader.logSnapsetDeletion = function (responseString, options) {
     };
 };
 
-/*
+/**
  * Create the step that deletes, in batch, the current snapset Prefs Safes and
  * their associated GPII keys.
- * @param {Promise} previousStep - Promise from a previous step whose fulfillment
- *                                 triggers the bulk delete request.
- * @param {Object} options - Object that contains the records to be deleted.
+ * @param {Object} options - The records to be deleted:
+ * @param {Array} options.snapsetPrefsSafes - The "snapset" PrefsSafe records to
+ *                                            delete.
+ * @param {Array} options.gpiiKeys - The GPII Key records to delete.
  * @return {Promise} - The promise that resolves the deletion.
  */
 gpii.dataLoader.createBatchDeleteStep = function (options) {
@@ -467,22 +537,25 @@ gpii.dataLoader.createBatchDeleteStep = function (options) {
     return gpii.dataLoader.configureStep(details, options);
 };
 
-/*
- * Log the uploading of all the snapset and user Prefs Safes.
+/**
+ * Log the uploading of all the "snapset" Prefs Safes and their GPII Keys.
  * @param {String} responseString - Response from the database (ignored)
- * @param {Object} options - Object that contains the directories from which
- *                           the Prefs Safes were loaded.
+ * @param {Object} options - The directory containing the data:
+ * @param {String} options.buildDataDir - The directory from which the Prefs
+ *                                        Safes and GPII keys were loaded.
+ * @return {String} - A message to indicate that the upload is complete.
  */
 gpii.dataLoader.logSnapsetsUpload = function (responseString, options) {
     fluid.log("Bulk loading of build data from '" + options.buildDataDir + "'");
     return "Uploaded latest snapsets preferences";
 };
 
-/*
- * Create the step that uploads, in batch, the new snapset Prefs Safes, and
+/**
+ * Create the step that uploads, in batch, the new "snapset" Prefs Safes, and
  * their associated GPII keys.
- * @param {Object} options - Object that has the paths to the directory that
- *                           contains the latest snapsets.
+ * @param {Object} options - The directory containing the data:
+ * @param {String} options.buildDataDir - The directory from which to load the
+ *                                        Prefs Safes and GPII keys data.
  * @return {Promise} - A promise that resolves the upload.
  */
 gpii.dataLoader.createBatchUploadStep = function (options) {
@@ -494,7 +567,7 @@ gpii.dataLoader.createBatchUploadStep = function (options) {
     return gpii.dataLoader.configureStep(details, options);
 };
 
-/*
+/**
  * Create and execute the steps to update the database.
  */
 gpii.dataLoader.orchestrate = function () {
