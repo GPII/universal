@@ -1533,5 +1533,57 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+    "net.gpii.async": {
+        // This solution exists only to support GPII automated tests. It references the "async settings handler" which will
+        // trigger a wait of the given milliseconds during either the get and set settingsHandler action.
+        "name": "GPII Test solution for triggering an asynchronous settings handler on the get and set",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.async",
+                "supportedSettings": {
+                    "timeInMs": {
+                        "schema": {
+                            "title": "The time to wait on calling the get, set or launch",
+                            "description": "The strategy to be used to simulate an asynchronous settings handler",
+                            "type": "number"
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "timeInMs": "http://registry\\.gpii\\.net/common/timeout"
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/timeout": "timeInMs"
+                }
+            }
+        },
+        "launchHandlers": {
+            "launch": {
+                "type": "gpii.settingsHandlers.async",
+                "options": {
+                    "launchHandler": true
+                }
+            }
+        },
+        "update": [
+            "settings.configuration"
+        ],
+        "isRunning": [
+            "launchers.launch"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
     }
 }
