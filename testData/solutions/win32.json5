@@ -6210,7 +6210,7 @@
                     },
                     "speech.espeak.pitch": {
                         "schema": {
-                            "title": "eSpeach Pitch",
+                            "title": "eSpeak Pitch",
                             "description": "The voice pitch eSpeak should use.",
                             "type": "integer",
                             "minimum": 0,
@@ -6947,6 +6947,11 @@
                     }
                 },
                 "capabilitiesTransformations": {
+                    "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
+                    "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
+
+                    "presentation\\.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
+
                     "speech\\.espeak\\.pitch": {
                         "transform": {
                             "type": "fluid.transforms.linearScale",
@@ -6954,70 +6959,6 @@
                             "factor": 100
                         }
                     },
-                    "speech\\.espeak\\.volume": {
-                        "transform": {
-                            "type": "fluid.transforms.linearScale",
-                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
-                            "factor": 100
-                        }
-                    },
-                    "presentation\\.reportHelpBalloons": "http://registry\\.gpii\\.net/common/speakTutorialMessages",
-                    "keyboard\\.speakTypedCharacters": "http://registry\\.gpii\\.net/common/keyEcho",
-                    "keyboard\\.speakTypedWords": "http://registry\\.gpii\\.net/common/wordEcho",
-                    "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
-                    "transform": [
-                        {
-                            "type": "fluid.transforms.arrayToSetMembership",
-                            "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
-                            "outputPath": "",
-                            "presentValue": true,
-                            "missingValue": false,
-                            "options": {
-                                "focus": "reviewCursor\\.followFocus",
-                                "caret": "reviewCursor\\.followCaret",
-                                "mouse": "reviewCursor\\.followMouse"
-                            }
-                        },
-                        {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
-                            "match": {
-                                // We have to set the synth to "espeak" if we want to use espeak-specific settings.
-                                "true": {
-                                    "outputValue": {
-                                        "transform": [
-                                            {
-                                                "type": "fluid.transforms.literalValue",
-                                                "input": "espeak",
-                                                "outputPath": "speech\\.synth"
-                                            },
-                                            {
-                                                "type": "fluid.transforms.literalValue",
-                                                "input": "Microsoft Sound Mapper",
-                                                "outputPath": "speech\\.outputDevice"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "false": {
-                                    "outputValue": {
-                                        "transform": [
-                                            {
-                                                "type": "fluid.transforms.literalValue",
-                                                "input": "silence",
-                                                "outputPath": "speech\\.synth"
-                                            },
-                                            {
-                                                "type": "fluid.transforms.literalValue",
-                                                "input": "Microsoft Sound Mapper",
-                                                "outputPath": "speech\\.outputDevice"
-                                            }
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    ],
                     "speech\\.espeak\\.rate": {
                         "transform": {
                             "type": "fluid.transforms.round",
@@ -7067,18 +7008,7 @@
                             "right": 390
                         }
                     },
-                    "speech\\.symbolLevel": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
-                            "match": {
-                                "none": 0,
-                                "some": 100,
-                                "most": 200,
-                                "all": 300
-                            }
-                        }
-                    },
+                    "speech\\.espeak\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
                     "speech\\.espeak\\.voice": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -7147,12 +7077,205 @@
                                 "zh-yue": "zh-yue"
                             }
                         }
-                    }
+                    },
+                    "speech\\.espeak\\.volume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "factor": 100
+                        }
+                    },
+
+                    "speech\\.oneCore\\.pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "factor": 100
+                        }
+                    },
+                    "speech\\.oneCore\\.rate": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "right": 3.10,
+                                    "operator": "/",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "right": 80,
+                                            "operator": "-",
+                                            "left": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.condition",
+                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "false": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 3
+                                                        }
+                                                    },
+                                                    "condition": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "<=",
+                                                            "right": 390
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.oneCore\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    // TODO: "speech\\.oneCore\\.voice" cannot be updated to reflect the current language without additional research, i.e. installing all languages.
+                    "speech\\.oneCore\\.volume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "factor": 100
+                        }
+                    },
+
+                    "speech\\.sapi5\\.pitch": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                            "factor": 100
+                        }
+                    },
+                    "speech\\.sapi5\\.rate": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "right": 3.10,
+                                    "operator": "/",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "right": 80,
+                                            "operator": "-",
+                                            "left": {
+                                                "transform": {
+                                                    "type": "fluid.transforms.condition",
+                                                    "truePath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                    "false": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "/",
+                                                            "right": 3
+                                                        }
+                                                    },
+                                                    "condition": {
+                                                        "transform": {
+                                                            "type": "fluid.transforms.binaryOp",
+                                                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                                                            "operator": "<=",
+                                                            "right": 390
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "speech\\.sapi5\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+                    // TODO: "speech\\.sapi5\\.voice" cannot be updated to reflect the current language without additional research, i.e. installing all languages.
+                    "speech\\.sapi5\\.volume": {
+                        "transform": {
+                            "type": "fluid.transforms.linearScale",
+                            "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                            "factor": 100
+                        }
+                    },
+
+                    "speech\\.silence\\.sayCapForCapitals": "http://registry\\.gpii\\.net/common/announceCapitals",
+
+                    "speech\\.symbolLevel": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/punctuationVerbosity",
+                            "match": {
+                                "none": 0,
+                                "some": 100,
+                                "most": 200,
+                                "all": 300
+                            }
+                        }
+                    },
+
+                    "transform": [
+                        {
+                            "type": "fluid.transforms.arrayToSetMembership",
+                            "inputPath": "http://registry\\.gpii\\.net/common/trackingTTS",
+                            "outputPath": "",
+                            "presentValue": true,
+                            "missingValue": false,
+                            "options": {
+                                "focus": "reviewCursor\\.followFocus",
+                                "caret": "reviewCursor\\.followCaret",
+                                "mouse": "reviewCursor\\.followMouse"
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
+                            "match": {
+                                // Explicitly set the voice to eSpeak so that we can control the language as well.
+                                "true": {
+                                    "outputValue": {
+                                        "transform": [
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "input": "espeak",
+                                                "outputPath": "speech\\.synth"
+                                            },
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "input": "Microsoft Sound Mapper",
+                                                "outputPath": "speech\\.outputDevice"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "false": {
+                                    "outputValue": {
+                                        "transform": [
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "input": "silence",
+                                                "outputPath": "speech\\.synth"
+                                            },
+                                            {
+                                                "type": "fluid.transforms.literalValue",
+                                                "input": "Microsoft Sound Mapper",
+                                                "outputPath": "speech\\.outputDevice"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 },
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/speakTutorialMessages": "presentation\\.reportHelpBalloons",
                     "http://registry\\.gpii\\.net/common/keyEcho": "keyboard\\.speakTypedCharacters",
                     "http://registry\\.gpii\\.net/common/wordEcho": "keyboard\\.speakTypedWords",
+                    // TODO: eSpeak is the preferred voice and is the only one we perform an inverse transform of at the moment.  If we decide to flesh this out better, we will need a better transform here.
                     "http://registry\\.gpii\\.net/common/announceCapitals": "speech\\.espeak\\.sayCapForCapitals",
                     "transform": [
                         {
