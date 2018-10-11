@@ -71,11 +71,11 @@ kettle.test.testDefToServerEnvironment = function (testDef) {
                 }
             },
             events: {
-                noUserLoggedIn: null,
+                resetAtStartSuccess: null,
                 onAllReady: {
                     events: {
                         "onServerReady": "onServerReady",
-                        "noUserLoggedIn": "noUserLoggedIn"
+                        "resetAtStartSuccess": "resetAtStartSuccess"
                     }
                 }
             }

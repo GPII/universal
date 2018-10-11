@@ -1,0 +1,15 @@
+{
+    "type": "gpii.tests.acceptance.resetAtStart.config",
+    "options": {
+        "distributeOptions": {
+            "acceptance.defaultSettings": {
+                "source": "{that}.options.flowManagerOptions",
+                "target": "{that gpii.flowManager.local}.options"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%gpii-universal/gpii/configs/gpii.config.development.local.json5",
+        "./shared/gpii.tests.resetAtStart.config.json5"
+    ]
+}
