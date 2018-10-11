@@ -1,42 +1,31 @@
 [
+
     {
-        "id": "net.gpii.test.speechControl"
+        "id": "com.android.activitymanager"
     },
 
     {
-        "id": "org.gnome.desktop.interface"
+        "id": "com.android.audioManager"
     },
 
     {
-        "id": "fakemag2"
+        "id": "com.android.freespeech"
     },
 
     {
-        "id": "fakescreenreader1"
+        "id": "com.android.persistentConfiguration"
     },
 
     {
-        "id": "org.gnome.nautilus"
+        "id": "com.android.settings.secure"
     },
 
     {
-        "id": "org.gnome.desktop.a11y.keyboard"
+        "id": "com.android.settings.system"
     },
 
     {
-        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
-    },
-
-    {
-        "id": "org.gnome.orca"
-    },
-
-    {
-        "id": "org.gnome.desktop.a11y.magnifier"
-    },
-
-    {
-        "id": "com.microsoft.windows.magnifier"
+        "id": "com.android.talkback"
     },
 
     {
@@ -44,11 +33,11 @@
     },
 
     {
-        "id": "com.microsoft.windows.onscreenKeyboard"
+        "id": "com.microsoft.windows.cursors"
     },
 
     {
-        "id": "com.microsoft.windows.narrator"
+        "id": "com.microsoft.windows.filterKeys"
     },
 
     {
@@ -60,11 +49,11 @@
     },
 
     {
-        "id": "com.microsoft.windows.stickyKeys"
+        "id": "com.microsoft.windows.language"
     },
 
     {
-        "id": "com.microsoft.windows.filterKeys"
+        "id": "com.microsoft.windows.magnifier"
     },
 
     {
@@ -76,15 +65,7 @@
     },
 
     {
-        "id": "com.microsoft.windows.screenDPI"
-    },
-
-    {
-        "id": "com.microsoft.windows.cursors"
-    },
-
-    {
-        "id": "com.microsoft.windows.screenResolution"
+        "id": "com.microsoft.windows.narrator"
     },
 
     {
@@ -92,35 +73,47 @@
     },
 
     {
+        "id": "com.microsoft.windows.onscreenKeyboard"
+    },
+
+    {
+        "id": "com.microsoft.windows.screenDPI"
+    },
+
+    {
+        "id": "com.microsoft.windows.screenResolution"
+    },
+
+    {
+        "id": "com.microsoft.windows.stickyKeys"
+    },
+
+    {
         "id": "com.microsoft.windows.typingEnhancement"
     },
 
     {
-        "id": "com.microsoft.windows.language"
+        "id": "com.microsoft.windows.volumeControl"
     },
 
     {
-        "id": "com.android.activitymanager"
+        "id": "fakemag2"
     },
 
     {
-        "id": "com.android.talkback"
+        "id": "fakescreenreader1"
     },
 
     {
-        "id": "com.android.freespeech"
+        "id": "net.gpii.explode"
     },
 
     {
-        "id": "com.android.settings.secure"
+        "id": "net.gpii.test.speechControl"
     },
 
     {
-        "id": "com.android.audioManager"
-    },
-
-    {
-        "id": "com.android.persistentConfiguration"
+        "id": "net.gpii.uioPlus"
     },
 
     {
@@ -132,19 +125,28 @@
     },
 
     {
-        "id": "com.android.settings.system"
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
     },
 
     {
-        "id": "net.gpii.uioPlus"
+        "id": "org.gnome.desktop.a11y.keyboard"
     },
 
     {
-        "id": "com.microsoft.windows.volumeControl"
+        "id": "org.gnome.desktop.a11y.magnifier"
     },
 
     {
-        "id": "net.gpii.explode"
-    }
+        "id": "org.gnome.desktop.interface"
+    },
 
+    {
+        "id": "org.gnome.nautilus"
+    },
+
+    {
+        "id": "org.gnome.orca"
+    },
+
+    {"id": "org.nvda-project"}
 ]
