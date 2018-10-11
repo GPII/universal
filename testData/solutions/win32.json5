@@ -7938,8 +7938,7 @@
                             "maximum": 358
                         }
                     },
-                    // TODO: Test this specifically, as it appears to have changed from the previous "Acceleration" setting.
-                    "TimeToMaximumSpeed": {
+                    "Acceleration": {
                         "schema": {
                             "title": "Mouse Keys Acceleration",
                             "description": "The time in milliseconds until the cursor reaches its maximum speed when using mouse keys.",
@@ -7983,7 +7982,7 @@
                             }
                         }
                     },
-                    "TimeToMaximumSpeed": {
+                    "Acceleration": {
                         "transform": {
                             "type": "fluid.transforms.binaryOp",
                             "left": {
