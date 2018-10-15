@@ -8,7 +8,7 @@ Each data file corresponds to a document structure specified in the [GPII Data M
 * gpiiAppInstallationClients.json: Contains the information of all registered GPII app installations.
 * views.json: The PouchDB/CouchDB "_design/views" functions.
 
-Additional preferences DB data is found elsewhere and used in conjunction with the files in this folder.  The preferences files located in %universal/testData/preferences/ are converted into both "snapset" and "user" preferences.  The following "snapset" folder contain snapset PrefsSafes and GPII keys for (1) running GPII in production and staging GPII configurations where the data is loaded into CouchDB, and (2) running GPII in its development configuration where the data is loaded into the local PouchDB:
+Additional preferences DB data are found elsewhere and used in conjunction with the files in this folder.  The preferences files located in %universal/testData/preferences/ are converted into both "snapset" and "user" preferences.  The following "snapset" folder contains snapset PrefsSafes and GPII keys for (1) running GPII in production and staging GPII configurations where the data is loaded into CouchDB, and (2) running GPII in its development configuration where the data is loaded into the local PouchDB:
 * %universal/build/dbData/snapset/gpiiKeys.json
 * %universal/build/dbData/snapset/prefsSafes.json
 

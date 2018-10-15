@@ -98,24 +98,30 @@ have set the `NODE_ENV` variable.
 
 ### Convert Preferences Data
 
-GPII has two sets of preferences JSON5 data files, located at `%gpii-universal/testData/preferences` and `%gpii-universal/tests/data/preferences`:
+GPII has two sets of source preferences JSON5 data files, located at `%gpii-universal/testData/preferences` and `%gpii-universal/tests/data/preferences/`.  These are converted and used in various configurations.
 
-* The preferences files for running GPII and for integration tests are located at
-  `%gpii-universal/testData/preferences`.  These files are converted into two types of preferences safes and GPII keys:
-  * They are converted into `snapset` preferences safes and GPII keys and placed into the
-    `%gpii-universal/build/dbData/snapset/` folder.   These are used to update the snapsets in CouchDB when GPII is
-    run in a production or staging configuration.
-  * They are also converted into `user` preferences safes and GPII keys and placed into the
-    `%gpii-universal/build/dbData/user/` folder.   These are used with PouchDB when GPII runs in a development
-    configuration or when running GPII integration tests.
-* The preferences files for running node tests are located at `%gpii-universal/tests/data/preferences`.  These files
-  are converted into preferences safes and GPII keys:
-  * They are converted into `user` preferences safes and GPII keys and placed into the
-    `%gpii-universal/build/tests/dbData/user` folder.   These are used during testing with PouchDB.
+The preferences files in `%gpii-universaluniversal/testData/preferences/` are converted into both `snapset` and `user` preferences:
+* `%gpii-universal/build/dbData/snapset/gpiiKeys.json`
+* `%gpii-universal/build/dbData/snapset/prefsSafes.json`
+* `%gpii-universal/build/dbData/user/gpiiKeys.json`
+* `%gpii-universal/build/dbData/user/prefsSafes.json`
 
-When any preferences file in either one of these two directories are modified, running `npm run postinstall` will generate
-gpiiKeys.json and prefsSafes.json, the files that are in the structure to be loaded into PouchDB/CouchDB, based off
-these directories. This step is needed for the modification to be applied to GPII.
+The above `snapset` preferences safes and GPII keys are:
+1. loaded into the production and the staging CouchDB in cloud environments.
+2. loaded into the PouchDB when GPII runs locally, regardless of which configuration is used.
+
+The above `user` preferences are loaded into the local PouchDB for running GPII integration tests.
+
+The preferences in `%gpii-universal/tests/data/preferences/` are converted into `user` preferences:
+* `%gpii-universal/build/tests/dbData/user/gpiiKeys.json`
+* `%gpii-universal/build/tests/dbData/user/prefsSafes.json`
+
+These `user` preferences and the above `snapset` preferences are used with a PouchDB when GPII runs in a development configuration.
+
+When any preferences file in either one of the two source directories (`%gpii-universaluniversal/testData/preferences/`
+or `%gpii-universal/tests/data/preferences/`) are modified, running `npm run postinstall` will generate
+gpiiKeys.json and prefsSafes.json files, whose contents are structured for loading into PouchDB/CouchDB.
+This step is needed for any preferences modifications that are to be applied to GPII.
 
 ### Running browser tests
 
