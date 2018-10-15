@@ -1,0 +1,245 @@
+{
+    "com.microsoft.windows.language": {
+        "name": "Windows Display Language",
+        "settingsHandlers": {
+            "configure1": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop\\MuiCached",
+                    "dataTypes": {
+                        "MachinePreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "MachinePreferredUILanguages": {
+
+                    }
+                },
+                "settings": {
+                    "MachinePreferredUILanguages": {
+                        "value": "en-US"
+                    }
+                }
+            },
+            "configure2": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "PreferredUILanguages": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "PreferredUILanguages": {
+
+                    }
+                },
+                "settings": {
+                    "PreferredUILanguages": {
+                        "value": "en-US"
+                    }
+                }
+            }
+        },
+        "configure": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
+            }
+        ],
+        "restore": [
+            "settings.configure1",
+            "settings.configure2",
+            {
+                "type": "gpii.windows.updateLanguage",
+                "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
+            }
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "active": true
+    },
+
+    "com.microsoft.windows.screenDPI": {
+        "name": "Windows DPI",
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.displaySettingsHandler",
+                "liveness": "live",
+                "supportedSettings": {
+                    "screen-dpi": {
+                        "schema": {
+                            "title": "Screen DPI",
+                            "description": "Screen DPI of the default display",
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 5
+                        }
+                    }
+                },
+                "settings": {
+					"screen-dpi": {
+						"type": "ADD",
+						"value": 1
+					}
+				}
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "active": true
+    },
+
+    "com.microsoft.windows.highContrast": {
+		"name": "Windows High Contrast",
+		"settingsHandlers": {
+			"configure-spi": {
+				"type": "gpii.windows.spiSettingsHandler",
+				"liveness": "live",
+				"options": {
+					"getAction": "SPI_GETHIGHCONTRAST",
+					"setAction": "SPI_SETHIGHCONTRAST",
+					"uiParam": "struct_size",
+					"pvParam": {
+						"type": "struct",
+						"name": "HIGHCONTRAST"
+					},
+					"verifySettings": true
+				},
+				"supportedSettings": {
+					"HighContrastOn": {
+						"schema": {
+							"title": "High Contrast",
+							"description": "Whether to enable/disable High Contrast",
+							"type": "boolean",
+							"default": false
+						}
+					}
+				},
+				"inverseCapabilitiesTransformations": {
+					"http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
+				},
+				"settings": {
+					"HighContrastOn": {
+						"value": false
+					}
+				}
+			},
+			"configure-registry": {
+				"type": "gpii.windows.registrySettingsHandler",
+				"liveness": "live",
+				"options": {
+					"hKey": "HKEY_CURRENT_USER",
+					"path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+					"dataTypes": {
+						"LastHighContrastTheme": "REG_SZ"
+					}
+				},
+				"supportedSettings": {
+					"LastHighContrastTheme": {
+						"schema": {
+							"title": "High Contrast theme",
+							"description": "High Contrast Theme",
+							"type": "string",
+							"default": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+							"enum": [
+								"%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+								"%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+								"%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+								"%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"
+							]
+						}
+					}
+				},
+				"settings": {}
+			}
+		},
+		"configure": [
+			"settings.configure-registry",
+			{
+				"type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
+				"filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+			},
+			"settings.configure-spi"
+		],
+		"isInstalled": [{
+			"type": "gpii.deviceReporter.alwaysInstalled"
+		}],
+		"active": true
+	},
+
+    "net.gpii.uioPlus": {
+        "name": "UIO+",
+        "settingsHandlers": {
+            "configuration": {
+                "type": "gpii.settingsHandlers.webSockets",
+                "liveness": "live",
+                "options": {
+                    "path": "net.gpii.uioPlus"
+                },
+                "supportedSettings": {
+                    "lineSpace": {
+
+                    },
+                    "fontSize": {
+
+                    },
+                    "characterSpace": {
+
+                    },
+                    "inputsLargerEnabled": {
+
+                    },
+                    "contrastTheme": {
+
+                    },
+                    "selfVoicingEnabled": {
+
+                    },
+                    "selectionTheme": {
+
+                    },
+                    "tableOfContentsEnabled": {
+
+                    },
+                    "simplifiedUiEnabled": {
+
+                    },
+                    "syllabificationEnabled": {
+
+                    },
+                    "captionsEnabled": {
+
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+
+                },
+                "settings": {
+                    "contrastTheme": {
+                        "value": "regular-contrast"
+                    },
+                    "selfVoicingEnabled": {
+                        "value": false
+                    }
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ],
+        "active": true
+    }
+}
