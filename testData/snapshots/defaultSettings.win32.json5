@@ -11,11 +11,6 @@
                         "MachinePreferredUILanguages": "REG_SZ"
                     }
                 },
-                "supportedSettings": {
-                    "MachinePreferredUILanguages": {
-
-                    }
-                },
                 "settings": {
                     "MachinePreferredUILanguages": {
                         "value": "en-US"
@@ -29,11 +24,6 @@
                     "path": "Control Panel\\Desktop",
                     "dataTypes": {
                         "PreferredUILanguages": "REG_SZ"
-                    }
-                },
-                "supportedSettings": {
-                    "PreferredUILanguages": {
-
                     }
                 },
                 "settings": {
@@ -73,21 +63,10 @@
             "configure": {
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "live",
-                "supportedSettings": {
-                    "screen-dpi": {
-                        "schema": {
-                            "title": "Screen DPI",
-                            "description": "Screen DPI of the default display",
-                            "type": "number",
-                            "minimum": 1,
-                            "maximum": 5
-                        }
-                    }
-                },
                 "settings": {
 					"screen-dpi": {
 						"type": "ADD",
-						"value": 1
+						"value": 0
 					}
 				}
             }
@@ -131,52 +110,20 @@
 				},
 				"settings": {
 					"HighContrastOn": {
-						"value": false
+						"value": false,
+                        "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
 					}
 				}
-			},
-			"configure-registry": {
-				"type": "gpii.windows.registrySettingsHandler",
-				"liveness": "live",
-				"options": {
-					"hKey": "HKEY_CURRENT_USER",
-					"path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
-					"dataTypes": {
-						"LastHighContrastTheme": "REG_SZ"
-					}
-				},
-				"supportedSettings": {
-					"LastHighContrastTheme": {
-						"schema": {
-							"title": "High Contrast theme",
-							"description": "High Contrast Theme",
-							"type": "string",
-							"default": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
-							"enum": [
-								"%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
-								"%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
-								"%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-								"%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"
-							]
-						}
-					}
-				},
-				"settings": {}
 			}
 		},
 		"configure": [
-			"settings.configure-registry",
-			{
-				"type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-				"filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
-			},
 			"settings.configure-spi"
 		],
 		"isInstalled": [{
 			"type": "gpii.deviceReporter.alwaysInstalled"
 		}],
 		"active": true
-	},
+    },
 
     "net.gpii.uioPlus": {
         "name": "UIO+",
@@ -187,43 +134,7 @@
                 "options": {
                     "path": "net.gpii.uioPlus"
                 },
-                "supportedSettings": {
-                    "lineSpace": {
-
-                    },
-                    "fontSize": {
-
-                    },
-                    "characterSpace": {
-
-                    },
-                    "inputsLargerEnabled": {
-
-                    },
-                    "contrastTheme": {
-
-                    },
-                    "selfVoicingEnabled": {
-
-                    },
-                    "selectionTheme": {
-
-                    },
-                    "tableOfContentsEnabled": {
-
-                    },
-                    "simplifiedUiEnabled": {
-
-                    },
-                    "syllabificationEnabled": {
-
-                    },
-                    "captionsEnabled": {
-
-                    }
-                },
                 "inverseCapabilitiesTransformations": {
-
                 },
                 "settings": {
                     "contrastTheme": {
