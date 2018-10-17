@@ -4,7 +4,7 @@
         "distributeOptions": {
             "flowManager.escalate": {
                 "record": {
-                    "noUserLoggedIn.escalate": "{testEnvironment}.events.noUserLoggedIn"
+                    "resetAtStartSuccess.escalate": "{testEnvironment}.events.resetAtStartSuccess"
                 },
                 "target": "{that gpii.flowManager.local}.options.listeners"
             }
