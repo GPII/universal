@@ -1,0 +1,24 @@
+// # Ben.json5
+//
+// This preference sets the screen brightness to full brightness.
+//
+// ## Testing
+//
+// If the screen brightness is supported in the device, the value should be setted
+// to the maximum possible value.
+//
+{
+    "flat": {
+        "name": "Daniel",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.brightness": {
+                        BrightnessVal: 100
+                    }
+                }
+            }
+        }
+    }
+}
