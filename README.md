@@ -98,21 +98,26 @@ have set the `NODE_ENV` variable.
 
 ### Convert Preferences Data
 
-GPII has two sets of source preferences JSON5 data files, located at `%gpii-universal/testData/preferences` and `%gpii-universal/tests/data/preferences/`.  These are converted and used in various configurations.
+GPII has two sets of source preferences JSON5 data files, located at `%gpii-universal/testData/preferences` and
+`%gpii-universal/tests/data/preferences/`.  These are converted and used in various configurations.
 
-The preferences files in `%gpii-universaluniversal/testData/preferences/` are converted into both `snapset` and `user` preferences:
+The preferences files in `%gpii-universaluniversal/testData/preferences/` are converted into both `snapset` and
+`user` preferences:
+
 * `%gpii-universal/build/dbData/snapset/gpiiKeys.json`
 * `%gpii-universal/build/dbData/snapset/prefsSafes.json`
 * `%gpii-universal/build/dbData/user/gpiiKeys.json`
 * `%gpii-universal/build/dbData/user/prefsSafes.json`
 
 The above `snapset` preferences safes and GPII keys are:
+
 1. loaded into the production and the staging CouchDB in cloud environments.
 2. loaded into the PouchDB when GPII runs locally, regardless of which configuration is used.
 
 The above `user` preferences are loaded into the local PouchDB for running GPII integration tests.
 
 The preferences in `%gpii-universal/tests/data/preferences/` are converted into `user` preferences:
+
 * `%gpii-universal/build/tests/dbData/user/gpiiKeys.json`
 * `%gpii-universal/build/tests/dbData/user/prefsSafes.json`
 
