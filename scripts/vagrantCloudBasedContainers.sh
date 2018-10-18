@@ -39,11 +39,11 @@ else
 fi
 
 UNIVERSAL_DIR="/home/vagrant/sync/universal"
+SCRIPT_DIR="$UNIVERSAL_DIR/scripts"
 STATIC_DATA_DIR="$UNIVERSAL_DIR/testData/dbData"
 BUILD_DATA_DIR="$UNIVERSAL_DIR/build/dbData/snapset"
 
-DATALOADER_IMAGE="herrclown/gpii-dataloader"
-DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
+COUCHDB_URL="http://localhost:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
 
 GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
@@ -82,7 +82,8 @@ docker run -d -p $COUCHDB_PORT:$COUCHDB_PORT --name couchdb $COUCHDB_IMAGE
 wget -O /dev/null --retry-connrefused --waitretry=$COUCHDB_HEALTHCHECK_DELAY --read-timeout=20 --timeout=1 --tries=$COUCHDB_HEALTHCHECK_TIMEOUT http://localhost:$COUCHDB_PORT
 
 # Load the CouchDB data
-docker run --rm --link couchdb -v $STATIC_DATA_DIR:/static_data -e STATIC_DATA_DIR=/static_data -v $BUILD_DATA_DIR:/build_data -e BUILD_DATA_DIR=/build_data -e COUCHDB_URL=$DATALOADER_COUCHDB_URL -e CLEAR_INDEX=$CLEAR_INDEX $DATALOADER_IMAGE
+export UNIVERSAL_DIR COUCHDB_URL STATIC_DATA_DIR BUILD_DATA_DIR CLEAR_INDEX
+$SCRIPT_DIR/deleteAndLoadSnapsets.sh
 
 # Wait for the CouchDB views become accessible. Accessing the view URL forced the view index to build which take time.
 # The URL returns 500 when the index is not ready, so use "--retry-on-http-error" option to continue retries at 500 response code.
