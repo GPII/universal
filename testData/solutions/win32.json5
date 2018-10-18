@@ -1,4 +1,293 @@
 {
+    "com.microsoft.office": {
+        "name": "Microsoft Office",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure.word-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Word.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.excel-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Excel.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.powerPoint-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\PowerPoint.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerPoint-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.oneNote-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\OneNote.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.oneNote-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.publisher-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Publisher.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.access-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\Access.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.outlook-ribbon": {
+                "type": "gpii.settingsHandlers.XMLHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "filename": "${{environment}.LOCALAPPDATA}\\Microsoft\\Office\\olkexplorer.officeUI",
+                    "encoding": "utf-8",
+                    "xml-tag": ""
+                },
+                "capabilitiesTransformations": {
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-ribbon"
+                },
+                "supportedSettings": {
+                    "mso$customUI": {}
+                }
+            },
+            "configure.word16.status": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Word\\StatusBar",
+                    "dataTypes": {
+                        "Section": "REG_DWORD",
+                        "FormattedPage": "REG_DWORD",
+                        "PageNumber": "REG_DWORD",
+                        "VerticalPos": "REG_DWORD",
+                        "Line": "REG_DWORD",
+                        "Column": "REG_DWORD",
+                        "WordCount": "REG_DWORD",
+                        "SpellCheck": "REG_DWORD",
+                        "Language": "REG_DWORD",
+                        "DigitalSignatures": "REG_DWORD",
+                        "InformationManagementPolicy": "REG_DWORD",
+                        "PermissionPolicy": "REG_DWORD",
+                        "TrackChanges": "REG_DWORD",
+                        "CapsLock": "REG_DWORD",
+                        "Overtype": "REG_DWORD",
+                        "ExtendSelection": "REG_DWORD",
+                        "MacroRecord": "REG_DWORD",
+                        "UploadStatus": "REG_DWORD",
+                        "UpdatesAvailable": "REG_DWORD",
+                        "ViewShortcuts": "REG_DWORD",
+                        "ZoomSlider": "REG_DWORD",
+                        "Zoom": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "FormattedPage": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.FormattedPage",
+                    "Section": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Section",
+                    "PageNumber": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.PageNumber",
+                    "VerticalPos": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.VerticalPos",
+                    "Line": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Line",
+                    "Column": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Column",
+                    "WordCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.WordCount",
+                    "SpellCheck": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.SpellCheck",
+                    "Language": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Language",
+                    "DigitalSignatures": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.DigitalSignatures",
+                    "InformationManagementPolicy": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.InformationManagementPolicy",
+                    "PermissionPolicy": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.PermissionPolicy",
+                    "TrackChanges": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.TrackChanges",
+                    "CapsLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.CapsLock",
+                    "Overtype": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Overtype",
+                    "ExtendSelection": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.ExtendSelection",
+                    "MacroRecord": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.MacroRecord",
+                    "UploadStatus": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.UploadStatus",
+                    "UpdatesAvailable": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.UpdatesAvailable",
+                    "ViewShortcuts": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.ViewShortcuts",
+                    "ZoomSlider": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.ZoomSlider",
+                    "Zoom": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Zoom"
+                },
+                "supportedSettings": {
+                    "FormattedPage": {},
+                    "Section": {},
+                    "PageNumber": {},
+                    "VerticalPos": {},
+                    "Line": {},
+                    "Column": {},
+                    "WordCount": {},
+                    "SpellCheck": {},
+                    "Language": {},
+                    "DigitalSignatures": {},
+                    "InformationManagementPolicy": {},
+                    "PermissionPolicy": {},
+                    "TrackChanges": {},
+                    "CapsLock": {},
+                    "Overtype": {},
+                    "ExtendSelection": {},
+                    "MacroRecord": {},
+                    "UploadStatus": {},
+                    "UpdatesAvailable": {},
+                    "ViewShortcuts": {},
+                    "ZoomSlider": {},
+                    "Zoom": {}
+                }
+            },
+            "configure.excel16.status": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Excel\\StatusBar",
+                    "dataTypes": {
+                        "SelectionMode": "REG_DWORD",
+                        "CellMode": "REG_DWORD",
+                        "EndMode": "REG_DWORD",
+                        "FixedDecimal": "REG_DWORD",
+                        "OverType": "REG_DWORD",
+                        "PageNum": "REG_DWORD",
+                        "Average": "REG_DWORD",
+                        "CellCount": "REG_DWORD",
+                        "MaxValue": "REG_DWORD",
+                        "MinValue": "REG_DWORD",
+                        "NumberCount": "REG_DWORD",
+                        "Sum": "REG_DWORD",
+                        "MacroRecord": "REG_DWORD",
+                        "DigitalSignatures": "REG_DWORD",
+                        "InformationManagementPolicy": "REG_DWORD",
+                        "PermissionPolicy": "REG_DWORD",
+                        "UploadStatus": "REG_DWORD",
+                        "FlashFillErrors": "REG_DWORD",
+                        "FlashFillUpdatedCells": "REG_DWORD",
+                        "CapsLock": "REG_DWORD",
+                        "NumLock": "REG_DWORD",
+                        "ScrollLock": "REG_DWORD",
+                        "ZoomSlider": "REG_DWORD",
+                        "Zoom": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SelectionMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.SelectionMode",
+                    "CellMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.CellMode",
+                    "EndMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.EndMode",
+                    "FixedDecimal": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.FixedDecimal",
+                    "OverType": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.OverType",
+                    "PageNum": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.PageNum",
+                    "Average": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.Average",
+                    "CellCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.CellCount",
+                    "MaxValue": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.MaxValue",
+                    "MinValue": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.MinValue",
+                    "NumberCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.NumberCount",
+                    "Sum": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.Sum",
+                    "MacroRecord": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.MacroRecord",
+                    "DigitalSignatures": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.DigitalSignatures",
+                    "InformationManagementPolicy": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.InformationManagementPolicy",
+                    "PermissionPolicy": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.PermissionPolicy",
+                    "UploadStatus": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.UploadStatus",
+                    "FlashFillErrors": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.FlashFillErrors",
+                    "FlashFillUpdatedCells": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.FlashFillUpdatedCells",
+                    "CapsLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.CapsLock",
+                    "NumLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.NumLock",
+                    "ScrollLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.ScrollLock",
+                    "ZoomSlider": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.ZoomSlider",
+                    "Zoom": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.Zoom"
+                },
+                "supportedSettings": {
+                    "SelectionMode": {},
+                    "CellMode": {},
+                    "EndMode": {},
+                    "FixedDecimal": {},
+                    "OverType": {},
+                    "PageNum": {},
+                    "Average": {},
+                    "CellCount": {},
+                    "MaxValue": {},
+                    "MinValue": {},
+                    "NumberCount": {},
+                    "Sum": {},
+                    "MacroRecord": {},
+                    "DigitalSignatures": {},
+                    "InformationManagementPolicy": {},
+                    "PermissionPolicy": {},
+                    "UploadStatus": {},
+                    "FlashFillErrors": {},
+                    "FlashFillUpdatedCells": {},
+                    "CapsLock": {},
+                    "NumLock": {},
+                    "ScrollLock": {},
+                    "ZoomSlider": {},
+                    "Zoom": {}
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
     "com.freedomscientific.jaws": {
         "name": "JAWS",
         "contexts": {

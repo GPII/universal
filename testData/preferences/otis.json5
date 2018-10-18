@@ -1,0 +1,173 @@
+// # otis.json5
+// Test user for Office UI customisations.
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.office": {
+                        "word-ribbon": {
+                            "xmlns$msox": "http://schemas.microsoft.com/office/2006/01/customui/special",
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:FileSave",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Undo",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:RedoOrRepeat",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Cut",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Copy",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Paste",
+                                                "visible": "true"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "mso$tabs": {
+                                    "mso$tab": [
+                                        {
+                                            "idQ": "mso:TabInsert",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabWordDesign",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabPageLayoutWord",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabReferences",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabMailings",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabReviewWord",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabAddIns",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabBlogPost",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabBlogInsert",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabOutlining",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabBackgroundRemoval",
+                                            "visible": "false"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "word-status": {
+                            "FormattedPage": false,
+                            "Section": false,
+                            "PageNumber": true,
+                            "VerticalPos": false,
+                            "Line": false,
+                            "Column": false,
+                            "WordCount": true,
+                            "SpellCheck": false,
+                            "Language": false,
+                            "DigitalSignatures": false,
+                            "InformationManagementPolicy": false,
+                            "PermissionPolicy": false,
+                            "TrackChanges": false,
+                            "CapsLock": false,
+                            "Overtype": false,
+                            "ExtendSelection": false,
+                            "MacroRecord": false,
+                            "UploadStatus": false,
+                            "UpdatesAvailable": false,
+                            "ViewShortcuts": false,
+                            "ZoomSlider": true,
+                            "Zoom": true
+                        },
+                        "excel-ribbon": {
+                            "xmlns$msox": "http://schemas.microsoft.com/office/2006/01/customui/special",
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:Cut",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Copy",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Paste",
+                                                "visible": "true"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "excel-status": {
+                            SelectionMode: true,
+                            CellMode: true,
+                            EndMode: true,
+                            FixedDecimal: true,
+                            OverType: true,
+                            PageNum: true,
+                            Average: true,
+                            CellCount: true,
+                            MaxValue: true,
+                            MinValue: true,
+                            NumberCount: true,
+                            Sum: true,
+                            MacroRecord: true,
+                            DigitalSignatures: true,
+                            InformationManagementPolicy: true,
+                            PermissionPolicy: true,
+                            UploadStatus: true,
+                            FlashFillErrors: true,
+                            FlashFillUpdatedCells: true,
+                            CapsLock: true,
+                            NumLock: true,
+                            ScrollLock: true,
+                            ZoomSlider: true,
+                            Zoom: true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
