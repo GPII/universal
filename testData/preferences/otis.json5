@@ -164,6 +164,198 @@
                             ScrollLock: true,
                             ZoomSlider: true,
                             Zoom: true
+                        },
+                        "onenote-ribbon": {
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:ViewGoBack",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:UndoButton",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FilePrintPreview",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FavoritePen1",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FavoritePen2",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FavoritePen3",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FavoritePen4",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FavoriteHighlighter1",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:PointerModeOptions",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:FilePrint",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:ViewGoForward"
+                                            },
+                                            {
+                                                "idQ": "mso:ViewGoForward",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:RedoButton",
+                                                "visible": "false"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "mso$tabs": {
+                                    "mso$tab": [
+                                        {
+                                            "idQ": "mso:TabHome",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabInsert",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabInk",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabHistory",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabReviewWord",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabView",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabAddIns",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "id": "mso_c1.119190F",
+                                            "label": "Morphic Test",
+                                            "mso$group": {
+                                                "id": "mso_c2.119190F",
+                                                "label": "New Group",
+                                                "autoScale": "true",
+                                                "mso$control": {
+                                                    "idQ": "mso:FileExit",
+                                                    "visible": "true"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "idQ": "mso:TabHomeNarrow",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabInsertNarrow",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabDrawNarrow",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabViewNarrow",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabPages",
+                                            "visible": "false"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "powerpoint-ribbon": {
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:FileNewDefault",
+                                                "visible": "true"
+                                            },
+                                            {
+                                                "idQ": "mso:Spelling",
+                                                "visible": "true"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "mso$tabs": {
+                                    "mso$tab": [
+                                        {
+                                            "id": "mso_c1.151111F",
+                                            "label": "Morphic",
+                                            "insertBeforeQ": "mso:TabInsert",
+                                            "mso$group": {
+                                                "id": "mso_c2.151111F",
+                                                "label": "Morphic",
+                                                "imageMso": "HappyFace",
+                                                "autoScale": "true",
+                                                "mso$control": [
+                                                    {
+                                                        "idQ": "mso:Copy",
+                                                        "visible": "true"
+                                                    },
+                                                    {
+                                                        "idQ": "mso:Cut",
+                                                        "visible": "true"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "idQ": "mso:TabReview",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabAddIns",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabMerge",
+                                            "visible": "false"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "powerpoint-status": {
+                            "ViewShortcuts":  false
                         }
                     }
                 }

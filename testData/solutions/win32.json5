@@ -40,7 +40,7 @@
                     "mso$customUI": {}
                 }
             },
-            "configure.powerPoint-ribbon": {
+            "configure.powerpoint-ribbon": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "liveness": "manualRestart",
                 "options": {
@@ -49,13 +49,13 @@
                     "xml-tag": ""
                 },
                 "capabilitiesTransformations": {
-                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerPoint-ribbon"
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-ribbon"
                 },
                 "supportedSettings": {
                     "mso$customUI": {}
                 }
             },
-            "configure.oneNote-ribbon": {
+            "configure.onenote-ribbon": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "liveness": "manualRestart",
                 "options": {
@@ -64,7 +64,7 @@
                     "xml-tag": ""
                 },
                 "capabilitiesTransformations": {
-                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.oneNote-ribbon"
+                    "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.onenote-ribbon"
                 },
                 "supportedSettings": {
                     "mso$customUI": {}
@@ -279,6 +279,68 @@
                     "ScrollLock": {},
                     "ZoomSlider": {},
                     "Zoom": {}
+                }
+            },
+            "configure.powerpoint16.status": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\PowerPoint\\StatusBar",
+                    "dataTypes": {
+                        "SelectionMode": "REG_DWORD",
+                        "ViewIndicator": "REG_DWORD",
+                        "DesignName": "REG_DWORD",
+                        "SpellCheck": "REG_DWORD",
+                        "Language": "REG_DWORD",
+                        "DigitalSignatures": "REG_DWORD",
+                        "ZoomToFit": "REG_DWORD",
+                        "Notes": "REG_DWORD",
+                        "Comments": "REG_DWORD",
+                        "ZoomSlider": "REG_DWORD",
+                        "Zoom": "REG_DWORD",
+                        "InformationManagementPolicy": "REG_DWORD",
+                        "PermissionPolicy": "REG_DWORD",
+                        "UploadStatus": "REG_DWORD",
+                        "UpdatesAvailable": "REG_DWORD",
+                        "ViewShortcuts": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SelectionMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.SelectionMode",
+                    "ViewIndicator": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.ViewIndicator",
+                    "DesignName": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.DesignName",
+                    "SpellCheck": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.SpellCheck",
+                    "Language": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.Language",
+                    "DigitalSignatures": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.DigitalSignatures",
+                    "ZoomToFit": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.ZoomToFit",
+                    "Notes": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.Notes",
+                    "Comments": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.Comments",
+                    "ZoomSlider": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.ZoomSlider",
+                    "Zoom": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.Zoom",
+                    "InformationManagementPolicy": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.InformationManagementPolicy",
+                    "PermissionPolicy": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.PermissionPolicy",
+                    "UploadStatus": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.UploadStatus",
+                    "UpdatesAvailable": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.UpdatesAvailable",
+                    "ViewShortcuts": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.ViewShortcuts"
+                },
+                "supportedSettings": {
+                    "SelectionMode": {},
+                    "ViewIndicator": {},
+                    "DesignName": {},
+                    "SpellCheck": {},
+                    "Language": {},
+                    "DigitalSignatures": {},
+                    "ZoomToFit": {},
+                    "Notes": {},
+                    "Comments": {},
+                    "ZoomSlider": {},
+                    "Zoom": {},
+                    "InformationManagementPolicy": {},
+                    "PermissionPolicy": {},
+                    "UploadStatus": {},
+                    "UpdatesAvailable": {},
+                    "ViewShortcuts": {}
                 }
             }
         },
