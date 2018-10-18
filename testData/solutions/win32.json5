@@ -342,6 +342,78 @@
                     "UpdatesAvailable": {},
                     "ViewShortcuts": {}
                 }
+            },
+            "configure.publisher16.status": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Publisher\\Preferences",
+                    "dataTypes": {
+                        "PageCount": "REG_DWORD",
+                        "CapsLock": "REG_DWORD",
+                        "Measurements": "REG_DWORD",
+                        "ViewMode": "REG_DWORD",
+                        "ZoomToFit": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SelectionMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.SelectionMode",
+                    "PageCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-status.PageCount",
+                    "CapsLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-status.CapsLock",
+                    "Measurements": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-status.Measurements",
+                    "ViewMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-status.ViewMode",
+                    "ZoomToFit": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-status.ZoomToFit"
+                },
+                "supportedSettings": {
+                    "SelectionMode": {},
+                    "PageCount": {},
+                    "CapsLock": {},
+                    "Measurements": {},
+                    "ViewMode": {},
+                    "ZoomToFit": {}
+                }
+            },
+            "configure.access16.status": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Access\\StatusBar",
+                    "dataTypes": {
+                        "CapsLock": "REG_DWORD",
+                        "KanaMode": "REG_DWORD",
+                        "NumLock": "REG_DWORD",
+                        "ScrollLock": "REG_DWORD",
+                        "OverType": "REG_DWORD",
+                        "Filter": "REG_DWORD",
+                        "MoveMode": "REG_DWORD",
+                        "ExtendMode": "REG_DWORD",
+                        "ViewShortcuts": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "CapsLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.CapsLock",
+                    "KanaMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.KanaMode",
+                    "NumLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.NumLock",
+                    "ScrollLock": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.ScrollLock",
+                    "OverType": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.OverType",
+                    "Filter": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.Filter",
+                    "MoveMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.MoveMode",
+                    "ExtendMode": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.ExtendMode",
+                    "ViewShortcuts": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.ViewShortcuts"
+                },
+                "supportedSettings": {
+                    "CapsLock": {},
+                    "KanaMode": {},
+                    "NumLock": {},
+                    "ScrollLock": {},
+                    "OverType": {},
+                    "Filter": {},
+                    "MoveMode": {},
+                    "ExtendMode": {},
+                    "ViewShortcuts": {}
+                }
             }
         },
         "isInstalled": [

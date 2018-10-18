@@ -356,6 +356,139 @@
                         },
                         "powerpoint-status": {
                             "ViewShortcuts":  false
+                        },
+                        "publisher-ribbon": {
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:FilePrintPreview",
+                                                "visible": "true"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "mso$tabs": {
+                                    "mso$tab": [
+                                        {
+                                            "idQ": "mso:TabHome",
+                                            "mso$group": [
+                                                {
+                                                    "idQ": "mso:GroupClipboard",
+                                                    "visible": "false"
+                                                },
+                                                {
+                                                    "idQ": "mso:GroupStyles",
+                                                    "visible": "false"
+                                                },
+                                                {
+                                                    "idQ": "mso:GroupObjects",
+                                                    "visible": "false"
+                                                },
+                                                {
+                                                    "idQ": "mso:GroupTableArrange",
+                                                    "visible": "false"
+                                                },
+                                                {
+                                                    "idQ": "mso:GroupEditing",
+                                                    "visible": "false"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "idQ": "mso:TabInsert",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabPageDesign",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabMailings",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabReviewWord",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabAddIns",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabView",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabWeb",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabMasterPage",
+                                            "visible": "false"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "publisher-status": {
+                            "SelectionMode": false,
+                            "PageCount": false,
+                            "CapsLock": false,
+                            "Measurements": false,
+                            "ViewMode": false,
+                            "ZoomToFit": false
+                        },
+                        "access-ribbon": {
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:FilePrintPreview",
+                                                "visible": "true"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "mso$tabs": {
+                                    "mso$tab": {
+                                        "idQ": "mso:TabHomeAccess",
+                                        "mso$group": {
+                                            "id": "mso_c1.187AD1A",
+                                            "label": "Morphic",
+                                            "insertBeforeQ": "mso:GroupSortAndFilter",
+                                            "autoScale": "true",
+                                            "mso$control": [
+                                                {
+                                                    "idQ": "mso:FileNewDatabase",
+                                                    "label": "Hello!",
+                                                    "imageMso": "HappyFace",
+                                                    "visible": "true"
+                                                },
+                                                {
+                                                    "idQ": "mso:MasterViewClose",
+                                                    "visible": "true"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "access-status": {
+                            "CapsLock": true,
+                            "KanaMode":true,
+                            "NumLock": true,
+                            "ScrollLock":true,
+                            "OverType": false,
+                            "Filter":false,
+                            "MoveMode": false,
+                            "ExtendMode":false,
+                            "ViewShortcuts": false
                         }
                     }
                 }
