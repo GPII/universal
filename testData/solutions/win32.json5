@@ -414,6 +414,56 @@
                     "ExtendMode": {},
                     "ViewShortcuts": {}
                 }
+            },
+            "configure.outlook.status": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Outlook\\StatusBar",
+                    "dataTypes": {
+                        "QuotaThermometer": "REG_DWORD",
+                        "Filter": "REG_DWORD",
+                        "ItemCount": "REG_DWORD",
+                        "HeaderCount": "REG_DWORD",
+                        "UnreadCount": "REG_DWORD",
+                        "UnseenCount": "REG_DWORD",
+                        "Reminder": "REG_DWORD",
+                        "Notifications": "REG_DWORD",
+                        "ZoomSlider": "REG_DWORD",
+                        "Zoom": "REG_DWORD",
+                        "ViewShortcuts": "REG_DWORD",
+                        "QuotaPollInterval": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "QuotaThermometer": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.QuotaThermometer",
+                    "Filter": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.Filter",
+                    "ItemCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.ItemCount",
+                    "HeaderCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.HeaderCount",
+                    "UnreadCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.UnreadCount",
+                    "UnseenCount": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.UnseenCount",
+                    "Reminder": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.Reminder",
+                    "Notifications": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.Notifications",
+                    "ZoomSlider": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.ZoomSlider",
+                    "Zoom": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.Zoom",
+                    "ViewShortcuts": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.ViewShortcuts",
+                    "QuotaPollInterval": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.QuotaPollInterval"
+                },
+                "supportedSettings": {
+                    "QuotaThermometer": {},
+                    "Filter": {},
+                    "ItemCount": {},
+                    "HeaderCount": {},
+                    "UnreadCount": {},
+                    "UnseenCount": {},
+                    "Reminder": {},
+                    "Notifications": {},
+                    "ZoomSlider": {},
+                    "Zoom": {},
+                    "ViewShortcuts": {},
+                    "QuotaPollInterval": {}
+                }
             }
         },
         "isInstalled": [

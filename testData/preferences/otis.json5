@@ -489,6 +489,159 @@
                             "MoveMode": false,
                             "ExtendMode":false,
                             "ViewShortcuts": false
+                        },
+                        "outlook-ribbon": {
+                            "xmlns$mso": "http://schemas.microsoft.com/office/2009/07/customui",
+                            "mso$ribbon": {
+                                "mso$qat": {
+                                    "mso$sharedControls": {
+                                        "mso$control": [
+                                            {
+                                                "idQ": "mso:FilePrint",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:FileSaveAs",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:SendReceiveAll",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:UpdateFolder",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:Reply",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:ReplyAll",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:Delete",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:Forward"
+                                            },
+                                            {
+                                                "idQ": "mso:Undo",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:Forward"
+                                            },
+                                            {
+                                                "idQ": "mso:EmptyTrash",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:Forward"
+                                            },
+                                            {
+                                                "idQ": "mso:PointerModeOptions",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:Forward"
+                                            },
+                                            {
+                                                "idQ": "mso:FindContactCombo",
+                                                "visible": "false",
+                                                "insertBeforeQ": "mso:Forward"
+                                            },
+                                            {
+                                                "idQ": "mso:Forward",
+                                                "visible": "false"
+                                            },
+                                            {
+                                                "idQ": "mso:ApplicationOptionsDialog",
+                                                "visible": "true"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "mso$tabs": {
+                                    "mso$tab": [
+                                        {
+                                            "idQ": "mso:TabMail",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "id": "mso_c1.1991CBA",
+                                            "label": "Morphic",
+                                            "insertBeforeQ": "mso:TabCalendarTableView",
+                                            "mso$group": [
+                                                {
+                                                    "id": "mso_c2.1991CBA",
+                                                    "label": "Morphic",
+                                                    "autoScale": "true",
+                                                    "mso$control": {
+                                                        "idQ": "mso:FileCloseAndLogOff",
+                                                        "visible": "true"
+                                                    }
+                                                },
+                                                {
+                                                    "idQ": "mso:GroupSendReceive"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "idQ": "mso:TabCalendarTableView",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabCalendar",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabContacts",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabTasks",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabNotes",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabJournals",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabHomeGroup",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabSendReceive",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabFolder",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabView",
+                                            "visible": "false"
+                                        },
+                                        {
+                                            "idQ": "mso:TabAddIns",
+                                            "visible": "false"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "outlook-status": {
+                            "QuotaThermometer": false,
+                            "Filter": false,
+                            "ItemCount": false,
+                            "HeaderCount": false,
+                            "UnreadCount": false,
+                            "UnseenCount": false,
+                            "Reminder": true,
+                            "Notifications": true,
+                            "ZoomSlider": true,
+                            "Zoom": true,
+                            "ViewShortcuts": true,
+                            "QuotaPollInterval": true
                         }
                     }
                 }
