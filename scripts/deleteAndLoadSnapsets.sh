@@ -1,6 +1,5 @@
 #!/bin/sh
 
-UNIVERSAL_DIR=${UNIVERSAL_DIR:-/home/node/universal}
 STATIC_DATA_DIR=${STATIC_DATA_DIR:-/home/node/universal/testData/dbData}
 BUILD_DATA_DIR=${BUILD_DATA_DIR:-/home/node/universal/build/dbData/snapset}
 
@@ -36,7 +35,6 @@ fi
 
 COUCHDB_URL_SANITIZED=`echo "$COUCHDB_URL" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g'`
 
-cd "$UNIVERSAL_DIR"
 log "Starting"
 log "CouchDB: $COUCHDB_URL_SANITIZED"
 log "Clear index: $CLEAR_INDEX"
@@ -44,6 +42,16 @@ log "Static: $STATIC_DATA_DIR"
 log "Build: $BUILD_DATA_DIR"
 log "Working directory: `pwd`"
 
+# Set up universal
+git clone --depth 1 https://github.com/GPII/universal.git
+cd universal
+
+npm install json5
+npm install fs
+npm install rimraf
+npm install mkdirp
+npm install infusion
+rm -f package-lock.json
 node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset
 
 # Initialize (possibly clear) data base
