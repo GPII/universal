@@ -28,15 +28,6 @@ if [ -z "$COUCHDB_URL" ]; then
   exit 1
 fi
 
-if [ ! -d "$STATIC_DATA_DIR" -o ! "$(ls -A $STATIC_DATA_DIR/*.json)" ]; then
-  echo "STATIC_DATA_DIR ($STATIC_DATA_DIR) does not exist or does not contain data, using universal's 'testData/dbData' as the default"
-  STATIC_DATA_DIR=./testData/dbData
-fi
-
-if [ ! -d "$BUILD_DATA_DIR" -o ! "$(ls -A $BUILD_DATA_DIR/*.json)" ]; then
-  echo "BUILD_DATA_DIR ($BUILD_DATA_DIR) does not exist or does not contain data, using universal's 'build/dbData/snapset' as the default"
-  BUILD_DATA_DIR=./build/dbData/snapset
-fi
 
 COUCHDB_URL_SANITIZED=`echo "$COUCHDB_URL" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g'`
 
@@ -47,6 +38,10 @@ log "Static: $STATIC_DATA_DIR"
 log "Build: $BUILD_DATA_DIR"
 log "Working directory: `pwd`"
 
+# Create build dir if it does not exist
+if [ ! -d "${BUILD_DATA_DIR}" ]; then
+  mkdir -p "${BUILD_DATA_DIR}"
+fi
 
 # Convert preferences json5 to GPII keys and preferences safes
 if [ -d "${PREFERENCES_DATA_DIR}" ]; then
