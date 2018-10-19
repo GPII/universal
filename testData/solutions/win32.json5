@@ -16,7 +16,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\enu\\DEFAULT.JCF"
                 },
                 "supportedSettings": {
                     "Braille.AllDotsBrailleCursor": {
@@ -67,6 +67,15 @@
                                 "Smart Autopan, autopan using the best algorithm for the current situation"
                             ],
                             "default": 255
+                        }
+                    },
+                    "Braille.BrailleAutoDetectBluetooth": {
+                        "schema": {
+                            "title": "Autodetect Bluetooth Braille Display",
+                            "description": "Whether to automatically detect bluetooth displays.",
+                            "enum": [0,1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
                         }
                     },
                     "Braille.BrailleAutoRouteToCursor": {
@@ -889,6 +898,24 @@
                             "default": 0
                         }
                     },
+                    "Options.AllowWebAppReservedKeystrokes": {
+                        "schema": {
+                            "title": "Allow Webapp-reserved Keystrokes",
+                            "description": "When both JAWS and a website such as Facebook support a key shortcut, whether to handle the key in JAWS (the default) or pass the key to the web app.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
+                        }
+                    },
+                    "Options.AnnounceMultilineEdit": {
+                        "schema": {
+                            "title": "Announce Multiline Edit Controls",
+                            "description": "Whether to announce multi-line edit controls.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 0
+                        }
+                    },
                     // This does not seem safe to update, as we have no idea which displays are available on a given machine.
                     // "Options.BrailleDisplay": {
                     //     "schema": {
@@ -957,6 +984,15 @@
                             ]
                         }
                     },
+                    "Options.confirmWhenExitingJAWS": {
+                        "schema": {
+                            "title": "Confirm when Exiting JAWS",
+                            "description": "Whether or not to present a confirmation menu when exiting JAWS.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
+                        }
+                    },
                     "Options.CustomPageSummary": {
                         "schema": {
                             "title": "Custom Page Summary",
@@ -1017,6 +1053,15 @@
                     //        "enumLabels": []
                     //     }
                     // },
+                    "Options.EnableEdge": {
+                        "schema": {
+                            "title": "Enable Edge",
+                            "description": "Whether JAWS should provide popular JAWS browser features in Edge such as Virtual Cursor, Navigation Quick Keys, List of Objects, and many more.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
+                        }
+                    },
                     "Options.Filter": {
                         "schema": {
                             "title": "Filter",
@@ -1108,6 +1153,15 @@
                                 "also indicate caps when reading by words",
                                 "also indicate caps when reading by lines"
                             ]
+                        }
+                    },
+                    "Options.IndicateMistypedWord": {
+                        "schema": {
+                            "title": "Indicate Mistyped Words",
+                            "description": "Whether to indicate a mistyped word.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
                         }
                     },
                     "Options.IndicateNewlinesAndParagraphs": {
@@ -1500,6 +1554,20 @@
                                 "on"
                             ],
                             "default": 0
+                        }
+                    },
+                    "Options.PhoneticCharAfterPause": {
+                        "schema": {
+                            "title": "Announce Phonetic Character after Pause",
+                            "description": "Whether pausing on character will cause JAWS to speak it phonetically while navigating text by character.",
+                            "enum": [0, 5, 10, 15],
+                            "enumLabels": [
+                                "Do not announce phonetically.",
+                                "Announce after a half second pause.",
+                                "Announce after a one second pause.",
+                                "Announce after a one and a half second pause."
+                            ],
+                            "default": 15
                         }
                     },
                     "Options.ProcessToolTipEvent": {
@@ -2240,6 +2308,15 @@
                             ]
                         }
                     },
+                    "Options.VirtualDocumentLinkActivationMethod": {
+                        "schema": {
+                            "title": "Virtual Document Link Activation Method",
+                            "description": "How to activate a link when the enter key is pressed.  Either simulates a mouse click or passes along the enter keypress.",
+                            "enum": [0,1],
+                            "enumLabels": ["Enter simulates mouse click.", "Enter sends enter key."],
+                            "default": 0
+                        }
+                    },
                     "Options.VIRTUALMSAAREFRESH": {
                         "schema": {
                             "title": "Virtual MSAA Refresh",
@@ -2247,6 +2324,15 @@
                             "type": "integer",
                             "default": 0,
                             "minValue": -1
+                        }
+                    },
+                    "Options.VirtualRibbonSupport": {
+                        "schema": {
+                            "title": "Virtual Ribbon Support",
+                            "description": "Whether to use the Virtual PC cursor to read HTML documents. When using the Virtual PC cursor, Web pages and other HTML documents are read as if they were formatted into single columns, with each link or form field on a line of its own.  This mode allows you to navigate or select text in a Web page as if you were in a standard text document, while also giving you the ability to fill out forms or activate links.",
+                            "enum": [0, 1],
+                            "enumLabels": ["off", "on"],
+                            "default": 1
                         }
                     },
                     // TODO: DEFAULT
@@ -2770,7 +2856,7 @@
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "liveness": "manualRestart",
                 "options": {
-                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                    "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2019\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "supportedSettings": {
                     "Options.PrimarySynthesizer": {},
@@ -3423,7 +3509,7 @@
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
-                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe\\}\""
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2019.exe\\}\""
                         }
                     ],
                     "setFalse": [
@@ -3439,7 +3525,7 @@
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "jhookldr.exe"
                         },
-                        // New for JAWS 2018
+                        // New for JAWS 2018 and higher.
                         {
                             "type": "gpii.windows.closeProcessByName",
                             "filename": "ScannerHandler.exe"
@@ -3452,7 +3538,7 @@
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
                 "hKey": "HKEY_LOCAL_MACHINE",
-                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2018.exe",
+                "path": "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS2019.exe",
                 "subPath": "",
                 "dataType": "REG_SZ"
             }
