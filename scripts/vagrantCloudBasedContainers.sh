@@ -6,7 +6,7 @@
 # It builds a Docker image for GPII/universal and uses it to start two
 # components: the Preferences Server and the Flow Manager.
 #
-# It also starts a CouchDB container and loads the CouchDB data into
+# It also starts a CouchDB container and data into
 # it, so tests running against the GPII components will have access to the
 # latest test data.
 #
@@ -35,16 +35,16 @@ COUCHDB_HEALTHCHECK_TIMEOUT=30
 if [ "$NO_REBUILD" == "true" ] ; then
     CLEAR_INDEX=
 else
-    CLEAR_INDEX=1
+    CLEAR_INDEX='true'
 fi
 
 UNIVERSAL_DIR="/home/vagrant/sync/universal"
 STATIC_DATA_DIR="$UNIVERSAL_DIR/testData/dbData"
 BUILD_DATA_DIR="$UNIVERSAL_DIR/build/dbData/snapset"
 
-DATALOADER_IMAGE="herrclown/gpii-dataloader"
 DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
+DATALOADER_CMD='/app/scripts/deleteAndLoadSnapsets.sh'
 
 GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
 GPII_PREFERENCES_PORT=9081
@@ -82,7 +82,7 @@ docker run -d -p $COUCHDB_PORT:$COUCHDB_PORT --name couchdb $COUCHDB_IMAGE
 wget -O /dev/null --retry-connrefused --waitretry=$COUCHDB_HEALTHCHECK_DELAY --read-timeout=20 --timeout=1 --tries=$COUCHDB_HEALTHCHECK_TIMEOUT http://localhost:$COUCHDB_PORT
 
 # Load the CouchDB data
-docker run --rm --link couchdb -v $STATIC_DATA_DIR:/static_data -e STATIC_DATA_DIR=/static_data -v $BUILD_DATA_DIR:/build_data -e BUILD_DATA_DIR=/build_data -e COUCHDB_URL=$DATALOADER_COUCHDB_URL -e CLEAR_INDEX=$CLEAR_INDEX $DATALOADER_IMAGE
+docker run --rm --link couchdb -v $STATIC_DATA_DIR:/static_data -e STATIC_DATA_DIR=/static_data -v $BUILD_DATA_DIR:/build_data -e BUILD_DATA_DIR=/build_data -e COUCHDB_URL=$DATALOADER_COUCHDB_URL -e CLEAR_INDEX=$CLEAR_INDEX $UNIVERSAL_IMAGE $DATALOADER_CMD
 
 # Wait for the CouchDB views become accessible. Accessing the view URL forced the view index to build which take time.
 # The URL returns 500 when the index is not ready, so use "--retry-on-http-error" option to continue retries at 500 response code.
