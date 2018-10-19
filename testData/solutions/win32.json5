@@ -10,6 +10,40 @@
             ]
         },
         "settingsHandlers": {
+            "configure.common-tabletmode":  {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Software\\Microsoft\\Office\\16.0\\Common",
+                    "dataTypes": {
+                        "OverrideTabletMode": "REG_DWORD",
+                        "OverridePointerMode": "REG_DWORD"
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "OverrideTabletMode": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "true": 1,
+                            "false": 0
+                        }
+                    },
+                    "OverridePointerMode": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.tabletMode",
+                            "true": 2,
+                            "false": 1
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "OverrideTabletMode": {},
+                    "OverridePointerMode": {}
+                }
+            },
             "configure.word-ribbon": {
                 "type": "gpii.settingsHandlers.XMLHandler",
                 "liveness": "manualRestart",
