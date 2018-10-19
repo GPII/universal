@@ -37,6 +37,13 @@ log "Static: ${STATIC_DATA_DIR}"
 log "Build: ${BUILD_DATA_DIR}"
 log "Working directory: $(pwd)"
 
+# Check we can connect to CouchDB
+COUCHDB_URL_ROOT=$(echo "${COUCHDB_URL}" | sed 's/[^\/]*$//g')
+RET_CODE=$(curl --write-out '%{http_code}' --silent --output /dev/null "${COUCHDB_URL_ROOT}/_up")
+if [ "$RET_CODE" != '200' ]; then
+  log "[ERROR] Failed to connect to CouchDB: ${COUCHDB_URL_SANITIZED}"
+  exit 1
+fi
 
 # Create build dir if it does not exist
 if [ ! -d "${BUILD_DATA_DIR}" ]; then
