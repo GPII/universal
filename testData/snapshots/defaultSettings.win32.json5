@@ -64,11 +64,11 @@
                 "type": "gpii.windows.displaySettingsHandler",
                 "liveness": "live",
                 "settings": {
-					"screen-dpi": {
-						"type": "ADD",
-						"value": 0
-					}
-				}
+                    "screen-dpi": {
+                        "type": "ADD",
+                        "value": 0
+                    }
+                }
             }
         },
         "isInstalled": [
@@ -80,49 +80,87 @@
     },
 
     "com.microsoft.windows.highContrast": {
-		"name": "Windows High Contrast",
-		"settingsHandlers": {
-			"configure-spi": {
-				"type": "gpii.windows.spiSettingsHandler",
-				"liveness": "live",
-				"options": {
-					"getAction": "SPI_GETHIGHCONTRAST",
-					"setAction": "SPI_SETHIGHCONTRAST",
-					"uiParam": "struct_size",
-					"pvParam": {
-						"type": "struct",
-						"name": "HIGHCONTRAST"
-					},
-					"verifySettings": true
-				},
-				"supportedSettings": {
-					"HighContrastOn": {
-						"schema": {
-							"title": "High Contrast",
-							"description": "Whether to enable/disable High Contrast",
-							"type": "boolean",
-							"default": false
-						}
-					}
-				},
-				"inverseCapabilitiesTransformations": {
-					"http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
-				},
-				"settings": {
-					"HighContrastOn": {
-						"value": false,
+        "name": "Windows High Contrast",
+        "settingsHandlers": {
+            "configure-spi": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETHIGHCONTRAST",
+                    "setAction": "SPI_SETHIGHCONTRAST",
+                    "uiParam": "struct_size",
+                    "pvParam": {
+                        "type": "struct",
+                        "name": "HIGHCONTRAST"
+                    },
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "HighContrastOn": {
+                        "schema": {
+                            "title": "High Contrast",
+                            "description": "Whether to enable/disable High Contrast",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/common/highContrast/enabled": "HighContrastOn.value"
+                },
+                "settings": {
+                    "HighContrastOn": {
+                        "value": false,
                         "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON"
-					}
-				}
-			}
-		},
-		"configure": [
-			"settings.configure-spi"
-		],
-		"isInstalled": [{
-			"type": "gpii.deviceReporter.alwaysInstalled"
-		}],
-		"active": true
+                    }
+                }
+            }
+        },
+        "configure-registry": {
+            "type": "gpii.windows.registrySettingsHandler",
+            "liveness": "live",
+            "options": {
+                "hKey": "HKEY_CURRENT_USER",
+                "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                "dataTypes": {
+                    "LastHighContrastTheme": "REG_SZ"
+                }
+            },
+            "supportedSettings": {
+                "LastHighContrastTheme": {
+                    "schema": {
+                        "title": "High Contrast theme",
+                        "description": "High Contrast Theme",
+                        "type": "string",
+                        "default": "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                        "enum": [
+                            "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
+                            "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
+                            "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
+                            "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"
+                        ]
+                    }
+                }
+            },
+            "settings": {
+                "LastHighContrastTheme": {
+                    "type": "ADD",
+                    "value": "C:\\Windows\\resources\\Ease of Access Themes\\hc1.theme"
+                }
+            }
+        },
+        "configure": [
+            "settings.configure-registry",
+            {
+                "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
+                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+            },
+            "settings.configure-spi"
+        ],
+        "isInstalled": [{
+            "type": "gpii.deviceReporter.alwaysInstalled"
+        }],
+        "active": true
     },
 
     "net.gpii.uioPlus": {
