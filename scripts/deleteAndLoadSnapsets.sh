@@ -1,7 +1,12 @@
 #!/bin/sh
+APP_DIR=${APP_DIR:-"/app"}
 
-STATIC_DATA_DIR=${STATIC_DATA_DIR:-/home/node/universal/testData/dbData}
-BUILD_DATA_DIR=${BUILD_DATA_DIR:-/home/node/universal/build/dbData/snapset}
+STATIC_DATA_DIR=${STATIC_DATA_DIR:-"${APP_DIR}/testData/dbData"}
+PREFERENCES_DATA_DIR=${PREFERENCES_DATA_DIR:-"${APP_DIR}/testData/preferences"}
+BUILD_DATA_DIR=${BUILD_DATA_DIR:-'/tmp/build/dbData'}
+
+DATALOADER_JS="${APP_DIR}/scripts/deleteAndLoadSnapsets.js"
+CONVERT_JS="${APP_DIR}/scripts/convertPrefs.js"
 
 log() {
   echo "$(date +'%Y-%m-%d %H:%M:%S') - $1"
@@ -42,17 +47,17 @@ log "Static: $STATIC_DATA_DIR"
 log "Build: $BUILD_DATA_DIR"
 log "Working directory: `pwd`"
 
-# Set up universal
-git clone --depth 1 https://github.com/GPII/universal.git
-cd universal
 
-npm install json5
-npm install fs
-npm install rimraf
-npm install mkdirp
-npm install infusion
-rm -f package-lock.json
-node scripts/convertPrefs.js testData/preferences/ build/dbData/snapset/ snapset
+# Convert preferences json5 to GPII keys and preferences safes
+if [ -d "${PREFERENCES_DATA_DIR}" ]; then
+  node "${CONVERT_JS}" "${PREFERENCES_DATA_DIR}" "${BUILD_DATA_DIR}" snapset
+  if [ "$?" != '0' ]; then
+    log "[ERROR] ${CONVERT_JS} failed (exit code: $?)"
+    exit 1
+  fi
+else
+  log "PREFERENCES_DATA_DIR ($PREFERENCES_DATA_DIR) does not exist, nothing to convert"
+fi
 
 # Initialize (possibly clear) data base
 if [ ! -z "$CLEAR_INDEX" ]; then
@@ -68,7 +73,7 @@ if ! curl -fsS -X PUT "$COUCHDB_URL"; then
 fi
 
 # Submit data
-node scripts/deleteAndLoadSnapsets.js $COUCHDB_URL $STATIC_DATA_DIR $BUILD_DATA_DIR
+node "${DATALOADER_JS}" "${COUCHDB_URL}" "${STATIC_DATA_DIR}" "${BUILD_DATA_DIR}"
 err=$?
 if [ $err != 0 ]; then
   log "deleteAndLoadSnapsets.js failed with $err, exiting"
