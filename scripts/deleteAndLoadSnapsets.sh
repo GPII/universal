@@ -15,28 +15,28 @@ log() {
 warm_indices(){
   log "Warming indices..."
 
-  for view in $(curl -s $COUCHDB_URL/_design/views/ | jq -r '.views | keys[]'); do
-    curl -fsS $COUCHDB_URL/_design/views/_view/$view >/dev/null
+  for view in $(curl -s "${COUCHDB_URL}/_design/views/" | jq -r '.views | keys[]'); do
+    curl -fsS "${COUCHDB_URL}/_design/views/_view/${view}" >/dev/null
   done
 
   log "Finished warming indices..."
 }
 
 # Verify variables
-if [ -z "$COUCHDB_URL" ]; then
+if [ -z "${COUCHDB_URL}" ]; then
   echo "COUCHDB_URL environment variable must be defined"
   exit 1
 fi
 
+COUCHDB_URL_SANITIZED=$(echo "${COUCHDB_URL}" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g')
 
-COUCHDB_URL_SANITIZED=`echo "$COUCHDB_URL" | sed -e 's,\(://\)[^/]*\(@\),\1<SENSITIVE>\2,g'`
+log 'Starting'
+log "CouchDB: ${COUCHDB_URL_SANITIZED}"
+log "Clear index: ${CLEAR_INDEX}"
+log "Static: ${STATIC_DATA_DIR}"
+log "Build: ${BUILD_DATA_DIR}"
+log "Working directory: $(pwd)"
 
-log "Starting"
-log "CouchDB: $COUCHDB_URL_SANITIZED"
-log "Clear index: $CLEAR_INDEX"
-log "Static: $STATIC_DATA_DIR"
-log "Build: $BUILD_DATA_DIR"
-log "Working directory: `pwd`"
 
 # Create build dir if it does not exist
 if [ ! -d "${BUILD_DATA_DIR}" ]; then
@@ -55,24 +55,24 @@ else
 fi
 
 # Initialize (possibly clear) data base
-if [ ! -z "$CLEAR_INDEX" ]; then
-  log "Deleting database at $COUCHDB_URL_SANITIZED"
-  if ! curl -fsS -X DELETE "$COUCHDB_URL"; then
+if [ "${CLEAR_INDEX}" == 'true' ]; then
+  log "Deleting database at ${COUCHDB_URL_SANITIZED}"
+  if ! curl -fsS -X DELETE "${COUCHDB_URL}"; then
     log "Error deleting database"
   fi
 fi
 
-log "Creating database at $COUCHDB_URL_SANITIZED"
-if ! curl -fsS -X PUT "$COUCHDB_URL"; then
-  log "Database already exists at $COUCHDB_URL_SANITIZED"
+log "Creating database at ${COUCHDB_URL_SANITIZED}"
+if ! curl -fsS -X PUT "${COUCHDB_URL}"; then
+  log "Database already exists at ${COUCHDB_URL_SANITIZED}"
 fi
 
 # Submit data
 node "${DATALOADER_JS}" "${COUCHDB_URL}" "${STATIC_DATA_DIR}" "${BUILD_DATA_DIR}"
 err=$?
-if [ $err != 0 ]; then
-  log "deleteAndLoadSnapsets.js failed with $err, exiting"
-  exit $err
+if [ "${err}" != '0' ]; then
+  log "${DATALOADER_JS} failed with ${err}, exiting"
+  exit "${err}"
 fi
 
 # Warm Data
