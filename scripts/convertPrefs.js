@@ -27,7 +27,7 @@ var inputDir = process.argv[2];
 var targetDir = process.argv[3];
 var prefsSafeType = process.argv[4] || "user";
 
-if (prefsSafeType !== "snapset" && prefsSafeType !== "user") {
+if (process.argv.length < 4 || (prefsSafeType !== "snapset" && prefsSafeType !== "user")) {
     console.log("Usage: node scripts/convertPrefs.js InputFolder OutputFolder PrefsSafeType");
     console.log("  where PrefsSafeType, is one of 'snapset' or 'user' (defaults to 'user')");
     process.exit(1);
