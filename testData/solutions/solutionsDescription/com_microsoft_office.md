@@ -10,7 +10,7 @@
 ## Description
 
 This solution provides the ability to use customised layout of the Ribbon, Quick Access Toolbar, and Status bar in the
-following Microsoft Office Applictions:
+following Microsoft Office 2016 Applictions:
 
 * Word
 * Excel
@@ -58,3 +58,6 @@ The user `otis` performs various customisations of each Office application.
 
 * Unable to make running instances of the applications reload the new settings. If more than one window is open, then
 the new settings *sometime* reload when switching between the window.
+* Only tested with Office 2016.
+  * The ribbon *may* work in other versions.
+  * The status bar will *not* work in other versions (the registry location contains the version number)
