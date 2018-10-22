@@ -39,13 +39,12 @@ else
 fi
 
 UNIVERSAL_DIR="/home/vagrant/sync/universal"
-SCRIPT_DIR="$UNIVERSAL_DIR/scripts"
 STATIC_DATA_DIR="$UNIVERSAL_DIR/testData/dbData"
 BUILD_DATA_DIR="$UNIVERSAL_DIR/build/dbData/snapset"
 
-COUCHDB_URL="http://localhost:${COUCHDB_PORT}/gpii"
+DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/gpii"
 DATASOURCE_HOSTNAME="http://couchdb"
-DATALOADER_CMD='/app/scripts/deleteAndLoadSnapsets.sh'
+DATALOADER_CMD="/app/scripts/deleteAndLoadSnapsets.sh"
 
 GPII_PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
 GPII_PREFERENCES_PORT=9081
@@ -82,6 +81,7 @@ docker run -d -p $COUCHDB_PORT:$COUCHDB_PORT --name couchdb $COUCHDB_IMAGE
 # Wait for CouchDB
 wget -O /dev/null --retry-connrefused --waitretry=$COUCHDB_HEALTHCHECK_DELAY --read-timeout=20 --timeout=1 --tries=$COUCHDB_HEALTHCHECK_TIMEOUT http://localhost:$COUCHDB_PORT
 
+# Load the CouchDB data
 docker run --rm --link couchdb -v $STATIC_DATA_DIR:/static_data -e STATIC_DATA_DIR=/static_data -v $BUILD_DATA_DIR:/build_data -e BUILD_DATA_DIR=/build_data -e COUCHDB_URL=$DATALOADER_COUCHDB_URL -e CLEAR_INDEX=$CLEAR_INDEX $UNIVERSAL_IMAGE $DATALOADER_CMD
 
 # Wait for the CouchDB views become accessible. Accessing the view URL forced the view index to build which take time.
