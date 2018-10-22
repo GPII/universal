@@ -8,7 +8,7 @@
                     "http://registry.gpii.net/common/speechSynthesizer": "eloq",
                     "http://registry.gpii.net/common/speechRate": 100,
                     "http://registry.gpii.net/common/pitch": 1,
-                    "http://registry.gpii.net/common/volume": 1,
+                    "http://registry.gpii.net/common/volumeTTS": 1,
                     "http://registry.gpii.net/common/punctuationVerbosity": "most",
                     "http://registry.gpii.net/common/announceCapitals": true,
                     "http://registry.gpii.net/common/readingUnit": "paragraph",

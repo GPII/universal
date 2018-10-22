@@ -10,24 +10,40 @@ Manager](LifecycleManager.md).
 
 Depending on what the usage of the system is, the flows will be different. For example user login, user log off, and
 retrieving settings from the system in "cloud based flowmanager" mode are all different. Each "flow" is managed in a
-different file, with the common events, functions, etc., located in `FlowManager.js` and `FlowManagerRequests.js`. The
+different file, with the common events, functions, etc., located in `FlowManager.js` and `MatchMaking.js`. The
 different kinds of flows are:
 
-* **User Login** (UserLogonStateChange.js) - the flow for a user keying in to the system. The flow is described in
+* **User Login** (`UserLogonHandlers.js`) - the flow for a user keying in to the system. The flow is described in
   details in the [loginAndLogoutFlow](LoginAndLogoutFlow.md) document
-* **User Logout** (UserLogonStateChange.js) - the flow for a user keying out of the system
-* **Retrieving Settings** (CloudBasedFlowManager.js) - used to retrieve the settings when the system is running in
+* **User Logout** (`UserLogonHandlers.js`) - the flow for a user keying out of the system
+* **User Logon State Change** (`UserLogonHandlers.js`) - the flow for changing a user's logon state
+* **Retrieve Settings** (`CloudBasedFlowManager.js`) - used to retrieve the settings when the system is running in
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
-* **Get GPII Key** (`GetGpiiKey.js`) - retrieval of the GPII key of the currently logged in user.
+* **Update Preferences** (`CloudBasedFlowManager.js`) - used to update the preferences when the system is running in
+  cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 
-## Important events:
+## Reserved GPII Keys
 
-There are a few notification events on the flowmanager related to the key-in and key-out process.
+### noUser
 
-* userLoginInitiated: fired when the process of keying in a user (ie. configuring the system) starts,
-* userLogoutInitiated: fired when the process of keying out a user (ie. restoring the system) has started,
-* userLoginComplete: fired when the process of keying in a user (ie. configuring the system) has completed,
-* userLogoutComplete: fired when the process of keying out a user (ie. restoring the system) has completed,
+The reserved GPII key "noUser" is automatically keyed into the system when there is not an actual key keyed in. This includes:
+
+* When GPII starts
+* Once an actual GPII key is keyed out
+
+The present of "noUser" key allows users to continue to change settings via QSS (Quick Strip Set) when no actual GPII
+key is keyed into the system.
+
+### reset
+
+The reserved GPII key "reset" is to be used with the flow manager login API to reset the computer. The API is:
+
+GET /user/reset/login
+
+See [Reset Computer Documentation](ResetComputer.md) for more details about the reset workflow.
+
+Note that a separate logout of "reset" is not necessary. The final condition of using the "reset" key is to have the
+"noUser" key log back in the system.
 
 ## APIs
 
@@ -56,14 +72,6 @@ There are a few notification events on the flowmanager related to the key-in and
 * **route:** `/user/:gpiiKey/logout` where `:gpiiKey` should be the GPII key of the user
 * **method:** `GET`
 * **return:** Message saying that user successfully logged out of the system or an error message.
-
-### Retrieve GPII key (GET /gpiiKey)
-
-* **description**: Get the GPII key of the user(s) who is (are) currently logged into the system
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/gpiiKey`
-* **method:** `GET`
-* **return:** A JSON array with a string entry for each user
 
 ### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
 
