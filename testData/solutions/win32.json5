@@ -6049,9 +6049,10 @@
                         "namespace": "root\\WMI",
                         "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
                         "set": {
-                            "class": "WmiMonitorBrightnessMethods",
+                            "className": "WmiMonitorBrightnessMethods",
                             "method": "WmiSetBrightness",
-                            "params": [0xFFFFFFFF, "$value"]
+                            "params": [0xFFFFFFFF, "$value"],
+                            "returnVal": ["uint", 0]
                         }
                     }
                 },
@@ -6059,7 +6060,7 @@
                     "Brightness": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.BrightnessVal",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.brightness.BrightnessVal",
                             "outputPath": "value"
                         }
                     }
@@ -6077,7 +6078,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.BrightnessVal": "BrightnessVal.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.brightness.BrightnessVal": "Brightness.value"
                 }
             }
         },
