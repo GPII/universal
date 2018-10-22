@@ -22,8 +22,8 @@
                 "conditions": [
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
-                        "maximum": 400000,
-                        "minimum": 400,
+                        "max": 400000,
+                        "min": 400,
                         "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
                     }
                 ]
@@ -36,8 +36,8 @@
                 "conditions": [
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
-                        "maximum": 200000,
-                        "minimum": 20000,
+                        "max": 200000,
+                        "min": 20000,
                         "inputPath": "http://registry\\.gpii\\.net/common/environment/auditory\\.noise"
                     }
                 ]
@@ -51,14 +51,14 @@
                 "conditions": [
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
-                        "maximum": 400000,
-                        "minimum": 400,
+                        "max": 400000,
+                        "min": 400,
                         "inputPath": "http://registry\\.gpii\\.net/common/environment/illuminance"
                     },
                     {
                         "type": "http://registry.gpii.net/conditions/inRange",
-                        "maximum": 200000,
-                        "minimum": 20000,
+                        "max": 200000,
+                        "min": 20000,
                         "inputPath": "http://registry\\.gpii\\.net/common/environment/auditory\\.noise"
                     }
                 ]

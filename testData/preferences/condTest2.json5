@@ -14,7 +14,7 @@
                 },
                 "conditions": [{
                     "type": "http://registry.gpii.net/conditions/inRange",
-                    "minimum": 50,
+                    "min": 50,
                     "inputPath": "http://registry\\.gpii\\.net/common/environment/auditory\\.noise"
                 }]
             }
