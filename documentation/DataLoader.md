@@ -9,7 +9,7 @@ It does following:
 
 - Converts the preferences in universal into `snapset` Prefs Safes and GPII Keys,
 - Optionally deletes existing database,
-- Creates a CouchDB database if none exits,
+- Creates a CouchDB database if none exists,
 - Updates the database with respect to its `design/views` document, as required,
 - Loads the latest snapsets created into the database.
 
