@@ -11,7 +11,8 @@ It does following:
 - Optionally deletes existing database,
 - Creates a CouchDB database if none exists,
 - Updates the database with respect to its `design/views` document, as required,
-- Loads the latest snapsets created into the database.
+- Deletes the snapsets and keys, if any, from the database,
+- Loads the latest snapsets and keys created created above into the database.
 
 ## Environment Variables
 
