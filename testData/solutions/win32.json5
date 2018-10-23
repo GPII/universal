@@ -6561,7 +6561,22 @@
                 },
                 "supportedSettings": {
                     "OverrideTabletMode": {},
-                    "OverridePointerMode": {}
+                    "OverridePointerMode": {
+                        "schema": {
+                            "title": "Enable Tablet Mode",
+                            "description": "Display larger ribbon buttons that are easier to touch",
+                            "type": "number",
+                            "enum": [
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 1
+                        }
+                    }
                 }
             },
             "configure.word-ribbon": {
@@ -6576,7 +6591,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "Word Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Word",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.excel-ribbon": {
@@ -6591,7 +6613,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "Excel Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Excel",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.powerpoint-ribbon": {
@@ -6606,7 +6635,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "PowerPoint Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for PowerPoint",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.onenote-ribbon": {
@@ -6621,7 +6657,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.onenote-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "OneNote Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for OneNote",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.publisher-ribbon": {
@@ -6636,7 +6679,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "Publisher Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Publisher",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.access-ribbon": {
@@ -6651,7 +6701,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "Access Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Access",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.outlook-ribbon": {
@@ -6666,7 +6723,14 @@
                     "mso$customUI": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-ribbon"
                 },
                 "supportedSettings": {
-                    "mso$customUI": {}
+                    "mso$customUI": {
+                        "schema": {
+                            "title": "Outlook Ribbon Layout",
+                            "description": "Specifies the custom layout of the ribbon and quick access toolbar for Outlook",
+                            "type": "data",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.word16.status": {
@@ -6725,28 +6789,182 @@
                     "Zoom": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.word-status.Zoom"
                 },
                 "supportedSettings": {
-                    "FormattedPage": {},
-                    "Section": {},
-                    "PageNumber": {},
-                    "VerticalPos": {},
-                    "Line": {},
-                    "Column": {},
-                    "WordCount": {},
-                    "SpellCheck": {},
-                    "Language": {},
-                    "DigitalSignatures": {},
-                    "InformationManagementPolicy": {},
-                    "PermissionPolicy": {},
-                    "TrackChanges": {},
-                    "CapsLock": {},
-                    "Overtype": {},
-                    "ExtendSelection": {},
-                    "MacroRecord": {},
-                    "UploadStatus": {},
-                    "UpdatesAvailable": {},
-                    "ViewShortcuts": {},
-                    "ZoomSlider": {},
-                    "Zoom": {}
+                    "FormattedPage": {
+                        "schema": {
+                            "title": "Formatted Page",
+                            "description": "Show the 'Formatted Page' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Section": {
+                        "schema": {
+                            "title": "Section",
+                            "description": "Show the 'Section' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "PageNumber": {
+                        "schema": {
+                            "title": "Page Number",
+                            "description": "Show the 'Page Number' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "VerticalPos": {
+                        "schema": {
+                            "title": "Vertical Pos",
+                            "description": "Show the 'Vertical Pos' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Line": {
+                        "schema": {
+                            "title": "Line",
+                            "description": "Show the 'Line' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Column": {
+                        "schema": {
+                            "title": "Column",
+                            "description": "Show the 'Column' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "WordCount": {
+                        "schema": {
+                            "title": "Word Count",
+                            "description": "Show the 'Word Count' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "SpellCheck": {
+                        "schema": {
+                            "title": "Spell Check",
+                            "description": "Show the 'Spell Check' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Language": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Show the 'Language' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "DigitalSignatures": {
+                        "schema": {
+                            "title": "Digital Signatures",
+                            "description": "Show the 'Digital Signatures' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "InformationManagementPolicy": {
+                        "schema": {
+                            "title": "Information Management Policy",
+                            "description": "Show the 'Information Management Policy' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "PermissionPolicy": {
+                        "schema": {
+                            "title": "Permission Policy",
+                            "description": "Show the 'Permission Policy' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "TrackChanges": {
+                        "schema": {
+                            "title": "Track Changes",
+                            "description": "Show the 'Track Changes' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "CapsLock": {
+                        "schema": {
+                            "title": "Caps Lock",
+                            "description": "Show the 'Caps Lock' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Overtype": {
+                        "schema": {
+                            "title": "Overtype",
+                            "description": "Show the 'Overtype' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ExtendSelection": {
+                        "schema": {
+                            "title": "Extend Selection",
+                            "description": "Show the 'Extend Selection' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "MacroRecord": {
+                        "schema": {
+                            "title": "Macro Record",
+                            "description": "Show the 'Macro Record' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UploadStatus": {
+                        "schema": {
+                            "title": "Upload Status",
+                            "description": "Show the 'Upload Status' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UpdatesAvailable": {
+                        "schema": {
+                            "title": "Updates Available",
+                            "description": "Show the 'Updates Available' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ViewShortcuts": {
+                        "schema": {
+                            "title": "View Shortcuts",
+                            "description": "Show the 'View Shortcuts' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ZoomSlider": {
+                        "schema": {
+                            "title": "Zoom Slider",
+                            "description": "Show the 'Zoom Slider' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Zoom": {
+                        "schema": {
+                            "title": "Zoom",
+                            "description": "Show the 'Zoom' field on the status bar in Word",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.excel16.status": {
@@ -6809,30 +7027,199 @@
                     "Zoom": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.excel-status.Zoom"
                 },
                 "supportedSettings": {
-                    "SelectionMode": {},
-                    "CellMode": {},
-                    "EndMode": {},
-                    "FixedDecimal": {},
-                    "OverType": {},
-                    "PageNum": {},
-                    "Average": {},
-                    "CellCount": {},
-                    "MaxValue": {},
-                    "MinValue": {},
-                    "NumberCount": {},
-                    "Sum": {},
-                    "MacroRecord": {},
-                    "DigitalSignatures": {},
-                    "InformationManagementPolicy": {},
-                    "PermissionPolicy": {},
-                    "UploadStatus": {},
-                    "FlashFillErrors": {},
-                    "FlashFillUpdatedCells": {},
-                    "CapsLock": {},
-                    "NumLock": {},
-                    "ScrollLock": {},
-                    "ZoomSlider": {},
-                    "Zoom": {}
+                    "SelectionMode": {
+                        "schema": {
+                            "title": "Selection Mode",
+                            "description": "Show the 'Selection Mode' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "CellMode": {
+                        "schema": {
+                            "title": "Cell Mode",
+                            "description": "Show the 'Cell Mode' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "EndMode": {
+                        "schema": {
+                            "title": "End Mode",
+                            "description": "Show the 'End Mode' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "FixedDecimal": {
+                        "schema": {
+                            "title": "Fixed Decimal",
+                            "description": "Show the 'Fixed Decimal' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "OverType": {
+                        "schema": {
+                            "title": "Over Type",
+                            "description": "Show the 'Over Type' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "PageNum": {
+                        "schema": {
+                            "title": "Page Num",
+                            "description": "Show the 'Page Num' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Average": {
+                        "schema": {
+                            "title": "Average",
+                            "description": "Show the 'Average' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "CellCount": {
+                        "schema": {
+                            "title": "Cell Count",
+                            "description": "Show the 'Cell Count' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "MaxValue": {
+                        "schema": {
+                            "title": "Max Value",
+                            "description": "Show the 'Max Value' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "MinValue": {
+                        "schema": {
+                            "title": "Min Value",
+                            "description": "Show the 'Min Value' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "NumberCount": {
+                        "schema": {
+                            "title": "Number Count",
+                            "description": "Show the 'Number Count' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Sum": {
+                        "schema": {
+                            "title": "Sum",
+                            "description": "Show the 'Sum' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "MacroRecord": {
+                        "schema": {
+                            "title": "Macro Record",
+                            "description": "Show the 'Macro Record' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+
+                    "DigitalSignatures": {
+                        "schema": {
+                            "title": "Digital Signatures",
+                            "description": "Show the 'Digital Signatures' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "InformationManagementPolicy": {
+                        "schema": {
+                            "title": "Information Management Policy",
+                            "description": "Show the 'Information Management Policy' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "PermissionPolicy": {
+                        "schema": {
+                            "title": "Permission Policy",
+                            "description": "Show the 'Permission Policy' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UploadStatus": {
+                        "schema": {
+                            "title": "Upload Status",
+                            "description": "Show the 'Upload Status' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "FlashFillErrors": {
+                        "schema": {
+                            "title": "Flash Fill Errors",
+                            "description": "Show the 'Flash Fill Errors' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "FlashFillUpdatedCells": {
+                        "schema": {
+                            "title": "Flash Fill Updated Cells",
+                            "description": "Show the 'Flash Fill Updated Cells' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "CapsLock": {
+                        "schema": {
+                            "title": "Caps Lock",
+                            "description": "Show the 'Caps Lock' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "NumLock": {
+                        "schema": {
+                            "title": "Num Lock",
+                            "description": "Show the 'Num Lock' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ScrollLock": {
+                        "schema": {
+                            "title": "Scroll Lock",
+                            "description": "Show the 'Scroll Lock' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ZoomSlider": {
+                        "schema": {
+                            "title": "Zoom Slider",
+                            "description": "Show the 'Zoom Slider' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Zoom": {
+                        "schema": {
+                            "title": "Zoom",
+                            "description": "Show the 'Zoom' on the status bar in Excel",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.powerpoint16.status": {
@@ -6879,22 +7266,134 @@
                     "ViewShortcuts": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.powerpoint-status.ViewShortcuts"
                 },
                 "supportedSettings": {
-                    "SelectionMode": {},
-                    "ViewIndicator": {},
-                    "DesignName": {},
-                    "SpellCheck": {},
-                    "Language": {},
-                    "DigitalSignatures": {},
-                    "ZoomToFit": {},
-                    "Notes": {},
-                    "Comments": {},
-                    "ZoomSlider": {},
-                    "Zoom": {},
-                    "InformationManagementPolicy": {},
-                    "PermissionPolicy": {},
-                    "UploadStatus": {},
-                    "UpdatesAvailable": {},
-                    "ViewShortcuts": {}
+                    "SelectionMode": {
+                        "schema": {
+                            "title": "Selection Mode",
+                            "description": "Show the 'Selection Mode' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ViewIndicator": {
+                        "schema": {
+                            "title": "View Indicator",
+                            "description": "Show the 'View Indicator' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "DesignName": {
+                        "schema": {
+                            "title": "Design Name",
+                            "description": "Show the 'Design Name' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "SpellCheck": {
+                        "schema": {
+                            "title": "Spell Check",
+                            "description": "Show the 'Spell Check' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Language": {
+                        "schema": {
+                            "title": "Language",
+                            "description": "Show the 'Language' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "DigitalSignatures": {
+                        "schema": {
+                            "title": "Digital Signatures",
+                            "description": "Show the 'Digital Signatures' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ZoomToFit": {
+                        "schema": {
+                            "title": "Zoom To Fit",
+                            "description": "Show the 'Zoom To Fit' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Notes": {
+                        "schema": {
+                            "title": "Notes",
+                            "description": "Show the 'Notes' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Comments": {
+                        "schema": {
+                            "title": "Comments",
+                            "description": "Show the 'Comments' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ZoomSlider": {
+                        "schema": {
+                            "title": "Zoom Slider",
+                            "description": "Show the 'Zoom Slider' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Zoom": {
+                        "schema": {
+                            "title": "Zoom",
+                            "description": "Show the 'Zoom' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "InformationManagementPolicy": {
+                        "schema": {
+                            "title": "Information Management Policy",
+                            "description": "Show the 'Information Management Policy' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "PermissionPolicy": {
+                        "schema": {
+                            "title": "Permission Policy",
+                            "description": "Show the 'Permission Policy' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UploadStatus": {
+                        "schema": {
+                            "title": "Upload Status",
+                            "description": "Show the 'Upload Status' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UpdatesAvailable": {
+                        "schema": {
+                            "title": "Updates Available",
+                            "description": "Show the 'Updates Available' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ViewShortcuts": {
+                        "schema": {
+                            "title": "View Shortcuts",
+                            "description": "Show the 'View Shortcuts' field on the status bar in PowerPoint.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.publisher16.status": {
@@ -6920,12 +7419,54 @@
                     "ZoomToFit": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.publisher-status.ZoomToFit"
                 },
                 "supportedSettings": {
-                    "SelectionMode": {},
-                    "PageCount": {},
-                    "CapsLock": {},
-                    "Measurements": {},
-                    "ViewMode": {},
-                    "ZoomToFit": {}
+                    "SelectionMode": {
+                        "schema": {
+                            "title": "Selection Mode",
+                            "description": "Show the 'Selection Mode' field on the status bar in Publisher.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "PageCount": {
+                        "schema": {
+                            "title": "Page Count",
+                            "description": "Show the 'Page Count' field on the status bar in Publisher.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "CapsLock": {
+                        "schema": {
+                            "title": "Caps Lock",
+                            "description": "Show the 'Caps Lock' field on the status bar in Publisher.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Measurements": {
+                        "schema": {
+                            "title": "Measurements",
+                            "description": "Show the 'Measurements' field on the status bar in Publisher.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ViewMode": {
+                        "schema": {
+                            "title": "View Mode",
+                            "description": "Show the 'View Mode' field on the status bar in Publisher.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ZoomToFit": {
+                        "schema": {
+                            "title": "Zoom To Fit",
+                            "description": "Show the 'Zoom To Fit' field on the status bar in Publisher.",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.access16.status": {
@@ -6958,15 +7499,78 @@
                     "ViewShortcuts": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.access-status.ViewShortcuts"
                 },
                 "supportedSettings": {
-                    "CapsLock": {},
-                    "KanaMode": {},
-                    "NumLock": {},
-                    "ScrollLock": {},
-                    "OverType": {},
-                    "Filter": {},
-                    "MoveMode": {},
-                    "ExtendMode": {},
-                    "ViewShortcuts": {}
+                    "CapsLock": {
+                        "schema": {
+                            "title": "Caps Lock",
+                            "description": "Show the 'Caps Lock' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "KanaMode": {
+                        "schema": {
+                            "title": "Kana Mode",
+                            "description": "Show the 'Kana Mode' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "NumLock": {
+                        "schema": {
+                            "title": "Num Lock",
+                            "description": "Show the 'Num Lock' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ScrollLock": {
+                        "schema": {
+                            "title": "Scroll Lock",
+                            "description": "Show the 'Scroll Lock' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "OverType": {
+                        "schema": {
+                            "title": "Over Type",
+                            "description": "Show the 'Over Type' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Filter": {
+                        "schema": {
+                            "title": "Filter",
+                            "description": "Show the 'Filter' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "MoveMode": {
+                        "schema": {
+                            "title": "Move Mode",
+                            "description": "Show the 'Move Mode' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ExtendMode": {
+                        "schema": {
+                            "title": "Extend Mode",
+                            "description": "Show the 'Extend Mode' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ViewShortcuts": {
+                        "schema": {
+                            "title": "View Shortcuts",
+                            "description": "Show the 'View Shortcuts' field on the status bar in Access",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    }
                 }
             },
             "configure.outlook.status": {
@@ -7005,18 +7609,102 @@
                     "QuotaPollInterval": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.office.outlook-status.QuotaPollInterval"
                 },
                 "supportedSettings": {
-                    "QuotaThermometer": {},
-                    "Filter": {},
-                    "ItemCount": {},
-                    "HeaderCount": {},
-                    "UnreadCount": {},
-                    "UnseenCount": {},
-                    "Reminder": {},
-                    "Notifications": {},
-                    "ZoomSlider": {},
-                    "Zoom": {},
-                    "ViewShortcuts": {},
-                    "QuotaPollInterval": {}
+                    "QuotaThermometer": {
+                        "schema": {
+                            "title": "Quota Thermometer",
+                            "description": "Show the 'Quota Thermometer' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Filter": {
+                        "schema": {
+                            "title": "Filter",
+                            "description": "Show the 'Filter' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ItemCount": {
+                        "schema": {
+                            "title": "Item Count",
+                            "description": "Show the 'Item Count' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "HeaderCount": {
+                        "schema": {
+                            "title": "Header Count",
+                            "description": "Show the 'Header Count' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UnreadCount": {
+                        "schema": {
+                            "title": "Unread Count",
+                            "description": "Show the 'Unread Count' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "UnseenCount": {
+                        "schema": {
+                            "title": "Unseen Count",
+                            "description": "Show the 'Unseen Count' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Reminder": {
+                        "schema": {
+                            "title": "Reminder",
+                            "description": "Show the 'Reminder' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Notifications": {
+                        "schema": {
+                            "title": "Notifications",
+                            "description": "Show the 'Notifications' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ZoomSlider": {
+                        "schema": {
+                            "title": "Zoom Slider",
+                            "description": "Show the 'Zoom Slider' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "Zoom": {
+                        "schema": {
+                            "title": "Zoom",
+                            "description": "Show the 'Zoom' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "ViewShortcuts": {
+                        "schema": {
+                            "title": "View Shortcuts",
+                            "description": "Show the 'View Shortcuts' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    },
+                    "QuotaPollInterval": {
+                        "schema": {
+                            "title": "Quota Poll Interval",
+                            "description": "Show the 'Quota Poll Interval' field on the status bar in Outlook",
+                            "type": "boolean",
+                            "default": null
+                        }
+                    }
                 }
             }
         },
