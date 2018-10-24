@@ -2,30 +2,44 @@
 
 (`scripts/deleteAndLoadSnapsets.sh`)
 
-This script is used to setup CouchDB database and is executed as a Kubernetes batch Job every time new version of the
+This script is used to setup CouchDB database and is executed as a Kubernetes batch Job every time a new version of the
 universal image is deployed to the cluster (also when cluster is initially created).
 
-It does following:
+It does the following:
 
-- Converts the preferences in universal into `snapset` Prefs Safes and GPII Keys,
-- Optionally deletes existing database,
-- Creates a CouchDB database if none exists,
-- Updates the database with respect to its `design/views` document, as required,
-- Deletes the snapsets and keys, if any, from the database,
-- Loads the latest snapsets and keys created created above into the database.
+1. Converts the preferences in universal into `snapset` Prefs Safes and their associated GPII Keys,
+2. Optionally deletes the existing database,
+3. Creates a CouchDB database if none exists,
+4. Updates the database with respect to its `_design/views` document, as required,
+5. Deletes the `snapset` Prefs Safes and their associated GPII Keys, if any, currently in the database,
+6. Loads the latest snapsets and associated keys created at step 1. into the database.
+
+Steps 4, 5, and 6 are handled by, and documented further in [`scripts/deleteAndLoadSnapsets.js`](https://github.com/GPII/universal/blob/master/scripts/deleteAndLoadSnapsets.js#L11).
 
 ## Environment Variables
 
-- `GPII_COUCHDB_URL`: URL of the CouchDB database. (required)
-- `GPII_CLEAR_INDEX`: If set to `true`, the database at $GPII_COUCHDB_URL will be deleted and recreated. (optional)
-- `GPII_STATIC_DATA_DIR`: The directory where the static data to be loaded into CouchDB resides. (optional)
-- `GPII_BUILD_DATA_DIR`: The directory where the data built from the conversion step resides. (optional)
+With the exception of `GPII_COUCHDB_URL`, the following environment variables have default values defined within
+`scripts/deleteAndLoadSnapsets.sh`. The database, `GPII_COUCHDB_URL`, must be set outside of the script.  Developers
+can set these variables as needed for testing and experimentation.
 
-The use of environment variables for data directories is useful if you want to mount the database data using a Docker
+The use of environment variables for data directories is also useful if you want to mount the database data using a Docker
 volume and point the data loader at it.
 
+WARNING: setting `GPII_CLEAR_INDEX` to `true` will erase all the contents of the database.  Use with caution, and with
+your own database for development.  In a staging or production environment, these variables are set appropriately for
+those contexts; in particular `GPII_CLEAR_INDEX` will not be set.
+
+- `GPII_COUCHDB_URL`: URL of the CouchDB database. (required)
+- `GPII_CLEAR_INDEX`: If set to `true`, the database at `$GPII_COUCHDB_URL` will be deleted and replaced with an empty
+  database. (optional)
+- `GPII_STATIC_DATA_DIR`: The directory where the static data to be loaded into CouchDB resides. (optional)
+- `GPII_PREFERENCES_DATA_DIR`: The directory containing the "raw" preferences that are converted into `snapset` Prefs
+  Safes and their associated GPII Keys (step 1 above). (optional)
+- `GPII_BUILD_DATA_DIR`: The directory where the data built from the conversion step reside. (optional)
+- `GPII_APP_DIR`: The main directory, typically `universal`. (optional)
+
 Note that since [the docker doesn't support the environment variable type of
-array](https://github.com/moby/moby/issues/20169), two separate environment variables are used for inputting data
+array](https://github.com/moby/moby/issues/20169), separate environment variables are used for inputting data
 directories instead of one array that holds these directories.
 
 ## Running
