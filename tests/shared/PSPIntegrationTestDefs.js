@@ -34,6 +34,11 @@ fluid.defaults("gpii.tests.pspIntegration.client", {
     port: 8081
 });
 
+fluid.defaults("gpii.tests.pspIntegration.resetRequestType", {
+    gradeNames: "kettle.test.request.http",
+    path: "/user/reset/login"
+});
+
 gpii.tests.pspIntegration.sendMsg = function (client, path, value) {
     client.send({
         path: path,
@@ -52,6 +57,10 @@ gpii.tests.pspIntegration.checkPayload = function (data, expectedType) {
 
 gpii.tests.pspIntegration.connectionSucceeded = function (data) {
     jqUnit.assertValue("Connection between client and server can be established", data);
+};
+
+gpii.tests.pspIntegration.checkResetResponse = function (data) {
+    jqUnit.assertEquals("The reset request completes successfully", "Reset successfully.", data);
 };
 
 gpii.tests.pspIntegration.data = {
@@ -76,7 +85,7 @@ gpii.tests.pspIntegration.data = {
             }
         }
     },
-    afterChange1: {
+    afterChangeMagnification: {
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
@@ -97,7 +106,49 @@ gpii.tests.pspIntegration.data = {
             }
         }
     },
-    afterChange2: {
+    afterChangeCursorSize: {
+        "settingsHandlers": {
+            "gpii.gsettings": {
+                "data": [{
+                    "settings": {
+                        "cursor-size": 41
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            },
+            "gpii.alsa": {
+                "data": [{
+                    "settings": {
+                        "masterVolume": 50
+                    }
+                }]
+            }
+        }
+    },
+    afterDecreaseCursorSize: {
+        "settingsHandlers": {
+            "gpii.gsettings": {
+                "data": [{
+                    "settings": {
+                        "cursor-size": 29
+                    },
+                    "options": {
+                        "schema": "org.gnome.desktop.interface"
+                    }
+                }]
+            },
+            "gpii.alsa": {
+                "data": [{
+                    "settings": {
+                        "masterVolume": 50
+                    }
+                }]
+            }
+        }
+    },
+    afterChangeVolume: {
         "settingsHandlers": {
             "gpii.gsettings": {
                 "data": [{
@@ -136,7 +187,7 @@ gpii.tests.pspIntegration.data = {
 
 gpii.tests.pspIntegration.testDefs = [
     {
-        name: "Simple settings change by PSP",
+        name: "Simple settings change by PSP - change an existing user setting",
         expect: 8,
         sequence: [
             [
@@ -178,7 +229,85 @@ gpii.tests.pspIntegration.testDefs = [
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{logoutRequest}.send"
+                }, {
+                    event: "{logoutRequest}.events.onComplete",
+                    listener: "gpii.test.logoutRequestListen"
+                }, {
+                    func: "gpii.test.checkRestoredConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckRestoredConfigurationComplete",
+                    listener: "fluid.identity"
+                }
+            ]
+        ]
+    }, {
+        name: "Simple settings change by PSP - sequentially change a new setting",
+        expect: 11,
+        sequence: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pspClient}.connect"
+                }, {
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/cursorSize"], 0.9]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "preferencesApplied"]
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterChangeCursorSize.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/common/cursorSize"], 0.5]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "preferencesApplied"]
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.afterDecreaseCursorSize.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -243,7 +372,7 @@ gpii.tests.pspIntegration.testDefs = [
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -304,7 +433,7 @@ gpii.tests.pspIntegration.testDefs = [
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -317,7 +446,7 @@ gpii.tests.pspIntegration.testDefs = [
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange2.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChangeVolume.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -439,7 +568,7 @@ gpii.tests.pspIntegration.testDefs = [
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -515,7 +644,7 @@ gpii.tests.pspIntegration.testDefs = [
                     args: ["{arguments}.0", "preferencesApplied"]
                 }, {
                     func: "gpii.test.checkConfiguration",
-                    args: ["{tests}.options.data.afterChange1.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                    args: ["{tests}.options.data.afterChangeMagnification.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
                 }, {
                     event: "{testCaseHolder}.events.onCheckConfigurationComplete",
                     listener: "fluid.identity"
@@ -557,6 +686,61 @@ gpii.tests.pspIntegration.testDefs = [
                 }
             ]
         ]
+    }, {
+        name: "GPII-3437: reset does not throw errors after a long asynchronous reset process",
+        expect: 7,
+        sequence: [
+            [
+                {
+                    func: "gpii.test.expandSettings",
+                    args: [ "{tests}", [ "contexts" ]]
+                }, {
+                    func: "gpii.test.snapshotSettings",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{tests}.settingsStore", "{nameResolver}", "{testCaseHolder}.events.onSnapshotComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onSnapshotComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{loginRequest}.send"
+                }, {
+                    event: "{loginRequest}.events.onComplete",
+                    listener: "gpii.test.loginRequestListen"
+                }, {
+                    func: "gpii.test.checkConfiguration",
+                    args: ["{tests}.options.data.initial.settingsHandlers", "{nameResolver}", "{testCaseHolder}.events.onCheckConfigurationComplete.fire"]
+                }, {
+                    event: "{testCaseHolder}.events.onCheckConfigurationComplete",
+                    listener: "fluid.identity"
+                }, {
+                    func: "{pspClient}.connect"
+                }, {
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    // Issue a setting change that will be applied using the async mock settings handler
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", [ "preferences","http://registry\\.gpii\\.net/applications/org\\.gnome\\.orca.http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"], true]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "preferencesApplied"]
+                }, {
+                    func: "{resetRequest}.send"
+                }, {
+                    event: "{resetRequest}.events.onComplete",
+                    listener: "gpii.tests.pspIntegration.checkResetResponse",
+                    args: ["{arguments}.0"]
+                }
+            ]
+        ]
     }
 ];
 
@@ -570,6 +754,9 @@ fluid.defaults("gpii.tests.pspIntegration.testCaseHolder.common.linux", {
         },
         environmentChangedRequest: {
             type: "gpii.tests.pspIntegration.environmentChangedRequestType"
+        },
+        resetRequest: {
+            type: "gpii.tests.pspIntegration.resetRequestType"
         }
     },
     gpiiKey: "context1",
