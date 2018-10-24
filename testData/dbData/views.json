@@ -22,6 +22,12 @@
             },
             "expressUserSafeLoginLookup": {
                 "map": "function(doc) {if (doc.type === 'gpiiCloudSafeCredential') {emit(doc.gpiiExpressUserId, null);}}"
+            },
+            "findSnapsetPrefsSafes": {
+                "map": "function(doc) {if (doc.type === 'prefsSafe' && doc.prefsSafeType === 'snapset') {emit(doc._id, doc)}}"
+            },
+            "findAllGpiiKeys": {
+                "map": "function(doc) {if (doc.type === 'gpiiKey') {emit(doc._id, doc)}}"
             }
         }
     }
