@@ -22,7 +22,17 @@ The main types of filtering provided by the Preferences Server are the following
   Preferences Server draws on the ontologyHandler component to take care of the bulk of this filtering, merging, etc.,
   of the prefs and metadata sections.
 
-## API
+## APIs
+
+### GET /ready
+
+Check whether Preferences Server is up and running. It returns http status code 200 when Preferences Server is up and
+running. Otherwise, returns http status code 500.
+
+### GET /health
+
+Check whether Preferences Server is able to handle requests by checking the database connection. It returns http status
+code 200 when Cloud Based Flow Manager is up and running. Otherwise, returns http status code 404.
 
 ### GET /preferences/:token[?view=:view]
 
