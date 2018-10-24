@@ -1,12 +1,12 @@
 #!/bin/sh
-APP_DIR=${APP_DIR:-"/app"}
+GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 
-STATIC_DATA_DIR=${STATIC_DATA_DIR:-"${APP_DIR}/testData/dbData"}
-PREFERENCES_DATA_DIR=${PREFERENCES_DATA_DIR:-"${APP_DIR}/testData/preferences"}
-BUILD_DATA_DIR=${BUILD_DATA_DIR:-'/tmp/build/dbData'}
+GPII_STATIC_DATA_DIR=${GPII_STATIC_DATA_DIR:-"${GPII_APP_DIR}/testData/dbData"}
+GPII_PREFERENCES_DATA_DIR=${GPII_PREFERENCES_DATA_DIR:-"${GPII_APP_DIR}/testData/preferences"}
+GPII_BUILD_DATA_DIR=${GPII_BUILD_DATA_DIR:-'/tmp/build/dbData'}
 
-DATALOADER_JS="${APP_DIR}/scripts/deleteAndLoadSnapsets.js"
-CONVERT_JS="${APP_DIR}/scripts/convertPrefs.js"
+DATALOADER_JS="${GPII_APP_DIR}/scripts/deleteAndLoadSnapsets.js"
+CONVERT_JS="${GPII_APP_DIR}/scripts/convertPrefs.js"
 
 log() {
   echo "$(date +'%Y-%m-%d %H:%M:%S') - $1"
@@ -32,9 +32,9 @@ GPII_COUCHDB_URL_SANITIZED=$(echo "${GPII_COUCHDB_URL}" | sed -e 's,\(://\)[^/]*
 
 log 'Starting'
 log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
-log "Clear index: ${CLEAR_INDEX}"
-log "Static: ${STATIC_DATA_DIR}"
-log "Build: ${BUILD_DATA_DIR}"
+log "Clear index: ${GPII_CLEAR_INDEX}"
+log "Static: ${GPII_STATIC_DATA_DIR}"
+log "Build: ${GPII_BUILD_DATA_DIR}"
 log "Working directory: $(pwd)"
 
 # Check we can connect to CouchDB
@@ -46,23 +46,23 @@ if [ "$RET_CODE" != '200' ]; then
 fi
 
 # Create build dir if it does not exist
-if [ ! -d "${BUILD_DATA_DIR}" ]; then
-  mkdir -p "${BUILD_DATA_DIR}"
+if [ ! -d "${GPII_BUILD_DATA_DIR}" ]; then
+  mkdir -p "${GPII_BUILD_DATA_DIR}"
 fi
 
 # Convert preferences json5 to GPII keys and preferences safes
-if [ -d "${PREFERENCES_DATA_DIR}" ]; then
-  node "${CONVERT_JS}" "${PREFERENCES_DATA_DIR}" "${BUILD_DATA_DIR}" snapset
+if [ -d "${GPII_PREFERENCES_DATA_DIR}" ]; then
+  node "${CONVERT_JS}" "${GPII_PREFERENCES_DATA_DIR}" "${GPII_BUILD_DATA_DIR}" snapset
   if [ "$?" != '0' ]; then
     log "[ERROR] ${CONVERT_JS} failed (exit code: $?)"
     exit 1
   fi
 else
-  log "PREFERENCES_DATA_DIR ($PREFERENCES_DATA_DIR) does not exist, nothing to convert"
+  log "GPII_PREFERENCES_DATA_DIR ($GPII_PREFERENCES_DATA_DIR) does not exist, nothing to convert"
 fi
 
 # Initialize (possibly clear) data base
-if [ "${CLEAR_INDEX}" == 'true' ]; then
+if [ "${GPII_CLEAR_INDEX}" == 'true' ]; then
   log "Deleting database at ${GPII_COUCHDB_URL_SANITIZED}"
   if ! curl -fsS -X DELETE "${GPII_COUCHDB_URL}"; then
     log "Error deleting database"
@@ -75,7 +75,7 @@ if ! curl -fsS -X PUT "${GPII_COUCHDB_URL}"; then
 fi
 
 # Submit data
-node "${DATALOADER_JS}" "${GPII_COUCHDB_URL}" "${STATIC_DATA_DIR}" "${BUILD_DATA_DIR}"
+node "${DATALOADER_JS}" "${GPII_COUCHDB_URL}" "${GPII_STATIC_DATA_DIR}" "${GPII_BUILD_DATA_DIR}"
 err=$?
 if [ "${err}" != '0' ]; then
   log "${DATALOADER_JS} failed with ${err}, exiting"
