@@ -1,12 +1,12 @@
 #!/bin/sh
-APP_DIR=${APP_DIR:-"/app"}
+GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 
-GPII_STATIC_DATA_DIR=${GPII_STATIC_DATA_DIR:-"${APP_DIR}/testData/dbData"}
-GPII_PREFERENCES_DATA_DIR=${GPII_PREFERENCES_DATA_DIR:-"${APP_DIR}/testData/preferences"}
+GPII_STATIC_DATA_DIR=${GPII_STATIC_DATA_DIR:-"${GPII_APP_DIR}/testData/dbData"}
+GPII_PREFERENCES_DATA_DIR=${GPII_PREFERENCES_DATA_DIR:-"${GPII_APP_DIR}/testData/preferences"}
 GPII_BUILD_DATA_DIR=${GPII_BUILD_DATA_DIR:-'/tmp/build/dbData'}
 
-DATALOADER_JS="${APP_DIR}/scripts/deleteAndLoadSnapsets.js"
-CONVERT_JS="${APP_DIR}/scripts/convertPrefs.js"
+DATALOADER_JS="${GPII_APP_DIR}/scripts/deleteAndLoadSnapsets.js"
+CONVERT_JS="${GPII_APP_DIR}/scripts/convertPrefs.js"
 
 log() {
   echo "$(date +'%Y-%m-%d %H:%M:%S') - $1"
