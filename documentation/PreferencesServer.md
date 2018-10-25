@@ -26,13 +26,17 @@ The main types of filtering provided by the Preferences Server are the following
 
 ### GET /ready
 
-Check whether Preferences Server is up and running. It returns http status code 200 when Preferences Server is up and
-running. Otherwise, returns http status code 500.
+Check whether Preferences Server is ready to handle requests. The readiness endpoint checks the database connection.
+
+It returns http status code 200 when Preferences Server is ready to handle requests. Otherwise, returns http status code
+404.
 
 ### GET /health
 
-Check whether Preferences Server is able to handle requests by checking the database connection. It returns http status
-code 200 when Cloud Based Flow Manager is up and running. Otherwise, returns http status code 404.
+Check whether Preferences Server itself is running. A running Preferences Server may or may not be ready to handle requests
+because the liveness endpoint does not check the connection between Preferences Server and the database.
+
+It returns http status code 200 when Preferences Server itself is running. Otherwise, returns http status code 500.
 
 ### GET /preferences/:token[?view=:view]
 

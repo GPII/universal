@@ -62,42 +62,42 @@ gpii.tests.cloudStatus.commonTestDefs = {
 };
 
 gpii.tests.cloudStatus.testCases = {
-    // Test cases for /ready
+    // Test cases for /health
     testReadyWithAllUp: {
         name:  "Test the readiness of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
-        url: "/ready",
+        url: "/health",
         config: gpii.tests.cloudStatus.configs.allLocalWithPrefsServer,
         expectedStatusCode: 200
     },
     testReadyWithoutPrefsServer: {
         name:  "Test the readiness of the cloud based flow manager: all local with only the cloud based flow manager running",
-        url: "/ready",
+        url: "/health",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
         expectedStatusCode: 200
     },
     testReadyWithSeparateServers: {
         name:  "Test the readiness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
-        url: "/ready",
+        url: "/health",
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,
         expectedStatusCode: 200
     },
 
-    // Test cases for /health
+    // Test cases for /ready
     testHealthWithAllUp: {
-        name:  "Test the health of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
-        url: "/health",
+        name:  "Test the liveness of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
+        url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithPrefsServer,
         expectedStatusCode: 200
     },
     testHealthWithoutPrefsServer: {
-        name:  "Test the health of the cloud based flow manager: all local with only the cloud based flow manager running",
-        url: "/health",
+        name:  "Test the liveness of the cloud based flow manager: all local with only the cloud based flow manager running",
+        url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
         expectedStatusCode: 404
     },
     testHealthWithSeparateServers: {
-        name:  "Test the health of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
-        url: "/health",
+        name:  "Test the liveness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
+        url: "/ready",
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,
         expectedStatusCode: 200
     }

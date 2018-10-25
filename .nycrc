@@ -76,7 +76,7 @@
     "!**/gpii/node_modules/pouchManager/index.js",
     "!**/gpii/node_modules/pouchManager/src/pouchManager.js",
     "!**/gpii/node_modules/preferencesServer/index.js",
-    "!**/gpii/node_modules/preferencesServer/src/healthGetHandler.js",
+    "!**/gpii/node_modules/preferencesServer/src/readyGetHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesGetHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesPostHandler.js",
     "!**/gpii/node_modules/preferencesServer/src/preferencesPutHandler.js",

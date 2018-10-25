@@ -75,23 +75,25 @@ Note that a separate logout of "reset" is not necessary. The final condition of 
 
 ### Check the readiness of Cloud Based Flow Manager (GET /ready)
 
-* **description**: Check whether Cloud Based Flow Manager is up and running.
+* **description**: Check whether Cloud Based Flow Manager is ready to handle requests.
+  * When Cloud Based Flow Manager and Preferences Server are running together as one server, the readiness endpoint
+    checks the database connection.
+  * When Cloud Based Flow Manager and Preferences Server are running as separate servers, the readiness endpoint
+    checks the communication with Preferences Server.
 * **route:** `/ready`
 * **method:** `GET`
-* **return:** Return http status code 200 when Cloud Based Flow Manager is up and running. Otherwise, return http status
- code 500.
+* **return:** Return http status code 200 when Cloud Based Flow Manager is ready to handle requests. Otherwise, return
+ http status code 404.
 
 ### Check the liveness of Cloud Based Flow Manager (GET /health)
 
-* **description**: Check whether Cloud Based Flow Manager is able to handle requests.
-  * When Cloud Based Flow Manager and Preferences Server are running together as one server, the liveness endpoint
-    checks the database connection.
-  * When Cloud Based Flow Manager and Preferences Server are running as separate servers, the liveness endpoint
-    checks the communication with Preferences Server.
+* **description**: Check whether Cloud Based Flow Manager itself is running. A running Cloud Based Flow Manager may or may
+ not be ready to handle requests because the liveness endpoint does not check communications between Cloud Based
+ Flow Manager with other modules such as Preferences Server and the database.
 * **route:** `/health`
 * **method:** `GET`
-* **return:** Return http status code 200 when Cloud Based Flow Manager is up and running. Otherwise, return http status
- code 404.
+* **return:** Return http status code 200 when Cloud Based Flow Manager itself is running. Otherwise, return http status
+ code 500.
 
 ### Get an access token (POST /access_token)
 
