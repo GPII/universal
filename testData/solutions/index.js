@@ -1,6 +1,6 @@
 /* eslint-env node */
 "use strict";
-require("json5/lib/require"); // allow us to require json5 files
+require("json5/lib/register"); // allow us to require json5 files
 exports.win32 = require("./win32.json5");
 exports.linux = require("./linux.json5");
 exports.darwin = require("./darwin.json5");
