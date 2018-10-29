@@ -27,7 +27,7 @@ var inputDir = process.argv[2];
 var targetDir = process.argv[3];
 var prefsSafeType = process.argv[4] || "user";
 
-if (prefsSafeType !== "snapset" && prefsSafeType !== "user") {
+if (process.argv.length < 4 || (prefsSafeType !== "snapset" && prefsSafeType !== "user")) {
     console.log("Usage: node scripts/convertPrefs.js InputFolder OutputFolder PrefsSafeType");
     console.log("  where PrefsSafeType, is one of 'snapset' or 'user' (defaults to 'user')");
     process.exit(1);
@@ -45,7 +45,7 @@ rimraf(targetDir, function () {
         filenames.forEach(function (filename) {
             if (filename.endsWith(".json5")) {
                 var gpiiKey = filename.substr(0, filename.length - 6);
-                var preferences = fs.readFileSync(inputDir + filename, "utf-8");
+                var preferences = fs.readFileSync(inputDir + "/" + filename, "utf-8");
                 var currentTime = new Date().toISOString();
                 var prefsSafeId = "prefsSafe-" + gpiiKey;
 
@@ -80,11 +80,11 @@ rimraf(targetDir, function () {
         });
 
         // Write the target files
-        var prefsSafesFile = targetDir + "prefsSafes.json";
+        var prefsSafesFile = targetDir + "/prefsSafes.json";
         console.log("prefsSafesFile: " + prefsSafesFile);
         fs.writeFileSync(prefsSafesFile, JSON.stringify(prefsSafes, null, 4));
 
-        var gpiiKeysFile = targetDir + "gpiiKeys.json";
+        var gpiiKeysFile = targetDir + "/gpiiKeys.json";
         fs.writeFileSync(gpiiKeysFile, JSON.stringify(gpiiKeys, null, 4));
 
         console.log("Finished converting preferences data in the source directory " + inputDir + " to the target directory " + targetDir);
