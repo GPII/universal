@@ -61,20 +61,33 @@ gpii.tests.userLogonRequest.modelChangeChecker = function (trackedLogonChange, e
     jqUnit.assertEquals("Checking gpiiKey of model change", expectedGpiiKey, result.gpiiKey);
 };
 
-gpii.tests.userLogonRequest.buildTestDefs = function (testDefs) {
+gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, expectedError) {
+    jqUnit.assertDeepEq("onError fires with the expected message", expectedError, actualError);
+    if (actualError.ignoreUserErrors) {
+        jqUnit.assertDeepEq("User error has not be fired", {}, userError);
+    } else {
+        var userErrorMessage = userError.error.originalError;
+        jqUnit.assertDeepEq("User error has been fired with the expected message", actualError.message, userErrorMessage);
+    }
+};
+
+gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
+    var config = {
+        // The custom config file is to config the debounce time at proximityTriggered endpoint to 3 seconds
+        // rather than using the default 1.5 seconds. This is to work around an issue with testing a following
+        // request that occurs < the debounce time. In this test, the following request was sent after waiting
+        // for 1 second. However in the reality with all other running processes, CPU processing power etc,
+        // this request is usually sent a bit more than after 1 second, occassionally even more than 1.5 seconds,
+        // which causes the test to fail. Setting the debounce time to 3 seconds provides more buffering time
+        // for the following request to send.
+        configName: testType === "untrusted" ? "gpii.tests.acceptance.untrusted.userLogon.config" : "gpii.tests.acceptance.userLogon.config",
+        configPath: "%gpii-universal/tests/configs"
+    };
+
     return fluid.transform(testDefs, function (testDef) {
+        var extraTestDef = testType === "untrusted" ? testDef.untrustedExtras : {};
         return fluid.extend(true, {
-            config: {
-                // The custom config file is to config the debounce time at proximityTriggered endpoint to 3 seconds
-                // rather than using the default 1.5 seconds. This is to work around an issue with testing a following
-                // request that occurs < the debounce time. In this test, the following request was sent after waiting
-                // for 1 second. However in the reality with all other running processes, CPU processing power etc,
-                // this request is usually sent a bit more than after 1 second, occassionally even more than 1.5 seconds,
-                // which causes the test to fail. Setting the debounce time to 3 seconds provides more buffering time
-                // for the following request to send.
-                configName: "gpii.tests.acceptance.userLogon.config",
-                configPath: "%gpii-universal/tests/configs"
-            },
+            config: config,
             gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
             distributeOptions: {
@@ -89,9 +102,21 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs) {
                         }
                     },
                     "target": "{that gpii.flowManager.local lifecycleManager}.options"
+                },
+                "lifecycleManager.userErrorsListener": {
+                    "record": {
+                        trackedUserErrors: {},
+                        listeners: {
+                            "userError.trackReportedError": {
+                                listener: "fluid.set",
+                                args: ["{that}.options.trackedUserErrors", "error", "{arguments}.0"]
+                            }
+                        }
+                    },
+                    "target": "{that gpii.flowManager.local userErrors}.options"
                 }
             }
-        }, testDef);
+        }, testDef, extraTestDef);
     });
 };
 
@@ -286,7 +311,8 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "jqUnit.assertDeepEq",
         args: ["Proximity trigger ignored due to bounce rules", {
             "statusCode": 429,
-            "message": "Proximity trigger ignored due to bounce rules. Please wait current logon change is complete"
+            "message": "Proximity trigger ignored due to bounce rules. Please wait current logon change is complete",
+            "ignoreUserErrors": false
         }, "{arguments}.0"]
     }]
 }, {
@@ -332,7 +358,8 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "jqUnit.assertDeepEq",
         args: ["Proximity trigger ignored due to bounce rules", {
             "statusCode": 429,
-            "message": "Proximity trigger ignored due to bounce rules. Please wait current logon change is complete"
+            "message": "Proximity trigger ignored due to bounce rules. Please wait current logon change is complete",
+            "ignoreUserErrors": false
         }, "{arguments}.0"]
     }]
 }, {
@@ -449,7 +476,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-    expect: 12,
+    expect: 13,
     sequence: [{
         // standard login
         func: "gpii.tests.invokePromiseProducer",
@@ -464,22 +491,25 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
-        listener: "jqUnit.assertDeepEq",
-        args: ["Received 409 error when logging in user who is already logged in", {
+        listener: "gpii.tests.userLogonRequest.testLogoutError",
+        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
             "statusCode": 409,
-            "message": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request."
-        }, "{arguments}.0"]
+            "message": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request.",
+            "ignoreUserErrors": false
+        }]
     }, {
         // logout of different user
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
-        listener: "jqUnit.assertDeepEq",
-        args: ["Received 409 error when logging out user who is not logged in", {
+        priority: "last",
+        listener: "gpii.tests.userLogonRequest.testLogoutError",
+        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
             "statusCode": 409,
-            "message": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request."
-        }, "{arguments}.0"]
+            "message": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request.",
+            "ignoreUserErrors": false
+        }]
     }, {
         // logout of the correct user
         func: "gpii.tests.invokePromiseProducer",
@@ -502,16 +532,21 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
         args: ["{lifecycleManager}", ["noUser"]]
-    }, {
+    }]
+}, {
+    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is \"noUser\"",
+    expect: 2,
+    sequence: [{
         // logout of user when none is logged in
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
-        listener: "jqUnit.assertDeepEq",
-        args: ["Received 409 error when logging out user when no user is logged in", {
+        listener: "gpii.tests.userLogonRequest.testLogoutError",
+        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
             "statusCode": 409,
-            "message": "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request."
+            "message": "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request.",
+            "ignoreUserErrors": true
         }, "{arguments}.0"]
     }]
 }, {
