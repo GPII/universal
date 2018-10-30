@@ -51,7 +51,7 @@ GPII_PREFERENCES_PORT=9081
 
 GPII_FLOWMANAGER_CONFIG="gpii.config.cloudBased.flowManager.production"
 GPII_FLOWMANAGER_PORT=9082
-GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL="http://preferences:${GPII_PREFERENCES_PORT}/preferences/%gpiiKey?merge=%merge"
+GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL="http://preferences:${GPII_PREFERENCES_PORT}"
 
 # The URL to point to the flow manager docker container, only used by running the production config tests
 GPII_CLOUD_URL="http://flowmanager:9082"
