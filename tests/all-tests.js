@@ -5,7 +5,7 @@ Copyright 2013 OCAD University
 Copyright 2014 Emergya
 Copyright 2014 Technosite
 Copyright 2014 Raising the Floor - International
-Copyright 2017 OCAD University
+Copyright 2017-2018 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -30,8 +30,9 @@ fluid.require("%gpii-universal", require);
 
 var testIncludes = [
     "./DevelopmentTests.js",
-    "./platform/cloud/AcceptanceTests_settingsGet.js",
-    "./platform/cloud/AcceptanceTests_settingsPut.js",
+    "./platform/cloud/CloudStatusTests.js",
+    "./platform/cloud/SettingsGetTests.js",
+    "./platform/cloud/SettingsPutTests.js",
     "./CloseConflictingAppsTests.js",
     "./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
@@ -60,6 +61,7 @@ var testIncludes = [
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
     "../gpii/node_modules/flowManager/test/DefaultSettingsLoaderTests.js",
+    "../gpii/node_modules/flowManager/test/PrefsServerDataSourceTests.js",
     "../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
     "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
