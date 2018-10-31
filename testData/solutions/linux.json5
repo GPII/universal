@@ -1319,7 +1319,7 @@
                                 "wb",
                                 "by",
                                 "yb",
-                                "lgdg",
+                                "gd",
                                 "gw",
                                 "bbr"
                             ],
@@ -1481,7 +1481,7 @@
                                         "white-black": "wb",
                                         "black-yellow": "by",
                                         "yellow-black": "yb",
-                                        "gray-dark": "lgdg",
+                                        "gray-dark": "gd",
                                         "gray-white": "gw",
                                         "black-brown": "bbr"
                                     }

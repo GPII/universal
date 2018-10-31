@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . /app
 
 RUN apk add --no-cache --virtual build-dependencies python make git g++ && \
+    apk add --no-cache curl jq && \
     npm install && \
     chown -R node:node . && \
     npm cache clean --force && \

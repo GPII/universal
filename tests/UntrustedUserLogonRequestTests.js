@@ -23,32 +23,4 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.untrusted.userLogonRequest");
 
-gpii.tests.untrusted.userLogonRequest.testDefs =
-    fluid.transform(gpii.tests.userLogonRequest.testDefs, function (testDefIn) {
-        var testDef = fluid.extend(true, {}, testDefIn, {
-            config: {
-                configName: "gpii.tests.acceptance.untrusted.userLogon.config",
-                configPath: "%gpii-universal/tests/configs"
-            },
-            gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
-            gpiiKey: testDefIn.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
-            distributeOptions: {
-                "lifecycleManager.logonChangeListener": {
-                    "record": {
-                        trackedLogonChange: [],
-                        modelListeners: {
-                            "logonChange": {
-                                listener: "gpii.tests.userLogonRequest.trackLogonChange",
-                                args: ["{that}.options.trackedLogonChange", "{change}.value"]
-                            }
-                        }
-                    },
-                    "target": "{that localConfig flowManager lifecycleManager}.options"
-                }
-            }
-        }, testDefIn.untrustedExtras || {});
-
-        return testDef;
-    });
-
-gpii.test.bootstrapServer(gpii.tests.untrusted.userLogonRequest.testDefs);
+gpii.test.bootstrapServer(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs, "untrusted"));
