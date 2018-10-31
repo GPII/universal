@@ -4815,7 +4815,21 @@
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hcwhite.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hcblack.theme",
                                 "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme",
-                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc1.theme"
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\yellowOnBlack.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\hc2.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\blackOnBrown.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\grayOnDark.theme",
+                                "%SystemRoot%\\resources\\Ease of Access Themes\\grayOnWhite.theme"
+                            ],
+                            "enumLabels": [
+                                "Black on White",
+                                "White on Black",
+                                "Yellow on Black",
+                                "Black on Yellow",
+                                "Lime on Black",
+                                "Black on Brown",
+                                "Grey on Dark",
+                                "Grey on White"
                             ]
                         }
                     }
@@ -6169,7 +6183,7 @@
                                 "wb",
                                 "by",
                                 "yb",
-                                "lgdg",
+                                "gd",
                                 "gw",
                                 "bbr"
                             ],
@@ -6331,7 +6345,7 @@
                                         "white-black": "wb",
                                         "black-yellow": "by",
                                         "yellow-black": "yb",
-                                        "grey-black": "lgdg",
+                                        "grey-black": "gd",
                                         "grey-white": "gw",
                                         "black-brown": "bbr"
                                     }
