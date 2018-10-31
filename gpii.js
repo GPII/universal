@@ -12,7 +12,16 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
+
 "use strict";
+
+// GPII-3394: This is temporary code enabling Google Stackdriver tracing https://cloud.google.com/trace/
+// If this requirement expands, this code will be moved into its own module, otherwise it will be removed
+
+if (process.env.GPII_ENABLE_STACKDRIVER_TRACE === "true") {
+    console.log("Enabling @google-cloud/trace-agent");
+    require("@google-cloud/trace-agent").start();
+}
 
 // A simple bootstrap file which allows a configuration of the GPII to be
 // started from the command line from universal
