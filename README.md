@@ -57,8 +57,9 @@ npm start
 The Flow Manager with the `gpii.config.cloudBased.flowManager.production` configuration uses the following variables:
 
 * `GPII_FLOWMANAGER_LISTEN_PORT`: TCP port to listen on (default: 8081)
-* `GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the flow manager to read/write
- preferences (default: `http://localhost:8081/preferences/%gpiiKey?merge=%merge`)
+* `GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL`: The preferences server URL used by the cloud based flow manager to
+ communicate with the preferences server
+ preferences (default: `http://localhost:8081`)
 * `GPII_DATASOURCE_HOSTNAME`: The host name of CouchDB (default: `http://localhost`)
 * `GPII_DATASOURCE_PORT`: The port of CouchDB (default: 5984)
 * `GPII_CLOUD_URL`: The URL to GPII Cloud (default: `http://localhost:8084`). Used by untrusted local flow manager
@@ -68,7 +69,7 @@ The Flow Manager with the `gpii.config.cloudBased.flowManager.production` config
 
 ```snippet
 GPII_FLOWMANAGER_LISTEN_PORT=9091 \
-GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=http://localhost:8081/preferences/%gpiiKey?merge=%merge \
+GPII_FLOWMANAGER_TO_PREFERENCESSERVER_URL=http://localhost:8081 \
 GPII_DATASOURCE_HOSTNAME=https://localhost \
 GPII_DATASOURCE_PORT=5984 \
 NODE_ENV=gpii.config.cloudBased.flowManager.production \
