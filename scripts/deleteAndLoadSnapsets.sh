@@ -3,7 +3,7 @@ GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 
 GPII_STATIC_DATA_DIR=${GPII_STATIC_DATA_DIR:-"${GPII_APP_DIR}/testData/dbData"}
 GPII_PREFERENCES_DATA_DIR=${GPII_PREFERENCES_DATA_DIR:-"${GPII_APP_DIR}/testData/preferences"}
-GPII_BUILD_DATA_DIR=${GPII_BUILD_DATA_DIR:-'/tmp/build/dbData'}
+GPII_BUILD_DATA_DIR=${GPII_BUILD_DATA_DIR:-"${GPII_APP_DIR}/build/dbData/snapset"}
 
 DATALOADER_JS="${GPII_APP_DIR}/scripts/deleteAndLoadSnapsets.js"
 CONVERT_JS="${GPII_APP_DIR}/scripts/convertPrefs.js"
