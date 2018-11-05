@@ -17,16 +17,7 @@ var fluid = require("infusion"),
 
 require("./shared/ResetAtStartTestDefs.js");
 
-gpii.tests.resetAtStart.buildTestDefs = function (testDefs) {
-    return fluid.transform(testDefs, function (testDef) {
-        return fluid.extend(true, {
-            config: {
-                configName: "gpii.tests.acceptance.resetAtStart.config",
-                configPath: "%gpii-universal/tests/configs"
-            },
-            gradeNames: ["gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"]
-        }, testDef);
-    });
-};
-
-gpii.test.bootstrapServer(gpii.tests.resetAtStart.buildTestDefs(gpii.tests.resetAtStart.testDefs));
+gpii.test.bootstrapServer(gpii.tests.resetAtStart.buildTestDefs({
+    configName: "gpii.tests.acceptance.resetAtStart.config",
+    configPath: "%gpii-universal/tests/configs"
+}));
