@@ -5,8 +5,8 @@ COPY . /app
 
 RUN apk add --no-cache --virtual build-dependencies python make git g++ && \
     apk add --no-cache curl jq && \
-    npm install --unsafe-perm && \
     chown -R node:node . && \
+    npm install && \
     npm cache clean --force && \
     apk del build-dependencies
 
