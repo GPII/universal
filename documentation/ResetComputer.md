@@ -5,7 +5,7 @@ is described below.
 
 ## Define the Default Settings File
 
-The default settings JSON5 file should be created at `testData/snapshots/defaultSettings.json5`. Each entry in this file
+The default settings JSON5 file should be created at `testData/defaultSettings/defaultSettings.json5`. Each entry in this file
 is keyed by a solution id with settings handlers and/or launch handlers for applying desired settings. An example of an
 entry for stopping gnome magnifier on Linux:
 
@@ -104,17 +104,17 @@ entry for stopping gnome magnifier on Linux:
 }
 ```
 
-When GPII starts, `defaultSettings.json5` is automatically copied from `testData/snapshots` directory to the GPII
+When GPII starts, `defaultSettings.json5` is automatically copied from `testData/defaultSettings` directory to the GPII
 settings directory if it hasn't been copied. GPII reads the default settings from `defaultSettings.json5` located
 at the GPII settings directory. Users are invited to edit the default settings file at the settings directory instead
-of at `testData/snapshots` directory to keep the code base clean and consistent.
+of at `testData/defaultSettings` directory to keep the code base clean and consistent.
 
-To make it easier to create windows installers, `testData/snapshots/defaultSettings.win32.json5` is pre-created. It
-should be renamed (or copied) to `testData/snapshots/defaultSettings.json5` before building windows installers.
+To make it easier to create windows installers, `testData/defaultSettings/defaultSettings.win32.json5` is pre-created. It
+should be renamed (or copied) to `testData/defaultSettings/defaultSettings.json5` before building windows installers.
 
 Note:
 
-* When `defaultSettings.json5` in the settings directory is wanted to be re-copied from `testData/snapshots` directory,
+* When `defaultSettings.json5` in the settings directory is wanted to be re-copied from `testData/defaultSettings` directory,
   removing `defaultSettings.json5` from the settings directory will trigger the recopy automatically next time when
   GPII starts.
 
