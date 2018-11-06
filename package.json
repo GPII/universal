@@ -13,6 +13,7 @@
         "express-session": "1.15.6",
         "fluid-resolve": "1.3.0",
         "glob": "7.1.3",
+        "@google-cloud/trace-agent": "3.2.1",
         "gpii-pouchdb": "1.0.12",
         "gpii-express-user": "https://github.com/sgithens/gpii-express-user.git#a6014a987c03fc6674121e4348d7264ca85d2dd9",
         "infusion": "3.0.0-dev.20181017T162149Z.787f7d5e5",
