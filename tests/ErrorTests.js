@@ -81,7 +81,7 @@ fluid.defaults("gpii.tests.errors.mixin", {
                 funcName: "gpii.tests.errors.preferencesFilter",
                 args: ["{arguments}.0", "{gpii.tests.errors.mixin}"]
             },
-            target: "{testCaseHolder flowManager preferencesDataSource}.options.listeners.onRead"
+            target: "{testCaseHolder flowManager prefsServerDataSource preferencesDataSourceImpl}.options.listeners.onRead"
         }
     },
     listeners: {
