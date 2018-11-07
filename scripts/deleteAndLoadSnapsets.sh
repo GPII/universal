@@ -3,7 +3,7 @@ GPII_APP_DIR=${GPII_APP_DIR:-"/app"}
 
 GPII_STATIC_DATA_DIR=${GPII_STATIC_DATA_DIR:-"${GPII_APP_DIR}/testData/dbData"}
 GPII_PREFERENCES_DATA_DIR=${GPII_PREFERENCES_DATA_DIR:-"${GPII_APP_DIR}/testData/preferences"}
-GPII_BUILD_DATA_DIR=${GPII_BUILD_DATA_DIR:-"${GPII_APP_DIR}/build/dbData/snapset"}
+GPII_SNAPSET_DATA_DIR=${GPII_SNAPSET_DATA_DIR:-"${GPII_APP_DIR}/build/dbData/snapset"}
 
 DATALOADER_JS="${GPII_APP_DIR}/scripts/deleteAndLoadSnapsets.js"
 CONVERT_JS="${GPII_APP_DIR}/scripts/convertPrefs.js"
@@ -34,7 +34,7 @@ log 'Starting'
 log "CouchDB: ${GPII_COUCHDB_URL_SANITIZED}"
 log "Clear index: ${GPII_CLEAR_INDEX}"
 log "Static: ${GPII_STATIC_DATA_DIR}"
-log "Build: ${GPII_BUILD_DATA_DIR}"
+log "Build: ${GPII_SNAPSET_DATA_DIR}"
 log "Working directory: $(pwd)"
 
 # Check we can connect to CouchDB
@@ -46,13 +46,13 @@ if [ "$RET_CODE" != '200' ]; then
 fi
 
 # Create build dir if it does not exist
-if [ ! -d "${GPII_BUILD_DATA_DIR}" ]; then
-  mkdir -p "${GPII_BUILD_DATA_DIR}"
+if [ ! -d "${GPII_SNAPSET_DATA_DIR}" ]; then
+  mkdir -p "${GPII_SNAPSET_DATA_DIR}"
 fi
 
 # Convert preferences json5 to GPII keys and preferences safes
 if [ -d "${GPII_PREFERENCES_DATA_DIR}" ]; then
-  node "${CONVERT_JS}" "${GPII_PREFERENCES_DATA_DIR}" "${GPII_BUILD_DATA_DIR}" snapset
+  node "${CONVERT_JS}" "${GPII_PREFERENCES_DATA_DIR}" "${GPII_SNAPSET_DATA_DIR}" snapset
   if [ "$?" != '0' ]; then
     log "[ERROR] ${CONVERT_JS} failed (exit code: $?)"
     exit 1
@@ -75,7 +75,7 @@ if ! curl -fsS -X PUT "${GPII_COUCHDB_URL}"; then
 fi
 
 # Submit data
-node "${DATALOADER_JS}" "${GPII_COUCHDB_URL}" "${GPII_STATIC_DATA_DIR}" "${GPII_BUILD_DATA_DIR}"
+node "${DATALOADER_JS}" "${GPII_COUCHDB_URL}" "${GPII_STATIC_DATA_DIR}" "${GPII_SNAPSET_DATA_DIR}"
 err=$?
 if [ "${err}" != '0' ]; then
   log "${DATALOADER_JS} failed with ${err}, exiting"
