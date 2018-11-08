@@ -405,6 +405,10 @@ gpii.tests.userLogonRequest.testDefs = [{
             "org.gnome.desktop.a11y.magnifier": [{
                 "settings": {
                     "running": false
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-magnifier-enabled"
                 }
             }]
         }
@@ -469,7 +473,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         // 6. Verify the default settings have been applied: stop the magnifier
         func: "gpii.test.checkRestoredInitialState",
-        args: [ "{tests}.expectedStateAfterReset", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
+        args: [ "{tests}.options.expectedStateAfterReset", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
     }, {
         event: "{testCaseHolder}.events.onCheckRestoredInitialStateComplete",
         listener: "fluid.identity"

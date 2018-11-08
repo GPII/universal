@@ -20,6 +20,12 @@ format of a standard preferences set. An example of its content for starting gno
 }
 ```
 
+## Reset on System Start
+
+The local flow manager provides a boolean option "resetAtStart" that serves as a flag indicating whether the computer
+should be reset on system start. This flag is set to `false` by default. Setting it to `true` will reset the computer
+on system start. This flag is set to true in GPII configs that run the local flow manager in the production mode.
+
 When GPII starts, `defaultSettings.json5` is automatically copied from `testData/defaultSettings` directory to the GPII
 settings directory if it hasn't been copied. GPII reads the default settings from `defaultSettings.json5` located
 at the GPII settings directory. Users are invited to edit the default settings file at the settings directory instead
@@ -36,7 +42,7 @@ Note:
 
 * The actual location of the settings directory can be found at the beginning of the log output when GPII starts
 
-## Reset the Computer
+## Reset via HTTP Request
 
 Once the default settings file is ready, the reset can be initiated by sending a HTTP request to the login API provided
 by the local flow manager. This API is:
