@@ -411,6 +411,23 @@ gpii.tests.userLogonRequest.testDefs = [{
                     "key": "screen-magnifier-enabled"
                 }
             }]
+        },
+        "gpii.gsettings": {
+            "data": [{
+                "settings": {
+                    "cursor-size": 29
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }]
+        },
+        "gpii.alsa": {
+            "data": [{
+                "settings": {
+                    "masterVolume": 75
+                }
+            }]
         }
     },
     sequence: [{
@@ -480,7 +497,45 @@ gpii.tests.userLogonRequest.testDefs = [{
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-    expect: 13,
+    expect: 14,
+    initialState: {
+        "gpii.gsettings": {
+            "data": [{
+                "settings": {
+                    "cursor-size": 29
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }]
+        },
+        "gpii.alsa": {
+            "data": [{
+                "settings": {
+                    "masterVolume": 75
+                }
+            }]
+        }
+    },
+    expectedState: {
+        "gpii.gsettings": {
+            "data": [{
+                "settings": {
+                    "cursor-size": 41
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }]
+        },
+        "gpii.alsa": {
+            "data": [{
+                "settings": {
+                    "masterVolume": 75
+                }
+            }]
+        }
+    },
     sequence: [{
         // standard login
         func: "gpii.tests.invokePromiseProducer",
@@ -489,6 +544,13 @@ gpii.tests.userLogonRequest.testDefs = [{
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+    }, {
+        // standard login completes: Verify both key-in settings and default settings have been applied
+        func: "gpii.test.checkRestoredInitialState",
+        args: [ "{tests}.options.expectedState", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
+    }, {
+        event: "{testCaseHolder}.events.onCheckRestoredInitialStateComplete",
+        listener: "fluid.identity"
     }, {
         // standard login with an already logged in user:
         func: "gpii.tests.invokePromiseProducer",

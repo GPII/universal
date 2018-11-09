@@ -26,7 +26,9 @@
                 "contexts": {
                     "gpii-default": {
                         "preferences": {
-                            "http://registry.gpii.net/common/magnification/enabled": false
+                            "http://registry.gpii.net/common/magnification/enabled": false,
+                            "http://registry.gpii.net/common/cursorSize": 0.5,
+                            "http://registry.gpii.net/common/volume": 0.75
                         }
                     }
                 }
