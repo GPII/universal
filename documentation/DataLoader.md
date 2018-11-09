@@ -44,7 +44,7 @@ directories instead of one array that holds these directories.
 
 ## Running
 
-Example using containers:
+### Example using containers
 
 ```bash
 $ docker run -d -p 5984:5984 --name couchdb couchdb
@@ -79,3 +79,14 @@ $ docker run --name dataloader --link couchdb \
     -e GPII_COUCHDB_URL=http://couchdb:5984/gpii \
     vagrant-universal scripts/deleteAndLoadSnapsets.sh
 ```
+
+### Example using a CouchDB installation
+
+You can provision a CouchDB installation using your local clone of `universal` for testing and development as well.
+
+```bash
+GPII_COUCHDB_URL="http://localhost:5984/gpii" GPII_APP_DIR=$(pwd) bash -c ./scripts/deleteAndLoadSnapsets.sh
+```
+
+In the above example we've created a `gpii` database in our local CouchDB database, and are working in the top level
+`universal` directory.
