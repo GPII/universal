@@ -22,11 +22,12 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // This is a useful site for manipulating which test fixtures will run during the development process
 
 module.exports = [
-    "windows/windows-builtIn-testSpec.js",
-    "windows/windows-jaws-testSpec.js",
+	"windows/windows-builtIn-testSpec.js",
+	"windows/windows-jaws-testSpec.js",
     "windows/windows-nvda-testSpec.js",
     "windows/windows-maavis-testSpec.js",
     "windows/windows-uioPlus-testSpec.js",
     "windows/windows-readWrite-testSpec.js",
-    "windows/windows-dynamicDeviceReporter-testSpec.js"
+    "windows/windows-dynamicDeviceReporter-testSpec.js",
+    "windows/windows-zoomtext-testSpec.js"
 ];
