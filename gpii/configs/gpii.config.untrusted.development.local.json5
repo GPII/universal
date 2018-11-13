@@ -13,7 +13,7 @@
  *
  * * The following components are running on the cloud:
  * *** Auth Server
- * *** Canopy MatchMaker
+ * *** Flat MatchMaker
  * *** Cloud Based Flow Manager
  * *** Preferences Server
  * *** Solutions Registry
@@ -38,9 +38,9 @@
                 "target": "{that cloudBasedConfig}.options.mainServerPort"
             },
             "untrusted.development.prefs": {
-                "record": "http://localhost:8084/preferences/%gpiiKey?merge=%merge",
-                "target": "{that cloudBasedConfig flowManager preferencesDataSource}.options.url",
-                "priority": "after:flowManager.preferencesDataSource.default"
+                "record": "http://localhost:8084",
+                "target": "{that cloudBasedConfig flowManager prefsServerDataSource}.options.prefsServerURL",
+                "priority": "after:flowManager.prefsServerDataSource.default"
             }
         }
     }

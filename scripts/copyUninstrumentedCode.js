@@ -7,6 +7,7 @@
     content is available when running the tests.
 
  */
+/* eslint-env node */
 "use strict";
 var fluid = require("infusion");
 var gpii  = fluid.registerNamespace("gpii");
@@ -26,6 +27,7 @@ gpii.test.testem.copier.copyDirs = function (srcRoot, targetRoot, dirsToCopy) {
             var src  = path.resolve(resolvedSrcRoot, dirToCopy);
             var dest = path.resolve(resolvedTargetRoot, dirToCopy);
             var rawPromise = copy(src, dest);
+            /* eslint dot-notation: "off" */
             rawPromise.then(wrappedPromise.resolve).catch(wrappedPromise.reject);
         });
     });

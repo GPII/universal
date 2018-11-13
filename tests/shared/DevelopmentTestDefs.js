@@ -48,7 +48,6 @@ gpii.tests.development.testDefs = [{
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
     gpiiKey: gpii.tests.development.gpiiKey,
-
     sequence: [{
         func: "{loginRequest}.send"
     }, {
