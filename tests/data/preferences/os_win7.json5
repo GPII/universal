@@ -106,6 +106,15 @@
                         "EnableShiftLock": 1,
                         "EnableCompatibilityKeyboard": 1,
                         "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.language": {
+                        "MachinePreferredUILanguages": "en-US",
+                        "PreferredUILanguages": "en-US"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.brightness": {
+                        "Brightness": {
+                            "value": null
+                        }
                     }
                 }
             }

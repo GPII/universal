@@ -4,7 +4,7 @@
  * the preferences server and matchmaker all locally. It doesn't start any backend database for data persistence.
  *
  * * The following components are running:
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  * ** Cloud Based Flow Manager
  * ** Lifecycle Manager
  * ** Local Flow Manager

@@ -1,0 +1,14 @@
+{
+    "type": "gpii.tests.productionConfigTests.config",
+    "options": {
+        "distributeOptions": {
+            "flowManager.escalate": {
+                "record": {
+                    "resetAtStartSuccess.escalate": "{testEnvironment}.events.resetAtStartSuccess"
+                },
+                "target": "{that gpii.flowManager.local}.options.listeners"
+            }
+        }
+    },
+    "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.json5"
+}

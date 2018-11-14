@@ -29,18 +29,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -58,18 +58,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "wb",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -87,18 +87,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 2,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 2,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -116,18 +116,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 2,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 2,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -145,18 +145,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "yellow",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -174,18 +174,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1.2,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -203,18 +203,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": true,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": true,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -232,18 +232,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": true,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": true,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -261,105 +261,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false,
                             "tableOfContentsEnabled": true,
-                            "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false,
-                            "captionsEnabled": false
-                        },
-                        "options": {
-                            "path": "net.gpii.uioPlus"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
-        name: "Acceptance test for dictionary transformation for UIO+",
-        gpiiKey: "uioPlus_support_tool",
-        settingsHandlers: {
-            "gpii.settingsHandlers.webSockets": {
-                "data": [
-                    {
-                        "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
-                            "characterSpace": 1,
-                            "inputsLargerEnabled": false,
-                            "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
-                            "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": true,
-                            "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false,
-                            "captionsEnabled": false
-                        },
-                        "options": {
-                            "path": "net.gpii.uioPlus"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
-        name: "Acceptance test for support tool transformation for UIO+ - multiple values",
-        gpiiKey: "uioPlus_multiple_support_tool",
-        settingsHandlers: {
-            "gpii.settingsHandlers.webSockets": {
-                "data": [
-                    {
-                        "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
-                            "characterSpace": 1,
-                            "inputsLargerEnabled": false,
-                            "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
-                            "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": true,
-                            "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false,
-                            "captionsEnabled": false
-                        },
-                        "options": {
-                            "path": "net.gpii.uioPlus"
-                        }
-                    }
-                ]
-            }
-        }
-    },
-    {
-        name: "Acceptance test for support tool transformation for UIO+ - unsupported values",
-        gpiiKey: "uioPlus_unhandled_support_tool",
-        settingsHandlers: {
-            "gpii.settingsHandlers.webSockets": {
-                "data": [
-                    {
-                        "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
-                            "characterSpace": 1,
-                            "inputsLargerEnabled": false,
-                            "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
-                            "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
-                            "simplifiedUiEnabled": false,
-                            "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -377,18 +290,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": true,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -399,25 +312,25 @@ gpii.tests.uioPlus.testDefs = [
         }
     },
     {
-        name: "Acceptance test for syllabification UI transformation for UIO+",
+        name: "Acceptance test for syllabification transformation for UIO+",
         gpiiKey: "uioPlus_syllabification",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": false,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": true,
-                            "captionsEnabled": false
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -428,25 +341,54 @@ gpii.tests.uioPlus.testDefs = [
         }
     },
     {
-        name: "Acceptance test for captions UI transformation for UIO+",
+        name: "Acceptance test for captions transformation for UIO+",
         gpiiKey: "uioPlus_captions",
         settingsHandlers: {
             "gpii.settingsHandlers.webSockets": {
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1,
-                            "fontSize": 1,
+                            "captionsEnabled": true,
                             "characterSpace": 1,
-                            "inputsLargerEnabled": false,
                             "contrastTheme": "default",
-                            "selfVoicingEnabled": false,
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
                             "selectionTheme": "default",
-                            "tableOfContentsEnabled": false,
-                            "dictionaryEnabled": false,
+                            "selfVoicingEnabled": false,
                             "simplifiedUiEnabled": false,
                             "syllabificationEnabled": false,
-                            "captionsEnabled": true
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1
+                        },
+                        "options": {
+                            "path": "net.gpii.uioPlus"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        name: "Acceptance test for word space transformation for UIO+",
+        gpiiKey: "uioPlus_word_space",
+        settingsHandlers: {
+            "gpii.settingsHandlers.webSockets": {
+                "data": [
+                    {
+                        "settings": {
+                            "captionsEnabled": false,
+                            "characterSpace": 1,
+                            "contrastTheme": "default",
+                            "fontSize": 1,
+                            "inputsLargerEnabled": false,
+                            "lineSpace": 1,
+                            "selectionTheme": "default",
+                            "selfVoicingEnabled": false,
+                            "simplifiedUiEnabled": false,
+                            "syllabificationEnabled": false,
+                            "tableOfContentsEnabled": false,
+                            "wordSpace": 1.2
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"
@@ -464,18 +406,18 @@ gpii.tests.uioPlus.testDefs = [
                 "data": [
                     {
                         "settings": {
-                            "lineSpace": 1.3,
-                            "fontSize": 1.3,
+                            "captionsEnabled": true,
                             "characterSpace": 2,
-                            "inputsLargerEnabled": true,
                             "contrastTheme": "yb",
-                            "selfVoicingEnabled": true,
+                            "fontSize": 1.3,
+                            "inputsLargerEnabled": true,
+                            "lineSpace": 1.3,
                             "selectionTheme": "green",
-                            "tableOfContentsEnabled": true,
-                            "dictionaryEnabled": true,
+                            "selfVoicingEnabled": true,
                             "simplifiedUiEnabled": true,
                             "syllabificationEnabled": true,
-                            "captionsEnabled": true
+                            "tableOfContentsEnabled": true,
+                            "wordSpace": 2
                         },
                         "options": {
                             "path": "net.gpii.uioPlus"

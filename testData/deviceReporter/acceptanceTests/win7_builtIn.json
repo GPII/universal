@@ -49,6 +49,14 @@
 
     {
         "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
+        "id": "com.microsoft.windows.language"
+    },
+
+    {
+        "id": "com.microsoft.windows.brightness"
     }
 
 ]

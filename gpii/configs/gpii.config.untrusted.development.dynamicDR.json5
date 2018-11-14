@@ -1,5 +1,5 @@
 /**
- * This configuration acts as a base for `gpii.config.untrusted.evelopment.local`. It runs the
+ * This configuration acts as a base for `gpii.config.untrusted.development.local`. It runs the
  * local Untrusted Flow Manager locally.
  *
  * * The following components are running on the local machine:
@@ -8,8 +8,17 @@
  */
 {
     "type": "gpii.config.untrusted.development.dynamicDR",
+    "options": {
+        "distributeOptions": {
+            "gpii.config.deviceReporter.flowManager": {
+                "record": "{flowManager}.solutionsRegistryDataSource",
+                "target": "{that gpii.deviceReporter.live}.options.components.solutionsRegistryDataSource"
+            }
+        }
+    },
     "mergeConfigs": [
-        "../node_modules/deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
-        "../node_modules/flowManager/configs/gpii.flowManager.config.untrusted.base.json5"
+        "%deviceReporter/configs/gpii.deviceReporter.config.dynamic.json5",
+        "%flowManager/configs/gpii.flowManager.config.untrusted.base.json5",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
     ]
 }
