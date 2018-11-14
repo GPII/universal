@@ -14,7 +14,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/DPIScale": 1.50,
+                    "http://registry.gpii.net/common/DPIScale": 2,
                     "http://registry.gpii.net/common/cursorSize": 1.0,
                     "http://registry.gpii.net/common/selfVoicing/enabled": true
                 }
