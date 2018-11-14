@@ -3597,7 +3597,6 @@
                             "title": "Dictation Language",
                             "description": "Voice dictation language",
                             "type": "number",
-                            // TODO: We should present the value to the user in a human readable format
                             "enum": [
                                 1031,
                                 3082,
@@ -3635,9 +3634,8 @@
                             "title": "Font Spacing",
                             "description": "Set wider font spacing for reading",
                             "type": "number",
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "Default", 1: "Wide"
                             "enum": [1, 0],
+                            "enumLabels": ["Default", "Wide"],
                             "default": 0
                         }
                     },
@@ -3646,9 +3644,8 @@
                             "title": "Theme",
                             "description": "Set the theme for reading",
                             "type": "number",
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "White", 1: "Reverse (High-Contrast)", 2: "Yellow", 3: "Pink", 4: "Green", 5: "Blue"
                             "enum": [0, 1, 2, 3, 4, 5],
+                            "enumLabels": ["White", "Reverse (High-Contrast)", "Yellow", "Pink", "Green", "Blue"],
                             "default": 0
                         }
                     },
@@ -3668,29 +3665,18 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            // TODO: We should present the value in a homogeneus speech rate. For this
-                            // particular value we need also being able to translate signed values to unsigned ones.
                             "enum": [
                                 4294967286,
-                                4294967287,
-                                4294967288,
                                 4294967289,
-                                4294967290,
                                 4294967291,
-                                4294967292,
-                                4294967293,
                                 4294967294,
-                                4294967295,
                                 0,
-                                1,
                                 2,
-                                3,
                                 4,
-                                5,
                                 6,
-                                7,
                                 8
                             ],
+                            "enumLabels": ["-4", "-3", "-2", "-1", "0", "1", "2", "4", "6"],
                             "default": 0
                         }
                     },
@@ -3699,26 +3685,43 @@
                             "title": "Synth voice",
                             "description": "The voice that will be used for text reading",
                             "type": "string",
-                            // TODO: We should present the value to the user in a human readable format
                             "enum": [
-                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  Tracy Desktop\"}]",      // - Hong kong
-                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  Hanhan Desktop\"}]",     // - Taiwan
-                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft  HuiHui Desktop\"}]",	   // - People’s Chinese Republic
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Tracy Desktop\"}]",      // - Hong kong
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Hanhan Desktop\"}]",     // - Taiwan
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft HuiHui Desktop\"}]",     // - People’s Chinese Republic
 
-                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",        // - US
-                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",       // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",       // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",      // - US
 
-                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",      // - United Kingdom
-                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",    // - France
-                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",       // - Germany
-                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",        // - Italy
-                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",      // - Japan
-                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",       // - Korea
-                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",     // - Poland
-                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",       // - Portugal
-                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",       // - Russia
-                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",      // - Mexico
-                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"       // - Spain
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",     // - United Kingdom
+                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",   // - France
+                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",      // - Germany
+                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",       // - Italy
+                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",     // - Japan
+                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",      // - Korea
+                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",    // - Poland
+                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",      // - Portugal
+                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",      // - Russia
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",     // - Mexico
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"      // - Spain
+                            ],
+                            "enumLabels": [
+                                "ZH - Microsoft Tracy",
+                                "ZH - Microsoft Hanhan",
+                                "ZH - Microsoft HuiHui",
+                                "EN - Microsoft Zira",
+                                "EN - Microsoft David",
+                                "EN - Microsoft Helena",
+                                "FR - Microsoft Hortense",
+                                "DE - Microsoft Hedda",
+                                "IT - Microsoft Elsa",
+                                "JA - Microsoft Haruka",
+                                "KO - Microsoft Heami",
+                                "PL - Microsoft Paulina",
+                                "PT - Microsoft Maria",
+                                "RU - Microsoft Irina",
+                                "ES - Microsoft Sabina",
+                                "ES - Microsoft Helena"
                             ]
                         }
                     }
@@ -3810,8 +3813,7 @@
                             "description": "Column mode in which to display text",
                             "type": "number",
                             "enum": [0, 1, 2],
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "Narrow", 1: "Default", 2: "Wide"
+                            "enumLabels": ["Narrow", "Default", "Wide"],
                             "default": 0
                         }
                     },
@@ -3821,8 +3823,7 @@
                             "description": "The color that will be used as page background",
                             "type": "number",
                             "enum": [0, 1, 2],
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "None", 1: "Sepia", 2: "Reverse (High-Contrast)"
+                            "enumLabels": ["None", "Sepia", "Reverse (High-Contrast)"],
                             "default": 0
                         }
                     },
@@ -3832,6 +3833,7 @@
                             "description": "Select between column desing and page design",
                             "type": "number",
                             "enum": [0, 1],
+                            "enumLabels": ["Column Layout", "Printed Layout"],
                             "default": 0
                         }
                     },
@@ -3849,6 +3851,7 @@
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_MarkM",
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_ZiraM"
                             ],
+                            "enumLabels": ["Pablo", "Helena", "Laura", "David", "Mark", "Zira"],
                             "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
                         }
                     },
@@ -3869,8 +3872,8 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            // TODO: We should present the value in a human readable format. Boolean?
                             "enum": [0, 1],
+                            "enumLabels": ["False", "True"],
                             "default": 0
                         }
                     },
@@ -3879,8 +3882,8 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            // TODO: We should present the value in a human readable format. Boolean?
                             "enum": [0, 1],
+                            "enumLabels": ["False", "True"],
                             "default": 0
                         }
                     }
@@ -3972,8 +3975,7 @@
                             "description": "Column mode in which to display text",
                             "type": "number",
                             "enum": [0, 1, 2],
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "Narrow", 1: "Default", 2: "Wide"
+                            "enumLabels": ["Narrow", "Default", "Wide"],
                             "default": 0
                         }
                     },
@@ -3983,8 +3985,7 @@
                             "description": "The color that will be used as page background",
                             "type": "number",
                             "enum": [0, 1, 2],
-                            // TODO: We should present the value to the user in a human readable format
-                            // 0: "None", 1: "Sepia", 2: "Reverse (High-Contrast)"
+                            "enumLabels": ["None", "Sepia", "Reverse (High-Contrast)"],
                             "default": 0
                         }
                     },
@@ -3994,6 +3995,7 @@
                             "description": "Select between column desing and page design",
                             "type": "number",
                             "enum": [0, 1],
+                            "enumLabels": ["Column Layout", "Printed Layout"],
                             "default": 0
                         }
                     },
@@ -4008,6 +4010,7 @@
 
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_ES-ES_HELENA_11.0"
                             ],
+                            "enumLabels": ["David", "Zira", "Helena"],
                             "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
                         }
                     },
@@ -4028,7 +4031,7 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            // TODO: We should present the value in a human readable format. Boolean?
+                            "enumLabels": ["False", "True"],
                             "enum": [0, 1],
                             "default": 0
                         }
@@ -4038,8 +4041,8 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            // TODO: We should present the value in a human readable format. Boolean?
                             "enum": [0, 1],
+                            "enumLabels": ["False", "True"],
                             "default": 0
                         }
                     }
