@@ -71,6 +71,7 @@ var testIncludes = [
     "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/preferencesServer/test/cloudSafeCredTests.js",
     "../gpii/node_modules/preferencesServer/test/prefsSafesTests.js",
+    "../gpii/node_modules/preferencesServer/test/preferencesServiceTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
