@@ -30,7 +30,6 @@ An example document:
         "schemaVersion": "0.1",
         "prefsSafeType": "user",
         "name": null,
-        "password": null,
         "email": null,
         "preferences": {
             "flat": {
@@ -55,7 +54,7 @@ An example document:
 ### Key-in Documents
 
 When users key-in to the GPII using a USB stick, NFC card, or other mechanism, the unique `gpiiKey` on the device will
-be matched to the CouchDB `id` on a document with type `gpiiKey`. This document contains the important fields `prefsSafeId`
+be matched to the CouchDB `_id` on a document with type `gpiiKey`. This document contains the important fields `prefsSafeId`
 and `prefsSetId` linking it to the safe, and to a specific preference set within that safe to key in with.
 
 An example document:
@@ -80,7 +79,8 @@ In order to have full permissions to edit all aspects of their preferences safe,
 username and password. The current implementation of this is backed by the `gpii-express-user` library which creates
 records in the same format as native CouchDB accounts and manages password hashing, unlocking, etc.  In order to avoid
 making changes to this external library, we introduce a document type 'gpiiCloudSafeCredential' which tracks the native
-record that is created by `gpii-express-user`.
+record that is created by `gpii-express-user`. Note that the `gpiiExpressuserId` entries are prefixed with `org.couch.db.user:`
+which is the convention for both internal CouchDB users and users created with gpii-express-user.
 
 An example document:
 
