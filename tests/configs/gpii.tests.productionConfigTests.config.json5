@@ -1,6 +1,7 @@
 {
     "type": "gpii.tests.productionConfigTests.config",
     "options": {
+        "mainServerPort": 9082,
         "distributeOptions": {
             "flowManager.escalate": {
                 "record": {

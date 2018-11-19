@@ -59,37 +59,24 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             configPath: "%gpii-universal/tests/configs"
         },
         components: {
-/*
-            healthyRequest: {
-                type: "kettle.test.request.http",
-                options: {
-                    host: "localhost",
-                    hostname: "localhost:9082",
-                    port: 9082,
-                    path: "/health",
-                    method: "GET",
-                    foobar: "tis me"
-                }
-            },
-*/
             healthRequest: {
                 type: "kettle.test.request.http",
                 options: {
+                    port: "9082",
                     hostname: "flowmanager",
-                    port: 9082,
                     path: "/health",
                     method: "GET",
-                    foobar: "tis me 2"
+                    foobar: "tis me health"
                 }
             },
             readyRequest: {
                 type: "kettle.test.request.http",
                 options: {
+                    port: "9082",
                     hostname: "flowmanager",
-                    port: 9082,
                     path: "/ready",
                     method: "GET",
-                    foobar: "tis me"
+                    foobar: "tis me ready"
                 }
             }
         }
@@ -107,13 +94,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             event: "{healthRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.test200Response",
             args: ["{healthRequest}", "{healthRequest}.nativeResponse.statusCode"]
-        }, /* {
-            func: "{healthyRequest}.send"
         }, {
-            event: "{healthyRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.test200Response",
-            args: ["{healthyRequest}", "{healthyRequest}.nativeResponse.statusCode"]
-        }, */ {
             func: "{readyRequest}.send"
         }, {
             event: "{readyRequest}.events.onComplete",
@@ -153,11 +134,11 @@ kettle.test.testDefToServerEnvironment = function (testDef) {
 };
 
 gpii.tests.productionConfigTesting.test200Response = function (request, status) {
-    console.log(request.options);
-    console.log(request.options.port);
-    console.log(status);
-    console.log(gpii.tests.productionConfigTesting.fmSettingsDataSource.options.cloudURL);
-    console.log(gpii.tests.productionConfigTesting.ktrHttp.options.port);
+    fluid.log(request.options);
+    fluid.log(request.options.port);
+    fluid.log(request.options.foobar);
+    fluid.log(status);
+    fluid.log(gpii.tests.productionConfigTesting.fmSettingsDataSource.options.cloudURL);
     jqUnit.assertEquals("Checking status of " + request.options.path, 200, status);
 };
 
