@@ -42,18 +42,18 @@ require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-fluid.defaults("gpii.tests.productionConfigTesting.request", {
-    gradeNames: "kettle.test.request.http",
-    host: "flowmanager",
-    port: 9082,
-    path: "/health",
-    method: "GET"
-});
+gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
+    "username": "carla",
+    "password": "dummy",
+    "client_id": "pilot-computer",
+    "client_secret": "pilot-computer-secret",
+    "grant_type": "password"
+};
 
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
-        expect: 4,
+        expect: 5,
         config: {
             configName: "gpii.tests.productionConfigTests.config",
             configPath: "%gpii-universal/tests/configs"
@@ -67,6 +67,16 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     path: "/health",
                     method: "GET",
                     foobar: "tis me health"
+                }
+            },
+            accessToken: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "9082",
+                    hostname: "flowmanager",
+                    path: "/access_token",
+                    method: "POST",
+                    foobar: "tis me access"
                 }
             },
             readyRequest: {
@@ -94,6 +104,13 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             event: "{healthRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.test200Response",
             args: ["{healthRequest}", "{healthRequest}.nativeResponse.statusCode"]
+        }, {
+            func: "{accessToken}.send",
+            args: [gpii.tests.productionConfigTesting.accessTokenRequestPayload]
+        }, {
+            event: "{accessToken}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.test200Response",
+            args: ["{accessToken}", "{accessToken}.nativeResponse.statusCode"]
         }, {
             func: "{readyRequest}.send"
         }, {
