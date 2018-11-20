@@ -492,6 +492,27 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }]
+            },
+            "gpii.windows.wmiSettingsHandler": {
+                "com.microsoft.windows.brightness": [{
+                    "settings": {
+                        "Brightness": {
+                            "value": null
+                        }
+                    },
+                    "options": {
+                        "Brightness": {
+                            "namespace": "root\\WMI",
+                            "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                            "set": {
+                                "className": "WmiMonitorBrightnessMethods",
+                                "method": "WmiSetBrightness",
+                                "params": [0xFFFFFFFF, "$value"],
+                                "returnVal": ["uint", 0]
+                            }
+                        }
+                    }
+                }]
             }
         }
     }, {

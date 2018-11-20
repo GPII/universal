@@ -14,7 +14,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/common/DPIScale": 1.75,
+                    "http://registry.gpii.net/common/DPIScale": 3,
                     "http://registry.gpii.net/common/cursorSize": 1.0
                 }
             }
