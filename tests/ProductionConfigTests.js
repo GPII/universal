@@ -43,7 +43,7 @@ require("./shared/DevelopmentTestDefs.js");
 gpii.loadTestingSupport();
 
 gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
-    "username": "carla",
+    "username": "testUser1",
     "password": "dummy",
     "client_id": "pilot-computer",
     "client_secret": "pilot-computer-secret",
