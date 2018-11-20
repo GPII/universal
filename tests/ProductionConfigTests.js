@@ -53,7 +53,7 @@ gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
-        expect: 5,
+        expect: 8,
         config: {
             configName: "gpii.tests.productionConfigTests.config",
             configPath: "%gpii-universal/tests/configs"
@@ -69,7 +69,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     foobar: "tis me health"
                 }
             },
-            accessToken: {
+            accessTokenRequest: {
                 type: "kettle.test.request.http",
                 options: {
                     port: "9082",
@@ -105,12 +105,11 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             listener: "gpii.tests.productionConfigTesting.test200Response",
             args: ["{healthRequest}", "{healthRequest}.nativeResponse.statusCode"]
         }, {
-            func: "{accessToken}.send",
+            func: "{accessTokenRequest}.send",
             args: [gpii.tests.productionConfigTesting.accessTokenRequestPayload]
         }, {
-            event: "{accessToken}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.test200Response",
-            args: ["{accessToken}", "{accessToken}.nativeResponse.statusCode"]
+            event: "{accessTokenRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testAccessResponse"
         }, {
             func: "{readyRequest}.send"
         }, {
@@ -157,6 +156,16 @@ gpii.tests.productionConfigTesting.test200Response = function (request, status) 
     fluid.log(status);
     fluid.log(gpii.tests.productionConfigTesting.fmSettingsDataSource.options.cloudURL);
     jqUnit.assertEquals("Checking status of " + request.options.path, 200, status);
+};
+
+gpii.tests.productionConfigTesting.testAccessResponse = function (data, request) {
+    var token = JSON.parse(data);
+    gpii.tests.productionConfigTesting.test200Response(
+        request, request.nativeResponse.statusCode
+    );
+    jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
+    jqUnit.assertNotNull("Checking 'expiresIn", token.expiresIn);
+    jqUnit.assertEquals("Checking 'token_type'",  token.token_type, "Bearer");
 };
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
