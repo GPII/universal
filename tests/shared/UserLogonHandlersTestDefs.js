@@ -82,10 +82,10 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
                 path: "/user/adjustCursor/logout"
             }
         },
-        logoutNoUserRequest: {
+        logoutDefaultGpiiKeyRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/noUser/logout"
+                path: "/user/" + gpii.defaultGpiiKey + "/logout"
             }
         }
     },
@@ -296,7 +296,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
         args: ["{arguments}.0"]
     }]
 }, {
-    name: "Testing proximityTriggered with 'reset' noUser",
+    name: "Testing proximityTriggered with 'reset' the default GPII key",
     expect: 1,
     sequence: [{
         // resetting with no user logged in
@@ -356,7 +356,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
-            errorTexts: "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
+            errorTexts: "Got logout request from user adjustCursor, but the user " + gpii.defaultGpiiKey + " is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
             request: "{logoutAdjustCursorRequest}"
@@ -387,14 +387,14 @@ gpii.tests.userLogonHandlers.testDefs = [{
         }
     }]
 }, {
-    name: "noUser logs back in after an explicit request to logout noUser",
+    name: "The default GPII key logs back in after an explicit request to log it out",
     expect: 1,
     sequence: [{
         // 1st /proximityTriggered request: standard login
-        func: "{logoutNoUserRequest}.send"
+        func: "{logoutDefaultGpiiKeyRequest}.send"
     }, {
-        event: "{logoutNoUserRequest}.events.onComplete",
+        event: "{logoutDefaultGpiiKeyRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", "noUser"]
+        args: ["{arguments}.0", gpii.defaultGpiiKey]
     }]
 }];

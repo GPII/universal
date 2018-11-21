@@ -40,12 +40,12 @@ gpii.tests.userLogonEvents.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonEvents.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, "noUser"]
+        args: ["{arguments}.0", "logout", true, gpii.defaultGpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonEvents.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, "noUser"]
+        args: ["{arguments}.0", "logout", false, gpii.defaultGpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",

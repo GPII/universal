@@ -492,8 +492,8 @@ gpii.tests.journal.fixtures = [
             },
             { // Fix for race condition as described in GPII-3396. However, it appears there is a low probability of
               // a test hang here because the last element of gpii.test.checkSequence is passive and may execute later
-              // than noUserLoggedIn. This can only be resolved with a globbing fix for FLUID-5502 in the framework
-                event: "{configuration}.server.flowManager.events.noUserLoggedIn",
+              // than defaultGpiiKeyLoggedIn. This can only be resolved with a globbing fix for FLUID-5502 in the framework
+                event: "{configuration}.server.flowManager.events.defaultGpiiKeyLoggedIn",
                 listener: "fluid.identity"
             }, gpii.test.checkSequence,
             // Now verify that we can log on normally after a restore, and generate a non-crashed session after logging off
