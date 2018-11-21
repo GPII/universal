@@ -6358,6 +6358,22 @@
                                 "%SystemRoot%\\cursors\\arrow_rl.cur": 1,
                                 "%SystemRoot%\\cursors\\arrow_il.cur": 1
                             }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "Arrow",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                            "match": {
+                                "": "White",
+                                "%SystemRoot%\\cursors\\arrow_r.cur": "Black",
+                                "%SystemRoot%\\cursors\\arrow_i.cur": "ReverseBlack",
+                                "%SystemRoot%\\cursors\\arrow_m.cur": "White",
+                                "%SystemRoot%\\cursors\\arrow_rm.cur": "Black",
+                                "%SystemRoot%\\cursors\\arrow_im.cur": "ReverseBlack",
+                                "%SystemRoot%\\cursors\\arrow_l.cur": "White",
+                                "%SystemRoot%\\cursors\\arrow_rl.cur": "Black",
+                                "%SystemRoot%\\cursors\\arrow_il.cur": "ReverseBlack"
+                            }
                         }
                     ]
                 }
