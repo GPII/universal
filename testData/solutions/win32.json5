@@ -4795,6 +4795,7 @@
                 }
             },
             "configure-registry": {
+                // This sets the high-contrast theme.
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -4852,15 +4853,54 @@
                         }
                     }
                 }
+            },
+            "configure-theme": {
+                // This is used to specify the theme file that Windows will use when restoring high-contrast. The
+                // file this setting points to is created by gpii, containing the currently unsaved theme settings.
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast",
+                    "dataTypes": {
+                        "Pre-High Contrast Scheme": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "Pre-High Contrast Scheme": {}
+                },
+                "capabilitiesTransformations": {
+                    "Pre-High Contrast Scheme": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": "${{environment}.LOCALAPPDATA}\\Microsoft\\Windows\\Themes\\Morphic.theme"
+                        }
+                    }
+                }
             }
         },
         "configure": [
+            // Set the "restore" theme.
+            "settings.configure-theme",
+            // Set the high-contrast theme.
             "settings.configure-registry",
             {
+                // Save the current theme, and set the new high-contrast one.
                 "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+                "newTheme": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}",
+                "currentTheme": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme}",
+                "saveAs": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme}"
             },
+            // Apply high-contrast.
             "settings.configure-spi"
+        ],
+        "restore": [
+            // Restore the high-contrast theme.
+            "settings.configure-registry",
+            // Disable high-contrast.
+            "settings.configure-spi",
+            // Restore the current theme.
+            "settings.configure-theme"
         ],
         "isInstalled": [
             {
