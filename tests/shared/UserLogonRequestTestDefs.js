@@ -61,13 +61,26 @@ gpii.tests.userLogonRequest.modelChangeChecker = function (trackedLogonChange, e
     jqUnit.assertEquals("Checking gpiiKey of model change", expectedGpiiKey, result.gpiiKey);
 };
 
-gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, expectedError) {
-    jqUnit.assertDeepEq("onError fires with the expected message", expectedError, actualError);
-    if (actualError.ignoreUserErrors) {
-        jqUnit.assertDeepEq("User error has not be fired", {}, userError);
-    } else {
-        var userErrorMessage = userError.error.originalError;
-        jqUnit.assertDeepEq("User error has been fired with the expected message", actualError.message, userErrorMessage);
+gpii.tests.userLogonRequest.testUserError = function (actualResponse, expectedResponse, userError, expectedUserError) {
+    jqUnit.assertDeepEq("onError fires with the expected message", expectedResponse, actualResponse);
+    jqUnit.assertDeepEq("User error has been fired with the expected content", expectedUserError, userError.error);
+};
+
+gpii.tests.userLogonRequest.commonTestConfig = {
+    gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+    distributeOptions: {
+        "lifecycleManager.userErrorsListener": {
+            "record": {
+                trackedUserErrors: {},
+                listeners: {
+                    "userError.trackReportedError": {
+                        listener: "fluid.set",
+                        args: ["{that}.options.trackedUserErrors", "error", "{arguments}.0"]
+                    }
+                }
+            },
+            "target": "{that gpii.flowManager.local userErrors}.options"
+        }
     }
 };
 
@@ -88,7 +101,6 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
         var extraTestDef = testType === "untrusted" ? testDef.untrustedExtras : {};
         return fluid.extend(true, {
             config: config,
-            gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
             distributeOptions: {
                 "lifecycleManager.logonChangeListener": {
@@ -102,21 +114,9 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
                         }
                     },
                     "target": "{that gpii.flowManager.local lifecycleManager}.options"
-                },
-                "lifecycleManager.userErrorsListener": {
-                    "record": {
-                        trackedUserErrors: {},
-                        listeners: {
-                            "userError.trackReportedError": {
-                                listener: "fluid.set",
-                                args: ["{that}.options.trackedUserErrors", "error", "{arguments}.0"]
-                            }
-                        }
-                    },
-                    "target": "{that gpii.flowManager.local userErrors}.options"
                 }
             }
-        }, testDef, extraTestDef);
+        }, gpii.tests.userLogonRequest.commonTestConfig, testDef, extraTestDef);
     });
 };
 
@@ -495,12 +495,20 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testLogoutError",
-        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
-            "statusCode": 409,
-            "message": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request.",
-            "ignoreUserErrors": false
-        }]
+        listener: "gpii.tests.userLogonRequest.testUserError",
+        args: ["{arguments}.0",
+            {
+                "statusCode": 409,
+                "message": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request.",
+                "ignoreUserErrors": false
+            },
+            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            {
+                "isError": true,
+                "messageKey": "KeyInFail",
+                "originalError": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request."
+            }
+        ]
     }, {
         // logout of different user
         func: "gpii.tests.invokePromiseProducer",
@@ -508,12 +516,20 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         event: "{that}.events.onError",
         priority: "last",
-        listener: "gpii.tests.userLogonRequest.testLogoutError",
-        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
-            "statusCode": 409,
-            "message": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request.",
-            "ignoreUserErrors": false
-        }]
+        listener: "gpii.tests.userLogonRequest.testUserError",
+        args: ["{arguments}.0",
+            {
+                "statusCode": 409,
+                "message": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request.",
+                "ignoreUserErrors": false
+            },
+            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            {
+                "isError": true,
+                "messageKey": "KeyInFail",
+                "originalError": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request."
+            }
+        ]
     }, {
         // logout of the correct user
         func: "gpii.tests.invokePromiseProducer",
@@ -546,12 +562,16 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testLogoutError",
-        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
-            "statusCode": 409,
-            "message": "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request.",
-            "ignoreUserErrors": true
-        }, "{arguments}.0"]
+        listener: "gpii.tests.userLogonRequest.testUserError",
+        args: ["{arguments}.0",
+            {
+                "statusCode": 409,
+                "message": "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request.",
+                "ignoreUserErrors": true
+            },
+            "{lifecycleManager}.userErrors.options.trackedUserErrors",
+            undefined
+        ]
     }]
 }, {
     name: "Testing standard error handling: invalid user URLs",
