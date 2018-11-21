@@ -6500,7 +6500,7 @@
                             "type": "number",
                             "default": 3,
                             "min": 0,
-                            "max": 4294967294,
+                            "max": 25,
                             "divisibleBy": 1,
                             // This special value trigger the special meaning
                             // of full-page scrolling.
@@ -6515,13 +6515,28 @@
                             "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
                             "defaultOutputPath": "value",
                             "match": {
-                                "full-page": 4294967295
+                                "full-page": 4294967295,
+                                "25": 4294967295
                             },
                             "noMatch": {
                                 "outputValue": {
                                     "transform": {
-                                        "type": "fluid.transforms.value",
-                                        "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines"
+                                        "type": "fluid.transforms.condition",
+                                        "condition": {
+                                            "transform": {
+                                                "type": "fluid.transforms.inRange",
+                                                "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
+                                                "min": 1,
+                                                "max": 25
+                                            }
+                                        },
+                                        "false": 3,
+                                        "true": {
+                                            "transform": {
+                                                "type": "fluid.transforms.value",
+                                                "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines"
+                                            }
+                                        }
                                     }
                                 }
                             }
