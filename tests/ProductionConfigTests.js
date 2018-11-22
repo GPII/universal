@@ -32,6 +32,8 @@ fluid.registerNamespace("gpii.tests.productionConfigTesting");
 
 fluid.require("%gpii-universal");
 
+fluid.logObjectRenderChars = 1024000;
+
 /*
  * ========================================================================
  * Testing of untrusted local config with the live cloud based flow manager
@@ -49,11 +51,29 @@ gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
     "client_secret": "pilot-computer-secret",
     "grant_type": "password"
 };
+gpii.tests.productionConfigTesting.device = {
+    "OS": {
+        "id": "linux"
+    },
+    "solutions": [{
+        "id": "org.gnome.desktop.a11y.magnifier"
+    }]
+};
+
+gpii.tests.productionConfigTesting.makeSettingsPath = function () {
+    var map = {
+        "gpiiKey": gpii.tests.development.gpiiKey,
+        "device": encodeURIComponent(
+            JSON.stringify(gpii.tests.productionConfigTesting.device)
+        )
+    };
+    return fluid.stringTemplate("/%gpiiKey/settings/%device", map);
+};
 
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
-        expect: 8,
+        expect: 11,
         config: {
             configName: "gpii.tests.productionConfigTests.config",
             configPath: "%gpii-universal/tests/configs"
@@ -69,6 +89,28 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     foobar: "tis me health"
                 }
             },
+            settingsRequest: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "9082",
+                    hostname: "flowmanager",
+                    path: gpii.tests.productionConfigTesting.makeSettingsPath(),
+/*
+                    path: "/%gpiiKey/settings/%device",
+                    termMap: {
+                        "gpiiKey": gpii.tests.development.gpiiKey,
+                        "device": JSON.stringify(
+                            gpii.tests.productionConfigTesting.device
+                        )
+                    },
+*/
+                    headers: {
+                        "Authorization": "Bearer token"
+                    },
+                    method: "GET",
+                    foobar: "tis me settings"
+                }
+            },
             accessTokenRequest: {
                 type: "kettle.test.request.http",
                 options: {
@@ -76,7 +118,8 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     hostname: "flowmanager",
                     path: "/access_token",
                     method: "POST",
-                    foobar: "tis me access"
+                    foobar: "tis me access",
+                    settingsRequest: "{settingsRequest}"
                 }
             },
             readyRequest: {
@@ -110,6 +153,11 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
         }, {
             event: "{accessTokenRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testAccessResponse"
+        }, {
+            func: "{settingsRequest}.send"
+        }, {
+            event: "{settingsRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testSettingsResponse"
         }, {
             func: "{readyRequest}.send"
         }, {
@@ -160,12 +208,26 @@ gpii.tests.productionConfigTesting.test200Response = function (request, status) 
 
 gpii.tests.productionConfigTesting.testAccessResponse = function (data, request) {
     var token = JSON.parse(data);
+    request.options.settingsRequest.options.headers["Authorization"] = "Bearer " + token.access_token;
     gpii.tests.productionConfigTesting.test200Response(
         request, request.nativeResponse.statusCode
     );
     jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
     jqUnit.assertNotNull("Checking 'expiresIn", token.expiresIn);
-    jqUnit.assertEquals("Checking 'token_type'",  token.token_type, "Bearer");
+    jqUnit.assertEquals("Checking 'token_type'",  "Bearer", token.token_type);
+};
+
+gpii.tests.productionConfigTesting.testSettingsResponse = function (data, request) {
+    var settings = JSON.parse(data);
+    gpii.tests.productionConfigTesting.test200Response(
+        request, request.nativeResponse.statusCode
+    );
+    jqUnit.assertEquals(
+        "Checking 'testUser1'",
+        gpii.tests.development.gpiiKey,
+        settings.gpiiKey
+    );
+    jqUnit.assertNotNull("Checking 'preferences", settings.preferences);
 };
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
