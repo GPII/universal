@@ -66,6 +66,16 @@ gpii.tests.userLogonRequest.testUserError = function (actualResponse, expectedRe
     jqUnit.assertDeepEq("User error has been fired with the expected content", expectedUserError, userError.error);
 };
 
+gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, expectedError) {
+    jqUnit.assertDeepEq("onError fires with the expected message", expectedError, actualError);
+    if (actualError.ignoreUserErrors) {
+        jqUnit.assertDeepEq("User error has not be fired", {}, userError);
+    } else {
+        var userErrorMessage = userError.error.originalError;
+        jqUnit.assertDeepEq("User error has been fired with the expected message", actualError.message, userErrorMessage);
+    }
+};
+
 gpii.tests.userLogonRequest.commonTestConfig = {
     gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
     distributeOptions: {
@@ -531,7 +541,10 @@ gpii.tests.userLogonRequest.testDefs = [{
         "gpii.alsa": {
             "data": [{
                 "settings": {
-                    "masterVolume": 75
+                    "masterVolume": {
+                        "type": "ADD",
+                        "value": 75
+                    }
                 }
             }]
         }
@@ -545,7 +558,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
-        // standard login completes: Verify both key-in settings and default settings have been applied
+        // standard login completes: Verify both key-in settings and default settings for reset have been applied
         func: "gpii.test.checkRestoredInitialState",
         args: [ "{tests}.options.expectedState", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
     }, {
