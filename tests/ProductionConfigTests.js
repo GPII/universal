@@ -145,8 +145,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             func: "{healthRequest}.send"
         }, {
             event: "{healthRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.test200Response",
-            args: ["{healthRequest}", "{healthRequest}.nativeResponse.statusCode"]
+            listener: "gpii.tests.productionConfigTesting.test200Response"
         }, {
             func: "{accessTokenRequest}.send",
             args: [gpii.tests.productionConfigTesting.accessTokenRequestPayload]
@@ -162,8 +161,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             func: "{readyRequest}.send"
         }, {
             event: "{readyRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.test200Response",
-            args: ["{readyRequest}", "{readyRequest}.nativeResponse.statusCode"]
+            listener: "gpii.tests.productionConfigTesting.test200Response"
         }
     ]);
     return testDef;
@@ -197,21 +195,22 @@ kettle.test.testDefToServerEnvironment = function (testDef) {
     };
 };
 
-gpii.tests.productionConfigTesting.test200Response = function (request, status) {
+gpii.tests.productionConfigTesting.test200Response = function (data, request) {
     fluid.log(request.options);
     fluid.log(request.options.port);
     fluid.log(request.options.foobar);
-    fluid.log(status);
+    fluid.log(request.nativeResponse.statusCode);
     fluid.log(gpii.tests.productionConfigTesting.fmSettingsDataSource.options.cloudURL);
-    jqUnit.assertEquals("Checking status of " + request.options.path, 200, status);
+    jqUnit.assertEquals(
+        "Checking status of " + request.options.path,
+        200, request.nativeResponse.statusCode
+    );
 };
 
 gpii.tests.productionConfigTesting.testAccessResponse = function (data, request) {
     var token = JSON.parse(data);
-    request.options.settingsRequest.options.headers["Authorization"] = "Bearer " + token.access_token;
-    gpii.tests.productionConfigTesting.test200Response(
-        request, request.nativeResponse.statusCode
-    );
+    request.options.settingsRequest.options.headers.Authorization = "Bearer " + token.access_token;
+    gpii.tests.productionConfigTesting.test200Response(data, request);
     jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
     jqUnit.assertNotNull("Checking 'expiresIn", token.expiresIn);
     jqUnit.assertEquals("Checking 'token_type'",  "Bearer", token.token_type);
@@ -219,15 +218,15 @@ gpii.tests.productionConfigTesting.testAccessResponse = function (data, request)
 
 gpii.tests.productionConfigTesting.testSettingsResponse = function (data, request) {
     var settings = JSON.parse(data);
-    gpii.tests.productionConfigTesting.test200Response(
-        request, request.nativeResponse.statusCode
-    );
+    fluid.log("HEY! ");
+    fluid.log(settings);
+    gpii.tests.productionConfigTesting.test200Response(data, request);
     jqUnit.assertEquals(
-        "Checking 'testUser1'",
+        "Checking '" + gpii.tests.development.gpiiKey + "'",
         gpii.tests.development.gpiiKey,
         settings.gpiiKey
     );
-    jqUnit.assertNotNull("Checking 'preferences", settings.preferences);
+    jqUnit.assertNotNull("Checking 'preferences'", settings.preferences);
 };
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
