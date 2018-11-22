@@ -61,6 +61,11 @@ gpii.tests.userLogonRequest.modelChangeChecker = function (trackedLogonChange, e
     jqUnit.assertEquals("Checking gpiiKey of model change", expectedGpiiKey, result.gpiiKey);
 };
 
+gpii.tests.userLogonRequest.testUserError = function (actualResponse, expectedResponse, userError, expectedUserError) {
+    jqUnit.assertDeepEq("onError fires with the expected message", expectedResponse, actualResponse);
+    jqUnit.assertDeepEq("User error has been fired with the expected content", expectedUserError, userError.error);
+};
+
 gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, expectedError) {
     jqUnit.assertDeepEq("onError fires with the expected message", expectedError, actualError);
     if (actualError.ignoreUserErrors) {
@@ -68,6 +73,24 @@ gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, 
     } else {
         var userErrorMessage = userError.error.originalError;
         jqUnit.assertDeepEq("User error has been fired with the expected message", actualError.message, userErrorMessage);
+    }
+};
+
+gpii.tests.userLogonRequest.commonTestConfig = {
+    gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+    distributeOptions: {
+        "lifecycleManager.userErrorsListener": {
+            "record": {
+                trackedUserErrors: {},
+                listeners: {
+                    "userError.trackReportedError": {
+                        listener: "fluid.set",
+                        args: ["{that}.options.trackedUserErrors", "error", "{arguments}.0"]
+                    }
+                }
+            },
+            "target": "{that gpii.flowManager.local userErrors}.options"
+        }
     }
 };
 
@@ -88,7 +111,6 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
         var extraTestDef = testType === "untrusted" ? testDef.untrustedExtras : {};
         return fluid.extend(true, {
             config: config,
-            gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
             gpiiKey: testDefs.gpiiKey || gpii.tests.userLogonRequest.gpiiKey,
             distributeOptions: {
                 "lifecycleManager.logonChangeListener": {
@@ -102,21 +124,9 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
                         }
                     },
                     "target": "{that gpii.flowManager.local lifecycleManager}.options"
-                },
-                "lifecycleManager.userErrorsListener": {
-                    "record": {
-                        trackedUserErrors: {},
-                        listeners: {
-                            "userError.trackReportedError": {
-                                listener: "fluid.set",
-                                args: ["{that}.options.trackedUserErrors", "error", "{arguments}.0"]
-                            }
-                        }
-                    },
-                    "target": "{that gpii.flowManager.local userErrors}.options"
                 }
             }
-        }, testDef, extraTestDef);
+        }, gpii.tests.userLogonRequest.commonTestConfig, testDef, extraTestDef);
     });
 };
 
@@ -530,7 +540,10 @@ gpii.tests.userLogonRequest.testDefs = [{
         "gpii.alsa": {
             "data": [{
                 "settings": {
-                    "masterVolume": 75
+                    "masterVolume": {
+                        "type": "ADD",
+                        "value": 75
+                    }
                 }
             }]
         }
@@ -544,7 +557,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
-        // standard login completes: Verify both key-in settings and default settings have been applied
+        // standard login completes: Verify both key-in settings and default settings for reset have been applied
         func: "gpii.test.checkRestoredInitialState",
         args: [ "{tests}.options.expectedState", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
     }, {
