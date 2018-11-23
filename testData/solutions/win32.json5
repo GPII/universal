@@ -3931,7 +3931,6 @@
                     "verifySettings": true
                 },
                 "supportedSettings": {
-                    "DefaultColor": {},
                     "SolidColorConfig": {
                         "schema": {
                            "title": "Desktop background payload",
@@ -3946,11 +3945,12 @@
                             "max": {
                                 "r": 255, "g": 255, "b": 255
                             }
-                        }
+                        },
+                        "DefaultColorConfig": {}
                     }
                 },
                 "capabilitiesTransformations": {
-                    "DefaultColor": {
+                    "DefaultColorConfig": {
                         "transform": {
                             "type": "fluid.transforms.literalValue",
                             "input": { "r": 0, "g": 0, "b": 0 },
@@ -3960,13 +3960,14 @@
                     "SolidColorConfig": {
                         "transform": {
                             "type": "fluid.transforms.firstValue",
-                            "values": ["http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor", "DefaultColor.value"],
+                            "values": ["http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor", "DefaultColorConfig.value"],
                             "outputPath": "value"
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor": "SolidColorConfig.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor": "SolidColorConfig.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.DefaultColor": "DefaultColorConfig.value"
                 }
             }
         },
