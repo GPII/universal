@@ -383,17 +383,37 @@ gpii.tests.windows.builtIn = [
         gpiiKey: "os_win7_2",
         initialState: {},
         settingsHandlers: {
-            "gpii.windows.desktopBackgroundSettingsHandler": {
-                "com.microsoft.windows.desktopBackground": [{
+            "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
                     "settings": {
-                        "BackgroundType": {
-                            "value": "SolidColor"
-                        },
-                        "Input": {
+                        "Image": {
+                            "path": "pvParam",
+                            "value": ""
+                        }
+                    },
+                    "options": {
+                        "getAction": "SPI_GETDESKWALLPAPER",
+                        "setAction": "SPI_SETDESKWALLPAPER",
+                        "uiParam": 260,
+                        "pvParam": {
+                            "type": "array",
+                            "valueType": "TCHAR",
+                            "length": 260
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.nativeSettingsHandler": {
+                "com.microsoft.windows.desktopBackgroundColor": [{
+                    "settings": {
+                        "SolidColor": {
                             "value": {
-                                "Color": {"r": 67, "g": 187, "b": 19}
+                                "r": 67, "g": 187, "b": 19
                             }
                         }
+                    },
+                    "options": {
+                        "functionName": "SolidColor"
                     }
                 }]
             }
