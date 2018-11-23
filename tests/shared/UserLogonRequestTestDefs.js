@@ -540,10 +540,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         "gpii.alsa": {
             "data": [{
                 "settings": {
-                    "masterVolume": {
-                        "type": "ADD",
-                        "value": 75
-                    }
+                    "masterVolume": 75
                 }
             }]
         }
