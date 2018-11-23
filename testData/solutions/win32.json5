@@ -3735,68 +3735,245 @@
             ]
         },
         "settingsHandlers": {
-            "configure": {
-                "type": "gpii.windows.desktopBackgroundSettingsHandler",
-                "liveness": "live",
-                "options": {},
+            "configureWallpaperStyle": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\Desktop",
+                    "dataTypes": {
+                        "TileWallpaper": "REG_SZ",
+                        "WallpaperStyle": "REG_SZ"
+                    }
+                },
                 "supportedSettings": {
-                    "BackgroundType": {
-                        "schema": {
-                            "title": "Desktop background payload",
-                            "description": "The type of background that user wants to select",
-                            "type": "string",
-                            "default": "Picture",
-                            "enum": [
-                                "SolidColor",
-                                "Picture",
-                                "Slideshow"
-                            ]
+                    "TileWallpaper": {},
+                    "WallpaperStyle": {}
+                },
+                "capabilitiesTransformations": {
+                    "TileWallpaper": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
+                            "match": {
+                                "Fill": "0",
+                                "Fit": "0",
+                                "Stretch": "0",
+                                "Tile": "1",
+                                "Center": "0",
+                                "Span": "0"
+                            },
+                            "noMatch": {
+                                "outputValue": "0"
+                            }
                         }
                     },
-                    "Input": {
+                    "WallpaperStyle": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling",
+                            "match": {
+                                "Fill": "6",
+                                "Fit": "10",
+                                "Stretch": "2",
+                                "Tile": "0",
+                                "Center": "0",
+                                "Span": "22"
+                            },
+                            "noMatch": {
+                                "outputValue": "6"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Scaling": {
+                        "transform": {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "WallpaperStyle",
+                            "match": {
+                                "6": "Fill",
+                                "10": "Fit",
+                                "2": "Stretch",
+                                "0": {
+                                    "outputValue": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "TileWallpaper",
+                                            "match": {
+                                                "1": "Tile",
+                                                "0": "Center"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "Tile"
+                                            }
+                                        }
+                                    }
+                                },
+                                "22": "Span"
+                            },
+                            "noMatch": {
+                                "outputValue": "Fill"
+                            }
+                        }
+                    }
+                }
+            },
+            "configureImage": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETDESKWALLPAPER",
+                    "setAction": "SPI_SETDESKWALLPAPER",
+                    "uiParam": 260,
+                    "pvParam": {
+                        "type": "array",
+                        "valueType": "TCHAR",
+                        "length": 260
+                    },
+                    "verifySettings": false
+                },
+                "supportedSettings": {
+                    "ImageConfig": {
                         "schema": {
-                            "title": "Desktop background payload",
+                            "title": "Image",
+                            "description": "The path to the image to be set as the new desktop wallpaper",
+                            "type": "String",
+                            "default": "C:\\Windows\\Web\\Wallpaper\\Windows\\img0.jpg"
+                        }
+                    },
+                },
+                "capabilitiesTransformations": {
+                    "ImageConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.Image": "ImageConfig.value"
+                }
+            }
+        },
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.desktopBackgroundColor": {
+        "name": "Windows desktop background personalization",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureImage": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETDESKWALLPAPER",
+                    "setAction": "SPI_SETDESKWALLPAPER",
+                    "uiParam": 260,
+                    "pvParam": {
+                        "type": "array",
+                        "valueType": "TCHAR",
+                        "length": 260
+                    },
+                    "verifySettings": false
+                },
+                "supportedSettings": {
+                    "ImageConfig": {
+                        "schema": {
+                            "title": "Image",
+                            "description": "The path to the image to be set as the new desktop wallpaper",
+                            "type": "String",
+                            "default": ""
+                        }
+                    },
+                },
+                "capabilitiesTransformations": {
+                    "ImageConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": "",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "transform": {
+                                "type": "fluid.transforms.literalValue",
+                                "input": "pvParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.Image": "ImageConfig.value"
+                }
+            },
+            "configureSolidColor": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "SolidColor",
+                    "verifySettings": true
+                },
+                "supportedSettings": {
+                    "DefaultColor": {},
+                    "SolidColorConfig": {
+                        "schema": {
+                           "title": "Desktop background payload",
                             "description": "The values that user want to use for that particular background type",
                             "type": "Object",
                             "default": {
-                                "Image": "‪C:\\Windows\\Web\\Wallpaper\\Windows\\img0.jpg",
-                                "Scaling": "Fill"
+                                "r": 0, "g": 0, "b": 0
                             },
-                            "enum": [
-                                // SolidColor 'BackgroundType' Input payload format
-                                {
-                                    "Color": "{ r: 0..0xff, g: 0..0xff, b: 0..0xff }"
-                                },
-                                // Slideshow 'BackgroundType' Input payload format
-                                {
-                                    "Shuffle": "True..False"
-                                }
-                            ]
+                            "min": {
+                                "r": 0, "g": 0, "b": 0
+                            },
+                            "max": {
+                                "r": 255, "g": 255, "b": 255
+                            }
                         }
                     }
                 },
                 "capabilitiesTransformations": {
-                    "BackgroundType": {
+                    "DefaultColor": {
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.BackgroundTypeVal",
+                            "type": "fluid.transforms.literalValue",
+                            "input": { "r": 0, "g": 0, "b": 0 },
                             "outputPath": "value"
                         }
                     },
-                    "Input": {
+                    "SolidColorConfig": {
                         "transform": {
-                            "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.InputVal",
+                            "type": "fluid.transforms.firstValue",
+                            "values": ["http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor", "DefaultColor.value"],
                             "outputPath": "value"
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.BackgroundTypeVal": "BackgroundType.value",
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackground.InputVal": "Input.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor": "SolidColorConfig.value"
                 }
             }
         },
+        "configure": [
+            "settings.configureImage",
+            "settings.configureSolidColor"
+        ],
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.alwaysInstalled"
