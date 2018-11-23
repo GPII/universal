@@ -9,6 +9,7 @@
   * [Preferences Server](PreferencesServer.md)
 * [Data Model for Preferences and OAuth Data](DataModel.md)
   * [Pouch Manager](PouchManager.md)
+  * [Data Loader](DataLoader.md)
 * [MatchMakerFramework](MatchMakerFramework.md)
   * [Flat Match Maker](FlatMatchMaker.md)
   * [Apptology](Apptology.md)
