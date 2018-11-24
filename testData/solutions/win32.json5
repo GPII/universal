@@ -6536,14 +6536,13 @@
                     "ScrollWheelModeConfig": {
                         "schema": {
                             "title": "Mouse scroll wheel mode",
-                            "description": "Changes the way scroll wheel behaves, between lines and screens",
+                            "description": "Changes the number of lines to scroll when moving the scrollwheel.",
                             "type": "number",
                             "default": 3,
                             "min": 0,
                             "max": 25,
                             "divisibleBy": 1,
-                            // This special value trigger the special meaning
-                            // of full-page scrolling.
+                            // This special value trigger the full-page scrolling.
                             "specialValue": "'full-page' | 4294967295"
                         }
                     }
