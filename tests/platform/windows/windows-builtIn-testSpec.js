@@ -386,7 +386,7 @@ gpii.tests.windows.builtIn = [
             "gpii.windows.spiSettingsHandler": {
                 "com.microsoft.windows.desktopBackgroundColor": [{
                     "settings": {
-                        "Image": {
+                        "ImageConfig": {
                             "path": "pvParam",
                             "value": ""
                         }
@@ -406,7 +406,7 @@ gpii.tests.windows.builtIn = [
             "gpii.windows.nativeSettingsHandler": {
                 "com.microsoft.windows.desktopBackgroundColor": [{
                     "settings": {
-                        "SolidColor": {
+                        "SolidColorConfig": {
                             "value": {
                                 "r": 67, "g": 187, "b": 19
                             }
