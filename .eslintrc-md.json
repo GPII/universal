@@ -1,0 +1,15 @@
+{
+    "extends": "eslint-config-fluid",
+    "useEslintrc": false,
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "no-undef": "off",
+        "strict": "off",
+        "no-unused-vars": "off"
+    },
+    "plugins": [
+        "markdown"
+    ]
+}

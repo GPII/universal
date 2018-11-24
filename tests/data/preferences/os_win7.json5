@@ -81,6 +81,11 @@
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenDPI": {
                         "screen-dpi": 1
                     },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.nightScreen": {
+                        "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                            "value": false
+                        }
+                    },
                     "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
                         "SpeechSpeed": 11,
                         "SpeechPitch": 4,
@@ -100,7 +105,16 @@
                         "EnableAutoShiftEngage": 1,
                         "EnableShiftLock": 1,
                         "EnableCompatibilityKeyboard": 1,
-                        "EnableDesktopModeAutoInvoke": 1 
+                        "EnableDesktopModeAutoInvoke": 1
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.language": {
+                        "MachinePreferredUILanguages": "en-US",
+                        "PreferredUILanguages": "en-US"
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.brightness": {
+                        "Brightness": {
+                            "value": null
+                        }
                     }
                 }
             }

@@ -289,7 +289,30 @@ gpii.tests.windows.builtIn = [
                         }
                     }
                 }
-            ]
+                ],
+                "com.microsoft.windows.language": [{
+                    "settings": {
+                        "PreferredUILanguages": "en-US"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop",
+                        "dataTypes": {
+                            "PreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }, {
+                    "settings": {
+                        "MachinePreferredUILanguages": "en-US"
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Control Panel\\Desktop\\MuiCached",
+                        "dataTypes": {
+                            "MachinePreferredUILanguages": "REG_SZ"
+                        }
+                    }
+                }]
             },
             "gpii.windows.displaySettingsHandler": {
                 "com.microsoft.windows.screenResolution": [{
@@ -321,6 +344,36 @@ gpii.tests.windows.builtIn = [
                                 "command": "Magnify.exe"
                             }
                         ]
+                    }
+                }]
+            },
+            "gpii.windows.systemSettingsHandler": {
+                "com.microsoft.windows.nightScreen": [{
+                    "settings": {
+                        "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                            "value": false
+                        }
+                    }
+                }]
+            },
+            "gpii.windows.wmiSettingsHandler": {
+                "com.microsoft.windows.brightness": [{
+                    "settings": {
+                        "Brightness": {
+                            "value": null
+                        }
+                    },
+                    "options": {
+                        "Brightness": {
+                            "namespace": "root\\WMI",
+                            "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                            "set": {
+                                "className": "WmiMonitorBrightnessMethods",
+                                "method": "WmiSetBrightness",
+                                "params": [0xFFFFFFFF, "$value"],
+                                "returnVal": ["uint", 0]
+                            }
+                        }
                     }
                 }]
             }

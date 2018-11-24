@@ -67,6 +67,7 @@
     "http://registry\\.gpii\\.net/common/autoScreenKeyboardEnabled": "keyboard.typingEnhancement.autoScreenKeyboard",
     "http://registry\\.gpii\\.net/common/DPIScale": "display.screenEnhancement.-provisional-DPIScale",
     "http://registry\\.gpii\\.net/common/speechControl": "control.-provisional-speechControl", // This is not currently supported by any real solutions, but rather used for user testing/demoing
+    "http://registry\\.gpii\\.net/common/nightScreen": "display.screenEnhancement.-provisional-nightScreen",
     "": {
         "transform": {
             "type": "gpii.ontologyHandler.transforms.applicationISOToFlat",

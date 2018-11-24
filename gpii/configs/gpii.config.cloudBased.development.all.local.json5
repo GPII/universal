@@ -1,11 +1,16 @@
 /**
- * This configuration runs the entire system as a cloudBased flowmanager, but with everything locally and in development mode.
- * It also starts pouchDB to serve data for the preferences server and the auth server.
+ * This configuration runs a GPII cloud including a cloud based flow manager and a preferences server, locally
+ * on port 8081. It also runs and loads test data into pouchDB on port 8058 for data persistence.
  *
- * It runs:
-
- * * A cloudBased flowmanager configuration with gpii.config.cloudBased.development.json5 (See corresponding file for details)
- * * Pouch Manager to store data on the local pouchDB
+ * * The following components are running:
+ * ** Auth Server
+ * ** Flat MatchMaker
+ * ** Flow Manager
+ * ** MatchMaker Framework
+ * ** Ontology Handler
+ * ** Preferences Server
+ * ** Solutions Registry (reading registry from file)
+ * ** Pouch Manager
  */
 {
     "type": "gpii.config.cloudBased.development.all.local",

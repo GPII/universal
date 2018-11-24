@@ -1,0 +1,12 @@
+// An empty snapset for testing purposes
+{
+    "flat": {
+        "name": "Empty",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {}
+            }
+        }
+    }
+}

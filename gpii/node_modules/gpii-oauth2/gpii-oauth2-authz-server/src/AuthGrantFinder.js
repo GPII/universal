@@ -33,7 +33,7 @@ var fluid = fluid || require("infusion");
             getGrantForAccessToken: {
                 funcName: "gpii.oauth2.authGrantFinder.getGrantForAccessToken",
                 args: ["{that}.authorizationService", "{arguments}.0"]
-                    // accessToken
+                                                      // accessToken
             }
         }
     });
@@ -52,8 +52,8 @@ var fluid = fluid || require("infusion");
                     grant = {
                         accessToken: accessToken,
                         gpiiKey: authRecord.authorization.gpiiKey,
-                        allowUntrustedSettingsGet: true,
-                        allowUntrustedSettingsPut: true
+                        allowSettingsGet: true,
+                        allowSettingsPut: true
                     };
                 }
             }
