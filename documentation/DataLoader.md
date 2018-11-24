@@ -35,7 +35,7 @@ those contexts; in particular `GPII_CLEAR_INDEX` will not be set.
 - `GPII_STATIC_DATA_DIR`: The directory where the static data to be loaded into CouchDB resides. (optional)
 - `GPII_PREFERENCES_DATA_DIR`: The directory containing the "raw" preferences that are converted into `snapset` Prefs
   Safes and their associated GPII Keys (step 1 above). (optional)
-- `GPII_BUILD_DATA_DIR`: The directory where the data built from the conversion step reside. (optional)
+- `GPII_SNAPSET_DATA_DIR`: The directory where the data built from the conversion step reside. (optional)
 - `GPII_APP_DIR`: The main directory, typically `universal`. (optional)
 
 Note that since [the docker doesn't support the environment variable type of
@@ -44,7 +44,7 @@ directories instead of one array that holds these directories.
 
 ## Running
 
-Example using containers:
+### Example using containers
 
 ```bash
 $ docker run -d -p 5984:5984 --name couchdb couchdb
@@ -64,7 +64,7 @@ database prior to other database changes:
 ```bash
 $ docker run --name dataloader --link couchdb \
     -v /home/vagrant/sync/universal/testData/dbData:/static_data -e GPII_STATIC_DATA_DIR=/static_data \
-    -v /home/vagrant/sync/universal/build/dbData:/build_data -e GPII_BUILD_DATA_DIR=/build_data \
+    -v /home/vagrant/sync/universal/build/dbData:/build_data -e GPII_SNAPSET_DATA_DIR=/build_data \
     -e GPII_COUCHDB_URL=http://couchdb:5984/gpii \
     -e GPII_CLEAR_INDEX=true vagrant-universal scripts/deleteAndLoadSnapsets.sh
 ```
@@ -75,7 +75,18 @@ changes to it (e.g., deleting the snapsets):
 ```bash
 $ docker run --name dataloader --link couchdb \
     -v /home/vagrant/sync/universal/testData/dbData:/static_data -e GPII_STATIC_DATA_DIR=/static_data \
-    -v /home/vagrant/sync/universal/build/dbData:/build_data -e GPII_BUILD_DATA_DIR=/build_data \
+    -v /home/vagrant/sync/universal/build/dbData:/build_data -e GPII_SNAPSET_DATA_DIR=/build_data \
     -e GPII_COUCHDB_URL=http://couchdb:5984/gpii \
     vagrant-universal scripts/deleteAndLoadSnapsets.sh
 ```
+
+### Example using a CouchDB installation
+
+You can provision a CouchDB installation using your local clone of `universal` for testing and development as well.
+
+```bash
+GPII_COUCHDB_URL="http://localhost:5984/gpii" GPII_APP_DIR=$(pwd) bash -c ./scripts/deleteAndLoadSnapsets.sh
+```
+
+In the above example we've created a `gpii` database in our local CouchDB database, and are working in the top level
+`universal` directory.
