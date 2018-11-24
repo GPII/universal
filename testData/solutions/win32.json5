@@ -5697,7 +5697,7 @@
                                             "type": "fluid.transforms.valueMapper",
                                             "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
                                             "match": {
-                                                "ReverseBlack": "C:\\Windows\\cursors\\aero_link_il.cur"
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_il.cur"
                                             },
                                             "noMatch": {
                                                 "outputValue": ""
