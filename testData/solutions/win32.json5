@@ -3841,7 +3841,7 @@
                             "type": "String",
                             "default": "C:\\Windows\\Web\\Wallpaper\\Windows\\img0.jpg"
                         }
-                    },
+                    }
                 },
                 "capabilitiesTransformations": {
                     "ImageConfig": {
@@ -3902,7 +3902,7 @@
                             "type": "String",
                             "default": ""
                         }
-                    },
+                    }
                 },
                 "capabilitiesTransformations": {
                     "ImageConfig": {
