@@ -23,9 +23,17 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.resetAtStart");
 
-gpii.tests.resetAtStart.testDefs = [{
-    name: "Testing reset on system startup",
-    expect: 1,
+gpii.tests.resetAtStart.testCases = [{
+    name: "Testing reset on system startup with a /enabled preference",
+    defaultSettings: {
+        "contexts": {
+            "gpii-default": {
+                "preferences": {
+                    "http://registry.gpii.net/common/magnification/enabled": true
+                }
+            }
+        }
+    },
     expectedState: {
         "gpii.gsettings.launch": {
             "org.gnome.desktop.a11y.magnifier": [{
@@ -37,19 +45,36 @@ gpii.tests.resetAtStart.testDefs = [{
                     "key": "screen-magnifier-enabled"
                 }
             }]
-        },
+        }
+    }
+}, {
+    name: "Testing reset on system startup with a preference for applying settings",
+    defaultSettings: {
+        "contexts": {
+            "gpii-default": {
+                "preferences": {
+                    "http://registry.gpii.net/common/magnification": 3
+                }
+            }
+        }
+    },
+    expectedState: {
         "gpii.gsettings": {
             "org.gnome.desktop.a11y.magnifier": [{
                 "settings": {
                     "mag-factor": 3,
-                    "screen-position": "right-half"
+                    "screen-position": "full-screen"
                 },
                 "options": {
                     "schema": "org.gnome.desktop.a11y.magnifier"
                 }
             }]
         }
-    },
+    }
+}];
+
+gpii.tests.resetAtStart.testSequence = {
+    expect: 1,
     sequence: [{
         func: "gpii.test.checkRestoredInitialState",
         args: ["{tests}.options.expectedState", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
@@ -57,4 +82,21 @@ gpii.tests.resetAtStart.testDefs = [{
         event: "{testCaseHolder}.events.onCheckRestoredInitialStateComplete",
         listener: "fluid.identity"
     }]
-}];
+};
+
+gpii.tests.resetAtStart.buildTestDefs = function (config) {
+    return fluid.transform(gpii.tests.resetAtStart.testCases, function (oneTestCase) {
+        return fluid.extend(true, {
+            name: oneTestCase.name,
+            expectedState: oneTestCase.expectedState,
+            gradeNames: ["gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
+            config: config,
+            "distributeOptions": {
+                "acceptance.defaultSettings": {
+                    "record": oneTestCase.defaultSettings,
+                    "target": "{that gpii.flowManager.local}.options.defaultSettings"
+                }
+            }
+        }, gpii.tests.resetAtStart.testSequence);
+    });
+};
