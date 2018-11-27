@@ -6537,11 +6537,18 @@
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 3,
-                            "min": 0,
-                            "max": 25,
-                            "divisibleBy": 1,
+                            "minimum": 1,
+                            "oneOf": [
+                                {
+                                    "maximum": 100
+                                },
+                                {
+                                    enum: [4294967295],
+                                    enumLabels: ["full-page"]
+                                }
+                            ],
                             // This special value trigger the full-page scrolling.
                             "specialValue": "'full-page' | 4294967295"
                         }
