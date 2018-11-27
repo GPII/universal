@@ -6561,7 +6561,7 @@
                             "defaultOutputPath": "value",
                             "match": {
                                 "full-page": 4294967295,
-                                "25": 4294967295
+                                "100": 4294967295
                             },
                             "noMatch": {
                                 "outputValue": {
@@ -6572,7 +6572,7 @@
                                                 "type": "fluid.transforms.inRange",
                                                 "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
                                                 "min": 1,
-                                                "max": 25
+                                                "max": 100
                                             }
                                         },
                                         "false": 3,
