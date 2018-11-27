@@ -24,7 +24,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
-                        "ScrollLines": "full-page",
+                        "ScrollLines": 4294967295,
                         "ScrollRouting": "RoutingHybrid",
                         "DoubleClickTime": 5000,
                         "EnableCursorShadow": 1,

@@ -6554,35 +6554,9 @@
                 "capabilitiesTransformations": {
                     "ScrollWheelModeConfig": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
-                            "defaultOutputPath": "value",
-                            "match": {
-                                "full-page": 4294967295,
-                                "100": 4294967295
-                            },
-                            "noMatch": {
-                                "outputValue": {
-                                    "transform": {
-                                        "type": "fluid.transforms.condition",
-                                        "condition": {
-                                            "transform": {
-                                                "type": "fluid.transforms.inRange",
-                                                "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
-                                                "min": 1,
-                                                "max": 100
-                                            }
-                                        },
-                                        "false": 3,
-                                        "true": {
-                                            "transform": {
-                                                "type": "fluid.transforms.value",
-                                                "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
