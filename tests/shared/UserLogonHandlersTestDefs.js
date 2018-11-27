@@ -82,10 +82,10 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
                 path: "/user/adjustCursor/logout"
             }
         },
-        logoutDefaultGpiiKeyRequest: {
+        logoutNoUserRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/" + "noUser" + "/logout"
+                path: "/user/noUser/logout"
             }
         }
     },
@@ -296,7 +296,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
         args: ["{arguments}.0"]
     }]
 }, {
-    name: "Testing proximityTriggered with 'reset' the default GPII key",
+    name: "Testing proximityTriggered with 'reset' noUser",
     expect: 1,
     sequence: [{
         // resetting with no user logged in
@@ -356,7 +356,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
-            errorTexts: "Got logout request from user adjustCursor, but the user " + "noUser" + " is logged in. So ignoring the request.",
+            errorTexts: "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
             request: "{logoutAdjustCursorRequest}"
@@ -387,13 +387,13 @@ gpii.tests.userLogonHandlers.testDefs = [{
         }
     }]
 }, {
-    name: "The default GPII key logs back in after an explicit request to log it out",
+    name: "noUser logs back in after an explicit request to logout noUser",
     expect: 1,
     sequence: [{
         // 1st /proximityTriggered request: standard login
-        func: "{logoutDefaultGpiiKeyRequest}.send"
+        func: "{logoutNoUserRequest}.send"
     }, {
-        event: "{logoutDefaultGpiiKeyRequest}.events.onComplete",
+        event: "{logoutNoUserRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
         args: ["{arguments}.0", "noUser"]
     }]

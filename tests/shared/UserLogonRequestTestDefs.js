@@ -200,7 +200,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.testLogoutResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
-        // The default GPII key automatically keys in when no actual key is keyed in
+        // noUser automatically keys in when no actual key is keyed in
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
@@ -215,7 +215,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }]
 }, {
-    name: "Login with a different user with proximity trigger should log previous user out and the default GPII key does not login in between",
+    name: "Login with a different user with proximity trigger should log previous user out and noUser does not login in between",
     expect: 15,
     sequence: [{
         // 1. 1nd proximityTriggered request to key in adjustCursor
@@ -373,7 +373,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         }, "{arguments}.0"]
     }]
 }, {
-    name: "Testing 'reset' GPII key: resetting with the default GPII key logs out the default key",
+    name: "Testing 'reset' GPII key: resetting with noUser logs out noUser",
     expect: 7,
     sequence: [{
         func: "gpii.tests.invokePromiseProducer",
@@ -609,7 +609,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }]
 }, {
-    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is the default GPII key",
+    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is noUser",
     expect: 2,
     sequence: [{
         // logout of user when none is logged in
@@ -663,7 +663,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }]
 }, {
-    name: "The default GPII key logs back in after an explicit request to log it out",
+    name: "noUser logs back in after an explicit request to logout noUser",
     expect: 15,
     sequence: [{
         // 1. "noUser" is keyed in initially
@@ -690,7 +690,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.testLogoutResponse",
         args: ["{arguments}.0", "noUser"]
     }, {
-        // The default GPII key automatically keys back in
+        // noUser automatically keys back in
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
