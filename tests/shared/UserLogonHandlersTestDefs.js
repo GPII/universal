@@ -85,7 +85,7 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
         logoutDefaultGpiiKeyRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/" + gpii.defaultGpiiKey + "/logout"
+                path: "/user/" + "noUser" + "/logout"
             }
         }
     },
@@ -356,7 +356,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
-            errorTexts: "Got logout request from user adjustCursor, but the user " + gpii.defaultGpiiKey + " is logged in. So ignoring the request.",
+            errorTexts: "Got logout request from user adjustCursor, but the user " + "noUser" + " is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
             request: "{logoutAdjustCursorRequest}"
@@ -395,6 +395,6 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }, {
         event: "{logoutDefaultGpiiKeyRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", gpii.defaultGpiiKey]
+        args: ["{arguments}.0", "noUser"]
     }]
 }];
