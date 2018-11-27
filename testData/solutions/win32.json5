@@ -6547,9 +6547,7 @@
                                     enum: [4294967295],
                                     enumLabels: ["full-page"]
                                 }
-                            ],
-                            // This special value trigger the full-page scrolling.
-                            "specialValue": "'full-page' | 4294967295"
+                            ]
                         }
                     }
                 },
