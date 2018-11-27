@@ -116,6 +116,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.brightness"
+    },
+
+    {
         "id": "com.android.activitymanager"
     },
 
@@ -153,6 +157,10 @@
 
     {
         "id": "net.gpii.uioPlus"
+    },
+
+    {
+        "id": "com.microsoft.windows.volumeControl"
     },
 
     {

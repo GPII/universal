@@ -1,0 +1,20 @@
+{
+    "type": "gpii.tests.resetAtStart.config",
+    "options": {
+        "flowManagerOptions": {
+            // Do not disturb the defaultSettings.json5 file that has been copied to the settings dir on the computer
+            // that this test is running on.
+            "components": {
+                "defaultSettingsLoader": {
+                    "type": "fluid.emptySubcomponent"
+                }
+            },
+            "listeners": {
+                "onCreate.loadDefaultSettings": "fluid.identity"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.production.base.json5"
+    ]
+}

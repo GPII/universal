@@ -70,16 +70,16 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
                 path: "/user/sammy/logout"
             }
         },
-        loginTestUser1Request: {
+        loginAdjustCursorRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/testUser1/login"
+                path: "/user/adjustCursor/login"
             }
         },
-        logoutTestUser1Request: {
+        logoutAdjustCursorRequest: {
             type: "kettle.test.request.http",
             options: {
-                path: "/user/testUser1/logout"
+                path: "/user/adjustCursor/logout"
             }
         },
         logoutNoUserRequest: {
@@ -94,7 +94,7 @@ fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
     }
 });
 
-gpii.tests.userLogonHandlers.gpiiKey = "testUser1";
+gpii.tests.userLogonHandlers.gpiiKey = "adjustCursor";
 
 gpii.tests.userLogonHandlers.testLoginResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
@@ -104,6 +104,10 @@ gpii.tests.userLogonHandlers.testLoginResponse = function (data) {
 gpii.tests.userLogonHandlers.testLogoutResponse = function (data, gpiiKey) {
     jqUnit.assertEquals("Response is correct", "User with GPII key " +
         gpiiKey + " was successfully logged out.", data);
+};
+
+gpii.tests.userLogonHandlers.testResetResponse = function (data) {
+    jqUnit.assertEquals("Response is correct", "Reset successfully.", data);
 };
 
 gpii.tests.userLogonHandlers.buildTestDefs = function (testDefs) {
@@ -288,8 +292,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{resetRequest2}.send"
     }, {
         event: "{resetRequest2}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
+        listener: "gpii.tests.userLogonHandlers.testResetResponse",
+        args: ["{arguments}.0"]
     }]
 }, {
     name: "Testing proximityTriggered with 'reset' noUser",
@@ -299,8 +303,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{resetRequest}.send"
     }, {
         event: "{resetRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", "noUser"]
+        listener: "gpii.tests.userLogonHandlers.testResetResponse",
+        args: ["{arguments}.0"]
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
@@ -313,16 +317,16 @@ gpii.tests.userLogonHandlers.testDefs = [{
         listener: "gpii.tests.userLogonHandlers.testLoginResponse"
     }, {
         // standard login with an already logged in user:
-        func: "{loginTestUser1Request}.send"
+        func: "{loginAdjustCursorRequest}.send"
     }, {
-        event: "{loginTestUser1Request}.events.onComplete",
+        event: "{loginAdjustCursorRequest}.events.onComplete",
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging in user who is already logged in",
-            errorTexts: "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request.",
+            errorTexts: "Got log in request from user adjustCursor, but the user adjustCursor is already logged in. So ignoring login request.",
             statusCode: 409,
             string: "{arguments}.0",
-            request: "{loginTestUser1Request}"
+            request: "{loginAdjustCursorRequest}"
         }
     }, {
         // logout of different user
@@ -332,7 +336,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user who is not logged in",
-            errorTexts: "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request.",
+            errorTexts: "Got logout request from user sammy, but the user adjustCursor is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
             request: "{logoutSammyRequest}"
@@ -346,16 +350,16 @@ gpii.tests.userLogonHandlers.testDefs = [{
         args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         // logout of user when none is logged in
-        func: "{logoutTestUser1Request}.send"
+        func: "{logoutAdjustCursorRequest}.send"
     }, {
-        event: "{logoutTestUser1Request}.events.onComplete",
+        event: "{logoutAdjustCursorRequest}.events.onComplete",
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
-            errorTexts: "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request.",
+            errorTexts: "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
-            request: "{logoutTestUser1Request}"
+            request: "{logoutAdjustCursorRequest}"
         }
     }]
 }, {

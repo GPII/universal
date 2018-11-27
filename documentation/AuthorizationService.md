@@ -67,7 +67,7 @@ Grant](https://wiki.gpii.net/w/GPII_OAuth_2_Guide#Resource_Owner_GPII_Key_Grant)
 }
 ```
 
-Return an object that contains the error message and http status code if,
+Return an object that contains the error message and HTTP status code if,
 
 * The GPII key is not found, or,
 * The client is not a GPII App Installation Client.

@@ -58,7 +58,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
 });
 
 // Override the original "kettle.test.testDefToServerEnvironment" function provided by kettle library to boil a new
-// aggregate event "onAllReady" that listens to both "onServerReady" and "{flowManager}.events.noUserLoggedIn" events
+// aggregate event "onAllReady" that listens to both "onServerReady" and "{flowManager}.events.resetAtStartSuccess" events
 kettle.test.testDefToServerEnvironment = function (testDef) {
     var configurationName = testDef.configType || kettle.config.createDefaults(testDef.config);
     return {
@@ -71,11 +71,11 @@ kettle.test.testDefToServerEnvironment = function (testDef) {
                 }
             },
             events: {
-                noUserLoggedIn: null,
+                resetAtStartSuccess: null,
                 onAllReady: {
                     events: {
                         "onServerReady": "onServerReady",
-                        "noUserLoggedIn": "noUserLoggedIn"
+                        "resetAtStartSuccess": "resetAtStartSuccess"
                     }
                 }
             }
