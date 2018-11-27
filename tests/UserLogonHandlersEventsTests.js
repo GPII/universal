@@ -50,12 +50,12 @@ gpii.tests.userLogonEvents.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonEvents.modelChangeChecker",
-        args: ["{arguments}.0", "login", true, "testUser1"]
+        args: ["{arguments}.0", "login", true, gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonEvents.modelChangeChecker",
-        args: ["{arguments}.0", "login", false, "testUser1"]
+        args: ["{arguments}.0", "login", false, gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         event: "{proximityTriggeredRequest}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLoginResponse"
@@ -72,16 +72,16 @@ gpii.tests.userLogonEvents.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonEvents.modelChangeChecker",
-        args: ["{arguments}.0", "logout", true, "testUser1"]
+        args: ["{arguments}.0", "logout", true, gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonEvents.modelChangeChecker",
-        args: ["{arguments}.0", "logout", false, "testUser1"]
+        args: ["{arguments}.0", "logout", false, gpii.tests.userLogonHandlers.gpiiKey]
     }, {
         event: "{proximityTriggeredRequest2}.events.onComplete",
         listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", "testUser1"]
+        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
     }]
 }];
 
