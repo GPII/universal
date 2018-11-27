@@ -6953,7 +6953,7 @@
         ]
     },
     "com.microsoft.windows.typingEnhancement": {
-        "name": "Windows typing autocorrection",
+        "name": "Windows typing autocorrect",
         "contexts": {
             "OS": [
                 {
