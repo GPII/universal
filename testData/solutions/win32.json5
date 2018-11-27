@@ -6499,10 +6499,9 @@
                 "capabilitiesTransformations": {
                     "SwapMouseButtonsConfig": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons",
-                            "outputPath": "value",
-                            "defaultValue": 0
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
@@ -6641,9 +6640,8 @@
                             "type": "fluid.transforms.valueMapper",
                             "defaultInput": {
                                 "transform": {
-                                    "type": "fluid.transforms.fallbackValue",
-                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
-                                    "defaultValue": "RoutingFocus"
+                                    "type": "fluid.transforms.value",
+                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting"
                                 }
                             },
                             "defaultOutputPath": "value",
@@ -6702,10 +6700,9 @@
                 "capabilitiesTransformations": {
                     "MouseCursorShadowConfig": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
-                            "outputPath": "value",
-                            "defaultValue": 0
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
@@ -6748,10 +6745,9 @@
                 "capabilitiesTransformations": {
                     "ScrollCharsConfig": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars",
-                            "outputPath": "value",
-                            "defaultValue": 3
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
@@ -6794,10 +6790,9 @@
                 "capabilitiesTransformations": {
                     "WindowsTrackingConfig": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
-                            "outputPath": "value",
-                            "defaultValue": 0
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
@@ -6837,10 +6832,9 @@
                 "capabilitiesTransformations": {
                     "ActiveZOrder": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
-                            "outputPath": "value",
-                            "defaultValue": 0
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
@@ -6877,10 +6871,9 @@
                 "capabilitiesTransformations": {
                     "WindowsArrangement": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement",
-                            "outputPath": "value",
-                            "defaultValue": 1
+                            "outputPath": "value"
                         },
                         "path": {
                             "transform": {
@@ -6920,10 +6913,9 @@
                 "capabilitiesTransformations": {
                     "DoubleClickTimeConfig": {
                         "transform": {
-                            "type": "fluid.transforms.fallbackValue",
+                            "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
-                            "outputPath": "value",
-                            "defaultValue": 500
+                            "outputPath": "value"
                         }
                     }
                 },
