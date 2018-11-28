@@ -376,7 +376,6 @@ gpii.tests.userLogonRequest.testDefs = [{
     name: "Testing 'reset' GPII key: resetting with noUser logs out noUser",
     expect: 7,
     sequence: [{
-        // 1. resetting with noUser logs out noUser
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
@@ -610,7 +609,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}", ["noUser"]]
     }]
 }, {
-    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is \"noUser\"",
+    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is noUser",
     expect: 2,
     sequence: [{
         // logout of user when none is logged in

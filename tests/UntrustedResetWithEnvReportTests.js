@@ -1,5 +1,5 @@
 /*
- * Reset on System Startup Tests with All in Local Config
+ * Reset on System Startup Tests with Untrusted Config
  *
  * Copyright 2018 OCAD University
  *
@@ -17,7 +17,7 @@ var fluid = require("infusion"),
 
 require("./shared/ResetDefaultSettingsTestDefs.js");
 
-gpii.test.bootstrapServer(gpii.tests.resetDefaultSettings.buildTestDefs(gpii.tests.resetDefaultSettings.resetAtStartTestCases, {
-    configName: "gpii.tests.acceptance.resetAtStart.config",
+gpii.test.bootstrapServer(gpii.tests.resetDefaultSettings.buildTestDefs(gpii.tests.resetDefaultSettings.testCasesWithEnvReport, {
+    configName: "gpii.tests.acceptance.untrusted.resetWithEnvReport.config",
     configPath: "%gpii-universal/tests/configs"
 }));
