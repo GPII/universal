@@ -94,6 +94,29 @@ gpii.tests.journal.initialSettings = {
             }
         ]
     },
+    "gpii.windows.wmiSettingsHandler": {
+        "com.microsoft.windows.brightness": [
+            {
+                "settings": {
+                    "Brightness": {
+                        "value": null
+                    }
+                },
+                "options": {
+                    "Brightness": {
+                        "namespace": "root\\WMI",
+                        "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                        "set": {
+                            "className": "WmiMonitorBrightnessMethods",
+                            "method": "WmiSetBrightness",
+                            "params": [0xFFFFFFFF, "$value"],
+                            "returnVal": ["uint", 0]
+                        }
+                    }
+                }
+            }
+        ]
+    },
     "gpii.windows.enableRegisteredAT": {
         "com.microsoft.windows.magnifier": [{
             "settings": {
@@ -466,13 +489,13 @@ gpii.tests.journal.fixtures = [
                         message: "The system's settings were restored from a snapshot"
                     }
                 }
-            }, gpii.test.checkSequence,
+            },
             { // Fix for race condition as described in GPII-3396. However, it appears there is a low probability of
               // a test hang here because the last element of gpii.test.checkSequence is passive and may execute later
               // than noUserLoggedIn. This can only be resolved with a globbing fix for FLUID-5502 in the framework
                 event: "{configuration}.server.flowManager.events.noUserLoggedIn",
                 listener: "fluid.identity"
-            },
+            }, gpii.test.checkSequence,
             // Now verify that we can log on normally after a restore, and generate a non-crashed session after logging off
             gpii.tests.journal.normalLoginFixtures
         ]

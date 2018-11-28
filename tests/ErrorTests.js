@@ -32,7 +32,7 @@ gpii.tests.errors.testLoginResponse = function (data, nativeResponse, method) {
 };
 
 gpii.tests.errors.recordError = function (holder, error) {
-    holder.lastError = error;
+    holder.lastError.push(error.messageKey);
 };
 
 gpii.tests.errors.recordClear = function (holder) {
@@ -41,7 +41,7 @@ gpii.tests.errors.recordClear = function (holder) {
 
 gpii.tests.errors.checkUserError = function (holder, expected) {
     jqUnit.assertValue("User error should have been reported", holder.lastError);
-    jqUnit.assertEquals("User error should be as expected", expected, holder.lastError.messageKey);
+    jqUnit.assertDeepEq("User error should be as expected", expected, holder.lastError);
 };
 
 gpii.tests.errors.checkCleared = function (holder) {
@@ -56,7 +56,7 @@ gpii.tests.errors.preferencesFilter = function (payload, testCaseHolder) {
 
 fluid.defaults("gpii.tests.errors.mixin", {
     members: {
-        lastError: null,
+        lastError: [],
         cleared: false
     },
     distributeOptions: {
@@ -81,7 +81,7 @@ fluid.defaults("gpii.tests.errors.mixin", {
                 funcName: "gpii.tests.errors.preferencesFilter",
                 args: ["{arguments}.0", "{gpii.tests.errors.mixin}"]
             },
-            target: "{testCaseHolder flowManager preferencesDataSource}.options.listeners.onRead"
+            target: "{testCaseHolder flowManager prefsServerDataSource preferencesDataSourceImpl}.options.listeners.onRead"
         }
     },
     listeners: {
@@ -107,7 +107,7 @@ gpii.tests.errors.coreTestDef = {
     },
     gradeNames: ["gpii.test.integration.testCaseHolder.windows", "gpii.tests.errors.mixin"],
     gpiiKey: null,
-    expectedError: null,
+    expectedError: [],
     expectedMethodFail: null,
     explodeMethod: null,
 
@@ -182,15 +182,15 @@ gpii.tests.errors.adjustSequenceToLogout = function (testDef) {
 
 gpii.tests.errors.testVariants = [{
     gpiiKey: "explodeSettingsHandlerSet",
-    expectedError: "WriteSettingFail",
+    expectedError: ["WriteSettingFail", "KeyInFail"],
     expectedMethodFail: "set"
 }, {
     gpiiKey: "explodeLaunchHandlerStart",
-    expectedError: "StartApplicationFail",
+    expectedError: ["StartApplicationFail", "KeyInFail"],
     expectedMethodFail: "launch"
 }, {
     gpiiKey: "explodeLaunchHandlerStop",
-    expectedError: "StopApplicationFail",
+    expectedError: ["StopApplicationFail", "KeyInFail"],
     expectedMethodFail: "stop",
     expect: 9
 }];
