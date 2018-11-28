@@ -49,8 +49,6 @@ gpii.prefsSetsDbUtils.emptyPreferencesBlock = {
  * @return {Object} A JSON object containing the documents ready to be inserted into DB.
  */
 gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences, prefsSafeType) {
-    var preferences = preferences || gpii.prefsSetsDbUtils.emptyPreferencesBlock;
-    var prefsSafeType = prefsSafeType || "user";
     var currentTime = new Date().toISOString();
     var prefsSafeId = "prefsSafe-" + gpiiKeyId;
 
@@ -70,11 +68,11 @@ gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences, prefsS
         "_id": prefsSafeId,
         "type": "prefsSafe",
         "schemaVersion": "0.1",
-        "prefsSafeType": prefsSafeType,
+        "prefsSafeType": prefsSafeType || "user",
         "name": gpiiKeyId,
         "password": null,
         "email": null,
-        "preferences": preferences,
+        "preferences": preferences || gpii.prefsSetsDbUtils.emptyPreferencesBlock,
         "timestampCreated": currentTime,
         "timestampUpdated": null
     };
