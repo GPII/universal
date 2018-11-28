@@ -45,9 +45,12 @@ gpii.prefsSetsDbUtils.emptyPreferencesBlock = {
  *
  * @param  {String} gpiiKeyId - The identifier of the prefsSet (usually, a uuid).
  * @param  {Object} preferences - The preferences to include in the prefsSet.
+ * @param  {String} prefsSafeType - The type of the prefsSafe, either "user" or "snapset".
  * @return {Object} A JSON object containing the documents ready to be inserted into DB.
  */
-gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences) {
+gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences, prefsSafeType) {
+    var preferences = preferences || gpii.prefsSetsDbUtils.emptyPreferencesBlock;
+    var prefsSafeType = prefsSafeType || "user";
     var currentTime = new Date().toISOString();
     var prefsSafeId = "prefsSafe-" + gpiiKeyId;
 
@@ -67,7 +70,7 @@ gpii.prefsSetsDbUtils.generateKeyData = function (gpiiKeyId, preferences) {
         "_id": prefsSafeId,
         "type": "prefsSafe",
         "schemaVersion": "0.1",
-        "prefsSafeType": "user",
+        "prefsSafeType": prefsSafeType,
         "name": gpiiKeyId,
         "password": null,
         "email": null,

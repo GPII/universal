@@ -11,7 +11,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // This script generates unique keys and loads them into CouchDB.
 //
 // To create 20 empty keys, the script needs to be called like this:
-//   * COUCHDB_URL=http://localhost:8058/gpii NUM_OF_KEYS=20 node scripts/loadEmptyPrefsSets.js
+//   * COUCHDB_URL=http://localhost:8058/gpii NUM_OF_KEYS=20 node scripts/loadEmptyKeys.js
 //
 // The options to this script must be passed as environment variables, and they are:
 //   * COUCHDB_URL [String] [required]: This needs to be in the form "http://host/dbname", but in case
@@ -42,6 +42,7 @@ fluid.defaults("gpii.uuidLoader", {
     outputFileName: process.env.OUTPUT_FILENAME || "generated-keys-" + new Date().toISOString() + ".txt",
     totalNumOfKeys: parseInt(process.env.NUM_OF_KEYS),
     hideProgress: process.env.HIDE_PROGRESS,
+    count: 1,
     dbOptions: {
         name: process.env.COUCHDB_URL
     },
@@ -56,7 +57,8 @@ fluid.defaults("gpii.uuidLoader", {
                 "{that}",
                 "{that}.options.totalNumOfKeys",
                 "{that}.options.outputFileName",
-                "{that}.options.hideProgress"
+                "{that}.options.hideProgress",
+                "{that}.options.count"
             ]
         },
         dbPut: {
@@ -75,7 +77,11 @@ gpii.uuidLoader.dbPut = function (that, doc) {
         promise.reject({isError: true, message: "doc with id " + doc._id + " already exists in DB"});
     }, function (err) {
         if (err.message === "missing") {
-            that.put(doc).then(function (newDoc) {promise.resolve(newDoc);}, function (err) {promise.reject(err);});
+            that.put(doc).then(function (newDoc) {
+                promise.resolve(newDoc);
+            }, function (err) {
+                promise.reject(err);
+            });
         } else {
             promise.reject(err);
         };
@@ -101,16 +107,16 @@ gpii.uuidLoader.addKeyInDb = function (that, keyData) {
 
 // The real action
 //
-gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName, hideProgress) {
-    var keyData = gpii.prefsSetsDbUtils.generateKeyData(uuid.v4(), gpii.prefsSetsDbUtils.emptyPreferencesBlock);
+gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName, hideProgress, count) {
+    var keyData = gpii.prefsSetsDbUtils.generateKeyData(uuid.v4());
     that.addKeyInDb(keyData).then(function (newKey) {
         fs.appendFileSync(outputFileName, newKey + "\n");
         if (!hideProgress) {
-            console.log("Key", gpii.uuidLoader.count, "of", totalNumOfKeys, "created:", newKey);
+            console.log("Key", count, "of", totalNumOfKeys, "created:", newKey);
         }
 
-        if (gpii.uuidLoader.count < totalNumOfKeys) {
-            gpii.uuidLoader.count++;
+        if (count < totalNumOfKeys) {
+            that.options.count++;
             that.createNewKeys();
         } else {
             console.log("We're done adding new keys! :)");
@@ -126,7 +132,6 @@ gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName, 
 //
 var uuidLoader = gpii.uuidLoader();
 if (uuidLoader.options.totalNumOfKeys > 0) {
-    gpii.uuidLoader.count = 1;
     console.log("Saving the list of generated keys into:", uuidLoader.options.outputFileName);
     uuidLoader.createNewKeys();
 }
