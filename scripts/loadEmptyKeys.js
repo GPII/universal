@@ -42,7 +42,9 @@ fluid.defaults("gpii.uuidLoader", {
     outputFileName: process.env.OUTPUT_FILENAME || "generated-keys-" + new Date().toISOString() + ".txt",
     totalNumOfKeys: parseInt(process.env.NUM_OF_KEYS),
     hideProgress: process.env.HIDE_PROGRESS,
-    count: 1,
+    members: {
+        count: 1
+    },
     dbOptions: {
         name: process.env.COUCHDB_URL
     },
@@ -57,8 +59,7 @@ fluid.defaults("gpii.uuidLoader", {
                 "{that}",
                 "{that}.options.totalNumOfKeys",
                 "{that}.options.outputFileName",
-                "{that}.options.hideProgress",
-                "{that}.options.count"
+                "{that}.options.hideProgress"
             ]
         },
         dbPut: {
@@ -107,16 +108,16 @@ gpii.uuidLoader.addKeyInDb = function (that, keyData) {
 
 // The real action
 //
-gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName, hideProgress, count) {
+gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName, hideProgress) {
     var keyData = gpii.prefsSetsDbUtils.generateKeyData(uuid.v4());
     that.addKeyInDb(keyData).then(function (newKey) {
         fs.appendFileSync(outputFileName, newKey + "\n");
         if (!hideProgress) {
-            console.log("Key", count, "of", totalNumOfKeys, "created:", newKey);
+            console.log("Key", that.count, "of", totalNumOfKeys, "created:", newKey);
         }
 
-        if (count < totalNumOfKeys) {
-            that.options.count++;
+        if (that.count < totalNumOfKeys) {
+            that.count++;
             that.createNewKeys();
         } else {
             console.log("We're done adding new keys! :)");
