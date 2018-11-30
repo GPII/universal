@@ -93,7 +93,7 @@ gpii.tests.cloudStatus.testCases = {
         name:  "Test the liveness of the cloud based flow manager: all local with only the cloud based flow manager running",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
-        expectedStatusCode: 404
+        expectedStatusCode: 503
     },
     testHealthWithSeparateServers: {
         name:  "Test the liveness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
