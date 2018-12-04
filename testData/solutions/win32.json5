@@ -6570,17 +6570,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "transform": [
-                        {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "ScrollWheelModeConfig.value",
-                            "defaultOutputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
-                            "match": {
-                                "4294967295": "full-page"
-                            },
-                            "noMatch": "ScrollWheelModeConfig.value"
-                        }
-                    ]
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines": "ScrollWheelModeConfig.value"
                 }
             },
             "configureScrollInactiveWindow": {
