@@ -111,6 +111,12 @@
             "max": 1,
             "divisibleBy": 0.1
         },
+        "http://registry\\.gpii\\.net/common/magnification/enabled": {
+            "title": "Magnification",
+            "description": "Whether to enable/disable magnification.",
+            "type": "boolean",
+            "default": false
+        },
         "http://registry.gpii.net/common/selfVoicing/enabled": {
             "title": "Self Voicing",
             "description": "Whether to enable/disable self voicing",
