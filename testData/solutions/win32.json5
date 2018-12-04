@@ -3381,7 +3381,7 @@
             ]
         },
         "settingsHandlers": {
-            "configuration1": {
+            "configuration-magic-core": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\14.0\\Settings\\enu\\DEFAULT.MCF"
@@ -4220,7 +4220,7 @@
                 }
             },
             // MAGic also supports a subset of JAWS settings using its built-in "JAWS lite".
-            "configuration2": {
+            "configuration-magic-jaws-lite": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\14.0\\Settings\\enu\\DEFAULT.JCF"
@@ -4463,10 +4463,10 @@
             }
         },
         "configure": [
-            "settings.configuration1", "settings.configuration2"
+            "settings.configuration-magic-core", "settings.configuration-magic-jaws-lite"
         ],
         "restore": [
-            "settings.configuration1", "settings.configuration2"
+            "settings.configuration-magic-core", "settings.configuration-magic-jaws-lite"
         ],
         "start": [
             {
