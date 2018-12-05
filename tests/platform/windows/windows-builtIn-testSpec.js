@@ -203,6 +203,25 @@ gpii.tests.windows.builtIn = [
                                 "type": "BOOL"
                             }
                         }
+                    },
+                    {
+                        "settings": {
+                            "WindowsArrangement": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETWINARRANGING",
+                            "setAction": "SPI_SETWINARRANGING",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
                     }
                 ],
                 "com.microsoft.windows.mouseTrailing": [

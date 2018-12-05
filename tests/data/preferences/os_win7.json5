@@ -145,6 +145,13 @@
                             "path": "pvParam",
                             "value": 0
                         },
+                        "WindowsArrangement": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
                         "DoubleClickTimeConfig": {
                             "value": 600
                         }
