@@ -1,5 +1,5 @@
 {
-    "type": "gpii.tests.acceptance.resetAtStart.config",
+    "type": "gpii.tests.acceptance.resetWithEnvReport.config",
     "options": {
         "distributeOptions": {
             "acceptance.defaultSettings": {
@@ -10,7 +10,6 @@
     },
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/gpii.config.development.local.json5",
-        "%flowManager/configs/gpii.flowManager.config.production.base.json5",
         "./shared/gpii.tests.resetDefaultSettings.config.json5"
     ]
 }
