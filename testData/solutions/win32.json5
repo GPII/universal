@@ -3322,11 +3322,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -3424,11 +3419,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        rewriteEvery: 0,
-                        numRetries: 40
-                    },
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
@@ -3640,12 +3630,6 @@
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20,
-                        "retryInterval": 1000
-                    },
                     "registryName": "magnifierpane",
                     "getState": [
                         {
@@ -4459,11 +4443,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -4693,11 +4672,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20
-                    },
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
@@ -4742,8 +4716,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "HIGHCONTRAST"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "HighContrastOn": {
@@ -4795,6 +4768,7 @@
                 }
             },
             "configure-registry": {
+                // This sets the high-contrast theme.
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -4852,15 +4826,54 @@
                         }
                     }
                 }
+            },
+            "configure-theme": {
+                // This is used to specify the theme file that Windows will use when restoring high-contrast. The
+                // file this setting points to is created by gpii, containing the currently unsaved theme settings.
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast",
+                    "dataTypes": {
+                        "Pre-High Contrast Scheme": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "Pre-High Contrast Scheme": {}
+                },
+                "capabilitiesTransformations": {
+                    "Pre-High Contrast Scheme": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": "${{environment}.LOCALAPPDATA}\\Microsoft\\Windows\\Themes\\Morphic.theme"
+                        }
+                    }
+                }
             }
         },
         "configure": [
+            // Set the "restore" theme.
+            "settings.configure-theme",
+            // Set the high-contrast theme.
             "settings.configure-registry",
             {
+                // Save the current theme, and set the new high-contrast one.
                 "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+                "newTheme": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}",
+                "currentTheme": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme}",
+                "saveAs": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme}"
             },
+            // Apply high-contrast.
             "settings.configure-spi"
+        ],
+        "restore": [
+            // Restore the high-contrast theme.
+            "settings.configure-registry",
+            // Disable high-contrast.
+            "settings.configure-spi",
+            // Restore the current theme.
+            "settings.configure-theme"
         ],
         "isInstalled": [
             {
@@ -4889,8 +4902,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "STICKYKEYS"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "StickyKeysOn": {}
@@ -4942,8 +4954,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "FILTERKEYS"
-                    },
-                    "verifySettings": false
+                    }
                 },
                 "supportedSettings": {
                     "FilterKeysEnable": {
@@ -5150,8 +5161,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "MOUSEKEYS"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "MouseKeysOn": {
@@ -5284,8 +5294,7 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "MouseTrails": {
@@ -5431,8 +5440,7 @@
                         "SizeWE": "REG_SZ",
                         "UpArrow": "REG_SZ",
                         "Wait": "REG_SZ"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "Arrow": {},
@@ -5784,8 +5792,7 @@
                         "EnableShiftLock": "REG_DWORD",
                         "EnableCompatibilityKeyboard": "REG_DWORD",
                         "EnableDesktopModeAutoInvoke": "REG_DWORD"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "EnableAutocorrection": {},
