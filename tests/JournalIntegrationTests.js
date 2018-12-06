@@ -39,7 +39,7 @@ gpii.tests.journal.initialSettings = {
                     "value": 20
                 }
             },
-            "options": { // We use a lower-quality utility than gpii.settingsHandlers.invokeRetryingHandler in our test case setup
+            "options": {
                 "mockSync": true,
                 "getAction": "SPI_GETMOUSETRAILS",
                 "setAction": "SPI_SETMOUSETRAILS"
