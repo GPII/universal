@@ -6132,16 +6132,9 @@
                 "capabilitiesTransformations": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity",
-                            "defaultOutputPath": "value",
-                            "match": {
-                                "low": "Low sensitivity",
-                                "medium": "Medium sensitivity",
-                                "high": "High sensitivity",
-                                "most": "Most sensitive"
-                            },
-                            "noMatch": "Medium sensitivity"
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity",
+                            "outputPath": "value"
                         }
                     }
                 },
@@ -6150,8 +6143,19 @@
                         "schema": {
                             "title": "Touchpad sensitivity",
                             "description": "Changes Windows 10 precision touchpad sensitivity.",
-                            "type": "string",
-                            "default": "medium"
+                            "default": "Medium sensitivity",
+                            "enum": [
+                                "Low sensitivity",
+                                "Medium sensitivity",
+                                "High sensitivity",
+                                "Most sensitive"
+                            ],
+                            "enumLabels": [
+                                "Low sensitivity",
+                                "Medium sensitivity",
+                                "High sensitivity",
+                                "Most sensitive"
+                            ]
                         }
                     }
                 },
