@@ -6603,7 +6603,6 @@
             }
         ]
     },
-
     "com.office.windowsOneNoteLearningTools": {
         "name": "LearningTools for OneNote 2016",
         "contexts": {
@@ -6818,7 +6817,6 @@
             }
         }
     },
-
     "com.office.windowsWordHome365LearningTools": {
         "name": "LearningTools for Microsoft Office 2016 Word Home 365 edition for Windows 10",
         "contexts": {
@@ -6980,7 +6978,6 @@
             }
         }
     },
-
     "com.office.windowsWordPro365LearningTools": {
         "name": "LearningTools for Microsoft Office 2016 Word Pro 365 edition for Windows 10",
         "contexts": {
