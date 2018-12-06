@@ -63,7 +63,7 @@ gpii.tests.cloudStatus.commonTestDefs = {
             "{that}.options.expectedStatusCode",
             "{that}.options.expectedPayload",
             "{serverStatusRequest}.nativeResponse.statusCode",
-            "{arguments}.0"    // response payload
+            "{arguments}.0"     // response payload
         ]
     }]
 };
@@ -112,7 +112,7 @@ gpii.tests.cloudStatus.testCases = {
         expectedStatusCode: 503,
         expectedPayload: {
             "isError": true,
-            "message": "Error connecting to Preferences Server at http://localhost:8081; FlowManager and Preferences server are the same host"
+            "message": "Error connecting to Preferences Server at http://localhost:8081"
         }
     },
     testHealthWithSeparateServers: {
