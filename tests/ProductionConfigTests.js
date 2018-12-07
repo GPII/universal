@@ -59,6 +59,16 @@ gpii.tests.productionConfigTesting.device = {
         "id": "org.gnome.desktop.a11y.magnifier"
     }]
 };
+gpii.tests.productionConfigTesting.prefsUpdate = {
+    "contexts": {
+        "gpii-default": {
+            "name": "Default preferences",
+            "preferences": {
+                "http://registry.gpii.net/common/setting1": 12
+            }
+        }
+    }
+};
 
 gpii.tests.productionConfigTesting.makeSettingsPath = function () {
     var map = {
@@ -73,7 +83,7 @@ gpii.tests.productionConfigTesting.makeSettingsPath = function () {
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
-        expect: 11,
+        expect: 16,
         config: {
             configName: "gpii.tests.productionConfigTests.config",
             configPath: "%gpii-universal/tests/configs"
@@ -86,10 +96,32 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     hostname: "flowmanager",
                     path: "/health",
                     method: "GET",
-                    foobar: "tis me health"
+                    expectedStatusCode: 200,
+                    expectedPayload: {"isHealthy": true}
                 }
             },
-            settingsRequest: {
+            readyRequest: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "9082",
+                    hostname: "flowmanager",
+                    path: "/ready",
+                    method: "GET",
+                    expectedStatusCode: 200,
+                    expectedPayload: {"isReady": true}
+                }
+            },
+            accessTokenRequest: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "9082",
+                    hostname: "flowmanager",
+                    path: "/access_token",
+                    method: "POST",
+                    expectedStatusCode: 200
+                }
+            },
+            lifeCycleRequest: {
                 type: "kettle.test.request.http",
                 options: {
                     port: "9082",
@@ -108,28 +140,24 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                         "Authorization": "Bearer token"
                     },
                     method: "GET",
-                    foobar: "tis me settings"
+                    expectedStatusCode: 200
                 }
             },
-            accessTokenRequest: {
+            putSettingsRequestFailure: { // can't update snapset (readonly)
                 type: "kettle.test.request.http",
                 options: {
                     port: "9082",
                     hostname: "flowmanager",
-                    path: "/access_token",
-                    method: "POST",
-                    foobar: "tis me access",
-                    settingsRequest: "{settingsRequest}"
-                }
-            },
-            readyRequest: {
-                type: "kettle.test.request.http",
-                options: {
-                    port: "9082",
-                    hostname: "flowmanager",
-                    path: "/ready",
-                    method: "GET",
-                    foobar: "tis me ready"
+                    path: "/testUser1/settings",
+                    headers: {
+                        "Authorization": "Bearer token"
+                    },
+                    method: "PUT",
+                    expectedStatusCode: 404,
+                    expectedPayload: {
+                        "isError": true,
+                        "message": "Cannot update:  GPII key \"testUser1\" is a snapset while executing HTTP PUT on url http://preferences:9081/preferences/%gpiiKey?merge=%merge"
+                    }
                 }
             }
         }
@@ -145,29 +173,34 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             func: "{healthRequest}.send"
         }, {
             event: "{healthRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.test200Response"
+            listener: "gpii.tests.productionConfigTesting.testResponse"
+        }, {
+            func: "{readyRequest}.send"
+        }, {
+            event: "{readyRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testResponse"
         }, {
             func: "{accessTokenRequest}.send",
             args: [gpii.tests.productionConfigTesting.accessTokenRequestPayload]
         }, {
             event: "{accessTokenRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAccessResponse"
+            listener: "gpii.tests.productionConfigTesting.testAccessResponse",
+            args: ["{arguments}.0", "{arguments}.1", ["{lifeCycleRequest}", "{putSettingsRequestFailure}"]]
         }, {
-            func: "{settingsRequest}.send"
+            func: "{lifeCycleRequest}.send"
         }, {
-            event: "{settingsRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testSettingsResponse"
+            event: "{lifeCycleRequest}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testLifecycleResponse"
         }, {
-            func: "{readyRequest}.send"
+            func: "{putSettingsRequestFailure}.send",
+            args: [gpii.tests.productionConfigTesting.prefsUpdate]
         }, {
-            event: "{readyRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.test200Response"
+            event: "{putSettingsRequestFailure}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testResponse"
         }
     ]);
     return testDef;
 });
-
-console.log("**** GPII_CLOUD_URL: " + process.env.GPII_CLOUD_URL);
 
 // Override the original "kettle.test.testDefToServerEnvironment" function provided by kettle library to boil a new
 // aggregate event "onAllReady" that listens to both "onServerReady" and "{flowManager}.events.resetAtStartSuccess" events
@@ -195,38 +228,49 @@ kettle.test.testDefToServerEnvironment = function (testDef) {
     };
 };
 
-gpii.tests.productionConfigTesting.test200Response = function (data, request) {
-    fluid.log(request.options);
-    fluid.log(request.options.port);
-    fluid.log(request.options.foobar);
-    fluid.log(request.nativeResponse.statusCode);
-    fluid.log(gpii.tests.productionConfigTesting.fmSettingsDataSource.options.cloudURL);
+gpii.tests.productionConfigTesting.testStatusCode = function (data, request) {
     jqUnit.assertEquals(
         "Checking status of " + request.options.path,
-        200, request.nativeResponse.statusCode
+        request.options.expectedStatusCode, request.nativeResponse.statusCode
     );
 };
 
-gpii.tests.productionConfigTesting.testAccessResponse = function (data, request) {
+gpii.tests.productionConfigTesting.testResponse = function (data, request) {
+    gpii.tests.productionConfigTesting.testStatusCode(data, request);
+    jqUnit.assertDeepEq(
+        "Checking paylod of " + request.options.path,
+        request.options.expectedPayload, JSON.parse(data)
+    );
+};
+
+gpii.tests.productionConfigTesting.testAccessResponse = function (data, request, dependantRequests) {
     var token = JSON.parse(data);
-    request.options.settingsRequest.options.headers.Authorization = "Bearer " + token.access_token;
-    gpii.tests.productionConfigTesting.test200Response(data, request);
+    var auth = "Bearer " + token.access_token;
+
+    // Set up the authorization for requests that depend on it
+    fluid.each(dependantRequests, function (aRequest) {
+        aRequest.options.headers.Authorization = auth;
+    });
+
+    gpii.tests.productionConfigTesting.testStatusCode(data, request);
     jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
-    jqUnit.assertNotNull("Checking 'expiresIn", token.expiresIn);
+    jqUnit.assertNotNull("Checking 'expiresIn'", token.expiresIn);
     jqUnit.assertEquals("Checking 'token_type'",  "Bearer", token.token_type);
 };
 
-gpii.tests.productionConfigTesting.testSettingsResponse = function (data, request) {
-    var settings = JSON.parse(data);
-    fluid.log("HEY! ");
-    fluid.log(settings);
-    gpii.tests.productionConfigTesting.test200Response(data, request);
+gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, request) {
+    gpii.tests.productionConfigTesting.testStatusCode(data, request);
+
+    var lifeCycle = JSON.parse(data);
     jqUnit.assertEquals(
         "Checking '" + gpii.tests.development.gpiiKey + "'",
         gpii.tests.development.gpiiKey,
-        settings.gpiiKey
+        lifeCycle.gpiiKey
     );
-    jqUnit.assertNotNull("Checking 'preferences'", settings.preferences);
+    // These checks based on
+    // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
+    jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
+    jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
 };
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
