@@ -77,15 +77,7 @@
                         "scheme.MouseSchemeModified": 1,
                         "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
                     },
-                    "metadata": [
-                        {
-                            "type": "required",
-                            "scope": [
-                                "http://registry.gpii.net/common/magnification/enabled"
-                            ],
-                            "value": 1024
-                        }
-                    ]
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic/enabled": true
                 }
             }
         }
