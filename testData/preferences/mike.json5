@@ -25,7 +25,7 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.mouseSettings": {
                         "ScrollLines": 4294967295,
-                        "ScrollRouting": "RoutingHybrid",
+                        "ScrollRouting": 1,
                         "DoubleClickTime": 5000,
                         "EnableCursorShadow": 1,
                         "ScrollChars": 10,
