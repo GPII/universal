@@ -10,7 +10,7 @@
             "gpii-default": {
                 "name": "Default preferences",
                 "preferences": {
-                    "http://registry.gpii.net/applications/uk.co.freedomscientific.magic": {
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic": {
                         "mag.caretbutton": 1,
                         "mag.colorbutton": 1,
                         "mag.cursorbutton": 1,
@@ -77,7 +77,7 @@
                         "scheme.MouseSchemeModified": 1,
                         "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
                     },
-                    "http://registry.gpii.net/applications/uk.co.freedomscientific.magic/enabled": true
+                    "http://registry.gpii.net/applications/com.freedomscientific.magic/enabled": true
                 }
             }
         }

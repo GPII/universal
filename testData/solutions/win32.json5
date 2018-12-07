@@ -3371,8 +3371,7 @@
             }
         ]
     },
-    // TODO: Only testing a theory, this should never be merged.
-    "uk.co.freedomscientific.magic": {
+    "com.freedomscientific.magic": {
         "name": "MAGic",
         "contexts": {
             "OS": [
@@ -3381,6 +3380,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configuration-magic-core": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
