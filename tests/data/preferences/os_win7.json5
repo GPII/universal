@@ -126,7 +126,7 @@
                             "path": "pvParam",
                             "value": 1
                         },
-                        "MouseCursorShadowConfig": {
+                        "MouseCursorShadowEnable": {
                             "path": "pvParam",
                             "value": 1
                         },

@@ -139,7 +139,7 @@ gpii.tests.windows.builtIn = [
                     },
                     {
                         "settings": {
-                            "MouseCursorShadowConfig": {
+                            "MouseCursorShadowEnable": {
                                 "path": "pvParam",
                                 "value": 1
                             }

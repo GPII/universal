@@ -6585,7 +6585,7 @@
                     "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
-                    "MouseCursorShadowConfig": {
+                    "MouseCursorShadowEnable": {
                         "schema": {
                             "title": "Mouse cursor shadow",
                             "description": "Enables or disables mouse cursor shadow.",
@@ -6595,7 +6595,7 @@
                     }
                 },
                 "capabilitiesTransformations": {
-                    "MouseCursorShadowConfig": {
+                    "MouseCursorShadowEnable": {
                         "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
@@ -6607,7 +6607,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow":  "MouseCursorShadowConfig.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow":  "MouseCursorShadowEnable.value"
                 }
             },
             "configureHorizontalScrollChars": {
