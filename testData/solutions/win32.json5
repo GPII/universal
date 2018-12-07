@@ -6477,6 +6477,9 @@
                             }
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons": "SwapMouseButtonsConfig.value"
                 }
             },
             "configureScrollWheelMode": {
