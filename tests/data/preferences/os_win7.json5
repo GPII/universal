@@ -115,6 +115,11 @@
                         "Brightness": {
                             "value": null
                         }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.touchPadSettings": {
+                        "SystemSettings_Input_Touch_SetActivationTimeout": {
+                            "value": "Low sensitivity"
+                        }
                     }
                 }
             }
