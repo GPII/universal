@@ -3371,7 +3371,8 @@
             }
         ]
     },
-    "com.freedomscientific.magic": {
+    // TODO: Only testing a theory, this should never be merged.
+    "uk.co.freedomscientific.magic": {
         "name": "MAGic",
         "contexts": {
             "OS": [
