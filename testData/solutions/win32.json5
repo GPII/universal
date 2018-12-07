@@ -4158,7 +4158,6 @@
                         }
                     }
                 },
-                "capabilities": ["http://registry.gpii.net/common/magnification/enabled"],
                 "capabilitiesTransformations": {
                     "mag\\.size": "http://registry\\.gpii\\.net/common/magnification",
                     "mag\\.TextViewerFontSize": "http://registry\\.gpii\\.net/common/fontSize",
@@ -4465,65 +4464,77 @@
                 }
             }
         },
-        "configure": [
-            "settings.configuration-magic-core", "settings.configuration-magic-jaws-lite"
-        ],
-        "restore": [
-            "settings.configuration-magic-core", "settings.configuration-magic-jaws-lite"
-        ],
-        "start": [
-            {
-                "type": "gpii.launch.exec",
-                "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MAGic140.exe\\}\""
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "verifySettings": true,
+                    "retryOptions": {
+                        "rewriteEvery": 0,
+                        "numRetries": 20
+                    },
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "jfw.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MAGic140.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        // In MAGic 14.0, the following processes show up in the task manager under the app's grouping:
+                        // magutil.exe, C:\Program Files\Freedom Scientific\MAGic\14.0\MagUtil
+                        // jhookldr.exe, C:\Program Files\Freedom Scientific\MAGic\14.0\MagUtil\x86
+                        // mag.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
+                        // MagHook32.exe, C:\Program Files\Freedom Scientific\MAGic\14.0\x86
+                        // Magic.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
+                        // Unloader.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
+                        //
+                        // Also found outside the grouping are these stragglers:
+                        // fsSynth32.exe, C:\Program Files (x86)\Freedom Scientific\Shared\fsSynth\2.0
+                        // fsATProxy.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
+                        //
+                        //
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "Unloader.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "Magic.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "MagHook32.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "fsATProxy.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "fsSynth32.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "mag.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "jhookldr.exe"
+                        },
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "magutil.exe"
+                        }
+                    ]
+                }
             }
-        ],
-        "stop": [
-            // In MAGic 14.0, the following processes show up in the task manager under the app's grouping:
-            // magutil.exe, C:\Program Files\Freedom Scientific\MAGic\14.0\MagUtil
-            // jhookldr.exe, C:\Program Files\Freedom Scientific\MAGic\14.0\MagUtil\x86
-            // mag.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
-            // MagHook32.exe, C:\Program Files\Freedom Scientific\MAGic\14.0\x86
-            // Magic.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
-            // Unloader.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
-            //
-            // Also found outside the grouping are these stragglers:
-            // fsSynth32.exe, C:\Program Files (x86)\Freedom Scientific\Shared\fsSynth\2.0
-            // fsATProxy.exe, C:\Program Files\Freedom Scientific\MAGic\14.0
-            //
-            //
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "Unloader.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "Magic.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "MagHook32.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "fsATProxy.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "fsSynth32.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "mag.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "jhookldr.exe"
-            },
-            {
-                "type": "gpii.windows.closeProcessByName",
-                "filename": "magutil.exe"
-            }
-        ],
+        },
         "isInstalled": [
             {
                 "type": "gpii.deviceReporter.registryKeyExists",
