@@ -12,7 +12,8 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii");
+    gpii = fluid.registerNamespace("gpii"),
+    jqUnit = fluid.registerNamespace("jqUnit");
 
 fluid.require("%gpii-universal");
 
@@ -36,9 +37,10 @@ gpii.tests.cloudStatus.configs = {
 };
 
 gpii.tests.cloudStatus.commonTestDefs = {
-    expect: 1,
+    expect: 2,
     testUrl: null,    // provided by each test run
     expectedStatusCode: 200,   // provided by each test run
+    expectedPayload: {},       // provided by each test run
     distributeOptions: {
         source: "{that}.options.testUrl",
         target: "{that > serverStatusRequest}.options.path"
@@ -56,9 +58,19 @@ gpii.tests.cloudStatus.commonTestDefs = {
         func: "{serverStatusRequest}.send"
     }, {
         event: "{serverStatusRequest}.events.onComplete",
-        listener: "jqUnit.assertEquals",
-        args: ["Receives http status code 200", "{that}.options.expectedStatusCode", "{serverStatusRequest}.nativeResponse.statusCode"]
+        listener: "gpii.tests.cloudStatus.testResponse",
+        args: [
+            "{that}.options.expectedStatusCode",
+            "{that}.options.expectedPayload",
+            "{serverStatusRequest}.nativeResponse.statusCode",
+            "{arguments}.0"     // response payload
+        ]
     }]
+};
+
+gpii.tests.cloudStatus.testResponse = function (expectedStatus, expectedPayload, actualStatus, actualPayload) {
+    jqUnit.assertEquals("Checking http status code", expectedStatus, actualStatus);
+    jqUnit.assertDeepEq("Checking payload", expectedPayload, JSON.parse(actualPayload));
 };
 
 gpii.tests.cloudStatus.testCases = {
@@ -67,19 +79,22 @@ gpii.tests.cloudStatus.testCases = {
         name:  "Test the readiness of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
         url: "/health",
         config: gpii.tests.cloudStatus.configs.allLocalWithPrefsServer,
-        expectedStatusCode: 200
+        expectedStatusCode: 200,
+        expectedPayload: {"isHealthy": true}
     },
     testReadyWithoutPrefsServer: {
         name:  "Test the readiness of the cloud based flow manager: all local with only the cloud based flow manager running",
         url: "/health",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
-        expectedStatusCode: 200
+        expectedStatusCode: 200,
+        expectedPayload: {"isHealthy": true}
     },
     testReadyWithSeparateServers: {
         name:  "Test the readiness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
         url: "/health",
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,
-        expectedStatusCode: 200
+        expectedStatusCode: 200,
+        expectedPayload: {"isHealthy": true}
     },
 
     // Test cases for /ready
@@ -87,27 +102,34 @@ gpii.tests.cloudStatus.testCases = {
         name:  "Test the liveness of the cloud based flow manager: all local with both the cloud based flow manager and the prefs server up running",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithPrefsServer,
-        expectedStatusCode: 200
+        expectedStatusCode: 200,
+        expectedPayload: {"isReady": true}
     },
     testHealthWithoutPrefsServer: {
         name:  "Test the liveness of the cloud based flow manager: all local with only the cloud based flow manager running",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.allLocalWithoutPrefsServer,
-        expectedStatusCode: 404
+        expectedStatusCode: 503,
+        expectedPayload: {
+            "isError": true,
+            "message": "Error connecting to Preferences Server at http://localhost:8081"
+        }
     },
     testHealthWithSeparateServers: {
         name:  "Test the liveness of the cloud based flow manager: the cloud based flow manager and the prefs server run as separate servers",
         url: "/ready",
         config: gpii.tests.cloudStatus.configs.separateServersWithPrefsServer,
-        expectedStatusCode: 200
+        expectedStatusCode: 200,
+        expectedPayload: {"isReady": true}
     }
 };
 
 fluid.each(gpii.tests.cloudStatus.testCases, function (oneCase) {
-    var oneTestDef = fluid.extend(true, gpii.tests.cloudStatus.commonTestDefs, {
+    var oneTestDef = fluid.extend(true, {}, gpii.tests.cloudStatus.commonTestDefs, {
         name: oneCase.name,
         testUrl: oneCase.url,
-        expectedStatusCode: oneCase.expectedStatusCode
+        expectedStatusCode: oneCase.expectedStatusCode,
+        expectedPayload: oneCase.expectedPayload
     }, {
         config: oneCase.config
     });
