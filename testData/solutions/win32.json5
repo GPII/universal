@@ -3384,8 +3384,9 @@
             "http://registry\\.gpii\\.net/common/magnification/enabled"
         ],
         "settingsHandlers": {
-            "configuration-magic-core": {
+            "configuration1": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\14.0\\Settings\\enu\\DEFAULT.MCF"
                 },
@@ -4222,8 +4223,9 @@
                 }
             },
             // MAGic also supports a subset of JAWS settings using its built-in "JAWS lite".
-            "configuration-magic-jaws-lite": {
+            "configuration2": {
                 "type": "gpii.settingsHandlers.INISettingsHandler",
+                "liveness": "manualRestart",
                 "options": {
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\MAGIC\\14.0\\Settings\\enu\\DEFAULT.JCF"
                 },
