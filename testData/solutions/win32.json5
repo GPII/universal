@@ -4478,7 +4478,7 @@
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
-                            "command": "jfw.exe"
+                            "command": "Magic.exe"
                         }
                     ],
                     "setTrue": [
