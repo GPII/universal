@@ -4183,20 +4183,7 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/common/magnification": "mag\\.size",
                     "http://registry\\.gpii\\.net/common/fontSize": "mag\\.TextViewerFontSize",
-                    "http://registry\\.gpii\\.net/common/fontFaceFontName": "mag\\.TextViwerFontFaceName",
-                    "http://registry\\.gpii\\.net/common/magnifier/enabled": {
-                        "transform": {
-                            "type": "valueMapper",
-                            "defaultInputPath": "mag\\.startmagnified",
-                            "match": [{
-                                inputValue: 1,
-                                outputValue: true
-                            }],
-                            noMatch: {
-                                outputUndefinedValue: true
-                            }
-                        }
-                    },
+                    "http://registry\\.gpii\\.net/common/fontFaceFontName": "mag\\.TextViewerFontFaceName",
                     "http://registry\\.gpii\\.net/common/showCrosshairs": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
