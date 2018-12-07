@@ -1,6 +1,6 @@
 // # Simon.json5
 //
-// This preference set changes touchpad sensibility to low.
+// This preference set changes touchpad sensitivity to low.
 // This way it's more difficult to trigger mouse accidentally while typing.
 //
 // This setting makes the system ignore brief key presses.
