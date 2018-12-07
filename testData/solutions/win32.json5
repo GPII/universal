@@ -6451,8 +6451,7 @@
                     "pvParam": {
                         "type": "BOOL"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "SwapMouseButtonsConfig": {
@@ -6472,18 +6471,12 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                }
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
                             }
                         }
                     }
-                },
-                "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons": "SwapMouseButtonsConfig.value"
                 }
             },
             "configureScrollWheelMode": {
@@ -6496,8 +6489,7 @@
                     "pvParam": {
                         "type": "UINT"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "ScrollWheelModeConfig": {
@@ -6527,12 +6519,9 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                }
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
                             }
                         }
                     }
@@ -6551,57 +6540,33 @@
                     "pvParam": {
                         "type": "UINT"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "ScrollFocusRoutingConfig": {
                         "schema": {
                             "title": "Mouse scroll focus routing",
-                            "description": "Changes the way mouse scrolling is passed to applications",
+                            "description": "Changes the way mouse scrolling is passed to applications.",
                             "type": "string",
-                            "enum": ["RoutingFocus", "RoutingHybrid"]
+                            "enum": [0, 1],
+                            "enumLabels": ["RoutingFocus", "RoutingHybrid"]
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "ScrollFocusRoutingConfig": {
                         "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInput": {
-                                "transform": {
-                                    "type": "fluid.transforms.value",
-                                    "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting"
-                                }
-                            },
-                            "defaultOutputPath": "value",
-                            "match": {
-                                "RoutingFocus": 0,
-                                "RoutingHybrid": 1
-                            },
-                            "noMatch": 0
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
+                            "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
+                            "literalValue": "pvParam"
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "transform": [
-                        {
-                            "type": "fluid.transforms.valueMapper",
-                            "defaultInputPath": "ScrollFocusRoutingConfig.value",
-                            "defaultOutputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
-                            "match": {
-                                "0": "RoutingFocus",
-                                "1": "RoutingHybrid"
-                            },
-                            "noMatch": "RoutingFocus"
-                        }
-                    ]
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting":  "ScrollFocusRoutingConfig.value"
                 }
             },
             "configureMouseCursorShadow": {
@@ -6614,14 +6579,13 @@
                     "pvParam": {
                         "type": "BOOL"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "MouseCursorShadowConfig": {
                         "schema": {
-                            "title": "Enable disable mouse cursor shadow",
-                            "description": "Changes the way mouse scrolling is passed to applications",
+                            "title": "Mouse cursor shadow",
+                            "description": "Enables or disables mouse cursor shadow.",
                             "type": "boolean",
                             "default": false
                         }
@@ -6635,10 +6599,7 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
+                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -6656,14 +6617,13 @@
                     "pvParam": {
                         "type": "UINT"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "ScrollCharsConfig": {
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
-                            "description": "Changes the number of chars that are scrolled horizontally",
+                            "description": "Changes the number of chars that are scrolled horizontally.",
                             "type": "number",
                             "default": 3,
                             "min": 1,
@@ -6680,12 +6640,9 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                }
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
                             }
                         }
                     }
@@ -6704,14 +6661,13 @@
                     "pvParam": {
                         "type": "BOOL"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "WindowsTrackingConfig": {
                         "schema": {
                             "title": "Mouse Windows tracking",
-                            "description": "Windows are focused when mouse is stopped over them",
+                            "description": "Windows are focused when mouse is stopped over them.",
                             "type": "boolean",
                             "default": 0
                         }
@@ -6725,10 +6681,7 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
+                            "literalValue": "pvParam"
                         }
                     }
                 },
@@ -6746,14 +6699,13 @@
                     "pvParam": {
                         "type": "BOOL"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "ActiveZOrder": {
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
-                            "description": "Changes the number of chars that are scrolled horizontally",
+                            "description": "Changes the number of chars that are scrolled horizontally.",
                             "type": "boolean",
                             "default": 0
                         }
@@ -6767,12 +6719,12 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": "pvParam"
-                            }
+                            "literalValue": "pvParam"
                         }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled": "ActiveZOrder.value"
                 }
             },
             "configureWindowsArrangement": {
@@ -6785,14 +6737,13 @@
                     "pvParam": {
                         "type": "BOOL"
                     },
-                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE",
-                    "verifySettings": true
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
                 },
                 "supportedSettings": {
                     "WindowsArrangement": {
                         "schema": {
                             "title": "Configures Window arrangement",
-                            "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse",
+                            "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
                             "type": "boolean",
                             "default": 1
                         }
@@ -6806,12 +6757,9 @@
                             "outputPath": "value"
                         },
                         "path": {
-                            "transform": {
-                                "type": "fluid.transforms.literalValue",
-                                "input": {
-                                    "get": "pvParam",
-                                    "set": "uiParam"
-                                }
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
                             }
                         }
                     }
@@ -6824,14 +6772,13 @@
                 "type": "gpii.windows.nativeSettingsHandler",
                 "liveness": "live",
                 "options": {
-                    "functionName": "DoubleClickTime",
-                    "verifySettings": true
+                    "functionName": "DoubleClickTime"
                 },
                 "supportedSettings": {
                     "DoubleClickTimeConfig": {
                         "schema": {
-                            "title": "Mouse scroll focus routing",
-                            "description": "Changes the way mouse scrolling is passed to applications",
+                            "title": "Double click time",
+                            "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
                             "type": "number",
                             "default": 500,
                             "min": 500,
@@ -6842,7 +6789,7 @@
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickTimeConfig": {
-                        "transform": {
+                            "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
                             "outputPath": "value"
@@ -7907,11 +7854,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -8068,11 +8010,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -8226,11 +8163,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
