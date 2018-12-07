@@ -4181,7 +4181,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/common/magnification": "mag\\.Size",
+                    "http://registry\\.gpii\\.net/common/magnification": "mag\\.size",
                     "http://registry\\.gpii\\.net/common/fontSize": "mag\\.TextViewerFontSize",
                     "http://registry\\.gpii\\.net/common/fontFaceFontName": "mag\\.TextViwerFontFaceName",
                     "http://registry\\.gpii\\.net/common/magnifier/enabled": {
