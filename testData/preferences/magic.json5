@@ -31,7 +31,7 @@
                         "mag.promptmagictosave": 1,
                         "mag.promptoverwriteschemes": 0,
                         // This may be problematic, as it is associated with a common term.
-                        // "mag.size": 2,
+                        "mag.size": 2,
                         "mag.speechbutton": 0,
                         "mag.splitlocation": 2,
                         "mag.splitsize": 0,
@@ -41,14 +41,14 @@
                         "mag.splitwindowwidth": 20,
                         "mag.startmagicminimized": 1,
                         // This may be problematic, as it is associated with a common term.
-                        // "mag.startmagnified": 0,
+                        "mag.startmagnified": 0,
                         "mag.TextViewerCharSpace": 1,
                         "mag.TextViewerFontBkgColorIndex": 13,
                         "mag.TextViewerFontColorIndex": 14,
                         // This may be problematic, as it is associated with a common term.
-                        // "mag.TextViewerFontFaceName": "Comic Sans",
+                        "mag.TextViewerFontFaceName": "Comic Sans",
                         // This may be problematic, as it is associated with a common term.
-                        // "mag.TextViewerFontSize": 45,
+                        "mag.TextViewerFontSize": 45,
                         "mag.TextViewerFontStyle": 2,
                         "mag.TextViewerFontEffect": 1,
                         "mag.TextViewerOn": 0,
@@ -75,14 +75,16 @@
                         "Options.MouseSpeechDelay": 2,
                         "Options.MouseSpeechEchoUnit": 1,
                         "Options.MouseSpeechEnabled": 1,
-                        "Options.TypingEcho": 2,
+                        // This is problematic because it is transformed into a JAWS setting via the common term.
+                        // TODO: Discuss the matchmaker's current behaviour and whether it can change.
+                        // "Options.TypingEcho": 2,
                         "scheme.ColorSchemeModified": 1,
                         "scheme.Color_Scheme": "Grayscale (Inverted)+Color",
                         "scheme.CursorSchemeModified": 1,
                         "scheme.Cursor_Scheme": "Purple Long Box+Cursor",
-                        "scheme.MouseSchemeModified": 1
+                        "scheme.MouseSchemeModified": 1,
                         // This may be problematic, as it is associated with a common term (crosshairs).
-                        // "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
+                        "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
                     },
                     "http://registry.gpii.net/applications/com.freedomscientific.magic/enabled": true
                 }
