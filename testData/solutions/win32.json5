@@ -4191,10 +4191,10 @@
                             "match": [{
                                 inputValue: 1,
                                 outputValue: true
-                            }, {
-                                inputValue: 0,
-                                outputValue: false
-                            }]
+                            }],
+                            noMatch: {
+                                outputUndefinedValue: true
+                            }
                         }
                     },
                     "http://registry\\.gpii\\.net/common/showCrosshairs": {
@@ -4216,7 +4216,7 @@
                                 }
                             ],
                             noMatch: {
-                                outputValue: false
+                                outputUndefinedValue: true
                             }
                         }
                     }
@@ -4439,7 +4439,7 @@
                                 }
                             ],
                             "noMatch": {
-                                "outputValue": false
+                                outputUndefinedValue: true
                             }
                         }
                     },
@@ -4459,7 +4459,7 @@
                                 }
                             ],
                             "noMatch": {
-                                "outputValue": false
+                                outputUndefinedValue: true
                             }
                         }
                     }
