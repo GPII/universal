@@ -77,6 +77,7 @@
                         "scheme.MouseSchemeModified": 1,
                         "scheme.Mouse_Scheme": "Scope When Moving+Mouse"
                     },
+                    "http://registry.gpii.net/applications/com.freedomscientific.jaws/enabled": false,
                     "http://registry.gpii.net/applications/com.freedomscientific.magic/enabled": true
                 }
             }
