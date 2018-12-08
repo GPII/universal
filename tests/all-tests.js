@@ -5,7 +5,7 @@ Copyright 2013 OCAD University
 Copyright 2014 Emergya
 Copyright 2014 Technosite
 Copyright 2014 Raising the Floor - International
-Copyright 2017 OCAD University
+Copyright 2017-2018 OCAD University
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -30,43 +30,42 @@ fluid.require("%gpii-universal", require);
 
 var testIncludes = [
     "./DevelopmentTests.js",
-    "./platform/cloud/AcceptanceTests_chrome.js",
-    "./platform/cloud/AcceptanceTests_easit4all.js",
-    "./platform/cloud/AcceptanceTests_empty.js",
-    "./platform/cloud/AcceptanceTests_gnome_keyboard.js",
-    "./platform/cloud/AcceptanceTests_jme.js",
-    "./platform/cloud/AcceptanceTests_olb.js",
-    "./platform/cloud/AcceptanceTests_smarthouses.js",
-    "./platform/cloud/AcceptanceTests_tvm.js",
-    "./platform/cloud/AcceptanceTests_untrustedSettingsGet.js",
-    "./platform/cloud/AcceptanceTests_untrustedSettingsPut.js",
+    "./platform/cloud/CloudStatusTests.js",
+    "./platform/cloud/SettingsGetTests.js",
+    "./platform/cloud/SettingsPutTests.js",
     "./CloseConflictingAppsTests.js",
     "./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
+    "./ErrorTests.js",
     "./IntegrationTests.js",
     "./JournalIntegrationTests.js",
     "./MultiSettingsHandlerTests.js",
     "./PayloadSizeTest.js",
     "./PSPIntegrationTests.js",
+    "./ResetWithEnvReportTests.js",
+    "./ResetAtStartTests.js",
     "./PreferencesServerErrorTests.js",
     "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
     "./UntrustedContextIntegrationTests.js",
     "./UntrustedDevelopmentTests.js",
     "./UntrustedPSPIntegrationTests.js",
-    "./UntrustedUserLogonStateChangeTests.js",
-    "./UserLogonStateChangeTests.js",
-    "./UserLogonStateEventsTests.js",
+    "./UntrustedResetWithEnvReportTests.js",
+    "./UntrustedResetAtStartTests.js",
+    "./UntrustedUserLogonHandlersTests.js",
+    "./UntrustedUserLogonRequestTests.js",
+    "./UserLogonHandlersEventsTests.js",
+    "./UserLogonHandlersTests.js",
+    "./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
-    "../gpii/node_modules/canopyMatchMaker/test/CanopyMatchMakerTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
-    "../gpii/node_modules/eventLog/test/EventLogTests.js",
+    "../gpii/node_modules/eventLog/test/all-tests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
-    "../gpii/node_modules/flowManager/test/SaveTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
-    "../gpii/node_modules/flowManager/test/GetGpiiKeyTests.js",
+    "../gpii/node_modules/flowManager/test/DefaultSettingsLoaderTests.js",
+    "../gpii/node_modules/flowManager/test/PrefsServerDataSourceTests.js",
     "../gpii/node_modules/flowManager/test/PSPChannelTests.js",
-    "../gpii/node_modules/flowManager/test/UntrustedSettingsDataSourceTests.js",
+    "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
     "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
@@ -76,9 +75,11 @@ var testIncludes = [
     "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/settingsHandlerUtilitiesTests.js",
+    "../gpii/node_modules/settingsHandlers/test/NoSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
-    "../gpii/node_modules/userListeners/test/all-tests.js"
+    "../gpii/node_modules/userListeners/test/all-tests.js",
+    "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

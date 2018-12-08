@@ -29,7 +29,8 @@ and
 
     `http://localhost:8081/user/snapset_1a/logout`
 
-Note that the preference sets used with the above configurations should be in the testData/preferences folder of this repository.
+Note that the preference sets used with the above configurations should be in the testData/preferences folder of this
+repository.
 
 ## Example payloads received by the PSP
 
@@ -37,7 +38,7 @@ Here are some sample payloads collected from this client during such testing.
 
 Firstly, connecting the client when no user is keyed into the system produces the payload
 
-```
+```json
 {
     "type": "modelChanged",
     "payload": {
@@ -49,7 +50,7 @@ Firstly, connecting the client when no user is keyed into the system produces th
 
 After logging in `snapset_1a`, the client receives the following update:
 
-```
+```json
 {
     "type": "modelChanged",
     "payload": {
@@ -97,7 +98,7 @@ After logging in `snapset_1a`, the client receives the following update:
 
 After logging out `snapset_1a`, the client receives the following update:
 
-```
+```json
 {
     "type": "modelChanged",
     "payload": {
@@ -108,28 +109,30 @@ After logging out `snapset_1a`, the client receives the following update:
 }
 ```
 
-When the PSP issues an update to the preferences (see below), a message will be sent to the PSP once the settings change has been applied to the system:
+When the PSP issues an update to the preferences (see below), a message will be sent to the PSP once the settings change
+has been applied to the system:
 
-```
+```json
 {
     "type": "preferencesApplied"
 }
 ```
 
-
 ## Example payloads sent by the PSP
 
-The PSP has can send two different payloads to the GPII core architecture. Namely a change in context or a change in a setting.
+The PSP has can send two different payloads to the GPII core architecture. Namely a change in context or a change in a
+setting.
 
 Changing the context via the psp is done with the following payload:
 
 `{"path": ["activeContextName"], "value": "bright", type: "ADD"}`
 
-This will change the context to "bright". To change the context to something else, simply change "bright" with the name of the desired context.
+This will change the context to "bright". To change the context to something else, simply change "bright" with the name
+of the desired context.
 
 The PSP API also supports changing preferences (one at a time). This is done via the following payload:
 
 `{"path":["preferences","http://registry\\.gpii\\.net/common/magnification"],"type":"ADD","value":4}`
 
-Where the value for the "preferences" key is the setting that should change, and the value for the "value" is the new value the setting should take. So in the above example
-the common term magnification is set to 4.
+Where the value for the "preferences" key is the setting that should change, and the value for the "value" is the new
+value the setting should take. So in the above example the common term magnification is set to 4.

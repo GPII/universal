@@ -9,6 +9,9 @@
                 }
             ]
         },
+        "capabilities": [
+            "http://registry\\.gpii\\.net/common/magnification/enabled"
+        ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
@@ -104,7 +107,6 @@
             }
         ]
     },
-
     "org.gnome.desktop.interface": {
         "name": "GNOME Interface Settings",
         "contexts": {
@@ -141,13 +143,16 @@
                                 {
                                     "upperBound": 0,
                                     "output": -1
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.333,
                                     "output": 20
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": 29
-                                }, {
+                                },
+                                {
                                     "output": 41
                                 }
                             ]
@@ -220,16 +225,16 @@
             }
         ]
     },
-
     "org.gnome.nautilus": {
         "name": "GNOME Nautilus Settings",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
@@ -253,14 +258,15 @@
             }
         ]
     },
-
     "org.gnome.desktop.a11y.applications.onscreen-keyboard": {
         "name": "GNOME Assistive Technology - Screen Keyboard",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "capabilities": [
             "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled"
@@ -282,14 +288,15 @@
             }
         ]
     },
-
     "org.gnome.desktop.a11y.keyboard": {
         "name": "GNOME Shell Keyboard Settings",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -359,16 +366,16 @@
             }
         ]
     },
-
     "org.gnome.desktop.wm.preferences": {
         "name": "GNOME desktop Window Manager preferences",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
-
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.gsettings",
@@ -385,14 +392,15 @@
             }
         ]
     },
-
     "org.gnome.shell.overrides": {
         "name": "GNOME Shell overrides",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -410,14 +418,15 @@
             }
         ]
     },
-
     "org.gnome.orca": {
         "name": "ORCA Screen Reader",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "capabilities": [
             "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled"
@@ -482,7 +491,7 @@
                                         "transform": {
                                             "type": "fluid.transforms.condition",
                                             "condition": {
-                                                "transform" : {
+                                                "transform": {
                                                     "type": "fluid.transforms.binaryOp",
                                                     "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
                                                     "operator": "<",
@@ -753,7 +762,7 @@
                                 "lv": {
                                     "outputValue": {
                                         "locale": "lv",
-                                       "name": "latvian"
+                                        "name": "latvian"
                                     }
                                 },
                                 "mk": {
@@ -959,7 +968,7 @@
                                         "transform": {
                                             "type": "fluid.transforms.condition",
                                             "condition": {
-                                                "transform" : {
+                                                "transform": {
                                                     "type": "fluid.transforms.binaryOp",
                                                     "leftPath": "voices\\.default\\.rate",
                                                     "operator": "<",
@@ -981,60 +990,61 @@
                                 "outputValue": "en"
                             },
                             "match": {
-                                "english": "en" ,
-                                "english-us": "en-US" ,
-                                "en-scottish": "en-scotland" ,
-                                "en-westindies": "en-BZ" ,
-                                "afrikaans": "af" ,
-                                "bulgarian-test": "bg" ,
-                                "bosnian": "bs" ,
-                                "catalan": "ca" ,
-                                "czech": "cs" ,
-                                "welsh-test": "cy" ,
-                                "danish": "da" ,
-                                "german": "de" ,
-                                "greek": "el" ,
-                                "greek-ancient": "grc" ,
-                                "esperanto": "eo" ,
-                                "spanish": "es" ,
-                                "spanish-latin-american": "es-419" ,
-                                "estonian": "et" ,
-                                "finnish": "fi" ,
-                                "french": "fr" ,
-                                "hindi": "hi" ,
-                                "croatian": "hr" ,
-                                "hungarian": "hu" ,
-                                "armenian": "hy" ,
-                                "armenian-west": "hy-arevmda" ,
-                                "indonesian-test": "id" ,
-                                "icelandic-test": "is" ,
-                                "italian": "it" ,
-                                "lojban": "jbo" ,
-                                "georgian-test": "ka" ,
-                                "kannada": "kn" ,
-                                "kurdish": "ku" ,
-                                "latin": "la" ,
-                                "latvian": "lv" ,
-                                "macedonian-test": "mk" ,
-                                "malayalam": "ml" ,
-                                "dutch-test": "nl" ,
-                                "norwegian": "no" ,
-                                "papiamento-test": "pap" ,
-                                "polish": "pl" ,
-                                "brazil": "pt-BR" ,
-                                "portugal": "pt-PT" ,
-                                "romanian": "ro" ,
-                                "russian_test": "ru" ,
-                                "slovak": "sk" ,
-                                "albanian": "sq" ,
-                                "serbian": "sr" ,
-                                "swedish": "sv" ,
-                                "swahili-test": "sw" ,
-                                "tamil": "ta" ,
-                                "turkish": "tr" ,
-                                "vietnam": "vi" ,
-                                "Mandarin": "zh-cmn" ,
-                                "cantonese": "zh-yue" }
+                                "english": "en",
+                                "english-us": "en-US",
+                                "en-scottish": "en-scotland",
+                                "en-westindies": "en-BZ",
+                                "afrikaans": "af",
+                                "bulgarian-test": "bg",
+                                "bosnian": "bs",
+                                "catalan": "ca",
+                                "czech": "cs",
+                                "welsh-test": "cy",
+                                "danish": "da",
+                                "german": "de",
+                                "greek": "el",
+                                "greek-ancient": "grc",
+                                "esperanto": "eo",
+                                "spanish": "es",
+                                "spanish-latin-american": "es-419",
+                                "estonian": "et",
+                                "finnish": "fi",
+                                "french": "fr",
+                                "hindi": "hi",
+                                "croatian": "hr",
+                                "hungarian": "hu",
+                                "armenian": "hy",
+                                "armenian-west": "hy-arevmda",
+                                "indonesian-test": "id",
+                                "icelandic-test": "is",
+                                "italian": "it",
+                                "lojban": "jbo",
+                                "georgian-test": "ka",
+                                "kannada": "kn",
+                                "kurdish": "ku",
+                                "latin": "la",
+                                "latvian": "lv",
+                                "macedonian-test": "mk",
+                                "malayalam": "ml",
+                                "dutch-test": "nl",
+                                "norwegian": "no",
+                                "papiamento-test": "pap",
+                                "polish": "pl",
+                                "brazil": "pt-BR",
+                                "portugal": "pt-PT",
+                                "romanian": "ro",
+                                "russian_test": "ru",
+                                "slovak": "sk",
+                                "albanian": "sq",
+                                "serbian": "sr",
+                                "swedish": "sv",
+                                "swahili-test": "sw",
+                                "tamil": "ta",
+                                "turkish": "tr",
+                                "vietnam": "vi",
+                                "Mandarin": "zh-cmn",
+                                "cantonese": "zh-yue"
+                            }
                         }
                     ]
                 }
@@ -1056,7 +1066,6 @@
             }
         ]
     },
-
     "org.alsa-project": {
         "name": "ALSA System Volume",
         "contexts": {
@@ -1096,7 +1105,6 @@
             }
         ]
     },
-
     "trace.easyOne.communicator.linux": {
         "name": "EasyOne Communicator Linux",
         "contexts": {
@@ -1122,9 +1130,11 @@
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1143,7 +1153,6 @@
             }
         ]
     },
-
     "trace.easyOne.sudan.linux": {
         "name": "EasyOne Communicator Sudan",
         "contexts": {
@@ -1174,9 +1183,11 @@
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1195,7 +1206,6 @@
             }
         ]
     },
-
     "webinsight.webAnywhere.linux": {
         "name": "Web Anywhere",
         "contexts": {
@@ -1221,9 +1231,11 @@
                         "type": "gpii.launch.exec",
                         "command": "pkill -2 chrome"
                     },
-                    "getState": [{
-                        "type": "gpii.processReporter.neverRunning"
-                    }]
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.neverRunning"
+                        }
+                    ]
                 }
             }
         },
@@ -1242,14 +1254,15 @@
             }
         ]
     },
-
     "org.freedesktop.xrandr": {
         "name": "Xrandr",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=2.6.26"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=2.6.26"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -1258,17 +1271,18 @@
                 "supportedSettings": {
                     "screen-resolution": {}
                 }
-           }
+            }
         }
     },
-
     "net.gpii.uioPlus": {
         "name": "UIO+",
         "contexts": {
-            "OS": [{
-                "id": "linux",
-                "version": ">=5.0"
-            }]
+            "OS": [
+                {
+                    "id": "linux",
+                    "version": ">=5.0"
+                }
+            ]
         },
         "settingsHandlers": {
             "configuration": {
@@ -1278,20 +1292,207 @@
                     "path": "net.gpii.uioPlus"
                 },
                 "supportedSettings": {
-                    "lineSpace": {},
-                    "fontSize": {},
-                    "characterSpace": {},
-                    "inputsLargerEnabled": {},
-                    "contrastTheme": {},
-                    "selfVoicingEnabled": {},
-                    "selectionTheme": {},
-                    "tableOfContentsEnabled": {},
-                    "dictionaryEnabled": {},
-                    "simplifiedUiEnabled": {},
-                    "syllabificationEnabled": {}
+                    "captionsEnabled": {
+                        "schema": {
+                            "title": "Captions",
+                            "description": "Request videos to display captions.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "characterSpace": {
+                        "schema": {
+                            "title": "Character Space",
+                            "description": "Adjust the space between characters.",
+                            "type": "number",
+                            "default": 0,
+                            "minimum": -0.1,
+                            "maximum": 1,
+                            "multipleOf": 0.1
+                        }
+                    },
+                    "contrastTheme": {
+                        "schema": {
+                            "title": "Contrast Theme",
+                            "description": "Change text and background colors.",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "bw",
+                                "wb",
+                                "by",
+                                "yb",
+                                "gd",
+                                "gw",
+                                "bbr"
+                            ],
+                            "enumLabels": [
+                                "Default Theme",
+                                "Black Foreground on a White Background",
+                                "White Foreground on a Black Background",
+                                "Black Foreground on a Yellow Background",
+                                "Yellow Foreground on a Black Background",
+                                "Light Gray Foreground on a Dark Gray Background",
+                                "Gray Foreground on a White Background",
+                                "Black Foreground on a Brown Background"
+                            ]
+                        }
+                    },
+                    "fontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "Adjust text size.",
+                            "type": "number",
+                            "default": 12,
+                            "minimum": 3,
+                            "maximum": 60,
+                            "multipleOf": 1
+                        }
+                    },
+                    "inputsLargerEnabled": {
+                        "schema": {
+                            "title": "Enhance Inputs",
+                            "description": "Emphasize links, buttons, menus, textfields, and other inputs.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "lineSpace": {
+                        "schema": {
+                            "title": "Line Space",
+                            "description": "Adjusts the spacing between lines of text.",
+                            "type": "number",
+                            "default": 1,
+                            "minimum": 0.7,
+                            "maximum": 3,
+                            "multipleOf": 0.1
+                        }
+                    },
+                    "selectionTheme": {
+                        "schema": {
+                            "title": "Selection Theme",
+                            "description": "Change the highlight colour for text selections.",
+                            "default": "default",
+                            "enum": [
+                                "default",
+                                "yellow",
+                                "green",
+                                "pink"
+                            ],
+                            "enumLabels": [
+                                "Default Selection Highlight",
+                                "Yellow Selection Highlight",
+                                "Green Selection Highlight",
+                                "Pink Selection Highlight"
+                            ]
+                        }
+                    },
+                    "selfVoicingEnabled": {
+                        "schema": {
+                            "title": "Self Voicing",
+                            "description": "Let the device read site content aloud.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "simplifiedUiEnabled": {
+                        "schema": {
+                            "title": "Simplified UI",
+                            "description": "Only display the main content.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "syllabificationEnabled": {
+                        "schema": {
+                            "title": "Syllabification",
+                            "description": "Display words broken down into their syllables.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "tableOfContentsEnabled": {
+                        "schema": {
+                            "title": "Table of Contents",
+                            "description": "Create a table of contents.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "wordSpace": {
+                        "schema": {
+                            "type": "number",
+                            "default": 0,
+                            "minimum": -0.3,
+                            "maximum": 3,
+                            "multipleOf": 0.1
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
-                    "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
+                    "captionsEnabled": "http://registry\\.gpii\\.net/common/captions/enabled",
+                    "characterSpace": {
+                        "transform": {
+                            "type": "fluid.transforms.round",
+                            "scale": 1,
+                            "input": {
+                                "transform": {
+                                    "type": "fluid.transforms.linearScale",
+                                    "offset": 1,
+                                    "inputPath": "http://registry\\.gpii\\.net/common/characterSpace"
+                                }
+                            }
+                        }
+                    },
+                    "contrastTheme": {
+                        "transform": {
+                            // Use the same condition for applying a high contrast theme to windows:
+                            // (highContrast.enabled || highContrastTheme) && (highContrastTheme != "regular-contrast")
+                            "type": "fluid.transforms.condition",
+                            "condition": {
+                                "transform": {
+                                    "type": "fluid.transforms.binaryOp",
+                                    "left": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
+                                            "left": false,
+                                            "operator": "||",
+                                            "rightPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "right": false
+                                        }
+                                    },
+                                    "operator": "&&",
+                                    "right": {
+                                        "transform": {
+                                            "type": "fluid.transforms.binaryOp",
+                                            "left": "",
+                                            "leftPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                            "operator": "!==",
+                                            "right": "regular-contrast"
+                                        }
+                                    }
+                                }
+                            },
+                            "true": {
+                                "transform": {
+                                    "type": "fluid.transforms.valueMapper",
+                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                                    "defaultOutputValue": "default",
+                                    "match": {
+                                        "black-white": "bw",
+                                        "white-black": "wb",
+                                        "black-yellow": "by",
+                                        "yellow-black": "yb",
+                                        "gray-dark": "gd",
+                                        "gray-white": "gw",
+                                        "black-brown": "bbr"
+                                    }
+                                }
+                            },
+                            "false": "default"
+                        }
+                    },
                     "fontSize": {
                         "transform": {
                             "type": "fluid.transforms.round",
@@ -1306,7 +1507,14 @@
                             }
                         }
                     },
-                    "characterSpace": {
+                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
+                    "lineSpace": "http://registry\\.gpii\\.net/common/lineSpace",
+                    "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
+                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
+                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled",
+                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
+                    "wordSpace": {
                         "transform": {
                             "type": "fluid.transforms.round",
                             "scale": 1,
@@ -1314,60 +1522,11 @@
                                 "transform": {
                                     "type": "fluid.transforms.linearScale",
                                     "offset": 1,
-                                    "inputPath": "http://registry\\.gpii\\.net/common/characterSpace"
+                                    "inputPath": "http://registry\\.gpii\\.net/common/wordSpace"
                                 }
                             }
                         }
-                    },
-                    "inputsLargerEnabled": "http://registry\\.gpii\\.net/common/inputsLarger/enabled",
-                    "contrastTheme": {
-                        "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
-                            "true": {
-                                "transform": {
-                                    "type": "fluid.transforms.valueMapper",
-                                    "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
-                                    "defaultOutputValue": "default",
-                                    "match": {
-                                        "black-white": "bw",
-                                        "white-black": "wb",
-                                        "black-yellow": "by",
-                                        "yellow-black": "yb"
-                                    }
-                                }
-                            },
-                            "false": "default"
-                        }
-                    },
-                    "selfVoicingEnabled": "http://registry\\.gpii\\.net/common/selfVoicing/enabled",
-                    "selectionTheme": "http://registry\\.gpii\\.net/common/highlightColor",
-                    "tableOfContentsEnabled": "http://registry\\.gpii\\.net/common/tableOfContents",
-                    "dictionaryEnabled": {
-                        "transform": {
-                            "type": "fluid.transforms.valueMapper",
-                            "match": [{
-                                "inputValue": {
-                                    "dictionaryEnabled": true
-                                },
-                                "outputValue": true
-                            }],
-                            "noMatch": {
-                                "outputValue": false
-                            },
-                            "defaultInput": {
-                                "transform": {
-                                    "type": "fluid.transforms.arrayToSetMembership",
-                                    "inputPath": "http://registry\\.gpii\\.net/common/supportTool",
-                                    "options": {
-                                        "dictionary": "dictionaryEnabled"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled",
-                    "syllabificationEnabled": "http://registry\\.gpii\\.net/common/syllabification/enabled"
+                    }
                 },
                 "inverseCapabilitiesTransformations": {}
             }

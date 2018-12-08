@@ -45,7 +45,7 @@ fluid.defaults("gpii.oauth2.oauth2orizeServer", {
         }
     },
     listeners: {
-        onCreate: {
+        "onCreate.listenOauth2orize": {
             listener: "gpii.oauth2.oauth2orizeServer.listenOauth2orize",
             args: ["{that}.oauth2orizeServer", "{clientService}", "{authorizationService}"]
         }
@@ -225,7 +225,8 @@ gpii.oauth2.urlencodedBodyParser = function () {
 gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServer, passport) {
     that.expressApp.post("/access_token",
         passport.authenticate("oauth2-client-password", { session: false }),
-        oauth2orizeServer.token()
+        oauth2orizeServer.token(),
+        oauth2orizeServer.errorHandler()
     );
 };
 
@@ -236,9 +237,6 @@ gpii.oauth2.authServer.contributeRouteHandlers = function (that, oauth2orizeServ
  * @param {Function} done - The oauth2orizeServer endpoint function to grant or reject when a client requests authorization.
  * @param {Object} paramsPromise - Contains additional parameters to be included in the success response.
  *  See [oauth2orize in github](https://github.com/jaredhanson/oauth2orize) for more information
- * @return {Object} The result of invoking done() within the promise callback. At the promise onResolve, done() is called with the resolved value as its parameter,
- * and the resolved value of paramsPromise as the additional parameter.
- * At the promise onReject, done() is called with the error.
  */
 gpii.oauth2.oauth2orizeServer.promiseToDone = function (promise, done, paramsPromise) {
     promise.then(function (data) {
