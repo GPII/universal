@@ -137,7 +137,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     },
 */
                     headers: {
-                        "Authorization": "Bearer token"
+                        "Authorization": "Bearer token" // set at test run
                     },
                     method: "GET",
                     expectedStatusCode: 200
@@ -148,15 +148,18 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                 options: {
                     port: "9082",
                     hostname: "flowmanager",
-                    path: "/testUser1/settings",
+                    path: "/%gpiiKey/settings",
+                    termMap: {
+                        "gpiiKey": gpii.tests.development.gpiiKey
+                    },
                     headers: {
-                        "Authorization": "Bearer token"
+                        "Authorization": "Bearer token" // set at test run
                     },
                     method: "PUT",
                     expectedStatusCode: 404,
                     expectedPayload: {
                         "isError": true,
-                        "message": "Cannot update:  GPII key \"testUser1\" is a snapset while executing HTTP PUT on url http://preferences:9081/preferences/%gpiiKey?merge=%merge"
+                        "message": "Cannot update:  GPII key \"" + gpii.tests.development.gpiiKey + "\" is a snapset while executing HTTP PUT on url http://preferences:9081/preferences/%gpiiKey?merge=%merge"
                     }
                 }
             }
@@ -184,16 +187,30 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
             args: [gpii.tests.productionConfigTesting.accessTokenRequestPayload]
         }, {
             event: "{accessTokenRequest}.events.onComplete",
-            listener: "gpii.tests.productionConfigTesting.testAccessResponse",
-            args: ["{arguments}.0", "{arguments}.1", ["{lifeCycleRequest}", "{putSettingsRequestFailure}"]]
+            listener: "gpii.tests.productionConfigTesting.testAccessResponse"
         }, {
-            func: "{lifeCycleRequest}.send"
+            func: "{lifeCycleRequest}.send",
+            args: [
+                null,
+                {
+                    "headers": {
+                        "Authorization": "{accessTokenRequest}.options.stashedAuth"
+                    }
+                }
+            ]
         }, {
             event: "{lifeCycleRequest}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testLifecycleResponse"
         }, {
             func: "{putSettingsRequestFailure}.send",
-            args: [gpii.tests.productionConfigTesting.prefsUpdate]
+            args: [
+                gpii.tests.productionConfigTesting.prefsUpdate,
+                {
+                    "headers": {
+                        "Authorization": "{accessTokenRequest}.options.stashedAuth"
+                    }
+                }
+            ]
         }, {
             event: "{putSettingsRequestFailure}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
@@ -243,14 +260,10 @@ gpii.tests.productionConfigTesting.testResponse = function (data, request) {
     );
 };
 
-gpii.tests.productionConfigTesting.testAccessResponse = function (data, request, dependantRequests) {
+gpii.tests.productionConfigTesting.testAccessResponse = function (data, request) {
     var token = JSON.parse(data);
     var auth = "Bearer " + token.access_token;
-
-    // Set up the authorization for requests that depend on it
-    fluid.each(dependantRequests, function (aRequest) {
-        aRequest.options.headers.Authorization = auth;
-    });
+    request.options.stashedAuth = auth;
 
     gpii.tests.productionConfigTesting.testStatusCode(data, request);
     jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
@@ -263,7 +276,7 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
 
     var lifeCycle = JSON.parse(data);
     jqUnit.assertEquals(
-        "Checking '" + gpii.tests.development.gpiiKey + "'",
+        "Checking lifeCycle user '" + gpii.tests.development.gpiiKey + "'",
         gpii.tests.development.gpiiKey,
         lifeCycle.gpiiKey
     );
