@@ -52,10 +52,10 @@ gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
     "grant_type": "password"
 };
 gpii.tests.productionConfigTesting.device = {
-    "OS": {
-        "id": "linux"
+    OS: {
+        id: "linux"
     },
-    "solutions": [{
+    solutions: [{
         "id": "org.gnome.desktop.a11y.magnifier"
     }]
 };
@@ -68,16 +68,6 @@ gpii.tests.productionConfigTesting.prefsUpdate = {
             }
         }
     }
-};
-
-gpii.tests.productionConfigTesting.makeSettingsPath = function () {
-    var map = {
-        "gpiiKey": gpii.tests.development.gpiiKey,
-        "device": encodeURIComponent(
-            JSON.stringify(gpii.tests.productionConfigTesting.device)
-        )
-    };
-    return fluid.stringTemplate("/%gpiiKey/settings/%device", map);
 };
 
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
@@ -126,16 +116,12 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                 options: {
                     port: "9082",
                     hostname: "flowmanager",
-                    path: gpii.tests.productionConfigTesting.makeSettingsPath(),
-/*
-                    path: "/%gpiiKey/settings/%device",
-                    termMap: {
-                        "gpiiKey": gpii.tests.development.gpiiKey,
-                        "device": JSON.stringify(
+                    path: fluid.stringTemplate("/%gpiiKey/settings/%device", {
+                        gpiiKey: gpii.tests.development.gpiiKey,
+                        device: encodeURIComponent(JSON.stringify(
                             gpii.tests.productionConfigTesting.device
-                        )
-                    },
-*/
+                        ))}
+                    ),
                     headers: {
                         "Authorization": "Bearer token" // set at test run
                     },
