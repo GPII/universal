@@ -5133,30 +5133,29 @@
                         "schema": {
                             "title": "Shortcut warning messages",
                             "description": "Enable/Disable warning messages when changing a setting with a shortcut",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "Warning Sounds": {
                         "transform": {
-                            "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
-                            "false": 0,
-                            "true": 1
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled",
+                            "outputPath": "value"
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled": {
-                        "transform": {
-                            "type": "fluid.transforms.binaryOp",
-                            "leftPath": "Warning Sounds",
-                            "right": 0,
-                            "operator": "!=="
-                        }
-                    }
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.shortcutWarningMessage.Enabled": "Warning Sounds.value"
                 }
             }
         },
