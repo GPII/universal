@@ -6502,13 +6502,15 @@
                             "default": 3,
                             "oneOf": [
                                 {
+                                    "title": "Range of accepted regular values",
                                     "type": "integer",
                                     "minimum": 1,
                                     "maximum": 100
                                 },
                                 {
-                                    enum: [4294967295],
-                                    enumLabels: ["full-page"]
+                                    "title": "Values with special meaning",
+                                    "enum": [4294967295],
+                                    "enumLabels": ["full-page"]
                                 }
                             ]
                         }
