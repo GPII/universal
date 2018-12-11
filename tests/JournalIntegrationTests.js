@@ -39,7 +39,7 @@ gpii.tests.journal.initialSettings = {
                     "value": 20
                 }
             },
-            "options": { // We use a lower-quality utility than gpii.settingsHandlers.invokeRetryingHandler in our test case setup
+            "options": {
                 "mockSync": true,
                 "getAction": "SPI_GETMOUSETRAILS",
                 "setAction": "SPI_SETMOUSETRAILS"
@@ -89,6 +89,15 @@ gpii.tests.journal.initialSettings = {
                 "settings": {
                     "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
                         "value": false
+                    }
+                }
+            }
+        ],
+        "com.microsoft.windows.touchPadSettings": [
+            {
+                "settings": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "value": "Low sensitivity"
                     }
                 }
             }

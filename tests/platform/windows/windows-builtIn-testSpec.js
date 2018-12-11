@@ -434,6 +434,13 @@ gpii.tests.windows.builtIn = [
                             "value": false
                         }
                     }
+                }],
+                "com.microsoft.windows.touchPadSettings": [{
+                    "settings": {
+                        "SystemSettings_Input_Touch_SetActivationTimeout": {
+                            "value": "Low sensitivity"
+                        }
+                    }
                 }]
             },
             "gpii.windows.wmiSettingsHandler": {
