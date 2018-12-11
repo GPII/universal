@@ -5,7 +5,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.microsoft.windows.audioDescription": {
-                        "AudioDescriptionEnabled": true
+                        "AudioDescriptionEnabled": 1
                     }
                 }
             }
