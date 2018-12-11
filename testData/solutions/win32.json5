@@ -6499,11 +6499,11 @@
                         "schema": {
                             "title": "Mouse scroll wheel mode",
                             "description": "Changes the number of lines to scroll when moving the scrollwheel.",
-                            "type": "integer",
                             "default": 3,
-                            "minimum": 1,
                             "oneOf": [
                                 {
+                                    "type": "integer",
+                                    "minimum": 1,
                                     "maximum": 100
                                 },
                                 {
