@@ -96,6 +96,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.touchPadSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.typingEnhancement"
     },
 
