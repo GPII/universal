@@ -112,7 +112,7 @@ gpii.tests.cloudStatus.testCases = {
         expectedStatusCode: 503,
         expectedPayload: {
             "isError": true,
-            "message": "Error connecting to Preferences Server at http://localhost:8081"
+            "message": "Error connecting to Preferences Server"
         }
     },
     testHealthWithSeparateServers: {
