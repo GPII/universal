@@ -5106,7 +5106,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.shortcutWarningMessage": {
         "name": "Warning messages for shortcuts",
         "contexts": {
@@ -5165,7 +5164,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.shortcutWarningSound": {
         "name": "Warning sounds for shortcuts",
         "contexts": {
@@ -5225,7 +5223,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.filterKeys": {
         "name": "Windows FilterKeys",
         "contexts": {
