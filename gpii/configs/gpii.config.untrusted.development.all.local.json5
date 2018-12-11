@@ -7,7 +7,7 @@
  *
  * * The following components are running:
  * ** Auth Server
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  * ** Cloud Based Flow Manager
  * ** Untrusted Local Flow Manager
  * ** MatchMaker Framework

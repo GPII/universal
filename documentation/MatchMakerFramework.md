@@ -7,7 +7,7 @@ framework has the following responsibility:
 
 * Doing the preprocessing - that is, preparing and augmenting the input payload for the specific matchmaker
 * Making the decision of which matchmaker to call, and then call that matchmaker (for example the
-  [Canopy MatchMaker](CanopyMatchMaker.md))
+  [Flat MatchMaker](FlatMatchMaker.md))
 * Doing the post-processing - that is, taking the return payload from the matchmakers, parse it and pass it on in the
   login (or other) flow.
 * Generally providing utilities that can be used by matchmaker implementations.
@@ -58,7 +58,7 @@ done like:
     preferences into common terms (that in turn can be translated into app settings for windows)._
 * matchMakerDispatcher:
   * Sends the matchmaker input data to the actual matchmaker. _While there is functionality in place for allowing
-    multiple matchmakers, the system is currently hardcoded to use the “default” one, which is the Canopy matchmaker in
+    multiple matchmakers, the system is currently hardcoded to use the “default” one, which is the Flat matchmaker in
     all the default configs_.
   * A promise is returned, which will contain the original matchmaker input along with the response from the matchmaker
     in a block keyed by `matchMakerOutput`.
@@ -66,10 +66,10 @@ done like:
 
 ### Important utilities and concepts in the Match Maker Framework
 
-**The Canopy Matchmaker**: While this is not part of the matchmaker framework, it is important to mention the Canopy
+**The Flat Matchmaker**: While this is not part of the matchmaker framework, it is important to mention the Flat
 Match Maker, which is an (the only) implementation of a matchmaker, which uses most of the utilities described in this
-document as well as a canopy matching algorithm. It is described in details here:
-[https://github.com/GPII/universal/blob/master/documentation/CanopyMatchMaker.md](./CanopyMatchMaker.md)
+document. It is described in details here:
+[https://github.com/GPII/universal/blob/master/documentation/FlatMatchMaker.md](./FlatMatchMaker.md)
 
 **Solution Types**: To ensure that several conflicting solutions (e.g. two screenreaders) are not launched, "Types" can
 be calculated for each solution, based on the capabilities they have (and in the future, on their explicitly stated
@@ -89,7 +89,7 @@ magnifier). The inference happens via the `gpii.matchMakerFramework.utils.inferC
 should be merged with an preference set, this can be done via the
 `gpii.matchMakerFramework.utils.addInferredCommonTerms` function. It is worth stressing two things: The use of inferred
 common terms is not mandatory in a matchmaking flow, but available via the above functions, and something which _is_
-being used in the canopy matchmaker. Secondly, there is no metadata generated saying that the common terms are
+being used in the flat matchmaker. Secondly, there is no metadata generated saying that the common terms are
 inferred, meaning that once added to an preference set, the matchmaker has no way of knowing whether the term was
 originally in the preference set or was inferred.
 
@@ -99,17 +99,6 @@ the linux solutions registry entries to get information (if available) about how
 into common terms (that in turn can be translated into app settings for windows). This should be changed into a more
 dynamically loaded solution registry fetching based on the users application settings, once the solutions registry has
 been turned into a queriable service.
-
-**gpii.matchMakerFramework.utils.disposeFromPriority**: Explicit priorities are declared in the preference sets metadata
-section and will always be a floating point value of 1024 or more. Implicit priorities are deduced from application
-specific settings. When a user has application specific settings for a solution a priority of 512 is set for that
-solution.
-
-This function goes through all solutions from high priority to low. If a solution already has a disposition, it is
-ignored. Else it will be selected (accepted). Any solution with the same type, but a lower priority (or no priority)
-will be rejected. If there are two or more solutions of the same priority _and_ the same type (even partly), these will
-be considered a "tie". All lower-priority solutions of this type will still be rejected. The tied solutions will have
-their current disposition and priority removed and left to be disposed by some other disposal algorithm.
 
 **gpii.matchmakerframework.utils.disposeSolution:** In many ways the “Heart” of the matchmaking process. It is
 responsible for adding priorities, augmenting the solution and preference data and finally passing it to some
@@ -127,7 +116,7 @@ disposition (matchmaker) strategy that is passed as a parameter. In more details
 4. A leaves structure of the preferences is calculated in the `gpii.matchMakerFramework.utils.computeLeaves` function.
    This is a structure with a key for each preference in an EL-path format and a value of true. This, in conjunction with
    the solutions skeleton is useful for looking up matches via fluids' getPath functionality.
-5. Once all this data has been prepared, the information is sent to the strategy (e.g. canopy match makers algorithm)
+5. Once all this data has been prepared, the information is sent to the strategy (e.g. flat match makers algorithm)
 6. Finally a disposition is assigned to each solution based on the output of the strategy.
 
 **Preference filtering:** When using a the untrusted flowmanager, security dictates that no "irrelevant" or unnused
@@ -138,7 +127,7 @@ device are those that have been used to configure the device. This filtering can
 
 **matchMakerDispatcher:** Sends the matchmaker input data to the actual matchmaker. While there is functionality in
 place for allowing multiple matchmakers, the system is currently hardcoded to use the “default” one, which is the
-Canopy matchmaker.
+Flat matchmaker.
 
 A promise is returned, which will contain the original matchmaker input along with the matchmaker response in a block
 keyed by matchMakerOutput

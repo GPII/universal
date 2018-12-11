@@ -22,9 +22,11 @@ different kinds of flows are:
 * **Update Preferences** (`CloudBasedFlowManager.js`) - used to update the preferences when the system is running in
   cloud-based mode. See [CloudBasedFlow](CloudBasedFlow.md) for more details
 
-## Reserved GPII Key "noUser"
+## Reserved GPII Keys
 
-The reserved special GPII key "noUser" is keyed into the system when there is not an actual key keyed in. This includes:
+### noUser
+
+The reserved GPII key "noUser" is automatically keyed into the system when there is not an actual key keyed in. This includes:
 
 * When GPII starts
 * Once an actual GPII key is keyed out
@@ -32,7 +34,18 @@ The reserved special GPII key "noUser" is keyed into the system when there is no
 The present of "noUser" key allows users to continue to change settings via QSS (Quick Strip Set) when no actual GPII
 key is keyed into the system.
 
-## APIs
+### reset
+
+The reserved GPII key "reset" is to be used with the flow manager login API to reset the computer. The API is:
+
+GET /user/reset/login
+
+See [Reset Computer Documentation](ResetComputer.md) for more details about the reset workflow.
+
+Note that a separate logout of "reset" is not necessary. The final condition of using the "reset" key is to have the
+"noUser" key log back in the system.
+
+## APIs on Local Flow Manager
 
 ### User Logon state change (GET /user/:gpiiKey/proximityTriggered)
 
@@ -47,7 +60,6 @@ key is keyed into the system.
 ### User Login (GET /user/:gpiiKey/login)
 
 * **description**: Log in a user to the system
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
 * **route:** `/user/:gpiiKey/login` where :gpiiKey should be the GPII key of the user
 * **method:** `GET`
 * **return:** Message saying that user successfully logged into the system or an error message.
@@ -55,26 +67,62 @@ key is keyed into the system.
 ### User Logout (GET /user/:gpiiKey/logout)
 
 * **description**: Log out a user of the system
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
 * **route:** `/user/:gpiiKey/logout` where `:gpiiKey` should be the GPII key of the user
 * **method:** `GET`
 * **return:** Message saying that user successfully logged out of the system or an error message.
 
-### Retrieve GPII key (GET /gpiiKey)
+## APIs on Cloud Based Flow Manager
 
-* **description**: Get the GPII key of the user(s) who is (are) currently logged into the system
-* **Supported modes**: works only with a locally installed GPII framework (i.e. non-cloud-based flowmanager)
-* **route:** `/gpiiKey`
+### Check the readiness of Cloud Based Flow Manager (GET /ready)
+
+* **description**: Check whether Cloud Based Flow Manager is ready to handle requests.
+  * When Cloud Based Flow Manager and Preferences Server are running together as one server, the readiness endpoint
+    checks the database connection.
+  * When Cloud Based Flow Manager and Preferences Server are running as separate servers, the readiness endpoint
+    checks the communication with Preferences Server.
+* **route:** `/ready`
 * **method:** `GET`
-* **return:** A JSON array with a string entry for each user
+* **return:** Return http status code 200 when Cloud Based Flow Manager is ready to handle requests. Otherwise, return
+ http status code 404.
+
+### Check the liveness of Cloud Based Flow Manager (GET /health)
+
+* **description**: Check whether Cloud Based Flow Manager itself is running. A running Cloud Based Flow Manager may or may
+ not be ready to handle requests because the liveness endpoint does not check communications between Cloud Based
+ Flow Manager with other modules such as Preferences Server and the database.
+* **route:** `/health`
+* **method:** `GET`
+* **return:** Return http status code 200 when Cloud Based Flow Manager itself is running. Otherwise, return http status
+ code 500.
+
+### Get an access token (POST /access_token)
+
+* **description**: Access tokens are credentials used to protect user preferences. An access token represents an
+ authorization issued to a GPII application. It needs to be provided at retrieving or updating user preferences.
+* **route:** `/access_token` with these parameters in the `POST` body using the `application/x-www-form-urlencoded` Content-Type.
+  * `grant_type`: must be set to "password".
+  * `client_id`: the OAuth2 client id.
+  * `client_secret`: the OAuth2 client_secret. Confidential shared secret, used to verify the identity of the OAuth2
+    client
+  * `username`: the GPII key.
+  * `password`: any string.
+* **method:** `POST`
+* **return:** A JSON document with an access token:
+
+```json5
+{
+    "access_token": "carla",
+    "expiresIn": 3600,
+    "token_type": "Bearer"
+}
+```
 
 ### Get lifecycle instructions from Cloud Based Flow Manager (GET /:gpiiKey/settings/:device)
 
 * **description**: Get settings in the ontology of preferences from the cloud based flow manager. These settings are
  untransformed lifecycle instructions. See [an example of the return payload of this endpoint.](https://github.com/GPII/gpii-payloads/blob/master/CloudBasedFlowManagerUntrustedSettings.md#user-content-return-payload)
-* **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings/:device` where:
-  * `:gpiiKey` should be the GPII key of the user for which the settings are requested
+  * `:gpiiKey` should be the GPII key of the user for which the settings are requested.
   * `:device` should be a device reporter payload - for example:
   `{"OS":{"id":"linux"},"solutions":[{"id":"org.gnome.desktop.a11y.magnifier"}]}` would retrieve the settings for the
   solution with ID `org.gnome.desktop.a11y.magnifier` which is a solution for `linux`.
@@ -88,7 +136,7 @@ key is keyed into the system.
 
 ```json5
 {
-    "gpiiKey": "li",
+    "gpiiKey": "carla",
     "solutionsRegistryEntries": {
         "org.nvda-project": {
             "name": "NVDA Screen Reader",
@@ -176,9 +224,8 @@ key is keyed into the system.
 * **description**: Call the preferences server API to update user preferences. The preferences server API merges the
  incoming preferences with the existing user preferences and update the merged preferences on the cloud based flow
  manager.
-* **Supported modes**: Cloud Based Flow Manager only
 * **route:** `/:gpiiKey/settings` where:
-  * `:gpiiKey` should be the GPII key of the user for which the preferences are updated
+  * `:gpiiKey` should be the GPII key of the user for which the preferences are updated.
 * **header:** Authorization: Bearer < access_token >
   * `access_token` The access token can be first requested via /access_token endpoint. It represents the authorization
     that grants a GPII app to update settings associated with a GPII key. Refer to [GPII OAuth2
@@ -205,7 +252,7 @@ key is keyed into the system.
 
 ```json
 {
-    "gpiiKey": "li",
+    "gpiiKey": "carla",
     "message": "Successfully updated."
 }
 ```

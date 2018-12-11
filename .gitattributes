@@ -1,0 +1,2 @@
+# Github thinks our long .js files are generated and hides them from diffs in PRs. Disable that behavior.
+*.js linguist-generated=false
