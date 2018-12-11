@@ -4994,7 +4994,6 @@
             }
         ]
     },
-
     "com.microsoft.windows.underlineMenuShortcuts": {
         "name": "Underline menu shortcuts",
         "contexts": {
@@ -5132,15 +5131,8 @@
                         "schema": {
                             "title": "Shortcut warning messages",
                             "description": "Enable/Disable warning messages when changing a setting with a shortcut",
-                            "enum": [
-                                0,
-                                1
-                            ],
-                            "enumLabels": [
-                                "off",
-                                "on"
-                            ],
-                            "default": 0
+                            "type": "boolean",
+                            "default": false
                         }
                     }
                 },
