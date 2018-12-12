@@ -92,6 +92,15 @@ gpii.tests.journal.initialSettings = {
                     }
                 }
             }
+        ],
+        "com.microsoft.windows.touchPadSettings": [
+            {
+                "settings": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "value": "Low sensitivity"
+                    }
+                }
+            }
         ]
     },
     "gpii.windows.wmiSettingsHandler": {
@@ -132,6 +141,20 @@ gpii.tests.journal.initialSettings = {
                 ]
             }
         }]
+    },
+    "gpii.windows.nativeSettingsHandler": {
+        "com.microsoft.windows.mouseSettings": [
+            {
+                "settings": {
+                    "DoubleClickTimeConfig": {
+                        "value": 500
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickTime"
+                }
+            }
+        ]
     }
 };
 
