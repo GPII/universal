@@ -3917,41 +3917,47 @@
                 "supportedSettings": {
                     "SolidColorConfig": {
                         "schema": {
-                           "title": "Desktop background payload",
+                            "title": "Desktop background payload",
                             "description": "The values that user want to use for that particular background type",
-                            "type": "Object",
-                            "default": {
-                                "r": 0, "g": 0, "b": 0
-                            },
-                            "min": {
-                                "r": 0, "g": 0, "b": 0
-                            },
-                            "max": {
-                                "r": 255, "g": 255, "b": 255
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "r": {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 255,
+                                    "default": 0,
+                                    "required": true
+                                },
+                                "g": {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 255,
+                                    "default": 0,
+                                    "required": true
+                                },
+                                "b": {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 255,
+                                    "default": 0,
+                                    "required": true
+                                }
                             }
-                        },
-                        "DefaultColorConfig": {}
+                        }
                     }
                 },
                 "capabilitiesTransformations": {
-                    "DefaultColorConfig": {
-                        "transform": {
-                            "type": "fluid.transforms.literalValue",
-                            "input": { "r": 0, "g": 0, "b": 0 },
-                            "outputPath": "value"
-                        }
-                    },
                     "SolidColorConfig": {
                         "transform": {
-                            "type": "fluid.transforms.firstValue",
-                            "values": ["http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor", "DefaultColorConfig.value"],
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor",
                             "outputPath": "value"
                         }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor": "SolidColorConfig.value",
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.DefaultColor": "DefaultColorConfig.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.desktopBackgroundColor.SolidColor": "SolidColorConfig.value"
                 }
             }
         },
