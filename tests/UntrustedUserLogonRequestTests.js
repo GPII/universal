@@ -78,4 +78,4 @@ gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     }]
 }];
 
-gpii.test.bootstrapServerNoDb(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));
+gpii.test.bootstrapServer(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));
