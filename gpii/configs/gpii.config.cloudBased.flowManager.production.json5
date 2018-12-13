@@ -10,6 +10,7 @@
 {
     "type": "gpii.config.cloudBased.flowManager.production",
     "options": {
+        "gradeNames": "gpii.withCloudLogging", // Apply cloud logging for GPII-3310
         "mainServerPort": 8082,
         "dbServerPort": 5984,
         "dataSourceConfigProductionEnv": {
