@@ -3322,11 +3322,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -3424,11 +3419,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        rewriteEvery: 0,
-                        numRetries: 40
-                    },
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
@@ -3640,12 +3630,6 @@
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20,
-                        "retryInterval": 1000
-                    },
                     "registryName": "magnifierpane",
                     "getState": [
                         {
@@ -4459,11 +4443,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    retryOptions: {
-                        rewriteEvery: 0,
-                        numRetries: 20
-                    },
                     "getState": [
                         {
                             "type": "gpii.processReporter.find",
@@ -4693,11 +4672,6 @@
             "launcher": {
                 "type": "gpii.launchHandlers.flexibleHandler",
                 "options": {
-                    "verifySettings": true,
-                    "retryOptions": {
-                        "rewriteEvery": 0,
-                        "numRetries": 20
-                    },
                     "setTrue": [
                         {
                             "type": "gpii.launch.exec",
@@ -4742,8 +4716,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "HIGHCONTRAST"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "HighContrastOn": {
@@ -4795,6 +4768,7 @@
                 }
             },
             "configure-registry": {
+                // This sets the high-contrast theme.
                 "type": "gpii.windows.registrySettingsHandler",
                 "liveness": "live",
                 "options": {
@@ -4852,15 +4826,54 @@
                         }
                     }
                 }
+            },
+            "configure-theme": {
+                // This is used to specify the theme file that Windows will use when restoring high-contrast. The
+                // file this setting points to is created by gpii, containing the currently unsaved theme settings.
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast",
+                    "dataTypes": {
+                        "Pre-High Contrast Scheme": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "Pre-High Contrast Scheme": {}
+                },
+                "capabilitiesTransformations": {
+                    "Pre-High Contrast Scheme": {
+                        "transform": {
+                            "type": "fluid.transforms.literalValue",
+                            "input": "${{environment}.LOCALAPPDATA}\\Microsoft\\Windows\\Themes\\Morphic.theme"
+                        }
+                    }
+                }
             }
         },
         "configure": [
+            // Set the "restore" theme.
+            "settings.configure-theme",
+            // Set the high-contrast theme.
             "settings.configure-registry",
             {
+                // Save the current theme, and set the new high-contrast one.
                 "type": "gpii.windows.spiSettingsHandler.setHighContrastTheme",
-                "filename": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}"
+                "newTheme": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\LastHighContrastTheme}",
+                "currentTheme": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\CurrentTheme}",
+                "saveAs": "${{registry}HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\HighContrast\\Pre-High Contrast Scheme}"
             },
+            // Apply high-contrast.
             "settings.configure-spi"
+        ],
+        "restore": [
+            // Restore the high-contrast theme.
+            "settings.configure-registry",
+            // Disable high-contrast.
+            "settings.configure-spi",
+            // Restore the current theme.
+            "settings.configure-theme"
         ],
         "isInstalled": [
             {
@@ -4889,8 +4902,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "STICKYKEYS"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "StickyKeysOn": {}
@@ -4942,8 +4954,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "FILTERKEYS"
-                    },
-                    "verifySettings": false
+                    }
                 },
                 "supportedSettings": {
                     "FilterKeysEnable": {
@@ -5150,8 +5161,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "MOUSEKEYS"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "MouseKeysOn": {
@@ -5284,8 +5294,7 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "MouseTrails": {
@@ -5431,8 +5440,7 @@
                         "SizeWE": "REG_SZ",
                         "UpArrow": "REG_SZ",
                         "Wait": "REG_SZ"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "Arrow": {},
@@ -5450,6 +5458,62 @@
                     "Wait": {}
                 },
                 "capabilitiesTransformations": {
+                    "AppStarting": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
+                                {
+                                    "upperBound": 0.333,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\wait_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\wait_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\wait_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\wait_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\wait_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\wait_im.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\wait_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\wait_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\wait_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\wait_l.cur"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
                     "Arrow": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
@@ -5457,14 +5521,107 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_arrow.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\arrow_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\arrow_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
-                                },
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\arrow_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\arrow_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\arrow_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\arrow_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\arrow_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\arrow_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\arrow_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\arrow_l.cur"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "Crosshair": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
                                 {
-                                    "output": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
+                                    "upperBound": 0.333,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\cross_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\cross_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\cross_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\cross_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\cross_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\cross_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\cross_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\cross_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5476,14 +5633,45 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_link.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_link_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_link_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\aero_link_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5495,33 +5683,107 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_helpsel.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\help_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\help_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\help_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\help_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\help_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\help_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\help_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\help_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\help_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\help_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
                     },
-                    "AppStarting": {
+                    "IBeam": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
                             "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_working.ani"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\beam_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_working_l.ani"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\beam_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\beam_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\beam_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\beam_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\beam_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\beam_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\beam_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5533,14 +5795,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_unavail.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\no_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\no_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\no_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\no_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\no_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\no_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\no_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\no_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\no_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\no_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5552,14 +5851,107 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_pen.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\pen_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\pen_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_pen_l.cur"
-                                },
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\pen_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\pen_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\pen_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\pen_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\pen_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\pen_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\pen_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\pen_l.cur"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "Scheme Source": {
+                        "transform": {
+                            "type": "fluid.transforms.quantize",
+                            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+                            "ranges": [
                                 {
-                                    "output": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
+                                    "upperBound": 0.333,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": 0,
+                                                "Black": 2,
+                                                "ReverseBlack": 2
+                                            },
+                                            "noMatch": {
+                                                "outputValue": 0
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "upperBound": 0.666,
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": 0,
+                                                "Black": 2,
+                                                "ReverseBlack": 2
+                                            },
+                                            "noMatch": {
+                                                "outputValue": 0
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": 0,
+                                                "Black": 2,
+                                                "ReverseBlack": 2
+                                            },
+                                            "noMatch": {
+                                                "outputValue": 0
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5571,14 +5963,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_move.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\move_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\move_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_move_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_move_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\move_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\move_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\move_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\move_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\move_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\move_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\move_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\move_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5590,14 +6019,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_nesw.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\size1_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size1_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size1_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size1_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size1_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size1_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size1_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size1_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size1_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size1_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5609,14 +6075,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_ns.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\size4_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size4_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_ns_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size4_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size4_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size4_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size4_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size4_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size4_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size4_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size4_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5628,14 +6131,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_nwse.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\size2_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size2_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size2_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size2_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size2_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size2_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size2_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size2_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size2_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size2_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5647,14 +6187,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_ew.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\size3_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size3_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_ew_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size3_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size3_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size3_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size3_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\size3_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\size3_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\size3_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\size3_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5666,14 +6243,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_up.cur"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\up_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\up_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_up_l.cur"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_up_xl.cur"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\up_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\up_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\up_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\up_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\up_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\up_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\up_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\up_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5685,14 +6299,51 @@
                             "ranges": [
                                 {
                                     "upperBound": 0.333,
-                                    "output": "%SystemRoot%\\cursors\\aero_busy.ani"
-                                },
-                                {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "",
+                                                "Black": "%SystemRoot%\\cursors\\busy_r.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\busy_i.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": ""
+                                            }
+                                        }
+                                    }
+                                }, {
                                     "upperBound": 0.666,
-                                    "output": "%SystemRoot%\\cursors\\aero_busy_l.ani"
-                                },
-                                {
-                                    "output": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\busy_m.cur",
+                                                "Black": "%SystemRoot%\\cursors\\busy_rm.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\busy_im.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\busy_m.cur"
+                                            }
+                                        }
+                                    }
+                                }, {
+                                    "output": {
+                                        "transform": {
+                                            "type": "fluid.transforms.valueMapper",
+                                            "defaultInputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                                            "match": {
+                                                "White": "%SystemRoot%\\cursors\\busy_l.cur",
+                                                "Black": "%SystemRoot%\\cursors\\busy_rl.cur",
+                                                "ReverseBlack": "%SystemRoot%\\cursors\\busy_il.cur"
+                                            },
+                                            "noMatch": {
+                                                "outputValue": "%SystemRoot%\\cursors\\busy_l.cur"
+                                            }
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -5705,9 +6356,31 @@
                             "defaultInputPath": "Arrow",
                             "defaultOutputPath": "http://registry\\.gpii\\.net/common/cursorSize",
                             "match": {
-                                "%SystemRoot%\\cursors\\aero_arrow.cur": 0.32,
-                                "%SystemRoot%\\cursors\\aero_arrow_l.cur": 0.65,
-                                "%SystemRoot%\\cursors\\aero_arrow_xl.cur": 1
+                                "": 0.32,
+                                "%SystemRoot%\\cursors\\arrow_r.cur": 0.32,
+                                "%SystemRoot%\\cursors\\arrow_i.cur": 0.32,
+                                "%SystemRoot%\\cursors\\arrow_m.cur": 0.65,
+                                "%SystemRoot%\\cursors\\arrow_rm.cur": 0.65,
+                                "%SystemRoot%\\cursors\\arrow_im.cur": 0.65,
+                                "%SystemRoot%\\cursors\\arrow_l.cur": 1,
+                                "%SystemRoot%\\cursors\\arrow_rl.cur": 1,
+                                "%SystemRoot%\\cursors\\arrow_il.cur": 1
+                            }
+                        },
+                        {
+                            "type": "fluid.transforms.valueMapper",
+                            "defaultInputPath": "Arrow",
+                            "defaultOutputPath": "http://registry\\.gpii\\.net/common/cursorColor",
+                            "match": {
+                                "": "White",
+                                "%SystemRoot%\\cursors\\arrow_r.cur": "Black",
+                                "%SystemRoot%\\cursors\\arrow_i.cur": "ReverseBlack",
+                                "%SystemRoot%\\cursors\\arrow_m.cur": "White",
+                                "%SystemRoot%\\cursors\\arrow_rm.cur": "Black",
+                                "%SystemRoot%\\cursors\\arrow_im.cur": "ReverseBlack",
+                                "%SystemRoot%\\cursors\\arrow_l.cur": "White",
+                                "%SystemRoot%\\cursors\\arrow_rl.cur": "Black",
+                                "%SystemRoot%\\cursors\\arrow_il.cur": "ReverseBlack"
                             }
                         }
                     ]
@@ -5757,8 +6430,412 @@
             }
         ]
     },
-    "com.microsoft.windows.typingEnhancement": {
+    "com.microsoft.windows.mouseSettings": {
         "name": "Windows typing autocorrection",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configureMousePrimaryButton": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSEBUTTONSWAP",
+                    "setAction": "SPI_SETMOUSEBUTTONSWAP",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "SwapMouseButtonsConfig": {
+                        "schema": {
+                            "title": "Swap mouse primary button",
+                            "description": "Swap mouse left/right buttons",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SwapMouseButtonsConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SwapMouseButtons": "SwapMouseButtonsConfig.value"
+                }
+            },
+            "configureScrollWheelMode": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETWHEELSCROLLLINES",
+                    "setAction": "SPI_SETWHEELSCROLLLINES",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "ScrollWheelModeConfig": {
+                        "schema": {
+                            "title": "Mouse scroll wheel mode",
+                            "description": "Changes the number of lines to scroll when moving the scrollwheel.",
+                            "default": 3,
+                            "oneOf": [
+                                {
+                                    "title": "Range of accepted regular values",
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 100
+                                },
+                                {
+                                    "title": "Values with special meaning",
+                                    "enum": [4294967295],
+                                    "enumLabels": ["full-page"]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScrollWheelModeConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollLines": "ScrollWheelModeConfig.value"
+                }
+            },
+            "configureScrollInactiveWindow": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSEWHEELROUTING",
+                    "setAction": "SPI_SETMOUSEWHEELROUTING",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "ScrollFocusRoutingConfig": {
+                        "schema": {
+                            "title": "Mouse scroll focus routing",
+                            "description": "Changes the way mouse scrolling is passed to applications.",
+                            "type": "string",
+                            "enum": [0, 1],
+                            "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScrollFocusRoutingConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting":  "ScrollFocusRoutingConfig.value"
+                }
+            },
+            "configureMouseCursorShadow": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETCURSORSHADOW",
+                    "setAction": "SPI_SETCURSORSHADOW",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "MouseCursorShadowEnable": {
+                        "schema": {
+                            "title": "Mouse cursor shadow",
+                            "description": "Enables or disables mouse cursor shadow.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "MouseCursorShadowEnable": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow":  "MouseCursorShadowEnable.value"
+                }
+            },
+            "configureHorizontalScrollChars": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETWHEELSCROLLCHARS",
+                    "setAction": "SPI_SETWHEELSCROLLCHARS",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "ScrollCharsConfig": {
+                        "schema": {
+                            "title": "Mouse wheel horizontal scroll",
+                            "description": "Changes the number of chars that are scrolled horizontally.",
+                            "type": "number",
+                            "default": 3,
+                            "min": 1,
+                            "max": 100,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ScrollCharsConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollChars": "ScrollCharsConfig.value"
+                }
+            },
+            "configureActiveWindowTracking": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETACTIVEWINDOWTRACKING",
+                    "setAction": "SPI_SETACTIVEWINDOWTRACKING",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "WindowsTrackingConfig": {
+                        "schema": {
+                            "title": "Mouse Windows tracking",
+                            "description": "Windows are focused when mouse is stopped over them.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "WindowsTrackingConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled": "WindowsTrackingConfig.value"
+                }
+            },
+            "configureActiveWindowZOrder": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETACTIVEWNDTRKZORDER",
+                    "setAction": "SPI_SETACTIVEWNDTRKZORDER",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "ActiveZOrder": {
+                        "schema": {
+                            "title": "Mouse wheel horizontal scroll",
+                            "description": "Changes the number of chars that are scrolled horizontally.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "ActiveZOrder": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.WindowsTrackingEnabled": "ActiveZOrder.value"
+                }
+            },
+            "configureWindowsArrangement": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETWINARRANGING",
+                    "setAction": "SPI_SETWINARRANGING",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "BOOL"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "WindowsArrangement": {
+                        "schema": {
+                            "title": "Configures Window arrangement",
+                            "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
+                            "type": "boolean",
+                            "default": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "WindowsArrangement": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.AutoWinArrangement": "WindowsArrangement.value"
+                }
+            },
+            "configureMouseDoubleClickTime": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "DoubleClickTime"
+                },
+                "supportedSettings": {
+                    "DoubleClickTimeConfig": {
+                        "schema": {
+                            "title": "Double click time",
+                            "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
+                            "type": "number",
+                            "default": 500,
+                            "min": 500,
+                            "max": 5000,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "DoubleClickTimeConfig": {
+                            "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime": "DoubleClickTimeConfig.value"
+                }
+            }
+        },
+        "configure": [
+            "settings.configureScrollWheelMode",
+            "settings.configureScrollInactiveWindow",
+            "settings.configureMouseCursorShadow",
+            "settings.configureHorizontalScrollChars",
+            "settings.configureActiveWindowTracking",
+            "settings.configureActiveWindowZOrder",
+            "settings.configureWindowsArrangement",
+            "settings.configureMouseDoubleClickTime",
+            "settings.configureMousePrimaryButton"
+        ],
+        "restore": [
+            "settings.configureScrollWheelMode",
+            "settings.configureScrollInactiveWindow",
+            "settings.configureMouseCursorShadow",
+            "settings.configureHorizontalScrollChars",
+            "settings.configureActiveWindowTracking",
+            "settings.configureActiveWindowZOrder",
+            "settings.configureWindowsArrangement",
+            "settings.configureMouseDoubleClickTime",
+            "settings.configureMousePrimaryButton"
+        ],
+        "isInstalled": [
+            {
+                 "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.typingEnhancement": {
+        "name": "Windows typing autocorrect",
         "contexts": {
             "OS": [
                 {
@@ -5784,8 +6861,7 @@
                         "EnableShiftLock": "REG_DWORD",
                         "EnableCompatibilityKeyboard": "REG_DWORD",
                         "EnableDesktopModeAutoInvoke": "REG_DWORD"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "EnableAutocorrection": {},
@@ -6096,6 +7172,70 @@
                 }
             }
         },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.alwaysInstalled"
+            }
+        ]
+    },
+    "com.microsoft.windows.touchPadSettings": {
+        "name": "Windows precision touchpad settings",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "capabilities": [],
+                "capabilitiesTransformations": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "schema": {
+                            "title": "Touchpad sensitivity",
+                            "description": "Changes Windows 10 precision touchpad sensitivity.",
+                            "default": "Medium sensitivity",
+                            "enum": [
+                                "Low sensitivity",
+                                "Medium sensitivity",
+                                "High sensitivity",
+                                "Most sensitive"
+                            ],
+                            "enumLabels": [
+                                "Low sensitivity",
+                                "Medium sensitivity",
+                                "High sensitivity",
+                                "Most sensitive"
+                            ]
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.touchPadSettings.Sensitivity": "SystemSettings_Input_Touch_SetActivationTimeout.value"
+                }
+            }
+        },
+        "update": [
+            "configure"
+        ],
         "configure": [
             "settings.configure"
         ],
@@ -6595,5 +7735,523 @@
                 "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
+    },
+    "com.office.windowsOneNoteLearningTools": {
+        "name": "LearningTools for OneNote 2016",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "64:Software\\Microsoft\\OneNoteLearningTools",
+                    "dataTypes": {
+                        "DictationLanguage": "REG_DWORD",
+                        "ReadingComprehensionDefaultFont": "REG_SZ",
+                        "IsReadingComprehensionFontWide": "REG_DWORD",
+                        "ReadingComprehensionTheme": "REG_DWORD",
+                        "ReadingComprehensionFontSize": "REG_DWORD",
+                        "SynthRate": "REG_DWORD",
+                        "SynthVoices": "REG_SZ"
+                    }
+                },
+                "supportedSettings": {
+                    "DictationLanguage": {
+                        "schema": {
+                            "title": "Dictation Language",
+                            "description": "Voice dictation language",
+                            "type": "number",
+                            "enum": [
+                                1031,
+                                3082,
+                                1036,
+                                1033,
+                                1040,
+                                1041,
+                                1046,
+                                1049
+                            ],
+                            "enumLabels": [
+                                "German",
+                                "Spanish",
+                                "French",
+                                "English",
+                                "Italian",
+                                "Japanese",
+                                "Portuguese",
+                                "Russian"
+                            ],
+                            "default": 1033
+                        }
+                    },
+                    "ReadingComprehensionDefaultFont": {
+                        "schema": {
+                            "title": "Font Spacing",
+                            "description": "The font in which text is preferred to be presented",
+                            "type": "string",
+                            "enum": [ "Calibri", "Sitka Small" ],
+                            "default": "Calibri"
+                        }
+                    },
+                    "IsReadingComprehensionFontWide": {
+                        "schema": {
+                            "title": "Font Spacing",
+                            "description": "Set wider font spacing for reading",
+                            "type": "number",
+                            "enum": [1, 0],
+                            "enumLabels": ["Default", "Wide"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingComprehensionTheme": {
+                        "schema": {
+                            "title": "Theme",
+                            "description": "Set the theme for reading",
+                            "type": "number",
+                            "enum": [0, 1, 2, 3, 4, 5],
+                            "enumLabels": ["White", "Reverse (High-Contrast)", "Yellow", "Pink", "Green", "Blue"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingComprehensionFontSize": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "min": 12,
+                            "max": 96,
+                            "default": 48,
+                            "divisibleBy" : 2
+                        }
+                    },
+                    "SynthRate": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "enum": [
+                                4294967286,
+                                4294967289,
+                                4294967291,
+                                4294967294,
+                                0,
+                                2,
+                                4,
+                                6,
+                                8
+                            ],
+                            "enumLabels": ["-4", "-3", "-2", "-1", "0", "1", "2", "4", "6"],
+                            "default": 0
+                        }
+                    },
+                    "SynthVoices": {
+                        "schema": {
+                            "title": "Synth voice",
+                            "description": "The voice that will be used for text reading",
+                            "type": "string",
+                            "enum": [
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Tracy Desktop\"}]",      // - Hong kong
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Hanhan Desktop\"}]",     // - Taiwan
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft HuiHui Desktop\"}]",     // - People’s Chinese Republic
+
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",       // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",      // - US
+
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",     // - United Kingdom
+                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",   // - France
+                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",      // - Germany
+                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",       // - Italy
+                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",     // - Japan
+                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",      // - Korea
+                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",    // - Poland
+                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",      // - Portugal
+                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",      // - Russia
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",     // - Mexico
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"      // - Spain
+                            ],
+                            "enumLabels": [
+                                "ZH - Microsoft Tracy",
+                                "ZH - Microsoft Hanhan",
+                                "ZH - Microsoft HuiHui",
+                                "EN - Microsoft Zira",
+                                "EN - Microsoft David",
+                                "EN - Microsoft Helena",
+                                "FR - Microsoft Hortense",
+                                "DE - Microsoft Hedda",
+                                "IT - Microsoft Elsa",
+                                "JA - Microsoft Haruka",
+                                "KO - Microsoft Heami",
+                                "PL - Microsoft Paulina",
+                                "PT - Microsoft Maria",
+                                "RU - Microsoft Irina",
+                                "ES - Microsoft Sabina",
+                                "ES - Microsoft Helena"
+                            ]
+                        }
+                    }
+                },
+                "capabilities": [
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\OneNote\\AddIns\\LearningTools.OneNoteLearningTools",
+                "subPath": "FriendlyName",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "ONENOTE.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\OneNote.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "ONENOTE.exe"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "com.office.windowsWordHome365LearningTools": {
+        "name": "LearningTools for Microsoft Office 2016 Word Home 365 edition for Windows 10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "64:Software\\Microsoft\\Office\\16.0\\Word\\Options",
+                    "dataTypes": {
+                        "ReadingModeColumnWidth": "REG_DWORD",
+                        "ReadingModePageColor": "REG_DWORD",
+                        "ReadingModePrintedPage": "REG_DWORD",
+                        "ReadAloudVoiceId": "REG_SZ",
+                        "ReadAloudVoiceRate": "REG_DWORD",
+                        "ReadingModeSyllables": "REG_DWORD",
+                        "ReadingModeTextSpacing": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "ReadingModeColumnWidth": {
+                        "schema": {
+                            "title": "Column mode",
+                            "description": "Column mode in which to display text",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["Narrow", "Default", "Wide"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePageColor": {
+                        "schema": {
+                            "title": "Page color",
+                            "description": "The color that will be used as page background",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["None", "Sepia", "Reverse (High-Contrast)"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePrintedPage": {
+                        "schema": {
+                            "title": "Design",
+                            "description": "Select between column desing and page design",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "enumLabels": ["Column Layout", "Printed Layout"],
+                            "default": 0
+                        }
+                    },
+                    "ReadAloudVoiceId": {
+                        "schema": {
+                            "title": "Voice Id",
+                            "description": "The voice that will be used for text reading",
+                            "type": "string",
+                            "enum": [
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_PabloM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_HelenaM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_LauraM",
+
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_MarkM",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_ZiraM"
+                            ],
+                            "enumLabels": ["Pablo", "Helena", "Laura", "David", "Mark", "Zira"],
+                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
+                        }
+                    },
+                    "ReadAloudVoiceRate": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a homogeneus speech rate
+                            "default": 10,
+                            "min": 0,
+                            "max": 20,
+                            "divisibleBy": 1
+                        }
+                    },
+                    "ReadingModeSyllables": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "enumLabels": ["False", "True"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModeTextSpacing": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "enumLabels": ["False", "True"],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilities": [
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
+                "subPath": "O365HomePremRetail.TenantId",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "WINWORD.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winword.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "WINWORD.exe"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "com.office.windowsWordPro365LearningTools": {
+        "name": "LearningTools for Microsoft Office 2016 Word Pro 365 edition for Windows 10",
+        "contexts": {
+            "OS": [
+                {
+                    "id": "win32",
+                    "version": ">=5.0"
+                }
+            ]
+        },
+        "settingsHandlers": {
+            "configure": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "manualRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "64:Software\\Microsoft\\Office\\16.0\\Word\\Options",
+                    "dataTypes": {
+                        "ReadingModeColumnWidth": "REG_DWORD",
+                        "ReadingModePageColor": "REG_DWORD",
+                        "ReadingModePrintedPage": "REG_DWORD",
+                        "ReadAloudVoiceId": "REG_SZ",
+                        "ReadAloudVoiceRate": "REG_DWORD",
+                        "ReadingModeSyllables": "REG_DWORD",
+                        "ReadingModeTextSpacing": "REG_DWORD"
+                    }
+                },
+                "supportedSettings": {
+                    "ReadingModeColumnWidth": {
+                        "schema": {
+                            "title": "Column mode",
+                            "description": "Column mode in which to display text",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["Narrow", "Default", "Wide"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePageColor": {
+                        "schema": {
+                            "title": "Page color",
+                            "description": "The color that will be used as page background",
+                            "type": "number",
+                            "enum": [0, 1, 2],
+                            "enumLabels": ["None", "Sepia", "Reverse (High-Contrast)"],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModePrintedPage": {
+                        "schema": {
+                            "title": "Design",
+                            "description": "Select between column desing and page design",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "enumLabels": ["Column Layout", "Printed Layout"],
+                            "default": 0
+                        }
+                    },
+                    "ReadAloudVoiceId": {
+                        "schema": {
+                            "title": "Voice Id",
+                            "description": "The voice that will be used for text reading",
+                            "type": "string",
+                            "enum": [
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0",
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0",
+
+                                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_ES-ES_HELENA_11.0"
+                            ],
+                            "enumLabels": ["David", "Zira", "Helena"],
+                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
+                        }
+                    },
+                    "ReadAloudVoiceRate": {
+                        "schema": {
+                            "title": "Font Size",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            // TODO: We should present the value in a homogeneus speech rate
+                            "default": 10,
+                            "min": 0,
+                            "max": 20,
+                            "divisibleBy": 1
+                        }
+                    },
+                    "ReadingModeSyllables": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "enumLabels": ["False", "True"],
+                            "enum": [0, 1],
+                            "default": 0
+                        }
+                    },
+                    "ReadingModeTextSpacing": {
+                        "schema": {
+                            "title": "Synth rate",
+                            "description": "The font size in which text is preferred to be presented",
+                            "type": "number",
+                            "enum": [0, 1],
+                            "enumLabels": ["False", "True"],
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilities": [
+                ],
+                "capabilitiesTransformations": {
+                }
+            }
+        },
+        "configure": [
+            "settings.configure"
+        ],
+        "restore": [
+            "settings.configure"
+        ],
+        "isInstalled": [
+            {
+                "type": "gpii.deviceReporter.registryKeyExists",
+                "hKey": "HKEY_LOCAL_MACHINE",
+                "path": "64:SOFTWARE\\Microsoft\\Office\\ClickToRun\\Configuration",
+                "subPath": "O365ProPlusRetail.TenantId",
+                "dataType": "REG_SZ"
+            }
+        ],
+        "launchHandlers": {
+            "launcher": {
+                "type": "gpii.launchHandlers.flexibleHandler",
+                "options": {
+                    "getState": [
+                        {
+                            "type": "gpii.processReporter.find",
+                            "command": "WINWORD.exe"
+                        }
+                    ],
+                    "setTrue": [
+                        {
+                            "type": "gpii.launch.exec",
+                            "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Winword.exe\\}\""
+                        }
+                    ],
+                    "setFalse": [
+                        {
+                            "type": "gpii.windows.closeProcessByName",
+                            "filename": "WINWORD.exe"
+                        }
+                    ]
+                }
+            }
+        }
     }
 }
