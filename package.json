@@ -39,6 +39,7 @@
         "browserify": "16.2.3",
         "gpii-express": "1.0.14",
         "gpii-grunt-lint-all": "1.0.5",
+        "gpii-json-schema": "2.0.0-dev.20181214T142944Z.57fb588.GPII-3083",
         "gpii-testem": "2.1.5",
         "grunt": "1.0.3",
         "grunt-markdownlint": "2.1.0",
@@ -47,6 +48,7 @@
         "nyc": "13.1.0",
         "pouchdb": "6.4.3",
         "recursive-copy": "2.0.9",
+        "supports-color": "5.5.0",
         "testem": "2.10.0",
         "url": "0.11.0"
     },
