@@ -41,8 +41,14 @@ fluid.logObjectRenderChars = 1024000;
  */
 
 require("./shared/DevelopmentTestDefs.js");
+require("./shared/CloudFlowManagerTestDefs.js");
 
 gpii.loadTestingSupport();
+
+gpii.tests.productionConfigTesting.config = {
+    configName: "gpii.tests.productionConfigTests.config",
+    configPath: "%gpii-universal/tests/configs"
+};
 
 gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
     "username": gpii.tests.development.gpiiKey,
@@ -70,14 +76,54 @@ gpii.tests.productionConfigTesting.prefsUpdate = {
     }
 };
 
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        accessTokenRequest_settings: {
+            type: "kettle.test.request.http",
+            options: {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                path: "/access_token",
+                port: 9082,
+                hostname: "flowmanager",
+                method: "POST"
+            }
+        },
+        settingsRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/%gpiiKey/settings/%device",
+                port: 9082,
+                hostname: "flowmanager",
+                termMap: {
+                    gpiiKey: "{testCaseHolder}.options.gpiiKey",
+                    device: {
+                        expander: {
+                            func: "gpii.test.cloudBased.computeDevice",
+                            args: [
+                                [
+                                    "org.gnome.desktop.a11y.magnifier",
+                                    "org.gnome.desktop.interface",
+                                    "org.alsa-project"
+                                ],
+                                "linux"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
         expect: 16,
-        config: {
-            configName: "gpii.tests.productionConfigTests.config",
-            configPath: "%gpii-universal/tests/configs"
-        },
+        config: gpii.tests.productionConfigTesting.config,
         components: {
             healthRequest: {
                 type: "kettle.test.request.http",
@@ -273,3 +319,12 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
 };
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
+
+fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
+    var whatsthis = gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+        oneTest.testDef,
+        {},
+        oneTest.disruptions,
+        gpii.tests.productionConfigTesting.config
+    );
+});
