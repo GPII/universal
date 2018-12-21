@@ -50,13 +50,59 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+gpii.tests.productionConfigTesting.gpiiKey = "carla";
 gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
-    "username": gpii.tests.development.gpiiKey,
+    "username": gpii.tests.productionConfigTesting.gpiiKey,
+    "gpiiKey": gpii.tests.productionConfigTesting.gpiiKey,
     "password": "dummy",
     "client_id": "pilot-computer",
     "client_secret": "pilot-computer-secret",
     "grant_type": "password"
 };
+gpii.tests.productionConfigTesting.matchMakerOutput = {
+    expectedMatchMakerOutput: {
+        "inferredConfiguration": {
+            "gpii-default": {
+                "applications": {
+                    "org.gnome.desktop.a11y.magnifier": {
+                        "active": true,
+                        "settings": {
+                            "http://registry.gpii.net/common/tracking": [
+                                "mouse",
+                                "mouse",
+                                "caret"
+                            ],
+                            "http://registry.gpii.net/common/magnification": 2,
+                            "http://registry.gpii.net/common/magnifierPosition": "RightHalf",
+                            "http://registry.gpii.net/common/showCrosshairs": true,
+                            "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                                "show-cross-hairs": true,
+                                "lens-mode": false,
+                                "mag-factor": 2,
+                                "mouse-tracking": "proportional",
+                                "screen-position": "right-half",
+                                "scroll-at-edges": true
+                            }
+                        }
+                    },
+                    "org.gnome.desktop.interface": {
+                        "active": true,
+                        "settings": {
+                            "http://registry.gpii.net/common/fontSize": 24
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+gpii.tests.productionConfigTesting.successfulWorkFlow = fluid.extend(
+    {},
+    gpii.tests.productionConfigTesting.accessTokenRequestPayload,
+    gpii.tests.productionConfigTesting.matchMakerOutput
+);
+
+debugger;
 gpii.tests.productionConfigTesting.device = {
     OS: {
         id: "linux"
@@ -75,6 +121,24 @@ gpii.tests.productionConfigTesting.prefsUpdate = {
         }
     }
 };
+
+fluid.defaults("gpii.tests.productionConfigTesting.testCaseHolder", {
+    gradeNames: ["kettle.test.testCaseHolder"],
+    components: {
+        accessTokenRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                path: "/access_token",
+                port: 9082,
+                hostname: "flowmanager",
+                method: "POST"
+            }
+        }
+    }
+});
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
     gradeNames: ["fluid.component"],
@@ -117,7 +181,6 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
         }
     }
 });
-
 
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
@@ -163,7 +226,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     port: "9082",
                     hostname: "flowmanager",
                     path: fluid.stringTemplate("/%gpiiKey/settings/%device", {
-                        gpiiKey: gpii.tests.development.gpiiKey,
+                        gpiiKey: gpii.tests.productionConfigTesting.gpiiKey,
                         device: encodeURIComponent(JSON.stringify(
                             gpii.tests.productionConfigTesting.device
                         ))}
@@ -182,7 +245,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     hostname: "flowmanager",
                     path: "/%gpiiKey/settings",
                     termMap: {
-                        "gpiiKey": gpii.tests.development.gpiiKey
+                        "gpiiKey": gpii.tests.productionConfigTesting.gpiiKey
                     },
                     headers: {
                         "Authorization": "Bearer token" // set at test run
@@ -191,7 +254,7 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                     expectedStatusCode: 404,
                     expectedPayload: {
                         "isError": true,
-                        "message": "Cannot update:  GPII key \"" + gpii.tests.development.gpiiKey + "\" is a snapset while executing HTTP PUT on url http://preferences:9081/preferences/%gpiiKey?merge=%merge"
+                        "message": "Cannot update:  GPII key \"" + gpii.tests.productionConfigTesting.gpiiKey + "\" is a snapset while executing HTTP PUT on url http://preferences:9081/preferences/%gpiiKey?merge=%merge"
                     }
                 }
             }
@@ -308,10 +371,11 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
 
     var lifeCycle = JSON.parse(data);
     jqUnit.assertEquals(
-        "Checking lifeCycle user '" + gpii.tests.development.gpiiKey + "'",
-        gpii.tests.development.gpiiKey,
+        "Checking lifeCycle user '" + gpii.tests.productionConfigTesting.gpiiKey + "'",
+        gpii.tests.productionConfigTesting.gpiiKey,
         lifeCycle.gpiiKey
     );
+    debugger;
     // These checks based on
     // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
     jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
@@ -320,11 +384,28 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
 
+// =======================================================
+//
+// Shared with SettingsGetTests.js and SettingsPutTests.js
+
+fluid.transform(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (aTest) {
+    var testDef = aTest.testDef;
+    if (testDef.name === "A successful workflow for retrieving settings") {
+        fluid.extend(testDef, gpii.tests.productionConfigTesting.successfulWorkFlow);
+    }
+    if (testDef.client_id === "Bakersfield-AJC-client-id") {
+        if (testDef.username !== "nonexistent_gpii_key") {
+            fluid.extend(testDef, gpii.tests.productionConfigTesting.accessTokenRequestPayload);
+        }
+    }
+});
+
 fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
-    var whatsthis = gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,
         {},
         oneTest.disruptions,
-        gpii.tests.productionConfigTesting.config
+        gpii.tests.productionConfigTesting.config,
+        "gpii.tests.productionConfigTesting.testCaseHolder"
     );
 });

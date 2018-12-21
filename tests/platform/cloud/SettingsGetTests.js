@@ -15,8 +15,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    jqUnit = fluid.registerNamespace("jqUnit");
+    gpii = fluid.registerNamespace("gpii");
 
 fluid.require("%gpii-universal");
 
@@ -29,16 +28,6 @@ fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsGet");
 gpii.tests.cloud.oauth2.settingsGet.config = {
     configName: "gpii.config.cloudBased.development",
     configPath: "%gpii-universal/gpii/configs"
-};
-
-gpii.tests.cloud.oauth2.settingsGet.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
-    gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse(body, refetchAccessTokenRequest);
-    jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
-};
-
-gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
-    var payload = JSON.parse(body);
-    jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };
 
 fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
@@ -80,12 +69,10 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
 });
 
 fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
-    debugger;
-    var whatsthis = gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,
         {},
         oneTest.disruptions,
         gpii.tests.cloud.oauth2.settingsGet.config
     );
-    debugger;
 });
