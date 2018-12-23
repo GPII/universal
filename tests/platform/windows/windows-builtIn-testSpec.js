@@ -399,8 +399,17 @@ gpii.tests.windows.builtIn = [
                         "InteractionMouse": 1,
                         "CoupleNarratorCursorKeyboard": 1,
                         "FollowInsertion": 0,
-                        "EchoChars": 0,
-                        "EchoWords": 1
+                        "EchoChars": 1,
+                        "EchoWords": 1,
+                        "IntonationPause": 1,
+                        "ReadHints": 1,
+                        "PlayAudioCues": 1,
+                        "NarratorCursorHighlight": 1,
+                        "FastKeyEntryEnabled": 1,
+                        "ReadingWithIntent": 1,
+                        "ErrorNotificationType": 1,
+                        "CoupleNarratorCursorMouse": 1,
+                        "LockNarratorKeys": 1
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -412,7 +421,41 @@ gpii.tests.windows.builtIn = [
                             "CoupleNarratorCursorKeyboard": "REG_DWORD",
                             "FollowInsertion": "REG_DWORD",
                             "EchoChars": "REG_DWORD",
-                            "EchoWords": "REG_DWORD"
+                            "EchoWords": "REG_DWORD",
+                            "IntonationPause": "REG_DWORD",
+                            "ReadHints": "REG_DWORD",
+                            "PlayAudioCues": "REG_DWORD",
+                            "NarratorCursorHighlight": "REG_DWORD",
+                            "FastKeyEntryEnabled": "REG_DWORD",
+                            "ReadingWithIntent": "REG_DWORD",
+                            "ErrorNotificationType": "REG_DWORD",
+                            "CoupleNarratorCursorMouse": "REG_DWORD",
+                            "LockNarratorKeys": "REG_DWORD"
+                        }
+                    }
+                }, { // Narrator (NoRoam)
+                    "settings": {
+                        "SpeechVolume": 80,
+                        "SpeechVoice": "Microsoft Zira - English (United States)",
+                        "ContextVerbosityLevel": 4,
+                        "RenderContextBeforeElement": 1,
+                        "DuckAudio": 1,
+                        "WinEnterLaunchEnabled": 1,
+                        "VerbosityLevel": 3,
+                        "DetailedFeedback": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Narrator\\NoRoam",
+                        "dataTypes": {
+                            "SpeechVolume": "REG_DWORD",
+                            "SpeechVoice": "REG_SZ",
+                            "ContextVerbosityLevel": "REG_DWORD",
+                            "RenderContextBeforeElement": "REG_DWORD",
+                            "DuckAudio": "REG_DWORD",
+                            "WinEnterLaunchEnabled": "REG_DWORD",
+                            "VerbosityLevel": "REG_DWORD",
+                            "DetailedFeedback": "REG_DWORD"
                         }
                     }
                 }, { // TypingEnhancement
@@ -515,6 +558,16 @@ gpii.tests.windows.builtIn = [
                     "settings": {
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
                             "value": "Low sensitivity"
+                        }
+                    }
+                }],
+                "com.microsoft.windows.narrator": [{
+                    "settings": {
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                            "value": true
+                        },
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                            "value": true
                         }
                     }
                 }]

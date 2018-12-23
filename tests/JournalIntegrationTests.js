@@ -101,6 +101,18 @@ gpii.tests.journal.initialSettings = {
                     }
                 }
             }
+        ],
+        "com.microsoft.windows.narrator": [
+            {
+                "settings": {
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                        "value": true
+                    },
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                        "value": true
+                    }
+                }
+            }
         ]
     },
     "gpii.windows.wmiSettingsHandler": {
