@@ -4846,7 +4846,7 @@
                     "Pre-High Contrast Scheme": {
                         "transform": {
                             "type": "fluid.transforms.literalValue",
-                            "input": "${{environment}.LOCALAPPDATA}\\Microsoft\\Windows\\Themes\\Morphic.theme"
+                            "input": "${{environment}.USERPROFILE}\\AppData\\Local\\Microsoft\\Windows\\Themes\\Morphic.theme"
                         }
                     }
                 }
