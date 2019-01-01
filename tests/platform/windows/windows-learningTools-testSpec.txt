@@ -1,0 +1,14 @@
+windows-learningTools-testSpec.js
+
+Descriptions:
+This will run the acceptance tests for the LearningTools application for OneNote and Word365 Home and Pro versions. It uses 3 preferences set:
+    - onenote_learningstools_application.json5
+    - wordhome_learningstools_application.json5
+    - wordpro_learningstools_application.json5
+
+Requirements:
+* Word365 Pro installed.
+* Word365 Home installed.
+* OneNote 2016 + LearningTools for OneNote addin installed.
+
+To run these tests, you need to have all the previous solutions installed.

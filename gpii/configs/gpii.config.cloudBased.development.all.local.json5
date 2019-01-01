@@ -4,7 +4,7 @@
  *
  * * The following components are running:
  * ** Auth Server
- * ** Canopy MatchMaker
+ * ** Flat MatchMaker
  * ** Flow Manager
  * ** MatchMaker Framework
  * ** Ontology Handler

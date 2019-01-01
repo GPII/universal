@@ -1,7 +1,0 @@
-AcceptanceTests_settingsPut.js
-
-Description:
-This is a series of tests using the cloud based flow manager to test the /settings PUT endpoint that GPII app installations use to update user settings. Before updating settings, the GPII app installation must request an access token from GPII Cloud using OAuth2 resource owner GPII key grant. This access token is then sent along with the update request to represent the authorization of the GPII app installation to user settings.
-
-Requirements:
-Since it's using the cloud based flow manager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

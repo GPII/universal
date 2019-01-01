@@ -1,0 +1,33 @@
+/**
+ * This configuration starts the cloud based flow manager and the preferences server as separate kettle servers.
+ *
+ * 1. Cloud Based Flow Manager on port 8081
+ * 2. Preferences Server on port 8084
+ */
+{
+    "type": "gpii.tests.cloudFlowManager.prefsServer.local",
+    "options": {
+        "gradeNames": ["kettle.multiConfig.config"],
+        "configs": {
+            "cloudBasedFlowManagerConfig": {
+                "configName": "gpii.flowManager.config.cloud.base",
+                "configPath": "%flowManager/configs"
+            },
+            "prefsServerConfig": {
+                "configName": "gpii.preferencesServer.config.base",
+                "configPath": "%preferencesServer/configs"
+            }
+        },
+        "distributeOptions": {
+            "prefsServer.port": {
+                "record": 8084,
+                "target": "{that prefsServerConfig}.options.mainServerPort"
+            },
+            "CloudBasedFlowManager.prefs": {
+                "record": "http://localhost:8084",
+                "target": "{that cloudBasedFlowManagerConfig flowManager prefsServerDataSource}.options.prefsServerURL",
+                "priority": "after:flowManager.prefsServerDataSource.default"
+            }
+        }
+    }
+}

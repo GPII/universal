@@ -1,0 +1,16 @@
+/**
+ * This configuration is the production version of `gpii.config.untrusted.development.dynamicDR`. It runs
+ * local Untrusted Flow Manager locally and includes an extra feature that resets the system on system startup.
+ * See documentation/ResetComputer.md.
+ *
+ * * The following components are running on the local machine:
+ * ** Untrusted Local Flow Manager
+ * ** Dynamic Device Reporter
+ */
+{
+    "type": "gpii.config.untrusted.production.dynamicDR",
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.production.base.json5",
+        "%gpii-universal/gpii/configs/gpii.config.untrusted.development.dynamicDR.json5"
+    ]
+}

@@ -1,0 +1,4 @@
+CloudStatusTests.js
+
+Description:
+This is a series of tests using different configs to test the status endpoints of Cloud Based Flow Manager: /ready and /health.

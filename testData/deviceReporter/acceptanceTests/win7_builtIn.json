@@ -40,6 +40,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mouseSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.narrator"
     },
 
@@ -49,6 +53,18 @@
 
     {
         "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
+        "id": "com.microsoft.windows.language"
+    },
+
+    {
+        "id": "com.microsoft.windows.brightness"
+    },
+
+    {
+        "id": "com.microsoft.windows.touchPadSettings"
     }
 
 ]
