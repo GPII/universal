@@ -4182,31 +4182,31 @@
                     "ContextVerbosityLevel": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity"
                         }
                     },
                     "RenderContextBeforeElement": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ReadContextBeforeControls",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ReadContextBeforeControls"
                         }
                     },
                     "DuckAudio": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.LowerAppsVolume",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.LowerAppsVolume"
                         }
                     },
                     "WinEnterLaunchEnabled": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut"
                         }
                     },
                     "VerbosityLevel": {
                         "transform": {
                             "type": "fluid.transforms.value",
-                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel"
                         }
                     }
                 },
