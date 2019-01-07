@@ -41,7 +41,7 @@ fluid.logObjectRenderChars = 1024000;
  */
 
 require("./shared/DevelopmentTestDefs.js");
-require("./shared/CloudFlowManagerTestDefs.js");
+require("./shared/FlowManagerSettingsGetTestDefs.js");
 
 gpii.loadTestingSupport();
 

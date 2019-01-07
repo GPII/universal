@@ -19,7 +19,7 @@ var fluid = require("infusion"),
 
 fluid.require("%gpii-universal");
 
-require("../../shared/CloudFlowManagerTestDefs.js");
+require("../../shared/FlowManagerSettingsGetTestDefs.js");
 
 gpii.loadTestingSupport();
 
