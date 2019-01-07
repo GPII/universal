@@ -228,6 +228,6 @@ fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest
         oneTest.testDef,
         {},
         oneTest.disruptions,
-        __dirname
+        gpii.tests.cloud.oauth2.settingsGet.config
     );
 });
