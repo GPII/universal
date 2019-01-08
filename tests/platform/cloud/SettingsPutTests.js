@@ -21,6 +21,11 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsPut");
 
+gpii.tests.cloud.oauth2.settingsPut.config = {
+    configName: "gpii.config.cloudBased.development",
+    configPath: "%gpii-universal/gpii/configs"
+};
+
 gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet = {
     "contexts": {
         "gpii-default": {
@@ -228,6 +233,6 @@ fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest
         oneTest.testDef,
         {},
         oneTest.disruptions,
-        gpii.tests.cloud.oauth2.settingsGet.config
+        gpii.tests.cloud.oauth2.settingsPut.config
     );
 });
