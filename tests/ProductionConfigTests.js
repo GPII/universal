@@ -102,7 +102,6 @@ gpii.tests.productionConfigTesting.successfulWorkFlow = fluid.extend(
     gpii.tests.productionConfigTesting.matchMakerOutput
 );
 
-debugger;
 gpii.tests.productionConfigTesting.device = {
     OS: {
         id: "linux"
@@ -375,7 +374,6 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
         gpii.tests.productionConfigTesting.gpiiKey,
         lifeCycle.gpiiKey
     );
-    debugger;
     // These checks based on
     // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
     jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);

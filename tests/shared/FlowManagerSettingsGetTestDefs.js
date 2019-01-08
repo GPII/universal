@@ -302,13 +302,11 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
 ];
 
 gpii.tests.cloud.oauth2.settingsGet.verifyRefetchedAccessToken = function (body, refetchAccessTokenRequest, initialAccessTokenRequest) {
-    debugger;
     gpii.test.cloudBased.oauth2.verifyResourceOwnerGpiiKeyAccessTokenInResponse(body, refetchAccessTokenRequest);
     jqUnit.assertNotEquals("A new access token is issued at the refetch", initialAccessTokenRequest.access_token, refetchAccessTokenRequest.access_token);
 };
 
 gpii.tests.cloud.oauth2.settingsGet.verifyPayloadMatchMakerOutput = function (body, expectedMatchMakerOutput) {
-    debugger;
     var payload = JSON.parse(body);
     jqUnit.assertDeepEq("Verify expected matchMakerOutput", expectedMatchMakerOutput, payload.matchMakerOutput);
 };
