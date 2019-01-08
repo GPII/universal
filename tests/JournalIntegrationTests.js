@@ -97,7 +97,7 @@ gpii.tests.journal.initialSettings = {
             {
                 "settings": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {
-                        "value": "Low sensitivity"
+                        "value": "Medium sensitivity"
                     }
                 }
             }
@@ -106,10 +106,10 @@ gpii.tests.journal.initialSettings = {
             {
                 "settings": {
                     "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
-                        "value": true
+                        "value": false
                     },
                     "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
-                        "value": true
+                        "value": false
                     }
                 }
             }
