@@ -34,4 +34,4 @@ gpii.tests.untrusted.flowManager.browserChannel.testDefs = fluid.transform(gpii.
     return testDef;
 });
 
-gpii.test.bootstrapServer(gpii.tests.untrusted.flowManager.browserChannel.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.untrusted.flowManager.browserChannel.testDefs);

@@ -14,8 +14,9 @@ Most configs have a "local" version and a "all.local" version.
 The "local" version contains necessary module configs without providing database support. This gives the freedom to config users to manage their own data. The "local" version is extended to:
 
 1. Create "all.local" version for **running GPII application**: The "all.local" version corresponds to the corresponding 
-"local" version plus [pouchManager](../../documentation/PouchManager.md).
+"local" version plus [Couch Connector](../../documentation/CouchConnector.md).
 
+# // TODO: Replace this with the couch connector case holder, etc.
 2. **Write integration and acceptance tests**: the "local" variant of the config works in conjunction with the 
 ["gpii.test.pouch.pouchTestCaseHolder" grade](../node_modules/testing/src/PouchTestCaseHolder.js) that performs a 
 fresh load of the test data at the start of each test sequence and cleans up the data at the end of each test sequence. 

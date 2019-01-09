@@ -61,4 +61,4 @@ gpii.tests.preferencesServerErrorTests.buildAllTestDefs = function () {
     });
 };
 
-gpii.test.bootstrapServer(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());
+gpii.test.runCouchTestDefs(gpii.tests.preferencesServerErrorTests.buildAllTestDefs());

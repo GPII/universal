@@ -17,6 +17,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
+// TODO: Don't commit this.
+fluid.logObjectRenderChars = 20480;
+
 fluid.require("%gpii-universal");
 require("./shared/PSPIntegrationTestDefs.js");
 
@@ -34,4 +37,5 @@ gpii.tests.pspIntegration.buildTestDefs = function (testDefs) {
         }, testDef);
     });
 };
-gpii.test.bootstrapServer(gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs));
+var builtTestDefs = gpii.tests.pspIntegration.buildTestDefs(gpii.tests.pspIntegration.testDefs);
+gpii.test.runCouchTestDefs(builtTestDefs);

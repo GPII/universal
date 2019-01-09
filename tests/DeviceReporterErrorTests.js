@@ -97,4 +97,4 @@ gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
     });
 };
 
-gpii.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());
+gpii.test.runCouchTestDefs(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());

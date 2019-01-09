@@ -218,4 +218,4 @@ gpii.tests.errors.testDefs = gpii.tests.errors.buildTestDefs(
 
 gpii.loadTestingSupport(gpii.tests.errors.testDefs);
 
-gpii.test.bootstrapServer(fluid.copy(gpii.tests.errors.testDefs));
+gpii.test.runCouchTestDefs(fluid.copy(gpii.tests.errors.testDefs));

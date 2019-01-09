@@ -16,7 +16,7 @@
  * ** solutionsRegistry (reading registry from file)
  * ** flatMatchMaker
  * ** matchMakerFramework
- * ** pouchManager
+ * ** CouchDB
  *
  * Note that this config incorrectly derives from the deviceReporter development config. This is because of a dependency error
  * in the system design where the cloudBased flowManager still attempts to query the platform deviceReporter rather than
@@ -50,6 +50,6 @@
         }
     },
     "mergeConfigs": [
-        "%pouchManager/configs/gpii.pouchManager.config.base.json5"
+        "%couchConnector/configs/gpii.couchConnector.config.base.json5"
     ]
 }

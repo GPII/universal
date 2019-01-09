@@ -53,4 +53,4 @@ gpii.tests.payloadSize.testDefs = [{
     }]
 }];
 
-gpii.test.bootstrapServer(gpii.tests.payloadSize.testDefs);
+gpii.test.runCouchTestDefs(gpii.tests.payloadSize.testDefs);

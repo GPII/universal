@@ -110,4 +110,4 @@ gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     }]
 }];
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));
+gpii.test.runServerTestDefs(gpii.tests.untrusted.userLogonRequest.buildTestDefs(gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests));
