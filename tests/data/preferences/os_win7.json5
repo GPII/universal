@@ -169,6 +169,22 @@
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
                             "value": "Low sensitivity"
                         }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {
+                        "NavigationMode": 0,
+                        "ClickSound": 0,
+                        "ShowClearKeyboard": 0,
+                        "ShowNumPad": 1,
+                        "Mode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
+                        "Dock": 0
                     }
                 }
             }
