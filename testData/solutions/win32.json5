@@ -5190,11 +5190,37 @@
                 "supportedSettings": {
                     "PreferredUILanguages": {}
                 }
+            },
+            "configure3": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\International\\User Profile",
+                    "dataTypes": {
+                        "Languages": "REG_MULTI_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "Languages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "Languages": {}
+                }
             }
         },
         "configure": [
             "settings.configure1",
             "settings.configure2",
+            "settings.configure3",
             {
                 "type": "gpii.windows.updateLanguage",
                 "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
@@ -5203,6 +5229,7 @@
         "restore": [
             "settings.configure1",
             "settings.configure2",
+            "settings.configure3",
             {
                 "type": "gpii.windows.updateLanguage",
                 "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
