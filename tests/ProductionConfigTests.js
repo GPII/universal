@@ -42,6 +42,7 @@ fluid.logObjectRenderChars = 1024000;
 
 require("./shared/DevelopmentTestDefs.js");
 require("./shared/FlowManagerSettingsGetTestDefs.js");
+require("./shared/FlowManagerSettingsPutTestDefs.js");
 
 gpii.loadTestingSupport();
 
@@ -175,6 +176,24 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
                             ]
                         }
                     }
+                }
+            }
+        }
+    }
+});
+
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        settingsPutRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/%gpiiKey/settings",
+                port: 9082,
+                hostname: "flowmanager",
+                method: "PUT",
+                termMap: {
+                    gpiiKey: "{testCaseHolder}.options.gpiiKey"
                 }
             }
         }
@@ -399,6 +418,16 @@ fluid.transform(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (aT
 });
 
 fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
+    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
+        oneTest.testDef,
+        {},
+        oneTest.disruptions,
+        gpii.tests.productionConfigTesting.config,
+        "gpii.tests.productionConfigTesting.testCaseHolder"
+    );
+});
+
+fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest) {
     gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,
         {},
