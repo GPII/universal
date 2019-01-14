@@ -4221,6 +4221,10 @@
             "configureSystemSettings": {
                 "type": "gpii.windows.systemSettingsHandler",
                 "capabilities": [],
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
                 "supportedSettings": {
                     "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
                         "schema": {
@@ -7407,6 +7411,10 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
                 "capabilities": [
                     "display.screenEnhancement.nightScreen",
                     "applications.com\\.microsoft\\.windows\\.nightScreen.id"
@@ -7526,6 +7534,10 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {

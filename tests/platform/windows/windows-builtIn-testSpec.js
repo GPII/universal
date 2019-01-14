@@ -552,6 +552,10 @@ gpii.tests.windows.builtIn = [
                         "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
                             "value": false
                         }
+                    },
+                    "options": {
+                        "Async": true,
+                        "CheckResult": true
                     }
                 }],
                 "com.microsoft.windows.touchPadSettings": [{
@@ -559,6 +563,10 @@ gpii.tests.windows.builtIn = [
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
                             "value": "Low sensitivity"
                         }
+                    },
+                    "options": {
+                        "Async": true,
+                        "CheckResult": true
                     }
                 }],
                 "com.microsoft.windows.narrator": [{
@@ -569,6 +577,10 @@ gpii.tests.windows.builtIn = [
                         "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
                             "value": true
                         }
+                    },
+                    "options": {
+                        "Async": true,
+                        "CheckResult": true
                     }
                 }]
             },
