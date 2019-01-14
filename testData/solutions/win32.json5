@@ -3667,7 +3667,20 @@
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Osk",
                     "dataTypes": {
-                        "NavigationMode": "REG_DWORD"
+                        "NavigationMode": "REG_DWORD",
+                        "ClickSound": "REG_DWORD",
+                        "ShowClearKeyboard": "REG_DWORD",
+                        "ShowNumPad": "REG_DWORD",
+                        "Mode": "REG_DWORD",
+                        "HoverPeriod": "REG_DWORD",
+                        "ScanInterval": "REG_DWORD",
+                        "UseDevice": "REG_DWORD",
+                        "UseKB": "REG_DWORD",
+                        "ScanKey": "REG_DWORD",
+                        "UseMouse": "REG_DWORD",
+                        "UseTextPrediction": "REG_DWORD",
+                        "InsertSpace": "REG_DWORD",
+                        "Dock": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
@@ -3679,12 +3692,191 @@
                             "type": "boolean",
                             "default": false
                         }
+                    },
+                    "ClickSound": {
+                        "schema": {
+                            "title": "Use click sound",
+                            "description": "Makes click sound when pressing OSK keys",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ShowClearKeyboard": {
+                        "schema": {
+                            "title": "Show position keys",
+                            "description": "Show keys to make it easier to move around the screen",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ShowNumPad": {
+                        "schema": {
+                            "title": "Numeric key pad",
+                            "description": "Turn on numeric key pad",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "Mode": {
+                        "schema": {
+                            "title": "OSK keys mode",
+                            "description": "Select how OSK keys are pressed",
+                            "enum": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Use click to press the OSK keys",
+                                "Hover over keys",
+                                "Scan through keys"
+                            ],
+                            "default": 1
+                        }
+                    },
+                    "HoverPeriod": {
+                        "schema": {
+                            "title": "Hover duration",
+                            "description": "Changes the ammount of time for considering a click when hovering over a key",
+                            "type": "integer",
+                            "default": 1000,
+                            "minimum": 500,
+                            "maximum": 3000
+                        }
+                    },
+                    "ScanInterval": {
+                        "schema": {
+                            "title": "Scanning speed",
+                            "description": "Changes the wait interval while scanning keys",
+                            "type": "integer",
+                            "default": 1000,
+                            "minimum": 500,
+                            "maximum": 3000
+                        }
+                    },
+                    "UseDevice": {
+                        "schema": {
+                            "title": "Scan using gaming device",
+                            "description": "Use joystick, game pad or other gaming device",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "UseKB": {
+                        "schema": {
+                            "title": "Scan using keyboard key",
+                            "description": "Use specific keyboard key for scanning",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ScanKey": {
+                        "schema": {
+                            "title": "Scan keyboard key",
+                            "description": "Keyboard key using for scanning",
+                            "enum": [
+                                32,
+                                13,
+                                113,
+                                114,
+                                115,
+                                116,
+                                117,
+                                118,
+                                119,
+                                120,
+                                123
+                            ],
+                            "enumLabels": [
+                                "Space Bar Key",
+                                "Enter",
+                                "F2",
+                                "F3",
+                                "F4",
+                                "F5",
+                                "F6",
+                                "F7",
+                                "F8",
+                                "F9",
+                                "F12"
+                            ],
+                            "default": 32
+                        }
+                    },
+                    "UseMouse": {
+                        "schema": {
+                            "title": "Scan using mouse click",
+                            "description": "Use mouse clicks to for scanning",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "UseTextPrediction": {
+                        "schema": {
+                            "title": "Text prediction",
+                            "description": "Use OSK text prediction to show suggestions while typing",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "InsertSpace": {
+                        "schema": {
+                            "title": "Auto insert space",
+                            "description": "Insert space after predicted word",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "Dock": {
+                        "schema": {
+                            "title": "Dock",
+                            "description": "Dock the OSK at the bottom of the screen",
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 },
                 "capabilitiesTransformations": {
                     "NavigationMode": {
                         "literalValue": 0
+                    },
+                    "ShowClearKeyboard": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.ShowPositionKeys"
+                        }
+                    },
+                    "Mode": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.KeyPressMode"
+                        }
+                    },
+                    "UseDevice": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseDeviceForScan"
+                        }
+                    },
+                    "UseKB": {
+                       "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseKBForScan"
+                        }
+                    },
+                    "UseMouse": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseMouseForScan"
+                        }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.ShowPositionKeys": "ShowClearKeyboard",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.KeyPressMode": "Mode",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseDeviceForScan": "UseDevice",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseKBForScan": "UseKBForScan",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseMouseForScan": "UseMouseForScan"
                 }
             }
         },
@@ -4027,11 +4219,37 @@
                 "supportedSettings": {
                     "PreferredUILanguages": {}
                 }
+            },
+            "configure3": {
+                "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "liveRestart",
+                "options": {
+                    "hKey": "HKEY_CURRENT_USER",
+                    "path": "Control Panel\\International\\User Profile",
+                    "dataTypes": {
+                        "Languages": "REG_MULTI_SZ"
+                    }
+                },
+                "capabilities": [
+                    "http://registry\\.gpii\\.net/common/language"
+                ],
+                "capabilitiesTransformations": {
+                    "Languages": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/common/language"
+                        }
+                    }
+                },
+                "supportedSettings": {
+                    "Languages": {}
+                }
             }
         },
         "configure": [
             "settings.configure1",
             "settings.configure2",
+            "settings.configure3",
             {
                 "type": "gpii.windows.updateLanguage",
                 "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
@@ -4040,6 +4258,7 @@
         "restore": [
             "settings.configure1",
             "settings.configure2",
+            "settings.configure3",
             {
                 "type": "gpii.windows.updateLanguage",
                 "currentLanguage": "${{registry}.HKEY_CURRENT_USER\\Control Panel\\Desktop\\PreferredUILanguages}"
