@@ -1,5 +1,5 @@
 {
-    "type": "gpii.tests.productionConfigTests.config",
+    "type": "gpii.tests.untrusted.production.config",
     "options": {
         "mainServerPort": 9082,
         "distributeOptions": {

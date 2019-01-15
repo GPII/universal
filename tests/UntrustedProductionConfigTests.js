@@ -47,7 +47,7 @@ require("./shared/FlowManagerSettingsPutTestDefs.js");
 gpii.loadTestingSupport();
 
 gpii.tests.productionConfigTesting.config = {
-    configName: "gpii.tests.productionConfigTests.config",
+    configName: "gpii.tests.untrusted.production.config",
     configPath: "%gpii-universal/tests/configs"
 };
 
