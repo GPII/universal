@@ -555,7 +555,7 @@
                             "description": "What to announce when a graphical link contains no title or alt text for its enclosing image and the enclosing anchor has no title.",
                             "enum": [0,1],
                             "enumLabels":["Read the image's src", "Read the image's enclosing anchor's href."],
-                            "default": "0"
+                            "default": 0
                         }
                     },
                     "HTML.IdentifyLinkType": {
@@ -4174,7 +4174,7 @@
                                 "Invert Colors",
                                 "Yellow on Black"
                             ],
-                            default: "Invert Brightness"
+                            default: "Invert Brightness+Color"
                         }
                     },
                     "scheme.CursorSchemeModified": {
@@ -4238,7 +4238,7 @@
                                 "MAGic Key Mouse Finder",
                                 "Scope When Moving"
                             ],
-                            default: "3D Blue with Oval"
+                            default: "3D Blue with Oval+Mouse"
                         }
                     }
                 },
@@ -4627,9 +4627,10 @@
                 }
             ]
         },
-        "capabilities": [
-            "http://registry\\.gpii\\.net/common/languageAssistance"
-        ],
+        // TODO: This setting does not exist, remove after discussion.
+        // "capabilities": [
+        //    "http://registry\\.gpii\\.net/common/languageAssistance"
+        // ],
         "settingsHandlers": {
             "configuration": {
                 "type": "gpii.settingsHandlers.XMLHandler",
@@ -4786,9 +4787,8 @@
                                 1,
                                 2,
                                 3
-                            ]
-                            // TODO: We must present these values in a human readable form
-                            // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
+                            ],
+                            "enumLabels": ["TopHalf", "FullScreen", "Lens"]
                         }
                     },
                     "ZoomIncrement": {}
@@ -5959,7 +5959,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/simplification"
+            "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
         ],
         "launchHandlers": {
             "launcher": {
@@ -5998,7 +5998,7 @@
             ]
         },
         "capabilities": [
-            "http://registry\\.gpii\\.net/common/pictorialSimplification"
+            "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
         ],
         "launchHandlers": {
             "launcher": {
@@ -6827,10 +6827,21 @@
                         "schema": {
                             "title": "Screen resolution",
                             "description": "Screen resolution of the default display",
-                            "type": "array",
-                            // TODO: Not sure about this type
-                            "enum": []
-                            // TODO: This must be filled in on the fly with available screen resolutions
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 10000,
+                                    "required": true
+                                },
+                                "height": {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 10000,
+                                    "required": true
+                                }
+                            }
                         }
                     }
                 }
@@ -8143,8 +8154,9 @@
                         "schema": {
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
-                            "type": "boolean",
-                            "default": 0
+                            "default": 0,
+                            "enum": [ 0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     }
                 },
@@ -8181,8 +8193,9 @@
                         "schema": {
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
-                            "type": "boolean",
-                            "default": 0
+                            "default": 0,
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"]
                         }
                     }
                 },
@@ -8219,7 +8232,8 @@
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
-                            "type": "boolean",
+                            "enum": [0,1],
+                            "enumLabels": ["Off", "On"],
                             "default": 1
                         }
                     }
@@ -8317,6 +8331,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\TabletTip\\1.7",
@@ -8548,6 +8563,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
                 "capabilities": [
                     "display.screenEnhancement.nightScreen",
                     "applications.com\\.microsoft\\.windows\\.nightScreen.id"
@@ -8566,7 +8582,8 @@
                         "schema": {
                             "title": "Night Screen",
                             "description": "Reduce the blue emitted from the screen.",
-                            "type": "boolean",
+                            "enum": [0, 1],
+                            "enumLabels": ["Off", "On"],
                             "default": 0
                         }
                     }
@@ -8604,6 +8621,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.wmiSettingsHandler",
+                "liveness": "live",
                 "options": {
                     "Brightness": {
                         "namespace": "root\\WMI",
@@ -8667,6 +8685,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "liveness": "live",
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {
@@ -9157,6 +9176,7 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.settingsHandlers.exploding",
+                "liveness": "live",
                 "supportedSettings": {
                     "explodeMethod": {
                         "schema": {
@@ -9164,6 +9184,11 @@
                             "description": "The strategy to be used when exploding",
                             "type": "string",
                             "enum": [
+                                "reject",
+                                "fail",
+                                "throw"
+                            ],
+                            "enumLabels": [
                                 "reject",
                                 "fail",
                                 "throw"
@@ -9176,6 +9201,10 @@
                             "description": "Whether to explode during the get or set settingsHandler method",
                             "type": "string",
                             "enum": [
+                                "get",
+                                "set"
+                            ],
+                            "enumLabels": [
                                 "get",
                                 "set"
                             ]
@@ -9266,8 +9295,8 @@
                         "schema": {
                             "title": "Font Spacing",
                             "description": "The font in which text is preferred to be presented",
-                            "type": "string",
-                            "enum": [ "Calibri", "Sitka Small" ],
+                            "enum": ["Calibri", "Sitka Small"],
+                            "enumLabels": ["Calibri", "Sitka Small"],
                             "default": "Calibri"
                         }
                     },
@@ -9275,7 +9304,6 @@
                         "schema": {
                             "title": "Font Spacing",
                             "description": "Set wider font spacing for reading",
-                            "type": "number",
                             "enum": [1, 0],
                             "enumLabels": ["Default", "Wide"],
                             "default": 0
@@ -9285,7 +9313,6 @@
                         "schema": {
                             "title": "Theme",
                             "description": "Set the theme for reading",
-                            "type": "number",
                             "enum": [0, 1, 2, 3, 4, 5],
                             "enumLabels": ["White", "Reverse (High-Contrast)", "Yellow", "Pink", "Green", "Blue"],
                             "default": 0
@@ -9306,7 +9333,6 @@
                         "schema": {
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
-                            "type": "number",
                             "enum": [
                                 4294967286,
                                 4294967289,
@@ -9326,7 +9352,6 @@
                         "schema": {
                             "title": "Synth voice",
                             "description": "The voice that will be used for text reading",
-                            "type": "string",
                             "enum": [
                                 "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Tracy Desktop\"}]",      // - Hong kong
                                 "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Hanhan Desktop\"}]",     // - Taiwan
