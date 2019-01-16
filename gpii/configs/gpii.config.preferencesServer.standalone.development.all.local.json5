@@ -1,6 +1,6 @@
 /**
  * This configuration runs a standalone preferences server locally on port 8081. It also starts and loads test data
- * into pouchDB on port 25984 for data persistence.
+ * into a CouchDB instance listening on port 25984 for data persistence.
  *
  * * The following components are running:
  * ** Preferences Server
