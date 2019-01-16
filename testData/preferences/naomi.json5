@@ -1,0 +1,62 @@
+// # Naomi.json5
+//
+// This preference set configure several Windows 10 built in narrator features.
+//
+// ## Testing
+//
+// The setting is supposed to trigger the following settings from the Windows 10
+// Narrator, with the following values:
+//     - "IntonationPause": Enabled,
+//     - "ReadHints": Enabled,
+//     - "PlayAudioCues": Enabled,
+//     - "NarratorCursorHighlight": Enabled,
+//     - "FastKeyEntryEnabled": Enabled,
+//     - "ReadingWithIntent": Enabled,
+//     - "ErrorNotificationType": Enabled,
+//     - "CoupleNarratorCursorMouse": Enabled,
+//     - "LockNarratorKeys": Enabled
+//     - "SpeechVolume": 80,
+//     - "SpeechVoice": "Microsoft Zira - English (United States)",
+//     - "ControlContextVerbosity": "4 - Full context of new control",
+//     - "ReadContextBeforeControls": Enabled,
+//     - "LowerAppsVolume": Enabled,
+//     - "StartWithShortcut": Enabled,
+//     - "TextVerbosityLevel": "3 - Other annotations",
+//     - "DetailedFeedback": Enabled,
+//     - "EnableAutoStart": Enabled,
+//     - "EnableSystemAutoStart": Enabled
+//
+// The settings changes can be observed in the Windows 10 "Settings" app.
+{
+    "flat": {
+        "name": "naomi",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.narrator": {
+                        "IntonationPause": 1,
+                        "ReadHints": 1,
+                        "PlayAudioCues": 1,
+                        "NarratorCursorHighlight": 1,
+                        "FastKeyEntryEnabled": 1,
+                        "ReadingWithIntent": 1,
+                        "ErrorNotificationType": 1,
+                        "CoupleNarratorCursorMouse": 1,
+                        "LockNarratorKeys": 1,
+                        "SpeechVolume": 80,
+                        "SpeechVoice": "Microsoft Zira - English (United States)",
+                        "ControlContextVerbosity": 4,
+                        "ReadContextBeforeControls": 1,
+                        "LowerAppsVolume": 1,
+                        "StartWithShortcut": 1,
+                        "TextVerbosityLevel": 3,
+                        "DetailedFeedback": 1,
+                        "EnableAutoStart": true,
+                        "EnableSystemAutoStart": true
+                    }
+                }
+            }
+        }
+    }
+}
