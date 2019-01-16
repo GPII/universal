@@ -487,8 +487,45 @@ gpii.tests.windows.builtIn = [
                             "EnableDesktopModeAutoInvoke": "REG_DWORD"
                         }
                     }
-                }
-                ],
+                }],
+                "com.microsoft.windows.onscreenKeyboard": [{
+                    "settings": {
+                        "NavigationMode": 0,
+                        "ClickSound": 0,
+                        "ShowClearKeyboard": 0,
+                        "ShowNumPad": 1,
+                        "Mode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
+                        "Dock": 0
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Osk",
+                        "dataTypes": {
+                            "NavigationMode": "REG_DWORD",
+                            "ClickSound": "REG_DWORD",
+                            "ShowClearKeyboard": "REG_DWORD",
+                            "ShowNumPad": "REG_DWORD",
+                            "Mode": "REG_DWORD",
+                            "HoverPeriod": "REG_DWORD",
+                            "ScanInterval": "REG_DWORD",
+                            "UseDevice": "REG_DWORD",
+                            "UseKB": "REG_DWORD",
+                            "ScanKey": "REG_DWORD",
+                            "UseMouse": "REG_DWORD",
+                            "UseTextPrediction": "REG_DWORD",
+                            "InsertSpace": "REG_DWORD",
+                            "Dock": "REG_DWORD"
+                        }
+                    }
+                }],
                 "com.microsoft.windows.language": [{
                     "settings": {
                         "PreferredUILanguages": "en-US"
