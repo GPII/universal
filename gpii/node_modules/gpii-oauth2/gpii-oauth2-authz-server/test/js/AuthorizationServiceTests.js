@@ -31,7 +31,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         return "test-access-token";
     };
 
-    // The base test enviornment without any pouch data being imported
+    // The base test environment without any data
     fluid.defaults("gpii.tests.oauth2.authorizationService.testEnvironment", {
         gradeNames: ["gpii.tests.dbOperation.pouchBackedTestEnvironment"],
         // Use a module-relative path when https://issues.gpii.net/browse/GPII-3030 is addressed
