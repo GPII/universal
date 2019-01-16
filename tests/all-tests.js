@@ -16,11 +16,32 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
-
 "use strict";
 
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
+
+// TODO: Remove this once we're done profiling.
+var process = require("process");
+
+var maxes = {};
+
+process.on("exit", function () {
+    console.log(JSON.stringify(maxes, null, 2));
+});
+
+process.nextTick(function () {
+    var memUsage = process.memoryUsage();
+    var statKey;
+    for (statKey in memUsage) {
+        var currVal = memUsage[statKey];
+        if (currVal > (maxes[statKey] || -1)) {
+            maxes[statKey] = currVal;
+        }
+    }
+});
+
+// TODO: Remove above once we're done profiling.
 
 // Ensure this happens first, to catch errors during code loading, especially before KETTLE-67 is fixed
 kettle.loadTestingSupport();
@@ -28,64 +49,63 @@ kettle.loadTestingSupport();
 // We must pass the current `require` to `fluid.require`, as nyc's instrumentation is hooked into it.
 fluid.require("%gpii-universal", require);
 
-// TODO: Most current problems seem to be down to not having any settingsHandlers, which is created based on the
-// caseholder's options.settingsHandler, which appears to be blank for PSPIntegrationTests.js
 var testIncludes = [
-    // TODO: login/logout problem, perhaps related to the other issues.
-    //"./DevelopmentTests.js",
+    "./DevelopmentTests.js",
     "./platform/cloud/CloudStatusTests.js",
-    // TODO:  Next two use "disrupted test" pattern, need to pick apart and rewrite.
-    //"./platform/cloud/SettingsGetTests.js",
-    //"./platform/cloud/SettingsPutTests.js",
+    "./platform/cloud/SettingsGetTests.js",
+    "./platform/cloud/SettingsPutTests.js",
     // TODO: Need to pick apart gpii.test.runTests to run the next test.  AFTER logout/login problem solved.
     //"./CloseConflictingAppsTests.js",
     // TODO: Need to pick apart gpii.test.buildSegmentedFixtures to run the next test.  AFTER logout/login problem solved.
     //"./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
-    // TODO: login/logout problems
-    /*
-
-        16:18:44.410:  FATAL ERROR: Uncaught exception: Got logout request from user explodeLaunchHandlerStop, but the user noUser is logged in. So ignoring the request.
-undefined
-
-     */
-    //"./ErrorTests.js",
+    "./ErrorTests.js",
     // TODO: Gotta get gpii.test.runSuitesWithFiltering working for the next test. AFTER logout/login problem solved.
     //"./IntegrationTests.js",
     // TODO: Gotta get gpii.test.buildSegmentedFixtures working for the next test. AFTER logout/login problem solved.
     //"./JournalIntegrationTests.js",
-    // TODO: login/logout mismatch
+    // TODO: Also has login/logout problems.
     //"./MultiSettingsHandlerTests.js"
-    // TODO: logged in / logged out problem
-    //"./PayloadSizeTest.js",
-    // TODO: login/logout problems.
-    //"./PSPIntegrationTests.js",
+    "./PayloadSizeTest.js",
+    "./PSPIntegrationTests.js",
     "./ResetWithEnvReportTests.js",
-    // TODO: login and seeming crash of server running on 8081
+    // TODO: login problem and seeming crash of server running on 8081
     //"./ResetAtStartTests.js",
     "./PreferencesServerErrorTests.js",
-    // TODO: Hangs, no idea why at the moment.
-    //"./StartupAPITests.js",
+    "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
-    // TODO: logged in / logged out problem (needs sequence from Testing.js?)
-    //"./UntrustedContextIntegrationTests.js",
-    // TODO: logged in / logged out problem (needs sequence from Testing.js?)
-    //"./UntrustedDevelopmentTests.js",
+    "./UntrustedContextIntegrationTests.js",
+    "./UntrustedDevelopmentTests.js",
     "./UntrustedPSPIntegrationTests.js",
     "./UntrustedResetWithEnvReportTests.js",
-    // TODO: {tests} / {testCaseHolder} problem in the next two tests.
+    // TODO: No actual reset and server on 8081 appears to crash.
     //"./UntrustedResetAtStartTests.js",
+    // TODO: proximity triggered login event doesn't fire.
+    /*
+            TODO: Still broken post-multi-session fix.
+
+        10:13:37.425:  Test case listener has not responded after 5000ms - at sequence pos 5 of 12 sequence element {
+        "event": "{proximityTriggeredRequest}.events.onComplete",
+     */
     //"./UntrustedUserLogonHandlersTests.js",
     // TODO: Needs to be rewritten to use sequence grades instead of baking in its own copy of the sequence-mangling.
     //"./UntrustedUserLogonRequestTests.js",
-    // TODO: {tests} / {testCaseHolder} problem in the next two tests.
+    // TODO: proximity triggered login event doesn't fire.
     //"./UserLogonHandlersEventsTests.js",
     /*
+        TODO: also fails because of proximity event.
+
         16:16:29.647:  Test case listener has not responded after 5000ms - at sequence pos 5 of 12 sequence element {
         "event": "{proximityTriggeredRequest}.events.onComplete",
+
+        ... Time passes ...
+
+        10:15:32.491:  jq: FAIL: Module "gpii.tests.acceptance.untrusted.userLogon.config tests" Test name "Testing standard proximityTriggered login and logout" - Message: Error making request to /user/adjustCursor/proximityTriggered: socket hang up
+10:15:32.491:  jq: Source:     at pok (/Users/duhrer/Source/rtf/universal/node_modules/infusion/tests/test-core/jqUnit/js/jqUnit.js:112:15)
+
      */
     //"./UserLogonHandlersTests.js",
-    // TODO: logged in / logged out problem (needs sequence from Testing.js?)
+    // TODO: seems to also be blocked by proximity login errors,
     //"./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
@@ -97,12 +117,9 @@ undefined
     // TODO: logged in / logged out problem (doesn't seem to log the named user in, complains that "noUser" is already logged in).
     //"../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
-    // TODO: Rewrite to use gpii-couchdb-test-harness
-    //"../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
-    // TODO: Uses its own sequence munging, need to unpack and rewrite
-    //"../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
-    // TODO: testCaseHolder with components plus kettle.test.bootstrapServer, need to rewrite or understand why we can leave it alone.
-    //"../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
+    "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
+    "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
+    "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
     "../gpii/node_modules/couchConnector/test/couchConnectorTests.js",
     // TODO: Deep integration with previous pouch test case holder, needs to be rewritten.
     //"../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
