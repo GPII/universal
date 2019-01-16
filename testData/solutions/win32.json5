@@ -3927,17 +3927,134 @@
                         "CoupleNarratorCursorKeyboard": "REG_DWORD",
                         "FollowInsertion": "REG_DWORD",
                         "EchoChars": "REG_DWORD",
-                        "EchoWords": "REG_DWORD"
+                        "EchoWords": "REG_DWORD",
+                        "IntonationPause": "REG_DWORD",
+                        "ReadHints": "REG_DWORD",
+                        "PlayAudioCues": "REG_DWORD",
+                        "NarratorCursorHighlight": "REG_DWORD",
+                        "FastKeyEntryEnabled": "REG_DWORD",
+                        "ReadingWithIntent": "REG_DWORD",
+                        "ErrorNotificationType": "REG_DWORD",
+                        "CoupleNarratorCursorMouse": "REG_DWORD",
+                        "LockNarratorKeys": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
-                    "SpeechSpeed": {},
-                    "SpeechPitch": {},
+                    "SpeechSpeed": {
+                        "schema": {
+                            "title": "Voice Speed",
+                            "description": "Control the speed at which Narrator speaks",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "SpeechPitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Adjust the pitch of Narrator voice",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // This three properties are mapped to one common term, maybe we should have indivial schemas, maybe not.
                     "CoupleNarratorCursorKeyboard": {},
-                    "FollowInsertion": {},
+                    "FollowInsertion": {
+                        "schema": {
+                            "title": "Text insertion point following Narrator",
+                            "description": "Make text insertion point follows Narrator cursor",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
                     "InteractionMouse": {},
-                    "EchoChars": {},
-                    "EchoWords": {}
+                    "EchoChars": {
+                        "schema": {
+                            "title": "Read typed characters",
+                            "description": "Enable reading of characters while typing",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "EchoWords": {
+                        "schema": {
+                            "title": "Read typed words",
+                            "description": "Enable reading of words while typing",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "IntonationPause": {
+                        "schema": {
+                            "title": "Narrator intonation pauses",
+                            "description": "Enable intonation pauses for Narrator",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ReadHints": {
+                        "schema": {
+                            "title": "Read hints for controls and buttons",
+                            "description": "Enable narrator announcing how to interact with items",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "PlayAudioCues": {
+                        "schema": {
+                            "title": "Read audio cues",
+                            "description": "Enable sound playing when you do things like perform a Narrator command or when suggestions are available",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "NarratorCursorHighlight": {
+                        "schema": {
+                            "title": "Cursor Highlight",
+                            "description": "Enable cursor highlighting with a blue focus box",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "FastKeyEntryEnabled": {
+                        "schema": {
+                            "title": "Touch keyboard keys activated on finger lift",
+                            "description": "Make key insertion work on finger lift on touch keyboards",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ReadingWithIntent": {
+                        "schema": {
+                            "title": "Emphasize formatted text",
+                            "description": "Narrator’s voice will put more emphasis on formatted text.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ErrorNotificationType": {
+                        "schema": {
+                            "title": "Speak narrator errors",
+                            "description": "Narrator announces errors such as 'no next landmark' or 'no next item.'",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "CoupleNarratorCursorMouse": {
+                        "schema": {
+                            "title": "Narrator cursor follow the mouse",
+                            "description": "Have the narrator cursor follow the mouse.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "LockNarratorKeys": {
+                        "schema": {
+                            "title": "Lock Narrator keys",
+                            "description": "Lock the Narrator key so you don't have to press it with each command.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
@@ -4025,6 +4142,13 @@
                             "true": 1,
                             "conditionPath": "http://registry\\.gpii\\.net/common/wordEcho"
                         }
+                    },
+                    "ReadingWithIntent": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "false": 0,
+                            "true": 1
+                        }
                     }
                 },
                 "inverseCapabilitiesTransformations": {
@@ -4104,14 +4228,125 @@
                     "path": "Software\\Microsoft\\Narrator\\NoRoam",
                     "dataTypes": {
                         "SpeechVolume": "REG_DWORD",
+                        "SpeechVoice": "REG_SZ",
                         "ShowKeyboardIntroduction": "REG_DWORD",
-                        "ShowBrowserSelection": "REG_DWORD"
+                        "ShowBrowserSelection": "REG_DWORD",
+                        "ContextVerbosityLevel": "REG_DWORD",
+                        "RenderContextBeforeElement": "REG_DWORD",
+                        "DuckAudio": "REG_DWORD",
+                        "WinEnterLaunchEnabled": "REG_DWORD",
+                        "VerbosityLevel": "REG_DWORD",
+                        "DetailedFeedback": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
-                    "SpeechVolume": {},
+                    "SpeechVolume": {
+                        "schema": {
+                            "title": "Speech volume",
+                            "description": "Changes the Narrator voice volume",
+                            "type": "number",
+                            "range": "0.01..1"
+                        }
+                    },
+                    "SpeechVoice": {
+                        "schema": {
+                            "title": "Speech voice",
+                            "description": "Select which voice is going to be used for Narrator",
+                            "type": "enum",
+                            "default": "Microsoft David - English (United States)",
+                            "enum": [
+                                "Microsoft David - English (United States)",
+                                "Microsoft Zira - English (United States)",
+                                "Microsoft Mark - English (United States)",
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ],
+                            "enumLabels": [
+                                "Microsoft David - English (United States)",
+                                "Microsoft Zira - English (United States)",
+                                "Microsoft Mark - English (United States)",
+                                "Microsoft David Desktop",
+                                "Microsoft Zira Desktop"
+                            ]
+                        }
+                    },
                     "ShowKeyboardIntroduction": {},
-                    "ShowBrowserSelection": {}
+                    "ShowBrowserSelection": {},
+                    "ContextVerbosityLevel": {
+                        "schema": {
+                            "title": "Context Verbosity Level",
+                            "description": "Changes the amount of contextual reading for controls and buttons",
+                            "type": "enum",
+                            "default": 2,
+                            "enum": [0, 1, 2, 3, 4, 5],
+                            "enumLabels": [
+                                "0 - No context reading",
+                                "1 - Sounds only",
+                                "2 - Immediate context",
+                                "3 - Immediate context name and type",
+                                "4 - Full context of new control",
+                                "5 - Full context of both the old control and new control"
+                            ]
+                        }
+                    },
+                    "RenderContextBeforeElement": {
+                        "schema": {
+                            "title": "Contextual reading order",
+                            "description": "Choose whether you want to hear context before or after the current item",
+                            "type": "enum",
+                            "default": 1,
+                            "enum": [0, 1],
+                            "enumLabels": ["Before", "After"]
+                        }
+                    },
+                    "DuckAudio": {
+                        "schema": {
+                            "title": "Lower other sounds",
+                            "description": "Enable/Disable lowering other sounds while narrator is speaking",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    WinEnterLaunchEnabled: {
+                        "schema": {
+                            "title": "Start with shortcut",
+                            "description": "Allow the shortcut key to start Narrator",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "VerbosityLevel": {
+                        "schema": {
+                            "title": "Text verbosity level",
+                            "description": "Changes the level of detail Narrator provides about text.",
+                            "type": "enum",
+                            "default": 1,
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "enumLabels": [
+                                "0 - Text Only",
+                                "1 - Headers and errors",
+                                "2 - Basic information",
+                                "3 - Other annotations",
+                                "4 - Extended formatting",
+                                "5 - Layout and animation info"
+                            ]
+                        }
+                    },
+                    "DetailedFeedback": {
+                        "schema": {
+                            "title": "Additional feedback",
+                            "description": "Use caps lock + E to send additional feedback",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "SpeechVolume": {
@@ -4135,10 +4370,108 @@
                             "type": "fluid.transforms.literalValue",
                             "input": 0
                         }
+                    },
+                    "ContextVerbosityLevel": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity"
+                        }
+                    },
+                    "RenderContextBeforeElement": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ReadContextBeforeControls"
+                        }
+                    },
+                    "DuckAudio": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.LowerAppsVolume"
+                        }
+                    },
+                    "WinEnterLaunchEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut"
+                        }
+                    },
+                    "VerbosityLevel": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel"
+                        }
                     }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ControlContextVerbosity": "ContextVerbosityLevel",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.ReadContextBeforeControls": "RenderContextBeforeElement",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.LowerAppsVolume": "DuckAudio",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.StartWithShortcut": "WinEnterLaunchEnabled",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.TextVerbosityLevel": "VerbosityLevel"
+                }
+            },
+            "configureSystemSettings": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "capabilities": [],
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
+                "supportedSettings": {
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                        "schema": {
+                            "title": "Auto Start Narrator",
+                            "description": "Start Narrator after sign-in.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    },
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                        "schema": {
+                            "title": "Auto Start Narrator for everyone",
+                            "description": "Start Narrator before sign-in.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableAutoStart",
+                            "outputPath": "value"
+                        }
+                    },
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableSystemAutoStart",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableAutoStart": "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.narrator.EnableSystemAutoStart": "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled.value"
                 }
             }
         },
+        "update": [
+            "settings.configure",
+            "settings.configureNoRoam",
+            "settings.configureSystemSettings"
+        ],
+        "configure": [
+            "settings.configure",
+            "settings.configureNoRoam",
+            "settings.configureSystemSettings"
+        ],
+        "restore": [
+            "settings.configure",
+            "settings.configureNoRoam",
+            "settings.configureSystemSettings"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",
@@ -7297,6 +7630,10 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
                 "capabilities": [
                     "display.screenEnhancement.nightScreen",
                     "applications.com\\.microsoft\\.windows\\.nightScreen.id"
@@ -7416,6 +7753,10 @@
         "settingsHandlers": {
             "configure": {
                 "type": "gpii.windows.systemSettingsHandler",
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
                 "capabilities": [],
                 "capabilitiesTransformations": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {
