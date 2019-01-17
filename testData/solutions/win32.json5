@@ -553,8 +553,14 @@
                         "schema": {
                             "title": "Graphical Link Last Resort",
                             "description": "What to announce when a graphical link contains no title or alt text for its enclosing image and the enclosing anchor has no title.",
-                            "enum": [0,1],
-                            "enumLabels":["Read the image's src", "Read the image's enclosing anchor's href."],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Read the image's src",
+                                "Read the image's enclosing anchor's href."
+                            ],
                             "default": 0
                         }
                     },
@@ -635,7 +641,6 @@
                             "default": 1
                         }
                     },
-
                     "HTML.IndicateElementAttributes": {
                         "schema": {
                             "title": "Indicate Element Attributes",
@@ -746,8 +751,14 @@
                         "schema": {
                             "title": "Table Detection",
                             "description": "Whether to announce all tables, or only data tables.",
-                            "enum": [0,1],
-                            "enumLabels": ["Indicate all tables", "Only indicate data tables"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Indicate all tables",
+                                "Only indicate data tables"
+                            ],
                             "default": 1
                         }
                     },
@@ -2378,8 +2389,16 @@
                         "schema": {
                             "title": "Include Graphics",
                             "description": "Which graphics to announce.",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["Ignore all graphics", "Announce labeled graphics only", "Announce all graphics"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Ignore all graphics",
+                                "Announce labeled graphics only",
+                                "Announce all graphics"
+                            ],
                             "default": 1
                         }
                     },
@@ -2774,7 +2793,13 @@
                     "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                 },
                 "supportedSettings": {
-                    "Options.PrimarySynthesizer": {},
+                    "Options.PrimarySynthesizer": {
+                        "schema": {
+                            "title": "Primary Synthesizer",
+                            "description": "The text to speech synthesizer to use.",
+                            "type": "string"
+                        }
+                    },
                     "ENU-Global.Pitch": {
                         "schema": {
                             "title": "Pitch",
@@ -2789,8 +2814,18 @@
                         "schema": {
                             "title": "Punctuation",
                             "description": "How much punctuation to announce for all types of announcements.",
-                            "enum": [0, 1, 2, 3],
-                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Some",
+                                "Most",
+                                "All"
+                            ],
                             "default": 2
                         }
                     },
@@ -2832,8 +2867,18 @@
                         "schema": {
                             "title": "JAWS Cursor Punctuation",
                             "description": "How much punctuation to announce for the JAWS cursor.",
-                            "enum": [0, 1, 2, 3],
-                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Some",
+                                "Most",
+                                "All"
+                            ],
                             "default": 2
                         }
                     },
@@ -2875,8 +2920,18 @@
                         "schema": {
                             "title": "Keyboard Punctuation",
                             "description": "How much punctuation to announce for announcements related to the keyboard.",
-                            "enum": [0,1,2,3],
-                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Some",
+                                "Most",
+                                "All"
+                            ],
                             "default": 2
                         }
                     },
@@ -2918,8 +2973,18 @@
                         "schema": {
                             "title": "Menu and Dialog Punctuation",
                             "description": "How much punctuation to announce for menus and dialogs.",
-                            "enum": [0,1,2,3],
-                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Some",
+                                "Most",
+                                "All"
+                            ],
                             "default": 2
                         }
                     },
@@ -2961,8 +3026,18 @@
                         "schema": {
                             "title": "Message Punctuation",
                             "description": "How much punctuation to announce for messages.",
-                            "enum": [0,1,2,3],
-                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Some",
+                                "Most",
+                                "All"
+                            ],
                             "default": 2
                         }
                     },
@@ -3004,8 +3079,18 @@
                         "schema": {
                             "title": "PC Cursor Punctuation",
                             "description": "How much punctuation to announce for the PC cursor.",
-                            "enum": [0,1,2,3],
-                            "enumLabels": ["None", "Some", "Most", "All"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Some",
+                                "Most",
+                                "All"
+                            ],
                             "default": 2
                         }
                     },
@@ -3478,8 +3563,14 @@
                         schema: {
                             title: "Enable Mouse Scheme",
                             description: "Whether to enable the mouse pointer scheme.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3487,8 +3578,14 @@
                         schema: {
                             title: "Enable Color Scheme",
                             description: "Whether to enable the color scheme.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3496,8 +3593,14 @@
                         schema: {
                             title: "Enable Cursor Scheme",
                             description: "Whether to enable the text cursor scheme.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3505,8 +3608,14 @@
                         schema: {
                             title: "Detect Keyboard Language",
                             description: "Whether or not text echo should use the language of the keyboard itself rather than the language defined for the voice profile.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -3514,8 +3623,14 @@
                         schema: {
                             title: "Disable Screen Saver",
                             description: "Whether or not to disable the screen saver while MAGic is running",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -3523,7 +3638,24 @@
                         schema: {
                             title: "Dynamic Lens Border Color",
                             description: "The border color to use for the 'dynamic lens' view.",
-                            enum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15
+                            ],
                             enumLabels: [
                                 "Black",
                                 "White",
@@ -3559,8 +3691,14 @@
                         schema: {
                             title: "Enable Bilingual Mode",
                             description: "Whether or not to enable 'bilingual mode' in MAGic.  If this setting is enabled, MAGic will change its language when a voice profile is selected that uses a different language.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3568,8 +3706,14 @@
                         schema: {
                             title: "Enable MAGic from System Tray",
                             description: "Whether or not to allow enabling and disabling of MAGic features from the system tray.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3577,8 +3721,14 @@
                         schema: {
                             title: "Focus Enhancement Enabled",
                             description: "Whether or not to enable focus enhancement.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3586,7 +3736,11 @@
                         schema: {
                             title: "Indicate Caps During",
                             description: "When to indicate capital letters in echoing typed text.",
-                            enum: [0,1,2],
+                            enum: [
+                                0,
+                                1,
+                                2
+                            ],
                             enumLabels: [
                                 "Say Character and Spelling",
                                 "Say Word,Character and Spelling",
@@ -3599,7 +3753,11 @@
                         schema: {
                             title: "Indicate Capitalization By",
                             description: "How to indicate capital letters in echoing typed text.",
-                            enum: [0,1,2],
+                            enum: [
+                                0,
+                                1,
+                                2
+                            ],
                             enumLabels: [
                                 "No Indication",
                                 "Pitch Increment",
@@ -3616,7 +3774,24 @@
                         schema: {
                             title: "Lens Border Color",
                             description: "The border color to use for the 'lens' view.",
-                            enum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15
+                            ],
                             enumLabels: [
                                 "Black",
                                 "White",
@@ -3652,8 +3827,14 @@
                         schema: {
                             title: "Lower Other Apps' Volume",
                             description: "Whether or not the volume of other apps should be lowered when MAGic is running.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3714,8 +3895,14 @@
                         schema: {
                             title: "Prompt to Save",
                             description: "Whether or not MAGic should prompt to save settings changes on shutdown.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3723,8 +3910,14 @@
                         schema: {
                             title: "Prompt When Overwriting Scheme",
                             description: "Whether or not to display a warning when attempting to save a color, cursor, or mouse scheme with the same name as an existing scheme.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -3735,9 +3928,20 @@
                             type: "number",
                             default: 1.10,
                             oneOf: [
-                                { minimum: 1, maximum: 1.9, multipleOf: 0.1},
-                                { minimum: 2, maximum: 3.75, multipleOf: 0.25},
-                                { minimum: 4, type: "integer"}
+                                {
+                                    minimum: 1,
+                                    maximum: 1.9,
+                                    multipleOf: 0.1
+                                },
+                                {
+                                    minimum: 2,
+                                    maximum: 3.75,
+                                    multipleOf: 0.25
+                                },
+                                {
+                                    minimum: 4,
+                                    type: "integer"
+                                }
                             ]
                         }
                     },
@@ -3745,8 +3949,14 @@
                         schema: {
                             title: "Enable Speech",
                             description: "Whether or not to announce onscreen text using text-to-speech.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -3754,7 +3964,12 @@
                         schema: {
                             title: "Split Location",
                             description: "The location where the 'split' view should appear when it is turned on.",
-                            enum: [0,1,2,3],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
                             enumLabels: [
                                 "Bottom",
                                 "Top",
@@ -3768,8 +3983,16 @@
                         schema: {
                             title: "Split Size",
                             description: "The size of the magnified portion of the screen in the 'split' view.",
-                            enum: [0,1,3],
-                            enumLabels: ["Quarter", "Half", "Custom"],
+                            enum: [
+                                0,
+                                1,
+                                3
+                            ],
+                            enumLabels: [
+                                "Quarter",
+                                "Half",
+                                "Custom"
+                            ],
                             default: 1
                         }
                     },
@@ -3815,7 +4038,6 @@
                             ],
                             default: 4
                         }
-
                     },
                     "mag.splitframesize": {
                         schema: {
@@ -3851,8 +4073,14 @@
                         schema: {
                             title: "Start Minimized",
                             description: "Whether or not to minimize MAGic on startup.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -3860,8 +4088,14 @@
                         schema: {
                             title: "Start Magnified",
                             description: "Whether or not to turn magnification on when MAGic starts.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -3882,7 +4116,23 @@
                             title: "Text Viewer Font Background Color",
                             description: "The background color to use behind the text in the text viewer.",
                             // 15 is "Custom", but we have no way to set that, so we leave it out.
-                            enum: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14
+                            ],
                             enumLabels: [
                                 "Light Blue",
                                 "Deep Sky Blue",
@@ -3901,7 +4151,8 @@
                                 "Black",
                                 "White"
                             ],
-                            default: 14 // White
+                            default: 14
+                            // White
                         }
                     },
                     // There is no easy way to understand or set custom color values, use the indexed color scheme instead.
@@ -3911,7 +4162,23 @@
                             title: "Text Viewer Font Color",
                             description: "The font color to use in the text viewer.",
                             // 15 is "Custom", but we have no way to set that, so we leave it out.
-                            enum: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14
+                            ],
                             enumLabels: [
                                 "Light Blue",
                                 "Deep Sky Blue",
@@ -3930,7 +4197,8 @@
                                 "Black",
                                 "White"
                             ],
-                            default: 13 // Black
+                            default: 13
+                            // Black
                         }
                     },
                     "mag.TextViewerFontFaceName": {
@@ -3953,18 +4221,33 @@
                         schema: {
                             title: "Text Viewer Font Style",
                             description: "The font style to use with the text viewer.",
-                            enum: [0,1,2],
-                            enumLabels: ["Original", "Regular", "Bold"],
+                            enum: [
+                                0,
+                                1,
+                                2
+                            ],
+                            enumLabels: [
+                                "Original",
+                                "Regular",
+                                "Bold"
+                            ],
                             default: 0
                         }
-
                     },
                     "mag.TextViewerFontEffect": {
                         schema: {
                             title: "Text Viewer Font Effect",
                             description: "The font effect to use in the text viewer.",
-                            enum: [0,1,2],
-                            enumLabels: ["Small Caps", "All Caps", "None"],
+                            enum: [
+                                0,
+                                1,
+                                2
+                            ],
+                            enumLabels: [
+                                "Small Caps",
+                                "All Caps",
+                                "None"
+                            ],
                             default: 2
                         }
                     },
@@ -3972,8 +4255,14 @@
                         schema: {
                             title: "Enable Text Viewer",
                             description: "Whether or not to enable the text viewer.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -3981,8 +4270,14 @@
                         schema: {
                             title: "Text Viewer Position",
                             description: "The position of text viewer content onscreen.",
-                            enum: [0,1],
-                            enumLabels: ["Bottom", "Top"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Bottom",
+                                "Top"
+                            ],
                             default: 0
                         }
                     },
@@ -3990,8 +4285,16 @@
                         schema: {
                             title: "Text Viewer Spotlight Style",
                             description: "The style of 'spotlight' to use with the text viewer.",
-                            enum: [0,1,2],
-                            enumLabels: ["Box", "Underline", "Block"],
+                            enum: [
+                                0,
+                                1,
+                                2
+                            ],
+                            enumLabels: [
+                                "Box",
+                                "Underline",
+                                "Block"
+                            ],
                             default: 0
                         }
                     },
@@ -4012,7 +4315,23 @@
                             title: "Text Viewer Spotlight Color",
                             description: "The spotlight color to use in the text viewer.",
                             // 15 is "Custom", but we have no way to set that, so we leave it out.
-                            enum: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14
+                            ],
                             enumLabels: [
                                 "Light Blue",
                                 "Deep Sky Blue",
@@ -4031,7 +4350,8 @@
                                 "Black",
                                 "White"
                             ],
-                            default: 6 // Red
+                            default: 6
+                            // Red
                         }
                     },
                     // There is no easy way to understand or set custom color values, use the indexed color scheme instead.
@@ -4041,7 +4361,23 @@
                             title: "Text Viewer Spotlight Text Color",
                             description: "The spotlight text color to use in the text viewer.",
                             // 15 is "Custom", but we have no way to set that, so we leave it out.
-                            enum: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14
+                            ],
                             enumLabels: [
                                 "Light Blue",
                                 "Deep Sky Blue",
@@ -4060,7 +4396,8 @@
                                 "Black",
                                 "White"
                             ],
-                            default: 8 // Yellow
+                            default: 8
+                            // Yellow
                         }
                     },
                     "mag.TextViewerSpotlightThickness": {
@@ -4077,8 +4414,14 @@
                         schema: {
                             title: "Text Viewer Tracking Mode",
                             description: "The tracking mode to use with the text viewer.",
-                            enum: [0,1],
-                            enumLabels: ["Auto Advance", "Center"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Auto Advance",
+                                "Center"
+                            ],
                             default: 0
                         }
                     },
@@ -4092,12 +4435,15 @@
                             default: 0
                         }
                     },
-
                     "mag.typingecho": {
                         schema: {
                             title: "Typing Echo Unit",
                             description: "The 'unit' to announce when echoing typed text (words, characters, or both).",
-                            enum: [1,2,3],
+                            enum: [
+                                1,
+                                2,
+                                3
+                            ],
                             // In JAWS, zero is also an option, but the MAGic interface doesn't allow you to select that, so it's omitted here.
                             enumLabels: [
                                 "Characters",
@@ -4111,8 +4457,14 @@
                         schema: {
                             title: "Enable Typing Echo",
                             description: "Whether or not to enable the typing echo when announcing content.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 1
                         }
                     },
@@ -4120,7 +4472,14 @@
                         schema: {
                             title: "View Type",
                             description: "How to display magnified content when magnification is active.",
-                            enum: [0, 1, 2, 3, 4, 5],
+                            enum: [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
                             enumLabels: [
                                 "Full",
                                 "Split",
@@ -4136,8 +4495,14 @@
                         schema: {
                             title: "Skip License Manager Dialog",
                             description: "Whether or not to display the license manager on startup.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -4145,8 +4510,14 @@
                         schema: {
                             title: "Color Scheme Modified",
                             description: "Whether or not the chosen color scheme has been modified from its defaults.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -4181,8 +4552,14 @@
                         schema: {
                             title: "Cursor Scheme Modified",
                             description: "Whether or not the chosen cursor scheme has been modified from its defaults.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -4211,8 +4588,14 @@
                         schema: {
                             title: "Mouse Scheme Modified",
                             description: "Whether or not the chosen mouse scheme has been modified from its defaults.",
-                            enum: [0,1],
-                            enumLabels: ["Off", "On"],
+                            enum: [
+                                0,
+                                1
+                            ],
+                            enumLabels: [
+                                "Off",
+                                "On"
+                            ],
                             default: 0
                         }
                     },
@@ -4748,9 +5131,9 @@
                             "description": "Set up magnification level",
                             "type": "number",
                             "default": 200,
-                            "min": 100,
-                            "max": 1600,
-                            "divisibleBy": 1
+                            "minimum": 100,
+                            "maximum": 1600,
+                            "multipleOf": 1
                         }
                     },
                     "FollowFocus": {
@@ -4788,7 +5171,11 @@
                                 2,
                                 3
                             ],
-                            "enumLabels": ["TopHalf", "FullScreen", "Lens"]
+                            "enumLabels": [
+                                "TopHalf",
+                                "FullScreen",
+                                "Lens"
+                            ]
                         }
                     },
                     "ZoomIncrement": {}
@@ -5110,7 +5497,7 @@
                         }
                     },
                     "UseKB": {
-                       "transform": {
+                        "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard.UseKBForScan"
                         }
@@ -5182,13 +5569,121 @@
                     }
                 },
                 "supportedSettings": {
-                    "SpeechSpeed": {},
-                    "SpeechPitch": {},
+                    "SpeechSpeed": {
+                        "schema": {
+                            "title": "Voice Speed",
+                            "description": "Control the speed at which Narrator speaks",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "SpeechPitch": {
+                        "schema": {
+                            "title": "Voice Pitch",
+                            "description": "Adjust the pitch of Narrator voice",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    // These three properties are mapped to one common term, maybe we should have individual schemas, maybe not.
                     "CoupleNarratorCursorKeyboard": {},
-                    "FollowInsertion": {},
+                    "FollowInsertion": {
+                        "schema": {
+                            "title": "Text insertion point following Narrator",
+                            "description": "Make text insertion point follows Narrator cursor",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
                     "InteractionMouse": {},
-                    "EchoChars": {},
-                    "EchoWords": {}
+                    "EchoChars": {
+                        "schema": {
+                            "title": "Read typed characters",
+                            "description": "Enable reading of characters while typing",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "EchoWords": {
+                        "schema": {
+                            "title": "Read typed words",
+                            "description": "Enable reading of words while typing",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "IntonationPause": {
+                        "schema": {
+                            "title": "Narrator intonation pauses",
+                            "description": "Enable intonation pauses for Narrator",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "ReadHints": {
+                        "schema": {
+                            "title": "Read hints for controls and buttons",
+                            "description": "Enable narrator announcing how to interact with items",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "PlayAudioCues": {
+                        "schema": {
+                            "title": "Read audio cues",
+                            "description": "Enable sound playing when you do things like perform a Narrator command or when suggestions are available",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "NarratorCursorHighlight": {
+                        "schema": {
+                            "title": "Cursor Highlight",
+                            "description": "Enable cursor highlighting with a blue focus box",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "FastKeyEntryEnabled": {
+                        "schema": {
+                            "title": "Touch keyboard keys activated on finger lift",
+                            "description": "Make key insertion work on finger lift on touch keyboards",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ReadingWithIntent": {
+                        "schema": {
+                            "title": "Emphasize formatted text",
+                            "description": "Narrator’s voice will put more emphasis on formatted text.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ErrorNotificationType": {
+                        "schema": {
+                            "title": "Speak narrator errors",
+                            "description": "Narrator announces errors such as 'no next landmark' or 'no next item.'",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "CoupleNarratorCursorMouse": {
+                        "schema": {
+                            "title": "Narrator cursor follow the mouse",
+                            "description": "Have the narrator cursor follow the mouse.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "LockNarratorKeys": {
+                        "schema": {
+                            "title": "Lock Narrator keys",
+                            "description": "Lock the Narrator key so you don't have to press it with each command.",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "SpeechSpeed": {
@@ -5350,6 +5845,7 @@
             },
             "configureNoRoam": {
                 "type": "gpii.windows.registrySettingsHandler",
+                "liveness": "live",
                 "options": {
                     "hKey": "HKEY_CURRENT_USER",
                     "path": "Software\\Microsoft\\Narrator\\NoRoam",
@@ -5360,9 +5856,43 @@
                     }
                 },
                 "supportedSettings": {
-                    "SpeechVolume": {},
-                    "ShowKeyboardIntroduction": {},
-                    "ShowBrowserSelection": {}
+                    "SpeechVolume": {
+                        "schema": {
+                            "title": "Speech Volume",
+                            "description": "The volume of speech.",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        }
+                    },
+                    "ShowKeyboardIntroduction": {
+                         "schema": {
+                            "title": "Show Keyboard Introduction",
+                            "description": "Whether or not to show the keyboard introduction.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ]
+                         }
+                    },
+                    "ShowBrowserSelection": {
+                        "schema": {
+                            "title": "Show Browser Selection",
+                            "description": "Whether or not to show the browser selection.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ]
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "SpeechVolume": {
@@ -5443,7 +5973,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "MachinePreferredUILanguages": {}
+                    "MachinePreferredUILanguages": {
+                    }
                 }
             },
             "configure2": {
@@ -5468,7 +5999,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "PreferredUILanguages": {}
+                    "PreferredUILanguages": {
+                    }
                 }
             },
             "configure3": {
@@ -5493,7 +6025,8 @@
                     }
                 },
                 "supportedSettings": {
-                    "Languages": {}
+                    "Languages": {
+                    }
                 }
             }
         },
@@ -5540,19 +6073,26 @@
                 },
                 "supportedSettings": {
                     "speech.espeak.pitch": {},
-                    "speech.espeak.volume": {},
+                    "speech.espeak.volume": {
+                    },
                     "presentation.reportHelpBalloons": {},
-                    "keyboard.speakTypedCharacters": {},
+                    "keyboard.speakTypedCharacters": {
+                    },
                     "keyboard.speakTypedWords": {},
-                    "speech.espeak.sayCapForCapitals": {},
+                    "speech.espeak.sayCapForCapitals": {
+                    },
                     "reviewCursor.followFocus": {},
-                    "reviewCursor.followCaret": {},
+                    "reviewCursor.followCaret": {
+                    },
                     "reviewCursor.followMouse": {},
-                    "speech.synth": {},
+                    "speech.synth": {
+                    },
                     "speech.outputDevice": {},
-                    "speech.espeak.rate": {},
+                    "speech.espeak.rate": {
+                    },
                     "speech.espeak.rateBoost": {},
-                    "speech.symbolLevel": {},
+                    "speech.symbolLevel": {
+                    },
                     "speech.espeak.voice": {}
                 },
                 "capabilitiesTransformations": {
@@ -6084,9 +6624,11 @@
                 },
                 "supportedSettings": {
                     "speakOnActivate": {},
-                    "speakTitles": {},
+                    "speakTitles": {
+                    },
                     "speakLabels": {},
-                    "theme": {}
+                    "theme": {
+                    }
                 },
                 "capabilitiesTransformations": {
                     "transform": [
@@ -6163,7 +6705,8 @@
                 }
             }
         },
-        "isInstalled": [] // Disabled due to GPII-3401
+        "isInstalled": []
+        // Disabled due to GPII-3401
     },
     "com.microsoft.windows.highContrast": {
         "name": "Windows High Contrast",
@@ -6442,7 +6985,7 @@
                             "type": "number",
                             "default": 0,
                             // 0 means no interval time
-                            "divisibleBy": 1
+                            "multipleOf": 1
                         }
                     },
                     "BounceKeysInterval": {
@@ -6451,7 +6994,7 @@
                             "description": "Bounce keys interval time in milliseconds",
                             "type": "number",
                             "default": 0,
-                            "divisibleBy": 1
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -6647,7 +7190,7 @@
                             "title": "Mouse keys speed",
                             "description": "Speed of mouse keys",
                             "type": "number",
-                            "divisibleBy": 10
+                            "multipleOf": 10
                         }
                     },
                     "Acceleration": {
@@ -6655,9 +7198,9 @@
                             "title": "Mouse keys acceleration",
                             "description": "Acceleration of mouse keys",
                             "type": "number",
-                            "min": -1000,
+                            "minimum": -1000,
                             // TODO: Not clear how to describe this setting
-                            "max": 1000
+                            "maximum": 1000
                         }
                     }
                 },
@@ -6773,9 +7316,9 @@
                             "title": "Mouse trails",
                             "description": "Amount of mouse trailing",
                             "type": "number",
-                            "min": 0,
-                            "max": 10,
-                            "divisibleBy": 1
+                            "minimum": 0,
+                            "maximum": 10,
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -6925,17 +7468,23 @@
                 },
                 "supportedSettings": {
                     "Arrow": {},
-                    "Hand": {},
+                    "Hand": {
+                    },
                     "Help": {},
-                    "AppStarting": {},
+                    "AppStarting": {
+                    },
                     "No": {},
-                    "NWPen": {},
+                    "NWPen": {
+                    },
                     "SizeAll": {},
-                    "SizeNESW": {},
+                    "SizeNESW": {
+                    },
                     "SizeNS": {},
-                    "SizeNWSE": {},
+                    "SizeNWSE": {
+                    },
                     "SizeWE": {},
-                    "UpArrow": {},
+                    "UpArrow": {
+                    },
                     "Wait": {}
                 },
                 "capabilitiesTransformations": {
@@ -6960,7 +7509,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -6976,7 +7526,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7016,7 +7567,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7032,7 +7584,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7072,7 +7625,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7088,7 +7642,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7126,7 +7681,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7140,7 +7696,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7178,7 +7735,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7194,7 +7752,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7234,7 +7793,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7250,7 +7810,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7290,7 +7851,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7306,7 +7868,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7346,7 +7909,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7362,7 +7926,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7402,7 +7967,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7418,7 +7984,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7458,7 +8025,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7474,7 +8042,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7514,7 +8083,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7530,7 +8100,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7570,7 +8141,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7586,7 +8158,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7626,7 +8199,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7642,7 +8216,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7682,7 +8257,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7698,7 +8274,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7738,7 +8315,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7754,7 +8332,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7794,7 +8373,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "upperBound": 0.666,
                                     "output": {
                                         "transform": {
@@ -7810,7 +8390,8 @@
                                             }
                                         }
                                     }
-                                }, {
+                                },
+                                {
                                     "output": {
                                         "transform": {
                                             "type": "fluid.transforms.valueMapper",
@@ -7990,8 +8571,12 @@
                                 },
                                 {
                                     "title": "Values with special meaning",
-                                    "enum": [4294967295],
-                                    "enumLabels": ["full-page"]
+                                    "enum": [
+                                        4294967295
+                                    ],
+                                    "enumLabels": [
+                                        "full-page"
+                                    ]
                                 }
                             ]
                         }
@@ -8034,8 +8619,14 @@
                             "title": "Mouse scroll focus routing",
                             "description": "Changes the way mouse scrolling is passed to applications.",
                             "type": "string",
-                            "enum": [0, 1],
-                            "enumLabels": ["RoutingFocus", "RoutingHybrid"]
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "RoutingFocus",
+                                "RoutingHybrid"
+                            ]
                         }
                     }
                 },
@@ -8052,7 +8643,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting":  "ScrollFocusRoutingConfig.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.ScrollRouting": "ScrollFocusRoutingConfig.value"
                 }
             },
             "configureMouseCursorShadow": {
@@ -8090,7 +8681,7 @@
                     }
                 },
                 "inverseCapabilitiesTransformations": {
-                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow":  "MouseCursorShadowEnable.value"
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnableCursorShadow": "MouseCursorShadowEnable.value"
                 }
             },
             "configureHorizontalScrollChars": {
@@ -8112,9 +8703,9 @@
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             "type": "number",
                             "default": 3,
-                            "min": 1,
-                            "max": 100,
-                            "divisibleBy": 1
+                            "minimum": 1,
+                            "maximum": 100,
+                            "multipleOf": 1
                         }
                     }
                 },
@@ -8155,8 +8746,14 @@
                             "title": "Mouse Windows tracking",
                             "description": "Windows are focused when mouse is stopped over them.",
                             "default": 0,
-                            "enum": [ 0, 1],
-                            "enumLabels": ["Off", "On"]
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ]
                         }
                     }
                 },
@@ -8194,8 +8791,14 @@
                             "title": "Mouse wheel horizontal scroll",
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             "default": 0,
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"]
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ]
                         }
                     }
                 },
@@ -8232,8 +8835,14 @@
                         "schema": {
                             "title": "Configures Window arrangement",
                             "description": "Enable/Disables the automatic Windows arrangment when dragging windows to border with mouse.",
-                            "enum": [0,1],
-                            "enumLabels": ["Off", "On"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ],
                             "default": 1
                         }
                     }
@@ -8270,15 +8879,15 @@
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
                             "type": "number",
                             "default": 500,
-                            "min": 500,
-                            "max": 5000,
-                            "divisibleBy": 1
+                            "minimum": 500,
+                            "maximum": 5000,
+                            "multipleOf": 1
                         }
                     }
                 },
                 "capabilitiesTransformations": {
                     "DoubleClickTimeConfig": {
-                            "transform": {
+                        "transform": {
                             "type": "fluid.transforms.value",
                             "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime",
                             "outputPath": "value"
@@ -8314,7 +8923,7 @@
         ],
         "isInstalled": [
             {
-                 "type": "gpii.deviceReporter.alwaysInstalled"
+                "type": "gpii.deviceReporter.alwaysInstalled"
             }
         ]
     },
@@ -8582,8 +9191,14 @@
                         "schema": {
                             "title": "Night Screen",
                             "description": "Reduce the blue emitted from the screen.",
-                            "enum": [0, 1],
-                            "enumLabels": ["Off", "On"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Off",
+                                "On"
+                            ],
                             "default": 0
                         }
                     }
@@ -8625,12 +9240,20 @@
                 "options": {
                     "Brightness": {
                         "namespace": "root\\WMI",
-                        "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                        "get": {
+                            "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness"
+                        },
                         "set": {
                             "className": "WmiMonitorBrightnessMethods",
                             "method": "WmiSetBrightness",
-                            "params": [0xFFFFFFFF, "$value"],
-                            "returnVal": ["uint", 0]
+                            "params": [
+                                0xFFFFFFFF,
+                                "$value"
+                            ],
+                            "returnVal": [
+                                "uint",
+                                0
+                            ]
                         }
                     }
                 },
@@ -9149,7 +9772,9 @@
                 }
             }
         },
-        "configure": ["settings.configure"],
+        "configure": [
+            "settings.configure"
+        ],
         "restore": [],
         "start": [],
         "stop": [],
@@ -9295,8 +9920,14 @@
                         "schema": {
                             "title": "Font Spacing",
                             "description": "The font in which text is preferred to be presented",
-                            "enum": ["Calibri", "Sitka Small"],
-                            "enumLabels": ["Calibri", "Sitka Small"],
+                            "enum": [
+                                "Calibri",
+                                "Sitka Small"
+                            ],
+                            "enumLabels": [
+                                "Calibri",
+                                "Sitka Small"
+                            ],
                             "default": "Calibri"
                         }
                     },
@@ -9304,8 +9935,14 @@
                         "schema": {
                             "title": "Font Spacing",
                             "description": "Set wider font spacing for reading",
-                            "enum": [1, 0],
-                            "enumLabels": ["Default", "Wide"],
+                            "enum": [
+                                1,
+                                0
+                            ],
+                            "enumLabels": [
+                                "Default",
+                                "Wide"
+                            ],
                             "default": 0
                         }
                     },
@@ -9313,8 +9950,22 @@
                         "schema": {
                             "title": "Theme",
                             "description": "Set the theme for reading",
-                            "enum": [0, 1, 2, 3, 4, 5],
-                            "enumLabels": ["White", "Reverse (High-Contrast)", "Yellow", "Pink", "Green", "Blue"],
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "enumLabels": [
+                                "White",
+                                "Reverse (High-Contrast)",
+                                "Yellow",
+                                "Pink",
+                                "Green",
+                                "Blue"
+                            ],
                             "default": 0
                         }
                     },
@@ -9323,10 +9974,10 @@
                             "title": "Font Size",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "min": 12,
-                            "max": 96,
+                            "minimum": 12,
+                            "maximum": 96,
                             "default": 48,
-                            "divisibleBy" : 2
+                            "multipleOf": 2
                         }
                     },
                     "SynthRate": {
@@ -9344,7 +9995,17 @@
                                 6,
                                 8
                             ],
-                            "enumLabels": ["-4", "-3", "-2", "-1", "0", "1", "2", "4", "6"],
+                            "enumLabels": [
+                                "-4",
+                                "-3",
+                                "-2",
+                                "-1",
+                                "0",
+                                "1",
+                                "2",
+                                "4",
+                                "6"
+                            ],
                             "default": 0
                         }
                     },
@@ -9353,24 +10014,40 @@
                             "title": "Synth voice",
                             "description": "The voice that will be used for text reading",
                             "enum": [
-                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Tracy Desktop\"}]",      // - Hong kong
-                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Hanhan Desktop\"}]",     // - Taiwan
-                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft HuiHui Desktop\"}]",     // - People’s Chinese Republic
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Tracy Desktop\"}]",
+                                // - Hong kong
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft Hanhan Desktop\"}]",
+                                // - Taiwan
+                                "[{\"Lang\":\"zh\",\"Voice\":\"Microsoft HuiHui Desktop\"}]",
+                                // - People’s Chinese Republic
 
-                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",       // - US
-                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",      // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Zira Desktop\"}]",
+                                // - US
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft David Desktop\"}]",
+                                // - US
 
-                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",     // - United Kingdom
-                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",   // - France
-                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",      // - Germany
-                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",       // - Italy
-                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",     // - Japan
-                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",      // - Korea
-                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",    // - Poland
-                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",      // - Portugal
-                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",      // - Russia
-                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",     // - Mexico
-                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"      // - Spain
+                                "[{\"Lang\":\"en\",\"Voice\":\"Microsoft Helena Desktop\"}]",
+                                // - United Kingdom
+                                "[{\"Lang\":\"fr\",\"Voice\":\"Microsoft Hortense Desktop\"}]",
+                                // - France
+                                "[{\"Lang\":\"de\",\"Voice\":\"Microsoft Hedda Desktop\"}]",
+                                // - Germany
+                                "[{\"Lang\":\"it\",\"Voice\":\"Microsoft Elsa Desktop\"}]",
+                                // - Italy
+                                "[{\"Lang\":\"ja\",\"Voice\":\"Microsoft Haruka Desktop\"}]",
+                                // - Japan
+                                "[{\"Lang\":\"ko\",\"Voice\":\"Microsoft Heami Desktop\"}]",
+                                // - Korea
+                                "[{\"Lang\":\"pl\",\"Voice\":\"Microsoft Paulina Desktop\"}]",
+                                // - Poland
+                                "[{\"Lang\":\"pt\",\"Voice\":\"Microsoft Maria Desktop\"}]",
+                                // - Portugal
+                                "[{\"Lang\":\"ru\",\"Voice\":\"Microsoft Irina Desktop\"}]",
+                                // - Russia
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Sabina Desktop\"}]",
+                                // - Mexico
+                                "[{\"Lang\":\"es\",\"Voice\":\"Microsoft Helena Desktop\"}]"
+                                // - Spain
                             ],
                             "enumLabels": [
                                 "ZH - Microsoft Tracy",
@@ -9473,8 +10150,16 @@
                             "title": "Column mode",
                             "description": "Column mode in which to display text",
                             "type": "number",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["Narrow", "Default", "Wide"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Narrow",
+                                "Default",
+                                "Wide"
+                            ],
                             "default": 0
                         }
                     },
@@ -9483,8 +10168,16 @@
                             "title": "Page color",
                             "description": "The color that will be used as page background",
                             "type": "number",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["None", "Sepia", "Reverse (High-Contrast)"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Sepia",
+                                "Reverse (High-Contrast)"
+                            ],
                             "default": 0
                         }
                     },
@@ -9493,8 +10186,14 @@
                             "title": "Design",
                             "description": "Select between column desing and page design",
                             "type": "number",
-                            "enum": [0, 1],
-                            "enumLabels": ["Column Layout", "Printed Layout"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Column Layout",
+                                "Printed Layout"
+                            ],
                             "default": 0
                         }
                     },
@@ -9502,17 +10201,22 @@
                         "schema": {
                             "title": "Voice Id",
                             "description": "The voice that will be used for text reading",
-                            "type": "string",
                             "enum": [
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_PabloM",
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_HelenaM",
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_esES_LauraM",
-
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM",
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_MarkM",
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_ZiraM"
                             ],
-                            "enumLabels": ["Pablo", "Helena", "Laura", "David", "Mark", "Zira"],
+                            "enumLabels": [
+                                "Pablo",
+                                "Helena",
+                                "Laura",
+                                "David",
+                                "Mark",
+                                "Zira"
+                            ],
                             "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
                         }
                     },
@@ -9523,9 +10227,9 @@
                             "type": "number",
                             // TODO: We should present the value in a homogeneus speech rate
                             "default": 10,
-                            "min": 0,
-                            "max": 20,
-                            "divisibleBy": 1
+                            "minimum": 0,
+                            "maximum": 20,
+                            "multipleOf": 1
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9533,8 +10237,14 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "enum": [0, 1],
-                            "enumLabels": ["False", "True"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "False",
+                                "True"
+                            ],
                             "default": 0
                         }
                     },
@@ -9543,8 +10253,14 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "enum": [0, 1],
-                            "enumLabels": ["False", "True"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "False",
+                                "True"
+                            ],
                             "default": 0
                         }
                     }
@@ -9629,8 +10345,16 @@
                             "title": "Column mode",
                             "description": "Column mode in which to display text",
                             "type": "number",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["Narrow", "Default", "Wide"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "Narrow",
+                                "Default",
+                                "Wide"
+                            ],
                             "default": 0
                         }
                     },
@@ -9639,8 +10363,16 @@
                             "title": "Page color",
                             "description": "The color that will be used as page background",
                             "type": "number",
-                            "enum": [0, 1, 2],
-                            "enumLabels": ["None", "Sepia", "Reverse (High-Contrast)"],
+                            "enum": [
+                                0,
+                                1,
+                                2
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "Sepia",
+                                "Reverse (High-Contrast)"
+                            ],
                             "default": 0
                         }
                     },
@@ -9649,8 +10381,14 @@
                             "title": "Design",
                             "description": "Select between column desing and page design",
                             "type": "number",
-                            "enum": [0, 1],
-                            "enumLabels": ["Column Layout", "Printed Layout"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "Column Layout",
+                                "Printed Layout"
+                            ],
                             "default": 0
                         }
                     },
@@ -9662,11 +10400,14 @@
                             "enum": [
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0",
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0",
-
                                 "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_ES-ES_HELENA_11.0"
                             ],
-                            "enumLabels": ["David", "Zira", "Helena"],
-                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech_OneCore\\Voices\\Tokens\\MSTTS_V110_enUS_DavidM"
+                            "enumLabels": [
+                                "David",
+                                "Zira",
+                                "Helena"
+                            ],
+                            "default": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0"
                         }
                     },
                     "ReadAloudVoiceRate": {
@@ -9676,9 +10417,9 @@
                             "type": "number",
                             // TODO: We should present the value in a homogeneus speech rate
                             "default": 10,
-                            "min": 0,
-                            "max": 20,
-                            "divisibleBy": 1
+                            "minimum": 0,
+                            "maximum": 20,
+                            "multipleOf": 1
                         }
                     },
                     "ReadingModeSyllables": {
@@ -9686,8 +10427,14 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "enumLabels": ["False", "True"],
-                            "enum": [0, 1],
+                            "enumLabels": [
+                                "False",
+                                "True"
+                            ],
+                            "enum": [
+                                0,
+                                1
+                            ],
                             "default": 0
                         }
                     },
@@ -9696,8 +10443,14 @@
                             "title": "Synth rate",
                             "description": "The font size in which text is preferred to be presented",
                             "type": "number",
-                            "enum": [0, 1],
-                            "enumLabels": ["False", "True"],
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "False",
+                                "True"
+                            ],
                             "default": 0
                         }
                     }

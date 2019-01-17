@@ -1,5 +1,5 @@
 {
-    "http://registry\\.gpii\\.net/common/DPIScale": {
+    "http://registry.gpii.net/common/DPIScale": {
         "schema": {
             "title": "DPI Scale",
             "description": "DPI scale factor on default monitor",
@@ -9,7 +9,7 @@
             "maximum": 4
         }
     },
-    "http://registry\\.gpii\\.net/common/speechRate": {
+    "http://registry.gpii.net/common/speechRate": {
         "schema": {
             "title": "Speech rate",
             "description": "Text to speech output speech rate",
@@ -18,7 +18,7 @@
             "minimum": 1
         }
     },
-    "http://registry\\.gpii\\.net/common/trackingTTS": {
+    "http://registry.gpii.net/common/trackingTTS": {
         "schema": {
             "title": "TTS tracking mode",
             "description": "Tracking mode for TTS",
@@ -35,7 +35,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/speakTutorialMessages": {
+    "http://registry.gpii.net/common/speakTutorialMessages": {
         "schema": {
             "title": "Speak Tutorial Messages",
             "description": "Whether to speak tutorial messages or not",
@@ -47,7 +47,7 @@
             // i.e.: show "on/off" or "enable/false" instead of "true/false"
         }
     },
-    "http://registry\\.gpii\\.net/common/keyEcho": {
+    "http://registry.gpii.net/common/keyEcho": {
         "schema": {
             "title": "Key echo",
             "description": "Whether to speak each key as it is introduced",
@@ -55,7 +55,7 @@
             "default": true
         }
     },
-    "http://registry\\.gpii\\.net/common/wordEcho": {
+    "http://registry.gpii.net/common/wordEcho": {
         "schema": {
             "title": "Word echo",
             "description": "Whether to speak each word as it is typed",
@@ -63,7 +63,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/announceCapitals": {
+    "http://registry.gpii.net/common/announceCapitals": {
         "schema": {
             "title": "Announce capitals",
             "description": "Whether to announce capitals",
@@ -71,7 +71,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/screenReaderBrailleOutput": {
+    "http://registry.gpii.net/common/screenReaderBrailleOutput": {
         "schema": {
             "title": "Enable braille output",
             "description": "Whether to enable/disable braille output",
@@ -79,7 +79,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/punctuationVerbosity": {
+    "http://registry.gpii.net/common/punctuationVerbosity": {
         "schema": {
             "title": "Punctuation verbosity",
             "description": "Level of puctuacion verbosity when producing text to speech",
@@ -98,7 +98,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/readingUnit": {
+    "http://registry.gpii.net/common/readingUnit": {
         "schema": {
             "title": "Reading Unit",
             "description": "Reading mode when producing text to speech",
@@ -117,7 +117,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/auditoryOutLanguage": {
+    "http://registry.gpii.net/common/auditoryOutLanguage": {
         "schema": {
             "title": "TTS output language",
             "description": "Language in which the text to speech must be produced",
@@ -255,7 +255,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled": {
+    "http://registry.gpii.net/common/screenReaderTTS/enabled": {
         "schema": {
             "title": "TTS enabled",
             "description": "Whether to enable/disable text to speech from screen reader",
@@ -263,7 +263,7 @@
             "default": true
         }
     },
-    "http://registry\\.gpii\\.net/common/pitch": {
+    "http://registry.gpii.net/common/pitch": {
         "schema": {
             "title": "Pitch rate",
             "description": "Text to speech output pitch rate",
@@ -274,7 +274,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/volumeTTS": {
+    "http://registry.gpii.net/common/volumeTTS": {
         "schema": {
             "title": "TTS Volume",
             "description": "Output volume of TTS",
@@ -284,7 +284,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/selfVoicing/enabled": {
+    "http://registry.gpii.net/common/selfVoicing/enabled": {
         "schema": {
             "title": "Self Voicing",
             "description": "Whether to enable/disable self voicing",
@@ -292,7 +292,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/highContrast/enabled": {
+    "http://registry.gpii.net/common/highContrast/enabled": {
         "schema": {
             "title": "High Contrast",
             "description": "Whether to enable/disable High Contrast",
@@ -300,7 +300,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/highContrastTheme": {
+    "http://registry.gpii.net/common/highContrastTheme": {
         "schema": {
             "title": "High Contrast theme",
             "description": "High Contrast Theme",
@@ -327,7 +327,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/fontSize": {
+    "http://registry.gpii.net/common/fontSize": {
         "schema": {
             "title": "Font Size",
             "description": "Font size of the text",
@@ -338,7 +338,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/cursorSize": {
+    "http://registry.gpii.net/common/cursorSize": {
         "schema": {
             "title": "Cursor Size",
             "description": "Cursor size",
@@ -349,7 +349,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/mouseTrailing": {
+    "http://registry.gpii.net/common/mouseTrailing": {
         "schema": {
             "title": "Mouse Trailing",
             "description": "Amount of mouse trailing",
@@ -358,7 +358,7 @@
             "maximum": 10
         }
     },
-    "http://registry\\.gpii\\.net/common/contrast": {
+    "http://registry.gpii.net/common/contrast": {
         "schema": {
             "title": "Contrast",
             "description": "Screen contrast",
@@ -368,7 +368,7 @@
             "maximum": 100
         }
     },
-    "http://registry\\.gpii\\.net/common/magnification/enabled": {
+    "http://registry.gpii.net/common/magnification/enabled": {
         "schema": {
             "title": "Magnifier Enabled",
             "description": "Whether to enable/disable magnification",
@@ -376,7 +376,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/magnification": {
+    "http://registry.gpii.net/common/magnification": {
         "schema": {
             "title": "Magnification",
             "description": "Level of magnification",
@@ -386,7 +386,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/tracking": {
+    "http://registry.gpii.net/common/tracking": {
         "schema": {
             "title": "Tracking",
             "description": "Tracking mode of the screen magnifier",
@@ -403,7 +403,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/magnifierPosition": {
+    "http://registry.gpii.net/common/magnifierPosition": {
         "schema": {
             "title": "Magnifier position",
             "description": "Position of the magnified area",
@@ -428,7 +428,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/invertColours": {
+    "http://registry.gpii.net/common/invertColours": {
         "schema": {
             "title": "Invert colours",
             "description": "Whether to invert colours",
@@ -436,7 +436,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/showCrosshairs": {
+    "http://registry.gpii.net/common/showCrosshairs": {
         "schema": {
             "title": "Show crosshairs",
             "description": "Whether to show crosshairs",
@@ -444,7 +444,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/volume": {
+    "http://registry.gpii.net/common/volume": {
         "schema": {
             "title": "Volume",
             "description": "General volume of the operating system",
@@ -453,7 +453,7 @@
             "maximum": 1
         }
     },
-    "http://registry\\.gpii\\.net/common/language": {
+    "http://registry.gpii.net/common/language": {
         "schema": {
             "title": "Language",
             "description": "Language of the system",
@@ -478,7 +478,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/screenResolution": {
+    "http://registry.gpii.net/common/screenResolution": {
         "schema": {
             "title": "Screen Resolution",
             "description": "Screen resolution of the default display",
@@ -497,7 +497,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/onScreenKeyboard/enabled": {
+    "http://registry.gpii.net/common/onScreenKeyboard/enabled": {
         "schema": {
             "title": "On-Screen keyboard",
             "description": "Whether to enable/disable the on-screen keyboard",
@@ -505,7 +505,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/mouseEmulation/enabled": {
+    "http://registry.gpii.net/common/mouseEmulation/enabled": {
         "schema": {
             "title": "Mouse emulation",
             "description": "Whether to enable/disable the mouse emulation",
@@ -513,7 +513,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/initDelay": {
+    "http://registry.gpii.net/common/initDelay": {
         "schema": {
             "title": "Keyboard init delay",
             // needs to be defined
@@ -523,7 +523,7 @@
             // in milliseconds
         }
     },
-    "http://registry\\.gpii\\.net/common/cursorSpeed": {
+    "http://registry.gpii.net/common/cursorSpeed": {
         "schema": {
             "title": "Cursor speed",
             "description": "The speed of the mouse cursor",
@@ -531,7 +531,7 @@
             "type": "number"
         }
     },
-    "http://registry\\.gpii\\.net/common/cursorAcceleration": {
+    "http://registry.gpii.net/common/cursorAcceleration": {
         "schema": {
             "title": "Cursor acceleration",
             "description": "The acceleration of the mouse cursor",
@@ -539,7 +539,7 @@
             "type": "number"
         }
     },
-    "http://registry\\.gpii\\.net/common/slowKeysEnable": {
+    "http://registry.gpii.net/common/slowKeysEnable": {
         "schema": {
             "title": "Slow Keys",
             "description": "Whether to enable/disable slow keys",
@@ -547,7 +547,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/slowKeysInterval": {
+    "http://registry.gpii.net/common/slowKeysInterval": {
         "schema": {
             "title": "Slow Keys Interval",
             "description": "Slow keys interval",
@@ -555,7 +555,7 @@
             "type": "number"
         }
     },
-    "http://registry\\.gpii\\.net/common/debounceEnable": {
+    "http://registry.gpii.net/common/debounceEnable": {
         "schema": {
             "title": "Debounce",
             "description": "Whether to enable/disable debounce",
@@ -563,7 +563,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/debounceInterval": {
+    "http://registry.gpii.net/common/debounceInterval": {
         "schema": {
             "title": "Debounce Interval",
             "description": "Debounce interval",
@@ -571,7 +571,7 @@
             "type": "number"
         }
     },
-    "http://registry\\.gpii\\.net/common/stickyKeys": {
+    "http://registry.gpii.net/common/stickyKeys": {
         "schema": {
             "title": "Sticky Keys",
             "description": "Whether to enable/disable sticky keys",
@@ -579,7 +579,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/captions/enabled": {
+    "http://registry.gpii.net/common/captions/enabled": {
         "schema": {
             "title": "Captions",
             "description": "Whether to enable/disable captions on videos",
@@ -587,7 +587,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/subtitles/enabled": {
+    "http://registry.gpii.net/common/subtitles/enabled": {
         "schema": {
             "title": "Subtitles",
             "description": "Whether to enable/disable subtitles on videos",
@@ -595,7 +595,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/audioDescription/enabled": {
+    "http://registry.gpii.net/common/audioDescription/enabled": {
         "schema": {
             "title": "Audio Description",
             "description": "Whether to enable/disable audio description on videos",
@@ -603,7 +603,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/supportTool": {
+    "http://registry.gpii.net/common/supportTool": {
         "schema": {
             "title": "Support Tools",
             "description": "Whether to enable/disable certain support tools",
@@ -619,7 +619,7 @@
             }
         }
     },
-    "http://registry\\.gpii\\.net/common/speechControl": {
+    "http://registry.gpii.net/common/speechControl": {
         "schema": {
             // This is not currently supported by any real solutions, but rather used for user testing/demoing
             "title": "Talk to the Computer",
@@ -628,7 +628,7 @@
             "default": "false"
         }
     },
-    "http://registry\\.gpii\\.net/common/nightScreen": {
+    "http://registry.gpii.net/common/nightScreen": {
         "schema": {
             "title": "Night Screen",
             "description": "Reduce the blue emitted from the screen.",
@@ -636,7 +636,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/lineSpace": {
+    "http://registry.gpii.net/common/lineSpace": {
         "schema": {
             "title": "Line Space",
             "description": "Increases the distance between lines of text.",
@@ -647,7 +647,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/characterSpace": {
+    "http://registry.gpii.net/common/characterSpace": {
         "schema": {
             "title": "Character Space",
             "description": "Increases the distance between characters.",
@@ -658,7 +658,7 @@
             "multipleOf": 0.1
         }
     },
-    "http://registry\\.gpii\\.net/common/inputsLarger/enabled": {
+    "http://registry.gpii.net/common/inputsLarger/enabled": {
         "schema": {
             "title": "Inputs Larger",
             "description": "Increases the size of inputs to make them more discoverable.",
@@ -666,7 +666,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/highlightColor": {
+    "http://registry.gpii.net/common/highlightColor": {
         "schema": {
             "title": "Highlight Color",
             "description": "The color used to highlight a user's selection.",
@@ -685,7 +685,7 @@
             ]
         }
     },
-    "http://registry\\.gpii\\.net/common/tableOfContents": {
+    "http://registry.gpii.net/common/tableOfContents": {
         "schema": {
             "title": "Table of Contents",
             "description": "Displays a Table of Contents for the sections of a document.",
@@ -693,7 +693,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/simplifiedUi/enabled": {
+    "http://registry.gpii.net/common/simplifiedUi/enabled": {
         "schema": {
             "title": "Simplified User Interface",
             "description": "Removes extraneous content to reduce the cognitive load and improve comprehension and/or focus.",
@@ -701,7 +701,7 @@
             "default": false
         }
     },
-    "http://registry\\.gpii\\.net/common/syllabification/enabled": {
+    "http://registry.gpii.net/common/syllabification/enabled": {
         "schema": {
             "title": "Syllabification",
             "description": "Separate words into their syllables.",

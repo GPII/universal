@@ -50,11 +50,10 @@
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
+                                // TODO: Enable this once a few more schemas are onboarded.
+                                // "schema": { "$ref": "gss-v7-full#", "required": true }
                                 "schema": { "$ref": "gss-v7-full#"}
                             }
-//                            "properties": {
-//                                "schema": { "type": "object" }
-//                            }
                         }
                     },
                     "capabilitiesTransformations": {
