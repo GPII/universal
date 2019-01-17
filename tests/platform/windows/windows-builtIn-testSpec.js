@@ -342,7 +342,14 @@ gpii.tests.windows.builtIn = [
                         "MagnificationMode": 3,
                         "FollowFocus": 0,
                         "FollowCaret": 1,
-                        "FollowMouse": 1
+                        "FollowMouse": 1,
+                        "FollowNarrator": 0,
+                        "FadeToMagIcon": 1,
+                        "ZoomIncrement": 50,
+                        "UseBitmapSmoothing": 1,
+                        "LensHeight": 50,
+                        "LensWidth": 50,
+                        "ClassiCDockPosition": 0
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -353,7 +360,14 @@ gpii.tests.windows.builtIn = [
                             "FollowFocus": "REG_DWORD",
                             "FollowCaret": "REG_DWORD",
                             "FollowMouse": "REG_DWORD",
-                            "MagnificationMode": "REG_DWORD"
+                            "FollowNarrator": "REG_DWORD",
+                            "MagnificationMode": "REG_DWORD",
+                            "FadeToMagIcon": "REG_DWORD",
+                            "ZoomIncrement": "REG_DWORD",
+                            "UseBitmapSmoothing": "REG_DWORD",
+                            "LensHeight": "REG_DWORD",
+                            "LensWidth": "REG_DWORD",
+                            "ClassiCDockPosition": "REG_DWORD"
                         }
                     }
                 }],

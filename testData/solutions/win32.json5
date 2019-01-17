@@ -3476,8 +3476,14 @@
                         "FollowFocus": "REG_DWORD",
                         "FollowCaret": "REG_DWORD",
                         "FollowMouse": "REG_DWORD",
+                        "FollowNarrator": "REG_DWORD",
                         "MagnificationMode": "REG_DWORD",
-                        "ZoomIncrement": "REG_DWORD"
+                        "FadeToMagIcon": "REG_DWORD",
+                        "ZoomIncrement": "REG_DWORD",
+                        "UseBitmapSmoothing": "REG_DWORD",
+                        "LensHeight": "REG_DWORD",
+                        "LensWidth": "REG_DWORD",
+                        "ClassiCDockPosition": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
@@ -3522,7 +3528,15 @@
                             "title": "Magnifier follows mouse",
                             "description": "Magnifier follows the mouse pointer",
                             "type": "boolean",
-                            "default": false
+                            "default": true
+                        }
+                    },
+                    "FollowNarrator": {
+                        "schema": {
+                            "title": "Magnifier follows Narrator",
+                            "description": "Magnifier follows the Narrator cursor",
+                            "type": "boolean",
+                            "default": true
                         }
                     },
                     "MagnificationMode": {
@@ -3535,12 +3549,92 @@
                                 1,
                                 2,
                                 3
+                            ],
+                            "enumLabels": [
+                               "Dock",
+                               "FullScreen",
+                               "Lens"
                             ]
-                            // TODO: We must present these values in a human readable form
-                            // 1: "TopHalf", 2: "FullScreen", 3: "Lens"
                         }
                     },
-                    "ZoomIncrement": {}
+                    "FadeToMagIcon": {
+                        "schema": {
+                            "title": "Collapse into magnifiying glass",
+                            "description": "Collapse Magnifier window into a floating transparent magnifying glass.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "ZoomIncrement": {
+                        "schema": {
+                            "title": "Zoom Increment",
+                            "description": "Change zoom increments.",
+                            "type": "number",
+                            "default": 100,
+                            "enum": [
+                                25,
+                                50,
+                                100,
+                                150,
+                                200,
+                                400
+                            ],
+                            "enumLabels": [
+                               "25%",
+                               "50%",
+                               "100% (default)",
+                               "150%",
+                               "200%",
+                               "400%"
+                            ]
+                        }
+                    },
+                    "UseBitmapSmoothing": {
+                        "schema": {
+                            "title": "Smooth edges of images and text",
+                            "description": "Enables/Disables smoothing for edges",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    },
+                    "LensHeight": {
+                        "schema": {
+                            "title": "Lens Height",
+                            "description": "Modifies the height of the magnifier lens.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 30
+                        }
+                    },
+                    "LensWidth": {
+                        "schema": {
+                            "title": "Lens Width",
+                            "description": "Modifies the width of the magnifier lens.",
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 100,
+                            "default": 30
+                        }
+                    },
+                    "ClassiCDockPosition": {
+                        "schema": {
+                            "title": "Dock position",
+                            "enum": [
+                                0,
+                                1,
+                                2,
+                                3
+                            ],
+                            "enumLabels": [
+                                "Left",
+                                "Top",
+                                "Right",
+                                "Down"
+                            ],
+                            "default": 1
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "Invert": {
