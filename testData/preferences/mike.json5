@@ -31,7 +31,12 @@
                         "ScrollChars": 10,
                         "WindowsTrackingEnabled": 1,
                         "AutoWinArrangement": 0,
-                        "SwapMouseButtons": 1
+                        "SwapMouseButtons": 1,
+                        "PointerSpeed": 15,
+                        "EnhancePrecision": true,
+                        "SnapToDefaultButton": 1,
+                        "HidePointer": 0,
+                        "MouseSonar": 1
                     }
                 }
             }

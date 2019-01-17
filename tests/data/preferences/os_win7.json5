@@ -154,6 +154,29 @@
                         },
                         "DoubleClickTimeConfig": {
                             "value": 600
+                        },
+                        "PointerSpeedConfig": {
+                            "path": "pvParam",
+                            "value": 15
+                        },
+                        "EnhancePrecisionConfig": {
+                            "path": "pvParam",
+                            "value": [0, 0, 1]
+                        },
+                        "SnapToDefaultButtonConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
+                        "HidePointerConfig": {
+                            "path": "pvParam",
+                            "value": 0
+                        },
+                        "MouseSonarConfig": {
+                            "path": "pvParam",
+                            "value": 1
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {
