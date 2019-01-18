@@ -92,6 +92,27 @@ gpii.tests.journal.initialSettings = {
                     }
                 }
             }
+        ],
+        "com.microsoft.windows.touchPadSettings": [
+            {
+                "settings": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "value": "Medium sensitivity"
+                    }
+                }
+            }
+        ],
+        "com.microsoft.windows.narrator": [
+            {
+                "settings": {
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                        "value": false
+                    },
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                        "value": false
+                    }
+                }
+            }
         ]
     },
     "gpii.windows.wmiSettingsHandler": {
@@ -132,6 +153,20 @@ gpii.tests.journal.initialSettings = {
                 ]
             }
         }]
+    },
+    "gpii.windows.nativeSettingsHandler": {
+        "com.microsoft.windows.mouseSettings": [
+            {
+                "settings": {
+                    "DoubleClickTimeConfig": {
+                        "value": 500
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickTime"
+                }
+            }
+        ]
     }
 };
 
@@ -489,12 +524,6 @@ gpii.tests.journal.fixtures = [
                         message: "The system's settings were restored from a snapshot"
                     }
                 }
-            },
-            { // Fix for race condition as described in GPII-3396. However, it appears there is a low probability of
-              // a test hang here because the last element of gpii.test.checkSequence is passive and may execute later
-              // than noUserLoggedIn. This can only be resolved with a globbing fix for FLUID-5502 in the framework
-                event: "{configuration}.server.flowManager.events.noUserLoggedIn",
-                listener: "fluid.identity"
             }, gpii.test.checkSequence,
             // Now verify that we can log on normally after a restore, and generate a non-crashed session after logging off
             gpii.tests.journal.normalLoginFixtures
