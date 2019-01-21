@@ -69,7 +69,8 @@ An example document:
         "revoked": false,
         "revokedReason": null,
         "timestampCreated": "2017-12-14T19:55:11.641Z",
-        "timestampUpdated": null
+        "timestampUpdated": null,
+        "timestampRevoked": null
     }
 ```
 
@@ -86,11 +87,11 @@ An example document:
 
 ```json
     {
+        "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
         "type": "gpiiCloudSafeCredential",
         "schemaVersion": "0.1",
         "prefsSafeId": "prefsSafe-7",
-        "gpiiExpressUserId": "org.couch.db.user:prefs7user",
-        "_id": "8f3085a7-b65b-4648-9a78-8ac7de766997"
+        "gpiiExpressUserId": "org.couch.db.user:prefs7user"
     }
 ```
 
@@ -98,6 +99,7 @@ For reference, the internal account record for the above looks as follows:
 
 ```json
     {
+        "_id": "org.couch.db.user:prefs7user",
         "name": "prefs7user",
         "type": "user",
         "email": null,
@@ -108,8 +110,7 @@ For reference, the internal account record for the above looks as follows:
         "password_scheme": "pbkdf2",
         "salt": "7cf6961e6ded3bd25732e5466512d116bf9908ba9629d4ed060a03a965e5341d",
         "derived_key": "e8bd265e7d82fd0f662e9ddaaf2e75acb294da1b",
-        "verification_code": "618fa72aa62af282704b556e34957a79",
-        "_id": "org.couch.db.user:prefs7user"
+        "verification_code": "618fa72aa62af282704b556e34957a79"
     }
 ```
 
