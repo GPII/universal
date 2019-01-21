@@ -17,9 +17,6 @@
             "listPrefsSafes": {
                 "map": "function(doc) {if (doc.type === 'prefsSafe') emit(doc._id, {'name': doc.name, 'email': doc.email, 'created': doc.timestampCreated, 'updated': doc.timestampUpdated})}"
             },
-            "findPrefsSafeByName": {
-                "map": "function(doc) {if (doc.type === 'prefsSafe') emit(doc.name, null)}"
-            },
             "expressUserSafeLoginLookup": {
                 "map": "function(doc) {if (doc.type === 'gpiiCloudSafeCredential') {emit(doc.gpiiExpressUserId, null);}}"
             },
