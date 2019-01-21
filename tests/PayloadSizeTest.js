@@ -14,32 +14,31 @@
 
 var fluid = require("infusion"),
     jqUnit = fluid.require("node-jqunit", require, "jqUnit"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.payloadSize");
 
 gpii.tests.payloadSize.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token giant was successfully logged in.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key giant was successfully logged in.", data);
 };
 
 gpii.tests.payloadSize.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token giant was successfully logged out.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key giant was successfully logged out.", data);
 };
 
 gpii.tests.payloadSize.testDefs = [{
     name: "Payload size limit tests > 100kb",
     expect: 2,
     config: {
-        configName: "gpii.tests.acceptance.localInstall.config",
-        configPath: "%universal/tests/configs"
+        configName: "gpii.config.development.local",
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
-    userToken: "giant",
+    gpiiKey: "giant",
 
     sequence: [{
         func: "{loginRequest}.send"
@@ -54,4 +53,4 @@ gpii.tests.payloadSize.testDefs = [{
     }]
 }];
 
-kettle.test.bootstrapServer(fluid.copy(gpii.tests.payloadSize.testDefs));
+gpii.test.bootstrapServer(gpii.tests.payloadSize.testDefs);

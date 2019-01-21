@@ -18,7 +18,7 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
@@ -27,13 +27,13 @@ fluid.registerNamespace("gpii.tests.android.talkback");
 gpii.tests.android.talkback = [
     {
         name: "Testing talkback1 using Flat matchmaker",
-        userToken: "talkback1",
+        gpiiKey: "talkback1",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [
                     {
                         "settings": {
-                            "STREAM_MUSIC": 14
+                            "STREAM_MUSIC": 14.5
                         }
                     }
                 ]
@@ -42,8 +42,8 @@ gpii.tests.android.talkback = [
                 "some.app.id": [
                     {
                         "settings": {
-                            "tts_default_rate": 450,
-                            "tts_default_pitch": 450
+                            "tts_default_rate": 450.99,
+                            "tts_default_pitch": 450.99
                         },
                         "options": {
                             "settingType": "Secure"
@@ -55,7 +55,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing talkback2 using Flat matchmaker",
-        userToken: "talkback2",
+        gpiiKey: "talkback2",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "some.app.id": [
@@ -74,7 +74,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing screenreader_orca using Flat matchmaker",
-        userToken: "screenreader_orca",
+        gpiiKey: "screenreader_orca",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "some.app.id": [
@@ -92,7 +92,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_nvda",
+        gpiiKey: "screenreader_nvda",
         settingsHandlers: {
             "gpii.androidSettings": {
                 "some.app.id": [
@@ -110,7 +110,7 @@ gpii.tests.android.talkback = [
     },
     {
         name: "Testing screenreader_nvda using Flat matchmaker",
-        userToken: "screenreader_common",
+        gpiiKey: "screenreader_common",
         settingsHandlers: {
             "gpii.androidAudioManager.volume": {
                 "some.app.id": [
@@ -141,6 +141,6 @@ gpii.tests.android.talkback = [
 module.exports = gpii.test.bootstrap({
     testDefs:  "gpii.tests.android.talkback",
     configName: "gpii.tests.acceptance.android.talkback.config",
-    configPath: "%universal/tests/platform/android/configs"
+    configPath: "%gpii-universal/tests/platform/android/configs"
 }, ["gpii.test.integration.testCaseHolder.android"],
     module, require, __dirname);

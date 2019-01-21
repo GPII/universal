@@ -1,0 +1,28 @@
+/**
+ * This configuration runs a standalone Preferences Server on port 8081. It doesn't start any backend database
+ * for data persistence, but expect couchDB to be running separately on the localhost using the default port 5984.
+ *
+ * * The following components are running on the local machine:
+ * ** Preferences Server
+ */
+{
+    "type": "gpii.config.preferencesServer.standalone.production",
+    "options": {
+        "gradeNames": "gpii.withCloudLogging", // Apply cloud logging for GPII-3310
+        "dbServerPort": 5984,
+        "dataSourceConfigProductionEnv": {
+            "baseUrl": "@expand:kettle.resolvers.env(GPII_DATASOURCE_HOSTNAME)",
+            "port": "@expand:kettle.resolvers.env(GPII_DATASOURCE_PORT)"
+        },
+        "distributeOptions": {
+            "preferencesServer.dataStore.production": {
+                "source": "{that}.options.dataSourceConfigProductionEnv",
+                "target": "{that preferencesServer dataStore}.options.dataSourceConfig",
+                "priority": "after:preferencesServer.base.dataStore"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%preferencesServer/configs/gpii.preferencesServer.config.base.json5"
+    ]
+}

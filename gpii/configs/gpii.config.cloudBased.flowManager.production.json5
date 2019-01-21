@@ -1,0 +1,32 @@
+/**
+ * This configuration runs a cloud based flow manager locally on port 8082. It expects:
+ * 1. couchDB to be running on the localhost using the default port 5984.
+ * 2. Preferences Server running as a standalone server using `gpii.config.preferencesServer.standalone.production`.
+ *
+ * * The following components are running:
+ * ** Cloud Bsed Flow Manager
+ * ** Flat MatchMaker
+ */
+{
+    "type": "gpii.config.cloudBased.flowManager.production",
+    "options": {
+        "gradeNames": "gpii.withCloudLogging", // Apply cloud logging for GPII-3310
+        "mainServerPort": 8082,
+        "dbServerPort": 5984,
+        "dataSourceConfigProductionEnv": {
+            "baseUrl": "@expand:kettle.resolvers.env(GPII_DATASOURCE_HOSTNAME)",
+            "port": "@expand:kettle.resolvers.env(GPII_DATASOURCE_PORT)"
+        },
+        "distributeOptions": {
+            "flowManager.production.dataStore": {
+                "source": "{that}.options.dataSourceConfigProductionEnv",
+                "target": "{that flowManager oauth2DataStore}.options.dataSourceConfig",
+                "priority": "after:flowManager.base.dataStore"
+            }
+        }
+    },
+    "mergeConfigs": [
+        "%flowManager/configs/gpii.flowManager.config.cloud.base.json5",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
+    ]
+}

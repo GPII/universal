@@ -17,18 +17,17 @@
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
 fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
-    gradeNames: "gpii.test.common.testCaseHolder",
+    gradeNames: ["gpii.test.common.testCaseHolder"],
     distributeOptions: {
         "development.installedSolutionsPath": {
-            "record": "%universal/tests/data/faultyDeviceReport.jsonx",
+            "record": "%gpii-universal/tests/data/faultyDeviceReport.jsonx",
             "target": "{that deviceReporter installedSolutionsDataSource}.options.path"
         }
     },
@@ -43,12 +42,12 @@ fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
     }
 });
 
-gpii.tests.deviceReporterErrorTests.userToken = "testUser1";
+gpii.tests.deviceReporterErrorTests.gpiiKey = "testUser1";
 
 gpii.tests.deviceReporterErrorTests.testDefCommon = {
     config: {
-        configName: "gpii.config.development.all.local",
-        configPath: "%universal/gpii/configs"
+        configName: "gpii.config.development.local",
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: "gpii.tests.deviceReporterErrorTests.testCaseHolder"
 };
@@ -57,7 +56,7 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
     {
         name: "Login fails on error in Device Reporter and reports to login",
         expect: 4,
-        userToken: gpii.tests.deviceReporterErrorTests.userToken,
+        gpiiKey: gpii.tests.deviceReporterErrorTests.gpiiKey,
         sequence: [{
             func: "{loginRequest}.send"
         }, {
@@ -74,8 +73,8 @@ gpii.tests.deviceReporterErrorTests.testDefs = [
         name: "Device Reporter fails on corrupt JSON file",
         expect: 4,
         config: {
-            configName: "gpii.config.development.all.local",
-            configPath: "%universal/gpii/configs"
+            configName: "gpii.config.development.local",
+            configPath: "%gpii-universal/gpii/configs"
         },
         gradeNames: [ "gpii.tests.deviceReporterErrorTests.testCaseHolder" ],
         sequence: [{
@@ -98,4 +97,4 @@ gpii.tests.deviceReporterErrorTests.buildAllTestDefs = function () {
     });
 };
 
-kettle.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());
+gpii.test.bootstrapServer(gpii.tests.deviceReporterErrorTests.buildAllTestDefs());

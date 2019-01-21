@@ -15,10 +15,9 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("./shared/ContextIntegrationTestDefs.js");
 
 fluid.registerNamespace("gpii.tests.untrusted.contextIntegration");
@@ -30,17 +29,15 @@ gpii.tests.untrusted.contextIntegration.testDefs = fluid.transform(gpii.tests.un
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.tests.acceptance.linux.builtIn.untrusted.config",
-            configPath: "%universal/tests/platform/linux/configs"
+            configPath: "%gpii-universal/tests/platform/linux/configs"
         },
         gradeNames: [
-            "gpii.test.pouch.pouchTestCaseHolder",
             "gpii.tests.contextIntegration.testCaseHolder.common.linux",
             "gpii.test.common.untrusted.lifecycleManagerReceiver"
         ]
     });
 
-    testDef.sequence = gpii.test.pouch.addConstructFixturesToSequence(testDef.sequence);
     return testDef;
 });
 
-kettle.test.bootstrapServer(gpii.tests.untrusted.contextIntegration.testDefs);
+gpii.test.bootstrapServer(gpii.tests.untrusted.contextIntegration.testDefs);

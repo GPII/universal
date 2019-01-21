@@ -13,7 +13,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-
 "use strict";
 
 var fluid = require("infusion"),
@@ -25,7 +24,7 @@ fluid.contextAware.makeChecks({
     }
 });
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 

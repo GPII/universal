@@ -4,10 +4,10 @@
             "title": "DPI Scale",
             "description": "DPI scale factor on default monitor",
             "type": "number",
-            "default": 1,
-            "min": 1,
-            "max": 2,
-            "divisibleBy": 0.25
+            "default": 0,
+            "min": -2,
+            "max": 4,
+            "divisibleBy": 1
         },
         "http://registry.gpii.net/common/speechRate": {
             "title": "Speech rate",
@@ -88,7 +88,7 @@
             // TODO: We should present the value to the user in a human readable format.
             // i.e.: "English (US)" instead of "en-US" or "Mandarin" instead of "zh-cmn"
         },
-        "http://registry.gpii.net/common/screenReaderTTSEnabled": {
+        "http://registry.gpii.net/common/screenReaderTTS/enabled": {
             "title": "TTS enabled",
             "description": "Whether to enable/disable text to speech from screen reader",
             "type": "boolean",
@@ -111,13 +111,13 @@
             "max": 1,
             "divisibleBy": 0.1
         },
-        "http://registry.gpii.net/common/selfVoicingEnabled": {
+        "http://registry.gpii.net/common/selfVoicing/enabled": {
             "title": "Self Voicing",
             "description": "Whether to enable/disable self voicing",
             "type": "boolean",
             "default": false
         },
-        "http://registry.gpii.net/common/highContrastEnabled": {
+        "http://registry.gpii.net/common/highContrast/enabled": {
             "title": "High Contrast",
             "description": "Whether to enable/disable High Contrast",
             "type": "boolean",
@@ -127,8 +127,8 @@
             "title": "High Contrast theme",
             "description": "High Contrast Theme",
             "type": "string",
-            "default": "black-white",
-            "enum": ["black-white", "white-black", "yellow-black", "black-yellow"]
+            "default": "regular-contrast",
+            "enum": ["regular-contrast", "black-white", "white-black", "yellow-black", "black-yellow", "grey-black", "grey-white", "black-brown"]
         },
         "http://registry.gpii.net/common/fontSize": {
             "title": "Font Size",
@@ -164,7 +164,7 @@
             "max": 100,
             "divisibleBy": 1
         },
-        "http://registry.gpii.net/common/magnifierEnabled": {
+        "http://registry.gpii.net/common/magnification/enabled": {
             "title": "Magnifier Enabled",
             "description": "Whether to enable/disable magnification",
             "type": "boolean",
@@ -217,12 +217,7 @@
             "type": "string",
             "default": "en",
             "enum": [
-                "en", "en-GB", "en-US", "en-scotland", "en-BZ", "en-BS", "en-AG", "en-AI",
-                "af", "bg", "bs", "ca", "cs", "cy", "da", "de", "el", "grc", "eo", "es",
-                "es-419", "et", "fi", "fr", "fr-BE", "hi", "hr", "hu", "hy", "hy-arevmda",
-                "id", "is", "it", "jbo", "ka", "kn", "ku", "la", "lv", "mk", "ml", "nl",
-                "no", "pap", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sq", "sr", "sv",
-                "sw", "ta", "tr", "vi", "zh-cmn", "cmn", "zh-yue", "yue"
+                "en-US", "hy-AM", "zh-CN", "zh-TW", "ko-KR", "ru-RU", "es-ES"
             ]
         },
         "http://registry.gpii.net/common/screenResolution": {
@@ -232,13 +227,13 @@
             "default": "normal",
             "enum": ["high", "normal", "low", "very low"]
         },
-        "http://registry.gpii.net/common/onScreenKeyboardEnabled": {
+        "http://registry.gpii.net/common/onScreenKeyboard/enabled": {
             "title": "On-Screen keyboard",
             "description": "Whether to enable/disable the on-screen keyboard",
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/mouseEmulationEnabled": {
+        "http://registry.gpii.net/common/mouseEmulation/enabled": {
             "title": "Mouse emulation",
             "description": "Whether to enable/disable the mouse emulation",
             "type": "boolean",
@@ -288,19 +283,19 @@
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/captionsEnabled": {
+        "http://registry.gpii.net/common/captions/enabled": {
             "title": "Captions",
             "description": "Whether to enable/disable captions on videos",
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/subtitlesEnabled": {
+        "http://registry.gpii.net/common/subtitles/enabled": {
             "title": "Subtitles",
             "description": "Whether to enable/disable subtitles on videos",
             "type": "boolean",
             "default": "false"
         },
-        "http://registry.gpii.net/common/audioDescriptionEnabled": {
+        "http://registry.gpii.net/common/audioDescription/enabled": {
             "title": "Audio Description",
             "description": "Whether to enable/disable audio description on videos",
             "type": "boolean",
@@ -318,6 +313,61 @@
             "description": "Whether to enable/disable voice commands for computer",
             "type": "boolean",
             "default": "false"
+        },
+        "http://registry.gpii.net/common/nightScreen": {
+            "title": "Night Screen",
+            "description": "Reduce the blue emitted from the screen.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/lineSpace": {
+            "title": "Line Space",
+            "description": "Increases the distance between lines of text.",
+            "type": "number",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 3,
+            "divisibleBy": 0.1
+        },
+        "http://registry.gpii.net/common/characterSpace": {
+            "title": "Character Space",
+            "description": "Increases the distance between characters.",
+            "type": "number",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 2,
+            "divisibleBy": 0.1
+        },
+        "http://registry.gpii.net/common/inputsLarger/enabled": {
+            "title": "Inputs Larger",
+            "description": "Increases the size of inputs to make them more discoverable.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/highlightColor": {
+            "title": "Highlight Color",
+            "description": "The color used to highlight a user's selection.",
+            "type": "string",
+            "default": "default",
+            "enum": ["default", "yellow", "green", "pink"]
+        },
+        "http://registry.gpii.net/common/tableOfContents": {
+            "title": "Table of Contents",
+            "description": "Displays a Table of Contents for the sections of a document.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/simplifiedUi/enabled": {
+            "title": "Simplified User Interface",
+            "description": "Removes extraneous content to reduce the cognitive load and improve comprehension and/or focus.",
+            "type": "boolean",
+            "default": false
+        },
+        "http://registry.gpii.net/common/syllabification/enabled": {
+            "title": "Syllabification",
+            "description": "Separate words into their syllables.",
+            "type": "boolean",
+            "default": false
         }
     }
 }

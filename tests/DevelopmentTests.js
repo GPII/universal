@@ -17,12 +17,11 @@
 "use strict";
 
 var fluid = require("infusion"),
-    gpii = fluid.registerNamespace("gpii"),
-    kettle = fluid.registerNamespace("kettle");
+    gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-kettle.test.bootstrapServer(fluid.copy(gpii.tests.development.testDefs));
+gpii.test.bootstrapServer(gpii.tests.development.testDefs);

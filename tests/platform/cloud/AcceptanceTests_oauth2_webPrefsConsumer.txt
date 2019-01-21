@@ -1,7 +1,0 @@
-AcceptanceTests_webPrefsConsumer.js
-
-Description:
-This is a series of tests using the online flowmanager to test the workflow of web preferences consumers to request access tokens that are then used to request filtered user settings from GPII Cloud using OAuth2 authorization code grant.
-
-Requirements:
-Since it's using the online flowmanager, there are NO REQUIREMENTS to the system other than the GPII being installed (and able to run in local 'cloudBased' flowmanager mode).

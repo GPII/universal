@@ -12,15 +12,13 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
-
-
 "use strict";
 
 var fluid = require("infusion"),
     kettle = fluid.registerNamespace("kettle"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.module.register("universal", __dirname, require);
+fluid.module.register("gpii-universal", __dirname, require);
 
 // TODO: proper module loader will eliminate these requires (FLUID-5521)
 require("./gpii/node_modules/transformer");
@@ -30,16 +28,17 @@ require("./gpii/node_modules/lifecycleActions");
 require("./gpii/node_modules/flowManager");
 require("./gpii/node_modules/settingsHandlers");
 require("./gpii/node_modules/preferencesServer");
-require("./gpii/node_modules/rawPreferencesServer");
 require("./gpii/node_modules/ontologyHandler");
 require("./gpii/node_modules/matchMakerFramework");
 require("./gpii/node_modules/flatMatchMaker");
-require("./gpii/node_modules/canopyMatchMaker");
 require("./gpii/node_modules/contextManager");
 require("./gpii/node_modules/journal");
 require("./gpii/node_modules/pouchManager");
 require("./gpii/node_modules/eventLog");
 require("./gpii/node_modules/processReporter");
+require("./gpii/node_modules/gpii-db-operation");
+require("./gpii/node_modules/userListeners");
+require("./gpii/node_modules/gpii-ini-file");
 
 gpii.loadTestingSupport = function () {
     fluid.contextAware.makeChecks({
@@ -72,7 +71,7 @@ gpii.queryConfigs = function () {
  * that allows specifying the configuration name and directory
  * of configurations.
  *
- * @param options {Object} Accepts the following options:
+ * @param {Object} options - Accepts the following options:
  *   - configName {String} Name of a configuration to use, specified by the name
  *     of the file without the .json extension.
  *   - configPath {String} Directory of the configuration json files.

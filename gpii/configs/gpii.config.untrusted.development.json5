@@ -1,0 +1,16 @@
+/**
+ * This configuration acts as a base for `gpii.config.untrusted.evelopment.local`. It runs the
+ * local Untrusted Flow Manager locally.
+ *
+ * * The following components are running on the local machine:
+ * ** Untrusted Local Flow Manager
+ * ** Static Device Reporter (reading from file)
+ */
+{
+    "type": "gpii.config.untrusted.development",
+    "mergeConfigs": [
+        "%deviceReporter/configs/gpii.deviceReporter.config.static.json5",
+        "%flowManager/configs/gpii.flowManager.config.untrusted.base.json5",
+        "%flatMatchMaker/configs/gpii.flatMatchMaker.config.base.json5"
+    ]
+}

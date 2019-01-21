@@ -27,28 +27,27 @@ var fluid = require("infusion"),
 
 fluid.registerNamespace("gpii.tests.development");
 
-gpii.tests.development.userToken = "testUser1";
+gpii.tests.development.gpiiKey = "testUser1";
 
 gpii.tests.development.testLoginResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged in.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key " +
+        gpii.tests.development.gpiiKey + " was successfully logged in.", data);
 };
 
 gpii.tests.development.testLogoutResponse = function (data) {
-    jqUnit.assertEquals("Response is correct", "User with token " +
-        gpii.tests.development.userToken + " was successfully logged out.", data);
+    jqUnit.assertEquals("Response is correct", "User with GPII key " +
+        gpii.tests.development.gpiiKey + " was successfully logged out.", data);
 };
 
 gpii.tests.development.testDefs = [{
     name: "Flow Manager development tests",
     expect: 2,
     config: {
-        configName: "gpii.config.development.all.local",
-        configPath: "%universal/gpii/configs"
+        configName: "gpii.config.development.local",
+        configPath: "%gpii-universal/gpii/configs"
     },
     gradeNames: ["gpii.test.common.testCaseHolder"],
-    userToken: gpii.tests.development.userToken,
-
+    gpiiKey: gpii.tests.development.gpiiKey,
     sequence: [{
         func: "{loginRequest}.send"
     }, {

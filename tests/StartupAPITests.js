@@ -17,7 +17,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit = fluid.registerNamespace("jqUnit"),
         gpii = fluid.registerNamespace("gpii");
 
-    fluid.require("%universal");
+    fluid.require("%gpii-universal");
 
     kettle.loadTestingSupport();
     fluid.setLogging(true);
@@ -47,13 +47,13 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
         gpii.start({
-            configName: "gpii.config.all.development.dr.production"
+            configName: "gpii.config.development.dynamicDR.local"
         });
 
         configs = gpii.queryConfigs();
         jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
         jqUnit.assertEquals("Default Config should be dev all dr prod.", configs[0].typeName,
-                "gpii.config.all.development.dr.production");
+                "gpii.config.development.dynamicDR.local");
 
         gpii.stop();
         configs = gpii.queryConfigs();
@@ -65,14 +65,14 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
         jqUnit.assertEquals("No Kettle Servers should be running.", configs.length, 0);
 
         gpii.start({
-            configPath: __dirname + "/configs",
-            configName: "gpii.tests.acceptance.localInstall.config"
+            configPath: "%gpii-universal/gpii/configs",
+            configName: "gpii.config.development.local"
         });
 
         configs = gpii.queryConfigs();
         jqUnit.assertEquals("One Kettle Server should be started on.", configs.length, 1);
-        jqUnit.assertEquals("Default Config should be acceptance local install.", configs[0].typeName,
-                "gpii.tests.acceptance.localInstall.config");
+        jqUnit.assertEquals("Default Config should be local install.", configs[0].typeName,
+                "gpii.config.development.local");
 
         gpii.stop();
         configs = gpii.queryConfigs();

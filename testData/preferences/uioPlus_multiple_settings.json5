@@ -1,0 +1,45 @@
+// # uioPlus_multiple_settings
+//
+// A preference set for testing preference settings in UIO+.
+//
+// Attempts to set all of the UIO+ preferences. The Syllabification and CharacterSpace preferences are currently not supported by UIO+ and will be ignored.
+//
+// ## Preferences
+//
+// * Captions: enabled
+// * Character Space: increased (1)
+// * Font Size: increased (1.3)
+// * High Contrast: Enabled
+// * High Contrast Theme: yellow-black
+// * Highlight Color: green (text selection is highlighted in green)
+// * Inputs Larger: enabled (form controls increase in size)
+// * Line Space: increased (1.3)
+// * Self Voicing: enabled
+// * Simplified UI: enabled
+// * Syllabification: enabled
+// * Table of Contents: enabled
+// * wordSpace: increased (1)
+{
+    "flat": {
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/captions/enabled": true,
+                    "http://registry.gpii.net/common/characterSpace": 1,
+                    "http://registry.gpii.net/common/fontSize": 16,
+                    "http://registry.gpii.net/common/highContrast/enabled": true,
+                    "http://registry.gpii.net/common/highContrastTheme": "yellow-black",
+                    "http://registry.gpii.net/common/highlightColor": "green",
+                    "http://registry.gpii.net/common/inputsLarger/enabled": true,
+                    "http://registry.gpii.net/common/lineSpace": 1.3,
+                    "http://registry.gpii.net/common/selfVoicing/enabled": true,
+                    "http://registry.gpii.net/common/simplifiedUi/enabled": true,
+                    "http://registry.gpii.net/common/syllabification/enabled": true,
+                    "http://registry.gpii.net/common/tableOfContents": true,
+                    "http://registry.gpii.net/common/wordSpace": 1
+                }
+            }
+        }
+    }
+}

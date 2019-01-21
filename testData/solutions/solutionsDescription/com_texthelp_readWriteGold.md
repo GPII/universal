@@ -25,23 +25,23 @@ The current implementation of Read&Write allows the GPII to:
 Actually it doesn't include any transformation so this implementation only works with application specific settings.
 
 ## Testing
-When using a NP set that makes use of Read&Write, it should be launched and configured properly by taking into account the settings included in that NP set.
-Actually there are two NP sets included into universal (rwg1 and rwg2) with settings for Read&Write and that you can use to test this implementation.
+When using a preference set that makes use of Read&Write, it should be launched and configured properly by taking into account the settings included in that preference set.
+Actually there are two preference sets included into universal (rwg1 and rwg2) with settings for Read&Write and that you can use to test this implementation.
 
 Also, the GPII has [acceptance tests](https://github.com/GPII/universal/blob/master/tests/platform/windows/windows-readwrite-testSpec.txt) for Read&Write.
 
 ### rwg1
 
-NP set: [preferences/rwg1.json](https://github.com/GPII/universal/blob/master/testData/preferences/rwg1.json)
+preference set: [preferences/rwg1.json](https://github.com/GPII/universal/blob/master/testData/preferences/rwg1.json)
 
-* When logging in, Read&Write should be started automatically and among many other adaptations: 
+* When logging in, Read&Write should be started automatically and among many other adaptations:
   * The toolbar must use the "Fun" icon set and they should be shown in "large" mode
   * The toolbar must show the "Writing Features" including buttons such as "Spell check", "Prediction", etc.
 * When logging out, Read&Write should be stopped and default settings will be restored.
 
 ### rwg2
 
-NP set: [preferences/rwg2.json](https://github.com/GPII/universal/blob/master/testData/preferences/rwg2.json)
+preference set: [preferences/rwg2.json](https://github.com/GPII/universal/blob/master/testData/preferences/rwg2.json)
 
 * When logging in, Read&Write should be started automatically and among many other adaptations:
   * The toolbar must use the "Professional" icon set and they should be shown in "large" mode

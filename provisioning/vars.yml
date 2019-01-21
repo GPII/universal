@@ -6,16 +6,18 @@
 
 nodejs_app_name: universal
 
-nodejs_app_tcp_port: 8081
+nodejs_preferences_server_port: 9081
+nodejs_flow_manager_port: 9082
+nodejs_couchdb_port: 5984
 
-# Currently Node.js 6.x LTS is required by Universal
+# Choose Node.js branch (lts or current)
 nodejs_branch: lts
 
 # If a specific Node.js version is needed, specify it here. If not defined, defaults to the latest within the branch.
-#nodejs_version: 4.x.y
+#nodejs_version: 8.x.y
 
 # If a specific npm version is needed, specify it here
-#nodejs_npm_version: 2.15.1
+#nodejs_npm_version: 5.6.0
 
 nodejs_app_start_script: gpii.js
 

@@ -10,7 +10,6 @@ You may obtain a copy of the License at
 https://github.com/GPII/universal/blob/master/LICENSE.txt
 */
 
-
 "use strict";
 
 var fluid = require("infusion"),
@@ -18,15 +17,13 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
-fluid.setLogging(true);
-fluid.logObjectRenderChars = 10240;
 
 fluid.registerNamespace("gpii.tests.journal");
 
-gpii.tests.journal.testSpec = fluid.require("%universal/tests/platform/windows/windows-builtIn-testSpec.js");
+gpii.tests.journal.testSpec = fluid.require("%gpii-universal/tests/platform/windows/windows-builtIn-testSpec.js");
 
 // The os_win7 entry forms the spine of our test. This user has 4 application-specific preferences encoded
 // for Windows built-in a11y features - mouse trailing (SPI), high contrast (SPI), large cursors (registry), magnifier (registry)
@@ -36,13 +33,13 @@ gpii.tests.journal.testDef = gpii.tests.windows.builtIn[0];
 
 gpii.tests.journal.initialSettings = {
     "gpii.windows.spiSettingsHandler": {
-        "some.app.id": [{
+        "com.microsoft.windows.mouseTrailing": [{
             "settings": {
                 "MouseTrails": {
                     "value": 20
                 }
             },
-            "options": { // We use a lower-quality utility than gpii.settingsHandlers.invokeRetryingHandler in our test case setup
+            "options": {
                 "mockSync": true,
                 "getAction": "SPI_GETMOUSETRAILS",
                 "setAction": "SPI_SETMOUSETRAILS"
@@ -50,7 +47,7 @@ gpii.tests.journal.initialSettings = {
         }]
     },
     "gpii.windows.registrySettingsHandler": {
-        "some.app.id": [{ // magnifier stuff
+        "com.microsoft.windows.magnifier": [{ // magnifier stuff
             "settings": {
                 "Invert": 1,
                 "Magnification": 200,
@@ -76,13 +73,117 @@ gpii.tests.journal.initialSettings = {
     ]
     },
     "gpii.windows.displaySettingsHandler": {
-        "some.app.id": [{
+        "com.microsoft.windows.screenResolution": [{
             "settings": {
                 "screen-resolution": {
                     "width": 800,
                     "height": 600
                 },
                 "screen-dpi": 1
+            }
+        }]
+    },
+    "gpii.windows.systemSettingsHandler": {
+        "com.microsoft.windows.nightScreen": [
+            {
+                "settings": {
+                    "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
+                        "value": false
+                    }
+                }
+            }
+        ],
+        "com.microsoft.windows.touchPadSettings": [
+            {
+                "settings": {
+                    "SystemSettings_Input_Touch_SetActivationTimeout": {
+                        "value": "Medium sensitivity"
+                    }
+                }
+            }
+        ],
+        "com.microsoft.windows.narrator": [
+            {
+                "settings": {
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                        "value": false
+                    },
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                        "value": false
+                    }
+                }
+            }
+        ]
+    },
+    "gpii.windows.wmiSettingsHandler": {
+        "com.microsoft.windows.brightness": [
+            {
+                "settings": {
+                    "Brightness": {
+                        "value": null
+                    }
+                },
+                "options": {
+                    "Brightness": {
+                        "namespace": "root\\WMI",
+                        "get": { "query": "SELECT CurrentBrightness FROM WmiMonitorBrightness" },
+                        "set": {
+                            "className": "WmiMonitorBrightnessMethods",
+                            "method": "WmiSetBrightness",
+                            "params": [0xFFFFFFFF, "$value"],
+                            "returnVal": ["uint", 0]
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "gpii.windows.enableRegisteredAT": {
+        "com.microsoft.windows.magnifier": [{
+            "settings": {
+                "running": false
+            },
+            "options": {
+                "registryName": "magnifierpane",
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "Magnify.exe"
+                    }
+                ]
+            }
+        }]
+    },
+    "gpii.windows.nativeSettingsHandler": {
+        "com.microsoft.windows.mouseSettings": [
+            {
+                "settings": {
+                    "DoubleClickTimeConfig": {
+                        "value": 500
+                    }
+                },
+                "options": {
+                    "functionName": "DoubleClickTime"
+                }
+            }
+        ]
+    }
+};
+
+gpii.tests.journal.settingsAfterCrash = {
+    "gpii.windows.enableRegisteredAT": {
+        "com.microsoft.windows.magnifier": [{
+            "settings": {
+                "running": false
+            },
+            "options": {
+                "registryName": "magnifierpane",
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "Magnify.exe"
+                    }
+                ]
             }
         }]
     }
@@ -324,8 +425,8 @@ gpii.tests.journal.stashInitial = function (settingsHandlersPayload, settingsSto
     var settingsHandlers = fluid.copy(testCaseHolder.options.settingsHandlers);
     // We eliminate the last blocks since our initial settings state does not include them, and the blocks
     // with values all `undefined` will confuse jqUnit.assertDeepEq in gpii.test.checkConfiguration
-    settingsHandlers["gpii.windows.spiSettingsHandler"]["some.app.id"].length = 1;
-    settingsHandlers["gpii.windows.registrySettingsHandler"]["some.app.id"].length = 1;
+    settingsHandlers["gpii.windows.spiSettingsHandler"] = fluid.filterKeys(settingsHandlers["gpii.windows.spiSettingsHandler"], "com.microsoft.windows.mouseTrailing");
+    settingsHandlers["gpii.windows.registrySettingsHandler"] = fluid.filterKeys(settingsHandlers["gpii.windows.registrySettingsHandler"], "com.microsoft.windows.magnifier");
     testCaseHolder.settingsHandlers = settingsHandlers;
 };
 
@@ -354,7 +455,7 @@ gpii.tests.journal.normalLoginFixtures = [
 gpii.tests.journal.fixtures = [
     {
         name: "Journal state and restoration",
-        expect: 10,
+        expect: 11,
         sequenceSegments: [
             {   func: "gpii.tests.journal.stashJournalId",
                 args: "{testCaseHolder}"
@@ -391,6 +492,12 @@ gpii.tests.journal.fixtures = [
             },
             kettle.test.startServerSequence,
             {
+                func: "gpii.test.setSettings",
+                args: [gpii.tests.journal.settingsAfterCrash, "{nameResolver}", "{testCaseHolder}.events.onInitialSettingsComplete.fire"]
+            }, {
+                event: "{tests}.events.onInitialSettingsComplete",
+                listener: "fluid.identity"
+            }, {
                 func: "{listJournalsRequest}.send"
             }, {
                 event: "{listJournalsRequest}.events.onComplete",
@@ -457,7 +564,7 @@ gpii.tests.journal.badJournalFixtures = [
 ];
 
 gpii.tests.journal.baseTestDefBase = fluid.freezeRecursive({
-    userToken: gpii.tests.journal.testDef.userToken,
+    gpiiKey: gpii.tests.journal.testDef.gpiiKey,
     settingsHandlers: gpii.tests.journal.testDef.settingsHandlers,
     config: {
         configName: gpii.tests.journal.testSpec.configName,
@@ -476,8 +583,8 @@ gpii.tests.journal.badJournalBaseTestDef = fluid.extend({
 }, gpii.tests.journal.baseTestDefBase);
 
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.journal.fixtures, gpii.tests.journal.baseTestDef));
 
-kettle.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
+gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
         gpii.tests.journal.badJournalFixtures, gpii.tests.journal.badJournalBaseTestDef));

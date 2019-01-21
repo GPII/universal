@@ -18,30 +18,81 @@ Seventh Framework Programme (FP7/2007-2013) under grant agreement no. 289016.
 var fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii");
 
-fluid.require("%universal");
+fluid.require("%gpii-universal");
 
 gpii.loadTestingSupport();
 
-fluid.registerNamespace("gpii.tests.windows");
+fluid.registerNamespace("gpii.tests.windows.jaws");
 
-gpii.tests.windows.jaws = [
+// To avoid duplicating this entire piece in each test. Given a true or false value
+// as input, this will return a settingshandler entry, containing all the options from
+// the solutions registry entry for NVDAs launchHandler, with a settings block with
+// running: X - where X is replaced with the input parameter
+gpii.tests.windows.jaws.flexibleHandlerEntry = function (running) {
+    return {
+        "com.freedomscientific.jaws": [{
+            "settings": {
+                "running": running
+            },
+            "options": {
+                "verifySettings": true,
+                retryOptions: {
+                    rewriteEvery: 0,
+                    numRetries: 20,
+                    retryInterval: 1000
+                },
+                "getState": [
+                    {
+                        "type": "gpii.processReporter.find",
+                        "command": "jfw.exe"
+                    }
+                ],
+                "setTrue": [
+                    {
+                        "type": "gpii.launch.exec",
+                        "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\JAWS17.exe\\}\""
+                    }
+                ],
+                "setFalse": [
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "jfw.exe"
+                    },
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "fsSynth32.exe"
+                    },
+                    {
+                        "type": "gpii.windows.closeProcessByName",
+                        "filename": "jhookldr.exe"
+                    }
+                ]
+            }
+        }]
+    };
+};
+
+gpii.tests.windows.jaws.testDefs = [
     {
-        name: "Testing NP set \"jaws_application\" using Flat matchmaker",
-        userToken: "jaws_application",
+        name: "Testing preference set \"jaws_application\"",
+        gpiiKey: "jaws_application",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName" : "GPII",
-                            "options.SayAllIndicateCaps" : false,
-                            "options.TypingEcho": 3,
-                            "options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps" : 0,
+                            "Options.TypingEcho": 3,
+                            "Options.SayAllMode": 0,
                             "Braille.BrailleMode": 0,
-                            "options.SayAllIgnoreShiftKeys": true
+                            "Options.SayAllIgnoreShiftKeys": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     },
 
@@ -80,27 +131,89 @@ gpii.tests.windows.jaws = [
                             "ENU-PCCursor.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
+        }
     },
     {
-        name: "Testing NP set \"jaws_common\" using Flat matchmaker",
-        userToken: "jaws_common",
+        name: "Testing preference set \"jaws_application\" - where jaws is running on startup",
+        gpiiKey: "jaws_application",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
+                    {
+                        "settings": {
+                            "Voice Profiles.ActiveVoiceProfileName" : "GPII",
+                            "Options.SayAllIndicateCaps" : 0,
+                            "Options.TypingEcho": 3,
+                            "Options.SayAllMode": 0,
+                            "Braille.BrailleMode": 0,
+                            "Options.SayAllIgnoreShiftKeys": 1
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
+                        }
+                    },
+
+                    {
+                        "settings": {
+                            "Options.PrimarySynthesizer" : "eloq",
+                            "ENU-Global.Rate": 100,
+                            "ENU-JAWSCursor.Rate": 100,
+                            "ENU-Keyboard.Rate": 100,
+                            "ENU-MenuAndDialog.Rate": 100,
+                            "ENU-Message.Rate": 100,
+                            "ENU-PCCursor.Rate": 100,
+                            "ENU-Global.Pitch": 75,
+                            "ENU-JAWSCursor.Pitch": 75,
+                            "ENU-Keyboard.Pitch": 75,
+                            "ENU-MenuAndDialog.Pitch": 75,
+                            "ENU-Message.Pitch": 75,
+                            "ENU-PCCursor.Pitch": 75,
+                            "ENU-Global.Volume": 100,
+                            "ENU-JAWSCursor.Volume": 100,
+                            "ENU-Keyboard.Volume": 100,
+                            "ENU-MenuAndDialog.Volume": 100,
+                            "ENU-Message.Volume": 100,
+                            "ENU-PCCursor.Volume": 100,
+                            "ENU-Global.Punctuation": 2,
+                            "ENU-JAWSCursor.Punctuation": 2,
+                            "ENU-Keyboard.Punctuation": 2,
+                            "ENU-MenuAndDialog.Punctuation": 2,
+                            "ENU-Message.Punctuation": 2,
+                            "ENU-PCCursor.Punctuation": 2,
+                            "ENU-Global.SynthLangString": "Italian",
+                            "ENU-JAWSCursor.SynthLangString": "Italian",
+                            "ENU-Keyboard.SynthLangString": "Italian",
+                            "ENU-MenuAndDialog.SynthLangString": "Italian",
+                            "ENU-Message.SynthLangString": "Italian",
+                            "ENU-PCCursor.SynthLangString": "Italian"
+                        },
+                        "options": {
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
+                        }
+                    }
+                ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
+        }
+    },
+    {
+        name: "Testing preference set \"jaws_common\"",
+        gpiiKey: "jaws_common",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
+        },
+        settingsHandlers: {
+            "gpii.settingsHandlers.INISettingsHandler": {
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
@@ -136,7 +249,7 @@ gpii.tests.windows.jaws = [
                             "ENU-MenuAndDialog.SynthLangString": "French"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -144,33 +257,29 @@ gpii.tests.windows.jaws = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 1,
-                            "options.SayAllMode": 1,
-                            "options.SayAllIndicateCaps": false,
-                            "options.SayAllIgnoreShiftKeys": false,
-                            "options.TypingEcho": 3
+                            "Options.SayAllMode": 1,
+                            "Options.SayAllIndicateCaps": 0,
+                            "Options.SayAllIgnoreShiftKeys": 0,
+                            "Options.TypingEcho": 3
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
+        }
     },
     {
-        name: "Testing NP set \"jaws_common2\" using Flat matchmaker",
-        userToken: "jaws_common2",
+        name: "Testing preference set \"jaws_common2\"",
+        gpiiKey: "jaws_common2",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
@@ -206,7 +315,7 @@ gpii.tests.windows.jaws = [
                             "ENU-MenuAndDialog.SynthLangString": "Italian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -214,32 +323,28 @@ gpii.tests.windows.jaws = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 0,
-                            "options.SayAllMode": 0,
-                            "options.SayAllIndicateCaps": false,
-                            "options.SayAllIgnoreShiftKeys": false
+                            "Options.SayAllMode": 0,
+                            "Options.SayAllIndicateCaps": 0,
+                            "Options.SayAllIgnoreShiftKeys": 0
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
+        }
     },
     {
-        name: "Testing NP set \"jaws_common3\" using Flat matchmaker",
-        userToken: "jaws_common3",
+        name: "Testing preference set \"jaws_common3\"",
+        gpiiKey: "jaws_common3",
+        initialState: {
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(false)
+        },
         settingsHandlers: {
             "gpii.settingsHandlers.INISettingsHandler": {
-                "some.app.id": [
+                "com.freedomscientific.jaws": [
                     {
                         "settings": {
                             "Options.PrimarySynthesizer": "eloq",
@@ -275,7 +380,7 @@ gpii.tests.windows.jaws = [
                             "ENU-MenuAndDialog.SynthLangString": "French Canadian"
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\VoiceProfiles\\GPII.VPF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\VoiceProfiles\\GPII.VPF"
                         }
                     },
 
@@ -283,32 +388,25 @@ gpii.tests.windows.jaws = [
                         "settings": {
                             "Voice Profiles.ActiveVoiceProfileName": "GPII",
                             "Braille.BrailleMode": 2,
-                            "options.SayAllMode": 2,
-                            "options.SayAllIndicateCaps": true,
-                            "options.SayAllIgnoreShiftKeys": true,
-                            "options.TypingEcho": 1
+                            "Options.SayAllMode": 2,
+                            "Options.SayAllIndicateCaps": 1,
+                            "Options.SayAllIgnoreShiftKeys": 1,
+                            "Options.TypingEcho": 1
                         },
                         "options": {
-                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\17.0\\Settings\\enu\\DEFAULT.JCF"
+                            "filename": "${{environment}.APPDATA}\\Freedom Scientific\\JAWS\\2018\\Settings\\enu\\DEFAULT.JCF"
                         }
                     }
                 ]
-            }
-        },
-        processes: [
-            {
-                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq jfw.exe\" | find /I \"jfw.exe\" /C",
-                "expectConfigured": "1",
-                "expectRestored": "0",
-                "maxTimeouts": "40"
-            }
-        ]
+            },
+            "gpii.launchHandlers.flexibleHandler": gpii.tests.windows.jaws.flexibleHandlerEntry(true)
+        }
     }
 ];
 
 module.exports = gpii.test.bootstrap({
-    testDefs:  "gpii.tests.windows.jaws",
+    testDefs:  "gpii.tests.windows.jaws.testDefs",
     configName: "gpii.tests.acceptance.windows.jaws.config",
-    configPath: "%universal/tests/platform/windows/configs"
+    configPath: "%gpii-universal/tests/platform/windows/configs"
 }, ["gpii.test.integration.testCaseHolder.windows"],
     module, require, __dirname);

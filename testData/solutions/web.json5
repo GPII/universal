@@ -12,17 +12,16 @@
             "myconf": {
                 "type": "gpii.settingsHandlers.noSettings",
                 "supportedSettings": {
-                    "screenReaderTTSEnabled": {},
+                    "screenReaderTTS/enabled": {},
                     "fontSize": {},
                     "magnifierEnabled": {},
                     "magnification": {},
-                    "highContrastEnabled": {},
+                    "highContrast/enabled": {},
                     "highContrastTheme": {},
                     "invertColours": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
-                    "screenReaderTTSEnabled": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled",
+                    "screenReaderTTS/enabled": "http://registry\\.gpii\\.net/common/screenReaderTTS/enabled",
                     "fontSize": {
                         "transform":{
                             "type": "fluid.transforms.quantize",
@@ -42,7 +41,7 @@
                             ]
                         }
                     },
-                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnifierEnabled",
+                    "magnifierEnabled": "http://registry\\.gpii\\.net/common/magnification/enabled",
                     "magnification": {
                         "transform": {
                             "type": "fluid.transforms.quantize",
@@ -62,7 +61,7 @@
                             ]
                         }
                     },
-                    "highContrastEnabled": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                    "highContrast/enabled": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                     "highContrastTheme": "http://registry\\.gpii\\.net/common/highContrastTheme",
                     "invertColours": "http://registry\\.gpii\\.net/common/invertColours"
                 },
@@ -96,7 +95,6 @@
                     "tracking": {},
                     "magnification": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "fontSize": {
                         "transform":{
@@ -196,12 +194,6 @@
                     "language": {},
                     "theme": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/volume",
-                    "http://registry\\.gpii\\.net/common/language"
-                ],
                 "capabilitiesTransformations": {
                     "theme": {
                         "transform": {
@@ -292,11 +284,6 @@
                     "highContrastTheme": {},
                     "volume": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/volume"
-                ],
                 "capabilitiesTransformations": {
                     "fontSize": {
                         "transform": {
@@ -367,7 +354,6 @@
                     "access_commonprefs_capitalization": {},
                     "access_commonprefs_c4a_enable_braille": {}
                 },
-                "capabilities": [],
                 "capabilitiesTransformations": {
                     "access_commonprefs_speechrate": {
                         "transform": {
@@ -431,19 +417,16 @@
                     "language": {},
                     "contrastTheme": {},
                     "fontSize": {},
-                    "timeOut": {}
+                    "timeOut": {},
+                    "buttonSize": {},
+                    "fontFace": {}
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/fontSize",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -511,13 +494,14 @@
                     "signLanguageEnabled": {},
                     "signLanguage": {},
                     "interpreterType": {},
+                    "interpreterName": {},
                     "pictogramsEnabled": {},
-                    "simplifiedUiEnabled": {}
+                    "simplifiedUiEnabled": {},
+                    "textStyle": {},
+                    "lineSpacing": {},
+                    "inputsLarger": {}
+
                 },
-                "capabilities": [
-                    "http://registry\\.gpii\\.net/common/highContrastTheme",
-                    "http://registry\\.gpii\\.net/common/highContrastEnabled"
-                ],
                 "capabilitiesTransformations": {
                     "language": "http://registry\\.gpii\\.net/common/language",
                     "textSize": {
@@ -550,7 +534,7 @@
                     "contrastTheme": {
                         "transform": {
                             "type": "fluid.transforms.condition",
-                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+                            "conditionPath": "http://registry\\.gpii\\.net/common/highContrast/enabled",
                             "true": {
                                 "transform": {
                                     "type": "fluid.transforms.valueMapper",
@@ -565,7 +549,7 @@
                             }
                         }
                     },
-                    "signLanguageEnabled": "http://registry\\.gpii\\.net/common/signLanguageEnabled",
+                    "signLanguageEnabled": "http://registry\\.gpii\\.net/common/signLanguage/enabled",
                     "signLanguage": {
                         "transform": {
                             "type": "fluid.transforms.valueMapper",
@@ -590,12 +574,11 @@
                             }
                         }
                     },
-                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictogramsEnabled",
-                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUiEnabled"
+                    "pictogramsEnabled": "http://registry\\.gpii\\.net/common/pictograms/enabled",
+                    "simplifiedUiEnabled": "http://registry\\.gpii\\.net/common/simplifiedUi/enabled"
                 },
                 "inverseCapabilitiesTransformations": {}
             }
         }
     }
 }
-

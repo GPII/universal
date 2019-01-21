@@ -1,0 +1,23 @@
+// # Snapsets for APCP pilots
+//
+// ## Description
+//
+// These snapsets have been created in order to test the GPII in the APCP pilots.
+// A full description of them can be found here: https://docs.google.com/document/d/1B3uIonWJNqbzoMgboVc7b-T3UJYuikB2FKJmIIp4DYE/edit#
+// In addition to the specifications from the original document:
+//
+// * **snapset_1b**: Win10 Display scaling (150%) and Win10 Mouse cursor size (1.0)
+{
+    "flat": {
+        "name": "Larger 150%",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/common/DPIScale": 2,
+                    "http://registry.gpii.net/common/cursorSize": 1.0
+                }
+            }
+        }
+    }
+}

@@ -10,5 +10,11 @@
     },
     {
         "id": "org.gnome.desktop.a11y.keyboard"
+    },
+    {
+        "id": "org.gnome.desktop.a11y.applications.onscreen-keyboard"
+    },
+    {
+        "id": "org.gnome.orca"
     }
 ]

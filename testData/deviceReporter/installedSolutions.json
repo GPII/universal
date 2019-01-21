@@ -8,11 +8,11 @@
     },
 
     {
-        "id": "org.gnome.shell.overrides"
+        "id": "fakemag2"
     },
 
     {
-        "id": "org.gnome.desktop.wm.preferences"
+        "id": "fakescreenreader1"
     },
 
     {
@@ -37,6 +37,10 @@
 
     {
         "id": "com.microsoft.windows.magnifier"
+    },
+
+    {
+        "id": "com.freedomscientific.jaws"
     },
 
     {
@@ -72,6 +76,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mouseSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.screenDPI"
     },
 
@@ -81,6 +89,26 @@
 
     {
         "id": "com.microsoft.windows.screenResolution"
+    },
+
+    {
+        "id": "com.microsoft.windows.nightScreen"
+    },
+
+    {
+        "id": "com.microsoft.windows.touchPadSettings"
+    },
+
+    {
+        "id": "com.microsoft.windows.typingEnhancement"
+    },
+
+    {
+        "id": "com.microsoft.windows.language"
+    },
+
+    {
+        "id": "com.microsoft.windows.brightness"
     },
 
     {
@@ -121,6 +149,14 @@
 
     {
         "id": "net.gpii.uioPlus"
+    },
+
+    {
+        "id": "com.microsoft.windows.volumeControl"
+    },
+
+    {
+        "id": "net.gpii.explode"
     }
 
 ]
