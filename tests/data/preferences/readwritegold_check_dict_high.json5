@@ -6,23 +6,23 @@
                 "preferences": {
                     "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
                         // Check It
-                        "ApplicationSettings.Spelling.OrderByContext.$t": false,
-                        "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": false,
-                        "ApplicationSettings.Spelling.ShowCheckIt.$t": true,
-                        "ApplicationSettings.Spelling.RightClickMSWord.$t": true,
+                        "ApplicationSettings.Spelling.OrderByContext.$t": "false",
+                        "ApplicationSettings.Spelling.SpeakSpellingOnHover.$t": "false",
+                        "ApplicationSettings.Spelling.ShowCheckIt.$t": "true",
+                        "ApplicationSettings.Spelling.RightClickMSWord.$t": "true",
                         // Dictionary
                         "ApplicationSettings.Dictionary.WebDictionary.$t": "Bing",
-                        "ApplicationSettings.Dictionary.PopupDictionary.$t": true,
-                        "ApplicationSettings.Dictionary.ToggleImages.$t": true,
+                        "ApplicationSettings.Dictionary.PopupDictionary.$t": "true",
+                        "ApplicationSettings.Dictionary.ToggleImages.$t": "true",
                         // Highlights
-                        "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": false,
-                        "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": true,
-                        "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": false,
-                        "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": false,
+                        "ApplicationSettings.StudySkills.CollectYellowHighlight.$t": "false",
+                        "ApplicationSettings.StudySkills.CollectBlueHighlight.$t": "true",
+                        "ApplicationSettings.StudySkills.CollectGreenHighlight.$t": "false",
+                        "ApplicationSettings.StudySkills.CollectPinkHighlight.$t": "false",
                         "ApplicationSettings.StudySkills.CollectOrder.$t": "Position",
                         "ApplicationSettings.StudySkills.ColorSeparator.$t": "Page",
                         "ApplicationSettings.StudySkills.HighlightSeparator.$t": "Tab",
-                        "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": false
+                        "ApplicationSettings.StudySkills.MultiDocHighlighting.$t": "false"
                     }
                 }
             }

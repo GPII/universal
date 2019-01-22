@@ -10,11 +10,11 @@
                         "ApplicationSettings.Translation.ToLanguage.$t": "da",
                         // Vocabulary List
                         // TODO: Verify with Microsoft word installation
-                        "ApplicationSettings.Vocabulary.VocabListWindow.$t": true,
-                        "ApplicationSettings.Vocabulary.VocabListImages.$t": false,
-                        "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": true,
+                        "ApplicationSettings.Vocabulary.VocabListWindow.$t": "true",
+                        "ApplicationSettings.Vocabulary.VocabListImages.$t": "false",
+                        "ApplicationSettings.Vocabulary.VocabListDefinitions.$t": "true",
                         // Voice Note
-                        "ApplicationSettings.VoiceNote.InsertInDoc.$t": true
+                        "ApplicationSettings.VoiceNote.InsertInDoc.$t": "true"
                     }
                 }
             }

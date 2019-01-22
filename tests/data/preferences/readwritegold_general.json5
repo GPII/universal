@@ -7,9 +7,9 @@
                     "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
                         "ApplicationSettings.AppBar.IconSize.$t": "Small",
                         "ApplicationSettings.AppBar.ToolbarIconSet.$t": "Color",
-                        "ApplicationSettings.AppBar.ShowText.$t": true,
+                        "ApplicationSettings.AppBar.ShowText.$t": "true",
                         "ApplicationSettings.AppBar.optToolbarBackColour.$t": "#008080",
-                        "ApplicationSettings.AppBar.RunOnStartUp.$t": false
+                        "ApplicationSettings.AppBar.RunOnStartUp.$t": "false"
                     }
                 }
             }
