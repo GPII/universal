@@ -54,18 +54,15 @@ var testIncludes = [
     "./platform/cloud/CloudStatusTests.js",
     "./platform/cloud/SettingsGetTests.js",
     "./platform/cloud/SettingsPutTests.js",
-    // TODO: Need to pick apart gpii.test.runTests to run the next test.  AFTER logout/login problem solved.
-    //"./CloseConflictingAppsTests.js",
-    // TODO: Need to pick apart gpii.test.buildSegmentedFixtures to run the next test.  AFTER logout/login problem solved.
-    //"./ContextIntegrationTests.js",
+    "./CloseConflictingAppsTests.js",
+    "./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
     "./ErrorTests.js",
     // TODO: Gotta get gpii.test.runSuitesWithFiltering working for the next test. AFTER logout/login problem solved.
     //"./IntegrationTests.js",
     // TODO: Gotta get gpii.test.buildSegmentedFixtures working for the next test. AFTER logout/login problem solved.
     //"./JournalIntegrationTests.js",
-    // TODO: Also has login/logout problems.
-    //"./MultiSettingsHandlerTests.js"
+    "./MultiSettingsHandlerTests.js",
     "./PayloadSizeTest.js",
     "./PSPIntegrationTests.js",
     "./ResetWithEnvReportTests.js",
