@@ -51,6 +51,88 @@ gpii.tests.productionConfigTesting.config = {
     configPath: "%gpii-universal/tests/configs"
 };
 
+gpii.tests.productionConfigTesting.settingsUserKey = {
+    "_id": "settingsUser",
+    "type": "gpiiKey",
+    "schemaVersion": "0.1",
+    "prefsSafeId": "prefsSafe-settingsUser",
+    "prefsSetId": "gpii-default",
+    "revoked": false,
+    "revokedReason": null,
+    "timestampCreated": new Date().toISOString(),
+    "timestampUpdated": null
+};
+
+gpii.tests.productionConfigTesting.settingsUserPrefsSafe = {
+    "_id": "prefsSafe-settingsUser",
+    "type": "prefsSafe",
+    "schemaVersion": "0.1",
+    "prefsSafeType": "user",
+    "name": "settingsUser",
+    "password": null,
+    "email": null,
+    "preferences": {
+        "flat": {
+            "name": "settingsUser",
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/applications/com.texthelp.readWriteGold": {
+                            "ApplicationSettings.AppBar.Width.$t": 788,
+                            "ApplicationSettings.AppBar.ShowText.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarShowText.$t": true,
+                            "ApplicationSettings.AppBar.LargeIcons.$t": true,
+                            "ApplicationSettings.AppBar.optToolbarLargeIcons.$t": true,
+                            "ApplicationSettings.Speech.optSAPI5Speed.$t": 50,
+                            "ApplicationSettings.Speech.optAutoUseScreenReading.$t": false
+                        },
+                        "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
+                            "show-cross-hairs": true,
+                            "lens-mode": false,
+                            "mag-factor": 2,
+                            "mouse-tracking": "proportional",
+                            "screen-position": "right-half",
+                            "scroll-at-edges": true
+                        },
+                        "http://registry.gpii.net/applications/com.microsoft.windows.magnifier": {
+                            "Magnification": 200,
+                            "ZoomIncrement": 50,
+                            "Invert": 0,
+                            "FollowMouse": 1,
+                            "FollowFocus": 1,
+                            "FollowCaret": 1,
+                            "MagnificationMode": 1
+                        },
+                        "http://registry.gpii.net/common/fontSize": 24,
+                        "http://registry.gpii.net/common/foregroundColor": "white",
+                        "http://registry.gpii.net/common/backgroundColor": "black",
+                        "http://registry.gpii.net/common/fontFaceFontName": [
+                            "Comic Sans"
+                        ],
+                        "http://registry.gpii.net/common/fontFaceGenericFontFace": "sans serif",
+                        "http://registry.gpii.net/common/magnification": 2,
+                        "http://registry.gpii.net/common/tracking": [
+                            "mouse"
+                        ],
+                        "http://registry.gpii.net/common/invertColours": true,
+                        "http://registry.gpii.net/common/adaptationPreference": [
+                            {
+                                "adaptationType": "caption",
+                                "language": "en"
+                            },
+                            {}
+                        ],
+                        "http://registry.gpii.net/common/tableOfContents": false
+                    }
+                }
+            }
+        }
+    },
+    "timestampCreated": new Date().toISOString(),
+    "timestampUpdated": null
+};
+
 gpii.tests.productionConfigTesting.gpiiKey = "carla";
 gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
     "username": gpii.tests.productionConfigTesting.gpiiKey,
@@ -203,9 +285,35 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
-        expect: 16,
+        expect: 20,
         config: gpii.tests.productionConfigTesting.config,
         components: {
+            addGpiiKey: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "5984",
+                    hostname: "couchdb",
+                    path: "/gpii",
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    expectedStatusCode: 201
+                }
+            },
+            addPrefsSafe: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "5984",
+                    hostname: "couchdb",
+                    path: "/gpii",
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    expectedStatusCode: 201
+                }
+            },
             healthRequest: {
                 type: "kettle.test.request.http",
                 options: {
@@ -275,16 +383,53 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
                         "message": "Cannot update:  GPII key \"" + gpii.tests.productionConfigTesting.gpiiKey + "\" is a snapset while executing HTTP PUT on url http://preferences:9081/preferences/%gpiiKey?merge=%merge"
                     }
                 }
+            },
+            deleteGpiiKey: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "5984",
+                    hostname: "couchdb",
+                    path: "/gpii/%id?rev=%revision",
+                    method: "DELETE",
+                    expectedStatusCode: 200
+                }
+            },
+            deletePrefsSafe: {
+                type: "kettle.test.request.http",
+                options: {
+                    port: "5984",
+                    hostname: "couchdb",
+                    path: "/gpii/%id?rev=%revision",
+                    method: "DELETE",
+                    expectedStatusCode: 200
+                }
             }
         }
     });
-    gpii.test.unshift(testDef.sequence, [
-        {
-            event: "{kettle.test.serverEnvironment}.events.onAllReady",
-            listener: "fluid.identity"
-        }
-    ]);
     gpii.test.push(testDef.sequence, [
+        {
+            func: "{addGpiiKey}.send",
+            args: [
+                gpii.tests.productionConfigTesting.settingsUserKey,
+                {
+                    port: "5984"
+                }
+            ]
+        }, {
+            event: "{addGpiiKey}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testAddToDatabase"
+        }, {
+            func: "{addPrefsSafe}.send",
+            args: [
+                gpii.tests.productionConfigTesting.settingsUserPrefsSafe,
+                {
+                    port: "5984"
+                }
+            ]
+        }, {
+            event: "{addPrefsSafe}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testAddToDatabase"
+        },
         {
             func: "{healthRequest}.send"
         }, {
@@ -327,6 +472,36 @@ gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.develop
         }, {
             event: "{putSettingsRequestFailure}.events.onComplete",
             listener: "gpii.tests.productionConfigTesting.testResponse"
+        }, {
+            func: "{deleteGpiiKey}.send",
+            args: [
+                null,
+                {
+                    termMap: {
+                        "id": "{addGpiiKey}.options.result.id",
+                        "revision": "{addGpiiKey}.options.result.rev"
+                    },
+                    port: "5984"
+                }
+            ]
+        }, {
+            event: "{deleteGpiiKey}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testStatusCode"
+        }, {
+            func: "{deletePrefsSafe}.send",
+            args: [
+                null,
+                {
+                    termMap: {
+                        "id": "{addPrefsSafe}.options.result.id",
+                        "revision": "{addPrefsSafe}.options.result.rev"
+                    },
+                    port: "5984"
+                }
+            ]
+        }, {
+            event: "{deletePrefsSafe}.events.onComplete",
+            listener: "gpii.tests.productionConfigTesting.testStatusCode"
         }
     ]);
     return testDef;
@@ -365,6 +540,12 @@ gpii.tests.productionConfigTesting.testStatusCode = function (data, request) {
     );
 };
 
+gpii.tests.productionConfigTesting.testAddToDatabase = function (data, request) {
+    gpii.tests.productionConfigTesting.testStatusCode(data, request);
+    // Record 'id' and 'rev' from response for later deletion.
+    request.options.result = JSON.parse(data);
+};
+
 gpii.tests.productionConfigTesting.testResponse = function (data, request) {
     gpii.tests.productionConfigTesting.testStatusCode(data, request);
     jqUnit.assertDeepEq(
@@ -401,6 +582,7 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
 
 kettle.test.bootstrapServer(gpii.tests.productionConfigTesting.testDefs);
 
+/*
 // =======================================================
 //
 // Shared with SettingsGetTests.js and SettingsPutTests.js
@@ -436,3 +618,4 @@ fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest
         "gpii.tests.productionConfigTesting.testCaseHolder"
     );
 });
+*/
