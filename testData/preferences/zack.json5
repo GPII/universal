@@ -1,0 +1,60 @@
+// # Zack.json5
+//
+// This preference set changes several preferences from ZoomText 2019
+//
+// ## Testing
+//
+// This changes the following settings from the AT software:
+//
+//      - Voice Language: French
+//      - Synthesizer: Vocalizer Expressive
+//      - Voice Settings:
+//          + Rate: 110 WPM.
+//          + Volume: 90%.
+//          + Pitch: 40%.
+//
+//      - Keyboard Echo: Words
+//      - Mouse Echo: Disabled
+//      - Pointer Scheme: Red with Circle
+//      - Zoom Level: 1.6
+{
+    "flat": {
+        "name": "Zack",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
+                        "ZtSpeech.SapiProductName": "Microsoft Zira Desktop - English (United States)-English",
+                        "ZtSpeech.Language": 1033,
+
+                        // [Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader]
+                        // ==================================================================
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Speaker": "Default",
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Valid": 1,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.SettingsValid": 1,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Muted": 0,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Voice": 0,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Rate": 110,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Volume": 90,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - Screen Reader.Pitch": 40,
+
+                        // [Microsoft Zira Desktop - English (United States)-English Speech - DocReader]
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Speaker": "Default",
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Valid": 1,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.SettingsValid": 1,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Muted": 0,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Voice": 0,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Rate": 110,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Volume": 90,
+                        "Microsoft Zira Desktop - English (United States)-English Speech - DocReader.Pitch": 40,
+
+                        "EchoTyping.Mode": 32771,
+                        "PointerScheme.PtrEnhEnable": 1,
+                        "PointerScheme.PtrEnhIndex": 2
+                    }
+                }
+            }
+        }
+    }
+}
