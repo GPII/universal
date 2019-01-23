@@ -506,7 +506,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-    expect: 14,
+    expect: 13,
     initialState: {
         "gpii.gsettings": {
             "data": [{
@@ -563,36 +563,32 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         // standard login with an already logged in user:
         func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
+        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
-        event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testLogoutError",
-        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
-            "statusCode": 409,
-            "message": "Got log in request from user adjustCursor, but the user adjustCursor is already logged in. So ignoring login request.",
-            "ignoreUserErrors": false
-        }]
+        event: "{that}.events.onResponse",
+        listener: "gpii.tests.userLogonRequest.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         // logout of different user
         func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
+        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
         priority: "last",
         listener: "gpii.tests.userLogonRequest.testLogoutError",
         args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
             "statusCode": 409,
-            "message": "Got logout request from user sammy, but the user adjustCursor is logged in. So ignoring the request.",
+            "message": "Got logout request from user adjustCursor, but the user sammy is logged in. So ignoring the request.",
             "ignoreUserErrors": false
         }]
     }, {
         // logout of the correct user
         func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
+        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+        args: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         // 3. "noUser" is automatically keyed in when no actual key is keyed in
         changeEvent: "{lifecycleManager}.applier.modelChanged",
