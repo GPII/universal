@@ -61,6 +61,7 @@ var testIncludes = [
     // TODO: Gotta get gpii.test.runSuitesWithFiltering working for the next test. AFTER logout/login problem solved.
     //"./IntegrationTests.js",
     // TODO: Gotta get gpii.test.buildSegmentedFixtures working for the next test. AFTER logout/login problem solved.
+    // TODO: This also has some really nasty and deep sequence munging.
     //"./JournalIntegrationTests.js",
     "./MultiSettingsHandlerTests.js",
     "./PayloadSizeTest.js",
@@ -106,6 +107,7 @@ var testIncludes = [
     //"./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
+    "../gpii/node_modules/couchConnector/test/couchConnectorTests.js",
     "../gpii/node_modules/eventLog/test/all-tests.js",
     "../gpii/node_modules/flatMatchMaker/test/FlatMatchMakerTests.js",
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
@@ -115,20 +117,22 @@ var testIncludes = [
     //"../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
     "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
+    "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authGrantFinderTests.js",
+    "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authorizationServiceTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    "../gpii/node_modules/couchConnector/test/couchConnectorTests.js",
     // TODO: Deep integration with previous pouch test case holder, needs to be rewritten.
     //"../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
+    "../gpii/node_modules/preferencesServer/test/preferencesServiceTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
-    "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/NoSettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/SettingsHandlerUtilitiesTests.js",
+    "../gpii/node_modules/settingsHandlers/test/WebSocketsSettingsHandlerTests.js",
+    "../gpii/node_modules/settingsHandlers/test/XMLSettingsHandlerTests.js",
     "../gpii/node_modules/singleInstance/test/SingleInstanceTests.js",
-    "../gpii/node_modules/userListeners/test/all-tests.js",
-    "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js"
+    "../gpii/node_modules/userListeners/test/all-tests.js"
 ];
 
 fluid.each(testIncludes, function (path) {

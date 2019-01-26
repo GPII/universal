@@ -134,6 +134,8 @@ gpii.tests.userLogonRequest.trackLogonChange = function (trackedLogonChange, log
     trackedLogonChange.push(logonChange);
 };
 
+// TODO: Replace all usages of gpii.tests.invokePromiseProducer
+
 // Note: There is an implementation risk with this fixture due to FLUID-5502 (https://issues.fluidproject.org/browse/FLUID-5502)
 // but we believe that this is currently reliable because each of the model changes is triggered asynchronously.
 gpii.tests.userLogonRequest.testDefs = [{

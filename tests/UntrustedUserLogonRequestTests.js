@@ -47,12 +47,10 @@ gpii.tests.untrusted.userLogonRequest.untrustedSpecificTests = [{
     expect: 2,
     sequence: [{
         // standard login without a cloud
-        func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
-    }, {
-        event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testUserError",
-        args: ["{arguments}.0",
+        task: "{lifecycleManager}.performLogin",
+        args: [gpii.tests.userLogonRequest.gpiiKey],
+        reject: "gpii.tests.userLogonRequest.testUserError",
+        rejectArgs: ["{arguments}.0",
             {
                 "code": "ECONNREFUSED",
                 "errno": "ECONNREFUSED",
