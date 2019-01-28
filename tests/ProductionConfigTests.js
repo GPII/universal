@@ -40,7 +40,7 @@ require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-gpii.test.bootstrapServer(fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
+gpii.test.runCouchTestDefs(fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.config.untrusted.development.json5",
