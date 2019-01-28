@@ -8519,6 +8519,206 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickTime": "DoubleClickTimeConfig.value"
                 }
+            },
+            "configurePointerSpeed": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSESPEED",
+                    "setAction": "SPI_SETMOUSESPEED",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "PointerSpeedConfig": {
+                        "schema": {
+                            "title": "Configures pointer speed",
+                            "description": "Selects a pointer speed.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 10
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "PointerSpeedConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.PointerSpeed",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.PointerSpeed": "PointerSpeedConfig.value"
+                }
+            },
+            "configurePointerPrecision": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSE",
+                    "setAction": "SPI_SETMOUSE",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "array",
+                        "valueType": "INT",
+                        "length": 3
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "EnhancePrecisionConfig": {
+                        "schema": {
+                            "title": "Enhance pointer precision",
+                            "description": "Enable/Disables enhanced pointer precision.",
+                            "type": "boolean",
+                            "default": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "EnhancePrecisionConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.condition",
+                            "conditionPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnhancePrecision",
+                            "condition": true,
+                            "outputPath": "value",
+                            "true": [6, 10, 1],
+                            "false": [0, 0, 1]
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.EnhancePrecision": "EnhancePrecisionConfig.value"
+                }
+            },
+            "configureSnapToDefButton": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETSNAPTODEFBUTTON",
+                    "setAction": "SPI_SETSNAPTODEFBUTTON",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "SnapToDefaultButtonConfig": {
+                        "schema": {
+                            "title": "Snap To",
+                            "description": "Automatically move pointer to the default button in a dialogue.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SnapToDefaultButtonConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SnapToDefaultButton",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            }
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.SnapToDefaultButton": "SnapToDefaultButtonConfig.value"
+                }
+            },
+            "configureHidePointer": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSEVANISH",
+                    "setAction": "SPI_SETMOUSEVANISH",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "INT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "HidePointerConfig": {
+                        "schema": {
+                            "title": "Hide pointer while typing",
+                            "description": "Enable/Disables hiding the pointer while typing.",
+                            "type": "boolean",
+                            "default": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "HidePointerConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.HidePointer",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.HidePointer": "HidePointerConfig.value"
+                }
+            },
+            "configureMouseSonar": {
+                "type": "gpii.windows.spiSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "getAction": "SPI_GETMOUSESONAR",
+                    "setAction": "SPI_SETMOUSESONAR",
+                    "uiParam": 0,
+                    "pvParam": {
+                        "type": "UINT"
+                    },
+                    "fWinIni": "SPIF_UPDATEINIFILE|SPIF_SENDCHANGE"
+                },
+                "supportedSettings": {
+                    "MouseSonarConfig": {
+                        "schema": {
+                            "title": "Mouse sonar",
+                            "description": "Enable/Disable showing mouse location when pressing the CTRL key.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "MouseSonarConfig": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar",
+                            "outputPath": "value"
+                        },
+                        "path": {
+                            "literalValue": "pvParam"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar": "MouseSonarConfig.value"
+                }
             }
         },
         "configure": [
@@ -8530,7 +8730,12 @@
             "settings.configureActiveWindowZOrder",
             "settings.configureWindowsArrangement",
             "settings.configureMouseDoubleClickTime",
-            "settings.configureMousePrimaryButton"
+            "settings.configureMousePrimaryButton",
+            "settings.configurePointerSpeed",
+            "settings.configurePointerPrecision",
+            "settings.configureSnapToDefButton",
+            "settings.configureHidePointer",
+            "settings.configureMouseSonar"
         ],
         "restore": [
             "settings.configureScrollWheelMode",
@@ -8541,7 +8746,12 @@
             "settings.configureActiveWindowZOrder",
             "settings.configureWindowsArrangement",
             "settings.configureMouseDoubleClickTime",
-            "settings.configureMousePrimaryButton"
+            "settings.configureMousePrimaryButton",
+            "settings.configurePointerSpeed",
+            "settings.configurePointerPrecision",
+            "settings.configureSnapToDefButton",
+            "settings.configureHidePointer",
+            "settings.configureMouseSonar"
         ],
         "isInstalled": [
             {
