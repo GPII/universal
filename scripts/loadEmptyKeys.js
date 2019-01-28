@@ -32,28 +32,33 @@ var process = require("process"),
     fs = require("fs"),
     fluid = require("infusion"),
     gpii = fluid.registerNamespace("gpii"),
+    request = require("request"),
     uuid = uuid || require("node-uuid");
 
 require("./shared/prefsSetsDbUtils.js");
-require("gpii-pouchdb");
 
 fluid.defaults("gpii.uuidLoader", {
-    gradeNames: ["gpii.pouch"],
+    gradeNames: ["fluid.component"],
     outputFileName: process.env.OUTPUT_FILENAME || "generated-keys-" + new Date().toISOString() + ".txt",
     totalNumOfKeys: parseInt(process.env.NUM_OF_KEYS),
     hideProgress: process.env.HIDE_PROGRESS,
     members: {
         count: 1
     },
-    dbOptions: {
-        name: process.env.COUCHDB_URL
-    },
+    couchUrl: process.env.COUCHDB_URL,
+    recordUrlTemplate: "%baseUrl/%id",
     invokers: {
-        addKeyInDb: {
-            funcName: "gpii.uuidLoader.addKeyInDb",
-            args: ["{that}", "{arguments}.0", "{arguments}.1"]
+        saveSingleCouchRecord: {
+            funcName: "gpii.uuidLoader.saveSingleCouchRecord",
+            args: ["{that}", "{arguments}.0"] // recordToPost
         },
-        createNewKeys: {
+        saveSingleKey: {
+            funcName: "gpii.uuidLoader.saveSingleKey",
+            args: ["{that}", "{arguments}.0"] // keyToSave
+        }
+    },
+    listeners: {
+        "onCreate.createKeys": {
             funcName: "gpii.uuidLoader.createNewKeys",
             args: [
                 "{that}",
@@ -61,78 +66,69 @@ fluid.defaults("gpii.uuidLoader", {
                 "{that}.options.outputFileName",
                 "{that}.options.hideProgress"
             ]
-        },
-        dbPut: {
-            funcName: "gpii.uuidLoader.dbPut",
-            args: ["{that}", "{arguments}.0"]
         }
     }
 });
 
-gpii.uuidLoader.dbPut = function (that, doc) {
-    var promise = fluid.promise();
-    // We only perform the put after checking that the uuid doesn't exist in DB,
-    // just in case somebody wants to reuse this in the future.
-    //
-    that.get(doc._id).then(function (/* record */) {
-        promise.reject({isError: true, message: "doc with id " + doc._id + " already exists in DB"});
-    }, function (err) {
-        if (err.message === "missing") {
-            that.put(doc).then(function (newDoc) {
-                promise.resolve(newDoc);
-            }, function (err) {
-                promise.reject(err);
-            });
-        } else {
-            promise.reject(err);
-        };
-    });
-    return promise;
+gpii.uuidLoader.saveSingleKey = function (that, keyData) {
+    return function () {
+        var promises = [
+            that.saveSingleCouchRecord(keyData.gpiiKey),
+            that.saveSingleCouchRecord(keyData.prefsSafe)
+        ];
+
+        return fluid.promise.sequence(promises);
+    };
 };
 
-gpii.uuidLoader.addKeyInDb = function (that, keyData) {
-    var promise = fluid.promise();
-    var sequence = [
-        that.dbPut(keyData.gpiiKey),
-        that.dbPut(keyData.prefsSafe)
-    ];
+gpii.uuidLoader.saveSingleCouchRecord = function (that, recordToPost) {
+    return function () {
+        var pouchPutPromise = fluid.promise();
 
-    fluid.promise.sequence(sequence).then(function () {
-        promise.resolve(keyData.gpiiKey._id);
-    }, function (error) {
-        promise.reject(error);
-    });
+        var requestOptions = {
+            url: that.options.couchUrl,
+            body: recordToPost,
+            json: true
+        };
 
-    return promise;
+        request.post(requestOptions, function (error, response, body) {
+            if (error) {
+                pouchPutPromise.reject(error);
+            }
+            else if (response.statusCode !== 201) {
+                pouchPutPromise.reject(body);
+            }
+            else {
+                pouchPutPromise.resolve(body);
+            }
+        });
+
+        return pouchPutPromise;
+    };
+};
+
+gpii.uuidLoader.createSingleKey = function () {
+    return gpii.prefsSetsDbUtils.generateKeyData(uuid.v4());
 };
 
 // The real action
 //
-gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName, hideProgress) {
-    var keyData = gpii.prefsSetsDbUtils.generateKeyData(uuid.v4());
-    that.addKeyInDb(keyData).then(function (newKey) {
-        fs.appendFileSync(outputFileName, newKey + "\n");
-        if (!hideProgress) {
-            console.log("Key", that.count, "of", totalNumOfKeys, "created:", newKey);
-        }
+gpii.uuidLoader.createNewKeys = function (that, totalNumOfKeys, outputFileName) {
+    var allKeys = fluid.generate(totalNumOfKeys, gpii.uuidLoader.createSingleKey, true);
+    fs.writeFileSync(outputFileName, JSON.stringify(allKeys, null, 2));
+    var recordSavePromises = fluid.transform(allKeys, that.saveSingleKey);
+    var sequence = fluid.promise.sequence(recordSavePromises);
 
-        if (that.count < totalNumOfKeys) {
-            that.count++;
-            that.createNewKeys();
-        } else {
+    sequence.then(
+        function () {
             console.log("We're done adding new keys! :)");
             console.log("Remember, you have a list of the created keys here:", outputFileName);
+        },
+        function (error) {
+            console.log("Got an error, let's stop it here. :/ Error was:", error);
+            console.log("You can find the keys we have created before crashing here:", outputFileName);
         }
-    }, function (error) {
-        console.log("Got an error, let's stop it here. :/ Error was:", error);
-        console.log("You can find the keys we have created before crashing here:", outputFileName);
-    });
+    );
 };
 
-// This triggers the "real action"
-//
-var uuidLoader = gpii.uuidLoader();
-if (uuidLoader.options.totalNumOfKeys > 0) {
-    console.log("Saving the list of generated keys into:", uuidLoader.options.outputFileName);
-    uuidLoader.createNewKeys();
-}
+gpii.uuidLoader();
