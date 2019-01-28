@@ -122,8 +122,7 @@ var testIncludes = [
     "../gpii/node_modules/gpii-oauth2/gpii-oauth2-authz-server/test/authorizationServiceTests.js",
     "../gpii/node_modules/matchMakerFramework/test/MatchMakerFrameworkTests.js",
     "../gpii/node_modules/ontologyHandler/test/node/OntologyHandlerTests.js",
-    // TODO: Deep integration with previous pouch test case holder, needs to be rewritten.
-    //"../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
+    "../gpii/node_modules/preferencesServer/test/preferencesServerTests.js",
     "../gpii/node_modules/preferencesServer/test/preferencesServiceTests.js",
     "../gpii/node_modules/settingsHandlers/test/INISettingsHandlerTests.js",
     "../gpii/node_modules/settingsHandlers/test/JSONSettingsHandlerTests.js",
