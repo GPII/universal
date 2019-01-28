@@ -18,8 +18,6 @@ var fluid = require("infusion"),
 
 fluid.require("%gpii-universal");
 
-fluid.require("%gpii-universal/gpii/node_modules/testing/src/PromiseUtils.js");
-
 gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.userLogonRequest");
