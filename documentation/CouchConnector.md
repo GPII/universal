@@ -6,8 +6,8 @@ provisions it with sample data.  This "Couch Connector" consists of:
 * An instance of CouchDB provided by the [gpii-couchdb-test-harness](https://github.com/GPII/gpii-couchdb-test-harness)
   package, which runs in either Docker or a combination of Vagrant and Docker depending on your local setup.  This is
   configured to listen on port `25984`.
-* An express server that provides a `/reset-pouch` API to restore the pouchDB instance with its initial data set. By
-  default, it listens on port `8060`.
+* An express server that provides a `/reset-couch` API to restore the initial data set. By default, it listens on port
+  `8060`.
 
 Note that when GPII runs using a production configuration, the authorization server expects to work with a local CouchDB
 instance. The couchConnector is not needed or started for those configurations.
@@ -22,7 +22,7 @@ single endpoint.
 
 ### GET /reset-couch
 
-Restores the pouchDB instance with its initial data set, listening on port 8060 by default.
+Reprovisions the CouchDB instance with the initial data set, listening on port 8060 by default.
 
 On success returns a 200 status code and a message like:
 
@@ -36,7 +36,7 @@ The Infusion component responsible for provisioning and resetting a CouchDB inst
 
 | Option            | Type       | Description | Default |
 | ----------------- | ---------- | ----------- | ------- |
-| `resetServerPort` | Integer    | Required. The port on which the express server for restoring the pouchdb-express server with its initial data set will run. | 8060 |
+| `resetServerPort` | Integer    | Required. The port on which the express server for restoring the initial data set will run. | 8060 |
 | `databases`       | Object     | [optional] The list of databases to provision. See [the gpii-couchdb-test-harness documentation for more details](https://github.com/the-t-in-rtf/gpii-couchdb-test-harness/blob/GPII-3531/docs/harness.md#the-databases-option). | None |
 
 ### Supported Events
@@ -44,6 +44,6 @@ The Infusion component responsible for provisioning and resetting a CouchDB inst
 | Event                         | Description | Parameters | Parameters Description |
 | ----------------------------- | ----------- | ---------- | ---------------------- |
 | `onCouchStartupComplete`      | Fires when the CouchDB instance has completed startup and is ready to handle requests. | None |  |
-| `onExpressResetServerStarted` | Fires when the express server for resetting the pouchDB instance is ready. | None |  |
+| `onExpressResetServerStarted` | Fires when the express server used to resetting the data set is ready. | None |  |
 | `onReady`                     | Fires when both CouchDB and the express "reset" server are ready. | None |  |
 | `onCouchProvisioningComplete` | Fires once the CouchDB instance has been reprovisioned, typically in response to a "reset" request. | None |  |

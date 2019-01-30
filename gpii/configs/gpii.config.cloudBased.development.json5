@@ -16,10 +16,7 @@
  * to be used for reading prefs and solutionsRegistry).
  * For more details, see the txt files describing the configs in the acceptance tests folder.
  *
- * This setup does not run the pouch manager because acceptance tests require a special pouchDB
- * handler (gpii.test.pouch.pouchTestCaseHolder) that uses db data for tests.
  */
-// TODO: Review and fix this
 {
     "type": "gpii.config.cloudBased.development",
     "mergeConfigs": [

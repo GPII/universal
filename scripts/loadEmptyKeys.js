@@ -11,7 +11,7 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 // This script generates unique keys and loads them into CouchDB.
 //
 // To create 20 empty keys, the script needs to be called like this:
-//   * COUCHDB_URL=http://localhost:8058/gpii NUM_OF_KEYS=20 node scripts/loadEmptyKeys.js
+//   * COUCHDB_URL=http://localhost:25984/gpii NUM_OF_KEYS=20 node scripts/loadEmptyKeys.js
 //
 // The options to this script must be passed as environment variables, and they are:
 //   * COUCHDB_URL [String] [required]: This needs to be in the form "http://host/dbname", but in case
@@ -83,7 +83,7 @@ gpii.uuidLoader.saveSingleKey = function (that, keyData) {
 
 gpii.uuidLoader.saveSingleCouchRecord = function (that, recordToPost) {
     return function () {
-        var pouchPutPromise = fluid.promise();
+        var couchPutPromise = fluid.promise();
 
         var requestOptions = {
             url: that.options.couchUrl,
@@ -93,17 +93,17 @@ gpii.uuidLoader.saveSingleCouchRecord = function (that, recordToPost) {
 
         request.post(requestOptions, function (error, response, body) {
             if (error) {
-                pouchPutPromise.reject(error);
+                couchPutPromise.reject(error);
             }
             else if (response.statusCode !== 201) {
-                pouchPutPromise.reject(body);
+                couchPutPromise.reject(body);
             }
             else {
-                pouchPutPromise.resolve(body);
+                couchPutPromise.resolve(body);
             }
         });
 
-        return pouchPutPromise;
+        return couchPutPromise;
     };
 };
 
