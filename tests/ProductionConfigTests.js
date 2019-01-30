@@ -1,10 +1,5 @@
 /**
-GPII Production Config tests
-
-Requirements:
-* an internet connection
-* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the MikelVargas
-preferences
+GPII Production Config tests - (To be run in development environment.)
 
 ---
 
@@ -40,7 +35,7 @@ require("./shared/DevelopmentTestDefs.js");
 
 gpii.loadTestingSupport();
 
-gpii.test.runCouchTestDefs(fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
+gpii.test.runServerTestDefs(fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         config: {
             configName: "gpii.config.untrusted.development.json5",
