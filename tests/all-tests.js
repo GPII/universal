@@ -58,17 +58,14 @@ var testIncludes = [
     "./ContextIntegrationTests.js",
     "./DeviceReporterErrorTests.js",
     "./ErrorTests.js",
-    // TODO: Gotta get gpii.test.runSuitesWithFiltering working for the next test. AFTER logout/login problem solved.
-    //"./IntegrationTests.js",
-    // TODO: Gotta get gpii.test.buildSegmentedFixtures working for the next test. AFTER logout/login problem solved.
-    // TODO: This also has some really nasty and deep sequence munging.
+    "./IntegrationTests.js",
+    // TODO: Still crashes following recent adjustment to startup sequence.
     //"./JournalIntegrationTests.js",
     "./MultiSettingsHandlerTests.js",
     "./PayloadSizeTest.js",
     "./PSPIntegrationTests.js",
     "./ResetWithEnvReportTests.js",
-    // TODO: login problem and seeming crash of server running on 8081
-    //"./ResetAtStartTests.js",
+    "./ResetAtStartTests.js",
     "./PreferencesServerErrorTests.js",
     "./StartupAPITests.js",
     "./UntrustedBrowserChannelTests.js",
@@ -76,34 +73,13 @@ var testIncludes = [
     "./UntrustedDevelopmentTests.js",
     "./UntrustedPSPIntegrationTests.js",
     "./UntrustedResetWithEnvReportTests.js",
-    // TODO: No actual reset and server on 8081 appears to crash.
-    //"./UntrustedResetAtStartTests.js",
-    // TODO: proximity triggered login event doesn't fire.
-    /*
-            TODO: Still broken post-multi-session fix.
-
-        10:13:37.425:  Test case listener has not responded after 5000ms - at sequence pos 5 of 12 sequence element {
-        "event": "{proximityTriggeredRequest}.events.onComplete",
-     */
-    //"./UntrustedUserLogonHandlersTests.js",
-    // TODO: Needs to be rewritten to use sequence grades instead of baking in its own copy of the sequence-mangling.
+    "./UntrustedResetAtStartTests.js",
+    "./UntrustedUserLogonHandlersTests.js",
+    // TODO: Still crashes following recent adjustment to startup sequence.
     //"./UntrustedUserLogonRequestTests.js",
-    // TODO: proximity triggered login event doesn't fire.
-    //"./UserLogonHandlersEventsTests.js",
-    /*
-        TODO: also fails because of proximity event.
-
-        16:16:29.647:  Test case listener has not responded after 5000ms - at sequence pos 5 of 12 sequence element {
-        "event": "{proximityTriggeredRequest}.events.onComplete",
-
-        ... Time passes ...
-
-        10:15:32.491:  jq: FAIL: Module "gpii.tests.acceptance.untrusted.userLogon.config tests" Test name "Testing standard proximityTriggered login and logout" - Message: Error making request to /user/adjustCursor/proximityTriggered: socket hang up
-10:15:32.491:  jq: Source:     at pok (/Users/duhrer/Source/rtf/universal/node_modules/infusion/tests/test-core/jqUnit/js/jqUnit.js:112:15)
-
-     */
-    //"./UserLogonHandlersTests.js",
-    // TODO: seems to also be blocked by proximity login errors,
+    "./UserLogonHandlersEventsTests.js",
+    "./UserLogonHandlersTests.js",
+    // TODO: Still not working following recent adjustment to startup sequence.
     //"./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
@@ -113,8 +89,7 @@ var testIncludes = [
     "../gpii/node_modules/flowManager/test/BrowserChannelTests.js",
     "../gpii/node_modules/flowManager/test/DefaultSettingsLoaderTests.js",
     "../gpii/node_modules/flowManager/test/PrefsServerDataSourceTests.js",
-    // TODO: logged in / logged out problem (doesn't seem to log the named user in, complains that "noUser" is already logged in).
-    //"../gpii/node_modules/flowManager/test/PSPChannelTests.js",
+    "../gpii/node_modules/flowManager/test/PSPChannelTests.js",
     "../gpii/node_modules/flowManager/test/SettingsDataSourceTests.js",
     "../gpii/node_modules/gpii-db-operation/test/DbDataStoreTests.js",
     "../gpii/node_modules/gpii-ini-file/test/iniFileTests.js",

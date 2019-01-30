@@ -490,6 +490,7 @@ gpii.tests.journal.fixtures = [
                 event: "{testCaseHolder}.events.FLUID5931wait",
                 listener: "fluid.identity"
             },
+            // TODO: Rewrite this as proper sequence grades
             kettle.test.startServerSequence,
             {
                 func: "gpii.test.setSettings",
@@ -524,7 +525,10 @@ gpii.tests.journal.fixtures = [
                         message: "The system's settings were restored from a snapshot"
                     }
                 }
-            }, gpii.test.checkSequence,
+            },
+            // TODO: Rewrite this as proper sequence grades
+            gpii.test.checkSequence,
+            // TODO: Rewrite this as proper sequence grades
             // Now verify that we can log on normally after a restore, and generate a non-crashed session after logging off
             gpii.tests.journal.normalLoginFixtures
         ]
@@ -558,7 +562,8 @@ gpii.tests.journal.badJournalFixtures = [
         }, {
             func: "kettle.test.popInstrumentedErrors"
         },
-        gpii.tests.journal.normalLoginFixtures
+            // TODO: Rewrite this as proper sequence grades
+            gpii.tests.journal.normalLoginFixtures
         ]
     }
 ];
@@ -582,9 +587,8 @@ gpii.tests.journal.badJournalBaseTestDef = fluid.extend({
     gradeNames: "gpii.tests.journal.baseTestCaseHolder"
 }, gpii.tests.journal.baseTestDefBase);
 
+var goodTestDefs = gpii.test.buildSegmentedFixtures(gpii.tests.journal.fixtures, gpii.tests.journal.baseTestDef);
+gpii.test.runCouchTestDefs(goodTestDefs);
 
-gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
-        gpii.tests.journal.fixtures, gpii.tests.journal.baseTestDef));
-
-gpii.test.bootstrapServer(gpii.test.buildSegmentedFixtures(
-        gpii.tests.journal.badJournalFixtures, gpii.tests.journal.badJournalBaseTestDef));
+//var badTestDefs = gpii.test.buildSegmentedFixtures(gpii.tests.journal.badJournalFixtures, gpii.tests.journal.badJournalBaseTestDef);
+//gpii.test.runCouchTestDefs(badTestDefs);
