@@ -1,5 +1,10 @@
 /**
-GPII Production Config tests - (To be run in development environment.)
+GPII Production Config tests
+
+Requirements:
+* an internet connection
+* a cloud based flow manager running at `http://flowmanager.gpii.net` containing at least the MikelVargas
+preferences
 
 ---
 
