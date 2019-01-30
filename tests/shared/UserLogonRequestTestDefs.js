@@ -74,6 +74,17 @@ gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, 
     }
 };
 
+// We need this construct because these tests inspect intermediate model states before the promise resolves, and then
+// check the final results.
+gpii.tests.userLogonRequest.executedEventedPromise = function (caseHolder, fn, fnArgs) {
+    var promise = fn.apply(null, fnArgs);
+    promise.then(
+        caseHolder.events.onResponse.fire,
+        caseHolder.events.onError.fire
+    );
+    return promise;
+};
+
 gpii.tests.userLogonRequest.commonTestConfig = {
     gradeNames: ["gpii.tests.userLogonRequest.testCaseHolder", "gpii.test.integration.testCaseHolder.linux"],
     distributeOptions: {
@@ -145,15 +156,15 @@ gpii.tests.userLogonRequest.testDefs = [
                 args: ["{lifecycleManager}", "noUser"]
             },
             {
-                // 1. 1nd proximityTriggered request to key in adjustCursor
-                func: "{lifecycleManager}.performProximityTriggered",
-                args: [gpii.tests.userLogonRequest.gpiiKey]
+                // 1. First proximityTriggered request to key in adjustCursor
+                funcName: "gpii.tests.userLogonRequest.executedEventedPromise",
+                args: ["{caseHolder}", "{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey]] // caseHolder, fn, fnArgs
             },
             {
-                task: "{lifecycleManager}.performProximityTriggered",
-                args: [gpii.tests.userLogonRequest.gpiiKey],
-                resolve: "gpii.tests.userLogonRequest.modelChangeChecker",
-                resolveArgs: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, "noUser"]
+                changeEvent: "{lifecycleManager}.applier.modelChanged",
+                path: "logonChange",
+                listener: "gpii.tests.userLogonRequest.modelChangeChecker",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, "noUser"]
             },
             {
                 changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -193,8 +204,8 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 // 3. 2nd proximityTriggered request to key out adjustCursor
-                func: "{lifecycleManager}.performProximityTriggered",
-                args: [gpii.tests.userLogonRequest.gpiiKey]
+                funcName: "gpii.tests.userLogonRequest.executedEventedPromise",
+                args: ["{caseHolder}", "{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey]] // caseHolder, fn, fnArgs
             },
             {
                 changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -257,8 +268,8 @@ gpii.tests.userLogonRequest.testDefs = [
                 // 1) key out the first key "adjustCursor";
                 // 2) key in the 2nd key "sammy";
                 // 3) "noUser" is not keyed in between step 1 and 2.
-                func: "{lifecycleManager}.performProximityTriggered",
-                args: [gpii.tests.userLogonRequest.anotherGpiiKey]
+                funcName: "gpii.tests.userLogonRequest.executedEventedPromise",
+                args: ["{caseHolder}", "{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.anotherGpiiKey]] // caseHolder, fn, fnArgs
             },
             {
                 changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -508,8 +519,8 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 // 3. reset and check that user is logged out)
-                func: "{lifecycleManager}.performProximityTriggered",
-                args: ["reset"]
+                funcName: "gpii.tests.userLogonRequest.executedEventedPromise",
+                args: ["{caseHolder}", "{lifecycleManager}.performProximityTriggered", ["reset"]] // caseHolder, fn, fnArgs
             },
             {
                 changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -733,8 +744,8 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 // 2. explicitly key out "noUser"
-                func: "{lifecycleManager}.performLogout",
-                args: ["noUser"]
+                funcName: "gpii.tests.userLogonRequest.executedEventedPromise",
+                args: ["{caseHolder}", "{lifecycleManager}.performLogout", ["noUser"]] // caseHolder, fn, fnArgs
             },
             {
                 // 3. "noUser" is in the process of being keyed out
