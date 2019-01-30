@@ -184,13 +184,13 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             name: "A successful workflow for retrieving settings",
 
             // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
-            username: "os_gnome",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
+            username: "settingsUser",
             password: "dummy",
 
             // The options below are required for sending /settings
-            gpiiKey: "os_gnome",
+            gpiiKey: "settingsUser",
             expectedMatchMakerOutput: {
                 "inferredConfiguration": {
                     "gpii-default": {
@@ -240,8 +240,8 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     {
         testDef: {
             name: "Acceptance test for suppporting resource owner GPII key grant type (missing arguments at sending requests to /access_token)",
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
             username: "os_gnome",
             password: "dummy"
         },
@@ -270,8 +270,8 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     {
         testDef: {
             name: "Attempt to get access token by sending a wrong GPII key",
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
             username: "nonexistent_gpii_key",
             password: "dummy"
         },
@@ -282,7 +282,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     {
         testDef: {
             name: "Attempt to retrieve user settings without providing an access token",
-            gpiiKey: "os_gnome"
+            gpiiKey: "settingsUser"
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsNoAccessTokenSequence",
@@ -292,7 +292,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
     {
         testDef: {
             name: "Attempt to retrieve user settings by providing a wrong access token",
-            gpiiKey: "os_gnome"
+            gpiiKey: "settingsUser"
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.settingsGet.disruption.settingsWrongAccessTokenSequence",

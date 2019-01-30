@@ -133,13 +133,13 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNonExi
 // Main tests that contain all test cases
 gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     // Succesful use cases that update user preferences with proper access tokens granted via Resource Owner GPII key grant
-/*    {
+    {
         testDef: {
             name: "A successful workflow that updates a GPII key with an existing prefs safe",
 
             // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
             username: "settingsUser",
             password: "dummy",
 
@@ -158,8 +158,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             name: "A successful workflow that updates a GPII key that has no associated prefs safe",
 
             // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
             username: "chrome_and_firefox",
             password: "dummy",
 
@@ -172,7 +172,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence"
         }]
     },
-*/
+
     // Rejected by /settings endpoint
     {
         testDef: {
@@ -199,8 +199,8 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             name: "Attempt to update user preferences by providing a GPII key that is not associated with any preference set",
 
             // The options below are for sending /access_token request
-            client_id: "Bakersfield-AJC-client-id",
-            client_secret: "Bakersfield-AJC-client-secret",
+            client_id: "pilot-computer",
+            client_secret: "pilot-computer-secret",
             username: "nonexistent_gpii_key",
             password: "dummy"
         },
