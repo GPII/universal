@@ -507,6 +507,7 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
     // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
     jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
     jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
+    fluid.log(lifeCycle);
 };
 
 gpii.tests.productionConfigTesting.docsForRemoval = [];
@@ -651,7 +652,7 @@ gpii.tests.productionConfigTesting.addTestRecordsToDatabase.sequence = [
 gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = {
     testDef: {
         name: "Flow manager production tests - delete test GPII keys and PrefsSafe",
-        expect: 5,
+        expect: 4,
         config: gpii.tests.productionConfigTesting.config,
         gradeNames: ["gpii.test.common.testCaseHolder"],
         components: {
@@ -695,18 +696,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = {
                     hostname: "couchdb",
                     path: "/gpii/_bulk_docs",
                     method: "POST",
-                    expectedStatusCode: 201,
-                    docsToPurge: null   // set by successful request.
-                }
-            },
-            purgeDeletedDocs: {
-                type: "kettle.test.request.http",
-                options: {
-                    port: "5984",
-                    hostname: "couchdb",
-                    path: "/gpii/_purge",
-                    method: "POST",
-                    expectedStatusCode: 501 // should be 201, but unimplemented
+                    expectedStatusCode: 201
                 }
             }
         }
@@ -752,13 +742,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabase.sequence = [
         ]
     }, {
         event: "{deleteInBulk}.events.onComplete",
-        listener: "gpii.tests.productionConfigTesting.testBulkDelete"
-    }, {
-        func: "{purgeDeletedDocs}.send",
-        args: ["{deleteInBulk}.options.docsToPurge", { port: "5984" }]
-    }, {
-        event: "{purgeDeletedDocs}.events.onComplete",
-        listener: "gpii.tests.productionConfigTesting.testPurge"
+        listener: "gpii.tests.productionConfigTesting.testStatusCode"
     }
 ];
 
