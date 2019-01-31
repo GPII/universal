@@ -222,6 +222,91 @@ gpii.tests.windows.builtIn = [
                                 "type": "BOOL"
                             }
                         }
+                    },
+                    {
+                        "settings": {
+                            "PointerSpeedConfig": {
+                                "path": "pvParam",
+                                "value": 15
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSESPEED",
+                            "setAction": "SPI_SETMOUSESPEED",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "EnhancePrecisionConfig": {
+                                "path": "pvParam",
+                                "value": [0, 0, 1]
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSE",
+                            "setAction": "SPI_SETMOUSE",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "array",
+                                "valueType": "INT",
+                                "length": 3
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "SnapToDefaultButtonConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETSNAPTODEFBUTTON",
+                            "setAction": "SPI_SETSNAPTODEFBUTTON",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "HidePointerConfig": {
+                                "path": "pvParam",
+                                "value": 0
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEVANISH",
+                            "setAction": "SPI_SETMOUSEVANISH",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "MouseSonarConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSESONAR",
+                            "setAction": "SPI_SETMOUSESONAR",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
                     }
                 ],
                 "com.microsoft.windows.mouseTrailing": [
