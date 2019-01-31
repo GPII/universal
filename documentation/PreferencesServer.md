@@ -354,34 +354,116 @@ There are two important things to note here:
 This end point will return the entire preferences safe, including the embedded preference sets. The URL param is the
 `id` of the preferences safe. This will not return any attached keys, credentials, or other records.
 
+#### Example GET
+
+URL: `http://preferences.gpii.net/prefssafe/prefsSafe-alice`
+
+Example Success Payload:
+
+```json
+{
+    "id": "prefsSafe-alice",
+    "type": "prefsSafe",
+    "schemaVersion": "0.1",
+    "prefsSafeType": "user",
+    "name": "alice",
+    "password": null,
+    "email": null,
+    "preferences": {
+        "flat": {
+            "name": "Alice",
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {}
+                    }
+                }
+            }
+        }
+    },
+    "timestampCreated": "2019-01-14T23:48:03.221Z",
+    "timestampUpdated": null
+}
+```
+
+If the preferences safe with the `prefsSafeId` does not exist, the following error payload will be
+returned:
+
+```json
+{
+    "isError": true,
+    "message": "Cannot lookup prefsSafe"
+}
+```
+
 ### GET /prefssafe-with-keys/:prefsSafeId
 
 This endpoint will return the entire preferences safe structure, along with records directory related to it, such
 as keys and credentials. A top level object will contain the preferences safe under key `prefsSafe`, and the related
 documents under key `keys`.
 
+#### Example GET
+
+URL: `http://preferences.gpii.net/prefssafe-with-keys/prefsSafe-alice`
+
 Example returned item:
 
 ```json
 {
     "prefsSafe": {
-        "id": "prefsSafeId",
+        "id": "prefsSafe-alice",
         "type": "prefsSafe",
+        "schemaVersion": "0.1",
+        "prefsSafeType": "user",
+        "name": "alice",
+        "password": null,
+        "email": null,
         "preferences": {
-            "etc etc": "..."
+            "flat": {
+                "name": "Alice",
+                "contexts": {
+                    "gpii-default": {
+                        "name": "Default preferences",
+                        "preferences": {
+                            "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {}
+                        }
+                    }
+                }
+            }
         },
-        "etc etc": "..."
+        "timestampCreated": "2019-01-14T23:48:03.221Z",
+        "timestampUpdated": null
     },
     "keys": [
         {
+            "id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
             "type": "gpiiCloudSafeCredential",
-            "etc etc": "..."
+            "schemaVersion": "0.1",
+            "prefsSafeId": "prefsSafe-alice",
+            "gpiiExpressUserId": "org.couch.db.user:alice"
         },
         {
+            "id": "57A68E84-03A9-4ADD-9365-11C75E4F1B0E",
             "type": "gpiiKey",
-            "etc etc": "..."
+            "schemaVersion": "0.1",
+            "prefsSafeId": "prefsSafe-alice",
+            "prefsSetId": "gpii-default",
+            "revoked": false,
+            "revokedReason": null,
+            "timestampCreated": "2017-12-14T19:55:11.640Z",
+            "timestampUpdated": null
         }
     ]
+}
+```
+
+If the safe with the specified `prefsSafeId` does not exist, the following error payload will be returned:
+
+```json
+{
+    "isError": true,
+    "message": "Cannot lookup prefsSafe"
 }
 ```
 
@@ -391,10 +473,97 @@ Creates a new preferences safe in the system. Takes a full preferences safe JSON
 The returned payload will include the entire preferences safe, including the updated `timestampCreated` field,
 and a newly provisioned `id`.
 
+#### Example POST
+
+URL: `http://preferences.gpii.net/prefssafe`
+
+The POST payload should be a full preferences safe without an `id`:
+
+```json
+{
+    "type": "prefsSafe",
+    "schemaVersion": "0.1",
+    "prefsSafeType": "user",
+    "name": "Steve",
+    "password": null,
+    "email": null,
+    "preferences": {
+        "flat": {
+            "name": "bit of stuff",
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/common/onScreenKeyboard/enabled": false
+                    },
+                    "metadata": []
+                }
+            },
+            "metadata": []
+        }
+    }
+}
+```
+
+A successful return payload will consist of the same payload with the addition of timestamps and a
+freshly generated `id` field.  In the event of an error a payload similar to the following will be returned
+with the contents of the system error:
+
+```json
+{
+    "isError": true,
+    "message": "System error described here."
+}
+```
+
 ### PUT /prefssafe/:prefsSafeId
 
 Updates an existing preferences safe in the database, using the full preferences safe format. Will return the
 updated safe, which should include an updated `timestampUpdated` field.
+
+#### Example PUT
+
+URL: `http://preferences.gpii.net/prefssafe/prefsSafe-alice`
+
+Example PUT body:
+
+```json
+{
+    "id": "prefsSafe-alice",
+    "type": "prefsSafe",
+    "schemaVersion": "0.1",
+    "prefsSafeType": "user",
+    "name": "alice",
+    "password": null,
+    "email": null,
+    "preferences": {
+        "flat": {
+            "name": "Alice",
+            "contexts": {
+                "gpii-default": {
+                    "name": "Default preferences",
+                    "preferences": {
+                        "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {}
+                    }
+                }
+            }
+        }
+    },
+    "timestampCreated": "2019-01-14T23:48:03.221Z",
+    "timestampUpdated": null
+}
+```
+
+On a successfull save, the same payload from the PUT operation will be returned, with an updated
+`timestampUpdated` field with the time of save. In the event of a failed save an error payload with a
+suitable message will be returned.
+
+```json
+{
+    "isError": true,
+    "message": "System error described here."
+}
+```
 
 ### GET /prefssafes
 
@@ -402,6 +571,10 @@ Returns a list of preferences safes, including only basic information about each
 or listing of preferences safes. Each item in the list representing a preferences safe will include `id`, `name`,
 `email`, `created`, and `updated`. This endpoint will likely have more options in the future, such as sorting,
 paging, etc.
+
+#### Example GET
+
+URL: `http://preferences.gpii.net/prefssafes`
 
 Example return payload:
 
@@ -428,11 +601,18 @@ Example return payload:
 }
 ```
 
+There should never be an error payload for this endpoint. In the situation where there are no preferences
+safes stored in the system it will merely contain zero rows.
+
 ### GET /prefssafe-keys/:prefsSafeId
 
 This will return the associated keys and credentials documents for a given preferences safe, in a `rows` field.
 Also included is a `total_rows` and `offset` field, but do note that the `total_rows` field is not accurate as
 of the time of writing, and should be ignored.
+
+#### Example GET
+
+URL: `http://preferences.gpii.net/prefssafe-keys/prefsSafe-alice`
 
 An example payload for a particlar safe may be:
 
@@ -440,48 +620,73 @@ An example payload for a particlar safe may be:
 {
     "total_rows": 2,
     "offset": 0,
-    "rows": [{
-        "type": "gpiiCloudSafeCredential",
-        "etc etc": "..."
-    },
-    {
-        "type": "gpiiKey",
-        "etc etc": "..."
-    }]
+    "rows": [
+        {
+            "id": "8f3085a7-b65b-4648-9a78-8ac7de766997",
+            "type": "gpiiCloudSafeCredential",
+            "schemaVersion": "0.1",
+            "prefsSafeId": "prefsSafe-alice",
+            "gpiiExpressUserId": "org.couch.db.user:alice"
+        },
+        {
+            "id": "57A68E84-03A9-4ADD-9365-11C75E4F1B0E",
+            "type": "gpiiKey",
+            "schemaVersion": "0.1",
+            "prefsSafeId": "prefsSafe-alice",
+            "prefsSetId": "gpii-default",
+            "revoked": false,
+            "revokedReason": null,
+            "timestampCreated": "2017-12-14T19:55:11.640Z",
+            "timestampUpdated": null
+        }
+    ]
 }
 ```
 
 ### POST /prefssafe-key-create
 
 This endpoint will add a new `gpiiKey` document to the system. There are no URL parameters, but the JSON body takes
-3 fields, one of them option. Required are the `prefsSafeId` and `prefsSetId`. These indicate the preferences safe,
+3 fields, one of them optional. Required are the `prefsSafeId` and `prefsSetId`. These indicate the preferences safe,
 and the respective preferences set that this key and token will operate upon. Optionally you can pass in a unique
 unused `gpiiKey` to use, otherwise a new one will be generated as part of the process.  The new document is returned
 upon success. In event of a failure, a standard error document is returned with `isError` true, and a message
 detailing the failure.
 
-#### Example POST
+#### Example POST:
+
+URL: `http://preferences.gpii.net/prefssafe-key-create`
+
+Example POST Body:
 
 ```json
 {
-    "prefsSafeId": "prefsSafe-1",
-    "prefsSetId": "gpii-default",
-    "gpiiKey": "3B3D3003-9F5F-4B66-98C1-1380EC86DDB1"
+    "prefsSafeId": "prefsSafe-alice",
+    "prefsSetId": "gpii-lowlight"
 }
 ```
 
-Successful return payload:
+Example successful return payload:
 
 ```json
 {
+    "id": "3B3D3003-9F5F-4B66-98C1-1380EC86DDB1",
     "type": "gpiiKey",
     "schemaVersion": "0.1",
-    "prefsSafeId": "prefsSafe-1",
-    "prefsSetId": "gpii-default",
+    "prefsSafeId": "prefsSafe-alice",
+    "prefsSetId": "gpii-lowlight",
     "revoked": false,
     "revokedReason": null,
     "timestampCreated": "2017-12-14T19:55:11.640Z",
     "timestampUpdated": null
+}
+```
+
+In the event of any system error, an error payload with a suitable `message` is returned.
+
+```json
+{
+    "isError": true,
+    "message": "System error described here."
 }
 ```
 
@@ -517,7 +722,7 @@ unique combination unlocks a particular safe, that preferences safes `prefsSafe`
 Using the `http://preferences.gpii.net/unlock-cloud-safe` with no parameters we can pass in the username and
 password via the body.
 
-postBody:
+Example POST body:
 
 ```json
 {
@@ -544,6 +749,9 @@ If the username and password do not match a record the following error is return
     "message": "Unable to unlock a Preferences Safe with the supplied credentials."
 }
 ```
+
+Any other system errors will return a similar `isError` payload with a suitable message for the failure
+condition.
 
 ## Other relevant documentation:
 
