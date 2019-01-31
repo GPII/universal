@@ -51,8 +51,12 @@ gpii.tests.pspIntegration.sendContextChange = function (client, newContext) {
     gpii.tests.pspIntegration.sendMsg(client, ["activeContextName"], newContext);
 };
 
-gpii.tests.pspIntegration.checkPayload = function (data, expectedType) {
+gpii.tests.pspIntegration.checkPayload = function (data, expectedType, expectedSettingControls) {
     jqUnit.assertEquals("Checking message from PSP: ", expectedType, data.type);
+    if (expectedSettingControls) {
+        var actualSettingControls = fluid.keys(data.payload.value.settingControls);
+        jqUnit.assertDeepEq("Checking received settingControls from PSP: ", expectedSettingControls, actualSettingControls);
+    }
 };
 
 gpii.tests.pspIntegration.connectionSucceeded = function (data) {
@@ -724,6 +728,48 @@ gpii.tests.pspIntegration.testDefs = [
                 listener: "gpii.tests.pspIntegration.checkResetResponse",
                 args: ["{arguments}.0"]
             }
+        ]
+    }, {
+        name: "GPII-3693: \"reset all\" does not corrupt PSPChannel's model",
+        expect: 9,
+        sequence: [
+            [
+                {
+                    func: "{pspClient}.connect"
+                }, {
+                    event: "{pspClient}.events.onConnect",
+                    listener: "gpii.tests.pspIntegration.connectionSucceeded"
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged"]
+                }, {
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", ["preferences", "http://registry\\.gpii\\.net/common/magnification"], 3]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged", ["http://registry\\.gpii\\.net/common/magnification"]]
+                }, {
+                    func: "{resetRequest}.send"
+                }, {
+                    event: "{resetRequest}.events.onComplete",
+                    listener: "gpii.tests.pspIntegration.checkResetResponse",
+                    args: ["{arguments}.0"]
+                }, {
+                    // When "noUser" keys back in, PSP client receives empty settingControls block.
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged", []]
+                }, {
+                    funcName: "gpii.tests.pspIntegration.sendMsg",
+                    args: [ "{pspClient}", ["preferences", "http://registry\\.gpii\\.net/common/cursorSize"], 0.9]
+                }, {
+                    event: "{pspClient}.events.onReceiveMessage",
+                    listener: "gpii.tests.pspIntegration.checkPayload",
+                    args: ["{arguments}.0", "modelChanged", ["http://registry\\.gpii\\.net/common/cursorSize"]]
+                }
+            ]
         ]
     }
 ];
