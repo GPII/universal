@@ -97,7 +97,19 @@ gpii.tests.journal.initialSettings = {
             {
                 "settings": {
                     "SystemSettings_Input_Touch_SetActivationTimeout": {
-                        "value": "Low sensitivity"
+                        "value": "Medium sensitivity"
+                    }
+                }
+            }
+        ],
+        "com.microsoft.windows.narrator": [
+            {
+                "settings": {
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                        "value": false
+                    },
+                    "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                        "value": false
                     }
                 }
             }
