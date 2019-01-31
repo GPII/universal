@@ -140,11 +140,11 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             // The options below are for sending /access_token request
             client_id: "pilot-computer",
             client_secret: "pilot-computer-secret",
-            username: "settingsUser",
+            username: "os_gnome",
             password: "dummy",
 
             // The options below are required for sending /settings
-            gpiiKey: "settingsUser",
+            gpiiKey: "os_gnome",
             updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
             expectedMsg: gpii.flowManager.cloudBased.settings.put.messages.success
         },
@@ -177,7 +177,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences without providing an access token",
-            gpiiKey: "settingsUser"
+            gpiiKey: "os_gnome"
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutNoAccessTokenSequence",
@@ -187,7 +187,7 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
     {
         testDef: {
             name: "Attempt to update preferences by providing a wrong access token",
-            gpiiKey: "settingsUser"
+            gpiiKey: "os_gnome"
         },
         disruptions: [{
             gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.settingsPutWrongAccessTokenSequence",

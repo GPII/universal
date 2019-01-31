@@ -52,10 +52,10 @@ gpii.tests.productionConfigTesting.config = {
 };
 
 gpii.tests.productionConfigTesting.settingsUserKey = {
-    "_id": "settingsUser",
+    "_id": "os_gnome",
     "type": "gpiiKey",
     "schemaVersion": "0.1",
-    "prefsSafeId": "prefsSafe-settingsUser",
+    "prefsSafeId": "prefsSafe-os_gnome",
     "prefsSetId": "gpii-default",
     "revoked": false,
     "revokedReason": null,
@@ -76,16 +76,16 @@ gpii.tests.productionConfigTesting.chromeAndFFKey = {
 };
 
 gpii.tests.productionConfigTesting.settingsUserPrefsSafe = {
-    "_id": "prefsSafe-settingsUser",
+    "_id": "prefsSafe-os_gnome",
     "type": "prefsSafe",
     "schemaVersion": "0.1",
     "prefsSafeType": "user",
-    "name": "settingsUser",
+    "name": "os_gnome",
     "password": null,
     "email": null,
     "preferences": {
         "flat": {
-            "name": "settingsUser",
+            "name": "os_gnome",
             "contexts": {
                 "gpii-default": {
                     "name": "Default preferences",
@@ -135,8 +135,8 @@ gpii.tests.productionConfigTesting.settingsUserPrefsSafe = {
     "timestampUpdated": null
 };
 gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
-    "username": "settingsUser",
-    "gpiiKey": "settingsUser",
+    "username": "os_gnome",
+    "gpiiKey": "os_gnome",
     "password": "dummy",
     "client_id": "pilot-computer",
     "client_secret": "pilot-computer-secret",
@@ -152,49 +152,6 @@ gpii.tests.productionConfigTesting.carlaTokenRequestPayload = {
     "client_secret": "pilot-computer-secret",
     "grant_type": "password"
 };
-
-gpii.tests.productionConfigTesting.matchMakerOutput = {
-    expectedMatchMakerOutput: {
-        "inferredConfiguration": {
-            "gpii-default": {
-                "applications": {
-                    "org.gnome.desktop.a11y.magnifier": {
-                        "active": true,
-                        "settings": {
-                            "http://registry.gpii.net/common/tracking": [
-                                "focus",
-                                "mouse",
-                                "caret"
-                            ],
-                            "http://registry.gpii.net/common/magnification": 1.5,
-                            "http://registry.gpii.net/common/magnifierPosition": "FullScreen",
-                            "http://registry.gpii.net/applications/org.gnome.desktop.a11y.magnifier": {
-                                "mag-factor": 1.5,
-                                "screen-position": "full-screen"
-                            }
-                        }
-                    },
-                    "org.gnome.desktop.interface": {
-                        "active": true,
-                        "settings": {
-                            "http://registry.gpii.net/common/fontSize": 9,
-                            "http://registry.gpii.net/common/cursorSize": 0.9,
-                            "http://registry.gpii.net/applications/org.gnome.desktop.interface": {
-                                "cursor-size": 90,
-                                "text-scaling-factor": 0.75
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-};
-gpii.tests.productionConfigTesting.successfulWorkFlow = fluid.extend(
-    {},
-    gpii.tests.productionConfigTesting.accessTokenRequestPayload,
-    gpii.tests.productionConfigTesting.matchMakerOutput
-);
 
 gpii.tests.productionConfigTesting.device = {
     OS: {
@@ -661,7 +618,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = {
                 options: {
                     port: "5984",
                     hostname: "couchdb",
-                    path: "/gpii/settingsUser",
+                    path: "/gpii/os_gnome",
                     method: "GET",
                     expectedStatusCodes: [200],
                     docToRemove: null    // set by successful request.
@@ -672,7 +629,7 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabaseTests = {
                 options: {
                     port: "5984",
                     hostname: "couchdb",
-                    path: "/gpii/prefsSafe-settingsUser",
+                    path: "/gpii/prefsSafe-os_gnome",
                     method: "GET",
                     expectedStatusCodes: [200],
                     docToRemove: null    // set by successful request.
