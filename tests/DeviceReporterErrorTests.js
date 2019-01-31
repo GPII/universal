@@ -24,7 +24,7 @@ fluid.require("%gpii-universal");
 gpii.loadTestingSupport();
 
 fluid.defaults("gpii.tests.deviceReporterErrorTests.testCaseHolder", {
-    gradeNames: ["gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.testCaseHolder"],
     distributeOptions: {
         "development.installedSolutionsPath": {
             "record": "%gpii-universal/tests/data/faultyDeviceReport.jsonx",

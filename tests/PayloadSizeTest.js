@@ -37,7 +37,7 @@ gpii.tests.payloadSize.testDefs = [{
         configName: "gpii.config.development.local",
         configPath: "%gpii-universal/gpii/configs"
     },
-    gradeNames: ["gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.testCaseHolder"],
     gpiiKey: "giant",
 
     sequence: [{

@@ -23,7 +23,7 @@ gpii.loadTestingSupport();
 fluid.registerNamespace("gpii.tests.userLogonRequest");
 
 fluid.defaults("gpii.tests.userLogonRequest.testCaseHolder", {
-    gradeNames: ["gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder"],
+    gradeNames: ["gpii.test.common.lifecycleManagerReceiver", "gpii.test.testCaseHolder"],
     events: {
         debounceTimeoutComplete: null
     },
