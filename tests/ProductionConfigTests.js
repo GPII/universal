@@ -134,14 +134,6 @@ gpii.tests.productionConfigTesting.settingsUserPrefsSafe = {
     "timestampCreated": new Date().toISOString(),
     "timestampUpdated": null
 };
-gpii.tests.productionConfigTesting.accessTokenRequestPayload = {
-    "username": "os_gnome",
-    "gpiiKey": "os_gnome",
-    "password": "dummy",
-    "client_id": "pilot-computer",
-    "client_secret": "pilot-computer-secret",
-    "grant_type": "password"
-};
 
 gpii.tests.productionConfigTesting.carlaKey = "carla";
 gpii.tests.productionConfigTesting.carlaTokenRequestPayload = {
@@ -254,10 +246,10 @@ fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
 // /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),
 // /health,
 // /ready,
+// and using the "carla" snapset to test that it cannot be modified:
 // /access_token,
-// /%gpiiKey/settings/%device (GET) for the carla snapset, and
-// /%gpiiKey/settings (PUT) also for the carla snapset.  This last one should not
-// update the snapset prefsSafe since it is read only.
+// /%gpiiKey/settings/%device
+// /%gpiiKey/settings
 gpii.tests.productionConfigTesting.testDefs = fluid.transform(gpii.tests.development.testDefs, function (testDefIn) {
     var testDef = fluid.extend(true, {}, testDefIn, {
         name: "Flow Manager production tests",
@@ -466,8 +458,6 @@ gpii.tests.productionConfigTesting.testLifecycleResponse = function (data, reque
     jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
     fluid.log(lifeCycle);
 };
-
-gpii.tests.productionConfigTesting.docsForRemoval = [];
 
 gpii.tests.productionConfigTesting.testGetForDeletion = function (data, request) {
     var expected = request.options.expectedStatusCodes;
