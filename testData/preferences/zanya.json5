@@ -27,7 +27,7 @@
                 "name": "Default preferences",
                 "preferences": {
                     "http://registry.gpii.net/applications/com.aisquared.zoomtext": {
-                        "ZtSpeech.SapiProductName": "VocalizerExpressive-French",
+                        "ZtSpeech.SapiProductName": "VocalizerExpressive-Dutch",
                         "ZtSpeech.Language": 12,
 
                         // [VocalizerExpressive-Dutch Speech - Screen Reader]
