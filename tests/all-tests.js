@@ -59,8 +59,7 @@ var testIncludes = [
     "./DeviceReporterErrorTests.js",
     "./ErrorTests.js",
     "./IntegrationTests.js",
-    // TODO: Still crashes following recent adjustment to startup sequence.
-    //"./JournalIntegrationTests.js",
+    "./JournalIntegrationTests.js",
     "./MultiSettingsHandlerTests.js",
     "./PayloadSizeTest.js",
     "./PSPIntegrationTests.js",
