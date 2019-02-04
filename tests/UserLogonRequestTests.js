@@ -21,5 +21,4 @@ var fluid = require("infusion"),
 
 require("./shared/UserLogonRequestTestDefs.js");
 
-// TODO: Unpack additional test def construction further.
 gpii.test.runCouchTestDefs(gpii.tests.userLogonRequest.buildTestDefs(gpii.tests.userLogonRequest.testDefs));

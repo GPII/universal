@@ -22,9 +22,13 @@ gpii.loadTestingSupport();
 
 fluid.registerNamespace("gpii.tests.userLogonRequest");
 
+gpii.tests.userLogonRequest.gpiiKey = "adjustCursor";
+gpii.tests.userLogonRequest.anotherGpiiKey = "sammy";
+
 fluid.defaults("gpii.tests.userLogonRequest.testCaseHolder", {
     gradeNames: ["gpii.test.common.lifecycleManagerReceiver", "gpii.test.testCaseHolder"],
     events: {
+        onNoUserLoggedIn: null,
         debounceTimeoutComplete: null
     },
     expectedModelChanges: {
@@ -50,7 +54,7 @@ fluid.defaults("gpii.tests.userLogonRequest.testCaseHolder", {
                 gpiiKey: gpii.tests.userLogonRequest.gpiiKey
             }
         ],
-        proximityTriggered: [
+        proximityTriggeredLogout: [
             {
                 type: "logout",
                 inProgress: true,
@@ -61,7 +65,6 @@ fluid.defaults("gpii.tests.userLogonRequest.testCaseHolder", {
                 inProgress: false,
                 gpiiKey: gpii.tests.userLogonRequest.gpiiKey
             },
-
             {
                 type: "login",
                 inProgress: true,
@@ -154,9 +157,6 @@ fluid.defaults("gpii.tests.userLogonRequest.testCaseHolder", {
     }
 });
 
-gpii.tests.userLogonRequest.gpiiKey        = "adjustCursor";
-gpii.tests.userLogonRequest.anotherGpiiKey = "sammy";
-
 gpii.tests.userLogonRequest.verifyActiveGpiiKey = function (lifecycleManager, expected) {
     jqUnit.assertDeepEq("The current active GPII key is as expected - " + expected, expected, lifecycleManager.getActiveSessionGpiiKey());
 };
@@ -175,8 +175,8 @@ gpii.tests.userLogonRequest.testResetResponse = function (data) {
     jqUnit.assertEquals("Response is correct", "Reset successfully.", data);
 };
 
-gpii.tests.userLogonRequest.checkAllModelChanges = function (trackedLogonChange, expectedModelChanges) {
-    var sliceToInspect = trackedLogonChange.slice(expectedModelChanges.length - 1);
+gpii.tests.userLogonRequest.checkLastModelChanges = function (trackedLogonChange, expectedModelChanges) {
+    var sliceToInspect = trackedLogonChange.slice(trackedLogonChange.length - expectedModelChanges.length);
     fluid.each(expectedModelChanges, function (expectedModelChange, index) {
         var actualChange = sliceToInspect[index];
         jqUnit.assertLeftHand("Checking model change " + index, expectedModelChange, actualChange);
@@ -241,7 +241,7 @@ gpii.tests.userLogonRequest.buildTestDefs = function (testDefs, testType) {
                         modelListeners: {
                             "logonChange": {
                                 listener: "gpii.tests.userLogonRequest.trackLogonChange",
-                                args: ["{that}.options.trackedLogonChange", "{change}.value"]
+                                args: ["{that}.options.trackedLogonChange", "{change}.value", "{testCaseHolder}"]
                             }
                         }
                     },
@@ -276,7 +276,7 @@ gpii.tests.userLogonRequest.testDefs = [
                 resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
                 args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogon"] // trackedLogonChange, expectedModelChanges)
             },
             {
@@ -300,12 +300,13 @@ gpii.tests.userLogonRequest.testDefs = [
                 resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogon"] // trackedLogonChange, expectedModelChanges)
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
+                args: ["{lifecycleManager}", "noUser"]
             },
             {
-                func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-                args: ["{lifecycleManager}", "noUser"]
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.proximityTriggeredLogout"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -340,12 +341,13 @@ gpii.tests.userLogonRequest.testDefs = [
                 resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.secondProximityTriggered"] // trackedLogonChange, expectedModelChanges)
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
+                args: ["{lifecycleManager}", gpii.tests.userLogonRequest.anotherGpiiKey]
             },
             {
-                func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-                args: ["{lifecycleManager}", gpii.tests.userLogonRequest.anotherGpiiKey]
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.secondProximityTriggered"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -472,7 +474,8 @@ gpii.tests.userLogonRequest.testDefs = [
                 resolveArgs: ["{arguments}.0"]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.checkLastModelChanges",
                 args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
             }
         ]
@@ -560,12 +563,13 @@ gpii.tests.userLogonRequest.testDefs = [
                 resolveArgs: ["{arguments}.0"]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.resetLogout"] // trackedLogonChange, expectedModelChanges)
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
+                args: ["{lifecycleManager}", "noUser"]
             },
             {
-                func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-                args: ["{lifecycleManager}", "noUser"]
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.resetLogout"] // trackedLogonChange, expectedModelChanges)
             },
             {
                 // 6. Verify the default settings have been applied: stop the magnifier
@@ -580,7 +584,7 @@ gpii.tests.userLogonRequest.testDefs = [
     },
     {
         name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-        expect: 10,
+        expect: 9,
         initialState: {
             "gpii.gsettings": {
                 "data": [{
@@ -629,7 +633,8 @@ gpii.tests.userLogonRequest.testDefs = [
             },
             {
                 // standard login completes: Verify both key-in settings and default settings for reset have been applied
-                func: "gpii.test.checkRestoredInitialState",
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.test.checkRestoredInitialState",
                 args: ["{tests}.options.expectedState", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
             },
             {
@@ -639,39 +644,40 @@ gpii.tests.userLogonRequest.testDefs = [
             {
                 // standard login with an already logged in user:
                 task: "{lifecycleManager}.performLogin",
-                args: [gpii.tests.userLogonRequest.gpiiKey],
-                reject: "gpii.tests.userLogonRequest.testLogoutError",
-                rejectArgs: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
-                    "statusCode": 409,
-                    "message": "Got log in request from user adjustCursor, but the user adjustCursor is already logged in. So ignoring login request.",
-                    "ignoreUserErrors": false
-                }]
+                args: [gpii.tests.userLogonRequest.anotherGpiiKey],
+                resolve:  "gpii.tests.userLogonRequest.testLoginResponse",
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
+            },
+            {
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "fluid.identity"
             },
             {
                 // logout of different user
                 task: "{lifecycleManager}.performLogout",
-                args: [gpii.tests.userLogonRequest.anotherGpiiKey],
+                args: [gpii.tests.userLogonRequest.gpiiKey],
                 reject: "gpii.tests.userLogonRequest.testLogoutError",
                 rejectArgs: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
                     "statusCode": 409,
-                    "message": "Got logout request from user sammy, but the user adjustCursor is logged in. So ignoring the request.",
+                    "message": "Got logout request from user adjustCursor, but the user sammy is logged in. So ignoring the request.",
                     "ignoreUserErrors": false
                 }]
             },
             {
                 // logout of the correct user
                 task: "{lifecycleManager}.performLogout",
-                args: [gpii.tests.userLogonRequest.gpiiKey],
+                args: [gpii.tests.userLogonRequest.anotherGpiiKey],
                 resolve: "gpii.tests.userLogonRequest.testLogoutResponse",
-                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+                resolveArgs: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
-            },
-            {
-                func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
                 args: ["{lifecycleManager}", "noUser"]
+            },
+            {
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -715,13 +721,14 @@ gpii.tests.userLogonRequest.testDefs = [
                 }, "{arguments}.0"]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
+                // "noUser" is still keyed in when a logon request is rejected
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
+                args: ["{lifecycleManager}", "noUser"]
             },
             {
-                // "noUser" is still keyed in when a logon request is rejected
-                func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-                args: ["{lifecycleManager}", "noUser"]
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.noUserLogin"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     },
@@ -742,12 +749,13 @@ gpii.tests.userLogonRequest.testDefs = [
                 resolveArgs: ["{arguments}.0", "noUser"]
             },
             {
-                funcName: "gpii.tests.userLogonRequest.checkAllModelChanges",
-                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.logoutNoUser"] // trackedLogonChange, expectedModelChanges)
+                event: "{lifecycleManager}.events.onQueueEmpty",
+                listener: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
+                args: ["{lifecycleManager}", "noUser"]
             },
             {
-                func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-                args: ["{lifecycleManager}", "noUser"]
+                funcName: "gpii.tests.userLogonRequest.checkLastModelChanges",
+                args: ["{lifecycleManager}.options.trackedLogonChange", "{that}.options.expectedModelChanges.logoutNoUser"] // trackedLogonChange, expectedModelChanges)
             }
         ]
     }

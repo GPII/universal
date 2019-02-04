@@ -74,12 +74,10 @@ var testIncludes = [
     "./UntrustedResetWithEnvReportTests.js",
     "./UntrustedResetAtStartTests.js",
     "./UntrustedUserLogonHandlersTests.js",
-    // TODO: Still crashes following recent adjustment to startup sequence.
-    //"./UntrustedUserLogonRequestTests.js",
+    "./UntrustedUserLogonRequestTests.js",
     "./UserLogonHandlersEventsTests.js",
     "./UserLogonHandlersTests.js",
-    // TODO: Still not working following recent adjustment to startup sequence.
-    //"./UserLogonRequestTests.js",
+    "./UserLogonRequestTests.js",
     "../gpii/node_modules/accessRequester/test/AccessRequesterTests.js",
     "../gpii/node_modules/contextManager/test/ContextManagerTests.js",
     "../gpii/node_modules/couchConnector/test/couchConnectorTests.js",
