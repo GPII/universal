@@ -30,44 +30,6 @@ gpii.tests.cloud.oauth2.settingsGet.config = {
     configPath: "%gpii-universal/gpii/configs"
 };
 
-fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
-    gradeNames: ["fluid.component"],
-    components: {
-        accessTokenRequest_settings: {
-            type: "kettle.test.request.http",
-            options: {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                path: "/access_token",
-                method: "POST"
-            }
-        },
-        settingsRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/%gpiiKey/settings/%device",
-                termMap: {
-                    gpiiKey: "{testCaseHolder}.options.gpiiKey",
-                    device: {
-                        expander: {
-                            func: "gpii.test.cloudBased.computeDevice",
-                            args: [
-                                [
-                                    "org.gnome.desktop.a11y.magnifier",
-                                    "org.gnome.desktop.interface",
-                                    "org.alsa-project"
-                                ],
-                                "linux"
-                            ]
-                        }
-                    }
-                }
-            }
-        }
-    }
-});
-
 fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
     gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,

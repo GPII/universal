@@ -21,10 +21,47 @@ var fluid = require("infusion"),
     jqUnit = fluid.registerNamespace("jqUnit");
 
 // These are test definitions for use with the cloud based flow manager in both
-// development and production configurations.  The definitions are for getting
+// development and production configurations. The definitions are for getting
 // and setting settings.
 
-fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsGet");
+// Define extra requests used for testing GET /settings endpoint
+fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        accessTokenRequest_settings: {
+            type: "kettle.test.request.http",
+            options: {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                path: "/access_token",
+                method: "POST"
+            }
+        },
+        settingsRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/%gpiiKey/settings/%device",
+                termMap: {
+                    gpiiKey: "{testCaseHolder}.options.gpiiKey",
+                    device: {
+                        expander: {
+                            func: "gpii.test.cloudBased.computeDevice",
+                            args: [
+                                [
+                                    "org.gnome.desktop.a11y.magnifier",
+                                    "org.gnome.desktop.interface",
+                                    "org.alsa-project"
+                                ],
+                                "linux"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
 
 // For successful workflows that request user settings from /settings endpoint
 // using access tokens granted by /access_token endpoint
