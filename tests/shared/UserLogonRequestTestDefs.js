@@ -706,7 +706,7 @@ gpii.tests.userLogonRequest.testDefs = [
             statusCode: 401,
             errorText: "server_error while executing HTTP POST on url http://localhost:8084/access_token"
         },
-        errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist while executing HTTP GET on url http://localhost:8081/preferences/%gpiiKey?merge=%merge",
+        errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist while executing HTTP GET on url http://localhost:8081/preferences/bogusToken?merge=%merge",
         statusCode: 404,
         sequence: [
             {
