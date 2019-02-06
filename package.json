@@ -17,9 +17,9 @@
         "gpii-couchdb-test-harness": "1.0.0-dev.20190206T093951Z.7394bfb.GPII-3531",
         "infusion": "3.0.0-dev.20181204T213346Z.2ca90f6e6",
         "json5": "2.1.0",
-        "kettle": "1.9.0",
+        "kettle": "1.10.1",
         "mkdirp": "0.5.1",
-        "moment": "2.22.2",
+        "moment": "2.24.0",
         "ndef": "0.2.0",
         "nock": "10.0.4",
         "node-jqunit": "1.1.8",
@@ -29,11 +29,11 @@
         "passport-local": "1.0.0",
         "passport-oauth2-client-password": "0.1.2",
         "request": "2.88.0",
-        "rimraf": "2.6.2",
+        "rimraf": "2.6.3",
         "semver": "5.6.0",
-        "write-file-atomic": "2.3.0",
+        "write-file-atomic": "2.4.2",
         "xml-mapping": "1.7.1",
-        "xregexp": "4.2.0"
+        "xregexp": "4.2.4"
     },
     "devDependencies": {
         "browserify": "16.2.3",
