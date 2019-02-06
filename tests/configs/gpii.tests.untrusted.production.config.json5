@@ -1,15 +1,7 @@
 {
     "type": "gpii.tests.untrusted.production.config",
     "options": {
-        "mainServerPort": 9082,
-        "distributeOptions": {
-            "flowManager.escalate": {
-                "record": {
-                    "resetAtStartSuccess.escalate": "{testEnvironment}.events.resetAtStartSuccess"
-                },
-                "target": "{that gpii.flowManager.local}.options.listeners"
-            }
-        }
+        "mainServerPort": 9082
     },
     "mergeConfigs": "%gpii-universal/gpii/configs/gpii.config.untrusted.development.json5"
 }

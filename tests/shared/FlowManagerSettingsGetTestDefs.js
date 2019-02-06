@@ -252,7 +252,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             name: "Attempt to get access token by sending a wrong client (oauth2 client type is not \"gpiiAppInstallationClient\")",
             client_id: "com.bdigital.easit4all",
             client_secret: "client_secret_easit4all",
-            username: "alice_gpii_key",
+            username: "gpii_key_no_prefs_safe",
             password: "dummy"
         },
         disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs
@@ -262,7 +262,7 @@ gpii.tests.cloud.oauth2.settingsGet.disruptedTests = [
             name: "Attempt to get access token by sending an nonexistent client",
             client_id: "nonexistent-client",
             client_secret: "client_secret_easit4all",
-            username: "alice_gpii_key",
+            username: "gpii_key_no_prefs_safe",
             password: "dummy"
         },
         disruptions: gpii.tests.cloud.oauth2.settingsGet.disruptionsWithWrongGrantArgs

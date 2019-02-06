@@ -160,11 +160,11 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
             // The options below are for sending /access_token request
             client_id: "pilot-computer",
             client_secret: "pilot-computer-secret",
-            username: "chrome_and_firefox",
+            username: "gpii_key_no_prefs_safe",
             password: "dummy",
 
             // The options below are required for sending /settings
-            gpiiKey: "chrome_and_firefox",
+            gpiiKey: "gpii_key_no_prefs_safe",
             updatedPrefsSet: gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
             expectedMsg: gpii.flowManager.cloudBased.settings.put.messages.success
         },
