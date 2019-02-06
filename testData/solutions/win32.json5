@@ -6961,7 +6961,7 @@
         ],
         "stop": [],
         "update": [
-            "configure",
+            "settings.configure",
             "start"
         ],
         "isRunning": [
@@ -7873,7 +7873,7 @@
             }
         },
         "update": [
-            "configure"
+            "settings.configure"
         ],
         "configure": [
             "settings.configure"
@@ -8004,7 +8004,7 @@
             }
         },
         "update": [
-            "configure"
+            "settings.configure"
         ],
         "configure": [
             "settings.configure"
