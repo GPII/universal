@@ -6066,7 +6066,7 @@
                             "description": "Specifies which background color is going to be used for captions",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "White",
                                 "Black",
@@ -6085,7 +6085,7 @@
                             "description": "Captions are placed in a small box, this property decides the transparency policy for that box",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "Opaque",
                                 "Translucent",
@@ -6100,7 +6100,7 @@
                             "description": "Determines the color in which captions are going to be draw",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "White",
                                 "Black",
@@ -6119,7 +6119,7 @@
                             "description": "Determines the color in which captions are going to be draw",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4, 5],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "None",
                                 "Raised",
@@ -6135,7 +6135,7 @@
                             "description": "Determines the style to apply to the captions font",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4, 5, 6, 7],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "Mono serif",
                                 "Proportional serif",
@@ -6153,7 +6153,7 @@
                             "description": "Determines the degree of opacity that the captions will have",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "Opaque",
                                 "Translucent",
@@ -6168,7 +6168,7 @@
                             "description": "Determines the degree of opacity that the captions will have",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "50%",
                                 "100%",
@@ -6183,7 +6183,7 @@
                             "description": "Determines the color of the whole window/region in which captions are displayed",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "White",
                                 "Black",
@@ -6202,7 +6202,7 @@
                             "description": "Determines the opacity of the whole window/region in which captions are displayed",
                             "type": "number",
                             "enum": [0, 1, 2, 3, 4],
-                            "outputFormat": [
+                            "enumLabels": [
                                 "Default",
                                 "Opaque",
                                 "Translucent",
