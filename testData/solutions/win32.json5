@@ -4978,7 +4978,22 @@
                             "description": "Changes the time system notifications are displayed",
                             "type": "number",
                             "default": 5,
-                            "enum": [5, 7, 15, 30, 60, 300]
+                            "enum": [
+                                5,
+                                7,
+                                15,
+                                30,
+                                60,
+                                300
+                            ],
+                            "enumLabels": [
+                                "5s",
+                                "7s",
+                                "15s",
+                                "30s",
+                                "60s",
+                                "300s"
+                            ]
                         }
                     }
                 },
