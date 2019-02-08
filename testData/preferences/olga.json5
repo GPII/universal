@@ -1,0 +1,47 @@
+// # Olga.json5
+//
+// This preference set changes the Windows 10 OSK preferences settings.
+//
+// ## Testing
+//
+// This changes the following settings from the system:
+//     + ClickSound: Disable click sound.
+//     + ShowPositionKeys: Enable OSK position keys.
+//     + ShowNumPad: Shows numeric pad.
+//     + KeyPressMode: Scan keys mode.
+//     + HoverPeriod: 1.5 seconds.
+//     + ScanInterval: 0.5 seconds.
+//     + UseDevice: Don't use a gaming device for key scanning.
+//     + UseKB: Use keyboard key for key scanning.
+//     + ScanKey: Set "F4" as scan key.
+//     + UseMouse: Disable mouse click to scan keys.
+//     + UseTextPrediction: Enable text prediction.
+//     + InsertSpace: Enable space insertion after predicted word.
+//
+{
+    "flat": {
+        "name": "olga",
+        "contexts": {
+            "gpii-default": {
+                "name": "Default preferences",
+                "preferences": {
+                    "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {
+                        "ClickSound": 0,
+                        "ShowPositionKeys": 1,
+                        "ShowNumPad": 1,
+                        "KeyPressMode": 3,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 500,
+                        "UseDevice": 0,
+                        "UseKB": 1,
+                        "ScanKey": 115,
+                        "UseMouse": 0,
+                        "UseTextPrediction": 1,
+                        "InsertSpace": 1,
+                        "Dock": 1
+                    }
+                }
+            }
+        }
+    }
+}

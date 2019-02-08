@@ -308,7 +308,7 @@ gpii.tests.userLogonHandlers.testDefs = [{
     }]
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
-    expect: 11,
+    expect: 9,
     sequence: [{
         // standard login
         func: "{loginRequest}.send"
@@ -320,14 +320,8 @@ gpii.tests.userLogonHandlers.testDefs = [{
         func: "{loginAdjustCursorRequest}.send"
     }, {
         event: "{loginAdjustCursorRequest}.events.onComplete",
-        listener: "kettle.test.assertErrorResponse",
-        args: {
-            message: "Received 409 error when logging in user who is already logged in",
-            errorTexts: "Got log in request from user adjustCursor, but the user adjustCursor is already logged in. So ignoring login request.",
-            statusCode: 409,
-            string: "{arguments}.0",
-            request: "{loginAdjustCursorRequest}"
-        }
+        listener: "gpii.tests.userLogonHandlers.testLoginResponse",
+        args: ["{arguments}.0", "adjustCursor"]
     }, {
         // logout of different user
         func: "{logoutSammyRequest}.send"
@@ -343,23 +337,23 @@ gpii.tests.userLogonHandlers.testDefs = [{
         }
     }, {
         // logout of the correct user
-        func: "{logoutRequest}.send"
-    }, {
-        event: "{logoutRequest}.events.onComplete",
-        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonHandlers.gpiiKey]
-    }, {
-        // logout of user when none is logged in
         func: "{logoutAdjustCursorRequest}.send"
     }, {
         event: "{logoutAdjustCursorRequest}.events.onComplete",
+        listener: "gpii.tests.userLogonHandlers.testLogoutResponse",
+        args: ["{arguments}.0", "adjustCursor"]
+    }, {
+        // logout of user when none is logged in
+        func: "{logoutRequest}.send"
+    }, {
+        event: "{logoutRequest}.events.onComplete",
         listener: "kettle.test.assertErrorResponse",
         args: {
             message: "Received 409 error when logging out user when no user is logged in",
             errorTexts: "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
             statusCode: 409,
             string: "{arguments}.0",
-            request: "{logoutAdjustCursorRequest}"
+            request: "{logoutRequest}"
         }
     }]
 }, {

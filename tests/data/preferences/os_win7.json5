@@ -93,7 +93,30 @@
                         "FollowInsertion": 0,
                         "InteractionMouse": 1,
                         "EchoWords": 1,
-                        "EchoChars": 0
+                        "EchoChars": 1,
+                        "IntonationPause": 1,
+                        "ReadHints": 1,
+                        "PlayAudioCues": 1,
+                        "NarratorCursorHighlight": 1,
+                        "FastKeyEntryEnabled": 1,
+                        "ReadingWithIntent": 1,
+                        "ErrorNotificationType": 1,
+                        "CoupleNarratorCursorMouse": 1,
+                        "LockNarratorKeys": 1,
+                        "SpeechVolume": 80,
+                        "SpeechVoice": "Microsoft Zira - English (United States)",
+                        "ContextVerbosityLevel": 4,
+                        "RenderContextBeforeElement": 1,
+                        "DuckAudio": 1,
+                        "WinEnterLaunchEnabled": 1,
+                        "VerbosityLevel": 3,
+                        "DetailedFeedback": 1,
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                            "value": true
+                        },
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                            "value": true
+                        }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.typingEnhancement": {
                         "EnableAutocorrection": 1,
@@ -154,6 +177,29 @@
                         },
                         "DoubleClickTimeConfig": {
                             "value": 600
+                        },
+                        "PointerSpeedConfig": {
+                            "path": "pvParam",
+                            "value": 15
+                        },
+                        "EnhancePrecisionConfig": {
+                            "path": "pvParam",
+                            "value": [0, 0, 1]
+                        },
+                        "SnapToDefaultButtonConfig": {
+                            "path": {
+                                "get": "pvParam",
+                                "set": "uiParam"
+                            },
+                            "value": 1
+                        },
+                        "HidePointerConfig": {
+                            "path": "pvParam",
+                            "value": 0
+                        },
+                        "MouseSonarConfig": {
+                            "path": "pvParam",
+                            "value": 1
                         }
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.language": {
@@ -169,6 +215,22 @@
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
                             "value": "Low sensitivity"
                         }
+                    },
+                    "http://registry.gpii.net/applications/com.microsoft.windows.onscreenKeyboard": {
+                        "NavigationMode": 0,
+                        "ClickSound": 0,
+                        "ShowClearKeyboard": 0,
+                        "ShowNumPad": 1,
+                        "Mode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
+                        "Dock": 0
                     }
                 }
             }
