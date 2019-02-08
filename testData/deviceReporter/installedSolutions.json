@@ -76,6 +76,10 @@
     },
 
     {
+        "id": "com.microsoft.windows.mouseSettings"
+    },
+
+    {
         "id": "com.microsoft.windows.screenDPI"
     },
 
@@ -93,6 +97,10 @@
 
     {
         "id": "com.microsoft.windows.nightScreen"
+    },
+
+    {
+        "id": "com.microsoft.windows.touchPadSettings"
     },
 
     {

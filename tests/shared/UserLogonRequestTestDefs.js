@@ -33,11 +33,11 @@ fluid.defaults("gpii.tests.userLogonRequest.testCaseHolder", {
     }
 });
 
-gpii.tests.userLogonRequest.gpiiKey = "testUser1";
+gpii.tests.userLogonRequest.gpiiKey = "adjustCursor";
 gpii.tests.userLogonRequest.anotherGpiiKey = "sammy";
 
 gpii.tests.userLogonRequest.verifyActiveGpiiKey = function (lifecycleManager, expected) {
-    jqUnit.assertDeepEq("The current active GPII key is as expected - " + expected, expected, lifecycleManager.getActiveSessionGpiiKeys());
+    jqUnit.assertDeepEq("The current active GPII key is as expected - " + expected, expected, lifecycleManager.getActiveSessionGpiiKey());
 };
 
 gpii.tests.userLogonRequest.testLoginResponse = function (data, gpiiKey) {
@@ -64,6 +64,16 @@ gpii.tests.userLogonRequest.modelChangeChecker = function (trackedLogonChange, e
 gpii.tests.userLogonRequest.testUserError = function (actualResponse, expectedResponse, userError, expectedUserError) {
     jqUnit.assertDeepEq("onError fires with the expected message", expectedResponse, actualResponse);
     jqUnit.assertDeepEq("User error has been fired with the expected content", expectedUserError, userError.error);
+};
+
+gpii.tests.userLogonRequest.testLogoutError = function (actualError, userError, expectedError) {
+    jqUnit.assertDeepEq("onError fires with the expected message", expectedError, actualError);
+    if (actualError.ignoreUserErrors) {
+        jqUnit.assertDeepEq("User error has not be fired", {}, userError);
+    } else {
+        var userErrorMessage = userError.error.originalError;
+        jqUnit.assertDeepEq("User error has been fired with the expected message", actualError.message, userErrorMessage);
+    }
 };
 
 gpii.tests.userLogonRequest.commonTestConfig = {
@@ -132,9 +142,9 @@ gpii.tests.userLogonRequest.testDefs = [{
     sequence: [{
         // The initial active GPII key is "noUser"
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }, {
-        // 1. 1nd proximityTriggered request to key in testUser1
+        // 1. 1nd proximityTriggered request to key in adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -151,19 +161,19 @@ gpii.tests.userLogonRequest.testDefs = [{
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", true, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", [gpii.tests.userLogonRequest.gpiiKey]]
+        args: ["{lifecycleManager}", gpii.tests.userLogonRequest.gpiiKey]
     }, {
         // 2. wait for the debounce period to pass so that the following proximityTriggered request is not rejected
         func: "setTimeout",
@@ -172,19 +182,19 @@ gpii.tests.userLogonRequest.testDefs = [{
         event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
-        // 3. 2nd proximityTriggered request to key out testUser1
+        // 3. 2nd proximityTriggered request to key out adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", true, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         changeEvent: "{lifecycleManager}.applier.modelChanged",
         path: "logonChange",
         listener: "gpii.tests.userLogonRequest.modelChangeChecker",
-        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, "testUser1"]
+        args: ["{lifecycleManager}.options.trackedLogonChange", "logout", false, gpii.tests.userLogonRequest.gpiiKey]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLogoutResponse",
@@ -202,13 +212,13 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }]
 }, {
     name: "Login with a different user with proximity trigger should log previous user out and noUser does not login in between",
     expect: 15,
     sequence: [{
-        // 1. 1nd proximityTriggered request to key in testUser1
+        // 1. 1nd proximityTriggered request to key in adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -224,7 +234,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "fluid.identity"
     }, {
         // 3. 2nd proximityTriggered request to key in another key "sammy". This should trigger:
-        // 1) key out the first key "testUser1";
+        // 1) key out the first key "adjustCursor";
         // 2) key in the 2nd key "sammy";
         // 3) "noUser" is not keyed in between step 1 and 2.
         func: "gpii.tests.invokePromiseProducer",
@@ -255,13 +265,13 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", [gpii.tests.userLogonRequest.anotherGpiiKey]]
+        args: ["{lifecycleManager}", gpii.tests.userLogonRequest.anotherGpiiKey]
     }]
 }, {
     name: "Login with a different user with proximity trigger should ignore debounce",
     expect: 2,
     sequence: [{
-        // 1. 1nd proximityTriggered request to key in testUser1
+        // 1. 1nd proximityTriggered request to key in adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -288,7 +298,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     name: "Testing proximityTriggered login with debounce",
     expect: 2,
     sequence: [{
-        // 1. 1nd proximityTriggered request to key in testUser1
+        // 1. 1nd proximityTriggered request to key in adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -303,7 +313,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         event: "{tests}.events.debounceTimeoutComplete",
         listener: "fluid.identity"
     }, {
-        // 1. 2nd proximityTriggered request to key out testUser1
+        // 1. 2nd proximityTriggered request to key out adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -319,7 +329,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     name: "Testing proximityTriggered logout with debounce",
     expect: 3,
     sequence: [{
-        // 1. 1nd proximityTriggered request to key in testUser1
+        // 1. 1nd proximityTriggered request to key in adjustCursor
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
@@ -366,7 +376,6 @@ gpii.tests.userLogonRequest.testDefs = [{
     name: "Testing 'reset' GPII key: resetting with noUser logs out noUser",
     expect: 7,
     sequence: [{
-        // 1. resetting with noUser logs out noUser
         func: "gpii.tests.invokePromiseProducer",
         args: ["{lifecycleManager}.performProximityTriggered", ["reset"], "{that}"]
     }, {
@@ -405,6 +414,27 @@ gpii.tests.userLogonRequest.testDefs = [{
             "org.gnome.desktop.a11y.magnifier": [{
                 "settings": {
                     "running": false
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.a11y.applications",
+                    "key": "screen-magnifier-enabled"
+                }
+            }]
+        },
+        "gpii.gsettings": {
+            "data": [{
+                "settings": {
+                    "cursor-size": 29
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }]
+        },
+        "gpii.alsa": {
+            "data": [{
+                "settings": {
+                    "masterVolume": 75
                 }
             }]
         }
@@ -465,11 +495,11 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }, {
         // 6. Verify the default settings have been applied: stop the magnifier
         func: "gpii.test.checkRestoredInitialState",
-        args: [ "{tests}.expectedStateAfterReset", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
+        args: [ "{tests}.options.expectedStateAfterReset", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
     }, {
         event: "{testCaseHolder}.events.onCheckRestoredInitialStateComplete",
         listener: "fluid.identity"
@@ -477,6 +507,44 @@ gpii.tests.userLogonRequest.testDefs = [{
 }, {
     name: "Testing standard user/<gpiiKey>/login and /user/<gpiiKey>/logout URLs",
     expect: 13,
+    initialState: {
+        "gpii.gsettings": {
+            "data": [{
+                "settings": {
+                    "cursor-size": 29
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }]
+        },
+        "gpii.alsa": {
+            "data": [{
+                "settings": {
+                    "masterVolume": 75
+                }
+            }]
+        }
+    },
+    expectedState: {
+        "gpii.gsettings": {
+            "data": [{
+                "settings": {
+                    "cursor-size": 41
+                },
+                "options": {
+                    "schema": "org.gnome.desktop.interface"
+                }
+            }]
+        },
+        "gpii.alsa": {
+            "data": [{
+                "settings": {
+                    "masterVolume": 75
+                }
+            }]
+        }
+    },
     sequence: [{
         // standard login
         func: "gpii.tests.invokePromiseProducer",
@@ -486,54 +554,41 @@ gpii.tests.userLogonRequest.testDefs = [{
         listener: "gpii.tests.userLogonRequest.testLoginResponse",
         args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
     }, {
+        // standard login completes: Verify both key-in settings and default settings for reset have been applied
+        func: "gpii.test.checkRestoredInitialState",
+        args: [ "{tests}.options.expectedState", "{nameResolver}", "{testCaseHolder}.events.onCheckRestoredInitialStateComplete.fire"]
+    }, {
+        event: "{testCaseHolder}.events.onCheckRestoredInitialStateComplete",
+        listener: "fluid.identity"
+    }, {
         // standard login with an already logged in user:
         func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
+        args: ["{lifecycleManager}.performLogin", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
-        event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testUserError",
-        args: ["{arguments}.0",
-            {
-                "statusCode": 409,
-                "message": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request.",
-                "ignoreUserErrors": false
-            },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
-            {
-                "isError": true,
-                "messageKey": "KeyInFail",
-                "originalError": "Got log in request from user testUser1, but the user testUser1 is already logged in. So ignoring login request."
-            }
-        ]
+        event: "{that}.events.onResponse",
+        listener: "gpii.tests.userLogonRequest.testLoginResponse",
+        args: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         // logout of different user
         func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
+        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
         priority: "last",
-        listener: "gpii.tests.userLogonRequest.testUserError",
-        args: ["{arguments}.0",
-            {
-                "statusCode": 409,
-                "message": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request.",
-                "ignoreUserErrors": false
-            },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
-            {
-                "isError": true,
-                "messageKey": "KeyInFail",
-                "originalError": "Got logout request from user sammy, but the user testUser1 is logged in. So ignoring the request."
-            }
-        ]
+        listener: "gpii.tests.userLogonRequest.testLogoutError",
+        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
+            "statusCode": 409,
+            "message": "Got logout request from user adjustCursor, but the user sammy is logged in. So ignoring the request.",
+            "ignoreUserErrors": false
+        }]
     }, {
         // logout of the correct user
         func: "gpii.tests.invokePromiseProducer",
-        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
+        args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.anotherGpiiKey], "{that}"]
     }, {
         event: "{that}.events.onResponse",
         listener: "gpii.tests.userLogonRequest.testLogoutResponse",
-        args: ["{arguments}.0", gpii.tests.userLogonRequest.gpiiKey]
+        args: ["{arguments}.0", gpii.tests.userLogonRequest.anotherGpiiKey]
     }, {
         // 3. "noUser" is automatically keyed in when no actual key is keyed in
         changeEvent: "{lifecycleManager}.applier.modelChanged",
@@ -547,10 +602,10 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }]
 }, {
-    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is \"noUser\"",
+    name: "GPII-3481: /user/<gpiiKey>/logout does not trigger the user error report when the current logged in user is noUser",
     expect: 2,
     sequence: [{
         // logout of user when none is logged in
@@ -558,16 +613,12 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.performLogout", [gpii.tests.userLogonRequest.gpiiKey], "{that}"]
     }, {
         event: "{that}.events.onError",
-        listener: "gpii.tests.userLogonRequest.testUserError",
-        args: ["{arguments}.0",
-            {
-                "statusCode": 409,
-                "message": "Got logout request from user testUser1, but the user noUser is logged in. So ignoring the request.",
-                "ignoreUserErrors": true
-            },
-            "{lifecycleManager}.userErrors.options.trackedUserErrors",
-            undefined
-        ]
+        listener: "gpii.tests.userLogonRequest.testLogoutError",
+        args: ["{arguments}.0", "{lifecycleManager}.userErrors.options.trackedUserErrors", {
+            "statusCode": 409,
+            "message": "Got logout request from user adjustCursor, but the user noUser is logged in. So ignoring the request.",
+            "ignoreUserErrors": true
+        }, "{arguments}.0"]
     }]
 }, {
     name: "Testing standard error handling: invalid user URLs",
@@ -577,7 +628,7 @@ gpii.tests.userLogonRequest.testDefs = [{
         statusCode: 401,
         errorText: "server_error while executing HTTP POST on url http://localhost:8084/access_token"
     },
-    errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist while executing HTTP GET on url http://localhost:8081/preferences/%gpiiKey?merge=%merge",
+    errorText: "Error when retrieving preferences: GPII key \"bogusToken\" does not exist while executing HTTP GET on url http://localhost:8081/preferences/bogusToken?merge=%merge",
     statusCode: 404,
     sequence: [{
         // login with a non-existing GPII key
@@ -605,7 +656,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     }, {
         // "noUser" is still keyed in when a logon request is rejected
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }]
 }, {
     name: "noUser logs back in after an explicit request to logout noUser",
@@ -613,7 +664,7 @@ gpii.tests.userLogonRequest.testDefs = [{
     sequence: [{
         // 1. "noUser" is keyed in initially
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }, {
         // 2. explicitly key out "noUser"
         func: "gpii.tests.invokePromiseProducer",
@@ -647,6 +698,6 @@ gpii.tests.userLogonRequest.testDefs = [{
         args: ["{lifecycleManager}.options.trackedLogonChange", "login", false, "noUser"]
     }, {
         func: "gpii.tests.userLogonRequest.verifyActiveGpiiKey",
-        args: ["{lifecycleManager}", ["noUser"]]
+        args: ["{lifecycleManager}", "noUser"]
     }]
 }];
