@@ -210,3 +210,119 @@ gpii.tests.cloud.oauth2.settingsPut.disruptedTests = [
         }]
     }
 ];
+
+// Flowmanager test sequence for inability to update a snapset ('carla').
+// 1. /access_token,
+// 2. /%gpiiKey/settings/%device
+// 3. /%gpiiKey/settings
+fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsPut.updateSnapset");
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey = "carla";
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaTokenRequestPayload = {
+    "username": gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey,
+    "gpiiKey": gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey,
+    "password": "dummy",
+    "client_id": "pilot-computer",
+    "client_secret": "pilot-computer-secret",
+    "grant_type": "password"
+};
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.device = {
+    OS: { id: "linux" },
+    solutions: [{
+        "id": "org.gnome.desktop.a11y.magnifier"
+    }]
+};
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence = [
+    {
+        func: "{accessTokenRequestUpdateSnapset}.send",
+        args: [gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaTokenRequestPayload]
+    }, {
+        event: "{accessTokenRequestUpdateSnapset}.events.onComplete",
+        listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse"
+    }, {
+        func: "{lifeCycleRequest}.send",
+        args: [
+            null,
+            {
+                "headers": {
+                    "Authorization": "{accessTokenRequestUpdateSnapset}.options.stashedAuth"
+                }
+            }
+        ]
+    }, {
+        event: "{lifeCycleRequest}.events.onComplete",
+        listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse"
+    }, {
+        func: "{putSettingsRequestFailure}.send",
+        args: [
+            gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
+            {
+                "headers": {
+                    "Authorization": "{accessTokenRequestUpdateSnapset}.options.stashedAuth"
+                }
+            }
+        ]
+    }, {
+        event: "{putSettingsRequestFailure}.events.onComplete",
+        listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testResponse"
+    }
+];
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode = function (data, request) {
+    jqUnit.assertEquals(
+        "Checking status of " + request.options.path,
+        request.options.expectedStatusCode, request.nativeResponse.statusCode
+    );
+};
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAddedToDatabase = function (data, request) {
+    var expected = request.options.expectedStatusCodes;
+    var actual = request.nativeResponse.statusCode;
+    jqUnit.assertNotEquals(
+        "Adding record to database using " + request.options.path +
+        ", status: " + actual,
+        expected.indexOf(actual), -1
+    );
+    // Store the added record's id and rev
+    if (actual === 201 || actual === 200) {
+        request.options.result = JSON.parse(data);
+        fluid.log(request.options.result);
+    }
+};
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testResponse = function (data, request) {
+    gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
+    jqUnit.assertDeepEq(
+        "Checking paylod of " + request.options.path,
+        request.options.expectedPayload, JSON.parse(data)
+    );
+};
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse = function (data, request) {
+    var token = JSON.parse(data);
+    var auth = "Bearer " + token.access_token;
+    request.options.stashedAuth = auth;
+
+    gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
+    jqUnit.assertNotNull("Checking 'access_token'", token.access_token);
+    jqUnit.assertNotNull("Checking 'expiresIn'", token.expiresIn);
+    jqUnit.assertEquals("Checking 'token_type'",  "Bearer", token.token_type);
+};
+
+gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse = function (data, request) {
+    gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
+
+    var lifeCycle = JSON.parse(data);
+    jqUnit.assertEquals(
+        "Checking lifeCycle user '" + gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey + "'",
+        gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey,
+        lifeCycle.gpiiKey
+    );
+    // These checks based on
+    // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
+    jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
+    jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
+    fluid.log(lifeCycle);
+};
