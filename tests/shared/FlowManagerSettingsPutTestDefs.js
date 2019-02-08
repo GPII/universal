@@ -67,6 +67,24 @@ gpii.tests.cloud.oauth2.settingsPut.mainSequence = [
     }
 ];
 
+// Define extra requests used for testing PUT /settings endpoint
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        settingsPutRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/%gpiiKey/settings",
+                port: 8081,
+                method: "PUT",
+                termMap: {
+                    gpiiKey: "{testCaseHolder}.options.gpiiKey"
+                }
+            }
+        }
+    }
+});
+
 fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.mainSequence", {
     gradeNames: ["gpii.test.disruption"],
     testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.requests",

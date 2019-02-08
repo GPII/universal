@@ -27,23 +27,6 @@ gpii.tests.cloud.oauth2.settingsPut.config = {
     configPath: "%gpii-universal/gpii/configs"
 };
 
-fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
-    gradeNames: ["fluid.component"],
-    components: {
-        settingsPutRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/%gpiiKey/settings",
-                port: 8081,
-                method: "PUT",
-                termMap: {
-                    gpiiKey: "{testCaseHolder}.options.gpiiKey"
-                }
-            }
-        }
-    }
-});
-
 fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest) {
     gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
         oneTest.testDef,

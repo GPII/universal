@@ -103,84 +103,6 @@ gpii.tests.productionConfigTesting.prefsUpdate = {
     }
 };
 
-fluid.defaults("gpii.tests.productionConfigTesting.testCaseHolder", {
-    gradeNames: ["kettle.test.testCaseHolder"],
-    components: {
-        accessTokenRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                path: "/access_token",
-                hostname: "flowmanager",
-                port: 9082,
-                method: "POST"
-            }
-        }
-    }
-});
-
-fluid.defaults("gpii.tests.cloud.oauth2.settingsGet.requests", {
-    gradeNames: ["fluid.component"],
-    components: {
-        accessTokenRequest_settings: {
-            type: "kettle.test.request.http",
-            options: {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                path: "/access_token",
-                hostname: "flowmanager",
-                port: 9082,
-                method: "POST"
-            }
-        },
-        settingsRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/%gpiiKey/settings/%device",
-                hostname: "flowmanager",
-                port: 9082,
-                termMap: {
-                    gpiiKey: "{testCaseHolder}.options.gpiiKey",
-                    device: {
-                        expander: {
-                            func: "gpii.test.cloudBased.computeDevice",
-                            args: [
-                                [
-                                    "org.gnome.desktop.a11y.magnifier",
-                                    "org.gnome.desktop.interface",
-                                    "org.alsa-project"
-                                ],
-                                "linux"
-                            ]
-                        }
-                    }
-                }
-            }
-        }
-    }
-});
-
-fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.requests", {
-    gradeNames: ["fluid.component"],
-    components: {
-        settingsPutRequest: {
-            type: "kettle.test.request.http",
-            options: {
-                path: "/%gpiiKey/settings",
-                hostname: "flowmanager",
-                port: 9082,
-                method: "PUT",
-                termMap: {
-                    gpiiKey: "{testCaseHolder}.options.gpiiKey"
-                }
-            }
-        }
-    }
-});
-
 // Flowmanager tests for:
 // /user/%gpiiKey/login and /user/%gpiiKey/logout (as defined in gpii.tests.development.testDefs),
 // /health,
@@ -595,6 +517,30 @@ gpii.tests.productionConfigTesting.deleteTestRecordsFromDatabase.sequence = [
     }
 ];
 
+// GET /settings tests
+
+fluid.defaults("gpii.tests.productionConfigTesting.settingsGet.testCaseHolder", {
+    gradeNames: ["gpii.test.cloudBased.oauth2.testCaseHolder"],
+    productionHostConfig: {
+        hostname: "flowmanager",
+        port: 9082
+    },
+    distributeOptions: {
+        "accessTokenRequest.hostConfig": {
+            source: "{that}.options.productionHostConfig",
+            target: "{that accessTokenRequest}.options"
+        },
+        "accessTokenRequest_settings.hostConfig": {
+            source: "{that}.options.productionHostConfig",
+            target: "{that accessTokenRequest_settings}.options"
+        },
+        "settingsRequest.hostConfig": {
+            source: "{that}.options.productionHostConfig",
+            target: "{that settingsRequest}.options"
+        }
+    }
+});
+
 // Add 'user' prefs to the database at the beginnning of the "get" settings test
 // definitions.
 gpii.tests.cloud.oauth2.settingsGet.disruptedTests.unshift(
@@ -607,8 +553,28 @@ fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest
         {},
         oneTest.disruptions,
         gpii.tests.productionConfigTesting.config,
-        "gpii.tests.productionConfigTesting.testCaseHolder"
+        "gpii.tests.productionConfigTesting.settingsGet.testCaseHolder"
     );
+});
+
+// PUT /settings tests
+
+fluid.defaults("gpii.tests.productionConfigTesting.settingsPut.testCaseHolder", {
+    gradeNames: ["gpii.test.cloudBased.oauth2.testCaseHolder"],
+    productionHostConfig: {
+        hostname: "flowmanager",
+        port: 9082
+    },
+    distributeOptions: {
+        "accessTokenRequest.hostConfig": {
+            source: "{that}.options.productionHostConfig",
+            target: "{that accessTokenRequest}.options"
+        },
+        "settingsPutRequest.hostConfig": {
+            source: "{that}.options.productionHostConfig",
+            target: "{that settingsPutRequest}.options"
+        }
+    }
 });
 
 // Add 'user' prefs to the database at the beginnning of the "put" settings test
@@ -630,6 +596,6 @@ fluid.each(gpii.tests.cloud.oauth2.settingsPut.disruptedTests, function (oneTest
         {},
         oneTest.disruptions,
         gpii.tests.productionConfigTesting.config,
-        "gpii.tests.productionConfigTesting.testCaseHolder"
+        "gpii.tests.productionConfigTesting.settingsPut.testCaseHolder"
     );
 });
