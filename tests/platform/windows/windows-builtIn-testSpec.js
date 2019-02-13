@@ -67,7 +67,248 @@ gpii.tests.windows.builtIn = [
             }
         },
         settingsHandlers: {
+            "gpii.windows.nativeSettingsHandler": {
+                "com.microsoft.windows.mouseSettings": [
+                    {
+                        "settings": {
+                            "DoubleClickTimeConfig": {
+                                "value": 600
+                            }
+                        },
+                        "options": {
+                            "functionName": "DoubleClickTime"
+                        }
+                    }
+                ]
+            },
             "gpii.windows.spiSettingsHandler": {
+                "com.microsoft.windows.mouseSettings": [
+                    {
+                        "settings": {
+                            "SwapMouseButtonsConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEBUTTONSWAP",
+                            "setAction": "SPI_SETMOUSEBUTTONSWAP",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ScrollWheelModeConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 4294967294
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETWHEELSCROLLLINES",
+                            "setAction": "SPI_SETWHEELSCROLLLINES",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ScrollFocusRoutingConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEWHEELROUTING",
+                            "setAction": "SPI_SETMOUSEWHEELROUTING",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "MouseCursorShadowEnable": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETCURSORSHADOW",
+                            "setAction": "SPI_SETCURSORSHADOW",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ScrollCharsConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 10
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETWHEELSCROLLCHARS",
+                            "setAction": "SPI_SETWHEELSCROLLCHARS",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "WindowsTrackingConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETACTIVEWINDOWTRACKING",
+                            "setAction": "SPI_SETACTIVEWINDOWTRACKING",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "ActiveZOrder": {
+                                "path": "pvParam",
+                                "value": 0
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETACTIVEWNDTRKZORDER",
+                            "setAction": "SPI_SETACTIVEWNDTRKZORDER",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "WindowsArrangement": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETWINARRANGING",
+                            "setAction": "SPI_SETWINARRANGING",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "BOOL"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "PointerSpeedConfig": {
+                                "path": "pvParam",
+                                "value": 15
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSESPEED",
+                            "setAction": "SPI_SETMOUSESPEED",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "EnhancePrecisionConfig": {
+                                "path": "pvParam",
+                                "value": [0, 0, 1]
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSE",
+                            "setAction": "SPI_SETMOUSE",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "array",
+                                "valueType": "INT",
+                                "length": 3
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "SnapToDefaultButtonConfig": {
+                                "path": {
+                                    "get": "pvParam",
+                                    "set": "uiParam"
+                                },
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETSNAPTODEFBUTTON",
+                            "setAction": "SPI_SETSNAPTODEFBUTTON",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "HidePointerConfig": {
+                                "path": "pvParam",
+                                "value": 0
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSEVANISH",
+                            "setAction": "SPI_SETMOUSEVANISH",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    },
+                    {
+                        "settings": {
+                            "MouseSonarConfig": {
+                                "path": "pvParam",
+                                "value": 1
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETMOUSESONAR",
+                            "setAction": "SPI_SETMOUSESONAR",
+                            "uiParam": 0,
+                            "pvParam": {
+                                "type": "UINT"
+                            }
+                        }
+                    }
+                ],
                 "com.microsoft.windows.mouseTrailing": [
                     {
                         "settings": {
@@ -259,19 +500,19 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
-                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
-                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
-                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
-                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
-                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                        "No": "%SystemRoot%\\cursors\\no_l.cur",
+                        "Hand": "",
+                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
+                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -299,8 +540,17 @@ gpii.tests.windows.builtIn = [
                         "InteractionMouse": 1,
                         "CoupleNarratorCursorKeyboard": 1,
                         "FollowInsertion": 0,
-                        "EchoChars": 0,
-                        "EchoWords": 1
+                        "EchoChars": 1,
+                        "EchoWords": 1,
+                        "IntonationPause": 1,
+                        "ReadHints": 1,
+                        "PlayAudioCues": 1,
+                        "NarratorCursorHighlight": 1,
+                        "FastKeyEntryEnabled": 1,
+                        "ReadingWithIntent": 1,
+                        "ErrorNotificationType": 1,
+                        "CoupleNarratorCursorMouse": 1,
+                        "LockNarratorKeys": 1
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -312,7 +562,41 @@ gpii.tests.windows.builtIn = [
                             "CoupleNarratorCursorKeyboard": "REG_DWORD",
                             "FollowInsertion": "REG_DWORD",
                             "EchoChars": "REG_DWORD",
-                            "EchoWords": "REG_DWORD"
+                            "EchoWords": "REG_DWORD",
+                            "IntonationPause": "REG_DWORD",
+                            "ReadHints": "REG_DWORD",
+                            "PlayAudioCues": "REG_DWORD",
+                            "NarratorCursorHighlight": "REG_DWORD",
+                            "FastKeyEntryEnabled": "REG_DWORD",
+                            "ReadingWithIntent": "REG_DWORD",
+                            "ErrorNotificationType": "REG_DWORD",
+                            "CoupleNarratorCursorMouse": "REG_DWORD",
+                            "LockNarratorKeys": "REG_DWORD"
+                        }
+                    }
+                }, { // Narrator (NoRoam)
+                    "settings": {
+                        "SpeechVolume": 80,
+                        "SpeechVoice": "Microsoft Zira - English (United States)",
+                        "ContextVerbosityLevel": 4,
+                        "RenderContextBeforeElement": 1,
+                        "DuckAudio": 1,
+                        "WinEnterLaunchEnabled": 1,
+                        "VerbosityLevel": 3,
+                        "DetailedFeedback": 1
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Narrator\\NoRoam",
+                        "dataTypes": {
+                            "SpeechVolume": "REG_DWORD",
+                            "SpeechVoice": "REG_SZ",
+                            "ContextVerbosityLevel": "REG_DWORD",
+                            "RenderContextBeforeElement": "REG_DWORD",
+                            "DuckAudio": "REG_DWORD",
+                            "WinEnterLaunchEnabled": "REG_DWORD",
+                            "VerbosityLevel": "REG_DWORD",
+                            "DetailedFeedback": "REG_DWORD"
                         }
                     }
                 }, { // TypingEnhancement
@@ -344,8 +628,45 @@ gpii.tests.windows.builtIn = [
                             "EnableDesktopModeAutoInvoke": "REG_DWORD"
                         }
                     }
-                }
-                ],
+                }],
+                "com.microsoft.windows.onscreenKeyboard": [{
+                    "settings": {
+                        "NavigationMode": 0,
+                        "ClickSound": 0,
+                        "ShowClearKeyboard": 0,
+                        "ShowNumPad": 1,
+                        "Mode": 2,
+                        "HoverPeriod": 1500,
+                        "ScanInterval": 1500,
+                        "UseDevice": 0,
+                        "UseKB": 0,
+                        "ScanKey": 113,
+                        "UseMouse": 1,
+                        "UseTextPrediction": 0,
+                        "InsertSpace": 0,
+                        "Dock": 0
+                    },
+                    "options": {
+                        "hKey": "HKEY_CURRENT_USER",
+                        "path": "Software\\Microsoft\\Osk",
+                        "dataTypes": {
+                            "NavigationMode": "REG_DWORD",
+                            "ClickSound": "REG_DWORD",
+                            "ShowClearKeyboard": "REG_DWORD",
+                            "ShowNumPad": "REG_DWORD",
+                            "Mode": "REG_DWORD",
+                            "HoverPeriod": "REG_DWORD",
+                            "ScanInterval": "REG_DWORD",
+                            "UseDevice": "REG_DWORD",
+                            "UseKB": "REG_DWORD",
+                            "ScanKey": "REG_DWORD",
+                            "UseMouse": "REG_DWORD",
+                            "UseTextPrediction": "REG_DWORD",
+                            "InsertSpace": "REG_DWORD",
+                            "Dock": "REG_DWORD"
+                        }
+                    }
+                }],
                 "com.microsoft.windows.language": [{
                     "settings": {
                         "PreferredUILanguages": "en-US"
@@ -433,6 +754,10 @@ gpii.tests.windows.builtIn = [
                         "SystemSettings_Display_BlueLight_ManualToggleQuickAction": {
                             "value": false
                         }
+                    },
+                    "options": {
+                        "Async": true,
+                        "CheckResult": true
                     }
                 }],
                 "com.microsoft.windows.touchPadSettings": [{
@@ -440,6 +765,24 @@ gpii.tests.windows.builtIn = [
                         "SystemSettings_Input_Touch_SetActivationTimeout": {
                             "value": "Low sensitivity"
                         }
+                    },
+                    "options": {
+                        "Async": true,
+                        "CheckResult": true
+                    }
+                }],
+                "com.microsoft.windows.narrator": [{
+                    "settings": {
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartEnabled": {
+                            "value": true
+                        },
+                        "SystemSettings_Accessibility_Narrator_IsAutoStartOnLogonDesktopEnabled": {
+                            "value": true
+                        }
+                    },
+                    "options": {
+                        "Async": true,
+                        "CheckResult": true
                     }
                 }]
             },
@@ -635,19 +978,19 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
-                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
-                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
-                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
-                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
-                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                        "No": "%SystemRoot%\\cursors\\no_l.cur",
+                        "Hand": "",
+                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
+                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -877,19 +1220,19 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
-                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
-                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
-                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
-                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
-                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                        "No": "%SystemRoot%\\cursors\\no_l.cur",
+                        "Hand": "",
+                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
+                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -1119,19 +1462,19 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
-                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
-                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
-                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
-                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
-                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                        "No": "%SystemRoot%\\cursors\\no_l.cur",
+                        "Hand": "",
+                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
+                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -1254,19 +1597,19 @@ gpii.tests.windows.builtIn = [
                 }],
                 "com.microsoft.windows.cursors": [{ // cursor size stuff
                     "settings": {
-                        "No": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
-                        "Hand": "%SystemRoot%\\cursors\\aero_link_xl.cur",
-                        "Help": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
-                        "Wait": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
-                        "Arrow": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
-                        "NWPen": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
-                        "SizeNS": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
-                        "SizeWE": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
-                        "SizeAll": "%SystemRoot%\\cursors\\aero_move_xl.cur",
-                        "UpArrow": "%SystemRoot%\\cursors\\aero_up_xl.cur",
-                        "SizeNESW": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
-                        "SizeNWSE": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
-                        "AppStarting": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+                        "No": "%SystemRoot%\\cursors\\no_l.cur",
+                        "Hand": "",
+                        "Help": "%SystemRoot%\\cursors\\help_l.cur",
+                        "Wait": "%SystemRoot%\\cursors\\busy_l.cur",
+                        "Arrow": "%SystemRoot%\\cursors\\arrow_l.cur",
+                        "NWPen": "%SystemRoot%\\cursors\\pen_l.cur",
+                        "SizeNS": "%SystemRoot%\\cursors\\size4_l.cur",
+                        "SizeWE": "%SystemRoot%\\cursors\\size3_l.cur",
+                        "SizeAll": "%SystemRoot%\\cursors\\move_l.cur",
+                        "UpArrow": "%SystemRoot%\\cursors\\up_l.cur",
+                        "SizeNESW": "%SystemRoot%\\cursors\\size1_l.cur",
+                        "SizeNWSE": "%SystemRoot%\\cursors\\size2_l.cur",
+                        "AppStarting": "%SystemRoot%\\cursors\\wait_l.cur"
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
