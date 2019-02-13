@@ -3814,8 +3814,7 @@
                         "type": "array",
                         "valueType": "TCHAR",
                         "length": 260
-                    },
-                    "verifySettings": false
+                    }
                 },
                 "supportedSettings": {
                     "ImageConfig": {
@@ -3875,8 +3874,7 @@
                         "type": "array",
                         "valueType": "TCHAR",
                         "length": 260
-                    },
-                    "verifySettings": false
+                    }
                 },
                 "supportedSettings": {
                     "ImageConfig": {
@@ -3911,8 +3909,7 @@
                 "type": "gpii.windows.nativeSettingsHandler",
                 "liveness": "live",
                 "options": {
-                    "functionName": "SolidColor",
-                    "verifySettings": true
+                    "functionName": "SolidColor"
                 },
                 "supportedSettings": {
                     "SolidColorConfig": {
