@@ -3482,8 +3482,7 @@
                         "ZoomIncrement": "REG_DWORD",
                         "UseBitmapSmoothing": "REG_DWORD",
                         "LensHeight": "REG_DWORD",
-                        "LensWidth": "REG_DWORD",
-                        "ClassiCDockPosition": "REG_DWORD"
+                        "LensWidth": "REG_DWORD"
                     }
                 },
                 "supportedSettings": {
@@ -3616,24 +3615,6 @@
                             "maximum": 100,
                             "default": 30
                         }
-                    },
-                    "ClassiCDockPosition": {
-                        "schema": {
-                            "title": "Dock position",
-                            "enum": [
-                                0,
-                                1,
-                                2,
-                                3
-                            ],
-                            "enumLabels": [
-                                "Left",
-                                "Top",
-                                "Right",
-                                "Down"
-                            ],
-                            "default": 1
-                        }
                     }
                 },
                 "capabilitiesTransformations": {
@@ -3717,6 +3698,52 @@
                             }
                         }
                     ]
+                }
+            },
+            "configureSystemSettings": {
+                "type": "gpii.windows.systemSettingsHandler",
+                "capabilities": [],
+                "options": {
+                    "Async": true,
+                    "CheckResult": true
+                },
+                "supportedSettings": {
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
+                        "schema": {
+                            "title": "Auto Start Magnifier",
+                            "description": "Start Magnifier after sign-in.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    },
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
+                        "schema": {
+                            "title": "Auto Start Magnifier for everyone",
+                            "description": "Start Magnifier before sign-in.",
+                            "type": "boolean",
+                            "default": 0
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart",
+                            "outputPath": "value"
+                        }
+                    },
+                    "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled": {
+                        "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableAutoStart": "SystemSettings_Accessibility_Magnifier_IsAutoStartEnabled.value",
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.magnifier.EnableSystemAutoStart": "SystemSettings_Accessibility_Magnifier_IsAutoStartOnLogonDesktopEnabled.value"
                 }
             }
         },

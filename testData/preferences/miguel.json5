@@ -1,4 +1,4 @@
-// # Margaret.json5
+// # Miguel.json5
 //
 // This preference set changes the Windows 10 magnifier preferences settings.
 //
@@ -7,11 +7,11 @@
 // This changes the following settings from the system:
 //     + FollowFocus: Narrator doesn't follow focus.
 //     + FollowCaret: Narrator now follows text insertion point.
-//     + Invert: Narrator invert the colours.
-//     + Magnification: Magnification is set to 150%.
-//     + MagnificationMode: Magnification mode is set to "Lens mode".
-//     + FollowNarrator: Magnifier follows Narrator cursor.
-//     + FadeToMagIcon: Magnifier collapses into a magnifying glass icon.
+//     + Invert: Narrator doesn't invert the colours.
+//     + Magnification: Magnification is set to 200%.
+//     + MagnificationMode: Magnification mode is set to "Fullscreen".
+//     + FollowNarrator: Magnifier doesn't follows Narrator cursor.
+//     + FadeToMagIcon: Magnifier doesn't collapses into a magnifying glass icon.
 //     + ZoomIncrement: Zoom increment is set to 50.
 //     + UseBitmapSmoothing: Smooth edges of image and text.
 //     + LensHeight: Now the lens height in magnifier lens mode is 50.
@@ -19,7 +19,7 @@
 //
 {
     "flat": {
-        "name": "margaret",
+        "name": "miguel",
         "contexts": {
             "gpii-default": {
                 "name": "Default preferences",
@@ -28,17 +28,15 @@
                         "FollowFocus": 0,
                         "FollowCaret": 1,
                         "FollowMouse": 1,
-                        "Invert": 1,
-                        "Magnification": 150,
-                        "MagnificationMode": 3,
+                        "Invert": 0,
+                        "Magnification": 200,
+                        "MagnificationMode": 2,
                         "FollowNarrator": 0,
-                        "FadeToMagIcon": 1,
+                        "FadeToMagIcon": 0,
                         "ZoomIncrement": 50,
                         "UseBitmapSmoothing": 1,
-                        "LensHeight": 50,
-                        "LensWidth": 50,
-                        "EnableAutoStart": true,
-                        "EnableSystemAutoStart": true
+                        "EnableAutoStart": false,
+                        "EnableSystemAutoStart": false
                     }
                 }
             }
