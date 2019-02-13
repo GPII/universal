@@ -433,8 +433,7 @@ gpii.tests.windows.builtIn = [
                         "ZoomIncrement": 50,
                         "UseBitmapSmoothing": 1,
                         "LensHeight": 50,
-                        "LensWidth": 50,
-                        "ClassiCDockPosition": 0
+                        "LensWidth": 50
                     },
                     "options": {
                         "hKey": "HKEY_CURRENT_USER",
@@ -451,8 +450,7 @@ gpii.tests.windows.builtIn = [
                             "ZoomIncrement": "REG_DWORD",
                             "UseBitmapSmoothing": "REG_DWORD",
                             "LensHeight": "REG_DWORD",
-                            "LensWidth": "REG_DWORD",
-                            "ClassiCDockPosition": "REG_DWORD"
+                            "LensWidth": "REG_DWORD"
                         }
                     }
                 }],

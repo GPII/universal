@@ -3702,7 +3702,6 @@
             },
             "configureSystemSettings": {
                 "type": "gpii.windows.systemSettingsHandler",
-                "capabilities": [],
                 "options": {
                     "Async": true,
                     "CheckResult": true
@@ -3747,6 +3746,18 @@
                 }
             }
         },
+        "update": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
+        "configure": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
+        "restore": [
+            "settings.configure",
+            "settings.configureSystemSettings"
+        ],
         "launchHandlers": {
             "launcher": {
                 "type": "gpii.windows.enableRegisteredAT",

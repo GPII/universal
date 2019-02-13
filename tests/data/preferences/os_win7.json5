@@ -76,8 +76,7 @@
                         "ZoomIncrement": 50,
                         "UseBitmapSmoothing": 1,
                         "LensHeight": 50,
-                        "LensWidth": 50,
-                        "ClassiCDockPosition": 0
+                        "LensWidth": 50
                     },
                     "http://registry.gpii.net/applications/com.microsoft.windows.screenResolution": {
                         "screen-resolution": {

@@ -60,8 +60,7 @@ gpii.tests.journal.initialSettings = {
                 "ZoomIncrement": 100,
                 "UseBitmapSmoothing": 1,
                 "LensHeight": 30,
-                "LensWidth": 30,
-                "ClassiCDockPosition": 1
+                "LensWidth": 30
             },
             "options": {
                 "mockSync": true,
@@ -79,8 +78,7 @@ gpii.tests.journal.initialSettings = {
                     "ZoomIncrement": "REG_DWORD",
                     "UseBitmapSmoothing": "REG_DWORD",
                     "LensHeight": "REG_DWORD",
-                    "LensWidth": "REG_DWORD",
-                    "ClassiCDockPosition": "REG_DWORD"
+                    "LensWidth": "REG_DWORD"
                 }
             }
         }
