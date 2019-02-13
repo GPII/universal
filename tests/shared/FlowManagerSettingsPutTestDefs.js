@@ -252,12 +252,71 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.device = {
     }]
 };
 
+// Define extra requests used for testing PUT /settings on a snapset
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.updateSnapsetRequests", {
+    gradeNames: ["fluid.component"],
+    components: {
+        accessTokenUpdateSnapsetRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: "/access_token",
+                method: "POST",
+                expectedStatusCode: 200
+            }
+        },
+        lifeCycleRequest: {
+            type: "kettle.test.request.http",
+            options: {
+                path: fluid.stringTemplate("/%gpiiKey/settings/%device", {
+                    gpiiKey: gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey,
+                    device: encodeURIComponent(JSON.stringify(
+                        gpii.tests.cloud.oauth2.settingsPut.updateSnapset.device
+                    ))}
+                ),
+                headers: {
+                    "Authorization": "Bearer token" // set at test run
+                },
+                method: "GET",
+                expectedStatusCode: 200
+            }
+        },
+        putSettingsRequestFailure: { // can't update snapset (readonly)
+            type: "kettle.test.request.http",
+            options: {
+                path: "/%gpiiKey/settings",
+                termMap: {
+                    "gpiiKey": gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey
+                },
+                headers: {
+                    "Authorization": "Bearer token" // set at test run
+                },
+                method: "PUT",
+                expectedStatusCode: 404,
+                expectedErrorMessageStart:
+                    "Cannot update:  GPII key \"" +
+                    gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaKey +
+                    "\" is a snapset while executing HTTP PUT"
+            }
+        }
+    }
+});
+
+// Tests showing the inability to update a snapset
+gpii.tests.cloud.oauth2.settingsPut.updateSnapsetTest = {
+    testDef: {
+        name: "Flow manager tests - attempt (and fail) to update a snapset"
+    },
+    disruptions: [{
+        gradeName: "gpii.tests.cloud.oauth2.settingsPut.disruption.updateSnapsetFailure"
+    }]
+};
+
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence = [
     {
-        func: "{accessTokenRequestUpdateSnapset}.send",
+        func: "{accessTokenUpdateSnapsetRequest}.send",
         args: [gpii.tests.cloud.oauth2.settingsPut.updateSnapset.carlaTokenRequestPayload]
     }, {
-        event: "{accessTokenRequestUpdateSnapset}.events.onComplete",
+        event: "{accessTokenUpdateSnapsetRequest}.events.onComplete",
         listener: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAccessResponse"
     }, {
         func: "{lifeCycleRequest}.send",
@@ -265,7 +324,7 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence = [
             null,
             {
                 "headers": {
-                    "Authorization": "{accessTokenRequestUpdateSnapset}.options.stashedAuth"
+                    "Authorization": "{accessTokenUpdateSnapsetRequest}.options.stashedAuth"
                 }
             }
         ]
@@ -278,7 +337,7 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence = [
             gpii.tests.cloud.oauth2.settingsPut.updatedPrefsSet,
             {
                 "headers": {
-                    "Authorization": "{accessTokenRequestUpdateSnapset}.options.stashedAuth"
+                    "Authorization": "{accessTokenUpdateSnapsetRequest}.options.stashedAuth"
                 }
             }
         ]
@@ -288,6 +347,12 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence = [
     }
 ];
 
+fluid.defaults("gpii.tests.cloud.oauth2.settingsPut.disruption.updateSnapsetFailure", {
+    gradeNames: ["gpii.test.disruption"],
+    testCaseGradeNames: "gpii.tests.cloud.oauth2.settingsPut.updateSnapsetRequests",
+    sequenceName: "gpii.tests.cloud.oauth2.settingsPut.updateSnapset.sequence"
+});
+
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode = function (data, request) {
     jqUnit.assertEquals(
         "Checking status of " + request.options.path,
@@ -295,26 +360,17 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode = function (dat
     );
 };
 
-gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testAddedToDatabase = function (data, request) {
-    var expected = request.options.expectedStatusCodes;
-    var actual = request.nativeResponse.statusCode;
-    jqUnit.assertNotEquals(
-        "Adding record to database using " + request.options.path +
-        ", status: " + actual,
-        expected.indexOf(actual), -1
-    );
-    // Store the added record's id and rev
-    if (actual === 201 || actual === 200) {
-        request.options.result = JSON.parse(data);
-        fluid.log(request.options.result);
-    }
-};
-
 gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testResponse = function (data, request) {
     gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testStatusCode(data, request);
-    jqUnit.assertDeepEq(
-        "Checking paylod of " + request.options.path,
-        request.options.expectedPayload, JSON.parse(data)
+    var actual = JSON.parse(data);
+
+    jqUnit.assertTrue(
+        "Checking payload error for " + request.options.path,
+        actual.isError
+    );
+    jqUnit.assertTrue(
+        "Checking paylod error message for " + request.options.path,
+        actual.message.startsWith(request.options.expectedErrorMessageStart)
     );
 };
 
@@ -342,5 +398,4 @@ gpii.tests.cloud.oauth2.settingsPut.updateSnapset.testLifecycleResponse = functi
     // https://github.com/GPII/universal/blob/master/documentation/FlowManager.md#get-lifecycle-instructions-from-cloud-based-flow-manager-get-gpiikeysettingsdevice
     jqUnit.assertNotNull("Checking 'solutionsRegistryEntries'", lifeCycle.solutionsRegistryEntries);
     jqUnit.assertNotNull("Checking 'matchMakerOutput'", lifeCycle.matchMakerOutput);
-    fluid.log(lifeCycle);
 };
