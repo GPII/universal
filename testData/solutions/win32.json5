@@ -7010,8 +7010,15 @@
                         "schema": {
                             "title": "Swap mouse primary button",
                             "description": "Swap mouse left/right buttons",
-                            "type": "boolean",
-                            "default": false
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ],
+                            "default": 0
                         }
                     }
                 },
@@ -7336,7 +7343,7 @@
                         "schema": {
                             "title": "Double click time",
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
-                            "type": "number",
+                            "type": "integer",
                             "default": 500,
                             "min": 500,
                             "max": 5000,
