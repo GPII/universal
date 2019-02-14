@@ -7563,6 +7563,70 @@
                 "inverseCapabilitiesTransformations": {
                     "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.MouseSonar": "MouseSonarConfig.value"
                 }
+            },
+            "configureDoubleClickWidth": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "DoubleClickWidth"
+                },
+                "supportedSettings": {
+                    "DoubleClickWidthConfig": {
+                        "schema": {
+                            "title": "Double-click rectangle width",
+                            "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
+                            "type": "integer",
+                            "default": 4,
+                            "min": 1,
+                            "max": 32,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "DoubleClickWidthConfig": {
+                            "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickWidth": "DoubleClickWidthConfig.value"
+                }
+            },
+            "configureDoubleClickHeight": {
+                "type": "gpii.windows.nativeSettingsHandler",
+                "liveness": "live",
+                "options": {
+                    "functionName": "DoubleClickHeight"
+                },
+                "supportedSettings": {
+                    "DoubleClickHeightConfig": {
+                        "schema": {
+                            "title": "Double click time",
+                            "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
+                            "type": "integer",
+                            "default": 4,
+                            "min": 1,
+                            "max": 32,
+                            "divisibleBy": 1
+                        }
+                    }
+                },
+                "capabilitiesTransformations": {
+                    "DoubleClickHeightConfig": {
+                            "transform": {
+                            "type": "fluid.transforms.value",
+                            "inputPath": "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight",
+                            "outputPath": "value"
+                        }
+                    }
+                },
+                "inverseCapabilitiesTransformations": {
+                    "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.mouseSettings.DoubleClickHeight": "DoubleClickHeightConfig.value"
+                }
             }
         },
         "configure": [
@@ -7579,7 +7643,9 @@
             "settings.configurePointerPrecision",
             "settings.configureSnapToDefButton",
             "settings.configureHidePointer",
-            "settings.configureMouseSonar"
+            "settings.configureMouseSonar",
+            "settings.configureDoubleClickWidth",
+            "settings.configureDoubleClickHeight"
         ],
         "restore": [
             "settings.configureScrollWheelMode",

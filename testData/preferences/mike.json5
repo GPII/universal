@@ -36,7 +36,9 @@
                         "EnhancePrecision": true,
                         "SnapToDefaultButton": 1,
                         "HidePointer": 0,
-                        "MouseSonar": 1
+                        "MouseSonar": 1,
+                        "DoubleClickHeight": 32,
+                        "DoubleClickWidth": 32
                     }
                 }
             }
