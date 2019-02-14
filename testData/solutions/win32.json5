@@ -5507,8 +5507,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "TOGGLEKEYS"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "ToggleKeysOn": {
@@ -5566,8 +5565,7 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "BOOL"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "UnderlineMenuShortcutsOn": {
@@ -5607,8 +5605,7 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "BOOL"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "KeyboardPreferenceOn": {
