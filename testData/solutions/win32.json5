@@ -3545,12 +3545,10 @@
                             "type": "number",
                             "default": 2,
                             "enum": [
-                                1,
                                 2,
                                 3
                             ],
                             "enumLabels": [
-                               "Dock",
                                "FullScreen",
                                "Lens"
                             ]
