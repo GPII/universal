@@ -37,7 +37,7 @@ gpii.tests.cloudStatus.configs = {
 };
 
 gpii.tests.cloudStatus.commonTestDefs = {
-    expect: 2,
+//    expect: 2,
     testUrl: null,    // provided by each test run
     expectedStatusCode: 200,   // provided by each test run
     expectedPayload: {},       // provided by each test run
@@ -134,5 +134,5 @@ fluid.each(gpii.tests.cloudStatus.testCases, function (oneCase) {
         config: oneCase.config
     });
 
-    gpii.test.bootstrapServer([oneTestDef]);
+    gpii.test.runCouchTestDefs([oneTestDef]);
 });

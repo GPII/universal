@@ -1,5 +1,5 @@
 /*!
-Copyright 2017 OCAD university
+Copyright 2017-2019 OCAD university
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -21,20 +21,16 @@ fluid.require("%gpii-universal");
 
 require("../../shared/FlowManagerSettingsGetTestDefs.js");
 
-gpii.loadTestingSupport();
-
 fluid.registerNamespace("gpii.tests.cloud.oauth2.settingsGet");
+
+gpii.loadTestingSupport();
 
 gpii.tests.cloud.oauth2.settingsGet.config = {
     configName: "gpii.config.cloudBased.development",
     configPath: "%gpii-universal/gpii/configs"
 };
 
-fluid.each(gpii.tests.cloud.oauth2.settingsGet.disruptedTests, function (oneTest) {
-    gpii.test.cloudBased.oauth2.bootstrapDisruptedTest(
-        oneTest.testDef,
-        {},
-        oneTest.disruptions,
-        gpii.tests.cloud.oauth2.settingsGet.config
-    );
-});
+gpii.test.cloudBased.oauth2.runDisruptedTests(
+    gpii.tests.cloud.oauth2.settingsGet.disruptedTests,
+    gpii.tests.cloud.oauth2.settingsGet.config
+);

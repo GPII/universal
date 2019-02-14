@@ -85,4 +85,4 @@ gpii.tests.userLogonEvents.testDefs = [{
     }]
 }];
 
-gpii.test.bootstrapServer(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonEvents.testDefs));
+gpii.test.runCouchTestDefs(gpii.tests.userLogonHandlers.buildTestDefs(gpii.tests.userLogonEvents.testDefs));

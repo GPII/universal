@@ -35,7 +35,7 @@ fluid.defaults("gpii.tests.userLogonHandlers.proximityTriggered", {
 });
 
 fluid.defaults("gpii.tests.userLogonHandlers.testCaseHolder", {
-    gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.common.testCaseHolder" ],
+    gradeNames: [ "gpii.test.common.lifecycleManagerReceiver", "gpii.test.testCaseHolder" ],
     components: {
         resetRequest: {
             type: "kettle.test.request.http",
