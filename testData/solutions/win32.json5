@@ -3731,8 +3731,64 @@
                     }
                 },
                 "supportedSettings": {
-                    "TileWallpaper": {},
-                    "WallpaperStyle": {}
+                    "TileWallpaper": {
+                        "schema": {
+                            "title": "Desktop wallpaper tiling",
+                            "description": "Sets the wallpaper to tiling style.",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "enumLabels": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    },
+                    "WallpaperStyle": {
+                        "schema": {
+                            "title": "Desktop wallpaper style",
+                            "description": "Sets the wallpaper style.",
+                            "enum": [
+                                0,
+                                0,
+                                2,
+                                6,
+                                10,
+                                22
+                            ],
+                            "enumLabels": [
+                                "None",
+                                "None",
+                                "Stretch",
+                                "Fill",
+                                "Fit",
+                                "Span"
+                            ]
+                        }
+                    },
+                    "Scaling": {
+                        "schema": {
+                            "title": "Desktop wallpaper scaling",
+                            "description": "Sets the wallpaper to scaling type.",
+                            "enum": [
+                                "Fill",
+                                "Fit",
+                                "Stretch",
+                                "Tile",
+                                "Center",
+                                "Span"
+                            ],
+                            "enumLabels": [
+                                "Fill",
+                                "Fit",
+                                "Stretch",
+                                "Tile",
+                                "Center",
+                                "Span"
+                            ]
+                        }
+                    }
                 },
                 "capabilitiesTransformations": {
                     "TileWallpaper": {
@@ -3819,9 +3875,9 @@
                 "supportedSettings": {
                     "ImageConfig": {
                         "schema": {
-                            "title": "Image",
-                            "description": "The path to the image to be set as the new desktop wallpaper",
-                            "type": "String",
+                            "title": "Desktop background wallpaper",
+                            "description": "The path to the image to be set as the new desktop wallpaper.",
+                            "type": "string",
                             "default": "C:\\Windows\\Web\\Wallpaper\\Windows\\img0.jpg"
                         }
                     }
@@ -3879,9 +3935,9 @@
                 "supportedSettings": {
                     "ImageConfig": {
                         "schema": {
-                            "title": "Image",
-                            "description": "The path to the image to be set as the new desktop wallpaper",
-                            "type": "String",
+                            "title": "Desktop background wallpaper",
+                            "description": "The path to the image to be set as the new desktop wallpaper.",
+                            "type": "string",
                             "default": ""
                         }
                     }
@@ -3914,8 +3970,8 @@
                 "supportedSettings": {
                     "SolidColorConfig": {
                         "schema": {
-                            "title": "Desktop background payload",
-                            "description": "The values that user want to use for that particular background type",
+                            "title": "Desktop background color",
+                            "description": "The color to be set as desktop background.",
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
