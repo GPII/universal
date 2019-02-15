@@ -7854,8 +7854,7 @@
                         "RegionColor": "REG_DWORD",
                         "RegionOpacity": "REG_DWORD"
                     },
-                    "uwp": true,
-                    "verifySettings": true
+                    "uwp": true
                 },
                 "supportedSettings": {
                     "BackgroundColor": {
