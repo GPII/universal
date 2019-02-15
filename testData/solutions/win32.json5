@@ -7661,7 +7661,9 @@
             "settings.configurePointerPrecision",
             "settings.configureSnapToDefButton",
             "settings.configureHidePointer",
-            "settings.configureMouseSonar"
+            "settings.configureMouseSonar",
+            "settings.configureDoubleClickWidth",
+            "settings.configureDoubleClickHeight"
         ],
         "isInstalled": [
             {
