@@ -7605,8 +7605,8 @@
                 "supportedSettings": {
                     "DoubleClickHeightConfig": {
                         "schema": {
-                            "title": "Double click time",
-                            "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
+                            "title": "Double-click rectangle height",
+                            "description": "Changes the height of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
                             "type": "integer",
                             "default": 4,
                             "minimum": 1,
