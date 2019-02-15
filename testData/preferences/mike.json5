@@ -11,10 +11,21 @@
 //                      works with Windows Store Apps and with Microsoft applications.
 //     + DoubleClickTime: Increases double click detection to 5 seconds.
 //     + EnableCursorShadow: Enable the cursor shadows.
-//     + ScrollChars: Number of character for horizontal  scroll changed to 10.
+//     + ScrollChars: Number of character for horizontal scroll changed to 10.
 //     + WindowsTrackingEnabled: Windows are now activated when mouse is overing over them.
 //     + AutoWinArrangement: Windows are not arranged when are dragged to the edge with the mouse.
 //     + SwapMouseButtons: Swaps right and left mouse buttons.
+//     + PointerSpeed: Increases system pointer speed to 15.
+//     + EnhancePrecision: Activates system setting 'Enhance pointer precision'.
+//     + SnapToDefaultButton: Makes the mouse move to the default menu option automatically.
+//     + HidePointer: Disables hiding pointer while typing text.
+//     + MouseSonar: Activates mouse sonar option.
+//     + DoubleClickHeight: Increases the mouse double-click rectangle height to 32 pixels.
+//         - Testing: Once this behavior is activated, making double click over an element should be
+//           possible even if mouse have been moved up to 32 pixels in the Y axis.
+//     + DoubleClickWidth: Increases the mouse double-click rectangle width to 32 pixels.
+//         - Testing: Once this behavior is activated, making double click over an element should be
+//           possible even if mouse have been moved up to 32 pixels in the X axis.
 //
 {
     "flat": {
