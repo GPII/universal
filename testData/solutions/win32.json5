@@ -7578,7 +7578,7 @@
                             "type": "integer",
                             "default": 4,
                             "minimum": 1,
-                            "maximum": 32,
+                            "maximum": 64,
                             "divisibleBy": 1
                         }
                     }
@@ -7610,7 +7610,7 @@
                             "type": "integer",
                             "default": 4,
                             "minimum": 1,
-                            "maximum": 32,
+                            "maximum": 64,
                             "divisibleBy": 1
                         }
                     }
