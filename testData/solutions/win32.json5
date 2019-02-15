@@ -5454,8 +5454,7 @@
                     "pvParam": {
                         "type": "struct",
                         "name": "AUDIODESCRIPTION"
-                    },
-                    verifySettings: true
+                    }
                 },
                 "supportedSettings": {
                     "AudioDescriptionOn": {
@@ -5520,8 +5519,7 @@
                     "uiParam": 0,
                     "pvParam": {
                         "type": "UINT"
-                    },
-                    "verifySettings": true
+                    }
                 },
                 "supportedSettings": {
                     "Duration": {
