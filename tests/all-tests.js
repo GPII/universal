@@ -21,28 +21,6 @@ https://github.com/GPII/universal/blob/master/LICENSE.txt
 var fluid = require("infusion"),
     kettle = fluid.require("kettle");
 
-// TODO: Remove this once we're done profiling.
-var process = require("process");
-
-var maxes = {};
-
-process.on("exit", function () {
-    console.log(JSON.stringify(maxes, null, 2));
-});
-
-process.nextTick(function () {
-    var memUsage = process.memoryUsage();
-    var statKey;
-    for (statKey in memUsage) {
-        var currVal = memUsage[statKey];
-        if (currVal > (maxes[statKey] || -1)) {
-            maxes[statKey] = currVal;
-        }
-    }
-});
-
-// TODO: Remove above once we're done profiling.
-
 // Ensure this happens first, to catch errors during code loading, especially before KETTLE-67 is fixed
 kettle.loadTestingSupport();
 
