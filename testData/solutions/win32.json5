@@ -7190,8 +7190,8 @@
                             "description": "Changes the number of chars that are scrolled horizontally.",
                             "type": "number",
                             "default": 3,
-                            "min": 1,
-                            "max": 100,
+                            "minimum": 1,
+                            "maximum": 100,
                             "divisibleBy": 1
                         }
                     }
@@ -7345,8 +7345,8 @@
                             "description": "Changes the amount of time that can elapse between a first click and a second click for the OS to consider the mouse action a double-click.",
                             "type": "integer",
                             "default": 500,
-                            "min": 500,
-                            "max": 5000,
+                            "minimum": 500,
+                            "maximum": 5000,
                             "divisibleBy": 1
                         }
                     }
@@ -7577,8 +7577,8 @@
                             "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
                             "type": "integer",
                             "default": 4,
-                            "min": 1,
-                            "max": 32,
+                            "minimum": 1,
+                            "maximum": 32,
                             "divisibleBy": 1
                         }
                     }
@@ -7609,8 +7609,8 @@
                             "description": "Changes the width of the rectangle in which a second click should fall for OS to consider the mouse action a double-click.",
                             "type": "integer",
                             "default": 4,
-                            "min": 1,
-                            "max": 32,
+                            "minimum": 1,
+                            "maximum": 32,
                             "divisibleBy": 1
                         }
                     }
