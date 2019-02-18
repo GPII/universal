@@ -18,6 +18,6 @@
     "type": "gpii.config.development.all.local",
     "mergeConfigs": [
         "%gpii-universal/gpii/configs/gpii.config.development.local.json5",
-        "%couchConnector/configs/gpii.couchConnector.config.base.json5"
+        "%gpii-couch-connector/configs/gpii.couchConnector.config.base.json5"
     ]
 }
