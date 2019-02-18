@@ -24,11 +24,7 @@ var fluid = fluid || require("infusion");
 
     fluid.registerNamespace("gpii.oauth2.authorizationService");
 
-    /*
-
-        Small function to return the current date.  Used in part to ensure that we can compare canned dates in tests.
-
-     */
+    // Small function to return the current date.  Used in part to ensure that we can compare canned dates in tests.
     gpii.oauth2.authorizationService.getCurrentDate = function () {
         return new Date();
     };
