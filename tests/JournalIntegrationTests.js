@@ -283,12 +283,30 @@ gpii.tests.journal.solutionsRegistryOverlay = {
                     type: "gpii.tests.journal.explodingSettingsHandler",
                     supportedSettings: {
                         cursorSize: {}
+                    },
+                    capabilitiesTransformations: {
+                        AppStarting: {
+                            transform: {
+                                type: "fluid.transforms.value",
+                                inputPath: "http://registry\\.gpii\\.net/common/cursorSize",
+                                outputPath: "value"
+                            }
+                        }
                     }
                 },
                 maybeThrow: {
                     type: "gpii.tests.journal.throwingSettingsHandler",
                     supportedSettings: {
                         cursorSize: {}
+                    },
+                    capabilitiesTransformations: {
+                        AppStarting: {
+                            transform: {
+                                type: "fluid.transforms.value",
+                                inputPath: "http://registry\\.gpii\\.net/common/cursorSize",
+                                outputPath: "value"
+                            }
+                        }
                     }
                 },
                 configure: {
