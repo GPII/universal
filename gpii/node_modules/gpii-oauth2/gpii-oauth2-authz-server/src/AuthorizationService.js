@@ -26,7 +26,7 @@ var fluid = fluid || require("infusion");
 
     /*
 
-        Small function to return the current date. Used in part to ensure that we can compare canned dates in tests.
+        Small function to return the current date.  Used in part to ensure that we can compare canned dates in tests.
 
      */
     gpii.oauth2.authorizationService.getCurrentDate = function () {
