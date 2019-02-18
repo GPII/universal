@@ -6983,7 +6983,7 @@
         ]
     },
     "com.microsoft.windows.mouseSettings": {
-        "name": "Windows typing autocorrection",
+        "name": "Windows Mouse settings",
         "contexts": {
             "OS": [
                 {
