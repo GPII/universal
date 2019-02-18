@@ -7268,8 +7268,8 @@
                 "supportedSettings": {
                     "ActiveZOrder": {
                         "schema": {
-                            "title": "Mouse wheel horizontal scroll",
-                            "description": "Changes the number of chars that are scrolled horizontally.",
+                            "title": "Windows Tracking",
+                            "description": "Windows receive focus when mouse hovers over them.",
                             "type": "boolean",
                             "default": 0
                         }
